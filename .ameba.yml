@@ -1,5 +1,5 @@
 Excluded:
-  - src/twilio/api/default_api.cr
+  - src/stripe/api/default_api.cr
   - bin
   - lib
   - local
