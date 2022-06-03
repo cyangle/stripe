@@ -20,7 +20,19 @@ describe Stripe::PaymentPagesCheckoutSessionCustomerDetails do
     end
   end
 
+  describe "test attribute 'address'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'email'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'name'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -35,7 +47,7 @@ describe Stripe::PaymentPagesCheckoutSessionCustomerDetails do
   describe "test attribute 'tax_exempt'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["exempt", "none", "reverse"])
+      # validator = EnumValidator.new("String", ["exempt", "none", "reverse", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.tax_exempt = value }.not_to raise_error
       # end

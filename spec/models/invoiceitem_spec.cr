@@ -89,7 +89,7 @@ describe Stripe::Invoiceitem do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["invoiceitem"])
+      # validator = EnumValidator.new("String", ["invoiceitem"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -97,6 +97,12 @@ describe Stripe::Invoiceitem do
   end
 
   describe "test attribute 'period'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'plan'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -133,6 +139,12 @@ describe Stripe::Invoiceitem do
   end
 
   describe "test attribute 'tax_rates'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'test_clock'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

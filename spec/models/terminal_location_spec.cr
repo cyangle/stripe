@@ -26,6 +26,12 @@ describe Stripe::TerminalLocation do
     end
   end
 
+  describe "test attribute 'configuration_overrides'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'display_name'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -53,7 +59,7 @@ describe Stripe::TerminalLocation do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["terminal.location"])
+      # validator = EnumValidator.new("String", ["terminal.location"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end

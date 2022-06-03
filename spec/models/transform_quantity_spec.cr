@@ -29,7 +29,7 @@ describe Stripe::TransformQuantity do
   describe "test attribute 'round'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["down", "up"])
+      # validator = EnumValidator.new("String", ["down", "up"])
       # validator.allowable_values.each do |value|
       #   expect { instance.round = value }.not_to raise_error
       # end

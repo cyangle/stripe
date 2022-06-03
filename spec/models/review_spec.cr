@@ -35,7 +35,7 @@ describe Stripe::Review do
   describe "test attribute 'closed_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["approved", "disputed", "redacted", "refunded", "refunded_as_fraud"])
+      # validator = EnumValidator.new("String", ["approved", "disputed", "redacted", "refunded", "refunded_as_fraud", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.closed_reason = value }.not_to raise_error
       # end
@@ -75,7 +75,7 @@ describe Stripe::Review do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["review"])
+      # validator = EnumValidator.new("String", ["review"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -91,7 +91,7 @@ describe Stripe::Review do
   describe "test attribute 'opened_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["manual", "rule"])
+      # validator = EnumValidator.new("String", ["manual", "rule"])
       # validator.allowable_values.each do |value|
       #   expect { instance.opened_reason = value }.not_to raise_error
       # end

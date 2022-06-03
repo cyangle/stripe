@@ -41,7 +41,7 @@ describe Stripe::RecurringPriceData do
   describe "test attribute 'tax_behavior'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["exclusive", "inclusive", "unspecified"])
+      # validator = EnumValidator.new("String", ["exclusive", "inclusive", "unspecified"])
       # validator.allowable_values.each do |value|
       #   expect { instance.tax_behavior = value }.not_to raise_error
       # end

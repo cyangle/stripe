@@ -23,7 +23,7 @@ describe Stripe::PortalSubscriptionUpdate do
   describe "test attribute 'default_allowed_updates'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("Array(String)", ["price", "promotion_code", "quantity"])
+      # validator = EnumValidator.new("Array(String)", ["price", "promotion_code", "quantity"])
       # validator.allowable_values.each do |value|
       #   expect { instance.default_allowed_updates = value }.not_to raise_error
       # end
@@ -45,7 +45,7 @@ describe Stripe::PortalSubscriptionUpdate do
   describe "test attribute 'proration_behavior'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["always_invoice", "create_prorations", "none"])
+      # validator = EnumValidator.new("String", ["always_invoice", "create_prorations", "none"])
       # validator.allowable_values.each do |value|
       #   expect { instance.proration_behavior = value }.not_to raise_error
       # end

@@ -20,7 +20,19 @@ describe Stripe::Item do
     end
   end
 
+  describe "test attribute 'amount_discount'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'amount_subtotal'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'amount_tax'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -59,7 +71,7 @@ describe Stripe::Item do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["item"])
+      # validator = EnumValidator.new("String", ["item"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -67,6 +79,12 @@ describe Stripe::Item do
   end
 
   describe "test attribute 'price'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'product'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

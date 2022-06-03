@@ -23,7 +23,7 @@ describe Stripe::GelatoSessionLastError do
   describe "test attribute 'code'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["abandoned", "consent_declined", "country_not_supported", "device_not_supported", "document_expired", "document_type_not_supported", "document_unverified_other", "id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other", "selfie_document_missing_photo", "selfie_face_mismatch", "selfie_manipulated", "selfie_unverified_other", "under_supported_age"])
+      # validator = EnumValidator.new("String", ["abandoned", "consent_declined", "country_not_supported", "device_not_supported", "document_expired", "document_type_not_supported", "document_unverified_other", "id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other", "selfie_document_missing_photo", "selfie_face_mismatch", "selfie_manipulated", "selfie_unverified_other", "under_supported_age", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.code = value }.not_to raise_error
       # end

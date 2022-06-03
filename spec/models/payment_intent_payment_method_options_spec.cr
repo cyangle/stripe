@@ -26,6 +26,12 @@ describe Stripe::PaymentIntentPaymentMethodOptions do
     end
   end
 
+  describe "test attribute 'affirm'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'afterpay_clearpay'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -74,6 +80,12 @@ describe Stripe::PaymentIntentPaymentMethodOptions do
     end
   end
 
+  describe "test attribute 'customer_balance'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'eps'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -116,6 +128,18 @@ describe Stripe::PaymentIntentPaymentMethodOptions do
     end
   end
 
+  describe "test attribute 'konbini'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'link'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'oxxo'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -128,6 +152,12 @@ describe Stripe::PaymentIntentPaymentMethodOptions do
     end
   end
 
+  describe "test attribute 'paynow'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'sepa_debit'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -135,6 +165,12 @@ describe Stripe::PaymentIntentPaymentMethodOptions do
   end
 
   describe "test attribute 'sofort'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'us_bank_account'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

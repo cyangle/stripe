@@ -65,7 +65,7 @@ describe Stripe::IssuingAuthorizationRequest do
   describe "test attribute 'reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["account_disabled", "card_active", "card_inactive", "cardholder_inactive", "cardholder_verification_required", "insufficient_funds", "not_allowed", "spending_controls", "suspected_fraud", "verification_failed", "webhook_approved", "webhook_declined", "webhook_timeout"])
+      # validator = EnumValidator.new("String", ["account_disabled", "card_active", "card_inactive", "cardholder_inactive", "cardholder_verification_required", "insufficient_funds", "not_allowed", "spending_controls", "suspected_fraud", "verification_failed", "webhook_approved", "webhook_declined", "webhook_timeout"])
       # validator.allowable_values.each do |value|
       #   expect { instance.reason = value }.not_to raise_error
       # end

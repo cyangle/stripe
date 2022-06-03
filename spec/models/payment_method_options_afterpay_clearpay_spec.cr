@@ -20,9 +20,29 @@ describe Stripe::PaymentMethodOptionsAfterpayClearpay do
     end
   end
 
+  describe "test attribute 'capture_method'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["manual"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.capture_method = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe "test attribute 'reference'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'setup_future_usage'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["none"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.setup_future_usage = value }.not_to raise_error
+      # end
     end
   end
 end

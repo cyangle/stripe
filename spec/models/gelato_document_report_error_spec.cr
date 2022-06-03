@@ -23,7 +23,7 @@ describe Stripe::GelatoDocumentReportError do
   describe "test attribute 'code'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["document_expired", "document_type_not_supported", "document_unverified_other"])
+      # validator = EnumValidator.new("String", ["document_expired", "document_type_not_supported", "document_unverified_other", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.code = value }.not_to raise_error
       # end

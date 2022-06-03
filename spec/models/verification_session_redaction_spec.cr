@@ -23,7 +23,7 @@ describe Stripe::VerificationSessionRedaction do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["processing", "redacted"])
+      # validator = EnumValidator.new("String", ["processing", "redacted"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

@@ -59,9 +59,25 @@ describe Stripe::PaymentLink do
   describe "test attribute 'billing_address_collection'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["auto", "required"])
+      # validator = EnumValidator.new("String", ["auto", "required"])
       # validator.allowable_values.each do |value|
       #   expect { instance.billing_address_collection = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe "test attribute 'consent_collection'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'customer_creation'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["always", "if_required"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.customer_creation = value }.not_to raise_error
       # end
     end
   end
@@ -93,7 +109,7 @@ describe Stripe::PaymentLink do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["payment_link"])
+      # validator = EnumValidator.new("String", ["payment_link"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -106,13 +122,25 @@ describe Stripe::PaymentLink do
     end
   end
 
+  describe "test attribute 'payment_intent_data'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'payment_method_types'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("Array(String)", ["card"])
+      # validator = EnumValidator.new("Array(String)", ["card"])
       # validator.allowable_values.each do |value|
       #   expect { instance.payment_method_types = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe "test attribute 'phone_number_collection'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 
@@ -122,7 +150,29 @@ describe Stripe::PaymentLink do
     end
   end
 
+  describe "test attribute 'shipping_options'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'submit_type'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["auto", "book", "donate", "pay"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.submit_type = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe "test attribute 'subscription_data'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'tax_id_collection'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

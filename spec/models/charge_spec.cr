@@ -20,6 +20,12 @@ describe Stripe::Charge do
     end
   end
 
+  describe "test attribute 'alternate_statement_descriptors'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'amount'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -51,6 +57,12 @@ describe Stripe::Charge do
   end
 
   describe "test attribute 'application_fee_amount'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'authorization_code'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -104,7 +116,25 @@ describe Stripe::Charge do
     end
   end
 
+  describe "test attribute 'destination'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'dispute'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'disputed'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'failure_balance_transaction'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -140,6 +170,12 @@ describe Stripe::Charge do
     end
   end
 
+  describe "test attribute 'level3'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'livemode'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -155,7 +191,7 @@ describe Stripe::Charge do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["charge"])
+      # validator = EnumValidator.new("String", ["charge"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -163,12 +199,6 @@ describe Stripe::Charge do
   end
 
   describe "test attribute 'on_behalf_of'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'order'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -199,6 +229,12 @@ describe Stripe::Charge do
   end
 
   describe "test attribute 'payment_method_details'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'radar_options'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -246,6 +282,12 @@ describe Stripe::Charge do
     end
   end
 
+  describe "test attribute 'source'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'source_transfer'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -267,7 +309,7 @@ describe Stripe::Charge do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["failed", "pending", "succeeded"])
+      # validator = EnumValidator.new("String", ["failed", "pending", "succeeded"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

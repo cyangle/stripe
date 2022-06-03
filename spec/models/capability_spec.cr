@@ -41,7 +41,7 @@ describe Stripe::Capability do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["capability"])
+      # validator = EnumValidator.new("String", ["capability"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -69,7 +69,7 @@ describe Stripe::Capability do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "disabled", "inactive", "pending", "unrequested"])
+      # validator = EnumValidator.new("String", ["active", "disabled", "inactive", "pending", "unrequested"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

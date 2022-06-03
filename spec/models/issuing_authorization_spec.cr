@@ -41,7 +41,7 @@ describe Stripe::IssuingAuthorization do
   describe "test attribute 'authorization_method'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["chip", "contactless", "keyed_in", "online", "swipe"])
+      # validator = EnumValidator.new("String", ["chip", "contactless", "keyed_in", "online", "swipe"])
       # validator.allowable_values.each do |value|
       #   expect { instance.authorization_method = value }.not_to raise_error
       # end
@@ -117,7 +117,7 @@ describe Stripe::IssuingAuthorization do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["issuing.authorization"])
+      # validator = EnumValidator.new("String", ["issuing.authorization"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -139,7 +139,7 @@ describe Stripe::IssuingAuthorization do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["closed", "pending", "reversed"])
+      # validator = EnumValidator.new("String", ["closed", "pending", "reversed"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -147,6 +147,12 @@ describe Stripe::IssuingAuthorization do
   end
 
   describe "test attribute 'transactions'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'treasury'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

@@ -29,7 +29,7 @@ describe Stripe::PortalSubscriptionCancellationReason do
   describe "test attribute 'options'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("Array(String)", ["customer_service", "low_quality", "missing_features", "other", "switched_service", "too_complex", "too_expensive", "unused"])
+      # validator = EnumValidator.new("Array(String)", ["customer_service", "low_quality", "missing_features", "other", "switched_service", "too_complex", "too_expensive", "unused"])
       # validator.allowable_values.each do |value|
       #   expect { instance.options = value }.not_to raise_error
       # end

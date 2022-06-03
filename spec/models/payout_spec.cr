@@ -113,7 +113,7 @@ describe Stripe::Payout do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["payout"])
+      # validator = EnumValidator.new("String", ["payout"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -153,7 +153,7 @@ describe Stripe::Payout do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["bank_account", "card"])
+      # validator = EnumValidator.new("String", ["bank_account", "card"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

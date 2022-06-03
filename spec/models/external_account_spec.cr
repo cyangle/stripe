@@ -47,7 +47,7 @@ describe Stripe::ExternalAccount do
   describe "test attribute 'available_payout_methods'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("Array(String)", ["instant", "standard"])
+      # validator = EnumValidator.new("Array(String)", ["instant", "standard"])
       # validator.allowable_values.each do |value|
       #   expect { instance.available_payout_methods = value }.not_to raise_error
       # end
@@ -111,7 +111,7 @@ describe Stripe::ExternalAccount do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["card"])
+      # validator = EnumValidator.new("String", ["card"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -190,6 +190,12 @@ describe Stripe::ExternalAccount do
     end
   end
 
+  describe "test attribute 'description'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'dynamic_last4'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -209,6 +215,18 @@ describe Stripe::ExternalAccount do
   end
 
   describe "test attribute 'funding'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'iin'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'issuer'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

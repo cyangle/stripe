@@ -59,7 +59,7 @@ describe Stripe::SourceMandateNotification do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["source_mandate_notification"])
+      # validator = EnumValidator.new("String", ["source_mandate_notification"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end

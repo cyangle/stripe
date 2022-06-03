@@ -35,7 +35,7 @@ describe Stripe::PortalSubscriptionCancel do
   describe "test attribute 'mode'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["at_period_end", "immediately"])
+      # validator = EnumValidator.new("String", ["at_period_end", "immediately"])
       # validator.allowable_values.each do |value|
       #   expect { instance.mode = value }.not_to raise_error
       # end
@@ -45,7 +45,7 @@ describe Stripe::PortalSubscriptionCancel do
   describe "test attribute 'proration_behavior'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["always_invoice", "create_prorations", "none"])
+      # validator = EnumValidator.new("String", ["always_invoice", "create_prorations", "none"])
       # validator.allowable_values.each do |value|
       #   expect { instance.proration_behavior = value }.not_to raise_error
       # end

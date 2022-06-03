@@ -23,7 +23,7 @@ describe Stripe::CheckoutAcssDebitPaymentMethodOptions do
   describe "test attribute 'currency'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["cad", "usd"])
+      # validator = EnumValidator.new("String", ["cad", "usd"])
       # validator.allowable_values.each do |value|
       #   expect { instance.currency = value }.not_to raise_error
       # end
@@ -39,7 +39,7 @@ describe Stripe::CheckoutAcssDebitPaymentMethodOptions do
   describe "test attribute 'verification_method'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["automatic", "instant", "microdeposits"])
+      # validator = EnumValidator.new("String", ["automatic", "instant", "microdeposits"])
       # validator.allowable_values.each do |value|
       #   expect { instance.verification_method = value }.not_to raise_error
       # end

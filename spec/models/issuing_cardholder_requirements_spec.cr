@@ -23,7 +23,7 @@ describe Stripe::IssuingCardholderRequirements do
   describe "test attribute 'disabled_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["listed", "rejected.listed", "under_review"])
+      # validator = EnumValidator.new("String", ["listed", "rejected.listed", "under_review", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.disabled_reason = value }.not_to raise_error
       # end
@@ -33,7 +33,7 @@ describe Stripe::IssuingCardholderRequirements do
   describe "test attribute 'past_due'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("Array(String)", ["company.tax_id", "individual.dob.day", "individual.dob.month", "individual.dob.year", "individual.first_name", "individual.last_name", "individual.verification.document"])
+      # validator = EnumValidator.new("Array(String)", ["company.tax_id", "individual.dob.day", "individual.dob.month", "individual.dob.year", "individual.first_name", "individual.last_name", "individual.verification.document"])
       # validator.allowable_values.each do |value|
       #   expect { instance.past_due = value }.not_to raise_error
       # end

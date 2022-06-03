@@ -23,7 +23,7 @@ describe Stripe::CustomerTax do
   describe "test attribute 'automatic_tax'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["failed", "not_collecting", "supported", "unrecognized_location"])
+      # validator = EnumValidator.new("String", ["failed", "not_collecting", "supported", "unrecognized_location"])
       # validator.allowable_values.each do |value|
       #   expect { instance.automatic_tax = value }.not_to raise_error
       # end

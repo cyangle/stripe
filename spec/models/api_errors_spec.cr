@@ -89,7 +89,7 @@ describe Stripe::ApiErrors do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["api_error", "card_error", "idempotency_error", "invalid_request_error"])
+      # validator = EnumValidator.new("String", ["api_error", "card_error", "idempotency_error", "invalid_request_error"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

@@ -23,7 +23,7 @@ describe Stripe::TaxIdVerification do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["pending", "unavailable", "unverified", "verified"])
+      # validator = EnumValidator.new("String", ["pending", "unavailable", "unverified", "verified"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

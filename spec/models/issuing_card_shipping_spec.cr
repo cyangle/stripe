@@ -29,7 +29,7 @@ describe Stripe::IssuingCardShipping do
   describe "test attribute 'carrier'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["dhl", "fedex", "royal_mail", "usps"])
+      # validator = EnumValidator.new("String", ["dhl", "fedex", "royal_mail", "usps", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.carrier = value }.not_to raise_error
       # end
@@ -51,7 +51,7 @@ describe Stripe::IssuingCardShipping do
   describe "test attribute 'service'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["express", "priority", "standard"])
+      # validator = EnumValidator.new("String", ["express", "priority", "standard"])
       # validator.allowable_values.each do |value|
       #   expect { instance.service = value }.not_to raise_error
       # end
@@ -61,7 +61,7 @@ describe Stripe::IssuingCardShipping do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["canceled", "delivered", "failure", "pending", "returned", "shipped"])
+      # validator = EnumValidator.new("String", ["canceled", "delivered", "failure", "pending", "returned", "shipped", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -83,7 +83,7 @@ describe Stripe::IssuingCardShipping do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["bulk", "individual"])
+      # validator = EnumValidator.new("String", ["bulk", "individual"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

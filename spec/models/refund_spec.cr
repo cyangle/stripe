@@ -74,7 +74,19 @@ describe Stripe::Refund do
     end
   end
 
+  describe "test attribute 'instructions_email'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'metadata'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'next_action'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -83,7 +95,7 @@ describe Stripe::Refund do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["refund"])
+      # validator = EnumValidator.new("String", ["refund"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -99,6 +111,10 @@ describe Stripe::Refund do
   describe "test attribute 'reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["duplicate", "expired_uncaptured_charge", "fraudulent", "requested_by_customer", "null"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.reason = value }.not_to raise_error
+      # end
     end
   end
 

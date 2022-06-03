@@ -23,7 +23,7 @@ describe Stripe::PaymentMethodDetailsIdeal do
   describe "test attribute 'bank'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"])
+      # validator = EnumValidator.new("String", ["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.bank = value }.not_to raise_error
       # end
@@ -33,7 +33,7 @@ describe Stripe::PaymentMethodDetailsIdeal do
   describe "test attribute 'bic'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U"])
+      # validator = EnumValidator.new("String", ["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.bic = value }.not_to raise_error
       # end

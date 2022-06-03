@@ -20,25 +20,13 @@ describe Stripe::DeliveryEstimate do
     end
   end
 
-  describe "test attribute 'date'" do
+  describe "test attribute 'maximum'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 
-  describe "test attribute 'earliest'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'latest'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute '_type'" do
+  describe "test attribute 'minimum'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

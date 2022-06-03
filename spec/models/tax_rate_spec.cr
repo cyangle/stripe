@@ -83,7 +83,7 @@ describe Stripe::TaxRate do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["tax_rate"])
+      # validator = EnumValidator.new("String", ["tax_rate"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -105,7 +105,7 @@ describe Stripe::TaxRate do
   describe "test attribute 'tax_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"])
+      # validator = EnumValidator.new("String", ["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.tax_type = value }.not_to raise_error
       # end

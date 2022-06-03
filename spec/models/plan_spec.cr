@@ -29,7 +29,7 @@ describe Stripe::Plan do
   describe "test attribute 'aggregate_usage'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["last_during_period", "last_ever", "max", "sum"])
+      # validator = EnumValidator.new("String", ["last_during_period", "last_ever", "max", "sum", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.aggregate_usage = value }.not_to raise_error
       # end
@@ -51,7 +51,7 @@ describe Stripe::Plan do
   describe "test attribute 'billing_scheme'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["per_unit", "tiered"])
+      # validator = EnumValidator.new("String", ["per_unit", "tiered"])
       # validator.allowable_values.each do |value|
       #   expect { instance.billing_scheme = value }.not_to raise_error
       # end
@@ -79,7 +79,7 @@ describe Stripe::Plan do
   describe "test attribute 'interval'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["day", "month", "week", "year"])
+      # validator = EnumValidator.new("String", ["day", "month", "week", "year"])
       # validator.allowable_values.each do |value|
       #   expect { instance.interval = value }.not_to raise_error
       # end
@@ -113,7 +113,7 @@ describe Stripe::Plan do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["plan"])
+      # validator = EnumValidator.new("String", ["plan"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -135,7 +135,7 @@ describe Stripe::Plan do
   describe "test attribute 'tiers_mode'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["graduated", "volume"])
+      # validator = EnumValidator.new("String", ["graduated", "volume", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.tiers_mode = value }.not_to raise_error
       # end
@@ -157,7 +157,7 @@ describe Stripe::Plan do
   describe "test attribute 'usage_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["licensed", "metered"])
+      # validator = EnumValidator.new("String", ["licensed", "metered"])
       # validator.allowable_values.each do |value|
       #   expect { instance.usage_type = value }.not_to raise_error
       # end

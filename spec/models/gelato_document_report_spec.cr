@@ -83,7 +83,7 @@ describe Stripe::GelatoDocumentReport do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["unverified", "verified"])
+      # validator = EnumValidator.new("String", ["unverified", "verified"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -93,7 +93,7 @@ describe Stripe::GelatoDocumentReport do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["driving_license", "id_card", "passport"])
+      # validator = EnumValidator.new("String", ["driving_license", "id_card", "passport", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

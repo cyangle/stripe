@@ -47,7 +47,7 @@ describe Stripe::ApplePayDomain do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["apple_pay_domain"])
+      # validator = EnumValidator.new("String", ["apple_pay_domain"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end

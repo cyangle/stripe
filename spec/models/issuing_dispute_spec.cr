@@ -71,7 +71,7 @@ describe Stripe::IssuingDispute do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["issuing.dispute"])
+      # validator = EnumValidator.new("String", ["issuing.dispute"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -81,7 +81,7 @@ describe Stripe::IssuingDispute do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["expired", "lost", "submitted", "unsubmitted", "won"])
+      # validator = EnumValidator.new("String", ["expired", "lost", "submitted", "unsubmitted", "won"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -89,6 +89,12 @@ describe Stripe::IssuingDispute do
   end
 
   describe "test attribute 'transaction'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'treasury'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

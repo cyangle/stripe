@@ -41,7 +41,7 @@ describe Stripe::SubscriptionSchedulePhaseConfiguration do
   describe "test attribute 'billing_cycle_anchor'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["automatic", "phase_start"])
+      # validator = EnumValidator.new("String", ["automatic", "phase_start", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.billing_cycle_anchor = value }.not_to raise_error
       # end
@@ -57,7 +57,7 @@ describe Stripe::SubscriptionSchedulePhaseConfiguration do
   describe "test attribute 'collection_method'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["charge_automatically", "send_invoice"])
+      # validator = EnumValidator.new("String", ["charge_automatically", "send_invoice", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.collection_method = value }.not_to raise_error
       # end
@@ -100,10 +100,16 @@ describe Stripe::SubscriptionSchedulePhaseConfiguration do
     end
   end
 
+  describe "test attribute 'metadata'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'proration_behavior'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["always_invoice", "create_prorations", "none"])
+      # validator = EnumValidator.new("String", ["always_invoice", "create_prorations", "none"])
       # validator.allowable_values.each do |value|
       #   expect { instance.proration_behavior = value }.not_to raise_error
       # end

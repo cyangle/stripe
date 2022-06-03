@@ -29,9 +29,19 @@ describe Stripe::PaymentMethodOptionsWechatPay do
   describe "test attribute 'client'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["android", "ios", "web"])
+      # validator = EnumValidator.new("String", ["android", "ios", "web", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.client = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe "test attribute 'setup_future_usage'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["none"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.setup_future_usage = value }.not_to raise_error
       # end
     end
   end

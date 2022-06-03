@@ -1,0 +1,28 @@
+tasks:
+  - name: 'Update models'
+    file_glob: './src/**/*cr'
+    changes:
+      -
+        name: 'Correct AnyType?'
+        pattern: 'AnyType?'
+        new_value: 'JSON::Any'
+      -
+        name: 'Correct ??'
+        pattern: '\?+'
+        new_value: '?'
+      -
+        name: 'Correct Object?'
+        pattern: 'Object\?'
+        new_value: 'JSON::Any'
+      -
+        name: 'Correct : Object'
+        pattern: ': Object'
+        new_value: ': JSON::Any'
+      -
+        name: 'Correct Stripe::String'
+        pattern: 'Stripe::String'
+        new_value: 'String'
+      -
+        name: 'Correct Int32'
+        pattern: 'Int32'
+        new_value: 'Int64'

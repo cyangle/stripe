@@ -23,7 +23,7 @@ describe Stripe::Recurring do
   describe "test attribute 'aggregate_usage'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["last_during_period", "last_ever", "max", "sum"])
+      # validator = EnumValidator.new("String", ["last_during_period", "last_ever", "max", "sum", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.aggregate_usage = value }.not_to raise_error
       # end
@@ -33,7 +33,7 @@ describe Stripe::Recurring do
   describe "test attribute 'interval'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["day", "month", "week", "year"])
+      # validator = EnumValidator.new("String", ["day", "month", "week", "year"])
       # validator.allowable_values.each do |value|
       #   expect { instance.interval = value }.not_to raise_error
       # end
@@ -46,10 +46,16 @@ describe Stripe::Recurring do
     end
   end
 
+  describe "test attribute 'trial_period_days'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'usage_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["licensed", "metered"])
+      # validator = EnumValidator.new("String", ["licensed", "metered"])
       # validator.allowable_values.each do |value|
       #   expect { instance.usage_type = value }.not_to raise_error
       # end

@@ -65,7 +65,7 @@ describe Stripe::IssuingDisputeCanceledEvidence do
   describe "test attribute 'product_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["merchandise", "service"])
+      # validator = EnumValidator.new("String", ["merchandise", "service", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.product_type = value }.not_to raise_error
       # end
@@ -75,7 +75,7 @@ describe Stripe::IssuingDisputeCanceledEvidence do
   describe "test attribute 'return_status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["merchant_rejected", "successful"])
+      # validator = EnumValidator.new("String", ["merchant_rejected", "successful", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.return_status = value }.not_to raise_error
       # end

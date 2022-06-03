@@ -37,4 +37,22 @@ describe Stripe::SubscriptionsResourcePaymentMethodOptions do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
+
+  describe "test attribute 'customer_balance'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'konbini'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'us_bank_account'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
 end

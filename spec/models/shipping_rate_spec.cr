@@ -71,7 +71,7 @@ describe Stripe::ShippingRate do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["shipping_rate"])
+      # validator = EnumValidator.new("String", ["shipping_rate"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -81,7 +81,7 @@ describe Stripe::ShippingRate do
   describe "test attribute 'tax_behavior'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["exclusive", "inclusive", "unspecified"])
+      # validator = EnumValidator.new("String", ["exclusive", "inclusive", "unspecified", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.tax_behavior = value }.not_to raise_error
       # end
@@ -97,7 +97,7 @@ describe Stripe::ShippingRate do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["fixed_amount"])
+      # validator = EnumValidator.new("String", ["fixed_amount"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

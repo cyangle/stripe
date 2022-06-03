@@ -23,7 +23,7 @@ describe Stripe::MandateAcssDebit do
   describe "test attribute 'default_for'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("Array(String)", ["invoice", "subscription"])
+      # validator = EnumValidator.new("Array(String)", ["invoice", "subscription"])
       # validator.allowable_values.each do |value|
       #   expect { instance.default_for = value }.not_to raise_error
       # end
@@ -39,7 +39,7 @@ describe Stripe::MandateAcssDebit do
   describe "test attribute 'payment_schedule'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["combined", "interval", "sporadic"])
+      # validator = EnumValidator.new("String", ["combined", "interval", "sporadic"])
       # validator.allowable_values.each do |value|
       #   expect { instance.payment_schedule = value }.not_to raise_error
       # end
@@ -49,7 +49,7 @@ describe Stripe::MandateAcssDebit do
   describe "test attribute 'transaction_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["business", "personal"])
+      # validator = EnumValidator.new("String", ["business", "personal"])
       # validator.allowable_values.each do |value|
       #   expect { instance.transaction_type = value }.not_to raise_error
       # end

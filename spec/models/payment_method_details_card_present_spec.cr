@@ -32,6 +32,12 @@ describe Stripe::PaymentMethodDetailsCardPresent do
     end
   end
 
+  describe "test attribute 'capture_before'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'cardholder_name'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -39,6 +45,12 @@ describe Stripe::PaymentMethodDetailsCardPresent do
   end
 
   describe "test attribute 'country'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'description'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -80,6 +92,24 @@ describe Stripe::PaymentMethodDetailsCardPresent do
     end
   end
 
+  describe "test attribute 'iin'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'incremental_authorization_supported'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'issuer'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'last4'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -101,7 +131,7 @@ describe Stripe::PaymentMethodDetailsCardPresent do
   describe "test attribute 'read_method'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["contact_emv", "contactless_emv", "contactless_magstripe_mode", "magnetic_stripe_fallback", "magnetic_stripe_track2"])
+      # validator = EnumValidator.new("String", ["contact_emv", "contactless_emv", "contactless_magstripe_mode", "magnetic_stripe_fallback", "magnetic_stripe_track2", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.read_method = value }.not_to raise_error
       # end

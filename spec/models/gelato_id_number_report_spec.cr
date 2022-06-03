@@ -47,7 +47,7 @@ describe Stripe::GelatoIdNumberReport do
   describe "test attribute 'id_number_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["br_cpf", "sg_nric", "us_ssn"])
+      # validator = EnumValidator.new("String", ["br_cpf", "sg_nric", "us_ssn", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.id_number_type = value }.not_to raise_error
       # end
@@ -63,7 +63,7 @@ describe Stripe::GelatoIdNumberReport do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["unverified", "verified"])
+      # validator = EnumValidator.new("String", ["unverified", "verified"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

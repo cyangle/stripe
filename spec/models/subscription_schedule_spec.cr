@@ -20,6 +20,12 @@ describe Stripe::SubscriptionSchedule do
     end
   end
 
+  describe "test attribute 'application'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'canceled_at'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -59,7 +65,7 @@ describe Stripe::SubscriptionSchedule do
   describe "test attribute 'end_behavior'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["cancel", "none", "release", "renew"])
+      # validator = EnumValidator.new("String", ["cancel", "none", "release", "renew"])
       # validator.allowable_values.each do |value|
       #   expect { instance.end_behavior = value }.not_to raise_error
       # end
@@ -87,7 +93,7 @@ describe Stripe::SubscriptionSchedule do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["subscription_schedule"])
+      # validator = EnumValidator.new("String", ["subscription_schedule"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -115,7 +121,7 @@ describe Stripe::SubscriptionSchedule do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "canceled", "completed", "not_started", "released"])
+      # validator = EnumValidator.new("String", ["active", "canceled", "completed", "not_started", "released"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -123,6 +129,12 @@ describe Stripe::SubscriptionSchedule do
   end
 
   describe "test attribute 'subscription'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'test_clock'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

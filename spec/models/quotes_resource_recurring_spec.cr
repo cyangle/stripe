@@ -35,7 +35,7 @@ describe Stripe::QuotesResourceRecurring do
   describe "test attribute 'interval'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["day", "month", "week", "year"])
+      # validator = EnumValidator.new("String", ["day", "month", "week", "year"])
       # validator.allowable_values.each do |value|
       #   expect { instance.interval = value }.not_to raise_error
       # end

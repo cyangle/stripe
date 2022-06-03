@@ -23,7 +23,7 @@ describe Stripe::DeletedPaymentSource do
   describe "test attribute 'deleted'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("Bool", ["true"])
+      # validator = EnumValidator.new("Bool", ["true"])
       # validator.allowable_values.each do |value|
       #   expect { instance.deleted = value }.not_to raise_error
       # end
@@ -39,7 +39,7 @@ describe Stripe::DeletedPaymentSource do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["card"])
+      # validator = EnumValidator.new("String", ["card"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end

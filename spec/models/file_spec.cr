@@ -53,7 +53,7 @@ describe Stripe::File do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["file"])
+      # validator = EnumValidator.new("String", ["file"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -63,7 +63,7 @@ describe Stripe::File do
   describe "test attribute 'purpose'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload"])
+      # validator = EnumValidator.new("String", ["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload"])
       # validator.allowable_values.each do |value|
       #   expect { instance.purpose = value }.not_to raise_error
       # end

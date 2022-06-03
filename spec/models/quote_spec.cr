@@ -32,6 +32,12 @@ describe Stripe::Quote do
     end
   end
 
+  describe "test attribute 'application'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'application_fee_amount'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -53,7 +59,7 @@ describe Stripe::Quote do
   describe "test attribute 'collection_method'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["charge_automatically", "send_invoice"])
+      # validator = EnumValidator.new("String", ["charge_automatically", "send_invoice"])
       # validator.allowable_values.each do |value|
       #   expect { instance.collection_method = value }.not_to raise_error
       # end
@@ -171,7 +177,7 @@ describe Stripe::Quote do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["quote"])
+      # validator = EnumValidator.new("String", ["quote"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -187,7 +193,7 @@ describe Stripe::Quote do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["accepted", "canceled", "draft", "open"])
+      # validator = EnumValidator.new("String", ["accepted", "canceled", "draft", "open"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -213,6 +219,12 @@ describe Stripe::Quote do
   end
 
   describe "test attribute 'subscription_schedule'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'test_clock'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

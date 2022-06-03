@@ -35,7 +35,7 @@ describe Stripe::PlatformTaxFee do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["platform_tax_fee"])
+      # validator = EnumValidator.new("String", ["platform_tax_fee"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end

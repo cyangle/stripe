@@ -23,7 +23,7 @@ describe Stripe::PortalCustomerUpdate do
   describe "test attribute 'allowed_updates'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("Array(String)", ["address", "email", "phone", "shipping", "tax_id"])
+      # validator = EnumValidator.new("Array(String)", ["address", "email", "phone", "shipping", "tax_id"])
       # validator.allowable_values.each do |value|
       #   expect { instance.allowed_updates = value }.not_to raise_error
       # end

@@ -23,7 +23,7 @@ describe Stripe::SubscriptionsResourcePauseCollection do
   describe "test attribute 'behavior'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["keep_as_draft", "mark_uncollectible", "void"])
+      # validator = EnumValidator.new("String", ["keep_as_draft", "mark_uncollectible", "void"])
       # validator.allowable_values.each do |value|
       #   expect { instance.behavior = value }.not_to raise_error
       # end

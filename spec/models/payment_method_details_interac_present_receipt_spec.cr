@@ -23,7 +23,7 @@ describe Stripe::PaymentMethodDetailsInteracPresentReceipt do
   describe "test attribute 'account_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["checking", "savings", "unknown"])
+      # validator = EnumValidator.new("String", ["checking", "savings", "unknown"])
       # validator.allowable_values.each do |value|
       #   expect { instance.account_type = value }.not_to raise_error
       # end

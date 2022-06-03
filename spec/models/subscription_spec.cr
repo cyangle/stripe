@@ -20,6 +20,12 @@ describe Stripe::Subscription do
     end
   end
 
+  describe "test attribute 'application'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'application_fee_percent'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -65,7 +71,7 @@ describe Stripe::Subscription do
   describe "test attribute 'collection_method'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["charge_automatically", "send_invoice"])
+      # validator = EnumValidator.new("String", ["charge_automatically", "send_invoice"])
       # validator.allowable_values.each do |value|
       #   expect { instance.collection_method = value }.not_to raise_error
       # end
@@ -115,6 +121,12 @@ describe Stripe::Subscription do
   end
 
   describe "test attribute 'default_tax_rates'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'description'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -171,7 +183,7 @@ describe Stripe::Subscription do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["subscription"])
+      # validator = EnumValidator.new("String", ["subscription"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -223,10 +235,16 @@ describe Stripe::Subscription do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "canceled", "incomplete", "incomplete_expired", "past_due", "trialing", "unpaid"])
+      # validator = EnumValidator.new("String", ["active", "canceled", "incomplete", "incomplete_expired", "past_due", "trialing", "unpaid"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe "test attribute 'test_clock'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 

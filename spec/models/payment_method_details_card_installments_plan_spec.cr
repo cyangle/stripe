@@ -29,7 +29,7 @@ describe Stripe::PaymentMethodDetailsCardInstallmentsPlan do
   describe "test attribute 'interval'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["month"])
+      # validator = EnumValidator.new("String", ["month", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.interval = value }.not_to raise_error
       # end
@@ -39,7 +39,7 @@ describe Stripe::PaymentMethodDetailsCardInstallmentsPlan do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["fixed_count"])
+      # validator = EnumValidator.new("String", ["fixed_count"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

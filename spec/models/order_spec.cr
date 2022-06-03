@@ -20,13 +20,13 @@ describe Stripe::Order do
     end
   end
 
-  describe "test attribute 'amount'" do
+  describe "test attribute 'amount_subtotal'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 
-  describe "test attribute 'amount_returned'" do
+  describe "test attribute 'amount_total'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -38,13 +38,19 @@ describe Stripe::Order do
     end
   end
 
-  describe "test attribute 'application_fee'" do
+  describe "test attribute 'automatic_tax'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 
-  describe "test attribute 'charge'" do
+  describe "test attribute 'billing_details'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'client_secret'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -68,13 +74,13 @@ describe Stripe::Order do
     end
   end
 
-  describe "test attribute 'email'" do
+  describe "test attribute 'description'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 
-  describe "test attribute 'external_coupon_code'" do
+  describe "test attribute 'discounts'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -86,7 +92,13 @@ describe Stripe::Order do
     end
   end
 
-  describe "test attribute 'items'" do
+  describe "test attribute 'ip_address'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'line_items'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -107,32 +119,26 @@ describe Stripe::Order do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["order"])
+      # validator = EnumValidator.new("String", ["order"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
     end
   end
 
-  describe "test attribute 'returns'" do
+  describe "test attribute 'payment'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 
-  describe "test attribute 'selected_shipping_method'" do
+  describe "test attribute 'shipping_cost'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 
-  describe "test attribute 'shipping'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'shipping_methods'" do
+  describe "test attribute 'shipping_details'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -141,22 +147,20 @@ describe Stripe::Order do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["canceled", "complete", "open", "processing", "submitted"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.status = value }.not_to raise_error
+      # end
     end
   end
 
-  describe "test attribute 'status_transitions'" do
+  describe "test attribute 'tax_details'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 
-  describe "test attribute 'updated'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'upstream_id'" do
+  describe "test attribute 'total_details'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

@@ -23,9 +23,19 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'acss_debit_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.acss_debit_payments = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe "test attribute 'affirm_payments'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.affirm_payments = value }.not_to raise_error
       # end
     end
   end
@@ -33,7 +43,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'afterpay_clearpay_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.afterpay_clearpay_payments = value }.not_to raise_error
       # end
@@ -43,7 +53,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'au_becs_debit_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.au_becs_debit_payments = value }.not_to raise_error
       # end
@@ -53,7 +63,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'bacs_debit_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.bacs_debit_payments = value }.not_to raise_error
       # end
@@ -63,9 +73,19 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'bancontact_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.bancontact_payments = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe "test attribute 'bank_transfer_payments'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.bank_transfer_payments = value }.not_to raise_error
       # end
     end
   end
@@ -73,7 +93,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'boleto_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.boleto_payments = value }.not_to raise_error
       # end
@@ -83,7 +103,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'card_issuing'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.card_issuing = value }.not_to raise_error
       # end
@@ -93,7 +113,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'card_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.card_payments = value }.not_to raise_error
       # end
@@ -103,7 +123,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'cartes_bancaires_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.cartes_bancaires_payments = value }.not_to raise_error
       # end
@@ -113,7 +133,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'eps_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.eps_payments = value }.not_to raise_error
       # end
@@ -123,7 +143,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'fpx_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.fpx_payments = value }.not_to raise_error
       # end
@@ -133,7 +153,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'giropay_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.giropay_payments = value }.not_to raise_error
       # end
@@ -143,7 +163,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'grabpay_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.grabpay_payments = value }.not_to raise_error
       # end
@@ -153,7 +173,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'ideal_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.ideal_payments = value }.not_to raise_error
       # end
@@ -163,7 +183,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'jcb_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.jcb_payments = value }.not_to raise_error
       # end
@@ -173,9 +193,19 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'klarna_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.klarna_payments = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe "test attribute 'konbini_payments'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.konbini_payments = value }.not_to raise_error
       # end
     end
   end
@@ -183,9 +213,19 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'legacy_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.legacy_payments = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe "test attribute 'link_payments'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.link_payments = value }.not_to raise_error
       # end
     end
   end
@@ -193,7 +233,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'oxxo_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.oxxo_payments = value }.not_to raise_error
       # end
@@ -203,9 +243,19 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'p24_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.p24_payments = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe "test attribute 'paynow_payments'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.paynow_payments = value }.not_to raise_error
       # end
     end
   end
@@ -213,7 +263,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'sepa_debit_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.sepa_debit_payments = value }.not_to raise_error
       # end
@@ -223,7 +273,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'sofort_payments'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.sofort_payments = value }.not_to raise_error
       # end
@@ -233,7 +283,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'tax_reporting_us_1099_k'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.tax_reporting_us_1099_k = value }.not_to raise_error
       # end
@@ -243,7 +293,7 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'tax_reporting_us_1099_misc'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.tax_reporting_us_1099_misc = value }.not_to raise_error
       # end
@@ -253,9 +303,29 @@ describe Stripe::AccountCapabilities do
   describe "test attribute 'transfers'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.transfers = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe "test attribute 'treasury'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.treasury = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe "test attribute 'us_bank_account_ach_payments'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.us_bank_account_ach_payments = value }.not_to raise_error
       # end
     end
   end

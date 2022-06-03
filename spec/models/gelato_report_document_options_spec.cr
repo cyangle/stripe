@@ -23,7 +23,7 @@ describe Stripe::GelatoReportDocumentOptions do
   describe "test attribute 'allowed_types'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("Array(String)", ["driving_license", "id_card", "passport"])
+      # validator = EnumValidator.new("Array(String)", ["driving_license", "id_card", "passport"])
       # validator.allowable_values.each do |value|
       #   expect { instance.allowed_types = value }.not_to raise_error
       # end

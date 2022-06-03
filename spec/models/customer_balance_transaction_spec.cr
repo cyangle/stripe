@@ -89,7 +89,7 @@ describe Stripe::CustomerBalanceTransaction do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["customer_balance_transaction"])
+      # validator = EnumValidator.new("String", ["customer_balance_transaction"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -99,7 +99,7 @@ describe Stripe::CustomerBalanceTransaction do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["adjustment", "applied_to_invoice", "credit_note", "initial", "invoice_too_large", "invoice_too_small", "migration", "unapplied_from_invoice", "unspent_receiver_credit"])
+      # validator = EnumValidator.new("String", ["adjustment", "applied_to_invoice", "credit_note", "initial", "invoice_too_large", "invoice_too_small", "migration", "unapplied_from_invoice", "unspent_receiver_credit"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

@@ -53,7 +53,7 @@ describe Stripe::CheckoutSession do
   describe "test attribute 'billing_address_collection'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["auto", "required"])
+      # validator = EnumValidator.new("String", ["auto", "required", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.billing_address_collection = value }.not_to raise_error
       # end
@@ -99,7 +99,7 @@ describe Stripe::CheckoutSession do
   describe "test attribute 'customer_creation'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["always", "if_required"])
+      # validator = EnumValidator.new("String", ["always", "if_required", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.customer_creation = value }.not_to raise_error
       # end
@@ -145,7 +145,7 @@ describe Stripe::CheckoutSession do
   describe "test attribute 'locale'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"])
+      # validator = EnumValidator.new("String", ["auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.locale = value }.not_to raise_error
       # end
@@ -161,7 +161,7 @@ describe Stripe::CheckoutSession do
   describe "test attribute 'mode'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["payment", "setup", "subscription"])
+      # validator = EnumValidator.new("String", ["payment", "setup", "subscription"])
       # validator.allowable_values.each do |value|
       #   expect { instance.mode = value }.not_to raise_error
       # end
@@ -171,7 +171,7 @@ describe Stripe::CheckoutSession do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["checkout.session"])
+      # validator = EnumValidator.new("String", ["checkout.session"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -205,7 +205,7 @@ describe Stripe::CheckoutSession do
   describe "test attribute 'payment_status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["no_payment_required", "paid", "unpaid"])
+      # validator = EnumValidator.new("String", ["no_payment_required", "paid", "unpaid"])
       # validator.allowable_values.each do |value|
       #   expect { instance.payment_status = value }.not_to raise_error
       # end
@@ -257,7 +257,7 @@ describe Stripe::CheckoutSession do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["complete", "expired", "open"])
+      # validator = EnumValidator.new("String", ["complete", "expired", "open", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -267,7 +267,7 @@ describe Stripe::CheckoutSession do
   describe "test attribute 'submit_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["auto", "book", "donate", "pay"])
+      # validator = EnumValidator.new("String", ["auto", "book", "donate", "pay", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.submit_type = value }.not_to raise_error
       # end

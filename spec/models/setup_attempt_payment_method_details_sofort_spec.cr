@@ -59,7 +59,7 @@ describe Stripe::SetupAttemptPaymentMethodDetailsSofort do
   describe "test attribute 'preferred_language'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["de", "en", "fr", "nl"])
+      # validator = EnumValidator.new("String", ["de", "en", "fr", "nl", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.preferred_language = value }.not_to raise_error
       # end

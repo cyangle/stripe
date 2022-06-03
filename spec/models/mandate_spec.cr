@@ -47,7 +47,7 @@ describe Stripe::Mandate do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["mandate"])
+      # validator = EnumValidator.new("String", ["mandate"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -75,7 +75,7 @@ describe Stripe::Mandate do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "inactive", "pending"])
+      # validator = EnumValidator.new("String", ["active", "inactive", "pending"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -85,7 +85,7 @@ describe Stripe::Mandate do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["multi_use", "single_use"])
+      # validator = EnumValidator.new("String", ["multi_use", "single_use"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

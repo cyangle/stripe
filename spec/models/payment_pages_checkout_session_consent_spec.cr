@@ -23,7 +23,7 @@ describe Stripe::PaymentPagesCheckoutSessionConsent do
   describe "test attribute 'promotions'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["opt_in", "opt_out"])
+      # validator = EnumValidator.new("String", ["opt_in", "opt_out", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.promotions = value }.not_to raise_error
       # end

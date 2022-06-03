@@ -59,7 +59,7 @@ describe Stripe::IssuingDisputeEvidence do
   describe "test attribute 'reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["canceled", "duplicate", "fraudulent", "merchandise_not_as_described", "not_received", "other", "service_not_as_described"])
+      # validator = EnumValidator.new("String", ["canceled", "duplicate", "fraudulent", "merchandise_not_as_described", "not_received", "other", "service_not_as_described"])
       # validator.allowable_values.each do |value|
       #   expect { instance.reason = value }.not_to raise_error
       # end

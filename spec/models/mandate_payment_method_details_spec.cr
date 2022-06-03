@@ -44,6 +44,12 @@ describe Stripe::MandatePaymentMethodDetails do
     end
   end
 
+  describe "test attribute 'link'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'sepa_debit'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -51,6 +57,12 @@ describe Stripe::MandatePaymentMethodDetails do
   end
 
   describe "test attribute '_type'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'us_bank_account'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

@@ -65,7 +65,7 @@ describe Stripe::CreditNoteLineItem do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["credit_note_line_item"])
+      # validator = EnumValidator.new("String", ["credit_note_line_item"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -93,7 +93,7 @@ describe Stripe::CreditNoteLineItem do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["custom_line_item", "invoice_line_item"])
+      # validator = EnumValidator.new("String", ["custom_line_item", "invoice_line_item"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

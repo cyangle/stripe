@@ -32,6 +32,12 @@ describe Stripe::PaymentIntent do
     end
   end
 
+  describe "test attribute 'amount_details'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'amount_received'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -65,7 +71,7 @@ describe Stripe::PaymentIntent do
   describe "test attribute 'cancellation_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["abandoned", "automatic", "duplicate", "failed_invoice", "fraudulent", "requested_by_customer", "void_invoice"])
+      # validator = EnumValidator.new("String", ["abandoned", "automatic", "duplicate", "failed_invoice", "fraudulent", "requested_by_customer", "void_invoice", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.cancellation_reason = value }.not_to raise_error
       # end
@@ -75,7 +81,7 @@ describe Stripe::PaymentIntent do
   describe "test attribute 'capture_method'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["automatic", "manual"])
+      # validator = EnumValidator.new("String", ["automatic", "manual"])
       # validator.allowable_values.each do |value|
       #   expect { instance.capture_method = value }.not_to raise_error
       # end
@@ -97,7 +103,7 @@ describe Stripe::PaymentIntent do
   describe "test attribute 'confirmation_method'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["automatic", "manual"])
+      # validator = EnumValidator.new("String", ["automatic", "manual"])
       # validator.allowable_values.each do |value|
       #   expect { instance.confirmation_method = value }.not_to raise_error
       # end
@@ -167,7 +173,7 @@ describe Stripe::PaymentIntent do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["payment_intent"])
+      # validator = EnumValidator.new("String", ["payment_intent"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -219,7 +225,7 @@ describe Stripe::PaymentIntent do
   describe "test attribute 'setup_future_usage'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["off_session", "on_session"])
+      # validator = EnumValidator.new("String", ["off_session", "on_session", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.setup_future_usage = value }.not_to raise_error
       # end
@@ -227,6 +233,12 @@ describe Stripe::PaymentIntent do
   end
 
   describe "test attribute 'shipping'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'source'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -247,7 +259,7 @@ describe Stripe::PaymentIntent do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["canceled", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method", "succeeded"])
+      # validator = EnumValidator.new("String", ["canceled", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method", "succeeded"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

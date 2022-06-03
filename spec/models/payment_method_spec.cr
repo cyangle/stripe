@@ -26,6 +26,12 @@ describe Stripe::PaymentMethod do
     end
   end
 
+  describe "test attribute 'affirm'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'afterpay_clearpay'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -92,6 +98,12 @@ describe Stripe::PaymentMethod do
     end
   end
 
+  describe "test attribute 'customer_balance'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'eps'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -140,6 +152,18 @@ describe Stripe::PaymentMethod do
     end
   end
 
+  describe "test attribute 'konbini'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'link'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'livemode'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -155,7 +179,7 @@ describe Stripe::PaymentMethod do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["payment_method"])
+      # validator = EnumValidator.new("String", ["payment_method"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -169,6 +193,18 @@ describe Stripe::PaymentMethod do
   end
 
   describe "test attribute 'p24'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'paynow'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'radar_options'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -189,10 +225,16 @@ describe Stripe::PaymentMethod do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["acss_debit", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "card_present", "eps", "fpx", "giropay", "grabpay", "ideal", "interac_present", "klarna", "oxxo", "p24", "sepa_debit", "sofort", "wechat_pay"])
+      # validator = EnumValidator.new("String", ["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "card_present", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "interac_present", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe "test attribute 'us_bank_account'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 

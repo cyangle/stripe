@@ -29,7 +29,7 @@ describe Stripe::Price do
   describe "test attribute 'billing_scheme'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["per_unit", "tiered"])
+      # validator = EnumValidator.new("String", ["per_unit", "tiered"])
       # validator.allowable_values.each do |value|
       #   expect { instance.billing_scheme = value }.not_to raise_error
       # end
@@ -81,7 +81,7 @@ describe Stripe::Price do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["price"])
+      # validator = EnumValidator.new("String", ["price"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -103,7 +103,7 @@ describe Stripe::Price do
   describe "test attribute 'tax_behavior'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["exclusive", "inclusive", "unspecified"])
+      # validator = EnumValidator.new("String", ["exclusive", "inclusive", "unspecified", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.tax_behavior = value }.not_to raise_error
       # end
@@ -119,7 +119,7 @@ describe Stripe::Price do
   describe "test attribute 'tiers_mode'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["graduated", "volume"])
+      # validator = EnumValidator.new("String", ["graduated", "volume", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.tiers_mode = value }.not_to raise_error
       # end
@@ -135,7 +135,7 @@ describe Stripe::Price do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["one_time", "recurring"])
+      # validator = EnumValidator.new("String", ["one_time", "recurring"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

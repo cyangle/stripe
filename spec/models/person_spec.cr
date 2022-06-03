@@ -110,6 +110,12 @@ describe Stripe::Person do
     end
   end
 
+  describe "test attribute 'id_number_secondary_provided'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'last_name'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -149,7 +155,7 @@ describe Stripe::Person do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["person"])
+      # validator = EnumValidator.new("String", ["person"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -165,10 +171,16 @@ describe Stripe::Person do
   describe "test attribute 'political_exposure'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["existing", "none"])
+      # validator = EnumValidator.new("String", ["existing", "none"])
       # validator.allowable_values.each do |value|
       #   expect { instance.political_exposure = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe "test attribute 'registered_address'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 

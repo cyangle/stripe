@@ -107,7 +107,7 @@ describe Stripe::CreditNote do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["credit_note"])
+      # validator = EnumValidator.new("String", ["credit_note"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -129,7 +129,7 @@ describe Stripe::CreditNote do
   describe "test attribute 'reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["duplicate", "fraudulent", "order_change", "product_unsatisfactory"])
+      # validator = EnumValidator.new("String", ["duplicate", "fraudulent", "order_change", "product_unsatisfactory", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.reason = value }.not_to raise_error
       # end
@@ -145,7 +145,7 @@ describe Stripe::CreditNote do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["issued", "void"])
+      # validator = EnumValidator.new("String", ["issued", "void"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -173,7 +173,7 @@ describe Stripe::CreditNote do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["post_payment", "pre_payment"])
+      # validator = EnumValidator.new("String", ["post_payment", "pre_payment"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

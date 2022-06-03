@@ -23,7 +23,7 @@ describe Stripe::IssuingAuthorizationVerificationData do
   describe "test attribute 'address_line1_check'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["match", "mismatch", "not_provided"])
+      # validator = EnumValidator.new("String", ["match", "mismatch", "not_provided"])
       # validator.allowable_values.each do |value|
       #   expect { instance.address_line1_check = value }.not_to raise_error
       # end
@@ -33,7 +33,7 @@ describe Stripe::IssuingAuthorizationVerificationData do
   describe "test attribute 'address_postal_code_check'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["match", "mismatch", "not_provided"])
+      # validator = EnumValidator.new("String", ["match", "mismatch", "not_provided"])
       # validator.allowable_values.each do |value|
       #   expect { instance.address_postal_code_check = value }.not_to raise_error
       # end
@@ -43,7 +43,7 @@ describe Stripe::IssuingAuthorizationVerificationData do
   describe "test attribute 'cvc_check'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["match", "mismatch", "not_provided"])
+      # validator = EnumValidator.new("String", ["match", "mismatch", "not_provided"])
       # validator.allowable_values.each do |value|
       #   expect { instance.cvc_check = value }.not_to raise_error
       # end
@@ -53,7 +53,7 @@ describe Stripe::IssuingAuthorizationVerificationData do
   describe "test attribute 'expiry_check'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["match", "mismatch", "not_provided"])
+      # validator = EnumValidator.new("String", ["match", "mismatch", "not_provided"])
       # validator.allowable_values.each do |value|
       #   expect { instance.expiry_check = value }.not_to raise_error
       # end

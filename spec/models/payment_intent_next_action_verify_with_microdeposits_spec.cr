@@ -31,4 +31,14 @@ describe Stripe::PaymentIntentNextActionVerifyWithMicrodeposits do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
+
+  describe "test attribute 'microdeposit_type'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["amounts", "descriptor_code", "null"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.microdeposit_type = value }.not_to raise_error
+      # end
+    end
+  end
 end

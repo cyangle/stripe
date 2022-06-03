@@ -20,10 +20,20 @@ describe Stripe::PaymentMethodDetailsFpx do
     end
   end
 
+  describe "test attribute 'account_holder_type'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["company", "individual", "null"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.account_holder_type = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe "test attribute 'bank'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["affin_bank", "agrobank", "alliance_bank", "ambank", "bank_islam", "bank_muamalat", "bank_rakyat", "bsn", "cimb", "deutsche_bank", "hong_leong_bank", "hsbc", "kfh", "maybank2e", "maybank2u", "ocbc", "pb_enterprise", "public_bank", "rhb", "standard_chartered", "uob"])
+      # validator = EnumValidator.new("String", ["affin_bank", "agrobank", "alliance_bank", "ambank", "bank_islam", "bank_muamalat", "bank_rakyat", "bsn", "cimb", "deutsche_bank", "hong_leong_bank", "hsbc", "kfh", "maybank2e", "maybank2u", "ocbc", "pb_enterprise", "public_bank", "rhb", "standard_chartered", "uob"])
       # validator.allowable_values.each do |value|
       #   expect { instance.bank = value }.not_to raise_error
       # end

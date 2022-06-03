@@ -26,10 +26,16 @@ describe Stripe::SetupIntent do
     end
   end
 
+  describe "test attribute 'attach_to_self'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'cancellation_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["abandoned", "duplicate", "requested_by_customer"])
+      # validator = EnumValidator.new("String", ["abandoned", "duplicate", "requested_by_customer", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.cancellation_reason = value }.not_to raise_error
       # end
@@ -57,6 +63,16 @@ describe Stripe::SetupIntent do
   describe "test attribute 'description'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'flow_directions'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("Array(String)", ["inbound", "outbound"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.flow_directions = value }.not_to raise_error
+      # end
     end
   end
 
@@ -105,7 +121,7 @@ describe Stripe::SetupIntent do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["setup_intent"])
+      # validator = EnumValidator.new("String", ["setup_intent"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -145,7 +161,7 @@ describe Stripe::SetupIntent do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["canceled", "processing", "requires_action", "requires_confirmation", "requires_payment_method", "succeeded"])
+      # validator = EnumValidator.new("String", ["canceled", "processing", "requires_action", "requires_confirmation", "requires_payment_method", "succeeded"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

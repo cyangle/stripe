@@ -47,7 +47,7 @@ describe Stripe::RadarValueList do
   describe "test attribute 'item_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string"])
+      # validator = EnumValidator.new("String", ["card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string"])
       # validator.allowable_values.each do |value|
       #   expect { instance.item_type = value }.not_to raise_error
       # end
@@ -81,7 +81,7 @@ describe Stripe::RadarValueList do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["radar.value_list"])
+      # validator = EnumValidator.new("String", ["radar.value_list"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end

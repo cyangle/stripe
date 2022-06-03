@@ -9,4 +9,6 @@
 
 # load modules
 require "spec"
+require "vcr"
 require "../src/stripe"
+require "./support/**"

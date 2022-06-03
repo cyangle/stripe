@@ -23,7 +23,7 @@ describe Stripe::ShippingRateDeliveryEstimateBound do
   describe "test attribute 'unit'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["business_day", "day", "hour", "month", "week"])
+      # validator = EnumValidator.new("String", ["business_day", "day", "hour", "month", "week"])
       # validator.allowable_values.each do |value|
       #   expect { instance.unit = value }.not_to raise_error
       # end

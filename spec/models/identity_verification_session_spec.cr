@@ -65,7 +65,7 @@ describe Stripe::IdentityVerificationSession do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["identity.verification_session"])
+      # validator = EnumValidator.new("String", ["identity.verification_session"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -87,7 +87,7 @@ describe Stripe::IdentityVerificationSession do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["canceled", "processing", "requires_input", "verified"])
+      # validator = EnumValidator.new("String", ["canceled", "processing", "requires_input", "verified"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -97,7 +97,7 @@ describe Stripe::IdentityVerificationSession do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["document", "id_number"])
+      # validator = EnumValidator.new("String", ["document", "id_number"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

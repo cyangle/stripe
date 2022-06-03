@@ -20,7 +20,23 @@ describe Stripe::PaymentIntentPaymentMethodOptionsCard do
     end
   end
 
+  describe "test attribute 'capture_method'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["manual"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.capture_method = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe "test attribute 'installments'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'mandate_options'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -29,7 +45,7 @@ describe Stripe::PaymentIntentPaymentMethodOptionsCard do
   describe "test attribute 'network'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
+      # validator = EnumValidator.new("String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.network = value }.not_to raise_error
       # end
@@ -39,7 +55,7 @@ describe Stripe::PaymentIntentPaymentMethodOptionsCard do
   describe "test attribute 'request_three_d_secure'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["any", "automatic", "challenge_only"])
+      # validator = EnumValidator.new("String", ["any", "automatic", "challenge_only", "null"])
       # validator.allowable_values.each do |value|
       #   expect { instance.request_three_d_secure = value }.not_to raise_error
       # end
@@ -49,7 +65,7 @@ describe Stripe::PaymentIntentPaymentMethodOptionsCard do
   describe "test attribute 'setup_future_usage'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["none", "off_session", "on_session"])
+      # validator = EnumValidator.new("String", ["none", "off_session", "on_session"])
       # validator.allowable_values.each do |value|
       #   expect { instance.setup_future_usage = value }.not_to raise_error
       # end

@@ -20,6 +20,12 @@ describe Stripe::TerminalReader do
     end
   end
 
+  describe "test attribute 'action'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'device_sw_version'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -29,7 +35,7 @@ describe Stripe::TerminalReader do
   describe "test attribute 'device_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["bbpos_chipper2x", "bbpos_wisepos_e", "verifone_P400"])
+      # validator = EnumValidator.new("String", ["bbpos_chipper2x", "bbpos_wisepad3", "bbpos_wisepos_e", "simulated_wisepos_e", "stripe_m2", "verifone_P400"])
       # validator.allowable_values.each do |value|
       #   expect { instance.device_type = value }.not_to raise_error
       # end
@@ -75,7 +81,7 @@ describe Stripe::TerminalReader do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["terminal.reader"])
+      # validator = EnumValidator.new("String", ["terminal.reader"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end

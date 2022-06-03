@@ -23,7 +23,7 @@ describe Stripe::MandateBacsDebit do
   describe "test attribute 'network_status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["accepted", "pending", "refused", "revoked"])
+      # validator = EnumValidator.new("String", ["accepted", "pending", "refused", "revoked"])
       # validator.allowable_values.each do |value|
       #   expect { instance.network_status = value }.not_to raise_error
       # end

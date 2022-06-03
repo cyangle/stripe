@@ -161,7 +161,7 @@ describe Stripe::Source do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["source"])
+      # validator = EnumValidator.new("String", ["source"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -187,6 +187,12 @@ describe Stripe::Source do
   end
 
   describe "test attribute 'redirect'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'sepa_credit_transfer'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -231,7 +237,7 @@ describe Stripe::Source do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["ach_credit_transfer", "ach_debit", "acss_debit", "alipay", "au_becs_debit", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_debit", "sofort", "three_d_secure", "wechat"])
+      # validator = EnumValidator.new("String", ["ach_credit_transfer", "ach_debit", "acss_debit", "alipay", "au_becs_debit", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_credit_transfer", "sepa_debit", "sofort", "three_d_secure", "wechat"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

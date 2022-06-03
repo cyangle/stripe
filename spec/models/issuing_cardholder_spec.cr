@@ -77,7 +77,7 @@ describe Stripe::IssuingCardholder do
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["issuing.cardholder"])
+      # validator = EnumValidator.new("String", ["issuing.cardholder"])
       # validator.allowable_values.each do |value|
       #   expect { instance.object = value }.not_to raise_error
       # end
@@ -105,7 +105,7 @@ describe Stripe::IssuingCardholder do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["active", "blocked", "inactive"])
+      # validator = EnumValidator.new("String", ["active", "blocked", "inactive"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -115,7 +115,7 @@ describe Stripe::IssuingCardholder do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new("String", ["company", "individual"])
+      # validator = EnumValidator.new("String", ["company", "individual"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end
