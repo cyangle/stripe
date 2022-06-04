@@ -122,28 +122,28 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @amount : Int64,
-      @cancelable : Bool,
-      @created : Int64,
-      @currency : String,
-      @financial_account : String,
-      @id : String,
-      @linked_flows : InboundTransfersResourceTreasuryInboundTransferResourceLinkedFlows,
-      @livemode : Bool,
-      @metadata : Hash(String, String),
-      @object : String,
-      @origin_payment_method : String,
-      @statement_descriptor : String,
-      @status : String,
-      @status_transitions : InboundTransfersResourceInboundTransferResourceStatusTransitions,
+      @amount : Int64, 
+      @cancelable : Bool, 
+      @created : Int64, 
+      @currency : String, 
+      @financial_account : String, 
+      @id : String, 
+      @linked_flows : InboundTransfersResourceTreasuryInboundTransferResourceLinkedFlows, 
+      @livemode : Bool, 
+      @metadata : Hash(String, String), 
+      @object : String, 
+      @origin_payment_method : String, 
+      @statement_descriptor : String, 
+      @status : String, 
+      @status_transitions : InboundTransfersResourceInboundTransferResourceStatusTransitions, 
       # Optional properties
-      @description : String? = nil,
-      @failure_details : TreasuryInboundTransferFailureDetails? = nil,
-      @hosted_regulatory_receipt_url : String? = nil,
-      @origin_payment_method_details : TreasuryInboundTransferOriginPaymentMethodDetails? = nil,
-      @returned : Bool? = nil,
+      @description : String? = nil, 
+      @failure_details : TreasuryInboundTransferFailureDetails? = nil, 
+      @hosted_regulatory_receipt_url : String? = nil, 
+      @origin_payment_method_details : TreasuryInboundTransferOriginPaymentMethodDetails? = nil, 
+      @returned : Bool? = nil, 
       @transaction : TreasuryCreditReversalTransaction? = nil
     )
     end

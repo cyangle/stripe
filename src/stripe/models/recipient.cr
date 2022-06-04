@@ -101,22 +101,22 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @created : Int64,
-      @id : String,
-      @livemode : Bool,
-      @metadata : Hash(String, String),
-      @object : String,
-      @_type : String,
+      @created : Int64, 
+      @id : String, 
+      @livemode : Bool, 
+      @metadata : Hash(String, String), 
+      @object : String, 
+      @_type : String, 
       # Optional properties
-      @active_account : RecipientActiveAccount? = nil,
-      @cards : CardList1? = nil,
-      @default_card : RecipientDefaultCard? = nil,
-      @description : String? = nil,
-      @email : String? = nil,
-      @migrated_to : RecipientMigratedTo? = nil,
-      @name : String? = nil,
+      @active_account : RecipientActiveAccount? = nil, 
+      @cards : CardList1? = nil, 
+      @default_card : RecipientDefaultCard? = nil, 
+      @description : String? = nil, 
+      @email : String? = nil, 
+      @migrated_to : RecipientMigratedTo? = nil, 
+      @name : String? = nil, 
       @rolled_back_from : RecipientRolledBackFrom? = nil
     )
     end

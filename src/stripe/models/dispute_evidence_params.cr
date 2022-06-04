@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "access_activity_log", type: String?, presence: true, ignore_serialize: access_activity_log.nil? && !access_activity_log_present?)]
@@ -185,34 +186,34 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @access_activity_log : String? = nil,
-      @billing_address : String? = nil,
-      @cancellation_policy : String? = nil,
-      @cancellation_policy_disclosure : String? = nil,
-      @cancellation_rebuttal : String? = nil,
-      @customer_communication : String? = nil,
-      @customer_email_address : String? = nil,
-      @customer_name : String? = nil,
-      @customer_purchase_ip : String? = nil,
-      @customer_signature : String? = nil,
-      @duplicate_charge_documentation : String? = nil,
-      @duplicate_charge_explanation : String? = nil,
-      @duplicate_charge_id : String? = nil,
-      @product_description : String? = nil,
-      @receipt : String? = nil,
-      @refund_policy : String? = nil,
-      @refund_policy_disclosure : String? = nil,
-      @refund_refusal_explanation : String? = nil,
-      @service_date : String? = nil,
-      @service_documentation : String? = nil,
-      @shipping_address : String? = nil,
-      @shipping_carrier : String? = nil,
-      @shipping_date : String? = nil,
-      @shipping_documentation : String? = nil,
-      @shipping_tracking_number : String? = nil,
-      @uncategorized_file : String? = nil,
+      @access_activity_log : String? = nil, 
+      @billing_address : String? = nil, 
+      @cancellation_policy : String? = nil, 
+      @cancellation_policy_disclosure : String? = nil, 
+      @cancellation_rebuttal : String? = nil, 
+      @customer_communication : String? = nil, 
+      @customer_email_address : String? = nil, 
+      @customer_name : String? = nil, 
+      @customer_purchase_ip : String? = nil, 
+      @customer_signature : String? = nil, 
+      @duplicate_charge_documentation : String? = nil, 
+      @duplicate_charge_explanation : String? = nil, 
+      @duplicate_charge_id : String? = nil, 
+      @product_description : String? = nil, 
+      @receipt : String? = nil, 
+      @refund_policy : String? = nil, 
+      @refund_policy_disclosure : String? = nil, 
+      @refund_refusal_explanation : String? = nil, 
+      @service_date : String? = nil, 
+      @service_documentation : String? = nil, 
+      @shipping_address : String? = nil, 
+      @shipping_carrier : String? = nil, 
+      @shipping_date : String? = nil, 
+      @shipping_documentation : String? = nil, 
+      @shipping_tracking_number : String? = nil, 
+      @uncategorized_file : String? = nil, 
       @uncategorized_text : String? = nil
     )
     end

@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "address", type: PostCustomersRequestAddress?, presence: true, ignore_serialize: address.nil? && !address_present?)]
@@ -169,29 +170,29 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @address : PostCustomersRequestAddress? = nil,
-      @balance : Int64? = nil,
-      @cash_balance : CashBalanceParam? = nil,
-      @coupon : String? = nil,
-      @description : String? = nil,
-      @email : String? = nil,
-      @expand : Array(String)? = nil,
-      @invoice_prefix : String? = nil,
-      @invoice_settings : CustomerParam? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @name : String? = nil,
-      @next_invoice_sequence : Int64? = nil,
-      @payment_method : String? = nil,
-      @phone : String? = nil,
-      @preferred_locales : Array(String)? = nil,
-      @promotion_code : String? = nil,
-      @shipping : PostCustomersRequestShipping? = nil,
-      @source : String? = nil,
-      @tax : TaxParam? = nil,
-      @tax_exempt : String? = nil,
-      @tax_id_data : Array(DataParams)? = nil,
+      @address : PostCustomersRequestAddress? = nil, 
+      @balance : Int64? = nil, 
+      @cash_balance : CashBalanceParam? = nil, 
+      @coupon : String? = nil, 
+      @description : String? = nil, 
+      @email : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @invoice_prefix : String? = nil, 
+      @invoice_settings : CustomerParam? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @name : String? = nil, 
+      @next_invoice_sequence : Int64? = nil, 
+      @payment_method : String? = nil, 
+      @phone : String? = nil, 
+      @preferred_locales : Array(String)? = nil, 
+      @promotion_code : String? = nil, 
+      @shipping : PostCustomersRequestShipping? = nil, 
+      @source : String? = nil, 
+      @tax : TaxParam? = nil, 
+      @tax_exempt : String? = nil, 
+      @tax_id_data : Array(DataParams)? = nil, 
       @test_clock : String? = nil
     )
     end

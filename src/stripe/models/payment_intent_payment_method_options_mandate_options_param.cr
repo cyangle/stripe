@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "custom_mandate_url", type: BusinessProfileSpecsSupportUrl?, presence: true, ignore_serialize: custom_mandate_url.nil? && !custom_mandate_url_present?)]
@@ -50,11 +51,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @custom_mandate_url : BusinessProfileSpecsSupportUrl? = nil,
-      @interval_description : String? = nil,
-      @payment_schedule : String? = nil,
+      @custom_mandate_url : BusinessProfileSpecsSupportUrl? = nil, 
+      @interval_description : String? = nil, 
+      @payment_schedule : String? = nil, 
       @transaction_type : String? = nil
     )
     end

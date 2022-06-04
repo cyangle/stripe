@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodDetailsCardPresent
     include JSON::Serializable
@@ -139,25 +139,25 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @exp_month : Int64,
-      @exp_year : Int64,
+      @exp_month : Int64, 
+      @exp_year : Int64, 
       # Optional properties
-      @amount_authorized : Int64? = nil,
-      @brand : String? = nil,
-      @capture_before : Int64? = nil,
-      @cardholder_name : String? = nil,
-      @country : String? = nil,
-      @emv_auth_data : String? = nil,
-      @fingerprint : String? = nil,
-      @funding : String? = nil,
-      @generated_card : String? = nil,
-      @incremental_authorization_supported : Bool? = nil,
-      @last4 : String? = nil,
-      @network : String? = nil,
-      @overcapture_supported : Bool? = nil,
-      @read_method : String? = nil,
+      @amount_authorized : Int64? = nil, 
+      @brand : String? = nil, 
+      @capture_before : Int64? = nil, 
+      @cardholder_name : String? = nil, 
+      @country : String? = nil, 
+      @emv_auth_data : String? = nil, 
+      @fingerprint : String? = nil, 
+      @funding : String? = nil, 
+      @generated_card : String? = nil, 
+      @incremental_authorization_supported : Bool? = nil, 
+      @last4 : String? = nil, 
+      @network : String? = nil, 
+      @overcapture_supported : Bool? = nil, 
+      @read_method : String? = nil, 
       @receipt : PaymentMethodDetailsCardPresentReceipt1? = nil
     )
     end

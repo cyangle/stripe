@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class InboundTransfersPaymentMethodDetailsUsBankAccount
     include JSON::Serializable
@@ -77,15 +77,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @network : String,
+      @network : String, 
       # Optional properties
-      @account_holder_type : String? = nil,
-      @account_type : String? = nil,
-      @bank_name : String? = nil,
-      @fingerprint : String? = nil,
-      @last4 : String? = nil,
+      @account_holder_type : String? = nil, 
+      @account_type : String? = nil, 
+      @bank_name : String? = nil, 
+      @fingerprint : String? = nil, 
+      @last4 : String? = nil, 
       @routing_number : String? = nil
     )
     end

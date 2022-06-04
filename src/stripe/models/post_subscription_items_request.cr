@@ -99,19 +99,19 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @subscription : String,
+      @subscription : String, 
       # Optional properties
-      @billing_thresholds : PostSubscriptionItemsRequestBillingThresholds? = nil,
-      @expand : Array(String)? = nil,
-      @metadata : Hash(String, String)? = nil,
-      @payment_behavior : String? = nil,
-      @price : String? = nil,
-      @price_data : RecurringPriceData1? = nil,
-      @proration_behavior : String? = nil,
-      @proration_date : Int64? = nil,
-      @quantity : Int64? = nil,
+      @billing_thresholds : PostSubscriptionItemsRequestBillingThresholds? = nil, 
+      @expand : Array(String)? = nil, 
+      @metadata : Hash(String, String)? = nil, 
+      @payment_behavior : String? = nil, 
+      @price : String? = nil, 
+      @price_data : RecurringPriceData1? = nil, 
+      @proration_behavior : String? = nil, 
+      @proration_date : Int64? = nil, 
+      @quantity : Int64? = nil, 
       @tax_rates : PostSubscriptionItemsRequestTaxRates? = nil
     )
     end

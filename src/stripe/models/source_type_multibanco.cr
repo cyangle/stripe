@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "entity", type: String?, presence: true, ignore_serialize: entity.nil? && !entity_present?)]
@@ -82,17 +83,17 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @entity : String? = nil,
-      @reference : String? = nil,
-      @refund_account_holder_address_city : String? = nil,
-      @refund_account_holder_address_country : String? = nil,
-      @refund_account_holder_address_line1 : String? = nil,
-      @refund_account_holder_address_line2 : String? = nil,
-      @refund_account_holder_address_postal_code : String? = nil,
-      @refund_account_holder_address_state : String? = nil,
-      @refund_account_holder_name : String? = nil,
+      @entity : String? = nil, 
+      @reference : String? = nil, 
+      @refund_account_holder_address_city : String? = nil, 
+      @refund_account_holder_address_country : String? = nil, 
+      @refund_account_holder_address_line1 : String? = nil, 
+      @refund_account_holder_address_line2 : String? = nil, 
+      @refund_account_holder_address_postal_code : String? = nil, 
+      @refund_account_holder_address_state : String? = nil, 
+      @refund_account_holder_name : String? = nil, 
       @refund_iban : String? = nil
     )
     end
@@ -108,6 +109,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # The amount to capture, which must be less than or equal to the original amount. Any additional amount will be automatically refunded.
@@ -84,16 +85,16 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @amount : Int64? = nil,
-      @application_fee : Int64? = nil,
-      @application_fee_amount : Int64? = nil,
-      @expand : Array(String)? = nil,
-      @receipt_email : String? = nil,
-      @statement_descriptor : String? = nil,
-      @statement_descriptor_suffix : String? = nil,
-      @transfer_data : TransferDataSpecs1? = nil,
+      @amount : Int64? = nil, 
+      @application_fee : Int64? = nil, 
+      @application_fee_amount : Int64? = nil, 
+      @expand : Array(String)? = nil, 
+      @receipt_email : String? = nil, 
+      @statement_descriptor : String? = nil, 
+      @statement_descriptor_suffix : String? = nil, 
+      @transfer_data : TransferDataSpecs1? = nil, 
       @transfer_group : String? = nil
     )
     end

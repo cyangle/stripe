@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "coupon", type: String?, presence: true, ignore_serialize: coupon.nil? && !coupon_present?)]
@@ -34,9 +35,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @coupon : String? = nil,
+      @coupon : String? = nil, 
       @discount : String? = nil
     )
     end

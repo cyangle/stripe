@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
@@ -143,25 +144,25 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @amount : Int64? = nil,
-      @application_fee_amount : PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil,
-      @currency : String? = nil,
-      @customer : String? = nil,
-      @description : String? = nil,
-      @expand : Array(String)? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @payment_method : String? = nil,
-      @payment_method_data : PaymentMethodDataParams? = nil,
-      @payment_method_options : PaymentMethodOptionsParam11? = nil,
-      @payment_method_types : Array(String)? = nil,
-      @receipt_email : PostPaymentIntentsIntentRequestReceiptEmail? = nil,
-      @setup_future_usage : String? = nil,
-      @shipping : PostPaymentIntentsIntentRequestShipping? = nil,
-      @statement_descriptor : String? = nil,
-      @statement_descriptor_suffix : String? = nil,
-      @transfer_data : TransferDataUpdateParams? = nil,
+      @amount : Int64? = nil, 
+      @application_fee_amount : PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil, 
+      @currency : String? = nil, 
+      @customer : String? = nil, 
+      @description : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @payment_method : String? = nil, 
+      @payment_method_data : PaymentMethodDataParams? = nil, 
+      @payment_method_options : PaymentMethodOptionsParam11? = nil, 
+      @payment_method_types : Array(String)? = nil, 
+      @receipt_email : PostPaymentIntentsIntentRequestReceiptEmail? = nil, 
+      @setup_future_usage : String? = nil, 
+      @shipping : PostPaymentIntentsIntentRequestShipping? = nil, 
+      @statement_descriptor : String? = nil, 
+      @statement_descriptor_suffix : String? = nil, 
+      @transfer_data : TransferDataUpdateParams? = nil, 
       @transfer_group : String? = nil
     )
     end

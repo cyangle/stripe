@@ -67,16 +67,16 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @account : CapabilityAccount,
-      @id : String,
-      @object : String,
-      @requested : Bool,
-      @status : String,
+      @account : CapabilityAccount, 
+      @id : String, 
+      @object : String, 
+      @requested : Bool, 
+      @status : String, 
       # Optional properties
-      @future_requirements : AccountCapabilityFutureRequirements? = nil,
-      @requested_at : Int64? = nil,
+      @future_requirements : AccountCapabilityFutureRequirements? = nil, 
+      @requested_at : Int64? = nil, 
       @requirements : AccountCapabilityRequirements? = nil
     )
     end

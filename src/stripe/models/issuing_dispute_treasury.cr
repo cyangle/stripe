@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class IssuingDisputeTreasury
     include JSON::Serializable
@@ -36,9 +36,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @received_debit : String,
+      @received_debit : String, 
       # Optional properties
       @debit_reversal : String? = nil
     )

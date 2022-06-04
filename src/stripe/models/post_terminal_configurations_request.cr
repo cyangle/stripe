@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "bbpos_wisepos_e", type: BbposWisePose?, presence: true, ignore_serialize: bbpos_wisepos_e.nil? && !bbpos_wisepos_e_present?)]
@@ -47,11 +48,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @bbpos_wisepos_e : BbposWisePose? = nil,
-      @expand : Array(String)? = nil,
-      @tipping : PostTerminalConfigurationsRequestTipping? = nil,
+      @bbpos_wisepos_e : BbposWisePose? = nil, 
+      @expand : Array(String)? = nil, 
+      @tipping : PostTerminalConfigurationsRequestTipping? = nil, 
       @verifone_p400 : VerifoneP400? = nil
     )
     end
@@ -67,6 +68,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

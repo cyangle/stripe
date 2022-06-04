@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SourceReceiverFlow
     include JSON::Serializable
@@ -52,13 +52,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @amount_charged : Int64,
-      @amount_received : Int64,
-      @amount_returned : Int64,
-      @refund_attributes_method : String,
-      @refund_attributes_status : String,
+      @amount_charged : Int64, 
+      @amount_received : Int64, 
+      @amount_returned : Int64, 
+      @refund_attributes_method : String, 
+      @refund_attributes_status : String, 
       # Optional properties
       @address : String? = nil
     )

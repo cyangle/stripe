@@ -126,28 +126,28 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @amount : Int64,
-      @card : IssuingTransactionCard,
-      @created : Int64,
-      @currency : String,
-      @id : String,
-      @livemode : Bool,
-      @merchant_amount : Int64,
-      @merchant_currency : String,
-      @merchant_data : IssuingAuthorizationMerchantData,
-      @metadata : Hash(String, String),
-      @object : String,
-      @_type : String,
+      @amount : Int64, 
+      @card : IssuingTransactionCard, 
+      @created : Int64, 
+      @currency : String, 
+      @id : String, 
+      @livemode : Bool, 
+      @merchant_amount : Int64, 
+      @merchant_currency : String, 
+      @merchant_data : IssuingAuthorizationMerchantData, 
+      @metadata : Hash(String, String), 
+      @object : String, 
+      @_type : String, 
       # Optional properties
-      @amount_details : IssuingTransactionAmountDetails1? = nil,
-      @authorization : IssuingTransactionAuthorization? = nil,
-      @balance_transaction : IssuingTransactionBalanceTransaction? = nil,
-      @cardholder : IssuingTransactionCardholder? = nil,
-      @dispute : IssuingTransactionDispute? = nil,
-      @purchase_details : IssuingTransactionPurchaseDetails1? = nil,
-      @treasury : IssuingTransactionTreasury1? = nil,
+      @amount_details : IssuingTransactionAmountDetails1? = nil, 
+      @authorization : IssuingTransactionAuthorization? = nil, 
+      @balance_transaction : IssuingTransactionBalanceTransaction? = nil, 
+      @cardholder : IssuingTransactionCardholder? = nil, 
+      @dispute : IssuingTransactionDispute? = nil, 
+      @purchase_details : IssuingTransactionPurchaseDetails1? = nil, 
+      @treasury : IssuingTransactionTreasury1? = nil, 
       @wallet : String? = nil
     )
     end

@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "ip_address", type: String?, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
@@ -34,9 +35,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @ip_address : String? = nil,
+      @ip_address : String? = nil, 
       @user_agent : String? = nil
     )
     end

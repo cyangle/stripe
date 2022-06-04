@@ -12,11 +12,12 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class OrdersV2ResourcePaymentMethodOptions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+
 
     # Optional properties
 
@@ -113,22 +114,22 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @acss_debit : PaymentIntentPaymentMethodOptionsAcssDebit? = nil,
-      @afterpay_clearpay : OrdersPaymentMethodOptionsAfterpayClearpay? = nil,
-      @alipay : PaymentMethodOptionsAlipay? = nil,
-      @bancontact : PaymentMethodOptionsBancontact? = nil,
-      @card : OrdersV2ResourceCardPaymentMethodOptions? = nil,
-      @customer_balance : PaymentMethodOptionsCustomerBalance? = nil,
-      @ideal : PaymentMethodOptionsIdeal? = nil,
-      @klarna : PaymentMethodOptionsKlarna? = nil,
-      @link : PaymentIntentPaymentMethodOptionsLink? = nil,
-      @oxxo : PaymentMethodOptionsOxxo? = nil,
-      @p24 : PaymentMethodOptionsP24? = nil,
-      @paypal : PaymentMethodOptionsPaypal? = nil,
-      @sepa_debit : PaymentIntentPaymentMethodOptionsSepaDebit? = nil,
-      @sofort : PaymentMethodOptionsSofort? = nil,
+      @acss_debit : PaymentIntentPaymentMethodOptionsAcssDebit? = nil, 
+      @afterpay_clearpay : OrdersPaymentMethodOptionsAfterpayClearpay? = nil, 
+      @alipay : PaymentMethodOptionsAlipay? = nil, 
+      @bancontact : PaymentMethodOptionsBancontact? = nil, 
+      @card : OrdersV2ResourceCardPaymentMethodOptions? = nil, 
+      @customer_balance : PaymentMethodOptionsCustomerBalance? = nil, 
+      @ideal : PaymentMethodOptionsIdeal? = nil, 
+      @klarna : PaymentMethodOptionsKlarna? = nil, 
+      @link : PaymentIntentPaymentMethodOptionsLink? = nil, 
+      @oxxo : PaymentMethodOptionsOxxo? = nil, 
+      @p24 : PaymentMethodOptionsP24? = nil, 
+      @paypal : PaymentMethodOptionsPaypal? = nil, 
+      @sepa_debit : PaymentIntentPaymentMethodOptionsSepaDebit? = nil, 
+      @sofort : PaymentMethodOptionsSofort? = nil, 
       @wechat_pay : PaymentMethodOptionsWechatPay? = nil
     )
     end
@@ -144,6 +145,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

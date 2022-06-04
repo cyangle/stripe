@@ -28,9 +28,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @ip_address : String,
+      @ip_address : String, 
       @user_agent : String
     )
     end

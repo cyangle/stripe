@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "billing_details", type: BillingDetailsInnerParams1?, presence: true, ignore_serialize: billing_details.nil? && !billing_details_present?)]
@@ -39,8 +40,8 @@ module Stripe
     property? expand_present : Bool = false
 
     # If this is an `Link` PaymentMethod, this hash contains details about the Link payment method.
-    @[JSON::Field(key: "link", type: JSON::Any, presence: true, ignore_serialize: link.nil? && !link_present?)]
-    property link : JSON::Any
+    @[JSON::Field(key: "link", type: JSON::Any?, presence: true, ignore_serialize: link.nil? && !link_present?)]
+    property link : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? link_present : Bool = false
@@ -60,13 +61,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @billing_details : BillingDetailsInnerParams1? = nil,
-      @card : UpdateApiParam? = nil,
-      @expand : Array(String)? = nil,
-      @link : JSON::Any = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
+      @billing_details : BillingDetailsInnerParams1? = nil, 
+      @card : UpdateApiParam? = nil, 
+      @expand : Array(String)? = nil, 
+      @link : JSON::Any? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
       @us_bank_account : UpdateParam? = nil
     )
     end
@@ -82,6 +83,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

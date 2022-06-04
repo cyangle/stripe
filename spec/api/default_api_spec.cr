@@ -1406,7 +1406,7 @@ describe "DefaultApi" do
   end
 
   # unit tests for get_customers_customer_discount
-  #
+  # 
   # @param customer
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
@@ -1504,7 +1504,7 @@ describe "DefaultApi" do
   end
 
   # unit tests for get_customers_customer_subscriptions_subscription_exposed_id_discount
-  #
+  # 
   # @param customer
   # @param subscription_exposed_id
   # @param [Hash] opts the optional parameters
@@ -4443,7 +4443,7 @@ describe "DefaultApi" do
   end
 
   # unit tests for post_application_fees_id_refund
-  #
+  # 
   # @param id
   # @param [Hash] opts the optional parameters
   # @option opts [Int32] :amount
@@ -4613,7 +4613,7 @@ describe "DefaultApi" do
   end
 
   # unit tests for post_charges_charge_dispute
-  #
+  # 
   # @param charge
   # @param [Hash] opts the optional parameters
   # @option opts [DisputeEvidenceParams] :evidence
@@ -4628,7 +4628,7 @@ describe "DefaultApi" do
   end
 
   # unit tests for post_charges_charge_dispute_close
-  #
+  # 
   # @param charge
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
@@ -6082,37 +6082,37 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates a PaymentMethod object. Read the &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-create-payment-method\&quot;&gt;Stripe.js reference&lt;/a&gt; to learn how to create PaymentMethods via Stripe.js.&lt;/p&gt;  &lt;p&gt;Instead of creating a PaymentMethod directly, we recommend using the &lt;a href&#x3D;\&quot;/docs/payments/accept-a-payment\&quot;&gt;PaymentIntents&lt;/a&gt; API to accept a payment immediately or the &lt;a href&#x3D;\&quot;/docs/payments/save-and-reuse\&quot;&gt;SetupIntent&lt;/a&gt; API to collect payment method details ahead of a future payment.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
   # @option opts [PaymentMethodParam2] :acss_debit
-  # @option opts [Object] :affirm If this is an &#x60;affirm&#x60; PaymentMethod, this hash contains details about the Affirm payment method.
-  # @option opts [Object] :afterpay_clearpay If this is an &#x60;AfterpayClearpay&#x60; PaymentMethod, this hash contains details about the AfterpayClearpay payment method.
-  # @option opts [Object] :alipay If this is an &#x60;Alipay&#x60; PaymentMethod, this hash contains details about the Alipay payment method.
+  # @option opts [JSON::Any] :affirm If this is an &#x60;affirm&#x60; PaymentMethod, this hash contains details about the Affirm payment method.
+  # @option opts [JSON::Any] :afterpay_clearpay If this is an &#x60;AfterpayClearpay&#x60; PaymentMethod, this hash contains details about the AfterpayClearpay payment method.
+  # @option opts [JSON::Any] :alipay If this is an &#x60;Alipay&#x60; PaymentMethod, this hash contains details about the Alipay payment method.
   # @option opts [Param10] :au_becs_debit
   # @option opts [Param11] :bacs_debit
-  # @option opts [Object] :bancontact If this is a &#x60;bancontact&#x60; PaymentMethod, this hash contains details about the Bancontact payment method.
+  # @option opts [JSON::Any] :bancontact If this is a &#x60;bancontact&#x60; PaymentMethod, this hash contains details about the Bancontact payment method.
   # @option opts [BillingDetailsInnerParams1] :billing_details
   # @option opts [Param12] :boleto
   # @option opts [PostPaymentMethodsRequestCard] :card
   # @option opts [String] :customer The &#x60;Customer&#x60; to whom the original PaymentMethod is attached.
-  # @option opts [Object] :customer_balance If this is a &#x60;customer_balance&#x60; PaymentMethod, this hash contains details about the CustomerBalance payment method.
+  # @option opts [JSON::Any] :customer_balance If this is a &#x60;customer_balance&#x60; PaymentMethod, this hash contains details about the CustomerBalance payment method.
   # @option opts [Param13] :eps
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Param14] :fpx
-  # @option opts [Object] :giropay If this is a &#x60;giropay&#x60; PaymentMethod, this hash contains details about the Giropay payment method.
-  # @option opts [Object] :grabpay If this is a &#x60;grabpay&#x60; PaymentMethod, this hash contains details about the GrabPay payment method.
+  # @option opts [JSON::Any] :giropay If this is a &#x60;giropay&#x60; PaymentMethod, this hash contains details about the Giropay payment method.
+  # @option opts [JSON::Any] :grabpay If this is a &#x60;grabpay&#x60; PaymentMethod, this hash contains details about the GrabPay payment method.
   # @option opts [Param15] :ideal
-  # @option opts [Object] :interac_present If this is an &#x60;interac_present&#x60; PaymentMethod, this hash contains details about the Interac Present payment method.
+  # @option opts [JSON::Any] :interac_present If this is an &#x60;interac_present&#x60; PaymentMethod, this hash contains details about the Interac Present payment method.
   # @option opts [Param16] :klarna
-  # @option opts [Object] :konbini If this is a &#x60;konbini&#x60; PaymentMethod, this hash contains details about the Konbini payment method.
-  # @option opts [Object] :link If this is an &#x60;Link&#x60; PaymentMethod, this hash contains details about the Link payment method.
-  # @option opts [Object] :oxxo If this is an &#x60;oxxo&#x60; PaymentMethod, this hash contains details about the OXXO payment method.
+  # @option opts [JSON::Any] :konbini If this is a &#x60;konbini&#x60; PaymentMethod, this hash contains details about the Konbini payment method.
+  # @option opts [JSON::Any] :link If this is an &#x60;Link&#x60; PaymentMethod, this hash contains details about the Link payment method.
+  # @option opts [JSON::Any] :oxxo If this is an &#x60;oxxo&#x60; PaymentMethod, this hash contains details about the OXXO payment method.
   # @option opts [Param17] :p24
   # @option opts [String] :payment_method The PaymentMethod to share.
-  # @option opts [Object] :paynow If this is a &#x60;paynow&#x60; PaymentMethod, this hash contains details about the PayNow payment method.
+  # @option opts [JSON::Any] :paynow If this is a &#x60;paynow&#x60; PaymentMethod, this hash contains details about the PayNow payment method.
   # @option opts [RadarOptions] :radar_options
   # @option opts [Param18] :sepa_debit
   # @option opts [Param19] :sofort
   # @option opts [String] :_type The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
   # @option opts [PaymentMethodParam3] :us_bank_account
-  # @option opts [Object] :wechat_pay If this is an &#x60;wechat_pay&#x60; PaymentMethod, this hash contains details about the wechat_pay payment method.
+  # @option opts [JSON::Any] :wechat_pay If this is an &#x60;wechat_pay&#x60; PaymentMethod, this hash contains details about the wechat_pay payment method.
   # @return [PaymentMethod]
   describe "post_payment_methods test" do
     it "should work" do
@@ -6127,7 +6127,7 @@ describe "DefaultApi" do
   # @option opts [BillingDetailsInnerParams1] :billing_details
   # @option opts [UpdateApiParam] :card
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Object] :link If this is an &#x60;Link&#x60; PaymentMethod, this hash contains details about the Link payment method.
+  # @option opts [JSON::Any] :link If this is an &#x60;Link&#x60; PaymentMethod, this hash contains details about the Link payment method.
   # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [UpdateParam] :us_bank_account
   # @return [PaymentMethod]

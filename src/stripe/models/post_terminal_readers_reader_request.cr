@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # Specifies which fields in the response should be expanded.
@@ -42,10 +43,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @expand : Array(String)? = nil,
-      @label : String? = nil,
+      @expand : Array(String)? = nil, 
+      @label : String? = nil, 
       @metadata : PostAccountRequestMetadata? = nil
     )
     end

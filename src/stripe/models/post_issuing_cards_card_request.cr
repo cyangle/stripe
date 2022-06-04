@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # Reason why the `status` of this card is `canceled`.
@@ -65,13 +66,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @cancellation_reason : String? = nil,
-      @expand : Array(String)? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @pin : EncryptedPinParam? = nil,
-      @spending_controls : AuthorizationControlsParam? = nil,
+      @cancellation_reason : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @pin : EncryptedPinParam? = nil, 
+      @spending_controls : AuthorizationControlsParam? = nil, 
       @status : String? = nil
     )
     end

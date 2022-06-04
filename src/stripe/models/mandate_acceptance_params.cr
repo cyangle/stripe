@@ -67,15 +67,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @status : String,
+      @status : String, 
       # Optional properties
-      @date : Int64? = nil,
-      @ip : String? = nil,
-      @offline : MandateOfflineAcceptanceParams? = nil,
-      @online : MandateOnlineAcceptanceParams? = nil,
-      @_type : String? = nil,
+      @date : Int64? = nil, 
+      @ip : String? = nil, 
+      @offline : MandateOfflineAcceptanceParams? = nil, 
+      @online : MandateOnlineAcceptanceParams? = nil, 
+      @_type : String? = nil, 
       @user_agent : String? = nil
     )
     end

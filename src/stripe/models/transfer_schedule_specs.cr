@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "delay_days", type: TransferScheduleSpecsDelayDays?, presence: true, ignore_serialize: delay_days.nil? && !delay_days_present?)]
@@ -50,11 +51,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @delay_days : TransferScheduleSpecsDelayDays? = nil,
-      @interval : String? = nil,
-      @monthly_anchor : Int64? = nil,
+      @delay_days : TransferScheduleSpecsDelayDays? = nil, 
+      @interval : String? = nil, 
+      @monthly_anchor : Int64? = nil, 
       @weekly_anchor : String? = nil
     )
     end

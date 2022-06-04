@@ -77,18 +77,18 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @configuration : BillingPortalSessionConfiguration,
-      @created : Int64,
-      @customer : String,
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @url : String,
+      @configuration : BillingPortalSessionConfiguration, 
+      @created : Int64, 
+      @customer : String, 
+      @id : String, 
+      @livemode : Bool, 
+      @object : String, 
+      @url : String, 
       # Optional properties
-      @locale : String? = nil,
-      @on_behalf_of : String? = nil,
+      @locale : String? = nil, 
+      @on_behalf_of : String? = nil, 
       @return_url : String? = nil
     )
     end

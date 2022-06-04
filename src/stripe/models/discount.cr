@@ -89,19 +89,19 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @coupon : Coupon,
-      @id : String,
-      @object : String,
-      @start : Int64,
+      @coupon : Coupon, 
+      @id : String, 
+      @object : String, 
+      @start : Int64, 
       # Optional properties
-      @checkout_session : String? = nil,
-      @customer : DeletedDiscountCustomer? = nil,
-      @_end : Int64? = nil,
-      @invoice : String? = nil,
-      @invoice_item : String? = nil,
-      @promotion_code : DeletedDiscountPromotionCode? = nil,
+      @checkout_session : String? = nil, 
+      @customer : DeletedDiscountCustomer? = nil, 
+      @_end : Int64? = nil, 
+      @invoice : String? = nil, 
+      @invoice_item : String? = nil, 
+      @promotion_code : DeletedDiscountPromotionCode? = nil, 
       @subscription : String? = nil
     )
     end

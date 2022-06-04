@@ -13,61 +13,6 @@ require "log"
 
 module Stripe
   # A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will override the [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates) on the Subscription. When updating, pass an empty string to remove previously-defined tax rates.
-  @[JSON::Serializable::Options(emit_nulls: true)]
-  class PostSubscriptionItemsRequestTaxRates
-    include JSON::Serializable
-    include JSON::Serializable::Unmapped
+  alias PostSubscriptionItemsRequestTaxRates = Array(String) | BusinessProfileSpecsSupportUrlOneOf
 
-    # List of class defined in anyOf (OpenAPI v3)
-    def self.openapi_any_of
-      [
-        Stripe::Array(String),
-        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
-      ]
-    end
-
-    # Initializes the object
-    # @param [Hash] attributes Model attributes in the form of hash
-    def initialize
-    end
-
-    # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properties with the reasons
-    def list_invalid_properties
-      invalid_properties = Array(String).new
-
-      invalid_properties
-    end
-
-    # Check to see if the all the properties in the model are valid
-    # @return true if the model is valid
-    def valid?
-      _any_of_found = false
-      json_string : String = self.to_json
-      _any_of_found = self.class.openapi_any_of.any? do |_class|
-        _any_of = begin
-          _class.from_json(json_string)
-        rescue
-          nil
-        end
-
-        !_any_of.nil? && _any_of.not_nil!.valid?
-      end
-      return false if !_any_of_found
-
-      true
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
-    end
-
-    # Generates #hash and #== methods from all fields
-    # #== @return [Bool]
-    # #hash calculates hash code according to all attributes.
-    # #hash @return [UInt64] Hash code
-    def_equals_and_hash()
-  end
 end

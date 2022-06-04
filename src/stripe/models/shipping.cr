@@ -12,11 +12,12 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class Shipping
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+
 
     # Optional properties
 
@@ -57,12 +58,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @address : Address? = nil,
-      @carrier : String? = nil,
-      @name : String? = nil,
-      @phone : String? = nil,
+      @address : Address? = nil, 
+      @carrier : String? = nil, 
+      @name : String? = nil, 
+      @phone : String? = nil, 
       @tracking_number : String? = nil
     )
     end

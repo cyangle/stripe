@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "automatic_tax", type: AutomaticTax1?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
@@ -112,21 +113,21 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @automatic_tax : AutomaticTax1? = nil,
-      @billing_details : PostOrdersRequestBillingDetails? = nil,
-      @currency : String? = nil,
-      @customer : String? = nil,
-      @description : String? = nil,
-      @discounts : PostOrdersIdRequestDiscounts? = nil,
-      @expand : Array(String)? = nil,
-      @ip_address : String? = nil,
-      @line_items : Array(UpdateParams)? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @payment : UpdateParams1? = nil,
-      @shipping_cost : PostOrdersRequestShippingCost? = nil,
-      @shipping_details : PostOrdersRequestShippingDetails? = nil,
+      @automatic_tax : AutomaticTax1? = nil, 
+      @billing_details : PostOrdersRequestBillingDetails? = nil, 
+      @currency : String? = nil, 
+      @customer : String? = nil, 
+      @description : String? = nil, 
+      @discounts : PostOrdersIdRequestDiscounts? = nil, 
+      @expand : Array(String)? = nil, 
+      @ip_address : String? = nil, 
+      @line_items : Array(UpdateParams)? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @payment : UpdateParams1? = nil, 
+      @shipping_cost : PostOrdersRequestShippingCost? = nil, 
+      @shipping_details : PostOrdersRequestShippingDetails? = nil, 
       @tax_details : TaxDetails? = nil
     )
     end

@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # Whether the product is available for purchase.
@@ -108,20 +109,20 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @active : Bool? = nil,
-      @default_price : String? = nil,
-      @description : String? = nil,
-      @expand : Array(String)? = nil,
-      @images : PostProductsIdRequestImages? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @name : String? = nil,
-      @package_dimensions : PostProductsIdRequestPackageDimensions? = nil,
-      @shippable : Bool? = nil,
-      @statement_descriptor : String? = nil,
-      @tax_code : PostProductsIdRequestTaxCode? = nil,
-      @unit_label : String? = nil,
+      @active : Bool? = nil, 
+      @default_price : String? = nil, 
+      @description : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @images : PostProductsIdRequestImages? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @name : String? = nil, 
+      @package_dimensions : PostProductsIdRequestPackageDimensions? = nil, 
+      @shippable : Bool? = nil, 
+      @statement_descriptor : String? = nil, 
+      @tax_code : PostProductsIdRequestTaxCode? = nil, 
+      @unit_label : String? = nil, 
       @url : PostProductsIdRequestUrl? = nil
     )
     end

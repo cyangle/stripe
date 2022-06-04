@@ -110,27 +110,27 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @amount : Int64,
-      @cancelable : Bool,
-      @created : Int64,
-      @currency : String,
-      @destination_payment_method : String,
-      @destination_payment_method_details : OutboundTransfersPaymentMethodDetails,
-      @expected_arrival_date : Int64,
-      @financial_account : String,
-      @id : String,
-      @livemode : Bool,
-      @metadata : Hash(String, String),
-      @object : String,
-      @statement_descriptor : String,
-      @status : String,
-      @status_transitions : OutboundTransfersResourceStatusTransitions,
-      @transaction : OutboundPaymentsResourceTreasuryReturnedStatusTransaction,
+      @amount : Int64, 
+      @cancelable : Bool, 
+      @created : Int64, 
+      @currency : String, 
+      @destination_payment_method : String, 
+      @destination_payment_method_details : OutboundTransfersPaymentMethodDetails, 
+      @expected_arrival_date : Int64, 
+      @financial_account : String, 
+      @id : String, 
+      @livemode : Bool, 
+      @metadata : Hash(String, String), 
+      @object : String, 
+      @statement_descriptor : String, 
+      @status : String, 
+      @status_transitions : OutboundTransfersResourceStatusTransitions, 
+      @transaction : OutboundPaymentsResourceTreasuryReturnedStatusTransaction, 
       # Optional properties
-      @description : String? = nil,
-      @hosted_regulatory_receipt_url : String? = nil,
+      @description : String? = nil, 
+      @hosted_regulatory_receipt_url : String? = nil, 
       @returned_details : TreasuryOutboundTransferReturnedDetails? = nil
     )
     end

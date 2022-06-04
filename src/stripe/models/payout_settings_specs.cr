@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "debit_negative_balances", type: Bool?, presence: true, ignore_serialize: debit_negative_balances.nil? && !debit_negative_balances_present?)]
@@ -40,10 +41,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @debit_negative_balances : Bool? = nil,
-      @schedule : TransferScheduleSpecs? = nil,
+      @debit_negative_balances : Bool? = nil, 
+      @schedule : TransferScheduleSpecs? = nil, 
       @statement_descriptor : String? = nil
     )
     end

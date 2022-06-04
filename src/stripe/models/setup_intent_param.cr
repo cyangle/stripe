@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "mandate_options", type: SetupIntentMandateOptionsParam?, presence: true, ignore_serialize: mandate_options.nil? && !mandate_options_present?)]
@@ -36,9 +37,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @mandate_options : SetupIntentMandateOptionsParam? = nil,
+      @mandate_options : SetupIntentMandateOptionsParam? = nil, 
       @request_three_d_secure : String? = nil
     )
     end

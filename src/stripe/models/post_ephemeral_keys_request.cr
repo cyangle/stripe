@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # The ID of the Customer you'd like to modify using the resulting ephemeral key.
@@ -43,10 +44,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @customer : String? = nil,
-      @expand : Array(String)? = nil,
+      @customer : String? = nil, 
+      @expand : Array(String)? = nil, 
       @issuing_card : String? = nil
     )
     end

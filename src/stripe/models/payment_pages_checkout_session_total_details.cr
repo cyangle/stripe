@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentPagesCheckoutSessionTotalDetails
     include JSON::Serializable
@@ -46,12 +46,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @amount_discount : Int64,
-      @amount_tax : Int64,
+      @amount_discount : Int64, 
+      @amount_tax : Int64, 
       # Optional properties
-      @amount_shipping : Int64? = nil,
+      @amount_shipping : Int64? = nil, 
       @breakdown : PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown? = nil
     )
     end
@@ -67,6 +67,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

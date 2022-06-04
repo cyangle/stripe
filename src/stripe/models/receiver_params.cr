@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "refund_attributes_method", type: String?, presence: true, ignore_serialize: refund_attributes_method.nil? && !refund_attributes_method_present?)]
@@ -31,7 +32,7 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
       @refund_attributes_method : String? = nil
     )

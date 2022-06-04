@@ -12,9 +12,9 @@ require "time"
 require "log"
 
 module Stripe
-  class SubscriptionDataCreateParamsEffectiveDateAnyOf
-    CURRENT_PERIOD_END = "current_period_end"
-
+  class TierUpToOneOf
+    INF = "inf"
+   
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
@@ -27,10 +27,10 @@ module Stripe
     # @return [String] The enum value
     def build_from_hash(value)
       case value
-      when "current_period_end"
-        CURRENT_PERIOD_END
+      when "inf"
+        INF
       else
-        raise "Invalid ENUM value #{value} for class #SubscriptionDataCreateParamsEffectiveDateAnyOf"
+        raise "Invalid ENUM value #{value} for class #TierUpToOneOf"
       end
     end
   end

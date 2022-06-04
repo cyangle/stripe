@@ -64,16 +64,16 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @created : Int64,
-      @id : String,
-      @livemode : Bool,
-      @name : String,
-      @object : String,
-      @scope : SecretServiceResourceScope,
+      @created : Int64, 
+      @id : String, 
+      @livemode : Bool, 
+      @name : String, 
+      @object : String, 
+      @scope : SecretServiceResourceScope, 
       # Optional properties
-      @deleted : Bool? = nil,
+      @deleted : Bool? = nil, 
       @payload : String? = nil
     )
     end

@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # The identifier of the customer to create the subscription schedule for.
@@ -77,15 +78,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @customer : String? = nil,
-      @default_settings : DefaultSettingsParams? = nil,
-      @end_behavior : String? = nil,
-      @expand : Array(String)? = nil,
-      @from_subscription : String? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @phases : Array(PhaseConfigurationParams)? = nil,
+      @customer : String? = nil, 
+      @default_settings : DefaultSettingsParams? = nil, 
+      @end_behavior : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @from_subscription : String? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @phases : Array(PhaseConfigurationParams)? = nil, 
       @start_date : PostSubscriptionSchedulesRequestStartDate? = nil
     )
     end

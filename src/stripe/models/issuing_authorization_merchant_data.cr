@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class IssuingAuthorizationMerchantData
     include JSON::Serializable
@@ -72,16 +72,16 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @category : String,
-      @category_code : String,
-      @network_id : String,
+      @category : String, 
+      @category_code : String, 
+      @network_id : String, 
       # Optional properties
-      @city : String? = nil,
-      @country : String? = nil,
-      @name : String? = nil,
-      @postal_code : String? = nil,
+      @city : String? = nil, 
+      @country : String? = nil, 
+      @name : String? = nil, 
+      @postal_code : String? = nil, 
       @state : String? = nil
     )
     end

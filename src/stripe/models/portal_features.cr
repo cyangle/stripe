@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PortalFeatures
     include JSON::Serializable
@@ -41,13 +41,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @customer_update : PortalCustomerUpdate,
-      @invoice_history : PortalInvoiceList,
-      @payment_method_update : PortalPaymentMethodUpdate,
-      @subscription_cancel : PortalSubscriptionCancel,
-      @subscription_pause : PortalSubscriptionPause,
+      @customer_update : PortalCustomerUpdate, 
+      @invoice_history : PortalInvoiceList, 
+      @payment_method_update : PortalPaymentMethodUpdate, 
+      @subscription_cancel : PortalSubscriptionCancel, 
+      @subscription_pause : PortalSubscriptionPause, 
       @subscription_update : PortalSubscriptionUpdate
     )
     end
@@ -63,6 +63,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

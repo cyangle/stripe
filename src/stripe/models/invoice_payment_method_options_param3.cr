@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "financial_connections", type: InvoiceLinkedAccountOptionsParam?, presence: true, ignore_serialize: financial_connections.nil? && !financial_connections_present?)]
@@ -36,9 +37,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @financial_connections : InvoiceLinkedAccountOptionsParam? = nil,
+      @financial_connections : InvoiceLinkedAccountOptionsParam? = nil, 
       @verification_method : String? = nil
     )
     end

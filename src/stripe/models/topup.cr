@@ -112,24 +112,24 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @amount : Int64,
-      @created : Int64,
-      @currency : String,
-      @id : String,
-      @livemode : Bool,
-      @metadata : Hash(String, String),
-      @object : String,
-      @source : Source,
-      @status : String,
+      @amount : Int64, 
+      @created : Int64, 
+      @currency : String, 
+      @id : String, 
+      @livemode : Bool, 
+      @metadata : Hash(String, String), 
+      @object : String, 
+      @source : Source, 
+      @status : String, 
       # Optional properties
-      @balance_transaction : TopupBalanceTransaction? = nil,
-      @description : String? = nil,
-      @expected_availability_date : Int64? = nil,
-      @failure_code : String? = nil,
-      @failure_message : String? = nil,
-      @statement_descriptor : String? = nil,
+      @balance_transaction : TopupBalanceTransaction? = nil, 
+      @description : String? = nil, 
+      @expected_availability_date : Int64? = nil, 
+      @failure_code : String? = nil, 
+      @failure_message : String? = nil, 
+      @statement_descriptor : String? = nil, 
       @transfer_group : String? = nil
     )
     end

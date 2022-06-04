@@ -12,8 +12,12 @@ tasks:
         new_value: 'property card_present2 :'
       -
         name: "card_present"
-        pattern: '@card_present( |,)'
-        new_value: '@card_present2'
+        pattern: '@card_present '
+        new_value: '@card_present2 '
+      -
+        name: "card_present"
+        pattern: '@card_present,'
+        new_value: '@card_present2,'
       -
         name: "card_present_present"
         pattern: 'card_present_present'
@@ -22,18 +26,6 @@ tasks:
     file_glob: './src/**/*cr'
     changes:
       -
-        name: 'Correct AnyType?'
-        pattern: 'AnyType\?'
-        new_value: 'JSON::Any'
-      -
-        name: 'Correct Object?'
-        pattern: 'Object\?'
-        new_value: 'JSON::Any'
-      -
-        name: 'Correct : Object'
-        pattern: ': Object'
-        new_value: ': JSON::Any'
-      -
         name: 'Correct Stripe::String'
         pattern: 'Stripe::String'
         new_value: 'String'
@@ -41,3 +33,10 @@ tasks:
         name: 'Correct Int32'
         pattern: 'Int32'
         new_value: 'Int64'
+  - name: 'Update api error'
+    file_glob: './src/stripe/api_error.cr'
+    changes:
+      -
+        name: 'Correct AnyType?'
+        pattern: 'Int64'
+        new_value: 'Int32'

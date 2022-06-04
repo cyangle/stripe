@@ -9,7 +9,7 @@
 
 module Stripe
   class ApiError < Exception
-    getter code : Int64?
+    getter code : Int32?
     getter response_headers : Hash(String, Array(String) | String)?
 
     # Usage examples:

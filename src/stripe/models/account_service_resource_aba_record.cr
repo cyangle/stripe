@@ -48,12 +48,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @account_holder_name : String,
-      @account_number_last4 : String,
-      @bank_name : String,
-      @routing_number : String,
+      @account_holder_name : String, 
+      @account_number_last4 : String, 
+      @bank_name : String, 
+      @routing_number : String, 
       # Optional properties
       @account_number : String? = nil
     )

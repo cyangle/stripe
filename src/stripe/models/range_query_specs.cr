@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "gt", type: Int64?, presence: true, ignore_serialize: gt.nil? && !gt_present?)]
@@ -46,11 +47,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @gt : Int64? = nil,
-      @gte : Int64? = nil,
-      @lt : Int64? = nil,
+      @gt : Int64? = nil, 
+      @gte : Int64? = nil, 
+      @lt : Int64? = nil, 
       @lte : Int64? = nil
     )
     end
@@ -66,6 +67,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

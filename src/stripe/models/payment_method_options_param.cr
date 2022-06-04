@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "acss_debit", type: PaymentMethodOptionsParam?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
@@ -26,8 +27,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? acss_debit_present : Bool = false
 
-    @[JSON::Field(key: "alipay", type: JSON::Any, presence: true, ignore_serialize: alipay.nil? && !alipay_present?)]
-    property alipay : JSON::Any
+    @[JSON::Field(key: "alipay", type: JSON::Any?, presence: true, ignore_serialize: alipay.nil? && !alipay_present?)]
+    property alipay : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? alipay_present : Bool = false
@@ -65,14 +66,14 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @acss_debit : PaymentMethodOptionsParam? = nil,
-      @alipay : JSON::Any = nil,
-      @boleto : PaymentMethodOptionsParam1? = nil,
-      @konbini : PaymentMethodOptionsParam1? = nil,
-      @oxxo : PaymentMethodOptionsParam1? = nil,
-      @us_bank_account : PaymentMethodOptionsParam2? = nil,
+      @acss_debit : PaymentMethodOptionsParam? = nil, 
+      @alipay : JSON::Any? = nil, 
+      @boleto : PaymentMethodOptionsParam1? = nil, 
+      @konbini : PaymentMethodOptionsParam1? = nil, 
+      @oxxo : PaymentMethodOptionsParam1? = nil, 
+      @us_bank_account : PaymentMethodOptionsParam2? = nil, 
       @wechat_pay : PaymentMethodOptionsParam3? = nil
     )
     end
@@ -88,6 +89,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

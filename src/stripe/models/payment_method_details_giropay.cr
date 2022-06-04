@@ -12,11 +12,12 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodDetailsGiropay
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+
 
     # Optional properties
 
@@ -51,11 +52,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @bank_code : String? = nil,
-      @bank_name : String? = nil,
-      @bic : String? = nil,
+      @bank_code : String? = nil, 
+      @bank_name : String? = nil, 
+      @bic : String? = nil, 
       @verified_name : String? = nil
     )
     end

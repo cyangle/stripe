@@ -33,9 +33,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @enabled : Bool,
+      @enabled : Bool, 
       # Optional properties
       @allow_promotion_codes : Bool? = nil
     )
@@ -52,6 +52,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

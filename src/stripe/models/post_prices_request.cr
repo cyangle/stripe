@@ -143,25 +143,25 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @currency : String,
+      @currency : String, 
       # Optional properties
-      @active : Bool? = nil,
-      @billing_scheme : String? = nil,
-      @expand : Array(String)? = nil,
-      @lookup_key : String? = nil,
-      @metadata : Hash(String, String)? = nil,
-      @nickname : String? = nil,
-      @product : String? = nil,
-      @product_data : InlineProductParams1? = nil,
-      @recurring : Recurring1? = nil,
-      @tax_behavior : String? = nil,
-      @tiers : Array(Tier)? = nil,
-      @tiers_mode : String? = nil,
-      @transfer_lookup_key : Bool? = nil,
-      @transform_quantity : TransformUsageParam? = nil,
-      @unit_amount : Int64? = nil,
+      @active : Bool? = nil, 
+      @billing_scheme : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @lookup_key : String? = nil, 
+      @metadata : Hash(String, String)? = nil, 
+      @nickname : String? = nil, 
+      @product : String? = nil, 
+      @product_data : InlineProductParams1? = nil, 
+      @recurring : Recurring1? = nil, 
+      @tax_behavior : String? = nil, 
+      @tiers : Array(Tier)? = nil, 
+      @tiers_mode : String? = nil, 
+      @transfer_lookup_key : Bool? = nil, 
+      @transform_quantity : TransformUsageParam? = nil, 
+      @unit_amount : Int64? = nil, 
       @unit_amount_decimal : String? = nil
     )
     end

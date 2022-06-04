@@ -109,22 +109,22 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @currency : String,
-      @line_items : Array(CreateParams),
+      @currency : String, 
+      @line_items : Array(CreateParams), 
       # Optional properties
-      @automatic_tax : AutomaticTax1? = nil,
-      @billing_details : PostOrdersRequestBillingDetails? = nil,
-      @customer : String? = nil,
-      @description : String? = nil,
-      @discounts : PostOrdersRequestDiscounts? = nil,
-      @expand : Array(String)? = nil,
-      @ip_address : String? = nil,
-      @metadata : Hash(String, String)? = nil,
-      @payment : CreateParams1? = nil,
-      @shipping_cost : PostOrdersRequestShippingCost? = nil,
-      @shipping_details : PostOrdersRequestShippingDetails? = nil,
+      @automatic_tax : AutomaticTax1? = nil, 
+      @billing_details : PostOrdersRequestBillingDetails? = nil, 
+      @customer : String? = nil, 
+      @description : String? = nil, 
+      @discounts : PostOrdersRequestDiscounts? = nil, 
+      @expand : Array(String)? = nil, 
+      @ip_address : String? = nil, 
+      @metadata : Hash(String, String)? = nil, 
+      @payment : CreateParams1? = nil, 
+      @shipping_cost : PostOrdersRequestShippingCost? = nil, 
+      @shipping_details : PostOrdersRequestShippingDetails? = nil, 
       @tax_details : TaxDetails? = nil
     )
     end

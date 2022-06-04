@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # Whether the shipping rate can be used for new purchases. Defaults to `true`.
@@ -42,10 +43,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @active : Bool? = nil,
-      @expand : Array(String)? = nil,
+      @active : Bool? = nil, 
+      @expand : Array(String)? = nil, 
       @metadata : PostAccountRequestMetadata? = nil
     )
     end
@@ -61,6 +62,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

@@ -100,8 +100,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? last4_present : Bool = false
 
-    @[JSON::Field(key: "ownership", type: FinancialConnectionsAccountOwnership?, presence: true, ignore_serialize: ownership.nil? && !ownership_present?)]
-    property ownership : FinancialConnectionsAccountOwnership?
+    @[JSON::Field(key: "ownership", type: FinancialConnectionsAccountOwnership2?, presence: true, ignore_serialize: ownership.nil? && !ownership_present?)]
+    property ownership : FinancialConnectionsAccountOwnership2?
 
     @[JSON::Field(ignore: true)]
     property? ownership_present : Bool = false
@@ -124,25 +124,25 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @category : String,
-      @created : Int64,
-      @id : String,
-      @institution_name : String,
-      @livemode : Bool,
-      @object : String,
-      @status : String,
-      @subcategory : String,
-      @supported_payment_method_types : Array(String),
+      @category : String, 
+      @created : Int64, 
+      @id : String, 
+      @institution_name : String, 
+      @livemode : Bool, 
+      @object : String, 
+      @status : String, 
+      @subcategory : String, 
+      @supported_payment_method_types : Array(String), 
       # Optional properties
-      @account_holder : FinancialConnectionsAccountAccountHolder? = nil,
-      @balance : FinancialConnectionsAccountBalance? = nil,
-      @balance_refresh : FinancialConnectionsAccountBalanceRefresh? = nil,
-      @display_name : String? = nil,
-      @last4 : String? = nil,
-      @ownership : FinancialConnectionsAccountOwnership? = nil,
-      @ownership_refresh : FinancialConnectionsAccountOwnershipRefresh? = nil,
+      @account_holder : FinancialConnectionsAccountAccountHolder? = nil, 
+      @balance : FinancialConnectionsAccountBalance? = nil, 
+      @balance_refresh : FinancialConnectionsAccountBalanceRefresh? = nil, 
+      @display_name : String? = nil, 
+      @last4 : String? = nil, 
+      @ownership : FinancialConnectionsAccountOwnership2? = nil, 
+      @ownership_refresh : FinancialConnectionsAccountOwnershipRefresh? = nil, 
       @permissions : Array(String)? = nil
     )
     end

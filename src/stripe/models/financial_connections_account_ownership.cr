@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # The most recent information about the account's owners.
+  # Describes a snapshot of the owners of an account at a particular point in time.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class FinancialConnectionsAccountOwnership
     include JSON::Serializable
@@ -21,39 +21,31 @@ module Stripe
     # Required properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
-    @[JSON::Field(key: "created", type: Int64?)]
-    property created : Int64?
+    @[JSON::Field(key: "created", type: Int64)]
+    property created : Int64
 
     # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String?)]
-    getter id : String?
+    @[JSON::Field(key: "id", type: String)]
+    getter id : String
 
     # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String?)]
-    getter object : String?
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["financial_connections.account_ownership"])
 
-    @[JSON::Field(key: "owners", type: BankConnectionsResourceOwnerList1?)]
-    property owners : BankConnectionsResourceOwnerList1?
-
-    # List of class defined in anyOf (OpenAPI v3)
-    def self.openapi_any_of
-      [
-        Stripe::FinancialConnectionsAccountOwnership,
-        String,
-      ]
-    end
+    @[JSON::Field(key: "owners", type: BankConnectionsResourceOwnerList1)]
+    property owners : BankConnectionsResourceOwnerList1
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @created : Int64? = nil,
-      @id : String? = nil,
-      @object : String? = nil,
-      @owners : BankConnectionsResourceOwnerList1? = nil
+      @created : Int64, 
+      @id : String, 
+      @object : String, 
+      @owners : BankConnectionsResourceOwnerList1
     )
     end
 
@@ -76,19 +68,6 @@ module Stripe
     def valid?
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
-      _any_of_found = false
-      json_string : String = self.to_json
-      _any_of_found = self.class.openapi_any_of.any? do |_class|
-        _any_of = begin
-          _class.from_json(json_string)
-        rescue
-          nil
-        end
-
-        !_any_of.nil? && _any_of.not_nil!.valid?
-      end
-      return false if !_any_of_found
 
       true
     end

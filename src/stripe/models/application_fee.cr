@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class ApplicationFee
     include JSON::Serializable
@@ -83,22 +83,22 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @account : ApplicationFeeAccount,
-      @amount : Int64,
-      @amount_refunded : Int64,
-      @application : ApplicationFeeApplication,
-      @charge : ApplicationFeeCharge,
-      @created : Int64,
-      @currency : String,
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @refunded : Bool,
-      @refunds : FeeRefundList1,
+      @account : ApplicationFeeAccount, 
+      @amount : Int64, 
+      @amount_refunded : Int64, 
+      @application : ApplicationFeeApplication, 
+      @charge : ApplicationFeeCharge, 
+      @created : Int64, 
+      @currency : String, 
+      @id : String, 
+      @livemode : Bool, 
+      @object : String, 
+      @refunded : Bool, 
+      @refunds : FeeRefundList1, 
       # Optional properties
-      @balance_transaction : ApplicationFeeBalanceTransaction? = nil,
+      @balance_transaction : ApplicationFeeBalanceTransaction? = nil, 
       @originating_transaction : ApplicationFeeOriginatingTransaction? = nil
     )
     end

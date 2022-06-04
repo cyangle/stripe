@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentIntentNextAction
     include JSON::Serializable
@@ -75,8 +75,8 @@ module Stripe
     property? redirect_to_url_present : Bool = false
 
     # When confirming a PaymentIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.
-    @[JSON::Field(key: "use_stripe_sdk", type: JSON::Any, presence: true, ignore_serialize: use_stripe_sdk.nil? && !use_stripe_sdk_present?)]
-    property use_stripe_sdk : JSON::Any
+    @[JSON::Field(key: "use_stripe_sdk", type: JSON::Any?, presence: true, ignore_serialize: use_stripe_sdk.nil? && !use_stripe_sdk_present?)]
+    property use_stripe_sdk : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? use_stripe_sdk_present : Bool = false
@@ -108,22 +108,22 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @_type : String,
+      @_type : String, 
       # Optional properties
-      @alipay_handle_redirect : PaymentIntentNextActionAlipayHandleRedirect? = nil,
-      @boleto_display_details : PaymentIntentNextActionBoleto? = nil,
-      @card_await_notification : PaymentIntentNextActionCardAwaitNotification? = nil,
-      @display_bank_transfer_instructions : PaymentIntentNextActionDisplayBankTransferInstructions? = nil,
-      @konbini_display_details : PaymentIntentNextActionKonbini? = nil,
-      @oxxo_display_details : PaymentIntentNextActionDisplayOxxoDetails? = nil,
-      @paynow_display_qr_code : PaymentIntentNextActionPaynowDisplayQrCode? = nil,
-      @redirect_to_url : PaymentIntentNextActionRedirectToUrl? = nil,
-      @use_stripe_sdk : JSON::Any = nil,
-      @verify_with_microdeposits : PaymentIntentNextActionVerifyWithMicrodeposits? = nil,
-      @wechat_pay_display_qr_code : PaymentIntentNextActionWechatPayDisplayQrCode? = nil,
-      @wechat_pay_redirect_to_android_app : PaymentIntentNextActionWechatPayRedirectToAndroidApp? = nil,
+      @alipay_handle_redirect : PaymentIntentNextActionAlipayHandleRedirect? = nil, 
+      @boleto_display_details : PaymentIntentNextActionBoleto? = nil, 
+      @card_await_notification : PaymentIntentNextActionCardAwaitNotification? = nil, 
+      @display_bank_transfer_instructions : PaymentIntentNextActionDisplayBankTransferInstructions? = nil, 
+      @konbini_display_details : PaymentIntentNextActionKonbini? = nil, 
+      @oxxo_display_details : PaymentIntentNextActionDisplayOxxoDetails? = nil, 
+      @paynow_display_qr_code : PaymentIntentNextActionPaynowDisplayQrCode? = nil, 
+      @redirect_to_url : PaymentIntentNextActionRedirectToUrl? = nil, 
+      @use_stripe_sdk : JSON::Any? = nil, 
+      @verify_with_microdeposits : PaymentIntentNextActionVerifyWithMicrodeposits? = nil, 
+      @wechat_pay_display_qr_code : PaymentIntentNextActionWechatPayDisplayQrCode? = nil, 
+      @wechat_pay_redirect_to_android_app : PaymentIntentNextActionWechatPayRedirectToAndroidApp? = nil, 
       @wechat_pay_redirect_to_ios_app : PaymentIntentNextActionWechatPayRedirectToIosApp? = nil
     )
     end

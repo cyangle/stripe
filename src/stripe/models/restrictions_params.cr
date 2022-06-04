@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "first_time_transaction", type: Bool?, presence: true, ignore_serialize: first_time_transaction.nil? && !first_time_transaction_present?)]
@@ -41,10 +42,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @first_time_transaction : Bool? = nil,
-      @minimum_amount : Int64? = nil,
+      @first_time_transaction : Bool? = nil, 
+      @minimum_amount : Int64? = nil, 
       @minimum_amount_currency : String? = nil
     )
     end
@@ -60,6 +61,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

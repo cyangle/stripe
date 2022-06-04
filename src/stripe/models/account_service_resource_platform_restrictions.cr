@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # Restricts all inbound money movement.
@@ -41,9 +42,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @inbound_flows : String? = nil,
+      @inbound_flows : String? = nil, 
       @outbound_flows : String? = nil
     )
     end

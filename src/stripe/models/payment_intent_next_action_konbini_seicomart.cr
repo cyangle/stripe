@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentIntentNextActionKonbiniSeicomart
     include JSON::Serializable
@@ -36,9 +36,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @payment_code : String,
+      @payment_code : String, 
       # Optional properties
       @confirmation_number : String? = nil
     )

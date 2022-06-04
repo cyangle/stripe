@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "cancellation_reason", type: SubscriptionCancellationReasonUpdatingParam?, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
@@ -50,11 +51,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @cancellation_reason : SubscriptionCancellationReasonUpdatingParam? = nil,
-      @enabled : Bool? = nil,
-      @mode : String? = nil,
+      @cancellation_reason : SubscriptionCancellationReasonUpdatingParam? = nil, 
+      @enabled : Bool? = nil, 
+      @mode : String? = nil, 
       @proration_behavior : String? = nil
     )
     end

@@ -129,25 +129,25 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @add_invoice_items : Array(SubscriptionScheduleAddInvoiceItem),
-      @end_date : Int64,
-      @items : Array(SubscriptionScheduleConfigurationItem),
-      @proration_behavior : String,
-      @start_date : Int64,
+      @add_invoice_items : Array(SubscriptionScheduleAddInvoiceItem), 
+      @end_date : Int64, 
+      @items : Array(SubscriptionScheduleConfigurationItem), 
+      @proration_behavior : String, 
+      @start_date : Int64, 
       # Optional properties
-      @application_fee_percent : Float64? = nil,
-      @automatic_tax : SchedulesPhaseAutomaticTax? = nil,
-      @billing_cycle_anchor : String? = nil,
-      @billing_thresholds : SubscriptionBillingThresholds1? = nil,
-      @collection_method : String? = nil,
-      @coupon : SubscriptionSchedulePhaseConfigurationCoupon? = nil,
-      @default_payment_method : SubscriptionSchedulePhaseConfigurationDefaultPaymentMethod? = nil,
-      @default_tax_rates : Array(TaxRate)? = nil,
-      @invoice_settings : SubscriptionSchedulePhaseConfigurationInvoiceSettings? = nil,
-      @metadata : Hash(String, String)? = nil,
-      @transfer_data : SubscriptionSchedulePhaseConfigurationTransferData? = nil,
+      @application_fee_percent : Float64? = nil, 
+      @automatic_tax : SchedulesPhaseAutomaticTax? = nil, 
+      @billing_cycle_anchor : String? = nil, 
+      @billing_thresholds : SubscriptionBillingThresholds1? = nil, 
+      @collection_method : String? = nil, 
+      @coupon : SubscriptionSchedulePhaseConfigurationCoupon? = nil, 
+      @default_payment_method : SubscriptionSchedulePhaseConfigurationDefaultPaymentMethod? = nil, 
+      @default_tax_rates : Array(TaxRate)? = nil, 
+      @invoice_settings : SubscriptionSchedulePhaseConfigurationInvoiceSettings? = nil, 
+      @metadata : Hash(String, String)? = nil, 
+      @transfer_data : SubscriptionSchedulePhaseConfigurationTransferData? = nil, 
       @trial_end : Int64? = nil
     )
     end

@@ -151,26 +151,26 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @currency : String,
-      @interval : String,
+      @currency : String, 
+      @interval : String, 
       # Optional properties
-      @active : Bool? = nil,
-      @aggregate_usage : String? = nil,
-      @amount : Int64? = nil,
-      @amount_decimal : String? = nil,
-      @billing_scheme : String? = nil,
-      @expand : Array(String)? = nil,
-      @id : String? = nil,
-      @interval_count : Int64? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @nickname : String? = nil,
-      @product : PostPlansRequestProduct? = nil,
-      @tiers : Array(Tier)? = nil,
-      @tiers_mode : String? = nil,
-      @transform_usage : TransformUsageParam? = nil,
-      @trial_period_days : Int64? = nil,
+      @active : Bool? = nil, 
+      @aggregate_usage : String? = nil, 
+      @amount : Int64? = nil, 
+      @amount_decimal : String? = nil, 
+      @billing_scheme : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @id : String? = nil, 
+      @interval_count : Int64? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @nickname : String? = nil, 
+      @product : PostPlansRequestProduct? = nil, 
+      @tiers : Array(Tier)? = nil, 
+      @tiers_mode : String? = nil, 
+      @transform_usage : TransformUsageParam? = nil, 
+      @trial_period_days : Int64? = nil, 
       @usage_type : String? = nil
     )
     end

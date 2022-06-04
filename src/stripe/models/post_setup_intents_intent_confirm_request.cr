@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # The client secret of the SetupIntent.
@@ -68,14 +69,14 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @client_secret : String? = nil,
-      @expand : Array(String)? = nil,
-      @mandate_data : PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
-      @payment_method : String? = nil,
-      @payment_method_data : PaymentMethodDataParams1? = nil,
-      @payment_method_options : PaymentMethodOptionsParam18? = nil,
+      @client_secret : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @mandate_data : PostPaymentIntentsIntentConfirmRequestMandateData? = nil, 
+      @payment_method : String? = nil, 
+      @payment_method_data : PaymentMethodDataParams1? = nil, 
+      @payment_method_options : PaymentMethodOptionsParam18? = nil, 
       @return_url : String? = nil
     )
     end

@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodDetailsInteracPresent
     include JSON::Serializable
@@ -118,22 +118,22 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @exp_month : Int64,
-      @exp_year : Int64,
+      @exp_month : Int64, 
+      @exp_year : Int64, 
       # Optional properties
-      @brand : String? = nil,
-      @cardholder_name : String? = nil,
-      @country : String? = nil,
-      @emv_auth_data : String? = nil,
-      @fingerprint : String? = nil,
-      @funding : String? = nil,
-      @generated_card : String? = nil,
-      @last4 : String? = nil,
-      @network : String? = nil,
-      @preferred_locales : Array(String)? = nil,
-      @read_method : String? = nil,
+      @brand : String? = nil, 
+      @cardholder_name : String? = nil, 
+      @country : String? = nil, 
+      @emv_auth_data : String? = nil, 
+      @fingerprint : String? = nil, 
+      @funding : String? = nil, 
+      @generated_card : String? = nil, 
+      @last4 : String? = nil, 
+      @network : String? = nil, 
+      @preferred_locales : Array(String)? = nil, 
+      @read_method : String? = nil, 
       @receipt : PaymentMethodDetailsInteracPresentReceipt1? = nil
     )
     end

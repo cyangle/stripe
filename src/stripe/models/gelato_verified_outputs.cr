@@ -12,11 +12,12 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class GelatoVerifiedOutputs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+
 
     # Optional properties
 
@@ -65,13 +66,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @address : GelatoVerifiedOutputsAddress? = nil,
-      @dob : GelatoVerifiedOutputsDob? = nil,
-      @first_name : String? = nil,
-      @id_number : String? = nil,
-      @id_number_type : String? = nil,
+      @address : GelatoVerifiedOutputsAddress? = nil, 
+      @dob : GelatoVerifiedOutputsDob? = nil, 
+      @first_name : String? = nil, 
+      @id_number : String? = nil, 
+      @id_number_type : String? = nil, 
       @last_name : String? = nil
     )
     end

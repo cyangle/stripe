@@ -41,11 +41,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @default_allowed_updates : SubscriptionUpdateCreationParamDefaultAllowedUpdates,
-      @enabled : Bool,
-      @products : SubscriptionUpdateCreationParamProducts,
+      @default_allowed_updates : SubscriptionUpdateCreationParamDefaultAllowedUpdates, 
+      @enabled : Bool, 
+      @products : SubscriptionUpdateCreationParamProducts, 
       # Optional properties
       @proration_behavior : String? = nil
     )

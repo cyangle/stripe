@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class AlipayAccount
     include JSON::Serializable
@@ -86,20 +86,20 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @created : Int64,
-      @fingerprint : String,
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @reusable : Bool,
-      @used : Bool,
-      @username : String,
+      @created : Int64, 
+      @fingerprint : String, 
+      @id : String, 
+      @livemode : Bool, 
+      @object : String, 
+      @reusable : Bool, 
+      @used : Bool, 
+      @username : String, 
       # Optional properties
-      @customer : AlipayAccountCustomer? = nil,
-      @metadata : Hash(String, String)? = nil,
-      @payment_amount : Int64? = nil,
+      @customer : AlipayAccountCustomer? = nil, 
+      @metadata : Hash(String, String)? = nil, 
+      @payment_amount : Int64? = nil, 
       @payment_currency : String? = nil
     )
     end

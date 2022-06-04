@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "payment_method_options", type: PaymentMethodOptions?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
@@ -43,10 +44,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @payment_method_options : PaymentMethodOptions? = nil,
-      @payment_method_types : PaymentSettingsPaymentMethodTypes? = nil,
+      @payment_method_options : PaymentMethodOptions? = nil, 
+      @payment_method_types : PaymentSettingsPaymentMethodTypes? = nil, 
       @save_default_payment_method : String? = nil
     )
     end

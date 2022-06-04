@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
@@ -120,22 +121,22 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @account_token : String? = nil,
-      @bank_account : PostAccountRequestBankAccount? = nil,
-      @business_profile : BusinessProfileSpecs? = nil,
-      @business_type : String? = nil,
-      @capabilities : CapabilitiesParam? = nil,
-      @company : CompanySpecs? = nil,
-      @default_currency : String? = nil,
-      @documents : DocumentsSpecs? = nil,
-      @email : String? = nil,
-      @expand : Array(String)? = nil,
-      @external_account : String? = nil,
-      @individual : IndividualSpecs? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @settings : SettingsSpecsUpdate? = nil,
+      @account_token : String? = nil, 
+      @bank_account : PostAccountRequestBankAccount? = nil, 
+      @business_profile : BusinessProfileSpecs? = nil, 
+      @business_type : String? = nil, 
+      @capabilities : CapabilitiesParam? = nil, 
+      @company : CompanySpecs? = nil, 
+      @default_currency : String? = nil, 
+      @documents : DocumentsSpecs? = nil, 
+      @email : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @external_account : String? = nil, 
+      @individual : IndividualSpecs? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @settings : SettingsSpecsUpdate? = nil, 
       @tos_acceptance : TosAcceptanceSpecs? = nil
     )
     end

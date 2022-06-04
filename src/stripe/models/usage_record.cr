@@ -49,13 +49,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @quantity : Int64,
-      @subscription_item : String,
+      @id : String, 
+      @livemode : Bool, 
+      @object : String, 
+      @quantity : Int64, 
+      @subscription_item : String, 
       @timestamp : Int64
     )
     end

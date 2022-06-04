@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # Amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for `single_use` sources. Not supported for `receiver` type sources, where charge amount may not be specified until funds land.
@@ -131,23 +132,23 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @amount : Int64? = nil,
-      @currency : String? = nil,
-      @customer : String? = nil,
-      @expand : Array(String)? = nil,
-      @flow : String? = nil,
-      @mandate : MandateParams? = nil,
-      @metadata : Hash(String, String)? = nil,
-      @original_source : String? = nil,
-      @owner : Owner1? = nil,
-      @receiver : ReceiverParams? = nil,
-      @redirect : RedirectParams? = nil,
-      @source_order : ShallowOrderSpecs? = nil,
-      @statement_descriptor : String? = nil,
-      @token : String? = nil,
-      @_type : String? = nil,
+      @amount : Int64? = nil, 
+      @currency : String? = nil, 
+      @customer : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @flow : String? = nil, 
+      @mandate : MandateParams? = nil, 
+      @metadata : Hash(String, String)? = nil, 
+      @original_source : String? = nil, 
+      @owner : Owner1? = nil, 
+      @receiver : ReceiverParams? = nil, 
+      @redirect : RedirectParams? = nil, 
+      @source_order : ShallowOrderSpecs? = nil, 
+      @statement_descriptor : String? = nil, 
+      @token : String? = nil, 
+      @_type : String? = nil, 
       @usage : String? = nil
     )
     end

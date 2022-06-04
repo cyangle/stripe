@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class AccountRequirementsError
     include JSON::Serializable
@@ -37,10 +37,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @code : String,
-      @reason : String,
+      @code : String, 
+      @reason : String, 
       @requirement : String
     )
     end

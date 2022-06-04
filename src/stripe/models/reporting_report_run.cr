@@ -74,18 +74,18 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @created : Int64,
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @parameters : FinancialReportingFinanceReportRunRunParameters,
-      @report_type : String,
-      @status : String,
+      @created : Int64, 
+      @id : String, 
+      @livemode : Bool, 
+      @object : String, 
+      @parameters : FinancialReportingFinanceReportRunRunParameters, 
+      @report_type : String, 
+      @status : String, 
       # Optional properties
-      @error : String? = nil,
-      @result : ReportingReportRunResult? = nil,
+      @error : String? = nil, 
+      @result : ReportingReportRunResult? = nil, 
       @succeeded_at : Int64? = nil
     )
     end

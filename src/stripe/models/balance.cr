@@ -63,15 +63,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @available : Array(BalanceAmount),
-      @livemode : Bool,
-      @object : String,
-      @pending : Array(BalanceAmount),
+      @available : Array(BalanceAmount), 
+      @livemode : Bool, 
+      @object : String, 
+      @pending : Array(BalanceAmount), 
       # Optional properties
-      @connect_reserved : Array(BalanceAmount)? = nil,
-      @instant_available : Array(BalanceAmount)? = nil,
+      @connect_reserved : Array(BalanceAmount)? = nil, 
+      @instant_available : Array(BalanceAmount)? = nil, 
       @issuing : BalanceDetail? = nil
     )
     end

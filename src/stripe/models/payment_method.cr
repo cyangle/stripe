@@ -55,23 +55,23 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? acss_debit_present : Bool = false
 
-    #
-    @[JSON::Field(key: "affirm", type: JSON::Any, presence: true, ignore_serialize: affirm.nil? && !affirm_present?)]
-    property affirm : JSON::Any
+    # 
+    @[JSON::Field(key: "affirm", type: JSON::Any?, presence: true, ignore_serialize: affirm.nil? && !affirm_present?)]
+    property affirm : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? affirm_present : Bool = false
 
-    #
-    @[JSON::Field(key: "afterpay_clearpay", type: JSON::Any, presence: true, ignore_serialize: afterpay_clearpay.nil? && !afterpay_clearpay_present?)]
-    property afterpay_clearpay : JSON::Any
+    # 
+    @[JSON::Field(key: "afterpay_clearpay", type: JSON::Any?, presence: true, ignore_serialize: afterpay_clearpay.nil? && !afterpay_clearpay_present?)]
+    property afterpay_clearpay : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? afterpay_clearpay_present : Bool = false
 
-    #
-    @[JSON::Field(key: "alipay", type: JSON::Any, presence: true, ignore_serialize: alipay.nil? && !alipay_present?)]
-    property alipay : JSON::Any
+    # 
+    @[JSON::Field(key: "alipay", type: JSON::Any?, presence: true, ignore_serialize: alipay.nil? && !alipay_present?)]
+    property alipay : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? alipay_present : Bool = false
@@ -88,9 +88,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? bacs_debit_present : Bool = false
 
-    #
-    @[JSON::Field(key: "bancontact", type: JSON::Any, presence: true, ignore_serialize: bancontact.nil? && !bancontact_present?)]
-    property bancontact : JSON::Any
+    # 
+    @[JSON::Field(key: "bancontact", type: JSON::Any?, presence: true, ignore_serialize: bancontact.nil? && !bancontact_present?)]
+    property bancontact : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? bancontact_present : Bool = false
@@ -107,9 +107,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
-    #
-    @[JSON::Field(key: "card_present", type: JSON::Any, presence: true, ignore_serialize: card_present2.nil? && !card_present2_present?)]
-    property card_present2 : JSON::Any
+    # 
+    @[JSON::Field(key: "card_present", type: JSON::Any?, presence: true, ignore_serialize: card_present2.nil? && !card_present2_present?)]
+    property card_present2 : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? card_present2_present : Bool = false
@@ -120,9 +120,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? customer_present : Bool = false
 
-    #
-    @[JSON::Field(key: "customer_balance", type: JSON::Any, presence: true, ignore_serialize: customer_balance.nil? && !customer_balance_present?)]
-    property customer_balance : JSON::Any
+    # 
+    @[JSON::Field(key: "customer_balance", type: JSON::Any?, presence: true, ignore_serialize: customer_balance.nil? && !customer_balance_present?)]
+    property customer_balance : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? customer_balance_present : Bool = false
@@ -139,16 +139,16 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? fpx_present : Bool = false
 
-    #
-    @[JSON::Field(key: "giropay", type: JSON::Any, presence: true, ignore_serialize: giropay.nil? && !giropay_present?)]
-    property giropay : JSON::Any
+    # 
+    @[JSON::Field(key: "giropay", type: JSON::Any?, presence: true, ignore_serialize: giropay.nil? && !giropay_present?)]
+    property giropay : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? giropay_present : Bool = false
 
-    #
-    @[JSON::Field(key: "grabpay", type: JSON::Any, presence: true, ignore_serialize: grabpay.nil? && !grabpay_present?)]
-    property grabpay : JSON::Any
+    # 
+    @[JSON::Field(key: "grabpay", type: JSON::Any?, presence: true, ignore_serialize: grabpay.nil? && !grabpay_present?)]
+    property grabpay : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? grabpay_present : Bool = false
@@ -159,9 +159,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? ideal_present : Bool = false
 
-    #
-    @[JSON::Field(key: "interac_present", type: JSON::Any, presence: true, ignore_serialize: interac_present.nil? && !interac_present_present?)]
-    property interac_present : JSON::Any
+    # 
+    @[JSON::Field(key: "interac_present", type: JSON::Any?, presence: true, ignore_serialize: interac_present.nil? && !interac_present_present?)]
+    property interac_present : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? interac_present_present : Bool = false
@@ -172,9 +172,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? klarna_present : Bool = false
 
-    #
-    @[JSON::Field(key: "konbini", type: JSON::Any, presence: true, ignore_serialize: konbini.nil? && !konbini_present?)]
-    property konbini : JSON::Any
+    # 
+    @[JSON::Field(key: "konbini", type: JSON::Any?, presence: true, ignore_serialize: konbini.nil? && !konbini_present?)]
+    property konbini : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? konbini_present : Bool = false
@@ -192,9 +192,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
-    #
-    @[JSON::Field(key: "oxxo", type: JSON::Any, presence: true, ignore_serialize: oxxo.nil? && !oxxo_present?)]
-    property oxxo : JSON::Any
+    # 
+    @[JSON::Field(key: "oxxo", type: JSON::Any?, presence: true, ignore_serialize: oxxo.nil? && !oxxo_present?)]
+    property oxxo : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? oxxo_present : Bool = false
@@ -205,9 +205,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? p24_present : Bool = false
 
-    #
-    @[JSON::Field(key: "paynow", type: JSON::Any, presence: true, ignore_serialize: paynow.nil? && !paynow_present?)]
-    property paynow : JSON::Any
+    # 
+    @[JSON::Field(key: "paynow", type: JSON::Any?, presence: true, ignore_serialize: paynow.nil? && !paynow_present?)]
+    property paynow : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? paynow_present : Bool = false
@@ -236,9 +236,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? us_bank_account_present : Bool = false
 
-    #
-    @[JSON::Field(key: "wechat_pay", type: JSON::Any, presence: true, ignore_serialize: wechat_pay.nil? && !wechat_pay_present?)]
-    property wechat_pay : JSON::Any
+    # 
+    @[JSON::Field(key: "wechat_pay", type: JSON::Any?, presence: true, ignore_serialize: wechat_pay.nil? && !wechat_pay_present?)]
+    property wechat_pay : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? wechat_pay_present : Bool = false
@@ -246,45 +246,45 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @billing_details : BillingDetails,
-      @created : Int64,
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @_type : String,
+      @billing_details : BillingDetails, 
+      @created : Int64, 
+      @id : String, 
+      @livemode : Bool, 
+      @object : String, 
+      @_type : String, 
       # Optional properties
-      @acss_debit : PaymentMethodAcssDebit? = nil,
-      @affirm : JSON::Any = nil,
-      @afterpay_clearpay : JSON::Any = nil,
-      @alipay : JSON::Any = nil,
-      @au_becs_debit : PaymentMethodAuBecsDebit? = nil,
-      @bacs_debit : PaymentMethodBacsDebit? = nil,
-      @bancontact : JSON::Any = nil,
-      @boleto : PaymentMethodBoleto? = nil,
-      @card : PaymentMethodCard? = nil,
-      @card_present2 : JSON::Any = nil,
-      @customer : PaymentMethodCustomer? = nil,
-      @customer_balance : JSON::Any = nil,
-      @eps : PaymentMethodEps? = nil,
-      @fpx : PaymentMethodFpx? = nil,
-      @giropay : JSON::Any = nil,
-      @grabpay : JSON::Any = nil,
-      @ideal : PaymentMethodIdeal? = nil,
-      @interac_present : JSON::Any = nil,
-      @klarna : PaymentMethodKlarna? = nil,
-      @konbini : JSON::Any = nil,
-      @link : PaymentMethodLink? = nil,
-      @metadata : Hash(String, String)? = nil,
-      @oxxo : JSON::Any = nil,
-      @p24 : PaymentMethodP24? = nil,
-      @paynow : JSON::Any = nil,
-      @radar_options : RadarRadarOptions? = nil,
-      @sepa_debit : PaymentMethodSepaDebit? = nil,
-      @sofort : PaymentMethodSofort? = nil,
-      @us_bank_account : PaymentMethodUsBankAccount? = nil,
-      @wechat_pay : JSON::Any = nil
+      @acss_debit : PaymentMethodAcssDebit? = nil, 
+      @affirm : JSON::Any? = nil, 
+      @afterpay_clearpay : JSON::Any? = nil, 
+      @alipay : JSON::Any? = nil, 
+      @au_becs_debit : PaymentMethodAuBecsDebit? = nil, 
+      @bacs_debit : PaymentMethodBacsDebit? = nil, 
+      @bancontact : JSON::Any? = nil, 
+      @boleto : PaymentMethodBoleto? = nil, 
+      @card : PaymentMethodCard? = nil, 
+      @card_present2 : JSON::Any? = nil, 
+      @customer : PaymentMethodCustomer? = nil, 
+      @customer_balance : JSON::Any? = nil, 
+      @eps : PaymentMethodEps? = nil, 
+      @fpx : PaymentMethodFpx? = nil, 
+      @giropay : JSON::Any? = nil, 
+      @grabpay : JSON::Any? = nil, 
+      @ideal : PaymentMethodIdeal? = nil, 
+      @interac_present : JSON::Any? = nil, 
+      @klarna : PaymentMethodKlarna? = nil, 
+      @konbini : JSON::Any? = nil, 
+      @link : PaymentMethodLink? = nil, 
+      @metadata : Hash(String, String)? = nil, 
+      @oxxo : JSON::Any? = nil, 
+      @p24 : PaymentMethodP24? = nil, 
+      @paynow : JSON::Any? = nil, 
+      @radar_options : RadarRadarOptions? = nil, 
+      @sepa_debit : PaymentMethodSepaDebit? = nil, 
+      @sofort : PaymentMethodSofort? = nil, 
+      @us_bank_account : PaymentMethodUsBankAccount? = nil, 
+      @wechat_pay : JSON::Any? = nil
     )
     end
 

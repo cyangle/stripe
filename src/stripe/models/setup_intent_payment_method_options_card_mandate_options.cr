@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SetupIntentPaymentMethodOptionsCardMandateOptions
     include JSON::Serializable
@@ -83,18 +83,18 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @amount : Int64,
-      @amount_type : String,
-      @currency : String,
-      @interval : String,
-      @reference : String,
-      @start_date : Int64,
+      @amount : Int64, 
+      @amount_type : String, 
+      @currency : String, 
+      @interval : String, 
+      @reference : String, 
+      @start_date : Int64, 
       # Optional properties
-      @description : String? = nil,
-      @end_date : Int64? = nil,
-      @interval_count : Int64? = nil,
+      @description : String? = nil, 
+      @end_date : Int64? = nil, 
+      @interval_count : Int64? = nil, 
       @supported_types : Array(String)? = nil
     )
     end

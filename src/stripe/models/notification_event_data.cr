@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class NotificationEventData
     include JSON::Serializable
@@ -27,8 +27,8 @@ module Stripe
     # Optional properties
 
     # Object containing the names of the attributes that have changed, and their previous values (sent along only with *.updated events).
-    @[JSON::Field(key: "previous_attributes", type: JSON::Any, presence: true, ignore_serialize: previous_attributes.nil? && !previous_attributes_present?)]
-    property previous_attributes : JSON::Any
+    @[JSON::Field(key: "previous_attributes", type: JSON::Any?, presence: true, ignore_serialize: previous_attributes.nil? && !previous_attributes_present?)]
+    property previous_attributes : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? previous_attributes_present : Bool = false
@@ -36,11 +36,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @object : JSON::Any,
+      @object : JSON::Any, 
       # Optional properties
-      @previous_attributes : JSON::Any = nil
+      @previous_attributes : JSON::Any? = nil
     )
     end
 
@@ -55,6 +55,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

@@ -141,7 +141,7 @@ spec/models/bitcoin_transaction_spec.cr
 spec/models/branding_settings_specs_spec.cr
 spec/models/business_profile_create_param_spec.cr
 spec/models/business_profile_specs_spec.cr
-spec/models/business_profile_specs_support_url_any_of_spec.cr
+spec/models/business_profile_specs_support_url_one_of_spec.cr
 spec/models/business_profile_specs_support_url_spec.cr
 spec/models/business_profile_update_param_spec.cr
 spec/models/canceled_cancellation_policy_provided_spec.cr
@@ -393,6 +393,7 @@ spec/models/financial_connections_account_account_holder_spec.cr
 spec/models/financial_connections_account_balance_refresh_spec.cr
 spec/models/financial_connections_account_balance_spec.cr
 spec/models/financial_connections_account_owner_spec.cr
+spec/models/financial_connections_account_ownership2_spec.cr
 spec/models/financial_connections_account_ownership_refresh_spec.cr
 spec/models/financial_connections_account_ownership_spec.cr
 spec/models/financial_connections_account_spec.cr
@@ -456,7 +457,7 @@ spec/models/get_identity_verification_reports200_response_spec.cr
 spec/models/get_identity_verification_sessions200_response_spec.cr
 spec/models/get_invoiceitems200_response_spec.cr
 spec/models/get_invoices_upcoming_discounts_parameter_spec.cr
-spec/models/get_invoices_upcoming_subscription_billing_cycle_anchor_parameter_any_of_spec.cr
+spec/models/get_invoices_upcoming_subscription_billing_cycle_anchor_parameter_one_of_spec.cr
 spec/models/get_invoices_upcoming_subscription_billing_cycle_anchor_parameter_spec.cr
 spec/models/get_invoices_upcoming_subscription_cancel_at_parameter_spec.cr
 spec/models/get_invoices_upcoming_subscription_trial_end_parameter_spec.cr
@@ -1224,7 +1225,7 @@ spec/models/post_customers_customer_cash_balance_request_spec.cr
 spec/models/post_customers_customer_funding_instructions_request_spec.cr
 spec/models/post_customers_customer_request_bank_account_spec.cr
 spec/models/post_customers_customer_request_spec.cr
-spec/models/post_customers_customer_request_trial_end_any_of_spec.cr
+spec/models/post_customers_customer_request_trial_end_one_of_spec.cr
 spec/models/post_customers_customer_request_trial_end_spec.cr
 spec/models/post_customers_customer_subscriptions_request_billing_thresholds_spec.cr
 spec/models/post_customers_customer_subscriptions_request_default_tax_rates_spec.cr
@@ -1294,7 +1295,7 @@ spec/models/post_payment_intents_intent_request_receipt_email_spec.cr
 spec/models/post_payment_intents_intent_request_shipping_spec.cr
 spec/models/post_payment_intents_intent_request_spec.cr
 spec/models/post_payment_intents_intent_verify_microdeposits_request_spec.cr
-spec/models/post_payment_intents_request_off_session_any_of_spec.cr
+spec/models/post_payment_intents_request_off_session_one_of_spec.cr
 spec/models/post_payment_intents_request_off_session_spec.cr
 spec/models/post_payment_intents_request_spec.cr
 spec/models/post_payment_links_payment_link_request_payment_method_types_spec.cr
@@ -1670,7 +1671,7 @@ spec/models/subscription_cancellation_reason_creation_param_options_spec.cr
 spec/models/subscription_cancellation_reason_creation_param_spec.cr
 spec/models/subscription_cancellation_reason_updating_param_spec.cr
 spec/models/subscription_customer_spec.cr
-spec/models/subscription_data_create_params_effective_date_any_of_spec.cr
+spec/models/subscription_data_create_params_effective_date_one_of_spec.cr
 spec/models/subscription_data_create_params_effective_date_spec.cr
 spec/models/subscription_data_create_params_spec.cr
 spec/models/subscription_data_item_param_spec.cr
@@ -1783,7 +1784,7 @@ spec/models/three_d_secure_details_spec.cr
 spec/models/three_d_secure_spec.cr
 spec/models/three_d_secure_usage_spec.cr
 spec/models/tier_spec.cr
-spec/models/tier_up_to_any_of_spec.cr
+spec/models/tier_up_to_one_of_spec.cr
 spec/models/tier_up_to_spec.cr
 spec/models/tipping_spec.cr
 spec/models/token_create_bank_account_spec.cr
@@ -1826,7 +1827,7 @@ spec/models/transfer_reversal_source_refund_spec.cr
 spec/models/transfer_reversal_spec.cr
 spec/models/transfer_reversal_transfer_spec.cr
 spec/models/transfer_schedule_spec.cr
-spec/models/transfer_schedule_specs_delay_days_any_of_spec.cr
+spec/models/transfer_schedule_specs_delay_days_one_of_spec.cr
 spec/models/transfer_schedule_specs_delay_days_spec.cr
 spec/models/transfer_schedule_specs_spec.cr
 spec/models/transfer_source_transaction_spec.cr
@@ -2042,7 +2043,7 @@ src/stripe/models/branding_settings_specs.cr
 src/stripe/models/business_profile_create_param.cr
 src/stripe/models/business_profile_specs.cr
 src/stripe/models/business_profile_specs_support_url.cr
-src/stripe/models/business_profile_specs_support_url_any_of.cr
+src/stripe/models/business_profile_specs_support_url_one_of.cr
 src/stripe/models/business_profile_update_param.cr
 src/stripe/models/canceled.cr
 src/stripe/models/canceled_cancellation_policy_provided.cr
@@ -2295,6 +2296,7 @@ src/stripe/models/financial_connections_account_balance.cr
 src/stripe/models/financial_connections_account_balance_refresh.cr
 src/stripe/models/financial_connections_account_owner.cr
 src/stripe/models/financial_connections_account_ownership.cr
+src/stripe/models/financial_connections_account_ownership2.cr
 src/stripe/models/financial_connections_account_ownership_refresh.cr
 src/stripe/models/financial_connections_session.cr
 src/stripe/models/financial_connections_session_account_holder.cr
@@ -2357,7 +2359,7 @@ src/stripe/models/get_identity_verification_sessions200_response.cr
 src/stripe/models/get_invoiceitems200_response.cr
 src/stripe/models/get_invoices_upcoming_discounts_parameter.cr
 src/stripe/models/get_invoices_upcoming_subscription_billing_cycle_anchor_parameter.cr
-src/stripe/models/get_invoices_upcoming_subscription_billing_cycle_anchor_parameter_any_of.cr
+src/stripe/models/get_invoices_upcoming_subscription_billing_cycle_anchor_parameter_one_of.cr
 src/stripe/models/get_invoices_upcoming_subscription_cancel_at_parameter.cr
 src/stripe/models/get_invoices_upcoming_subscription_trial_end_parameter.cr
 src/stripe/models/get_issuing_authorizations200_response.cr
@@ -3125,7 +3127,7 @@ src/stripe/models/post_customers_customer_funding_instructions_request.cr
 src/stripe/models/post_customers_customer_request.cr
 src/stripe/models/post_customers_customer_request_bank_account.cr
 src/stripe/models/post_customers_customer_request_trial_end.cr
-src/stripe/models/post_customers_customer_request_trial_end_any_of.cr
+src/stripe/models/post_customers_customer_request_trial_end_one_of.cr
 src/stripe/models/post_customers_customer_subscriptions_request.cr
 src/stripe/models/post_customers_customer_subscriptions_request_billing_thresholds.cr
 src/stripe/models/post_customers_customer_subscriptions_request_default_tax_rates.cr
@@ -3196,7 +3198,7 @@ src/stripe/models/post_payment_intents_intent_request_shipping.cr
 src/stripe/models/post_payment_intents_intent_verify_microdeposits_request.cr
 src/stripe/models/post_payment_intents_request.cr
 src/stripe/models/post_payment_intents_request_off_session.cr
-src/stripe/models/post_payment_intents_request_off_session_any_of.cr
+src/stripe/models/post_payment_intents_request_off_session_one_of.cr
 src/stripe/models/post_payment_links_payment_link_request.cr
 src/stripe/models/post_payment_links_payment_link_request_payment_method_types.cr
 src/stripe/models/post_payment_links_payment_link_request_shipping_address_collection.cr
@@ -3573,7 +3575,7 @@ src/stripe/models/subscription_cancellation_reason_updating_param.cr
 src/stripe/models/subscription_customer.cr
 src/stripe/models/subscription_data_create_params.cr
 src/stripe/models/subscription_data_create_params_effective_date.cr
-src/stripe/models/subscription_data_create_params_effective_date_any_of.cr
+src/stripe/models/subscription_data_create_params_effective_date_one_of.cr
 src/stripe/models/subscription_data_item_param.cr
 src/stripe/models/subscription_data_params.cr
 src/stripe/models/subscription_data_params1.cr
@@ -3684,7 +3686,7 @@ src/stripe/models/three_d_secure_details.cr
 src/stripe/models/three_d_secure_usage.cr
 src/stripe/models/tier.cr
 src/stripe/models/tier_up_to.cr
-src/stripe/models/tier_up_to_any_of.cr
+src/stripe/models/tier_up_to_one_of.cr
 src/stripe/models/tipping.cr
 src/stripe/models/token.cr
 src/stripe/models/token_create_bank_account.cr
@@ -3729,7 +3731,7 @@ src/stripe/models/transfer_reversal_transfer.cr
 src/stripe/models/transfer_schedule.cr
 src/stripe/models/transfer_schedule_specs.cr
 src/stripe/models/transfer_schedule_specs_delay_days.cr
-src/stripe/models/transfer_schedule_specs_delay_days_any_of.cr
+src/stripe/models/transfer_schedule_specs_delay_days_one_of.cr
 src/stripe/models/transfer_source_transaction.cr
 src/stripe/models/transform_quantity.cr
 src/stripe/models/transform_usage.cr

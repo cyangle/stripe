@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "acss_debit", type: SetupIntentPaymentMethodOptionsParam?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
@@ -53,12 +54,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @acss_debit : SetupIntentPaymentMethodOptionsParam? = nil,
-      @card : SetupIntentParam? = nil,
-      @link : SetupIntentPaymentMethodOptionsParam1? = nil,
-      @sepa_debit : SetupIntentPaymentMethodOptionsParam2? = nil,
+      @acss_debit : SetupIntentPaymentMethodOptionsParam? = nil, 
+      @card : SetupIntentParam? = nil, 
+      @link : SetupIntentPaymentMethodOptionsParam1? = nil, 
+      @sepa_debit : SetupIntentPaymentMethodOptionsParam2? = nil, 
       @us_bank_account : SetupIntentPaymentMethodOptionsParam3? = nil
     )
     end
@@ -74,6 +75,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

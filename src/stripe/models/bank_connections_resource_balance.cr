@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class BankConnectionsResourceBalance
     include JSON::Serializable
@@ -51,13 +51,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @as_of : Int64,
-      @current : Hash(String, Int64),
-      @_type : String,
+      @as_of : Int64, 
+      @current : Hash(String, Int64), 
+      @_type : String, 
       # Optional properties
-      @cash : BankConnectionsResourceBalanceApiResourceCashBalance? = nil,
+      @cash : BankConnectionsResourceBalanceApiResourceCashBalance? = nil, 
       @credit : BankConnectionsResourceBalanceApiResourceCreditBalance? = nil
     )
     end

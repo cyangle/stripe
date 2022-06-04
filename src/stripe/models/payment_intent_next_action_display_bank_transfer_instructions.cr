@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentIntentNextActionDisplayBankTransferInstructions
     include JSON::Serializable
@@ -66,14 +66,14 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @_type : String,
+      @_type : String, 
       # Optional properties
-      @amount_remaining : Int64? = nil,
-      @currency : String? = nil,
-      @financial_addresses : Array(FundingInstructionsBankTransferFinancialAddress)? = nil,
-      @hosted_instructions_url : String? = nil,
+      @amount_remaining : Int64? = nil, 
+      @currency : String? = nil, 
+      @financial_addresses : Array(FundingInstructionsBankTransferFinancialAddress)? = nil, 
+      @hosted_instructions_url : String? = nil, 
       @reference : String? = nil
     )
     end

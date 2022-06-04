@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # Amount intended to be applied to this PaymentIntent from the customer’s cash balance.  A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).  The maximum amount is the amount of the PaymentIntent.  When omitted, the amount defaults to the remaining amount requested on the PaymentIntent.
@@ -43,10 +44,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @amount : Int64? = nil,
-      @currency : String? = nil,
+      @amount : Int64? = nil, 
+      @currency : String? = nil, 
       @expand : Array(String)? = nil
     )
     end
@@ -62,6 +63,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

@@ -12,11 +12,12 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class IssuingDisputeMerchandiseNotAsDescribedEvidence
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+
 
     # Optional properties
 
@@ -66,13 +67,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @additional_documentation : IssuingDisputeCanceledEvidenceAdditionalDocumentation? = nil,
-      @explanation : String? = nil,
-      @received_at : Int64? = nil,
-      @return_description : String? = nil,
-      @return_status : String? = nil,
+      @additional_documentation : IssuingDisputeCanceledEvidenceAdditionalDocumentation? = nil, 
+      @explanation : String? = nil, 
+      @received_at : Int64? = nil, 
+      @return_description : String? = nil, 
+      @return_status : String? = nil, 
       @returned_at : Int64? = nil
     )
     end

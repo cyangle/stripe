@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
@@ -108,20 +109,20 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @amount : Int64? = nil,
-      @description : String? = nil,
-      @discountable : Bool? = nil,
-      @discounts : PostInvoiceitemsInvoiceitemRequestDiscounts? = nil,
-      @expand : Array(String)? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @period : Period1? = nil,
-      @price : String? = nil,
-      @price_data : OneTimePriceData1? = nil,
-      @quantity : Int64? = nil,
-      @tax_rates : PostInvoiceitemsInvoiceitemRequestTaxRates? = nil,
-      @unit_amount : Int64? = nil,
+      @amount : Int64? = nil, 
+      @description : String? = nil, 
+      @discountable : Bool? = nil, 
+      @discounts : PostInvoiceitemsInvoiceitemRequestDiscounts? = nil, 
+      @expand : Array(String)? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @period : Period1? = nil, 
+      @price : String? = nil, 
+      @price_data : OneTimePriceData1? = nil, 
+      @quantity : Int64? = nil, 
+      @tax_rates : PostInvoiceitemsInvoiceitemRequestTaxRates? = nil, 
+      @unit_amount : Int64? = nil, 
       @unit_amount_decimal : String? = nil
     )
     end

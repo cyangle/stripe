@@ -32,8 +32,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? accepted_at_present : Bool = false
 
-    @[JSON::Field(key: "offline", type: JSON::Any, presence: true, ignore_serialize: offline.nil? && !offline_present?)]
-    property offline : JSON::Any
+    @[JSON::Field(key: "offline", type: JSON::Any?, presence: true, ignore_serialize: offline.nil? && !offline_present?)]
+    property offline : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? offline_present : Bool = false
@@ -47,12 +47,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @_type : String,
+      @_type : String, 
       # Optional properties
-      @accepted_at : Int64? = nil,
-      @offline : JSON::Any = nil,
+      @accepted_at : Int64? = nil, 
+      @offline : JSON::Any? = nil, 
       @online : OnlineParam? = nil
     )
     end

@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # A list of prices and quantities that will generate invoice items appended to the first invoice for this subscription. You may pass up to 20 items.
@@ -216,35 +217,35 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @add_invoice_items : Array(AddInvoiceItemEntry)? = nil,
-      @application_fee_percent : Float64? = nil,
-      @automatic_tax : AutomaticTaxConfig? = nil,
-      @billing_cycle_anchor : String? = nil,
-      @billing_thresholds : PostCustomersCustomerSubscriptionsRequestBillingThresholds? = nil,
-      @cancel_at : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil,
-      @cancel_at_period_end : Bool? = nil,
-      @collection_method : String? = nil,
-      @coupon : String? = nil,
-      @days_until_due : Int64? = nil,
-      @default_payment_method : String? = nil,
-      @default_source : String? = nil,
-      @default_tax_rates : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil,
-      @description : String? = nil,
-      @expand : Array(String)? = nil,
-      @items : Array(SubscriptionItemUpdateParams)? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @off_session : Bool? = nil,
-      @pause_collection : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil,
-      @payment_behavior : String? = nil,
-      @payment_settings : PaymentSettings? = nil,
-      @pending_invoice_item_interval : PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval? = nil,
-      @promotion_code : String? = nil,
-      @proration_behavior : String? = nil,
-      @proration_date : Int64? = nil,
-      @transfer_data : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTransferData? = nil,
-      @trial_end : PostCustomersCustomerRequestTrialEnd? = nil,
+      @add_invoice_items : Array(AddInvoiceItemEntry)? = nil, 
+      @application_fee_percent : Float64? = nil, 
+      @automatic_tax : AutomaticTaxConfig? = nil, 
+      @billing_cycle_anchor : String? = nil, 
+      @billing_thresholds : PostCustomersCustomerSubscriptionsRequestBillingThresholds? = nil, 
+      @cancel_at : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil, 
+      @cancel_at_period_end : Bool? = nil, 
+      @collection_method : String? = nil, 
+      @coupon : String? = nil, 
+      @days_until_due : Int64? = nil, 
+      @default_payment_method : String? = nil, 
+      @default_source : String? = nil, 
+      @default_tax_rates : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil, 
+      @description : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @items : Array(SubscriptionItemUpdateParams)? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @off_session : Bool? = nil, 
+      @pause_collection : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil, 
+      @payment_behavior : String? = nil, 
+      @payment_settings : PaymentSettings? = nil, 
+      @pending_invoice_item_interval : PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval? = nil, 
+      @promotion_code : String? = nil, 
+      @proration_behavior : String? = nil, 
+      @proration_date : Int64? = nil, 
+      @transfer_data : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTransferData? = nil, 
+      @trial_end : PostCustomersCustomerRequestTrialEnd? = nil, 
       @trial_from_plan : Bool? = nil
     )
     end

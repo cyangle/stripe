@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SetupIntentNextAction
     include JSON::Serializable
@@ -33,8 +33,8 @@ module Stripe
     property? redirect_to_url_present : Bool = false
 
     # When confirming a SetupIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.
-    @[JSON::Field(key: "use_stripe_sdk", type: JSON::Any, presence: true, ignore_serialize: use_stripe_sdk.nil? && !use_stripe_sdk_present?)]
-    property use_stripe_sdk : JSON::Any
+    @[JSON::Field(key: "use_stripe_sdk", type: JSON::Any?, presence: true, ignore_serialize: use_stripe_sdk.nil? && !use_stripe_sdk_present?)]
+    property use_stripe_sdk : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? use_stripe_sdk_present : Bool = false
@@ -48,12 +48,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @_type : String,
+      @_type : String, 
       # Optional properties
-      @redirect_to_url : SetupIntentNextActionRedirectToUrl? = nil,
-      @use_stripe_sdk : JSON::Any = nil,
+      @redirect_to_url : SetupIntentNextActionRedirectToUrl? = nil, 
+      @use_stripe_sdk : JSON::Any? = nil, 
       @verify_with_microdeposits : SetupIntentNextActionVerifyWithMicrodeposits? = nil
     )
     end

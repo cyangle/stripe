@@ -12,9 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  class PostCustomersCustomerRequestTrialEndAnyOf
-    NOW = "now"
-
+  class PostPaymentIntentsRequestOffSessionOneOf
+    ONE_OFF = "one_off"
+  
+    RECURRING = "recurring"
+   
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
@@ -27,10 +29,12 @@ module Stripe
     # @return [String] The enum value
     def build_from_hash(value)
       case value
-      when "now"
-        NOW
+      when "one_off"
+        ONE_OFF
+      when "recurring"
+        RECURRING
       else
-        raise "Invalid ENUM value #{value} for class #PostCustomersCustomerRequestTrialEndAnyOf"
+        raise "Invalid ENUM value #{value} for class #PostPaymentIntentsRequestOffSessionOneOf"
       end
     end
   end

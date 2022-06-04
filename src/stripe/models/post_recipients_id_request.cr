@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # A bank account to attach to the recipient. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details, with the options described below.
@@ -84,16 +85,16 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @bank_account : String? = nil,
-      @card : String? = nil,
-      @default_card : String? = nil,
-      @description : String? = nil,
-      @email : String? = nil,
-      @expand : Array(String)? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @name : String? = nil,
+      @bank_account : String? = nil, 
+      @card : String? = nil, 
+      @default_card : String? = nil, 
+      @description : String? = nil, 
+      @email : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @name : String? = nil, 
       @tax_id : String? = nil
     )
     end

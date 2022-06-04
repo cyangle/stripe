@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "capture_method", type: String?, presence: true, ignore_serialize: capture_method.nil? && !capture_method_present?)]
@@ -72,14 +73,14 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @capture_method : String? = nil,
-      @cvc_token : String? = nil,
-      @installments : InstallmentsParam? = nil,
-      @mandate_options : MandateOptionsParam3? = nil,
-      @network : String? = nil,
-      @request_three_d_secure : String? = nil,
+      @capture_method : String? = nil, 
+      @cvc_token : String? = nil, 
+      @installments : InstallmentsParam? = nil, 
+      @mandate_options : MandateOptionsParam3? = nil, 
+      @network : String? = nil, 
+      @request_three_d_secure : String? = nil, 
       @setup_future_usage : String? = nil
     )
     end

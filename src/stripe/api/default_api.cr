@@ -8130,7 +8130,7 @@ module Stripe
       )
     end
 
-    #
+    # 
     # @param customer [String]
     # @return [Discount]
     def get_customers_customer_discount(*, customer : String, expand : Array(String)? = nil)
@@ -8138,7 +8138,7 @@ module Stripe
       data
     end
 
-    #
+    # 
     # @param customer [String]
     # @return [Array<(Discount, Integer, Hash)>] Discount data, response status code and response headers
     def get_customers_customer_discount_with_http_info(*, customer : String, expand : Array(String)? = nil)
@@ -8153,7 +8153,7 @@ module Stripe
       return Discount.from_json(data), status_code, headers
     end
 
-    #
+    # 
     # @param customer [String]
     # @return nil
     def get_customers_customer_discount(*, customer : String, expand : Array(String)? = nil, &block : Crest::Response ->)
@@ -8699,7 +8699,7 @@ module Stripe
       )
     end
 
-    #
+    # 
     # @param customer [String]
     # @param subscription_exposed_id [String]
     # @return [Discount]
@@ -8708,7 +8708,7 @@ module Stripe
       data
     end
 
-    #
+    # 
     # @param customer [String]
     # @param subscription_exposed_id [String]
     # @return [Array<(Discount, Integer, Hash)>] Discount data, response status code and response headers
@@ -8724,7 +8724,7 @@ module Stripe
       return Discount.from_json(data), status_code, headers
     end
 
-    #
+    # 
     # @param customer [String]
     # @param subscription_exposed_id [String]
     # @return nil
@@ -24381,7 +24381,7 @@ module Stripe
       )
     end
 
-    #
+    # 
     # @param id [String]
     # @return [ApplicationFee]
     def post_application_fees_id_refund(*, id : String, amount : Int64? = nil, directive : String? = nil, expand : Array(String)? = nil)
@@ -24389,7 +24389,7 @@ module Stripe
       data
     end
 
-    #
+    # 
     # @param id [String]
     # @return [Array<(ApplicationFee, Integer, Hash)>] ApplicationFee data, response status code and response headers
     def post_application_fees_id_refund_with_http_info(*, id : String, amount : Int64? = nil, directive : String? = nil, expand : Array(String)? = nil)
@@ -24404,7 +24404,7 @@ module Stripe
       return ApplicationFee.from_json(data), status_code, headers
     end
 
-    #
+    # 
     # @param id [String]
     # @return nil
     def post_application_fees_id_refund(*, id : String, amount : Int64? = nil, directive : String? = nil, expand : Array(String)? = nil, &block : Crest::Response ->)
@@ -25237,7 +25237,7 @@ module Stripe
       )
     end
 
-    #
+    # 
     # @param charge [String]
     # @return [Dispute]
     def post_charges_charge_dispute(*, charge : String, evidence : DisputeEvidenceParams? = nil, expand : Array(String)? = nil, metadata : PostAccountRequestMetadata? = nil, submit : Bool? = nil)
@@ -25245,7 +25245,7 @@ module Stripe
       data
     end
 
-    #
+    # 
     # @param charge [String]
     # @return [Array<(Dispute, Integer, Hash)>] Dispute data, response status code and response headers
     def post_charges_charge_dispute_with_http_info(*, charge : String, evidence : DisputeEvidenceParams? = nil, expand : Array(String)? = nil, metadata : PostAccountRequestMetadata? = nil, submit : Bool? = nil)
@@ -25260,7 +25260,7 @@ module Stripe
       return Dispute.from_json(data), status_code, headers
     end
 
-    #
+    # 
     # @param charge [String]
     # @return nil
     def post_charges_charge_dispute(*, charge : String, evidence : DisputeEvidenceParams? = nil, expand : Array(String)? = nil, metadata : PostAccountRequestMetadata? = nil, submit : Bool? = nil, &block : Crest::Response ->)
@@ -25314,7 +25314,7 @@ module Stripe
       )
     end
 
-    #
+    # 
     # @param charge [String]
     # @return [Dispute]
     def post_charges_charge_dispute_close(*, charge : String, expand : Array(String)? = nil)
@@ -25322,7 +25322,7 @@ module Stripe
       data
     end
 
-    #
+    # 
     # @param charge [String]
     # @return [Array<(Dispute, Integer, Hash)>] Dispute data, response status code and response headers
     def post_charges_charge_dispute_close_with_http_info(*, charge : String, expand : Array(String)? = nil)
@@ -25337,7 +25337,7 @@ module Stripe
       return Dispute.from_json(data), status_code, headers
     end
 
-    #
+    # 
     # @param charge [String]
     # @return nil
     def post_charges_charge_dispute_close(*, charge : String, expand : Array(String)? = nil, &block : Crest::Response ->)
@@ -32530,14 +32530,14 @@ module Stripe
 
     # <p>Creates a PaymentMethod object. Read the <a href=\"/docs/stripe-js/reference#stripe-create-payment-method\">Stripe.js reference</a> to learn how to create PaymentMethods via Stripe.js.</p>  <p>Instead of creating a PaymentMethod directly, we recommend using the <a href=\"/docs/payments/accept-a-payment\">PaymentIntents</a> API to accept a payment immediately or the <a href=\"/docs/payments/save-and-reuse\">SetupIntent</a> API to collect payment method details ahead of a future payment.</p>
     # @return [PaymentMethod]
-    def post_payment_methods(*, acss_debit : PaymentMethodParam2? = nil, affirm : JSON::Any = nil, afterpay_clearpay : JSON::Any = nil, alipay : JSON::Any = nil, au_becs_debit : Param10? = nil, bacs_debit : Param11? = nil, bancontact : JSON::Any = nil, billing_details : BillingDetailsInnerParams1? = nil, boleto : Param12? = nil, card : PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any = nil, eps : Param13? = nil, expand : Array(String)? = nil, fpx : Param14? = nil, giropay : JSON::Any = nil, grabpay : JSON::Any = nil, ideal : Param15? = nil, interac_present : JSON::Any = nil, klarna : Param16? = nil, konbini : JSON::Any = nil, link : JSON::Any = nil, oxxo : JSON::Any = nil, p24 : Param17? = nil, payment_method : String? = nil, paynow : JSON::Any = nil, radar_options : RadarOptions? = nil, sepa_debit : Param18? = nil, sofort : Param19? = nil, _type : String? = nil, us_bank_account : PaymentMethodParam3? = nil, wechat_pay : JSON::Any = nil)
+    def post_payment_methods(*, acss_debit : PaymentMethodParam2? = nil, affirm : JSON::Any? = nil, afterpay_clearpay : JSON::Any? = nil, alipay : JSON::Any? = nil, au_becs_debit : Param10? = nil, bacs_debit : Param11? = nil, bancontact : JSON::Any? = nil, billing_details : BillingDetailsInnerParams1? = nil, boleto : Param12? = nil, card : PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any? = nil, eps : Param13? = nil, expand : Array(String)? = nil, fpx : Param14? = nil, giropay : JSON::Any? = nil, grabpay : JSON::Any? = nil, ideal : Param15? = nil, interac_present : JSON::Any? = nil, klarna : Param16? = nil, konbini : JSON::Any? = nil, link : JSON::Any? = nil, oxxo : JSON::Any? = nil, p24 : Param17? = nil, payment_method : String? = nil, paynow : JSON::Any? = nil, radar_options : RadarOptions? = nil, sepa_debit : Param18? = nil, sofort : Param19? = nil, _type : String? = nil, us_bank_account : PaymentMethodParam3? = nil, wechat_pay : JSON::Any? = nil)
       data, _status_code, _headers = post_payment_methods_with_http_info(acss_debit: acss_debit, affirm: affirm, afterpay_clearpay: afterpay_clearpay, alipay: alipay, au_becs_debit: au_becs_debit, bacs_debit: bacs_debit, bancontact: bancontact, billing_details: billing_details, boleto: boleto, card: card, customer: customer, customer_balance: customer_balance, eps: eps, expand: expand, fpx: fpx, giropay: giropay, grabpay: grabpay, ideal: ideal, interac_present: interac_present, klarna: klarna, konbini: konbini, link: link, oxxo: oxxo, p24: p24, payment_method: payment_method, paynow: paynow, radar_options: radar_options, sepa_debit: sepa_debit, sofort: sofort, _type: _type, us_bank_account: us_bank_account, wechat_pay: wechat_pay)
       data
     end
 
     # &lt;p&gt;Creates a PaymentMethod object. Read the &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-create-payment-method\&quot;&gt;Stripe.js reference&lt;/a&gt; to learn how to create PaymentMethods via Stripe.js.&lt;/p&gt;  &lt;p&gt;Instead of creating a PaymentMethod directly, we recommend using the &lt;a href&#x3D;\&quot;/docs/payments/accept-a-payment\&quot;&gt;PaymentIntents&lt;/a&gt; API to accept a payment immediately or the &lt;a href&#x3D;\&quot;/docs/payments/save-and-reuse\&quot;&gt;SetupIntent&lt;/a&gt; API to collect payment method details ahead of a future payment.&lt;/p&gt;
     # @return [Array<(PaymentMethod, Integer, Hash)>] PaymentMethod data, response status code and response headers
-    def post_payment_methods_with_http_info(*, acss_debit : PaymentMethodParam2? = nil, affirm : JSON::Any = nil, afterpay_clearpay : JSON::Any = nil, alipay : JSON::Any = nil, au_becs_debit : Param10? = nil, bacs_debit : Param11? = nil, bancontact : JSON::Any = nil, billing_details : BillingDetailsInnerParams1? = nil, boleto : Param12? = nil, card : PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any = nil, eps : Param13? = nil, expand : Array(String)? = nil, fpx : Param14? = nil, giropay : JSON::Any = nil, grabpay : JSON::Any = nil, ideal : Param15? = nil, interac_present : JSON::Any = nil, klarna : Param16? = nil, konbini : JSON::Any = nil, link : JSON::Any = nil, oxxo : JSON::Any = nil, p24 : Param17? = nil, payment_method : String? = nil, paynow : JSON::Any = nil, radar_options : RadarOptions? = nil, sepa_debit : Param18? = nil, sofort : Param19? = nil, _type : String? = nil, us_bank_account : PaymentMethodParam3? = nil, wechat_pay : JSON::Any = nil)
+    def post_payment_methods_with_http_info(*, acss_debit : PaymentMethodParam2? = nil, affirm : JSON::Any? = nil, afterpay_clearpay : JSON::Any? = nil, alipay : JSON::Any? = nil, au_becs_debit : Param10? = nil, bacs_debit : Param11? = nil, bancontact : JSON::Any? = nil, billing_details : BillingDetailsInnerParams1? = nil, boleto : Param12? = nil, card : PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any? = nil, eps : Param13? = nil, expand : Array(String)? = nil, fpx : Param14? = nil, giropay : JSON::Any? = nil, grabpay : JSON::Any? = nil, ideal : Param15? = nil, interac_present : JSON::Any? = nil, klarna : Param16? = nil, konbini : JSON::Any? = nil, link : JSON::Any? = nil, oxxo : JSON::Any? = nil, p24 : Param17? = nil, payment_method : String? = nil, paynow : JSON::Any? = nil, radar_options : RadarOptions? = nil, sepa_debit : Param18? = nil, sofort : Param19? = nil, _type : String? = nil, us_bank_account : PaymentMethodParam3? = nil, wechat_pay : JSON::Any? = nil)
       request = build_api_request_for_post_payment_methods(acss_debit: acss_debit, affirm: affirm, afterpay_clearpay: afterpay_clearpay, alipay: alipay, au_becs_debit: au_becs_debit, bacs_debit: bacs_debit, bancontact: bancontact, billing_details: billing_details, boleto: boleto, card: card, customer: customer, customer_balance: customer_balance, eps: eps, expand: expand, fpx: fpx, giropay: giropay, grabpay: grabpay, ideal: ideal, interac_present: interac_present, klarna: klarna, konbini: konbini, link: link, oxxo: oxxo, p24: p24, payment_method: payment_method, paynow: paynow, radar_options: radar_options, sepa_debit: sepa_debit, sofort: sofort, _type: _type, us_bank_account: us_bank_account, wechat_pay: wechat_pay)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -32551,12 +32551,12 @@ module Stripe
 
     # &lt;p&gt;Creates a PaymentMethod object. Read the &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-create-payment-method\&quot;&gt;Stripe.js reference&lt;/a&gt; to learn how to create PaymentMethods via Stripe.js.&lt;/p&gt;  &lt;p&gt;Instead of creating a PaymentMethod directly, we recommend using the &lt;a href&#x3D;\&quot;/docs/payments/accept-a-payment\&quot;&gt;PaymentIntents&lt;/a&gt; API to accept a payment immediately or the &lt;a href&#x3D;\&quot;/docs/payments/save-and-reuse\&quot;&gt;SetupIntent&lt;/a&gt; API to collect payment method details ahead of a future payment.&lt;/p&gt;
     # @return nil
-    def post_payment_methods(*, acss_debit : PaymentMethodParam2? = nil, affirm : JSON::Any = nil, afterpay_clearpay : JSON::Any = nil, alipay : JSON::Any = nil, au_becs_debit : Param10? = nil, bacs_debit : Param11? = nil, bancontact : JSON::Any = nil, billing_details : BillingDetailsInnerParams1? = nil, boleto : Param12? = nil, card : PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any = nil, eps : Param13? = nil, expand : Array(String)? = nil, fpx : Param14? = nil, giropay : JSON::Any = nil, grabpay : JSON::Any = nil, ideal : Param15? = nil, interac_present : JSON::Any = nil, klarna : Param16? = nil, konbini : JSON::Any = nil, link : JSON::Any = nil, oxxo : JSON::Any = nil, p24 : Param17? = nil, payment_method : String? = nil, paynow : JSON::Any = nil, radar_options : RadarOptions? = nil, sepa_debit : Param18? = nil, sofort : Param19? = nil, _type : String? = nil, us_bank_account : PaymentMethodParam3? = nil, wechat_pay : JSON::Any = nil, &block : Crest::Response ->)
+    def post_payment_methods(*, acss_debit : PaymentMethodParam2? = nil, affirm : JSON::Any? = nil, afterpay_clearpay : JSON::Any? = nil, alipay : JSON::Any? = nil, au_becs_debit : Param10? = nil, bacs_debit : Param11? = nil, bancontact : JSON::Any? = nil, billing_details : BillingDetailsInnerParams1? = nil, boleto : Param12? = nil, card : PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any? = nil, eps : Param13? = nil, expand : Array(String)? = nil, fpx : Param14? = nil, giropay : JSON::Any? = nil, grabpay : JSON::Any? = nil, ideal : Param15? = nil, interac_present : JSON::Any? = nil, klarna : Param16? = nil, konbini : JSON::Any? = nil, link : JSON::Any? = nil, oxxo : JSON::Any? = nil, p24 : Param17? = nil, payment_method : String? = nil, paynow : JSON::Any? = nil, radar_options : RadarOptions? = nil, sepa_debit : Param18? = nil, sofort : Param19? = nil, _type : String? = nil, us_bank_account : PaymentMethodParam3? = nil, wechat_pay : JSON::Any? = nil, &block : Crest::Response ->)
       build_api_request_for_post_payment_methods(acss_debit: acss_debit, affirm: affirm, afterpay_clearpay: afterpay_clearpay, alipay: alipay, au_becs_debit: au_becs_debit, bacs_debit: bacs_debit, bancontact: bancontact, billing_details: billing_details, boleto: boleto, card: card, customer: customer, customer_balance: customer_balance, eps: eps, expand: expand, fpx: fpx, giropay: giropay, grabpay: grabpay, ideal: ideal, interac_present: interac_present, klarna: klarna, konbini: konbini, link: link, oxxo: oxxo, p24: p24, payment_method: payment_method, paynow: paynow, radar_options: radar_options, sepa_debit: sepa_debit, sofort: sofort, _type: _type, us_bank_account: us_bank_account, wechat_pay: wechat_pay).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_methods(*, acss_debit : PaymentMethodParam2? = nil, affirm : JSON::Any = nil, afterpay_clearpay : JSON::Any = nil, alipay : JSON::Any = nil, au_becs_debit : Param10? = nil, bacs_debit : Param11? = nil, bancontact : JSON::Any = nil, billing_details : BillingDetailsInnerParams1? = nil, boleto : Param12? = nil, card : PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any = nil, eps : Param13? = nil, expand : Array(String)? = nil, fpx : Param14? = nil, giropay : JSON::Any = nil, grabpay : JSON::Any = nil, ideal : Param15? = nil, interac_present : JSON::Any = nil, klarna : Param16? = nil, konbini : JSON::Any = nil, link : JSON::Any = nil, oxxo : JSON::Any = nil, p24 : Param17? = nil, payment_method : String? = nil, paynow : JSON::Any = nil, radar_options : RadarOptions? = nil, sepa_debit : Param18? = nil, sofort : Param19? = nil, _type : String? = nil, us_bank_account : PaymentMethodParam3? = nil, wechat_pay : JSON::Any = nil) : Crest::Request
+    def build_api_request_for_post_payment_methods(*, acss_debit : PaymentMethodParam2? = nil, affirm : JSON::Any? = nil, afterpay_clearpay : JSON::Any? = nil, alipay : JSON::Any? = nil, au_becs_debit : Param10? = nil, bacs_debit : Param11? = nil, bancontact : JSON::Any? = nil, billing_details : BillingDetailsInnerParams1? = nil, boleto : Param12? = nil, card : PostPaymentMethodsRequestCard? = nil, customer : String? = nil, customer_balance : JSON::Any? = nil, eps : Param13? = nil, expand : Array(String)? = nil, fpx : Param14? = nil, giropay : JSON::Any? = nil, grabpay : JSON::Any? = nil, ideal : Param15? = nil, interac_present : JSON::Any? = nil, klarna : Param16? = nil, konbini : JSON::Any? = nil, link : JSON::Any? = nil, oxxo : JSON::Any? = nil, p24 : Param17? = nil, payment_method : String? = nil, paynow : JSON::Any? = nil, radar_options : RadarOptions? = nil, sepa_debit : Param18? = nil, sofort : Param19? = nil, _type : String? = nil, us_bank_account : PaymentMethodParam3? = nil, wechat_pay : JSON::Any? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: DefaultApi.post_payment_methods ..." }
       end
@@ -32641,7 +32641,7 @@ module Stripe
     # <p>Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated.</p>
     # @param payment_method [String]
     # @return [PaymentMethod]
-    def post_payment_methods_payment_method(*, payment_method : String, billing_details : BillingDetailsInnerParams1? = nil, card : UpdateApiParam? = nil, expand : Array(String)? = nil, link : JSON::Any = nil, metadata : PostAccountRequestMetadata? = nil, us_bank_account : UpdateParam? = nil)
+    def post_payment_methods_payment_method(*, payment_method : String, billing_details : BillingDetailsInnerParams1? = nil, card : UpdateApiParam? = nil, expand : Array(String)? = nil, link : JSON::Any? = nil, metadata : PostAccountRequestMetadata? = nil, us_bank_account : UpdateParam? = nil)
       data, _status_code, _headers = post_payment_methods_payment_method_with_http_info(payment_method: payment_method, billing_details: billing_details, card: card, expand: expand, link: link, metadata: metadata, us_bank_account: us_bank_account)
       data
     end
@@ -32649,7 +32649,7 @@ module Stripe
     # &lt;p&gt;Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated.&lt;/p&gt;
     # @param payment_method [String]
     # @return [Array<(PaymentMethod, Integer, Hash)>] PaymentMethod data, response status code and response headers
-    def post_payment_methods_payment_method_with_http_info(*, payment_method : String, billing_details : BillingDetailsInnerParams1? = nil, card : UpdateApiParam? = nil, expand : Array(String)? = nil, link : JSON::Any = nil, metadata : PostAccountRequestMetadata? = nil, us_bank_account : UpdateParam? = nil)
+    def post_payment_methods_payment_method_with_http_info(*, payment_method : String, billing_details : BillingDetailsInnerParams1? = nil, card : UpdateApiParam? = nil, expand : Array(String)? = nil, link : JSON::Any? = nil, metadata : PostAccountRequestMetadata? = nil, us_bank_account : UpdateParam? = nil)
       request = build_api_request_for_post_payment_methods_payment_method(payment_method: payment_method, billing_details: billing_details, card: card, expand: expand, link: link, metadata: metadata, us_bank_account: us_bank_account)
 
       data, status_code, headers = @api_client.execute_api_request(request)
@@ -32664,12 +32664,12 @@ module Stripe
     # &lt;p&gt;Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated.&lt;/p&gt;
     # @param payment_method [String]
     # @return nil
-    def post_payment_methods_payment_method(*, payment_method : String, billing_details : BillingDetailsInnerParams1? = nil, card : UpdateApiParam? = nil, expand : Array(String)? = nil, link : JSON::Any = nil, metadata : PostAccountRequestMetadata? = nil, us_bank_account : UpdateParam? = nil, &block : Crest::Response ->)
+    def post_payment_methods_payment_method(*, payment_method : String, billing_details : BillingDetailsInnerParams1? = nil, card : UpdateApiParam? = nil, expand : Array(String)? = nil, link : JSON::Any? = nil, metadata : PostAccountRequestMetadata? = nil, us_bank_account : UpdateParam? = nil, &block : Crest::Response ->)
       build_api_request_for_post_payment_methods_payment_method(payment_method: payment_method, billing_details: billing_details, card: card, expand: expand, link: link, metadata: metadata, us_bank_account: us_bank_account).execute(&block)
     end
 
     # @return Crest::Request
-    def build_api_request_for_post_payment_methods_payment_method(*, payment_method : String, billing_details : BillingDetailsInnerParams1? = nil, card : UpdateApiParam? = nil, expand : Array(String)? = nil, link : JSON::Any = nil, metadata : PostAccountRequestMetadata? = nil, us_bank_account : UpdateParam? = nil) : Crest::Request
+    def build_api_request_for_post_payment_methods_payment_method(*, payment_method : String, billing_details : BillingDetailsInnerParams1? = nil, card : UpdateApiParam? = nil, expand : Array(String)? = nil, link : JSON::Any? = nil, metadata : PostAccountRequestMetadata? = nil, us_bank_account : UpdateParam? = nil) : Crest::Request
       if @api_client.config.debugging
         Log.debug { "Calling API: DefaultApi.post_payment_methods_payment_method ..." }
       end

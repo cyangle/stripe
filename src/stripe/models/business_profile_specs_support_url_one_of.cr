@@ -12,9 +12,9 @@ require "time"
 require "log"
 
 module Stripe
-  class TierUpToAnyOf
-    INF = "inf"
-
+  class BusinessProfileSpecsSupportUrlOneOf
+    EMPTY = ""
+   
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
@@ -27,10 +27,10 @@ module Stripe
     # @return [String] The enum value
     def build_from_hash(value)
       case value
-      when "inf"
-        INF
+      when ""
+        EMPTY
       else
-        raise "Invalid ENUM value #{value} for class #TierUpToAnyOf"
+        raise "Invalid ENUM value #{value} for class #BusinessProfileSpecsSupportUrlOneOf"
       end
     end
   end

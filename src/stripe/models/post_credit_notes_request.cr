@@ -100,19 +100,19 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @invoice : String,
+      @invoice : String, 
       # Optional properties
-      @amount : Int64? = nil,
-      @credit_amount : Int64? = nil,
-      @expand : Array(String)? = nil,
-      @lines : Array(CreditNoteLineItemParams)? = nil,
-      @memo : String? = nil,
-      @metadata : Hash(String, String)? = nil,
-      @out_of_band_amount : Int64? = nil,
-      @reason : String? = nil,
-      @refund : String? = nil,
+      @amount : Int64? = nil, 
+      @credit_amount : Int64? = nil, 
+      @expand : Array(String)? = nil, 
+      @lines : Array(CreditNoteLineItemParams)? = nil, 
+      @memo : String? = nil, 
+      @metadata : Hash(String, String)? = nil, 
+      @out_of_band_amount : Int64? = nil, 
+      @reason : String? = nil, 
+      @refund : String? = nil, 
       @refund_amount : Int64? = nil
     )
     end

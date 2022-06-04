@@ -247,9 +247,9 @@ module Stripe
       {
         "DefaultApi.post_files" => [
           {
-            "url"         => "https://files.stripe.com/",
-            "description" => "No description provided",
-          },
+          "url" => "https://files.stripe.com/",
+          "description" => "No description provided",
+          }
         ],
       }
     end

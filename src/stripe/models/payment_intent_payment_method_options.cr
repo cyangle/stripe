@@ -12,11 +12,12 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentIntentPaymentMethodOptions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+
 
     # Optional properties
 
@@ -185,34 +186,34 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @acss_debit : PaymentIntentPaymentMethodOptionsAcssDebit1? = nil,
-      @affirm : PaymentIntentPaymentMethodOptionsAffirm? = nil,
-      @afterpay_clearpay : PaymentIntentPaymentMethodOptionsAfterpayClearpay? = nil,
-      @alipay : PaymentIntentPaymentMethodOptionsAlipay? = nil,
-      @au_becs_debit : PaymentIntentPaymentMethodOptionsAuBecsDebit1? = nil,
-      @bacs_debit : PaymentIntentPaymentMethodOptionsBacsDebit? = nil,
-      @bancontact : PaymentIntentPaymentMethodOptionsBancontact? = nil,
-      @boleto : PaymentIntentPaymentMethodOptionsBoleto? = nil,
-      @card : PaymentIntentPaymentMethodOptionsCard1? = nil,
-      @card_present2 : PaymentIntentPaymentMethodOptionsCardPresent? = nil,
-      @customer_balance : PaymentIntentPaymentMethodOptionsCustomerBalance? = nil,
-      @eps : PaymentIntentPaymentMethodOptionsEps1? = nil,
-      @fpx : PaymentIntentPaymentMethodOptionsFpx? = nil,
-      @giropay : PaymentIntentPaymentMethodOptionsGiropay? = nil,
-      @grabpay : PaymentIntentPaymentMethodOptionsGrabpay? = nil,
-      @ideal : PaymentIntentPaymentMethodOptionsIdeal? = nil,
-      @interac_present : PaymentIntentPaymentMethodOptionsInteracPresent? = nil,
-      @klarna : PaymentIntentPaymentMethodOptionsKlarna? = nil,
-      @konbini : PaymentIntentPaymentMethodOptionsKonbini? = nil,
-      @link : PaymentIntentPaymentMethodOptionsLink1? = nil,
-      @oxxo : PaymentIntentPaymentMethodOptionsOxxo? = nil,
-      @p24 : PaymentIntentPaymentMethodOptionsP24? = nil,
-      @paynow : PaymentIntentPaymentMethodOptionsPaynow? = nil,
-      @sepa_debit : PaymentIntentPaymentMethodOptionsSepaDebit1? = nil,
-      @sofort : PaymentIntentPaymentMethodOptionsSofort? = nil,
-      @us_bank_account : PaymentIntentPaymentMethodOptionsUsBankAccount1? = nil,
+      @acss_debit : PaymentIntentPaymentMethodOptionsAcssDebit1? = nil, 
+      @affirm : PaymentIntentPaymentMethodOptionsAffirm? = nil, 
+      @afterpay_clearpay : PaymentIntentPaymentMethodOptionsAfterpayClearpay? = nil, 
+      @alipay : PaymentIntentPaymentMethodOptionsAlipay? = nil, 
+      @au_becs_debit : PaymentIntentPaymentMethodOptionsAuBecsDebit1? = nil, 
+      @bacs_debit : PaymentIntentPaymentMethodOptionsBacsDebit? = nil, 
+      @bancontact : PaymentIntentPaymentMethodOptionsBancontact? = nil, 
+      @boleto : PaymentIntentPaymentMethodOptionsBoleto? = nil, 
+      @card : PaymentIntentPaymentMethodOptionsCard1? = nil, 
+      @card_present2 : PaymentIntentPaymentMethodOptionsCardPresent? = nil, 
+      @customer_balance : PaymentIntentPaymentMethodOptionsCustomerBalance? = nil, 
+      @eps : PaymentIntentPaymentMethodOptionsEps1? = nil, 
+      @fpx : PaymentIntentPaymentMethodOptionsFpx? = nil, 
+      @giropay : PaymentIntentPaymentMethodOptionsGiropay? = nil, 
+      @grabpay : PaymentIntentPaymentMethodOptionsGrabpay? = nil, 
+      @ideal : PaymentIntentPaymentMethodOptionsIdeal? = nil, 
+      @interac_present : PaymentIntentPaymentMethodOptionsInteracPresent? = nil, 
+      @klarna : PaymentIntentPaymentMethodOptionsKlarna? = nil, 
+      @konbini : PaymentIntentPaymentMethodOptionsKonbini? = nil, 
+      @link : PaymentIntentPaymentMethodOptionsLink1? = nil, 
+      @oxxo : PaymentIntentPaymentMethodOptionsOxxo? = nil, 
+      @p24 : PaymentIntentPaymentMethodOptionsP24? = nil, 
+      @paynow : PaymentIntentPaymentMethodOptionsPaynow? = nil, 
+      @sepa_debit : PaymentIntentPaymentMethodOptionsSepaDebit1? = nil, 
+      @sofort : PaymentIntentPaymentMethodOptionsSofort? = nil, 
+      @us_bank_account : PaymentIntentPaymentMethodOptionsUsBankAccount1? = nil, 
       @wechat_pay : PaymentIntentPaymentMethodOptionsWechatPay? = nil
     )
     end
@@ -228,6 +229,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

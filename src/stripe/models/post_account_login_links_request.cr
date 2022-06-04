@@ -41,11 +41,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @account : String,
+      @account : String, 
       # Optional properties
-      @expand : Array(String)? = nil,
+      @expand : Array(String)? = nil, 
       @redirect_url : String? = nil
     )
     end

@@ -51,13 +51,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @address : CreateLocationAddressParam,
-      @display_name : String,
+      @address : CreateLocationAddressParam, 
+      @display_name : String, 
       # Optional properties
-      @configuration_overrides : String? = nil,
-      @expand : Array(String)? = nil,
+      @configuration_overrides : String? = nil, 
+      @expand : Array(String)? = nil, 
       @metadata : PostAccountRequestMetadata? = nil
     )
     end

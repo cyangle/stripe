@@ -13,61 +13,6 @@ require "log"
 
 module Stripe
   # Email address that the receipt for the resulting payment will be sent to. If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
-  @[JSON::Serializable::Options(emit_nulls: true)]
-  class PostPaymentIntentsIntentRequestReceiptEmail
-    include JSON::Serializable
-    include JSON::Serializable::Unmapped
+  alias PostPaymentIntentsIntentRequestReceiptEmail = BusinessProfileSpecsSupportUrlOneOf | String
 
-    # List of class defined in anyOf (OpenAPI v3)
-    def self.openapi_any_of
-      [
-        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
-        String,
-      ]
-    end
-
-    # Initializes the object
-    # @param [Hash] attributes Model attributes in the form of hash
-    def initialize
-    end
-
-    # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properties with the reasons
-    def list_invalid_properties
-      invalid_properties = Array(String).new
-
-      invalid_properties
-    end
-
-    # Check to see if the all the properties in the model are valid
-    # @return true if the model is valid
-    def valid?
-      _any_of_found = false
-      json_string : String = self.to_json
-      _any_of_found = self.class.openapi_any_of.any? do |_class|
-        _any_of = begin
-          _class.from_json(json_string)
-        rescue
-          nil
-        end
-
-        !_any_of.nil? && _any_of.not_nil!.valid?
-      end
-      return false if !_any_of_found
-
-      true
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
-    end
-
-    # Generates #hash and #== methods from all fields
-    # #== @return [Bool]
-    # #hash calculates hash code according to all attributes.
-    # #hash @return [UInt64] Hash code
-    def_equals_and_hash()
-  end
 end

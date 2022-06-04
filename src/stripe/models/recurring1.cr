@@ -52,12 +52,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @interval : String,
+      @interval : String, 
       # Optional properties
-      @aggregate_usage : String? = nil,
-      @interval_count : Int64? = nil,
+      @aggregate_usage : String? = nil, 
+      @interval_count : Int64? = nil, 
       @usage_type : String? = nil
     )
     end

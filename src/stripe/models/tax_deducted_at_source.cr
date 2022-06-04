@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class TaxDeductedAtSource
     include JSON::Serializable
@@ -45,12 +45,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @id : String,
-      @object : String,
-      @period_end : Int64,
-      @period_start : Int64,
+      @id : String, 
+      @object : String, 
+      @period_end : Int64, 
+      @period_start : Int64, 
       @tax_deduction_account_number : String
     )
     end

@@ -12,11 +12,12 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class DisputeEvidence
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+
 
     # Optional properties
 
@@ -203,34 +204,34 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @access_activity_log : String? = nil,
-      @billing_address : String? = nil,
-      @cancellation_policy : DisputeEvidenceCancellationPolicy? = nil,
-      @cancellation_policy_disclosure : String? = nil,
-      @cancellation_rebuttal : String? = nil,
-      @customer_communication : DisputeEvidenceCustomerCommunication? = nil,
-      @customer_email_address : String? = nil,
-      @customer_name : String? = nil,
-      @customer_purchase_ip : String? = nil,
-      @customer_signature : DisputeEvidenceCustomerSignature? = nil,
-      @duplicate_charge_documentation : DisputeEvidenceDuplicateChargeDocumentation? = nil,
-      @duplicate_charge_explanation : String? = nil,
-      @duplicate_charge_id : String? = nil,
-      @product_description : String? = nil,
-      @receipt : DisputeEvidenceReceipt? = nil,
-      @refund_policy : DisputeEvidenceRefundPolicy? = nil,
-      @refund_policy_disclosure : String? = nil,
-      @refund_refusal_explanation : String? = nil,
-      @service_date : String? = nil,
-      @service_documentation : DisputeEvidenceServiceDocumentation? = nil,
-      @shipping_address : String? = nil,
-      @shipping_carrier : String? = nil,
-      @shipping_date : String? = nil,
-      @shipping_documentation : DisputeEvidenceShippingDocumentation? = nil,
-      @shipping_tracking_number : String? = nil,
-      @uncategorized_file : DisputeEvidenceUncategorizedFile? = nil,
+      @access_activity_log : String? = nil, 
+      @billing_address : String? = nil, 
+      @cancellation_policy : DisputeEvidenceCancellationPolicy? = nil, 
+      @cancellation_policy_disclosure : String? = nil, 
+      @cancellation_rebuttal : String? = nil, 
+      @customer_communication : DisputeEvidenceCustomerCommunication? = nil, 
+      @customer_email_address : String? = nil, 
+      @customer_name : String? = nil, 
+      @customer_purchase_ip : String? = nil, 
+      @customer_signature : DisputeEvidenceCustomerSignature? = nil, 
+      @duplicate_charge_documentation : DisputeEvidenceDuplicateChargeDocumentation? = nil, 
+      @duplicate_charge_explanation : String? = nil, 
+      @duplicate_charge_id : String? = nil, 
+      @product_description : String? = nil, 
+      @receipt : DisputeEvidenceReceipt? = nil, 
+      @refund_policy : DisputeEvidenceRefundPolicy? = nil, 
+      @refund_policy_disclosure : String? = nil, 
+      @refund_refusal_explanation : String? = nil, 
+      @service_date : String? = nil, 
+      @service_documentation : DisputeEvidenceServiceDocumentation? = nil, 
+      @shipping_address : String? = nil, 
+      @shipping_carrier : String? = nil, 
+      @shipping_date : String? = nil, 
+      @shipping_documentation : DisputeEvidenceShippingDocumentation? = nil, 
+      @shipping_tracking_number : String? = nil, 
+      @uncategorized_file : DisputeEvidenceUncategorizedFile? = nil, 
       @uncategorized_text : String? = nil
     )
     end

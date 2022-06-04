@@ -12,11 +12,12 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SourceOwner
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+
 
     # Optional properties
 
@@ -77,15 +78,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @address : SourceOwnerAddress? = nil,
-      @email : String? = nil,
-      @name : String? = nil,
-      @phone : String? = nil,
-      @verified_address : SourceOwnerVerifiedAddress? = nil,
-      @verified_email : String? = nil,
-      @verified_name : String? = nil,
+      @address : SourceOwnerAddress? = nil, 
+      @email : String? = nil, 
+      @name : String? = nil, 
+      @phone : String? = nil, 
+      @verified_address : SourceOwnerVerifiedAddress? = nil, 
+      @verified_email : String? = nil, 
+      @verified_name : String? = nil, 
       @verified_phone : String? = nil
     )
     end

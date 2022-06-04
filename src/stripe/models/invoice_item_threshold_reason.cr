@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class InvoiceItemThresholdReason
     include JSON::Serializable
@@ -31,9 +31,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @line_item_ids : Array(String),
+      @line_item_ids : Array(String), 
       @usage_gte : Int64
     )
     end
@@ -49,6 +49,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "address", type: AddressSpecs?, presence: true, ignore_serialize: address.nil? && !address_present?)]
@@ -127,24 +128,24 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @address : AddressSpecs? = nil,
-      @address_kana : JapanAddressKanaSpecs? = nil,
-      @address_kanji : JapanAddressKanjiSpecs? = nil,
-      @directors_provided : Bool? = nil,
-      @executives_provided : Bool? = nil,
-      @name : String? = nil,
-      @name_kana : String? = nil,
-      @name_kanji : String? = nil,
-      @owners_provided : Bool? = nil,
-      @ownership_declaration : CompanyOwnershipDeclaration? = nil,
-      @phone : String? = nil,
-      @registration_number : String? = nil,
-      @structure : String? = nil,
-      @tax_id : String? = nil,
-      @tax_id_registrar : String? = nil,
-      @vat_id : String? = nil,
+      @address : AddressSpecs? = nil, 
+      @address_kana : JapanAddressKanaSpecs? = nil, 
+      @address_kanji : JapanAddressKanjiSpecs? = nil, 
+      @directors_provided : Bool? = nil, 
+      @executives_provided : Bool? = nil, 
+      @name : String? = nil, 
+      @name_kana : String? = nil, 
+      @name_kanji : String? = nil, 
+      @owners_provided : Bool? = nil, 
+      @ownership_declaration : CompanyOwnershipDeclaration? = nil, 
+      @phone : String? = nil, 
+      @registration_number : String? = nil, 
+      @structure : String? = nil, 
+      @tax_id : String? = nil, 
+      @tax_id_registrar : String? = nil, 
+      @vat_id : String? = nil, 
       @verification : VerificationSpecs? = nil
     )
     end

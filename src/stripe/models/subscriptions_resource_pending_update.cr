@@ -57,13 +57,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @expires_at : Int64,
+      @expires_at : Int64, 
       # Optional properties
-      @billing_cycle_anchor : Int64? = nil,
-      @subscription_items : Array(SubscriptionItem)? = nil,
-      @trial_end : Int64? = nil,
+      @billing_cycle_anchor : Int64? = nil, 
+      @subscription_items : Array(SubscriptionItem)? = nil, 
+      @trial_end : Int64? = nil, 
       @trial_from_plan : Bool? = nil
     )
     end
@@ -79,6 +79,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

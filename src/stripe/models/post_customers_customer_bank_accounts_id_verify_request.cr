@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
@@ -36,9 +37,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @amounts : Array(Int64)? = nil,
+      @amounts : Array(Int64)? = nil, 
       @expand : Array(String)? = nil
     )
     end
@@ -54,6 +55,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

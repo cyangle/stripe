@@ -104,24 +104,24 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @active_features : Array(String),
-      @balance : AccountServiceResourceBalance,
-      @country : String,
-      @created : Int64,
-      @financial_addresses : Array(AccountServiceResourceFinancialAddress),
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @pending_features : Array(String),
-      @restricted_features : Array(String),
-      @status : String,
-      @status_details : AccountServiceResourceTreasuryStatusDetails,
-      @supported_currencies : Array(String),
+      @active_features : Array(String), 
+      @balance : AccountServiceResourceBalance, 
+      @country : String, 
+      @created : Int64, 
+      @financial_addresses : Array(AccountServiceResourceFinancialAddress), 
+      @id : String, 
+      @livemode : Bool, 
+      @object : String, 
+      @pending_features : Array(String), 
+      @restricted_features : Array(String), 
+      @status : String, 
+      @status_details : AccountServiceResourceTreasuryStatusDetails, 
+      @supported_currencies : Array(String), 
       # Optional properties
-      @features : TreasuryFinancialAccountFeatures? = nil,
-      @metadata : Hash(String, String)? = nil,
+      @features : TreasuryFinancialAccountFeatures? = nil, 
+      @metadata : Hash(String, String)? = nil, 
       @platform_restrictions : TreasuryFinancialAccountPlatformRestrictions? = nil
     )
     end

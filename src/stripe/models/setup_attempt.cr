@@ -84,21 +84,21 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @created : Int64,
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @payment_method : SetupAttemptPaymentMethod,
-      @payment_method_details : SetupAttemptPaymentMethodDetails,
-      @setup_intent : SetupAttemptSetupIntent,
-      @status : String,
-      @usage : String,
+      @created : Int64, 
+      @id : String, 
+      @livemode : Bool, 
+      @object : String, 
+      @payment_method : SetupAttemptPaymentMethod, 
+      @payment_method_details : SetupAttemptPaymentMethodDetails, 
+      @setup_intent : SetupAttemptSetupIntent, 
+      @status : String, 
+      @usage : String, 
       # Optional properties
-      @application : SetupAttemptApplication? = nil,
-      @customer : SetupAttemptCustomer? = nil,
-      @on_behalf_of : SetupAttemptOnBehalfOf? = nil,
+      @application : SetupAttemptApplication? = nil, 
+      @customer : SetupAttemptCustomer? = nil, 
+      @on_behalf_of : SetupAttemptOnBehalfOf? = nil, 
       @setup_error : SetupAttemptSetupError? = nil
     )
     end

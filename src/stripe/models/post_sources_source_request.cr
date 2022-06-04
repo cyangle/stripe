@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # Amount associated with the source.
@@ -60,13 +61,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @amount : Int64? = nil,
-      @expand : Array(String)? = nil,
-      @mandate : MandateParams? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @owner : Owner1? = nil,
+      @amount : Int64? = nil, 
+      @expand : Array(String)? = nil, 
+      @mandate : MandateParams? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @owner : Owner1? = nil, 
       @source_order : OrderParams? = nil
     )
     end
@@ -82,6 +83,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

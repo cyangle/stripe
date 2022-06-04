@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     # An optional description of what the webhook is used for.
@@ -65,13 +66,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @description : String? = nil,
-      @disabled : Bool? = nil,
-      @enabled_events : Array(String)? = nil,
-      @expand : Array(String)? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
+      @description : String? = nil, 
+      @disabled : Bool? = nil, 
+      @enabled_events : Array(String)? = nil, 
+      @expand : Array(String)? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
       @url : String? = nil
     )
     end

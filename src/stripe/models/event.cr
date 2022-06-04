@@ -74,18 +74,18 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @created : Int64,
-      @data : NotificationEventData,
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @pending_webhooks : Int64,
-      @_type : String,
+      @created : Int64, 
+      @data : NotificationEventData, 
+      @id : String, 
+      @livemode : Bool, 
+      @object : String, 
+      @pending_webhooks : Int64, 
+      @_type : String, 
       # Optional properties
-      @account : String? = nil,
-      @api_version : String? = nil,
+      @account : String? = nil, 
+      @api_version : String? = nil, 
       @request : EventRequest? = nil
     )
     end

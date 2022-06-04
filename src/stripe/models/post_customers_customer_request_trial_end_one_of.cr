@@ -12,9 +12,9 @@ require "time"
 require "log"
 
 module Stripe
-  class BusinessProfileSpecsSupportUrlAnyOf
-    EMPTY = ""
-
+  class PostCustomersCustomerRequestTrialEndOneOf
+    NOW = "now"
+   
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
@@ -27,10 +27,10 @@ module Stripe
     # @return [String] The enum value
     def build_from_hash(value)
       case value
-      when ""
-        EMPTY
+      when "now"
+        NOW
       else
-        raise "Invalid ENUM value #{value} for class #BusinessProfileSpecsSupportUrlAnyOf"
+        raise "Invalid ENUM value #{value} for class #PostCustomersCustomerRequestTrialEndOneOf"
       end
     end
   end

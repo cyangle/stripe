@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "application_fee_amount", type: PostQuotesRequestApplicationFeeAmount?, presence: true, ignore_serialize: application_fee_amount.nil? && !application_fee_amount_present?)]
@@ -141,25 +142,25 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @application_fee_amount : PostQuotesRequestApplicationFeeAmount? = nil,
-      @application_fee_percent : PostQuotesRequestApplicationFeePercent? = nil,
-      @automatic_tax : AutomaticTaxParam2? = nil,
-      @collection_method : String? = nil,
-      @customer : String? = nil,
-      @default_tax_rates : PostQuotesRequestDefaultTaxRates? = nil,
-      @description : String? = nil,
-      @discounts : PostQuotesRequestDiscounts? = nil,
-      @expand : Array(String)? = nil,
-      @expires_at : Int64? = nil,
-      @footer : String? = nil,
-      @header : String? = nil,
-      @invoice_settings : QuoteParam? = nil,
-      @line_items : Array(LineItemUpdateParams)? = nil,
-      @metadata : Hash(String, String)? = nil,
-      @on_behalf_of : PostQuotesRequestOnBehalfOf? = nil,
-      @subscription_data : SubscriptionDataUpdateParams? = nil,
+      @application_fee_amount : PostQuotesRequestApplicationFeeAmount? = nil, 
+      @application_fee_percent : PostQuotesRequestApplicationFeePercent? = nil, 
+      @automatic_tax : AutomaticTaxParam2? = nil, 
+      @collection_method : String? = nil, 
+      @customer : String? = nil, 
+      @default_tax_rates : PostQuotesRequestDefaultTaxRates? = nil, 
+      @description : String? = nil, 
+      @discounts : PostQuotesRequestDiscounts? = nil, 
+      @expand : Array(String)? = nil, 
+      @expires_at : Int64? = nil, 
+      @footer : String? = nil, 
+      @header : String? = nil, 
+      @invoice_settings : QuoteParam? = nil, 
+      @line_items : Array(LineItemUpdateParams)? = nil, 
+      @metadata : Hash(String, String)? = nil, 
+      @on_behalf_of : PostQuotesRequestOnBehalfOf? = nil, 
+      @subscription_data : SubscriptionDataUpdateParams? = nil, 
       @transfer_data : PostQuotesRequestTransferData? = nil
     )
     end

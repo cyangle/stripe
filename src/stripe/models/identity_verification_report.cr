@@ -77,18 +77,18 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @created : Int64,
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @options : GelatoVerificationReportOptions,
-      @_type : String,
+      @created : Int64, 
+      @id : String, 
+      @livemode : Bool, 
+      @object : String, 
+      @options : GelatoVerificationReportOptions, 
+      @_type : String, 
       # Optional properties
-      @document : GelatoDocumentReport? = nil,
-      @id_number : GelatoIdNumberReport? = nil,
-      @selfie : GelatoSelfieReport? = nil,
+      @document : GelatoDocumentReport? = nil, 
+      @id_number : GelatoIdNumberReport? = nil, 
+      @selfie : GelatoSelfieReport? = nil, 
       @verification_session : String? = nil
     )
     end

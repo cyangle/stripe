@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "address", type: AddressSpecs1?, presence: true, ignore_serialize: address.nil? && !address_present?)]
@@ -201,34 +202,34 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @address : AddressSpecs1? = nil,
-      @address_kana : JapanAddressKanaSpecs1? = nil,
-      @address_kanji : JapanAddressKanjiSpecs1? = nil,
-      @dob : PostAccountPeopleRequestDob? = nil,
-      @documents : PersonDocumentsSpecs? = nil,
-      @email : String? = nil,
-      @expand : Array(String)? = nil,
-      @first_name : String? = nil,
-      @first_name_kana : String? = nil,
-      @first_name_kanji : String? = nil,
-      @full_name_aliases : PostAccountPeopleRequestFullNameAliases? = nil,
-      @gender : String? = nil,
-      @id_number : String? = nil,
-      @id_number_secondary : String? = nil,
-      @last_name : String? = nil,
-      @last_name_kana : String? = nil,
-      @last_name_kanji : String? = nil,
-      @maiden_name : String? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @nationality : String? = nil,
-      @person_token : String? = nil,
-      @phone : String? = nil,
-      @political_exposure : String? = nil,
-      @registered_address : AddressSpecs2? = nil,
-      @relationship : RelationshipSpecs? = nil,
-      @ssn_last_4 : String? = nil,
+      @address : AddressSpecs1? = nil, 
+      @address_kana : JapanAddressKanaSpecs1? = nil, 
+      @address_kanji : JapanAddressKanjiSpecs1? = nil, 
+      @dob : PostAccountPeopleRequestDob? = nil, 
+      @documents : PersonDocumentsSpecs? = nil, 
+      @email : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @first_name : String? = nil, 
+      @first_name_kana : String? = nil, 
+      @first_name_kanji : String? = nil, 
+      @full_name_aliases : PostAccountPeopleRequestFullNameAliases? = nil, 
+      @gender : String? = nil, 
+      @id_number : String? = nil, 
+      @id_number_secondary : String? = nil, 
+      @last_name : String? = nil, 
+      @last_name_kana : String? = nil, 
+      @last_name_kanji : String? = nil, 
+      @maiden_name : String? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @nationality : String? = nil, 
+      @person_token : String? = nil, 
+      @phone : String? = nil, 
+      @political_exposure : String? = nil, 
+      @registered_address : AddressSpecs2? = nil, 
+      @relationship : RelationshipSpecs? = nil, 
+      @ssn_last_4 : String? = nil, 
       @verification : PersonVerificationSpecs1? = nil
     )
     end

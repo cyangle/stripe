@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "acss_debit", type: UpdateParams1AcssDebit?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
@@ -185,34 +186,34 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @acss_debit : UpdateParams1AcssDebit? = nil,
-      @affirm : PaymentMethodOptionsParam11Affirm? = nil,
-      @afterpay_clearpay : PaymentMethodOptionsParam11AfterpayClearpay? = nil,
-      @alipay : UpdateParams1Alipay? = nil,
-      @au_becs_debit : PaymentMethodOptionsParam11AuBecsDebit? = nil,
-      @bacs_debit : PaymentMethodOptionsParam11BacsDebit? = nil,
-      @bancontact : UpdateParams1Bancontact? = nil,
-      @boleto : PaymentMethodOptionsParam11Boleto? = nil,
-      @card : PaymentMethodOptionsParam11Card? = nil,
-      @card_present2 : PaymentMethodOptionsParam11CardPresent? = nil,
-      @customer_balance : UpdateParams1CustomerBalance? = nil,
-      @eps : PaymentMethodOptionsParam11Eps? = nil,
-      @fpx : PaymentMethodOptionsParam11Fpx? = nil,
-      @giropay : PaymentMethodOptionsParam11Fpx? = nil,
-      @grabpay : PaymentMethodOptionsParam11Fpx? = nil,
-      @ideal : UpdateParams1Alipay? = nil,
-      @interac_present : PaymentMethodOptionsParam11InteracPresent? = nil,
-      @klarna : UpdateParams1Klarna? = nil,
-      @konbini : PaymentMethodOptionsParam11Konbini? = nil,
-      @link : UpdateParams1Link? = nil,
-      @oxxo : UpdateParams1Oxxo? = nil,
-      @p24 : UpdateParams1P24? = nil,
-      @paynow : PaymentMethodOptionsParam11Fpx? = nil,
-      @sepa_debit : UpdateParams1SepaDebit? = nil,
-      @sofort : UpdateParams1Sofort? = nil,
-      @us_bank_account : PaymentMethodOptionsParam11UsBankAccount? = nil,
+      @acss_debit : UpdateParams1AcssDebit? = nil, 
+      @affirm : PaymentMethodOptionsParam11Affirm? = nil, 
+      @afterpay_clearpay : PaymentMethodOptionsParam11AfterpayClearpay? = nil, 
+      @alipay : UpdateParams1Alipay? = nil, 
+      @au_becs_debit : PaymentMethodOptionsParam11AuBecsDebit? = nil, 
+      @bacs_debit : PaymentMethodOptionsParam11BacsDebit? = nil, 
+      @bancontact : UpdateParams1Bancontact? = nil, 
+      @boleto : PaymentMethodOptionsParam11Boleto? = nil, 
+      @card : PaymentMethodOptionsParam11Card? = nil, 
+      @card_present2 : PaymentMethodOptionsParam11CardPresent? = nil, 
+      @customer_balance : UpdateParams1CustomerBalance? = nil, 
+      @eps : PaymentMethodOptionsParam11Eps? = nil, 
+      @fpx : PaymentMethodOptionsParam11Fpx? = nil, 
+      @giropay : PaymentMethodOptionsParam11Fpx? = nil, 
+      @grabpay : PaymentMethodOptionsParam11Fpx? = nil, 
+      @ideal : UpdateParams1Alipay? = nil, 
+      @interac_present : PaymentMethodOptionsParam11InteracPresent? = nil, 
+      @klarna : UpdateParams1Klarna? = nil, 
+      @konbini : PaymentMethodOptionsParam11Konbini? = nil, 
+      @link : UpdateParams1Link? = nil, 
+      @oxxo : UpdateParams1Oxxo? = nil, 
+      @p24 : UpdateParams1P24? = nil, 
+      @paynow : PaymentMethodOptionsParam11Fpx? = nil, 
+      @sepa_debit : UpdateParams1SepaDebit? = nil, 
+      @sofort : UpdateParams1Sofort? = nil, 
+      @us_bank_account : PaymentMethodOptionsParam11UsBankAccount? = nil, 
       @wechat_pay : UpdateParams1WechatPay? = nil
     )
     end
@@ -228,6 +229,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

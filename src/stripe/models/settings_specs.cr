@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "branding", type: BrandingSettingsSpecs?, presence: true, ignore_serialize: branding.nil? && !branding_present?)]
@@ -53,12 +54,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @branding : BrandingSettingsSpecs? = nil,
-      @card_issuing : CardIssuingSettingsSpecs? = nil,
-      @card_payments : CardPaymentsSettingsSpecs? = nil,
-      @payments : PaymentsSettingsSpecs? = nil,
+      @branding : BrandingSettingsSpecs? = nil, 
+      @card_issuing : CardIssuingSettingsSpecs? = nil, 
+      @card_payments : CardPaymentsSettingsSpecs? = nil, 
+      @payments : PaymentsSettingsSpecs? = nil, 
       @payouts : PayoutSettingsSpecs? = nil
     )
     end
@@ -74,6 +75,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

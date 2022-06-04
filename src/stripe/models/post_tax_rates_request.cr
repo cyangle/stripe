@@ -94,19 +94,19 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @display_name : String,
-      @inclusive : Bool,
-      @percentage : Float64,
+      @display_name : String, 
+      @inclusive : Bool, 
+      @percentage : Float64, 
       # Optional properties
-      @active : Bool? = nil,
-      @country : String? = nil,
-      @description : String? = nil,
-      @expand : Array(String)? = nil,
-      @jurisdiction : String? = nil,
-      @metadata : Hash(String, String)? = nil,
-      @state : String? = nil,
+      @active : Bool? = nil, 
+      @country : String? = nil, 
+      @description : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @jurisdiction : String? = nil, 
+      @metadata : Hash(String, String)? = nil, 
+      @state : String? = nil, 
       @tax_type : String? = nil
     )
     end

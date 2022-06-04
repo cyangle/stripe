@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "decline_on", type: DeclineChargeOnSpecs?, presence: true, ignore_serialize: decline_on.nil? && !decline_on_present?)]
@@ -34,9 +35,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @decline_on : DeclineChargeOnSpecs? = nil,
+      @decline_on : DeclineChargeOnSpecs? = nil, 
       @statement_descriptor_prefix : String? = nil
     )
     end

@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class Recurring
     include JSON::Serializable
@@ -50,11 +50,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @interval : String,
-      @interval_count : Int64,
-      @usage_type : String,
+      @interval : String, 
+      @interval_count : Int64, 
+      @usage_type : String, 
       # Optional properties
       @aggregate_usage : String? = nil
     )

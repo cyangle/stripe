@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "effective_date", type: SubscriptionDataCreateParamsEffectiveDate?, presence: true, ignore_serialize: effective_date.nil? && !effective_date_present?)]
@@ -35,9 +36,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @effective_date : SubscriptionDataCreateParamsEffectiveDate? = nil,
+      @effective_date : SubscriptionDataCreateParamsEffectiveDate? = nil, 
       @trial_period_days : UpdateParams1ApplicationFeeAmount? = nil
     )
     end
@@ -53,6 +54,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

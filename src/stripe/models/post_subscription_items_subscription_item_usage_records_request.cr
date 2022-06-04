@@ -50,12 +50,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @quantity : Int64,
+      @quantity : Int64, 
       # Optional properties
-      @action : String? = nil,
-      @expand : Array(String)? = nil,
+      @action : String? = nil, 
+      @expand : Array(String)? = nil, 
       @timestamp : PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp? = nil
     )
     end

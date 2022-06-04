@@ -73,15 +73,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @status : String,
+      @status : String, 
       # Optional properties
-      @dob : GelatoIdNumberReportDob? = nil,
-      @error : GelatoIdNumberReportError1? = nil,
-      @first_name : String? = nil,
-      @id_number : String? = nil,
-      @id_number_type : String? = nil,
+      @dob : GelatoIdNumberReportDob? = nil, 
+      @error : GelatoIdNumberReportError1? = nil, 
+      @first_name : String? = nil, 
+      @id_number : String? = nil, 
+      @id_number_type : String? = nil, 
       @last_name : String? = nil
     )
     end

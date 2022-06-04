@@ -12,9 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  class TransferScheduleSpecsDelayDaysAnyOf
-    MINIMUM = "minimum"
-
+  class GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameterOneOf
+    NOW = "now"
+  
+    UNCHANGED = "unchanged"
+   
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
@@ -27,10 +29,12 @@ module Stripe
     # @return [String] The enum value
     def build_from_hash(value)
       case value
-      when "minimum"
-        MINIMUM
+      when "now"
+        NOW
+      when "unchanged"
+        UNCHANGED
       else
-        raise "Invalid ENUM value #{value} for class #TransferScheduleSpecsDelayDaysAnyOf"
+        raise "Invalid ENUM value #{value} for class #GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameterOneOf"
       end
     end
   end

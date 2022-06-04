@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class CardGeneratedFromPaymentMethodDetails
     include JSON::Serializable
@@ -35,9 +35,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @_type : String,
+      @_type : String, 
       # Optional properties
       @card_present2 : PaymentMethodDetailsCardPresent? = nil
     )
@@ -83,6 +83,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @card_present2)
+    def_equals_and_hash(@_type, @card_present)
   end
 end

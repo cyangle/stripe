@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodDetails
     include JSON::Serializable
@@ -44,9 +44,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? acss_debit_present : Bool = false
 
-    #
-    @[JSON::Field(key: "affirm", type: JSON::Any, presence: true, ignore_serialize: affirm.nil? && !affirm_present?)]
-    property affirm : JSON::Any
+    # 
+    @[JSON::Field(key: "affirm", type: JSON::Any?, presence: true, ignore_serialize: affirm.nil? && !affirm_present?)]
+    property affirm : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? affirm_present : Bool = false
@@ -99,9 +99,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? card_present2_present : Bool = false
 
-    #
-    @[JSON::Field(key: "customer_balance", type: JSON::Any, presence: true, ignore_serialize: customer_balance.nil? && !customer_balance_present?)]
-    property customer_balance : JSON::Any
+    # 
+    @[JSON::Field(key: "customer_balance", type: JSON::Any?, presence: true, ignore_serialize: customer_balance.nil? && !customer_balance_present?)]
+    property customer_balance : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? customer_balance_present : Bool = false
@@ -154,9 +154,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? konbini_present : Bool = false
 
-    #
-    @[JSON::Field(key: "link", type: JSON::Any, presence: true, ignore_serialize: link.nil? && !link_present?)]
-    property link : JSON::Any
+    # 
+    @[JSON::Field(key: "link", type: JSON::Any?, presence: true, ignore_serialize: link.nil? && !link_present?)]
+    property link : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? link_present : Bool = false
@@ -197,9 +197,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? sofort_present : Bool = false
 
-    #
-    @[JSON::Field(key: "stripe_account", type: JSON::Any, presence: true, ignore_serialize: stripe_account.nil? && !stripe_account_present?)]
-    property stripe_account : JSON::Any
+    # 
+    @[JSON::Field(key: "stripe_account", type: JSON::Any?, presence: true, ignore_serialize: stripe_account.nil? && !stripe_account_present?)]
+    property stripe_account : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? stripe_account_present : Bool = false
@@ -210,9 +210,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? us_bank_account_present : Bool = false
 
-    #
-    @[JSON::Field(key: "wechat", type: JSON::Any, presence: true, ignore_serialize: wechat.nil? && !wechat_present?)]
-    property wechat : JSON::Any
+    # 
+    @[JSON::Field(key: "wechat", type: JSON::Any?, presence: true, ignore_serialize: wechat.nil? && !wechat_present?)]
+    property wechat : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? wechat_present : Bool = false
@@ -226,41 +226,41 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @_type : String,
+      @_type : String, 
       # Optional properties
-      @ach_credit_transfer : PaymentMethodDetailsAchCreditTransfer? = nil,
-      @ach_debit : PaymentMethodDetailsAchDebit? = nil,
-      @acss_debit : PaymentMethodDetailsAcssDebit? = nil,
-      @affirm : JSON::Any = nil,
-      @afterpay_clearpay : PaymentMethodDetailsAfterpayClearpay? = nil,
-      @alipay : PaymentFlowsPrivatePaymentMethodsAlipayDetails? = nil,
-      @au_becs_debit : PaymentMethodDetailsAuBecsDebit? = nil,
-      @bacs_debit : PaymentMethodDetailsBacsDebit? = nil,
-      @bancontact : PaymentMethodDetailsBancontact? = nil,
-      @boleto : PaymentMethodDetailsBoleto? = nil,
-      @card : PaymentMethodDetailsCard? = nil,
-      @card_present2 : PaymentMethodDetailsCardPresent? = nil,
-      @customer_balance : JSON::Any = nil,
-      @eps : PaymentMethodDetailsEps? = nil,
-      @fpx : PaymentMethodDetailsFpx? = nil,
-      @giropay : PaymentMethodDetailsGiropay? = nil,
-      @grabpay : PaymentMethodDetailsGrabpay? = nil,
-      @ideal : PaymentMethodDetailsIdeal? = nil,
-      @interac_present : PaymentMethodDetailsInteracPresent? = nil,
-      @klarna : PaymentMethodDetailsKlarna? = nil,
-      @konbini : PaymentMethodDetailsKonbini? = nil,
-      @link : JSON::Any = nil,
-      @multibanco : PaymentMethodDetailsMultibanco? = nil,
-      @oxxo : PaymentMethodDetailsOxxo? = nil,
-      @p24 : PaymentMethodDetailsP24? = nil,
-      @paynow : PaymentMethodDetailsPaynow? = nil,
-      @sepa_debit : PaymentMethodDetailsSepaDebit? = nil,
-      @sofort : PaymentMethodDetailsSofort? = nil,
-      @stripe_account : JSON::Any = nil,
-      @us_bank_account : PaymentMethodDetailsUsBankAccount? = nil,
-      @wechat : JSON::Any = nil,
+      @ach_credit_transfer : PaymentMethodDetailsAchCreditTransfer? = nil, 
+      @ach_debit : PaymentMethodDetailsAchDebit? = nil, 
+      @acss_debit : PaymentMethodDetailsAcssDebit? = nil, 
+      @affirm : JSON::Any? = nil, 
+      @afterpay_clearpay : PaymentMethodDetailsAfterpayClearpay? = nil, 
+      @alipay : PaymentFlowsPrivatePaymentMethodsAlipayDetails? = nil, 
+      @au_becs_debit : PaymentMethodDetailsAuBecsDebit? = nil, 
+      @bacs_debit : PaymentMethodDetailsBacsDebit? = nil, 
+      @bancontact : PaymentMethodDetailsBancontact? = nil, 
+      @boleto : PaymentMethodDetailsBoleto? = nil, 
+      @card : PaymentMethodDetailsCard? = nil, 
+      @card_present2 : PaymentMethodDetailsCardPresent? = nil, 
+      @customer_balance : JSON::Any? = nil, 
+      @eps : PaymentMethodDetailsEps? = nil, 
+      @fpx : PaymentMethodDetailsFpx? = nil, 
+      @giropay : PaymentMethodDetailsGiropay? = nil, 
+      @grabpay : PaymentMethodDetailsGrabpay? = nil, 
+      @ideal : PaymentMethodDetailsIdeal? = nil, 
+      @interac_present : PaymentMethodDetailsInteracPresent? = nil, 
+      @klarna : PaymentMethodDetailsKlarna? = nil, 
+      @konbini : PaymentMethodDetailsKonbini? = nil, 
+      @link : JSON::Any? = nil, 
+      @multibanco : PaymentMethodDetailsMultibanco? = nil, 
+      @oxxo : PaymentMethodDetailsOxxo? = nil, 
+      @p24 : PaymentMethodDetailsP24? = nil, 
+      @paynow : PaymentMethodDetailsPaynow? = nil, 
+      @sepa_debit : PaymentMethodDetailsSepaDebit? = nil, 
+      @sofort : PaymentMethodDetailsSofort? = nil, 
+      @stripe_account : JSON::Any? = nil, 
+      @us_bank_account : PaymentMethodDetailsUsBankAccount? = nil, 
+      @wechat : JSON::Any? = nil, 
       @wechat_pay : PaymentMethodDetailsWechatPay? = nil
     )
     end

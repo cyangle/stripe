@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  #
+  # 
   @[JSON::Serializable::Options(emit_nulls: true)]
   class IssuingAuthorizationPendingRequest
     include JSON::Serializable
@@ -51,13 +51,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @amount : Int64,
-      @currency : String,
-      @is_amount_controllable : Bool,
-      @merchant_amount : Int64,
-      @merchant_currency : String,
+      @amount : Int64, 
+      @currency : String, 
+      @is_amount_controllable : Bool, 
+      @merchant_amount : Int64, 
+      @merchant_currency : String, 
       # Optional properties
       @amount_details : IssuingAuthorizationAmountDetails1? = nil
     )
@@ -74,6 +74,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+
       true
     end
 

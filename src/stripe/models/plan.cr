@@ -145,28 +145,28 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Required properties
-      @active : Bool,
-      @billing_scheme : String,
-      @created : Int64,
-      @currency : String,
-      @id : String,
-      @interval : String,
-      @interval_count : Int64,
-      @livemode : Bool,
-      @object : String,
-      @usage_type : String,
+      @active : Bool, 
+      @billing_scheme : String, 
+      @created : Int64, 
+      @currency : String, 
+      @id : String, 
+      @interval : String, 
+      @interval_count : Int64, 
+      @livemode : Bool, 
+      @object : String, 
+      @usage_type : String, 
       # Optional properties
-      @aggregate_usage : String? = nil,
-      @amount : Int64? = nil,
-      @amount_decimal : String? = nil,
-      @metadata : Hash(String, String)? = nil,
-      @nickname : String? = nil,
-      @product : PlanProduct? = nil,
-      @tiers : Array(PlanTier)? = nil,
-      @tiers_mode : String? = nil,
-      @transform_usage : PlanTransformUsage? = nil,
+      @aggregate_usage : String? = nil, 
+      @amount : Int64? = nil, 
+      @amount_decimal : String? = nil, 
+      @metadata : Hash(String, String)? = nil, 
+      @nickname : String? = nil, 
+      @product : PlanProduct? = nil, 
+      @tiers : Array(PlanTier)? = nil, 
+      @tiers_mode : String? = nil, 
+      @transform_usage : PlanTransformUsage? = nil, 
       @trial_period_days : Int64? = nil
     )
     end

@@ -17,6 +17,7 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
+
     # Optional properties
 
     @[JSON::Field(key: "default_settings", type: DefaultSettingsParams?, presence: true, ignore_serialize: default_settings.nil? && !default_settings_present?)]
@@ -66,13 +67,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *,
+      *, 
       # Optional properties
-      @default_settings : DefaultSettingsParams? = nil,
-      @end_behavior : String? = nil,
-      @expand : Array(String)? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
-      @phases : Array(PhaseConfigurationParams1)? = nil,
+      @default_settings : DefaultSettingsParams? = nil, 
+      @end_behavior : String? = nil, 
+      @expand : Array(String)? = nil, 
+      @metadata : PostAccountRequestMetadata? = nil, 
+      @phases : Array(PhaseConfigurationParams1)? = nil, 
       @proration_behavior : String? = nil
     )
     end
