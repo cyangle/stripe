@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The list of events to enable for this endpoint. You may specify `['*']` to enable all events, except those that require explicit selection.
     @[JSON::Field(key: "enabled_events", type: Array(String))]
     getter enabled_events : Array(String)
@@ -29,6 +30,7 @@ module Stripe
     property url : String
 
     # Optional properties
+
     # Events sent to this endpoint will be generated with this Stripe Version instead of your account's default Stripe Version.
     @[JSON::Field(key: "api_version", type: String?, presence: true, ignore_serialize: api_version.nil? && !api_version_present?)]
     getter api_version : String?
@@ -52,27 +54,42 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? expand_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @enabled_events : Array(String), @url : String, @api_version : String? = nil, @connect : Bool? = nil, @description : String? = nil, @expand : Array(String)? = nil, @metadata : IndividualSpecsMetadata? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @enabled_events : Array(String),
+      @url : String,
+      # Optional properties
+      @api_version : String? = nil,
+      @connect : Bool? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_ENABLED_EVENTS.error_message) unless ENUM_VALIDATOR_FOR_ENABLED_EVENTS.all_valid?(@enabled_events, false)
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_API_VERSION.error_message) unless ENUM_VALIDATOR_FOR_API_VERSION.valid?(@api_version)
 
       if !@api_version.nil? && @api_version.to_s.size > 5000
@@ -83,19 +100,25 @@ module Stripe
         invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ENABLED_EVENTS.error_message) unless ENUM_VALIDATOR_FOR_ENABLED_EVENTS.all_valid?(@enabled_events, false)
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false unless ENUM_VALIDATOR_FOR_ENABLED_EVENTS.all_valid?(@enabled_events, false)
       return false unless ENUM_VALIDATOR_FOR_API_VERSION.valid?(@api_version)
       return false if !@api_version.nil? && @api_version.to_s.size > 5000
       return false if !@description.nil? && @description.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_ENABLED_EVENTS.all_valid?(@enabled_events, false)
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] enabled_events Object to be assigned
+    def enabled_events=(enabled_events)
+      ENUM_VALIDATOR_FOR_ENABLED_EVENTS.all_valid!(enabled_events, false)
+      @enabled_events = enabled_events
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -115,35 +138,16 @@ module Stripe
       @description = description
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] enabled_events Object to be assigned
-    def enabled_events=(enabled_events)
-      ENUM_VALIDATOR_FOR_ENABLED_EVENTS.all_valid!(enabled_events, false)
-      @enabled_events = enabled_events
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        api_version == o.api_version &&
-        connect == o.connect &&
-        description == o.description &&
-        enabled_events == o.enabled_events &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        url == o.url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@api_version, @connect, @description, @enabled_events, @expand, @metadata, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@enabled_events, @url, @api_version, @connect, @description, @expand, @metadata)
   end
 end

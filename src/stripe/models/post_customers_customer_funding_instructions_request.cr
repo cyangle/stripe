@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "bank_transfer", type: BankTransferParams)]
     property bank_transfer : BankTransferParams
 
@@ -32,6 +33,8 @@ module Stripe
     ENUM_VALIDATOR_FOR_FUNDING_TYPE = EnumValidator.new("funding_type", "String", ["bank_transfer"])
 
     # Optional properties
+
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -40,7 +43,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bank_transfer : BankTransferParams, @currency : String, @funding_type : String, @expand : Array(String)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @bank_transfer : BankTransferParams,
+      @currency : String,
+      @funding_type : String,
+      # Optional properties
+      @expand : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -57,6 +68,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_FUNDING_TYPE.valid?(@funding_type, false)
+
       true
     end
 
@@ -67,25 +79,16 @@ module Stripe
       @funding_type = funding_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bank_transfer == o.bank_transfer &&
-        currency == o.currency &&
-        expand == o.expand &&
-        funding_type == o.funding_type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bank_transfer, @currency, @expand, @funding_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bank_transfer, @currency, @funding_type, @expand)
   end
 end

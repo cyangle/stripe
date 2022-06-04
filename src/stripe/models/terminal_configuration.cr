@@ -19,16 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
     getter id : String
-
-    # Whether this Configuration is the default for your account
-    @[JSON::Field(key: "is_account_default", type: Bool?, presence: true, ignore_serialize: is_account_default.nil? && !is_account_default_present?)]
-    property is_account_default : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? is_account_default_present : Bool = false
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool)]
@@ -41,11 +35,19 @@ module Stripe
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["terminal.configuration"])
 
     # Optional properties
+
     @[JSON::Field(key: "bbpos_wisepos_e", type: TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig?, presence: true, ignore_serialize: bbpos_wisepos_e.nil? && !bbpos_wisepos_e_present?)]
     property bbpos_wisepos_e : TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig?
 
     @[JSON::Field(ignore: true)]
     property? bbpos_wisepos_e_present : Bool = false
+
+    # Whether this Configuration is the default for your account
+    @[JSON::Field(key: "is_account_default", type: Bool?, presence: true, ignore_serialize: is_account_default.nil? && !is_account_default_present?)]
+    property is_account_default : Bool?
+
+    @[JSON::Field(ignore: true)]
+    property? is_account_default_present : Bool = false
 
     @[JSON::Field(key: "tipping", type: TerminalConfigurationConfigurationResourceTipping?, presence: true, ignore_serialize: tipping.nil? && !tipping_present?)]
     property tipping : TerminalConfigurationConfigurationResourceTipping?
@@ -61,7 +63,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @id : String, @is_account_default : Bool?, @livemode : Bool, @object : String, @bbpos_wisepos_e : TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig? = nil, @tipping : TerminalConfigurationConfigurationResourceTipping? = nil, @verifone_p400 : TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      # Optional properties
+      @bbpos_wisepos_e : TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig? = nil,
+      @is_account_default : Bool? = nil,
+      @tipping : TerminalConfigurationConfigurationResourceTipping? = nil,
+      @verifone_p400 : TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -83,6 +96,7 @@ module Stripe
     def valid?
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
       true
     end
 
@@ -103,28 +117,16 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bbpos_wisepos_e == o.bbpos_wisepos_e &&
-        id == o.id &&
-        is_account_default == o.is_account_default &&
-        livemode == o.livemode &&
-        object == o.object &&
-        tipping == o.tipping &&
-        verifone_p400 == o.verifone_p400
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bbpos_wisepos_e, @id, @is_account_default, @livemode, @object, @tipping, @verifone_p400)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@id, @livemode, @object, @bbpos_wisepos_e, @is_account_default, @tipping, @verifone_p400)
   end
 end

@@ -18,14 +18,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The ID of the Stripe account whose accounts will be retrieved.
+
     @[JSON::Field(key: "account", type: String?, presence: true, ignore_serialize: account.nil? && !account_present?)]
     getter account : String?
 
     @[JSON::Field(ignore: true)]
     property? account_present : Bool = false
 
-    # The ID of the Stripe customer whose accounts will be retrieved.
     @[JSON::Field(key: "customer", type: String?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
     getter customer : String?
 
@@ -34,7 +33,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account : String? = nil, @customer : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @account : String? = nil,
+      @customer : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -58,6 +62,7 @@ module Stripe
     def valid?
       return false if !@account.nil? && @account.to_s.size > 5000
       return false if !@customer.nil? && @customer.to_s.size > 5000
+
       true
     end
 
@@ -81,23 +86,16 @@ module Stripe
       @customer = customer
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account == o.account &&
-        customer == o.customer
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account, @customer)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account, @customer)
   end
 end

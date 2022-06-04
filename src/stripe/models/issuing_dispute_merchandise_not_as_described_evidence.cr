@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     @[JSON::Field(key: "additional_documentation", type: IssuingDisputeCanceledEvidenceAdditionalDocumentation?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
     property additional_documentation : IssuingDisputeCanceledEvidenceAdditionalDocumentation?
 
@@ -53,7 +54,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? return_status_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_RETURN_STATUS = EnumValidator.new("return_status", "String", ["merchant_rejected", "successful", "null"])
+    ENUM_VALIDATOR_FOR_RETURN_STATUS = EnumValidator.new("return_status", "String", ["merchant_rejected", "successful"])
 
     # Date when the product was returned or attempted to be returned.
     @[JSON::Field(key: "returned_at", type: Int64?, presence: true, ignore_serialize: returned_at.nil? && !returned_at_present?)]
@@ -64,7 +65,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @additional_documentation : IssuingDisputeCanceledEvidenceAdditionalDocumentation?, @explanation : String?, @received_at : Int64?, @return_description : String?, @return_status : String?, @returned_at : Int64?)
+    def initialize(
+      *,
+      # Optional properties
+      @additional_documentation : IssuingDisputeCanceledEvidenceAdditionalDocumentation? = nil,
+      @explanation : String? = nil,
+      @received_at : Int64? = nil,
+      @return_description : String? = nil,
+      @return_status : String? = nil,
+      @returned_at : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -72,11 +82,11 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @explanation.to_s.size > 5000
+      if !@explanation.nil? && @explanation.to_s.size > 5000
         invalid_properties.push("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @return_description.to_s.size > 5000
+      if !@return_description.nil? && @return_description.to_s.size > 5000
         invalid_properties.push("invalid value for \"return_description\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -88,16 +98,17 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @explanation.to_s.size > 5000
-      return false if @return_description.to_s.size > 5000
+      return false if !@explanation.nil? && @explanation.to_s.size > 5000
+      return false if !@return_description.nil? && @return_description.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] explanation Value to be assigned
     def explanation=(explanation)
-      if explanation.to_s.size > 5000
+      if !explanation.nil? && explanation.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -107,7 +118,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] return_description Value to be assigned
     def return_description=(return_description)
-      if return_description.to_s.size > 5000
+      if !return_description.nil? && return_description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"return_description\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -121,27 +132,16 @@ module Stripe
       @return_status = return_status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        additional_documentation == o.additional_documentation &&
-        explanation == o.explanation &&
-        received_at == o.received_at &&
-        return_description == o.return_description &&
-        return_status == o.return_status &&
-        returned_at == o.returned_at
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@additional_documentation, @explanation, @received_at, @return_description, @return_status, @returned_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@additional_documentation, @explanation, @received_at, @return_description, @return_status, @returned_at)
   end
 end

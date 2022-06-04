@@ -23,10 +23,16 @@ describe Stripe::PaymentMethodOptionsParam8 do
   describe "test attribute 'setup_future_usage'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["", "none", "off_session"])
+      # validator = EnumValidator.new("String", ["none"])
       # validator.allowable_values.each do |value|
       #   expect { instance.setup_future_usage = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe "test attribute 'tos_shown_and_accepted'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 end

@@ -19,13 +19,18 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Whether the company's business ID number was provided.
     @[JSON::Field(key: "tax_id_provided", type: Bool)]
     property tax_id_provided : Bool
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @tax_id_provided : Bool)
+    def initialize(
+      *,
+      # Required properties
+      @tax_id_provided : Bool
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -42,22 +47,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        tax_id_provided == o.tax_id_provided
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@tax_id_provided)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@tax_id_provided)
   end
 end

@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Whether the cardholder provided an address first line and if it matched the cardholder’s `billing.address.line1`.
     @[JSON::Field(key: "address_line1_check", type: String)]
     getter address_line1_check : String
@@ -45,13 +46,21 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address_line1_check : String, @address_postal_code_check : String, @cvc_check : String, @expiry_check : String)
+    def initialize(
+      *,
+      # Required properties
+      @address_line1_check : String,
+      @address_postal_code_check : String,
+      @cvc_check : String,
+      @expiry_check : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK.error_message) unless ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK.valid?(@address_line1_check, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK.error_message) unless ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK.valid?(@address_postal_code_check, false)
@@ -70,6 +79,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK.valid?(@address_postal_code_check, false)
       return false unless ENUM_VALIDATOR_FOR_CVC_CHECK.valid?(@cvc_check, false)
       return false unless ENUM_VALIDATOR_FOR_EXPIRY_CHECK.valid?(@expiry_check, false)
+
       true
     end
 
@@ -101,25 +111,16 @@ module Stripe
       @expiry_check = expiry_check
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address_line1_check == o.address_line1_check &&
-        address_postal_code_check == o.address_postal_code_check &&
-        cvc_check == o.cvc_check &&
-        expiry_check == o.expiry_check
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address_line1_check, @address_postal_code_check, @cvc_check, @expiry_check)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address_line1_check, @address_postal_code_check, @cvc_check, @expiry_check)
   end
 end

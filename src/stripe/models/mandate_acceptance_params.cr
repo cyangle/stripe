@@ -12,28 +12,26 @@ require "time"
 require "log"
 
 module Stripe
-  # The parameters required to notify Stripe of a mandate acceptance or refusal by the customer.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class MandateAcceptanceParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The status of the mandate acceptance. Either `accepted` (the mandate was accepted) or `refused` (the mandate was refused).
+
     @[JSON::Field(key: "status", type: String)]
     getter status : String
 
     ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["accepted", "pending", "refused", "revoked"])
 
     # Optional properties
-    # The Unix timestamp (in seconds) when the mandate was accepted or refused by the customer.
+
     @[JSON::Field(key: "date", type: Int64?, presence: true, ignore_serialize: date.nil? && !date_present?)]
     property date : Int64?
 
     @[JSON::Field(ignore: true)]
     property? date_present : Bool = false
 
-    # The IP address from which the mandate was accepted or refused by the customer.
     @[JSON::Field(key: "ip", type: String?, presence: true, ignore_serialize: ip.nil? && !ip_present?)]
     property ip : String?
 
@@ -52,7 +50,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? online_present : Bool = false
 
-    # The type of acceptance information included with the mandate. Either `online` or `offline`
     @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
     getter _type : String?
 
@@ -61,7 +58,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["offline", "online"])
 
-    # The user agent of the browser from which the mandate was accepted or refused by the customer.
     @[JSON::Field(key: "user_agent", type: String?, presence: true, ignore_serialize: user_agent.nil? && !user_agent_present?)]
     getter user_agent : String?
 
@@ -70,7 +66,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @status : String, @date : Int64? = nil, @ip : String? = nil, @offline : MandateOfflineAcceptanceParams? = nil, @online : MandateOnlineAcceptanceParams? = nil, @_type : String? = nil, @user_agent : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @status : String,
+      # Optional properties
+      @date : Int64? = nil,
+      @ip : String? = nil,
+      @offline : MandateOfflineAcceptanceParams? = nil,
+      @online : MandateOnlineAcceptanceParams? = nil,
+      @_type : String? = nil,
+      @user_agent : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -105,6 +112,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
       return false if !@_type.nil? && @_type.to_s.size > 5000
       return false if !@user_agent.nil? && @user_agent.to_s.size > 5000
+
       true
     end
 
@@ -132,28 +140,16 @@ module Stripe
       @user_agent = user_agent
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        date == o.date &&
-        ip == o.ip &&
-        offline == o.offline &&
-        online == o.online &&
-        status == o.status &&
-        _type == o._type &&
-        user_agent == o.user_agent
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@date, @ip, @offline, @online, @status, @_type, @user_agent)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@status, @date, @ip, @offline, @online, @_type, @user_agent)
   end
 end

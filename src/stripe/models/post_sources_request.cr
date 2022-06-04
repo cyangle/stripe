@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for `single_use` sources. Not supported for `receiver` type sources, where charge amount may not be specified until funds land.
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
@@ -39,6 +40,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? customer_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -128,7 +130,26 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64? = nil, @currency : String? = nil, @customer : String? = nil, @expand : Array(String)? = nil, @flow : String? = nil, @mandate : MandateParams? = nil, @metadata : Hash(String, String)? = nil, @original_source : String? = nil, @owner : Owner1? = nil, @receiver : ReceiverParams? = nil, @redirect : RedirectParams? = nil, @source_order : ShallowOrderSpecs? = nil, @statement_descriptor : String? = nil, @token : String? = nil, @_type : String? = nil, @usage : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @amount : Int64? = nil,
+      @currency : String? = nil,
+      @customer : String? = nil,
+      @expand : Array(String)? = nil,
+      @flow : String? = nil,
+      @mandate : MandateParams? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @original_source : String? = nil,
+      @owner : Owner1? = nil,
+      @receiver : ReceiverParams? = nil,
+      @redirect : RedirectParams? = nil,
+      @source_order : ShallowOrderSpecs? = nil,
+      @statement_descriptor : String? = nil,
+      @token : String? = nil,
+      @_type : String? = nil,
+      @usage : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -183,6 +204,7 @@ module Stripe
       return false if !@_type.nil? && @_type.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_USAGE.valid?(@usage)
       return false if !@usage.nil? && @usage.to_s.size > 5000
+
       true
     end
 
@@ -250,37 +272,16 @@ module Stripe
       @usage = usage
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        currency == o.currency &&
-        customer == o.customer &&
-        expand == o.expand &&
-        flow == o.flow &&
-        mandate == o.mandate &&
-        metadata == o.metadata &&
-        original_source == o.original_source &&
-        owner == o.owner &&
-        receiver == o.receiver &&
-        redirect == o.redirect &&
-        source_order == o.source_order &&
-        statement_descriptor == o.statement_descriptor &&
-        token == o.token &&
-        _type == o._type &&
-        usage == o.usage
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @currency, @customer, @expand, @flow, @mandate, @metadata, @original_source, @owner, @receiver, @redirect, @source_order, @statement_descriptor, @token, @_type, @usage)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @currency, @customer, @expand, @flow, @mandate, @metadata, @original_source, @owner, @receiver, @redirect, @source_order, @statement_descriptor, @token, @_type, @usage)
   end
 end

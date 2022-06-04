@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
@@ -45,6 +46,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? capture_present : Bool = false
 
+    @[JSON::Field(key: "card", type: PostChargesRequestCard?, presence: true, ignore_serialize: card.nil? && !card_present?)]
+    property card : PostChargesRequestCard?
+
+    @[JSON::Field(ignore: true)]
+    property? card_present : Bool = false
+
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
     property currency : String?
@@ -66,20 +73,21 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
-    @[JSON::Field(key: "destination", type: DestinationSpecs?, presence: true, ignore_serialize: destination.nil? && !destination_present?)]
-    property destination : DestinationSpecs?
+    @[JSON::Field(key: "destination", type: PostChargesRequestDestination?, presence: true, ignore_serialize: destination.nil? && !destination_present?)]
+    property destination : PostChargesRequestDestination?
 
     @[JSON::Field(ignore: true)]
     property? destination_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? expand_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -146,7 +154,30 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64? = nil, @application_fee : Int64? = nil, @application_fee_amount : Int64? = nil, @capture : Bool? = nil, @currency : String? = nil, @customer : String? = nil, @description : String? = nil, @destination : DestinationSpecs? = nil, @expand : Array(String)? = nil, @metadata : IndividualSpecsMetadata? = nil, @on_behalf_of : String? = nil, @radar_options : RadarOptions? = nil, @receipt_email : String? = nil, @shipping : OptionalFieldsShipping? = nil, @source : String? = nil, @statement_descriptor : String? = nil, @statement_descriptor_suffix : String? = nil, @transfer_data : TransferDataSpecs? = nil, @transfer_group : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @amount : Int64? = nil,
+      @application_fee : Int64? = nil,
+      @application_fee_amount : Int64? = nil,
+      @capture : Bool? = nil,
+      @card : PostChargesRequestCard? = nil,
+      @currency : String? = nil,
+      @customer : String? = nil,
+      @description : String? = nil,
+      @destination : PostChargesRequestDestination? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @on_behalf_of : String? = nil,
+      @radar_options : RadarOptions? = nil,
+      @receipt_email : String? = nil,
+      @shipping : OptionalFieldsShipping? = nil,
+      @source : String? = nil,
+      @statement_descriptor : String? = nil,
+      @statement_descriptor_suffix : String? = nil,
+      @transfer_data : TransferDataSpecs? = nil,
+      @transfer_group : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -190,6 +221,7 @@ module Stripe
       return false if !@source.nil? && @source.to_s.size > 5000
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
       return false if !@statement_descriptor_suffix.nil? && @statement_descriptor_suffix.to_s.size > 22
+
       true
     end
 
@@ -253,40 +285,16 @@ module Stripe
       @statement_descriptor_suffix = statement_descriptor_suffix
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        application_fee == o.application_fee &&
-        application_fee_amount == o.application_fee_amount &&
-        capture == o.capture &&
-        currency == o.currency &&
-        customer == o.customer &&
-        description == o.description &&
-        destination == o.destination &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        on_behalf_of == o.on_behalf_of &&
-        radar_options == o.radar_options &&
-        receipt_email == o.receipt_email &&
-        shipping == o.shipping &&
-        source == o.source &&
-        statement_descriptor == o.statement_descriptor &&
-        statement_descriptor_suffix == o.statement_descriptor_suffix &&
-        transfer_data == o.transfer_data &&
-        transfer_group == o.transfer_group
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @application_fee, @application_fee_amount, @capture, @currency, @customer, @description, @destination, @expand, @metadata, @on_behalf_of, @radar_options, @receipt_email, @shipping, @source, @statement_descriptor, @statement_descriptor_suffix, @transfer_data, @transfer_group)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @application_fee, @application_fee_amount, @capture, @card, @currency, @customer, @description, @destination, @expand, @metadata, @on_behalf_of, @radar_options, @receipt_email, @shipping, @source, @statement_descriptor, @statement_descriptor_suffix, @transfer_data, @transfer_group)
   end
 end

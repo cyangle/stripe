@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The time that the flight departed.
     @[JSON::Field(key: "departure_at", type: Int64?, presence: true, ignore_serialize: departure_at.nil? && !departure_at_present?)]
     property departure_at : Int64?
@@ -56,7 +57,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @departure_at : Int64?, @passenger_name : String?, @refundable : Bool?, @segments : Array(IssuingTransactionFlightDataLeg)?, @travel_agency : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @departure_at : Int64? = nil,
+      @passenger_name : String? = nil,
+      @refundable : Bool? = nil,
+      @segments : Array(IssuingTransactionFlightDataLeg)? = nil,
+      @travel_agency : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -64,11 +73,11 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @passenger_name.to_s.size > 5000
+      if !@passenger_name.nil? && @passenger_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"passenger_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @travel_agency.to_s.size > 5000
+      if !@travel_agency.nil? && @travel_agency.to_s.size > 5000
         invalid_properties.push("invalid value for \"travel_agency\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -78,15 +87,16 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @passenger_name.to_s.size > 5000
-      return false if @travel_agency.to_s.size > 5000
+      return false if !@passenger_name.nil? && @passenger_name.to_s.size > 5000
+      return false if !@travel_agency.nil? && @travel_agency.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] passenger_name Value to be assigned
     def passenger_name=(passenger_name)
-      if passenger_name.to_s.size > 5000
+      if !passenger_name.nil? && passenger_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"passenger_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -96,23 +106,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] travel_agency Value to be assigned
     def travel_agency=(travel_agency)
-      if travel_agency.to_s.size > 5000
+      if !travel_agency.nil? && travel_agency.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"travel_agency\", the character length must be smaller than or equal to 5000.")
       end
 
       @travel_agency = travel_agency
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        departure_at == o.departure_at &&
-        passenger_name == o.passenger_name &&
-        refundable == o.refundable &&
-        segments == o.segments &&
-        travel_agency == o.travel_agency
     end
 
     # @see the `==` method
@@ -121,8 +119,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@departure_at, @passenger_name, @refundable, @segments, @travel_agency)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@departure_at, @passenger_name, @refundable, @segments, @travel_agency)
   end
 end

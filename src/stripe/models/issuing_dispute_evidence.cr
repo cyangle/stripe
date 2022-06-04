@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The reason for filing the dispute. Its value will match the field containing the evidence.
     @[JSON::Field(key: "reason", type: String)]
     getter reason : String
@@ -26,6 +27,7 @@ module Stripe
     ENUM_VALIDATOR_FOR_REASON = EnumValidator.new("reason", "String", ["canceled", "duplicate", "fraudulent", "merchandise_not_as_described", "not_received", "other", "service_not_as_described"])
 
     # Optional properties
+
     @[JSON::Field(key: "canceled", type: IssuingDisputeCanceledEvidence?, presence: true, ignore_serialize: canceled.nil? && !canceled_present?)]
     property canceled : IssuingDisputeCanceledEvidence?
 
@@ -70,7 +72,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @reason : String, @canceled : IssuingDisputeCanceledEvidence? = nil, @duplicate : IssuingDisputeDuplicateEvidence? = nil, @fraudulent : IssuingDisputeFraudulentEvidence? = nil, @merchandise_not_as_described : IssuingDisputeMerchandiseNotAsDescribedEvidence? = nil, @not_received : IssuingDisputeNotReceivedEvidence? = nil, @other : IssuingDisputeOtherEvidence? = nil, @service_not_as_described : IssuingDisputeServiceNotAsDescribedEvidence? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @reason : String,
+      # Optional properties
+      @canceled : IssuingDisputeCanceledEvidence? = nil,
+      @duplicate : IssuingDisputeDuplicateEvidence? = nil,
+      @fraudulent : IssuingDisputeFraudulentEvidence? = nil,
+      @merchandise_not_as_described : IssuingDisputeMerchandiseNotAsDescribedEvidence? = nil,
+      @not_received : IssuingDisputeNotReceivedEvidence? = nil,
+      @other : IssuingDisputeOtherEvidence? = nil,
+      @service_not_as_described : IssuingDisputeServiceNotAsDescribedEvidence? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -87,6 +101,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason, false)
+
       true
     end
 
@@ -97,29 +112,16 @@ module Stripe
       @reason = reason
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        canceled == o.canceled &&
-        duplicate == o.duplicate &&
-        fraudulent == o.fraudulent &&
-        merchandise_not_as_described == o.merchandise_not_as_described &&
-        not_received == o.not_received &&
-        other == o.other &&
-        reason == o.reason &&
-        service_not_as_described == o.service_not_as_described
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@canceled, @duplicate, @fraudulent, @merchandise_not_as_described, @not_received, @other, @reason, @service_not_as_described)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@reason, @canceled, @duplicate, @fraudulent, @merchandise_not_as_described, @not_received, @other, @service_not_as_described)
   end
 end

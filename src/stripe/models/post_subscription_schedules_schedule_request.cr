@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "default_settings", type: DefaultSettingsParams?, presence: true, ignore_serialize: default_settings.nil? && !default_settings_present?)]
     property default_settings : DefaultSettingsParams?
 
@@ -33,14 +34,15 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_END_BEHAVIOR = EnumValidator.new("end_behavior", "String", ["cancel", "none", "release", "renew"])
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? expand_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -63,7 +65,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @default_settings : DefaultSettingsParams? = nil, @end_behavior : String? = nil, @expand : Array(String)? = nil, @metadata : IndividualSpecsMetadata? = nil, @phases : Array(PhaseConfigurationParams1)? = nil, @proration_behavior : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @default_settings : DefaultSettingsParams? = nil,
+      @end_behavior : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @phases : Array(PhaseConfigurationParams1)? = nil,
+      @proration_behavior : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -83,6 +94,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior)
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+
       true
     end
 
@@ -100,27 +112,16 @@ module Stripe
       @proration_behavior = proration_behavior
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        default_settings == o.default_settings &&
-        end_behavior == o.end_behavior &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        phases == o.phases &&
-        proration_behavior == o.proration_behavior
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@default_settings, @end_behavior, @expand, @metadata, @phases, @proration_behavior)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@default_settings, @end_behavior, @expand, @metadata, @phases, @proration_behavior)
   end
 end

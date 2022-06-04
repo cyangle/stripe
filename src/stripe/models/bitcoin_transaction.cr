@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The amount of `currency` that the transaction was converted to in real-time.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -51,7 +52,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @bitcoin_amount : Int64, @created : Int64, @currency : String, @id : String, @object : String, @receiver : String)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @bitcoin_amount : Int64,
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @object : String,
+      @receiver : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -78,6 +89,7 @@ module Stripe
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @receiver.to_s.size > 5000
+
       true
     end
 
@@ -108,28 +120,16 @@ module Stripe
       @receiver = receiver
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        bitcoin_amount == o.bitcoin_amount &&
-        created == o.created &&
-        currency == o.currency &&
-        id == o.id &&
-        object == o.object &&
-        receiver == o.receiver
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @bitcoin_amount, @created, @currency, @id, @object, @receiver)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @bitcoin_amount, @created, @currency, @id, @object, @receiver)
   end
 end

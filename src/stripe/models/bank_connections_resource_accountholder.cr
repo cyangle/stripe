@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Type of account holder that this account belongs to.
     @[JSON::Field(key: "type", type: String)]
     getter _type : String
@@ -26,6 +27,7 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["account", "customer"])
 
     # Optional properties
+
     @[JSON::Field(key: "account", type: BankConnectionsResourceAccountholderAccount?, presence: true, ignore_serialize: account.nil? && !account_present?)]
     property account : BankConnectionsResourceAccountholderAccount?
 
@@ -40,7 +42,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_type : String, @account : BankConnectionsResourceAccountholderAccount? = nil, @customer : BankConnectionsResourceAccountholderCustomer? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String,
+      # Optional properties
+      @account : BankConnectionsResourceAccountholderAccount? = nil,
+      @customer : BankConnectionsResourceAccountholderCustomer? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -57,6 +66,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       true
     end
 
@@ -67,24 +77,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account == o.account &&
-        customer == o.customer &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account, @customer, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @account, @customer)
   end
 end

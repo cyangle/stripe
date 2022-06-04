@@ -19,189 +19,163 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Any server or activity logs showing proof that the customer accessed or downloaded the purchased digital product. This information should include IP addresses, corresponding timestamps, and any detailed recorded activity. Has a maximum character count of 20,000.
+
     @[JSON::Field(key: "access_activity_log", type: String?, presence: true, ignore_serialize: access_activity_log.nil? && !access_activity_log_present?)]
     getter access_activity_log : String?
 
     @[JSON::Field(ignore: true)]
     property? access_activity_log_present : Bool = false
 
-    # The billing address provided by the customer.
     @[JSON::Field(key: "billing_address", type: String?, presence: true, ignore_serialize: billing_address.nil? && !billing_address_present?)]
     getter billing_address : String?
 
     @[JSON::Field(ignore: true)]
     property? billing_address_present : Bool = false
 
-    # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription cancellation policy, as shown to the customer.
     @[JSON::Field(key: "cancellation_policy", type: String?, presence: true, ignore_serialize: cancellation_policy.nil? && !cancellation_policy_present?)]
     property cancellation_policy : String?
 
     @[JSON::Field(ignore: true)]
     property? cancellation_policy_present : Bool = false
 
-    # An explanation of how and when the customer was shown your refund policy prior to purchase. Has a maximum character count of 20,000.
     @[JSON::Field(key: "cancellation_policy_disclosure", type: String?, presence: true, ignore_serialize: cancellation_policy_disclosure.nil? && !cancellation_policy_disclosure_present?)]
     getter cancellation_policy_disclosure : String?
 
     @[JSON::Field(ignore: true)]
     property? cancellation_policy_disclosure_present : Bool = false
 
-    # A justification for why the customer's subscription was not canceled. Has a maximum character count of 20,000.
     @[JSON::Field(key: "cancellation_rebuttal", type: String?, presence: true, ignore_serialize: cancellation_rebuttal.nil? && !cancellation_rebuttal_present?)]
     getter cancellation_rebuttal : String?
 
     @[JSON::Field(ignore: true)]
     property? cancellation_rebuttal_present : Bool = false
 
-    # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any communication with the customer that you feel is relevant to your case. Examples include emails proving that the customer received the product or service, or demonstrating their use of or satisfaction with the product or service.
     @[JSON::Field(key: "customer_communication", type: String?, presence: true, ignore_serialize: customer_communication.nil? && !customer_communication_present?)]
     property customer_communication : String?
 
     @[JSON::Field(ignore: true)]
     property? customer_communication_present : Bool = false
 
-    # The email address of the customer.
     @[JSON::Field(key: "customer_email_address", type: String?, presence: true, ignore_serialize: customer_email_address.nil? && !customer_email_address_present?)]
     getter customer_email_address : String?
 
     @[JSON::Field(ignore: true)]
     property? customer_email_address_present : Bool = false
 
-    # The name of the customer.
     @[JSON::Field(key: "customer_name", type: String?, presence: true, ignore_serialize: customer_name.nil? && !customer_name_present?)]
     getter customer_name : String?
 
     @[JSON::Field(ignore: true)]
     property? customer_name_present : Bool = false
 
-    # The IP address that the customer used when making the purchase.
     @[JSON::Field(key: "customer_purchase_ip", type: String?, presence: true, ignore_serialize: customer_purchase_ip.nil? && !customer_purchase_ip_present?)]
     getter customer_purchase_ip : String?
 
     @[JSON::Field(ignore: true)]
     property? customer_purchase_ip_present : Bool = false
 
-    # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or contract showing the customer's signature.
     @[JSON::Field(key: "customer_signature", type: String?, presence: true, ignore_serialize: customer_signature.nil? && !customer_signature_present?)]
     property customer_signature : String?
 
     @[JSON::Field(ignore: true)]
     property? customer_signature_present : Bool = false
 
-    # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation for the prior charge that can uniquely identify the charge, such as a receipt, shipping label, work order, etc. This document should be paired with a similar document from the disputed payment that proves the two payments are separate.
     @[JSON::Field(key: "duplicate_charge_documentation", type: String?, presence: true, ignore_serialize: duplicate_charge_documentation.nil? && !duplicate_charge_documentation_present?)]
     property duplicate_charge_documentation : String?
 
     @[JSON::Field(ignore: true)]
     property? duplicate_charge_documentation_present : Bool = false
 
-    # An explanation of the difference between the disputed charge versus the prior charge that appears to be a duplicate. Has a maximum character count of 20,000.
     @[JSON::Field(key: "duplicate_charge_explanation", type: String?, presence: true, ignore_serialize: duplicate_charge_explanation.nil? && !duplicate_charge_explanation_present?)]
     getter duplicate_charge_explanation : String?
 
     @[JSON::Field(ignore: true)]
     property? duplicate_charge_explanation_present : Bool = false
 
-    # The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge.
     @[JSON::Field(key: "duplicate_charge_id", type: String?, presence: true, ignore_serialize: duplicate_charge_id.nil? && !duplicate_charge_id_present?)]
     getter duplicate_charge_id : String?
 
     @[JSON::Field(ignore: true)]
     property? duplicate_charge_id_present : Bool = false
 
-    # A description of the product or service that was sold. Has a maximum character count of 20,000.
     @[JSON::Field(key: "product_description", type: String?, presence: true, ignore_serialize: product_description.nil? && !product_description_present?)]
     getter product_description : String?
 
     @[JSON::Field(ignore: true)]
     property? product_description_present : Bool = false
 
-    # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message sent to the customer notifying them of the charge.
     @[JSON::Field(key: "receipt", type: String?, presence: true, ignore_serialize: receipt.nil? && !receipt_present?)]
     property receipt : String?
 
     @[JSON::Field(ignore: true)]
     property? receipt_present : Bool = false
 
-    # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your refund policy, as shown to the customer.
     @[JSON::Field(key: "refund_policy", type: String?, presence: true, ignore_serialize: refund_policy.nil? && !refund_policy_present?)]
     property refund_policy : String?
 
     @[JSON::Field(ignore: true)]
     property? refund_policy_present : Bool = false
 
-    # Documentation demonstrating that the customer was shown your refund policy prior to purchase. Has a maximum character count of 20,000.
     @[JSON::Field(key: "refund_policy_disclosure", type: String?, presence: true, ignore_serialize: refund_policy_disclosure.nil? && !refund_policy_disclosure_present?)]
     getter refund_policy_disclosure : String?
 
     @[JSON::Field(ignore: true)]
     property? refund_policy_disclosure_present : Bool = false
 
-    # A justification for why the customer is not entitled to a refund. Has a maximum character count of 20,000.
     @[JSON::Field(key: "refund_refusal_explanation", type: String?, presence: true, ignore_serialize: refund_refusal_explanation.nil? && !refund_refusal_explanation_present?)]
     getter refund_refusal_explanation : String?
 
     @[JSON::Field(ignore: true)]
     property? refund_refusal_explanation_present : Bool = false
 
-    # The date on which the customer received or began receiving the purchased service, in a clear human-readable format.
     @[JSON::Field(key: "service_date", type: String?, presence: true, ignore_serialize: service_date.nil? && !service_date_present?)]
     getter service_date : String?
 
     @[JSON::Field(ignore: true)]
     property? service_date_present : Bool = false
 
-    # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a service was provided to the customer. This could include a copy of a signed contract, work order, or other form of written agreement.
     @[JSON::Field(key: "service_documentation", type: String?, presence: true, ignore_serialize: service_documentation.nil? && !service_documentation_present?)]
     property service_documentation : String?
 
     @[JSON::Field(ignore: true)]
     property? service_documentation_present : Bool = false
 
-    # The address to which a physical product was shipped. You should try to include as complete address information as possible.
     @[JSON::Field(key: "shipping_address", type: String?, presence: true, ignore_serialize: shipping_address.nil? && !shipping_address_present?)]
     getter shipping_address : String?
 
     @[JSON::Field(ignore: true)]
     property? shipping_address_present : Bool = false
 
-    # The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If multiple carriers were used for this purchase, please separate them with commas.
     @[JSON::Field(key: "shipping_carrier", type: String?, presence: true, ignore_serialize: shipping_carrier.nil? && !shipping_carrier_present?)]
     getter shipping_carrier : String?
 
     @[JSON::Field(ignore: true)]
     property? shipping_carrier_present : Bool = false
 
-    # The date on which a physical product began its route to the shipping address, in a clear human-readable format.
     @[JSON::Field(key: "shipping_date", type: String?, presence: true, ignore_serialize: shipping_date.nil? && !shipping_date_present?)]
     getter shipping_date : String?
 
     @[JSON::Field(ignore: true)]
     property? shipping_date_present : Bool = false
 
-    # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a product was shipped to the customer at the same address the customer provided to you. This could include a copy of the shipment receipt, shipping label, etc. It should show the customer's full shipping address, if possible.
     @[JSON::Field(key: "shipping_documentation", type: String?, presence: true, ignore_serialize: shipping_documentation.nil? && !shipping_documentation_present?)]
     property shipping_documentation : String?
 
     @[JSON::Field(ignore: true)]
     property? shipping_documentation_present : Bool = false
 
-    # The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
     @[JSON::Field(key: "shipping_tracking_number", type: String?, presence: true, ignore_serialize: shipping_tracking_number.nil? && !shipping_tracking_number_present?)]
     getter shipping_tracking_number : String?
 
     @[JSON::Field(ignore: true)]
     property? shipping_tracking_number_present : Bool = false
 
-    # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence or statements.
     @[JSON::Field(key: "uncategorized_file", type: String?, presence: true, ignore_serialize: uncategorized_file.nil? && !uncategorized_file_present?)]
     property uncategorized_file : String?
 
     @[JSON::Field(ignore: true)]
     property? uncategorized_file_present : Bool = false
 
-    # Any additional evidence or statements. Has a maximum character count of 20,000.
     @[JSON::Field(key: "uncategorized_text", type: String?, presence: true, ignore_serialize: uncategorized_text.nil? && !uncategorized_text_present?)]
     getter uncategorized_text : String?
 
@@ -210,7 +184,37 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @access_activity_log : String? = nil, @billing_address : String? = nil, @cancellation_policy : String? = nil, @cancellation_policy_disclosure : String? = nil, @cancellation_rebuttal : String? = nil, @customer_communication : String? = nil, @customer_email_address : String? = nil, @customer_name : String? = nil, @customer_purchase_ip : String? = nil, @customer_signature : String? = nil, @duplicate_charge_documentation : String? = nil, @duplicate_charge_explanation : String? = nil, @duplicate_charge_id : String? = nil, @product_description : String? = nil, @receipt : String? = nil, @refund_policy : String? = nil, @refund_policy_disclosure : String? = nil, @refund_refusal_explanation : String? = nil, @service_date : String? = nil, @service_documentation : String? = nil, @shipping_address : String? = nil, @shipping_carrier : String? = nil, @shipping_date : String? = nil, @shipping_documentation : String? = nil, @shipping_tracking_number : String? = nil, @uncategorized_file : String? = nil, @uncategorized_text : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @access_activity_log : String? = nil,
+      @billing_address : String? = nil,
+      @cancellation_policy : String? = nil,
+      @cancellation_policy_disclosure : String? = nil,
+      @cancellation_rebuttal : String? = nil,
+      @customer_communication : String? = nil,
+      @customer_email_address : String? = nil,
+      @customer_name : String? = nil,
+      @customer_purchase_ip : String? = nil,
+      @customer_signature : String? = nil,
+      @duplicate_charge_documentation : String? = nil,
+      @duplicate_charge_explanation : String? = nil,
+      @duplicate_charge_id : String? = nil,
+      @product_description : String? = nil,
+      @receipt : String? = nil,
+      @refund_policy : String? = nil,
+      @refund_policy_disclosure : String? = nil,
+      @refund_refusal_explanation : String? = nil,
+      @service_date : String? = nil,
+      @service_documentation : String? = nil,
+      @shipping_address : String? = nil,
+      @shipping_carrier : String? = nil,
+      @shipping_date : String? = nil,
+      @shipping_documentation : String? = nil,
+      @shipping_tracking_number : String? = nil,
+      @uncategorized_file : String? = nil,
+      @uncategorized_text : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -314,6 +318,7 @@ module Stripe
       return false if !@shipping_date.nil? && @shipping_date.to_s.size > 5000
       return false if !@shipping_tracking_number.nil? && @shipping_tracking_number.to_s.size > 5000
       return false if !@uncategorized_text.nil? && @uncategorized_text.to_s.size > 20000
+
       true
     end
 
@@ -497,48 +502,16 @@ module Stripe
       @uncategorized_text = uncategorized_text
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        access_activity_log == o.access_activity_log &&
-        billing_address == o.billing_address &&
-        cancellation_policy == o.cancellation_policy &&
-        cancellation_policy_disclosure == o.cancellation_policy_disclosure &&
-        cancellation_rebuttal == o.cancellation_rebuttal &&
-        customer_communication == o.customer_communication &&
-        customer_email_address == o.customer_email_address &&
-        customer_name == o.customer_name &&
-        customer_purchase_ip == o.customer_purchase_ip &&
-        customer_signature == o.customer_signature &&
-        duplicate_charge_documentation == o.duplicate_charge_documentation &&
-        duplicate_charge_explanation == o.duplicate_charge_explanation &&
-        duplicate_charge_id == o.duplicate_charge_id &&
-        product_description == o.product_description &&
-        receipt == o.receipt &&
-        refund_policy == o.refund_policy &&
-        refund_policy_disclosure == o.refund_policy_disclosure &&
-        refund_refusal_explanation == o.refund_refusal_explanation &&
-        service_date == o.service_date &&
-        service_documentation == o.service_documentation &&
-        shipping_address == o.shipping_address &&
-        shipping_carrier == o.shipping_carrier &&
-        shipping_date == o.shipping_date &&
-        shipping_documentation == o.shipping_documentation &&
-        shipping_tracking_number == o.shipping_tracking_number &&
-        uncategorized_file == o.uncategorized_file &&
-        uncategorized_text == o.uncategorized_text
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@access_activity_log, @billing_address, @cancellation_policy, @cancellation_policy_disclosure, @cancellation_rebuttal, @customer_communication, @customer_email_address, @customer_name, @customer_purchase_ip, @customer_signature, @duplicate_charge_documentation, @duplicate_charge_explanation, @duplicate_charge_id, @product_description, @receipt, @refund_policy, @refund_policy_disclosure, @refund_refusal_explanation, @service_date, @service_documentation, @shipping_address, @shipping_carrier, @shipping_date, @shipping_documentation, @shipping_tracking_number, @uncategorized_file, @uncategorized_text)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@access_activity_log, @billing_address, @cancellation_policy, @cancellation_policy_disclosure, @cancellation_rebuttal, @customer_communication, @customer_email_address, @customer_name, @customer_purchase_ip, @customer_signature, @duplicate_charge_documentation, @duplicate_charge_explanation, @duplicate_charge_id, @product_description, @receipt, @refund_policy, @refund_policy_disclosure, @refund_refusal_explanation, @service_date, @service_documentation, @shipping_address, @shipping_carrier, @shipping_date, @shipping_documentation, @shipping_tracking_number, @uncategorized_file, @uncategorized_text)
   end
 end

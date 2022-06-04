@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
@@ -34,6 +35,7 @@ module Stripe
     getter product : String
 
     # Optional properties
+
     # Whether the SKU is available for purchase. Default to `true`.
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
@@ -48,6 +50,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? attributes_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -83,7 +86,22 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @currency : String, @inventory : InventoryCreateSpecs, @price : Int64, @product : String, @active : Bool? = nil, @attributes : Hash(String, String)? = nil, @expand : Array(String)? = nil, @id : String? = nil, @image : String? = nil, @metadata : Hash(String, String)? = nil, @package_dimensions : PackageDimensionsSpecs2? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @currency : String,
+      @inventory : InventoryCreateSpecs,
+      @price : Int64,
+      @product : String,
+      # Optional properties
+      @active : Bool? = nil,
+      @attributes : Hash(String, String)? = nil,
+      @expand : Array(String)? = nil,
+      @id : String? = nil,
+      @image : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @package_dimensions : PackageDimensionsSpecs2? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -91,12 +109,12 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if !@image.nil? && @image.to_s.size > 5000
-        invalid_properties.push("invalid value for \"image\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @product.to_s.size > 5000
         invalid_properties.push("invalid value for \"product\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@image.nil? && @image.to_s.size > 5000
+        invalid_properties.push("invalid value for \"image\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties
@@ -105,19 +123,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@image.nil? && @image.to_s.size > 5000
       return false if @product.to_s.size > 5000
+      return false if !@image.nil? && @image.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] image Value to be assigned
-    def image=(image)
-      if !image.nil? && image.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"image\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @image = image
     end
 
     # Custom attribute writer method with validation
@@ -130,22 +139,14 @@ module Stripe
       @product = product
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        attributes == o.attributes &&
-        currency == o.currency &&
-        expand == o.expand &&
-        id == o.id &&
-        image == o.image &&
-        inventory == o.inventory &&
-        metadata == o.metadata &&
-        package_dimensions == o.package_dimensions &&
-        price == o.price &&
-        product == o.product
+    # Custom attribute writer method with validation
+    # @param [Object] image Value to be assigned
+    def image=(image)
+      if !image.nil? && image.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"image\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @image = image
     end
 
     # @see the `==` method
@@ -154,8 +155,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @attributes, @currency, @expand, @id, @image, @inventory, @metadata, @package_dimensions, @price, @product)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@currency, @inventory, @price, @product, @active, @attributes, @expand, @id, @image, @metadata, @package_dimensions)
   end
 end

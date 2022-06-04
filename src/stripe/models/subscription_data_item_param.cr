@@ -18,12 +18,12 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Plan ID for this item.
+
     @[JSON::Field(key: "plan", type: String)]
     getter plan : String
 
     # Optional properties
-    # The quantity of the subscription item being purchased. Quantity should not be defined when `recurring.usage_type=metered`.
+
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
     property quantity : Int64?
 
@@ -38,7 +38,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @plan : String, @quantity : Int64? = nil, @tax_rates : Array(String)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @plan : String,
+      # Optional properties
+      @quantity : Int64? = nil,
+      @tax_rates : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -57,6 +64,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @plan.to_s.size > 5000
+
       true
     end
 
@@ -70,24 +78,16 @@ module Stripe
       @plan = plan
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        plan == o.plan &&
-        quantity == o.quantity &&
-        tax_rates == o.tax_rates
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@plan, @quantity, @tax_rates)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@plan, @quantity, @tax_rates)
   end
 end

@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Transaction type of the mandate.
     @[JSON::Field(key: "transaction_type", type: String?, presence: true, ignore_serialize: transaction_type.nil? && !transaction_type_present?)]
     getter transaction_type : String?
@@ -26,17 +27,22 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? transaction_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_TRANSACTION_TYPE = EnumValidator.new("transaction_type", "String", ["business", "personal", "null"])
+    ENUM_VALIDATOR_FOR_TRANSACTION_TYPE = EnumValidator.new("transaction_type", "String", ["business", "personal"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @transaction_type : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @transaction_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.error_message) unless ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.valid?(@transaction_type)
 
       invalid_properties
@@ -46,6 +52,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.valid?(@transaction_type)
+
       true
     end
 
@@ -56,22 +63,16 @@ module Stripe
       @transaction_type = transaction_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        transaction_type == o.transaction_type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@transaction_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@transaction_type)
   end
 end

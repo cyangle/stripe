@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Whether the shipping rate can be used for new purchases. Defaults to `true`.
     @[JSON::Field(key: "active", type: Bool?)]
     property active : Bool?
@@ -26,19 +27,6 @@ module Stripe
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?)]
     property created : Int64?
-
-    @[JSON::Field(key: "delivery_estimate", type: ShippingRateDeliveryEstimate1, presence: true, ignore_serialize: delivery_estimate.nil? && !delivery_estimate_present?)]
-    property delivery_estimate : ShippingRateDeliveryEstimate1
-
-    @[JSON::Field(ignore: true)]
-    property? delivery_estimate_present : Bool = false
-
-    # The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
-    @[JSON::Field(key: "display_name", type: String, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
-    getter display_name : String
-
-    @[JSON::Field(ignore: true)]
-    property? display_name_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?)]
@@ -58,21 +46,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["shipping_rate"])
 
-    # Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.
-    @[JSON::Field(key: "tax_behavior", type: String, presence: true, ignore_serialize: tax_behavior.nil? && !tax_behavior_present?)]
-    getter tax_behavior : String
-
-    @[JSON::Field(ignore: true)]
-    property? tax_behavior_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified", "null"])
-
-    @[JSON::Field(key: "tax_code", type: ShippingRateTaxCode, presence: true, ignore_serialize: tax_code.nil? && !tax_code_present?)]
-    property tax_code : ShippingRateTaxCode
-
-    @[JSON::Field(ignore: true)]
-    property? tax_code_present : Bool = false
-
     # The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
     @[JSON::Field(key: "type", type: String?)]
     getter _type : String?
@@ -80,11 +53,40 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["fixed_amount"])
 
     # Optional properties
+
+    @[JSON::Field(key: "delivery_estimate", type: ShippingRateDeliveryEstimate1?, presence: true, ignore_serialize: delivery_estimate.nil? && !delivery_estimate_present?)]
+    property delivery_estimate : ShippingRateDeliveryEstimate1?
+
+    @[JSON::Field(ignore: true)]
+    property? delivery_estimate_present : Bool = false
+
+    # The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
+    @[JSON::Field(key: "display_name", type: String?, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
+    getter display_name : String?
+
+    @[JSON::Field(ignore: true)]
+    property? display_name_present : Bool = false
+
     @[JSON::Field(key: "fixed_amount", type: ShippingRateFixedAmount?, presence: true, ignore_serialize: fixed_amount.nil? && !fixed_amount_present?)]
     property fixed_amount : ShippingRateFixedAmount?
 
     @[JSON::Field(ignore: true)]
     property? fixed_amount_present : Bool = false
+
+    # Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`.
+    @[JSON::Field(key: "tax_behavior", type: String?, presence: true, ignore_serialize: tax_behavior.nil? && !tax_behavior_present?)]
+    getter tax_behavior : String?
+
+    @[JSON::Field(ignore: true)]
+    property? tax_behavior_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
+
+    @[JSON::Field(key: "tax_code", type: ShippingRateTaxCode?, presence: true, ignore_serialize: tax_code.nil? && !tax_code_present?)]
+    property tax_code : ShippingRateTaxCode?
+
+    @[JSON::Field(ignore: true)]
+    property? tax_code_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -96,7 +98,23 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool, @created : Int64, @delivery_estimate : ShippingRateDeliveryEstimate1?, @display_name : String?, @id : String, @livemode : Bool, @metadata : Hash(String, String), @object : String, @tax_behavior : String?, @tax_code : ShippingRateTaxCode?, @_type : String, @fixed_amount : ShippingRateFixedAmount? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @active : Bool? = nil,
+      @created : Int64? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @object : String? = nil,
+      @_type : String? = nil,
+      # Optional properties
+      @delivery_estimate : ShippingRateDeliveryEstimate1? = nil,
+      @display_name : String? = nil,
+      @fixed_amount : ShippingRateFixedAmount? = nil,
+      @tax_behavior : String? = nil,
+      @tax_code : ShippingRateTaxCode? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -104,19 +122,19 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @display_name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      if !@display_name.nil? && @display_name.to_s.size > 5000
+        invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
 
       invalid_properties
     end
@@ -124,11 +142,12 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @display_name.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if !@display_name.nil? && @display_name.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -140,22 +159,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] display_name Value to be assigned
-    def display_name=(display_name)
-      if display_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @display_name = display_name
     end
 
     # Custom attribute writer method with validation
@@ -176,36 +182,27 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] tax_behavior Object to be assigned
-    def tax_behavior=(tax_behavior)
-      ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid!(tax_behavior)
-      @tax_behavior = tax_behavior
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
     def _type=(_type)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        created == o.created &&
-        delivery_estimate == o.delivery_estimate &&
-        display_name == o.display_name &&
-        fixed_amount == o.fixed_amount &&
-        id == o.id &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        tax_behavior == o.tax_behavior &&
-        tax_code == o.tax_code &&
-        _type == o._type
+    # Custom attribute writer method with validation
+    # @param [Object] display_name Value to be assigned
+    def display_name=(display_name)
+      if !display_name.nil? && display_name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @display_name = display_name
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tax_behavior Object to be assigned
+    def tax_behavior=(tax_behavior)
+      ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid!(tax_behavior)
+      @tax_behavior = tax_behavior
     end
 
     # @see the `==` method
@@ -214,8 +211,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @created, @delivery_estimate, @display_name, @fixed_amount, @id, @livemode, @metadata, @object, @tax_behavior, @tax_code, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @created, @id, @livemode, @metadata, @object, @_type, @delivery_estimate, @display_name, @fixed_amount, @tax_behavior, @tax_code)
   end
 end

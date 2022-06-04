@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Type of the flow that created the Transaction. Set to the same value as `flow_type`.
     @[JSON::Field(key: "type", type: String?)]
     getter _type : String?
@@ -26,6 +27,7 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["credit_reversal", "debit_reversal", "inbound_transfer", "issuing_authorization", "other", "outbound_payment", "outbound_transfer", "received_credit", "received_debit"])
 
     # Optional properties
+
     @[JSON::Field(key: "credit_reversal", type: TreasuryCreditReversal?, presence: true, ignore_serialize: credit_reversal.nil? && !credit_reversal_present?)]
     property credit_reversal : TreasuryCreditReversal?
 
@@ -83,7 +85,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_type : String, @credit_reversal : TreasuryCreditReversal? = nil, @debit_reversal : TreasuryDebitReversal? = nil, @inbound_transfer : TreasuryInboundTransfer? = nil, @issuing_authorization : IssuingAuthorization? = nil, @outbound_payment : TreasuryOutboundPayment? = nil, @outbound_transfer : TreasuryOutboundTransfer? = nil, @received_credit : TreasuryReceivedCredit? = nil, @received_debit : TreasuryReceivedDebit? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String? = nil,
+      # Optional properties
+      @credit_reversal : TreasuryCreditReversal? = nil,
+      @debit_reversal : TreasuryDebitReversal? = nil,
+      @inbound_transfer : TreasuryInboundTransfer? = nil,
+      @issuing_authorization : IssuingAuthorization? = nil,
+      @outbound_payment : TreasuryOutboundPayment? = nil,
+      @outbound_transfer : TreasuryOutboundTransfer? = nil,
+      @received_credit : TreasuryReceivedCredit? = nil,
+      @received_debit : TreasuryReceivedDebit? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -100,6 +115,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -111,10 +127,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -126,30 +139,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        credit_reversal == o.credit_reversal &&
-        debit_reversal == o.debit_reversal &&
-        inbound_transfer == o.inbound_transfer &&
-        issuing_authorization == o.issuing_authorization &&
-        outbound_payment == o.outbound_payment &&
-        outbound_transfer == o.outbound_transfer &&
-        received_credit == o.received_credit &&
-        received_debit == o.received_debit &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@credit_reversal, @debit_reversal, @inbound_transfer, @issuing_authorization, @outbound_payment, @outbound_transfer, @received_credit, @received_debit, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @credit_reversal, @debit_reversal, @inbound_transfer, @issuing_authorization, @outbound_payment, @outbound_transfer, @received_credit, @received_debit)
   end
 end

@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Amount (in cents) transferred.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -35,13 +36,6 @@ module Stripe
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
 
-    # An arbitrary string attached to the object. Often useful for displaying to users.
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
     # The PaymentMethod used as the payment instrument for an OutboundTransfer.
     @[JSON::Field(key: "destination_payment_method", type: String)]
     getter destination_payment_method : String
@@ -56,13 +50,6 @@ module Stripe
     # The FinancialAccount that funds were pulled from.
     @[JSON::Field(key: "financial_account", type: String)]
     getter financial_account : String
-
-    # A hosted transaction receipt URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
-    @[JSON::Field(key: "hosted_regulatory_receipt_url", type: String?, presence: true, ignore_serialize: hosted_regulatory_receipt_url.nil? && !hosted_regulatory_receipt_url_present?)]
-    getter hosted_regulatory_receipt_url : String?
-
-    @[JSON::Field(ignore: true)]
-    property? hosted_regulatory_receipt_url_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
@@ -82,12 +69,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["treasury.outbound_transfer"])
 
-    @[JSON::Field(key: "returned_details", type: TreasuryOutboundTransferReturnedDetails?, presence: true, ignore_serialize: returned_details.nil? && !returned_details_present?)]
-    property returned_details : TreasuryOutboundTransferReturnedDetails?
-
-    @[JSON::Field(ignore: true)]
-    property? returned_details_present : Bool = false
-
     # Information about the OutboundTransfer to be sent to the recipient account.
     @[JSON::Field(key: "statement_descriptor", type: String)]
     getter statement_descriptor : String
@@ -104,9 +85,54 @@ module Stripe
     @[JSON::Field(key: "transaction", type: OutboundPaymentsResourceTreasuryReturnedStatusTransaction)]
     property transaction : OutboundPaymentsResourceTreasuryReturnedStatusTransaction
 
+    # Optional properties
+
+    # An arbitrary string attached to the object. Often useful for displaying to users.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
+
+    # A hosted transaction receipt URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
+    @[JSON::Field(key: "hosted_regulatory_receipt_url", type: String?, presence: true, ignore_serialize: hosted_regulatory_receipt_url.nil? && !hosted_regulatory_receipt_url_present?)]
+    getter hosted_regulatory_receipt_url : String?
+
+    @[JSON::Field(ignore: true)]
+    property? hosted_regulatory_receipt_url_present : Bool = false
+
+    @[JSON::Field(key: "returned_details", type: TreasuryOutboundTransferReturnedDetails?, presence: true, ignore_serialize: returned_details.nil? && !returned_details_present?)]
+    property returned_details : TreasuryOutboundTransferReturnedDetails?
+
+    @[JSON::Field(ignore: true)]
+    property? returned_details_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @cancelable : Bool, @created : Int64, @currency : String, @description : String?, @destination_payment_method : String, @destination_payment_method_details : OutboundTransfersPaymentMethodDetails, @expected_arrival_date : Int64, @financial_account : String, @hosted_regulatory_receipt_url : String?, @id : String, @livemode : Bool, @metadata : Hash(String, String), @object : String, @returned_details : TreasuryOutboundTransferReturnedDetails?, @statement_descriptor : String, @status : String, @status_transitions : OutboundTransfersResourceStatusTransitions, @transaction : OutboundPaymentsResourceTreasuryReturnedStatusTransaction)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @cancelable : Bool,
+      @created : Int64,
+      @currency : String,
+      @destination_payment_method : String,
+      @destination_payment_method_details : OutboundTransfersPaymentMethodDetails,
+      @expected_arrival_date : Int64,
+      @financial_account : String,
+      @id : String,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      @statement_descriptor : String,
+      @status : String,
+      @status_transitions : OutboundTransfersResourceStatusTransitions,
+      @transaction : OutboundPaymentsResourceTreasuryReturnedStatusTransaction,
+      # Optional properties
+      @description : String? = nil,
+      @hosted_regulatory_receipt_url : String? = nil,
+      @returned_details : TreasuryOutboundTransferReturnedDetails? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -114,20 +140,12 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @destination_payment_method.to_s.size > 5000
         invalid_properties.push("invalid value for \"destination_payment_method\", the character length must be smaller than or equal to 5000.")
       end
 
       if @financial_account.to_s.size > 5000
         invalid_properties.push("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @hosted_regulatory_receipt_url.to_s.size > 5000
-        invalid_properties.push("invalid value for \"hosted_regulatory_receipt_url\", the character length must be smaller than or equal to 5000.")
       end
 
       if @id.to_s.size > 5000
@@ -142,31 +160,30 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@hosted_regulatory_receipt_url.nil? && @hosted_regulatory_receipt_url.to_s.size > 5000
+        invalid_properties.push("invalid value for \"hosted_regulatory_receipt_url\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @description.to_s.size > 5000
       return false if @destination_payment_method.to_s.size > 5000
       return false if @financial_account.to_s.size > 5000
-      return false if @hosted_regulatory_receipt_url.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @statement_descriptor.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@hosted_regulatory_receipt_url.nil? && @hosted_regulatory_receipt_url.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -187,16 +204,6 @@ module Stripe
       end
 
       @financial_account = financial_account
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] hosted_regulatory_receipt_url Value to be assigned
-    def hosted_regulatory_receipt_url=(hosted_regulatory_receipt_url)
-      if hosted_regulatory_receipt_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"hosted_regulatory_receipt_url\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @hosted_regulatory_receipt_url = hosted_regulatory_receipt_url
     end
 
     # Custom attribute writer method with validation
@@ -233,30 +240,24 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        cancelable == o.cancelable &&
-        created == o.created &&
-        currency == o.currency &&
-        description == o.description &&
-        destination_payment_method == o.destination_payment_method &&
-        destination_payment_method_details == o.destination_payment_method_details &&
-        expected_arrival_date == o.expected_arrival_date &&
-        financial_account == o.financial_account &&
-        hosted_regulatory_receipt_url == o.hosted_regulatory_receipt_url &&
-        id == o.id &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        returned_details == o.returned_details &&
-        statement_descriptor == o.statement_descriptor &&
-        status == o.status &&
-        status_transitions == o.status_transitions &&
-        transaction == o.transaction
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] hosted_regulatory_receipt_url Value to be assigned
+    def hosted_regulatory_receipt_url=(hosted_regulatory_receipt_url)
+      if !hosted_regulatory_receipt_url.nil? && hosted_regulatory_receipt_url.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"hosted_regulatory_receipt_url\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @hosted_regulatory_receipt_url = hosted_regulatory_receipt_url
     end
 
     # @see the `==` method
@@ -265,8 +266,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @cancelable, @created, @currency, @description, @destination_payment_method, @destination_payment_method_details, @expected_arrival_date, @financial_account, @hosted_regulatory_receipt_url, @id, @livemode, @metadata, @object, @returned_details, @statement_descriptor, @status, @status_transitions, @transaction)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @cancelable, @created, @currency, @destination_payment_method, @destination_payment_method_details, @expected_arrival_date, @financial_account, @id, @livemode, @metadata, @object, @statement_descriptor, @status, @status_transitions, @transaction, @description, @hosted_regulatory_receipt_url, @returned_details)
   end
 end

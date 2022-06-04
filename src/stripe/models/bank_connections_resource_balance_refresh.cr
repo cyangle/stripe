@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The time at which the last refresh attempt was initiated. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "last_attempted_at", type: Int64)]
     property last_attempted_at : Int64
@@ -31,7 +32,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @last_attempted_at : Int64, @status : String)
+    def initialize(
+      *,
+      # Required properties
+      @last_attempted_at : Int64,
+      @status : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -48,6 +54,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
       true
     end
 
@@ -58,23 +65,16 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        last_attempted_at == o.last_attempted_at &&
-        status == o.status
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@last_attempted_at, @status)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@last_attempted_at, @status)
   end
 end

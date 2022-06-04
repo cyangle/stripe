@@ -18,14 +18,14 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.
+
     @[JSON::Field(key: "behavior", type: String)]
     getter behavior : String
 
     ENUM_VALIDATOR_FOR_BEHAVIOR = EnumValidator.new("behavior", "String", ["keep_as_draft", "mark_uncollectible", "void"])
 
     # Optional properties
-    # The time after which the subscription will resume collecting payments.
+
     @[JSON::Field(key: "resumes_at", type: Int64?, presence: true, ignore_serialize: resumes_at.nil? && !resumes_at_present?)]
     property resumes_at : Int64?
 
@@ -34,13 +34,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @behavior : String, @resumes_at : Int64? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @behavior : String,
+      # Optional properties
+      @resumes_at : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_BEHAVIOR.valid?(@behavior, false)
 
       invalid_properties
@@ -50,6 +57,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_BEHAVIOR.valid?(@behavior, false)
+
       true
     end
 
@@ -60,23 +68,16 @@ module Stripe
       @behavior = behavior
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        behavior == o.behavior &&
-        resumes_at == o.resumes_at
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@behavior, @resumes_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@behavior, @resumes_at)
   end
 end

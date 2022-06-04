@@ -12,21 +12,19 @@ require "time"
 require "log"
 
 module Stripe
-  # A document verifying the business.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class VerificationDocumentSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The back of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `additional_verification`. The uploaded file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+
     @[JSON::Field(key: "back", type: String?, presence: true, ignore_serialize: back.nil? && !back_present?)]
     getter back : String?
 
     @[JSON::Field(ignore: true)]
     property? back_present : Bool = false
 
-    # The front of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `additional_verification`. The uploaded file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
     @[JSON::Field(key: "front", type: String?, presence: true, ignore_serialize: front.nil? && !front_present?)]
     getter front : String?
 
@@ -35,7 +33,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @back : String? = nil, @front : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @back : String? = nil,
+      @front : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -59,6 +62,7 @@ module Stripe
     def valid?
       return false if !@back.nil? && @back.to_s.size > 500
       return false if !@front.nil? && @front.to_s.size > 500
+
       true
     end
 
@@ -82,23 +86,16 @@ module Stripe
       @front = front
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        back == o.back &&
-        front == o.front
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@back, @front)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@back, @front)
   end
 end

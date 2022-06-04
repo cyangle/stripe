@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "aud", type: TerminalConfigurationConfigurationResourceCurrencySpecificConfig?, presence: true, ignore_serialize: aud.nil? && !aud_present?)]
     property aud : TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
 
@@ -105,7 +106,24 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @aud : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @cad : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @chf : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @czk : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @dkk : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @eur : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @gbp : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @hkd : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @myr : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @nok : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @nzd : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @sek : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @sgd : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil, @usd : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @aud : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @cad : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @chf : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @czk : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @dkk : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @eur : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @gbp : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @hkd : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @myr : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @nok : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @nzd : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @sek : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @sgd : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil,
+      @usd : TerminalConfigurationConfigurationResourceCurrencySpecificConfig? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -122,35 +140,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        aud == o.aud &&
-        cad == o.cad &&
-        chf == o.chf &&
-        czk == o.czk &&
-        dkk == o.dkk &&
-        eur == o.eur &&
-        gbp == o.gbp &&
-        hkd == o.hkd &&
-        myr == o.myr &&
-        nok == o.nok &&
-        nzd == o.nzd &&
-        sek == o.sek &&
-        sgd == o.sgd &&
-        usd == o.usd
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@aud, @cad, @chf, @czk, @dkk, @eur, @gbp, @hkd, @myr, @nok, @nzd, @sek, @sgd, @usd)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@aud, @cad, @chf, @czk, @dkk, @eur, @gbp, @hkd, @myr, @nok, @nzd, @sek, @sgd, @usd)
   end
 end

@@ -19,16 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
     getter id : String
-
-    # The invoice in which this usage period has been billed for.
-    @[JSON::Field(key: "invoice", type: String?, presence: true, ignore_serialize: invoice.nil? && !invoice_present?)]
-    getter invoice : String?
-
-    @[JSON::Field(ignore: true)]
-    property? invoice_present : Bool = false
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool)]
@@ -51,9 +45,29 @@ module Stripe
     @[JSON::Field(key: "total_usage", type: Int64)]
     property total_usage : Int64
 
+    # Optional properties
+
+    # The invoice in which this usage period has been billed for.
+    @[JSON::Field(key: "invoice", type: String?, presence: true, ignore_serialize: invoice.nil? && !invoice_present?)]
+    getter invoice : String?
+
+    @[JSON::Field(ignore: true)]
+    property? invoice_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @id : String, @invoice : String?, @livemode : Bool, @object : String, @period : Period, @subscription_item : String, @total_usage : Int64)
+    def initialize(
+      *,
+      # Required properties
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @period : Period,
+      @subscription_item : String,
+      @total_usage : Int64,
+      # Optional properties
+      @invoice : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -65,14 +79,14 @@ module Stripe
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @invoice.to_s.size > 5000
-        invalid_properties.push("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       if @subscription_item.to_s.size > 5000
         invalid_properties.push("invalid value for \"subscription_item\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@invoice.nil? && @invoice.to_s.size > 5000
+        invalid_properties.push("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties
@@ -82,9 +96,10 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @id.to_s.size > 5000
-      return false if @invoice.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @subscription_item.to_s.size > 5000
+      return false if !@invoice.nil? && @invoice.to_s.size > 5000
+
       true
     end
 
@@ -96,16 +111,6 @@ module Stripe
       end
 
       @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] invoice Value to be assigned
-    def invoice=(invoice)
-      if invoice.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @invoice = invoice
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -125,18 +130,14 @@ module Stripe
       @subscription_item = subscription_item
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        id == o.id &&
-        invoice == o.invoice &&
-        livemode == o.livemode &&
-        object == o.object &&
-        period == o.period &&
-        subscription_item == o.subscription_item &&
-        total_usage == o.total_usage
+    # Custom attribute writer method with validation
+    # @param [Object] invoice Value to be assigned
+    def invoice=(invoice)
+      if !invoice.nil? && invoice.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @invoice = invoice
     end
 
     # @see the `==` method
@@ -145,8 +146,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@id, @invoice, @livemode, @object, @period, @subscription_item, @total_usage)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@id, @livemode, @object, @period, @subscription_item, @total_usage, @invoice)
   end
 end

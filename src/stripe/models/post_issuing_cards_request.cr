@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The currency for the card.
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
@@ -29,6 +30,7 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["physical", "virtual"])
 
     # Optional properties
+
     # The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the card will be associated.
     @[JSON::Field(key: "cardholder", type: String?, presence: true, ignore_serialize: cardholder.nil? && !cardholder_present?)]
     getter cardholder : String?
@@ -36,6 +38,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? cardholder_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -94,13 +97,30 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @currency : String, @_type : String, @cardholder : String? = nil, @expand : Array(String)? = nil, @financial_account : String? = nil, @metadata : Hash(String, String)? = nil, @replacement_for : String? = nil, @replacement_reason : String? = nil, @shipping : ShippingSpecs? = nil, @spending_controls : AuthorizationControlsParam? = nil, @status : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @currency : String,
+      @_type : String,
+      # Optional properties
+      @cardholder : String? = nil,
+      @expand : Array(String)? = nil,
+      @financial_account : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @replacement_for : String? = nil,
+      @replacement_reason : String? = nil,
+      @shipping : ShippingSpecs? = nil,
+      @spending_controls : AuthorizationControlsParam? = nil,
+      @status : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       if !@cardholder.nil? && @cardholder.to_s.size > 5000
         invalid_properties.push("invalid value for \"cardholder\", the character length must be smaller than or equal to 5000.")
@@ -114,20 +134,26 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       return false if !@cardholder.nil? && @cardholder.to_s.size > 5000
       return false if !@replacement_for.nil? && @replacement_for.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.valid?(@replacement_reason)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type)
+      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
+      @_type = _type
     end
 
     # Custom attribute writer method with validation
@@ -164,39 +190,16 @@ module Stripe
       @status = status
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] _type Object to be assigned
-    def _type=(_type)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
-      @_type = _type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        cardholder == o.cardholder &&
-        currency == o.currency &&
-        expand == o.expand &&
-        financial_account == o.financial_account &&
-        metadata == o.metadata &&
-        replacement_for == o.replacement_for &&
-        replacement_reason == o.replacement_reason &&
-        shipping == o.shipping &&
-        spending_controls == o.spending_controls &&
-        status == o.status &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@cardholder, @currency, @expand, @financial_account, @metadata, @replacement_for, @replacement_reason, @shipping, @spending_controls, @status, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@currency, @_type, @cardholder, @expand, @financial_account, @metadata, @replacement_for, @replacement_reason, @shipping, @spending_controls, @status)
   end
 end

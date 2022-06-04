@@ -29,7 +29,7 @@ describe Stripe::InvoicesPaymentSettings do
   describe "test attribute 'payment_method_types'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("Array(String)", ["ach_credit_transfer", "ach_debit", "acss_debit", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "customer_balance", "fpx", "giropay", "grabpay", "ideal", "konbini", "link", "paynow", "sepa_credit_transfer", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
+      # validator = EnumValidator.new("Array(String)", ["ach_credit_transfer", "ach_debit", "acss_debit", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "customer_balance", "fpx", "giropay", "grabpay", "ideal", "konbini", "link", "paynow", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
       # validator.allowable_values.each do |value|
       #   expect { instance.payment_method_types = value }.not_to raise_error
       # end

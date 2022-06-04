@@ -18,7 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Filter by billing frequency. Either `day`, `week`, `month` or `year`.
+
     @[JSON::Field(key: "interval", type: String?, presence: true, ignore_serialize: interval.nil? && !interval_present?)]
     getter interval : String?
 
@@ -27,7 +27,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
 
-    # Filter by the usage type for this price. Can be either `metered` or `licensed`.
     @[JSON::Field(key: "usage_type", type: String?, presence: true, ignore_serialize: usage_type.nil? && !usage_type_present?)]
     getter usage_type : String?
 
@@ -38,13 +37,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @interval : String? = nil, @usage_type : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @interval : String? = nil,
+      @usage_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_USAGE_TYPE.error_message) unless ENUM_VALIDATOR_FOR_USAGE_TYPE.valid?(@usage_type)
@@ -57,6 +62,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
       return false unless ENUM_VALIDATOR_FOR_USAGE_TYPE.valid?(@usage_type)
+
       true
     end
 
@@ -74,23 +80,16 @@ module Stripe
       @usage_type = usage_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        interval == o.interval &&
-        usage_type == o.usage_type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@interval, @usage_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@interval, @usage_type)
   end
 end

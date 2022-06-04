@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The time that payment will be attempted. If customer approval is required, they need to provide approval before this time.
     @[JSON::Field(key: "charge_attempt_at", type: Int64?, presence: true, ignore_serialize: charge_attempt_at.nil? && !charge_attempt_at_present?)]
     property charge_attempt_at : Int64?
@@ -35,7 +36,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @charge_attempt_at : Int64?, @customer_approval_required : Bool?)
+    def initialize(
+      *,
+      # Optional properties
+      @charge_attempt_at : Int64? = nil,
+      @customer_approval_required : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -52,23 +58,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        charge_attempt_at == o.charge_attempt_at &&
-        customer_approval_required == o.customer_approval_required
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@charge_attempt_at, @customer_approval_required)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@charge_attempt_at, @customer_approval_required)
   end
 end

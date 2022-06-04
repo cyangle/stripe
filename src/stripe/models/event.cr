@@ -19,12 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The Stripe API version used to render `data`. *Note: This property is populated only for events on or after October 31, 2014*.
-    @[JSON::Field(key: "api_version", type: String?, presence: true, ignore_serialize: api_version.nil? && !api_version_present?)]
-    getter api_version : String?
-
-    @[JSON::Field(ignore: true)]
-    property? api_version_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
@@ -51,17 +45,12 @@ module Stripe
     @[JSON::Field(key: "pending_webhooks", type: Int64)]
     property pending_webhooks : Int64
 
-    @[JSON::Field(key: "request", type: EventRequest?, presence: true, ignore_serialize: request.nil? && !request_present?)]
-    property request : EventRequest?
-
-    @[JSON::Field(ignore: true)]
-    property? request_present : Bool = false
-
     # Description of the event (e.g., `invoice.created` or `charge.refunded`).
     @[JSON::Field(key: "type", type: String)]
     getter _type : String
 
     # Optional properties
+
     # The connected account that originated the event.
     @[JSON::Field(key: "account", type: String?, presence: true, ignore_serialize: account.nil? && !account_present?)]
     getter account : String?
@@ -69,23 +58,42 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? account_present : Bool = false
 
+    # The Stripe API version used to render `data`. *Note: This property is populated only for events on or after October 31, 2014*.
+    @[JSON::Field(key: "api_version", type: String?, presence: true, ignore_serialize: api_version.nil? && !api_version_present?)]
+    getter api_version : String?
+
+    @[JSON::Field(ignore: true)]
+    property? api_version_present : Bool = false
+
+    @[JSON::Field(key: "request", type: EventRequest?, presence: true, ignore_serialize: request.nil? && !request_present?)]
+    property request : EventRequest?
+
+    @[JSON::Field(ignore: true)]
+    property? request_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @api_version : String?, @created : Int64, @data : NotificationEventData, @id : String, @livemode : Bool, @object : String, @pending_webhooks : Int64, @request : EventRequest?, @_type : String, @account : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @data : NotificationEventData,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @pending_webhooks : Int64,
+      @_type : String,
+      # Optional properties
+      @account : String? = nil,
+      @api_version : String? = nil,
+      @request : EventRequest? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if !@account.nil? && @account.to_s.size > 5000
-        invalid_properties.push("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @api_version.to_s.size > 5000
-        invalid_properties.push("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
@@ -97,38 +105,27 @@ module Stripe
         invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
+      if !@account.nil? && @account.to_s.size > 5000
+        invalid_properties.push("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@api_version.nil? && @api_version.to_s.size > 5000
+        invalid_properties.push("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@account.nil? && @account.to_s.size > 5000
-      return false if @api_version.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @_type.to_s.size > 5000
+      return false if !@account.nil? && @account.to_s.size > 5000
+      return false if !@api_version.nil? && @api_version.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account Value to be assigned
-    def account=(account)
-      if !account.nil? && account.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @account = account
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] api_version Value to be assigned
-    def api_version=(api_version)
-      if api_version.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @api_version = api_version
     end
 
     # Custom attribute writer method with validation
@@ -158,21 +155,24 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account == o.account &&
-        api_version == o.api_version &&
-        created == o.created &&
-        data == o.data &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        pending_webhooks == o.pending_webhooks &&
-        request == o.request &&
-        _type == o._type
+    # Custom attribute writer method with validation
+    # @param [Object] account Value to be assigned
+    def account=(account)
+      if !account.nil? && account.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @account = account
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] api_version Value to be assigned
+    def api_version=(api_version)
+      if !api_version.nil? && api_version.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @api_version = api_version
     end
 
     # @see the `==` method
@@ -181,8 +181,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account, @api_version, @created, @data, @id, @livemode, @object, @pending_webhooks, @request, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @data, @id, @livemode, @object, @pending_webhooks, @_type, @account, @api_version, @request)
   end
 end

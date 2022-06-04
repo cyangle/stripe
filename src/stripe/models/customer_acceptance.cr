@@ -19,12 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The time at which the customer accepted the Mandate.
-    @[JSON::Field(key: "accepted_at", type: Int64?, presence: true, ignore_serialize: accepted_at.nil? && !accepted_at_present?)]
-    property accepted_at : Int64?
-
-    @[JSON::Field(ignore: true)]
-    property? accepted_at_present : Bool = false
 
     # The type of customer acceptance information included with the Mandate. One of `online` or `offline`.
     @[JSON::Field(key: "type", type: String)]
@@ -33,6 +27,14 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["offline", "online"])
 
     # Optional properties
+
+    # The time at which the customer accepted the Mandate.
+    @[JSON::Field(key: "accepted_at", type: Int64?, presence: true, ignore_serialize: accepted_at.nil? && !accepted_at_present?)]
+    property accepted_at : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? accepted_at_present : Bool = false
+
     #
     @[JSON::Field(key: "offline", type: JSON::Any, presence: true, ignore_serialize: offline.nil? && !offline_present?)]
     property offline : JSON::Any
@@ -48,7 +50,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @accepted_at : Int64?, @_type : String, @offline : JSON::Any = nil, @online : OnlineAcceptance? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String,
+      # Optional properties
+      @accepted_at : Int64? = nil,
+      @offline : JSON::Any = nil,
+      @online : OnlineAcceptance? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -65,6 +75,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       true
     end
 
@@ -75,25 +86,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        accepted_at == o.accepted_at &&
-        offline == o.offline &&
-        online == o.online &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@accepted_at, @offline, @online, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @accepted_at, @offline, @online)
   end
 end

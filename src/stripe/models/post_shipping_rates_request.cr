@@ -18,25 +18,28 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
     @[JSON::Field(key: "display_name", type: String)]
     getter display_name : String
 
     # Optional properties
-    @[JSON::Field(key: "delivery_estimate", type: DeliveryEstimate?, presence: true, ignore_serialize: delivery_estimate.nil? && !delivery_estimate_present?)]
-    property delivery_estimate : DeliveryEstimate?
+
+    @[JSON::Field(key: "delivery_estimate", type: DeliveryEstimate1?, presence: true, ignore_serialize: delivery_estimate.nil? && !delivery_estimate_present?)]
+    property delivery_estimate : DeliveryEstimate1?
 
     @[JSON::Field(ignore: true)]
     property? delivery_estimate_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? expand_present : Bool = false
 
-    @[JSON::Field(key: "fixed_amount", type: FixedAmount?, presence: true, ignore_serialize: fixed_amount.nil? && !fixed_amount_present?)]
-    property fixed_amount : FixedAmount?
+    @[JSON::Field(key: "fixed_amount", type: FixedAmount1?, presence: true, ignore_serialize: fixed_amount.nil? && !fixed_amount_present?)]
+    property fixed_amount : FixedAmount1?
 
     @[JSON::Field(ignore: true)]
     property? fixed_amount_present : Bool = false
@@ -75,7 +78,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @display_name : String, @delivery_estimate : DeliveryEstimate? = nil, @expand : Array(String)? = nil, @fixed_amount : FixedAmount? = nil, @metadata : Hash(String, String)? = nil, @tax_behavior : String? = nil, @tax_code : String? = nil, @_type : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @display_name : String,
+      # Optional properties
+      @delivery_estimate : DeliveryEstimate1? = nil,
+      @expand : Array(String)? = nil,
+      @fixed_amount : FixedAmount1? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @tax_behavior : String? = nil,
+      @tax_code : String? = nil,
+      @_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -100,6 +115,7 @@ module Stripe
       return false if @display_name.to_s.size > 100
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+
       true
     end
 
@@ -127,29 +143,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        delivery_estimate == o.delivery_estimate &&
-        display_name == o.display_name &&
-        expand == o.expand &&
-        fixed_amount == o.fixed_amount &&
-        metadata == o.metadata &&
-        tax_behavior == o.tax_behavior &&
-        tax_code == o.tax_code &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@delivery_estimate, @display_name, @expand, @fixed_amount, @metadata, @tax_behavior, @tax_code, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@display_name, @delivery_estimate, @expand, @fixed_amount, @metadata, @tax_behavior, @tax_code, @_type)
   end
 end

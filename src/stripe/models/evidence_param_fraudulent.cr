@@ -12,20 +12,19 @@ require "time"
 require "log"
 
 module Stripe
-  # Evidence provided when `reason` is 'fraudulent'.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class EvidenceParamFraudulent
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "additional_documentation", type: CanceledAdditionalDocumentation?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
-    property additional_documentation : CanceledAdditionalDocumentation?
+
+    @[JSON::Field(key: "additional_documentation", type: BusinessProfileSpecsSupportUrl?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
+    property additional_documentation : BusinessProfileSpecsSupportUrl?
 
     @[JSON::Field(ignore: true)]
     property? additional_documentation_present : Bool = false
 
-    # Explanation of why the cardholder is disputing this transaction.
     @[JSON::Field(key: "explanation", type: String?, presence: true, ignore_serialize: explanation.nil? && !explanation_present?)]
     getter explanation : String?
 
@@ -35,14 +34,19 @@ module Stripe
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
         Stripe::Fraudulent,
-        String,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @additional_documentation : CanceledAdditionalDocumentation? = nil, @explanation : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @additional_documentation : BusinessProfileSpecsSupportUrl? = nil,
+      @explanation : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -61,6 +65,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@explanation.nil? && @explanation.to_s.size > 1500
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -72,10 +77,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -90,23 +92,16 @@ module Stripe
       @explanation = explanation
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        additional_documentation == o.additional_documentation &&
-        explanation == o.explanation
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@additional_documentation, @explanation)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@additional_documentation, @explanation)
   end
 end

@@ -19,32 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Whether the plan can be used for new purchases.
     @[JSON::Field(key: "active", type: Bool)]
     property active : Bool
-
-    # Specifies a usage aggregation strategy for plans of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.
-    @[JSON::Field(key: "aggregate_usage", type: String?, presence: true, ignore_serialize: aggregate_usage.nil? && !aggregate_usage_present?)]
-    getter aggregate_usage : String?
-
-    @[JSON::Field(ignore: true)]
-    property? aggregate_usage_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_AGGREGATE_USAGE = EnumValidator.new("aggregate_usage", "String", ["last_during_period", "last_ever", "max", "sum", "null"])
-
-    # The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.
-    @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
-    property amount : Int64?
-
-    @[JSON::Field(ignore: true)]
-    property? amount_present : Bool = false
-
-    # The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.
-    @[JSON::Field(key: "amount_decimal", type: String?, presence: true, ignore_serialize: amount_decimal.nil? && !amount_decimal_present?)]
-    property amount_decimal : String?
-
-    @[JSON::Field(ignore: true)]
-    property? amount_decimal_present : Bool = false
 
     # Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `amount`) will be charged per unit in `quantity` (for plans with `usage_type=licensed`), or per unit of total usage (for plans with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
     @[JSON::Field(key: "billing_scheme", type: String)]
@@ -78,6 +56,43 @@ module Stripe
     @[JSON::Field(key: "livemode", type: Bool)]
     property livemode : Bool
 
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
+
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["plan"])
+
+    # Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.
+    @[JSON::Field(key: "usage_type", type: String)]
+    getter usage_type : String
+
+    ENUM_VALIDATOR_FOR_USAGE_TYPE = EnumValidator.new("usage_type", "String", ["licensed", "metered"])
+
+    # Optional properties
+
+    # Specifies a usage aggregation strategy for plans of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.
+    @[JSON::Field(key: "aggregate_usage", type: String?, presence: true, ignore_serialize: aggregate_usage.nil? && !aggregate_usage_present?)]
+    getter aggregate_usage : String?
+
+    @[JSON::Field(ignore: true)]
+    property? aggregate_usage_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_AGGREGATE_USAGE = EnumValidator.new("aggregate_usage", "String", ["last_during_period", "last_ever", "max", "sum"])
+
+    # The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.
+    @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
+    property amount : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? amount_present : Bool = false
+
+    # The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.
+    @[JSON::Field(key: "amount_decimal", type: String?, presence: true, ignore_serialize: amount_decimal.nil? && !amount_decimal_present?)]
+    property amount_decimal : String?
+
+    @[JSON::Field(ignore: true)]
+    property? amount_decimal_present : Bool = false
+
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
     property metadata : Hash(String, String)?
@@ -92,17 +107,18 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? nickname_present : Bool = false
 
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["plan"])
-
     @[JSON::Field(key: "product", type: PlanProduct?, presence: true, ignore_serialize: product.nil? && !product_present?)]
     property product : PlanProduct?
 
     @[JSON::Field(ignore: true)]
     property? product_present : Bool = false
+
+    # Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.
+    @[JSON::Field(key: "tiers", type: Array(PlanTier)?, presence: true, ignore_serialize: tiers.nil? && !tiers_present?)]
+    property tiers : Array(PlanTier)?
+
+    @[JSON::Field(ignore: true)]
+    property? tiers_present : Bool = false
 
     # Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.
     @[JSON::Field(key: "tiers_mode", type: String?, presence: true, ignore_serialize: tiers_mode.nil? && !tiers_mode_present?)]
@@ -111,7 +127,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? tiers_mode_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_TIERS_MODE = EnumValidator.new("tiers_mode", "String", ["graduated", "volume", "null"])
+    ENUM_VALIDATOR_FOR_TIERS_MODE = EnumValidator.new("tiers_mode", "String", ["graduated", "volume"])
 
     @[JSON::Field(key: "transform_usage", type: PlanTransformUsage?, presence: true, ignore_serialize: transform_usage.nil? && !transform_usage_present?)]
     property transform_usage : PlanTransformUsage?
@@ -126,31 +142,39 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? trial_period_days_present : Bool = false
 
-    # Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.
-    @[JSON::Field(key: "usage_type", type: String)]
-    getter usage_type : String
-
-    ENUM_VALIDATOR_FOR_USAGE_TYPE = EnumValidator.new("usage_type", "String", ["licensed", "metered"])
-
-    # Optional properties
-    # Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.
-    @[JSON::Field(key: "tiers", type: Array(PlanTier)?, presence: true, ignore_serialize: tiers.nil? && !tiers_present?)]
-    property tiers : Array(PlanTier)?
-
-    @[JSON::Field(ignore: true)]
-    property? tiers_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool, @aggregate_usage : String?, @amount : Int64?, @amount_decimal : String?, @billing_scheme : String, @created : Int64, @currency : String, @id : String, @interval : String, @interval_count : Int64, @livemode : Bool, @metadata : Hash(String, String)?, @nickname : String?, @object : String, @product : PlanProduct?, @tiers_mode : String?, @transform_usage : PlanTransformUsage?, @trial_period_days : Int64?, @usage_type : String, @tiers : Array(PlanTier)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @active : Bool,
+      @billing_scheme : String,
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @interval : String,
+      @interval_count : Int64,
+      @livemode : Bool,
+      @object : String,
+      @usage_type : String,
+      # Optional properties
+      @aggregate_usage : String? = nil,
+      @amount : Int64? = nil,
+      @amount_decimal : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @nickname : String? = nil,
+      @product : PlanProduct? = nil,
+      @tiers : Array(PlanTier)? = nil,
+      @tiers_mode : String? = nil,
+      @transform_usage : PlanTransformUsage? = nil,
+      @trial_period_days : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid?(@aggregate_usage)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_SCHEME.error_message) unless ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid?(@billing_scheme, false)
 
@@ -160,15 +184,17 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
 
-      if @nickname.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_USAGE_TYPE.error_message) unless ENUM_VALIDATOR_FOR_USAGE_TYPE.valid?(@usage_type, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid?(@aggregate_usage)
+
+      if !@nickname.nil? && @nickname.to_s.size > 5000
         invalid_properties.push("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_TIERS_MODE.error_message) unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_USAGE_TYPE.error_message) unless ENUM_VALIDATOR_FOR_USAGE_TYPE.valid?(@usage_type, false)
 
       invalid_properties
     end
@@ -176,22 +202,16 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid?(@aggregate_usage)
       return false unless ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid?(@billing_scheme, false)
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
-      return false if @nickname.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
       return false unless ENUM_VALIDATOR_FOR_USAGE_TYPE.valid?(@usage_type, false)
-      true
-    end
+      return false unless ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid?(@aggregate_usage)
+      return false if !@nickname.nil? && @nickname.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] aggregate_usage Object to be assigned
-    def aggregate_usage=(aggregate_usage)
-      ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid!(aggregate_usage)
-      @aggregate_usage = aggregate_usage
+      true
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -218,28 +238,11 @@ module Stripe
       @interval = interval
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] nickname Value to be assigned
-    def nickname=(nickname)
-      if nickname.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @nickname = nickname
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
     def object=(object)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] tiers_mode Object to be assigned
-    def tiers_mode=(tiers_mode)
-      ENUM_VALIDATOR_FOR_TIERS_MODE.valid!(tiers_mode)
-      @tiers_mode = tiers_mode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -249,31 +252,28 @@ module Stripe
       @usage_type = usage_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        aggregate_usage == o.aggregate_usage &&
-        amount == o.amount &&
-        amount_decimal == o.amount_decimal &&
-        billing_scheme == o.billing_scheme &&
-        created == o.created &&
-        currency == o.currency &&
-        id == o.id &&
-        interval == o.interval &&
-        interval_count == o.interval_count &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        nickname == o.nickname &&
-        object == o.object &&
-        product == o.product &&
-        tiers == o.tiers &&
-        tiers_mode == o.tiers_mode &&
-        transform_usage == o.transform_usage &&
-        trial_period_days == o.trial_period_days &&
-        usage_type == o.usage_type
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] aggregate_usage Object to be assigned
+    def aggregate_usage=(aggregate_usage)
+      ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid!(aggregate_usage)
+      @aggregate_usage = aggregate_usage
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] nickname Value to be assigned
+    def nickname=(nickname)
+      if !nickname.nil? && nickname.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @nickname = nickname
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tiers_mode Object to be assigned
+    def tiers_mode=(tiers_mode)
+      ENUM_VALIDATOR_FOR_TIERS_MODE.valid!(tiers_mode)
+      @tiers_mode = tiers_mode
     end
 
     # @see the `==` method
@@ -282,8 +282,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @aggregate_usage, @amount, @amount_decimal, @billing_scheme, @created, @currency, @id, @interval, @interval_count, @livemode, @metadata, @nickname, @object, @product, @tiers, @tiers_mode, @transform_usage, @trial_period_days, @usage_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @billing_scheme, @created, @currency, @id, @interval, @interval_count, @livemode, @object, @usage_type, @aggregate_usage, @amount, @amount_decimal, @metadata, @nickname, @product, @tiers, @tiers_mode, @transform_usage, @trial_period_days)
   end
 end

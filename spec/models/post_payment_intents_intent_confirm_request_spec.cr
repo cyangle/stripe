@@ -20,6 +20,12 @@ describe Stripe::PostPaymentIntentsIntentConfirmRequest do
     end
   end
 
+  describe "test attribute 'client_secret'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'error_on_requires_action'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -63,6 +69,12 @@ describe Stripe::PostPaymentIntentsIntentConfirmRequest do
   end
 
   describe "test attribute 'payment_method_options'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'payment_method_types'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

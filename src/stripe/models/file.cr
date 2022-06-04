@@ -19,23 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
     property created : Int64
-
-    # The time at which the file expires and is no longer available in epoch seconds.
-    @[JSON::Field(key: "expires_at", type: Int64?, presence: true, ignore_serialize: expires_at.nil? && !expires_at_present?)]
-    property expires_at : Int64?
-
-    @[JSON::Field(ignore: true)]
-    property? expires_at_present : Bool = false
-
-    # A filename for the file, suitable for saving to a filesystem.
-    @[JSON::Field(key: "filename", type: String?, presence: true, ignore_serialize: filename.nil? && !filename_present?)]
-    getter filename : String?
-
-    @[JSON::Field(ignore: true)]
-    property? filename_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
@@ -56,6 +43,28 @@ module Stripe
     # The size in bytes of the file object.
     @[JSON::Field(key: "size", type: Int64)]
     property size : Int64
+
+    # Optional properties
+
+    # The time at which the file expires and is no longer available in epoch seconds.
+    @[JSON::Field(key: "expires_at", type: Int64?, presence: true, ignore_serialize: expires_at.nil? && !expires_at_present?)]
+    property expires_at : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? expires_at_present : Bool = false
+
+    # A filename for the file, suitable for saving to a filesystem.
+    @[JSON::Field(key: "filename", type: String?, presence: true, ignore_serialize: filename.nil? && !filename_present?)]
+    getter filename : String?
+
+    @[JSON::Field(ignore: true)]
+    property? filename_present : Bool = false
+
+    @[JSON::Field(key: "links", type: FileFileLinkList?, presence: true, ignore_serialize: links.nil? && !links_present?)]
+    property links : FileFileLinkList?
+
+    @[JSON::Field(ignore: true)]
+    property? links_present : Bool = false
 
     # A user friendly title for the document.
     @[JSON::Field(key: "title", type: String?, presence: true, ignore_serialize: title.nil? && !title_present?)]
@@ -78,26 +87,30 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? url_present : Bool = false
 
-    # Optional properties
-    @[JSON::Field(key: "links", type: FileFileLinkList?, presence: true, ignore_serialize: links.nil? && !links_present?)]
-    property links : FileFileLinkList?
-
-    @[JSON::Field(ignore: true)]
-    property? links_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @created : Int64, @expires_at : Int64?, @filename : String?, @id : String, @object : String, @purpose : String, @size : Int64, @title : String?, @_type : String?, @url : String?, @links : FileFileLinkList? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @id : String,
+      @object : String,
+      @purpose : String,
+      @size : Int64,
+      # Optional properties
+      @expires_at : Int64? = nil,
+      @filename : String? = nil,
+      @links : FileFileLinkList? = nil,
+      @title : String? = nil,
+      @_type : String? = nil,
+      @url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @filename.to_s.size > 5000
-        invalid_properties.push("invalid value for \"filename\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
@@ -107,15 +120,19 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PURPOSE.error_message) unless ENUM_VALIDATOR_FOR_PURPOSE.valid?(@purpose, false)
 
-      if @title.to_s.size > 5000
+      if !@filename.nil? && @filename.to_s.size > 5000
+        invalid_properties.push("invalid value for \"filename\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@title.nil? && @title.to_s.size > 5000
         invalid_properties.push("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @_type.to_s.size > 5000
+      if !@_type.nil? && @_type.to_s.size > 5000
         invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @url.to_s.size > 5000
+      if !@url.nil? && @url.to_s.size > 5000
         invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -125,24 +142,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @filename.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_PURPOSE.valid?(@purpose, false)
-      return false if @title.to_s.size > 5000
-      return false if @_type.to_s.size > 5000
-      return false if @url.to_s.size > 5000
+      return false if !@filename.nil? && @filename.to_s.size > 5000
+      return false if !@title.nil? && @title.to_s.size > 5000
+      return false if !@_type.nil? && @_type.to_s.size > 5000
+      return false if !@url.nil? && @url.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] filename Value to be assigned
-    def filename=(filename)
-      if filename.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"filename\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @filename = filename
     end
 
     # Custom attribute writer method with validation
@@ -170,9 +178,19 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] filename Value to be assigned
+    def filename=(filename)
+      if !filename.nil? && filename.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"filename\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @filename = filename
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] title Value to be assigned
     def title=(title)
-      if title.to_s.size > 5000
+      if !title.nil? && title.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -182,7 +200,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] _type Value to be assigned
     def _type=(_type)
-      if _type.to_s.size > 5000
+      if !_type.nil? && _type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -192,29 +210,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
     def url=(url)
-      if url.to_s.size > 5000
+      if !url.nil? && url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
       @url = url
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        created == o.created &&
-        expires_at == o.expires_at &&
-        filename == o.filename &&
-        id == o.id &&
-        links == o.links &&
-        object == o.object &&
-        purpose == o.purpose &&
-        size == o.size &&
-        title == o.title &&
-        _type == o._type &&
-        url == o.url
     end
 
     # @see the `==` method
@@ -223,8 +223,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@created, @expires_at, @filename, @id, @links, @object, @purpose, @size, @title, @_type, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @object, @purpose, @size, @expires_at, @filename, @links, @title, @_type, @url)
   end
 end

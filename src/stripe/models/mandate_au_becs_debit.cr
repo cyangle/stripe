@@ -19,13 +19,18 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.
     @[JSON::Field(key: "url", type: String)]
     getter url : String
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @url : String)
+    def initialize(
+      *,
+      # Required properties
+      @url : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -44,6 +49,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @url.to_s.size > 5000
+
       true
     end
 
@@ -57,22 +63,16 @@ module Stripe
       @url = url
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        url == o.url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@url)
   end
 end

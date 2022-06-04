@@ -18,38 +18,39 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The city where the payment originated.
-    @[JSON::Field(key: "city", type: String, presence: true, ignore_serialize: city.nil? && !city_present?)]
-    getter city : String
+    @[JSON::Field(key: "city", type: String?, presence: true, ignore_serialize: city.nil? && !city_present?)]
+    getter city : String?
 
     @[JSON::Field(ignore: true)]
     property? city_present : Bool = false
 
     # Two-letter ISO code representing the country where the payment originated.
-    @[JSON::Field(key: "country", type: String, presence: true, ignore_serialize: country.nil? && !country_present?)]
-    getter country : String
+    @[JSON::Field(key: "country", type: String?, presence: true, ignore_serialize: country.nil? && !country_present?)]
+    getter country : String?
 
     @[JSON::Field(ignore: true)]
     property? country_present : Bool = false
 
     # The geographic latitude where the payment originated.
-    @[JSON::Field(key: "latitude", type: Float64, presence: true, ignore_serialize: latitude.nil? && !latitude_present?)]
-    property latitude : Float64
+    @[JSON::Field(key: "latitude", type: Float64?, presence: true, ignore_serialize: latitude.nil? && !latitude_present?)]
+    property latitude : Float64?
 
     @[JSON::Field(ignore: true)]
     property? latitude_present : Bool = false
 
     # The geographic longitude where the payment originated.
-    @[JSON::Field(key: "longitude", type: Float64, presence: true, ignore_serialize: longitude.nil? && !longitude_present?)]
-    property longitude : Float64
+    @[JSON::Field(key: "longitude", type: Float64?, presence: true, ignore_serialize: longitude.nil? && !longitude_present?)]
+    property longitude : Float64?
 
     @[JSON::Field(ignore: true)]
     property? longitude_present : Bool = false
 
     # The state/county/province/region where the payment originated.
-    @[JSON::Field(key: "region", type: String, presence: true, ignore_serialize: region.nil? && !region_present?)]
-    getter region : String
+    @[JSON::Field(key: "region", type: String?, presence: true, ignore_serialize: region.nil? && !region_present?)]
+    getter region : String?
 
     @[JSON::Field(ignore: true)]
     property? region_present : Bool = false
@@ -63,7 +64,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @city : String?, @country : String?, @latitude : Float64?, @longitude : Float64?, @region : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @city : String? = nil,
+      @country : String? = nil,
+      @latitude : Float64? = nil,
+      @longitude : Float64? = nil,
+      @region : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -71,15 +80,15 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @city.to_s.size > 5000
+      if !@city.nil? && @city.to_s.size > 5000
         invalid_properties.push("invalid value for \"city\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @country.to_s.size > 5000
+      if !@country.nil? && @country.to_s.size > 5000
         invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @region.to_s.size > 5000
+      if !@region.nil? && @region.to_s.size > 5000
         invalid_properties.push("invalid value for \"region\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -89,9 +98,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @city.to_s.size > 5000
-      return false if @country.to_s.size > 5000
-      return false if @region.to_s.size > 5000
+      return false if !@city.nil? && @city.to_s.size > 5000
+      return false if !@country.nil? && @country.to_s.size > 5000
+      return false if !@region.nil? && @region.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -103,10 +113,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -114,7 +121,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] city Value to be assigned
     def city=(city)
-      if city.to_s.size > 5000
+      if !city.nil? && city.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"city\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -124,7 +131,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
     def country=(country)
-      if country.to_s.size > 5000
+      if !country.nil? && country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -134,23 +141,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] region Value to be assigned
     def region=(region)
-      if region.to_s.size > 5000
+      if !region.nil? && region.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"region\", the character length must be smaller than or equal to 5000.")
       end
 
       @region = region
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        city == o.city &&
-        country == o.country &&
-        latitude == o.latitude &&
-        longitude == o.longitude &&
-        region == o.region
     end
 
     # @see the `==` method
@@ -159,8 +154,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@city, @country, @latitude, @longitude, @region)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@city, @country, @latitude, @longitude, @region)
   end
 end

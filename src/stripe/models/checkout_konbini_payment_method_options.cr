@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The number of calendar days (between 1 and 60) after which Konbini payment instructions will expire. For example, if a PaymentIntent is confirmed with Konbini and `expires_after_days` set to 2 on Monday JST, the instructions will expire on Wednesday 23:59:59 JST.
     @[JSON::Field(key: "expires_after_days", type: Int64?, presence: true, ignore_serialize: expires_after_days.nil? && !expires_after_days_present?)]
     property expires_after_days : Int64?
@@ -28,7 +29,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @expires_after_days : Int64?)
+    def initialize(
+      *,
+      # Optional properties
+      @expires_after_days : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -45,22 +50,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        expires_after_days == o.expires_after_days
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@expires_after_days)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@expires_after_days)
   end
 end

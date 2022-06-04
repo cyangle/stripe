@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # A list of prices and quantities that will generate invoice items appended to the first invoice for this subscription. You may pass up to 20 items.
     @[JSON::Field(key: "add_invoice_items", type: Array(AddInvoiceItemEntry)?, presence: true, ignore_serialize: add_invoice_items.nil? && !add_invoice_items_present?)]
     property add_invoice_items : Array(AddInvoiceItemEntry)?
@@ -32,8 +33,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? application_fee_percent_present : Bool = false
 
-    @[JSON::Field(key: "automatic_tax", type: AutomaticTaxConfig2?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
-    property automatic_tax : AutomaticTaxConfig2?
+    @[JSON::Field(key: "automatic_tax", type: AutomaticTaxConfig?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
+    property automatic_tax : AutomaticTaxConfig?
 
     @[JSON::Field(ignore: true)]
     property? automatic_tax_present : Bool = false
@@ -47,14 +48,14 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR = EnumValidator.new("billing_cycle_anchor", "String", ["now", "unchanged"])
 
-    @[JSON::Field(key: "billing_thresholds", type: DefaultSettingsParamsBillingThresholds?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
-    property billing_thresholds : DefaultSettingsParamsBillingThresholds?
+    @[JSON::Field(key: "billing_thresholds", type: PostCustomersCustomerSubscriptionsRequestBillingThresholds?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
+    property billing_thresholds : PostCustomersCustomerSubscriptionsRequestBillingThresholds?
 
     @[JSON::Field(ignore: true)]
     property? billing_thresholds_present : Bool = false
 
-    @[JSON::Field(key: "cancel_at", type: PostSubscriptionsSubscriptionExposedIdRequestCancelAt?, presence: true, ignore_serialize: cancel_at.nil? && !cancel_at_present?)]
-    property cancel_at : PostSubscriptionsSubscriptionExposedIdRequestCancelAt?
+    @[JSON::Field(key: "cancel_at", type: PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestCancelAt?, presence: true, ignore_serialize: cancel_at.nil? && !cancel_at_present?)]
+    property cancel_at : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestCancelAt?
 
     @[JSON::Field(ignore: true)]
     property? cancel_at_present : Bool = false
@@ -103,8 +104,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? default_source_present : Bool = false
 
-    @[JSON::Field(key: "default_tax_rates", type: PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates?, presence: true, ignore_serialize: default_tax_rates.nil? && !default_tax_rates_present?)]
-    property default_tax_rates : PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates?
+    @[JSON::Field(key: "default_tax_rates", type: PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates?, presence: true, ignore_serialize: default_tax_rates.nil? && !default_tax_rates_present?)]
+    property default_tax_rates : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates?
 
     @[JSON::Field(ignore: true)]
     property? default_tax_rates_present : Bool = false
@@ -116,6 +117,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -129,8 +131,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? items_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -142,8 +144,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? off_session_present : Bool = false
 
-    @[JSON::Field(key: "pause_collection", type: PostSubscriptionsSubscriptionExposedIdRequestPauseCollection?, presence: true, ignore_serialize: pause_collection.nil? && !pause_collection_present?)]
-    property pause_collection : PostSubscriptionsSubscriptionExposedIdRequestPauseCollection?
+    @[JSON::Field(key: "pause_collection", type: PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestPauseCollection?, presence: true, ignore_serialize: pause_collection.nil? && !pause_collection_present?)]
+    property pause_collection : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestPauseCollection?
 
     @[JSON::Field(ignore: true)]
     property? pause_collection_present : Bool = false
@@ -157,14 +159,14 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR = EnumValidator.new("payment_behavior", "String", ["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"])
 
-    @[JSON::Field(key: "payment_settings", type: PaymentSettings1?, presence: true, ignore_serialize: payment_settings.nil? && !payment_settings_present?)]
-    property payment_settings : PaymentSettings1?
+    @[JSON::Field(key: "payment_settings", type: PaymentSettings?, presence: true, ignore_serialize: payment_settings.nil? && !payment_settings_present?)]
+    property payment_settings : PaymentSettings?
 
     @[JSON::Field(ignore: true)]
     property? payment_settings_present : Bool = false
 
-    @[JSON::Field(key: "pending_invoice_item_interval", type: PostSubscriptionsRequestPendingInvoiceItemInterval?, presence: true, ignore_serialize: pending_invoice_item_interval.nil? && !pending_invoice_item_interval_present?)]
-    property pending_invoice_item_interval : PostSubscriptionsRequestPendingInvoiceItemInterval?
+    @[JSON::Field(key: "pending_invoice_item_interval", type: PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval?, presence: true, ignore_serialize: pending_invoice_item_interval.nil? && !pending_invoice_item_interval_present?)]
+    property pending_invoice_item_interval : PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval?
 
     @[JSON::Field(ignore: true)]
     property? pending_invoice_item_interval_present : Bool = false
@@ -192,8 +194,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? proration_date_present : Bool = false
 
-    @[JSON::Field(key: "transfer_data", type: PostSubscriptionsSubscriptionExposedIdRequestTransferData?, presence: true, ignore_serialize: transfer_data.nil? && !transfer_data_present?)]
-    property transfer_data : PostSubscriptionsSubscriptionExposedIdRequestTransferData?
+    @[JSON::Field(key: "transfer_data", type: PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTransferData?, presence: true, ignore_serialize: transfer_data.nil? && !transfer_data_present?)]
+    property transfer_data : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTransferData?
 
     @[JSON::Field(ignore: true)]
     property? transfer_data_present : Bool = false
@@ -213,7 +215,38 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @add_invoice_items : Array(AddInvoiceItemEntry)? = nil, @application_fee_percent : Float64? = nil, @automatic_tax : AutomaticTaxConfig2? = nil, @billing_cycle_anchor : String? = nil, @billing_thresholds : DefaultSettingsParamsBillingThresholds? = nil, @cancel_at : PostSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil, @cancel_at_period_end : Bool? = nil, @collection_method : String? = nil, @coupon : String? = nil, @days_until_due : Int64? = nil, @default_payment_method : String? = nil, @default_source : String? = nil, @default_tax_rates : PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil, @description : String? = nil, @expand : Array(String)? = nil, @items : Array(SubscriptionItemUpdateParams)? = nil, @metadata : IndividualSpecsMetadata? = nil, @off_session : Bool? = nil, @pause_collection : PostSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil, @payment_behavior : String? = nil, @payment_settings : PaymentSettings1? = nil, @pending_invoice_item_interval : PostSubscriptionsRequestPendingInvoiceItemInterval? = nil, @promotion_code : String? = nil, @proration_behavior : String? = nil, @proration_date : Int64? = nil, @transfer_data : PostSubscriptionsSubscriptionExposedIdRequestTransferData? = nil, @trial_end : PostCustomersCustomerRequestTrialEnd? = nil, @trial_from_plan : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @add_invoice_items : Array(AddInvoiceItemEntry)? = nil,
+      @application_fee_percent : Float64? = nil,
+      @automatic_tax : AutomaticTaxConfig? = nil,
+      @billing_cycle_anchor : String? = nil,
+      @billing_thresholds : PostCustomersCustomerSubscriptionsRequestBillingThresholds? = nil,
+      @cancel_at : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestCancelAt? = nil,
+      @cancel_at_period_end : Bool? = nil,
+      @collection_method : String? = nil,
+      @coupon : String? = nil,
+      @days_until_due : Int64? = nil,
+      @default_payment_method : String? = nil,
+      @default_source : String? = nil,
+      @default_tax_rates : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @items : Array(SubscriptionItemUpdateParams)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @off_session : Bool? = nil,
+      @pause_collection : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestPauseCollection? = nil,
+      @payment_behavior : String? = nil,
+      @payment_settings : PaymentSettings? = nil,
+      @pending_invoice_item_interval : PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval? = nil,
+      @promotion_code : String? = nil,
+      @proration_behavior : String? = nil,
+      @proration_date : Int64? = nil,
+      @transfer_data : PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTransferData? = nil,
+      @trial_end : PostCustomersCustomerRequestTrialEnd? = nil,
+      @trial_from_plan : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -269,6 +302,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.valid?(@payment_behavior)
       return false if !@promotion_code.nil? && @promotion_code.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+
       true
     end
 
@@ -350,49 +384,16 @@ module Stripe
       @proration_behavior = proration_behavior
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        add_invoice_items == o.add_invoice_items &&
-        application_fee_percent == o.application_fee_percent &&
-        automatic_tax == o.automatic_tax &&
-        billing_cycle_anchor == o.billing_cycle_anchor &&
-        billing_thresholds == o.billing_thresholds &&
-        cancel_at == o.cancel_at &&
-        cancel_at_period_end == o.cancel_at_period_end &&
-        collection_method == o.collection_method &&
-        coupon == o.coupon &&
-        days_until_due == o.days_until_due &&
-        default_payment_method == o.default_payment_method &&
-        default_source == o.default_source &&
-        default_tax_rates == o.default_tax_rates &&
-        description == o.description &&
-        expand == o.expand &&
-        items == o.items &&
-        metadata == o.metadata &&
-        off_session == o.off_session &&
-        pause_collection == o.pause_collection &&
-        payment_behavior == o.payment_behavior &&
-        payment_settings == o.payment_settings &&
-        pending_invoice_item_interval == o.pending_invoice_item_interval &&
-        promotion_code == o.promotion_code &&
-        proration_behavior == o.proration_behavior &&
-        proration_date == o.proration_date &&
-        transfer_data == o.transfer_data &&
-        trial_end == o.trial_end &&
-        trial_from_plan == o.trial_from_plan
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@add_invoice_items, @application_fee_percent, @automatic_tax, @billing_cycle_anchor, @billing_thresholds, @cancel_at, @cancel_at_period_end, @collection_method, @coupon, @days_until_due, @default_payment_method, @default_source, @default_tax_rates, @description, @expand, @items, @metadata, @off_session, @pause_collection, @payment_behavior, @payment_settings, @pending_invoice_item_interval, @promotion_code, @proration_behavior, @proration_date, @transfer_data, @trial_end, @trial_from_plan)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@add_invoice_items, @application_fee_percent, @automatic_tax, @billing_cycle_anchor, @billing_thresholds, @cancel_at, @cancel_at_period_end, @collection_method, @coupon, @days_until_due, @default_payment_method, @default_source, @default_tax_rates, @description, @expand, @items, @metadata, @off_session, @pause_collection, @payment_behavior, @payment_settings, @pending_invoice_item_interval, @promotion_code, @proration_behavior, @proration_date, @transfer_data, @trial_end, @trial_from_plan)
   end
 end

@@ -26,12 +26,6 @@ describe Stripe::SubscriptionDataParams do
     end
   end
 
-  describe "test attribute 'coupon'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'default_tax_rates'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -63,12 +57,6 @@ describe Stripe::SubscriptionDataParams do
   end
 
   describe "test attribute 'trial_end'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'trial_from_plan'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

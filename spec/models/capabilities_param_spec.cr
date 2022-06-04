@@ -80,11 +80,11 @@ describe Stripe::CapabilitiesParam do
     end
   end
 
-  # describe "test attribute 'cartes_bancaires_payments'" do
-  #   it "should work" do
-  #     # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-  #   end
-  # end
+  describe "test attribute 'cartes_bancaires_payments'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
 
   describe "test attribute 'eps_payments'" do
     it "should work" do

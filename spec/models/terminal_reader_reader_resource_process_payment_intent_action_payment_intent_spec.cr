@@ -71,7 +71,7 @@ describe Stripe::TerminalReaderReaderResourceProcessPaymentIntentActionPaymentIn
   describe "test attribute 'cancellation_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["abandoned", "automatic", "duplicate", "failed_invoice", "fraudulent", "requested_by_customer", "void_invoice", "null"])
+      # validator = EnumValidator.new("String", ["abandoned", "automatic", "duplicate", "failed_invoice", "fraudulent", "requested_by_customer", "void_invoice"])
       # validator.allowable_values.each do |value|
       #   expect { instance.cancellation_reason = value }.not_to raise_error
       # end
@@ -225,7 +225,7 @@ describe Stripe::TerminalReaderReaderResourceProcessPaymentIntentActionPaymentIn
   describe "test attribute 'setup_future_usage'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["off_session", "on_session", "null"])
+      # validator = EnumValidator.new("String", ["off_session", "on_session"])
       # validator.allowable_values.each do |value|
       #   expect { instance.setup_future_usage = value }.not_to raise_error
       # end
@@ -233,12 +233,6 @@ describe Stripe::TerminalReaderReaderResourceProcessPaymentIntentActionPaymentIn
   end
 
   describe "test attribute 'shipping'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'source'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

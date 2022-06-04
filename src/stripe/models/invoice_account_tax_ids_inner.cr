@@ -18,22 +18,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Two-letter ISO code representing the country of the tax ID.
-    @[JSON::Field(key: "country", type: String, presence: true, ignore_serialize: country.nil? && !country_present?)]
-    getter country : String
-
-    @[JSON::Field(ignore: true)]
-    property? country_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?)]
     property created : Int64?
-
-    @[JSON::Field(key: "customer", type: TaxIdCustomer, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
-    property customer : TaxIdCustomer
-
-    @[JSON::Field(ignore: true)]
-    property? customer_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?)]
@@ -59,17 +47,32 @@ module Stripe
     @[JSON::Field(key: "value", type: String?)]
     getter value : String?
 
-    @[JSON::Field(key: "verification", type: TaxIdVerification1, presence: true, ignore_serialize: verification.nil? && !verification_present?)]
-    property verification : TaxIdVerification1
-
-    @[JSON::Field(ignore: true)]
-    property? verification_present : Bool = false
-
     # Always true for a deleted object
     @[JSON::Field(key: "deleted", type: Bool?)]
     getter deleted : Bool?
 
     ENUM_VALIDATOR_FOR_DELETED = EnumValidator.new("deleted", "Bool", ["true"])
+
+    # Optional properties
+
+    # Two-letter ISO code representing the country of the tax ID.
+    @[JSON::Field(key: "country", type: String?, presence: true, ignore_serialize: country.nil? && !country_present?)]
+    getter country : String?
+
+    @[JSON::Field(ignore: true)]
+    property? country_present : Bool = false
+
+    @[JSON::Field(key: "customer", type: TaxIdCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
+    property customer : TaxIdCustomer?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_present : Bool = false
+
+    @[JSON::Field(key: "verification", type: TaxIdVerification1?, presence: true, ignore_serialize: verification.nil? && !verification_present?)]
+    property verification : TaxIdVerification1?
+
+    @[JSON::Field(ignore: true)]
+    property? verification_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -82,17 +85,27 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @country : String?, @created : Int64, @customer : TaxIdCustomer?, @id : String, @livemode : Bool, @object : String, @_type : String, @value : String, @verification : TaxIdVerification1?, @deleted : Bool)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @object : String? = nil,
+      @_type : String? = nil,
+      @value : String? = nil,
+      @deleted : Bool? = nil,
+      # Optional properties
+      @country : String? = nil,
+      @customer : TaxIdCustomer? = nil,
+      @verification : TaxIdVerification1? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @country.to_s.size > 5000
-        invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
@@ -108,18 +121,23 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_DELETED.error_message) unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
 
+      if !@country.nil? && @country.to_s.size > 5000
+        invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @country.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       return false if @value.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
+      return false if !@country.nil? && @country.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -131,22 +149,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] country Value to be assigned
-    def country=(country)
-      if country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @country = country
     end
 
     # Custom attribute writer method with validation
@@ -190,21 +195,14 @@ module Stripe
       @deleted = deleted
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        country == o.country &&
-        created == o.created &&
-        customer == o.customer &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        _type == o._type &&
-        value == o.value &&
-        verification == o.verification &&
-        deleted == o.deleted
+    # Custom attribute writer method with validation
+    # @param [Object] country Value to be assigned
+    def country=(country)
+      if !country.nil? && country.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @country = country
     end
 
     # @see the `==` method
@@ -213,8 +211,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@country, @created, @customer, @id, @livemode, @object, @_type, @value, @verification, @deleted)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @livemode, @object, @_type, @value, @deleted, @country, @customer, @verification)
   end
 end

@@ -47,7 +47,7 @@ describe Stripe::IssuingDisputeMerchandiseNotAsDescribedEvidence do
   describe "test attribute 'return_status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["merchant_rejected", "successful", "null"])
+      # validator = EnumValidator.new("String", ["merchant_rejected", "successful"])
       # validator.allowable_values.each do |value|
       #   expect { instance.return_status = value }.not_to raise_error
       # end

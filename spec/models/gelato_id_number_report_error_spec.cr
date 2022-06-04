@@ -23,7 +23,7 @@ describe Stripe::GelatoIdNumberReportError do
   describe "test attribute 'code'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other", "null"])
+      # validator = EnumValidator.new("String", ["id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other"])
       # validator.allowable_values.each do |value|
       #   expect { instance.code = value }.not_to raise_error
       # end

@@ -12,13 +12,13 @@ require "time"
 require "log"
 
 module Stripe
-  # One or more documents that support the [Bank account ownership verification](https://support.stripe.com/questions/bank-account-ownership-verification) requirement. Must be a document associated with the account’s primary active bank account that displays the last 4 digits of the account number, either a statement or a voided check.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class DocumentsParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "files", type: Array(String)?, presence: true, ignore_serialize: files.nil? && !files_present?)]
     property files : Array(String)?
 
@@ -27,7 +27,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @files : Array(String)? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @files : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -44,22 +48,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        files == o.files
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@files)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@files)
   end
 end

@@ -18,7 +18,15 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
+    # Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
+    @[JSON::Field(key: "buyer_id", type: String?, presence: true, ignore_serialize: buyer_id.nil? && !buyer_id_present?)]
+    getter buyer_id : String?
+
+    @[JSON::Field(ignore: true)]
+    property? buyer_id_present : Bool = false
+
     # Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
     @[JSON::Field(key: "fingerprint", type: String?, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
     getter fingerprint : String?
@@ -33,17 +41,15 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? transaction_id_present : Bool = false
 
-    # Optional properties
-    # Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
-    @[JSON::Field(key: "buyer_id", type: String?, presence: true, ignore_serialize: buyer_id.nil? && !buyer_id_present?)]
-    getter buyer_id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? buyer_id_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @fingerprint : String?, @transaction_id : String?, @buyer_id : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @buyer_id : String? = nil,
+      @fingerprint : String? = nil,
+      @transaction_id : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -55,11 +61,11 @@ module Stripe
         invalid_properties.push("invalid value for \"buyer_id\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @fingerprint.to_s.size > 5000
+      if !@fingerprint.nil? && @fingerprint.to_s.size > 5000
         invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @transaction_id.to_s.size > 5000
+      if !@transaction_id.nil? && @transaction_id.to_s.size > 5000
         invalid_properties.push("invalid value for \"transaction_id\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -70,8 +76,9 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@buyer_id.nil? && @buyer_id.to_s.size > 5000
-      return false if @fingerprint.to_s.size > 5000
-      return false if @transaction_id.to_s.size > 5000
+      return false if !@fingerprint.nil? && @fingerprint.to_s.size > 5000
+      return false if !@transaction_id.nil? && @transaction_id.to_s.size > 5000
+
       true
     end
 
@@ -88,7 +95,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] fingerprint Value to be assigned
     def fingerprint=(fingerprint)
-      if fingerprint.to_s.size > 5000
+      if !fingerprint.nil? && fingerprint.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -98,21 +105,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] transaction_id Value to be assigned
     def transaction_id=(transaction_id)
-      if transaction_id.to_s.size > 5000
+      if !transaction_id.nil? && transaction_id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"transaction_id\", the character length must be smaller than or equal to 5000.")
       end
 
       @transaction_id = transaction_id
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        buyer_id == o.buyer_id &&
-        fingerprint == o.fingerprint &&
-        transaction_id == o.transaction_id
     end
 
     # @see the `==` method
@@ -121,8 +118,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@buyer_id, @fingerprint, @transaction_id)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@buyer_id, @fingerprint, @transaction_id)
   end
 end

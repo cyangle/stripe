@@ -18,9 +18,10 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
-    @[JSON::Field(key: "document", type: IssuingCardholderVerificationDocument, presence: true, ignore_serialize: document.nil? && !document_present?)]
-    property document : IssuingCardholderVerificationDocument
+    # Optional properties
+
+    @[JSON::Field(key: "document", type: IssuingCardholderVerificationDocument?, presence: true, ignore_serialize: document.nil? && !document_present?)]
+    property document : IssuingCardholderVerificationDocument?
 
     @[JSON::Field(ignore: true)]
     property? document_present : Bool = false
@@ -34,7 +35,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @document : IssuingCardholderVerificationDocument?)
+    def initialize(
+      *,
+      # Optional properties
+      @document : IssuingCardholderVerificationDocument? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -59,20 +64,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        document == o.document
     end
 
     # @see the `==` method
@@ -81,8 +75,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@document)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@document)
   end
 end

@@ -19,6 +19,8 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # The list of price IDs which, when subscribed to, a subscription can be updated.
     @[JSON::Field(key: "prices", type: Array(String))]
     property prices : Array(String)
 
@@ -28,7 +30,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @prices : Array(String), @product : String)
+    def initialize(
+      *,
+      # Required properties
+      @prices : Array(String),
+      @product : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -47,6 +54,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @product.to_s.size > 5000
+
       true
     end
 
@@ -60,23 +68,16 @@ module Stripe
       @product = product
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        prices == o.prices &&
-        product == o.product
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@prices, @product)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@prices, @product)
   end
 end

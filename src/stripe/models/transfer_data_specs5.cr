@@ -18,28 +18,27 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # ID of an existing, connected Stripe account.
+
     @[JSON::Field(key: "destination", type: String)]
     property destination : String
 
     # Optional properties
-    # The amount that will be transferred automatically when the invoice is paid. If no amount is set, the full amount is transferred. There cannot be any line items with recurring prices when using this field.
+
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
 
     @[JSON::Field(ignore: true)]
     property? amount_present : Bool = false
 
-    # A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount is transferred to the destination. There must be at least 1 line item with a recurring price to use this field.
-    @[JSON::Field(key: "amount_percent", type: Float64?, presence: true, ignore_serialize: amount_percent.nil? && !amount_percent_present?)]
-    property amount_percent : Float64?
-
-    @[JSON::Field(ignore: true)]
-    property? amount_percent_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @destination : String, @amount : Int64? = nil, @amount_percent : Float64? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @destination : String,
+      # Optional properties
+      @amount : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -56,24 +55,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        amount_percent == o.amount_percent &&
-        destination == o.destination
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @amount_percent, @destination)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@destination, @amount)
   end
 end

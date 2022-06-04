@@ -19,9 +19,30 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # A list of prices and quantities that will generate invoice items appended to the first invoice for this phase.
     @[JSON::Field(key: "add_invoice_items", type: Array(SubscriptionScheduleAddInvoiceItem))]
     property add_invoice_items : Array(SubscriptionScheduleAddInvoiceItem)
+
+    # The end of this phase of the subscription schedule.
+    @[JSON::Field(key: "end_date", type: Int64)]
+    property end_date : Int64
+
+    # Subscription items to configure the subscription to during this phase of the subscription schedule.
+    @[JSON::Field(key: "items", type: Array(SubscriptionScheduleConfigurationItem))]
+    property items : Array(SubscriptionScheduleConfigurationItem)
+
+    # If the subscription schedule will prorate when transitioning to this phase. Possible values are `create_prorations` and `none`.
+    @[JSON::Field(key: "proration_behavior", type: String)]
+    getter proration_behavior : String
+
+    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
+
+    # The start of this phase of the subscription schedule.
+    @[JSON::Field(key: "start_date", type: Int64)]
+    property start_date : Int64
+
+    # Optional properties
 
     # A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account during this phase of the schedule.
     @[JSON::Field(key: "application_fee_percent", type: Float64?, presence: true, ignore_serialize: application_fee_percent.nil? && !application_fee_percent_present?)]
@@ -30,6 +51,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? application_fee_percent_present : Bool = false
 
+    @[JSON::Field(key: "automatic_tax", type: SchedulesPhaseAutomaticTax?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
+    property automatic_tax : SchedulesPhaseAutomaticTax?
+
+    @[JSON::Field(ignore: true)]
+    property? automatic_tax_present : Bool = false
+
     # Possible values are `phase_start` or `automatic`. If `phase_start` then billing cycle anchor of the subscription is set to the start of the phase when entering the phase. If `automatic` then the billing cycle anchor is automatically modified as needed when entering the phase. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
     @[JSON::Field(key: "billing_cycle_anchor", type: String?, presence: true, ignore_serialize: billing_cycle_anchor.nil? && !billing_cycle_anchor_present?)]
     getter billing_cycle_anchor : String?
@@ -37,7 +64,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? billing_cycle_anchor_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR = EnumValidator.new("billing_cycle_anchor", "String", ["automatic", "phase_start", "null"])
+    ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR = EnumValidator.new("billing_cycle_anchor", "String", ["automatic", "phase_start"])
 
     @[JSON::Field(key: "billing_thresholds", type: SubscriptionBillingThresholds1?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
     property billing_thresholds : SubscriptionBillingThresholds1?
@@ -52,7 +79,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? collection_method_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_COLLECTION_METHOD = EnumValidator.new("collection_method", "String", ["charge_automatically", "send_invoice", "null"])
+    ENUM_VALIDATOR_FOR_COLLECTION_METHOD = EnumValidator.new("collection_method", "String", ["charge_automatically", "send_invoice"])
 
     @[JSON::Field(key: "coupon", type: SubscriptionSchedulePhaseConfigurationCoupon?, presence: true, ignore_serialize: coupon.nil? && !coupon_present?)]
     property coupon : SubscriptionSchedulePhaseConfigurationCoupon?
@@ -66,9 +93,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? default_payment_method_present : Bool = false
 
-    # The end of this phase of the subscription schedule.
-    @[JSON::Field(key: "end_date", type: Int64)]
-    property end_date : Int64
+    # The default tax rates to apply to the subscription during this phase of the subscription schedule.
+    @[JSON::Field(key: "default_tax_rates", type: Array(TaxRate)?, presence: true, ignore_serialize: default_tax_rates.nil? && !default_tax_rates_present?)]
+    property default_tax_rates : Array(TaxRate)?
+
+    @[JSON::Field(ignore: true)]
+    property? default_tax_rates_present : Bool = false
 
     @[JSON::Field(key: "invoice_settings", type: SubscriptionSchedulePhaseConfigurationInvoiceSettings?, presence: true, ignore_serialize: invoice_settings.nil? && !invoice_settings_present?)]
     property invoice_settings : SubscriptionSchedulePhaseConfigurationInvoiceSettings?
@@ -76,26 +106,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? invoice_settings_present : Bool = false
 
-    # Subscription items to configure the subscription to during this phase of the subscription schedule.
-    @[JSON::Field(key: "items", type: Array(SubscriptionScheduleConfigurationItem))]
-    property items : Array(SubscriptionScheduleConfigurationItem)
-
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to a phase. Metadata on a schedule's phase will update the underlying subscription's `metadata` when the phase is entered. Updating the underlying subscription's `metadata` directly will not affect the current phase's `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
     property metadata : Hash(String, String)?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
-
-    # If the subscription schedule will prorate when transitioning to this phase. Possible values are `create_prorations` and `none`.
-    @[JSON::Field(key: "proration_behavior", type: String)]
-    getter proration_behavior : String
-
-    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
-
-    # The start of this phase of the subscription schedule.
-    @[JSON::Field(key: "start_date", type: Int64)]
-    property start_date : Int64
 
     @[JSON::Field(key: "transfer_data", type: SubscriptionSchedulePhaseConfigurationTransferData?, presence: true, ignore_serialize: transfer_data.nil? && !transfer_data_present?)]
     property transfer_data : SubscriptionSchedulePhaseConfigurationTransferData?
@@ -110,23 +126,30 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? trial_end_present : Bool = false
 
-    # Optional properties
-    @[JSON::Field(key: "automatic_tax", type: SchedulesPhaseAutomaticTax?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
-    property automatic_tax : SchedulesPhaseAutomaticTax?
-
-    @[JSON::Field(ignore: true)]
-    property? automatic_tax_present : Bool = false
-
-    # The default tax rates to apply to the subscription during this phase of the subscription schedule.
-    @[JSON::Field(key: "default_tax_rates", type: Array(TaxRate)?, presence: true, ignore_serialize: default_tax_rates.nil? && !default_tax_rates_present?)]
-    property default_tax_rates : Array(TaxRate)?
-
-    @[JSON::Field(ignore: true)]
-    property? default_tax_rates_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @add_invoice_items : Array(SubscriptionScheduleAddInvoiceItem), @application_fee_percent : Float64?, @billing_cycle_anchor : String?, @billing_thresholds : SubscriptionBillingThresholds1?, @collection_method : String?, @coupon : SubscriptionSchedulePhaseConfigurationCoupon?, @default_payment_method : SubscriptionSchedulePhaseConfigurationDefaultPaymentMethod?, @end_date : Int64, @invoice_settings : SubscriptionSchedulePhaseConfigurationInvoiceSettings?, @items : Array(SubscriptionScheduleConfigurationItem), @metadata : Hash(String, String)?, @proration_behavior : String, @start_date : Int64, @transfer_data : SubscriptionSchedulePhaseConfigurationTransferData?, @trial_end : Int64?, @automatic_tax : SchedulesPhaseAutomaticTax? = nil, @default_tax_rates : Array(TaxRate)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @add_invoice_items : Array(SubscriptionScheduleAddInvoiceItem),
+      @end_date : Int64,
+      @items : Array(SubscriptionScheduleConfigurationItem),
+      @proration_behavior : String,
+      @start_date : Int64,
+      # Optional properties
+      @application_fee_percent : Float64? = nil,
+      @automatic_tax : SchedulesPhaseAutomaticTax? = nil,
+      @billing_cycle_anchor : String? = nil,
+      @billing_thresholds : SubscriptionBillingThresholds1? = nil,
+      @collection_method : String? = nil,
+      @coupon : SubscriptionSchedulePhaseConfigurationCoupon? = nil,
+      @default_payment_method : SubscriptionSchedulePhaseConfigurationDefaultPaymentMethod? = nil,
+      @default_tax_rates : Array(TaxRate)? = nil,
+      @invoice_settings : SubscriptionSchedulePhaseConfigurationInvoiceSettings? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @transfer_data : SubscriptionSchedulePhaseConfigurationTransferData? = nil,
+      @trial_end : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -134,11 +157,11 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
+      invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior, false)
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.error_message) unless ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid?(@billing_cycle_anchor)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECTION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior, false)
 
       invalid_properties
     end
@@ -146,10 +169,18 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior, false)
       return false unless ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid?(@billing_cycle_anchor)
       return false unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
-      return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior, false)
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] proration_behavior Object to be assigned
+    def proration_behavior=(proration_behavior)
+      ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(proration_behavior, false)
+      @proration_behavior = proration_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -166,45 +197,16 @@ module Stripe
       @collection_method = collection_method
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] proration_behavior Object to be assigned
-    def proration_behavior=(proration_behavior)
-      ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(proration_behavior, false)
-      @proration_behavior = proration_behavior
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        add_invoice_items == o.add_invoice_items &&
-        application_fee_percent == o.application_fee_percent &&
-        automatic_tax == o.automatic_tax &&
-        billing_cycle_anchor == o.billing_cycle_anchor &&
-        billing_thresholds == o.billing_thresholds &&
-        collection_method == o.collection_method &&
-        coupon == o.coupon &&
-        default_payment_method == o.default_payment_method &&
-        default_tax_rates == o.default_tax_rates &&
-        end_date == o.end_date &&
-        invoice_settings == o.invoice_settings &&
-        items == o.items &&
-        metadata == o.metadata &&
-        proration_behavior == o.proration_behavior &&
-        start_date == o.start_date &&
-        transfer_data == o.transfer_data &&
-        trial_end == o.trial_end
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@add_invoice_items, @application_fee_percent, @automatic_tax, @billing_cycle_anchor, @billing_thresholds, @collection_method, @coupon, @default_payment_method, @default_tax_rates, @end_date, @invoice_settings, @items, @metadata, @proration_behavior, @start_date, @transfer_data, @trial_end)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@add_invoice_items, @end_date, @items, @proration_behavior, @start_date, @application_fee_percent, @automatic_tax, @billing_cycle_anchor, @billing_thresholds, @collection_method, @coupon, @default_payment_method, @default_tax_rates, @invoice_settings, @metadata, @transfer_data, @trial_end)
   end
 end

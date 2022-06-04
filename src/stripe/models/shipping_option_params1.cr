@@ -18,7 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The ID of the Shipping Rate to use for this shipping option.
+
     @[JSON::Field(key: "shipping_rate", type: String?, presence: true, ignore_serialize: shipping_rate.nil? && !shipping_rate_present?)]
     getter shipping_rate : String?
 
@@ -27,7 +27,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @shipping_rate : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @shipping_rate : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -46,6 +50,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@shipping_rate.nil? && @shipping_rate.to_s.size > 5000
+
       true
     end
 
@@ -59,22 +64,16 @@ module Stripe
       @shipping_rate = shipping_rate
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        shipping_rate == o.shipping_rate
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@shipping_rate)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@shipping_rate)
   end
 end

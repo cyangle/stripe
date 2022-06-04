@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The name of the value list for use in rules.
     @[JSON::Field(key: "alias", type: String?, presence: true, ignore_serialize: _alias.nil? && !_alias_present?)]
     getter _alias : String?
@@ -25,6 +26,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? _alias_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -47,7 +49,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_alias : String? = nil, @expand : Array(String)? = nil, @metadata : Hash(String, String)? = nil, @name : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @_alias : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @name : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -71,6 +80,7 @@ module Stripe
     def valid?
       return false if !@_alias.nil? && @_alias.to_s.size > 100
       return false if !@name.nil? && @name.to_s.size > 100
+
       true
     end
 
@@ -94,25 +104,16 @@ module Stripe
       @name = name
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        _alias == o._alias &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        name == o.name
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@_alias, @expand, @metadata, @name)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_alias, @expand, @metadata, @name)
   end
 end

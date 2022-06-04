@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The amount to capture, which must be less than or equal to the original amount. Any additional amount will be automatically refunded.
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
@@ -39,6 +40,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? application_fee_amount_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -81,7 +83,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64? = nil, @application_fee : Int64? = nil, @application_fee_amount : Int64? = nil, @expand : Array(String)? = nil, @receipt_email : String? = nil, @statement_descriptor : String? = nil, @statement_descriptor_suffix : String? = nil, @transfer_data : TransferDataSpecs1? = nil, @transfer_group : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @amount : Int64? = nil,
+      @application_fee : Int64? = nil,
+      @application_fee_amount : Int64? = nil,
+      @expand : Array(String)? = nil,
+      @receipt_email : String? = nil,
+      @statement_descriptor : String? = nil,
+      @statement_descriptor_suffix : String? = nil,
+      @transfer_data : TransferDataSpecs1? = nil,
+      @transfer_group : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -105,6 +119,7 @@ module Stripe
     def valid?
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
       return false if !@statement_descriptor_suffix.nil? && @statement_descriptor_suffix.to_s.size > 22
+
       true
     end
 
@@ -128,30 +143,16 @@ module Stripe
       @statement_descriptor_suffix = statement_descriptor_suffix
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        application_fee == o.application_fee &&
-        application_fee_amount == o.application_fee_amount &&
-        expand == o.expand &&
-        receipt_email == o.receipt_email &&
-        statement_descriptor == o.statement_descriptor &&
-        statement_descriptor_suffix == o.statement_descriptor_suffix &&
-        transfer_data == o.transfer_data &&
-        transfer_group == o.transfer_group
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @application_fee, @application_fee_amount, @expand, @receipt_email, @statement_descriptor, @statement_descriptor_suffix, @transfer_data, @transfer_group)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @application_fee, @application_fee_amount, @expand, @receipt_email, @statement_descriptor, @statement_descriptor_suffix, @transfer_data, @transfer_group)
   end
 end

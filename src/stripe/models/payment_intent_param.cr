@@ -18,7 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Controls when the funds will be captured from the customer's account.  If provided, this parameter will override the top-level `capture_method` when finalizing the payment with this payment method type.  If `capture_method` is already set on the PaymentIntent, providing an empty value for this parameter will unset the stored value for this payment method type.
+
     @[JSON::Field(key: "capture_method", type: String?, presence: true, ignore_serialize: capture_method.nil? && !capture_method_present?)]
     getter capture_method : String?
 
@@ -27,7 +27,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_CAPTURE_METHOD = EnumValidator.new("capture_method", "String", ["", "manual"])
 
-    # A single-use `cvc_update` Token that represents a card CVC value. When provided, the CVC value will be verified during the card payment attempt. This parameter can only be provided during confirmation.
     @[JSON::Field(key: "cvc_token", type: String?, presence: true, ignore_serialize: cvc_token.nil? && !cvc_token_present?)]
     getter cvc_token : String?
 
@@ -40,20 +39,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? installments_present : Bool = false
 
-    @[JSON::Field(key: "mandate_options", type: MandateOptionsParam2?, presence: true, ignore_serialize: mandate_options.nil? && !mandate_options_present?)]
-    property mandate_options : MandateOptionsParam2?
+    @[JSON::Field(key: "mandate_options", type: MandateOptionsParam3?, presence: true, ignore_serialize: mandate_options.nil? && !mandate_options_present?)]
+    property mandate_options : MandateOptionsParam3?
 
     @[JSON::Field(ignore: true)]
     property? mandate_options_present : Bool = false
 
-    # When specified, this parameter indicates that a transaction will be marked as MOTO (Mail Order Telephone Order) and thus out of scope for SCA. This parameter can only be provided during confirmation.
-    @[JSON::Field(key: "moto", type: Bool?, presence: true, ignore_serialize: moto.nil? && !moto_present?)]
-    property moto : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? moto_present : Bool = false
-
-    # Selected network to process this PaymentIntent on. Depends on the available networks of the card attached to the PaymentIntent. Can be only set confirm-time.
     @[JSON::Field(key: "network", type: String?, presence: true, ignore_serialize: network.nil? && !network_present?)]
     getter network : String?
 
@@ -62,7 +53,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_NETWORK = EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
 
-    # We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
     @[JSON::Field(key: "request_three_d_secure", type: String?, presence: true, ignore_serialize: request_three_d_secure.nil? && !request_three_d_secure_present?)]
     getter request_three_d_secure : String?
 
@@ -71,7 +61,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = EnumValidator.new("request_three_d_secure", "String", ["any", "automatic"])
 
-    # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.
     @[JSON::Field(key: "setup_future_usage", type: String?, presence: true, ignore_serialize: setup_future_usage.nil? && !setup_future_usage_present?)]
     getter setup_future_usage : String?
 
@@ -82,13 +71,24 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @capture_method : String? = nil, @cvc_token : String? = nil, @installments : InstallmentsParam? = nil, @mandate_options : MandateOptionsParam2? = nil, @moto : Bool? = nil, @network : String? = nil, @request_three_d_secure : String? = nil, @setup_future_usage : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @capture_method : String? = nil,
+      @cvc_token : String? = nil,
+      @installments : InstallmentsParam? = nil,
+      @mandate_options : MandateOptionsParam3? = nil,
+      @network : String? = nil,
+      @request_three_d_secure : String? = nil,
+      @setup_future_usage : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
 
       if !@cvc_token.nil? && @cvc_token.to_s.size > 5000
@@ -122,6 +122,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
       return false if !@request_three_d_secure.nil? && @request_three_d_secure.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+
       true
     end
 
@@ -163,29 +164,16 @@ module Stripe
       @setup_future_usage = setup_future_usage
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        capture_method == o.capture_method &&
-        cvc_token == o.cvc_token &&
-        installments == o.installments &&
-        mandate_options == o.mandate_options &&
-        moto == o.moto &&
-        network == o.network &&
-        request_three_d_secure == o.request_three_d_secure &&
-        setup_future_usage == o.setup_future_usage
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@capture_method, @cvc_token, @installments, @mandate_options, @moto, @network, @request_three_d_secure, @setup_future_usage)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@capture_method, @cvc_token, @installments, @mandate_options, @network, @request_three_d_secure, @setup_future_usage)
   end
 end

@@ -19,13 +19,18 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Whether 3D Secure is supported on this card.
     @[JSON::Field(key: "supported", type: Bool)]
     property supported : Bool
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @supported : Bool)
+    def initialize(
+      *,
+      # Required properties
+      @supported : Bool
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -42,22 +47,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        supported == o.supported
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@supported)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@supported)
   end
 end

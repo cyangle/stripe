@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # An optional 10 to 11 digit numeric-only string determining the confirmation code at applicable convenience stores.
     @[JSON::Field(key: "confirmation_number", type: String?, presence: true, ignore_serialize: confirmation_number.nil? && !confirmation_number_present?)]
     getter confirmation_number : String?
@@ -47,7 +48,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? product_description_present : Bool = false
 
-    # Optional properties
     # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
     @[JSON::Field(key: "setup_future_usage", type: String?, presence: true, ignore_serialize: setup_future_usage.nil? && !setup_future_usage_present?)]
     getter setup_future_usage : String?
@@ -59,7 +59,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @confirmation_number : String?, @expires_after_days : Int64?, @expires_at : Int64?, @product_description : String?, @setup_future_usage : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @confirmation_number : String? = nil,
+      @expires_after_days : Int64? = nil,
+      @expires_at : Int64? = nil,
+      @product_description : String? = nil,
+      @setup_future_usage : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -67,11 +75,11 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @confirmation_number.to_s.size > 5000
+      if !@confirmation_number.nil? && @confirmation_number.to_s.size > 5000
         invalid_properties.push("invalid value for \"confirmation_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @product_description.to_s.size > 5000
+      if !@product_description.nil? && @product_description.to_s.size > 5000
         invalid_properties.push("invalid value for \"product_description\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -83,16 +91,17 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @confirmation_number.to_s.size > 5000
-      return false if @product_description.to_s.size > 5000
+      return false if !@confirmation_number.nil? && @confirmation_number.to_s.size > 5000
+      return false if !@product_description.nil? && @product_description.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] confirmation_number Value to be assigned
     def confirmation_number=(confirmation_number)
-      if confirmation_number.to_s.size > 5000
+      if !confirmation_number.nil? && confirmation_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"confirmation_number\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -102,7 +111,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] product_description Value to be assigned
     def product_description=(product_description)
-      if product_description.to_s.size > 5000
+      if !product_description.nil? && product_description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -116,26 +125,16 @@ module Stripe
       @setup_future_usage = setup_future_usage
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        confirmation_number == o.confirmation_number &&
-        expires_after_days == o.expires_after_days &&
-        expires_at == o.expires_at &&
-        product_description == o.product_description &&
-        setup_future_usage == o.setup_future_usage
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@confirmation_number, @expires_after_days, @expires_at, @product_description, @setup_future_usage)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@confirmation_number, @expires_after_days, @expires_at, @product_description, @setup_future_usage)
   end
 end

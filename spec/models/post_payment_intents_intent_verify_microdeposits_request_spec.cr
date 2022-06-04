@@ -26,6 +26,12 @@ describe Stripe::PostPaymentIntentsIntentVerifyMicrodepositsRequest do
     end
   end
 
+  describe "test attribute 'client_secret'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'descriptor_code'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

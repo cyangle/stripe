@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The display name of the tax rate, which will be shown to users.
     @[JSON::Field(key: "display_name", type: String)]
     getter display_name : String
@@ -31,6 +32,7 @@ module Stripe
     property percentage : Float64
 
     # Optional properties
+
     # Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
@@ -52,6 +54,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -90,7 +93,22 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @display_name : String, @inclusive : Bool, @percentage : Float64, @active : Bool? = nil, @country : String? = nil, @description : String? = nil, @expand : Array(String)? = nil, @jurisdiction : String? = nil, @metadata : Hash(String, String)? = nil, @state : String? = nil, @tax_type : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @display_name : String,
+      @inclusive : Bool,
+      @percentage : Float64,
+      # Optional properties
+      @active : Bool? = nil,
+      @country : String? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @jurisdiction : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @state : String? = nil,
+      @tax_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -98,16 +116,16 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
+      if @display_name.to_s.size > 50
+        invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 50.")
+      end
+
       if !@country.nil? && @country.to_s.size > 5000
         invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
       if !@description.nil? && @description.to_s.size > 5000
         invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @display_name.to_s.size > 50
-        invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 50.")
       end
 
       if !@jurisdiction.nil? && @jurisdiction.to_s.size > 50
@@ -126,13 +144,24 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @display_name.to_s.size > 50
       return false if !@country.nil? && @country.to_s.size > 5000
       return false if !@description.nil? && @description.to_s.size > 5000
-      return false if @display_name.to_s.size > 50
       return false if !@jurisdiction.nil? && @jurisdiction.to_s.size > 50
       return false if !@state.nil? && @state.to_s.size > 2
       return false unless ENUM_VALIDATOR_FOR_TAX_TYPE.valid?(@tax_type)
+
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] display_name Value to be assigned
+    def display_name=(display_name)
+      if display_name.to_s.size > 50
+        raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 50.")
+      end
+
+      @display_name = display_name
     end
 
     # Custom attribute writer method with validation
@@ -153,16 +182,6 @@ module Stripe
       end
 
       @description = description
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] display_name Value to be assigned
-    def display_name=(display_name)
-      if display_name.to_s.size > 50
-        raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 50.")
-      end
-
-      @display_name = display_name
     end
 
     # Custom attribute writer method with validation
@@ -192,32 +211,16 @@ module Stripe
       @tax_type = tax_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        country == o.country &&
-        description == o.description &&
-        display_name == o.display_name &&
-        expand == o.expand &&
-        inclusive == o.inclusive &&
-        jurisdiction == o.jurisdiction &&
-        metadata == o.metadata &&
-        percentage == o.percentage &&
-        state == o.state &&
-        tax_type == o.tax_type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @country, @description, @display_name, @expand, @inclusive, @jurisdiction, @metadata, @percentage, @state, @tax_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@display_name, @inclusive, @percentage, @active, @country, @description, @expand, @jurisdiction, @metadata, @state, @tax_type)
   end
 end

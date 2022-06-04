@@ -12,24 +12,27 @@ require "time"
 require "log"
 
 module Stripe
-  # If this is an `au_becs_debit` PaymentMethod, this hash contains details about the bank account.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class Param
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The account number for the bank account.
+
     @[JSON::Field(key: "account_number", type: String)]
     getter account_number : String
 
-    # Bank-State-Branch number of the bank account.
     @[JSON::Field(key: "bsb_number", type: String)]
     getter bsb_number : String
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account_number : String, @bsb_number : String)
+    def initialize(
+      *,
+      # Required properties
+      @account_number : String,
+      @bsb_number : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -53,6 +56,7 @@ module Stripe
     def valid?
       return false if @account_number.to_s.size > 5000
       return false if @bsb_number.to_s.size > 5000
+
       true
     end
 
@@ -76,23 +80,16 @@ module Stripe
       @bsb_number = bsb_number
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account_number == o.account_number &&
-        bsb_number == o.bsb_number
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account_number, @bsb_number)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account_number, @bsb_number)
   end
 end

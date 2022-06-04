@@ -19,21 +19,20 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Type of account holder to collect accounts for.
+
     @[JSON::Field(key: "type", type: String)]
     getter _type : String
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["account", "customer"])
 
     # Optional properties
-    # The ID of the Stripe account whose accounts will be retrieved. Should only be present if `type` is `account`.
+
     @[JSON::Field(key: "account", type: String?, presence: true, ignore_serialize: account.nil? && !account_present?)]
     getter account : String?
 
     @[JSON::Field(ignore: true)]
     property? account_present : Bool = false
 
-    # The ID of the Stripe customer whose accounts will be retrieved. Should only be present if `type` is `customer`.
     @[JSON::Field(key: "customer", type: String?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
     getter customer : String?
 
@@ -42,13 +41,22 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_type : String, @account : String? = nil, @customer : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String,
+      # Optional properties
+      @account : String? = nil,
+      @customer : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       if !@account.nil? && @account.to_s.size > 5000
         invalid_properties.push("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
@@ -58,18 +66,24 @@ module Stripe
         invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       return false if !@account.nil? && @account.to_s.size > 5000
       return false if !@customer.nil? && @customer.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type)
+      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
+      @_type = _type
     end
 
     # Custom attribute writer method with validation
@@ -92,31 +106,16 @@ module Stripe
       @customer = customer
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] _type Object to be assigned
-    def _type=(_type)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
-      @_type = _type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account == o.account &&
-        customer == o.customer &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account, @customer, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @account, @customer)
   end
 end

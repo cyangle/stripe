@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # A short machine-readable string giving the reason for the verification failure.
     @[JSON::Field(key: "code", type: String?, presence: true, ignore_serialize: code.nil? && !code_present?)]
     getter code : String?
@@ -26,7 +27,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? code_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_CODE = EnumValidator.new("code", "String", ["document_expired", "document_type_not_supported", "document_unverified_other", "null"])
+    ENUM_VALIDATOR_FOR_CODE = EnumValidator.new("code", "String", ["document_expired", "document_type_not_supported", "document_unverified_other"])
 
     # A human-readable message giving the reason for the failure. These messages can be shown to your users.
     @[JSON::Field(key: "reason", type: String?, presence: true, ignore_serialize: reason.nil? && !reason_present?)]
@@ -37,16 +38,22 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @code : String?, @reason : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @code : String? = nil,
+      @reason : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code)
 
-      if @reason.to_s.size > 5000
+      if !@reason.nil? && @reason.to_s.size > 5000
         invalid_properties.push("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -57,7 +64,8 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_CODE.valid?(@code)
-      return false if @reason.to_s.size > 5000
+      return false if !@reason.nil? && @reason.to_s.size > 5000
+
       true
     end
 
@@ -71,20 +79,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] reason Value to be assigned
     def reason=(reason)
-      if reason.to_s.size > 5000
+      if !reason.nil? && reason.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
       end
 
       @reason = reason
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        code == o.code &&
-        reason == o.reason
     end
 
     # @see the `==` method
@@ -93,8 +92,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@code, @reason)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@code, @reason)
   end
 end

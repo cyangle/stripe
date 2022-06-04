@@ -18,35 +18,32 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Type of the credit note line item, one of `invoice_line_item` or `custom_line_item`
+
     @[JSON::Field(key: "type", type: String)]
     getter _type : String
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["custom_line_item", "invoice_line_item"])
 
     # Optional properties
-    # The line item amount to credit. Only valid when `type` is `invoice_line_item`.
+
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
 
     @[JSON::Field(ignore: true)]
     property? amount_present : Bool = false
 
-    # The description of the credit note line item. Only valid when the `type` is `custom_line_item`.
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String?
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
-    # The invoice line item to credit. Only valid when the `type` is `invoice_line_item`.
     @[JSON::Field(key: "invoice_line_item", type: String?, presence: true, ignore_serialize: invoice_line_item.nil? && !invoice_line_item_present?)]
     getter invoice_line_item : String?
 
     @[JSON::Field(ignore: true)]
     property? invoice_line_item_present : Bool = false
 
-    # The line item quantity to credit.
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
     property quantity : Int64?
 
@@ -59,14 +56,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? tax_rates_present : Bool = false
 
-    # The integer unit amount in cents (or local equivalent) of the credit note line item. This `unit_amount` will be multiplied by the quantity to get the full amount to credit for this line item. Only valid when `type` is `custom_line_item`.
     @[JSON::Field(key: "unit_amount", type: Int64?, presence: true, ignore_serialize: unit_amount.nil? && !unit_amount_present?)]
     property unit_amount : Int64?
 
     @[JSON::Field(ignore: true)]
     property? unit_amount_present : Bool = false
 
-    # Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
     @[JSON::Field(key: "unit_amount_decimal", type: String?, presence: true, ignore_serialize: unit_amount_decimal.nil? && !unit_amount_decimal_present?)]
     property unit_amount_decimal : String?
 
@@ -75,13 +70,27 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_type : String, @amount : Int64? = nil, @description : String? = nil, @invoice_line_item : String? = nil, @quantity : Int64? = nil, @tax_rates : CreditNoteLineItemParamsTaxRates? = nil, @unit_amount : Int64? = nil, @unit_amount_decimal : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String,
+      # Optional properties
+      @amount : Int64? = nil,
+      @description : String? = nil,
+      @invoice_line_item : String? = nil,
+      @quantity : Int64? = nil,
+      @tax_rates : CreditNoteLineItemParamsTaxRates? = nil,
+      @unit_amount : Int64? = nil,
+      @unit_amount_decimal : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       if !@description.nil? && @description.to_s.size > 5000
         invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
@@ -91,18 +100,24 @@ module Stripe
         invalid_properties.push("invalid value for \"invoice_line_item\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       return false if !@description.nil? && @description.to_s.size > 5000
       return false if !@invoice_line_item.nil? && @invoice_line_item.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type)
+      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
+      @_type = _type
     end
 
     # Custom attribute writer method with validation
@@ -125,36 +140,16 @@ module Stripe
       @invoice_line_item = invoice_line_item
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] _type Object to be assigned
-    def _type=(_type)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
-      @_type = _type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        description == o.description &&
-        invoice_line_item == o.invoice_line_item &&
-        quantity == o.quantity &&
-        tax_rates == o.tax_rates &&
-        _type == o._type &&
-        unit_amount == o.unit_amount &&
-        unit_amount_decimal == o.unit_amount_decimal
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @description, @invoice_line_item, @quantity, @tax_rates, @_type, @unit_amount, @unit_amount_decimal)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @amount, @description, @invoice_line_item, @quantity, @tax_rates, @unit_amount, @unit_amount_decimal)
   end
 end

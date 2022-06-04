@@ -20,16 +20,6 @@ describe Stripe::Param4 do
     end
   end
 
-  describe "test attribute 'account_holder_type'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["company", "individual"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.account_holder_type = value }.not_to raise_error
-      # end
-    end
-  end
-
   describe "test attribute 'bank'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

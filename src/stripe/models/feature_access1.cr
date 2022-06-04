@@ -19,14 +19,15 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "card_issuing", type: Access?, presence: true, ignore_serialize: card_issuing.nil? && !card_issuing_present?)]
     property card_issuing : Access?
 
     @[JSON::Field(ignore: true)]
     property? card_issuing_present : Bool = false
 
-    @[JSON::Field(key: "deposit_insurance", type: Access1?, presence: true, ignore_serialize: deposit_insurance.nil? && !deposit_insurance_present?)]
-    property deposit_insurance : Access1?
+    @[JSON::Field(key: "deposit_insurance", type: Access?, presence: true, ignore_serialize: deposit_insurance.nil? && !deposit_insurance_present?)]
+    property deposit_insurance : Access?
 
     @[JSON::Field(ignore: true)]
     property? deposit_insurance_present : Bool = false
@@ -43,8 +44,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? inbound_transfers_present : Bool = false
 
-    @[JSON::Field(key: "intra_stripe_flows", type: Access4?, presence: true, ignore_serialize: intra_stripe_flows.nil? && !intra_stripe_flows_present?)]
-    property intra_stripe_flows : Access4?
+    @[JSON::Field(key: "intra_stripe_flows", type: Access?, presence: true, ignore_serialize: intra_stripe_flows.nil? && !intra_stripe_flows_present?)]
+    property intra_stripe_flows : Access?
 
     @[JSON::Field(ignore: true)]
     property? intra_stripe_flows_present : Bool = false
@@ -63,7 +64,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @card_issuing : Access? = nil, @deposit_insurance : Access1? = nil, @financial_addresses : FinancialAddresses? = nil, @inbound_transfers : InboundTransfers1? = nil, @intra_stripe_flows : Access4? = nil, @outbound_payments : OutboundPayments? = nil, @outbound_transfers : OutboundTransfers? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @card_issuing : Access? = nil,
+      @deposit_insurance : Access? = nil,
+      @financial_addresses : FinancialAddresses? = nil,
+      @inbound_transfers : InboundTransfers1? = nil,
+      @intra_stripe_flows : Access? = nil,
+      @outbound_payments : OutboundPayments? = nil,
+      @outbound_transfers : OutboundTransfers? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -80,28 +91,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        card_issuing == o.card_issuing &&
-        deposit_insurance == o.deposit_insurance &&
-        financial_addresses == o.financial_addresses &&
-        inbound_transfers == o.inbound_transfers &&
-        intra_stripe_flows == o.intra_stripe_flows &&
-        outbound_payments == o.outbound_payments &&
-        outbound_transfers == o.outbound_transfers
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@card_issuing, @deposit_insurance, @financial_addresses, @inbound_transfers, @intra_stripe_flows, @outbound_payments, @outbound_transfers)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@card_issuing, @deposit_insurance, @financial_addresses, @inbound_transfers, @intra_stripe_flows, @outbound_payments, @outbound_transfers)
   end
 end

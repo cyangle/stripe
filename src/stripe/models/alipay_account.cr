@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
     property created : Int64
@@ -41,6 +42,33 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["alipay_account"])
 
+    # True if you can create multiple payments using this account. If the account is reusable, then you can freely choose the amount of each payment.
+    @[JSON::Field(key: "reusable", type: Bool)]
+    property reusable : Bool
+
+    # Whether this Alipay account object has ever been used for a payment.
+    @[JSON::Field(key: "used", type: Bool)]
+    property used : Bool
+
+    # The username for the Alipay account.
+    @[JSON::Field(key: "username", type: String)]
+    getter username : String
+
+    # Optional properties
+
+    @[JSON::Field(key: "customer", type: AlipayAccountCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
+    property customer : AlipayAccountCustomer?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_present : Bool = false
+
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
+
     # If the Alipay account object is not reusable, the exact amount that you can create a charge for.
     @[JSON::Field(key: "payment_amount", type: Int64?, presence: true, ignore_serialize: payment_amount.nil? && !payment_amount_present?)]
     property payment_amount : Int64?
@@ -55,35 +83,25 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_currency_present : Bool = false
 
-    # True if you can create multiple payments using this account. If the account is reusable, then you can freely choose the amount of each payment.
-    @[JSON::Field(key: "reusable", type: Bool)]
-    property reusable : Bool
-
-    # Whether this Alipay account object has ever been used for a payment.
-    @[JSON::Field(key: "used", type: Bool)]
-    property used : Bool
-
-    # The username for the Alipay account.
-    @[JSON::Field(key: "username", type: String)]
-    getter username : String
-
-    # Optional properties
-    @[JSON::Field(key: "customer", type: AlipayAccountCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
-    property customer : AlipayAccountCustomer?
-
-    @[JSON::Field(ignore: true)]
-    property? customer_present : Bool = false
-
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)?
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @created : Int64, @fingerprint : String, @id : String, @livemode : Bool, @object : String, @payment_amount : Int64?, @payment_currency : String?, @reusable : Bool, @used : Bool, @username : String, @customer : AlipayAccountCustomer? = nil, @metadata : Hash(String, String)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @fingerprint : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @reusable : Bool,
+      @used : Bool,
+      @username : String,
+      # Optional properties
+      @customer : AlipayAccountCustomer? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @payment_amount : Int64? = nil,
+      @payment_currency : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -115,6 +133,7 @@ module Stripe
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @username.to_s.size > 5000
+
       true
     end
 
@@ -155,33 +174,16 @@ module Stripe
       @username = username
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        created == o.created &&
-        customer == o.customer &&
-        fingerprint == o.fingerprint &&
-        id == o.id &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        payment_amount == o.payment_amount &&
-        payment_currency == o.payment_currency &&
-        reusable == o.reusable &&
-        used == o.used &&
-        username == o.username
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@created, @customer, @fingerprint, @id, @livemode, @metadata, @object, @payment_amount, @payment_currency, @reusable, @used, @username)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @fingerprint, @id, @livemode, @object, @reusable, @used, @username, @customer, @metadata, @payment_amount, @payment_currency)
   end
 end

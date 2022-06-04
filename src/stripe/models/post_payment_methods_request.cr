@@ -18,8 +18,9 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "acss_debit", type: PaymentMethodParam?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
-    property acss_debit : PaymentMethodParam?
+
+    @[JSON::Field(key: "acss_debit", type: PaymentMethodParam2?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
+    property acss_debit : PaymentMethodParam2?
 
     @[JSON::Field(ignore: true)]
     property? acss_debit_present : Bool = false
@@ -45,14 +46,14 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? alipay_present : Bool = false
 
-    @[JSON::Field(key: "au_becs_debit", type: Param?, presence: true, ignore_serialize: au_becs_debit.nil? && !au_becs_debit_present?)]
-    property au_becs_debit : Param?
+    @[JSON::Field(key: "au_becs_debit", type: Param10?, presence: true, ignore_serialize: au_becs_debit.nil? && !au_becs_debit_present?)]
+    property au_becs_debit : Param10?
 
     @[JSON::Field(ignore: true)]
     property? au_becs_debit_present : Bool = false
 
-    @[JSON::Field(key: "bacs_debit", type: Param1?, presence: true, ignore_serialize: bacs_debit.nil? && !bacs_debit_present?)]
-    property bacs_debit : Param1?
+    @[JSON::Field(key: "bacs_debit", type: Param11?, presence: true, ignore_serialize: bacs_debit.nil? && !bacs_debit_present?)]
+    property bacs_debit : Param11?
 
     @[JSON::Field(ignore: true)]
     property? bacs_debit_present : Bool = false
@@ -64,14 +65,14 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? bancontact_present : Bool = false
 
-    @[JSON::Field(key: "billing_details", type: BillingDetailsInnerParams?, presence: true, ignore_serialize: billing_details.nil? && !billing_details_present?)]
-    property billing_details : BillingDetailsInnerParams?
+    @[JSON::Field(key: "billing_details", type: BillingDetailsInnerParams1?, presence: true, ignore_serialize: billing_details.nil? && !billing_details_present?)]
+    property billing_details : BillingDetailsInnerParams1?
 
     @[JSON::Field(ignore: true)]
     property? billing_details_present : Bool = false
 
-    @[JSON::Field(key: "boleto", type: Param2?, presence: true, ignore_serialize: boleto.nil? && !boleto_present?)]
-    property boleto : Param2?
+    @[JSON::Field(key: "boleto", type: Param12?, presence: true, ignore_serialize: boleto.nil? && !boleto_present?)]
+    property boleto : Param12?
 
     @[JSON::Field(ignore: true)]
     property? boleto_present : Bool = false
@@ -96,20 +97,21 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? customer_balance_present : Bool = false
 
-    @[JSON::Field(key: "eps", type: Param3?, presence: true, ignore_serialize: eps.nil? && !eps_present?)]
-    property eps : Param3?
+    @[JSON::Field(key: "eps", type: Param13?, presence: true, ignore_serialize: eps.nil? && !eps_present?)]
+    property eps : Param13?
 
     @[JSON::Field(ignore: true)]
     property? eps_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? expand_present : Bool = false
 
-    @[JSON::Field(key: "fpx", type: Param4?, presence: true, ignore_serialize: fpx.nil? && !fpx_present?)]
-    property fpx : Param4?
+    @[JSON::Field(key: "fpx", type: Param14?, presence: true, ignore_serialize: fpx.nil? && !fpx_present?)]
+    property fpx : Param14?
 
     @[JSON::Field(ignore: true)]
     property? fpx_present : Bool = false
@@ -128,8 +130,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? grabpay_present : Bool = false
 
-    @[JSON::Field(key: "ideal", type: Param5?, presence: true, ignore_serialize: ideal.nil? && !ideal_present?)]
-    property ideal : Param5?
+    @[JSON::Field(key: "ideal", type: Param15?, presence: true, ignore_serialize: ideal.nil? && !ideal_present?)]
+    property ideal : Param15?
 
     @[JSON::Field(ignore: true)]
     property? ideal_present : Bool = false
@@ -141,8 +143,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? interac_present_present : Bool = false
 
-    @[JSON::Field(key: "klarna", type: Param6?, presence: true, ignore_serialize: klarna.nil? && !klarna_present?)]
-    property klarna : Param6?
+    @[JSON::Field(key: "klarna", type: Param16?, presence: true, ignore_serialize: klarna.nil? && !klarna_present?)]
+    property klarna : Param16?
 
     @[JSON::Field(ignore: true)]
     property? klarna_present : Bool = false
@@ -175,8 +177,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? oxxo_present : Bool = false
 
-    @[JSON::Field(key: "p24", type: Param7?, presence: true, ignore_serialize: p24.nil? && !p24_present?)]
-    property p24 : Param7?
+    @[JSON::Field(key: "p24", type: Param17?, presence: true, ignore_serialize: p24.nil? && !p24_present?)]
+    property p24 : Param17?
 
     @[JSON::Field(ignore: true)]
     property? p24_present : Bool = false
@@ -201,14 +203,14 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? radar_options_present : Bool = false
 
-    @[JSON::Field(key: "sepa_debit", type: Param8?, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
-    property sepa_debit : Param8?
+    @[JSON::Field(key: "sepa_debit", type: Param18?, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
+    property sepa_debit : Param18?
 
     @[JSON::Field(ignore: true)]
     property? sepa_debit_present : Bool = false
 
-    @[JSON::Field(key: "sofort", type: Param9?, presence: true, ignore_serialize: sofort.nil? && !sofort_present?)]
-    property sofort : Param9?
+    @[JSON::Field(key: "sofort", type: Param19?, presence: true, ignore_serialize: sofort.nil? && !sofort_present?)]
+    property sofort : Param19?
 
     @[JSON::Field(ignore: true)]
     property? sofort_present : Bool = false
@@ -222,8 +224,8 @@ module Stripe
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
 
-    @[JSON::Field(key: "us_bank_account", type: PaymentMethodParam1?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
-    property us_bank_account : PaymentMethodParam1?
+    @[JSON::Field(key: "us_bank_account", type: PaymentMethodParam3?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
+    property us_bank_account : PaymentMethodParam3?
 
     @[JSON::Field(ignore: true)]
     property? us_bank_account_present : Bool = false
@@ -237,7 +239,43 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @acss_debit : PaymentMethodParam? = nil, @affirm : JSON::Any = nil, @afterpay_clearpay : JSON::Any = nil, @alipay : JSON::Any = nil, @au_becs_debit : Param? = nil, @bacs_debit : Param1? = nil, @bancontact : JSON::Any = nil, @billing_details : BillingDetailsInnerParams? = nil, @boleto : Param2? = nil, @card : PostPaymentMethodsRequestCard? = nil, @customer : String? = nil, @customer_balance : JSON::Any = nil, @eps : Param3? = nil, @expand : Array(String)? = nil, @fpx : Param4? = nil, @giropay : JSON::Any = nil, @grabpay : JSON::Any = nil, @ideal : Param5? = nil, @interac_present : JSON::Any = nil, @klarna : Param6? = nil, @konbini : JSON::Any = nil, @link : JSON::Any = nil, @metadata : Hash(String, String)? = nil, @oxxo : JSON::Any = nil, @p24 : Param7? = nil, @payment_method : String? = nil, @paynow : JSON::Any = nil, @radar_options : RadarOptions? = nil, @sepa_debit : Param8? = nil, @sofort : Param9? = nil, @_type : String? = nil, @us_bank_account : PaymentMethodParam1? = nil, @wechat_pay : JSON::Any = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @acss_debit : PaymentMethodParam2? = nil,
+      @affirm : JSON::Any = nil,
+      @afterpay_clearpay : JSON::Any = nil,
+      @alipay : JSON::Any = nil,
+      @au_becs_debit : Param10? = nil,
+      @bacs_debit : Param11? = nil,
+      @bancontact : JSON::Any = nil,
+      @billing_details : BillingDetailsInnerParams1? = nil,
+      @boleto : Param12? = nil,
+      @card : PostPaymentMethodsRequestCard? = nil,
+      @customer : String? = nil,
+      @customer_balance : JSON::Any = nil,
+      @eps : Param13? = nil,
+      @expand : Array(String)? = nil,
+      @fpx : Param14? = nil,
+      @giropay : JSON::Any = nil,
+      @grabpay : JSON::Any = nil,
+      @ideal : Param15? = nil,
+      @interac_present : JSON::Any = nil,
+      @klarna : Param16? = nil,
+      @konbini : JSON::Any = nil,
+      @link : JSON::Any = nil,
+      @metadata : Hash(String, String)? = nil,
+      @oxxo : JSON::Any = nil,
+      @p24 : Param17? = nil,
+      @payment_method : String? = nil,
+      @paynow : JSON::Any = nil,
+      @radar_options : RadarOptions? = nil,
+      @sepa_debit : Param18? = nil,
+      @sofort : Param19? = nil,
+      @_type : String? = nil,
+      @us_bank_account : PaymentMethodParam3? = nil,
+      @wechat_pay : JSON::Any = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -264,6 +302,7 @@ module Stripe
       return false if !@customer.nil? && @customer.to_s.size > 5000
       return false if !@payment_method.nil? && @payment_method.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+
       true
     end
 
@@ -294,54 +333,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit == o.acss_debit &&
-        affirm == o.affirm &&
-        afterpay_clearpay == o.afterpay_clearpay &&
-        alipay == o.alipay &&
-        au_becs_debit == o.au_becs_debit &&
-        bacs_debit == o.bacs_debit &&
-        bancontact == o.bancontact &&
-        billing_details == o.billing_details &&
-        boleto == o.boleto &&
-        card == o.card &&
-        customer == o.customer &&
-        customer_balance == o.customer_balance &&
-        eps == o.eps &&
-        expand == o.expand &&
-        fpx == o.fpx &&
-        giropay == o.giropay &&
-        grabpay == o.grabpay &&
-        ideal == o.ideal &&
-        interac_present == o.interac_present &&
-        klarna == o.klarna &&
-        konbini == o.konbini &&
-        link == o.link &&
-        metadata == o.metadata &&
-        oxxo == o.oxxo &&
-        p24 == o.p24 &&
-        payment_method == o.payment_method &&
-        paynow == o.paynow &&
-        radar_options == o.radar_options &&
-        sepa_debit == o.sepa_debit &&
-        sofort == o.sofort &&
-        _type == o._type &&
-        us_bank_account == o.us_bank_account &&
-        wechat_pay == o.wechat_pay
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @billing_details, @boleto, @card, @customer, @customer_balance, @eps, @expand, @fpx, @giropay, @grabpay, @ideal, @interac_present, @klarna, @konbini, @link, @metadata, @oxxo, @p24, @payment_method, @paynow, @radar_options, @sepa_debit, @sofort, @_type, @us_bank_account, @wechat_pay)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @billing_details, @boleto, @card, @customer, @customer_balance, @eps, @expand, @fpx, @giropay, @grabpay, @ideal, @interac_present, @klarna, @konbini, @link, @metadata, @oxxo, @p24, @payment_method, @paynow, @radar_options, @sepa_debit, @sofort, @_type, @us_bank_account, @wechat_pay)
   end
 end

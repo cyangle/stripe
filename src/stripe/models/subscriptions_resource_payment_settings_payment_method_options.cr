@@ -18,39 +18,40 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
-    @[JSON::Field(key: "acss_debit", type: SubscriptionsResourcePaymentMethodOptionsAcssDebit, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
-    property acss_debit : SubscriptionsResourcePaymentMethodOptionsAcssDebit
+    # Optional properties
+
+    @[JSON::Field(key: "acss_debit", type: SubscriptionsResourcePaymentMethodOptionsAcssDebit?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
+    property acss_debit : SubscriptionsResourcePaymentMethodOptionsAcssDebit?
 
     @[JSON::Field(ignore: true)]
     property? acss_debit_present : Bool = false
 
-    @[JSON::Field(key: "bancontact", type: SubscriptionsResourcePaymentMethodOptionsBancontact, presence: true, ignore_serialize: bancontact.nil? && !bancontact_present?)]
-    property bancontact : SubscriptionsResourcePaymentMethodOptionsBancontact
+    @[JSON::Field(key: "bancontact", type: SubscriptionsResourcePaymentMethodOptionsBancontact?, presence: true, ignore_serialize: bancontact.nil? && !bancontact_present?)]
+    property bancontact : SubscriptionsResourcePaymentMethodOptionsBancontact?
 
     @[JSON::Field(ignore: true)]
     property? bancontact_present : Bool = false
 
-    @[JSON::Field(key: "card", type: SubscriptionsResourcePaymentMethodOptionsCard, presence: true, ignore_serialize: card.nil? && !card_present?)]
-    property card : SubscriptionsResourcePaymentMethodOptionsCard
+    @[JSON::Field(key: "card", type: SubscriptionsResourcePaymentMethodOptionsCard?, presence: true, ignore_serialize: card.nil? && !card_present?)]
+    property card : SubscriptionsResourcePaymentMethodOptionsCard?
 
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
-    @[JSON::Field(key: "customer_balance", type: SubscriptionsResourcePaymentMethodOptionsCustomerBalance, presence: true, ignore_serialize: customer_balance.nil? && !customer_balance_present?)]
-    property customer_balance : SubscriptionsResourcePaymentMethodOptionsCustomerBalance
+    @[JSON::Field(key: "customer_balance", type: SubscriptionsResourcePaymentMethodOptionsCustomerBalance?, presence: true, ignore_serialize: customer_balance.nil? && !customer_balance_present?)]
+    property customer_balance : SubscriptionsResourcePaymentMethodOptionsCustomerBalance?
 
     @[JSON::Field(ignore: true)]
     property? customer_balance_present : Bool = false
 
-    @[JSON::Field(key: "konbini", type: SubscriptionsResourcePaymentMethodOptionsKonbini, presence: true, ignore_serialize: konbini.nil? && !konbini_present?)]
-    property konbini : SubscriptionsResourcePaymentMethodOptionsKonbini
+    @[JSON::Field(key: "konbini", type: SubscriptionsResourcePaymentMethodOptionsKonbini?, presence: true, ignore_serialize: konbini.nil? && !konbini_present?)]
+    property konbini : SubscriptionsResourcePaymentMethodOptionsKonbini?
 
     @[JSON::Field(ignore: true)]
     property? konbini_present : Bool = false
 
-    @[JSON::Field(key: "us_bank_account", type: SubscriptionsResourcePaymentMethodOptionsUsBankAccount, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
-    property us_bank_account : SubscriptionsResourcePaymentMethodOptionsUsBankAccount
+    @[JSON::Field(key: "us_bank_account", type: SubscriptionsResourcePaymentMethodOptionsUsBankAccount?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
+    property us_bank_account : SubscriptionsResourcePaymentMethodOptionsUsBankAccount?
 
     @[JSON::Field(ignore: true)]
     property? us_bank_account_present : Bool = false
@@ -64,7 +65,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @acss_debit : SubscriptionsResourcePaymentMethodOptionsAcssDebit?, @bancontact : SubscriptionsResourcePaymentMethodOptionsBancontact?, @card : SubscriptionsResourcePaymentMethodOptionsCard?, @customer_balance : SubscriptionsResourcePaymentMethodOptionsCustomerBalance?, @konbini : SubscriptionsResourcePaymentMethodOptionsKonbini?, @us_bank_account : SubscriptionsResourcePaymentMethodOptionsUsBankAccount?)
+    def initialize(
+      *,
+      # Optional properties
+      @acss_debit : SubscriptionsResourcePaymentMethodOptionsAcssDebit? = nil,
+      @bancontact : SubscriptionsResourcePaymentMethodOptionsBancontact? = nil,
+      @card : SubscriptionsResourcePaymentMethodOptionsCard? = nil,
+      @customer_balance : SubscriptionsResourcePaymentMethodOptionsCustomerBalance? = nil,
+      @konbini : SubscriptionsResourcePaymentMethodOptionsKonbini? = nil,
+      @us_bank_account : SubscriptionsResourcePaymentMethodOptionsUsBankAccount? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -89,25 +99,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit == o.acss_debit &&
-        bancontact == o.bancontact &&
-        card == o.card &&
-        customer_balance == o.customer_balance &&
-        konbini == o.konbini &&
-        us_bank_account == o.us_bank_account
     end
 
     # @see the `==` method
@@ -116,8 +110,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit, @bancontact, @card, @customer_balance, @konbini, @us_bank_account)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@acss_debit, @bancontact, @card, @customer_balance, @konbini, @us_bank_account)
   end
 end

@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Array of strings of allowed identity document types. If the provided identity document isn’t one of the allowed types, the verification check will fail with a document_type_not_allowed error code.
     @[JSON::Field(key: "allowed_types", type: Array(String)?, presence: true, ignore_serialize: allowed_types.nil? && !allowed_types_present?)]
     getter allowed_types : Array(String)?
@@ -51,13 +52,21 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @allowed_types : Array(String)? = nil, @require_id_number : Bool? = nil, @require_live_capture : Bool? = nil, @require_matching_selfie : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @allowed_types : Array(String)? = nil,
+      @require_id_number : Bool? = nil,
+      @require_live_capture : Bool? = nil,
+      @require_matching_selfie : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_ALLOWED_TYPES.error_message) unless ENUM_VALIDATOR_FOR_ALLOWED_TYPES.all_valid?(@allowed_types)
 
       invalid_properties
@@ -67,6 +76,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_ALLOWED_TYPES.all_valid?(@allowed_types)
+
       true
     end
 
@@ -77,25 +87,16 @@ module Stripe
       @allowed_types = allowed_types
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        allowed_types == o.allowed_types &&
-        require_id_number == o.require_id_number &&
-        require_live_capture == o.require_live_capture &&
-        require_matching_selfie == o.require_matching_selfie
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@allowed_types, @require_id_number, @require_live_capture, @require_matching_selfie)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@allowed_types, @require_id_number, @require_live_capture, @require_matching_selfie)
   end
 end

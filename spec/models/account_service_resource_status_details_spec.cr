@@ -33,7 +33,7 @@ describe Stripe::AccountServiceResourceStatusDetails do
   describe "test attribute 'resolution'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["contact_stripe", "provide_information", "remove_restriction", "null"])
+      # validator = EnumValidator.new("String", ["contact_stripe", "provide_information", "remove_restriction"])
       # validator.allowable_values.each do |value|
       #   expect { instance.resolution = value }.not_to raise_error
       # end

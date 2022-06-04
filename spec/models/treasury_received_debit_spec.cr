@@ -47,7 +47,7 @@ describe Stripe::TreasuryReceivedDebit do
   describe "test attribute 'failure_code'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["account_closed", "account_frozen", "insufficient_funds", "other", "null"])
+      # validator = EnumValidator.new("String", ["account_closed", "account_frozen", "insufficient_funds", "other"])
       # validator.allowable_values.each do |value|
       #   expect { instance.failure_code = value }.not_to raise_error
       # end

@@ -23,7 +23,7 @@ describe Stripe::InvoicePaymentMethodOptionsCard do
   describe "test attribute 'request_three_d_secure'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["any", "automatic", "null"])
+      # validator = EnumValidator.new("String", ["any", "automatic"])
       # validator.allowable_values.each do |value|
       #   expect { instance.request_three_d_secure = value }.not_to raise_error
       # end

@@ -12,17 +12,16 @@ require "time"
 require "log"
 
 module Stripe
-  # Information about updating subscriptions in the portal.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SubscriptionUpdateCreationParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "default_allowed_updates", type: SubscriptionUpdateCreationParamDefaultAllowedUpdates)]
     property default_allowed_updates : SubscriptionUpdateCreationParamDefaultAllowedUpdates
 
-    # Whether the feature is enabled.
     @[JSON::Field(key: "enabled", type: Bool)]
     property enabled : Bool
 
@@ -30,7 +29,7 @@ module Stripe
     property products : SubscriptionUpdateCreationParamProducts
 
     # Optional properties
-    # Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.
+
     @[JSON::Field(key: "proration_behavior", type: String?, presence: true, ignore_serialize: proration_behavior.nil? && !proration_behavior_present?)]
     getter proration_behavior : String?
 
@@ -41,7 +40,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @default_allowed_updates : SubscriptionUpdateCreationParamDefaultAllowedUpdates, @enabled : Bool, @products : SubscriptionUpdateCreationParamProducts, @proration_behavior : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @default_allowed_updates : SubscriptionUpdateCreationParamDefaultAllowedUpdates,
+      @enabled : Bool,
+      @products : SubscriptionUpdateCreationParamProducts,
+      # Optional properties
+      @proration_behavior : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -58,6 +65,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+
       true
     end
 
@@ -68,25 +76,16 @@ module Stripe
       @proration_behavior = proration_behavior
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        default_allowed_updates == o.default_allowed_updates &&
-        enabled == o.enabled &&
-        products == o.products &&
-        proration_behavior == o.proration_behavior
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@default_allowed_updates, @enabled, @products, @proration_behavior)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@default_allowed_updates, @enabled, @products, @proration_behavior)
   end
 end

@@ -19,165 +19,165 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "acss_debit", type: PaymentIntentPaymentMethodOptionsAcssDebit?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
-    property acss_debit : PaymentIntentPaymentMethodOptionsAcssDebit?
+
+    @[JSON::Field(key: "acss_debit", type: PaymentIntentPaymentMethodOptionsAcssDebit1?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
+    property acss_debit : PaymentIntentPaymentMethodOptionsAcssDebit1?
 
     @[JSON::Field(ignore: true)]
     property? acss_debit_present : Bool = false
 
-    @[JSON::Field(key: "affirm", type: PaymentMethodOptionsAffirm?, presence: true, ignore_serialize: affirm.nil? && !affirm_present?)]
-    property affirm : PaymentMethodOptionsAffirm?
+    @[JSON::Field(key: "affirm", type: PaymentIntentPaymentMethodOptionsAffirm?, presence: true, ignore_serialize: affirm.nil? && !affirm_present?)]
+    property affirm : PaymentIntentPaymentMethodOptionsAffirm?
 
     @[JSON::Field(ignore: true)]
     property? affirm_present : Bool = false
 
-    @[JSON::Field(key: "afterpay_clearpay", type: PaymentMethodOptionsAfterpayClearpay?, presence: true, ignore_serialize: afterpay_clearpay.nil? && !afterpay_clearpay_present?)]
-    property afterpay_clearpay : PaymentMethodOptionsAfterpayClearpay?
+    @[JSON::Field(key: "afterpay_clearpay", type: PaymentIntentPaymentMethodOptionsAfterpayClearpay?, presence: true, ignore_serialize: afterpay_clearpay.nil? && !afterpay_clearpay_present?)]
+    property afterpay_clearpay : PaymentIntentPaymentMethodOptionsAfterpayClearpay?
 
     @[JSON::Field(ignore: true)]
     property? afterpay_clearpay_present : Bool = false
 
-    @[JSON::Field(key: "alipay", type: PaymentMethodOptionsAlipay?, presence: true, ignore_serialize: alipay.nil? && !alipay_present?)]
-    property alipay : PaymentMethodOptionsAlipay?
+    @[JSON::Field(key: "alipay", type: PaymentIntentPaymentMethodOptionsAlipay?, presence: true, ignore_serialize: alipay.nil? && !alipay_present?)]
+    property alipay : PaymentIntentPaymentMethodOptionsAlipay?
 
     @[JSON::Field(ignore: true)]
     property? alipay_present : Bool = false
 
-    @[JSON::Field(key: "au_becs_debit", type: PaymentIntentPaymentMethodOptionsAuBecsDebit?, presence: true, ignore_serialize: au_becs_debit.nil? && !au_becs_debit_present?)]
-    property au_becs_debit : PaymentIntentPaymentMethodOptionsAuBecsDebit?
+    @[JSON::Field(key: "au_becs_debit", type: PaymentIntentPaymentMethodOptionsAuBecsDebit1?, presence: true, ignore_serialize: au_becs_debit.nil? && !au_becs_debit_present?)]
+    property au_becs_debit : PaymentIntentPaymentMethodOptionsAuBecsDebit1?
 
     @[JSON::Field(ignore: true)]
     property? au_becs_debit_present : Bool = false
 
-    @[JSON::Field(key: "bacs_debit", type: PaymentMethodOptionsBacsDebit?, presence: true, ignore_serialize: bacs_debit.nil? && !bacs_debit_present?)]
-    property bacs_debit : PaymentMethodOptionsBacsDebit?
+    @[JSON::Field(key: "bacs_debit", type: PaymentIntentPaymentMethodOptionsBacsDebit?, presence: true, ignore_serialize: bacs_debit.nil? && !bacs_debit_present?)]
+    property bacs_debit : PaymentIntentPaymentMethodOptionsBacsDebit?
 
     @[JSON::Field(ignore: true)]
     property? bacs_debit_present : Bool = false
 
-    @[JSON::Field(key: "bancontact", type: PaymentMethodOptionsBancontact?, presence: true, ignore_serialize: bancontact.nil? && !bancontact_present?)]
-    property bancontact : PaymentMethodOptionsBancontact?
+    @[JSON::Field(key: "bancontact", type: PaymentIntentPaymentMethodOptionsBancontact?, presence: true, ignore_serialize: bancontact.nil? && !bancontact_present?)]
+    property bancontact : PaymentIntentPaymentMethodOptionsBancontact?
 
     @[JSON::Field(ignore: true)]
     property? bancontact_present : Bool = false
 
-    @[JSON::Field(key: "boleto", type: PaymentMethodOptionsBoleto?, presence: true, ignore_serialize: boleto.nil? && !boleto_present?)]
-    property boleto : PaymentMethodOptionsBoleto?
+    @[JSON::Field(key: "boleto", type: PaymentIntentPaymentMethodOptionsBoleto?, presence: true, ignore_serialize: boleto.nil? && !boleto_present?)]
+    property boleto : PaymentIntentPaymentMethodOptionsBoleto?
 
     @[JSON::Field(ignore: true)]
     property? boleto_present : Bool = false
 
-    @[JSON::Field(key: "card", type: PaymentIntentPaymentMethodOptionsCard?, presence: true, ignore_serialize: card.nil? && !card_present?)]
-    property card : PaymentIntentPaymentMethodOptionsCard?
+    @[JSON::Field(key: "card", type: PaymentIntentPaymentMethodOptionsCard1?, presence: true, ignore_serialize: card.nil? && !card_present?)]
+    property card : PaymentIntentPaymentMethodOptionsCard1?
 
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
-    @[JSON::Field(key: "card_present", type: PaymentMethodOptionsCardPresent?, presence: true, ignore_serialize: card_present.nil? && !card_present_present?)]
-    property card_present2 : PaymentMethodOptionsCardPresent?
+    @[JSON::Field(key: "card_present", type: PaymentIntentPaymentMethodOptionsCardPresent?, presence: true, ignore_serialize: card_present2.nil? && !card_present2_present?)]
+    property card_present2 : PaymentIntentPaymentMethodOptionsCardPresent?
 
     @[JSON::Field(ignore: true)]
     property? card_present2_present : Bool = false
 
-    @[JSON::Field(key: "customer_balance", type: PaymentMethodOptionsCustomerBalance?, presence: true, ignore_serialize: customer_balance.nil? && !customer_balance_present?)]
-    property customer_balance : PaymentMethodOptionsCustomerBalance?
+    @[JSON::Field(key: "customer_balance", type: PaymentIntentPaymentMethodOptionsCustomerBalance?, presence: true, ignore_serialize: customer_balance.nil? && !customer_balance_present?)]
+    property customer_balance : PaymentIntentPaymentMethodOptionsCustomerBalance?
 
     @[JSON::Field(ignore: true)]
     property? customer_balance_present : Bool = false
 
-    @[JSON::Field(key: "eps", type: PaymentIntentPaymentMethodOptionsEps?, presence: true, ignore_serialize: eps.nil? && !eps_present?)]
-    property eps : PaymentIntentPaymentMethodOptionsEps?
+    @[JSON::Field(key: "eps", type: PaymentIntentPaymentMethodOptionsEps1?, presence: true, ignore_serialize: eps.nil? && !eps_present?)]
+    property eps : PaymentIntentPaymentMethodOptionsEps1?
 
     @[JSON::Field(ignore: true)]
     property? eps_present : Bool = false
 
-    @[JSON::Field(key: "fpx", type: PaymentMethodOptionsFpx?, presence: true, ignore_serialize: fpx.nil? && !fpx_present?)]
-    property fpx : PaymentMethodOptionsFpx?
+    @[JSON::Field(key: "fpx", type: PaymentIntentPaymentMethodOptionsFpx?, presence: true, ignore_serialize: fpx.nil? && !fpx_present?)]
+    property fpx : PaymentIntentPaymentMethodOptionsFpx?
 
     @[JSON::Field(ignore: true)]
     property? fpx_present : Bool = false
 
-    @[JSON::Field(key: "giropay", type: PaymentMethodOptionsGiropay?, presence: true, ignore_serialize: giropay.nil? && !giropay_present?)]
-    property giropay : PaymentMethodOptionsGiropay?
+    @[JSON::Field(key: "giropay", type: PaymentIntentPaymentMethodOptionsGiropay?, presence: true, ignore_serialize: giropay.nil? && !giropay_present?)]
+    property giropay : PaymentIntentPaymentMethodOptionsGiropay?
 
     @[JSON::Field(ignore: true)]
     property? giropay_present : Bool = false
 
-    @[JSON::Field(key: "grabpay", type: PaymentMethodOptionsGrabpay?, presence: true, ignore_serialize: grabpay.nil? && !grabpay_present?)]
-    property grabpay : PaymentMethodOptionsGrabpay?
+    @[JSON::Field(key: "grabpay", type: PaymentIntentPaymentMethodOptionsGrabpay?, presence: true, ignore_serialize: grabpay.nil? && !grabpay_present?)]
+    property grabpay : PaymentIntentPaymentMethodOptionsGrabpay?
 
     @[JSON::Field(ignore: true)]
     property? grabpay_present : Bool = false
 
-    @[JSON::Field(key: "ideal", type: PaymentMethodOptionsIdeal?, presence: true, ignore_serialize: ideal.nil? && !ideal_present?)]
-    property ideal : PaymentMethodOptionsIdeal?
+    @[JSON::Field(key: "ideal", type: PaymentIntentPaymentMethodOptionsIdeal?, presence: true, ignore_serialize: ideal.nil? && !ideal_present?)]
+    property ideal : PaymentIntentPaymentMethodOptionsIdeal?
 
     @[JSON::Field(ignore: true)]
     property? ideal_present : Bool = false
 
-    #
-    @[JSON::Field(key: "interac_present", type: JSON::Any, presence: true, ignore_serialize: interac_present.nil? && !interac_present_present?)]
-    property interac_present : JSON::Any
+    @[JSON::Field(key: "interac_present", type: PaymentIntentPaymentMethodOptionsInteracPresent?, presence: true, ignore_serialize: interac_present.nil? && !interac_present_present?)]
+    property interac_present : PaymentIntentPaymentMethodOptionsInteracPresent?
 
     @[JSON::Field(ignore: true)]
     property? interac_present_present : Bool = false
 
-    @[JSON::Field(key: "klarna", type: PaymentMethodOptionsKlarna?, presence: true, ignore_serialize: klarna.nil? && !klarna_present?)]
-    property klarna : PaymentMethodOptionsKlarna?
+    @[JSON::Field(key: "klarna", type: PaymentIntentPaymentMethodOptionsKlarna?, presence: true, ignore_serialize: klarna.nil? && !klarna_present?)]
+    property klarna : PaymentIntentPaymentMethodOptionsKlarna?
 
     @[JSON::Field(ignore: true)]
     property? klarna_present : Bool = false
 
-    @[JSON::Field(key: "konbini", type: PaymentMethodOptionsKonbini?, presence: true, ignore_serialize: konbini.nil? && !konbini_present?)]
-    property konbini : PaymentMethodOptionsKonbini?
+    @[JSON::Field(key: "konbini", type: PaymentIntentPaymentMethodOptionsKonbini?, presence: true, ignore_serialize: konbini.nil? && !konbini_present?)]
+    property konbini : PaymentIntentPaymentMethodOptionsKonbini?
 
     @[JSON::Field(ignore: true)]
     property? konbini_present : Bool = false
 
-    @[JSON::Field(key: "link", type: PaymentIntentPaymentMethodOptionsLink?, presence: true, ignore_serialize: link.nil? && !link_present?)]
-    property link : PaymentIntentPaymentMethodOptionsLink?
+    @[JSON::Field(key: "link", type: PaymentIntentPaymentMethodOptionsLink1?, presence: true, ignore_serialize: link.nil? && !link_present?)]
+    property link : PaymentIntentPaymentMethodOptionsLink1?
 
     @[JSON::Field(ignore: true)]
     property? link_present : Bool = false
 
-    @[JSON::Field(key: "oxxo", type: PaymentMethodOptionsOxxo?, presence: true, ignore_serialize: oxxo.nil? && !oxxo_present?)]
-    property oxxo : PaymentMethodOptionsOxxo?
+    @[JSON::Field(key: "oxxo", type: PaymentIntentPaymentMethodOptionsOxxo?, presence: true, ignore_serialize: oxxo.nil? && !oxxo_present?)]
+    property oxxo : PaymentIntentPaymentMethodOptionsOxxo?
 
     @[JSON::Field(ignore: true)]
     property? oxxo_present : Bool = false
 
-    @[JSON::Field(key: "p24", type: PaymentMethodOptionsP24?, presence: true, ignore_serialize: p24.nil? && !p24_present?)]
-    property p24 : PaymentMethodOptionsP24?
+    @[JSON::Field(key: "p24", type: PaymentIntentPaymentMethodOptionsP24?, presence: true, ignore_serialize: p24.nil? && !p24_present?)]
+    property p24 : PaymentIntentPaymentMethodOptionsP24?
 
     @[JSON::Field(ignore: true)]
     property? p24_present : Bool = false
 
-    @[JSON::Field(key: "paynow", type: PaymentMethodOptionsPaynow?, presence: true, ignore_serialize: paynow.nil? && !paynow_present?)]
-    property paynow : PaymentMethodOptionsPaynow?
+    @[JSON::Field(key: "paynow", type: PaymentIntentPaymentMethodOptionsPaynow?, presence: true, ignore_serialize: paynow.nil? && !paynow_present?)]
+    property paynow : PaymentIntentPaymentMethodOptionsPaynow?
 
     @[JSON::Field(ignore: true)]
     property? paynow_present : Bool = false
 
-    @[JSON::Field(key: "sepa_debit", type: PaymentIntentPaymentMethodOptionsSepaDebit?, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
-    property sepa_debit : PaymentIntentPaymentMethodOptionsSepaDebit?
+    @[JSON::Field(key: "sepa_debit", type: PaymentIntentPaymentMethodOptionsSepaDebit1?, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
+    property sepa_debit : PaymentIntentPaymentMethodOptionsSepaDebit1?
 
     @[JSON::Field(ignore: true)]
     property? sepa_debit_present : Bool = false
 
-    @[JSON::Field(key: "sofort", type: PaymentMethodOptionsSofort?, presence: true, ignore_serialize: sofort.nil? && !sofort_present?)]
-    property sofort : PaymentMethodOptionsSofort?
+    @[JSON::Field(key: "sofort", type: PaymentIntentPaymentMethodOptionsSofort?, presence: true, ignore_serialize: sofort.nil? && !sofort_present?)]
+    property sofort : PaymentIntentPaymentMethodOptionsSofort?
 
     @[JSON::Field(ignore: true)]
     property? sofort_present : Bool = false
 
-    @[JSON::Field(key: "us_bank_account", type: PaymentIntentPaymentMethodOptionsUsBankAccount?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
-    property us_bank_account : PaymentIntentPaymentMethodOptionsUsBankAccount?
+    @[JSON::Field(key: "us_bank_account", type: PaymentIntentPaymentMethodOptionsUsBankAccount1?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
+    property us_bank_account : PaymentIntentPaymentMethodOptionsUsBankAccount1?
 
     @[JSON::Field(ignore: true)]
     property? us_bank_account_present : Bool = false
 
-    @[JSON::Field(key: "wechat_pay", type: PaymentMethodOptionsWechatPay?, presence: true, ignore_serialize: wechat_pay.nil? && !wechat_pay_present?)]
-    property wechat_pay : PaymentMethodOptionsWechatPay?
+    @[JSON::Field(key: "wechat_pay", type: PaymentIntentPaymentMethodOptionsWechatPay?, presence: true, ignore_serialize: wechat_pay.nil? && !wechat_pay_present?)]
+    property wechat_pay : PaymentIntentPaymentMethodOptionsWechatPay?
 
     @[JSON::Field(ignore: true)]
     property? wechat_pay_present : Bool = false
@@ -191,7 +191,37 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @acss_debit : PaymentIntentPaymentMethodOptionsAcssDebit? = nil, @affirm : PaymentMethodOptionsAffirm? = nil, @afterpay_clearpay : PaymentMethodOptionsAfterpayClearpay? = nil, @alipay : PaymentMethodOptionsAlipay? = nil, @au_becs_debit : PaymentIntentPaymentMethodOptionsAuBecsDebit? = nil, @bacs_debit : PaymentMethodOptionsBacsDebit? = nil, @bancontact : PaymentMethodOptionsBancontact? = nil, @boleto : PaymentMethodOptionsBoleto? = nil, @card : PaymentIntentPaymentMethodOptionsCard? = nil, @card_present2 : PaymentMethodOptionsCardPresent? = nil, @customer_balance : PaymentMethodOptionsCustomerBalance? = nil, @eps : PaymentIntentPaymentMethodOptionsEps? = nil, @fpx : PaymentMethodOptionsFpx? = nil, @giropay : PaymentMethodOptionsGiropay? = nil, @grabpay : PaymentMethodOptionsGrabpay? = nil, @ideal : PaymentMethodOptionsIdeal? = nil, @interac_present : JSON::Any = nil, @klarna : PaymentMethodOptionsKlarna? = nil, @konbini : PaymentMethodOptionsKonbini? = nil, @link : PaymentIntentPaymentMethodOptionsLink? = nil, @oxxo : PaymentMethodOptionsOxxo? = nil, @p24 : PaymentMethodOptionsP24? = nil, @paynow : PaymentMethodOptionsPaynow? = nil, @sepa_debit : PaymentIntentPaymentMethodOptionsSepaDebit? = nil, @sofort : PaymentMethodOptionsSofort? = nil, @us_bank_account : PaymentIntentPaymentMethodOptionsUsBankAccount? = nil, @wechat_pay : PaymentMethodOptionsWechatPay? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @acss_debit : PaymentIntentPaymentMethodOptionsAcssDebit1? = nil,
+      @affirm : PaymentIntentPaymentMethodOptionsAffirm? = nil,
+      @afterpay_clearpay : PaymentIntentPaymentMethodOptionsAfterpayClearpay? = nil,
+      @alipay : PaymentIntentPaymentMethodOptionsAlipay? = nil,
+      @au_becs_debit : PaymentIntentPaymentMethodOptionsAuBecsDebit1? = nil,
+      @bacs_debit : PaymentIntentPaymentMethodOptionsBacsDebit? = nil,
+      @bancontact : PaymentIntentPaymentMethodOptionsBancontact? = nil,
+      @boleto : PaymentIntentPaymentMethodOptionsBoleto? = nil,
+      @card : PaymentIntentPaymentMethodOptionsCard1? = nil,
+      @card_present2 : PaymentIntentPaymentMethodOptionsCardPresent? = nil,
+      @customer_balance : PaymentIntentPaymentMethodOptionsCustomerBalance? = nil,
+      @eps : PaymentIntentPaymentMethodOptionsEps1? = nil,
+      @fpx : PaymentIntentPaymentMethodOptionsFpx? = nil,
+      @giropay : PaymentIntentPaymentMethodOptionsGiropay? = nil,
+      @grabpay : PaymentIntentPaymentMethodOptionsGrabpay? = nil,
+      @ideal : PaymentIntentPaymentMethodOptionsIdeal? = nil,
+      @interac_present : PaymentIntentPaymentMethodOptionsInteracPresent? = nil,
+      @klarna : PaymentIntentPaymentMethodOptionsKlarna? = nil,
+      @konbini : PaymentIntentPaymentMethodOptionsKonbini? = nil,
+      @link : PaymentIntentPaymentMethodOptionsLink1? = nil,
+      @oxxo : PaymentIntentPaymentMethodOptionsOxxo? = nil,
+      @p24 : PaymentIntentPaymentMethodOptionsP24? = nil,
+      @paynow : PaymentIntentPaymentMethodOptionsPaynow? = nil,
+      @sepa_debit : PaymentIntentPaymentMethodOptionsSepaDebit1? = nil,
+      @sofort : PaymentIntentPaymentMethodOptionsSofort? = nil,
+      @us_bank_account : PaymentIntentPaymentMethodOptionsUsBankAccount1? = nil,
+      @wechat_pay : PaymentIntentPaymentMethodOptionsWechatPay? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -216,46 +246,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit == o.acss_debit &&
-        affirm == o.affirm &&
-        afterpay_clearpay == o.afterpay_clearpay &&
-        alipay == o.alipay &&
-        au_becs_debit == o.au_becs_debit &&
-        bacs_debit == o.bacs_debit &&
-        bancontact == o.bancontact &&
-        boleto == o.boleto &&
-        card == o.card &&
-        card_present2 == o.card_present2 &&
-        customer_balance == o.customer_balance &&
-        eps == o.eps &&
-        fpx == o.fpx &&
-        giropay == o.giropay &&
-        grabpay == o.grabpay &&
-        ideal == o.ideal &&
-        interac_present == o.interac_present &&
-        klarna == o.klarna &&
-        konbini == o.konbini &&
-        link == o.link &&
-        oxxo == o.oxxo &&
-        p24 == o.p24 &&
-        paynow == o.paynow &&
-        sepa_debit == o.sepa_debit &&
-        sofort == o.sofort &&
-        us_bank_account == o.us_bank_account &&
-        wechat_pay == o.wechat_pay
     end
 
     # @see the `==` method
@@ -264,8 +257,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @boleto, @card, @card_present2, @customer_balance, @eps, @fpx, @giropay, @grabpay, @ideal, @interac_present, @klarna, @konbini, @link, @oxxo, @p24, @paynow, @sepa_debit, @sofort, @us_bank_account, @wechat_pay)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @boleto, @card, @card_present2, @customer_balance, @eps, @fpx, @giropay, @grabpay, @ideal, @interac_present, @klarna, @konbini, @link, @oxxo, @p24, @paynow, @sepa_debit, @sofort, @us_bank_account, @wechat_pay)
   end
 end

@@ -19,6 +19,58 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    @[JSON::Field(key: "automatic_tax", type: PaymentPagesCheckoutSessionAutomaticTax)]
+    property automatic_tax : PaymentPagesCheckoutSessionAutomaticTax
+
+    # The URL the customer will be directed to if they decide to cancel payment and return to your website.
+    @[JSON::Field(key: "cancel_url", type: String)]
+    getter cancel_url : String
+
+    # The timestamp at which the Checkout Session will expire.
+    @[JSON::Field(key: "expires_at", type: Int64)]
+    property expires_at : Int64
+
+    # Unique identifier for the object. Used to pass to `redirectToCheckout` in Stripe.js.
+    @[JSON::Field(key: "id", type: String)]
+    getter id : String
+
+    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    @[JSON::Field(key: "livemode", type: Bool)]
+    property livemode : Bool
+
+    # The mode of the Checkout Session.
+    @[JSON::Field(key: "mode", type: String)]
+    getter mode : String
+
+    ENUM_VALIDATOR_FOR_MODE = EnumValidator.new("mode", "String", ["payment", "setup", "subscription"])
+
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
+
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["checkout.session"])
+
+    # A list of the types of payment methods (e.g. card) this Checkout Session is allowed to accept.
+    @[JSON::Field(key: "payment_method_types", type: Array(String))]
+    property payment_method_types : Array(String)
+
+    # The payment status of the Checkout Session, one of `paid`, `unpaid`, or `no_payment_required`. You can use this value to decide when to fulfill your customer's order.
+    @[JSON::Field(key: "payment_status", type: String)]
+    getter payment_status : String
+
+    ENUM_VALIDATOR_FOR_PAYMENT_STATUS = EnumValidator.new("payment_status", "String", ["no_payment_required", "paid", "unpaid"])
+
+    # The shipping rate options applied to this Session.
+    @[JSON::Field(key: "shipping_options", type: Array(PaymentPagesCheckoutSessionShippingOption))]
+    property shipping_options : Array(PaymentPagesCheckoutSessionShippingOption)
+
+    # The URL the customer will be directed to after the payment or subscription creation is successful.
+    @[JSON::Field(key: "success_url", type: String)]
+    getter success_url : String
+
+    # Optional properties
+
     @[JSON::Field(key: "after_expiration", type: CheckoutSessionAfterExpiration?, presence: true, ignore_serialize: after_expiration.nil? && !after_expiration_present?)]
     property after_expiration : CheckoutSessionAfterExpiration?
 
@@ -46,9 +98,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? amount_total_present : Bool = false
 
-    @[JSON::Field(key: "automatic_tax", type: PaymentPagesCheckoutSessionAutomaticTax)]
-    property automatic_tax : PaymentPagesCheckoutSessionAutomaticTax
-
     # Describes whether Checkout should collect the customer's billing address.
     @[JSON::Field(key: "billing_address_collection", type: String?, presence: true, ignore_serialize: billing_address_collection.nil? && !billing_address_collection_present?)]
     getter billing_address_collection : String?
@@ -56,11 +105,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? billing_address_collection_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION = EnumValidator.new("billing_address_collection", "String", ["auto", "required", "null"])
-
-    # The URL the customer will be directed to if they decide to cancel payment and return to your website.
-    @[JSON::Field(key: "cancel_url", type: String)]
-    getter cancel_url : String
+    ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION = EnumValidator.new("billing_address_collection", "String", ["auto", "required"])
 
     # A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or similar, and can be used to reconcile the Session with your internal systems.
     @[JSON::Field(key: "client_reference_id", type: String?, presence: true, ignore_serialize: client_reference_id.nil? && !client_reference_id_present?)]
@@ -101,7 +146,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? customer_creation_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_CUSTOMER_CREATION = EnumValidator.new("customer_creation", "String", ["always", "if_required", "null"])
+    ENUM_VALIDATOR_FOR_CUSTOMER_CREATION = EnumValidator.new("customer_creation", "String", ["always", "if_required"])
 
     @[JSON::Field(key: "customer_details", type: CheckoutSessionCustomerDetails?, presence: true, ignore_serialize: customer_details.nil? && !customer_details_present?)]
     property customer_details : CheckoutSessionCustomerDetails?
@@ -116,17 +161,11 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? customer_email_present : Bool = false
 
-    # The timestamp at which the Checkout Session will expire.
-    @[JSON::Field(key: "expires_at", type: Int64)]
-    property expires_at : Int64
+    @[JSON::Field(key: "line_items", type: PaymentPagesCheckoutSessionListLineItems1?, presence: true, ignore_serialize: line_items.nil? && !line_items_present?)]
+    property line_items : PaymentPagesCheckoutSessionListLineItems1?
 
-    # Unique identifier for the object. Used to pass to `redirectToCheckout` in Stripe.js.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
-
-    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-    @[JSON::Field(key: "livemode", type: Bool)]
-    property livemode : Bool
+    @[JSON::Field(ignore: true)]
+    property? line_items_present : Bool = false
 
     # The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's locale is used.
     @[JSON::Field(key: "locale", type: String?, presence: true, ignore_serialize: locale.nil? && !locale_present?)]
@@ -135,7 +174,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? locale_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_LOCALE = EnumValidator.new("locale", "String", ["auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW", "null"])
+    ENUM_VALIDATOR_FOR_LOCALE = EnumValidator.new("locale", "String", ["auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"])
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
@@ -143,18 +182,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
-
-    # The mode of the Checkout Session.
-    @[JSON::Field(key: "mode", type: String)]
-    getter mode : String
-
-    ENUM_VALIDATOR_FOR_MODE = EnumValidator.new("mode", "String", ["payment", "setup", "subscription"])
-
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["checkout.session"])
 
     @[JSON::Field(key: "payment_intent", type: CheckoutSessionPaymentIntent?, presence: true, ignore_serialize: payment_intent.nil? && !payment_intent_present?)]
     property payment_intent : CheckoutSessionPaymentIntent?
@@ -174,14 +201,11 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_method_options_present : Bool = false
 
-    @[JSON::Field(key: "payment_method_types", type: Array(String))]
-    property payment_method_types : Array(String)
+    @[JSON::Field(key: "phone_number_collection", type: PaymentPagesCheckoutSessionPhoneNumberCollection?, presence: true, ignore_serialize: phone_number_collection.nil? && !phone_number_collection_present?)]
+    property phone_number_collection : PaymentPagesCheckoutSessionPhoneNumberCollection?
 
-    # The payment status of the Checkout Session, one of `paid`, `unpaid`, or `no_payment_required`. You can use this value to decide when to fulfill your customer's order.
-    @[JSON::Field(key: "payment_status", type: String)]
-    getter payment_status : String
-
-    ENUM_VALIDATOR_FOR_PAYMENT_STATUS = EnumValidator.new("payment_status", "String", ["no_payment_required", "paid", "unpaid"])
+    @[JSON::Field(ignore: true)]
+    property? phone_number_collection_present : Bool = false
 
     # The ID of the original expired Checkout Session that triggered the recovery flow.
     @[JSON::Field(key: "recovered_from", type: String?, presence: true, ignore_serialize: recovered_from.nil? && !recovered_from_present?)]
@@ -208,10 +232,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? shipping_address_collection_present : Bool = false
 
-    # The shipping rate options applied to this Session.
-    @[JSON::Field(key: "shipping_options", type: Array(PaymentPagesCheckoutSessionShippingOption))]
-    property shipping_options : Array(PaymentPagesCheckoutSessionShippingOption)
-
     @[JSON::Field(key: "shipping_rate", type: CheckoutSessionShippingRate?, presence: true, ignore_serialize: shipping_rate.nil? && !shipping_rate_present?)]
     property shipping_rate : CheckoutSessionShippingRate?
 
@@ -225,7 +245,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["complete", "expired", "open", "null"])
+    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["complete", "expired", "open"])
 
     # Describes the type of transaction being performed by Checkout in order to customize relevant text on the page, such as the submit button. `submit_type` can only be specified on Checkout Sessions in `payment` mode, but not Checkout Sessions in `subscription` or `setup` mode.
     @[JSON::Field(key: "submit_type", type: String?, presence: true, ignore_serialize: submit_type.nil? && !submit_type_present?)]
@@ -234,7 +254,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? submit_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_SUBMIT_TYPE = EnumValidator.new("submit_type", "String", ["auto", "book", "donate", "pay", "null"])
+    ENUM_VALIDATOR_FOR_SUBMIT_TYPE = EnumValidator.new("submit_type", "String", ["auto", "book", "donate", "pay"])
 
     @[JSON::Field(key: "subscription", type: CheckoutSessionSubscription?, presence: true, ignore_serialize: subscription.nil? && !subscription_present?)]
     property subscription : CheckoutSessionSubscription?
@@ -242,9 +262,11 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? subscription_present : Bool = false
 
-    # The URL the customer will be directed to after the payment or subscription creation is successful.
-    @[JSON::Field(key: "success_url", type: String)]
-    getter success_url : String
+    @[JSON::Field(key: "tax_id_collection", type: PaymentPagesCheckoutSessionTaxIdCollection?, presence: true, ignore_serialize: tax_id_collection.nil? && !tax_id_collection_present?)]
+    property tax_id_collection : PaymentPagesCheckoutSessionTaxIdCollection?
+
+    @[JSON::Field(ignore: true)]
+    property? tax_id_collection_present : Bool = false
 
     @[JSON::Field(key: "total_details", type: CheckoutSessionTotalDetails?, presence: true, ignore_serialize: total_details.nil? && !total_details_present?)]
     property total_details : CheckoutSessionTotalDetails?
@@ -259,28 +281,55 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? url_present : Bool = false
 
-    # Optional properties
-    @[JSON::Field(key: "line_items", type: PaymentPagesCheckoutSessionListLineItems1?, presence: true, ignore_serialize: line_items.nil? && !line_items_present?)]
-    property line_items : PaymentPagesCheckoutSessionListLineItems1?
-
-    @[JSON::Field(ignore: true)]
-    property? line_items_present : Bool = false
-
-    @[JSON::Field(key: "phone_number_collection", type: PaymentPagesCheckoutSessionPhoneNumberCollection?, presence: true, ignore_serialize: phone_number_collection.nil? && !phone_number_collection_present?)]
-    property phone_number_collection : PaymentPagesCheckoutSessionPhoneNumberCollection?
-
-    @[JSON::Field(ignore: true)]
-    property? phone_number_collection_present : Bool = false
-
-    @[JSON::Field(key: "tax_id_collection", type: PaymentPagesCheckoutSessionTaxIdCollection?, presence: true, ignore_serialize: tax_id_collection.nil? && !tax_id_collection_present?)]
-    property tax_id_collection : PaymentPagesCheckoutSessionTaxIdCollection?
-
-    @[JSON::Field(ignore: true)]
-    property? tax_id_collection_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @after_expiration : CheckoutSessionAfterExpiration?, @allow_promotion_codes : Bool?, @amount_subtotal : Int64?, @amount_total : Int64?, @automatic_tax : PaymentPagesCheckoutSessionAutomaticTax, @billing_address_collection : String?, @cancel_url : String, @client_reference_id : String?, @consent : CheckoutSessionConsent?, @consent_collection : CheckoutSessionConsentCollection?, @currency : String?, @customer : CheckoutSessionCustomer?, @customer_creation : String?, @customer_details : CheckoutSessionCustomerDetails?, @customer_email : String?, @expires_at : Int64, @id : String, @livemode : Bool, @locale : String?, @metadata : Hash(String, String)?, @mode : String, @object : String, @payment_intent : CheckoutSessionPaymentIntent?, @payment_link : CheckoutSessionPaymentLink?, @payment_method_options : CheckoutSessionPaymentMethodOptions1?, @payment_method_types : Array(String), @payment_status : String, @recovered_from : String?, @setup_intent : CheckoutSessionSetupIntent?, @shipping : CheckoutSessionShipping?, @shipping_address_collection : CheckoutSessionShippingAddressCollection?, @shipping_options : Array(PaymentPagesCheckoutSessionShippingOption), @shipping_rate : CheckoutSessionShippingRate?, @status : String?, @submit_type : String?, @subscription : CheckoutSessionSubscription?, @success_url : String, @total_details : CheckoutSessionTotalDetails?, @url : String?, @line_items : PaymentPagesCheckoutSessionListLineItems1? = nil, @phone_number_collection : PaymentPagesCheckoutSessionPhoneNumberCollection? = nil, @tax_id_collection : PaymentPagesCheckoutSessionTaxIdCollection? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @automatic_tax : PaymentPagesCheckoutSessionAutomaticTax,
+      @cancel_url : String,
+      @expires_at : Int64,
+      @id : String,
+      @livemode : Bool,
+      @mode : String,
+      @object : String,
+      @payment_method_types : Array(String),
+      @payment_status : String,
+      @shipping_options : Array(PaymentPagesCheckoutSessionShippingOption),
+      @success_url : String,
+      # Optional properties
+      @after_expiration : CheckoutSessionAfterExpiration? = nil,
+      @allow_promotion_codes : Bool? = nil,
+      @amount_subtotal : Int64? = nil,
+      @amount_total : Int64? = nil,
+      @billing_address_collection : String? = nil,
+      @client_reference_id : String? = nil,
+      @consent : CheckoutSessionConsent? = nil,
+      @consent_collection : CheckoutSessionConsentCollection? = nil,
+      @currency : String? = nil,
+      @customer : CheckoutSessionCustomer? = nil,
+      @customer_creation : String? = nil,
+      @customer_details : CheckoutSessionCustomerDetails? = nil,
+      @customer_email : String? = nil,
+      @line_items : PaymentPagesCheckoutSessionListLineItems1? = nil,
+      @locale : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @payment_intent : CheckoutSessionPaymentIntent? = nil,
+      @payment_link : CheckoutSessionPaymentLink? = nil,
+      @payment_method_options : CheckoutSessionPaymentMethodOptions1? = nil,
+      @phone_number_collection : PaymentPagesCheckoutSessionPhoneNumberCollection? = nil,
+      @recovered_from : String? = nil,
+      @setup_intent : CheckoutSessionSetupIntent? = nil,
+      @shipping : CheckoutSessionShipping? = nil,
+      @shipping_address_collection : CheckoutSessionShippingAddressCollection? = nil,
+      @shipping_rate : CheckoutSessionShippingRate? = nil,
+      @status : String? = nil,
+      @submit_type : String? = nil,
+      @subscription : CheckoutSessionSubscription? = nil,
+      @tax_id_collection : PaymentPagesCheckoutSessionTaxIdCollection? = nil,
+      @total_details : CheckoutSessionTotalDetails? = nil,
+      @url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -288,27 +337,13 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.error_message) unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
-
       if @cancel_url.to_s.size > 5000
         invalid_properties.push("invalid value for \"cancel_url\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @client_reference_id.to_s.size > 5000
-        invalid_properties.push("invalid value for \"client_reference_id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.error_message) unless ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid?(@customer_creation)
-
-      if @customer_email.to_s.size > 5000
-        invalid_properties.push("invalid value for \"customer_email\", the character length must be smaller than or equal to 5000.")
       end
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_LOCALE.error_message) unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_MODE.error_message) unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode, false)
 
@@ -316,7 +351,25 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_STATUS.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_STATUS.valid?(@payment_status, false)
 
-      if @recovered_from.to_s.size > 5000
+      if @success_url.to_s.size > 5000
+        invalid_properties.push("invalid value for \"success_url\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.error_message) unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
+
+      if !@client_reference_id.nil? && @client_reference_id.to_s.size > 5000
+        invalid_properties.push("invalid value for \"client_reference_id\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.error_message) unless ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid?(@customer_creation)
+
+      if !@customer_email.nil? && @customer_email.to_s.size > 5000
+        invalid_properties.push("invalid value for \"customer_email\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_LOCALE.error_message) unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
+
+      if !@recovered_from.nil? && @recovered_from.to_s.size > 5000
         invalid_properties.push("invalid value for \"recovered_from\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -324,11 +377,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUBMIT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid?(@submit_type)
 
-      if @success_url.to_s.size > 5000
-        invalid_properties.push("invalid value for \"success_url\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @url.to_s.size > 5000
+      if !@url.nil? && @url.to_s.size > 5000
         invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -338,29 +387,23 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
       return false if @cancel_url.to_s.size > 5000
-      return false if @client_reference_id.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid?(@customer_creation)
-      return false if @customer_email.to_s.size > 5000
       return false if @id.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
       return false unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode, false)
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_STATUS.valid?(@payment_status, false)
-      return false if @recovered_from.to_s.size > 5000
+      return false if @success_url.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
+      return false if !@client_reference_id.nil? && @client_reference_id.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid?(@customer_creation)
+      return false if !@customer_email.nil? && @customer_email.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
+      return false if !@recovered_from.nil? && @recovered_from.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
       return false unless ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid?(@submit_type)
-      return false if @success_url.to_s.size > 5000
-      return false if @url.to_s.size > 5000
-      true
-    end
+      return false if !@url.nil? && @url.to_s.size > 5000
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] billing_address_collection Object to be assigned
-    def billing_address_collection=(billing_address_collection)
-      ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid!(billing_address_collection)
-      @billing_address_collection = billing_address_collection
+      true
     end
 
     # Custom attribute writer method with validation
@@ -374,33 +417,6 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] client_reference_id Value to be assigned
-    def client_reference_id=(client_reference_id)
-      if client_reference_id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"client_reference_id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @client_reference_id = client_reference_id
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] customer_creation Object to be assigned
-    def customer_creation=(customer_creation)
-      ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid!(customer_creation)
-      @customer_creation = customer_creation
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] customer_email Value to be assigned
-    def customer_email=(customer_email)
-      if customer_email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer_email\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @customer_email = customer_email
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
     def id=(id)
       if id.to_s.size > 5000
@@ -408,13 +424,6 @@ module Stripe
       end
 
       @id = id
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] locale Object to be assigned
-    def locale=(locale)
-      ENUM_VALIDATOR_FOR_LOCALE.valid!(locale)
-      @locale = locale
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -439,9 +448,60 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] success_url Value to be assigned
+    def success_url=(success_url)
+      if success_url.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"success_url\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @success_url = success_url
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] billing_address_collection Object to be assigned
+    def billing_address_collection=(billing_address_collection)
+      ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid!(billing_address_collection)
+      @billing_address_collection = billing_address_collection
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] client_reference_id Value to be assigned
+    def client_reference_id=(client_reference_id)
+      if !client_reference_id.nil? && client_reference_id.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"client_reference_id\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @client_reference_id = client_reference_id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] customer_creation Object to be assigned
+    def customer_creation=(customer_creation)
+      ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid!(customer_creation)
+      @customer_creation = customer_creation
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] customer_email Value to be assigned
+    def customer_email=(customer_email)
+      if !customer_email.nil? && customer_email.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"customer_email\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @customer_email = customer_email
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] locale Object to be assigned
+    def locale=(locale)
+      ENUM_VALIDATOR_FOR_LOCALE.valid!(locale)
+      @locale = locale
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] recovered_from Value to be assigned
     def recovered_from=(recovered_from)
-      if recovered_from.to_s.size > 5000
+      if !recovered_from.nil? && recovered_from.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"recovered_from\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -463,72 +523,13 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] success_url Value to be assigned
-    def success_url=(success_url)
-      if success_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"success_url\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @success_url = success_url
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
     def url=(url)
-      if url.to_s.size > 5000
+      if !url.nil? && url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
       @url = url
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        after_expiration == o.after_expiration &&
-        allow_promotion_codes == o.allow_promotion_codes &&
-        amount_subtotal == o.amount_subtotal &&
-        amount_total == o.amount_total &&
-        automatic_tax == o.automatic_tax &&
-        billing_address_collection == o.billing_address_collection &&
-        cancel_url == o.cancel_url &&
-        client_reference_id == o.client_reference_id &&
-        consent == o.consent &&
-        consent_collection == o.consent_collection &&
-        currency == o.currency &&
-        customer == o.customer &&
-        customer_creation == o.customer_creation &&
-        customer_details == o.customer_details &&
-        customer_email == o.customer_email &&
-        expires_at == o.expires_at &&
-        id == o.id &&
-        line_items == o.line_items &&
-        livemode == o.livemode &&
-        locale == o.locale &&
-        metadata == o.metadata &&
-        mode == o.mode &&
-        object == o.object &&
-        payment_intent == o.payment_intent &&
-        payment_link == o.payment_link &&
-        payment_method_options == o.payment_method_options &&
-        payment_method_types == o.payment_method_types &&
-        payment_status == o.payment_status &&
-        phone_number_collection == o.phone_number_collection &&
-        recovered_from == o.recovered_from &&
-        setup_intent == o.setup_intent &&
-        shipping == o.shipping &&
-        shipping_address_collection == o.shipping_address_collection &&
-        shipping_options == o.shipping_options &&
-        shipping_rate == o.shipping_rate &&
-        status == o.status &&
-        submit_type == o.submit_type &&
-        subscription == o.subscription &&
-        success_url == o.success_url &&
-        tax_id_collection == o.tax_id_collection &&
-        total_details == o.total_details &&
-        url == o.url
     end
 
     # @see the `==` method
@@ -537,8 +538,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@after_expiration, @allow_promotion_codes, @amount_subtotal, @amount_total, @automatic_tax, @billing_address_collection, @cancel_url, @client_reference_id, @consent, @consent_collection, @currency, @customer, @customer_creation, @customer_details, @customer_email, @expires_at, @id, @line_items, @livemode, @locale, @metadata, @mode, @object, @payment_intent, @payment_link, @payment_method_options, @payment_method_types, @payment_status, @phone_number_collection, @recovered_from, @setup_intent, @shipping, @shipping_address_collection, @shipping_options, @shipping_rate, @status, @submit_type, @subscription, @success_url, @tax_id_collection, @total_details, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@automatic_tax, @cancel_url, @expires_at, @id, @livemode, @mode, @object, @payment_method_types, @payment_status, @shipping_options, @success_url, @after_expiration, @allow_promotion_codes, @amount_subtotal, @amount_total, @billing_address_collection, @client_reference_id, @consent, @consent_collection, @currency, @customer, @customer_creation, @customer_details, @customer_email, @line_items, @locale, @metadata, @payment_intent, @payment_link, @payment_method_options, @phone_number_collection, @recovered_from, @setup_intent, @shipping, @shipping_address_collection, @shipping_rate, @status, @submit_type, @subscription, @tax_id_collection, @total_details, @url)
   end
 end

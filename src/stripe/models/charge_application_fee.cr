@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "account", type: ApplicationFeeAccount?)]
     property account : ApplicationFeeAccount?
 
@@ -32,12 +33,6 @@ module Stripe
 
     @[JSON::Field(key: "application", type: ApplicationFeeApplication?)]
     property application : ApplicationFeeApplication?
-
-    @[JSON::Field(key: "balance_transaction", type: ApplicationFeeBalanceTransaction, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
-    property balance_transaction : ApplicationFeeBalanceTransaction
-
-    @[JSON::Field(ignore: true)]
-    property? balance_transaction_present : Bool = false
 
     @[JSON::Field(key: "charge", type: ApplicationFeeCharge?)]
     property charge : ApplicationFeeCharge?
@@ -64,18 +59,26 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["application_fee"])
 
-    @[JSON::Field(key: "originating_transaction", type: ApplicationFeeOriginatingTransaction, presence: true, ignore_serialize: originating_transaction.nil? && !originating_transaction_present?)]
-    property originating_transaction : ApplicationFeeOriginatingTransaction
-
-    @[JSON::Field(ignore: true)]
-    property? originating_transaction_present : Bool = false
-
     # Whether the fee has been fully refunded. If the fee is only partially refunded, this attribute will still be false.
     @[JSON::Field(key: "refunded", type: Bool?)]
     property refunded : Bool?
 
     @[JSON::Field(key: "refunds", type: FeeRefundList1?)]
     property refunds : FeeRefundList1?
+
+    # Optional properties
+
+    @[JSON::Field(key: "balance_transaction", type: ApplicationFeeBalanceTransaction?, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
+    property balance_transaction : ApplicationFeeBalanceTransaction?
+
+    @[JSON::Field(ignore: true)]
+    property? balance_transaction_present : Bool = false
+
+    @[JSON::Field(key: "originating_transaction", type: ApplicationFeeOriginatingTransaction?, presence: true, ignore_serialize: originating_transaction.nil? && !originating_transaction_present?)]
+    property originating_transaction : ApplicationFeeOriginatingTransaction?
+
+    @[JSON::Field(ignore: true)]
+    property? originating_transaction_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -87,7 +90,25 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account : ApplicationFeeAccount, @amount : Int64, @amount_refunded : Int64, @application : ApplicationFeeApplication, @balance_transaction : ApplicationFeeBalanceTransaction?, @charge : ApplicationFeeCharge, @created : Int64, @currency : String, @id : String, @livemode : Bool, @object : String, @originating_transaction : ApplicationFeeOriginatingTransaction?, @refunded : Bool, @refunds : FeeRefundList1)
+    def initialize(
+      *,
+      # Required properties
+      @account : ApplicationFeeAccount? = nil,
+      @amount : Int64? = nil,
+      @amount_refunded : Int64? = nil,
+      @application : ApplicationFeeApplication? = nil,
+      @charge : ApplicationFeeCharge? = nil,
+      @created : Int64? = nil,
+      @currency : String? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @object : String? = nil,
+      @refunded : Bool? = nil,
+      @refunds : FeeRefundList1? = nil,
+      # Optional properties
+      @balance_transaction : ApplicationFeeBalanceTransaction? = nil,
+      @originating_transaction : ApplicationFeeOriginatingTransaction? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -109,6 +130,7 @@ module Stripe
     def valid?
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -120,10 +142,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -145,35 +164,16 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account == o.account &&
-        amount == o.amount &&
-        amount_refunded == o.amount_refunded &&
-        application == o.application &&
-        balance_transaction == o.balance_transaction &&
-        charge == o.charge &&
-        created == o.created &&
-        currency == o.currency &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        originating_transaction == o.originating_transaction &&
-        refunded == o.refunded &&
-        refunds == o.refunds
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account, @amount, @amount_refunded, @application, @balance_transaction, @charge, @created, @currency, @id, @livemode, @object, @originating_transaction, @refunded, @refunds)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account, @amount, @amount_refunded, @application, @charge, @created, @currency, @id, @livemode, @object, @refunded, @refunds, @balance_transaction, @originating_transaction)
   end
 end

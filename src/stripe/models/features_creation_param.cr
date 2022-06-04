@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "customer_update", type: CustomerUpdateCreationParam?, presence: true, ignore_serialize: customer_update.nil? && !customer_update_present?)]
     property customer_update : CustomerUpdateCreationParam?
 
@@ -57,7 +58,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @customer_update : CustomerUpdateCreationParam? = nil, @invoice_history : InvoiceListParam? = nil, @payment_method_update : PaymentMethodUpdateParam? = nil, @subscription_cancel : SubscriptionCancelCreationParam? = nil, @subscription_pause : SubscriptionPauseParam? = nil, @subscription_update : SubscriptionUpdateCreationParam? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @customer_update : CustomerUpdateCreationParam? = nil,
+      @invoice_history : InvoiceListParam? = nil,
+      @payment_method_update : PaymentMethodUpdateParam? = nil,
+      @subscription_cancel : SubscriptionCancelCreationParam? = nil,
+      @subscription_pause : SubscriptionPauseParam? = nil,
+      @subscription_update : SubscriptionUpdateCreationParam? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -74,27 +84,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        customer_update == o.customer_update &&
-        invoice_history == o.invoice_history &&
-        payment_method_update == o.payment_method_update &&
-        subscription_cancel == o.subscription_cancel &&
-        subscription_pause == o.subscription_pause &&
-        subscription_update == o.subscription_update
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@customer_update, @invoice_history, @payment_method_update, @subscription_cancel, @subscription_pause, @subscription_update)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@customer_update, @invoice_history, @payment_method_update, @subscription_cancel, @subscription_pause, @subscription_update)
   end
 end

@@ -18,18 +18,17 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Maximum amount allowed to spend per interval.
+
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
 
-    # Interval (or event) to which the amount applies.
     @[JSON::Field(key: "interval", type: String)]
     getter interval : String
 
     ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["all_time", "daily", "monthly", "per_authorization", "weekly", "yearly"])
 
     # Optional properties
-    # Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) this limit applies to. Omitting this field will apply the limit to all categories.
+
     @[JSON::Field(key: "categories", type: Array(String)?, presence: true, ignore_serialize: categories.nil? && !categories_present?)]
     getter categories : Array(String)?
 
@@ -40,7 +39,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @interval : String, @categories : Array(String)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @interval : String,
+      # Optional properties
+      @categories : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -48,9 +54,9 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CATEGORIES.error_message) unless ENUM_VALIDATOR_FOR_CATEGORIES.all_valid?(@categories)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_CATEGORIES.error_message) unless ENUM_VALIDATOR_FOR_CATEGORIES.all_valid?(@categories)
 
       invalid_properties
     end
@@ -58,16 +64,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_CATEGORIES.all_valid?(@categories)
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
-      true
-    end
+      return false unless ENUM_VALIDATOR_FOR_CATEGORIES.all_valid?(@categories)
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] categories Object to be assigned
-    def categories=(categories)
-      ENUM_VALIDATOR_FOR_CATEGORIES.all_valid!(categories)
-      @categories = categories
+      true
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -77,14 +77,11 @@ module Stripe
       @interval = interval
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        categories == o.categories &&
-        interval == o.interval
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] categories Object to be assigned
+    def categories=(categories)
+      ENUM_VALIDATOR_FOR_CATEGORIES.all_valid!(categories)
+      @categories = categories
     end
 
     # @see the `==` method
@@ -93,8 +90,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @categories, @interval)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @interval, @categories)
   end
 end

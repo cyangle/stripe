@@ -51,7 +51,7 @@ describe Stripe::SubscriptionSchedulesResourceDefaultSettings do
   describe "test attribute 'collection_method'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["charge_automatically", "send_invoice", "null"])
+      # validator = EnumValidator.new("String", ["charge_automatically", "send_invoice"])
       # validator.allowable_values.each do |value|
       #   expect { instance.collection_method = value }.not_to raise_error
       # end

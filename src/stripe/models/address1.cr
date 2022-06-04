@@ -12,47 +12,42 @@ require "time"
 require "log"
 
 module Stripe
-  # Shipping address.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class Address1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Address line 1 (e.g., street, PO Box, or company name).
+
     @[JSON::Field(key: "line1", type: String)]
     getter line1 : String
 
     # Optional properties
-    # City, district, suburb, town, or village.
+
     @[JSON::Field(key: "city", type: String?, presence: true, ignore_serialize: city.nil? && !city_present?)]
     getter city : String?
 
     @[JSON::Field(ignore: true)]
     property? city_present : Bool = false
 
-    # Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     @[JSON::Field(key: "country", type: String?, presence: true, ignore_serialize: country.nil? && !country_present?)]
     getter country : String?
 
     @[JSON::Field(ignore: true)]
     property? country_present : Bool = false
 
-    # Address line 2 (e.g., apartment, suite, unit, or building).
     @[JSON::Field(key: "line2", type: String?, presence: true, ignore_serialize: line2.nil? && !line2_present?)]
     getter line2 : String?
 
     @[JSON::Field(ignore: true)]
     property? line2_present : Bool = false
 
-    # ZIP or postal code.
     @[JSON::Field(key: "postal_code", type: String?, presence: true, ignore_serialize: postal_code.nil? && !postal_code_present?)]
     getter postal_code : String?
 
     @[JSON::Field(ignore: true)]
     property? postal_code_present : Bool = false
 
-    # State, county, province, or region.
     @[JSON::Field(key: "state", type: String?, presence: true, ignore_serialize: state.nil? && !state_present?)]
     getter state : String?
 
@@ -61,7 +56,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @line1 : String, @city : String? = nil, @country : String? = nil, @line2 : String? = nil, @postal_code : String? = nil, @state : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @line1 : String,
+      # Optional properties
+      @city : String? = nil,
+      @country : String? = nil,
+      @line2 : String? = nil,
+      @postal_code : String? = nil,
+      @state : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -69,16 +74,16 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
+      if @line1.to_s.size > 5000
+        invalid_properties.push("invalid value for \"line1\", the character length must be smaller than or equal to 5000.")
+      end
+
       if !@city.nil? && @city.to_s.size > 5000
         invalid_properties.push("invalid value for \"city\", the character length must be smaller than or equal to 5000.")
       end
 
       if !@country.nil? && @country.to_s.size > 5000
         invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @line1.to_s.size > 5000
-        invalid_properties.push("invalid value for \"line1\", the character length must be smaller than or equal to 5000.")
       end
 
       if !@line2.nil? && @line2.to_s.size > 5000
@@ -99,13 +104,24 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @line1.to_s.size > 5000
       return false if !@city.nil? && @city.to_s.size > 5000
       return false if !@country.nil? && @country.to_s.size > 5000
-      return false if @line1.to_s.size > 5000
       return false if !@line2.nil? && @line2.to_s.size > 5000
       return false if !@postal_code.nil? && @postal_code.to_s.size > 5000
       return false if !@state.nil? && @state.to_s.size > 5000
+
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] line1 Value to be assigned
+    def line1=(line1)
+      if line1.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"line1\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @line1 = line1
     end
 
     # Custom attribute writer method with validation
@@ -126,16 +142,6 @@ module Stripe
       end
 
       @country = country
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] line1 Value to be assigned
-    def line1=(line1)
-      if line1.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"line1\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @line1 = line1
     end
 
     # Custom attribute writer method with validation
@@ -168,27 +174,16 @@ module Stripe
       @state = state
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        city == o.city &&
-        country == o.country &&
-        line1 == o.line1 &&
-        line2 == o.line2 &&
-        postal_code == o.postal_code &&
-        state == o.state
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@city, @country, @line1, @line2, @postal_code, @state)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@line1, @city, @country, @line2, @postal_code, @state)
   end
 end

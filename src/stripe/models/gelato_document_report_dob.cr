@@ -18,24 +18,25 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Numerical day between 1 and 31.
-    @[JSON::Field(key: "day", type: Int64, presence: true, ignore_serialize: day.nil? && !day_present?)]
-    property day : Int64
+    @[JSON::Field(key: "day", type: Int64?, presence: true, ignore_serialize: day.nil? && !day_present?)]
+    property day : Int64?
 
     @[JSON::Field(ignore: true)]
     property? day_present : Bool = false
 
     # Numerical month between 1 and 12.
-    @[JSON::Field(key: "month", type: Int64, presence: true, ignore_serialize: month.nil? && !month_present?)]
-    property month : Int64
+    @[JSON::Field(key: "month", type: Int64?, presence: true, ignore_serialize: month.nil? && !month_present?)]
+    property month : Int64?
 
     @[JSON::Field(ignore: true)]
     property? month_present : Bool = false
 
     # The four-digit year.
-    @[JSON::Field(key: "year", type: Int64, presence: true, ignore_serialize: year.nil? && !year_present?)]
-    property year : Int64
+    @[JSON::Field(key: "year", type: Int64?, presence: true, ignore_serialize: year.nil? && !year_present?)]
+    property year : Int64?
 
     @[JSON::Field(ignore: true)]
     property? year_present : Bool = false
@@ -49,7 +50,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @day : Int64?, @month : Int64?, @year : Int64?)
+    def initialize(
+      *,
+      # Optional properties
+      @day : Int64? = nil,
+      @month : Int64? = nil,
+      @year : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -74,22 +81,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        day == o.day &&
-        month == o.month &&
-        year == o.year
     end
 
     # @see the `==` method
@@ -98,8 +92,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@day, @month, @year)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@day, @month, @year)
   end
 end

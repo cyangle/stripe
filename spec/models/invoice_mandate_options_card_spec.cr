@@ -29,7 +29,7 @@ describe Stripe::InvoiceMandateOptionsCard do
   describe "test attribute 'amount_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["fixed", "maximum", "null"])
+      # validator = EnumValidator.new("String", ["fixed", "maximum"])
       # validator.allowable_values.each do |value|
       #   expect { instance.amount_type = value }.not_to raise_error
       # end

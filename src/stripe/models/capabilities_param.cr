@@ -19,195 +19,230 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "acss_debit_payments", type: CapabilityParam?, presence: true, ignore_serialize: acss_debit_payments.nil? && !acss_debit_payments_present?)]
     property acss_debit_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? acss_debit_payments_present : Bool = false
 
-    @[JSON::Field(key: "affirm_payments", type: CapabilityParam1?, presence: true, ignore_serialize: affirm_payments.nil? && !affirm_payments_present?)]
-    property affirm_payments : CapabilityParam1?
+    @[JSON::Field(key: "affirm_payments", type: CapabilityParam?, presence: true, ignore_serialize: affirm_payments.nil? && !affirm_payments_present?)]
+    property affirm_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? affirm_payments_present : Bool = false
 
-    @[JSON::Field(key: "afterpay_clearpay_payments", type: CapabilityParam2?, presence: true, ignore_serialize: afterpay_clearpay_payments.nil? && !afterpay_clearpay_payments_present?)]
-    property afterpay_clearpay_payments : CapabilityParam2?
+    @[JSON::Field(key: "afterpay_clearpay_payments", type: CapabilityParam?, presence: true, ignore_serialize: afterpay_clearpay_payments.nil? && !afterpay_clearpay_payments_present?)]
+    property afterpay_clearpay_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? afterpay_clearpay_payments_present : Bool = false
 
-    @[JSON::Field(key: "au_becs_debit_payments", type: CapabilityParam3?, presence: true, ignore_serialize: au_becs_debit_payments.nil? && !au_becs_debit_payments_present?)]
-    property au_becs_debit_payments : CapabilityParam3?
+    @[JSON::Field(key: "au_becs_debit_payments", type: CapabilityParam?, presence: true, ignore_serialize: au_becs_debit_payments.nil? && !au_becs_debit_payments_present?)]
+    property au_becs_debit_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? au_becs_debit_payments_present : Bool = false
 
-    @[JSON::Field(key: "bacs_debit_payments", type: CapabilityParam4?, presence: true, ignore_serialize: bacs_debit_payments.nil? && !bacs_debit_payments_present?)]
-    property bacs_debit_payments : CapabilityParam4?
+    @[JSON::Field(key: "bacs_debit_payments", type: CapabilityParam?, presence: true, ignore_serialize: bacs_debit_payments.nil? && !bacs_debit_payments_present?)]
+    property bacs_debit_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? bacs_debit_payments_present : Bool = false
 
-    @[JSON::Field(key: "bancontact_payments", type: CapabilityParam5?, presence: true, ignore_serialize: bancontact_payments.nil? && !bancontact_payments_present?)]
-    property bancontact_payments : CapabilityParam5?
+    @[JSON::Field(key: "bancontact_payments", type: CapabilityParam?, presence: true, ignore_serialize: bancontact_payments.nil? && !bancontact_payments_present?)]
+    property bancontact_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? bancontact_payments_present : Bool = false
 
-    @[JSON::Field(key: "bank_transfer_payments", type: CapabilityParam6?, presence: true, ignore_serialize: bank_transfer_payments.nil? && !bank_transfer_payments_present?)]
-    property bank_transfer_payments : CapabilityParam6?
+    @[JSON::Field(key: "bank_transfer_payments", type: CapabilityParam?, presence: true, ignore_serialize: bank_transfer_payments.nil? && !bank_transfer_payments_present?)]
+    property bank_transfer_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? bank_transfer_payments_present : Bool = false
 
-    @[JSON::Field(key: "boleto_payments", type: CapabilityParam7?, presence: true, ignore_serialize: boleto_payments.nil? && !boleto_payments_present?)]
-    property boleto_payments : CapabilityParam7?
+    @[JSON::Field(key: "boleto_payments", type: CapabilityParam?, presence: true, ignore_serialize: boleto_payments.nil? && !boleto_payments_present?)]
+    property boleto_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? boleto_payments_present : Bool = false
 
-    @[JSON::Field(key: "card_issuing", type: CapabilityParam8?, presence: true, ignore_serialize: card_issuing.nil? && !card_issuing_present?)]
-    property card_issuing : CapabilityParam8?
+    @[JSON::Field(key: "card_issuing", type: CapabilityParam?, presence: true, ignore_serialize: card_issuing.nil? && !card_issuing_present?)]
+    property card_issuing : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? card_issuing_present : Bool = false
 
-    @[JSON::Field(key: "card_payments", type: CapabilityParam9?, presence: true, ignore_serialize: card_payments.nil? && !card_payments_present?)]
-    property card_payments : CapabilityParam9?
+    @[JSON::Field(key: "card_payments", type: CapabilityParam?, presence: true, ignore_serialize: card_payments.nil? && !card_payments_present?)]
+    property card_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? card_payments_present : Bool = false
 
-    @[JSON::Field(key: "cartes_bancaires_payments", type: CapabilityParam10?, presence: true, ignore_serialize: cartes_bancaires_payments.nil? && !cartes_bancaires_payments_present?)]
-    property cartes_bancaires_payments : CapabilityParam10?
+    @[JSON::Field(key: "cartes_bancaires_payments", type: CapabilityParam?, presence: true, ignore_serialize: cartes_bancaires_payments.nil? && !cartes_bancaires_payments_present?)]
+    property cartes_bancaires_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? cartes_bancaires_payments_present : Bool = false
 
-    @[JSON::Field(key: "eps_payments", type: CapabilityParam11?, presence: true, ignore_serialize: eps_payments.nil? && !eps_payments_present?)]
-    property eps_payments : CapabilityParam11?
+    @[JSON::Field(key: "eps_payments", type: CapabilityParam?, presence: true, ignore_serialize: eps_payments.nil? && !eps_payments_present?)]
+    property eps_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? eps_payments_present : Bool = false
 
-    @[JSON::Field(key: "fpx_payments", type: CapabilityParam12?, presence: true, ignore_serialize: fpx_payments.nil? && !fpx_payments_present?)]
-    property fpx_payments : CapabilityParam12?
+    @[JSON::Field(key: "fpx_payments", type: CapabilityParam?, presence: true, ignore_serialize: fpx_payments.nil? && !fpx_payments_present?)]
+    property fpx_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? fpx_payments_present : Bool = false
 
-    @[JSON::Field(key: "giropay_payments", type: CapabilityParam13?, presence: true, ignore_serialize: giropay_payments.nil? && !giropay_payments_present?)]
-    property giropay_payments : CapabilityParam13?
+    @[JSON::Field(key: "giropay_payments", type: CapabilityParam?, presence: true, ignore_serialize: giropay_payments.nil? && !giropay_payments_present?)]
+    property giropay_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? giropay_payments_present : Bool = false
 
-    @[JSON::Field(key: "grabpay_payments", type: CapabilityParam14?, presence: true, ignore_serialize: grabpay_payments.nil? && !grabpay_payments_present?)]
-    property grabpay_payments : CapabilityParam14?
+    @[JSON::Field(key: "grabpay_payments", type: CapabilityParam?, presence: true, ignore_serialize: grabpay_payments.nil? && !grabpay_payments_present?)]
+    property grabpay_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? grabpay_payments_present : Bool = false
 
-    @[JSON::Field(key: "ideal_payments", type: CapabilityParam15?, presence: true, ignore_serialize: ideal_payments.nil? && !ideal_payments_present?)]
-    property ideal_payments : CapabilityParam15?
+    @[JSON::Field(key: "ideal_payments", type: CapabilityParam?, presence: true, ignore_serialize: ideal_payments.nil? && !ideal_payments_present?)]
+    property ideal_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? ideal_payments_present : Bool = false
 
-    @[JSON::Field(key: "jcb_payments", type: CapabilityParam16?, presence: true, ignore_serialize: jcb_payments.nil? && !jcb_payments_present?)]
-    property jcb_payments : CapabilityParam16?
+    @[JSON::Field(key: "jcb_payments", type: CapabilityParam?, presence: true, ignore_serialize: jcb_payments.nil? && !jcb_payments_present?)]
+    property jcb_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? jcb_payments_present : Bool = false
 
-    @[JSON::Field(key: "klarna_payments", type: CapabilityParam17?, presence: true, ignore_serialize: klarna_payments.nil? && !klarna_payments_present?)]
-    property klarna_payments : CapabilityParam17?
+    @[JSON::Field(key: "klarna_payments", type: CapabilityParam?, presence: true, ignore_serialize: klarna_payments.nil? && !klarna_payments_present?)]
+    property klarna_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? klarna_payments_present : Bool = false
 
-    @[JSON::Field(key: "konbini_payments", type: CapabilityParam18?, presence: true, ignore_serialize: konbini_payments.nil? && !konbini_payments_present?)]
-    property konbini_payments : CapabilityParam18?
+    @[JSON::Field(key: "konbini_payments", type: CapabilityParam?, presence: true, ignore_serialize: konbini_payments.nil? && !konbini_payments_present?)]
+    property konbini_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? konbini_payments_present : Bool = false
 
-    @[JSON::Field(key: "legacy_payments", type: CapabilityParam19?, presence: true, ignore_serialize: legacy_payments.nil? && !legacy_payments_present?)]
-    property legacy_payments : CapabilityParam19?
+    @[JSON::Field(key: "legacy_payments", type: CapabilityParam?, presence: true, ignore_serialize: legacy_payments.nil? && !legacy_payments_present?)]
+    property legacy_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? legacy_payments_present : Bool = false
 
-    @[JSON::Field(key: "link_payments", type: CapabilityParam20?, presence: true, ignore_serialize: link_payments.nil? && !link_payments_present?)]
-    property link_payments : CapabilityParam20?
+    @[JSON::Field(key: "link_payments", type: CapabilityParam?, presence: true, ignore_serialize: link_payments.nil? && !link_payments_present?)]
+    property link_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? link_payments_present : Bool = false
 
-    @[JSON::Field(key: "oxxo_payments", type: CapabilityParam21?, presence: true, ignore_serialize: oxxo_payments.nil? && !oxxo_payments_present?)]
-    property oxxo_payments : CapabilityParam21?
+    @[JSON::Field(key: "oxxo_payments", type: CapabilityParam?, presence: true, ignore_serialize: oxxo_payments.nil? && !oxxo_payments_present?)]
+    property oxxo_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? oxxo_payments_present : Bool = false
 
-    @[JSON::Field(key: "p24_payments", type: CapabilityParam22?, presence: true, ignore_serialize: p24_payments.nil? && !p24_payments_present?)]
-    property p24_payments : CapabilityParam22?
+    @[JSON::Field(key: "p24_payments", type: CapabilityParam?, presence: true, ignore_serialize: p24_payments.nil? && !p24_payments_present?)]
+    property p24_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? p24_payments_present : Bool = false
 
-    @[JSON::Field(key: "paynow_payments", type: CapabilityParam23?, presence: true, ignore_serialize: paynow_payments.nil? && !paynow_payments_present?)]
-    property paynow_payments : CapabilityParam23?
+    @[JSON::Field(key: "paynow_payments", type: CapabilityParam?, presence: true, ignore_serialize: paynow_payments.nil? && !paynow_payments_present?)]
+    property paynow_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? paynow_payments_present : Bool = false
 
-    @[JSON::Field(key: "sepa_debit_payments", type: CapabilityParam24?, presence: true, ignore_serialize: sepa_debit_payments.nil? && !sepa_debit_payments_present?)]
-    property sepa_debit_payments : CapabilityParam24?
+    @[JSON::Field(key: "sepa_debit_payments", type: CapabilityParam?, presence: true, ignore_serialize: sepa_debit_payments.nil? && !sepa_debit_payments_present?)]
+    property sepa_debit_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? sepa_debit_payments_present : Bool = false
 
-    @[JSON::Field(key: "sofort_payments", type: CapabilityParam25?, presence: true, ignore_serialize: sofort_payments.nil? && !sofort_payments_present?)]
-    property sofort_payments : CapabilityParam25?
+    @[JSON::Field(key: "sofort_payments", type: CapabilityParam?, presence: true, ignore_serialize: sofort_payments.nil? && !sofort_payments_present?)]
+    property sofort_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? sofort_payments_present : Bool = false
 
-    @[JSON::Field(key: "tax_reporting_us_1099_k", type: CapabilityParam26?, presence: true, ignore_serialize: tax_reporting_us_1099_k.nil? && !tax_reporting_us_1099_k_present?)]
-    property tax_reporting_us_1099_k : CapabilityParam26?
+    @[JSON::Field(key: "tax_reporting_us_1099_k", type: CapabilityParam?, presence: true, ignore_serialize: tax_reporting_us_1099_k.nil? && !tax_reporting_us_1099_k_present?)]
+    property tax_reporting_us_1099_k : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? tax_reporting_us_1099_k_present : Bool = false
 
-    @[JSON::Field(key: "tax_reporting_us_1099_misc", type: CapabilityParam27?, presence: true, ignore_serialize: tax_reporting_us_1099_misc.nil? && !tax_reporting_us_1099_misc_present?)]
-    property tax_reporting_us_1099_misc : CapabilityParam27?
+    @[JSON::Field(key: "tax_reporting_us_1099_misc", type: CapabilityParam?, presence: true, ignore_serialize: tax_reporting_us_1099_misc.nil? && !tax_reporting_us_1099_misc_present?)]
+    property tax_reporting_us_1099_misc : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? tax_reporting_us_1099_misc_present : Bool = false
 
-    @[JSON::Field(key: "transfers", type: CapabilityParam28?, presence: true, ignore_serialize: transfers.nil? && !transfers_present?)]
-    property transfers : CapabilityParam28?
+    @[JSON::Field(key: "transfers", type: CapabilityParam?, presence: true, ignore_serialize: transfers.nil? && !transfers_present?)]
+    property transfers : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? transfers_present : Bool = false
 
-    @[JSON::Field(key: "treasury", type: CapabilityParam29?, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
-    property treasury : CapabilityParam29?
+    @[JSON::Field(key: "treasury", type: CapabilityParam?, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
+    property treasury : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? treasury_present : Bool = false
 
-    @[JSON::Field(key: "us_bank_account_ach_payments", type: CapabilityParam30?, presence: true, ignore_serialize: us_bank_account_ach_payments.nil? && !us_bank_account_ach_payments_present?)]
-    property us_bank_account_ach_payments : CapabilityParam30?
+    @[JSON::Field(key: "us_bank_account_ach_payments", type: CapabilityParam?, presence: true, ignore_serialize: us_bank_account_ach_payments.nil? && !us_bank_account_ach_payments_present?)]
+    property us_bank_account_ach_payments : CapabilityParam?
 
     @[JSON::Field(ignore: true)]
     property? us_bank_account_ach_payments_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @acss_debit_payments : CapabilityParam? = nil, @affirm_payments : CapabilityParam1? = nil, @afterpay_clearpay_payments : CapabilityParam2? = nil, @au_becs_debit_payments : CapabilityParam3? = nil, @bacs_debit_payments : CapabilityParam4? = nil, @bancontact_payments : CapabilityParam5? = nil, @bank_transfer_payments : CapabilityParam6? = nil, @boleto_payments : CapabilityParam7? = nil, @card_issuing : CapabilityParam8? = nil, @card_payments : CapabilityParam9? = nil, @cartes_bancaires_payments : CapabilityParam10? = nil, @eps_payments : CapabilityParam11? = nil, @fpx_payments : CapabilityParam12? = nil, @giropay_payments : CapabilityParam13? = nil, @grabpay_payments : CapabilityParam14? = nil, @ideal_payments : CapabilityParam15? = nil, @jcb_payments : CapabilityParam16? = nil, @klarna_payments : CapabilityParam17? = nil, @konbini_payments : CapabilityParam18? = nil, @legacy_payments : CapabilityParam19? = nil, @link_payments : CapabilityParam20? = nil, @oxxo_payments : CapabilityParam21? = nil, @p24_payments : CapabilityParam22? = nil, @paynow_payments : CapabilityParam23? = nil, @sepa_debit_payments : CapabilityParam24? = nil, @sofort_payments : CapabilityParam25? = nil, @tax_reporting_us_1099_k : CapabilityParam26? = nil, @tax_reporting_us_1099_misc : CapabilityParam27? = nil, @transfers : CapabilityParam28? = nil, @treasury : CapabilityParam29? = nil, @us_bank_account_ach_payments : CapabilityParam30? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @acss_debit_payments : CapabilityParam? = nil,
+      @affirm_payments : CapabilityParam? = nil,
+      @afterpay_clearpay_payments : CapabilityParam? = nil,
+      @au_becs_debit_payments : CapabilityParam? = nil,
+      @bacs_debit_payments : CapabilityParam? = nil,
+      @bancontact_payments : CapabilityParam? = nil,
+      @bank_transfer_payments : CapabilityParam? = nil,
+      @boleto_payments : CapabilityParam? = nil,
+      @card_issuing : CapabilityParam? = nil,
+      @card_payments : CapabilityParam? = nil,
+      @cartes_bancaires_payments : CapabilityParam? = nil,
+      @eps_payments : CapabilityParam? = nil,
+      @fpx_payments : CapabilityParam? = nil,
+      @giropay_payments : CapabilityParam? = nil,
+      @grabpay_payments : CapabilityParam? = nil,
+      @ideal_payments : CapabilityParam? = nil,
+      @jcb_payments : CapabilityParam? = nil,
+      @klarna_payments : CapabilityParam? = nil,
+      @konbini_payments : CapabilityParam? = nil,
+      @legacy_payments : CapabilityParam? = nil,
+      @link_payments : CapabilityParam? = nil,
+      @oxxo_payments : CapabilityParam? = nil,
+      @p24_payments : CapabilityParam? = nil,
+      @paynow_payments : CapabilityParam? = nil,
+      @sepa_debit_payments : CapabilityParam? = nil,
+      @sofort_payments : CapabilityParam? = nil,
+      @tax_reporting_us_1099_k : CapabilityParam? = nil,
+      @tax_reporting_us_1099_misc : CapabilityParam? = nil,
+      @transfers : CapabilityParam? = nil,
+      @treasury : CapabilityParam? = nil,
+      @us_bank_account_ach_payments : CapabilityParam? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -224,52 +259,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit_payments == o.acss_debit_payments &&
-        affirm_payments == o.affirm_payments &&
-        afterpay_clearpay_payments == o.afterpay_clearpay_payments &&
-        au_becs_debit_payments == o.au_becs_debit_payments &&
-        bacs_debit_payments == o.bacs_debit_payments &&
-        bancontact_payments == o.bancontact_payments &&
-        bank_transfer_payments == o.bank_transfer_payments &&
-        boleto_payments == o.boleto_payments &&
-        card_issuing == o.card_issuing &&
-        card_payments == o.card_payments &&
-        cartes_bancaires_payments == o.cartes_bancaires_payments &&
-        eps_payments == o.eps_payments &&
-        fpx_payments == o.fpx_payments &&
-        giropay_payments == o.giropay_payments &&
-        grabpay_payments == o.grabpay_payments &&
-        ideal_payments == o.ideal_payments &&
-        jcb_payments == o.jcb_payments &&
-        klarna_payments == o.klarna_payments &&
-        konbini_payments == o.konbini_payments &&
-        legacy_payments == o.legacy_payments &&
-        link_payments == o.link_payments &&
-        oxxo_payments == o.oxxo_payments &&
-        p24_payments == o.p24_payments &&
-        paynow_payments == o.paynow_payments &&
-        sepa_debit_payments == o.sepa_debit_payments &&
-        sofort_payments == o.sofort_payments &&
-        tax_reporting_us_1099_k == o.tax_reporting_us_1099_k &&
-        tax_reporting_us_1099_misc == o.tax_reporting_us_1099_misc &&
-        transfers == o.transfers &&
-        treasury == o.treasury &&
-        us_bank_account_ach_payments == o.us_bank_account_ach_payments
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit_payments, @affirm_payments, @afterpay_clearpay_payments, @au_becs_debit_payments, @bacs_debit_payments, @bancontact_payments, @bank_transfer_payments, @boleto_payments, @card_issuing, @card_payments, @cartes_bancaires_payments, @eps_payments, @fpx_payments, @giropay_payments, @grabpay_payments, @ideal_payments, @jcb_payments, @klarna_payments, @konbini_payments, @legacy_payments, @link_payments, @oxxo_payments, @p24_payments, @paynow_payments, @sepa_debit_payments, @sofort_payments, @tax_reporting_us_1099_k, @tax_reporting_us_1099_misc, @transfers, @treasury, @us_bank_account_ach_payments)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@acss_debit_payments, @affirm_payments, @afterpay_clearpay_payments, @au_becs_debit_payments, @bacs_debit_payments, @bancontact_payments, @bank_transfer_payments, @boleto_payments, @card_issuing, @card_payments, @cartes_bancaires_payments, @eps_payments, @fpx_payments, @giropay_payments, @grabpay_payments, @ideal_payments, @jcb_payments, @klarna_payments, @konbini_payments, @legacy_payments, @link_payments, @oxxo_payments, @p24_payments, @paynow_payments, @sepa_debit_payments, @sofort_payments, @tax_reporting_us_1099_k, @tax_reporting_us_1099_misc, @transfers, @treasury, @us_bank_account_ach_payments)
   end
 end

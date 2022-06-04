@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether this SKU is available for purchase.
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
@@ -39,6 +40,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? currency_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -58,8 +60,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? inventory_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -86,7 +88,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool? = nil, @attributes : Hash(String, String)? = nil, @currency : String? = nil, @expand : Array(String)? = nil, @image : String? = nil, @inventory : InventoryUpdateSpecs? = nil, @metadata : IndividualSpecsMetadata? = nil, @package_dimensions : PostSkusIdRequestPackageDimensions? = nil, @price : Int64? = nil, @product : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @active : Bool? = nil,
+      @attributes : Hash(String, String)? = nil,
+      @currency : String? = nil,
+      @expand : Array(String)? = nil,
+      @image : String? = nil,
+      @inventory : InventoryUpdateSpecs? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @package_dimensions : PostSkusIdRequestPackageDimensions? = nil,
+      @price : Int64? = nil,
+      @product : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -110,6 +125,7 @@ module Stripe
     def valid?
       return false if !@image.nil? && @image.to_s.size > 5000
       return false if !@product.nil? && @product.to_s.size > 5000
+
       true
     end
 
@@ -133,31 +149,16 @@ module Stripe
       @product = product
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        attributes == o.attributes &&
-        currency == o.currency &&
-        expand == o.expand &&
-        image == o.image &&
-        inventory == o.inventory &&
-        metadata == o.metadata &&
-        package_dimensions == o.package_dimensions &&
-        price == o.price &&
-        product == o.product
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @attributes, @currency, @expand, @image, @inventory, @metadata, @package_dimensions, @price, @product)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @attributes, @currency, @expand, @image, @inventory, @metadata, @package_dimensions, @price, @product)
   end
 end

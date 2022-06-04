@@ -19,15 +19,32 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    @[JSON::Field(key: "coupon", type: Coupon)]
+    property coupon : Coupon
+
+    # The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.
+    @[JSON::Field(key: "id", type: String)]
+    getter id : String
+
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
+
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["discount"])
+
+    # Date that the coupon was applied.
+    @[JSON::Field(key: "start", type: Int64)]
+    property start : Int64
+
+    # Optional properties
+
     # The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.
     @[JSON::Field(key: "checkout_session", type: String?, presence: true, ignore_serialize: checkout_session.nil? && !checkout_session_present?)]
     getter checkout_session : String?
 
     @[JSON::Field(ignore: true)]
     property? checkout_session_present : Bool = false
-
-    @[JSON::Field(key: "coupon", type: Coupon)]
-    property coupon : Coupon
 
     @[JSON::Field(key: "customer", type: DeletedDiscountCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
     property customer : DeletedDiscountCustomer?
@@ -41,10 +58,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? _end_present : Bool = false
-
-    # The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
 
     # The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.
     @[JSON::Field(key: "invoice", type: String?, presence: true, ignore_serialize: invoice.nil? && !invoice_present?)]
@@ -60,21 +73,11 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? invoice_item_present : Bool = false
 
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["discount"])
-
     @[JSON::Field(key: "promotion_code", type: DeletedDiscountPromotionCode?, presence: true, ignore_serialize: promotion_code.nil? && !promotion_code_present?)]
     property promotion_code : DeletedDiscountPromotionCode?
 
     @[JSON::Field(ignore: true)]
     property? promotion_code_present : Bool = false
-
-    # Date that the coupon was applied.
-    @[JSON::Field(key: "start", type: Int64)]
-    property start : Int64
 
     # The subscription that this coupon is applied to, if it is applied to a particular subscription.
     @[JSON::Field(key: "subscription", type: String?, presence: true, ignore_serialize: subscription.nil? && !subscription_present?)]
@@ -85,7 +88,22 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @checkout_session : String?, @coupon : Coupon, @customer : DeletedDiscountCustomer?, @_end : Int64?, @id : String, @invoice : String?, @invoice_item : String?, @object : String, @promotion_code : DeletedDiscountPromotionCode?, @start : Int64, @subscription : String?)
+    def initialize(
+      *,
+      # Required properties
+      @coupon : Coupon,
+      @id : String,
+      @object : String,
+      @start : Int64,
+      # Optional properties
+      @checkout_session : String? = nil,
+      @customer : DeletedDiscountCustomer? = nil,
+      @_end : Int64? = nil,
+      @invoice : String? = nil,
+      @invoice_item : String? = nil,
+      @promotion_code : DeletedDiscountPromotionCode? = nil,
+      @subscription : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -93,25 +111,25 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @checkout_session.to_s.size > 5000
-        invalid_properties.push("invalid value for \"checkout_session\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @invoice.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      if !@checkout_session.nil? && @checkout_session.to_s.size > 5000
+        invalid_properties.push("invalid value for \"checkout_session\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@invoice.nil? && @invoice.to_s.size > 5000
         invalid_properties.push("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @invoice_item.to_s.size > 5000
+      if !@invoice_item.nil? && @invoice_item.to_s.size > 5000
         invalid_properties.push("invalid value for \"invoice_item\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
-      if @subscription.to_s.size > 5000
+      if !@subscription.nil? && @subscription.to_s.size > 5000
         invalid_properties.push("invalid value for \"subscription\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -121,23 +139,14 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @checkout_session.to_s.size > 5000
       return false if @id.to_s.size > 5000
-      return false if @invoice.to_s.size > 5000
-      return false if @invoice_item.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @subscription.to_s.size > 5000
+      return false if !@checkout_session.nil? && @checkout_session.to_s.size > 5000
+      return false if !@invoice.nil? && @invoice.to_s.size > 5000
+      return false if !@invoice_item.nil? && @invoice_item.to_s.size > 5000
+      return false if !@subscription.nil? && @subscription.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] checkout_session Value to be assigned
-    def checkout_session=(checkout_session)
-      if checkout_session.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"checkout_session\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @checkout_session = checkout_session
     end
 
     # Custom attribute writer method with validation
@@ -150,10 +159,27 @@ module Stripe
       @id = id
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] object Object to be assigned
+    def object=(object)
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+      @object = object
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] checkout_session Value to be assigned
+    def checkout_session=(checkout_session)
+      if !checkout_session.nil? && checkout_session.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"checkout_session\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @checkout_session = checkout_session
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] invoice Value to be assigned
     def invoice=(invoice)
-      if invoice.to_s.size > 5000
+      if !invoice.nil? && invoice.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -163,46 +189,21 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] invoice_item Value to be assigned
     def invoice_item=(invoice_item)
-      if invoice_item.to_s.size > 5000
+      if !invoice_item.nil? && invoice_item.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"invoice_item\", the character length must be smaller than or equal to 5000.")
       end
 
       @invoice_item = invoice_item
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
-      @object = object
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] subscription Value to be assigned
     def subscription=(subscription)
-      if subscription.to_s.size > 5000
+      if !subscription.nil? && subscription.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"subscription\", the character length must be smaller than or equal to 5000.")
       end
 
       @subscription = subscription
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        checkout_session == o.checkout_session &&
-        coupon == o.coupon &&
-        customer == o.customer &&
-        _end == o._end &&
-        id == o.id &&
-        invoice == o.invoice &&
-        invoice_item == o.invoice_item &&
-        object == o.object &&
-        promotion_code == o.promotion_code &&
-        start == o.start &&
-        subscription == o.subscription
     end
 
     # @see the `==` method
@@ -211,8 +212,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@checkout_session, @coupon, @customer, @_end, @id, @invoice, @invoice_item, @object, @promotion_code, @start, @subscription)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@coupon, @id, @object, @start, @checkout_session, @customer, @_end, @invoice, @invoice_item, @promotion_code, @subscription)
   end
 end

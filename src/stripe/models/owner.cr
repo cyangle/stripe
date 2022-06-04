@@ -18,27 +18,25 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "address", type: SourceAddress?, presence: true, ignore_serialize: address.nil? && !address_present?)]
     property address : SourceAddress?
 
     @[JSON::Field(ignore: true)]
     property? address_present : Bool = false
 
-    # Owner's email address.
     @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
     property email : String?
 
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
-    # Owner's full name.
     @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
     getter name : String?
 
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
 
-    # Owner's phone number.
     @[JSON::Field(key: "phone", type: String?, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
     getter phone : String?
 
@@ -47,7 +45,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : SourceAddress? = nil, @email : String? = nil, @name : String? = nil, @phone : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @address : SourceAddress? = nil,
+      @email : String? = nil,
+      @name : String? = nil,
+      @phone : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -71,6 +76,7 @@ module Stripe
     def valid?
       return false if !@name.nil? && @name.to_s.size > 5000
       return false if !@phone.nil? && @phone.to_s.size > 5000
+
       true
     end
 
@@ -94,25 +100,16 @@ module Stripe
       @phone = phone
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        email == o.email &&
-        name == o.name &&
-        phone == o.phone
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @email, @name, @phone)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address, @email, @name, @phone)
   end
 end

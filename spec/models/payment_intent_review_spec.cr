@@ -35,7 +35,7 @@ describe Stripe::PaymentIntentReview do
   describe "test attribute 'closed_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["approved", "disputed", "redacted", "refunded", "refunded_as_fraud", "null"])
+      # validator = EnumValidator.new("String", ["approved", "disputed", "redacted", "refunded", "refunded_as_fraud"])
       # validator.allowable_values.each do |value|
       #   expect { instance.closed_reason = value }.not_to raise_error
       # end

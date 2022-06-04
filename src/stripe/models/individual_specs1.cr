@@ -12,27 +12,27 @@ require "time"
 require "log"
 
 module Stripe
-  # Information about the person represented by the account.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class IndividualSpecs1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "address", type: AddressSpecs2?, presence: true, ignore_serialize: address.nil? && !address_present?)]
-    property address : AddressSpecs2?
+
+    @[JSON::Field(key: "address", type: AddressSpecs?, presence: true, ignore_serialize: address.nil? && !address_present?)]
+    property address : AddressSpecs?
 
     @[JSON::Field(ignore: true)]
     property? address_present : Bool = false
 
-    @[JSON::Field(key: "address_kana", type: JapanAddressKanaSpecs1?, presence: true, ignore_serialize: address_kana.nil? && !address_kana_present?)]
-    property address_kana : JapanAddressKanaSpecs1?
+    @[JSON::Field(key: "address_kana", type: JapanAddressKanaSpecs?, presence: true, ignore_serialize: address_kana.nil? && !address_kana_present?)]
+    property address_kana : JapanAddressKanaSpecs?
 
     @[JSON::Field(ignore: true)]
     property? address_kana_present : Bool = false
 
-    @[JSON::Field(key: "address_kanji", type: JapanAddressKanjiSpecs1?, presence: true, ignore_serialize: address_kanji.nil? && !address_kanji_present?)]
-    property address_kanji : JapanAddressKanjiSpecs1?
+    @[JSON::Field(key: "address_kanji", type: JapanAddressKanjiSpecs?, presence: true, ignore_serialize: address_kanji.nil? && !address_kanji_present?)]
+    property address_kanji : JapanAddressKanjiSpecs?
 
     @[JSON::Field(ignore: true)]
     property? address_kanji_present : Bool = false
@@ -43,28 +43,24 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? dob_present : Bool = false
 
-    # The individual's email address.
     @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
     property email : String?
 
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
-    # The individual's first name.
     @[JSON::Field(key: "first_name", type: String?, presence: true, ignore_serialize: first_name.nil? && !first_name_present?)]
     getter first_name : String?
 
     @[JSON::Field(ignore: true)]
     property? first_name_present : Bool = false
 
-    # The Kana variation of the the individual's first name (Japan only).
     @[JSON::Field(key: "first_name_kana", type: String?, presence: true, ignore_serialize: first_name_kana.nil? && !first_name_kana_present?)]
     getter first_name_kana : String?
 
     @[JSON::Field(ignore: true)]
     property? first_name_kana_present : Bool = false
 
-    # The Kanji variation of the individual's first name (Japan only).
     @[JSON::Field(key: "first_name_kanji", type: String?, presence: true, ignore_serialize: first_name_kanji.nil? && !first_name_kanji_present?)]
     getter first_name_kanji : String?
 
@@ -77,49 +73,42 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? full_name_aliases_present : Bool = false
 
-    # The individual's gender (International regulations require either \"male\" or \"female\").
     @[JSON::Field(key: "gender", type: String?, presence: true, ignore_serialize: gender.nil? && !gender_present?)]
     property gender : String?
 
     @[JSON::Field(ignore: true)]
     property? gender_present : Bool = false
 
-    # The government-issued ID number of the individual, as appropriate for the representative’s country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number in Canada). Instead of the number itself, you can also provide a [PII token created with Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
     @[JSON::Field(key: "id_number", type: String?, presence: true, ignore_serialize: id_number.nil? && !id_number_present?)]
     getter id_number : String?
 
     @[JSON::Field(ignore: true)]
     property? id_number_present : Bool = false
 
-    # The government-issued secondary ID number of the individual, as appropriate for the representative's country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token created with Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
     @[JSON::Field(key: "id_number_secondary", type: String?, presence: true, ignore_serialize: id_number_secondary.nil? && !id_number_secondary_present?)]
     getter id_number_secondary : String?
 
     @[JSON::Field(ignore: true)]
     property? id_number_secondary_present : Bool = false
 
-    # The individual's last name.
     @[JSON::Field(key: "last_name", type: String?, presence: true, ignore_serialize: last_name.nil? && !last_name_present?)]
     getter last_name : String?
 
     @[JSON::Field(ignore: true)]
     property? last_name_present : Bool = false
 
-    # The Kana variation of the individual's last name (Japan only).
     @[JSON::Field(key: "last_name_kana", type: String?, presence: true, ignore_serialize: last_name_kana.nil? && !last_name_kana_present?)]
     getter last_name_kana : String?
 
     @[JSON::Field(ignore: true)]
     property? last_name_kana_present : Bool = false
 
-    # The Kanji variation of the individual's last name (Japan only).
     @[JSON::Field(key: "last_name_kanji", type: String?, presence: true, ignore_serialize: last_name_kanji.nil? && !last_name_kanji_present?)]
     getter last_name_kanji : String?
 
     @[JSON::Field(ignore: true)]
     property? last_name_kanji_present : Bool = false
 
-    # The individual's maiden name.
     @[JSON::Field(key: "maiden_name", type: String?, presence: true, ignore_serialize: maiden_name.nil? && !maiden_name_present?)]
     getter maiden_name : String?
 
@@ -132,14 +121,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
-    # The individual's phone number.
     @[JSON::Field(key: "phone", type: String?, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
     property phone : String?
 
     @[JSON::Field(ignore: true)]
     property? phone_present : Bool = false
 
-    # Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
     @[JSON::Field(key: "political_exposure", type: String?, presence: true, ignore_serialize: political_exposure.nil? && !political_exposure_present?)]
     getter political_exposure : String?
 
@@ -148,13 +135,12 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE = EnumValidator.new("political_exposure", "String", ["existing", "none"])
 
-    @[JSON::Field(key: "registered_address", type: AddressSpecs3?, presence: true, ignore_serialize: registered_address.nil? && !registered_address_present?)]
-    property registered_address : AddressSpecs3?
+    @[JSON::Field(key: "registered_address", type: AddressSpecs?, presence: true, ignore_serialize: registered_address.nil? && !registered_address_present?)]
+    property registered_address : AddressSpecs?
 
     @[JSON::Field(ignore: true)]
     property? registered_address_present : Bool = false
 
-    # The last four digits of the individual's Social Security Number (U.S. only).
     @[JSON::Field(key: "ssn_last_4", type: String?, presence: true, ignore_serialize: ssn_last_4.nil? && !ssn_last_4_present?)]
     getter ssn_last_4 : String?
 
@@ -169,7 +155,32 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : AddressSpecs2? = nil, @address_kana : JapanAddressKanaSpecs1? = nil, @address_kanji : JapanAddressKanjiSpecs1? = nil, @dob : IndividualSpecsDob? = nil, @email : String? = nil, @first_name : String? = nil, @first_name_kana : String? = nil, @first_name_kanji : String? = nil, @full_name_aliases : IndividualSpecsFullNameAliases? = nil, @gender : String? = nil, @id_number : String? = nil, @id_number_secondary : String? = nil, @last_name : String? = nil, @last_name_kana : String? = nil, @last_name_kanji : String? = nil, @maiden_name : String? = nil, @metadata : IndividualSpecsMetadata? = nil, @phone : String? = nil, @political_exposure : String? = nil, @registered_address : AddressSpecs3? = nil, @ssn_last_4 : String? = nil, @verification : PersonVerificationSpecs? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @address : AddressSpecs? = nil,
+      @address_kana : JapanAddressKanaSpecs? = nil,
+      @address_kanji : JapanAddressKanjiSpecs? = nil,
+      @dob : IndividualSpecsDob? = nil,
+      @email : String? = nil,
+      @first_name : String? = nil,
+      @first_name_kana : String? = nil,
+      @first_name_kanji : String? = nil,
+      @full_name_aliases : IndividualSpecsFullNameAliases? = nil,
+      @gender : String? = nil,
+      @id_number : String? = nil,
+      @id_number_secondary : String? = nil,
+      @last_name : String? = nil,
+      @last_name_kana : String? = nil,
+      @last_name_kanji : String? = nil,
+      @maiden_name : String? = nil,
+      @metadata : IndividualSpecsMetadata? = nil,
+      @phone : String? = nil,
+      @political_exposure : String? = nil,
+      @registered_address : AddressSpecs? = nil,
+      @ssn_last_4 : String? = nil,
+      @verification : PersonVerificationSpecs? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -236,6 +247,7 @@ module Stripe
       return false if !@maiden_name.nil? && @maiden_name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.valid?(@political_exposure)
       return false if !@ssn_last_4.nil? && @ssn_last_4.to_s.size > 5000
+
       true
     end
 
@@ -346,43 +358,16 @@ module Stripe
       @ssn_last_4 = ssn_last_4
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        address_kana == o.address_kana &&
-        address_kanji == o.address_kanji &&
-        dob == o.dob &&
-        email == o.email &&
-        first_name == o.first_name &&
-        first_name_kana == o.first_name_kana &&
-        first_name_kanji == o.first_name_kanji &&
-        full_name_aliases == o.full_name_aliases &&
-        gender == o.gender &&
-        id_number == o.id_number &&
-        id_number_secondary == o.id_number_secondary &&
-        last_name == o.last_name &&
-        last_name_kana == o.last_name_kana &&
-        last_name_kanji == o.last_name_kanji &&
-        maiden_name == o.maiden_name &&
-        metadata == o.metadata &&
-        phone == o.phone &&
-        political_exposure == o.political_exposure &&
-        registered_address == o.registered_address &&
-        ssn_last_4 == o.ssn_last_4 &&
-        verification == o.verification
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @address_kana, @address_kanji, @dob, @email, @first_name, @first_name_kana, @first_name_kanji, @full_name_aliases, @gender, @id_number, @id_number_secondary, @last_name, @last_name_kana, @last_name_kanji, @maiden_name, @metadata, @phone, @political_exposure, @registered_address, @ssn_last_4, @verification)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address, @address_kana, @address_kanji, @dob, @email, @first_name, @first_name_kana, @first_name_kanji, @full_name_aliases, @gender, @id_number, @id_number_secondary, @last_name, @last_name_kana, @last_name_kanji, @maiden_name, @metadata, @phone, @political_exposure, @registered_address, @ssn_last_4, @verification)
   end
 end

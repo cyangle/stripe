@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The default currency for this country. This applies to both payment methods and bank accounts.
     @[JSON::Field(key: "default_currency", type: String)]
     getter default_currency : String
@@ -34,15 +35,18 @@ module Stripe
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["country_spec"])
 
     # Currencies that can be accepted in the specific country (for transfers).
-    @[JSON::Field(key: "supported_bank_account_currencies", type: Hash(String, Array))]
-    property supported_bank_account_currencies : Hash(String, Array)
+    @[JSON::Field(key: "supported_bank_account_currencies", type: Hash(String, Array(String)))]
+    property supported_bank_account_currencies : Hash(String, Array(String))
 
+    # Currencies that can be accepted in the specified country (for payments).
     @[JSON::Field(key: "supported_payment_currencies", type: Array(String))]
     property supported_payment_currencies : Array(String)
 
+    # Payment methods available in the specified country. You may need to enable some payment methods (e.g., [ACH](https://stripe.com/docs/ach)) on your account before they appear in this list. The `stripe` payment method refers to [charging through your platform](https://stripe.com/docs/connect/destination-charges).
     @[JSON::Field(key: "supported_payment_methods", type: Array(String))]
     property supported_payment_methods : Array(String)
 
+    # Countries that can accept transfers from the specified country.
     @[JSON::Field(key: "supported_transfer_countries", type: Array(String))]
     property supported_transfer_countries : Array(String)
 
@@ -51,7 +55,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @default_currency : String, @id : String, @object : String, @supported_bank_account_currencies : Hash(String, Array), @supported_payment_currencies : Array(String), @supported_payment_methods : Array(String), @supported_transfer_countries : Array(String), @verification_fields : CountrySpecVerificationFields)
+    def initialize(
+      *,
+      # Required properties
+      @default_currency : String,
+      @id : String,
+      @object : String,
+      @supported_bank_account_currencies : Hash(String, Array(String)),
+      @supported_payment_currencies : Array(String),
+      @supported_payment_methods : Array(String),
+      @supported_transfer_countries : Array(String),
+      @verification_fields : CountrySpecVerificationFields
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -78,6 +93,7 @@ module Stripe
       return false if @default_currency.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
       true
     end
 
@@ -108,29 +124,16 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        default_currency == o.default_currency &&
-        id == o.id &&
-        object == o.object &&
-        supported_bank_account_currencies == o.supported_bank_account_currencies &&
-        supported_payment_currencies == o.supported_payment_currencies &&
-        supported_payment_methods == o.supported_payment_methods &&
-        supported_transfer_countries == o.supported_transfer_countries &&
-        verification_fields == o.verification_fields
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@default_currency, @id, @object, @supported_bank_account_currencies, @supported_payment_currencies, @supported_payment_methods, @supported_transfer_countries, @verification_fields)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@default_currency, @id, @object, @supported_bank_account_currencies, @supported_payment_currencies, @supported_payment_methods, @supported_transfer_countries, @verification_fields)
   end
 end

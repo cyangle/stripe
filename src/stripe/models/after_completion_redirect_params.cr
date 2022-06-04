@@ -12,20 +12,23 @@ require "time"
 require "log"
 
 module Stripe
-  # Configuration when `type=redirect`.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class AfterCompletionRedirectParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The URL the customer will be redirected to after the purchase is complete. You can embed `{CHECKOUT_SESSION_ID}` into the URL to have the `id` of the completed [checkout session](https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-id) included.
+
     @[JSON::Field(key: "url", type: String)]
     getter url : String
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @url : String)
+    def initialize(
+      *,
+      # Required properties
+      @url : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -44,6 +47,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @url.to_s.size > 2048
+
       true
     end
 
@@ -57,22 +61,16 @@ module Stripe
       @url = url
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        url == o.url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@url)
   end
 end

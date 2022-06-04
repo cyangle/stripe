@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The URL the customer will be directed to if they decide to cancel payment and return to your website.
     @[JSON::Field(key: "cancel_url", type: String)]
     getter cancel_url : String
@@ -27,6 +28,7 @@ module Stripe
     getter success_url : String
 
     # Optional properties
+
     @[JSON::Field(key: "after_expiration", type: AfterExpirationParams?, presence: true, ignore_serialize: after_expiration.nil? && !after_expiration_present?)]
     property after_expiration : AfterExpirationParams?
 
@@ -104,6 +106,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? discounts_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -195,13 +198,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? shipping_options_present : Bool = false
 
-    # [Deprecated] The shipping rate to apply to this Session. Only up to one may be specified.
-    @[JSON::Field(key: "shipping_rates", type: Array(String)?, presence: true, ignore_serialize: shipping_rates.nil? && !shipping_rates_present?)]
-    property shipping_rates : Array(String)?
-
-    @[JSON::Field(ignore: true)]
-    property? shipping_rates_present : Bool = false
-
     # Describes the type of transaction being performed by Checkout in order to customize relevant text on the page, such as the submit button. `submit_type` can only be specified on Checkout Sessions in `payment` mode, but not Checkout Sessions in `subscription` or `setup` mode.
     @[JSON::Field(key: "submit_type", type: String?, presence: true, ignore_serialize: submit_type.nil? && !submit_type_present?)]
     getter submit_type : String?
@@ -225,7 +221,40 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @cancel_url : String, @success_url : String, @after_expiration : AfterExpirationParams? = nil, @allow_promotion_codes : Bool? = nil, @automatic_tax : AutomaticTaxParams? = nil, @billing_address_collection : String? = nil, @client_reference_id : String? = nil, @consent_collection : ConsentCollectionParams? = nil, @customer : String? = nil, @customer_creation : String? = nil, @customer_email : String? = nil, @customer_update : CustomerUpdateParams? = nil, @discounts : Array(DiscountParams)? = nil, @expand : Array(String)? = nil, @expires_at : Int64? = nil, @line_items : Array(LineItemParams)? = nil, @locale : String? = nil, @metadata : Hash(String, String)? = nil, @mode : String? = nil, @payment_intent_data : PaymentIntentDataParams? = nil, @payment_method_options : PaymentMethodOptionsParam? = nil, @payment_method_types : Array(String)? = nil, @phone_number_collection : PhoneNumberCollectionParams? = nil, @setup_intent_data : SetupIntentDataParam? = nil, @shipping_address_collection : ShippingAddressCollectionParams? = nil, @shipping_options : Array(ShippingOptionParams)? = nil, @shipping_rates : Array(String)? = nil, @submit_type : String? = nil, @subscription_data : SubscriptionDataParams? = nil, @tax_id_collection : TaxIdCollectionParams? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @cancel_url : String,
+      @success_url : String,
+      # Optional properties
+      @after_expiration : AfterExpirationParams? = nil,
+      @allow_promotion_codes : Bool? = nil,
+      @automatic_tax : AutomaticTaxParams? = nil,
+      @billing_address_collection : String? = nil,
+      @client_reference_id : String? = nil,
+      @consent_collection : ConsentCollectionParams? = nil,
+      @customer : String? = nil,
+      @customer_creation : String? = nil,
+      @customer_email : String? = nil,
+      @customer_update : CustomerUpdateParams? = nil,
+      @discounts : Array(DiscountParams)? = nil,
+      @expand : Array(String)? = nil,
+      @expires_at : Int64? = nil,
+      @line_items : Array(LineItemParams)? = nil,
+      @locale : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @mode : String? = nil,
+      @payment_intent_data : PaymentIntentDataParams? = nil,
+      @payment_method_options : PaymentMethodOptionsParam? = nil,
+      @payment_method_types : Array(String)? = nil,
+      @phone_number_collection : PhoneNumberCollectionParams? = nil,
+      @setup_intent_data : SetupIntentDataParam? = nil,
+      @shipping_address_collection : ShippingAddressCollectionParams? = nil,
+      @shipping_options : Array(ShippingOptionParams)? = nil,
+      @submit_type : String? = nil,
+      @subscription_data : SubscriptionDataParams? = nil,
+      @tax_id_collection : TaxIdCollectionParams? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -233,11 +262,15 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.error_message) unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
-
       if @cancel_url.to_s.size > 5000
         invalid_properties.push("invalid value for \"cancel_url\", the character length must be smaller than or equal to 5000.")
       end
+
+      if @success_url.to_s.size > 5000
+        invalid_properties.push("invalid value for \"success_url\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.error_message) unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
 
       if !@client_reference_id.nil? && @client_reference_id.to_s.size > 200
         invalid_properties.push("invalid value for \"client_reference_id\", the character length must be smaller than or equal to 200.")
@@ -257,18 +290,15 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUBMIT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid?(@submit_type)
 
-      if @success_url.to_s.size > 5000
-        invalid_properties.push("invalid value for \"success_url\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
       return false if @cancel_url.to_s.size > 5000
+      return false if @success_url.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
       return false if !@client_reference_id.nil? && @client_reference_id.to_s.size > 200
       return false if !@customer.nil? && @customer.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid?(@customer_creation)
@@ -276,15 +306,8 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode)
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
       return false unless ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid?(@submit_type)
-      return false if @success_url.to_s.size > 5000
-      true
-    end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] billing_address_collection Object to be assigned
-    def billing_address_collection=(billing_address_collection)
-      ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid!(billing_address_collection)
-      @billing_address_collection = billing_address_collection
+      true
     end
 
     # Custom attribute writer method with validation
@@ -295,6 +318,23 @@ module Stripe
       end
 
       @cancel_url = cancel_url
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] success_url Value to be assigned
+    def success_url=(success_url)
+      if success_url.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"success_url\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @success_url = success_url
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] billing_address_collection Object to be assigned
+    def billing_address_collection=(billing_address_collection)
+      ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid!(billing_address_collection)
+      @billing_address_collection = billing_address_collection
     end
 
     # Custom attribute writer method with validation
@@ -352,61 +392,16 @@ module Stripe
       @submit_type = submit_type
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] success_url Value to be assigned
-    def success_url=(success_url)
-      if success_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"success_url\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @success_url = success_url
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        after_expiration == o.after_expiration &&
-        allow_promotion_codes == o.allow_promotion_codes &&
-        automatic_tax == o.automatic_tax &&
-        billing_address_collection == o.billing_address_collection &&
-        cancel_url == o.cancel_url &&
-        client_reference_id == o.client_reference_id &&
-        consent_collection == o.consent_collection &&
-        customer == o.customer &&
-        customer_creation == o.customer_creation &&
-        customer_email == o.customer_email &&
-        customer_update == o.customer_update &&
-        discounts == o.discounts &&
-        expand == o.expand &&
-        expires_at == o.expires_at &&
-        line_items == o.line_items &&
-        locale == o.locale &&
-        metadata == o.metadata &&
-        mode == o.mode &&
-        payment_intent_data == o.payment_intent_data &&
-        payment_method_options == o.payment_method_options &&
-        payment_method_types == o.payment_method_types &&
-        phone_number_collection == o.phone_number_collection &&
-        setup_intent_data == o.setup_intent_data &&
-        shipping_address_collection == o.shipping_address_collection &&
-        shipping_options == o.shipping_options &&
-        shipping_rates == o.shipping_rates &&
-        submit_type == o.submit_type &&
-        subscription_data == o.subscription_data &&
-        success_url == o.success_url &&
-        tax_id_collection == o.tax_id_collection
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@after_expiration, @allow_promotion_codes, @automatic_tax, @billing_address_collection, @cancel_url, @client_reference_id, @consent_collection, @customer, @customer_creation, @customer_email, @customer_update, @discounts, @expand, @expires_at, @line_items, @locale, @metadata, @mode, @payment_intent_data, @payment_method_options, @payment_method_types, @phone_number_collection, @setup_intent_data, @shipping_address_collection, @shipping_options, @shipping_rates, @submit_type, @subscription_data, @success_url, @tax_id_collection)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@cancel_url, @success_url, @after_expiration, @allow_promotion_codes, @automatic_tax, @billing_address_collection, @client_reference_id, @consent_collection, @customer, @customer_creation, @customer_email, @customer_update, @discounts, @expand, @expires_at, @line_items, @locale, @metadata, @mode, @payment_intent_data, @payment_method_options, @payment_method_types, @phone_number_collection, @setup_intent_data, @shipping_address_collection, @shipping_options, @submit_type, @subscription_data, @tax_id_collection)
   end
 end

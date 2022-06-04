@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Amount (in cents) transferred.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -34,22 +35,6 @@ module Stripe
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String)]
     getter description : String
-
-    # Reason for the failure. A ReceivedCredit might fail because the receiving FinancialAccount is closed or frozen.
-    @[JSON::Field(key: "failure_code", type: String?, presence: true, ignore_serialize: failure_code.nil? && !failure_code_present?)]
-    getter failure_code : String?
-
-    @[JSON::Field(ignore: true)]
-    property? failure_code_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_FAILURE_CODE = EnumValidator.new("failure_code", "String", ["account_closed", "account_frozen", "other", "null"])
-
-    # The FinancialAccount that received the funds.
-    @[JSON::Field(key: "financial_account", type: String?, presence: true, ignore_serialize: financial_account.nil? && !financial_account_present?)]
-    getter financial_account : String?
-
-    @[JSON::Field(ignore: true)]
-    property? financial_account_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
@@ -83,6 +68,24 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["failed", "succeeded"])
 
+    # Optional properties
+
+    # Reason for the failure. A ReceivedCredit might fail because the receiving FinancialAccount is closed or frozen.
+    @[JSON::Field(key: "failure_code", type: String?, presence: true, ignore_serialize: failure_code.nil? && !failure_code_present?)]
+    getter failure_code : String?
+
+    @[JSON::Field(ignore: true)]
+    property? failure_code_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_FAILURE_CODE = EnumValidator.new("failure_code", "String", ["account_closed", "account_frozen", "other"])
+
+    # The FinancialAccount that received the funds.
+    @[JSON::Field(key: "financial_account", type: String?, presence: true, ignore_serialize: financial_account.nil? && !financial_account_present?)]
+    getter financial_account : String?
+
+    @[JSON::Field(ignore: true)]
+    property? financial_account_present : Bool = false
+
     @[JSON::Field(key: "transaction", type: TreasuryCreditReversalTransaction?, presence: true, ignore_serialize: transaction.nil? && !transaction_present?)]
     property transaction : TreasuryCreditReversalTransaction?
 
@@ -91,7 +94,25 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @created : Int64, @currency : String, @description : String, @failure_code : String?, @financial_account : String?, @id : String, @initiating_payment_method_details : UfaResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetails, @linked_flows : ReceivedCreditsResourceTreasuryLinkedFlows, @livemode : Bool, @network : String, @object : String, @status : String, @transaction : TreasuryCreditReversalTransaction?)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @created : Int64,
+      @currency : String,
+      @description : String,
+      @id : String,
+      @initiating_payment_method_details : UfaResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetails,
+      @linked_flows : ReceivedCreditsResourceTreasuryLinkedFlows,
+      @livemode : Bool,
+      @network : String,
+      @object : String,
+      @status : String,
+      # Optional properties
+      @failure_code : String? = nil,
+      @financial_account : String? = nil,
+      @transaction : TreasuryCreditReversalTransaction? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -101,12 +122,6 @@ module Stripe
 
       if @description.to_s.size > 5000
         invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_FAILURE_CODE.error_message) unless ENUM_VALIDATOR_FOR_FAILURE_CODE.valid?(@failure_code)
-
-      if @financial_account.to_s.size > 5000
-        invalid_properties.push("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
       end
 
       if @id.to_s.size > 5000
@@ -119,6 +134,12 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
+      invalid_properties.push(ENUM_VALIDATOR_FOR_FAILURE_CODE.error_message) unless ENUM_VALIDATOR_FOR_FAILURE_CODE.valid?(@failure_code)
+
+      if !@financial_account.nil? && @financial_account.to_s.size > 5000
+        invalid_properties.push("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
@@ -126,12 +147,13 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @description.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_FAILURE_CODE.valid?(@failure_code)
-      return false if @financial_account.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network, false)
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false unless ENUM_VALIDATOR_FOR_FAILURE_CODE.valid?(@failure_code)
+      return false if !@financial_account.nil? && @financial_account.to_s.size > 5000
+
       true
     end
 
@@ -143,23 +165,6 @@ module Stripe
       end
 
       @description = description
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] failure_code Object to be assigned
-    def failure_code=(failure_code)
-      ENUM_VALIDATOR_FOR_FAILURE_CODE.valid!(failure_code)
-      @failure_code = failure_code
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] financial_account Value to be assigned
-    def financial_account=(financial_account)
-      if financial_account.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @financial_account = financial_account
     end
 
     # Custom attribute writer method with validation
@@ -193,25 +198,21 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        created == o.created &&
-        currency == o.currency &&
-        description == o.description &&
-        failure_code == o.failure_code &&
-        financial_account == o.financial_account &&
-        id == o.id &&
-        initiating_payment_method_details == o.initiating_payment_method_details &&
-        linked_flows == o.linked_flows &&
-        livemode == o.livemode &&
-        network == o.network &&
-        object == o.object &&
-        status == o.status &&
-        transaction == o.transaction
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] failure_code Object to be assigned
+    def failure_code=(failure_code)
+      ENUM_VALIDATOR_FOR_FAILURE_CODE.valid!(failure_code)
+      @failure_code = failure_code
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] financial_account Value to be assigned
+    def financial_account=(financial_account)
+      if !financial_account.nil? && financial_account.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @financial_account = financial_account
     end
 
     # @see the `==` method
@@ -220,8 +221,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @created, @currency, @description, @failure_code, @financial_account, @id, @initiating_payment_method_details, @linked_flows, @livemode, @network, @object, @status, @transaction)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @created, @currency, @description, @id, @initiating_payment_method_details, @linked_flows, @livemode, @network, @object, @status, @failure_code, @financial_account, @transaction)
   end
 end

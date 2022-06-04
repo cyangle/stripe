@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
@@ -29,6 +30,7 @@ module Stripe
     ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
 
     # Optional properties
+
     # Whether the plan is currently available for new subscriptions. Defaults to `true`.
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
@@ -68,6 +70,7 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_BILLING_SCHEME = EnumValidator.new("billing_scheme", "String", ["per_unit", "tiered"])
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -88,8 +91,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? interval_count_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -147,13 +150,37 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @currency : String, @interval : String, @active : Bool? = nil, @aggregate_usage : String? = nil, @amount : Int64? = nil, @amount_decimal : String? = nil, @billing_scheme : String? = nil, @expand : Array(String)? = nil, @id : String? = nil, @interval_count : Int64? = nil, @metadata : IndividualSpecsMetadata? = nil, @nickname : String? = nil, @product : PostPlansRequestProduct? = nil, @tiers : Array(Tier)? = nil, @tiers_mode : String? = nil, @transform_usage : TransformUsageParam? = nil, @trial_period_days : Int64? = nil, @usage_type : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @currency : String,
+      @interval : String,
+      # Optional properties
+      @active : Bool? = nil,
+      @aggregate_usage : String? = nil,
+      @amount : Int64? = nil,
+      @amount_decimal : String? = nil,
+      @billing_scheme : String? = nil,
+      @expand : Array(String)? = nil,
+      @id : String? = nil,
+      @interval_count : Int64? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @nickname : String? = nil,
+      @product : PostPlansRequestProduct? = nil,
+      @tiers : Array(Tier)? = nil,
+      @tiers_mode : String? = nil,
+      @transform_usage : TransformUsageParam? = nil,
+      @trial_period_days : Int64? = nil,
+      @usage_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid?(@aggregate_usage)
 
@@ -162,8 +189,6 @@ module Stripe
       if !@id.nil? && @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
 
       if !@nickname.nil? && @nickname.to_s.size > 5000
         invalid_properties.push("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
@@ -179,14 +204,22 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
       return false unless ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid?(@aggregate_usage)
       return false unless ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid?(@billing_scheme)
       return false if !@id.nil? && @id.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
       return false if !@nickname.nil? && @nickname.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
       return false unless ENUM_VALIDATOR_FOR_USAGE_TYPE.valid?(@usage_type)
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] interval Object to be assigned
+    def interval=(interval)
+      ENUM_VALIDATOR_FOR_INTERVAL.valid!(interval, false)
+      @interval = interval
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -213,13 +246,6 @@ module Stripe
       @id = id
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] interval Object to be assigned
-    def interval=(interval)
-      ENUM_VALIDATOR_FOR_INTERVAL.valid!(interval, false)
-      @interval = interval
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] nickname Value to be assigned
     def nickname=(nickname)
@@ -244,39 +270,16 @@ module Stripe
       @usage_type = usage_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        aggregate_usage == o.aggregate_usage &&
-        amount == o.amount &&
-        amount_decimal == o.amount_decimal &&
-        billing_scheme == o.billing_scheme &&
-        currency == o.currency &&
-        expand == o.expand &&
-        id == o.id &&
-        interval == o.interval &&
-        interval_count == o.interval_count &&
-        metadata == o.metadata &&
-        nickname == o.nickname &&
-        product == o.product &&
-        tiers == o.tiers &&
-        tiers_mode == o.tiers_mode &&
-        transform_usage == o.transform_usage &&
-        trial_period_days == o.trial_period_days &&
-        usage_type == o.usage_type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @aggregate_usage, @amount, @amount_decimal, @billing_scheme, @currency, @expand, @id, @interval, @interval_count, @metadata, @nickname, @product, @tiers, @tiers_mode, @transform_usage, @trial_period_days, @usage_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@currency, @interval, @active, @aggregate_usage, @amount, @amount_decimal, @billing_scheme, @expand, @id, @interval_count, @metadata, @nickname, @product, @tiers, @tiers_mode, @transform_usage, @trial_period_days, @usage_type)
   end
 end

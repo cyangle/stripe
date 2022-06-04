@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The raw data string used to generate QR code, it should be used together with QR code library.
     @[JSON::Field(key: "data", type: String)]
     getter data : String
@@ -33,7 +34,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @data : String, @image_url_png : String, @image_url_svg : String)
+    def initialize(
+      *,
+      # Required properties
+      @data : String,
+      @image_url_png : String,
+      @image_url_svg : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -62,6 +69,7 @@ module Stripe
       return false if @data.to_s.size > 5000
       return false if @image_url_png.to_s.size > 5000
       return false if @image_url_svg.to_s.size > 5000
+
       true
     end
 
@@ -95,24 +103,16 @@ module Stripe
       @image_url_svg = image_url_svg
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        data == o.data &&
-        image_url_png == o.image_url_png &&
-        image_url_svg == o.image_url_svg
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@data, @image_url_png, @image_url_svg)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@data, @image_url_png, @image_url_svg)
   end
 end

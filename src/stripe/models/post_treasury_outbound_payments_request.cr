@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Amount (in cents) to be transferred.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -31,6 +32,7 @@ module Stripe
     property financial_account : String
 
     # Optional properties
+
     # ID of the customer to whom the OutboundPayment is sent. Must match the Customer attached to the `destination_payment_method` passed in.
     @[JSON::Field(key: "customer", type: String?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
     getter customer : String?
@@ -70,6 +72,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? end_user_details_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -92,7 +95,23 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @currency : String, @financial_account : String, @customer : String? = nil, @description : String? = nil, @destination_payment_method : String? = nil, @destination_payment_method_data : PaymentMethodData? = nil, @destination_payment_method_options : PaymentMethodOptions2? = nil, @end_user_details : EndUserDetailsParams? = nil, @expand : Array(String)? = nil, @metadata : Hash(String, String)? = nil, @statement_descriptor : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @currency : String,
+      @financial_account : String,
+      # Optional properties
+      @customer : String? = nil,
+      @description : String? = nil,
+      @destination_payment_method : String? = nil,
+      @destination_payment_method_data : PaymentMethodData? = nil,
+      @destination_payment_method_options : PaymentMethodOptions2? = nil,
+      @end_user_details : EndUserDetailsParams? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @statement_descriptor : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -126,6 +145,7 @@ module Stripe
       return false if !@description.nil? && @description.to_s.size > 5000
       return false if !@destination_payment_method.nil? && @destination_payment_method.to_s.size > 5000
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
+
       true
     end
 
@@ -169,33 +189,16 @@ module Stripe
       @statement_descriptor = statement_descriptor
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        currency == o.currency &&
-        customer == o.customer &&
-        description == o.description &&
-        destination_payment_method == o.destination_payment_method &&
-        destination_payment_method_data == o.destination_payment_method_data &&
-        destination_payment_method_options == o.destination_payment_method_options &&
-        end_user_details == o.end_user_details &&
-        expand == o.expand &&
-        financial_account == o.financial_account &&
-        metadata == o.metadata &&
-        statement_descriptor == o.statement_descriptor
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @currency, @customer, @description, @destination_payment_method, @destination_payment_method_data, @destination_payment_method_options, @end_user_details, @expand, @financial_account, @metadata, @statement_descriptor)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @currency, @financial_account, @customer, @description, @destination_payment_method, @destination_payment_method_data, @destination_payment_method_options, @end_user_details, @expand, @metadata, @statement_descriptor)
   end
 end

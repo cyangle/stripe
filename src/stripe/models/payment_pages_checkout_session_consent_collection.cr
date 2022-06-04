@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # If set to `auto`, enables the collection of customer consent for promotional communications. The Checkout Session will determine whether to display an option to opt into promotional communication from the merchant depending on the customer's locale. Only available to US merchants.
     @[JSON::Field(key: "promotions", type: String?, presence: true, ignore_serialize: promotions.nil? && !promotions_present?)]
     getter promotions : String?
@@ -26,17 +27,22 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? promotions_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PROMOTIONS = EnumValidator.new("promotions", "String", ["auto", "null"])
+    ENUM_VALIDATOR_FOR_PROMOTIONS = EnumValidator.new("promotions", "String", ["auto"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @promotions : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @promotions : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_PROMOTIONS.error_message) unless ENUM_VALIDATOR_FOR_PROMOTIONS.valid?(@promotions)
 
       invalid_properties
@@ -46,6 +52,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_PROMOTIONS.valid?(@promotions)
+
       true
     end
 
@@ -56,22 +63,16 @@ module Stripe
       @promotions = promotions
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        promotions == o.promotions
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@promotions)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@promotions)
   end
 end

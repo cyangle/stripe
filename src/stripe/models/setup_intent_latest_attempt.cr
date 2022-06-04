@@ -19,21 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    @[JSON::Field(key: "application", type: SetupAttemptApplication, presence: true, ignore_serialize: application.nil? && !application_present?)]
-    property application : SetupAttemptApplication
-
-    @[JSON::Field(ignore: true)]
-    property? application_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?)]
     property created : Int64?
-
-    @[JSON::Field(key: "customer", type: SetupAttemptCustomer, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
-    property customer : SetupAttemptCustomer
-
-    @[JSON::Field(ignore: true)]
-    property? customer_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?)]
@@ -49,23 +38,11 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["setup_attempt"])
 
-    @[JSON::Field(key: "on_behalf_of", type: SetupAttemptOnBehalfOf, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
-    property on_behalf_of : SetupAttemptOnBehalfOf
-
-    @[JSON::Field(ignore: true)]
-    property? on_behalf_of_present : Bool = false
-
     @[JSON::Field(key: "payment_method", type: SetupAttemptPaymentMethod?)]
     property payment_method : SetupAttemptPaymentMethod?
 
     @[JSON::Field(key: "payment_method_details", type: SetupAttemptPaymentMethodDetails?)]
     property payment_method_details : SetupAttemptPaymentMethodDetails?
-
-    @[JSON::Field(key: "setup_error", type: SetupAttemptSetupError, presence: true, ignore_serialize: setup_error.nil? && !setup_error_present?)]
-    property setup_error : SetupAttemptSetupError
-
-    @[JSON::Field(ignore: true)]
-    property? setup_error_present : Bool = false
 
     @[JSON::Field(key: "setup_intent", type: SetupAttemptSetupIntent?)]
     property setup_intent : SetupAttemptSetupIntent?
@@ -78,6 +55,32 @@ module Stripe
     @[JSON::Field(key: "usage", type: String?)]
     getter usage : String?
 
+    # Optional properties
+
+    @[JSON::Field(key: "application", type: SetupAttemptApplication?, presence: true, ignore_serialize: application.nil? && !application_present?)]
+    property application : SetupAttemptApplication?
+
+    @[JSON::Field(ignore: true)]
+    property? application_present : Bool = false
+
+    @[JSON::Field(key: "customer", type: SetupAttemptCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
+    property customer : SetupAttemptCustomer?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_present : Bool = false
+
+    @[JSON::Field(key: "on_behalf_of", type: SetupAttemptOnBehalfOf?, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
+    property on_behalf_of : SetupAttemptOnBehalfOf?
+
+    @[JSON::Field(ignore: true)]
+    property? on_behalf_of_present : Bool = false
+
+    @[JSON::Field(key: "setup_error", type: SetupAttemptSetupError?, presence: true, ignore_serialize: setup_error.nil? && !setup_error_present?)]
+    property setup_error : SetupAttemptSetupError?
+
+    @[JSON::Field(ignore: true)]
+    property? setup_error_present : Bool = false
+
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
@@ -88,7 +91,24 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @application : SetupAttemptApplication?, @created : Int64, @customer : SetupAttemptCustomer?, @id : String, @livemode : Bool, @object : String, @on_behalf_of : SetupAttemptOnBehalfOf?, @payment_method : SetupAttemptPaymentMethod, @payment_method_details : SetupAttemptPaymentMethodDetails, @setup_error : SetupAttemptSetupError?, @setup_intent : SetupAttemptSetupIntent, @status : String, @usage : String)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @object : String? = nil,
+      @payment_method : SetupAttemptPaymentMethod? = nil,
+      @payment_method_details : SetupAttemptPaymentMethodDetails? = nil,
+      @setup_intent : SetupAttemptSetupIntent? = nil,
+      @status : String? = nil,
+      @usage : String? = nil,
+      # Optional properties
+      @application : SetupAttemptApplication? = nil,
+      @customer : SetupAttemptCustomer? = nil,
+      @on_behalf_of : SetupAttemptOnBehalfOf? = nil,
+      @setup_error : SetupAttemptSetupError? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -120,6 +140,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @status.to_s.size > 5000
       return false if @usage.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -131,10 +152,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -176,34 +194,16 @@ module Stripe
       @usage = usage
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        application == o.application &&
-        created == o.created &&
-        customer == o.customer &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        on_behalf_of == o.on_behalf_of &&
-        payment_method == o.payment_method &&
-        payment_method_details == o.payment_method_details &&
-        setup_error == o.setup_error &&
-        setup_intent == o.setup_intent &&
-        status == o.status &&
-        usage == o.usage
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@application, @created, @customer, @id, @livemode, @object, @on_behalf_of, @payment_method, @payment_method_details, @setup_error, @setup_intent, @status, @usage)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @livemode, @object, @payment_method, @payment_method_details, @setup_intent, @status, @usage, @application, @customer, @on_behalf_of, @setup_error)
   end
 end

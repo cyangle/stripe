@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     @[JSON::Field(key: "billing_address", type: PaymentMethodCardWalletMasterpassBillingAddress?, presence: true, ignore_serialize: billing_address.nil? && !billing_address_present?)]
     property billing_address : PaymentMethodCardWalletMasterpassBillingAddress?
 
@@ -47,7 +48,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing_address : PaymentMethodCardWalletMasterpassBillingAddress?, @email : String?, @name : String?, @shipping_address : PaymentMethodCardWalletMasterpassShippingAddress?)
+    def initialize(
+      *,
+      # Optional properties
+      @billing_address : PaymentMethodCardWalletMasterpassBillingAddress? = nil,
+      @email : String? = nil,
+      @name : String? = nil,
+      @shipping_address : PaymentMethodCardWalletMasterpassShippingAddress? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -55,11 +63,11 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @email.to_s.size > 5000
+      if !@email.nil? && @email.to_s.size > 5000
         invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @name.to_s.size > 5000
+      if !@name.nil? && @name.to_s.size > 5000
         invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -69,15 +77,16 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @email.to_s.size > 5000
-      return false if @name.to_s.size > 5000
+      return false if !@email.nil? && @email.to_s.size > 5000
+      return false if !@name.nil? && @name.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] email Value to be assigned
     def email=(email)
-      if email.to_s.size > 5000
+      if !email.nil? && email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -87,22 +96,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
     def name=(name)
-      if name.to_s.size > 5000
+      if !name.nil? && name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
       @name = name
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        billing_address == o.billing_address &&
-        email == o.email &&
-        name == o.name &&
-        shipping_address == o.shipping_address
     end
 
     # @see the `==` method
@@ -111,8 +109,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@billing_address, @email, @name, @shipping_address)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@billing_address, @email, @name, @shipping_address)
   end
 end

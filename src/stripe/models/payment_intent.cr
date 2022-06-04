@@ -19,17 +19,75 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
 
+    # Controls when the funds will be captured from the customer's account.
+    @[JSON::Field(key: "capture_method", type: String)]
+    getter capture_method : String
+
+    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = EnumValidator.new("capture_method", "String", ["automatic", "manual"])
+
+    @[JSON::Field(key: "confirmation_method", type: String)]
+    getter confirmation_method : String
+
+    ENUM_VALIDATOR_FOR_CONFIRMATION_METHOD = EnumValidator.new("confirmation_method", "String", ["automatic", "manual"])
+
+    # Time at which the object was created. Measured in seconds since the Unix epoch.
+    @[JSON::Field(key: "created", type: Int64)]
+    property created : Int64
+
+    # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+    @[JSON::Field(key: "currency", type: String)]
+    property currency : String
+
+    # Unique identifier for the object.
+    @[JSON::Field(key: "id", type: String)]
+    getter id : String
+
+    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    @[JSON::Field(key: "livemode", type: Bool)]
+    property livemode : Bool
+
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
+
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["payment_intent"])
+
+    # The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
+    @[JSON::Field(key: "payment_method_types", type: Array(String))]
+    property payment_method_types : Array(String)
+
+    # Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`. Read more about each PaymentIntent [status](https://stripe.com/docs/payments/intents#intent-statuses).
+    @[JSON::Field(key: "status", type: String)]
+    getter status : String
+
+    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["canceled", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method", "succeeded"])
+
+    # Optional properties
+
     # Amount that can be captured from this PaymentIntent.
-    @[JSON::Field(key: "amount_capturable", type: Int64)]
-    property amount_capturable : Int64
+    @[JSON::Field(key: "amount_capturable", type: Int64?, presence: true, ignore_serialize: amount_capturable.nil? && !amount_capturable_present?)]
+    property amount_capturable : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? amount_capturable_present : Bool = false
+
+    @[JSON::Field(key: "amount_details", type: PaymentFlowsAmountDetails?, presence: true, ignore_serialize: amount_details.nil? && !amount_details_present?)]
+    property amount_details : PaymentFlowsAmountDetails?
+
+    @[JSON::Field(ignore: true)]
+    property? amount_details_present : Bool = false
 
     # Amount that was collected by this PaymentIntent.
-    @[JSON::Field(key: "amount_received", type: Int64)]
-    property amount_received : Int64
+    @[JSON::Field(key: "amount_received", type: Int64?, presence: true, ignore_serialize: amount_received.nil? && !amount_received_present?)]
+    property amount_received : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? amount_received_present : Bool = false
 
     @[JSON::Field(key: "application", type: PaymentIntentApplication?, presence: true, ignore_serialize: application.nil? && !application_present?)]
     property application : PaymentIntentApplication?
@@ -64,16 +122,13 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? cancellation_reason_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_CANCELLATION_REASON = EnumValidator.new("cancellation_reason", "String", ["abandoned", "automatic", "duplicate", "failed_invoice", "fraudulent", "requested_by_customer", "void_invoice", "null"])
+    ENUM_VALIDATOR_FOR_CANCELLATION_REASON = EnumValidator.new("cancellation_reason", "String", ["abandoned", "automatic", "duplicate", "failed_invoice", "fraudulent", "requested_by_customer", "void_invoice"])
 
-    # Controls when the funds will be captured from the customer's account.
-    @[JSON::Field(key: "capture_method", type: String)]
-    getter capture_method : String
+    @[JSON::Field(key: "charges", type: PaymentFlowsPaymentIntentResourceChargeList?, presence: true, ignore_serialize: charges.nil? && !charges_present?)]
+    property charges : PaymentFlowsPaymentIntentResourceChargeList?
 
-    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = EnumValidator.new("capture_method", "String", ["automatic", "manual"])
-
-    @[JSON::Field(key: "charges", type: PaymentFlowsPaymentIntentResourceChargeList)]
-    property charges : PaymentFlowsPaymentIntentResourceChargeList
+    @[JSON::Field(ignore: true)]
+    property? charges_present : Bool = false
 
     # The client secret of this PaymentIntent. Used for client-side retrieval using a publishable key.   The client secret can be used to complete a payment from your frontend. It should not be stored, logged, or exposed to anyone other than the customer. Make sure that you have TLS enabled on any page that includes the client secret.  Refer to our docs to [accept a payment](https://stripe.com/docs/payments/accept-a-payment?ui=elements) and learn about how `client_secret` should be handled.
     @[JSON::Field(key: "client_secret", type: String?, presence: true, ignore_serialize: client_secret.nil? && !client_secret_present?)]
@@ -81,19 +136,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? client_secret_present : Bool = false
-
-    @[JSON::Field(key: "confirmation_method", type: String)]
-    getter confirmation_method : String
-
-    ENUM_VALIDATOR_FOR_CONFIRMATION_METHOD = EnumValidator.new("confirmation_method", "String", ["automatic", "manual"])
-
-    # Time at which the object was created. Measured in seconds since the Unix epoch.
-    @[JSON::Field(key: "created", type: Int64)]
-    property created : Int64
-
-    # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    @[JSON::Field(key: "currency", type: String)]
-    property currency : String
 
     @[JSON::Field(key: "customer", type: PaymentIntentCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
     property customer : PaymentIntentCustomer?
@@ -108,10 +150,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
-    # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
-
     @[JSON::Field(key: "invoice", type: PaymentIntentInvoice?, presence: true, ignore_serialize: invoice.nil? && !invoice_present?)]
     property invoice : PaymentIntentInvoice?
 
@@ -124,25 +162,18 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? last_payment_error_present : Bool = false
 
-    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-    @[JSON::Field(key: "livemode", type: Bool)]
-    property livemode : Bool
-
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. For more information, see the [documentation](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#storing-information-in-metadata).
-    @[JSON::Field(key: "metadata", type: Hash(String, String))]
-    property metadata : Hash(String, String)
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
 
     @[JSON::Field(key: "next_action", type: PaymentIntentNextAction1?, presence: true, ignore_serialize: next_action.nil? && !next_action_present?)]
     property next_action : PaymentIntentNextAction1?
 
     @[JSON::Field(ignore: true)]
     property? next_action_present : Bool = false
-
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["payment_intent"])
 
     @[JSON::Field(key: "on_behalf_of", type: PaymentIntentOnBehalfOf?, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
     property on_behalf_of : PaymentIntentOnBehalfOf?
@@ -161,9 +192,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? payment_method_options_present : Bool = false
-
-    @[JSON::Field(key: "payment_method_types", type: Array(String))]
-    property payment_method_types : Array(String)
 
     @[JSON::Field(key: "processing", type: PaymentIntentProcessing1?, presence: true, ignore_serialize: processing.nil? && !processing_present?)]
     property processing : PaymentIntentProcessing1?
@@ -191,19 +219,13 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? setup_future_usage_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["off_session", "on_session", "null"])
+    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["off_session", "on_session"])
 
     @[JSON::Field(key: "shipping", type: PaymentIntentShipping?, presence: true, ignore_serialize: shipping.nil? && !shipping_present?)]
     property shipping : PaymentIntentShipping?
 
     @[JSON::Field(ignore: true)]
     property? shipping_present : Bool = false
-
-    @[JSON::Field(key: "source", type: PaymentIntentSource?, presence: true, ignore_serialize: source.nil? && !source_present?)]
-    property source : PaymentIntentSource?
-
-    @[JSON::Field(ignore: true)]
-    property? source_present : Bool = false
 
     # For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
     @[JSON::Field(key: "statement_descriptor", type: String?, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
@@ -219,12 +241,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_suffix_present : Bool = false
 
-    # Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`. Read more about each PaymentIntent [status](https://stripe.com/docs/payments/intents#intent-statuses).
-    @[JSON::Field(key: "status", type: String)]
-    getter status : String
-
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["canceled", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method", "succeeded"])
-
     @[JSON::Field(key: "transfer_data", type: PaymentIntentTransferData?, presence: true, ignore_serialize: transfer_data.nil? && !transfer_data_present?)]
     property transfer_data : PaymentIntentTransferData?
 
@@ -238,16 +254,51 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? transfer_group_present : Bool = false
 
-    # Optional properties
-    @[JSON::Field(key: "amount_details", type: PaymentFlowsAmountDetails?, presence: true, ignore_serialize: amount_details.nil? && !amount_details_present?)]
-    property amount_details : PaymentFlowsAmountDetails?
-
-    @[JSON::Field(ignore: true)]
-    property? amount_details_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @amount_capturable : Int64, @amount_received : Int64, @application : PaymentIntentApplication?, @application_fee_amount : Int64?, @automatic_payment_methods : PaymentIntentAutomaticPaymentMethods?, @canceled_at : Int64?, @cancellation_reason : String?, @capture_method : String, @charges : PaymentFlowsPaymentIntentResourceChargeList, @client_secret : String?, @confirmation_method : String, @created : Int64, @currency : String, @customer : PaymentIntentCustomer?, @description : String?, @id : String, @invoice : PaymentIntentInvoice?, @last_payment_error : PaymentIntentLastPaymentError?, @livemode : Bool, @metadata : Hash(String, String), @next_action : PaymentIntentNextAction1?, @object : String, @on_behalf_of : PaymentIntentOnBehalfOf?, @payment_method : PaymentIntentPaymentMethod?, @payment_method_options : PaymentIntentPaymentMethodOptions1?, @payment_method_types : Array(String), @processing : PaymentIntentProcessing1?, @receipt_email : String?, @review : PaymentIntentReview?, @setup_future_usage : String?, @shipping : PaymentIntentShipping?, @source : PaymentIntentSource?, @statement_descriptor : String?, @statement_descriptor_suffix : String?, @status : String, @transfer_data : PaymentIntentTransferData?, @transfer_group : String?, @amount_details : PaymentFlowsAmountDetails? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @capture_method : String,
+      @confirmation_method : String,
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @payment_method_types : Array(String),
+      @status : String,
+      # Optional properties
+      @amount_capturable : Int64? = nil,
+      @amount_details : PaymentFlowsAmountDetails? = nil,
+      @amount_received : Int64? = nil,
+      @application : PaymentIntentApplication? = nil,
+      @application_fee_amount : Int64? = nil,
+      @automatic_payment_methods : PaymentIntentAutomaticPaymentMethods? = nil,
+      @canceled_at : Int64? = nil,
+      @cancellation_reason : String? = nil,
+      @charges : PaymentFlowsPaymentIntentResourceChargeList? = nil,
+      @client_secret : String? = nil,
+      @customer : PaymentIntentCustomer? = nil,
+      @description : String? = nil,
+      @invoice : PaymentIntentInvoice? = nil,
+      @last_payment_error : PaymentIntentLastPaymentError? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @next_action : PaymentIntentNextAction1? = nil,
+      @on_behalf_of : PaymentIntentOnBehalfOf? = nil,
+      @payment_method : PaymentIntentPaymentMethod? = nil,
+      @payment_method_options : PaymentIntentPaymentMethodOptions1? = nil,
+      @processing : PaymentIntentProcessing1? = nil,
+      @receipt_email : String? = nil,
+      @review : PaymentIntentReview? = nil,
+      @setup_future_usage : String? = nil,
+      @shipping : PaymentIntentShipping? = nil,
+      @statement_descriptor : String? = nil,
+      @statement_descriptor_suffix : String? = nil,
+      @transfer_data : PaymentIntentTransferData? = nil,
+      @transfer_group : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -255,19 +306,9 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CANCELLATION_REASON.error_message) unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method, false)
 
-      if @client_secret.to_s.size > 5000
-        invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_CONFIRMATION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CONFIRMATION_METHOD.valid?(@confirmation_method, false)
-
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
@@ -275,23 +316,33 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
-      if @receipt_email.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_CANCELLATION_REASON.error_message) unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
+
+      if !@client_secret.nil? && @client_secret.to_s.size > 5000
+        invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@receipt_email.nil? && @receipt_email.to_s.size > 5000
         invalid_properties.push("invalid value for \"receipt_email\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
 
-      if @statement_descriptor.to_s.size > 5000
+      if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
         invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @statement_descriptor_suffix.to_s.size > 5000
+      if !@statement_descriptor_suffix.nil? && @statement_descriptor_suffix.to_s.size > 5000
         invalid_properties.push("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-
-      if @transfer_group.to_s.size > 5000
+      if !@transfer_group.nil? && @transfer_group.to_s.size > 5000
         invalid_properties.push("invalid value for \"transfer_group\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -301,27 +352,21 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
       return false unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method, false)
-      return false if @client_secret.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_CONFIRMATION_METHOD.valid?(@confirmation_method, false)
-      return false if @description.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @receipt_email.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
-      return false if @statement_descriptor.to_s.size > 5000
-      return false if @statement_descriptor_suffix.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      return false if @transfer_group.to_s.size > 5000
-      true
-    end
+      return false unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
+      return false if !@client_secret.nil? && @client_secret.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@receipt_email.nil? && @receipt_email.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+      return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
+      return false if !@statement_descriptor_suffix.nil? && @statement_descriptor_suffix.to_s.size > 5000
+      return false if !@transfer_group.nil? && @transfer_group.to_s.size > 5000
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] cancellation_reason Object to be assigned
-    def cancellation_reason=(cancellation_reason)
-      ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid!(cancellation_reason)
-      @cancellation_reason = cancellation_reason
+      true
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -331,31 +376,11 @@ module Stripe
       @capture_method = capture_method
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] client_secret Value to be assigned
-    def client_secret=(client_secret)
-      if client_secret.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @client_secret = client_secret
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] confirmation_method Object to be assigned
     def confirmation_method=(confirmation_method)
       ENUM_VALIDATOR_FOR_CONFIRMATION_METHOD.valid!(confirmation_method, false)
       @confirmation_method = confirmation_method
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -375,10 +400,44 @@ module Stripe
       @object = object
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
+      @status = status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] cancellation_reason Object to be assigned
+    def cancellation_reason=(cancellation_reason)
+      ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid!(cancellation_reason)
+      @cancellation_reason = cancellation_reason
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] client_secret Value to be assigned
+    def client_secret=(client_secret)
+      if !client_secret.nil? && client_secret.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @client_secret = client_secret
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] receipt_email Value to be assigned
     def receipt_email=(receipt_email)
-      if receipt_email.to_s.size > 5000
+      if !receipt_email.nil? && receipt_email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"receipt_email\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -395,7 +454,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
     def statement_descriptor=(statement_descriptor)
-      if statement_descriptor.to_s.size > 5000
+      if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -405,74 +464,21 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor_suffix Value to be assigned
     def statement_descriptor_suffix=(statement_descriptor_suffix)
-      if statement_descriptor_suffix.to_s.size > 5000
+      if !statement_descriptor_suffix.nil? && statement_descriptor_suffix.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 5000.")
       end
 
       @statement_descriptor_suffix = statement_descriptor_suffix
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
-      @status = status
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] transfer_group Value to be assigned
     def transfer_group=(transfer_group)
-      if transfer_group.to_s.size > 5000
+      if !transfer_group.nil? && transfer_group.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"transfer_group\", the character length must be smaller than or equal to 5000.")
       end
 
       @transfer_group = transfer_group
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        amount_capturable == o.amount_capturable &&
-        amount_details == o.amount_details &&
-        amount_received == o.amount_received &&
-        application == o.application &&
-        application_fee_amount == o.application_fee_amount &&
-        automatic_payment_methods == o.automatic_payment_methods &&
-        canceled_at == o.canceled_at &&
-        cancellation_reason == o.cancellation_reason &&
-        capture_method == o.capture_method &&
-        charges == o.charges &&
-        client_secret == o.client_secret &&
-        confirmation_method == o.confirmation_method &&
-        created == o.created &&
-        currency == o.currency &&
-        customer == o.customer &&
-        description == o.description &&
-        id == o.id &&
-        invoice == o.invoice &&
-        last_payment_error == o.last_payment_error &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        next_action == o.next_action &&
-        object == o.object &&
-        on_behalf_of == o.on_behalf_of &&
-        payment_method == o.payment_method &&
-        payment_method_options == o.payment_method_options &&
-        payment_method_types == o.payment_method_types &&
-        processing == o.processing &&
-        receipt_email == o.receipt_email &&
-        review == o.review &&
-        setup_future_usage == o.setup_future_usage &&
-        shipping == o.shipping &&
-        source == o.source &&
-        statement_descriptor == o.statement_descriptor &&
-        statement_descriptor_suffix == o.statement_descriptor_suffix &&
-        status == o.status &&
-        transfer_data == o.transfer_data &&
-        transfer_group == o.transfer_group
     end
 
     # @see the `==` method
@@ -481,8 +487,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @amount_capturable, @amount_details, @amount_received, @application, @application_fee_amount, @automatic_payment_methods, @canceled_at, @cancellation_reason, @capture_method, @charges, @client_secret, @confirmation_method, @created, @currency, @customer, @description, @id, @invoice, @last_payment_error, @livemode, @metadata, @next_action, @object, @on_behalf_of, @payment_method, @payment_method_options, @payment_method_types, @processing, @receipt_email, @review, @setup_future_usage, @shipping, @source, @statement_descriptor, @statement_descriptor_suffix, @status, @transfer_data, @transfer_group)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @capture_method, @confirmation_method, @created, @currency, @id, @livemode, @object, @payment_method_types, @status, @amount_capturable, @amount_details, @amount_received, @application, @application_fee_amount, @automatic_payment_methods, @canceled_at, @cancellation_reason, @charges, @client_secret, @customer, @description, @invoice, @last_payment_error, @metadata, @next_action, @on_behalf_of, @payment_method, @payment_method_options, @processing, @receipt_email, @review, @setup_future_usage, @shipping, @statement_descriptor, @statement_descriptor_suffix, @transfer_data, @transfer_group)
   end
 end

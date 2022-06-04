@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Balance amount.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -28,6 +29,7 @@ module Stripe
     property currency : String
 
     # Optional properties
+
     @[JSON::Field(key: "source_types", type: BalanceAmountBySourceType?, presence: true, ignore_serialize: source_types.nil? && !source_types_present?)]
     property source_types : BalanceAmountBySourceType?
 
@@ -36,7 +38,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @currency : String, @source_types : BalanceAmountBySourceType? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @currency : String,
+      # Optional properties
+      @source_types : BalanceAmountBySourceType? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -53,24 +62,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        currency == o.currency &&
-        source_types == o.source_types
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @currency, @source_types)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @currency, @source_types)
   end
 end

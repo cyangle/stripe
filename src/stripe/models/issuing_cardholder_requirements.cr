@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # If `disabled_reason` is present, all cards will decline authorizations with `cardholder_verification_required` reason.
     @[JSON::Field(key: "disabled_reason", type: String?, presence: true, ignore_serialize: disabled_reason.nil? && !disabled_reason_present?)]
     getter disabled_reason : String?
@@ -26,7 +27,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? disabled_reason_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_DISABLED_REASON = EnumValidator.new("disabled_reason", "String", ["listed", "rejected.listed", "under_review", "null"])
+    ENUM_VALIDATOR_FOR_DISABLED_REASON = EnumValidator.new("disabled_reason", "String", ["listed", "rejected.listed", "under_review"])
 
     # Array of fields that need to be collected in order to verify and re-enable the cardholder.
     @[JSON::Field(key: "past_due", type: Array(String)?, presence: true, ignore_serialize: past_due.nil? && !past_due_present?)]
@@ -35,17 +36,23 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? past_due_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PAST_DUE = EnumValidator.new("past_due", "Array(String)", ["company.tax_id", "individual.dob.day", "individual.dob.month", "individual.dob.year", "individual.first_name", "individual.last_name", "individual.verification.document"])
+    ENUM_VALIDATOR_FOR_PAST_DUE = EnumValidator.new("past_due", "String", ["company.tax_id", "individual.dob.day", "individual.dob.month", "individual.dob.year", "individual.first_name", "individual.last_name", "individual.verification.document"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @disabled_reason : String?, @past_due : Array(String)?)
+    def initialize(
+      *,
+      # Optional properties
+      @disabled_reason : String? = nil,
+      @past_due : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_DISABLED_REASON.error_message) unless ENUM_VALIDATOR_FOR_DISABLED_REASON.valid?(@disabled_reason)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PAST_DUE.error_message) unless ENUM_VALIDATOR_FOR_PAST_DUE.all_valid?(@past_due)
@@ -58,6 +65,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_DISABLED_REASON.valid?(@disabled_reason)
       return false unless ENUM_VALIDATOR_FOR_PAST_DUE.all_valid?(@past_due)
+
       true
     end
 
@@ -75,23 +83,16 @@ module Stripe
       @past_due = past_due
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        disabled_reason == o.disabled_reason &&
-        past_due == o.past_due
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@disabled_reason, @past_due)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@disabled_reason, @past_due)
   end
 end

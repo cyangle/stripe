@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # A bank account to attach to the recipient. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details, with the options described below.
     @[JSON::Field(key: "bank_account", type: String?, presence: true, ignore_serialize: bank_account.nil? && !bank_account_present?)]
     getter bank_account : String?
@@ -53,14 +54,15 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? expand_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -81,7 +83,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bank_account : String? = nil, @card : String? = nil, @default_card : String? = nil, @description : String? = nil, @email : String? = nil, @expand : Array(String)? = nil, @metadata : IndividualSpecsMetadata? = nil, @name : String? = nil, @tax_id : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @bank_account : String? = nil,
+      @card : String? = nil,
+      @default_card : String? = nil,
+      @description : String? = nil,
+      @email : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @name : String? = nil,
+      @tax_id : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -130,6 +144,7 @@ module Stripe
       return false if !@email.nil? && @email.to_s.size > 5000
       return false if !@name.nil? && @name.to_s.size > 5000
       return false if !@tax_id.nil? && @tax_id.to_s.size > 5000
+
       true
     end
 
@@ -203,30 +218,16 @@ module Stripe
       @tax_id = tax_id
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bank_account == o.bank_account &&
-        card == o.card &&
-        default_card == o.default_card &&
-        description == o.description &&
-        email == o.email &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        name == o.name &&
-        tax_id == o.tax_id
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bank_account, @card, @default_card, @description, @email, @expand, @metadata, @name, @tax_id)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bank_account, @card, @default_card, @description, @email, @expand, @metadata, @name, @tax_id)
   end
 end

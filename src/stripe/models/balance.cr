@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Funds that are available to be transferred or paid out, whether automatically by Stripe or explicitly via the [Transfers API](https://stripe.com/docs/api#transfers) or [Payouts API](https://stripe.com/docs/api#payouts). The available balance for each currency and payment type can be found in the `source_types` property.
     @[JSON::Field(key: "available", type: Array(BalanceAmount))]
     property available : Array(BalanceAmount)
@@ -38,6 +39,7 @@ module Stripe
     property pending : Array(BalanceAmount)
 
     # Optional properties
+
     # Funds held due to negative balances on connected Custom accounts. The connect reserve balance for each currency and payment type can be found in the `source_types` property.
     @[JSON::Field(key: "connect_reserved", type: Array(BalanceAmount)?, presence: true, ignore_serialize: connect_reserved.nil? && !connect_reserved_present?)]
     property connect_reserved : Array(BalanceAmount)?
@@ -60,7 +62,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @available : Array(BalanceAmount), @livemode : Bool, @object : String, @pending : Array(BalanceAmount), @connect_reserved : Array(BalanceAmount)? = nil, @instant_available : Array(BalanceAmount)? = nil, @issuing : BalanceDetail? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @available : Array(BalanceAmount),
+      @livemode : Bool,
+      @object : String,
+      @pending : Array(BalanceAmount),
+      # Optional properties
+      @connect_reserved : Array(BalanceAmount)? = nil,
+      @instant_available : Array(BalanceAmount)? = nil,
+      @issuing : BalanceDetail? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -77,6 +90,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
       true
     end
 
@@ -87,28 +101,16 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        available == o.available &&
-        connect_reserved == o.connect_reserved &&
-        instant_available == o.instant_available &&
-        issuing == o.issuing &&
-        livemode == o.livemode &&
-        object == o.object &&
-        pending == o.pending
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@available, @connect_reserved, @instant_available, @issuing, @livemode, @object, @pending)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@available, @livemode, @object, @pending, @connect_reserved, @instant_available, @issuing)
   end
 end

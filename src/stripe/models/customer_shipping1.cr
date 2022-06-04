@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "address", type: Address?, presence: true, ignore_serialize: address.nil? && !address_present?)]
     property address : Address?
 
@@ -62,7 +63,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : Address? = nil, @carrier : String? = nil, @name : String? = nil, @phone : String? = nil, @tracking_number : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @address : Address? = nil,
+      @carrier : String? = nil,
+      @name : String? = nil,
+      @phone : String? = nil,
+      @tracking_number : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -96,6 +105,7 @@ module Stripe
       return false if !@name.nil? && @name.to_s.size > 5000
       return false if !@phone.nil? && @phone.to_s.size > 5000
       return false if !@tracking_number.nil? && @tracking_number.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -107,10 +117,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -155,26 +162,16 @@ module Stripe
       @tracking_number = tracking_number
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        carrier == o.carrier &&
-        name == o.name &&
-        phone == o.phone &&
-        tracking_number == o.tracking_number
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @carrier, @name, @phone, @tracking_number)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address, @carrier, @name, @phone, @tracking_number)
   end
 end

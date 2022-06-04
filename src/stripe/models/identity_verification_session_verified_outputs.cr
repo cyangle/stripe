@@ -18,45 +18,46 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
-    @[JSON::Field(key: "address", type: GelatoVerifiedOutputsAddress, presence: true, ignore_serialize: address.nil? && !address_present?)]
-    property address : GelatoVerifiedOutputsAddress
+    # Optional properties
+
+    @[JSON::Field(key: "address", type: GelatoVerifiedOutputsAddress?, presence: true, ignore_serialize: address.nil? && !address_present?)]
+    property address : GelatoVerifiedOutputsAddress?
 
     @[JSON::Field(ignore: true)]
     property? address_present : Bool = false
 
-    @[JSON::Field(key: "dob", type: GelatoVerifiedOutputsDob, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
-    property dob : GelatoVerifiedOutputsDob
+    @[JSON::Field(key: "dob", type: GelatoVerifiedOutputsDob?, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
+    property dob : GelatoVerifiedOutputsDob?
 
     @[JSON::Field(ignore: true)]
     property? dob_present : Bool = false
 
     # The user's verified first name.
-    @[JSON::Field(key: "first_name", type: String, presence: true, ignore_serialize: first_name.nil? && !first_name_present?)]
-    getter first_name : String
+    @[JSON::Field(key: "first_name", type: String?, presence: true, ignore_serialize: first_name.nil? && !first_name_present?)]
+    getter first_name : String?
 
     @[JSON::Field(ignore: true)]
     property? first_name_present : Bool = false
 
     # The user's verified id number.
-    @[JSON::Field(key: "id_number", type: String, presence: true, ignore_serialize: id_number.nil? && !id_number_present?)]
-    getter id_number : String
+    @[JSON::Field(key: "id_number", type: String?, presence: true, ignore_serialize: id_number.nil? && !id_number_present?)]
+    getter id_number : String?
 
     @[JSON::Field(ignore: true)]
     property? id_number_present : Bool = false
 
     # The user's verified id number type.
-    @[JSON::Field(key: "id_number_type", type: String, presence: true, ignore_serialize: id_number_type.nil? && !id_number_type_present?)]
-    getter id_number_type : String
+    @[JSON::Field(key: "id_number_type", type: String?, presence: true, ignore_serialize: id_number_type.nil? && !id_number_type_present?)]
+    getter id_number_type : String?
 
     @[JSON::Field(ignore: true)]
     property? id_number_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE = EnumValidator.new("id_number_type", "String", ["br_cpf", "sg_nric", "us_ssn", "null"])
+    ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE = EnumValidator.new("id_number_type", "String", ["br_cpf", "sg_nric", "us_ssn"])
 
     # The user's verified last name.
-    @[JSON::Field(key: "last_name", type: String, presence: true, ignore_serialize: last_name.nil? && !last_name_present?)]
-    getter last_name : String
+    @[JSON::Field(key: "last_name", type: String?, presence: true, ignore_serialize: last_name.nil? && !last_name_present?)]
+    getter last_name : String?
 
     @[JSON::Field(ignore: true)]
     property? last_name_present : Bool = false
@@ -70,7 +71,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : GelatoVerifiedOutputsAddress?, @dob : GelatoVerifiedOutputsDob?, @first_name : String?, @id_number : String?, @id_number_type : String?, @last_name : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @address : GelatoVerifiedOutputsAddress? = nil,
+      @dob : GelatoVerifiedOutputsDob? = nil,
+      @first_name : String? = nil,
+      @id_number : String? = nil,
+      @id_number_type : String? = nil,
+      @last_name : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -78,17 +88,17 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @first_name.to_s.size > 5000
+      if !@first_name.nil? && @first_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @id_number.to_s.size > 5000
+      if !@id_number.nil? && @id_number.to_s.size > 5000
         invalid_properties.push("invalid value for \"id_number\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid?(@id_number_type)
 
-      if @last_name.to_s.size > 5000
+      if !@last_name.nil? && @last_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -98,10 +108,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @first_name.to_s.size > 5000
-      return false if @id_number.to_s.size > 5000
+      return false if !@first_name.nil? && @first_name.to_s.size > 5000
+      return false if !@id_number.nil? && @id_number.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid?(@id_number_type)
-      return false if @last_name.to_s.size > 5000
+      return false if !@last_name.nil? && @last_name.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -113,10 +124,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -124,7 +132,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] first_name Value to be assigned
     def first_name=(first_name)
-      if first_name.to_s.size > 5000
+      if !first_name.nil? && first_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -134,7 +142,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] id_number Value to be assigned
     def id_number=(id_number)
-      if id_number.to_s.size > 5000
+      if !id_number.nil? && id_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id_number\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -151,24 +159,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] last_name Value to be assigned
     def last_name=(last_name)
-      if last_name.to_s.size > 5000
+      if !last_name.nil? && last_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
       end
 
       @last_name = last_name
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        dob == o.dob &&
-        first_name == o.first_name &&
-        id_number == o.id_number &&
-        id_number_type == o.id_number_type &&
-        last_name == o.last_name
     end
 
     # @see the `==` method
@@ -177,8 +172,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @dob, @first_name, @id_number, @id_number_type, @last_name)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address, @dob, @first_name, @id_number, @id_number_type, @last_name)
   end
 end

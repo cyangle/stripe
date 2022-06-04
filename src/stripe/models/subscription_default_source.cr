@@ -19,46 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
-    @[JSON::Field(key: "country", type: String, presence: true, ignore_serialize: country.nil? && !country_present?)]
-    getter country : String
-
-    @[JSON::Field(ignore: true)]
-    property? country_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?)]
     property created : Int64?
-
-    # The customer's email address, set by the API call that creates the receiver.
-    @[JSON::Field(key: "email", type: String, presence: true, ignore_serialize: email.nil? && !email_present?)]
-    getter email : String
-
-    @[JSON::Field(ignore: true)]
-    property? email_present : Bool = false
-
-    # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String?)]
-    getter id : String?
-
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String), presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
-
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String?)]
-    getter object : String?
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["source"])
-
-    # The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](https://stripe.com/docs/sources) used.
-    @[JSON::Field(key: "type", type: String?)]
-    getter _type : String?
-
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["ach_credit_transfer", "ach_debit", "acss_debit", "alipay", "au_becs_debit", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_credit_transfer", "sepa_debit", "sofort", "three_d_secure", "wechat"])
 
     # Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.  *Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*
     @[JSON::Field(key: "fingerprint", type: String, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
@@ -67,23 +31,19 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? fingerprint_present : Bool = false
 
+    # Unique identifier for the object.
+    @[JSON::Field(key: "id", type: String?)]
+    getter id : String?
+
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?)]
     property livemode : Bool?
 
-    # If the Alipay account object is not reusable, the exact amount that you can create a charge for.
-    @[JSON::Field(key: "payment_amount", type: Int64, presence: true, ignore_serialize: payment_amount.nil? && !payment_amount_present?)]
-    property payment_amount : Int64
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String?)]
+    getter object : String?
 
-    @[JSON::Field(ignore: true)]
-    property? payment_amount_present : Bool = false
-
-    # If the Alipay account object is not reusable, the exact currency that you can create a charge for.
-    @[JSON::Field(key: "payment_currency", type: String, presence: true, ignore_serialize: payment_currency.nil? && !payment_currency_present?)]
-    property payment_currency : String
-
-    @[JSON::Field(ignore: true)]
-    property? payment_currency_present : Bool = false
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["source"])
 
     # True if you can create multiple payments using this account. If the account is reusable, then you can freely choose the amount of each payment.
     @[JSON::Field(key: "reusable", type: Bool?)]
@@ -97,33 +57,12 @@ module Stripe
     @[JSON::Field(key: "username", type: String?)]
     getter username : String?
 
-    # The name of the person or business that owns the bank account.
-    @[JSON::Field(key: "account_holder_name", type: String, presence: true, ignore_serialize: account_holder_name.nil? && !account_holder_name_present?)]
-    getter account_holder_name : String
+    # Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
+    @[JSON::Field(key: "country", type: String, presence: true, ignore_serialize: country.nil? && !country_present?)]
+    getter country : String
 
     @[JSON::Field(ignore: true)]
-    property? account_holder_name_present : Bool = false
-
-    # The type of entity that holds the account. This can be either `individual` or `company`.
-    @[JSON::Field(key: "account_holder_type", type: String, presence: true, ignore_serialize: account_holder_type.nil? && !account_holder_type_present?)]
-    getter account_holder_type : String
-
-    @[JSON::Field(ignore: true)]
-    property? account_holder_type_present : Bool = false
-
-    # The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.
-    @[JSON::Field(key: "account_type", type: String, presence: true, ignore_serialize: account_type.nil? && !account_type_present?)]
-    getter account_type : String
-
-    @[JSON::Field(ignore: true)]
-    property? account_type_present : Bool = false
-
-    # Name of the bank associated with the routing number (e.g., `WELLS FARGO`).
-    @[JSON::Field(key: "bank_name", type: String, presence: true, ignore_serialize: bank_name.nil? && !bank_name_present?)]
-    getter bank_name : String
-
-    @[JSON::Field(ignore: true)]
-    property? bank_name_present : Bool = false
+    property? country_present : Bool = false
 
     # Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with the source. This is the currency for which the source will be chargeable once ready. Required for `single_use` sources.
     @[JSON::Field(key: "currency", type: String, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
@@ -135,13 +74,6 @@ module Stripe
     # The last four digits of the card.
     @[JSON::Field(key: "last4", type: String?)]
     getter last4 : String?
-
-    # The routing transit number for the bank account.
-    @[JSON::Field(key: "routing_number", type: String, presence: true, ignore_serialize: routing_number.nil? && !routing_number_present?)]
-    getter routing_number : String
-
-    @[JSON::Field(ignore: true)]
-    property? routing_number_present : Bool = false
 
     # The status of the source, one of `canceled`, `chargeable`, `consumed`, `failed`, or `pending`. Only `chargeable` sources can be used to create a charge.
     @[JSON::Field(key: "status", type: String?)]
@@ -174,10 +106,6 @@ module Stripe
     @[JSON::Field(key: "bitcoin_uri", type: String?)]
     getter bitcoin_uri : String?
 
-    # A high-level description of the type of cards issued in this range. (For internal use only and not typically available in standard API requests.)
-    @[JSON::Field(key: "description", type: String?)]
-    getter description : String?
-
     # This flag is initially false and updates to true when the customer sends the `bitcoin_amount` to this receiver.
     @[JSON::Field(key: "filled", type: Bool?)]
     property filled : Bool?
@@ -186,97 +114,13 @@ module Stripe
     @[JSON::Field(key: "inbound_address", type: String?)]
     getter inbound_address : String?
 
-    # The refund address of this bitcoin receiver.
-    @[JSON::Field(key: "refund_address", type: String, presence: true, ignore_serialize: refund_address.nil? && !refund_address_present?)]
-    getter refund_address : String
-
-    @[JSON::Field(ignore: true)]
-    property? refund_address_present : Bool = false
-
     # This receiver contains uncaptured funds that can be used for a payment or refunded.
     @[JSON::Field(key: "uncaptured_funds", type: Bool?)]
     property uncaptured_funds : Bool?
 
-    # Indicate if this source is used for payment.
-    @[JSON::Field(key: "used_for_payment", type: Bool, presence: true, ignore_serialize: used_for_payment.nil? && !used_for_payment_present?)]
-    property used_for_payment : Bool
-
-    @[JSON::Field(ignore: true)]
-    property? used_for_payment_present : Bool = false
-
-    # City/District/Suburb/Town/Village.
-    @[JSON::Field(key: "address_city", type: String, presence: true, ignore_serialize: address_city.nil? && !address_city_present?)]
-    getter address_city : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_city_present : Bool = false
-
-    # Billing address country, if provided when creating card.
-    @[JSON::Field(key: "address_country", type: String, presence: true, ignore_serialize: address_country.nil? && !address_country_present?)]
-    getter address_country : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_country_present : Bool = false
-
-    # Address line 1 (Street address/PO Box/Company name).
-    @[JSON::Field(key: "address_line1", type: String, presence: true, ignore_serialize: address_line1.nil? && !address_line1_present?)]
-    getter address_line1 : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_line1_present : Bool = false
-
-    # If `address_line1` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.
-    @[JSON::Field(key: "address_line1_check", type: String, presence: true, ignore_serialize: address_line1_check.nil? && !address_line1_check_present?)]
-    getter address_line1_check : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_line1_check_present : Bool = false
-
-    # Address line 2 (Apartment/Suite/Unit/Building).
-    @[JSON::Field(key: "address_line2", type: String, presence: true, ignore_serialize: address_line2.nil? && !address_line2_present?)]
-    getter address_line2 : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_line2_present : Bool = false
-
-    # State/County/Province/Region.
-    @[JSON::Field(key: "address_state", type: String, presence: true, ignore_serialize: address_state.nil? && !address_state_present?)]
-    getter address_state : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_state_present : Bool = false
-
-    # ZIP or postal code.
-    @[JSON::Field(key: "address_zip", type: String, presence: true, ignore_serialize: address_zip.nil? && !address_zip_present?)]
-    getter address_zip : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_zip_present : Bool = false
-
-    # If `address_zip` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.
-    @[JSON::Field(key: "address_zip_check", type: String, presence: true, ignore_serialize: address_zip_check.nil? && !address_zip_check_present?)]
-    getter address_zip_check : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_zip_check_present : Bool = false
-
     # Card brand. Can be `American Express`, `Diners Club`, `Discover`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.
     @[JSON::Field(key: "brand", type: String?)]
     getter brand : String?
-
-    # If a CVC was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`. A result of unchecked indicates that CVC was provided but hasn't been checked yet. Checks are typically performed when attaching a card to a Customer object, or when creating a charge. For more details, see [Check if a card is valid without a charge](https://support.stripe.com/questions/check-if-a-card-is-valid-without-a-charge).
-    @[JSON::Field(key: "cvc_check", type: String, presence: true, ignore_serialize: cvc_check.nil? && !cvc_check_present?)]
-    getter cvc_check : String
-
-    @[JSON::Field(ignore: true)]
-    property? cvc_check_present : Bool = false
-
-    # (For tokenized numbers only.) The last four digits of the device account number.
-    @[JSON::Field(key: "dynamic_last4", type: String, presence: true, ignore_serialize: dynamic_last4.nil? && !dynamic_last4_present?)]
-    getter dynamic_last4 : String
-
-    @[JSON::Field(ignore: true)]
-    property? dynamic_last4_present : Bool = false
 
     # Two-digit number representing the card's expiration month.
     @[JSON::Field(key: "exp_month", type: Int64?)]
@@ -290,20 +134,6 @@ module Stripe
     @[JSON::Field(key: "funding", type: String?)]
     getter funding : String?
 
-    # Cardholder name.
-    @[JSON::Field(key: "name", type: String, presence: true, ignore_serialize: name.nil? && !name_present?)]
-    getter name : String
-
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
-
-    # If the card number is tokenized, this is the method that was used. Can be `android_pay` (includes Google Pay), `apple_pay`, `masterpass`, `visa_checkout`, or null.
-    @[JSON::Field(key: "tokenization_method", type: String, presence: true, ignore_serialize: tokenization_method.nil? && !tokenization_method_present?)]
-    getter tokenization_method : String
-
-    @[JSON::Field(ignore: true)]
-    property? tokenization_method_present : Bool = false
-
     # The client secret of the source. Used for client-side retrieval using a publishable key.
     @[JSON::Field(key: "client_secret", type: String?)]
     getter client_secret : String?
@@ -312,123 +142,13 @@ module Stripe
     @[JSON::Field(key: "flow", type: String?)]
     getter flow : String?
 
-    @[JSON::Field(key: "owner", type: SourceOwner1, presence: true, ignore_serialize: owner.nil? && !owner_present?)]
-    property owner : SourceOwner1
+    # The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](https://stripe.com/docs/sources) used.
+    @[JSON::Field(key: "type", type: String?)]
+    getter _type : String?
 
-    @[JSON::Field(ignore: true)]
-    property? owner_present : Bool = false
-
-    # Extra information about a source. This will appear on your customer's statement every time you charge the source.
-    @[JSON::Field(key: "statement_descriptor", type: String, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
-    getter statement_descriptor : String
-
-    @[JSON::Field(ignore: true)]
-    property? statement_descriptor_present : Bool = false
-
-    # Either `reusable` or `single_use`. Whether this source should be reusable or not. Some source types may or may not be reusable by construction, while others may leave the option at creation. If an incompatible value is passed, an error will be returned.
-    @[JSON::Field(key: "usage", type: String, presence: true, ignore_serialize: usage.nil? && !usage_present?)]
-    getter usage : String
-
-    @[JSON::Field(ignore: true)]
-    property? usage_present : Bool = false
+    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["ach_credit_transfer", "ach_debit", "acss_debit", "alipay", "au_becs_debit", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_debit", "sofort", "three_d_secure", "wechat"])
 
     # Optional properties
-    @[JSON::Field(key: "business_profile", type: AccountBusinessProfile1?, presence: true, ignore_serialize: business_profile.nil? && !business_profile_present?)]
-    property business_profile : AccountBusinessProfile1?
-
-    @[JSON::Field(ignore: true)]
-    property? business_profile_present : Bool = false
-
-    # The business type.
-    @[JSON::Field(key: "business_type", type: String?, presence: true, ignore_serialize: business_type.nil? && !business_type_present?)]
-    getter business_type : String?
-
-    @[JSON::Field(ignore: true)]
-    property? business_type_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_BUSINESS_TYPE = EnumValidator.new("business_type", "String", ["company", "government_entity", "individual", "non_profit", "null"])
-
-    @[JSON::Field(key: "capabilities", type: AccountCapabilities?, presence: true, ignore_serialize: capabilities.nil? && !capabilities_present?)]
-    property capabilities : AccountCapabilities?
-
-    @[JSON::Field(ignore: true)]
-    property? capabilities_present : Bool = false
-
-    # Whether the account can create live charges.
-    @[JSON::Field(key: "charges_enabled", type: Bool?, presence: true, ignore_serialize: charges_enabled.nil? && !charges_enabled_present?)]
-    property charges_enabled : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? charges_enabled_present : Bool = false
-
-    @[JSON::Field(key: "company", type: LegalEntityCompany?, presence: true, ignore_serialize: company.nil? && !company_present?)]
-    property company : LegalEntityCompany?
-
-    @[JSON::Field(ignore: true)]
-    property? company_present : Bool = false
-
-    @[JSON::Field(key: "controller", type: AccountUnificationAccountController?, presence: true, ignore_serialize: controller.nil? && !controller_present?)]
-    property controller : AccountUnificationAccountController?
-
-    @[JSON::Field(ignore: true)]
-    property? controller_present : Bool = false
-
-    # Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
-    @[JSON::Field(key: "default_currency", type: String?, presence: true, ignore_serialize: default_currency.nil? && !default_currency_present?)]
-    getter default_currency : String?
-
-    @[JSON::Field(ignore: true)]
-    property? default_currency_present : Bool = false
-
-    # Whether account details have been submitted. Standard accounts cannot receive payouts before this is true.
-    @[JSON::Field(key: "details_submitted", type: Bool?, presence: true, ignore_serialize: details_submitted.nil? && !details_submitted_present?)]
-    property details_submitted : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? details_submitted_present : Bool = false
-
-    @[JSON::Field(key: "external_accounts", type: ExternalAccountList1?, presence: true, ignore_serialize: external_accounts.nil? && !external_accounts_present?)]
-    property external_accounts : ExternalAccountList1?
-
-    @[JSON::Field(ignore: true)]
-    property? external_accounts_present : Bool = false
-
-    @[JSON::Field(key: "future_requirements", type: AccountFutureRequirements?, presence: true, ignore_serialize: future_requirements.nil? && !future_requirements_present?)]
-    property future_requirements : AccountFutureRequirements?
-
-    @[JSON::Field(ignore: true)]
-    property? future_requirements_present : Bool = false
-
-    @[JSON::Field(key: "individual", type: Person?, presence: true, ignore_serialize: individual.nil? && !individual_present?)]
-    property individual : Person?
-
-    @[JSON::Field(ignore: true)]
-    property? individual_present : Bool = false
-
-    # Whether Stripe can send payouts to this account.
-    @[JSON::Field(key: "payouts_enabled", type: Bool?, presence: true, ignore_serialize: payouts_enabled.nil? && !payouts_enabled_present?)]
-    property payouts_enabled : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? payouts_enabled_present : Bool = false
-
-    @[JSON::Field(key: "requirements", type: AccountRequirements?, presence: true, ignore_serialize: requirements.nil? && !requirements_present?)]
-    property requirements : AccountRequirements?
-
-    @[JSON::Field(ignore: true)]
-    property? requirements_present : Bool = false
-
-    @[JSON::Field(key: "settings", type: AccountSettings1?, presence: true, ignore_serialize: settings.nil? && !settings_present?)]
-    property settings : AccountSettings1?
-
-    @[JSON::Field(ignore: true)]
-    property? settings_present : Bool = false
-
-    @[JSON::Field(key: "tos_acceptance", type: AccountTosAcceptance?, presence: true, ignore_serialize: tos_acceptance.nil? && !tos_acceptance_present?)]
-    property tos_acceptance : AccountTosAcceptance?
-
-    @[JSON::Field(ignore: true)]
-    property? tos_acceptance_present : Bool = false
 
     # The ID of the customer to which this source is attached. This will not be present when the source has not been attached to a customer.
     @[JSON::Field(key: "customer", type: String?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
@@ -437,11 +157,53 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? customer_present : Bool = false
 
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
+
+    # If the Alipay account object is not reusable, the exact amount that you can create a charge for.
+    @[JSON::Field(key: "payment_amount", type: Int64?, presence: true, ignore_serialize: payment_amount.nil? && !payment_amount_present?)]
+    property payment_amount : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? payment_amount_present : Bool = false
+
+    # If the Alipay account object is not reusable, the exact currency that you can create a charge for.
+    @[JSON::Field(key: "payment_currency", type: String?, presence: true, ignore_serialize: payment_currency.nil? && !payment_currency_present?)]
+    property payment_currency : String?
+
+    @[JSON::Field(ignore: true)]
+    property? payment_currency_present : Bool = false
+
     @[JSON::Field(key: "account", type: CardAccount?, presence: true, ignore_serialize: account.nil? && !account_present?)]
     property account : CardAccount?
 
     @[JSON::Field(ignore: true)]
     property? account_present : Bool = false
+
+    # The name of the person or business that owns the bank account.
+    @[JSON::Field(key: "account_holder_name", type: String?, presence: true, ignore_serialize: account_holder_name.nil? && !account_holder_name_present?)]
+    getter account_holder_name : String?
+
+    @[JSON::Field(ignore: true)]
+    property? account_holder_name_present : Bool = false
+
+    # The type of entity that holds the account. This can be either `individual` or `company`.
+    @[JSON::Field(key: "account_holder_type", type: String?, presence: true, ignore_serialize: account_holder_type.nil? && !account_holder_type_present?)]
+    getter account_holder_type : String?
+
+    @[JSON::Field(ignore: true)]
+    property? account_holder_type_present : Bool = false
+
+    # The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.
+    @[JSON::Field(key: "account_type", type: String?, presence: true, ignore_serialize: account_type.nil? && !account_type_present?)]
+    getter account_type : String?
+
+    @[JSON::Field(ignore: true)]
+    property? account_type_present : Bool = false
 
     # A set of available payout methods for this card. Only values from this set should be passed as the `method` when creating a payout.
     @[JSON::Field(key: "available_payout_methods", type: Array(String)?, presence: true, ignore_serialize: available_payout_methods.nil? && !available_payout_methods_present?)]
@@ -452,12 +214,40 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS = EnumValidator.new("available_payout_methods", "String", ["instant", "standard"])
 
+    # Name of the bank associated with the routing number (e.g., `WELLS FARGO`).
+    @[JSON::Field(key: "bank_name", type: String?, presence: true, ignore_serialize: bank_name.nil? && !bank_name_present?)]
+    getter bank_name : String?
+
+    @[JSON::Field(ignore: true)]
+    property? bank_name_present : Bool = false
+
     # Whether this card is the default external account for its currency.
     @[JSON::Field(key: "default_for_currency", type: Bool?, presence: true, ignore_serialize: default_for_currency.nil? && !default_for_currency_present?)]
     property default_for_currency : Bool?
 
     @[JSON::Field(ignore: true)]
     property? default_for_currency_present : Bool = false
+
+    # The routing transit number for the bank account.
+    @[JSON::Field(key: "routing_number", type: String?, presence: true, ignore_serialize: routing_number.nil? && !routing_number_present?)]
+    getter routing_number : String?
+
+    @[JSON::Field(ignore: true)]
+    property? routing_number_present : Bool = false
+
+    # An arbitrary string attached to the object. Often useful for displaying to users.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
+
+    # The customer's email address, set by the API call that creates the receiver.
+    @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
+    getter email : String?
+
+    @[JSON::Field(ignore: true)]
+    property? email_present : Bool = false
 
     # The ID of the payment created from the receiver, if any. Hidden when viewing the receiver with a publishable key.
     @[JSON::Field(key: "payment", type: String?, presence: true, ignore_serialize: payment.nil? && !payment_present?)]
@@ -466,31 +256,115 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_present : Bool = false
 
+    # The refund address of this bitcoin receiver.
+    @[JSON::Field(key: "refund_address", type: String?, presence: true, ignore_serialize: refund_address.nil? && !refund_address_present?)]
+    getter refund_address : String?
+
+    @[JSON::Field(ignore: true)]
+    property? refund_address_present : Bool = false
+
     @[JSON::Field(key: "transactions", type: BitcoinTransactionList1?, presence: true, ignore_serialize: transactions.nil? && !transactions_present?)]
     property transactions : BitcoinTransactionList1?
 
     @[JSON::Field(ignore: true)]
     property? transactions_present : Bool = false
 
-    # Issuer identification number of the card. (For internal use only and not typically available in standard API requests.)
-    @[JSON::Field(key: "iin", type: String?, presence: true, ignore_serialize: iin.nil? && !iin_present?)]
-    getter iin : String?
+    # Indicate if this source is used for payment.
+    @[JSON::Field(key: "used_for_payment", type: Bool?, presence: true, ignore_serialize: used_for_payment.nil? && !used_for_payment_present?)]
+    property used_for_payment : Bool?
 
     @[JSON::Field(ignore: true)]
-    property? iin_present : Bool = false
+    property? used_for_payment_present : Bool = false
 
-    # The name of the card's issuing bank. (For internal use only and not typically available in standard API requests.)
-    @[JSON::Field(key: "issuer", type: String?, presence: true, ignore_serialize: issuer.nil? && !issuer_present?)]
-    getter issuer : String?
+    # City/District/Suburb/Town/Village.
+    @[JSON::Field(key: "address_city", type: String?, presence: true, ignore_serialize: address_city.nil? && !address_city_present?)]
+    getter address_city : String?
 
     @[JSON::Field(ignore: true)]
-    property? issuer_present : Bool = false
+    property? address_city_present : Bool = false
+
+    # Billing address country, if provided when creating card.
+    @[JSON::Field(key: "address_country", type: String?, presence: true, ignore_serialize: address_country.nil? && !address_country_present?)]
+    getter address_country : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_country_present : Bool = false
+
+    # Address line 1 (Street address/PO Box/Company name).
+    @[JSON::Field(key: "address_line1", type: String?, presence: true, ignore_serialize: address_line1.nil? && !address_line1_present?)]
+    getter address_line1 : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_line1_present : Bool = false
+
+    # If `address_line1` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.
+    @[JSON::Field(key: "address_line1_check", type: String?, presence: true, ignore_serialize: address_line1_check.nil? && !address_line1_check_present?)]
+    getter address_line1_check : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_line1_check_present : Bool = false
+
+    # Address line 2 (Apartment/Suite/Unit/Building).
+    @[JSON::Field(key: "address_line2", type: String?, presence: true, ignore_serialize: address_line2.nil? && !address_line2_present?)]
+    getter address_line2 : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_line2_present : Bool = false
+
+    # State/County/Province/Region.
+    @[JSON::Field(key: "address_state", type: String?, presence: true, ignore_serialize: address_state.nil? && !address_state_present?)]
+    getter address_state : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_state_present : Bool = false
+
+    # ZIP or postal code.
+    @[JSON::Field(key: "address_zip", type: String?, presence: true, ignore_serialize: address_zip.nil? && !address_zip_present?)]
+    getter address_zip : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_zip_present : Bool = false
+
+    # If `address_zip` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.
+    @[JSON::Field(key: "address_zip_check", type: String?, presence: true, ignore_serialize: address_zip_check.nil? && !address_zip_check_present?)]
+    getter address_zip_check : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_zip_check_present : Bool = false
+
+    # If a CVC was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`. A result of unchecked indicates that CVC was provided but hasn't been checked yet. Checks are typically performed when attaching a card to a Customer object, or when creating a charge. For more details, see [Check if a card is valid without a charge](https://support.stripe.com/questions/check-if-a-card-is-valid-without-a-charge).
+    @[JSON::Field(key: "cvc_check", type: String?, presence: true, ignore_serialize: cvc_check.nil? && !cvc_check_present?)]
+    getter cvc_check : String?
+
+    @[JSON::Field(ignore: true)]
+    property? cvc_check_present : Bool = false
+
+    # (For tokenized numbers only.) The last four digits of the device account number.
+    @[JSON::Field(key: "dynamic_last4", type: String?, presence: true, ignore_serialize: dynamic_last4.nil? && !dynamic_last4_present?)]
+    getter dynamic_last4 : String?
+
+    @[JSON::Field(ignore: true)]
+    property? dynamic_last4_present : Bool = false
+
+    # Cardholder name.
+    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    getter name : String?
+
+    @[JSON::Field(ignore: true)]
+    property? name_present : Bool = false
 
     @[JSON::Field(key: "recipient", type: CardRecipient?, presence: true, ignore_serialize: recipient.nil? && !recipient_present?)]
     property recipient : CardRecipient?
 
     @[JSON::Field(ignore: true)]
     property? recipient_present : Bool = false
+
+    # If the card number is tokenized, this is the method that was used. Can be `android_pay` (includes Google Pay), `apple_pay`, `masterpass`, `visa_checkout`, or null.
+    @[JSON::Field(key: "tokenization_method", type: String?, presence: true, ignore_serialize: tokenization_method.nil? && !tokenization_method_present?)]
+    getter tokenization_method : String?
+
+    @[JSON::Field(ignore: true)]
+    property? tokenization_method_present : Bool = false
 
     @[JSON::Field(key: "ach_credit_transfer", type: SourceTypeAchCreditTransfer?, presence: true, ignore_serialize: ach_credit_transfer.nil? && !ach_credit_transfer_present?)]
     property ach_credit_transfer : SourceTypeAchCreditTransfer?
@@ -534,7 +408,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
-    @[JSON::Field(key: "card_present", type: SourceTypeCardPresent?, presence: true, ignore_serialize: card_present.nil? && !card_present_present?)]
+    @[JSON::Field(key: "card_present", type: SourceTypeCardPresent?, presence: true, ignore_serialize: card_present2.nil? && !card_present2_present?)]
     property card_present2 : SourceTypeCardPresent?
 
     @[JSON::Field(ignore: true)]
@@ -576,6 +450,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? multibanco_present : Bool = false
 
+    @[JSON::Field(key: "owner", type: SourceOwner1?, presence: true, ignore_serialize: owner.nil? && !owner_present?)]
+    property owner : SourceOwner1?
+
+    @[JSON::Field(ignore: true)]
+    property? owner_present : Bool = false
+
     @[JSON::Field(key: "p24", type: SourceTypeP24?, presence: true, ignore_serialize: p24.nil? && !p24_present?)]
     property p24 : SourceTypeP24?
 
@@ -593,12 +473,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? redirect_present : Bool = false
-
-    @[JSON::Field(key: "sepa_credit_transfer", type: SourceTypeSepaCreditTransfer?, presence: true, ignore_serialize: sepa_credit_transfer.nil? && !sepa_credit_transfer_present?)]
-    property sepa_credit_transfer : SourceTypeSepaCreditTransfer?
-
-    @[JSON::Field(ignore: true)]
-    property? sepa_credit_transfer_present : Bool = false
 
     @[JSON::Field(key: "sepa_debit", type: SourceTypeSepaDebit?, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
     property sepa_debit : SourceTypeSepaDebit?
@@ -618,11 +492,25 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? source_order_present : Bool = false
 
+    # Extra information about a source. This will appear on your customer's statement every time you charge the source.
+    @[JSON::Field(key: "statement_descriptor", type: String?, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
+    getter statement_descriptor : String?
+
+    @[JSON::Field(ignore: true)]
+    property? statement_descriptor_present : Bool = false
+
     @[JSON::Field(key: "three_d_secure", type: SourceTypeThreeDSecure?, presence: true, ignore_serialize: three_d_secure.nil? && !three_d_secure_present?)]
     property three_d_secure : SourceTypeThreeDSecure?
 
     @[JSON::Field(ignore: true)]
     property? three_d_secure_present : Bool = false
+
+    # Either `reusable` or `single_use`. Whether this source should be reusable or not. Some source types may or may not be reusable by construction, while others may leave the option at creation. If an incompatible value is passed, an error will be returned.
+    @[JSON::Field(key: "usage", type: String?, presence: true, ignore_serialize: usage.nil? && !usage_present?)]
+    getter usage : String?
+
+    @[JSON::Field(ignore: true)]
+    property? usage_present : Bool = false
 
     @[JSON::Field(key: "wechat", type: SourceTypeWechat?, presence: true, ignore_serialize: wechat.nil? && !wechat_present?)]
     property wechat : SourceTypeWechat?
@@ -633,14 +521,106 @@ module Stripe
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
-        Stripe::PaymentSource,
+        Stripe::AlipayAccount,
+        Stripe::BankAccount,
+        Stripe::BitcoinReceiver,
+        Stripe::Card,
+        Stripe::Source,
         String,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @country : String?, @created : Int64, @email : String?, @id : String, @metadata : Hash(String, String)?, @object : String, @_type : String, @fingerprint : String?, @livemode : Bool, @payment_amount : Int64?, @payment_currency : String?, @reusable : Bool, @used : Bool, @username : String, @account_holder_name : String?, @account_holder_type : String?, @account_type : String?, @bank_name : String?, @currency : String?, @last4 : String, @routing_number : String?, @status : String, @active : Bool, @amount : Int64?, @amount_received : Int64, @bitcoin_amount : Int64, @bitcoin_amount_received : Int64, @bitcoin_uri : String, @description : String, @filled : Bool, @inbound_address : String, @refund_address : String?, @uncaptured_funds : Bool, @used_for_payment : Bool?, @address_city : String?, @address_country : String?, @address_line1 : String?, @address_line1_check : String?, @address_line2 : String?, @address_state : String?, @address_zip : String?, @address_zip_check : String?, @brand : String, @cvc_check : String?, @dynamic_last4 : String?, @exp_month : Int64, @exp_year : Int64, @funding : String, @name : String?, @tokenization_method : String?, @client_secret : String, @flow : String, @owner : SourceOwner1?, @statement_descriptor : String?, @usage : String?, @business_profile : AccountBusinessProfile1? = nil, @business_type : String? = nil, @capabilities : AccountCapabilities? = nil, @charges_enabled : Bool? = nil, @company : LegalEntityCompany? = nil, @controller : AccountUnificationAccountController? = nil, @default_currency : String? = nil, @details_submitted : Bool? = nil, @external_accounts : ExternalAccountList1? = nil, @future_requirements : AccountFutureRequirements? = nil, @individual : Person? = nil, @payouts_enabled : Bool? = nil, @requirements : AccountRequirements? = nil, @settings : AccountSettings1? = nil, @tos_acceptance : AccountTosAcceptance? = nil, @customer : String? = nil, @account : CardAccount? = nil, @available_payout_methods : Array(String)? = nil, @default_for_currency : Bool? = nil, @payment : String? = nil, @transactions : BitcoinTransactionList1? = nil, @iin : String? = nil, @issuer : String? = nil, @recipient : CardRecipient? = nil, @ach_credit_transfer : SourceTypeAchCreditTransfer? = nil, @ach_debit : SourceTypeAchDebit? = nil, @acss_debit : SourceTypeAcssDebit? = nil, @alipay : SourceTypeAlipay? = nil, @au_becs_debit : SourceTypeAuBecsDebit? = nil, @bancontact : SourceTypeBancontact? = nil, @card : SourceTypeCard? = nil, @card_present2 : SourceTypeCardPresent? = nil, @code_verification : SourceCodeVerificationFlow? = nil, @eps : SourceTypeEps? = nil, @giropay : SourceTypeGiropay? = nil, @ideal : SourceTypeIdeal? = nil, @klarna : SourceTypeKlarna? = nil, @multibanco : SourceTypeMultibanco? = nil, @p24 : SourceTypeP24? = nil, @receiver : SourceReceiverFlow? = nil, @redirect : SourceRedirectFlow? = nil, @sepa_credit_transfer : SourceTypeSepaCreditTransfer? = nil, @sepa_debit : SourceTypeSepaDebit? = nil, @sofort : SourceTypeSofort? = nil, @source_order : SourceOrder? = nil, @three_d_secure : SourceTypeThreeDSecure? = nil, @wechat : SourceTypeWechat? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64? = nil,
+      @fingerprint : String = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @object : String? = nil,
+      @reusable : Bool? = nil,
+      @used : Bool? = nil,
+      @username : String? = nil,
+      @country : String = nil,
+      @currency : String = nil,
+      @last4 : String? = nil,
+      @status : String? = nil,
+      @active : Bool? = nil,
+      @amount : Int64 = nil,
+      @amount_received : Int64? = nil,
+      @bitcoin_amount : Int64? = nil,
+      @bitcoin_amount_received : Int64? = nil,
+      @bitcoin_uri : String? = nil,
+      @filled : Bool? = nil,
+      @inbound_address : String? = nil,
+      @uncaptured_funds : Bool? = nil,
+      @brand : String? = nil,
+      @exp_month : Int64? = nil,
+      @exp_year : Int64? = nil,
+      @funding : String? = nil,
+      @client_secret : String? = nil,
+      @flow : String? = nil,
+      @_type : String? = nil,
+      # Optional properties
+      @customer : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @payment_amount : Int64? = nil,
+      @payment_currency : String? = nil,
+      @account : CardAccount? = nil,
+      @account_holder_name : String? = nil,
+      @account_holder_type : String? = nil,
+      @account_type : String? = nil,
+      @available_payout_methods : Array(String)? = nil,
+      @bank_name : String? = nil,
+      @default_for_currency : Bool? = nil,
+      @routing_number : String? = nil,
+      @description : String? = nil,
+      @email : String? = nil,
+      @payment : String? = nil,
+      @refund_address : String? = nil,
+      @transactions : BitcoinTransactionList1? = nil,
+      @used_for_payment : Bool? = nil,
+      @address_city : String? = nil,
+      @address_country : String? = nil,
+      @address_line1 : String? = nil,
+      @address_line1_check : String? = nil,
+      @address_line2 : String? = nil,
+      @address_state : String? = nil,
+      @address_zip : String? = nil,
+      @address_zip_check : String? = nil,
+      @cvc_check : String? = nil,
+      @dynamic_last4 : String? = nil,
+      @name : String? = nil,
+      @recipient : CardRecipient? = nil,
+      @tokenization_method : String? = nil,
+      @ach_credit_transfer : SourceTypeAchCreditTransfer? = nil,
+      @ach_debit : SourceTypeAchDebit? = nil,
+      @acss_debit : SourceTypeAcssDebit? = nil,
+      @alipay : SourceTypeAlipay? = nil,
+      @au_becs_debit : SourceTypeAuBecsDebit? = nil,
+      @bancontact : SourceTypeBancontact? = nil,
+      @card : SourceTypeCard? = nil,
+      @card_present2 : SourceTypeCardPresent? = nil,
+      @code_verification : SourceCodeVerificationFlow? = nil,
+      @eps : SourceTypeEps? = nil,
+      @giropay : SourceTypeGiropay? = nil,
+      @ideal : SourceTypeIdeal? = nil,
+      @klarna : SourceTypeKlarna? = nil,
+      @multibanco : SourceTypeMultibanco? = nil,
+      @owner : SourceOwner1? = nil,
+      @p24 : SourceTypeP24? = nil,
+      @receiver : SourceReceiverFlow? = nil,
+      @redirect : SourceRedirectFlow? = nil,
+      @sepa_debit : SourceTypeSepaDebit? = nil,
+      @sofort : SourceTypeSofort? = nil,
+      @source_order : SourceOrder? = nil,
+      @statement_descriptor : String? = nil,
+      @three_d_secure : SourceTypeThreeDSecure? = nil,
+      @usage : String? = nil,
+      @wechat : SourceTypeWechat? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -648,18 +628,8 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BUSINESS_TYPE.error_message) unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
-
-      if @country.to_s.size > 5000
-        invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@default_currency.nil? && @default_currency.to_s.size > 5000
-        invalid_properties.push("invalid value for \"default_currency\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @email.to_s.size > 5000
-        invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      if @fingerprint.to_s.size > 5000
+        invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
       if @id.to_s.size > 5000
@@ -668,44 +638,16 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-
-      if !@customer.nil? && @customer.to_s.size > 5000
-        invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @fingerprint.to_s.size > 5000
-        invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @username.to_s.size > 5000
         invalid_properties.push("invalid value for \"username\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @account_holder_name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @account_holder_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"account_holder_type\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @account_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"account_type\", the character length must be smaller than or equal to 5000.")
-      end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.error_message) unless ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid?(@available_payout_methods)
-
-      if @bank_name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+      if @country.to_s.size > 5000
+        invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
       if @last4.to_s.size > 5000
         invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @routing_number.to_s.size > 5000
-        invalid_properties.push("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
       end
 
       if @status.to_s.size > 5000
@@ -716,84 +658,16 @@ module Stripe
         invalid_properties.push("invalid value for \"bitcoin_uri\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @inbound_address.to_s.size > 5000
         invalid_properties.push("invalid value for \"inbound_address\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@payment.nil? && @payment.to_s.size > 5000
-        invalid_properties.push("invalid value for \"payment\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @refund_address.to_s.size > 5000
-        invalid_properties.push("invalid value for \"refund_address\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_city.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_country.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_line1.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_line1_check.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_line1_check\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_line2.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_state.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_zip.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_zip_check.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_zip_check\", the character length must be smaller than or equal to 5000.")
       end
 
       if @brand.to_s.size > 5000
         invalid_properties.push("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @cvc_check.to_s.size > 5000
-        invalid_properties.push("invalid value for \"cvc_check\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @dynamic_last4.to_s.size > 5000
-        invalid_properties.push("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @funding.to_s.size > 5000
         invalid_properties.push("invalid value for \"funding\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@iin.nil? && @iin.to_s.size > 5000
-        invalid_properties.push("invalid value for \"iin\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@issuer.nil? && @issuer.to_s.size > 5000
-        invalid_properties.push("invalid value for \"issuer\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @tokenization_method.to_s.size > 5000
-        invalid_properties.push("invalid value for \"tokenization_method\", the character length must be smaller than or equal to 5000.")
       end
 
       if @client_secret.to_s.size > 5000
@@ -804,11 +678,103 @@ module Stripe
         invalid_properties.push("invalid value for \"flow\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @statement_descriptor.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      if !@customer.nil? && @customer.to_s.size > 5000
+        invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@account_holder_name.nil? && @account_holder_name.to_s.size > 5000
+        invalid_properties.push("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@account_holder_type.nil? && @account_holder_type.to_s.size > 5000
+        invalid_properties.push("invalid value for \"account_holder_type\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@account_type.nil? && @account_type.to_s.size > 5000
+        invalid_properties.push("invalid value for \"account_type\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.error_message) unless ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid?(@available_payout_methods)
+
+      if !@bank_name.nil? && @bank_name.to_s.size > 5000
+        invalid_properties.push("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@routing_number.nil? && @routing_number.to_s.size > 5000
+        invalid_properties.push("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@email.nil? && @email.to_s.size > 5000
+        invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@payment.nil? && @payment.to_s.size > 5000
+        invalid_properties.push("invalid value for \"payment\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@refund_address.nil? && @refund_address.to_s.size > 5000
+        invalid_properties.push("invalid value for \"refund_address\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_city.nil? && @address_city.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_country.nil? && @address_country.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_line1.nil? && @address_line1.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_line1_check.nil? && @address_line1_check.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_line1_check\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_line2.nil? && @address_line2.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_state.nil? && @address_state.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_zip.nil? && @address_zip.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_zip_check.nil? && @address_zip_check.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_zip_check\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@cvc_check.nil? && @cvc_check.to_s.size > 5000
+        invalid_properties.push("invalid value for \"cvc_check\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@dynamic_last4.nil? && @dynamic_last4.to_s.size > 5000
+        invalid_properties.push("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@name.nil? && @name.to_s.size > 5000
+        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@tokenization_method.nil? && @tokenization_method.to_s.size > 5000
+        invalid_properties.push("invalid value for \"tokenization_method\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
         invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @usage.to_s.size > 5000
+      if !@usage.nil? && @usage.to_s.size > 5000
         invalid_properties.push("invalid value for \"usage\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -818,49 +784,46 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
-      return false if @country.to_s.size > 5000
-      return false if !@default_currency.nil? && @default_currency.to_s.size > 5000
-      return false if @email.to_s.size > 5000
+      return false if @fingerprint.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      return false if !@customer.nil? && @customer.to_s.size > 5000
-      return false if @fingerprint.to_s.size > 5000
       return false if @username.to_s.size > 5000
-      return false if @account_holder_name.to_s.size > 5000
-      return false if @account_holder_type.to_s.size > 5000
-      return false if @account_type.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid?(@available_payout_methods)
-      return false if @bank_name.to_s.size > 5000
+      return false if @country.to_s.size > 5000
       return false if @last4.to_s.size > 5000
-      return false if @routing_number.to_s.size > 5000
       return false if @status.to_s.size > 5000
       return false if @bitcoin_uri.to_s.size > 5000
-      return false if @description.to_s.size > 5000
       return false if @inbound_address.to_s.size > 5000
-      return false if !@payment.nil? && @payment.to_s.size > 5000
-      return false if @refund_address.to_s.size > 5000
-      return false if @address_city.to_s.size > 5000
-      return false if @address_country.to_s.size > 5000
-      return false if @address_line1.to_s.size > 5000
-      return false if @address_line1_check.to_s.size > 5000
-      return false if @address_line2.to_s.size > 5000
-      return false if @address_state.to_s.size > 5000
-      return false if @address_zip.to_s.size > 5000
-      return false if @address_zip_check.to_s.size > 5000
       return false if @brand.to_s.size > 5000
-      return false if @cvc_check.to_s.size > 5000
-      return false if @dynamic_last4.to_s.size > 5000
       return false if @funding.to_s.size > 5000
-      return false if !@iin.nil? && @iin.to_s.size > 5000
-      return false if !@issuer.nil? && @issuer.to_s.size > 5000
-      return false if @name.to_s.size > 5000
-      return false if @tokenization_method.to_s.size > 5000
       return false if @client_secret.to_s.size > 5000
       return false if @flow.to_s.size > 5000
-      return false if @statement_descriptor.to_s.size > 5000
-      return false if @usage.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if !@customer.nil? && @customer.to_s.size > 5000
+      return false if !@account_holder_name.nil? && @account_holder_name.to_s.size > 5000
+      return false if !@account_holder_type.nil? && @account_holder_type.to_s.size > 5000
+      return false if !@account_type.nil? && @account_type.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid?(@available_payout_methods)
+      return false if !@bank_name.nil? && @bank_name.to_s.size > 5000
+      return false if !@routing_number.nil? && @routing_number.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@email.nil? && @email.to_s.size > 5000
+      return false if !@payment.nil? && @payment.to_s.size > 5000
+      return false if !@refund_address.nil? && @refund_address.to_s.size > 5000
+      return false if !@address_city.nil? && @address_city.to_s.size > 5000
+      return false if !@address_country.nil? && @address_country.to_s.size > 5000
+      return false if !@address_line1.nil? && @address_line1.to_s.size > 5000
+      return false if !@address_line1_check.nil? && @address_line1_check.to_s.size > 5000
+      return false if !@address_line2.nil? && @address_line2.to_s.size > 5000
+      return false if !@address_state.nil? && @address_state.to_s.size > 5000
+      return false if !@address_zip.nil? && @address_zip.to_s.size > 5000
+      return false if !@address_zip_check.nil? && @address_zip_check.to_s.size > 5000
+      return false if !@cvc_check.nil? && @cvc_check.to_s.size > 5000
+      return false if !@dynamic_last4.nil? && @dynamic_last4.to_s.size > 5000
+      return false if !@name.nil? && @name.to_s.size > 5000
+      return false if !@tokenization_method.nil? && @tokenization_method.to_s.size > 5000
+      return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
+      return false if !@usage.nil? && @usage.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -872,49 +835,19 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] business_type Object to be assigned
-    def business_type=(business_type)
-      ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid!(business_type)
-      @business_type = business_type
-    end
-
     # Custom attribute writer method with validation
-    # @param [Object] country Value to be assigned
-    def country=(country)
-      if country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+    # @param [Object] fingerprint Value to be assigned
+    def fingerprint=(fingerprint)
+      if fingerprint.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
-      @country = country
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] default_currency Value to be assigned
-    def default_currency=(default_currency)
-      if !default_currency.nil? && default_currency.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"default_currency\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @default_currency = default_currency
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] email Value to be assigned
-    def email=(email)
-      if email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @email = email
+      @fingerprint = fingerprint
     end
 
     # Custom attribute writer method with validation
@@ -934,33 +867,6 @@ module Stripe
       @object = object
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] _type Object to be assigned
-    def _type=(_type)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
-      @_type = _type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] customer Value to be assigned
-    def customer=(customer)
-      if !customer.nil? && customer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @customer = customer
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] fingerprint Value to be assigned
-    def fingerprint=(fingerprint)
-      if fingerprint.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @fingerprint = fingerprint
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] username Value to be assigned
     def username=(username)
@@ -972,50 +878,13 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] account_holder_name Value to be assigned
-    def account_holder_name=(account_holder_name)
-      if account_holder_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
+    # @param [Object] country Value to be assigned
+    def country=(country)
+      if country.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @account_holder_name = account_holder_name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account_holder_type Value to be assigned
-    def account_holder_type=(account_holder_type)
-      if account_holder_type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_holder_type\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @account_holder_type = account_holder_type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account_type Value to be assigned
-    def account_type=(account_type)
-      if account_type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_type\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @account_type = account_type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] available_payout_methods Object to be assigned
-    def available_payout_methods=(available_payout_methods)
-      ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid!(available_payout_methods)
-      @available_payout_methods = available_payout_methods
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] bank_name Value to be assigned
-    def bank_name=(bank_name)
-      if bank_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @bank_name = bank_name
+      @country = country
     end
 
     # Custom attribute writer method with validation
@@ -1026,16 +895,6 @@ module Stripe
       end
 
       @last4 = last4
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] routing_number Value to be assigned
-    def routing_number=(routing_number)
-      if routing_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @routing_number = routing_number
     end
 
     # Custom attribute writer method with validation
@@ -1059,16 +918,6 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] inbound_address Value to be assigned
     def inbound_address=(inbound_address)
       if inbound_address.to_s.size > 5000
@@ -1076,106 +925,6 @@ module Stripe
       end
 
       @inbound_address = inbound_address
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] payment Value to be assigned
-    def payment=(payment)
-      if !payment.nil? && payment.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"payment\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @payment = payment
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] refund_address Value to be assigned
-    def refund_address=(refund_address)
-      if refund_address.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"refund_address\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @refund_address = refund_address
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_city Value to be assigned
-    def address_city=(address_city)
-      if address_city.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_city = address_city
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_country Value to be assigned
-    def address_country=(address_country)
-      if address_country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_country = address_country
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_line1 Value to be assigned
-    def address_line1=(address_line1)
-      if address_line1.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_line1 = address_line1
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_line1_check Value to be assigned
-    def address_line1_check=(address_line1_check)
-      if address_line1_check.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_line1_check\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_line1_check = address_line1_check
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_line2 Value to be assigned
-    def address_line2=(address_line2)
-      if address_line2.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_line2 = address_line2
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_state Value to be assigned
-    def address_state=(address_state)
-      if address_state.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_state = address_state
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_zip Value to be assigned
-    def address_zip=(address_zip)
-      if address_zip.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_zip = address_zip
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_zip_check Value to be assigned
-    def address_zip_check=(address_zip_check)
-      if address_zip_check.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_zip_check\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_zip_check = address_zip_check
     end
 
     # Custom attribute writer method with validation
@@ -1189,26 +938,6 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] cvc_check Value to be assigned
-    def cvc_check=(cvc_check)
-      if cvc_check.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"cvc_check\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @cvc_check = cvc_check
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] dynamic_last4 Value to be assigned
-    def dynamic_last4=(dynamic_last4)
-      if dynamic_last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @dynamic_last4 = dynamic_last4
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] funding Value to be assigned
     def funding=(funding)
       if funding.to_s.size > 5000
@@ -1216,46 +945,6 @@ module Stripe
       end
 
       @funding = funding
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] iin Value to be assigned
-    def iin=(iin)
-      if !iin.nil? && iin.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"iin\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @iin = iin
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] issuer Value to be assigned
-    def issuer=(issuer)
-      if !issuer.nil? && issuer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"issuer\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @issuer = issuer
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @name = name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] tokenization_method Value to be assigned
-    def tokenization_method=(tokenization_method)
-      if tokenization_method.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"tokenization_method\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @tokenization_method = tokenization_method
     end
 
     # Custom attribute writer method with validation
@@ -1278,10 +967,244 @@ module Stripe
       @flow = flow
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type)
+      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
+      @_type = _type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] customer Value to be assigned
+    def customer=(customer)
+      if !customer.nil? && customer.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @customer = customer
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] account_holder_name Value to be assigned
+    def account_holder_name=(account_holder_name)
+      if !account_holder_name.nil? && account_holder_name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @account_holder_name = account_holder_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] account_holder_type Value to be assigned
+    def account_holder_type=(account_holder_type)
+      if !account_holder_type.nil? && account_holder_type.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"account_holder_type\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @account_holder_type = account_holder_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] account_type Value to be assigned
+    def account_type=(account_type)
+      if !account_type.nil? && account_type.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"account_type\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @account_type = account_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] available_payout_methods Object to be assigned
+    def available_payout_methods=(available_payout_methods)
+      ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid!(available_payout_methods)
+      @available_payout_methods = available_payout_methods
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] bank_name Value to be assigned
+    def bank_name=(bank_name)
+      if !bank_name.nil? && bank_name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @bank_name = bank_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] routing_number Value to be assigned
+    def routing_number=(routing_number)
+      if !routing_number.nil? && routing_number.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @routing_number = routing_number
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] email Value to be assigned
+    def email=(email)
+      if !email.nil? && email.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @email = email
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] payment Value to be assigned
+    def payment=(payment)
+      if !payment.nil? && payment.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"payment\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @payment = payment
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] refund_address Value to be assigned
+    def refund_address=(refund_address)
+      if !refund_address.nil? && refund_address.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"refund_address\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @refund_address = refund_address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_city Value to be assigned
+    def address_city=(address_city)
+      if !address_city.nil? && address_city.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_city = address_city
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_country Value to be assigned
+    def address_country=(address_country)
+      if !address_country.nil? && address_country.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_country = address_country
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_line1 Value to be assigned
+    def address_line1=(address_line1)
+      if !address_line1.nil? && address_line1.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_line1 = address_line1
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_line1_check Value to be assigned
+    def address_line1_check=(address_line1_check)
+      if !address_line1_check.nil? && address_line1_check.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_line1_check\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_line1_check = address_line1_check
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_line2 Value to be assigned
+    def address_line2=(address_line2)
+      if !address_line2.nil? && address_line2.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_line2 = address_line2
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_state Value to be assigned
+    def address_state=(address_state)
+      if !address_state.nil? && address_state.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_state = address_state
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_zip Value to be assigned
+    def address_zip=(address_zip)
+      if !address_zip.nil? && address_zip.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_zip = address_zip
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_zip_check Value to be assigned
+    def address_zip_check=(address_zip_check)
+      if !address_zip_check.nil? && address_zip_check.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_zip_check\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_zip_check = address_zip_check
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] cvc_check Value to be assigned
+    def cvc_check=(cvc_check)
+      if !cvc_check.nil? && cvc_check.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"cvc_check\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @cvc_check = cvc_check
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] dynamic_last4 Value to be assigned
+    def dynamic_last4=(dynamic_last4)
+      if !dynamic_last4.nil? && dynamic_last4.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @dynamic_last4 = dynamic_last4
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if !name.nil? && name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] tokenization_method Value to be assigned
+    def tokenization_method=(tokenization_method)
+      if !tokenization_method.nil? && tokenization_method.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"tokenization_method\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @tokenization_method = tokenization_method
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
     def statement_descriptor=(statement_descriptor)
-      if statement_descriptor.to_s.size > 5000
+      if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -1291,120 +1214,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] usage Value to be assigned
     def usage=(usage)
-      if usage.to_s.size > 5000
+      if !usage.nil? && usage.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"usage\", the character length must be smaller than or equal to 5000.")
       end
 
       @usage = usage
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        business_profile == o.business_profile &&
-        business_type == o.business_type &&
-        capabilities == o.capabilities &&
-        charges_enabled == o.charges_enabled &&
-        company == o.company &&
-        controller == o.controller &&
-        country == o.country &&
-        created == o.created &&
-        default_currency == o.default_currency &&
-        details_submitted == o.details_submitted &&
-        email == o.email &&
-        external_accounts == o.external_accounts &&
-        future_requirements == o.future_requirements &&
-        id == o.id &&
-        individual == o.individual &&
-        metadata == o.metadata &&
-        object == o.object &&
-        payouts_enabled == o.payouts_enabled &&
-        requirements == o.requirements &&
-        settings == o.settings &&
-        tos_acceptance == o.tos_acceptance &&
-        _type == o._type &&
-        customer == o.customer &&
-        fingerprint == o.fingerprint &&
-        livemode == o.livemode &&
-        payment_amount == o.payment_amount &&
-        payment_currency == o.payment_currency &&
-        reusable == o.reusable &&
-        used == o.used &&
-        username == o.username &&
-        account == o.account &&
-        account_holder_name == o.account_holder_name &&
-        account_holder_type == o.account_holder_type &&
-        account_type == o.account_type &&
-        available_payout_methods == o.available_payout_methods &&
-        bank_name == o.bank_name &&
-        currency == o.currency &&
-        default_for_currency == o.default_for_currency &&
-        last4 == o.last4 &&
-        routing_number == o.routing_number &&
-        status == o.status &&
-        active == o.active &&
-        amount == o.amount &&
-        amount_received == o.amount_received &&
-        bitcoin_amount == o.bitcoin_amount &&
-        bitcoin_amount_received == o.bitcoin_amount_received &&
-        bitcoin_uri == o.bitcoin_uri &&
-        description == o.description &&
-        filled == o.filled &&
-        inbound_address == o.inbound_address &&
-        payment == o.payment &&
-        refund_address == o.refund_address &&
-        transactions == o.transactions &&
-        uncaptured_funds == o.uncaptured_funds &&
-        used_for_payment == o.used_for_payment &&
-        address_city == o.address_city &&
-        address_country == o.address_country &&
-        address_line1 == o.address_line1 &&
-        address_line1_check == o.address_line1_check &&
-        address_line2 == o.address_line2 &&
-        address_state == o.address_state &&
-        address_zip == o.address_zip &&
-        address_zip_check == o.address_zip_check &&
-        brand == o.brand &&
-        cvc_check == o.cvc_check &&
-        dynamic_last4 == o.dynamic_last4 &&
-        exp_month == o.exp_month &&
-        exp_year == o.exp_year &&
-        funding == o.funding &&
-        iin == o.iin &&
-        issuer == o.issuer &&
-        name == o.name &&
-        recipient == o.recipient &&
-        tokenization_method == o.tokenization_method &&
-        ach_credit_transfer == o.ach_credit_transfer &&
-        ach_debit == o.ach_debit &&
-        acss_debit == o.acss_debit &&
-        alipay == o.alipay &&
-        au_becs_debit == o.au_becs_debit &&
-        bancontact == o.bancontact &&
-        card == o.card &&
-        card_present2 == o.card_present2 &&
-        client_secret == o.client_secret &&
-        code_verification == o.code_verification &&
-        eps == o.eps &&
-        flow == o.flow &&
-        giropay == o.giropay &&
-        ideal == o.ideal &&
-        klarna == o.klarna &&
-        multibanco == o.multibanco &&
-        owner == o.owner &&
-        p24 == o.p24 &&
-        receiver == o.receiver &&
-        redirect == o.redirect &&
-        sepa_credit_transfer == o.sepa_credit_transfer &&
-        sepa_debit == o.sepa_debit &&
-        sofort == o.sofort &&
-        source_order == o.source_order &&
-        statement_descriptor == o.statement_descriptor &&
-        three_d_secure == o.three_d_secure &&
-        usage == o.usage &&
-        wechat == o.wechat
     end
 
     # @see the `==` method
@@ -1413,8 +1227,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@business_profile, @business_type, @capabilities, @charges_enabled, @company, @controller, @country, @created, @default_currency, @details_submitted, @email, @external_accounts, @future_requirements, @id, @individual, @metadata, @object, @payouts_enabled, @requirements, @settings, @tos_acceptance, @_type, @customer, @fingerprint, @livemode, @payment_amount, @payment_currency, @reusable, @used, @username, @account, @account_holder_name, @account_holder_type, @account_type, @available_payout_methods, @bank_name, @currency, @default_for_currency, @last4, @routing_number, @status, @active, @amount, @amount_received, @bitcoin_amount, @bitcoin_amount_received, @bitcoin_uri, @description, @filled, @inbound_address, @payment, @refund_address, @transactions, @uncaptured_funds, @used_for_payment, @address_city, @address_country, @address_line1, @address_line1_check, @address_line2, @address_state, @address_zip, @address_zip_check, @brand, @cvc_check, @dynamic_last4, @exp_month, @exp_year, @funding, @iin, @issuer, @name, @recipient, @tokenization_method, @ach_credit_transfer, @ach_debit, @acss_debit, @alipay, @au_becs_debit, @bancontact, @card, @card_present2, @client_secret, @code_verification, @eps, @flow, @giropay, @ideal, @klarna, @multibanco, @owner, @p24, @receiver, @redirect, @sepa_credit_transfer, @sepa_debit, @sofort, @source_order, @statement_descriptor, @three_d_secure, @usage, @wechat)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @fingerprint, @id, @livemode, @object, @reusable, @used, @username, @country, @currency, @last4, @status, @active, @amount, @amount_received, @bitcoin_amount, @bitcoin_amount_received, @bitcoin_uri, @filled, @inbound_address, @uncaptured_funds, @brand, @exp_month, @exp_year, @funding, @client_secret, @flow, @_type, @customer, @metadata, @payment_amount, @payment_currency, @account, @account_holder_name, @account_holder_type, @account_type, @available_payout_methods, @bank_name, @default_for_currency, @routing_number, @description, @email, @payment, @refund_address, @transactions, @used_for_payment, @address_city, @address_country, @address_line1, @address_line1_check, @address_line2, @address_state, @address_zip, @address_zip_check, @cvc_check, @dynamic_last4, @name, @recipient, @tokenization_method, @ach_credit_transfer, @ach_debit, @acss_debit, @alipay, @au_becs_debit, @bancontact, @card, @card_present2, @code_verification, @eps, @giropay, @ideal, @klarna, @multibanco, @owner, @p24, @receiver, @redirect, @sepa_debit, @sofort, @source_order, @statement_descriptor, @three_d_secure, @usage, @wechat)
   end
 end

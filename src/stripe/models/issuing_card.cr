@@ -19,18 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The brand of the card.
     @[JSON::Field(key: "brand", type: String)]
     getter brand : String
-
-    # The reason why the card was canceled.
-    @[JSON::Field(key: "cancellation_reason", type: String?, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
-    getter cancellation_reason : String?
-
-    @[JSON::Field(ignore: true)]
-    property? cancellation_reason_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_CANCELLATION_REASON = EnumValidator.new("cancellation_reason", "String", ["lost", "stolen", "null"])
 
     @[JSON::Field(key: "cardholder", type: IssuingCardholder)]
     property cardholder : IssuingCardholder
@@ -73,33 +65,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["issuing.card"])
 
-    @[JSON::Field(key: "replaced_by", type: IssuingCardReplacedBy?, presence: true, ignore_serialize: replaced_by.nil? && !replaced_by_present?)]
-    property replaced_by : IssuingCardReplacedBy?
-
-    @[JSON::Field(ignore: true)]
-    property? replaced_by_present : Bool = false
-
-    @[JSON::Field(key: "replacement_for", type: IssuingCardReplacementFor?, presence: true, ignore_serialize: replacement_for.nil? && !replacement_for_present?)]
-    property replacement_for : IssuingCardReplacementFor?
-
-    @[JSON::Field(ignore: true)]
-    property? replacement_for_present : Bool = false
-
-    # The reason why the previous card needed to be replaced.
-    @[JSON::Field(key: "replacement_reason", type: String?, presence: true, ignore_serialize: replacement_reason.nil? && !replacement_reason_present?)]
-    getter replacement_reason : String?
-
-    @[JSON::Field(ignore: true)]
-    property? replacement_reason_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_REPLACEMENT_REASON = EnumValidator.new("replacement_reason", "String", ["damaged", "expired", "lost", "stolen", "null"])
-
-    @[JSON::Field(key: "shipping", type: IssuingCardShipping1?, presence: true, ignore_serialize: shipping.nil? && !shipping_present?)]
-    property shipping : IssuingCardShipping1?
-
-    @[JSON::Field(ignore: true)]
-    property? shipping_present : Bool = false
-
     @[JSON::Field(key: "spending_controls", type: IssuingCardAuthorizationControls)]
     property spending_controls : IssuingCardAuthorizationControls
 
@@ -115,13 +80,17 @@ module Stripe
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["physical", "virtual"])
 
-    @[JSON::Field(key: "wallets", type: IssuingCardWallets1?, presence: true, ignore_serialize: wallets.nil? && !wallets_present?)]
-    property wallets : IssuingCardWallets1?
+    # Optional properties
+
+    # The reason why the card was canceled.
+    @[JSON::Field(key: "cancellation_reason", type: String?, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
+    getter cancellation_reason : String?
 
     @[JSON::Field(ignore: true)]
-    property? wallets_present : Bool = false
+    property? cancellation_reason_present : Bool = false
 
-    # Optional properties
+    ENUM_VALIDATOR_FOR_CANCELLATION_REASON = EnumValidator.new("cancellation_reason", "String", ["lost", "stolen"])
+
     # The card's CVC. For security reasons, this is only available for virtual cards, and will be omitted unless you explicitly request it with [the `expand` parameter](https://stripe.com/docs/api/expanding_objects). Additionally, it's only available via the [\"Retrieve a card\" endpoint](https://stripe.com/docs/api/issuing/cards/retrieve), not via \"List all cards\" or any other endpoint.
     @[JSON::Field(key: "cvc", type: String?, presence: true, ignore_serialize: cvc.nil? && !cvc_present?)]
     getter cvc : String?
@@ -143,9 +112,69 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? number_present : Bool = false
 
+    @[JSON::Field(key: "replaced_by", type: IssuingCardReplacedBy?, presence: true, ignore_serialize: replaced_by.nil? && !replaced_by_present?)]
+    property replaced_by : IssuingCardReplacedBy?
+
+    @[JSON::Field(ignore: true)]
+    property? replaced_by_present : Bool = false
+
+    @[JSON::Field(key: "replacement_for", type: IssuingCardReplacementFor?, presence: true, ignore_serialize: replacement_for.nil? && !replacement_for_present?)]
+    property replacement_for : IssuingCardReplacementFor?
+
+    @[JSON::Field(ignore: true)]
+    property? replacement_for_present : Bool = false
+
+    # The reason why the previous card needed to be replaced.
+    @[JSON::Field(key: "replacement_reason", type: String?, presence: true, ignore_serialize: replacement_reason.nil? && !replacement_reason_present?)]
+    getter replacement_reason : String?
+
+    @[JSON::Field(ignore: true)]
+    property? replacement_reason_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_REPLACEMENT_REASON = EnumValidator.new("replacement_reason", "String", ["damaged", "expired", "lost", "stolen"])
+
+    @[JSON::Field(key: "shipping", type: IssuingCardShipping1?, presence: true, ignore_serialize: shipping.nil? && !shipping_present?)]
+    property shipping : IssuingCardShipping1?
+
+    @[JSON::Field(ignore: true)]
+    property? shipping_present : Bool = false
+
+    @[JSON::Field(key: "wallets", type: IssuingCardWallets1?, presence: true, ignore_serialize: wallets.nil? && !wallets_present?)]
+    property wallets : IssuingCardWallets1?
+
+    @[JSON::Field(ignore: true)]
+    property? wallets_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @brand : String, @cancellation_reason : String?, @cardholder : IssuingCardholder, @created : Int64, @currency : String, @exp_month : Int64, @exp_year : Int64, @id : String, @last4 : String, @livemode : Bool, @metadata : Hash(String, String), @object : String, @replaced_by : IssuingCardReplacedBy?, @replacement_for : IssuingCardReplacementFor?, @replacement_reason : String?, @shipping : IssuingCardShipping1?, @spending_controls : IssuingCardAuthorizationControls, @status : String, @_type : String, @wallets : IssuingCardWallets1?, @cvc : String? = nil, @financial_account : String? = nil, @number : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @brand : String,
+      @cardholder : IssuingCardholder,
+      @created : Int64,
+      @currency : String,
+      @exp_month : Int64,
+      @exp_year : Int64,
+      @id : String,
+      @last4 : String,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      @spending_controls : IssuingCardAuthorizationControls,
+      @status : String,
+      @_type : String,
+      # Optional properties
+      @cancellation_reason : String? = nil,
+      @cvc : String? = nil,
+      @financial_account : String? = nil,
+      @number : String? = nil,
+      @replaced_by : IssuingCardReplacedBy? = nil,
+      @replacement_for : IssuingCardReplacementFor? = nil,
+      @replacement_reason : String? = nil,
+      @shipping : IssuingCardShipping1? = nil,
+      @wallets : IssuingCardWallets1? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -157,6 +186,20 @@ module Stripe
         invalid_properties.push("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
       end
 
+      if @id.to_s.size > 5000
+        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if @last4.to_s.size > 5000
+        invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_CANCELLATION_REASON.error_message) unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
 
       if !@cvc.nil? && @cvc.to_s.size > 5000
@@ -167,25 +210,11 @@ module Stripe
         invalid_properties.push("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @id.to_s.size > 5000
-        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @last4.to_s.size > 5000
-        invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
-      end
-
       if !@number.nil? && @number.to_s.size > 5000
         invalid_properties.push("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.error_message) unless ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.valid?(@replacement_reason)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       invalid_properties
     end
@@ -194,16 +223,17 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @brand.to_s.size > 5000
+      return false if @id.to_s.size > 5000
+      return false if @last4.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       return false unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
       return false if !@cvc.nil? && @cvc.to_s.size > 5000
       return false if !@financial_account.nil? && @financial_account.to_s.size > 5000
-      return false if @id.to_s.size > 5000
-      return false if @last4.to_s.size > 5000
       return false if !@number.nil? && @number.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.valid?(@replacement_reason)
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       true
     end
 
@@ -215,6 +245,47 @@ module Stripe
       end
 
       @brand = brand
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @id = id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] last4 Value to be assigned
+    def last4=(last4)
+      if last4.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @last4 = last4
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] object Object to be assigned
+    def object=(object)
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+      @object = object
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
+      @status = status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type)
+      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
+      @_type = _type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -245,26 +316,6 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id)
-      if id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] last4 Value to be assigned
-    def last4=(last4)
-      if last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @last4 = last4
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] number Value to be assigned
     def number=(number)
       if !number.nil? && number.to_s.size > 5000
@@ -275,61 +326,10 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
-      @object = object
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] replacement_reason Object to be assigned
     def replacement_reason=(replacement_reason)
       ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.valid!(replacement_reason)
       @replacement_reason = replacement_reason
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
-      @status = status
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] _type Object to be assigned
-    def _type=(_type)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
-      @_type = _type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        brand == o.brand &&
-        cancellation_reason == o.cancellation_reason &&
-        cardholder == o.cardholder &&
-        created == o.created &&
-        currency == o.currency &&
-        cvc == o.cvc &&
-        exp_month == o.exp_month &&
-        exp_year == o.exp_year &&
-        financial_account == o.financial_account &&
-        id == o.id &&
-        last4 == o.last4 &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        number == o.number &&
-        object == o.object &&
-        replaced_by == o.replaced_by &&
-        replacement_for == o.replacement_for &&
-        replacement_reason == o.replacement_reason &&
-        shipping == o.shipping &&
-        spending_controls == o.spending_controls &&
-        status == o.status &&
-        _type == o._type &&
-        wallets == o.wallets
     end
 
     # @see the `==` method
@@ -338,8 +338,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@brand, @cancellation_reason, @cardholder, @created, @currency, @cvc, @exp_month, @exp_year, @financial_account, @id, @last4, @livemode, @metadata, @number, @object, @replaced_by, @replacement_for, @replacement_reason, @shipping, @spending_controls, @status, @_type, @wallets)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@brand, @cardholder, @created, @currency, @exp_month, @exp_year, @id, @last4, @livemode, @metadata, @object, @spending_controls, @status, @_type, @cancellation_reason, @cvc, @financial_account, @number, @replaced_by, @replacement_for, @replacement_reason, @shipping, @wallets)
   end
 end

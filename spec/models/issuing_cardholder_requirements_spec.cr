@@ -23,7 +23,7 @@ describe Stripe::IssuingCardholderRequirements do
   describe "test attribute 'disabled_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["listed", "rejected.listed", "under_review", "null"])
+      # validator = EnumValidator.new("String", ["listed", "rejected.listed", "under_review"])
       # validator.allowable_values.each do |value|
       #   expect { instance.disabled_reason = value }.not_to raise_error
       # end

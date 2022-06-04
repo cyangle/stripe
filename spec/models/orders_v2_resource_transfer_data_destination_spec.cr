@@ -29,7 +29,7 @@ describe Stripe::OrdersV2ResourceTransferDataDestination do
   describe "test attribute 'business_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["company", "government_entity", "individual", "non_profit", "null"])
+      # validator = EnumValidator.new("String", ["company", "government_entity", "individual", "non_profit"])
       # validator.allowable_values.each do |value|
       #   expect { instance.business_type = value }.not_to raise_error
       # end

@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The type of financial address
     @[JSON::Field(key: "type", type: String)]
     getter _type : String
@@ -26,6 +27,7 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["aba"])
 
     # Optional properties
+
     @[JSON::Field(key: "aba", type: AccountServiceResourceAbaRecord?, presence: true, ignore_serialize: aba.nil? && !aba_present?)]
     property aba : AccountServiceResourceAbaRecord?
 
@@ -43,7 +45,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_type : String, @aba : AccountServiceResourceAbaRecord? = nil, @supported_networks : Array(String)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String,
+      # Optional properties
+      @aba : AccountServiceResourceAbaRecord? = nil,
+      @supported_networks : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -51,9 +60,9 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
 
       invalid_properties
     end
@@ -61,16 +70,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      true
-    end
+      return false unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] supported_networks Object to be assigned
-    def supported_networks=(supported_networks)
-      ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid!(supported_networks)
-      @supported_networks = supported_networks
+      true
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -80,14 +83,11 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        aba == o.aba &&
-        supported_networks == o.supported_networks &&
-        _type == o._type
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] supported_networks Object to be assigned
+    def supported_networks=(supported_networks)
+      ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid!(supported_networks)
+      @supported_networks = supported_networks
     end
 
     # @see the `==` method
@@ -96,8 +96,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@aba, @supported_networks, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @aba, @supported_networks)
   end
 end

@@ -29,7 +29,7 @@ describe Stripe::IssuingCardGooglePay do
   describe "test attribute 'ineligible_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["missing_agreement", "missing_cardholder_contact", "unsupported_region", "null"])
+      # validator = EnumValidator.new("String", ["missing_agreement", "missing_cardholder_contact", "unsupported_region"])
       # validator.allowable_values.each do |value|
       #   expect { instance.ineligible_reason = value }.not_to raise_error
       # end

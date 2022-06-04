@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String)]
     getter object : String
@@ -30,6 +31,7 @@ module Stripe
     getter secret : String
 
     # Optional properties
+
     # The id of the location that this connection token is scoped to. Note that location scoping only applies to internet-connected readers. For more details, see [the docs on scoping connection tokens](https://stripe.com/docs/terminal/fleet/locations#connection-tokens).
     @[JSON::Field(key: "location", type: String?, presence: true, ignore_serialize: location.nil? && !location_present?)]
     getter location : String?
@@ -39,7 +41,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @object : String, @secret : String, @location : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @object : String,
+      @secret : String,
+      # Optional properties
+      @location : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -47,14 +56,14 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if !@location.nil? && @location.to_s.size > 5000
-        invalid_properties.push("invalid value for \"location\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       if @secret.to_s.size > 5000
         invalid_properties.push("invalid value for \"secret\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@location.nil? && @location.to_s.size > 5000
+        invalid_properties.push("invalid value for \"location\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties
@@ -63,20 +72,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@location.nil? && @location.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @secret.to_s.size > 5000
+      return false if !@location.nil? && @location.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] location Value to be assigned
-    def location=(location)
-      if !location.nil? && location.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"location\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @location = location
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -96,14 +96,14 @@ module Stripe
       @secret = secret
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        location == o.location &&
-        object == o.object &&
-        secret == o.secret
+    # Custom attribute writer method with validation
+    # @param [Object] location Value to be assigned
+    def location=(location)
+      if !location.nil? && location.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"location\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @location = location
     end
 
     # @see the `==` method
@@ -112,8 +112,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@location, @object, @secret)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@object, @secret, @location)
   end
 end

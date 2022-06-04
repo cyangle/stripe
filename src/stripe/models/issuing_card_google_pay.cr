@@ -19,9 +19,12 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Google Pay Eligibility
     @[JSON::Field(key: "eligible", type: Bool)]
     property eligible : Bool
+
+    # Optional properties
 
     # Reason the card is ineligible for Google Pay
     @[JSON::Field(key: "ineligible_reason", type: String?, presence: true, ignore_serialize: ineligible_reason.nil? && !ineligible_reason_present?)]
@@ -30,11 +33,17 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? ineligible_reason_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_INELIGIBLE_REASON = EnumValidator.new("ineligible_reason", "String", ["missing_agreement", "missing_cardholder_contact", "unsupported_region", "null"])
+    ENUM_VALIDATOR_FOR_INELIGIBLE_REASON = EnumValidator.new("ineligible_reason", "String", ["missing_agreement", "missing_cardholder_contact", "unsupported_region"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @eligible : Bool, @ineligible_reason : String?)
+    def initialize(
+      *,
+      # Required properties
+      @eligible : Bool,
+      # Optional properties
+      @ineligible_reason : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -51,6 +60,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_INELIGIBLE_REASON.valid?(@ineligible_reason)
+
       true
     end
 
@@ -61,23 +71,16 @@ module Stripe
       @ineligible_reason = ineligible_reason
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        eligible == o.eligible &&
-        ineligible_reason == o.ineligible_reason
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@eligible, @ineligible_reason)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@eligible, @ineligible_reason)
   end
 end

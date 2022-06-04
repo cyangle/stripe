@@ -19,28 +19,25 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The Unix timestamp marking when the account representative accepted their service agreement.
+
     @[JSON::Field(key: "date", type: Int64?, presence: true, ignore_serialize: date.nil? && !date_present?)]
     property date : Int64?
 
     @[JSON::Field(ignore: true)]
     property? date_present : Bool = false
 
-    # The IP address from which the account representative accepted their service agreement.
     @[JSON::Field(key: "ip", type: String?, presence: true, ignore_serialize: ip.nil? && !ip_present?)]
     property ip : String?
 
     @[JSON::Field(ignore: true)]
     property? ip_present : Bool = false
 
-    # The user's service agreement type.
     @[JSON::Field(key: "service_agreement", type: String?, presence: true, ignore_serialize: service_agreement.nil? && !service_agreement_present?)]
     getter service_agreement : String?
 
     @[JSON::Field(ignore: true)]
     property? service_agreement_present : Bool = false
 
-    # The user agent of the browser from which the account representative accepted their service agreement.
     @[JSON::Field(key: "user_agent", type: String?, presence: true, ignore_serialize: user_agent.nil? && !user_agent_present?)]
     getter user_agent : String?
 
@@ -49,7 +46,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @date : Int64? = nil, @ip : String? = nil, @service_agreement : String? = nil, @user_agent : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @date : Int64? = nil,
+      @ip : String? = nil,
+      @service_agreement : String? = nil,
+      @user_agent : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -73,6 +77,7 @@ module Stripe
     def valid?
       return false if !@service_agreement.nil? && @service_agreement.to_s.size > 5000
       return false if !@user_agent.nil? && @user_agent.to_s.size > 5000
+
       true
     end
 
@@ -96,25 +101,16 @@ module Stripe
       @user_agent = user_agent
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        date == o.date &&
-        ip == o.ip &&
-        service_agreement == o.service_agreement &&
-        user_agent == o.user_agent
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@date, @ip, @service_agreement, @user_agent)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@date, @ip, @service_agreement, @user_agent)
   end
 end

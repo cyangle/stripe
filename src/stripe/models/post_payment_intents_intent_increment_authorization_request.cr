@@ -18,11 +18,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The updated total amount you intend to collect from the cardholder. This amount must be greater than the currently authorized amount.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
 
     # Optional properties
+
     # The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
     @[JSON::Field(key: "application_fee_amount", type: Int64?, presence: true, ignore_serialize: application_fee_amount.nil? && !application_fee_amount_present?)]
     property application_fee_amount : Int64?
@@ -37,6 +39,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -58,7 +61,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @application_fee_amount : Int64? = nil, @description : String? = nil, @expand : Array(String)? = nil, @metadata : Hash(String, String)? = nil, @transfer_data : TransferDataUpdateParams2? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      # Optional properties
+      @application_fee_amount : Int64? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @transfer_data : TransferDataUpdateParams2? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -77,6 +90,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@description.nil? && @description.to_s.size > 1000
+
       true
     end
 
@@ -90,27 +104,16 @@ module Stripe
       @description = description
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        application_fee_amount == o.application_fee_amount &&
-        description == o.description &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        transfer_data == o.transfer_data
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @application_fee_amount, @description, @expand, @metadata, @transfer_data)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @application_fee_amount, @description, @expand, @metadata, @transfer_data)
   end
 end

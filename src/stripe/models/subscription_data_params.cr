@@ -19,19 +19,12 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account. To use an application fee percent, the request must be made on behalf of another account, using the `Stripe-Account` header or an OAuth key. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
+
     @[JSON::Field(key: "application_fee_percent", type: Float64?, presence: true, ignore_serialize: application_fee_percent.nil? && !application_fee_percent_present?)]
     property application_fee_percent : Float64?
 
     @[JSON::Field(ignore: true)]
     property? application_fee_percent_present : Bool = false
-
-    # The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
-    @[JSON::Field(key: "coupon", type: String?, presence: true, ignore_serialize: coupon.nil? && !coupon_present?)]
-    getter coupon : String?
-
-    @[JSON::Field(ignore: true)]
-    property? coupon_present : Bool = false
 
     @[JSON::Field(key: "default_tax_rates", type: Array(String)?, presence: true, ignore_serialize: default_tax_rates.nil? && !default_tax_rates_present?)]
     property default_tax_rates : Array(String)?
@@ -39,21 +32,18 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? default_tax_rates_present : Bool = false
 
-    # The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe hosted surfaces.
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String?
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
-    # A list of items, each with an attached plan, that the customer is subscribing to. Prefer using `line_items`.
     @[JSON::Field(key: "items", type: Array(SubscriptionDataItemParam)?, presence: true, ignore_serialize: items.nil? && !items_present?)]
     property items : Array(SubscriptionDataItemParam)?
 
     @[JSON::Field(ignore: true)]
     property? items_present : Bool = false
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
     property metadata : Hash(String, String)?
 
@@ -66,21 +56,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? transfer_data_present : Bool = false
 
-    # Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. Has to be at least 48 hours in the future.
     @[JSON::Field(key: "trial_end", type: Int64?, presence: true, ignore_serialize: trial_end.nil? && !trial_end_present?)]
     property trial_end : Int64?
 
     @[JSON::Field(ignore: true)]
     property? trial_end_present : Bool = false
 
-    # Indicates if a plan’s `trial_period_days` should be applied to the subscription. Setting `trial_end` on `subscription_data` is preferred. Defaults to `false`.
-    @[JSON::Field(key: "trial_from_plan", type: Bool?, presence: true, ignore_serialize: trial_from_plan.nil? && !trial_from_plan_present?)]
-    property trial_from_plan : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? trial_from_plan_present : Bool = false
-
-    # Integer representing the number of trial period days before the customer is charged for the first time. Has to be at least 1.
     @[JSON::Field(key: "trial_period_days", type: Int64?, presence: true, ignore_serialize: trial_period_days.nil? && !trial_period_days_present?)]
     property trial_period_days : Int64?
 
@@ -89,17 +70,24 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @application_fee_percent : Float64? = nil, @coupon : String? = nil, @default_tax_rates : Array(String)? = nil, @description : String? = nil, @items : Array(SubscriptionDataItemParam)? = nil, @metadata : Hash(String, String)? = nil, @transfer_data : TransferDataSpecs2? = nil, @trial_end : Int64? = nil, @trial_from_plan : Bool? = nil, @trial_period_days : Int64? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @application_fee_percent : Float64? = nil,
+      @default_tax_rates : Array(String)? = nil,
+      @description : String? = nil,
+      @items : Array(SubscriptionDataItemParam)? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @transfer_data : TransferDataSpecs2? = nil,
+      @trial_end : Int64? = nil,
+      @trial_period_days : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if !@coupon.nil? && @coupon.to_s.size > 5000
-        invalid_properties.push("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
-      end
 
       if !@description.nil? && @description.to_s.size > 500
         invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 500.")
@@ -111,19 +99,9 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@coupon.nil? && @coupon.to_s.size > 5000
       return false if !@description.nil? && @description.to_s.size > 500
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] coupon Value to be assigned
-    def coupon=(coupon)
-      if !coupon.nil? && coupon.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @coupon = coupon
     end
 
     # Custom attribute writer method with validation
@@ -136,31 +114,16 @@ module Stripe
       @description = description
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        application_fee_percent == o.application_fee_percent &&
-        coupon == o.coupon &&
-        default_tax_rates == o.default_tax_rates &&
-        description == o.description &&
-        items == o.items &&
-        metadata == o.metadata &&
-        transfer_data == o.transfer_data &&
-        trial_end == o.trial_end &&
-        trial_from_plan == o.trial_from_plan &&
-        trial_period_days == o.trial_period_days
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@application_fee_percent, @coupon, @default_tax_rates, @description, @items, @metadata, @transfer_data, @trial_end, @trial_from_plan, @trial_period_days)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@application_fee_percent, @default_tax_rates, @description, @items, @metadata, @transfer_data, @trial_end, @trial_period_days)
   end
 end

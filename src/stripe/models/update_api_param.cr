@@ -19,14 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Two-digit number representing the card's expiration month.
+
     @[JSON::Field(key: "exp_month", type: Int64?, presence: true, ignore_serialize: exp_month.nil? && !exp_month_present?)]
     property exp_month : Int64?
 
     @[JSON::Field(ignore: true)]
     property? exp_month_present : Bool = false
 
-    # Four-digit number representing the card's expiration year.
     @[JSON::Field(key: "exp_year", type: Int64?, presence: true, ignore_serialize: exp_year.nil? && !exp_year_present?)]
     property exp_year : Int64?
 
@@ -35,7 +34,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @exp_month : Int64? = nil, @exp_year : Int64? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @exp_month : Int64? = nil,
+      @exp_year : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -52,23 +56,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        exp_month == o.exp_month &&
-        exp_year == o.exp_year
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@exp_month, @exp_year)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@exp_month, @exp_year)
   end
 end

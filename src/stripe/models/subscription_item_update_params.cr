@@ -18,27 +18,25 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "billing_thresholds", type: SubscriptionItemUpdateParamsBillingThresholds?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
-    property billing_thresholds : SubscriptionItemUpdateParamsBillingThresholds?
+
+    @[JSON::Field(key: "billing_thresholds", type: SubscriptionItemCreateParamsBillingThresholds?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
+    property billing_thresholds : SubscriptionItemCreateParamsBillingThresholds?
 
     @[JSON::Field(ignore: true)]
     property? billing_thresholds_present : Bool = false
 
-    # Delete all usage for a given subscription item. Allowed only when `deleted` is set to `true` and the current plan's `usage_type` is `metered`.
     @[JSON::Field(key: "clear_usage", type: Bool?, presence: true, ignore_serialize: clear_usage.nil? && !clear_usage_present?)]
     property clear_usage : Bool?
 
     @[JSON::Field(ignore: true)]
     property? clear_usage_present : Bool = false
 
-    # A flag that, if set to `true`, will delete the specified item.
     @[JSON::Field(key: "deleted", type: Bool?, presence: true, ignore_serialize: deleted.nil? && !deleted_present?)]
     property deleted : Bool?
 
     @[JSON::Field(ignore: true)]
     property? deleted_present : Bool = false
 
-    # Subscription item to update.
     @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
     getter id : String?
 
@@ -51,14 +49,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
-    # Plan ID for this item, as a string.
-    @[JSON::Field(key: "plan", type: String?, presence: true, ignore_serialize: plan.nil? && !plan_present?)]
-    getter plan : String?
-
-    @[JSON::Field(ignore: true)]
-    property? plan_present : Bool = false
-
-    # The ID of the price object. When changing a subscription item's price, `quantity` is set to 1 unless a `quantity` parameter is provided.
     @[JSON::Field(key: "price", type: String?, presence: true, ignore_serialize: price.nil? && !price_present?)]
     getter price : String?
 
@@ -71,22 +61,33 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? price_data_present : Bool = false
 
-    # Quantity for this item.
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
     property quantity : Int64?
 
     @[JSON::Field(ignore: true)]
     property? quantity_present : Bool = false
 
-    @[JSON::Field(key: "tax_rates", type: SubscriptionItemUpdateParamsTaxRates?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
-    property tax_rates : SubscriptionItemUpdateParamsTaxRates?
+    @[JSON::Field(key: "tax_rates", type: CreditNoteLineItemParamsTaxRates?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
+    property tax_rates : CreditNoteLineItemParamsTaxRates?
 
     @[JSON::Field(ignore: true)]
     property? tax_rates_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing_thresholds : SubscriptionItemUpdateParamsBillingThresholds? = nil, @clear_usage : Bool? = nil, @deleted : Bool? = nil, @id : String? = nil, @metadata : IndividualSpecsMetadata? = nil, @plan : String? = nil, @price : String? = nil, @price_data : RecurringPriceData? = nil, @quantity : Int64? = nil, @tax_rates : SubscriptionItemUpdateParamsTaxRates? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @billing_thresholds : SubscriptionItemCreateParamsBillingThresholds? = nil,
+      @clear_usage : Bool? = nil,
+      @deleted : Bool? = nil,
+      @id : String? = nil,
+      @metadata : IndividualSpecsMetadata? = nil,
+      @price : String? = nil,
+      @price_data : RecurringPriceData? = nil,
+      @quantity : Int64? = nil,
+      @tax_rates : CreditNoteLineItemParamsTaxRates? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -96,10 +97,6 @@ module Stripe
 
       if !@id.nil? && @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@plan.nil? && @plan.to_s.size > 5000
-        invalid_properties.push("invalid value for \"plan\", the character length must be smaller than or equal to 5000.")
       end
 
       if !@price.nil? && @price.to_s.size > 5000
@@ -113,8 +110,8 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@id.nil? && @id.to_s.size > 5000
-      return false if !@plan.nil? && @plan.to_s.size > 5000
       return false if !@price.nil? && @price.to_s.size > 5000
+
       true
     end
 
@@ -129,16 +126,6 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] plan Value to be assigned
-    def plan=(plan)
-      if !plan.nil? && plan.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"plan\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @plan = plan
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] price Value to be assigned
     def price=(price)
       if !price.nil? && price.to_s.size > 5000
@@ -148,31 +135,16 @@ module Stripe
       @price = price
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        billing_thresholds == o.billing_thresholds &&
-        clear_usage == o.clear_usage &&
-        deleted == o.deleted &&
-        id == o.id &&
-        metadata == o.metadata &&
-        plan == o.plan &&
-        price == o.price &&
-        price_data == o.price_data &&
-        quantity == o.quantity &&
-        tax_rates == o.tax_rates
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@billing_thresholds, @clear_usage, @deleted, @id, @metadata, @plan, @price, @price_data, @quantity, @tax_rates)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@billing_thresholds, @clear_usage, @deleted, @id, @metadata, @price, @price_data, @quantity, @tax_rates)
   end
 end

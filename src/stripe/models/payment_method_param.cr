@@ -12,28 +12,31 @@ require "time"
 require "log"
 
 module Stripe
-  # If this is an `acss_debit` PaymentMethod, this hash contains details about the ACSS Debit payment method.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Customer's bank account number.
+
     @[JSON::Field(key: "account_number", type: String)]
     getter account_number : String
 
-    # Institution number of the customer's bank.
     @[JSON::Field(key: "institution_number", type: String)]
     getter institution_number : String
 
-    # Transit number of the customer's bank.
     @[JSON::Field(key: "transit_number", type: String)]
     getter transit_number : String
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account_number : String, @institution_number : String, @transit_number : String)
+    def initialize(
+      *,
+      # Required properties
+      @account_number : String,
+      @institution_number : String,
+      @transit_number : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -62,6 +65,7 @@ module Stripe
       return false if @account_number.to_s.size > 5000
       return false if @institution_number.to_s.size > 5000
       return false if @transit_number.to_s.size > 5000
+
       true
     end
 
@@ -95,24 +99,16 @@ module Stripe
       @transit_number = transit_number
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account_number == o.account_number &&
-        institution_number == o.institution_number &&
-        transit_number == o.transit_number
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account_number, @institution_number, @transit_number)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account_number, @institution_number, @transit_number)
   end
 end

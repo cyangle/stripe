@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # True when this bitcoin receiver has received a non-zero amount of bitcoin.
     @[JSON::Field(key: "active", type: Bool)]
     property active : Bool
@@ -51,20 +52,6 @@ module Stripe
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
 
-    # An arbitrary string attached to the object. Often useful for displaying to users.
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
-    # The customer's email address, set by the API call that creates the receiver.
-    @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
-    getter email : String?
-
-    @[JSON::Field(ignore: true)]
-    property? email_present : Bool = false
-
     # This flag is initially false and updates to true when the customer sends the `bitcoin_amount` to this receiver.
     @[JSON::Field(key: "filled", type: Bool)]
     property filled : Bool
@@ -81,44 +68,45 @@ module Stripe
     @[JSON::Field(key: "livemode", type: Bool)]
     property livemode : Bool
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)?
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
-
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String)]
     getter object : String
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["bitcoin_receiver"])
 
-    # The refund address of this bitcoin receiver.
-    @[JSON::Field(key: "refund_address", type: String?, presence: true, ignore_serialize: refund_address.nil? && !refund_address_present?)]
-    getter refund_address : String?
-
-    @[JSON::Field(ignore: true)]
-    property? refund_address_present : Bool = false
-
     # This receiver contains uncaptured funds that can be used for a payment or refunded.
     @[JSON::Field(key: "uncaptured_funds", type: Bool)]
     property uncaptured_funds : Bool
 
-    # Indicate if this source is used for payment.
-    @[JSON::Field(key: "used_for_payment", type: Bool?, presence: true, ignore_serialize: used_for_payment.nil? && !used_for_payment_present?)]
-    property used_for_payment : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? used_for_payment_present : Bool = false
-
     # Optional properties
+
     # The customer ID of the bitcoin receiver.
     @[JSON::Field(key: "customer", type: String?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
     getter customer : String?
 
     @[JSON::Field(ignore: true)]
     property? customer_present : Bool = false
+
+    # An arbitrary string attached to the object. Often useful for displaying to users.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
+
+    # The customer's email address, set by the API call that creates the receiver.
+    @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
+    getter email : String?
+
+    @[JSON::Field(ignore: true)]
+    property? email_present : Bool = false
+
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
 
     # The ID of the payment created from the receiver, if any. Hidden when viewing the receiver with a publishable key.
     @[JSON::Field(key: "payment", type: String?, presence: true, ignore_serialize: payment.nil? && !payment_present?)]
@@ -127,15 +115,55 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_present : Bool = false
 
+    # The refund address of this bitcoin receiver.
+    @[JSON::Field(key: "refund_address", type: String?, presence: true, ignore_serialize: refund_address.nil? && !refund_address_present?)]
+    getter refund_address : String?
+
+    @[JSON::Field(ignore: true)]
+    property? refund_address_present : Bool = false
+
     @[JSON::Field(key: "transactions", type: BitcoinTransactionList1?, presence: true, ignore_serialize: transactions.nil? && !transactions_present?)]
     property transactions : BitcoinTransactionList1?
 
     @[JSON::Field(ignore: true)]
     property? transactions_present : Bool = false
 
+    # Indicate if this source is used for payment.
+    @[JSON::Field(key: "used_for_payment", type: Bool?, presence: true, ignore_serialize: used_for_payment.nil? && !used_for_payment_present?)]
+    property used_for_payment : Bool?
+
+    @[JSON::Field(ignore: true)]
+    property? used_for_payment_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool, @amount : Int64, @amount_received : Int64, @bitcoin_amount : Int64, @bitcoin_amount_received : Int64, @bitcoin_uri : String, @created : Int64, @currency : String, @description : String?, @email : String?, @filled : Bool, @id : String, @inbound_address : String, @livemode : Bool, @metadata : Hash(String, String)?, @object : String, @refund_address : String?, @uncaptured_funds : Bool, @used_for_payment : Bool?, @customer : String? = nil, @payment : String? = nil, @transactions : BitcoinTransactionList1? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @active : Bool,
+      @amount : Int64,
+      @amount_received : Int64,
+      @bitcoin_amount : Int64,
+      @bitcoin_amount_received : Int64,
+      @bitcoin_uri : String,
+      @created : Int64,
+      @currency : String,
+      @filled : Bool,
+      @id : String,
+      @inbound_address : String,
+      @livemode : Bool,
+      @object : String,
+      @uncaptured_funds : Bool,
+      # Optional properties
+      @customer : String? = nil,
+      @description : String? = nil,
+      @email : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @payment : String? = nil,
+      @refund_address : String? = nil,
+      @transactions : BitcoinTransactionList1? = nil,
+      @used_for_payment : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -145,18 +173,6 @@ module Stripe
 
       if @bitcoin_uri.to_s.size > 5000
         invalid_properties.push("invalid value for \"bitcoin_uri\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@customer.nil? && @customer.to_s.size > 5000
-        invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @email.to_s.size > 5000
-        invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
 
       if @id.to_s.size > 5000
@@ -169,11 +185,23 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
+      if !@customer.nil? && @customer.to_s.size > 5000
+        invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@email.nil? && @email.to_s.size > 5000
+        invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      end
+
       if !@payment.nil? && @payment.to_s.size > 5000
         invalid_properties.push("invalid value for \"payment\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @refund_address.to_s.size > 5000
+      if !@refund_address.nil? && @refund_address.to_s.size > 5000
         invalid_properties.push("invalid value for \"refund_address\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -184,14 +212,15 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @bitcoin_uri.to_s.size > 5000
-      return false if !@customer.nil? && @customer.to_s.size > 5000
-      return false if @description.to_s.size > 5000
-      return false if @email.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false if @inbound_address.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if !@customer.nil? && @customer.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@email.nil? && @email.to_s.size > 5000
       return false if !@payment.nil? && @payment.to_s.size > 5000
-      return false if @refund_address.to_s.size > 5000
+      return false if !@refund_address.nil? && @refund_address.to_s.size > 5000
+
       true
     end
 
@@ -203,36 +232,6 @@ module Stripe
       end
 
       @bitcoin_uri = bitcoin_uri
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] customer Value to be assigned
-    def customer=(customer)
-      if !customer.nil? && customer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @customer = customer
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] email Value to be assigned
-    def email=(email)
-      if email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @email = email
     end
 
     # Custom attribute writer method with validation
@@ -263,6 +262,36 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] customer Value to be assigned
+    def customer=(customer)
+      if !customer.nil? && customer.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @customer = customer
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] email Value to be assigned
+    def email=(email)
+      if !email.nil? && email.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @email = email
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] payment Value to be assigned
     def payment=(payment)
       if !payment.nil? && payment.to_s.size > 5000
@@ -275,40 +304,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] refund_address Value to be assigned
     def refund_address=(refund_address)
-      if refund_address.to_s.size > 5000
+      if !refund_address.nil? && refund_address.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"refund_address\", the character length must be smaller than or equal to 5000.")
       end
 
       @refund_address = refund_address
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        amount == o.amount &&
-        amount_received == o.amount_received &&
-        bitcoin_amount == o.bitcoin_amount &&
-        bitcoin_amount_received == o.bitcoin_amount_received &&
-        bitcoin_uri == o.bitcoin_uri &&
-        created == o.created &&
-        currency == o.currency &&
-        customer == o.customer &&
-        description == o.description &&
-        email == o.email &&
-        filled == o.filled &&
-        id == o.id &&
-        inbound_address == o.inbound_address &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        payment == o.payment &&
-        refund_address == o.refund_address &&
-        transactions == o.transactions &&
-        uncaptured_funds == o.uncaptured_funds &&
-        used_for_payment == o.used_for_payment
     end
 
     # @see the `==` method
@@ -317,8 +317,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @amount, @amount_received, @bitcoin_amount, @bitcoin_amount_received, @bitcoin_uri, @created, @currency, @customer, @description, @email, @filled, @id, @inbound_address, @livemode, @metadata, @object, @payment, @refund_address, @transactions, @uncaptured_funds, @used_for_payment)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @amount, @amount_received, @bitcoin_amount, @bitcoin_amount_received, @bitcoin_uri, @created, @currency, @filled, @id, @inbound_address, @livemode, @object, @uncaptured_funds, @customer, @description, @email, @metadata, @payment, @refund_address, @transactions, @used_for_payment)
   end
 end

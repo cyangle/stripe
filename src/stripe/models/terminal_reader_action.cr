@@ -19,19 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Failure code, only set if status is `failed`.
-    @[JSON::Field(key: "failure_code", type: String, presence: true, ignore_serialize: failure_code.nil? && !failure_code_present?)]
-    getter failure_code : String
-
-    @[JSON::Field(ignore: true)]
-    property? failure_code_present : Bool = false
-
-    # Detailed failure message, only set if status is `failed`.
-    @[JSON::Field(key: "failure_message", type: String, presence: true, ignore_serialize: failure_message.nil? && !failure_message_present?)]
-    getter failure_message : String
-
-    @[JSON::Field(ignore: true)]
-    property? failure_message_present : Bool = false
 
     # Status of the action performed by the reader.
     @[JSON::Field(key: "status", type: String?)]
@@ -46,6 +33,21 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["process_payment_intent", "process_setup_intent", "set_reader_display"])
 
     # Optional properties
+
+    # Failure code, only set if status is `failed`.
+    @[JSON::Field(key: "failure_code", type: String?, presence: true, ignore_serialize: failure_code.nil? && !failure_code_present?)]
+    getter failure_code : String?
+
+    @[JSON::Field(ignore: true)]
+    property? failure_code_present : Bool = false
+
+    # Detailed failure message, only set if status is `failed`.
+    @[JSON::Field(key: "failure_message", type: String?, presence: true, ignore_serialize: failure_message.nil? && !failure_message_present?)]
+    getter failure_message : String?
+
+    @[JSON::Field(ignore: true)]
+    property? failure_message_present : Bool = false
+
     @[JSON::Field(key: "process_payment_intent", type: TerminalReaderReaderResourceProcessPaymentIntentAction?, presence: true, ignore_serialize: process_payment_intent.nil? && !process_payment_intent_present?)]
     property process_payment_intent : TerminalReaderReaderResourceProcessPaymentIntentAction?
 
@@ -73,7 +75,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @failure_code : String?, @failure_message : String?, @status : String, @_type : String, @process_payment_intent : TerminalReaderReaderResourceProcessPaymentIntentAction? = nil, @process_setup_intent : TerminalReaderReaderResourceProcessSetupIntentAction? = nil, @set_reader_display : TerminalReaderReaderResourceSetReaderDisplayAction? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @status : String? = nil,
+      @_type : String? = nil,
+      # Optional properties
+      @failure_code : String? = nil,
+      @failure_message : String? = nil,
+      @process_payment_intent : TerminalReaderReaderResourceProcessPaymentIntentAction? = nil,
+      @process_setup_intent : TerminalReaderReaderResourceProcessSetupIntentAction? = nil,
+      @set_reader_display : TerminalReaderReaderResourceSetReaderDisplayAction? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -81,17 +94,17 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @failure_code.to_s.size > 5000
-        invalid_properties.push("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @failure_message.to_s.size > 5000
-        invalid_properties.push("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      if !@failure_code.nil? && @failure_code.to_s.size > 5000
+        invalid_properties.push("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@failure_message.nil? && @failure_message.to_s.size > 5000
+        invalid_properties.push("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
+      end
 
       invalid_properties
     end
@@ -99,10 +112,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @failure_code.to_s.size > 5000
-      return false if @failure_message.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if !@failure_code.nil? && @failure_code.to_s.size > 5000
+      return false if !@failure_message.nil? && @failure_message.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -114,32 +128,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] failure_code Value to be assigned
-    def failure_code=(failure_code)
-      if failure_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @failure_code = failure_code
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] failure_message Value to be assigned
-    def failure_message=(failure_message)
-      if failure_message.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @failure_message = failure_message
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -156,18 +147,24 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        failure_code == o.failure_code &&
-        failure_message == o.failure_message &&
-        process_payment_intent == o.process_payment_intent &&
-        process_setup_intent == o.process_setup_intent &&
-        set_reader_display == o.set_reader_display &&
-        status == o.status &&
-        _type == o._type
+    # Custom attribute writer method with validation
+    # @param [Object] failure_code Value to be assigned
+    def failure_code=(failure_code)
+      if !failure_code.nil? && failure_code.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @failure_code = failure_code
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] failure_message Value to be assigned
+    def failure_message=(failure_message)
+      if !failure_message.nil? && failure_message.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @failure_message = failure_message
     end
 
     # @see the `==` method
@@ -176,8 +173,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@failure_code, @failure_message, @process_payment_intent, @process_setup_intent, @set_reader_display, @status, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@status, @_type, @failure_code, @failure_message, @process_payment_intent, @process_setup_intent, @set_reader_display)
   end
 end

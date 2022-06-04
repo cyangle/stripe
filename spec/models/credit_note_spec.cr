@@ -129,7 +129,7 @@ describe Stripe::CreditNote do
   describe "test attribute 'reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["duplicate", "fraudulent", "order_change", "product_unsatisfactory", "null"])
+      # validator = EnumValidator.new("String", ["duplicate", "fraudulent", "order_change", "product_unsatisfactory"])
       # validator.allowable_values.each do |value|
       #   expect { instance.reason = value }.not_to raise_error
       # end

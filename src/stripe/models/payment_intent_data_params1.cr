@@ -19,7 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Controls when the funds will be captured from the customer's account.
+
     @[JSON::Field(key: "capture_method", type: String?, presence: true, ignore_serialize: capture_method.nil? && !capture_method_present?)]
     getter capture_method : String?
 
@@ -28,7 +28,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_CAPTURE_METHOD = EnumValidator.new("capture_method", "String", ["automatic", "manual"])
 
-    # Indicates that you intend to [make future payments](https://stripe.com/docs/payments/payment-intents#future-usage) with the payment method collected by this Checkout Session.  When setting this to `on_session`, Checkout will show a notice to the customer that their payment details will be saved.  When setting this to `off_session`, Checkout will show a notice to the customer that their payment details will be saved and used for future payments.  If a Customer has been provided or Checkout creates a new Customer,Checkout will attach the payment method to the Customer.  If Checkout does not create a Customer, the payment method is not attached to a Customer. To reuse the payment method, you can retrieve it from the Checkout Session's PaymentIntent.  When processing card payments, Checkout also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as SCA.
     @[JSON::Field(key: "setup_future_usage", type: String?, presence: true, ignore_serialize: setup_future_usage.nil? && !setup_future_usage_present?)]
     getter setup_future_usage : String?
 
@@ -39,13 +38,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @capture_method : String? = nil, @setup_future_usage : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @capture_method : String? = nil,
+      @setup_future_usage : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
@@ -58,6 +63,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+
       true
     end
 
@@ -75,23 +81,16 @@ module Stripe
       @setup_future_usage = setup_future_usage
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        capture_method == o.capture_method &&
-        setup_future_usage == o.setup_future_usage
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@capture_method, @setup_future_usage)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@capture_method, @setup_future_usage)
   end
 end

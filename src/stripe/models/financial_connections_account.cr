@@ -19,6 +19,55 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # The type of the account. Account category is further divided in `subcategory`.
+    @[JSON::Field(key: "category", type: String)]
+    getter category : String
+
+    ENUM_VALIDATOR_FOR_CATEGORY = EnumValidator.new("category", "String", ["cash", "credit", "investment", "other"])
+
+    # Time at which the object was created. Measured in seconds since the Unix epoch.
+    @[JSON::Field(key: "created", type: Int64)]
+    property created : Int64
+
+    # Unique identifier for the object.
+    @[JSON::Field(key: "id", type: String)]
+    getter id : String
+
+    # The name of the institution that holds this account.
+    @[JSON::Field(key: "institution_name", type: String)]
+    getter institution_name : String
+
+    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    @[JSON::Field(key: "livemode", type: Bool)]
+    property livemode : Bool
+
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
+
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["financial_connections.account"])
+
+    # The status of the link to the account.
+    @[JSON::Field(key: "status", type: String)]
+    getter status : String
+
+    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["active", "disconnected", "inactive"])
+
+    # If `category` is `cash`, one of:   - `checking`  - `savings`  - `other`  If `category` is `credit`, one of:   - `mortgage`  - `line_of_credit`  - `credit_card`  - `other`  If `category` is `investment` or `other`, this will be `other`.
+    @[JSON::Field(key: "subcategory", type: String)]
+    getter subcategory : String
+
+    ENUM_VALIDATOR_FOR_SUBCATEGORY = EnumValidator.new("subcategory", "String", ["checking", "credit_card", "line_of_credit", "mortgage", "other", "savings"])
+
+    # The [PaymentMethod type](https://stripe.com/docs/api/payment_methods/object#payment_method_object-type)(s) that can be created from this account.
+    @[JSON::Field(key: "supported_payment_method_types", type: Array(String))]
+    getter supported_payment_method_types : Array(String)
+
+    ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES = EnumValidator.new("supported_payment_method_types", "Array(String)", ["link", "us_bank_account"])
+
+    # Optional properties
+
     @[JSON::Field(key: "account_holder", type: FinancialConnectionsAccountAccountHolder?, presence: true, ignore_serialize: account_holder.nil? && !account_holder_present?)]
     property account_holder : FinancialConnectionsAccountAccountHolder?
 
@@ -37,16 +86,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? balance_refresh_present : Bool = false
 
-    # The type of the account. Account category is further divided in `subcategory`.
-    @[JSON::Field(key: "category", type: String)]
-    getter category : String
-
-    ENUM_VALIDATOR_FOR_CATEGORY = EnumValidator.new("category", "String", ["cash", "credit", "investment", "other"])
-
-    # Time at which the object was created. Measured in seconds since the Unix epoch.
-    @[JSON::Field(key: "created", type: Int64)]
-    property created : Int64
-
     # A human-readable name that has been assigned to this account, either by the account holder or by the institution.
     @[JSON::Field(key: "display_name", type: String?, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
     getter display_name : String?
@@ -54,30 +93,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? display_name_present : Bool = false
 
-    # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
-
-    # The name of the institution that holds this account.
-    @[JSON::Field(key: "institution_name", type: String)]
-    getter institution_name : String
-
     # The last 4 digits of the account number. If present, this will be 4 numeric characters.
     @[JSON::Field(key: "last4", type: String?, presence: true, ignore_serialize: last4.nil? && !last4_present?)]
     getter last4 : String?
 
     @[JSON::Field(ignore: true)]
     property? last4_present : Bool = false
-
-    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-    @[JSON::Field(key: "livemode", type: Bool)]
-    property livemode : Bool
-
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["financial_connections.account"])
 
     @[JSON::Field(key: "ownership", type: FinancialConnectionsAccountOwnership?, presence: true, ignore_serialize: ownership.nil? && !ownership_present?)]
     property ownership : FinancialConnectionsAccountOwnership?
@@ -98,29 +119,32 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? permissions_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PERMISSIONS = EnumValidator.new("permissions", "Array(String)", ["balances", "ownership", "payment_method", "transactions"])
-
-    # The status of the link to the account.
-    @[JSON::Field(key: "status", type: String)]
-    getter status : String
-
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["active", "disconnected", "inactive"])
-
-    # If `category` is `cash`, one of:   - `checking`  - `savings`  - `other`  If `category` is `credit`, one of:   - `mortgage`  - `line_of_credit`  - `credit_card`  - `other`  If `category` is `investment` or `other`, this will be `other`.
-    @[JSON::Field(key: "subcategory", type: String)]
-    getter subcategory : String
-
-    ENUM_VALIDATOR_FOR_SUBCATEGORY = EnumValidator.new("subcategory", "String", ["checking", "credit_card", "line_of_credit", "mortgage", "other", "savings"])
-
-    # The [PaymentMethod type](https://stripe.com/docs/api/payment_methods/object#payment_method_object-type)(s) that can be created from this account.
-    @[JSON::Field(key: "supported_payment_method_types", type: Array(String))]
-    getter supported_payment_method_types : Array(String)
-
-    ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES = EnumValidator.new("supported_payment_method_types", "Array(String)", ["link", "us_bank_account"])
+    ENUM_VALIDATOR_FOR_PERMISSIONS = EnumValidator.new("permissions", "String", ["balances", "ownership", "payment_method", "transactions"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account_holder : FinancialConnectionsAccountAccountHolder?, @balance : FinancialConnectionsAccountBalance?, @balance_refresh : FinancialConnectionsAccountBalanceRefresh?, @category : String, @created : Int64, @display_name : String?, @id : String, @institution_name : String, @last4 : String?, @livemode : Bool, @object : String, @ownership : FinancialConnectionsAccountOwnership?, @ownership_refresh : FinancialConnectionsAccountOwnershipRefresh?, @permissions : Array(String)?, @status : String, @subcategory : String, @supported_payment_method_types : Array(String))
+    def initialize(
+      *,
+      # Required properties
+      @category : String,
+      @created : Int64,
+      @id : String,
+      @institution_name : String,
+      @livemode : Bool,
+      @object : String,
+      @status : String,
+      @subcategory : String,
+      @supported_payment_method_types : Array(String),
+      # Optional properties
+      @account_holder : FinancialConnectionsAccountAccountHolder? = nil,
+      @balance : FinancialConnectionsAccountBalance? = nil,
+      @balance_refresh : FinancialConnectionsAccountBalanceRefresh? = nil,
+      @display_name : String? = nil,
+      @last4 : String? = nil,
+      @ownership : FinancialConnectionsAccountOwnership? = nil,
+      @ownership_refresh : FinancialConnectionsAccountOwnershipRefresh? = nil,
+      @permissions : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -130,10 +154,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CATEGORY.error_message) unless ENUM_VALIDATOR_FOR_CATEGORY.valid?(@category, false)
 
-      if @display_name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -142,19 +162,23 @@ module Stripe
         invalid_properties.push("invalid value for \"institution_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @last4.to_s.size > 5000
-        invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PERMISSIONS.error_message) unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUBCATEGORY.error_message) unless ENUM_VALIDATOR_FOR_SUBCATEGORY.valid?(@subcategory, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.all_valid?(@supported_payment_method_types, false)
+
+      if !@display_name.nil? && @display_name.to_s.size > 5000
+        invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@last4.nil? && @last4.to_s.size > 5000
+        invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_PERMISSIONS.error_message) unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
 
       invalid_properties
     end
@@ -163,15 +187,16 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_CATEGORY.valid?(@category, false)
-      return false if @display_name.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false if @institution_name.to_s.size > 5000
-      return false if @last4.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false unless ENUM_VALIDATOR_FOR_SUBCATEGORY.valid?(@subcategory, false)
       return false unless ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.all_valid?(@supported_payment_method_types, false)
+      return false if !@display_name.nil? && @display_name.to_s.size > 5000
+      return false if !@last4.nil? && @last4.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
+
       true
     end
 
@@ -180,16 +205,6 @@ module Stripe
     def category=(category)
       ENUM_VALIDATOR_FOR_CATEGORY.valid!(category, false)
       @category = category
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] display_name Value to be assigned
-    def display_name=(display_name)
-      if display_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @display_name = display_name
     end
 
     # Custom attribute writer method with validation
@@ -212,28 +227,11 @@ module Stripe
       @institution_name = institution_name
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] last4 Value to be assigned
-    def last4=(last4)
-      if last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @last4 = last4
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
     def object=(object)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] permissions Object to be assigned
-    def permissions=(permissions)
-      ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid!(permissions)
-      @permissions = permissions
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -257,28 +255,31 @@ module Stripe
       @supported_payment_method_types = supported_payment_method_types
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account_holder == o.account_holder &&
-        balance == o.balance &&
-        balance_refresh == o.balance_refresh &&
-        category == o.category &&
-        created == o.created &&
-        display_name == o.display_name &&
-        id == o.id &&
-        institution_name == o.institution_name &&
-        last4 == o.last4 &&
-        livemode == o.livemode &&
-        object == o.object &&
-        ownership == o.ownership &&
-        ownership_refresh == o.ownership_refresh &&
-        permissions == o.permissions &&
-        status == o.status &&
-        subcategory == o.subcategory &&
-        supported_payment_method_types == o.supported_payment_method_types
+    # Custom attribute writer method with validation
+    # @param [Object] display_name Value to be assigned
+    def display_name=(display_name)
+      if !display_name.nil? && display_name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @display_name = display_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] last4 Value to be assigned
+    def last4=(last4)
+      if !last4.nil? && last4.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @last4 = last4
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] permissions Object to be assigned
+    def permissions=(permissions)
+      ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid!(permissions)
+      @permissions = permissions
     end
 
     # @see the `==` method
@@ -287,8 +288,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account_holder, @balance, @balance_refresh, @category, @created, @display_name, @id, @institution_name, @last4, @livemode, @object, @ownership, @ownership_refresh, @permissions, @status, @subcategory, @supported_payment_method_types)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@category, @created, @id, @institution_name, @livemode, @object, @status, @subcategory, @supported_payment_method_types, @account_holder, @balance, @balance_refresh, @display_name, @last4, @ownership, @ownership_refresh, @permissions)
   end
 end

@@ -18,28 +18,25 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # A filter on the list of people returned based on whether these people are directors of the account's company.
+
     @[JSON::Field(key: "director", type: Bool?, presence: true, ignore_serialize: director.nil? && !director_present?)]
     property director : Bool?
 
     @[JSON::Field(ignore: true)]
     property? director_present : Bool = false
 
-    # A filter on the list of people returned based on whether these people are executives of the account's company.
     @[JSON::Field(key: "executive", type: Bool?, presence: true, ignore_serialize: executive.nil? && !executive_present?)]
     property executive : Bool?
 
     @[JSON::Field(ignore: true)]
     property? executive_present : Bool = false
 
-    # A filter on the list of people returned based on whether these people are owners of the account's company.
     @[JSON::Field(key: "owner", type: Bool?, presence: true, ignore_serialize: owner.nil? && !owner_present?)]
     property owner : Bool?
 
     @[JSON::Field(ignore: true)]
     property? owner_present : Bool = false
 
-    # A filter on the list of people returned based on whether these people are the representative of the account's company.
     @[JSON::Field(key: "representative", type: Bool?, presence: true, ignore_serialize: representative.nil? && !representative_present?)]
     property representative : Bool?
 
@@ -48,7 +45,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @director : Bool? = nil, @executive : Bool? = nil, @owner : Bool? = nil, @representative : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @director : Bool? = nil,
+      @executive : Bool? = nil,
+      @owner : Bool? = nil,
+      @representative : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -65,25 +69,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        director == o.director &&
-        executive == o.executive &&
-        owner == o.owner &&
-        representative == o.representative
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@director, @executive, @owner, @representative)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@director, @executive, @owner, @representative)
   end
 end

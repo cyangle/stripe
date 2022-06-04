@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the amount your customer has pushed to the receiver.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -60,6 +61,7 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["ach_credit_transfer", "ach_debit", "alipay", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_debit", "sofort", "three_d_secure", "wechat"])
 
     # Optional properties
+
     @[JSON::Field(key: "ach_credit_transfer", type: SourceTransactionAchCreditTransferData?, presence: true, ignore_serialize: ach_credit_transfer.nil? && !ach_credit_transfer_present?)]
     property ach_credit_transfer : SourceTransactionAchCreditTransferData?
 
@@ -92,7 +94,25 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @created : Int64, @currency : String, @id : String, @livemode : Bool, @object : String, @source : String, @status : String, @_type : String, @ach_credit_transfer : SourceTransactionAchCreditTransferData? = nil, @chf_credit_transfer : SourceTransactionChfCreditTransferData? = nil, @gbp_credit_transfer : SourceTransactionGbpCreditTransferData? = nil, @paper_check : SourceTransactionPaperCheckData? = nil, @sepa_credit_transfer : SourceTransactionSepaCreditTransferData? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @source : String,
+      @status : String,
+      @_type : String,
+      # Optional properties
+      @ach_credit_transfer : SourceTransactionAchCreditTransferData? = nil,
+      @chf_credit_transfer : SourceTransactionChfCreditTransferData? = nil,
+      @gbp_credit_transfer : SourceTransactionGbpCreditTransferData? = nil,
+      @paper_check : SourceTransactionPaperCheckData? = nil,
+      @sepa_credit_transfer : SourceTransactionSepaCreditTransferData? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -127,6 +147,7 @@ module Stripe
       return false if @source.to_s.size > 5000
       return false if @status.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       true
     end
 
@@ -174,35 +195,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        ach_credit_transfer == o.ach_credit_transfer &&
-        amount == o.amount &&
-        chf_credit_transfer == o.chf_credit_transfer &&
-        created == o.created &&
-        currency == o.currency &&
-        gbp_credit_transfer == o.gbp_credit_transfer &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        paper_check == o.paper_check &&
-        sepa_credit_transfer == o.sepa_credit_transfer &&
-        source == o.source &&
-        status == o.status &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@ach_credit_transfer, @amount, @chf_credit_transfer, @created, @currency, @gbp_credit_transfer, @id, @livemode, @object, @paper_check, @sepa_credit_transfer, @source, @status, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @created, @currency, @id, @livemode, @object, @source, @status, @_type, @ach_credit_transfer, @chf_credit_transfer, @gbp_credit_transfer, @paper_check, @sepa_credit_transfer)
   end
 end

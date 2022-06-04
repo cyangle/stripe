@@ -19,11 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    @[JSON::Field(key: "account_holder", type: FinancialConnectionsSessionAccountHolder?, presence: true, ignore_serialize: account_holder.nil? && !account_holder_present?)]
-    property account_holder : FinancialConnectionsSessionAccountHolder?
-
-    @[JSON::Field(ignore: true)]
-    property? account_holder_present : Bool = false
 
     @[JSON::Field(key: "accounts", type: BankConnectionsResourceLinkedAccountList1)]
     property accounts : BankConnectionsResourceLinkedAccountList1
@@ -53,6 +48,13 @@ module Stripe
     ENUM_VALIDATOR_FOR_PERMISSIONS = EnumValidator.new("permissions", "Array(String)", ["balances", "ownership", "payment_method", "transactions"])
 
     # Optional properties
+
+    @[JSON::Field(key: "account_holder", type: FinancialConnectionsSessionAccountHolder?, presence: true, ignore_serialize: account_holder.nil? && !account_holder_present?)]
+    property account_holder : FinancialConnectionsSessionAccountHolder?
+
+    @[JSON::Field(ignore: true)]
+    property? account_holder_present : Bool = false
+
     @[JSON::Field(key: "filters", type: BankConnectionsResourceLinkAccountSessionFilters?, presence: true, ignore_serialize: filters.nil? && !filters_present?)]
     property filters : BankConnectionsResourceLinkAccountSessionFilters?
 
@@ -68,7 +70,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account_holder : FinancialConnectionsSessionAccountHolder?, @accounts : BankConnectionsResourceLinkedAccountList1, @client_secret : String, @id : String, @livemode : Bool, @object : String, @permissions : Array(String), @filters : BankConnectionsResourceLinkAccountSessionFilters? = nil, @return_url : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @accounts : BankConnectionsResourceLinkedAccountList1,
+      @client_secret : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @permissions : Array(String),
+      # Optional properties
+      @account_holder : FinancialConnectionsSessionAccountHolder? = nil,
+      @filters : BankConnectionsResourceLinkAccountSessionFilters? = nil,
+      @return_url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -103,6 +118,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions, false)
       return false if !@return_url.nil? && @return_url.to_s.size > 5000
+
       true
     end
 
@@ -150,30 +166,16 @@ module Stripe
       @return_url = return_url
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account_holder == o.account_holder &&
-        accounts == o.accounts &&
-        client_secret == o.client_secret &&
-        filters == o.filters &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        permissions == o.permissions &&
-        return_url == o.return_url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account_holder, @accounts, @client_secret, @filters, @id, @livemode, @object, @permissions, @return_url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@accounts, @client_secret, @id, @livemode, @object, @permissions, @account_holder, @filters, @return_url)
   end
 end

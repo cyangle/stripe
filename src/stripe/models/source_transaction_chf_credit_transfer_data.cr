@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Reference associated with the transfer.
     @[JSON::Field(key: "reference", type: String?, presence: true, ignore_serialize: reference.nil? && !reference_present?)]
     getter reference : String?
@@ -56,7 +57,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @reference : String? = nil, @sender_address_country : String? = nil, @sender_address_line1 : String? = nil, @sender_iban : String? = nil, @sender_name : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @reference : String? = nil,
+      @sender_address_country : String? = nil,
+      @sender_address_line1 : String? = nil,
+      @sender_iban : String? = nil,
+      @sender_name : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -95,6 +104,7 @@ module Stripe
       return false if !@sender_address_line1.nil? && @sender_address_line1.to_s.size > 5000
       return false if !@sender_iban.nil? && @sender_iban.to_s.size > 5000
       return false if !@sender_name.nil? && @sender_name.to_s.size > 5000
+
       true
     end
 
@@ -148,26 +158,16 @@ module Stripe
       @sender_name = sender_name
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        reference == o.reference &&
-        sender_address_country == o.sender_address_country &&
-        sender_address_line1 == o.sender_address_line1 &&
-        sender_iban == o.sender_iban &&
-        sender_name == o.sender_name
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@reference, @sender_address_country, @sender_address_line1, @sender_iban, @sender_name)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@reference, @sender_address_country, @sender_address_line1, @sender_iban, @sender_name)
   end
 end

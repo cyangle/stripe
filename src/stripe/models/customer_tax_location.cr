@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The customer's country as identified by Stripe Tax.
     @[JSON::Field(key: "country", type: String)]
     getter country : String
@@ -29,6 +30,8 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_SOURCE = EnumValidator.new("source", "String", ["billing_address", "ip_address", "payment_method", "shipping_destination"])
 
+    # Optional properties
+
     # The customer's state, county, province, or region as identified by Stripe Tax.
     @[JSON::Field(key: "state", type: String?, presence: true, ignore_serialize: state.nil? && !state_present?)]
     getter state : String?
@@ -38,7 +41,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @country : String, @source : String, @state : String?)
+    def initialize(
+      *,
+      # Required properties
+      @country : String,
+      @source : String,
+      # Optional properties
+      @state : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -52,7 +62,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SOURCE.error_message) unless ENUM_VALIDATOR_FOR_SOURCE.valid?(@source, false)
 
-      if @state.to_s.size > 5000
+      if !@state.nil? && @state.to_s.size > 5000
         invalid_properties.push("invalid value for \"state\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -64,7 +74,8 @@ module Stripe
     def valid?
       return false if @country.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_SOURCE.valid?(@source, false)
-      return false if @state.to_s.size > 5000
+      return false if !@state.nil? && @state.to_s.size > 5000
+
       true
     end
 
@@ -88,21 +99,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] state Value to be assigned
     def state=(state)
-      if state.to_s.size > 5000
+      if !state.nil? && state.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"state\", the character length must be smaller than or equal to 5000.")
       end
 
       @state = state
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        country == o.country &&
-        source == o.source &&
-        state == o.state
     end
 
     # @see the `==` method
@@ -111,8 +112,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@country, @source, @state)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@country, @source, @state)
   end
 end

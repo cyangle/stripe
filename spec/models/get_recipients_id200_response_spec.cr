@@ -108,12 +108,6 @@ describe Stripe::GetRecipientsId200Response do
     end
   end
 
-  describe "test attribute 'verified'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'deleted'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

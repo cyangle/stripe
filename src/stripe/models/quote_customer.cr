@@ -19,29 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?)]
     property created : Int64?
-
-    @[JSON::Field(key: "default_source", type: CustomerDefaultSource, presence: true, ignore_serialize: default_source.nil? && !default_source_present?)]
-    property default_source : CustomerDefaultSource
-
-    @[JSON::Field(ignore: true)]
-    property? default_source_present : Bool = false
-
-    # An arbitrary string attached to the object. Often useful for displaying to users.
-    @[JSON::Field(key: "description", type: String, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
-    # The customer's email address.
-    @[JSON::Field(key: "email", type: String, presence: true, ignore_serialize: email.nil? && !email_present?)]
-    getter email : String
-
-    @[JSON::Field(ignore: true)]
-    property? email_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?)]
@@ -57,12 +38,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["customer"])
 
-    @[JSON::Field(key: "shipping", type: CustomerShipping1, presence: true, ignore_serialize: shipping.nil? && !shipping_present?)]
-    property shipping : CustomerShipping1
-
-    @[JSON::Field(ignore: true)]
-    property? shipping_present : Bool = false
-
     # Always true for a deleted object
     @[JSON::Field(key: "deleted", type: Bool?)]
     getter deleted : Bool?
@@ -70,6 +45,7 @@ module Stripe
     ENUM_VALIDATOR_FOR_DELETED = EnumValidator.new("deleted", "Bool", ["true"])
 
     # Optional properties
+
     @[JSON::Field(key: "address", type: CustomerAddress?, presence: true, ignore_serialize: address.nil? && !address_present?)]
     property address : CustomerAddress?
 
@@ -96,6 +72,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? currency_present : Bool = false
 
+    @[JSON::Field(key: "default_source", type: CustomerDefaultSource?, presence: true, ignore_serialize: default_source.nil? && !default_source_present?)]
+    property default_source : CustomerDefaultSource?
+
+    @[JSON::Field(ignore: true)]
+    property? default_source_present : Bool = false
+
     # When the customer's latest invoice is billed by charging automatically, `delinquent` is `true` if the invoice's latest charge failed. When the customer's latest invoice is billed by sending an invoice, `delinquent` is `true` if the invoice isn't paid by its due date.  If an invoice is marked uncollectible by [dunning](https://stripe.com/docs/billing/automatic-collection), `delinquent` doesn't get reset to `false`.
     @[JSON::Field(key: "delinquent", type: Bool?, presence: true, ignore_serialize: delinquent.nil? && !delinquent_present?)]
     property delinquent : Bool?
@@ -103,11 +85,25 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? delinquent_present : Bool = false
 
+    # An arbitrary string attached to the object. Often useful for displaying to users.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
+
     @[JSON::Field(key: "discount", type: CustomerDiscount?, presence: true, ignore_serialize: discount.nil? && !discount_present?)]
     property discount : CustomerDiscount?
 
     @[JSON::Field(ignore: true)]
     property? discount_present : Bool = false
+
+    # The customer's email address.
+    @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
+    getter email : String?
+
+    @[JSON::Field(ignore: true)]
+    property? email_present : Bool = false
 
     # The prefix for the customer used to generate unique invoice numbers.
     @[JSON::Field(key: "invoice_prefix", type: String?, presence: true, ignore_serialize: invoice_prefix.nil? && !invoice_prefix_present?)]
@@ -150,11 +146,18 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? phone_present : Bool = false
 
+    # The customer's preferred locales (languages), ordered by preference.
     @[JSON::Field(key: "preferred_locales", type: Array(String)?, presence: true, ignore_serialize: preferred_locales.nil? && !preferred_locales_present?)]
     property preferred_locales : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? preferred_locales_present : Bool = false
+
+    @[JSON::Field(key: "shipping", type: CustomerShipping1?, presence: true, ignore_serialize: shipping.nil? && !shipping_present?)]
+    property shipping : CustomerShipping1?
+
+    @[JSON::Field(ignore: true)]
+    property? shipping_present : Bool = false
 
     @[JSON::Field(key: "sources", type: ApmsSourcesSourceList1?, presence: true, ignore_serialize: sources.nil? && !sources_present?)]
     property sources : ApmsSourcesSourceList1?
@@ -162,8 +165,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? sources_present : Bool = false
 
-    @[JSON::Field(key: "subscriptions", type: SubscriptionList?, presence: true, ignore_serialize: subscriptions.nil? && !subscriptions_present?)]
-    property subscriptions : SubscriptionList?
+    @[JSON::Field(key: "subscriptions", type: SubscriptionList1?, presence: true, ignore_serialize: subscriptions.nil? && !subscriptions_present?)]
+    property subscriptions : SubscriptionList1?
 
     @[JSON::Field(ignore: true)]
     property? subscriptions_present : Bool = false
@@ -181,7 +184,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? tax_exempt_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_TAX_EXEMPT = EnumValidator.new("tax_exempt", "String", ["exempt", "none", "reverse", "null"])
+    ENUM_VALIDATOR_FOR_TAX_EXEMPT = EnumValidator.new("tax_exempt", "String", ["exempt", "none", "reverse"])
 
     @[JSON::Field(key: "tax_ids", type: TaxIDsList1?, presence: true, ignore_serialize: tax_ids.nil? && !tax_ids_present?)]
     property tax_ids : TaxIDsList1?
@@ -206,7 +209,39 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @created : Int64, @default_source : CustomerDefaultSource?, @description : String?, @email : String?, @id : String, @livemode : Bool, @object : String, @shipping : CustomerShipping1?, @deleted : Bool, @address : CustomerAddress? = nil, @balance : Int64? = nil, @cash_balance : CustomerCashBalance? = nil, @currency : String? = nil, @delinquent : Bool? = nil, @discount : CustomerDiscount? = nil, @invoice_prefix : String? = nil, @invoice_settings : InvoiceSettingCustomerSetting? = nil, @metadata : Hash(String, String)? = nil, @name : String? = nil, @next_invoice_sequence : Int64? = nil, @phone : String? = nil, @preferred_locales : Array(String)? = nil, @sources : ApmsSourcesSourceList1? = nil, @subscriptions : SubscriptionList? = nil, @tax : CustomerTax? = nil, @tax_exempt : String? = nil, @tax_ids : TaxIDsList1? = nil, @test_clock : CustomerTestClock? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @object : String? = nil,
+      @deleted : Bool? = nil,
+      # Optional properties
+      @address : CustomerAddress? = nil,
+      @balance : Int64? = nil,
+      @cash_balance : CustomerCashBalance? = nil,
+      @currency : String? = nil,
+      @default_source : CustomerDefaultSource? = nil,
+      @delinquent : Bool? = nil,
+      @description : String? = nil,
+      @discount : CustomerDiscount? = nil,
+      @email : String? = nil,
+      @invoice_prefix : String? = nil,
+      @invoice_settings : InvoiceSettingCustomerSetting? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @name : String? = nil,
+      @next_invoice_sequence : Int64? = nil,
+      @phone : String? = nil,
+      @preferred_locales : Array(String)? = nil,
+      @shipping : CustomerShipping1? = nil,
+      @sources : ApmsSourcesSourceList1? = nil,
+      @subscriptions : SubscriptionList1? = nil,
+      @tax : CustomerTax? = nil,
+      @tax_exempt : String? = nil,
+      @tax_ids : TaxIDsList1? = nil,
+      @test_clock : CustomerTestClock? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -214,20 +249,24 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
+      if @id.to_s.size > 5000
+        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_DELETED.error_message) unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
+
       if !@currency.nil? && @currency.to_s.size > 5000
         invalid_properties.push("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @description.to_s.size > 5000
+      if !@description.nil? && @description.to_s.size > 5000
         invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @email.to_s.size > 5000
+      if !@email.nil? && @email.to_s.size > 5000
         invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @id.to_s.size > 5000
-        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
       if !@invoice_prefix.nil? && @invoice_prefix.to_s.size > 5000
@@ -238,15 +277,11 @@ module Stripe
         invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
       if !@phone.nil? && @phone.to_s.size > 5000
         invalid_properties.push("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_EXEMPT.error_message) unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_DELETED.error_message) unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
 
       invalid_properties
     end
@@ -254,16 +289,17 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@currency.nil? && @currency.to_s.size > 5000
-      return false if @description.to_s.size > 5000
-      return false if @email.to_s.size > 5000
       return false if @id.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
+      return false if !@currency.nil? && @currency.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@email.nil? && @email.to_s.size > 5000
       return false if !@invoice_prefix.nil? && @invoice_prefix.to_s.size > 5000
       return false if !@name.nil? && @name.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if !@phone.nil? && @phone.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
-      return false unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -275,12 +311,33 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @id = id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] object Object to be assigned
+    def object=(object)
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+      @object = object
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] deleted Object to be assigned
+    def deleted=(deleted)
+      ENUM_VALIDATOR_FOR_DELETED.valid!(deleted, false)
+      @deleted = deleted
     end
 
     # Custom attribute writer method with validation
@@ -296,7 +353,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
     def description=(description)
-      if description.to_s.size > 5000
+      if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -306,21 +363,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] email Value to be assigned
     def email=(email)
-      if email.to_s.size > 5000
+      if !email.nil? && email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
 
       @email = email
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id)
-      if id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @id = id
     end
 
     # Custom attribute writer method with validation
@@ -343,13 +390,6 @@ module Stripe
       @name = name
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
-      @object = object
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] phone Value to be assigned
     def phone=(phone)
@@ -367,56 +407,16 @@ module Stripe
       @tax_exempt = tax_exempt
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] deleted Object to be assigned
-    def deleted=(deleted)
-      ENUM_VALIDATOR_FOR_DELETED.valid!(deleted, false)
-      @deleted = deleted
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        balance == o.balance &&
-        cash_balance == o.cash_balance &&
-        created == o.created &&
-        currency == o.currency &&
-        default_source == o.default_source &&
-        delinquent == o.delinquent &&
-        description == o.description &&
-        discount == o.discount &&
-        email == o.email &&
-        id == o.id &&
-        invoice_prefix == o.invoice_prefix &&
-        invoice_settings == o.invoice_settings &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        name == o.name &&
-        next_invoice_sequence == o.next_invoice_sequence &&
-        object == o.object &&
-        phone == o.phone &&
-        preferred_locales == o.preferred_locales &&
-        shipping == o.shipping &&
-        sources == o.sources &&
-        subscriptions == o.subscriptions &&
-        tax == o.tax &&
-        tax_exempt == o.tax_exempt &&
-        tax_ids == o.tax_ids &&
-        test_clock == o.test_clock &&
-        deleted == o.deleted
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @balance, @cash_balance, @created, @currency, @default_source, @delinquent, @description, @discount, @email, @id, @invoice_prefix, @invoice_settings, @livemode, @metadata, @name, @next_invoice_sequence, @object, @phone, @preferred_locales, @shipping, @sources, @subscriptions, @tax, @tax_exempt, @tax_ids, @test_clock, @deleted)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @livemode, @object, @deleted, @address, @balance, @cash_balance, @currency, @default_source, @delinquent, @description, @discount, @email, @invoice_prefix, @invoice_settings, @metadata, @name, @next_invoice_sequence, @phone, @preferred_locales, @shipping, @sources, @subscriptions, @tax, @tax_exempt, @tax_ids, @test_clock)
   end
 end

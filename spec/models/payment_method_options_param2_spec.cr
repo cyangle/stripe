@@ -20,9 +20,19 @@ describe Stripe::PaymentMethodOptionsParam2 do
     end
   end
 
-  describe "test attribute 'expires_after_days'" do
+  describe "test attribute 'financial_connections'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'verification_method'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["automatic", "instant"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.verification_method = value }.not_to raise_error
+      # end
     end
   end
 end

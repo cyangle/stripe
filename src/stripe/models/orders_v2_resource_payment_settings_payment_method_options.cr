@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "acss_debit", type: PaymentIntentPaymentMethodOptionsAcssDebit?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
     property acss_debit : PaymentIntentPaymentMethodOptionsAcssDebit?
 
@@ -118,7 +119,25 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @acss_debit : PaymentIntentPaymentMethodOptionsAcssDebit? = nil, @afterpay_clearpay : OrdersPaymentMethodOptionsAfterpayClearpay? = nil, @alipay : PaymentMethodOptionsAlipay? = nil, @bancontact : PaymentMethodOptionsBancontact? = nil, @card : OrdersV2ResourceCardPaymentMethodOptions? = nil, @customer_balance : PaymentMethodOptionsCustomerBalance? = nil, @ideal : PaymentMethodOptionsIdeal? = nil, @klarna : PaymentMethodOptionsKlarna? = nil, @link : PaymentIntentPaymentMethodOptionsLink? = nil, @oxxo : PaymentMethodOptionsOxxo? = nil, @p24 : PaymentMethodOptionsP24? = nil, @paypal : PaymentMethodOptionsPaypal? = nil, @sepa_debit : PaymentIntentPaymentMethodOptionsSepaDebit? = nil, @sofort : PaymentMethodOptionsSofort? = nil, @wechat_pay : PaymentMethodOptionsWechatPay? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @acss_debit : PaymentIntentPaymentMethodOptionsAcssDebit? = nil,
+      @afterpay_clearpay : OrdersPaymentMethodOptionsAfterpayClearpay? = nil,
+      @alipay : PaymentMethodOptionsAlipay? = nil,
+      @bancontact : PaymentMethodOptionsBancontact? = nil,
+      @card : OrdersV2ResourceCardPaymentMethodOptions? = nil,
+      @customer_balance : PaymentMethodOptionsCustomerBalance? = nil,
+      @ideal : PaymentMethodOptionsIdeal? = nil,
+      @klarna : PaymentMethodOptionsKlarna? = nil,
+      @link : PaymentIntentPaymentMethodOptionsLink? = nil,
+      @oxxo : PaymentMethodOptionsOxxo? = nil,
+      @p24 : PaymentMethodOptionsP24? = nil,
+      @paypal : PaymentMethodOptionsPaypal? = nil,
+      @sepa_debit : PaymentIntentPaymentMethodOptionsSepaDebit? = nil,
+      @sofort : PaymentMethodOptionsSofort? = nil,
+      @wechat_pay : PaymentMethodOptionsWechatPay? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -143,34 +162,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit == o.acss_debit &&
-        afterpay_clearpay == o.afterpay_clearpay &&
-        alipay == o.alipay &&
-        bancontact == o.bancontact &&
-        card == o.card &&
-        customer_balance == o.customer_balance &&
-        ideal == o.ideal &&
-        klarna == o.klarna &&
-        link == o.link &&
-        oxxo == o.oxxo &&
-        p24 == o.p24 &&
-        paypal == o.paypal &&
-        sepa_debit == o.sepa_debit &&
-        sofort == o.sofort &&
-        wechat_pay == o.wechat_pay
     end
 
     # @see the `==` method
@@ -179,8 +173,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit, @afterpay_clearpay, @alipay, @bancontact, @card, @customer_balance, @ideal, @klarna, @link, @oxxo, @p24, @paypal, @sepa_debit, @sofort, @wechat_pay)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@acss_debit, @afterpay_clearpay, @alipay, @bancontact, @card, @customer_balance, @ideal, @klarna, @link, @oxxo, @p24, @paypal, @sepa_debit, @sofort, @wechat_pay)
   end
 end

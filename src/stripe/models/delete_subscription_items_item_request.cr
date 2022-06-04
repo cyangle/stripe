@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Delete all usage for the given subscription item. Allowed only when the current plan's `usage_type` is `metered`.
     @[JSON::Field(key: "clear_usage", type: Bool?, presence: true, ignore_serialize: clear_usage.nil? && !clear_usage_present?)]
     property clear_usage : Bool?
@@ -43,7 +44,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @clear_usage : Bool? = nil, @proration_behavior : String? = nil, @proration_date : Int64? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @clear_usage : Bool? = nil,
+      @proration_behavior : String? = nil,
+      @proration_date : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -60,6 +67,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+
       true
     end
 
@@ -70,24 +78,16 @@ module Stripe
       @proration_behavior = proration_behavior
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        clear_usage == o.clear_usage &&
-        proration_behavior == o.proration_behavior &&
-        proration_date == o.proration_date
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@clear_usage, @proration_behavior, @proration_date)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@clear_usage, @proration_behavior, @proration_date)
   end
 end

@@ -18,27 +18,25 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The description for the line item. Will default to the name of the associated product.
+
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String?
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
-    @[JSON::Field(key: "discounts", type: CreateParamsDiscounts?, presence: true, ignore_serialize: discounts.nil? && !discounts_present?)]
-    property discounts : CreateParamsDiscounts?
+    @[JSON::Field(key: "discounts", type: GetInvoicesUpcomingDiscountsParameter?, presence: true, ignore_serialize: discounts.nil? && !discounts_present?)]
+    property discounts : GetInvoicesUpcomingDiscountsParameter?
 
     @[JSON::Field(ignore: true)]
     property? discounts_present : Bool = false
 
-    # The ID of an existing line item on the order.
     @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
     getter id : String?
 
     @[JSON::Field(ignore: true)]
     property? id_present : Bool = false
 
-    # The ID of the price object. One of `product` (with default price) or `price` or `price_data` is required.
     @[JSON::Field(key: "price", type: String?, presence: true, ignore_serialize: price.nil? && !price_present?)]
     getter price : String?
 
@@ -51,29 +49,38 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? price_data_present : Bool = false
 
-    # The product of the line item. The product must have a default price specified. One of `product` (with default price) or `price` or `price_data` is required.
     @[JSON::Field(key: "product", type: String?, presence: true, ignore_serialize: product.nil? && !product_present?)]
     getter product : String?
 
     @[JSON::Field(ignore: true)]
     property? product_present : Bool = false
 
-    # The quantity of the line item.
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
     property quantity : Int64?
 
     @[JSON::Field(ignore: true)]
     property? quantity_present : Bool = false
 
-    @[JSON::Field(key: "tax_rates", type: CreateParamsTaxRates?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
-    property tax_rates : CreateParamsTaxRates?
+    @[JSON::Field(key: "tax_rates", type: CreditNoteLineItemParamsTaxRates?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
+    property tax_rates : CreditNoteLineItemParamsTaxRates?
 
     @[JSON::Field(ignore: true)]
     property? tax_rates_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @description : String? = nil, @discounts : CreateParamsDiscounts? = nil, @id : String? = nil, @price : String? = nil, @price_data : PriceDataWithOptionalProduct? = nil, @product : String? = nil, @quantity : Int64? = nil, @tax_rates : CreateParamsTaxRates? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @description : String? = nil,
+      @discounts : GetInvoicesUpcomingDiscountsParameter? = nil,
+      @id : String? = nil,
+      @price : String? = nil,
+      @price_data : PriceDataWithOptionalProduct? = nil,
+      @product : String? = nil,
+      @quantity : Int64? = nil,
+      @tax_rates : CreditNoteLineItemParamsTaxRates? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -107,6 +114,7 @@ module Stripe
       return false if !@id.nil? && @id.to_s.size > 5000
       return false if !@price.nil? && @price.to_s.size > 5000
       return false if !@product.nil? && @product.to_s.size > 5000
+
       true
     end
 
@@ -150,29 +158,16 @@ module Stripe
       @product = product
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        description == o.description &&
-        discounts == o.discounts &&
-        id == o.id &&
-        price == o.price &&
-        price_data == o.price_data &&
-        product == o.product &&
-        quantity == o.quantity &&
-        tax_rates == o.tax_rates
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@description, @discounts, @id, @price, @price_data, @product, @quantity, @tax_rates)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@description, @discounts, @id, @price, @price_data, @product, @quantity, @tax_rates)
   end
 end

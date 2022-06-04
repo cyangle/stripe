@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Disputed amount. Usually the amount of the charge, but can differ (usually because of currency fluctuation or because only part of the order is disputed).
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -66,12 +67,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["dispute"])
 
-    @[JSON::Field(key: "payment_intent", type: DisputePaymentIntent?, presence: true, ignore_serialize: payment_intent.nil? && !payment_intent_present?)]
-    property payment_intent : DisputePaymentIntent?
-
-    @[JSON::Field(ignore: true)]
-    property? payment_intent_present : Bool = false
-
     # Reason given by cardholder for dispute. Possible values are `bank_cannot_process`, `check_returned`, `credit_not_processed`, `customer_initiated`, `debit_not_authorized`, `duplicate`, `fraudulent`, `general`, `incorrect_account_details`, `insufficient_funds`, `product_not_received`, `product_unacceptable`, `subscription_canceled`, or `unrecognized`. Read more about [dispute reasons](https://stripe.com/docs/disputes/categories).
     @[JSON::Field(key: "reason", type: String)]
     getter reason : String
@@ -83,16 +78,35 @@ module Stripe
     ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["charge_refunded", "lost", "needs_response", "under_review", "warning_closed", "warning_needs_response", "warning_under_review", "won"])
 
     # Optional properties
-    # Network-dependent reason code for the dispute.
-    @[JSON::Field(key: "network_reason_code", type: String?, presence: true, ignore_serialize: network_reason_code.nil? && !network_reason_code_present?)]
-    getter network_reason_code : String?
+
+    @[JSON::Field(key: "payment_intent", type: DisputePaymentIntent?, presence: true, ignore_serialize: payment_intent.nil? && !payment_intent_present?)]
+    property payment_intent : DisputePaymentIntent?
 
     @[JSON::Field(ignore: true)]
-    property? network_reason_code_present : Bool = false
+    property? payment_intent_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @balance_transactions : Array(BalanceTransaction), @charge : DisputeCharge, @created : Int64, @currency : String, @evidence : DisputeEvidence, @evidence_details : DisputeEvidenceDetails, @id : String, @is_charge_refundable : Bool, @livemode : Bool, @metadata : Hash(String, String), @object : String, @payment_intent : DisputePaymentIntent?, @reason : String, @status : String, @network_reason_code : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @balance_transactions : Array(BalanceTransaction),
+      @charge : DisputeCharge,
+      @created : Int64,
+      @currency : String,
+      @evidence : DisputeEvidence,
+      @evidence_details : DisputeEvidenceDetails,
+      @id : String,
+      @is_charge_refundable : Bool,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      @reason : String,
+      @status : String,
+      # Optional properties
+      @payment_intent : DisputePaymentIntent? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -102,10 +116,6 @@ module Stripe
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@network_reason_code.nil? && @network_reason_code.to_s.size > 5000
-        invalid_properties.push("invalid value for \"network_reason_code\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
@@ -123,10 +133,10 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @id.to_s.size > 5000
-      return false if !@network_reason_code.nil? && @network_reason_code.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @reason.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
       true
     end
 
@@ -138,16 +148,6 @@ module Stripe
       end
 
       @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] network_reason_code Value to be assigned
-    def network_reason_code=(network_reason_code)
-      if !network_reason_code.nil? && network_reason_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"network_reason_code\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @network_reason_code = network_reason_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -174,37 +174,16 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        balance_transactions == o.balance_transactions &&
-        charge == o.charge &&
-        created == o.created &&
-        currency == o.currency &&
-        evidence == o.evidence &&
-        evidence_details == o.evidence_details &&
-        id == o.id &&
-        is_charge_refundable == o.is_charge_refundable &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        network_reason_code == o.network_reason_code &&
-        object == o.object &&
-        payment_intent == o.payment_intent &&
-        reason == o.reason &&
-        status == o.status
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @balance_transactions, @charge, @created, @currency, @evidence, @evidence_details, @id, @is_charge_refundable, @livemode, @metadata, @network_reason_code, @object, @payment_intent, @reason, @status)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @balance_transactions, @charge, @created, @currency, @evidence, @evidence_details, @id, @is_charge_refundable, @livemode, @metadata, @object, @reason, @status, @payment_intent)
   end
 end

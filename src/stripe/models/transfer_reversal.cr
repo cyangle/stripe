@@ -19,15 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Amount, in %s.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
-
-    @[JSON::Field(key: "balance_transaction", type: FeeRefundBalanceTransaction?, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
-    property balance_transaction : FeeRefundBalanceTransaction?
-
-    @[JSON::Field(ignore: true)]
-    property? balance_transaction_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
@@ -37,15 +32,32 @@ module Stripe
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
 
+    # Unique identifier for the object.
+    @[JSON::Field(key: "id", type: String)]
+    getter id : String
+
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
+
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["transfer_reversal"])
+
+    @[JSON::Field(key: "transfer", type: TransferReversalTransfer)]
+    property transfer : TransferReversalTransfer
+
+    # Optional properties
+
+    @[JSON::Field(key: "balance_transaction", type: FeeRefundBalanceTransaction?, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
+    property balance_transaction : FeeRefundBalanceTransaction?
+
+    @[JSON::Field(ignore: true)]
+    property? balance_transaction_present : Bool = false
+
     @[JSON::Field(key: "destination_payment_refund", type: TransferReversalDestinationPaymentRefund?, presence: true, ignore_serialize: destination_payment_refund.nil? && !destination_payment_refund_present?)]
     property destination_payment_refund : TransferReversalDestinationPaymentRefund?
 
     @[JSON::Field(ignore: true)]
     property? destination_payment_refund_present : Bool = false
-
-    # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
@@ -54,24 +66,29 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["transfer_reversal"])
-
     @[JSON::Field(key: "source_refund", type: TransferReversalSourceRefund?, presence: true, ignore_serialize: source_refund.nil? && !source_refund_present?)]
     property source_refund : TransferReversalSourceRefund?
 
     @[JSON::Field(ignore: true)]
     property? source_refund_present : Bool = false
 
-    @[JSON::Field(key: "transfer", type: TransferReversalTransfer)]
-    property transfer : TransferReversalTransfer
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @balance_transaction : FeeRefundBalanceTransaction?, @created : Int64, @currency : String, @destination_payment_refund : TransferReversalDestinationPaymentRefund?, @id : String, @metadata : Hash(String, String)?, @object : String, @source_refund : TransferReversalSourceRefund?, @transfer : TransferReversalTransfer)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @object : String,
+      @transfer : TransferReversalTransfer,
+      # Optional properties
+      @balance_transaction : FeeRefundBalanceTransaction? = nil,
+      @destination_payment_refund : TransferReversalDestinationPaymentRefund? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @source_refund : TransferReversalSourceRefund? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -93,6 +110,7 @@ module Stripe
     def valid?
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
       true
     end
 
@@ -113,31 +131,16 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        balance_transaction == o.balance_transaction &&
-        created == o.created &&
-        currency == o.currency &&
-        destination_payment_refund == o.destination_payment_refund &&
-        id == o.id &&
-        metadata == o.metadata &&
-        object == o.object &&
-        source_refund == o.source_refund &&
-        transfer == o.transfer
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @balance_transaction, @created, @currency, @destination_payment_refund, @id, @metadata, @object, @source_refund, @transfer)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @created, @currency, @id, @object, @transfer, @balance_transaction, @destination_payment_refund, @metadata, @source_refund)
   end
 end

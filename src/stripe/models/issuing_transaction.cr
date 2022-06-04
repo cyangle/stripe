@@ -19,36 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The transaction amount, which will be reflected in your balance. This amount is in your currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
 
-    @[JSON::Field(key: "amount_details", type: IssuingTransactionAmountDetails1?, presence: true, ignore_serialize: amount_details.nil? && !amount_details_present?)]
-    property amount_details : IssuingTransactionAmountDetails1?
-
-    @[JSON::Field(ignore: true)]
-    property? amount_details_present : Bool = false
-
-    @[JSON::Field(key: "authorization", type: IssuingTransactionAuthorization?, presence: true, ignore_serialize: authorization.nil? && !authorization_present?)]
-    property authorization : IssuingTransactionAuthorization?
-
-    @[JSON::Field(ignore: true)]
-    property? authorization_present : Bool = false
-
-    @[JSON::Field(key: "balance_transaction", type: IssuingTransactionBalanceTransaction?, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
-    property balance_transaction : IssuingTransactionBalanceTransaction?
-
-    @[JSON::Field(ignore: true)]
-    property? balance_transaction_present : Bool = false
-
     @[JSON::Field(key: "card", type: IssuingTransactionCard)]
     property card : IssuingTransactionCard
-
-    @[JSON::Field(key: "cardholder", type: IssuingTransactionCardholder?, presence: true, ignore_serialize: cardholder.nil? && !cardholder_present?)]
-    property cardholder : IssuingTransactionCardholder?
-
-    @[JSON::Field(ignore: true)]
-    property? cardholder_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
@@ -57,12 +34,6 @@ module Stripe
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
-
-    @[JSON::Field(key: "dispute", type: IssuingTransactionDispute?, presence: true, ignore_serialize: dispute.nil? && !dispute_present?)]
-    property dispute : IssuingTransactionDispute?
-
-    @[JSON::Field(ignore: true)]
-    property? dispute_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
@@ -93,17 +64,55 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["issuing.transaction"])
 
+    # The nature of the transaction.
+    @[JSON::Field(key: "type", type: String)]
+    getter _type : String
+
+    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["capture", "refund"])
+
+    # Optional properties
+
+    @[JSON::Field(key: "amount_details", type: IssuingTransactionAmountDetails1?, presence: true, ignore_serialize: amount_details.nil? && !amount_details_present?)]
+    property amount_details : IssuingTransactionAmountDetails1?
+
+    @[JSON::Field(ignore: true)]
+    property? amount_details_present : Bool = false
+
+    @[JSON::Field(key: "authorization", type: IssuingTransactionAuthorization?, presence: true, ignore_serialize: authorization.nil? && !authorization_present?)]
+    property authorization : IssuingTransactionAuthorization?
+
+    @[JSON::Field(ignore: true)]
+    property? authorization_present : Bool = false
+
+    @[JSON::Field(key: "balance_transaction", type: IssuingTransactionBalanceTransaction?, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
+    property balance_transaction : IssuingTransactionBalanceTransaction?
+
+    @[JSON::Field(ignore: true)]
+    property? balance_transaction_present : Bool = false
+
+    @[JSON::Field(key: "cardholder", type: IssuingTransactionCardholder?, presence: true, ignore_serialize: cardholder.nil? && !cardholder_present?)]
+    property cardholder : IssuingTransactionCardholder?
+
+    @[JSON::Field(ignore: true)]
+    property? cardholder_present : Bool = false
+
+    @[JSON::Field(key: "dispute", type: IssuingTransactionDispute?, presence: true, ignore_serialize: dispute.nil? && !dispute_present?)]
+    property dispute : IssuingTransactionDispute?
+
+    @[JSON::Field(ignore: true)]
+    property? dispute_present : Bool = false
+
     @[JSON::Field(key: "purchase_details", type: IssuingTransactionPurchaseDetails1?, presence: true, ignore_serialize: purchase_details.nil? && !purchase_details_present?)]
     property purchase_details : IssuingTransactionPurchaseDetails1?
 
     @[JSON::Field(ignore: true)]
     property? purchase_details_present : Bool = false
 
-    # The nature of the transaction.
-    @[JSON::Field(key: "type", type: String)]
-    getter _type : String
+    @[JSON::Field(key: "treasury", type: IssuingTransactionTreasury1?, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
+    property treasury : IssuingTransactionTreasury1?
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["capture", "refund"])
+    @[JSON::Field(ignore: true)]
+    property? treasury_present : Bool = false
 
     # The digital wallet used for this transaction. One of `apple_pay`, `google_pay`, or `samsung_pay`.
     @[JSON::Field(key: "wallet", type: String?, presence: true, ignore_serialize: wallet.nil? && !wallet_present?)]
@@ -112,18 +121,35 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? wallet_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_WALLET = EnumValidator.new("wallet", "String", ["apple_pay", "google_pay", "samsung_pay", "null"])
-
-    # Optional properties
-    @[JSON::Field(key: "treasury", type: IssuingTransactionTreasury1?, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
-    property treasury : IssuingTransactionTreasury1?
-
-    @[JSON::Field(ignore: true)]
-    property? treasury_present : Bool = false
+    ENUM_VALIDATOR_FOR_WALLET = EnumValidator.new("wallet", "String", ["apple_pay", "google_pay", "samsung_pay"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @amount_details : IssuingTransactionAmountDetails1?, @authorization : IssuingTransactionAuthorization?, @balance_transaction : IssuingTransactionBalanceTransaction?, @card : IssuingTransactionCard, @cardholder : IssuingTransactionCardholder?, @created : Int64, @currency : String, @dispute : IssuingTransactionDispute?, @id : String, @livemode : Bool, @merchant_amount : Int64, @merchant_currency : String, @merchant_data : IssuingAuthorizationMerchantData, @metadata : Hash(String, String), @object : String, @purchase_details : IssuingTransactionPurchaseDetails1?, @_type : String, @wallet : String?, @treasury : IssuingTransactionTreasury1? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @card : IssuingTransactionCard,
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @livemode : Bool,
+      @merchant_amount : Int64,
+      @merchant_currency : String,
+      @merchant_data : IssuingAuthorizationMerchantData,
+      @metadata : Hash(String, String),
+      @object : String,
+      @_type : String,
+      # Optional properties
+      @amount_details : IssuingTransactionAmountDetails1? = nil,
+      @authorization : IssuingTransactionAuthorization? = nil,
+      @balance_transaction : IssuingTransactionBalanceTransaction? = nil,
+      @cardholder : IssuingTransactionCardholder? = nil,
+      @dispute : IssuingTransactionDispute? = nil,
+      @purchase_details : IssuingTransactionPurchaseDetails1? = nil,
+      @treasury : IssuingTransactionTreasury1? = nil,
+      @wallet : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -151,6 +177,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       return false unless ENUM_VALIDATOR_FOR_WALLET.valid?(@wallet)
+
       true
     end
 
@@ -185,41 +212,16 @@ module Stripe
       @wallet = wallet
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        amount_details == o.amount_details &&
-        authorization == o.authorization &&
-        balance_transaction == o.balance_transaction &&
-        card == o.card &&
-        cardholder == o.cardholder &&
-        created == o.created &&
-        currency == o.currency &&
-        dispute == o.dispute &&
-        id == o.id &&
-        livemode == o.livemode &&
-        merchant_amount == o.merchant_amount &&
-        merchant_currency == o.merchant_currency &&
-        merchant_data == o.merchant_data &&
-        metadata == o.metadata &&
-        object == o.object &&
-        purchase_details == o.purchase_details &&
-        treasury == o.treasury &&
-        _type == o._type &&
-        wallet == o.wallet
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @amount_details, @authorization, @balance_transaction, @card, @cardholder, @created, @currency, @dispute, @id, @livemode, @merchant_amount, @merchant_currency, @merchant_data, @metadata, @object, @purchase_details, @treasury, @_type, @wallet)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @card, @created, @currency, @id, @livemode, @merchant_amount, @merchant_currency, @merchant_data, @metadata, @object, @_type, @amount_details, @authorization, @balance_transaction, @cardholder, @dispute, @purchase_details, @treasury, @wallet)
   end
 end

@@ -18,47 +18,55 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Controls when the funds will be captured from the customer's account.  If provided, this parameter will override the top-level `capture_method` when finalizing the payment with this payment method type.  If `capture_method` is already set on the PaymentIntent, providing an empty value for this parameter will unset the stored value for this payment method type.
-    @[JSON::Field(key: "capture_method", type: String?, presence: true, ignore_serialize: capture_method.nil? && !capture_method_present?)]
-    getter capture_method : String?
+
+    @[JSON::Field(key: "financial_connections", type: LinkedAccountOptionsParam1?, presence: true, ignore_serialize: financial_connections.nil? && !financial_connections_present?)]
+    property financial_connections : LinkedAccountOptionsParam1?
 
     @[JSON::Field(ignore: true)]
-    property? capture_method_present : Bool = false
+    property? financial_connections_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = EnumValidator.new("capture_method", "String", ["", "manual"])
-
-    # Token used for persistent Link logins.
-    @[JSON::Field(key: "persistent_token", type: String?, presence: true, ignore_serialize: persistent_token.nil? && !persistent_token_present?)]
-    getter persistent_token : String?
+    @[JSON::Field(key: "networks", type: NetworksOptionsParam?, presence: true, ignore_serialize: networks.nil? && !networks_present?)]
+    property networks : NetworksOptionsParam?
 
     @[JSON::Field(ignore: true)]
-    property? persistent_token_present : Bool = false
+    property? networks_present : Bool = false
 
-    # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.
     @[JSON::Field(key: "setup_future_usage", type: String?, presence: true, ignore_serialize: setup_future_usage.nil? && !setup_future_usage_present?)]
     getter setup_future_usage : String?
 
     @[JSON::Field(ignore: true)]
     property? setup_future_usage_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["", "none", "off_session"])
+    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["", "none", "off_session", "on_session"])
+
+    @[JSON::Field(key: "verification_method", type: String?, presence: true, ignore_serialize: verification_method.nil? && !verification_method_present?)]
+    getter verification_method : String?
+
+    @[JSON::Field(ignore: true)]
+    property? verification_method_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_VERIFICATION_METHOD = EnumValidator.new("verification_method", "String", ["automatic", "instant", "microdeposits"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @capture_method : String? = nil, @persistent_token : String? = nil, @setup_future_usage : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @financial_connections : LinkedAccountOptionsParam1? = nil,
+      @networks : NetworksOptionsParam? = nil,
+      @setup_future_usage : String? = nil,
+      @verification_method : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
-
-      if !@persistent_token.nil? && @persistent_token.to_s.size > 5000
-        invalid_properties.push("invalid value for \"persistent_token\", the character length must be smaller than or equal to 5000.")
-      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
 
       invalid_properties
     end
@@ -66,27 +74,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
-      return false if !@persistent_token.nil? && @persistent_token.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+      return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
+
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] capture_method Object to be assigned
-    def capture_method=(capture_method)
-      ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid!(capture_method)
-      @capture_method = capture_method
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] persistent_token Value to be assigned
-    def persistent_token=(persistent_token)
-      if !persistent_token.nil? && persistent_token.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"persistent_token\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @persistent_token = persistent_token
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -96,14 +87,11 @@ module Stripe
       @setup_future_usage = setup_future_usage
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        capture_method == o.capture_method &&
-        persistent_token == o.persistent_token &&
-        setup_future_usage == o.setup_future_usage
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] verification_method Object to be assigned
+    def verification_method=(verification_method)
+      ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid!(verification_method)
+      @verification_method = verification_method
     end
 
     # @see the `==` method
@@ -112,8 +100,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@capture_method, @persistent_token, @setup_future_usage)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@financial_connections, @networks, @setup_future_usage, @verification_method)
   end
 end

@@ -12,26 +12,24 @@ require "time"
 require "log"
 
 module Stripe
-  # When set, provides configuration for this item’s quantity to be adjusted by the customer during Checkout.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class AdjustableQuantityParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Set to true if the quantity can be adjusted to any non-negative integer. By default customers will be able to remove the line item by setting the quantity to 0.
+
     @[JSON::Field(key: "enabled", type: Bool)]
     property enabled : Bool
 
     # Optional properties
-    # The maximum quantity the customer can purchase for the Checkout Session. By default this value is 99. You can specify a value up to 999.
+
     @[JSON::Field(key: "maximum", type: Int64?, presence: true, ignore_serialize: maximum.nil? && !maximum_present?)]
     property maximum : Int64?
 
     @[JSON::Field(ignore: true)]
     property? maximum_present : Bool = false
 
-    # The minimum quantity the customer must purchase for the Checkout Session. By default this value is 0.
     @[JSON::Field(key: "minimum", type: Int64?, presence: true, ignore_serialize: minimum.nil? && !minimum_present?)]
     property minimum : Int64?
 
@@ -40,7 +38,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @enabled : Bool, @maximum : Int64? = nil, @minimum : Int64? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @enabled : Bool,
+      # Optional properties
+      @maximum : Int64? = nil,
+      @minimum : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -57,24 +62,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        enabled == o.enabled &&
-        maximum == o.maximum &&
-        minimum == o.minimum
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@enabled, @maximum, @minimum)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@enabled, @maximum, @minimum)
   end
 end

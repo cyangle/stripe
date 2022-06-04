@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The number of days charges for the account will be held before being paid out.
     @[JSON::Field(key: "delay_days", type: Int64)]
     property delay_days : Int64
@@ -28,6 +29,7 @@ module Stripe
     getter interval : String
 
     # Optional properties
+
     # The day of the month funds will be paid out. Only shown if `interval` is monthly. Payouts scheduled between the 29th and 31st of the month are sent on the last day of shorter months.
     @[JSON::Field(key: "monthly_anchor", type: Int64?, presence: true, ignore_serialize: monthly_anchor.nil? && !monthly_anchor_present?)]
     property monthly_anchor : Int64?
@@ -44,7 +46,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @delay_days : Int64, @interval : String, @monthly_anchor : Int64? = nil, @weekly_anchor : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @delay_days : Int64,
+      @interval : String,
+      # Optional properties
+      @monthly_anchor : Int64? = nil,
+      @weekly_anchor : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -68,6 +78,7 @@ module Stripe
     def valid?
       return false if @interval.to_s.size > 5000
       return false if !@weekly_anchor.nil? && @weekly_anchor.to_s.size > 5000
+
       true
     end
 
@@ -91,25 +102,16 @@ module Stripe
       @weekly_anchor = weekly_anchor
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        delay_days == o.delay_days &&
-        interval == o.interval &&
-        monthly_anchor == o.monthly_anchor &&
-        weekly_anchor == o.weekly_anchor
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@delay_days, @interval, @monthly_anchor, @weekly_anchor)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@delay_days, @interval, @monthly_anchor, @weekly_anchor)
   end
 end

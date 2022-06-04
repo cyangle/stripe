@@ -19,21 +19,19 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # [The merchant category code for the account](https://stripe.com/docs/connect/setting-mcc). MCCs are used to classify businesses based on the goods or services they provide.
+
     @[JSON::Field(key: "mcc", type: String?, presence: true, ignore_serialize: mcc.nil? && !mcc_present?)]
     getter mcc : String?
 
     @[JSON::Field(ignore: true)]
     property? mcc_present : Bool = false
 
-    # The customer-facing business name.
     @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
     getter name : String?
 
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
 
-    # Internal-only description of the product sold by, or service provided by, the business. Used by Stripe for risk and underwriting purposes.
     @[JSON::Field(key: "product_description", type: String?, presence: true, ignore_serialize: product_description.nil? && !product_description_present?)]
     getter product_description : String?
 
@@ -46,14 +44,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? support_address_present : Bool = false
 
-    # A publicly available email address for sending support issues to.
     @[JSON::Field(key: "support_email", type: String?, presence: true, ignore_serialize: support_email.nil? && !support_email_present?)]
     property support_email : String?
 
     @[JSON::Field(ignore: true)]
     property? support_email_present : Bool = false
 
-    # A publicly available phone number to call with support issues.
     @[JSON::Field(key: "support_phone", type: String?, presence: true, ignore_serialize: support_phone.nil? && !support_phone_present?)]
     getter support_phone : String?
 
@@ -66,7 +62,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? support_url_present : Bool = false
 
-    # The business's publicly available website.
     @[JSON::Field(key: "url", type: String?, presence: true, ignore_serialize: url.nil? && !url_present?)]
     getter url : String?
 
@@ -75,7 +70,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @mcc : String? = nil, @name : String? = nil, @product_description : String? = nil, @support_address : AddressSpecs? = nil, @support_email : String? = nil, @support_phone : String? = nil, @support_url : BusinessProfileSpecsSupportUrl? = nil, @url : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @mcc : String? = nil,
+      @name : String? = nil,
+      @product_description : String? = nil,
+      @support_address : AddressSpecs? = nil,
+      @support_email : String? = nil,
+      @support_phone : String? = nil,
+      @support_url : BusinessProfileSpecsSupportUrl? = nil,
+      @url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -114,6 +120,7 @@ module Stripe
       return false if !@product_description.nil? && @product_description.to_s.size > 40000
       return false if !@support_phone.nil? && @support_phone.to_s.size > 5000
       return false if !@url.nil? && @url.to_s.size > 5000
+
       true
     end
 
@@ -167,29 +174,16 @@ module Stripe
       @url = url
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        mcc == o.mcc &&
-        name == o.name &&
-        product_description == o.product_description &&
-        support_address == o.support_address &&
-        support_email == o.support_email &&
-        support_phone == o.support_phone &&
-        support_url == o.support_url &&
-        url == o.url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@mcc, @name, @product_description, @support_address, @support_email, @support_phone, @support_url, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@mcc, @name, @product_description, @support_address, @support_email, @support_phone, @support_url, @url)
   end
 end

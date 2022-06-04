@@ -18,12 +18,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The current software version of the reader.
-    @[JSON::Field(key: "device_sw_version", type: String, presence: true, ignore_serialize: device_sw_version.nil? && !device_sw_version_present?)]
-    getter device_sw_version : String
-
-    @[JSON::Field(ignore: true)]
-    property? device_sw_version_present : Bool = false
 
     # Type of reader, one of `bbpos_wisepad3`, `stripe_m2`, `bbpos_chipper2x`, `bbpos_wisepos_e`, `verifone_P400`, or `simulated_wisepos_e`.
     @[JSON::Field(key: "device_type", type: String?)]
@@ -35,13 +29,6 @@ module Stripe
     @[JSON::Field(key: "id", type: String?)]
     getter id : String?
 
-    # The local IP address of the reader.
-    @[JSON::Field(key: "ip_address", type: String, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
-    getter ip_address : String
-
-    @[JSON::Field(ignore: true)]
-    property? ip_address_present : Bool = false
-
     # Custom label given to the reader for easier identification.
     @[JSON::Field(key: "label", type: String?)]
     getter label : String?
@@ -49,12 +36,6 @@ module Stripe
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?)]
     property livemode : Bool?
-
-    @[JSON::Field(key: "location", type: TerminalReaderLocation, presence: true, ignore_serialize: location.nil? && !location_present?)]
-    property location : TerminalReaderLocation
-
-    @[JSON::Field(ignore: true)]
-    property? location_present : Bool = false
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?)]
@@ -70,13 +51,6 @@ module Stripe
     @[JSON::Field(key: "serial_number", type: String?)]
     getter serial_number : String?
 
-    # The networking status of the reader.
-    @[JSON::Field(key: "status", type: String, presence: true, ignore_serialize: status.nil? && !status_present?)]
-    getter status : String
-
-    @[JSON::Field(ignore: true)]
-    property? status_present : Bool = false
-
     # Always true for a deleted object
     @[JSON::Field(key: "deleted", type: Bool?)]
     getter deleted : Bool?
@@ -84,11 +58,39 @@ module Stripe
     ENUM_VALIDATOR_FOR_DELETED = EnumValidator.new("deleted", "Bool", ["true"])
 
     # Optional properties
+
     @[JSON::Field(key: "action", type: TerminalReaderAction?, presence: true, ignore_serialize: action.nil? && !action_present?)]
     property action : TerminalReaderAction?
 
     @[JSON::Field(ignore: true)]
     property? action_present : Bool = false
+
+    # The current software version of the reader.
+    @[JSON::Field(key: "device_sw_version", type: String?, presence: true, ignore_serialize: device_sw_version.nil? && !device_sw_version_present?)]
+    getter device_sw_version : String?
+
+    @[JSON::Field(ignore: true)]
+    property? device_sw_version_present : Bool = false
+
+    # The local IP address of the reader.
+    @[JSON::Field(key: "ip_address", type: String?, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
+    getter ip_address : String?
+
+    @[JSON::Field(ignore: true)]
+    property? ip_address_present : Bool = false
+
+    @[JSON::Field(key: "location", type: TerminalReaderLocation?, presence: true, ignore_serialize: location.nil? && !location_present?)]
+    property location : TerminalReaderLocation?
+
+    @[JSON::Field(ignore: true)]
+    property? location_present : Bool = false
+
+    # The networking status of the reader.
+    @[JSON::Field(key: "status", type: String?, presence: true, ignore_serialize: status.nil? && !status_present?)]
+    getter status : String?
+
+    @[JSON::Field(ignore: true)]
+    property? status_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -100,7 +102,24 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @device_sw_version : String?, @device_type : String, @id : String, @ip_address : String?, @label : String, @livemode : Bool, @location : TerminalReaderLocation?, @metadata : Hash(String, String), @object : String, @serial_number : String, @status : String?, @deleted : Bool, @action : TerminalReaderAction? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @device_type : String? = nil,
+      @id : String? = nil,
+      @label : String? = nil,
+      @livemode : Bool? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @object : String? = nil,
+      @serial_number : String? = nil,
+      @deleted : Bool? = nil,
+      # Optional properties
+      @action : TerminalReaderAction? = nil,
+      @device_sw_version : String? = nil,
+      @ip_address : String? = nil,
+      @location : TerminalReaderLocation? = nil,
+      @status : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -108,18 +127,10 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @device_sw_version.to_s.size > 5000
-        invalid_properties.push("invalid value for \"device_sw_version\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_DEVICE_TYPE.error_message) unless ENUM_VALIDATOR_FOR_DEVICE_TYPE.valid?(@device_type, false)
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @ip_address.to_s.size > 5000
-        invalid_properties.push("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
       end
 
       if @label.to_s.size > 5000
@@ -132,11 +143,19 @@ module Stripe
         invalid_properties.push("invalid value for \"serial_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @status.to_s.size > 5000
-        invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push(ENUM_VALIDATOR_FOR_DELETED.error_message) unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
+
+      if !@device_sw_version.nil? && @device_sw_version.to_s.size > 5000
+        invalid_properties.push("invalid value for \"device_sw_version\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_DELETED.error_message) unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
+      if !@ip_address.nil? && @ip_address.to_s.size > 5000
+        invalid_properties.push("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@status.nil? && @status.to_s.size > 5000
+        invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      end
 
       invalid_properties
     end
@@ -144,15 +163,16 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @device_sw_version.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_DEVICE_TYPE.valid?(@device_type, false)
       return false if @id.to_s.size > 5000
-      return false if @ip_address.to_s.size > 5000
       return false if @label.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @serial_number.to_s.size > 5000
-      return false if @status.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
+      return false if !@device_sw_version.nil? && @device_sw_version.to_s.size > 5000
+      return false if !@ip_address.nil? && @ip_address.to_s.size > 5000
+      return false if !@status.nil? && @status.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -164,22 +184,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] device_sw_version Value to be assigned
-    def device_sw_version=(device_sw_version)
-      if device_sw_version.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"device_sw_version\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @device_sw_version = device_sw_version
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -197,16 +204,6 @@ module Stripe
       end
 
       @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] ip_address Value to be assigned
-    def ip_address=(ip_address)
-      if ip_address.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @ip_address = ip_address
     end
 
     # Custom attribute writer method with validation
@@ -236,16 +233,6 @@ module Stripe
       @serial_number = serial_number
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] status Value to be assigned
-    def status=(status)
-      if status.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @status = status
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] deleted Object to be assigned
     def deleted=(deleted)
@@ -253,24 +240,34 @@ module Stripe
       @deleted = deleted
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        action == o.action &&
-        device_sw_version == o.device_sw_version &&
-        device_type == o.device_type &&
-        id == o.id &&
-        ip_address == o.ip_address &&
-        label == o.label &&
-        livemode == o.livemode &&
-        location == o.location &&
-        metadata == o.metadata &&
-        object == o.object &&
-        serial_number == o.serial_number &&
-        status == o.status &&
-        deleted == o.deleted
+    # Custom attribute writer method with validation
+    # @param [Object] device_sw_version Value to be assigned
+    def device_sw_version=(device_sw_version)
+      if !device_sw_version.nil? && device_sw_version.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"device_sw_version\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @device_sw_version = device_sw_version
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] ip_address Value to be assigned
+    def ip_address=(ip_address)
+      if !ip_address.nil? && ip_address.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @ip_address = ip_address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] status Value to be assigned
+    def status=(status)
+      if !status.nil? && status.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @status = status
     end
 
     # @see the `==` method
@@ -279,8 +276,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@action, @device_sw_version, @device_type, @id, @ip_address, @label, @livemode, @location, @metadata, @object, @serial_number, @status, @deleted)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@device_type, @id, @label, @livemode, @metadata, @object, @serial_number, @deleted, @action, @device_sw_version, @ip_address, @location, @status)
   end
 end

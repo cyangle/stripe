@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "automatic_tax", type: AutomaticTax1?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
     property automatic_tax : AutomaticTax1?
 
@@ -57,6 +58,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? discounts_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -77,8 +79,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? line_items_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -109,7 +111,24 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @automatic_tax : AutomaticTax1? = nil, @billing_details : PostOrdersRequestBillingDetails? = nil, @currency : String? = nil, @customer : String? = nil, @description : String? = nil, @discounts : PostOrdersIdRequestDiscounts? = nil, @expand : Array(String)? = nil, @ip_address : String? = nil, @line_items : Array(UpdateParams)? = nil, @metadata : IndividualSpecsMetadata? = nil, @payment : UpdateParams1? = nil, @shipping_cost : PostOrdersRequestShippingCost? = nil, @shipping_details : PostOrdersRequestShippingDetails? = nil, @tax_details : TaxDetails? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @automatic_tax : AutomaticTax1? = nil,
+      @billing_details : PostOrdersRequestBillingDetails? = nil,
+      @currency : String? = nil,
+      @customer : String? = nil,
+      @description : String? = nil,
+      @discounts : PostOrdersIdRequestDiscounts? = nil,
+      @expand : Array(String)? = nil,
+      @ip_address : String? = nil,
+      @line_items : Array(UpdateParams)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @payment : UpdateParams1? = nil,
+      @shipping_cost : PostOrdersRequestShippingCost? = nil,
+      @shipping_details : PostOrdersRequestShippingDetails? = nil,
+      @tax_details : TaxDetails? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -133,6 +152,7 @@ module Stripe
     def valid?
       return false if !@customer.nil? && @customer.to_s.size > 5000
       return false if !@description.nil? && @description.to_s.size > 5000
+
       true
     end
 
@@ -156,35 +176,16 @@ module Stripe
       @description = description
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        automatic_tax == o.automatic_tax &&
-        billing_details == o.billing_details &&
-        currency == o.currency &&
-        customer == o.customer &&
-        description == o.description &&
-        discounts == o.discounts &&
-        expand == o.expand &&
-        ip_address == o.ip_address &&
-        line_items == o.line_items &&
-        metadata == o.metadata &&
-        payment == o.payment &&
-        shipping_cost == o.shipping_cost &&
-        shipping_details == o.shipping_details &&
-        tax_details == o.tax_details
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@automatic_tax, @billing_details, @currency, @customer, @description, @discounts, @expand, @ip_address, @line_items, @metadata, @payment, @shipping_cost, @shipping_details, @tax_details)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@automatic_tax, @billing_details, @currency, @customer, @description, @discounts, @expand, @ip_address, @line_items, @metadata, @payment, @shipping_cost, @shipping_details, @tax_details)
   end
 end

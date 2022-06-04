@@ -12,39 +12,36 @@ require "time"
 require "log"
 
 module Stripe
-  # Shipping address for the order. Required if any of the SKUs are for products that have `shippable` set to true.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class OrderShipping
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "address", type: Address1)]
     property address : Address1
 
     # Optional properties
-    # The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
+
     @[JSON::Field(key: "carrier", type: String?, presence: true, ignore_serialize: carrier.nil? && !carrier_present?)]
     getter carrier : String?
 
     @[JSON::Field(ignore: true)]
     property? carrier_present : Bool = false
 
-    # Recipient name.
     @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
     getter name : String?
 
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
 
-    # Recipient phone (including extension).
     @[JSON::Field(key: "phone", type: String?, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
     getter phone : String?
 
     @[JSON::Field(ignore: true)]
     property? phone_present : Bool = false
 
-    # The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
     @[JSON::Field(key: "tracking_number", type: String?, presence: true, ignore_serialize: tracking_number.nil? && !tracking_number_present?)]
     getter tracking_number : String?
 
@@ -53,7 +50,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : Address1, @carrier : String? = nil, @name : String? = nil, @phone : String? = nil, @tracking_number : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @address : Address1,
+      # Optional properties
+      @carrier : String? = nil,
+      @name : String? = nil,
+      @phone : String? = nil,
+      @tracking_number : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -87,6 +93,7 @@ module Stripe
       return false if !@name.nil? && @name.to_s.size > 5000
       return false if !@phone.nil? && @phone.to_s.size > 5000
       return false if !@tracking_number.nil? && @tracking_number.to_s.size > 5000
+
       true
     end
 
@@ -130,26 +137,16 @@ module Stripe
       @tracking_number = tracking_number
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        carrier == o.carrier &&
-        name == o.name &&
-        phone == o.phone &&
-        tracking_number == o.tracking_number
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @carrier, @name, @phone, @tracking_number)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address, @carrier, @name, @phone, @tracking_number)
   end
 end

@@ -190,12 +190,6 @@ describe Stripe::PostCheckoutSessionsRequest do
     end
   end
 
-  describe "test attribute 'shipping_rates'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'submit_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

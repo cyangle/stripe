@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The account holder name
     @[JSON::Field(key: "account_holder_name", type: String?, presence: true, ignore_serialize: account_holder_name.nil? && !account_holder_name_present?)]
     getter account_holder_name : String?
@@ -70,7 +71,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account_holder_name : String?, @account_number : String?, @account_type : String?, @bank_code : String?, @bank_name : String?, @branch_code : String?, @branch_name : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @account_holder_name : String? = nil,
+      @account_number : String? = nil,
+      @account_type : String? = nil,
+      @bank_code : String? = nil,
+      @bank_name : String? = nil,
+      @branch_code : String? = nil,
+      @branch_name : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -78,31 +89,31 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @account_holder_name.to_s.size > 5000
+      if !@account_holder_name.nil? && @account_holder_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @account_number.to_s.size > 5000
+      if !@account_number.nil? && @account_number.to_s.size > 5000
         invalid_properties.push("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @account_type.to_s.size > 5000
+      if !@account_type.nil? && @account_type.to_s.size > 5000
         invalid_properties.push("invalid value for \"account_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @bank_code.to_s.size > 5000
+      if !@bank_code.nil? && @bank_code.to_s.size > 5000
         invalid_properties.push("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @bank_name.to_s.size > 5000
+      if !@bank_name.nil? && @bank_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @branch_code.to_s.size > 5000
+      if !@branch_code.nil? && @branch_code.to_s.size > 5000
         invalid_properties.push("invalid value for \"branch_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @branch_name.to_s.size > 5000
+      if !@branch_name.nil? && @branch_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"branch_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -112,20 +123,21 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @account_holder_name.to_s.size > 5000
-      return false if @account_number.to_s.size > 5000
-      return false if @account_type.to_s.size > 5000
-      return false if @bank_code.to_s.size > 5000
-      return false if @bank_name.to_s.size > 5000
-      return false if @branch_code.to_s.size > 5000
-      return false if @branch_name.to_s.size > 5000
+      return false if !@account_holder_name.nil? && @account_holder_name.to_s.size > 5000
+      return false if !@account_number.nil? && @account_number.to_s.size > 5000
+      return false if !@account_type.nil? && @account_type.to_s.size > 5000
+      return false if !@bank_code.nil? && @bank_code.to_s.size > 5000
+      return false if !@bank_name.nil? && @bank_name.to_s.size > 5000
+      return false if !@branch_code.nil? && @branch_code.to_s.size > 5000
+      return false if !@branch_name.nil? && @branch_name.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] account_holder_name Value to be assigned
     def account_holder_name=(account_holder_name)
-      if account_holder_name.to_s.size > 5000
+      if !account_holder_name.nil? && account_holder_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -135,7 +147,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] account_number Value to be assigned
     def account_number=(account_number)
-      if account_number.to_s.size > 5000
+      if !account_number.nil? && account_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -145,7 +157,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] account_type Value to be assigned
     def account_type=(account_type)
-      if account_type.to_s.size > 5000
+      if !account_type.nil? && account_type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_type\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -155,7 +167,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] bank_code Value to be assigned
     def bank_code=(bank_code)
-      if bank_code.to_s.size > 5000
+      if !bank_code.nil? && bank_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -165,7 +177,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] bank_name Value to be assigned
     def bank_name=(bank_name)
-      if bank_name.to_s.size > 5000
+      if !bank_name.nil? && bank_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -175,7 +187,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] branch_code Value to be assigned
     def branch_code=(branch_code)
-      if branch_code.to_s.size > 5000
+      if !branch_code.nil? && branch_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"branch_code\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -185,25 +197,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] branch_name Value to be assigned
     def branch_name=(branch_name)
-      if branch_name.to_s.size > 5000
+      if !branch_name.nil? && branch_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"branch_name\", the character length must be smaller than or equal to 5000.")
       end
 
       @branch_name = branch_name
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account_holder_name == o.account_holder_name &&
-        account_number == o.account_number &&
-        account_type == o.account_type &&
-        bank_code == o.bank_code &&
-        bank_name == o.bank_name &&
-        branch_code == o.branch_code &&
-        branch_name == o.branch_name
     end
 
     # @see the `==` method
@@ -212,8 +210,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account_holder_name, @account_number, @account_type, @bank_code, @bank_name, @branch_code, @branch_name)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account_holder_name, @account_number, @account_type, @bank_code, @bank_name, @branch_code, @branch_name)
   end
 end

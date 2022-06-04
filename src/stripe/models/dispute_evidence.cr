@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Any server or activity logs showing proof that the customer accessed or downloaded the purchased digital product. This information should include IP addresses, corresponding timestamps, and any detailed recorded activity.
     @[JSON::Field(key: "access_activity_log", type: String?, presence: true, ignore_serialize: access_activity_log.nil? && !access_activity_log_present?)]
     getter access_activity_log : String?
@@ -201,7 +202,37 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @access_activity_log : String?, @billing_address : String?, @cancellation_policy : DisputeEvidenceCancellationPolicy?, @cancellation_policy_disclosure : String?, @cancellation_rebuttal : String?, @customer_communication : DisputeEvidenceCustomerCommunication?, @customer_email_address : String?, @customer_name : String?, @customer_purchase_ip : String?, @customer_signature : DisputeEvidenceCustomerSignature?, @duplicate_charge_documentation : DisputeEvidenceDuplicateChargeDocumentation?, @duplicate_charge_explanation : String?, @duplicate_charge_id : String?, @product_description : String?, @receipt : DisputeEvidenceReceipt?, @refund_policy : DisputeEvidenceRefundPolicy?, @refund_policy_disclosure : String?, @refund_refusal_explanation : String?, @service_date : String?, @service_documentation : DisputeEvidenceServiceDocumentation?, @shipping_address : String?, @shipping_carrier : String?, @shipping_date : String?, @shipping_documentation : DisputeEvidenceShippingDocumentation?, @shipping_tracking_number : String?, @uncategorized_file : DisputeEvidenceUncategorizedFile?, @uncategorized_text : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @access_activity_log : String? = nil,
+      @billing_address : String? = nil,
+      @cancellation_policy : DisputeEvidenceCancellationPolicy? = nil,
+      @cancellation_policy_disclosure : String? = nil,
+      @cancellation_rebuttal : String? = nil,
+      @customer_communication : DisputeEvidenceCustomerCommunication? = nil,
+      @customer_email_address : String? = nil,
+      @customer_name : String? = nil,
+      @customer_purchase_ip : String? = nil,
+      @customer_signature : DisputeEvidenceCustomerSignature? = nil,
+      @duplicate_charge_documentation : DisputeEvidenceDuplicateChargeDocumentation? = nil,
+      @duplicate_charge_explanation : String? = nil,
+      @duplicate_charge_id : String? = nil,
+      @product_description : String? = nil,
+      @receipt : DisputeEvidenceReceipt? = nil,
+      @refund_policy : DisputeEvidenceRefundPolicy? = nil,
+      @refund_policy_disclosure : String? = nil,
+      @refund_refusal_explanation : String? = nil,
+      @service_date : String? = nil,
+      @service_documentation : DisputeEvidenceServiceDocumentation? = nil,
+      @shipping_address : String? = nil,
+      @shipping_carrier : String? = nil,
+      @shipping_date : String? = nil,
+      @shipping_documentation : DisputeEvidenceShippingDocumentation? = nil,
+      @shipping_tracking_number : String? = nil,
+      @uncategorized_file : DisputeEvidenceUncategorizedFile? = nil,
+      @uncategorized_text : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -209,75 +240,75 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @access_activity_log.to_s.size > 150000
+      if !@access_activity_log.nil? && @access_activity_log.to_s.size > 150000
         invalid_properties.push("invalid value for \"access_activity_log\", the character length must be smaller than or equal to 150000.")
       end
 
-      if @billing_address.to_s.size > 5000
+      if !@billing_address.nil? && @billing_address.to_s.size > 5000
         invalid_properties.push("invalid value for \"billing_address\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @cancellation_policy_disclosure.to_s.size > 150000
+      if !@cancellation_policy_disclosure.nil? && @cancellation_policy_disclosure.to_s.size > 150000
         invalid_properties.push("invalid value for \"cancellation_policy_disclosure\", the character length must be smaller than or equal to 150000.")
       end
 
-      if @cancellation_rebuttal.to_s.size > 150000
+      if !@cancellation_rebuttal.nil? && @cancellation_rebuttal.to_s.size > 150000
         invalid_properties.push("invalid value for \"cancellation_rebuttal\", the character length must be smaller than or equal to 150000.")
       end
 
-      if @customer_email_address.to_s.size > 5000
+      if !@customer_email_address.nil? && @customer_email_address.to_s.size > 5000
         invalid_properties.push("invalid value for \"customer_email_address\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @customer_name.to_s.size > 5000
+      if !@customer_name.nil? && @customer_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"customer_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @customer_purchase_ip.to_s.size > 5000
+      if !@customer_purchase_ip.nil? && @customer_purchase_ip.to_s.size > 5000
         invalid_properties.push("invalid value for \"customer_purchase_ip\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @duplicate_charge_explanation.to_s.size > 150000
+      if !@duplicate_charge_explanation.nil? && @duplicate_charge_explanation.to_s.size > 150000
         invalid_properties.push("invalid value for \"duplicate_charge_explanation\", the character length must be smaller than or equal to 150000.")
       end
 
-      if @duplicate_charge_id.to_s.size > 5000
+      if !@duplicate_charge_id.nil? && @duplicate_charge_id.to_s.size > 5000
         invalid_properties.push("invalid value for \"duplicate_charge_id\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @product_description.to_s.size > 150000
+      if !@product_description.nil? && @product_description.to_s.size > 150000
         invalid_properties.push("invalid value for \"product_description\", the character length must be smaller than or equal to 150000.")
       end
 
-      if @refund_policy_disclosure.to_s.size > 150000
+      if !@refund_policy_disclosure.nil? && @refund_policy_disclosure.to_s.size > 150000
         invalid_properties.push("invalid value for \"refund_policy_disclosure\", the character length must be smaller than or equal to 150000.")
       end
 
-      if @refund_refusal_explanation.to_s.size > 150000
+      if !@refund_refusal_explanation.nil? && @refund_refusal_explanation.to_s.size > 150000
         invalid_properties.push("invalid value for \"refund_refusal_explanation\", the character length must be smaller than or equal to 150000.")
       end
 
-      if @service_date.to_s.size > 5000
+      if !@service_date.nil? && @service_date.to_s.size > 5000
         invalid_properties.push("invalid value for \"service_date\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @shipping_address.to_s.size > 5000
+      if !@shipping_address.nil? && @shipping_address.to_s.size > 5000
         invalid_properties.push("invalid value for \"shipping_address\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @shipping_carrier.to_s.size > 5000
+      if !@shipping_carrier.nil? && @shipping_carrier.to_s.size > 5000
         invalid_properties.push("invalid value for \"shipping_carrier\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @shipping_date.to_s.size > 5000
+      if !@shipping_date.nil? && @shipping_date.to_s.size > 5000
         invalid_properties.push("invalid value for \"shipping_date\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @shipping_tracking_number.to_s.size > 5000
+      if !@shipping_tracking_number.nil? && @shipping_tracking_number.to_s.size > 5000
         invalid_properties.push("invalid value for \"shipping_tracking_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @uncategorized_text.to_s.size > 150000
+      if !@uncategorized_text.nil? && @uncategorized_text.to_s.size > 150000
         invalid_properties.push("invalid value for \"uncategorized_text\", the character length must be smaller than or equal to 150000.")
       end
 
@@ -287,31 +318,32 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @access_activity_log.to_s.size > 150000
-      return false if @billing_address.to_s.size > 5000
-      return false if @cancellation_policy_disclosure.to_s.size > 150000
-      return false if @cancellation_rebuttal.to_s.size > 150000
-      return false if @customer_email_address.to_s.size > 5000
-      return false if @customer_name.to_s.size > 5000
-      return false if @customer_purchase_ip.to_s.size > 5000
-      return false if @duplicate_charge_explanation.to_s.size > 150000
-      return false if @duplicate_charge_id.to_s.size > 5000
-      return false if @product_description.to_s.size > 150000
-      return false if @refund_policy_disclosure.to_s.size > 150000
-      return false if @refund_refusal_explanation.to_s.size > 150000
-      return false if @service_date.to_s.size > 5000
-      return false if @shipping_address.to_s.size > 5000
-      return false if @shipping_carrier.to_s.size > 5000
-      return false if @shipping_date.to_s.size > 5000
-      return false if @shipping_tracking_number.to_s.size > 5000
-      return false if @uncategorized_text.to_s.size > 150000
+      return false if !@access_activity_log.nil? && @access_activity_log.to_s.size > 150000
+      return false if !@billing_address.nil? && @billing_address.to_s.size > 5000
+      return false if !@cancellation_policy_disclosure.nil? && @cancellation_policy_disclosure.to_s.size > 150000
+      return false if !@cancellation_rebuttal.nil? && @cancellation_rebuttal.to_s.size > 150000
+      return false if !@customer_email_address.nil? && @customer_email_address.to_s.size > 5000
+      return false if !@customer_name.nil? && @customer_name.to_s.size > 5000
+      return false if !@customer_purchase_ip.nil? && @customer_purchase_ip.to_s.size > 5000
+      return false if !@duplicate_charge_explanation.nil? && @duplicate_charge_explanation.to_s.size > 150000
+      return false if !@duplicate_charge_id.nil? && @duplicate_charge_id.to_s.size > 5000
+      return false if !@product_description.nil? && @product_description.to_s.size > 150000
+      return false if !@refund_policy_disclosure.nil? && @refund_policy_disclosure.to_s.size > 150000
+      return false if !@refund_refusal_explanation.nil? && @refund_refusal_explanation.to_s.size > 150000
+      return false if !@service_date.nil? && @service_date.to_s.size > 5000
+      return false if !@shipping_address.nil? && @shipping_address.to_s.size > 5000
+      return false if !@shipping_carrier.nil? && @shipping_carrier.to_s.size > 5000
+      return false if !@shipping_date.nil? && @shipping_date.to_s.size > 5000
+      return false if !@shipping_tracking_number.nil? && @shipping_tracking_number.to_s.size > 5000
+      return false if !@uncategorized_text.nil? && @uncategorized_text.to_s.size > 150000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] access_activity_log Value to be assigned
     def access_activity_log=(access_activity_log)
-      if access_activity_log.to_s.size > 150000
+      if !access_activity_log.nil? && access_activity_log.to_s.size > 150000
         raise ArgumentError.new("invalid value for \"access_activity_log\", the character length must be smaller than or equal to 150000.")
       end
 
@@ -321,7 +353,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] billing_address Value to be assigned
     def billing_address=(billing_address)
-      if billing_address.to_s.size > 5000
+      if !billing_address.nil? && billing_address.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"billing_address\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -331,7 +363,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] cancellation_policy_disclosure Value to be assigned
     def cancellation_policy_disclosure=(cancellation_policy_disclosure)
-      if cancellation_policy_disclosure.to_s.size > 150000
+      if !cancellation_policy_disclosure.nil? && cancellation_policy_disclosure.to_s.size > 150000
         raise ArgumentError.new("invalid value for \"cancellation_policy_disclosure\", the character length must be smaller than or equal to 150000.")
       end
 
@@ -341,7 +373,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] cancellation_rebuttal Value to be assigned
     def cancellation_rebuttal=(cancellation_rebuttal)
-      if cancellation_rebuttal.to_s.size > 150000
+      if !cancellation_rebuttal.nil? && cancellation_rebuttal.to_s.size > 150000
         raise ArgumentError.new("invalid value for \"cancellation_rebuttal\", the character length must be smaller than or equal to 150000.")
       end
 
@@ -351,7 +383,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] customer_email_address Value to be assigned
     def customer_email_address=(customer_email_address)
-      if customer_email_address.to_s.size > 5000
+      if !customer_email_address.nil? && customer_email_address.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer_email_address\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -361,7 +393,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] customer_name Value to be assigned
     def customer_name=(customer_name)
-      if customer_name.to_s.size > 5000
+      if !customer_name.nil? && customer_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -371,7 +403,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] customer_purchase_ip Value to be assigned
     def customer_purchase_ip=(customer_purchase_ip)
-      if customer_purchase_ip.to_s.size > 5000
+      if !customer_purchase_ip.nil? && customer_purchase_ip.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer_purchase_ip\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -381,7 +413,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] duplicate_charge_explanation Value to be assigned
     def duplicate_charge_explanation=(duplicate_charge_explanation)
-      if duplicate_charge_explanation.to_s.size > 150000
+      if !duplicate_charge_explanation.nil? && duplicate_charge_explanation.to_s.size > 150000
         raise ArgumentError.new("invalid value for \"duplicate_charge_explanation\", the character length must be smaller than or equal to 150000.")
       end
 
@@ -391,7 +423,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] duplicate_charge_id Value to be assigned
     def duplicate_charge_id=(duplicate_charge_id)
-      if duplicate_charge_id.to_s.size > 5000
+      if !duplicate_charge_id.nil? && duplicate_charge_id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"duplicate_charge_id\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -401,7 +433,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] product_description Value to be assigned
     def product_description=(product_description)
-      if product_description.to_s.size > 150000
+      if !product_description.nil? && product_description.to_s.size > 150000
         raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 150000.")
       end
 
@@ -411,7 +443,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] refund_policy_disclosure Value to be assigned
     def refund_policy_disclosure=(refund_policy_disclosure)
-      if refund_policy_disclosure.to_s.size > 150000
+      if !refund_policy_disclosure.nil? && refund_policy_disclosure.to_s.size > 150000
         raise ArgumentError.new("invalid value for \"refund_policy_disclosure\", the character length must be smaller than or equal to 150000.")
       end
 
@@ -421,7 +453,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] refund_refusal_explanation Value to be assigned
     def refund_refusal_explanation=(refund_refusal_explanation)
-      if refund_refusal_explanation.to_s.size > 150000
+      if !refund_refusal_explanation.nil? && refund_refusal_explanation.to_s.size > 150000
         raise ArgumentError.new("invalid value for \"refund_refusal_explanation\", the character length must be smaller than or equal to 150000.")
       end
 
@@ -431,7 +463,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] service_date Value to be assigned
     def service_date=(service_date)
-      if service_date.to_s.size > 5000
+      if !service_date.nil? && service_date.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"service_date\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -441,7 +473,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] shipping_address Value to be assigned
     def shipping_address=(shipping_address)
-      if shipping_address.to_s.size > 5000
+      if !shipping_address.nil? && shipping_address.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"shipping_address\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -451,7 +483,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] shipping_carrier Value to be assigned
     def shipping_carrier=(shipping_carrier)
-      if shipping_carrier.to_s.size > 5000
+      if !shipping_carrier.nil? && shipping_carrier.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"shipping_carrier\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -461,7 +493,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] shipping_date Value to be assigned
     def shipping_date=(shipping_date)
-      if shipping_date.to_s.size > 5000
+      if !shipping_date.nil? && shipping_date.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"shipping_date\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -471,7 +503,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] shipping_tracking_number Value to be assigned
     def shipping_tracking_number=(shipping_tracking_number)
-      if shipping_tracking_number.to_s.size > 5000
+      if !shipping_tracking_number.nil? && shipping_tracking_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"shipping_tracking_number\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -481,45 +513,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] uncategorized_text Value to be assigned
     def uncategorized_text=(uncategorized_text)
-      if uncategorized_text.to_s.size > 150000
+      if !uncategorized_text.nil? && uncategorized_text.to_s.size > 150000
         raise ArgumentError.new("invalid value for \"uncategorized_text\", the character length must be smaller than or equal to 150000.")
       end
 
       @uncategorized_text = uncategorized_text
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        access_activity_log == o.access_activity_log &&
-        billing_address == o.billing_address &&
-        cancellation_policy == o.cancellation_policy &&
-        cancellation_policy_disclosure == o.cancellation_policy_disclosure &&
-        cancellation_rebuttal == o.cancellation_rebuttal &&
-        customer_communication == o.customer_communication &&
-        customer_email_address == o.customer_email_address &&
-        customer_name == o.customer_name &&
-        customer_purchase_ip == o.customer_purchase_ip &&
-        customer_signature == o.customer_signature &&
-        duplicate_charge_documentation == o.duplicate_charge_documentation &&
-        duplicate_charge_explanation == o.duplicate_charge_explanation &&
-        duplicate_charge_id == o.duplicate_charge_id &&
-        product_description == o.product_description &&
-        receipt == o.receipt &&
-        refund_policy == o.refund_policy &&
-        refund_policy_disclosure == o.refund_policy_disclosure &&
-        refund_refusal_explanation == o.refund_refusal_explanation &&
-        service_date == o.service_date &&
-        service_documentation == o.service_documentation &&
-        shipping_address == o.shipping_address &&
-        shipping_carrier == o.shipping_carrier &&
-        shipping_date == o.shipping_date &&
-        shipping_documentation == o.shipping_documentation &&
-        shipping_tracking_number == o.shipping_tracking_number &&
-        uncategorized_file == o.uncategorized_file &&
-        uncategorized_text == o.uncategorized_text
     end
 
     # @see the `==` method
@@ -528,8 +526,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@access_activity_log, @billing_address, @cancellation_policy, @cancellation_policy_disclosure, @cancellation_rebuttal, @customer_communication, @customer_email_address, @customer_name, @customer_purchase_ip, @customer_signature, @duplicate_charge_documentation, @duplicate_charge_explanation, @duplicate_charge_id, @product_description, @receipt, @refund_policy, @refund_policy_disclosure, @refund_refusal_explanation, @service_date, @service_documentation, @shipping_address, @shipping_carrier, @shipping_date, @shipping_documentation, @shipping_tracking_number, @uncategorized_file, @uncategorized_text)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@access_activity_log, @billing_address, @cancellation_policy, @cancellation_policy_disclosure, @cancellation_rebuttal, @customer_communication, @customer_email_address, @customer_name, @customer_purchase_ip, @customer_signature, @duplicate_charge_documentation, @duplicate_charge_explanation, @duplicate_charge_id, @product_description, @receipt, @refund_policy, @refund_policy_disclosure, @refund_refusal_explanation, @service_date, @service_documentation, @shipping_address, @shipping_carrier, @shipping_date, @shipping_documentation, @shipping_tracking_number, @uncategorized_file, @uncategorized_text)
   end
 end

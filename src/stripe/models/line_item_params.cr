@@ -18,32 +18,12 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "adjustable_quantity", type: AdjustableQuantityParams?, presence: true, ignore_serialize: adjustable_quantity.nil? && !adjustable_quantity_present?)]
     property adjustable_quantity : AdjustableQuantityParams?
 
     @[JSON::Field(ignore: true)]
     property? adjustable_quantity_present : Bool = false
-
-    # [Deprecated] The amount to be collected per unit of the line item. If specified, must also pass `currency` and `name`.
-    @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
-    property amount : Int64?
-
-    @[JSON::Field(ignore: true)]
-    property? amount_present : Bool = false
-
-    # [Deprecated] Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). Required if `amount` is passed.
-    @[JSON::Field(key: "currency", type: String?, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
-    property currency : String?
-
-    @[JSON::Field(ignore: true)]
-    property? currency_present : Bool = false
-
-    # [Deprecated] The description for the line item, to be displayed on the Checkout page.
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
 
     @[JSON::Field(key: "dynamic_tax_rates", type: Array(String)?, presence: true, ignore_serialize: dynamic_tax_rates.nil? && !dynamic_tax_rates_present?)]
     property dynamic_tax_rates : Array(String)?
@@ -51,20 +31,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? dynamic_tax_rates_present : Bool = false
 
-    @[JSON::Field(key: "images", type: Array(String)?, presence: true, ignore_serialize: images.nil? && !images_present?)]
-    property images : Array(String)?
-
-    @[JSON::Field(ignore: true)]
-    property? images_present : Bool = false
-
-    # [Deprecated] The name for the item to be displayed on the Checkout page. Required if `amount` is passed.
-    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
-    getter name : String?
-
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
-
-    # The ID of the [Price](https://stripe.com/docs/api/prices) or [Plan](https://stripe.com/docs/api/plans) object. One of `price` or `price_data` is required.
     @[JSON::Field(key: "price", type: String?, presence: true, ignore_serialize: price.nil? && !price_present?)]
     getter price : String?
 
@@ -77,7 +43,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? price_data_present : Bool = false
 
-    # The quantity of the line item being purchased. Quantity should not be defined when `recurring.usage_type=metered`.
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
     property quantity : Int64?
 
@@ -92,21 +57,22 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @adjustable_quantity : AdjustableQuantityParams? = nil, @amount : Int64? = nil, @currency : String? = nil, @description : String? = nil, @dynamic_tax_rates : Array(String)? = nil, @images : Array(String)? = nil, @name : String? = nil, @price : String? = nil, @price_data : PriceDataWithProductData? = nil, @quantity : Int64? = nil, @tax_rates : Array(String)? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @adjustable_quantity : AdjustableQuantityParams? = nil,
+      @dynamic_tax_rates : Array(String)? = nil,
+      @price : String? = nil,
+      @price_data : PriceDataWithProductData? = nil,
+      @quantity : Int64? = nil,
+      @tax_rates : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if !@description.nil? && @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@name.nil? && @name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
 
       if !@price.nil? && @price.to_s.size > 5000
         invalid_properties.push("invalid value for \"price\", the character length must be smaller than or equal to 5000.")
@@ -118,30 +84,9 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@description.nil? && @description.to_s.size > 5000
-      return false if !@name.nil? && @name.to_s.size > 5000
       return false if !@price.nil? && @price.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if !description.nil? && description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if !name.nil? && name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @name = name
     end
 
     # Custom attribute writer method with validation
@@ -154,32 +99,16 @@ module Stripe
       @price = price
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        adjustable_quantity == o.adjustable_quantity &&
-        amount == o.amount &&
-        currency == o.currency &&
-        description == o.description &&
-        dynamic_tax_rates == o.dynamic_tax_rates &&
-        images == o.images &&
-        name == o.name &&
-        price == o.price &&
-        price_data == o.price_data &&
-        quantity == o.quantity &&
-        tax_rates == o.tax_rates
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@adjustable_quantity, @amount, @currency, @description, @dynamic_tax_rates, @images, @name, @price, @price_data, @quantity, @tax_rates)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@adjustable_quantity, @dynamic_tax_rates, @price, @price_data, @quantity, @tax_rates)
   end
 end

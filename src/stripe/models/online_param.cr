@@ -12,24 +12,27 @@ require "time"
 require "log"
 
 module Stripe
-  # If this is a Mandate accepted online, this hash contains details about the online acceptance.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class OnlineParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The IP address from which the Mandate was accepted by the customer.
+
     @[JSON::Field(key: "ip_address", type: String)]
     property ip_address : String
 
-    # The user agent of the browser from which the Mandate was accepted by the customer.
     @[JSON::Field(key: "user_agent", type: String)]
     getter user_agent : String
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @ip_address : String, @user_agent : String)
+    def initialize(
+      *,
+      # Required properties
+      @ip_address : String,
+      @user_agent : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -48,6 +51,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @user_agent.to_s.size > 5000
+
       true
     end
 
@@ -61,23 +65,16 @@ module Stripe
       @user_agent = user_agent
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        ip_address == o.ip_address &&
-        user_agent == o.user_agent
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@ip_address, @user_agent)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@ip_address, @user_agent)
   end
 end

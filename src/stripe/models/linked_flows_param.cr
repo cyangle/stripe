@@ -18,7 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The source flow type.
+
     @[JSON::Field(key: "source_flow_type", type: String)]
     getter source_flow_type : String
 
@@ -26,13 +26,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @source_flow_type : String)
+    def initialize(
+      *,
+      # Required properties
+      @source_flow_type : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_SOURCE_FLOW_TYPE.error_message) unless ENUM_VALIDATOR_FOR_SOURCE_FLOW_TYPE.valid?(@source_flow_type, false)
 
       invalid_properties
@@ -42,6 +47,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_SOURCE_FLOW_TYPE.valid?(@source_flow_type, false)
+
       true
     end
 
@@ -52,22 +58,16 @@ module Stripe
       @source_flow_type = source_flow_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        source_flow_type == o.source_flow_type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@source_flow_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@source_flow_type)
   end
 end

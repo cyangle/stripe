@@ -19,17 +19,12 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "data", type: Array(PaymentIntent))]
     property data : Array(PaymentIntent)
 
     @[JSON::Field(key: "has_more", type: Bool)]
     property has_more : Bool
-
-    @[JSON::Field(key: "next_page", type: String?, presence: true, ignore_serialize: next_page.nil? && !next_page_present?)]
-    getter next_page : String?
-
-    @[JSON::Field(ignore: true)]
-    property? next_page_present : Bool = false
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String)]
@@ -41,6 +36,13 @@ module Stripe
     getter url : String
 
     # Optional properties
+
+    @[JSON::Field(key: "next_page", type: String?, presence: true, ignore_serialize: next_page.nil? && !next_page_present?)]
+    getter next_page : String?
+
+    @[JSON::Field(ignore: true)]
+    property? next_page_present : Bool = false
+
     # The total number of objects that match the query, only accurate up to 10,000.
     @[JSON::Field(key: "total_count", type: Int64?, presence: true, ignore_serialize: total_count.nil? && !total_count_present?)]
     property total_count : Int64?
@@ -50,7 +52,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @data : Array(PaymentIntent), @has_more : Bool, @next_page : String?, @object : String, @url : String, @total_count : Int64? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @data : Array(PaymentIntent),
+      @has_more : Bool,
+      @object : String,
+      @url : String,
+      # Optional properties
+      @next_page : String? = nil,
+      @total_count : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -58,14 +70,14 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @next_page.to_s.size > 5000
-        invalid_properties.push("invalid value for \"next_page\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       if @url.to_s.size > 5000
         invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@next_page.nil? && @next_page.to_s.size > 5000
+        invalid_properties.push("invalid value for \"next_page\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties
@@ -74,20 +86,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @next_page.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @url.to_s.size > 5000
+      return false if !@next_page.nil? && @next_page.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] next_page Value to be assigned
-    def next_page=(next_page)
-      if next_page.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"next_page\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @next_page = next_page
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,17 +110,14 @@ module Stripe
       @url = url
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        data == o.data &&
-        has_more == o.has_more &&
-        next_page == o.next_page &&
-        object == o.object &&
-        total_count == o.total_count &&
-        url == o.url
+    # Custom attribute writer method with validation
+    # @param [Object] next_page Value to be assigned
+    def next_page=(next_page)
+      if !next_page.nil? && next_page.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"next_page\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @next_page = next_page
     end
 
     # @see the `==` method
@@ -126,8 +126,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@data, @has_more, @next_page, @object, @total_count, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@data, @has_more, @object, @url, @next_page, @total_count)
   end
 end

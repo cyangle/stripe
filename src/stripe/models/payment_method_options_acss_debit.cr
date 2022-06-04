@@ -12,20 +12,19 @@ require "time"
 require "log"
 
 module Stripe
-  # If paying by `acss_debit`, this sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodOptionsAcssDebit
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "mandate_options", type: MandateOptionsParam1?, presence: true, ignore_serialize: mandate_options.nil? && !mandate_options_present?)]
     property mandate_options : MandateOptionsParam1?
 
     @[JSON::Field(ignore: true)]
     property? mandate_options_present : Bool = false
 
-    # Verification method for the intent
     @[JSON::Field(key: "verification_method", type: String?, presence: true, ignore_serialize: verification_method.nil? && !verification_method_present?)]
     getter verification_method : String?
 
@@ -37,14 +36,19 @@ module Stripe
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
         Stripe::InvoicePaymentMethodOptionsParam,
-        String,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @mandate_options : MandateOptionsParam1? = nil, @verification_method : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @mandate_options : MandateOptionsParam1? = nil,
+      @verification_method : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -61,6 +65,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -72,10 +77,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -87,23 +89,16 @@ module Stripe
       @verification_method = verification_method
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        mandate_options == o.mandate_options &&
-        verification_method == o.verification_method
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@mandate_options, @verification_method)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@mandate_options, @verification_method)
   end
 end

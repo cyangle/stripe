@@ -12,21 +12,21 @@ require "time"
 require "log"
 
 module Stripe
-  # Payment-method-specific configuration to provide to invoices created by the subscription.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodOptions1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "acss_debit", type: PaymentMethodOptions1AcssDebit?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
-    property acss_debit : PaymentMethodOptions1AcssDebit?
+
+    @[JSON::Field(key: "acss_debit", type: PaymentMethodOptionsAcssDebit?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
+    property acss_debit : PaymentMethodOptionsAcssDebit?
 
     @[JSON::Field(ignore: true)]
     property? acss_debit_present : Bool = false
 
-    @[JSON::Field(key: "bancontact", type: PaymentMethodOptions1Bancontact?, presence: true, ignore_serialize: bancontact.nil? && !bancontact_present?)]
-    property bancontact : PaymentMethodOptions1Bancontact?
+    @[JSON::Field(key: "bancontact", type: PaymentMethodOptionsBancontact1?, presence: true, ignore_serialize: bancontact.nil? && !bancontact_present?)]
+    property bancontact : PaymentMethodOptionsBancontact1?
 
     @[JSON::Field(ignore: true)]
     property? bancontact_present : Bool = false
@@ -37,27 +37,36 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
-    @[JSON::Field(key: "customer_balance", type: PaymentMethodOptions1CustomerBalance?, presence: true, ignore_serialize: customer_balance.nil? && !customer_balance_present?)]
-    property customer_balance : PaymentMethodOptions1CustomerBalance?
+    @[JSON::Field(key: "customer_balance", type: PaymentMethodOptionsCustomerBalance1?, presence: true, ignore_serialize: customer_balance.nil? && !customer_balance_present?)]
+    property customer_balance : PaymentMethodOptionsCustomerBalance1?
 
     @[JSON::Field(ignore: true)]
     property? customer_balance_present : Bool = false
 
-    @[JSON::Field(key: "konbini", type: PaymentMethodOptions1Konbini?, presence: true, ignore_serialize: konbini.nil? && !konbini_present?)]
-    property konbini : PaymentMethodOptions1Konbini?
+    @[JSON::Field(key: "konbini", type: PaymentMethodOptionsKonbini1?, presence: true, ignore_serialize: konbini.nil? && !konbini_present?)]
+    property konbini : PaymentMethodOptionsKonbini1?
 
     @[JSON::Field(ignore: true)]
     property? konbini_present : Bool = false
 
-    @[JSON::Field(key: "us_bank_account", type: PaymentMethodOptions1UsBankAccount?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
-    property us_bank_account : PaymentMethodOptions1UsBankAccount?
+    @[JSON::Field(key: "us_bank_account", type: PaymentMethodOptionsUsBankAccount?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
+    property us_bank_account : PaymentMethodOptionsUsBankAccount?
 
     @[JSON::Field(ignore: true)]
     property? us_bank_account_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @acss_debit : PaymentMethodOptions1AcssDebit? = nil, @bancontact : PaymentMethodOptions1Bancontact? = nil, @card : PaymentMethodOptions1Card? = nil, @customer_balance : PaymentMethodOptions1CustomerBalance? = nil, @konbini : PaymentMethodOptions1Konbini? = nil, @us_bank_account : PaymentMethodOptions1UsBankAccount? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @acss_debit : PaymentMethodOptionsAcssDebit? = nil,
+      @bancontact : PaymentMethodOptionsBancontact1? = nil,
+      @card : PaymentMethodOptions1Card? = nil,
+      @customer_balance : PaymentMethodOptionsCustomerBalance1? = nil,
+      @konbini : PaymentMethodOptionsKonbini1? = nil,
+      @us_bank_account : PaymentMethodOptionsUsBankAccount? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -74,27 +83,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit == o.acss_debit &&
-        bancontact == o.bancontact &&
-        card == o.card &&
-        customer_balance == o.customer_balance &&
-        konbini == o.konbini &&
-        us_bank_account == o.us_bank_account
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit, @bancontact, @card, @customer_balance, @konbini, @us_bank_account)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@acss_debit, @bancontact, @card, @customer_balance, @konbini, @us_bank_account)
   end
 end

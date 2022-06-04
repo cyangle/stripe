@@ -18,25 +18,25 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "address", type: PostCustomersRequestAddress?, presence: true, ignore_serialize: address.nil? && !address_present?)]
-    property address : PostCustomersRequestAddress?
+
+    @[JSON::Field(key: "address", type: CustomerDetailsParamAddress?, presence: true, ignore_serialize: address.nil? && !address_present?)]
+    property address : CustomerDetailsParamAddress?
 
     @[JSON::Field(ignore: true)]
     property? address_present : Bool = false
 
-    @[JSON::Field(key: "shipping", type: PostCustomersRequestShipping?, presence: true, ignore_serialize: shipping.nil? && !shipping_present?)]
-    property shipping : PostCustomersRequestShipping?
+    @[JSON::Field(key: "shipping", type: CustomerDetailsParamShipping?, presence: true, ignore_serialize: shipping.nil? && !shipping_present?)]
+    property shipping : CustomerDetailsParamShipping?
 
     @[JSON::Field(ignore: true)]
     property? shipping_present : Bool = false
 
-    @[JSON::Field(key: "tax", type: TaxParam?, presence: true, ignore_serialize: tax.nil? && !tax_present?)]
-    property tax : TaxParam?
+    @[JSON::Field(key: "tax", type: TaxParam1?, presence: true, ignore_serialize: tax.nil? && !tax_present?)]
+    property tax : TaxParam1?
 
     @[JSON::Field(ignore: true)]
     property? tax_present : Bool = false
 
-    # The customer's tax exemption. One of `none`, `exempt`, or `reverse`.
     @[JSON::Field(key: "tax_exempt", type: String?, presence: true, ignore_serialize: tax_exempt.nil? && !tax_exempt_present?)]
     getter tax_exempt : String?
 
@@ -45,7 +45,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_TAX_EXEMPT = EnumValidator.new("tax_exempt", "String", ["", "exempt", "none", "reverse"])
 
-    # The customer's tax IDs.
     @[JSON::Field(key: "tax_ids", type: Array(DataParams)?, presence: true, ignore_serialize: tax_ids.nil? && !tax_ids_present?)]
     property tax_ids : Array(DataParams)?
 
@@ -54,7 +53,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : PostCustomersRequestAddress? = nil, @shipping : PostCustomersRequestShipping? = nil, @tax : TaxParam? = nil, @tax_exempt : String? = nil, @tax_ids : Array(DataParams)? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @address : CustomerDetailsParamAddress? = nil,
+      @shipping : CustomerDetailsParamShipping? = nil,
+      @tax : TaxParam1? = nil,
+      @tax_exempt : String? = nil,
+      @tax_ids : Array(DataParams)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -71,6 +78,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
+
       true
     end
 
@@ -81,26 +89,16 @@ module Stripe
       @tax_exempt = tax_exempt
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        shipping == o.shipping &&
-        tax == o.tax &&
-        tax_exempt == o.tax_exempt &&
-        tax_ids == o.tax_ids
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @shipping, @tax, @tax_exempt, @tax_ids)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address, @shipping, @tax, @tax_exempt, @tax_ids)
   end
 end

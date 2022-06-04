@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String)]
     getter object : String
@@ -26,6 +27,7 @@ module Stripe
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["treasury.financial_account_features"])
 
     # Optional properties
+
     @[JSON::Field(key: "card_issuing", type: AccountServiceResourceToggleSettings?, presence: true, ignore_serialize: card_issuing.nil? && !card_issuing_present?)]
     property card_issuing : AccountServiceResourceToggleSettings?
 
@@ -70,7 +72,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @object : String, @card_issuing : AccountServiceResourceToggleSettings? = nil, @deposit_insurance : AccountServiceResourceToggleSettings? = nil, @financial_addresses : AccountServiceResourceFinancialAddressesFeatures? = nil, @inbound_transfers : AccountServiceResourceInboundTransfers? = nil, @intra_stripe_flows : AccountServiceResourceToggleSettings? = nil, @outbound_payments : AccountServiceResourceOutboundPayments? = nil, @outbound_transfers : AccountServiceResourceOutboundTransfers? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @object : String,
+      # Optional properties
+      @card_issuing : AccountServiceResourceToggleSettings? = nil,
+      @deposit_insurance : AccountServiceResourceToggleSettings? = nil,
+      @financial_addresses : AccountServiceResourceFinancialAddressesFeatures? = nil,
+      @inbound_transfers : AccountServiceResourceInboundTransfers? = nil,
+      @intra_stripe_flows : AccountServiceResourceToggleSettings? = nil,
+      @outbound_payments : AccountServiceResourceOutboundPayments? = nil,
+      @outbound_transfers : AccountServiceResourceOutboundTransfers? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -87,6 +101,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
       true
     end
 
@@ -97,29 +112,16 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        card_issuing == o.card_issuing &&
-        deposit_insurance == o.deposit_insurance &&
-        financial_addresses == o.financial_addresses &&
-        inbound_transfers == o.inbound_transfers &&
-        intra_stripe_flows == o.intra_stripe_flows &&
-        object == o.object &&
-        outbound_payments == o.outbound_payments &&
-        outbound_transfers == o.outbound_transfers
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@card_issuing, @deposit_insurance, @financial_addresses, @inbound_transfers, @intra_stripe_flows, @object, @outbound_payments, @outbound_transfers)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@object, @card_issuing, @deposit_insurance, @financial_addresses, @inbound_transfers, @intra_stripe_flows, @outbound_payments, @outbound_transfers)
   end
 end

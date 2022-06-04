@@ -19,6 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # Indicates which line items triggered a threshold invoice.
+    @[JSON::Field(key: "item_reasons", type: Array(InvoiceItemThresholdReason))]
+    property item_reasons : Array(InvoiceItemThresholdReason)
+
+    # Optional properties
+
     # The total invoice amount threshold boundary if it triggered the threshold invoice.
     @[JSON::Field(key: "amount_gte", type: Int64?, presence: true, ignore_serialize: amount_gte.nil? && !amount_gte_present?)]
     property amount_gte : Int64?
@@ -26,13 +33,15 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? amount_gte_present : Bool = false
 
-    # Indicates which line items triggered a threshold invoice.
-    @[JSON::Field(key: "item_reasons", type: Array(InvoiceItemThresholdReason))]
-    property item_reasons : Array(InvoiceItemThresholdReason)
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount_gte : Int64?, @item_reasons : Array(InvoiceItemThresholdReason))
+    def initialize(
+      *,
+      # Required properties
+      @item_reasons : Array(InvoiceItemThresholdReason),
+      # Optional properties
+      @amount_gte : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -49,23 +58,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount_gte == o.amount_gte &&
-        item_reasons == o.item_reasons
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount_gte, @item_reasons)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@item_reasons, @amount_gte)
   end
 end

@@ -12,20 +12,19 @@ require "time"
 require "log"
 
 module Stripe
-  # If paying by `acss_debit`, this sub-hash contains details about the ACSS Debit payment method options to pass to the order's PaymentIntent.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentIntentPaymentMethodOptionsParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "mandate_options", type: PaymentIntentPaymentMethodOptionsMandateOptionsParam?, presence: true, ignore_serialize: mandate_options.nil? && !mandate_options_present?)]
     property mandate_options : PaymentIntentPaymentMethodOptionsMandateOptionsParam?
 
     @[JSON::Field(ignore: true)]
     property? mandate_options_present : Bool = false
 
-    # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.
     @[JSON::Field(key: "setup_future_usage", type: String?, presence: true, ignore_serialize: setup_future_usage.nil? && !setup_future_usage_present?)]
     getter setup_future_usage : String?
 
@@ -34,7 +33,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["", "none", "off_session", "on_session"])
 
-    # Verification method for the intent
     @[JSON::Field(key: "verification_method", type: String?, presence: true, ignore_serialize: verification_method.nil? && !verification_method_present?)]
     getter verification_method : String?
 
@@ -45,7 +43,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @mandate_options : PaymentIntentPaymentMethodOptionsMandateOptionsParam? = nil, @setup_future_usage : String? = nil, @verification_method : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @mandate_options : PaymentIntentPaymentMethodOptionsMandateOptionsParam? = nil,
+      @setup_future_usage : String? = nil,
+      @verification_method : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -65,6 +69,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
       return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
+
       true
     end
 
@@ -82,24 +87,16 @@ module Stripe
       @verification_method = verification_method
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        mandate_options == o.mandate_options &&
-        setup_future_usage == o.setup_future_usage &&
-        verification_method == o.verification_method
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@mandate_options, @setup_future_usage, @verification_method)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@mandate_options, @setup_future_usage, @verification_method)
   end
 end

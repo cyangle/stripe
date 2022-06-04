@@ -12,7 +12,6 @@ require "time"
 require "log"
 
 module Stripe
-  # The list of payment method types (e.g. card) to provide to the invoice’s PaymentIntent. If not set, Stripe attempts to automatically determine the types to use by looking at the invoice’s default payment method, the subscription’s default payment method, the customer’s default payment method, and your [invoice template settings](https://dashboard.stripe.com/settings/billing/invoice).
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentSettingsPaymentMethodTypes
     include JSON::Serializable
@@ -22,7 +21,7 @@ module Stripe
     def self.openapi_any_of
       [
         Stripe::Array(String),
-        String,
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
       ]
     end
 
@@ -35,6 +34,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties
     end
 
@@ -52,19 +52,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class
     end
 
     # @see the `==` method
@@ -73,8 +63,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash()
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash()
   end
 end

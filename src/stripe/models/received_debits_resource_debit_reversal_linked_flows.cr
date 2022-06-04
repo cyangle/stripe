@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Set if there is an Issuing dispute associated with the DebitReversal.
     @[JSON::Field(key: "issuing_dispute", type: String?, presence: true, ignore_serialize: issuing_dispute.nil? && !issuing_dispute_present?)]
     getter issuing_dispute : String?
@@ -28,7 +29,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @issuing_dispute : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @issuing_dispute : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -36,7 +41,7 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @issuing_dispute.to_s.size > 5000
+      if !@issuing_dispute.nil? && @issuing_dispute.to_s.size > 5000
         invalid_properties.push("invalid value for \"issuing_dispute\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -46,26 +51,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @issuing_dispute.to_s.size > 5000
+      return false if !@issuing_dispute.nil? && @issuing_dispute.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] issuing_dispute Value to be assigned
     def issuing_dispute=(issuing_dispute)
-      if issuing_dispute.to_s.size > 5000
+      if !issuing_dispute.nil? && issuing_dispute.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"issuing_dispute\", the character length must be smaller than or equal to 5000.")
       end
 
       @issuing_dispute = issuing_dispute
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        issuing_dispute == o.issuing_dispute
     end
 
     # @see the `==` method
@@ -74,8 +72,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@issuing_dispute)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@issuing_dispute)
   end
 end

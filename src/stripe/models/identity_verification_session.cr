@@ -19,12 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The short-lived client secret used by Stripe.js to [show a verification modal](https://stripe.com/docs/js/identity/modal) inside your app. This client secret expires after 24 hours and can only be used once. Don’t store it, log it, embed it in a URL, or expose it to anyone other than the user. Make sure that you have TLS enabled on any page that includes the client secret. Refer to our docs on [passing the client secret to the frontend](https://stripe.com/docs/identity/verification-sessions#client-secret) to learn more.
-    @[JSON::Field(key: "client_secret", type: String?, presence: true, ignore_serialize: client_secret.nil? && !client_secret_present?)]
-    getter client_secret : String?
-
-    @[JSON::Field(ignore: true)]
-    property? client_secret_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
@@ -33,18 +27,6 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
     getter id : String
-
-    @[JSON::Field(key: "last_error", type: IdentityVerificationSessionLastError?, presence: true, ignore_serialize: last_error.nil? && !last_error_present?)]
-    property last_error : IdentityVerificationSessionLastError?
-
-    @[JSON::Field(ignore: true)]
-    property? last_error_present : Bool = false
-
-    @[JSON::Field(key: "last_verification_report", type: IdentityVerificationSessionLastVerificationReport?, presence: true, ignore_serialize: last_verification_report.nil? && !last_verification_report_present?)]
-    property last_verification_report : IdentityVerificationSessionLastVerificationReport?
-
-    @[JSON::Field(ignore: true)]
-    property? last_verification_report_present : Bool = false
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool)]
@@ -63,12 +45,6 @@ module Stripe
     @[JSON::Field(key: "options", type: GelatoVerificationSessionOptions)]
     property options : GelatoVerificationSessionOptions
 
-    @[JSON::Field(key: "redaction", type: IdentityVerificationSessionRedaction?, presence: true, ignore_serialize: redaction.nil? && !redaction_present?)]
-    property redaction : IdentityVerificationSessionRedaction?
-
-    @[JSON::Field(ignore: true)]
-    property? redaction_present : Bool = false
-
     # Status of this VerificationSession. [Learn more about the lifecycle of sessions](https://stripe.com/docs/identity/how-sessions-work).
     @[JSON::Field(key: "status", type: String)]
     getter status : String
@@ -80,6 +56,33 @@ module Stripe
     getter _type : String
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["document", "id_number"])
+
+    # Optional properties
+
+    # The short-lived client secret used by Stripe.js to [show a verification modal](https://stripe.com/docs/js/identity/modal) inside your app. This client secret expires after 24 hours and can only be used once. Don’t store it, log it, embed it in a URL, or expose it to anyone other than the user. Make sure that you have TLS enabled on any page that includes the client secret. Refer to our docs on [passing the client secret to the frontend](https://stripe.com/docs/identity/verification-sessions#client-secret) to learn more.
+    @[JSON::Field(key: "client_secret", type: String?, presence: true, ignore_serialize: client_secret.nil? && !client_secret_present?)]
+    getter client_secret : String?
+
+    @[JSON::Field(ignore: true)]
+    property? client_secret_present : Bool = false
+
+    @[JSON::Field(key: "last_error", type: IdentityVerificationSessionLastError?, presence: true, ignore_serialize: last_error.nil? && !last_error_present?)]
+    property last_error : IdentityVerificationSessionLastError?
+
+    @[JSON::Field(ignore: true)]
+    property? last_error_present : Bool = false
+
+    @[JSON::Field(key: "last_verification_report", type: IdentityVerificationSessionLastVerificationReport?, presence: true, ignore_serialize: last_verification_report.nil? && !last_verification_report_present?)]
+    property last_verification_report : IdentityVerificationSessionLastVerificationReport?
+
+    @[JSON::Field(ignore: true)]
+    property? last_verification_report_present : Bool = false
+
+    @[JSON::Field(key: "redaction", type: IdentityVerificationSessionRedaction?, presence: true, ignore_serialize: redaction.nil? && !redaction_present?)]
+    property redaction : IdentityVerificationSessionRedaction?
+
+    @[JSON::Field(ignore: true)]
+    property? redaction_present : Bool = false
 
     # The short-lived URL that you use to redirect a user to Stripe to submit their identity information. This URL expires after 48 hours and can only be used once. Don’t store it, log it, send it in emails or expose it to anyone other than the user. Refer to our docs on [verifying identity documents](https://stripe.com/docs/identity/verify-identity-documents?platform=web&type=redirect) to learn how to redirect users to Stripe.
     @[JSON::Field(key: "url", type: String?, presence: true, ignore_serialize: url.nil? && !url_present?)]
@@ -96,17 +99,31 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @client_secret : String?, @created : Int64, @id : String, @last_error : IdentityVerificationSessionLastError?, @last_verification_report : IdentityVerificationSessionLastVerificationReport?, @livemode : Bool, @metadata : Hash(String, String), @object : String, @options : GelatoVerificationSessionOptions, @redaction : IdentityVerificationSessionRedaction?, @status : String, @_type : String, @url : String?, @verified_outputs : IdentityVerificationSessionVerifiedOutputs?)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @id : String,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      @options : GelatoVerificationSessionOptions,
+      @status : String,
+      @_type : String,
+      # Optional properties
+      @client_secret : String? = nil,
+      @last_error : IdentityVerificationSessionLastError? = nil,
+      @last_verification_report : IdentityVerificationSessionLastVerificationReport? = nil,
+      @redaction : IdentityVerificationSessionRedaction? = nil,
+      @url : String? = nil,
+      @verified_outputs : IdentityVerificationSessionVerifiedOutputs? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @client_secret.to_s.size > 5000
-        invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
@@ -118,7 +135,11 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
-      if @url.to_s.size > 5000
+      if !@client_secret.nil? && @client_secret.to_s.size > 5000
+        invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@url.nil? && @url.to_s.size > 5000
         invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -128,23 +149,14 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @client_secret.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      return false if @url.to_s.size > 5000
+      return false if !@client_secret.nil? && @client_secret.to_s.size > 5000
+      return false if !@url.nil? && @url.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] client_secret Value to be assigned
-    def client_secret=(client_secret)
-      if client_secret.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @client_secret = client_secret
     end
 
     # Custom attribute writer method with validation
@@ -179,34 +191,23 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] client_secret Value to be assigned
+    def client_secret=(client_secret)
+      if !client_secret.nil? && client_secret.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @client_secret = client_secret
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
     def url=(url)
-      if url.to_s.size > 5000
+      if !url.nil? && url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
       @url = url
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        client_secret == o.client_secret &&
-        created == o.created &&
-        id == o.id &&
-        last_error == o.last_error &&
-        last_verification_report == o.last_verification_report &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        options == o.options &&
-        redaction == o.redaction &&
-        status == o.status &&
-        _type == o._type &&
-        url == o.url &&
-        verified_outputs == o.verified_outputs
     end
 
     # @see the `==` method
@@ -215,8 +216,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@client_secret, @created, @id, @last_error, @last_verification_report, @livemode, @metadata, @object, @options, @redaction, @status, @_type, @url, @verified_outputs)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @livemode, @metadata, @object, @options, @status, @_type, @client_secret, @last_error, @last_verification_report, @redaction, @url, @verified_outputs)
   end
 end

@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
     property created : Int64
@@ -26,13 +27,6 @@ module Stripe
     # Whether this link is already expired.
     @[JSON::Field(key: "expired", type: Bool)]
     property expired : Bool
-
-    # Time at which the link expires.
-    @[JSON::Field(key: "expires_at", type: Int64?, presence: true, ignore_serialize: expires_at.nil? && !expires_at_present?)]
-    property expires_at : Int64?
-
-    @[JSON::Field(ignore: true)]
-    property? expires_at_present : Bool = false
 
     @[JSON::Field(key: "file", type: FileLinkFile)]
     property file : FileLinkFile
@@ -55,6 +49,15 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["file_link"])
 
+    # Optional properties
+
+    # Time at which the link expires.
+    @[JSON::Field(key: "expires_at", type: Int64?, presence: true, ignore_serialize: expires_at.nil? && !expires_at_present?)]
+    property expires_at : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? expires_at_present : Bool = false
+
     # The publicly accessible URL to download the file.
     @[JSON::Field(key: "url", type: String?, presence: true, ignore_serialize: url.nil? && !url_present?)]
     getter url : String?
@@ -64,7 +67,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @created : Int64, @expired : Bool, @expires_at : Int64?, @file : FileLinkFile, @id : String, @livemode : Bool, @metadata : Hash(String, String), @object : String, @url : String?)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @expired : Bool,
+      @file : FileLinkFile,
+      @id : String,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      # Optional properties
+      @expires_at : Int64? = nil,
+      @url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -78,7 +94,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
-      if @url.to_s.size > 5000
+      if !@url.nil? && @url.to_s.size > 5000
         invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -90,7 +106,8 @@ module Stripe
     def valid?
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @url.to_s.size > 5000
+      return false if !@url.nil? && @url.to_s.size > 5000
+
       true
     end
 
@@ -114,27 +131,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
     def url=(url)
-      if url.to_s.size > 5000
+      if !url.nil? && url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
       @url = url
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        created == o.created &&
-        expired == o.expired &&
-        expires_at == o.expires_at &&
-        file == o.file &&
-        id == o.id &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        url == o.url
     end
 
     # @see the `==` method
@@ -143,8 +144,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@created, @expired, @expires_at, @file, @id, @livemode, @metadata, @object, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @expired, @file, @id, @livemode, @metadata, @object, @expires_at, @url)
   end
 end

@@ -12,17 +12,16 @@ require "time"
 require "log"
 
 module Stripe
-  # This hash contains details about the customer acceptance of the Mandate.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class CustomerAcceptanceParam1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "online", type: OnlineParam1)]
     property online : OnlineParam1
 
-    # The type of customer acceptance information included with the Mandate.
     @[JSON::Field(key: "type", type: String)]
     getter _type : String
 
@@ -30,7 +29,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @online : OnlineParam1, @_type : String)
+    def initialize(
+      *,
+      # Required properties
+      @online : OnlineParam1,
+      @_type : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -52,6 +56,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       return false if @_type.to_s.size > 5000
+
       true
     end
 
@@ -62,23 +67,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        online == o.online &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@online, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@online, @_type)
   end
 end

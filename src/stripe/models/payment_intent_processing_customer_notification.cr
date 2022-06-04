@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Whether customer approval has been requested for this payment. For payments greater than INR 5000 or mandate amount, the customer must provide explicit approval of the payment with their bank.
     @[JSON::Field(key: "approval_requested", type: Bool?, presence: true, ignore_serialize: approval_requested.nil? && !approval_requested_present?)]
     property approval_requested : Bool?
@@ -35,7 +36,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @approval_requested : Bool?, @completes_at : Int64?)
+    def initialize(
+      *,
+      # Optional properties
+      @approval_requested : Bool? = nil,
+      @completes_at : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -52,23 +58,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        approval_requested == o.approval_requested &&
-        completes_at == o.completes_at
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@approval_requested, @completes_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@approval_requested, @completes_at)
   end
 end

@@ -1,15 +1,30 @@
 tasks:
   - name: 'Update models'
+    file_glob: './src/stripe/models/*cr'
+    changes:
+      -
+        name: "card_present"
+        pattern: 'ignore_serialize: card_present\.'
+        new_value: 'ignore_serialize: card_present2.'
+      -
+        name: "card_present"
+        pattern: 'property card_present :'
+        new_value: 'property card_present2 :'
+      -
+        name: "card_present"
+        pattern: '@card_present( |,)'
+        new_value: '@card_present2'
+      -
+        name: "card_present_present"
+        pattern: 'card_present_present'
+        new_value: 'card_present2_present'
+  - name: 'Update all'
     file_glob: './src/**/*cr'
     changes:
       -
         name: 'Correct AnyType?'
-        pattern: 'AnyType?'
+        pattern: 'AnyType\?'
         new_value: 'JSON::Any'
-      -
-        name: 'Correct ??'
-        pattern: '\?+'
-        new_value: '?'
       -
         name: 'Correct Object?'
         pattern: 'Object\?'

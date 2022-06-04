@@ -12,21 +12,19 @@ require "time"
 require "log"
 
 module Stripe
-  # Automatically declines certain charge types regardless of whether the card issuer accepted or declined the charge.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class DeclineChargeOnSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Whether Stripe automatically declines charges with an incorrect ZIP or postal code. This setting only applies when a ZIP or postal code is provided and they fail bank verification.
+
     @[JSON::Field(key: "avs_failure", type: Bool?, presence: true, ignore_serialize: avs_failure.nil? && !avs_failure_present?)]
     property avs_failure : Bool?
 
     @[JSON::Field(ignore: true)]
     property? avs_failure_present : Bool = false
 
-    # Whether Stripe automatically declines charges with an incorrect CVC. This setting only applies when a CVC is provided and it fails bank verification.
     @[JSON::Field(key: "cvc_failure", type: Bool?, presence: true, ignore_serialize: cvc_failure.nil? && !cvc_failure_present?)]
     property cvc_failure : Bool?
 
@@ -35,7 +33,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @avs_failure : Bool? = nil, @cvc_failure : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @avs_failure : Bool? = nil,
+      @cvc_failure : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -52,23 +55,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        avs_failure == o.avs_failure &&
-        cvc_failure == o.cvc_failure
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@avs_failure, @cvc_failure)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@avs_failure, @cvc_failure)
   end
 end

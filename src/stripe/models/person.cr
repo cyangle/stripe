@@ -19,6 +19,11 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # The account the person is associated with.
+    @[JSON::Field(key: "account", type: String)]
+    getter account : String
+
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
     property created : Int64
@@ -34,12 +39,6 @@ module Stripe
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["person"])
 
     # Optional properties
-    # The account the person is associated with.
-    @[JSON::Field(key: "account", type: String?, presence: true, ignore_serialize: account.nil? && !account_present?)]
-    getter account : String?
-
-    @[JSON::Field(ignore: true)]
-    property? account_present : Bool = false
 
     @[JSON::Field(key: "address", type: Address?, presence: true, ignore_serialize: address.nil? && !address_present?)]
     property address : Address?
@@ -53,8 +52,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? address_kana_present : Bool = false
 
-    @[JSON::Field(key: "address_kanji", type: PersonAddressKanji?, presence: true, ignore_serialize: address_kanji.nil? && !address_kanji_present?)]
-    property address_kanji : PersonAddressKanji?
+    @[JSON::Field(key: "address_kanji", type: PersonAddressKana?, presence: true, ignore_serialize: address_kanji.nil? && !address_kanji_present?)]
+    property address_kanji : PersonAddressKana?
 
     @[JSON::Field(ignore: true)]
     property? address_kanji_present : Bool = false
@@ -93,6 +92,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? first_name_kanji_present : Bool = false
 
+    # A list of alternate names or aliases that the person is known by.
     @[JSON::Field(key: "full_name_aliases", type: Array(String)?, presence: true, ignore_serialize: full_name_aliases.nil? && !full_name_aliases_present?)]
     property full_name_aliases : Array(String)?
 
@@ -217,7 +217,41 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @created : Int64, @id : String, @object : String, @account : String? = nil, @address : Address? = nil, @address_kana : PersonAddressKana? = nil, @address_kanji : PersonAddressKanji? = nil, @dob : LegalEntityDob? = nil, @email : String? = nil, @first_name : String? = nil, @first_name_kana : String? = nil, @first_name_kanji : String? = nil, @full_name_aliases : Array(String)? = nil, @future_requirements : PersonFutureRequirements1? = nil, @gender : String? = nil, @id_number_provided : Bool? = nil, @id_number_secondary_provided : Bool? = nil, @last_name : String? = nil, @last_name_kana : String? = nil, @last_name_kanji : String? = nil, @maiden_name : String? = nil, @metadata : Hash(String, String)? = nil, @nationality : String? = nil, @phone : String? = nil, @political_exposure : String? = nil, @registered_address : Address? = nil, @relationship : PersonRelationship? = nil, @requirements : PersonRequirements1? = nil, @ssn_last_4_provided : Bool? = nil, @verification : LegalEntityPersonVerification? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @account : String,
+      @created : Int64,
+      @id : String,
+      @object : String,
+      # Optional properties
+      @address : Address? = nil,
+      @address_kana : PersonAddressKana? = nil,
+      @address_kanji : PersonAddressKana? = nil,
+      @dob : LegalEntityDob? = nil,
+      @email : String? = nil,
+      @first_name : String? = nil,
+      @first_name_kana : String? = nil,
+      @first_name_kanji : String? = nil,
+      @full_name_aliases : Array(String)? = nil,
+      @future_requirements : PersonFutureRequirements1? = nil,
+      @gender : String? = nil,
+      @id_number_provided : Bool? = nil,
+      @id_number_secondary_provided : Bool? = nil,
+      @last_name : String? = nil,
+      @last_name_kana : String? = nil,
+      @last_name_kanji : String? = nil,
+      @maiden_name : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @nationality : String? = nil,
+      @phone : String? = nil,
+      @political_exposure : String? = nil,
+      @registered_address : Address? = nil,
+      @relationship : PersonRelationship? = nil,
+      @requirements : PersonRequirements1? = nil,
+      @ssn_last_4_provided : Bool? = nil,
+      @verification : LegalEntityPersonVerification? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -225,9 +259,15 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if !@account.nil? && @account.to_s.size > 5000
+      if @account.to_s.size > 5000
         invalid_properties.push("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
       end
+
+      if @id.to_s.size > 5000
+        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       if !@email.nil? && @email.to_s.size > 5000
         invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
@@ -243,10 +283,6 @@ module Stripe
 
       if !@first_name_kanji.nil? && @first_name_kanji.to_s.size > 5000
         invalid_properties.push("invalid value for \"first_name_kanji\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @id.to_s.size > 5000
-        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
       if !@last_name.nil? && @last_name.to_s.size > 5000
@@ -269,8 +305,6 @@ module Stripe
         invalid_properties.push("invalid value for \"nationality\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
       if !@phone.nil? && @phone.to_s.size > 5000
         invalid_properties.push("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
       end
@@ -283,31 +317,49 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@account.nil? && @account.to_s.size > 5000
+      return false if @account.to_s.size > 5000
+      return false if @id.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if !@email.nil? && @email.to_s.size > 5000
       return false if !@first_name.nil? && @first_name.to_s.size > 5000
       return false if !@first_name_kana.nil? && @first_name_kana.to_s.size > 5000
       return false if !@first_name_kanji.nil? && @first_name_kanji.to_s.size > 5000
-      return false if @id.to_s.size > 5000
       return false if !@last_name.nil? && @last_name.to_s.size > 5000
       return false if !@last_name_kana.nil? && @last_name_kana.to_s.size > 5000
       return false if !@last_name_kanji.nil? && @last_name_kanji.to_s.size > 5000
       return false if !@maiden_name.nil? && @maiden_name.to_s.size > 5000
       return false if !@nationality.nil? && @nationality.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if !@phone.nil? && @phone.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.valid?(@political_exposure)
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] account Value to be assigned
     def account=(account)
-      if !account.nil? && account.to_s.size > 5000
+      if account.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
       end
 
       @account = account
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @id = id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] object Object to be assigned
+    def object=(object)
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+      @object = object
     end
 
     # Custom attribute writer method with validation
@@ -348,16 +400,6 @@ module Stripe
       end
 
       @first_name_kanji = first_name_kanji
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id)
-      if id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @id = id
     end
 
     # Custom attribute writer method with validation
@@ -410,13 +452,6 @@ module Stripe
       @nationality = nationality
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
-      @object = object
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] phone Value to be assigned
     def phone=(phone)
@@ -434,51 +469,16 @@ module Stripe
       @political_exposure = political_exposure
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account == o.account &&
-        address == o.address &&
-        address_kana == o.address_kana &&
-        address_kanji == o.address_kanji &&
-        created == o.created &&
-        dob == o.dob &&
-        email == o.email &&
-        first_name == o.first_name &&
-        first_name_kana == o.first_name_kana &&
-        first_name_kanji == o.first_name_kanji &&
-        full_name_aliases == o.full_name_aliases &&
-        future_requirements == o.future_requirements &&
-        gender == o.gender &&
-        id == o.id &&
-        id_number_provided == o.id_number_provided &&
-        id_number_secondary_provided == o.id_number_secondary_provided &&
-        last_name == o.last_name &&
-        last_name_kana == o.last_name_kana &&
-        last_name_kanji == o.last_name_kanji &&
-        maiden_name == o.maiden_name &&
-        metadata == o.metadata &&
-        nationality == o.nationality &&
-        object == o.object &&
-        phone == o.phone &&
-        political_exposure == o.political_exposure &&
-        registered_address == o.registered_address &&
-        relationship == o.relationship &&
-        requirements == o.requirements &&
-        ssn_last_4_provided == o.ssn_last_4_provided &&
-        verification == o.verification
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account, @address, @address_kana, @address_kanji, @created, @dob, @email, @first_name, @first_name_kana, @first_name_kanji, @full_name_aliases, @future_requirements, @gender, @id, @id_number_provided, @id_number_secondary_provided, @last_name, @last_name_kana, @last_name_kanji, @maiden_name, @metadata, @nationality, @object, @phone, @political_exposure, @registered_address, @relationship, @requirements, @ssn_last_4_provided, @verification)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account, @created, @id, @object, @address, @address_kana, @address_kanji, @dob, @email, @first_name, @first_name_kana, @first_name_kanji, @full_name_aliases, @future_requirements, @gender, @id_number_provided, @id_number_secondary_provided, @last_name, @last_name_kana, @last_name_kanji, @maiden_name, @metadata, @nationality, @phone, @political_exposure, @registered_address, @relationship, @requirements, @ssn_last_4_provided, @verification)
   end
 end

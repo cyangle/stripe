@@ -19,16 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The name of the person or business that owns the bank account.
     @[JSON::Field(key: "account_holder_name", type: String)]
     getter account_holder_name : String
-
-    # The account number.
-    @[JSON::Field(key: "account_number", type: String?, presence: true, ignore_serialize: account_number.nil? && !account_number_present?)]
-    getter account_number : String?
-
-    @[JSON::Field(ignore: true)]
-    property? account_number_present : Bool = false
 
     # The last four characters of the account number.
     @[JSON::Field(key: "account_number_last4", type: String)]
@@ -42,9 +36,27 @@ module Stripe
     @[JSON::Field(key: "routing_number", type: String)]
     getter routing_number : String
 
+    # Optional properties
+
+    # The account number.
+    @[JSON::Field(key: "account_number", type: String?, presence: true, ignore_serialize: account_number.nil? && !account_number_present?)]
+    getter account_number : String?
+
+    @[JSON::Field(ignore: true)]
+    property? account_number_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account_holder_name : String, @account_number : String?, @account_number_last4 : String, @bank_name : String, @routing_number : String)
+    def initialize(
+      *,
+      # Required properties
+      @account_holder_name : String,
+      @account_number_last4 : String,
+      @bank_name : String,
+      @routing_number : String,
+      # Optional properties
+      @account_number : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -54,10 +66,6 @@ module Stripe
 
       if @account_holder_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @account_number.to_s.size > 5000
-        invalid_properties.push("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
 
       if @account_number_last4.to_s.size > 5000
@@ -72,6 +80,10 @@ module Stripe
         invalid_properties.push("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
       end
 
+      if !@account_number.nil? && @account_number.to_s.size > 5000
+        invalid_properties.push("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
@@ -79,10 +91,11 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @account_holder_name.to_s.size > 5000
-      return false if @account_number.to_s.size > 5000
       return false if @account_number_last4.to_s.size > 5000
       return false if @bank_name.to_s.size > 5000
       return false if @routing_number.to_s.size > 5000
+      return false if !@account_number.nil? && @account_number.to_s.size > 5000
+
       true
     end
 
@@ -94,16 +107,6 @@ module Stripe
       end
 
       @account_holder_name = account_holder_name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account_number Value to be assigned
-    def account_number=(account_number)
-      if account_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @account_number = account_number
     end
 
     # Custom attribute writer method with validation
@@ -136,16 +139,14 @@ module Stripe
       @routing_number = routing_number
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account_holder_name == o.account_holder_name &&
-        account_number == o.account_number &&
-        account_number_last4 == o.account_number_last4 &&
-        bank_name == o.bank_name &&
-        routing_number == o.routing_number
+    # Custom attribute writer method with validation
+    # @param [Object] account_number Value to be assigned
+    def account_number=(account_number)
+      if !account_number.nil? && account_number.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @account_number = account_number
     end
 
     # @see the `==` method
@@ -154,8 +155,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account_holder_name, @account_number, @account_number_last4, @bank_name, @routing_number)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account_holder_name, @account_number_last4, @bank_name, @routing_number, @account_number)
   end
 end

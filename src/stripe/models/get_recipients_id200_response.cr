@@ -18,40 +18,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    @[JSON::Field(key: "active_account", type: RecipientActiveAccount, presence: true, ignore_serialize: active_account.nil? && !active_account_present?)]
-    property active_account : RecipientActiveAccount
-
-    @[JSON::Field(ignore: true)]
-    property? active_account_present : Bool = false
-
-    @[JSON::Field(key: "cards", type: CardList, presence: true, ignore_serialize: cards.nil? && !cards_present?)]
-    property cards : CardList
-
-    @[JSON::Field(ignore: true)]
-    property? cards_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?)]
     property created : Int64?
-
-    @[JSON::Field(key: "default_card", type: RecipientDefaultCard, presence: true, ignore_serialize: default_card.nil? && !default_card_present?)]
-    property default_card : RecipientDefaultCard
-
-    @[JSON::Field(ignore: true)]
-    property? default_card_present : Bool = false
-
-    # An arbitrary string attached to the object. Often useful for displaying to users.
-    @[JSON::Field(key: "description", type: String, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
-    @[JSON::Field(key: "email", type: String, presence: true, ignore_serialize: email.nil? && !email_present?)]
-    getter email : String
-
-    @[JSON::Field(ignore: true)]
-    property? email_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?)]
@@ -65,19 +35,6 @@ module Stripe
     @[JSON::Field(key: "metadata", type: Hash(String, String)?)]
     property metadata : Hash(String, String)?
 
-    @[JSON::Field(key: "migrated_to", type: RecipientMigratedTo, presence: true, ignore_serialize: migrated_to.nil? && !migrated_to_present?)]
-    property migrated_to : RecipientMigratedTo
-
-    @[JSON::Field(ignore: true)]
-    property? migrated_to_present : Bool = false
-
-    # Full, legal name of the recipient.
-    @[JSON::Field(key: "name", type: String, presence: true, ignore_serialize: name.nil? && !name_present?)]
-    getter name : String
-
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
-
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?)]
     getter object : String?
@@ -88,10 +45,6 @@ module Stripe
     @[JSON::Field(key: "type", type: String?)]
     getter _type : String?
 
-    # Whether the recipient has been verified. This field is non-standard, and maybe removed in the future
-    @[JSON::Field(key: "verified", type: Bool?)]
-    property verified : Bool?
-
     # Always true for a deleted object
     @[JSON::Field(key: "deleted", type: Bool?)]
     getter deleted : Bool?
@@ -99,6 +52,51 @@ module Stripe
     ENUM_VALIDATOR_FOR_DELETED = EnumValidator.new("deleted", "Bool", ["true"])
 
     # Optional properties
+
+    @[JSON::Field(key: "active_account", type: RecipientActiveAccount?, presence: true, ignore_serialize: active_account.nil? && !active_account_present?)]
+    property active_account : RecipientActiveAccount?
+
+    @[JSON::Field(ignore: true)]
+    property? active_account_present : Bool = false
+
+    @[JSON::Field(key: "cards", type: CardList1?, presence: true, ignore_serialize: cards.nil? && !cards_present?)]
+    property cards : CardList1?
+
+    @[JSON::Field(ignore: true)]
+    property? cards_present : Bool = false
+
+    @[JSON::Field(key: "default_card", type: RecipientDefaultCard?, presence: true, ignore_serialize: default_card.nil? && !default_card_present?)]
+    property default_card : RecipientDefaultCard?
+
+    @[JSON::Field(ignore: true)]
+    property? default_card_present : Bool = false
+
+    # An arbitrary string attached to the object. Often useful for displaying to users.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
+
+    @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
+    getter email : String?
+
+    @[JSON::Field(ignore: true)]
+    property? email_present : Bool = false
+
+    @[JSON::Field(key: "migrated_to", type: RecipientMigratedTo?, presence: true, ignore_serialize: migrated_to.nil? && !migrated_to_present?)]
+    property migrated_to : RecipientMigratedTo?
+
+    @[JSON::Field(ignore: true)]
+    property? migrated_to_present : Bool = false
+
+    # Full, legal name of the recipient.
+    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    getter name : String?
+
+    @[JSON::Field(ignore: true)]
+    property? name_present : Bool = false
+
     @[JSON::Field(key: "rolled_back_from", type: RecipientRolledBackFrom?, presence: true, ignore_serialize: rolled_back_from.nil? && !rolled_back_from_present?)]
     property rolled_back_from : RecipientRolledBackFrom?
 
@@ -115,7 +113,26 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active_account : RecipientActiveAccount?, @cards : CardList?, @created : Int64, @default_card : RecipientDefaultCard?, @description : String?, @email : String?, @id : String, @livemode : Bool, @metadata : Hash(String, String), @migrated_to : RecipientMigratedTo?, @name : String?, @object : String, @_type : String, @verified : Bool, @deleted : Bool, @rolled_back_from : RecipientRolledBackFrom? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @object : String? = nil,
+      @_type : String? = nil,
+      @deleted : Bool? = nil,
+      # Optional properties
+      @active_account : RecipientActiveAccount? = nil,
+      @cards : CardList1? = nil,
+      @default_card : RecipientDefaultCard? = nil,
+      @description : String? = nil,
+      @email : String? = nil,
+      @migrated_to : RecipientMigratedTo? = nil,
+      @name : String? = nil,
+      @rolled_back_from : RecipientRolledBackFrom? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -123,20 +140,8 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @email.to_s.size > 5000
-        invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
@@ -147,19 +152,32 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_DELETED.error_message) unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
 
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@email.nil? && @email.to_s.size > 5000
+        invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@name.nil? && @name.to_s.size > 5000
+        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @description.to_s.size > 5000
-      return false if @email.to_s.size > 5000
       return false if @id.to_s.size > 5000
-      return false if @name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @_type.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@email.nil? && @email.to_s.size > 5000
+      return false if !@name.nil? && @name.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -171,32 +189,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] email Value to be assigned
-    def email=(email)
-      if email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @email = email
     end
 
     # Custom attribute writer method with validation
@@ -207,16 +202,6 @@ module Stripe
       end
 
       @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @name = name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -243,27 +228,34 @@ module Stripe
       @deleted = deleted
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active_account == o.active_account &&
-        cards == o.cards &&
-        created == o.created &&
-        default_card == o.default_card &&
-        description == o.description &&
-        email == o.email &&
-        id == o.id &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        migrated_to == o.migrated_to &&
-        name == o.name &&
-        object == o.object &&
-        rolled_back_from == o.rolled_back_from &&
-        _type == o._type &&
-        verified == o.verified &&
-        deleted == o.deleted
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] email Value to be assigned
+    def email=(email)
+      if !email.nil? && email.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @email = email
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if !name.nil? && name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @name = name
     end
 
     # @see the `==` method
@@ -272,8 +264,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active_account, @cards, @created, @default_card, @description, @email, @id, @livemode, @metadata, @migrated_to, @name, @object, @rolled_back_from, @_type, @verified, @deleted)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @livemode, @metadata, @object, @_type, @deleted, @active_account, @cards, @default_card, @description, @email, @migrated_to, @name, @rolled_back_from)
   end
 end

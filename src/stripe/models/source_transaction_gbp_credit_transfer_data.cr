@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Bank account fingerprint associated with the Stripe owned bank account receiving the transfer.
     @[JSON::Field(key: "fingerprint", type: String?, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
     getter fingerprint : String?
@@ -70,7 +71,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @fingerprint : String? = nil, @funding_method : String? = nil, @last4 : String? = nil, @reference : String? = nil, @sender_account_number : String? = nil, @sender_name : String? = nil, @sender_sort_code : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @fingerprint : String? = nil,
+      @funding_method : String? = nil,
+      @last4 : String? = nil,
+      @reference : String? = nil,
+      @sender_account_number : String? = nil,
+      @sender_name : String? = nil,
+      @sender_sort_code : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -119,6 +130,7 @@ module Stripe
       return false if !@sender_account_number.nil? && @sender_account_number.to_s.size > 5000
       return false if !@sender_name.nil? && @sender_name.to_s.size > 5000
       return false if !@sender_sort_code.nil? && @sender_sort_code.to_s.size > 5000
+
       true
     end
 
@@ -192,28 +204,16 @@ module Stripe
       @sender_sort_code = sender_sort_code
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        fingerprint == o.fingerprint &&
-        funding_method == o.funding_method &&
-        last4 == o.last4 &&
-        reference == o.reference &&
-        sender_account_number == o.sender_account_number &&
-        sender_name == o.sender_name &&
-        sender_sort_code == o.sender_sort_code
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@fingerprint, @funding_method, @last4, @reference, @sender_account_number, @sender_name, @sender_sort_code)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@fingerprint, @funding_method, @last4, @reference, @sender_account_number, @sender_name, @sender_sort_code)
   end
 end

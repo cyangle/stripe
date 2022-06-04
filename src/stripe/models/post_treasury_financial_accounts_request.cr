@@ -18,10 +18,14 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # The currencies the FinancialAccount can hold a balance in.
     @[JSON::Field(key: "supported_currencies", type: Array(String))]
     property supported_currencies : Array(String)
 
     # Optional properties
+
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -49,7 +53,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @supported_currencies : Array(String), @expand : Array(String)? = nil, @features : FeatureAccess? = nil, @metadata : Hash(String, String)? = nil, @platform_restrictions : PlatformRestrictions? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @supported_currencies : Array(String),
+      # Optional properties
+      @expand : Array(String)? = nil,
+      @features : FeatureAccess? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @platform_restrictions : PlatformRestrictions? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -66,26 +79,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        expand == o.expand &&
-        features == o.features &&
-        metadata == o.metadata &&
-        platform_restrictions == o.platform_restrictions &&
-        supported_currencies == o.supported_currencies
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@expand, @features, @metadata, @platform_restrictions, @supported_currencies)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@supported_currencies, @expand, @features, @metadata, @platform_restrictions)
   end
 end

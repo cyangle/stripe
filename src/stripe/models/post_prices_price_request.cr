@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether the price can be used for new purchases. Defaults to `true`.
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
@@ -25,6 +26,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? active_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -38,8 +40,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? lookup_key_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -50,12 +52,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? nickname_present : Bool = false
-
-    @[JSON::Field(key: "recurring", type: PostPricesPriceRequestRecurring?, presence: true, ignore_serialize: recurring.nil? && !recurring_present?)]
-    property recurring : PostPricesPriceRequestRecurring?
-
-    @[JSON::Field(ignore: true)]
-    property? recurring_present : Bool = false
 
     # Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
     @[JSON::Field(key: "tax_behavior", type: String?, presence: true, ignore_serialize: tax_behavior.nil? && !tax_behavior_present?)]
@@ -75,7 +71,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool? = nil, @expand : Array(String)? = nil, @lookup_key : String? = nil, @metadata : IndividualSpecsMetadata? = nil, @nickname : String? = nil, @recurring : PostPricesPriceRequestRecurring? = nil, @tax_behavior : String? = nil, @transfer_lookup_key : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @active : Bool? = nil,
+      @expand : Array(String)? = nil,
+      @lookup_key : String? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @nickname : String? = nil,
+      @tax_behavior : String? = nil,
+      @transfer_lookup_key : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -102,6 +108,7 @@ module Stripe
       return false if !@lookup_key.nil? && @lookup_key.to_s.size > 200
       return false if !@nickname.nil? && @nickname.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
+
       true
     end
 
@@ -132,29 +139,16 @@ module Stripe
       @tax_behavior = tax_behavior
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        expand == o.expand &&
-        lookup_key == o.lookup_key &&
-        metadata == o.metadata &&
-        nickname == o.nickname &&
-        recurring == o.recurring &&
-        tax_behavior == o.tax_behavior &&
-        transfer_lookup_key == o.transfer_lookup_key
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @expand, @lookup_key, @metadata, @nickname, @recurring, @tax_behavior, @transfer_lookup_key)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @expand, @lookup_key, @metadata, @nickname, @tax_behavior, @transfer_lookup_key)
   end
 end

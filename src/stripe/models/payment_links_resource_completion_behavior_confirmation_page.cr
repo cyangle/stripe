@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The custom message that is displayed to the customer after the purchase is complete.
     @[JSON::Field(key: "custom_message", type: String?, presence: true, ignore_serialize: custom_message.nil? && !custom_message_present?)]
     getter custom_message : String?
@@ -28,7 +29,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @custom_message : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @custom_message : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -36,7 +41,7 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @custom_message.to_s.size > 5000
+      if !@custom_message.nil? && @custom_message.to_s.size > 5000
         invalid_properties.push("invalid value for \"custom_message\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -46,26 +51,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @custom_message.to_s.size > 5000
+      return false if !@custom_message.nil? && @custom_message.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] custom_message Value to be assigned
     def custom_message=(custom_message)
-      if custom_message.to_s.size > 5000
+      if !custom_message.nil? && custom_message.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"custom_message\", the character length must be smaller than or equal to 5000.")
       end
 
       @custom_message = custom_message
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        custom_message == o.custom_message
     end
 
     # @see the `==` method
@@ -74,8 +72,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@custom_message)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@custom_message)
   end
 end

@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "billing_details", type: UfaResourceBillingDetails)]
     property billing_details : UfaResourceBillingDetails
 
@@ -29,6 +30,7 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["balance", "financial_account", "issuing_card", "stripe", "us_bank_account"])
 
     # Optional properties
+
     # Set when `type` is `balance`.
     @[JSON::Field(key: "balance", type: String?, presence: true, ignore_serialize: balance.nil? && !balance_present?)]
     getter balance : String?
@@ -59,20 +61,31 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing_details : UfaResourceBillingDetails, @_type : String, @balance : String? = nil, @financial_account : ReceivedPaymentMethodDetailsFinancialAccount? = nil, @issuing_card : String? = nil, @us_bank_account : UfaResourceInitiatingPaymentMethodDetailsUsBankAccount? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @billing_details : UfaResourceBillingDetails,
+      @_type : String,
+      # Optional properties
+      @balance : String? = nil,
+      @financial_account : ReceivedPaymentMethodDetailsFinancialAccount? = nil,
+      @issuing_card : String? = nil,
+      @us_bank_account : UfaResourceInitiatingPaymentMethodDetailsUsBankAccount? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_BALANCE.error_message) unless ENUM_VALIDATOR_FOR_BALANCE.valid?(@balance)
 
       if !@issuing_card.nil? && @issuing_card.to_s.size > 5000
         invalid_properties.push("invalid value for \"issuing_card\", the character length must be smaller than or equal to 5000.")
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       invalid_properties
     end
@@ -80,10 +93,18 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       return false unless ENUM_VALIDATOR_FOR_BALANCE.valid?(@balance)
       return false if !@issuing_card.nil? && @issuing_card.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type)
+      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
+      @_type = _type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -103,34 +124,16 @@ module Stripe
       @issuing_card = issuing_card
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] _type Object to be assigned
-    def _type=(_type)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
-      @_type = _type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        balance == o.balance &&
-        billing_details == o.billing_details &&
-        financial_account == o.financial_account &&
-        issuing_card == o.issuing_card &&
-        _type == o._type &&
-        us_bank_account == o.us_bank_account
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@balance, @billing_details, @financial_account, @issuing_card, @_type, @us_bank_account)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@billing_details, @_type, @balance, @financial_account, @issuing_card, @us_bank_account)
   end
 end

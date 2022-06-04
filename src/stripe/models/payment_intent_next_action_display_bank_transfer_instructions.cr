@@ -19,6 +19,15 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # Type of bank transfer
+    @[JSON::Field(key: "type", type: String)]
+    getter _type : String
+
+    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["jp_bank_transfer"])
+
+    # Optional properties
+
     # The remaining amount that needs to be transferred to complete the payment.
     @[JSON::Field(key: "amount_remaining", type: Int64?, presence: true, ignore_serialize: amount_remaining.nil? && !amount_remaining_present?)]
     property amount_remaining : Int64?
@@ -32,6 +41,13 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? currency_present : Bool = false
+
+    # A list of financial addresses that can be used to fund the customer balance
+    @[JSON::Field(key: "financial_addresses", type: Array(FundingInstructionsBankTransferFinancialAddress)?, presence: true, ignore_serialize: financial_addresses.nil? && !financial_addresses_present?)]
+    property financial_addresses : Array(FundingInstructionsBankTransferFinancialAddress)?
+
+    @[JSON::Field(ignore: true)]
+    property? financial_addresses_present : Bool = false
 
     # A link to a hosted page that guides your customer through completing the transfer.
     @[JSON::Field(key: "hosted_instructions_url", type: String?, presence: true, ignore_serialize: hosted_instructions_url.nil? && !hosted_instructions_url_present?)]
@@ -47,23 +63,19 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? reference_present : Bool = false
 
-    # Type of bank transfer
-    @[JSON::Field(key: "type", type: String)]
-    getter _type : String
-
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["jp_bank_transfer"])
-
-    # Optional properties
-    # A list of financial addresses that can be used to fund the customer balance
-    @[JSON::Field(key: "financial_addresses", type: Array(FundingInstructionsBankTransferFinancialAddress)?, presence: true, ignore_serialize: financial_addresses.nil? && !financial_addresses_present?)]
-    property financial_addresses : Array(FundingInstructionsBankTransferFinancialAddress)?
-
-    @[JSON::Field(ignore: true)]
-    property? financial_addresses_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount_remaining : Int64?, @currency : String?, @hosted_instructions_url : String?, @reference : String?, @_type : String, @financial_addresses : Array(FundingInstructionsBankTransferFinancialAddress)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String,
+      # Optional properties
+      @amount_remaining : Int64? = nil,
+      @currency : String? = nil,
+      @financial_addresses : Array(FundingInstructionsBankTransferFinancialAddress)? = nil,
+      @hosted_instructions_url : String? = nil,
+      @reference : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -71,15 +83,15 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @hosted_instructions_url.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      if !@hosted_instructions_url.nil? && @hosted_instructions_url.to_s.size > 5000
         invalid_properties.push("invalid value for \"hosted_instructions_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @reference.to_s.size > 5000
+      if !@reference.nil? && @reference.to_s.size > 5000
         invalid_properties.push("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       invalid_properties
     end
@@ -87,30 +99,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @hosted_instructions_url.to_s.size > 5000
-      return false if @reference.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if !@hosted_instructions_url.nil? && @hosted_instructions_url.to_s.size > 5000
+      return false if !@reference.nil? && @reference.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] hosted_instructions_url Value to be assigned
-    def hosted_instructions_url=(hosted_instructions_url)
-      if hosted_instructions_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"hosted_instructions_url\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @hosted_instructions_url = hosted_instructions_url
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] reference Value to be assigned
-    def reference=(reference)
-      if reference.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @reference = reference
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -120,17 +113,24 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount_remaining == o.amount_remaining &&
-        currency == o.currency &&
-        financial_addresses == o.financial_addresses &&
-        hosted_instructions_url == o.hosted_instructions_url &&
-        reference == o.reference &&
-        _type == o._type
+    # Custom attribute writer method with validation
+    # @param [Object] hosted_instructions_url Value to be assigned
+    def hosted_instructions_url=(hosted_instructions_url)
+      if !hosted_instructions_url.nil? && hosted_instructions_url.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"hosted_instructions_url\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @hosted_instructions_url = hosted_instructions_url
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] reference Value to be assigned
+    def reference=(reference)
+      if !reference.nil? && reference.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @reference = reference
     end
 
     # @see the `==` method
@@ -139,8 +139,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount_remaining, @currency, @financial_addresses, @hosted_instructions_url, @reference, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @amount_remaining, @currency, @financial_addresses, @hosted_instructions_url, @reference)
   end
 end

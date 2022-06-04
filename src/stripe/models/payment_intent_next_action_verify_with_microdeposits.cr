@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The timestamp when the microdeposits are expected to land.
     @[JSON::Field(key: "arrival_date", type: Int64)]
     property arrival_date : Int64
@@ -27,6 +28,8 @@ module Stripe
     @[JSON::Field(key: "hosted_verification_url", type: String)]
     getter hosted_verification_url : String
 
+    # Optional properties
+
     # The type of the microdeposit sent to the customer. Used to distinguish between different verification methods.
     @[JSON::Field(key: "microdeposit_type", type: String?, presence: true, ignore_serialize: microdeposit_type.nil? && !microdeposit_type_present?)]
     getter microdeposit_type : String?
@@ -34,11 +37,18 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? microdeposit_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_MICRODEPOSIT_TYPE = EnumValidator.new("microdeposit_type", "String", ["amounts", "descriptor_code", "null"])
+    ENUM_VALIDATOR_FOR_MICRODEPOSIT_TYPE = EnumValidator.new("microdeposit_type", "String", ["amounts", "descriptor_code"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @arrival_date : Int64, @hosted_verification_url : String, @microdeposit_type : String?)
+    def initialize(
+      *,
+      # Required properties
+      @arrival_date : Int64,
+      @hosted_verification_url : String,
+      # Optional properties
+      @microdeposit_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -60,6 +70,7 @@ module Stripe
     def valid?
       return false if @hosted_verification_url.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_MICRODEPOSIT_TYPE.valid?(@microdeposit_type)
+
       true
     end
 
@@ -80,24 +91,16 @@ module Stripe
       @microdeposit_type = microdeposit_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        arrival_date == o.arrival_date &&
-        hosted_verification_url == o.hosted_verification_url &&
-        microdeposit_type == o.microdeposit_type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@arrival_date, @hosted_verification_url, @microdeposit_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@arrival_date, @hosted_verification_url, @microdeposit_type)
   end
 end

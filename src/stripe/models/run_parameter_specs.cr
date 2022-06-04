@@ -19,48 +19,43 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "columns", type: Array(String)?, presence: true, ignore_serialize: columns.nil? && !columns_present?)]
     property columns : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? columns_present : Bool = false
 
-    # Connected account ID to filter for in the report run.
     @[JSON::Field(key: "connected_account", type: String?, presence: true, ignore_serialize: connected_account.nil? && !connected_account_present?)]
     property connected_account : String?
 
     @[JSON::Field(ignore: true)]
     property? connected_account_present : Bool = false
 
-    # Currency of objects to be included in the report run.
     @[JSON::Field(key: "currency", type: String?, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
     property currency : String?
 
     @[JSON::Field(ignore: true)]
     property? currency_present : Bool = false
 
-    # Ending timestamp of data to be included in the report run (exclusive).
     @[JSON::Field(key: "interval_end", type: Int64?, presence: true, ignore_serialize: interval_end.nil? && !interval_end_present?)]
     property interval_end : Int64?
 
     @[JSON::Field(ignore: true)]
     property? interval_end_present : Bool = false
 
-    # Starting timestamp of data to be included in the report run.
     @[JSON::Field(key: "interval_start", type: Int64?, presence: true, ignore_serialize: interval_start.nil? && !interval_start_present?)]
     property interval_start : Int64?
 
     @[JSON::Field(ignore: true)]
     property? interval_start_present : Bool = false
 
-    # Payout ID by which to filter the report run.
     @[JSON::Field(key: "payout", type: String?, presence: true, ignore_serialize: payout.nil? && !payout_present?)]
     property payout : String?
 
     @[JSON::Field(ignore: true)]
     property? payout_present : Bool = false
 
-    # Category of balance transactions to be included in the report run.
     @[JSON::Field(key: "reporting_category", type: String?, presence: true, ignore_serialize: reporting_category.nil? && !reporting_category_present?)]
     getter reporting_category : String?
 
@@ -69,7 +64,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_REPORTING_CATEGORY = EnumValidator.new("reporting_category", "String", ["advance", "advance_funding", "anticipation_repayment", "charge", "charge_failure", "connect_collection_transfer", "connect_reserved_funds", "contribution", "dispute", "dispute_reversal", "fee", "financing_paydown", "financing_paydown_reversal", "financing_payout", "financing_payout_reversal", "issuing_authorization_hold", "issuing_authorization_release", "issuing_dispute", "issuing_transaction", "network_cost", "other_adjustment", "partial_capture_reversal", "payout", "payout_reversal", "platform_earning", "platform_earning_refund", "refund", "refund_failure", "risk_reserved_funds", "tax", "topup", "topup_reversal", "transfer", "transfer_reversal"])
 
-    # Defaults to `Etc/UTC`. The output timezone for all timestamps in the report. A list of possible time zone values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones). Has no effect on `interval_start` or `interval_end`.
     @[JSON::Field(key: "timezone", type: String?, presence: true, ignore_serialize: timezone.nil? && !timezone_present?)]
     getter timezone : String?
 
@@ -80,7 +74,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @columns : Array(String)? = nil, @connected_account : String? = nil, @currency : String? = nil, @interval_end : Int64? = nil, @interval_start : Int64? = nil, @payout : String? = nil, @reporting_category : String? = nil, @timezone : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @columns : Array(String)? = nil,
+      @connected_account : String? = nil,
+      @currency : String? = nil,
+      @interval_end : Int64? = nil,
+      @interval_start : Int64? = nil,
+      @payout : String? = nil,
+      @reporting_category : String? = nil,
+      @timezone : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -110,6 +115,7 @@ module Stripe
       return false if !@reporting_category.nil? && @reporting_category.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_TIMEZONE.valid?(@timezone)
       return false if !@timezone.nil? && @timezone.to_s.size > 5000
+
       true
     end
 
@@ -127,29 +133,16 @@ module Stripe
       @timezone = timezone
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        columns == o.columns &&
-        connected_account == o.connected_account &&
-        currency == o.currency &&
-        interval_end == o.interval_end &&
-        interval_start == o.interval_start &&
-        payout == o.payout &&
-        reporting_category == o.reporting_category &&
-        timezone == o.timezone
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@columns, @connected_account, @currency, @interval_end, @interval_start, @payout, @reporting_category, @timezone)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@columns, @connected_account, @currency, @interval_end, @interval_start, @payout, @reporting_category, @timezone)
   end
 end

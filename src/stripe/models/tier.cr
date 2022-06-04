@@ -18,32 +18,30 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "up_to", type: TierUpTo)]
     property up_to : TierUpTo
 
     # Optional properties
-    # The flat billing amount for an entire tier, regardless of the number of units in the tier.
+
     @[JSON::Field(key: "flat_amount", type: Int64?, presence: true, ignore_serialize: flat_amount.nil? && !flat_amount_present?)]
     property flat_amount : Int64?
 
     @[JSON::Field(ignore: true)]
     property? flat_amount_present : Bool = false
 
-    # Same as `flat_amount`, but accepts a decimal value representing an integer in the minor units of the currency. Only one of `flat_amount` and `flat_amount_decimal` can be set.
     @[JSON::Field(key: "flat_amount_decimal", type: String?, presence: true, ignore_serialize: flat_amount_decimal.nil? && !flat_amount_decimal_present?)]
     property flat_amount_decimal : String?
 
     @[JSON::Field(ignore: true)]
     property? flat_amount_decimal_present : Bool = false
 
-    # The per unit billing amount for each individual unit for which this tier applies.
     @[JSON::Field(key: "unit_amount", type: Int64?, presence: true, ignore_serialize: unit_amount.nil? && !unit_amount_present?)]
     property unit_amount : Int64?
 
     @[JSON::Field(ignore: true)]
     property? unit_amount_present : Bool = false
 
-    # Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
     @[JSON::Field(key: "unit_amount_decimal", type: String?, presence: true, ignore_serialize: unit_amount_decimal.nil? && !unit_amount_decimal_present?)]
     property unit_amount_decimal : String?
 
@@ -52,7 +50,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @up_to : TierUpTo, @flat_amount : Int64? = nil, @flat_amount_decimal : String? = nil, @unit_amount : Int64? = nil, @unit_amount_decimal : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @up_to : TierUpTo,
+      # Optional properties
+      @flat_amount : Int64? = nil,
+      @flat_amount_decimal : String? = nil,
+      @unit_amount : Int64? = nil,
+      @unit_amount_decimal : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -69,26 +76,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        flat_amount == o.flat_amount &&
-        flat_amount_decimal == o.flat_amount_decimal &&
-        unit_amount == o.unit_amount &&
-        unit_amount_decimal == o.unit_amount_decimal &&
-        up_to == o.up_to
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@flat_amount, @flat_amount_decimal, @unit_amount, @unit_amount_decimal, @up_to)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@up_to, @flat_amount, @flat_amount_decimal, @unit_amount, @unit_amount_decimal)
   end
 end

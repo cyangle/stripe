@@ -19,19 +19,22 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Installment plans that may be selected for this PaymentIntent.
-    @[JSON::Field(key: "available_plans", type: Array(PaymentMethodDetailsCardInstallmentsPlan), presence: true, ignore_serialize: available_plans.nil? && !available_plans_present?)]
-    property available_plans : Array(PaymentMethodDetailsCardInstallmentsPlan)
-
-    @[JSON::Field(ignore: true)]
-    property? available_plans_present : Bool = false
 
     # Whether Installments are enabled for this PaymentIntent.
     @[JSON::Field(key: "enabled", type: Bool?)]
     property enabled : Bool?
 
-    @[JSON::Field(key: "plan", type: PaymentMethodOptionsCardInstallmentsPlan, presence: true, ignore_serialize: plan.nil? && !plan_present?)]
-    property plan : PaymentMethodOptionsCardInstallmentsPlan
+    # Optional properties
+
+    # Installment plans that may be selected for this PaymentIntent.
+    @[JSON::Field(key: "available_plans", type: Array(PaymentMethodDetailsCardInstallmentsPlan)?, presence: true, ignore_serialize: available_plans.nil? && !available_plans_present?)]
+    property available_plans : Array(PaymentMethodDetailsCardInstallmentsPlan)?
+
+    @[JSON::Field(ignore: true)]
+    property? available_plans_present : Bool = false
+
+    @[JSON::Field(key: "plan", type: PaymentMethodOptionsCardInstallmentsPlan?, presence: true, ignore_serialize: plan.nil? && !plan_present?)]
+    property plan : PaymentMethodOptionsCardInstallmentsPlan?
 
     @[JSON::Field(ignore: true)]
     property? plan_present : Bool = false
@@ -45,7 +48,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @available_plans : Array(PaymentMethodDetailsCardInstallmentsPlan)?, @enabled : Bool, @plan : PaymentMethodOptionsCardInstallmentsPlan?)
+    def initialize(
+      *,
+      # Required properties
+      @enabled : Bool? = nil,
+      # Optional properties
+      @available_plans : Array(PaymentMethodDetailsCardInstallmentsPlan)? = nil,
+      @plan : PaymentMethodOptionsCardInstallmentsPlan? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -70,22 +80,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        available_plans == o.available_plans &&
-        enabled == o.enabled &&
-        plan == o.plan
     end
 
     # @see the `==` method
@@ -94,8 +91,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@available_plans, @enabled, @plan)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@enabled, @available_plans, @plan)
   end
 end

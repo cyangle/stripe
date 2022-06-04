@@ -33,7 +33,7 @@ describe Stripe::PaymentMethodOptionsCustomerBalanceBankTransfer do
   describe "test attribute '_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["jp_bank_transfer", "null"])
+      # validator = EnumValidator.new("String", ["jp_bank_transfer"])
       # validator.allowable_values.each do |value|
       #   expect { instance._type = value }.not_to raise_error
       # end

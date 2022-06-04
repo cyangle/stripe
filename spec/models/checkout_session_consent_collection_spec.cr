@@ -23,7 +23,7 @@ describe Stripe::CheckoutSessionConsentCollection do
   describe "test attribute 'promotions'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["auto", "null"])
+      # validator = EnumValidator.new("String", ["auto"])
       # validator.allowable_values.each do |value|
       #   expect { instance.promotions = value }.not_to raise_error
       # end

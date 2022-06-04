@@ -19,11 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.
     @[JSON::Field(key: "type", type: String)]
     getter _type : String
 
     # Optional properties
+
     @[JSON::Field(key: "redirect_to_url", type: SetupIntentNextActionRedirectToUrl?, presence: true, ignore_serialize: redirect_to_url.nil? && !redirect_to_url_present?)]
     property redirect_to_url : SetupIntentNextActionRedirectToUrl?
 
@@ -45,7 +47,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_type : String, @redirect_to_url : SetupIntentNextActionRedirectToUrl? = nil, @use_stripe_sdk : JSON::Any = nil, @verify_with_microdeposits : SetupIntentNextActionVerifyWithMicrodeposits? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String,
+      # Optional properties
+      @redirect_to_url : SetupIntentNextActionRedirectToUrl? = nil,
+      @use_stripe_sdk : JSON::Any = nil,
+      @verify_with_microdeposits : SetupIntentNextActionVerifyWithMicrodeposits? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -64,6 +74,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @_type.to_s.size > 5000
+
       true
     end
 
@@ -77,25 +88,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        redirect_to_url == o.redirect_to_url &&
-        _type == o._type &&
-        use_stripe_sdk == o.use_stripe_sdk &&
-        verify_with_microdeposits == o.verify_with_microdeposits
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@redirect_to_url, @_type, @use_stripe_sdk, @verify_with_microdeposits)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @redirect_to_url, @use_stripe_sdk, @verify_with_microdeposits)
   end
 end

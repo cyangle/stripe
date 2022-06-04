@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "bank_code", type: String?, presence: true, ignore_serialize: bank_code.nil? && !bank_code_present?)]
     property bank_code : String?
 
@@ -62,7 +63,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bank_code : String? = nil, @branch_code : String? = nil, @country : String? = nil, @fingerprint : String? = nil, @last4 : String? = nil, @mandate_reference : String? = nil, @mandate_url : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @bank_code : String? = nil,
+      @branch_code : String? = nil,
+      @country : String? = nil,
+      @fingerprint : String? = nil,
+      @last4 : String? = nil,
+      @mandate_reference : String? = nil,
+      @mandate_url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -79,28 +90,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bank_code == o.bank_code &&
-        branch_code == o.branch_code &&
-        country == o.country &&
-        fingerprint == o.fingerprint &&
-        last4 == o.last4 &&
-        mandate_reference == o.mandate_reference &&
-        mandate_url == o.mandate_url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bank_code, @branch_code, @country, @fingerprint, @last4, @mandate_reference, @mandate_url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bank_code, @branch_code, @country, @fingerprint, @last4, @mandate_reference, @mandate_url)
   end
 end

@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "address_line1_check", type: String?, presence: true, ignore_serialize: address_line1_check.nil? && !address_line1_check_present?)]
     property address_line1_check : String?
 
@@ -47,12 +48,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? cvc_check_present : Bool = false
-
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    property description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
 
     @[JSON::Field(key: "dynamic_last4", type: String?, presence: true, ignore_serialize: dynamic_last4.nil? && !dynamic_last4_present?)]
     property dynamic_last4 : String?
@@ -84,18 +79,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? funding_present : Bool = false
 
-    @[JSON::Field(key: "iin", type: String?, presence: true, ignore_serialize: iin.nil? && !iin_present?)]
-    property iin : String?
-
-    @[JSON::Field(ignore: true)]
-    property? iin_present : Bool = false
-
-    @[JSON::Field(key: "issuer", type: String?, presence: true, ignore_serialize: issuer.nil? && !issuer_present?)]
-    property issuer : String?
-
-    @[JSON::Field(ignore: true)]
-    property? issuer_present : Bool = false
-
     @[JSON::Field(key: "last4", type: String?, presence: true, ignore_serialize: last4.nil? && !last4_present?)]
     property last4 : String?
 
@@ -122,7 +105,24 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address_line1_check : String? = nil, @address_zip_check : String? = nil, @brand : String? = nil, @country : String? = nil, @cvc_check : String? = nil, @description : String? = nil, @dynamic_last4 : String? = nil, @exp_month : Int64? = nil, @exp_year : Int64? = nil, @fingerprint : String? = nil, @funding : String? = nil, @iin : String? = nil, @issuer : String? = nil, @last4 : String? = nil, @name : String? = nil, @three_d_secure : String? = nil, @tokenization_method : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @address_line1_check : String? = nil,
+      @address_zip_check : String? = nil,
+      @brand : String? = nil,
+      @country : String? = nil,
+      @cvc_check : String? = nil,
+      @dynamic_last4 : String? = nil,
+      @exp_month : Int64? = nil,
+      @exp_year : Int64? = nil,
+      @fingerprint : String? = nil,
+      @funding : String? = nil,
+      @last4 : String? = nil,
+      @name : String? = nil,
+      @three_d_secure : String? = nil,
+      @tokenization_method : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -139,38 +139,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address_line1_check == o.address_line1_check &&
-        address_zip_check == o.address_zip_check &&
-        brand == o.brand &&
-        country == o.country &&
-        cvc_check == o.cvc_check &&
-        description == o.description &&
-        dynamic_last4 == o.dynamic_last4 &&
-        exp_month == o.exp_month &&
-        exp_year == o.exp_year &&
-        fingerprint == o.fingerprint &&
-        funding == o.funding &&
-        iin == o.iin &&
-        issuer == o.issuer &&
-        last4 == o.last4 &&
-        name == o.name &&
-        three_d_secure == o.three_d_secure &&
-        tokenization_method == o.tokenization_method
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address_line1_check, @address_zip_check, @brand, @country, @cvc_check, @description, @dynamic_last4, @exp_month, @exp_year, @fingerprint, @funding, @iin, @issuer, @last4, @name, @three_d_secure, @tokenization_method)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address_line1_check, @address_zip_check, @brand, @country, @cvc_check, @dynamic_last4, @exp_month, @exp_year, @fingerprint, @funding, @last4, @name, @three_d_secure, @tokenization_method)
   end
 end

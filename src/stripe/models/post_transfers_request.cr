@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # 3-letter [ISO code for currency](https://stripe.com/docs/payouts).
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
@@ -27,6 +28,7 @@ module Stripe
     property destination : String
 
     # Optional properties
+
     # A positive integer in cents (or local equivalent) representing how much to transfer.
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
@@ -41,6 +43,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -79,7 +82,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @currency : String, @destination : String, @amount : Int64? = nil, @description : String? = nil, @expand : Array(String)? = nil, @metadata : Hash(String, String)? = nil, @source_transaction : String? = nil, @source_type : String? = nil, @transfer_group : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @currency : String,
+      @destination : String,
+      # Optional properties
+      @amount : Int64? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @source_transaction : String? = nil,
+      @source_type : String? = nil,
+      @transfer_group : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -106,6 +122,7 @@ module Stripe
       return false if !@description.nil? && @description.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_SOURCE_TYPE.valid?(@source_type)
       return false if !@source_type.nil? && @source_type.to_s.size > 5000
+
       true
     end
 
@@ -126,30 +143,16 @@ module Stripe
       @source_type = source_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        currency == o.currency &&
-        description == o.description &&
-        destination == o.destination &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        source_transaction == o.source_transaction &&
-        source_type == o.source_type &&
-        transfer_group == o.transfer_group
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @currency, @description, @destination, @expand, @metadata, @source_transaction, @source_type, @transfer_group)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@currency, @destination, @amount, @description, @expand, @metadata, @source_transaction, @source_type, @transfer_group)
   end
 end

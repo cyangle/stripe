@@ -19,26 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The country of the business associated with this invoice, most often the business creating the invoice.
-    @[JSON::Field(key: "account_country", type: String, presence: true, ignore_serialize: account_country.nil? && !account_country_present?)]
-    getter account_country : String
-
-    @[JSON::Field(ignore: true)]
-    property? account_country_present : Bool = false
-
-    # The public name of the business associated with this invoice, most often the business creating the invoice.
-    @[JSON::Field(key: "account_name", type: String, presence: true, ignore_serialize: account_name.nil? && !account_name_present?)]
-    getter account_name : String
-
-    @[JSON::Field(ignore: true)]
-    property? account_name_present : Bool = false
-
-    # The account tax IDs associated with the invoice. Only editable when the invoice is a draft.
-    @[JSON::Field(key: "account_tax_ids", type: Array(InvoiceAccountTaxIdsInner), presence: true, ignore_serialize: account_tax_ids.nil? && !account_tax_ids_present?)]
-    property account_tax_ids : Array(InvoiceAccountTaxIdsInner)
-
-    @[JSON::Field(ignore: true)]
-    property? account_tax_ids_present : Bool = false
 
     # Final amount due at this time for this invoice. If the invoice's total is smaller than the minimum charge amount, for example, or if there is account credit that can be applied to the invoice, the `amount_due` may be 0. If there is a positive `starting_balance` for the invoice (the customer owes money), the `amount_due` will also take that into account. The charge that gets generated for the invoice will be for the amount specified in `amount_due`.
     @[JSON::Field(key: "amount_due", type: Int64?)]
@@ -52,19 +32,6 @@ module Stripe
     @[JSON::Field(key: "amount_remaining", type: Int64?)]
     property amount_remaining : Int64?
 
-    @[JSON::Field(key: "application", type: InvoiceApplication, presence: true, ignore_serialize: application.nil? && !application_present?)]
-    property application : InvoiceApplication
-
-    @[JSON::Field(ignore: true)]
-    property? application_present : Bool = false
-
-    # The fee in %s that will be applied to the invoice and transferred to the application owner's Stripe account when the invoice is paid.
-    @[JSON::Field(key: "application_fee_amount", type: Int64, presence: true, ignore_serialize: application_fee_amount.nil? && !application_fee_amount_present?)]
-    property application_fee_amount : Int64
-
-    @[JSON::Field(ignore: true)]
-    property? application_fee_amount_present : Bool = false
-
     # Number of payment attempts made for this invoice, from the perspective of the payment retry schedule. Any payment attempt counts as the first attempt, and subsequently only automatic retries increment the attempt count. In other words, manual payment attempts after the first attempt do not affect the retry schedule.
     @[JSON::Field(key: "attempt_count", type: Int64?)]
     property attempt_count : Int64?
@@ -75,21 +42,6 @@ module Stripe
 
     @[JSON::Field(key: "automatic_tax", type: AutomaticTax?)]
     property automatic_tax : AutomaticTax?
-
-    # Indicates the reason why the invoice was created. `subscription_cycle` indicates an invoice created by a subscription advancing into a new period. `subscription_create` indicates an invoice created due to creating a subscription. `subscription_update` indicates an invoice created due to updating a subscription. `subscription` is set for all old invoices to indicate either a change to a subscription or a period advancement. `manual` is set for all invoices unrelated to a subscription (for example: created via the invoice editor). The `upcoming` value is reserved for simulated invoices per the upcoming invoice endpoint. `subscription_threshold` indicates an invoice created due to a billing threshold being reached.
-    @[JSON::Field(key: "billing_reason", type: String, presence: true, ignore_serialize: billing_reason.nil? && !billing_reason_present?)]
-    getter billing_reason : String
-
-    @[JSON::Field(ignore: true)]
-    property? billing_reason_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_BILLING_REASON = EnumValidator.new("billing_reason", "String", ["automatic_pending_invoice_item_invoice", "manual", "quote_accept", "subscription", "subscription_create", "subscription_cycle", "subscription_threshold", "subscription_update", "upcoming", "null"])
-
-    @[JSON::Field(key: "charge", type: InvoiceCharge, presence: true, ignore_serialize: charge.nil? && !charge_present?)]
-    property charge : InvoiceCharge
-
-    @[JSON::Field(ignore: true)]
-    property? charge_present : Bool = false
 
     # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions.
     @[JSON::Field(key: "collection_method", type: String?)]
@@ -105,123 +57,9 @@ module Stripe
     @[JSON::Field(key: "currency", type: String?)]
     property currency : String?
 
-    # Custom fields displayed on the invoice.
-    @[JSON::Field(key: "custom_fields", type: Array(InvoiceSettingCustomField), presence: true, ignore_serialize: custom_fields.nil? && !custom_fields_present?)]
-    property custom_fields : Array(InvoiceSettingCustomField)
-
-    @[JSON::Field(ignore: true)]
-    property? custom_fields_present : Bool = false
-
-    @[JSON::Field(key: "customer", type: InvoiceCustomer, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
-    property customer : InvoiceCustomer
-
-    @[JSON::Field(ignore: true)]
-    property? customer_present : Bool = false
-
-    @[JSON::Field(key: "customer_address", type: InvoiceCustomerAddress, presence: true, ignore_serialize: customer_address.nil? && !customer_address_present?)]
-    property customer_address : InvoiceCustomerAddress
-
-    @[JSON::Field(ignore: true)]
-    property? customer_address_present : Bool = false
-
-    # The customer's email. Until the invoice is finalized, this field will equal `customer.email`. Once the invoice is finalized, this field will no longer be updated.
-    @[JSON::Field(key: "customer_email", type: String, presence: true, ignore_serialize: customer_email.nil? && !customer_email_present?)]
-    getter customer_email : String
-
-    @[JSON::Field(ignore: true)]
-    property? customer_email_present : Bool = false
-
-    # The customer's name. Until the invoice is finalized, this field will equal `customer.name`. Once the invoice is finalized, this field will no longer be updated.
-    @[JSON::Field(key: "customer_name", type: String, presence: true, ignore_serialize: customer_name.nil? && !customer_name_present?)]
-    getter customer_name : String
-
-    @[JSON::Field(ignore: true)]
-    property? customer_name_present : Bool = false
-
-    # The customer's phone number. Until the invoice is finalized, this field will equal `customer.phone`. Once the invoice is finalized, this field will no longer be updated.
-    @[JSON::Field(key: "customer_phone", type: String, presence: true, ignore_serialize: customer_phone.nil? && !customer_phone_present?)]
-    getter customer_phone : String
-
-    @[JSON::Field(ignore: true)]
-    property? customer_phone_present : Bool = false
-
-    @[JSON::Field(key: "customer_shipping", type: InvoiceCustomerShipping, presence: true, ignore_serialize: customer_shipping.nil? && !customer_shipping_present?)]
-    property customer_shipping : InvoiceCustomerShipping
-
-    @[JSON::Field(ignore: true)]
-    property? customer_shipping_present : Bool = false
-
-    # The customer's tax exempt status. Until the invoice is finalized, this field will equal `customer.tax_exempt`. Once the invoice is finalized, this field will no longer be updated.
-    @[JSON::Field(key: "customer_tax_exempt", type: String, presence: true, ignore_serialize: customer_tax_exempt.nil? && !customer_tax_exempt_present?)]
-    getter customer_tax_exempt : String
-
-    @[JSON::Field(ignore: true)]
-    property? customer_tax_exempt_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_CUSTOMER_TAX_EXEMPT = EnumValidator.new("customer_tax_exempt", "String", ["exempt", "none", "reverse", "null"])
-
-    @[JSON::Field(key: "default_payment_method", type: InvoiceDefaultPaymentMethod, presence: true, ignore_serialize: default_payment_method.nil? && !default_payment_method_present?)]
-    property default_payment_method : InvoiceDefaultPaymentMethod
-
-    @[JSON::Field(ignore: true)]
-    property? default_payment_method_present : Bool = false
-
-    @[JSON::Field(key: "default_source", type: InvoiceDefaultSource, presence: true, ignore_serialize: default_source.nil? && !default_source_present?)]
-    property default_source : InvoiceDefaultSource
-
-    @[JSON::Field(ignore: true)]
-    property? default_source_present : Bool = false
-
     # The tax rates applied to this invoice, if any.
     @[JSON::Field(key: "default_tax_rates", type: Array(TaxRate)?)]
     property default_tax_rates : Array(TaxRate)?
-
-    # An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
-    @[JSON::Field(key: "description", type: String, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
-    @[JSON::Field(key: "discount", type: InvoiceDiscount, presence: true, ignore_serialize: discount.nil? && !discount_present?)]
-    property discount : InvoiceDiscount
-
-    @[JSON::Field(ignore: true)]
-    property? discount_present : Bool = false
-
-    # The discounts applied to the invoice. Line item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
-    @[JSON::Field(key: "discounts", type: Array(InvoiceDiscountsInner), presence: true, ignore_serialize: discounts.nil? && !discounts_present?)]
-    property discounts : Array(InvoiceDiscountsInner)
-
-    @[JSON::Field(ignore: true)]
-    property? discounts_present : Bool = false
-
-    # The date on which payment for this invoice is due. This value will be `null` for invoices where `collection_method=charge_automatically`.
-    @[JSON::Field(key: "due_date", type: Int64, presence: true, ignore_serialize: due_date.nil? && !due_date_present?)]
-    property due_date : Int64
-
-    @[JSON::Field(ignore: true)]
-    property? due_date_present : Bool = false
-
-    # Ending customer balance after the invoice is finalized. Invoices are finalized approximately an hour after successful webhook delivery or when payment collection is attempted for the invoice. If the invoice has not been finalized yet, this will be null.
-    @[JSON::Field(key: "ending_balance", type: Int64, presence: true, ignore_serialize: ending_balance.nil? && !ending_balance_present?)]
-    property ending_balance : Int64
-
-    @[JSON::Field(ignore: true)]
-    property? ending_balance_present : Bool = false
-
-    # Footer displayed on the invoice.
-    @[JSON::Field(key: "footer", type: String, presence: true, ignore_serialize: footer.nil? && !footer_present?)]
-    getter footer : String
-
-    @[JSON::Field(ignore: true)]
-    property? footer_present : Bool = false
-
-    @[JSON::Field(key: "last_finalization_error", type: InvoiceLastFinalizationError, presence: true, ignore_serialize: last_finalization_error.nil? && !last_finalization_error_present?)]
-    property last_finalization_error : InvoiceLastFinalizationError
-
-    @[JSON::Field(ignore: true)]
-    property? last_finalization_error_present : Bool = false
 
     @[JSON::Field(key: "lines", type: InvoiceLinesList1?)]
     property lines : InvoiceLinesList1?
@@ -230,38 +68,11 @@ module Stripe
     @[JSON::Field(key: "livemode", type: Bool?)]
     property livemode : Bool?
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String), presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
-
-    # The time at which payment will next be attempted. This value will be `null` for invoices where `collection_method=send_invoice`.
-    @[JSON::Field(key: "next_payment_attempt", type: Int64, presence: true, ignore_serialize: next_payment_attempt.nil? && !next_payment_attempt_present?)]
-    property next_payment_attempt : Int64
-
-    @[JSON::Field(ignore: true)]
-    property? next_payment_attempt_present : Bool = false
-
-    # A unique, identifying string that appears on emails sent to the customer for this invoice. This starts with the customer's unique invoice_prefix if it is specified.
-    @[JSON::Field(key: "number", type: String, presence: true, ignore_serialize: number.nil? && !number_present?)]
-    getter number : String
-
-    @[JSON::Field(ignore: true)]
-    property? number_present : Bool = false
-
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?)]
     getter object : String?
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["invoice"])
-
-    @[JSON::Field(key: "on_behalf_of", type: InvoiceOnBehalfOf, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
-    property on_behalf_of : InvoiceOnBehalfOf
-
-    @[JSON::Field(ignore: true)]
-    property? on_behalf_of_present : Bool = false
 
     # Whether payment was successfully collected for this invoice. An invoice can be paid (most commonly) with a charge or with credit from the customer's account balance.
     @[JSON::Field(key: "paid", type: Bool?)]
@@ -270,12 +81,6 @@ module Stripe
     # Returns true if the invoice was manually marked paid, returns false if the invoice hasn't been paid yet or was paid on Stripe.
     @[JSON::Field(key: "paid_out_of_band", type: Bool?)]
     property paid_out_of_band : Bool?
-
-    @[JSON::Field(key: "payment_intent", type: InvoicePaymentIntent, presence: true, ignore_serialize: payment_intent.nil? && !payment_intent_present?)]
-    property payment_intent : InvoicePaymentIntent
-
-    @[JSON::Field(ignore: true)]
-    property? payment_intent_present : Bool = false
 
     @[JSON::Field(key: "payment_settings", type: InvoicesPaymentSettings?)]
     property payment_settings : InvoicesPaymentSettings?
@@ -296,94 +101,61 @@ module Stripe
     @[JSON::Field(key: "pre_payment_credit_notes_amount", type: Int64?)]
     property pre_payment_credit_notes_amount : Int64?
 
-    @[JSON::Field(key: "quote", type: InvoiceQuote, presence: true, ignore_serialize: quote.nil? && !quote_present?)]
-    property quote : InvoiceQuote
-
-    @[JSON::Field(ignore: true)]
-    property? quote_present : Bool = false
-
-    # This is the transaction number that appears on email receipts sent for this invoice.
-    @[JSON::Field(key: "receipt_number", type: String, presence: true, ignore_serialize: receipt_number.nil? && !receipt_number_present?)]
-    getter receipt_number : String
-
-    @[JSON::Field(ignore: true)]
-    property? receipt_number_present : Bool = false
-
     # Starting customer balance before the invoice is finalized. If the invoice has not been finalized yet, this will be the current customer balance.
     @[JSON::Field(key: "starting_balance", type: Int64?)]
     property starting_balance : Int64?
 
-    # Extra information about an invoice for the customer's credit card statement.
-    @[JSON::Field(key: "statement_descriptor", type: String, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
-    getter statement_descriptor : String
-
-    @[JSON::Field(ignore: true)]
-    property? statement_descriptor_present : Bool = false
-
-    # The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
-    @[JSON::Field(key: "status", type: String, presence: true, ignore_serialize: status.nil? && !status_present?)]
-    getter status : String
-
-    @[JSON::Field(ignore: true)]
-    property? status_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["deleted", "draft", "open", "paid", "uncollectible", "void", "null"])
-
     @[JSON::Field(key: "status_transitions", type: InvoicesStatusTransitions?)]
     property status_transitions : InvoicesStatusTransitions?
-
-    @[JSON::Field(key: "subscription", type: InvoiceSubscription, presence: true, ignore_serialize: subscription.nil? && !subscription_present?)]
-    property subscription : InvoiceSubscription
-
-    @[JSON::Field(ignore: true)]
-    property? subscription_present : Bool = false
 
     # Total of all subscriptions, invoice items, and prorations on the invoice before any invoice level discount or tax is applied. Item discounts are already incorporated
     @[JSON::Field(key: "subtotal", type: Int64?)]
     property subtotal : Int64?
 
-    # The amount of tax on this invoice. This is the sum of all the tax amounts on this invoice.
-    @[JSON::Field(key: "tax", type: Int64, presence: true, ignore_serialize: tax.nil? && !tax_present?)]
-    property tax : Int64
-
-    @[JSON::Field(ignore: true)]
-    property? tax_present : Bool = false
-
-    @[JSON::Field(key: "test_clock", type: InvoiceTestClock, presence: true, ignore_serialize: test_clock.nil? && !test_clock_present?)]
-    property test_clock : InvoiceTestClock
-
-    @[JSON::Field(ignore: true)]
-    property? test_clock_present : Bool = false
-
     # Total after discounts and taxes.
     @[JSON::Field(key: "total", type: Int64?)]
     property total : Int64?
-
-    # The aggregate amounts calculated per discount across all line items.
-    @[JSON::Field(key: "total_discount_amounts", type: Array(DiscountsResourceDiscountAmount), presence: true, ignore_serialize: total_discount_amounts.nil? && !total_discount_amounts_present?)]
-    property total_discount_amounts : Array(DiscountsResourceDiscountAmount)
-
-    @[JSON::Field(ignore: true)]
-    property? total_discount_amounts_present : Bool = false
 
     # The aggregate amounts calculated per tax rate for all line items.
     @[JSON::Field(key: "total_tax_amounts", type: Array(InvoiceTaxAmount)?)]
     property total_tax_amounts : Array(InvoiceTaxAmount)?
 
-    @[JSON::Field(key: "transfer_data", type: InvoiceTransferData1, presence: true, ignore_serialize: transfer_data.nil? && !transfer_data_present?)]
-    property transfer_data : InvoiceTransferData1
-
-    @[JSON::Field(ignore: true)]
-    property? transfer_data_present : Bool = false
-
-    # Invoices are automatically paid or sent 1 hour after webhooks are delivered, or until all webhook delivery attempts have [been exhausted](https://stripe.com/docs/billing/webhooks#understand). This field tracks the time when webhooks for this invoice were successfully delivered. If the invoice had no webhooks to deliver, this will be set while the invoice is being created.
-    @[JSON::Field(key: "webhooks_delivered_at", type: Int64, presence: true, ignore_serialize: webhooks_delivered_at.nil? && !webhooks_delivered_at_present?)]
-    property webhooks_delivered_at : Int64
-
-    @[JSON::Field(ignore: true)]
-    property? webhooks_delivered_at_present : Bool = false
-
     # Optional properties
+
+    # The country of the business associated with this invoice, most often the business creating the invoice.
+    @[JSON::Field(key: "account_country", type: String?, presence: true, ignore_serialize: account_country.nil? && !account_country_present?)]
+    getter account_country : String?
+
+    @[JSON::Field(ignore: true)]
+    property? account_country_present : Bool = false
+
+    # The public name of the business associated with this invoice, most often the business creating the invoice.
+    @[JSON::Field(key: "account_name", type: String?, presence: true, ignore_serialize: account_name.nil? && !account_name_present?)]
+    getter account_name : String?
+
+    @[JSON::Field(ignore: true)]
+    property? account_name_present : Bool = false
+
+    # The account tax IDs associated with the invoice. Only editable when the invoice is a draft.
+    @[JSON::Field(key: "account_tax_ids", type: Array(InvoiceAccountTaxIdsInner)?, presence: true, ignore_serialize: account_tax_ids.nil? && !account_tax_ids_present?)]
+    property account_tax_ids : Array(InvoiceAccountTaxIdsInner)?
+
+    @[JSON::Field(ignore: true)]
+    property? account_tax_ids_present : Bool = false
+
+    @[JSON::Field(key: "application", type: InvoiceApplication?, presence: true, ignore_serialize: application.nil? && !application_present?)]
+    property application : InvoiceApplication?
+
+    @[JSON::Field(ignore: true)]
+    property? application_present : Bool = false
+
+    # The fee in %s that will be applied to the invoice and transferred to the application owner's Stripe account when the invoice is paid.
+    @[JSON::Field(key: "application_fee_amount", type: Int64?, presence: true, ignore_serialize: application_fee_amount.nil? && !application_fee_amount_present?)]
+    property application_fee_amount : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? application_fee_amount_present : Bool = false
+
     # Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
     @[JSON::Field(key: "auto_advance", type: Bool?, presence: true, ignore_serialize: auto_advance.nil? && !auto_advance_present?)]
     property auto_advance : Bool?
@@ -391,12 +163,135 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? auto_advance_present : Bool = false
 
+    # Indicates the reason why the invoice was created. `subscription_cycle` indicates an invoice created by a subscription advancing into a new period. `subscription_create` indicates an invoice created due to creating a subscription. `subscription_update` indicates an invoice created due to updating a subscription. `subscription` is set for all old invoices to indicate either a change to a subscription or a period advancement. `manual` is set for all invoices unrelated to a subscription (for example: created via the invoice editor). The `upcoming` value is reserved for simulated invoices per the upcoming invoice endpoint. `subscription_threshold` indicates an invoice created due to a billing threshold being reached.
+    @[JSON::Field(key: "billing_reason", type: String?, presence: true, ignore_serialize: billing_reason.nil? && !billing_reason_present?)]
+    getter billing_reason : String?
+
+    @[JSON::Field(ignore: true)]
+    property? billing_reason_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_BILLING_REASON = EnumValidator.new("billing_reason", "String", ["automatic_pending_invoice_item_invoice", "manual", "quote_accept", "subscription", "subscription_create", "subscription_cycle", "subscription_threshold", "subscription_update", "upcoming"])
+
+    @[JSON::Field(key: "charge", type: InvoiceCharge?, presence: true, ignore_serialize: charge.nil? && !charge_present?)]
+    property charge : InvoiceCharge?
+
+    @[JSON::Field(ignore: true)]
+    property? charge_present : Bool = false
+
+    # Custom fields displayed on the invoice.
+    @[JSON::Field(key: "custom_fields", type: Array(InvoiceSettingCustomField)?, presence: true, ignore_serialize: custom_fields.nil? && !custom_fields_present?)]
+    property custom_fields : Array(InvoiceSettingCustomField)?
+
+    @[JSON::Field(ignore: true)]
+    property? custom_fields_present : Bool = false
+
+    @[JSON::Field(key: "customer", type: InvoiceCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
+    property customer : InvoiceCustomer?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_present : Bool = false
+
+    @[JSON::Field(key: "customer_address", type: InvoiceCustomerAddress?, presence: true, ignore_serialize: customer_address.nil? && !customer_address_present?)]
+    property customer_address : InvoiceCustomerAddress?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_address_present : Bool = false
+
+    # The customer's email. Until the invoice is finalized, this field will equal `customer.email`. Once the invoice is finalized, this field will no longer be updated.
+    @[JSON::Field(key: "customer_email", type: String?, presence: true, ignore_serialize: customer_email.nil? && !customer_email_present?)]
+    getter customer_email : String?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_email_present : Bool = false
+
+    # The customer's name. Until the invoice is finalized, this field will equal `customer.name`. Once the invoice is finalized, this field will no longer be updated.
+    @[JSON::Field(key: "customer_name", type: String?, presence: true, ignore_serialize: customer_name.nil? && !customer_name_present?)]
+    getter customer_name : String?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_name_present : Bool = false
+
+    # The customer's phone number. Until the invoice is finalized, this field will equal `customer.phone`. Once the invoice is finalized, this field will no longer be updated.
+    @[JSON::Field(key: "customer_phone", type: String?, presence: true, ignore_serialize: customer_phone.nil? && !customer_phone_present?)]
+    getter customer_phone : String?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_phone_present : Bool = false
+
+    @[JSON::Field(key: "customer_shipping", type: InvoiceCustomerShipping?, presence: true, ignore_serialize: customer_shipping.nil? && !customer_shipping_present?)]
+    property customer_shipping : InvoiceCustomerShipping?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_shipping_present : Bool = false
+
+    # The customer's tax exempt status. Until the invoice is finalized, this field will equal `customer.tax_exempt`. Once the invoice is finalized, this field will no longer be updated.
+    @[JSON::Field(key: "customer_tax_exempt", type: String?, presence: true, ignore_serialize: customer_tax_exempt.nil? && !customer_tax_exempt_present?)]
+    getter customer_tax_exempt : String?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_tax_exempt_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_CUSTOMER_TAX_EXEMPT = EnumValidator.new("customer_tax_exempt", "String", ["exempt", "none", "reverse"])
+
     # The customer's tax IDs. Until the invoice is finalized, this field will contain the same tax IDs as `customer.tax_ids`. Once the invoice is finalized, this field will no longer be updated.
     @[JSON::Field(key: "customer_tax_ids", type: Array(InvoicesResourceInvoiceTaxId)?, presence: true, ignore_serialize: customer_tax_ids.nil? && !customer_tax_ids_present?)]
     property customer_tax_ids : Array(InvoicesResourceInvoiceTaxId)?
 
     @[JSON::Field(ignore: true)]
     property? customer_tax_ids_present : Bool = false
+
+    @[JSON::Field(key: "default_payment_method", type: InvoiceDefaultPaymentMethod?, presence: true, ignore_serialize: default_payment_method.nil? && !default_payment_method_present?)]
+    property default_payment_method : InvoiceDefaultPaymentMethod?
+
+    @[JSON::Field(ignore: true)]
+    property? default_payment_method_present : Bool = false
+
+    @[JSON::Field(key: "default_source", type: InvoiceDefaultSource?, presence: true, ignore_serialize: default_source.nil? && !default_source_present?)]
+    property default_source : InvoiceDefaultSource?
+
+    @[JSON::Field(ignore: true)]
+    property? default_source_present : Bool = false
+
+    # An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
+
+    @[JSON::Field(key: "discount", type: InvoiceDiscount?, presence: true, ignore_serialize: discount.nil? && !discount_present?)]
+    property discount : InvoiceDiscount?
+
+    @[JSON::Field(ignore: true)]
+    property? discount_present : Bool = false
+
+    # The discounts applied to the invoice. Line item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
+    @[JSON::Field(key: "discounts", type: Array(InvoiceDiscountsInner)?, presence: true, ignore_serialize: discounts.nil? && !discounts_present?)]
+    property discounts : Array(InvoiceDiscountsInner)?
+
+    @[JSON::Field(ignore: true)]
+    property? discounts_present : Bool = false
+
+    # The date on which payment for this invoice is due. This value will be `null` for invoices where `collection_method=charge_automatically`.
+    @[JSON::Field(key: "due_date", type: Int64?, presence: true, ignore_serialize: due_date.nil? && !due_date_present?)]
+    property due_date : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? due_date_present : Bool = false
+
+    # Ending customer balance after the invoice is finalized. Invoices are finalized approximately an hour after successful webhook delivery or when payment collection is attempted for the invoice. If the invoice has not been finalized yet, this will be null.
+    @[JSON::Field(key: "ending_balance", type: Int64?, presence: true, ignore_serialize: ending_balance.nil? && !ending_balance_present?)]
+    property ending_balance : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? ending_balance_present : Bool = false
+
+    # Footer displayed on the invoice.
+    @[JSON::Field(key: "footer", type: String?, presence: true, ignore_serialize: footer.nil? && !footer_present?)]
+    getter footer : String?
+
+    @[JSON::Field(ignore: true)]
+    property? footer_present : Bool = false
 
     # The URL for the hosted invoice page, which allows customers to view and pay an invoice. If the invoice has not been finalized yet, this will be null.
     @[JSON::Field(key: "hosted_invoice_url", type: String?, presence: true, ignore_serialize: hosted_invoice_url.nil? && !hosted_invoice_url_present?)]
@@ -419,6 +314,80 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? invoice_pdf_present : Bool = false
 
+    @[JSON::Field(key: "last_finalization_error", type: InvoiceLastFinalizationError?, presence: true, ignore_serialize: last_finalization_error.nil? && !last_finalization_error_present?)]
+    property last_finalization_error : InvoiceLastFinalizationError?
+
+    @[JSON::Field(ignore: true)]
+    property? last_finalization_error_present : Bool = false
+
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
+
+    # The time at which payment will next be attempted. This value will be `null` for invoices where `collection_method=send_invoice`.
+    @[JSON::Field(key: "next_payment_attempt", type: Int64?, presence: true, ignore_serialize: next_payment_attempt.nil? && !next_payment_attempt_present?)]
+    property next_payment_attempt : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? next_payment_attempt_present : Bool = false
+
+    # A unique, identifying string that appears on emails sent to the customer for this invoice. This starts with the customer's unique invoice_prefix if it is specified.
+    @[JSON::Field(key: "number", type: String?, presence: true, ignore_serialize: number.nil? && !number_present?)]
+    getter number : String?
+
+    @[JSON::Field(ignore: true)]
+    property? number_present : Bool = false
+
+    @[JSON::Field(key: "on_behalf_of", type: InvoiceOnBehalfOf?, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
+    property on_behalf_of : InvoiceOnBehalfOf?
+
+    @[JSON::Field(ignore: true)]
+    property? on_behalf_of_present : Bool = false
+
+    @[JSON::Field(key: "payment_intent", type: InvoicePaymentIntent?, presence: true, ignore_serialize: payment_intent.nil? && !payment_intent_present?)]
+    property payment_intent : InvoicePaymentIntent?
+
+    @[JSON::Field(ignore: true)]
+    property? payment_intent_present : Bool = false
+
+    @[JSON::Field(key: "quote", type: InvoiceQuote?, presence: true, ignore_serialize: quote.nil? && !quote_present?)]
+    property quote : InvoiceQuote?
+
+    @[JSON::Field(ignore: true)]
+    property? quote_present : Bool = false
+
+    # This is the transaction number that appears on email receipts sent for this invoice.
+    @[JSON::Field(key: "receipt_number", type: String?, presence: true, ignore_serialize: receipt_number.nil? && !receipt_number_present?)]
+    getter receipt_number : String?
+
+    @[JSON::Field(ignore: true)]
+    property? receipt_number_present : Bool = false
+
+    # Extra information about an invoice for the customer's credit card statement.
+    @[JSON::Field(key: "statement_descriptor", type: String?, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
+    getter statement_descriptor : String?
+
+    @[JSON::Field(ignore: true)]
+    property? statement_descriptor_present : Bool = false
+
+    # The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
+    @[JSON::Field(key: "status", type: String?, presence: true, ignore_serialize: status.nil? && !status_present?)]
+    getter status : String?
+
+    @[JSON::Field(ignore: true)]
+    property? status_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["deleted", "draft", "open", "paid", "uncollectible", "void"])
+
+    @[JSON::Field(key: "subscription", type: InvoiceSubscription?, presence: true, ignore_serialize: subscription.nil? && !subscription_present?)]
+    property subscription : InvoiceSubscription?
+
+    @[JSON::Field(ignore: true)]
+    property? subscription_present : Bool = false
+
     # Only set for upcoming invoices that preview prorations. The time used to calculate prorations.
     @[JSON::Field(key: "subscription_proration_date", type: Int64?, presence: true, ignore_serialize: subscription_proration_date.nil? && !subscription_proration_date_present?)]
     property subscription_proration_date : Int64?
@@ -426,11 +395,44 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? subscription_proration_date_present : Bool = false
 
+    # The amount of tax on this invoice. This is the sum of all the tax amounts on this invoice.
+    @[JSON::Field(key: "tax", type: Int64?, presence: true, ignore_serialize: tax.nil? && !tax_present?)]
+    property tax : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? tax_present : Bool = false
+
+    @[JSON::Field(key: "test_clock", type: InvoiceTestClock?, presence: true, ignore_serialize: test_clock.nil? && !test_clock_present?)]
+    property test_clock : InvoiceTestClock?
+
+    @[JSON::Field(ignore: true)]
+    property? test_clock_present : Bool = false
+
     @[JSON::Field(key: "threshold_reason", type: InvoiceThresholdReason?, presence: true, ignore_serialize: threshold_reason.nil? && !threshold_reason_present?)]
     property threshold_reason : InvoiceThresholdReason?
 
     @[JSON::Field(ignore: true)]
     property? threshold_reason_present : Bool = false
+
+    # The aggregate amounts calculated per discount across all line items.
+    @[JSON::Field(key: "total_discount_amounts", type: Array(DiscountsResourceDiscountAmount)?, presence: true, ignore_serialize: total_discount_amounts.nil? && !total_discount_amounts_present?)]
+    property total_discount_amounts : Array(DiscountsResourceDiscountAmount)?
+
+    @[JSON::Field(ignore: true)]
+    property? total_discount_amounts_present : Bool = false
+
+    @[JSON::Field(key: "transfer_data", type: InvoiceTransferData1?, presence: true, ignore_serialize: transfer_data.nil? && !transfer_data_present?)]
+    property transfer_data : InvoiceTransferData1?
+
+    @[JSON::Field(ignore: true)]
+    property? transfer_data_present : Bool = false
+
+    # Invoices are automatically paid or sent 1 hour after webhooks are delivered, or until all webhook delivery attempts have [been exhausted](https://stripe.com/docs/billing/webhooks#understand). This field tracks the time when webhooks for this invoice were successfully delivered. If the invoice had no webhooks to deliver, this will be set while the invoice is being created.
+    @[JSON::Field(key: "webhooks_delivered_at", type: Int64?, presence: true, ignore_serialize: webhooks_delivered_at.nil? && !webhooks_delivered_at_present?)]
+    property webhooks_delivered_at : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? webhooks_delivered_at_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -442,7 +444,82 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account_country : String?, @account_name : String?, @account_tax_ids : Array(InvoiceAccountTaxIdsInner)?, @amount_due : Int64, @amount_paid : Int64, @amount_remaining : Int64, @application : InvoiceApplication?, @application_fee_amount : Int64?, @attempt_count : Int64, @attempted : Bool, @automatic_tax : AutomaticTax, @billing_reason : String?, @charge : InvoiceCharge?, @collection_method : String, @created : Int64, @currency : String, @custom_fields : Array(InvoiceSettingCustomField)?, @customer : InvoiceCustomer?, @customer_address : InvoiceCustomerAddress?, @customer_email : String?, @customer_name : String?, @customer_phone : String?, @customer_shipping : InvoiceCustomerShipping?, @customer_tax_exempt : String?, @default_payment_method : InvoiceDefaultPaymentMethod?, @default_source : InvoiceDefaultSource?, @default_tax_rates : Array(TaxRate), @description : String?, @discount : InvoiceDiscount?, @discounts : Array(InvoiceDiscountsInner)?, @due_date : Int64?, @ending_balance : Int64?, @footer : String?, @last_finalization_error : InvoiceLastFinalizationError?, @lines : InvoiceLinesList1, @livemode : Bool, @metadata : Hash(String, String)?, @next_payment_attempt : Int64?, @number : String?, @object : String, @on_behalf_of : InvoiceOnBehalfOf?, @paid : Bool, @paid_out_of_band : Bool, @payment_intent : InvoicePaymentIntent?, @payment_settings : InvoicesPaymentSettings, @period_end : Int64, @period_start : Int64, @post_payment_credit_notes_amount : Int64, @pre_payment_credit_notes_amount : Int64, @quote : InvoiceQuote?, @receipt_number : String?, @starting_balance : Int64, @statement_descriptor : String?, @status : String?, @status_transitions : InvoicesStatusTransitions, @subscription : InvoiceSubscription?, @subtotal : Int64, @tax : Int64?, @test_clock : InvoiceTestClock?, @total : Int64, @total_discount_amounts : Array(DiscountsResourceDiscountAmount)?, @total_tax_amounts : Array(InvoiceTaxAmount), @transfer_data : InvoiceTransferData1?, @webhooks_delivered_at : Int64?, @auto_advance : Bool? = nil, @customer_tax_ids : Array(InvoicesResourceInvoiceTaxId)? = nil, @hosted_invoice_url : String? = nil, @id : String? = nil, @invoice_pdf : String? = nil, @subscription_proration_date : Int64? = nil, @threshold_reason : InvoiceThresholdReason? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount_due : Int64? = nil,
+      @amount_paid : Int64? = nil,
+      @amount_remaining : Int64? = nil,
+      @attempt_count : Int64? = nil,
+      @attempted : Bool? = nil,
+      @automatic_tax : AutomaticTax? = nil,
+      @collection_method : String? = nil,
+      @created : Int64? = nil,
+      @currency : String? = nil,
+      @default_tax_rates : Array(TaxRate)? = nil,
+      @lines : InvoiceLinesList1? = nil,
+      @livemode : Bool? = nil,
+      @object : String? = nil,
+      @paid : Bool? = nil,
+      @paid_out_of_band : Bool? = nil,
+      @payment_settings : InvoicesPaymentSettings? = nil,
+      @period_end : Int64? = nil,
+      @period_start : Int64? = nil,
+      @post_payment_credit_notes_amount : Int64? = nil,
+      @pre_payment_credit_notes_amount : Int64? = nil,
+      @starting_balance : Int64? = nil,
+      @status_transitions : InvoicesStatusTransitions? = nil,
+      @subtotal : Int64? = nil,
+      @total : Int64? = nil,
+      @total_tax_amounts : Array(InvoiceTaxAmount)? = nil,
+      # Optional properties
+      @account_country : String? = nil,
+      @account_name : String? = nil,
+      @account_tax_ids : Array(InvoiceAccountTaxIdsInner)? = nil,
+      @application : InvoiceApplication? = nil,
+      @application_fee_amount : Int64? = nil,
+      @auto_advance : Bool? = nil,
+      @billing_reason : String? = nil,
+      @charge : InvoiceCharge? = nil,
+      @custom_fields : Array(InvoiceSettingCustomField)? = nil,
+      @customer : InvoiceCustomer? = nil,
+      @customer_address : InvoiceCustomerAddress? = nil,
+      @customer_email : String? = nil,
+      @customer_name : String? = nil,
+      @customer_phone : String? = nil,
+      @customer_shipping : InvoiceCustomerShipping? = nil,
+      @customer_tax_exempt : String? = nil,
+      @customer_tax_ids : Array(InvoicesResourceInvoiceTaxId)? = nil,
+      @default_payment_method : InvoiceDefaultPaymentMethod? = nil,
+      @default_source : InvoiceDefaultSource? = nil,
+      @description : String? = nil,
+      @discount : InvoiceDiscount? = nil,
+      @discounts : Array(InvoiceDiscountsInner)? = nil,
+      @due_date : Int64? = nil,
+      @ending_balance : Int64? = nil,
+      @footer : String? = nil,
+      @hosted_invoice_url : String? = nil,
+      @id : String? = nil,
+      @invoice_pdf : String? = nil,
+      @last_finalization_error : InvoiceLastFinalizationError? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @next_payment_attempt : Int64? = nil,
+      @number : String? = nil,
+      @on_behalf_of : InvoiceOnBehalfOf? = nil,
+      @payment_intent : InvoicePaymentIntent? = nil,
+      @quote : InvoiceQuote? = nil,
+      @receipt_number : String? = nil,
+      @statement_descriptor : String? = nil,
+      @status : String? = nil,
+      @subscription : InvoiceSubscription? = nil,
+      @subscription_proration_date : Int64? = nil,
+      @tax : Int64? = nil,
+      @test_clock : InvoiceTestClock? = nil,
+      @threshold_reason : InvoiceThresholdReason? = nil,
+      @total_discount_amounts : Array(DiscountsResourceDiscountAmount)? = nil,
+      @transfer_data : InvoiceTransferData1? = nil,
+      @webhooks_delivered_at : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -450,37 +527,39 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @account_country.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECTION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      if !@account_country.nil? && @account_country.to_s.size > 5000
         invalid_properties.push("invalid value for \"account_country\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @account_name.to_s.size > 5000
+      if !@account_name.nil? && @account_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"account_name\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_REASON.error_message) unless ENUM_VALIDATOR_FOR_BILLING_REASON.valid?(@billing_reason)
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECTION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method, false)
-
-      if @customer_email.to_s.size > 5000
+      if !@customer_email.nil? && @customer_email.to_s.size > 5000
         invalid_properties.push("invalid value for \"customer_email\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @customer_name.to_s.size > 5000
+      if !@customer_name.nil? && @customer_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"customer_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @customer_phone.to_s.size > 5000
+      if !@customer_phone.nil? && @customer_phone.to_s.size > 5000
         invalid_properties.push("invalid value for \"customer_phone\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CUSTOMER_TAX_EXEMPT.error_message) unless ENUM_VALIDATOR_FOR_CUSTOMER_TAX_EXEMPT.valid?(@customer_tax_exempt)
 
-      if @description.to_s.size > 5000
+      if !@description.nil? && @description.to_s.size > 5000
         invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @footer.to_s.size > 5000
+      if !@footer.nil? && @footer.to_s.size > 5000
         invalid_properties.push("invalid value for \"footer\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -496,17 +575,15 @@ module Stripe
         invalid_properties.push("invalid value for \"invoice_pdf\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @number.to_s.size > 5000
+      if !@number.nil? && @number.to_s.size > 5000
         invalid_properties.push("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
-      if @receipt_number.to_s.size > 5000
+      if !@receipt_number.nil? && @receipt_number.to_s.size > 5000
         invalid_properties.push("invalid value for \"receipt_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @statement_descriptor.to_s.size > 5000
+      if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
         invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -518,24 +595,25 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @account_country.to_s.size > 5000
-      return false if @account_name.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_BILLING_REASON.valid?(@billing_reason)
       return false unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method, false)
-      return false if @customer_email.to_s.size > 5000
-      return false if @customer_name.to_s.size > 5000
-      return false if @customer_phone.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if !@account_country.nil? && @account_country.to_s.size > 5000
+      return false if !@account_name.nil? && @account_name.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_BILLING_REASON.valid?(@billing_reason)
+      return false if !@customer_email.nil? && @customer_email.to_s.size > 5000
+      return false if !@customer_name.nil? && @customer_name.to_s.size > 5000
+      return false if !@customer_phone.nil? && @customer_phone.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_CUSTOMER_TAX_EXEMPT.valid?(@customer_tax_exempt)
-      return false if @description.to_s.size > 5000
-      return false if @footer.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@footer.nil? && @footer.to_s.size > 5000
       return false if !@hosted_invoice_url.nil? && @hosted_invoice_url.to_s.size > 5000
       return false if !@id.nil? && @id.to_s.size > 5000
       return false if !@invoice_pdf.nil? && @invoice_pdf.to_s.size > 5000
-      return false if @number.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @receipt_number.to_s.size > 5000
-      return false if @statement_descriptor.to_s.size > 5000
+      return false if !@number.nil? && @number.to_s.size > 5000
+      return false if !@receipt_number.nil? && @receipt_number.to_s.size > 5000
+      return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -547,18 +625,29 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] collection_method Object to be assigned
+    def collection_method=(collection_method)
+      ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(collection_method, false)
+      @collection_method = collection_method
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] object Object to be assigned
+    def object=(object)
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+      @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] account_country Value to be assigned
     def account_country=(account_country)
-      if account_country.to_s.size > 5000
+      if !account_country.nil? && account_country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_country\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -568,7 +657,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] account_name Value to be assigned
     def account_name=(account_name)
-      if account_name.to_s.size > 5000
+      if !account_name.nil? && account_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -582,17 +671,10 @@ module Stripe
       @billing_reason = billing_reason
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] collection_method Object to be assigned
-    def collection_method=(collection_method)
-      ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(collection_method, false)
-      @collection_method = collection_method
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] customer_email Value to be assigned
     def customer_email=(customer_email)
-      if customer_email.to_s.size > 5000
+      if !customer_email.nil? && customer_email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer_email\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -602,7 +684,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] customer_name Value to be assigned
     def customer_name=(customer_name)
-      if customer_name.to_s.size > 5000
+      if !customer_name.nil? && customer_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -612,7 +694,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] customer_phone Value to be assigned
     def customer_phone=(customer_phone)
-      if customer_phone.to_s.size > 5000
+      if !customer_phone.nil? && customer_phone.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer_phone\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -629,7 +711,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
     def description=(description)
-      if description.to_s.size > 5000
+      if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -639,7 +721,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] footer Value to be assigned
     def footer=(footer)
-      if footer.to_s.size > 5000
+      if !footer.nil? && footer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"footer\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -679,24 +761,17 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] number Value to be assigned
     def number=(number)
-      if number.to_s.size > 5000
+      if !number.nil? && number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
       end
 
       @number = number
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
-      @object = object
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] receipt_number Value to be assigned
     def receipt_number=(receipt_number)
-      if receipt_number.to_s.size > 5000
+      if !receipt_number.nil? && receipt_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"receipt_number\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -706,7 +781,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
     def statement_descriptor=(statement_descriptor)
-      if statement_descriptor.to_s.size > 5000
+      if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -720,92 +795,16 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account_country == o.account_country &&
-        account_name == o.account_name &&
-        account_tax_ids == o.account_tax_ids &&
-        amount_due == o.amount_due &&
-        amount_paid == o.amount_paid &&
-        amount_remaining == o.amount_remaining &&
-        application == o.application &&
-        application_fee_amount == o.application_fee_amount &&
-        attempt_count == o.attempt_count &&
-        attempted == o.attempted &&
-        auto_advance == o.auto_advance &&
-        automatic_tax == o.automatic_tax &&
-        billing_reason == o.billing_reason &&
-        charge == o.charge &&
-        collection_method == o.collection_method &&
-        created == o.created &&
-        currency == o.currency &&
-        custom_fields == o.custom_fields &&
-        customer == o.customer &&
-        customer_address == o.customer_address &&
-        customer_email == o.customer_email &&
-        customer_name == o.customer_name &&
-        customer_phone == o.customer_phone &&
-        customer_shipping == o.customer_shipping &&
-        customer_tax_exempt == o.customer_tax_exempt &&
-        customer_tax_ids == o.customer_tax_ids &&
-        default_payment_method == o.default_payment_method &&
-        default_source == o.default_source &&
-        default_tax_rates == o.default_tax_rates &&
-        description == o.description &&
-        discount == o.discount &&
-        discounts == o.discounts &&
-        due_date == o.due_date &&
-        ending_balance == o.ending_balance &&
-        footer == o.footer &&
-        hosted_invoice_url == o.hosted_invoice_url &&
-        id == o.id &&
-        invoice_pdf == o.invoice_pdf &&
-        last_finalization_error == o.last_finalization_error &&
-        lines == o.lines &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        next_payment_attempt == o.next_payment_attempt &&
-        number == o.number &&
-        object == o.object &&
-        on_behalf_of == o.on_behalf_of &&
-        paid == o.paid &&
-        paid_out_of_band == o.paid_out_of_band &&
-        payment_intent == o.payment_intent &&
-        payment_settings == o.payment_settings &&
-        period_end == o.period_end &&
-        period_start == o.period_start &&
-        post_payment_credit_notes_amount == o.post_payment_credit_notes_amount &&
-        pre_payment_credit_notes_amount == o.pre_payment_credit_notes_amount &&
-        quote == o.quote &&
-        receipt_number == o.receipt_number &&
-        starting_balance == o.starting_balance &&
-        statement_descriptor == o.statement_descriptor &&
-        status == o.status &&
-        status_transitions == o.status_transitions &&
-        subscription == o.subscription &&
-        subscription_proration_date == o.subscription_proration_date &&
-        subtotal == o.subtotal &&
-        tax == o.tax &&
-        test_clock == o.test_clock &&
-        threshold_reason == o.threshold_reason &&
-        total == o.total &&
-        total_discount_amounts == o.total_discount_amounts &&
-        total_tax_amounts == o.total_tax_amounts &&
-        transfer_data == o.transfer_data &&
-        webhooks_delivered_at == o.webhooks_delivered_at
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account_country, @account_name, @account_tax_ids, @amount_due, @amount_paid, @amount_remaining, @application, @application_fee_amount, @attempt_count, @attempted, @auto_advance, @automatic_tax, @billing_reason, @charge, @collection_method, @created, @currency, @custom_fields, @customer, @customer_address, @customer_email, @customer_name, @customer_phone, @customer_shipping, @customer_tax_exempt, @customer_tax_ids, @default_payment_method, @default_source, @default_tax_rates, @description, @discount, @discounts, @due_date, @ending_balance, @footer, @hosted_invoice_url, @id, @invoice_pdf, @last_finalization_error, @lines, @livemode, @metadata, @next_payment_attempt, @number, @object, @on_behalf_of, @paid, @paid_out_of_band, @payment_intent, @payment_settings, @period_end, @period_start, @post_payment_credit_notes_amount, @pre_payment_credit_notes_amount, @quote, @receipt_number, @starting_balance, @statement_descriptor, @status, @status_transitions, @subscription, @subscription_proration_date, @subtotal, @tax, @test_clock, @threshold_reason, @total, @total_discount_amounts, @total_tax_amounts, @transfer_data, @webhooks_delivered_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount_due, @amount_paid, @amount_remaining, @attempt_count, @attempted, @automatic_tax, @collection_method, @created, @currency, @default_tax_rates, @lines, @livemode, @object, @paid, @paid_out_of_band, @payment_settings, @period_end, @period_start, @post_payment_credit_notes_amount, @pre_payment_credit_notes_amount, @starting_balance, @status_transitions, @subtotal, @total, @total_tax_amounts, @account_country, @account_name, @account_tax_ids, @application, @application_fee_amount, @auto_advance, @billing_reason, @charge, @custom_fields, @customer, @customer_address, @customer_email, @customer_name, @customer_phone, @customer_shipping, @customer_tax_exempt, @customer_tax_ids, @default_payment_method, @default_source, @description, @discount, @discounts, @due_date, @ending_balance, @footer, @hosted_invoice_url, @id, @invoice_pdf, @last_finalization_error, @metadata, @next_payment_attempt, @number, @on_behalf_of, @payment_intent, @quote, @receipt_number, @statement_descriptor, @status, @subscription, @subscription_proration_date, @tax, @test_clock, @threshold_reason, @total_discount_amounts, @transfer_data, @webhooks_delivered_at)
   end
 end

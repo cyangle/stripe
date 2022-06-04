@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "application_cryptogram", type: String?, presence: true, ignore_serialize: application_cryptogram.nil? && !application_cryptogram_present?)]
     property application_cryptogram : String?
 
@@ -72,12 +73,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? dedicated_file_name_present : Bool = false
 
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    property description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
     @[JSON::Field(key: "emv_auth_data", type: String?, presence: true, ignore_serialize: emv_auth_data.nil? && !emv_auth_data_present?)]
     property emv_auth_data : String?
 
@@ -119,18 +114,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? funding_present : Bool = false
-
-    @[JSON::Field(key: "iin", type: String?, presence: true, ignore_serialize: iin.nil? && !iin_present?)]
-    property iin : String?
-
-    @[JSON::Field(ignore: true)]
-    property? iin_present : Bool = false
-
-    @[JSON::Field(key: "issuer", type: String?, presence: true, ignore_serialize: issuer.nil? && !issuer_present?)]
-    property issuer : String?
-
-    @[JSON::Field(ignore: true)]
-    property? issuer_present : Bool = false
 
     @[JSON::Field(key: "last4", type: String?, presence: true, ignore_serialize: last4.nil? && !last4_present?)]
     property last4 : String?
@@ -176,7 +159,33 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @application_cryptogram : String? = nil, @application_preferred_name : String? = nil, @authorization_code : String? = nil, @authorization_response_code : String? = nil, @brand : String? = nil, @country : String? = nil, @cvm_type : String? = nil, @data_type : String? = nil, @dedicated_file_name : String? = nil, @description : String? = nil, @emv_auth_data : String? = nil, @evidence_customer_signature : String? = nil, @evidence_transaction_certificate : String? = nil, @exp_month : Int64? = nil, @exp_year : Int64? = nil, @fingerprint : String? = nil, @funding : String? = nil, @iin : String? = nil, @issuer : String? = nil, @last4 : String? = nil, @pos_device_id : String? = nil, @pos_entry_mode : String? = nil, @read_method : String? = nil, @reader : String? = nil, @terminal_verification_results : String? = nil, @transaction_status_information : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @application_cryptogram : String? = nil,
+      @application_preferred_name : String? = nil,
+      @authorization_code : String? = nil,
+      @authorization_response_code : String? = nil,
+      @brand : String? = nil,
+      @country : String? = nil,
+      @cvm_type : String? = nil,
+      @data_type : String? = nil,
+      @dedicated_file_name : String? = nil,
+      @emv_auth_data : String? = nil,
+      @evidence_customer_signature : String? = nil,
+      @evidence_transaction_certificate : String? = nil,
+      @exp_month : Int64? = nil,
+      @exp_year : Int64? = nil,
+      @fingerprint : String? = nil,
+      @funding : String? = nil,
+      @last4 : String? = nil,
+      @pos_device_id : String? = nil,
+      @pos_entry_mode : String? = nil,
+      @read_method : String? = nil,
+      @reader : String? = nil,
+      @terminal_verification_results : String? = nil,
+      @transaction_status_information : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -193,47 +202,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        application_cryptogram == o.application_cryptogram &&
-        application_preferred_name == o.application_preferred_name &&
-        authorization_code == o.authorization_code &&
-        authorization_response_code == o.authorization_response_code &&
-        brand == o.brand &&
-        country == o.country &&
-        cvm_type == o.cvm_type &&
-        data_type == o.data_type &&
-        dedicated_file_name == o.dedicated_file_name &&
-        description == o.description &&
-        emv_auth_data == o.emv_auth_data &&
-        evidence_customer_signature == o.evidence_customer_signature &&
-        evidence_transaction_certificate == o.evidence_transaction_certificate &&
-        exp_month == o.exp_month &&
-        exp_year == o.exp_year &&
-        fingerprint == o.fingerprint &&
-        funding == o.funding &&
-        iin == o.iin &&
-        issuer == o.issuer &&
-        last4 == o.last4 &&
-        pos_device_id == o.pos_device_id &&
-        pos_entry_mode == o.pos_entry_mode &&
-        read_method == o.read_method &&
-        reader == o.reader &&
-        terminal_verification_results == o.terminal_verification_results &&
-        transaction_status_information == o.transaction_status_information
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@application_cryptogram, @application_preferred_name, @authorization_code, @authorization_response_code, @brand, @country, @cvm_type, @data_type, @dedicated_file_name, @description, @emv_auth_data, @evidence_customer_signature, @evidence_transaction_certificate, @exp_month, @exp_year, @fingerprint, @funding, @iin, @issuer, @last4, @pos_device_id, @pos_entry_mode, @read_method, @reader, @terminal_verification_results, @transaction_status_information)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@application_cryptogram, @application_preferred_name, @authorization_code, @authorization_response_code, @brand, @country, @cvm_type, @data_type, @dedicated_file_name, @emv_auth_data, @evidence_customer_signature, @evidence_transaction_certificate, @exp_month, @exp_year, @fingerprint, @funding, @last4, @pos_device_id, @pos_entry_mode, @read_method, @reader, @terminal_verification_results, @transaction_status_information)
   end
 end

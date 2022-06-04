@@ -29,7 +29,7 @@ describe Stripe::PaymentMethodDetailsCardInstallmentsPlan do
   describe "test attribute 'interval'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["month", "null"])
+      # validator = EnumValidator.new("String", ["month"])
       # validator.allowable_values.each do |value|
       #   expect { instance.interval = value }.not_to raise_error
       # end

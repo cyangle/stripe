@@ -18,11 +18,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The identifier of the customer to subscribe.
     @[JSON::Field(key: "customer", type: String)]
     getter customer : String
 
     # Optional properties
+
     # A list of prices and quantities that will generate invoice items appended to the first invoice for this subscription. You may pass up to 20 items.
     @[JSON::Field(key: "add_invoice_items", type: Array(AddInvoiceItemEntry)?, presence: true, ignore_serialize: add_invoice_items.nil? && !add_invoice_items_present?)]
     property add_invoice_items : Array(AddInvoiceItemEntry)?
@@ -37,8 +39,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? application_fee_percent_present : Bool = false
 
-    @[JSON::Field(key: "automatic_tax", type: AutomaticTaxConfig2?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
-    property automatic_tax : AutomaticTaxConfig2?
+    @[JSON::Field(key: "automatic_tax", type: AutomaticTaxConfig?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
+    property automatic_tax : AutomaticTaxConfig?
 
     @[JSON::Field(ignore: true)]
     property? automatic_tax_present : Bool = false
@@ -57,8 +59,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? billing_cycle_anchor_present : Bool = false
 
-    @[JSON::Field(key: "billing_thresholds", type: DefaultSettingsParamsBillingThresholds?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
-    property billing_thresholds : DefaultSettingsParamsBillingThresholds?
+    @[JSON::Field(key: "billing_thresholds", type: PostCustomersCustomerSubscriptionsRequestBillingThresholds?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
+    property billing_thresholds : PostCustomersCustomerSubscriptionsRequestBillingThresholds?
 
     @[JSON::Field(ignore: true)]
     property? billing_thresholds_present : Bool = false
@@ -114,8 +116,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? default_source_present : Bool = false
 
-    @[JSON::Field(key: "default_tax_rates", type: PostSubscriptionsRequestDefaultTaxRates?, presence: true, ignore_serialize: default_tax_rates.nil? && !default_tax_rates_present?)]
-    property default_tax_rates : PostSubscriptionsRequestDefaultTaxRates?
+    @[JSON::Field(key: "default_tax_rates", type: PostCustomersCustomerSubscriptionsRequestDefaultTaxRates?, presence: true, ignore_serialize: default_tax_rates.nil? && !default_tax_rates_present?)]
+    property default_tax_rates : PostCustomersCustomerSubscriptionsRequestDefaultTaxRates?
 
     @[JSON::Field(ignore: true)]
     property? default_tax_rates_present : Bool = false
@@ -127,6 +129,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -140,8 +143,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? items_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -162,14 +165,14 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR = EnumValidator.new("payment_behavior", "String", ["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"])
 
-    @[JSON::Field(key: "payment_settings", type: PaymentSettings1?, presence: true, ignore_serialize: payment_settings.nil? && !payment_settings_present?)]
-    property payment_settings : PaymentSettings1?
+    @[JSON::Field(key: "payment_settings", type: PaymentSettings?, presence: true, ignore_serialize: payment_settings.nil? && !payment_settings_present?)]
+    property payment_settings : PaymentSettings?
 
     @[JSON::Field(ignore: true)]
     property? payment_settings_present : Bool = false
 
-    @[JSON::Field(key: "pending_invoice_item_interval", type: PostSubscriptionsRequestPendingInvoiceItemInterval?, presence: true, ignore_serialize: pending_invoice_item_interval.nil? && !pending_invoice_item_interval_present?)]
-    property pending_invoice_item_interval : PostSubscriptionsRequestPendingInvoiceItemInterval?
+    @[JSON::Field(key: "pending_invoice_item_interval", type: PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval?, presence: true, ignore_serialize: pending_invoice_item_interval.nil? && !pending_invoice_item_interval_present?)]
+    property pending_invoice_item_interval : PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval?
 
     @[JSON::Field(ignore: true)]
     property? pending_invoice_item_interval_present : Bool = false
@@ -190,14 +193,14 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
 
-    @[JSON::Field(key: "transfer_data", type: TransferDataSpecs2?, presence: true, ignore_serialize: transfer_data.nil? && !transfer_data_present?)]
-    property transfer_data : TransferDataSpecs2?
+    @[JSON::Field(key: "transfer_data", type: TransferDataSpecs3?, presence: true, ignore_serialize: transfer_data.nil? && !transfer_data_present?)]
+    property transfer_data : TransferDataSpecs3?
 
     @[JSON::Field(ignore: true)]
     property? transfer_data_present : Bool = false
 
-    @[JSON::Field(key: "trial_end", type: PostSubscriptionsRequestTrialEnd?, presence: true, ignore_serialize: trial_end.nil? && !trial_end_present?)]
-    property trial_end : PostSubscriptionsRequestTrialEnd?
+    @[JSON::Field(key: "trial_end", type: PostCustomersCustomerSubscriptionsRequestTrialEnd?, presence: true, ignore_serialize: trial_end.nil? && !trial_end_present?)]
+    property trial_end : PostCustomersCustomerSubscriptionsRequestTrialEnd?
 
     @[JSON::Field(ignore: true)]
     property? trial_end_present : Bool = false
@@ -218,7 +221,40 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @customer : String, @add_invoice_items : Array(AddInvoiceItemEntry)? = nil, @application_fee_percent : Float64? = nil, @automatic_tax : AutomaticTaxConfig2? = nil, @backdate_start_date : Int64? = nil, @billing_cycle_anchor : Int64? = nil, @billing_thresholds : DefaultSettingsParamsBillingThresholds? = nil, @cancel_at : Int64? = nil, @cancel_at_period_end : Bool? = nil, @collection_method : String? = nil, @coupon : String? = nil, @days_until_due : Int64? = nil, @default_payment_method : String? = nil, @default_source : String? = nil, @default_tax_rates : PostSubscriptionsRequestDefaultTaxRates? = nil, @description : String? = nil, @expand : Array(String)? = nil, @items : Array(SubscriptionItemCreateParams)? = nil, @metadata : IndividualSpecsMetadata? = nil, @off_session : Bool? = nil, @payment_behavior : String? = nil, @payment_settings : PaymentSettings1? = nil, @pending_invoice_item_interval : PostSubscriptionsRequestPendingInvoiceItemInterval? = nil, @promotion_code : String? = nil, @proration_behavior : String? = nil, @transfer_data : TransferDataSpecs2? = nil, @trial_end : PostSubscriptionsRequestTrialEnd? = nil, @trial_from_plan : Bool? = nil, @trial_period_days : Int64? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @customer : String,
+      # Optional properties
+      @add_invoice_items : Array(AddInvoiceItemEntry)? = nil,
+      @application_fee_percent : Float64? = nil,
+      @automatic_tax : AutomaticTaxConfig? = nil,
+      @backdate_start_date : Int64? = nil,
+      @billing_cycle_anchor : Int64? = nil,
+      @billing_thresholds : PostCustomersCustomerSubscriptionsRequestBillingThresholds? = nil,
+      @cancel_at : Int64? = nil,
+      @cancel_at_period_end : Bool? = nil,
+      @collection_method : String? = nil,
+      @coupon : String? = nil,
+      @days_until_due : Int64? = nil,
+      @default_payment_method : String? = nil,
+      @default_source : String? = nil,
+      @default_tax_rates : PostCustomersCustomerSubscriptionsRequestDefaultTaxRates? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @items : Array(SubscriptionItemCreateParams)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @off_session : Bool? = nil,
+      @payment_behavior : String? = nil,
+      @payment_settings : PaymentSettings? = nil,
+      @pending_invoice_item_interval : PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval? = nil,
+      @promotion_code : String? = nil,
+      @proration_behavior : String? = nil,
+      @transfer_data : TransferDataSpecs3? = nil,
+      @trial_end : PostCustomersCustomerSubscriptionsRequestTrialEnd? = nil,
+      @trial_from_plan : Bool? = nil,
+      @trial_period_days : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -226,14 +262,14 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
+      if @customer.to_s.size > 5000
+        invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECTION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
 
       if !@coupon.nil? && @coupon.to_s.size > 5000
         invalid_properties.push("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @customer.to_s.size > 5000
-        invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
 
       if !@default_payment_method.nil? && @default_payment_method.to_s.size > 5000
@@ -262,16 +298,27 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @customer.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
       return false if !@coupon.nil? && @coupon.to_s.size > 5000
-      return false if @customer.to_s.size > 5000
       return false if !@default_payment_method.nil? && @default_payment_method.to_s.size > 5000
       return false if !@default_source.nil? && @default_source.to_s.size > 5000
       return false if !@description.nil? && @description.to_s.size > 500
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.valid?(@payment_behavior)
       return false if !@promotion_code.nil? && @promotion_code.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] customer Value to be assigned
+    def customer=(customer)
+      if customer.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @customer = customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -289,16 +336,6 @@ module Stripe
       end
 
       @coupon = coupon
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] customer Value to be assigned
-    def customer=(customer)
-      if customer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @customer = customer
     end
 
     # Custom attribute writer method with validation
@@ -355,50 +392,16 @@ module Stripe
       @proration_behavior = proration_behavior
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        add_invoice_items == o.add_invoice_items &&
-        application_fee_percent == o.application_fee_percent &&
-        automatic_tax == o.automatic_tax &&
-        backdate_start_date == o.backdate_start_date &&
-        billing_cycle_anchor == o.billing_cycle_anchor &&
-        billing_thresholds == o.billing_thresholds &&
-        cancel_at == o.cancel_at &&
-        cancel_at_period_end == o.cancel_at_period_end &&
-        collection_method == o.collection_method &&
-        coupon == o.coupon &&
-        customer == o.customer &&
-        days_until_due == o.days_until_due &&
-        default_payment_method == o.default_payment_method &&
-        default_source == o.default_source &&
-        default_tax_rates == o.default_tax_rates &&
-        description == o.description &&
-        expand == o.expand &&
-        items == o.items &&
-        metadata == o.metadata &&
-        off_session == o.off_session &&
-        payment_behavior == o.payment_behavior &&
-        payment_settings == o.payment_settings &&
-        pending_invoice_item_interval == o.pending_invoice_item_interval &&
-        promotion_code == o.promotion_code &&
-        proration_behavior == o.proration_behavior &&
-        transfer_data == o.transfer_data &&
-        trial_end == o.trial_end &&
-        trial_from_plan == o.trial_from_plan &&
-        trial_period_days == o.trial_period_days
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@add_invoice_items, @application_fee_percent, @automatic_tax, @backdate_start_date, @billing_cycle_anchor, @billing_thresholds, @cancel_at, @cancel_at_period_end, @collection_method, @coupon, @customer, @days_until_due, @default_payment_method, @default_source, @default_tax_rates, @description, @expand, @items, @metadata, @off_session, @payment_behavior, @payment_settings, @pending_invoice_item_interval, @promotion_code, @proration_behavior, @transfer_data, @trial_end, @trial_from_plan, @trial_period_days)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@customer, @add_invoice_items, @application_fee_percent, @automatic_tax, @backdate_start_date, @billing_cycle_anchor, @billing_thresholds, @cancel_at, @cancel_at_period_end, @collection_method, @coupon, @days_until_due, @default_payment_method, @default_source, @default_tax_rates, @description, @expand, @items, @metadata, @off_session, @payment_behavior, @payment_settings, @pending_invoice_item_interval, @promotion_code, @proration_behavior, @transfer_data, @trial_end, @trial_from_plan, @trial_period_days)
   end
 end

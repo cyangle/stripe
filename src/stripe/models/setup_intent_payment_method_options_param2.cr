@@ -12,14 +12,13 @@ require "time"
 require "log"
 
 module Stripe
-  # If this is a `sepa_debit` SetupIntent, this sub-hash contains details about the SEPA Debit payment method options.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SetupIntentPaymentMethodOptionsParam2
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Additional fields for Mandate creation
+
     @[JSON::Field(key: "mandate_options", type: JSON::Any, presence: true, ignore_serialize: mandate_options.nil? && !mandate_options_present?)]
     property mandate_options : JSON::Any
 
@@ -28,7 +27,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @mandate_options : JSON::Any = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @mandate_options : JSON::Any = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -45,22 +48,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        mandate_options == o.mandate_options
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@mandate_options)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@mandate_options)
   end
 end

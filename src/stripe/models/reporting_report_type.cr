@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Most recent time for which this Report Type is available. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "data_available_end", type: Int64)]
     property data_available_end : Int64
@@ -26,9 +27,6 @@ module Stripe
     # Earliest time for which this Report Type is available. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "data_available_start", type: Int64)]
     property data_available_start : Int64
-
-    @[JSON::Field(key: "default_columns", type: Array(String))]
-    property default_columns : Array(String)
 
     # The [ID of the Report Type](https://stripe.com/docs/reporting/statements/api#available-report-types), such as `balance.summary.1`.
     @[JSON::Field(key: "id", type: String)]
@@ -56,9 +54,31 @@ module Stripe
     @[JSON::Field(key: "version", type: Int64)]
     property version : Int64
 
+    # Optional properties
+
+    # List of column names that are included by default when this Report Type gets run. (If the Report Type doesn't support the `columns` parameter, this will be null.)
+    @[JSON::Field(key: "default_columns", type: Array(String)?, presence: true, ignore_serialize: default_columns.nil? && !default_columns_present?)]
+    property default_columns : Array(String)?
+
+    @[JSON::Field(ignore: true)]
+    property? default_columns_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @data_available_end : Int64, @data_available_start : Int64, @default_columns : Array(String), @id : String, @livemode : Bool, @name : String, @object : String, @updated : Int64, @version : Int64)
+    def initialize(
+      *,
+      # Required properties
+      @data_available_end : Int64,
+      @data_available_start : Int64,
+      @id : String,
+      @livemode : Bool,
+      @name : String,
+      @object : String,
+      @updated : Int64,
+      @version : Int64,
+      # Optional properties
+      @default_columns : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -85,6 +105,7 @@ module Stripe
       return false if @id.to_s.size > 5000
       return false if @name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
       true
     end
 
@@ -115,30 +136,16 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        data_available_end == o.data_available_end &&
-        data_available_start == o.data_available_start &&
-        default_columns == o.default_columns &&
-        id == o.id &&
-        livemode == o.livemode &&
-        name == o.name &&
-        object == o.object &&
-        updated == o.updated &&
-        version == o.version
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@data_available_end, @data_available_start, @default_columns, @id, @livemode, @name, @object, @updated, @version)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@data_available_end, @data_available_start, @id, @livemode, @name, @object, @updated, @version, @default_columns)
   end
 end

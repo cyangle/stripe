@@ -19,8 +19,9 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "address", type: AddressSpecs1?, presence: true, ignore_serialize: address.nil? && !address_present?)]
-    property address : AddressSpecs1?
+
+    @[JSON::Field(key: "address", type: AddressSpecs?, presence: true, ignore_serialize: address.nil? && !address_present?)]
+    property address : AddressSpecs?
 
     @[JSON::Field(ignore: true)]
     property? address_present : Bool = false
@@ -37,42 +38,36 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? address_kanji_present : Bool = false
 
-    # Whether the company's directors have been provided. Set this Boolean to `true` after creating all the company's directors with [the Persons API](https://stripe.com/docs/api/persons) for accounts with a `relationship.director` requirement. This value is not automatically set to `true` after creating directors, so it needs to be updated to indicate all directors have been provided.
     @[JSON::Field(key: "directors_provided", type: Bool?, presence: true, ignore_serialize: directors_provided.nil? && !directors_provided_present?)]
     property directors_provided : Bool?
 
     @[JSON::Field(ignore: true)]
     property? directors_provided_present : Bool = false
 
-    # Whether the company's executives have been provided. Set this Boolean to `true` after creating all the company's executives with [the Persons API](https://stripe.com/docs/api/persons) for accounts with a `relationship.executive` requirement.
     @[JSON::Field(key: "executives_provided", type: Bool?, presence: true, ignore_serialize: executives_provided.nil? && !executives_provided_present?)]
     property executives_provided : Bool?
 
     @[JSON::Field(ignore: true)]
     property? executives_provided_present : Bool = false
 
-    # The company's legal name.
     @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
     getter name : String?
 
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
 
-    # The Kana variation of the company's legal name (Japan only).
     @[JSON::Field(key: "name_kana", type: String?, presence: true, ignore_serialize: name_kana.nil? && !name_kana_present?)]
     getter name_kana : String?
 
     @[JSON::Field(ignore: true)]
     property? name_kana_present : Bool = false
 
-    # The Kanji variation of the company's legal name (Japan only).
     @[JSON::Field(key: "name_kanji", type: String?, presence: true, ignore_serialize: name_kanji.nil? && !name_kanji_present?)]
     getter name_kanji : String?
 
     @[JSON::Field(ignore: true)]
     property? name_kanji_present : Bool = false
 
-    # Whether the company's owners have been provided. Set this Boolean to `true` after creating all the company's owners with [the Persons API](https://stripe.com/docs/api/persons) for accounts with a `relationship.owner` requirement.
     @[JSON::Field(key: "owners_provided", type: Bool?, presence: true, ignore_serialize: owners_provided.nil? && !owners_provided_present?)]
     property owners_provided : Bool?
 
@@ -85,21 +80,18 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? ownership_declaration_present : Bool = false
 
-    # The company's phone number (used for verification).
     @[JSON::Field(key: "phone", type: String?, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
     getter phone : String?
 
     @[JSON::Field(ignore: true)]
     property? phone_present : Bool = false
 
-    # The identification number given to a company when it is registered or incorporated, if distinct from the identification number used for filing taxes. (Examples are the CIN for companies and LLP IN for partnerships in India, and the Company Registration Number in Hong Kong).
     @[JSON::Field(key: "registration_number", type: String?, presence: true, ignore_serialize: registration_number.nil? && !registration_number_present?)]
     getter registration_number : String?
 
     @[JSON::Field(ignore: true)]
     property? registration_number_present : Bool = false
 
-    # The category identifying the legal structure of the company or legal entity. See [Business structure](https://stripe.com/docs/connect/identity-verification#business-structure) for more details.
     @[JSON::Field(key: "structure", type: String?, presence: true, ignore_serialize: structure.nil? && !structure_present?)]
     getter structure : String?
 
@@ -108,21 +100,18 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_STRUCTURE = EnumValidator.new("structure", "String", ["", "free_zone_establishment", "free_zone_llc", "government_instrumentality", "governmental_unit", "incorporated_non_profit", "limited_liability_partnership", "llc", "multi_member_llc", "private_company", "private_corporation", "private_partnership", "public_company", "public_corporation", "public_partnership", "single_member_llc", "sole_establishment", "sole_proprietorship", "tax_exempt_government_instrumentality", "unincorporated_association", "unincorporated_non_profit"])
 
-    # The business ID number of the company, as appropriate for the company’s country. (Examples are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in the UK.)
     @[JSON::Field(key: "tax_id", type: String?, presence: true, ignore_serialize: tax_id.nil? && !tax_id_present?)]
     getter tax_id : String?
 
     @[JSON::Field(ignore: true)]
     property? tax_id_present : Bool = false
 
-    # The jurisdiction in which the `tax_id` is registered (Germany-based companies only).
     @[JSON::Field(key: "tax_id_registrar", type: String?, presence: true, ignore_serialize: tax_id_registrar.nil? && !tax_id_registrar_present?)]
     getter tax_id_registrar : String?
 
     @[JSON::Field(ignore: true)]
     property? tax_id_registrar_present : Bool = false
 
-    # The VAT number of the company.
     @[JSON::Field(key: "vat_id", type: String?, presence: true, ignore_serialize: vat_id.nil? && !vat_id_present?)]
     getter vat_id : String?
 
@@ -137,7 +126,27 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : AddressSpecs1? = nil, @address_kana : JapanAddressKanaSpecs? = nil, @address_kanji : JapanAddressKanjiSpecs? = nil, @directors_provided : Bool? = nil, @executives_provided : Bool? = nil, @name : String? = nil, @name_kana : String? = nil, @name_kanji : String? = nil, @owners_provided : Bool? = nil, @ownership_declaration : CompanyOwnershipDeclaration? = nil, @phone : String? = nil, @registration_number : String? = nil, @structure : String? = nil, @tax_id : String? = nil, @tax_id_registrar : String? = nil, @vat_id : String? = nil, @verification : VerificationSpecs? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @address : AddressSpecs? = nil,
+      @address_kana : JapanAddressKanaSpecs? = nil,
+      @address_kanji : JapanAddressKanjiSpecs? = nil,
+      @directors_provided : Bool? = nil,
+      @executives_provided : Bool? = nil,
+      @name : String? = nil,
+      @name_kana : String? = nil,
+      @name_kanji : String? = nil,
+      @owners_provided : Bool? = nil,
+      @ownership_declaration : CompanyOwnershipDeclaration? = nil,
+      @phone : String? = nil,
+      @registration_number : String? = nil,
+      @structure : String? = nil,
+      @tax_id : String? = nil,
+      @tax_id_registrar : String? = nil,
+      @vat_id : String? = nil,
+      @verification : VerificationSpecs? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -194,6 +203,7 @@ module Stripe
       return false if !@tax_id.nil? && @tax_id.to_s.size > 5000
       return false if !@tax_id_registrar.nil? && @tax_id_registrar.to_s.size > 5000
       return false if !@vat_id.nil? && @vat_id.to_s.size > 5000
+
       true
     end
 
@@ -284,38 +294,16 @@ module Stripe
       @vat_id = vat_id
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        address_kana == o.address_kana &&
-        address_kanji == o.address_kanji &&
-        directors_provided == o.directors_provided &&
-        executives_provided == o.executives_provided &&
-        name == o.name &&
-        name_kana == o.name_kana &&
-        name_kanji == o.name_kanji &&
-        owners_provided == o.owners_provided &&
-        ownership_declaration == o.ownership_declaration &&
-        phone == o.phone &&
-        registration_number == o.registration_number &&
-        structure == o.structure &&
-        tax_id == o.tax_id &&
-        tax_id_registrar == o.tax_id_registrar &&
-        vat_id == o.vat_id &&
-        verification == o.verification
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @address_kana, @address_kanji, @directors_provided, @executives_provided, @name, @name_kana, @name_kanji, @owners_provided, @ownership_declaration, @phone, @registration_number, @structure, @tax_id, @tax_id_registrar, @vat_id, @verification)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address, @address_kana, @address_kanji, @directors_provided, @executives_provided, @name, @name_kana, @name_kanji, @owners_provided, @ownership_declaration, @phone, @registration_number, @structure, @tax_id, @tax_id_registrar, @vat_id, @verification)
   end
 end

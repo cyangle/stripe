@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The code for the type of error.
     @[JSON::Field(key: "code", type: String)]
     getter code : String
@@ -35,13 +36,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @code : String, @reason : String, @requirement : String)
+    def initialize(
+      *,
+      # Required properties
+      @code : String,
+      @reason : String,
+      @requirement : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
 
       if @reason.to_s.size > 5000
@@ -61,6 +69,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
       return false if @reason.to_s.size > 5000
       return false if @requirement.to_s.size > 5000
+
       true
     end
 
@@ -91,24 +100,16 @@ module Stripe
       @requirement = requirement
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        code == o.code &&
-        reason == o.reason &&
-        requirement == o.requirement
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@code, @reason, @requirement)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@code, @reason, @requirement)
   end
 end

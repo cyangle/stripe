@@ -18,27 +18,25 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "additional_documentation", type: CanceledAdditionalDocumentation?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
-    property additional_documentation : CanceledAdditionalDocumentation?
+
+    @[JSON::Field(key: "additional_documentation", type: BusinessProfileSpecsSupportUrl?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
+    property additional_documentation : BusinessProfileSpecsSupportUrl?
 
     @[JSON::Field(ignore: true)]
     property? additional_documentation_present : Bool = false
 
-    # Explanation of why the cardholder is disputing this transaction.
     @[JSON::Field(key: "explanation", type: String?, presence: true, ignore_serialize: explanation.nil? && !explanation_present?)]
     getter explanation : String?
 
     @[JSON::Field(ignore: true)]
     property? explanation_present : Bool = false
 
-    # Description of the merchandise or service that was purchased.
     @[JSON::Field(key: "product_description", type: String?, presence: true, ignore_serialize: product_description.nil? && !product_description_present?)]
     getter product_description : String?
 
     @[JSON::Field(ignore: true)]
     property? product_description_present : Bool = false
 
-    # Whether the product was a merchandise or service.
     @[JSON::Field(key: "product_type", type: String?, presence: true, ignore_serialize: product_type.nil? && !product_type_present?)]
     getter product_type : String?
 
@@ -49,7 +47,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @additional_documentation : CanceledAdditionalDocumentation? = nil, @explanation : String? = nil, @product_description : String? = nil, @product_type : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @additional_documentation : BusinessProfileSpecsSupportUrl? = nil,
+      @explanation : String? = nil,
+      @product_description : String? = nil,
+      @product_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -76,6 +81,7 @@ module Stripe
       return false if !@explanation.nil? && @explanation.to_s.size > 1500
       return false if !@product_description.nil? && @product_description.to_s.size > 1500
       return false unless ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid?(@product_type)
+
       true
     end
 
@@ -106,25 +112,16 @@ module Stripe
       @product_type = product_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        additional_documentation == o.additional_documentation &&
-        explanation == o.explanation &&
-        product_description == o.product_description &&
-        product_type == o.product_type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@additional_documentation, @explanation, @product_description, @product_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@additional_documentation, @explanation, @product_description, @product_type)
   end
 end

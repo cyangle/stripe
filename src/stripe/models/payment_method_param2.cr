@@ -12,75 +12,49 @@ require "time"
 require "log"
 
 module Stripe
-  # Required hash if type is set to `us_bank_account`.
+  # If this is an `acss_debit` PaymentMethod, this hash contains details about the ACSS Debit payment method.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodParam2
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Optional properties
-    # Account holder type: individual or company.
-    @[JSON::Field(key: "account_holder_type", type: String?, presence: true, ignore_serialize: account_holder_type.nil? && !account_holder_type_present?)]
-    getter account_holder_type : String?
+    # Required properties
 
-    @[JSON::Field(ignore: true)]
-    property? account_holder_type_present : Bool = false
+    @[JSON::Field(key: "account_number", type: String)]
+    getter account_number : String
 
-    ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE = EnumValidator.new("account_holder_type", "String", ["company", "individual"])
+    @[JSON::Field(key: "institution_number", type: String)]
+    getter institution_number : String
 
-    # Account number of the bank account.
-    @[JSON::Field(key: "account_number", type: String?, presence: true, ignore_serialize: account_number.nil? && !account_number_present?)]
-    getter account_number : String?
-
-    @[JSON::Field(ignore: true)]
-    property? account_number_present : Bool = false
-
-    # Account type: checkings or savings. Defaults to checking if omitted.
-    @[JSON::Field(key: "account_type", type: String?, presence: true, ignore_serialize: account_type.nil? && !account_type_present?)]
-    getter account_type : String?
-
-    @[JSON::Field(ignore: true)]
-    property? account_type_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_ACCOUNT_TYPE = EnumValidator.new("account_type", "String", ["checking", "savings"])
-
-    # The ID of a Financial Connections Account to use as a payment method.
-    @[JSON::Field(key: "financial_connections_account", type: String?, presence: true, ignore_serialize: financial_connections_account.nil? && !financial_connections_account_present?)]
-    getter financial_connections_account : String?
-
-    @[JSON::Field(ignore: true)]
-    property? financial_connections_account_present : Bool = false
-
-    # Routing number of the bank account.
-    @[JSON::Field(key: "routing_number", type: String?, presence: true, ignore_serialize: routing_number.nil? && !routing_number_present?)]
-    getter routing_number : String?
-
-    @[JSON::Field(ignore: true)]
-    property? routing_number_present : Bool = false
+    @[JSON::Field(key: "transit_number", type: String)]
+    getter transit_number : String
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account_holder_type : String? = nil, @account_number : String? = nil, @account_type : String? = nil, @financial_connections_account : String? = nil, @routing_number : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @account_number : String,
+      @institution_number : String,
+      @transit_number : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid?(@account_holder_type)
 
-      if !@account_number.nil? && @account_number.to_s.size > 5000
+      if @account_number.to_s.size > 5000
         invalid_properties.push("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid?(@account_type)
-
-      if !@financial_connections_account.nil? && @financial_connections_account.to_s.size > 5000
-        invalid_properties.push("invalid value for \"financial_connections_account\", the character length must be smaller than or equal to 5000.")
+      if @institution_number.to_s.size > 5000
+        invalid_properties.push("invalid value for \"institution_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      if !@routing_number.nil? && @routing_number.to_s.size > 5000
-        invalid_properties.push("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
+      if @transit_number.to_s.size > 5000
+        invalid_properties.push("invalid value for \"transit_number\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties
@@ -89,68 +63,41 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid?(@account_holder_type)
-      return false if !@account_number.nil? && @account_number.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid?(@account_type)
-      return false if !@financial_connections_account.nil? && @financial_connections_account.to_s.size > 5000
-      return false if !@routing_number.nil? && @routing_number.to_s.size > 5000
-      true
-    end
+      return false if @account_number.to_s.size > 5000
+      return false if @institution_number.to_s.size > 5000
+      return false if @transit_number.to_s.size > 5000
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] account_holder_type Object to be assigned
-    def account_holder_type=(account_holder_type)
-      ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid!(account_holder_type)
-      @account_holder_type = account_holder_type
+      true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] account_number Value to be assigned
     def account_number=(account_number)
-      if !account_number.nil? && account_number.to_s.size > 5000
+      if account_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
 
       @account_number = account_number
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] account_type Object to be assigned
-    def account_type=(account_type)
-      ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid!(account_type)
-      @account_type = account_type
+    # Custom attribute writer method with validation
+    # @param [Object] institution_number Value to be assigned
+    def institution_number=(institution_number)
+      if institution_number.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"institution_number\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @institution_number = institution_number
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] financial_connections_account Value to be assigned
-    def financial_connections_account=(financial_connections_account)
-      if !financial_connections_account.nil? && financial_connections_account.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"financial_connections_account\", the character length must be smaller than or equal to 5000.")
+    # @param [Object] transit_number Value to be assigned
+    def transit_number=(transit_number)
+      if transit_number.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"transit_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @financial_connections_account = financial_connections_account
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] routing_number Value to be assigned
-    def routing_number=(routing_number)
-      if !routing_number.nil? && routing_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @routing_number = routing_number
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account_holder_type == o.account_holder_type &&
-        account_number == o.account_number &&
-        account_type == o.account_type &&
-        financial_connections_account == o.financial_connections_account &&
-        routing_number == o.routing_number
+      @transit_number = transit_number
     end
 
     # @see the `==` method
@@ -159,8 +106,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account_holder_type, @account_number, @account_type, @financial_connections_account, @routing_number)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account_number, @institution_number, @transit_number)
   end
 end

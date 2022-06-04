@@ -12,28 +12,33 @@ require "time"
 require "log"
 
 module Stripe
-  # Contains a Feature and settings related to moving money out of the FinancialAccount into another Account with the same owner.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class OutboundTransfers
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "ach", type: Access7?, presence: true, ignore_serialize: ach.nil? && !ach_present?)]
-    property ach : Access7?
+
+    @[JSON::Field(key: "ach", type: Access?, presence: true, ignore_serialize: ach.nil? && !ach_present?)]
+    property ach : Access?
 
     @[JSON::Field(ignore: true)]
     property? ach_present : Bool = false
 
-    @[JSON::Field(key: "us_domestic_wire", type: Access8?, presence: true, ignore_serialize: us_domestic_wire.nil? && !us_domestic_wire_present?)]
-    property us_domestic_wire : Access8?
+    @[JSON::Field(key: "us_domestic_wire", type: Access?, presence: true, ignore_serialize: us_domestic_wire.nil? && !us_domestic_wire_present?)]
+    property us_domestic_wire : Access?
 
     @[JSON::Field(ignore: true)]
     property? us_domestic_wire_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @ach : Access7? = nil, @us_domestic_wire : Access8? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @ach : Access? = nil,
+      @us_domestic_wire : Access? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -50,23 +55,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        ach == o.ach &&
-        us_domestic_wire == o.us_domestic_wire
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@ach, @us_domestic_wire)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@ach, @us_domestic_wire)
   end
 end

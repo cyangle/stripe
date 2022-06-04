@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "account_tax_ids", type: PostInvoicesRequestAccountTaxIds?, presence: true, ignore_serialize: account_tax_ids.nil? && !account_tax_ids_present?)]
     property account_tax_ids : PostInvoicesRequestAccountTaxIds?
 
@@ -87,6 +88,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? default_source_present : Bool = false
 
+    # The tax rates that will apply to any line item that does not have `tax_rates` set.
     @[JSON::Field(key: "default_tax_rates", type: Array(String)?, presence: true, ignore_serialize: default_tax_rates.nil? && !default_tax_rates_present?)]
     property default_tax_rates : Array(String)?
 
@@ -113,6 +115,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? due_date_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -126,8 +129,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? footer_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -139,8 +142,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? on_behalf_of_present : Bool = false
 
-    @[JSON::Field(key: "payment_settings", type: PaymentSettings?, presence: true, ignore_serialize: payment_settings.nil? && !payment_settings_present?)]
-    property payment_settings : PaymentSettings?
+    @[JSON::Field(key: "payment_settings", type: PaymentSettings1?, presence: true, ignore_serialize: payment_settings.nil? && !payment_settings_present?)]
+    property payment_settings : PaymentSettings1?
 
     @[JSON::Field(ignore: true)]
     property? payment_settings_present : Bool = false
@@ -168,15 +171,41 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? subscription_present : Bool = false
 
-    @[JSON::Field(key: "transfer_data", type: TransferDataSpecs3?, presence: true, ignore_serialize: transfer_data.nil? && !transfer_data_present?)]
-    property transfer_data : TransferDataSpecs3?
+    @[JSON::Field(key: "transfer_data", type: TransferDataSpecs4?, presence: true, ignore_serialize: transfer_data.nil? && !transfer_data_present?)]
+    property transfer_data : TransferDataSpecs4?
 
     @[JSON::Field(ignore: true)]
     property? transfer_data_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account_tax_ids : PostInvoicesRequestAccountTaxIds? = nil, @application_fee_amount : Int64? = nil, @auto_advance : Bool? = nil, @automatic_tax : AutomaticTaxParam? = nil, @collection_method : String? = nil, @custom_fields : PostInvoicesRequestCustomFields? = nil, @customer : String? = nil, @days_until_due : Int64? = nil, @default_payment_method : String? = nil, @default_source : String? = nil, @default_tax_rates : Array(String)? = nil, @description : String? = nil, @discounts : PostInvoicesRequestDiscounts? = nil, @due_date : Int64? = nil, @expand : Array(String)? = nil, @footer : String? = nil, @metadata : IndividualSpecsMetadata? = nil, @on_behalf_of : String? = nil, @payment_settings : PaymentSettings? = nil, @pending_invoice_items_behavior : String? = nil, @statement_descriptor : String? = nil, @subscription : String? = nil, @transfer_data : TransferDataSpecs3? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @account_tax_ids : PostInvoicesRequestAccountTaxIds? = nil,
+      @application_fee_amount : Int64? = nil,
+      @auto_advance : Bool? = nil,
+      @automatic_tax : AutomaticTaxParam? = nil,
+      @collection_method : String? = nil,
+      @custom_fields : PostInvoicesRequestCustomFields? = nil,
+      @customer : String? = nil,
+      @days_until_due : Int64? = nil,
+      @default_payment_method : String? = nil,
+      @default_source : String? = nil,
+      @default_tax_rates : Array(String)? = nil,
+      @description : String? = nil,
+      @discounts : PostInvoicesRequestDiscounts? = nil,
+      @due_date : Int64? = nil,
+      @expand : Array(String)? = nil,
+      @footer : String? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @on_behalf_of : String? = nil,
+      @payment_settings : PaymentSettings1? = nil,
+      @pending_invoice_items_behavior : String? = nil,
+      @statement_descriptor : String? = nil,
+      @subscription : String? = nil,
+      @transfer_data : TransferDataSpecs4? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -231,6 +260,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_PENDING_INVOICE_ITEMS_BEHAVIOR.valid?(@pending_invoice_items_behavior)
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
       return false if !@subscription.nil? && @subscription.to_s.size > 5000
+
       true
     end
 
@@ -318,44 +348,16 @@ module Stripe
       @subscription = subscription
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account_tax_ids == o.account_tax_ids &&
-        application_fee_amount == o.application_fee_amount &&
-        auto_advance == o.auto_advance &&
-        automatic_tax == o.automatic_tax &&
-        collection_method == o.collection_method &&
-        custom_fields == o.custom_fields &&
-        customer == o.customer &&
-        days_until_due == o.days_until_due &&
-        default_payment_method == o.default_payment_method &&
-        default_source == o.default_source &&
-        default_tax_rates == o.default_tax_rates &&
-        description == o.description &&
-        discounts == o.discounts &&
-        due_date == o.due_date &&
-        expand == o.expand &&
-        footer == o.footer &&
-        metadata == o.metadata &&
-        on_behalf_of == o.on_behalf_of &&
-        payment_settings == o.payment_settings &&
-        pending_invoice_items_behavior == o.pending_invoice_items_behavior &&
-        statement_descriptor == o.statement_descriptor &&
-        subscription == o.subscription &&
-        transfer_data == o.transfer_data
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account_tax_ids, @application_fee_amount, @auto_advance, @automatic_tax, @collection_method, @custom_fields, @customer, @days_until_due, @default_payment_method, @default_source, @default_tax_rates, @description, @discounts, @due_date, @expand, @footer, @metadata, @on_behalf_of, @payment_settings, @pending_invoice_items_behavior, @statement_descriptor, @subscription, @transfer_data)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account_tax_ids, @application_fee_amount, @auto_advance, @automatic_tax, @collection_method, @custom_fields, @customer, @days_until_due, @default_payment_method, @default_source, @default_tax_rates, @description, @discounts, @due_date, @expand, @footer, @metadata, @on_behalf_of, @payment_settings, @pending_invoice_items_behavior, @statement_descriptor, @subscription, @transfer_data)
   end
 end

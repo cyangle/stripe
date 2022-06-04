@@ -19,12 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # (For tokenized numbers only.) The last four digits of the device account number.
-    @[JSON::Field(key: "dynamic_last4", type: String?, presence: true, ignore_serialize: dynamic_last4.nil? && !dynamic_last4_present?)]
-    getter dynamic_last4 : String?
-
-    @[JSON::Field(ignore: true)]
-    property? dynamic_last4_present : Bool = false
 
     # The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
     @[JSON::Field(key: "type", type: String)]
@@ -33,6 +27,7 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["amex_express_checkout", "apple_pay", "google_pay", "masterpass", "samsung_pay", "visa_checkout"])
 
     # Optional properties
+
     #
     @[JSON::Field(key: "amex_express_checkout", type: JSON::Any, presence: true, ignore_serialize: amex_express_checkout.nil? && !amex_express_checkout_present?)]
     property amex_express_checkout : JSON::Any
@@ -46,6 +41,13 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? apple_pay_present : Bool = false
+
+    # (For tokenized numbers only.) The last four digits of the device account number.
+    @[JSON::Field(key: "dynamic_last4", type: String?, presence: true, ignore_serialize: dynamic_last4.nil? && !dynamic_last4_present?)]
+    getter dynamic_last4 : String?
+
+    @[JSON::Field(ignore: true)]
+    property? dynamic_last4_present : Bool = false
 
     #
     @[JSON::Field(key: "google_pay", type: JSON::Any, presence: true, ignore_serialize: google_pay.nil? && !google_pay_present?)]
@@ -75,7 +77,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @dynamic_last4 : String?, @_type : String, @amex_express_checkout : JSON::Any = nil, @apple_pay : JSON::Any = nil, @google_pay : JSON::Any = nil, @masterpass : PaymentMethodCardWalletMasterpass? = nil, @samsung_pay : JSON::Any = nil, @visa_checkout : PaymentMethodCardWalletVisaCheckout? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String,
+      # Optional properties
+      @amex_express_checkout : JSON::Any = nil,
+      @apple_pay : JSON::Any = nil,
+      @dynamic_last4 : String? = nil,
+      @google_pay : JSON::Any = nil,
+      @masterpass : PaymentMethodCardWalletMasterpass? = nil,
+      @samsung_pay : JSON::Any = nil,
+      @visa_checkout : PaymentMethodCardWalletVisaCheckout? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -83,11 +97,11 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @dynamic_last4.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      if !@dynamic_last4.nil? && @dynamic_last4.to_s.size > 5000
         invalid_properties.push("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       invalid_properties
     end
@@ -95,19 +109,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @dynamic_last4.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if !@dynamic_last4.nil? && @dynamic_last4.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] dynamic_last4 Value to be assigned
-    def dynamic_last4=(dynamic_last4)
-      if dynamic_last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @dynamic_last4 = dynamic_last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -117,19 +122,14 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amex_express_checkout == o.amex_express_checkout &&
-        apple_pay == o.apple_pay &&
-        dynamic_last4 == o.dynamic_last4 &&
-        google_pay == o.google_pay &&
-        masterpass == o.masterpass &&
-        samsung_pay == o.samsung_pay &&
-        _type == o._type &&
-        visa_checkout == o.visa_checkout
+    # Custom attribute writer method with validation
+    # @param [Object] dynamic_last4 Value to be assigned
+    def dynamic_last4=(dynamic_last4)
+      if !dynamic_last4.nil? && dynamic_last4.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @dynamic_last4 = dynamic_last4
     end
 
     # @see the `==` method
@@ -138,8 +138,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amex_express_checkout, @apple_pay, @dynamic_last4, @google_pay, @masterpass, @samsung_pay, @_type, @visa_checkout)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @amex_express_checkout, @apple_pay, @dynamic_last4, @google_pay, @masterpass, @samsung_pay, @visa_checkout)
   end
 end

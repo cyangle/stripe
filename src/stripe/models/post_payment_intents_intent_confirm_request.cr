@@ -18,6 +18,14 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
+    # The client secret of the PaymentIntent.
+    @[JSON::Field(key: "client_secret", type: String?, presence: true, ignore_serialize: client_secret.nil? && !client_secret_present?)]
+    getter client_secret : String?
+
+    @[JSON::Field(ignore: true)]
+    property? client_secret_present : Bool = false
+
     # Set to `true` to fail the payment attempt if the PaymentIntent transitions into `requires_action`. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication).
     @[JSON::Field(key: "error_on_requires_action", type: Bool?, presence: true, ignore_serialize: error_on_requires_action.nil? && !error_on_requires_action_present?)]
     property error_on_requires_action : Bool?
@@ -25,6 +33,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? error_on_requires_action_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -63,11 +72,18 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_method_data_present : Bool = false
 
-    @[JSON::Field(key: "payment_method_options", type: PaymentMethodOptionsParam21?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
-    property payment_method_options : PaymentMethodOptionsParam21?
+    @[JSON::Field(key: "payment_method_options", type: PaymentMethodOptionsParam11?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
+    property payment_method_options : PaymentMethodOptionsParam11?
 
     @[JSON::Field(ignore: true)]
     property? payment_method_options_present : Bool = false
+
+    # The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
+    @[JSON::Field(key: "payment_method_types", type: Array(String)?, presence: true, ignore_serialize: payment_method_types.nil? && !payment_method_types_present?)]
+    property payment_method_types : Array(String)?
+
+    @[JSON::Field(ignore: true)]
+    property? payment_method_types_present : Bool = false
 
     @[JSON::Field(key: "radar_options", type: RadarOptions?, presence: true, ignore_serialize: radar_options.nil? && !radar_options_present?)]
     property radar_options : RadarOptions?
@@ -112,13 +128,36 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @error_on_requires_action : Bool? = nil, @expand : Array(String)? = nil, @mandate : String? = nil, @mandate_data : PostPaymentIntentsIntentConfirmRequestMandateData? = nil, @off_session : PostPaymentIntentsIntentConfirmRequestOffSession? = nil, @payment_method : String? = nil, @payment_method_data : PaymentMethodDataParams? = nil, @payment_method_options : PaymentMethodOptionsParam21? = nil, @radar_options : RadarOptions? = nil, @receipt_email : PostPaymentIntentsIntentRequestReceiptEmail? = nil, @return_url : String? = nil, @setup_future_usage : String? = nil, @shipping : PostPaymentIntentsIntentRequestShipping? = nil, @use_stripe_sdk : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @client_secret : String? = nil,
+      @error_on_requires_action : Bool? = nil,
+      @expand : Array(String)? = nil,
+      @mandate : String? = nil,
+      @mandate_data : PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
+      @off_session : PostPaymentIntentsIntentConfirmRequestOffSession? = nil,
+      @payment_method : String? = nil,
+      @payment_method_data : PaymentMethodDataParams? = nil,
+      @payment_method_options : PaymentMethodOptionsParam11? = nil,
+      @payment_method_types : Array(String)? = nil,
+      @radar_options : RadarOptions? = nil,
+      @receipt_email : PostPaymentIntentsIntentRequestReceiptEmail? = nil,
+      @return_url : String? = nil,
+      @setup_future_usage : String? = nil,
+      @shipping : PostPaymentIntentsIntentRequestShipping? = nil,
+      @use_stripe_sdk : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
+      if !@client_secret.nil? && @client_secret.to_s.size > 5000
+        invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      end
 
       if !@mandate.nil? && @mandate.to_s.size > 5000
         invalid_properties.push("invalid value for \"mandate\", the character length must be smaller than or equal to 5000.")
@@ -136,10 +175,22 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@client_secret.nil? && @client_secret.to_s.size > 5000
       return false if !@mandate.nil? && @mandate.to_s.size > 5000
       return false if !@payment_method.nil? && @payment_method.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] client_secret Value to be assigned
+    def client_secret=(client_secret)
+      if !client_secret.nil? && client_secret.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @client_secret = client_secret
     end
 
     # Custom attribute writer method with validation
@@ -169,35 +220,16 @@ module Stripe
       @setup_future_usage = setup_future_usage
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        error_on_requires_action == o.error_on_requires_action &&
-        expand == o.expand &&
-        mandate == o.mandate &&
-        mandate_data == o.mandate_data &&
-        off_session == o.off_session &&
-        payment_method == o.payment_method &&
-        payment_method_data == o.payment_method_data &&
-        payment_method_options == o.payment_method_options &&
-        radar_options == o.radar_options &&
-        receipt_email == o.receipt_email &&
-        return_url == o.return_url &&
-        setup_future_usage == o.setup_future_usage &&
-        shipping == o.shipping &&
-        use_stripe_sdk == o.use_stripe_sdk
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@error_on_requires_action, @expand, @mandate, @mandate_data, @off_session, @payment_method, @payment_method_data, @payment_method_options, @radar_options, @receipt_email, @return_url, @setup_future_usage, @shipping, @use_stripe_sdk)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@client_secret, @error_on_requires_action, @expand, @mandate, @mandate_data, @off_session, @payment_method, @payment_method_data, @payment_method_options, @payment_method_types, @radar_options, @receipt_email, @return_url, @setup_future_usage, @shipping, @use_stripe_sdk)
   end
 end

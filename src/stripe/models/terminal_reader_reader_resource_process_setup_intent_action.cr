@@ -19,10 +19,12 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "setup_intent", type: TerminalReaderReaderResourceProcessSetupIntentActionSetupIntent)]
     property setup_intent : TerminalReaderReaderResourceProcessSetupIntentActionSetupIntent
 
     # Optional properties
+
     @[JSON::Field(key: "generated_card", type: String?, presence: true, ignore_serialize: generated_card.nil? && !generated_card_present?)]
     getter generated_card : String?
 
@@ -31,7 +33,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @setup_intent : TerminalReaderReaderResourceProcessSetupIntentActionSetupIntent, @generated_card : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @setup_intent : TerminalReaderReaderResourceProcessSetupIntentActionSetupIntent,
+      # Optional properties
+      @generated_card : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -50,6 +58,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@generated_card.nil? && @generated_card.to_s.size > 5000
+
       true
     end
 
@@ -63,23 +72,16 @@ module Stripe
       @generated_card = generated_card
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        generated_card == o.generated_card &&
-        setup_intent == o.setup_intent
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@generated_card, @setup_intent)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@setup_intent, @generated_card)
   end
 end

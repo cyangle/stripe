@@ -19,11 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The type of transaction-specific details of the payment method used in the payment, one of `ach_credit_transfer`, `ach_debit`, `acss_debit`, `alipay`, `au_becs_debit`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `klarna`, `multibanco`, `p24`, `sepa_debit`, `sofort`, `stripe_account`, or `wechat`. An additional hash is included on `payment_method_details` with a name matching this value. It contains information specific to the payment method.
     @[JSON::Field(key: "type", type: String?)]
     getter _type : String?
 
     # Optional properties
+
     @[JSON::Field(key: "ach_credit_transfer", type: PaymentMethodDetailsAchCreditTransfer?, presence: true, ignore_serialize: ach_credit_transfer.nil? && !ach_credit_transfer_present?)]
     property ach_credit_transfer : PaymentMethodDetailsAchCreditTransfer?
 
@@ -91,7 +93,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
-    @[JSON::Field(key: "card_present", type: PaymentMethodDetailsCardPresent?, presence: true, ignore_serialize: card_present.nil? && !card_present_present?)]
+    @[JSON::Field(key: "card_present", type: PaymentMethodDetailsCardPresent?, presence: true, ignore_serialize: card_present2.nil? && !card_present2_present?)]
     property card_present2 : PaymentMethodDetailsCardPresent?
 
     @[JSON::Field(ignore: true)]
@@ -183,12 +185,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? paynow_present : Bool = false
 
-    @[JSON::Field(key: "sepa_credit_transfer", type: PaymentMethodDetailsSepaCreditTransfer?, presence: true, ignore_serialize: sepa_credit_transfer.nil? && !sepa_credit_transfer_present?)]
-    property sepa_credit_transfer : PaymentMethodDetailsSepaCreditTransfer?
-
-    @[JSON::Field(ignore: true)]
-    property? sepa_credit_transfer_present : Bool = false
-
     @[JSON::Field(key: "sepa_debit", type: PaymentMethodDetailsSepaDebit?, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
     property sepa_debit : PaymentMethodDetailsSepaDebit?
 
@@ -236,7 +232,44 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_type : String, @ach_credit_transfer : PaymentMethodDetailsAchCreditTransfer? = nil, @ach_debit : PaymentMethodDetailsAchDebit? = nil, @acss_debit : PaymentMethodDetailsAcssDebit? = nil, @affirm : JSON::Any = nil, @afterpay_clearpay : PaymentMethodDetailsAfterpayClearpay? = nil, @alipay : PaymentFlowsPrivatePaymentMethodsAlipayDetails? = nil, @au_becs_debit : PaymentMethodDetailsAuBecsDebit? = nil, @bacs_debit : PaymentMethodDetailsBacsDebit? = nil, @bancontact : PaymentMethodDetailsBancontact? = nil, @boleto : PaymentMethodDetailsBoleto? = nil, @card : PaymentMethodDetailsCard? = nil, @card_present2 : PaymentMethodDetailsCardPresent? = nil, @customer_balance : JSON::Any = nil, @eps : PaymentMethodDetailsEps? = nil, @fpx : PaymentMethodDetailsFpx? = nil, @giropay : PaymentMethodDetailsGiropay? = nil, @grabpay : PaymentMethodDetailsGrabpay? = nil, @ideal : PaymentMethodDetailsIdeal? = nil, @interac_present : PaymentMethodDetailsInteracPresent? = nil, @klarna : PaymentMethodDetailsKlarna? = nil, @konbini : PaymentMethodDetailsKonbini? = nil, @link : JSON::Any = nil, @multibanco : PaymentMethodDetailsMultibanco? = nil, @oxxo : PaymentMethodDetailsOxxo? = nil, @p24 : PaymentMethodDetailsP24? = nil, @paynow : PaymentMethodDetailsPaynow? = nil, @sepa_credit_transfer : PaymentMethodDetailsSepaCreditTransfer? = nil, @sepa_debit : PaymentMethodDetailsSepaDebit? = nil, @sofort : PaymentMethodDetailsSofort? = nil, @stripe_account : JSON::Any = nil, @us_bank_account : PaymentMethodDetailsUsBankAccount? = nil, @wechat : JSON::Any = nil, @wechat_pay : PaymentMethodDetailsWechatPay? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String? = nil,
+      # Optional properties
+      @ach_credit_transfer : PaymentMethodDetailsAchCreditTransfer? = nil,
+      @ach_debit : PaymentMethodDetailsAchDebit? = nil,
+      @acss_debit : PaymentMethodDetailsAcssDebit? = nil,
+      @affirm : JSON::Any = nil,
+      @afterpay_clearpay : PaymentMethodDetailsAfterpayClearpay? = nil,
+      @alipay : PaymentFlowsPrivatePaymentMethodsAlipayDetails? = nil,
+      @au_becs_debit : PaymentMethodDetailsAuBecsDebit? = nil,
+      @bacs_debit : PaymentMethodDetailsBacsDebit? = nil,
+      @bancontact : PaymentMethodDetailsBancontact? = nil,
+      @boleto : PaymentMethodDetailsBoleto? = nil,
+      @card : PaymentMethodDetailsCard? = nil,
+      @card_present2 : PaymentMethodDetailsCardPresent? = nil,
+      @customer_balance : JSON::Any = nil,
+      @eps : PaymentMethodDetailsEps? = nil,
+      @fpx : PaymentMethodDetailsFpx? = nil,
+      @giropay : PaymentMethodDetailsGiropay? = nil,
+      @grabpay : PaymentMethodDetailsGrabpay? = nil,
+      @ideal : PaymentMethodDetailsIdeal? = nil,
+      @interac_present : PaymentMethodDetailsInteracPresent? = nil,
+      @klarna : PaymentMethodDetailsKlarna? = nil,
+      @konbini : PaymentMethodDetailsKonbini? = nil,
+      @link : JSON::Any = nil,
+      @multibanco : PaymentMethodDetailsMultibanco? = nil,
+      @oxxo : PaymentMethodDetailsOxxo? = nil,
+      @p24 : PaymentMethodDetailsP24? = nil,
+      @paynow : PaymentMethodDetailsPaynow? = nil,
+      @sepa_debit : PaymentMethodDetailsSepaDebit? = nil,
+      @sofort : PaymentMethodDetailsSofort? = nil,
+      @stripe_account : JSON::Any = nil,
+      @us_bank_account : PaymentMethodDetailsUsBankAccount? = nil,
+      @wechat : JSON::Any = nil,
+      @wechat_pay : PaymentMethodDetailsWechatPay? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -255,6 +288,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @_type.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -266,10 +300,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -284,55 +315,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        ach_credit_transfer == o.ach_credit_transfer &&
-        ach_debit == o.ach_debit &&
-        acss_debit == o.acss_debit &&
-        affirm == o.affirm &&
-        afterpay_clearpay == o.afterpay_clearpay &&
-        alipay == o.alipay &&
-        au_becs_debit == o.au_becs_debit &&
-        bacs_debit == o.bacs_debit &&
-        bancontact == o.bancontact &&
-        boleto == o.boleto &&
-        card == o.card &&
-        card_present2 == o.card_present2 &&
-        customer_balance == o.customer_balance &&
-        eps == o.eps &&
-        fpx == o.fpx &&
-        giropay == o.giropay &&
-        grabpay == o.grabpay &&
-        ideal == o.ideal &&
-        interac_present == o.interac_present &&
-        klarna == o.klarna &&
-        konbini == o.konbini &&
-        link == o.link &&
-        multibanco == o.multibanco &&
-        oxxo == o.oxxo &&
-        p24 == o.p24 &&
-        paynow == o.paynow &&
-        sepa_credit_transfer == o.sepa_credit_transfer &&
-        sepa_debit == o.sepa_debit &&
-        sofort == o.sofort &&
-        stripe_account == o.stripe_account &&
-        _type == o._type &&
-        us_bank_account == o.us_bank_account &&
-        wechat == o.wechat &&
-        wechat_pay == o.wechat_pay
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@ach_credit_transfer, @ach_debit, @acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @boleto, @card, @card_present2, @customer_balance, @eps, @fpx, @giropay, @grabpay, @ideal, @interac_present, @klarna, @konbini, @link, @multibanco, @oxxo, @p24, @paynow, @sepa_credit_transfer, @sepa_debit, @sofort, @stripe_account, @_type, @us_bank_account, @wechat, @wechat_pay)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @ach_credit_transfer, @ach_debit, @acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @boleto, @card, @card_present2, @customer_balance, @eps, @fpx, @giropay, @grabpay, @ideal, @interac_present, @klarna, @konbini, @link, @multibanco, @oxxo, @p24, @paynow, @sepa_debit, @sofort, @stripe_account, @us_bank_account, @wechat, @wechat_pay)
   end
 end

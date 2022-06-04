@@ -23,7 +23,7 @@ describe Stripe::SetupIntentPaymentMethodOptionsAcssDebit do
   describe "test attribute 'currency'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["cad", "usd", "null"])
+      # validator = EnumValidator.new("String", ["cad", "usd"])
       # validator.allowable_values.each do |value|
       #   expect { instance.currency = value }.not_to raise_error
       # end

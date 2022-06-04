@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
@@ -46,6 +47,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? display_name_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -59,8 +61,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? jurisdiction_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -83,7 +85,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool? = nil, @country : String? = nil, @description : String? = nil, @display_name : String? = nil, @expand : Array(String)? = nil, @jurisdiction : String? = nil, @metadata : IndividualSpecsMetadata? = nil, @state : String? = nil, @tax_type : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @active : Bool? = nil,
+      @country : String? = nil,
+      @description : String? = nil,
+      @display_name : String? = nil,
+      @expand : Array(String)? = nil,
+      @jurisdiction : String? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @state : String? = nil,
+      @tax_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -125,6 +139,7 @@ module Stripe
       return false if !@jurisdiction.nil? && @jurisdiction.to_s.size > 50
       return false if !@state.nil? && @state.to_s.size > 2
       return false unless ENUM_VALIDATOR_FOR_TAX_TYPE.valid?(@tax_type)
+
       true
     end
 
@@ -185,30 +200,16 @@ module Stripe
       @tax_type = tax_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        country == o.country &&
-        description == o.description &&
-        display_name == o.display_name &&
-        expand == o.expand &&
-        jurisdiction == o.jurisdiction &&
-        metadata == o.metadata &&
-        state == o.state &&
-        tax_type == o.tax_type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @country, @description, @display_name, @expand, @jurisdiction, @metadata, @state, @tax_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @country, @description, @display_name, @expand, @jurisdiction, @metadata, @state, @tax_type)
   end
 end

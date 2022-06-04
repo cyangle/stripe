@@ -19,9 +19,20 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Amount of the fee, in cents.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
+
+    # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+    @[JSON::Field(key: "currency", type: String)]
+    property currency : String
+
+    # Type of the fee, one of: `application_fee`, `stripe_fee` or `tax`.
+    @[JSON::Field(key: "type", type: String)]
+    getter _type : String
+
+    # Optional properties
 
     # ID of the Connect application that earned the fee.
     @[JSON::Field(key: "application", type: String?, presence: true, ignore_serialize: application.nil? && !application_present?)]
@@ -30,10 +41,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? application_present : Bool = false
 
-    # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    @[JSON::Field(key: "currency", type: String)]
-    property currency : String
-
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String?
@@ -41,13 +48,18 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
-    # Type of the fee, one of: `application_fee`, `stripe_fee` or `tax`.
-    @[JSON::Field(key: "type", type: String)]
-    getter _type : String
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @application : String?, @currency : String, @description : String?, @_type : String)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @currency : String,
+      @_type : String,
+      # Optional properties
+      @application : String? = nil,
+      @description : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -55,16 +67,16 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @application.to_s.size > 5000
+      if @_type.to_s.size > 5000
+        invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@application.nil? && @application.to_s.size > 5000
         invalid_properties.push("invalid value for \"application\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @description.to_s.size > 5000
+      if !@description.nil? && @description.to_s.size > 5000
         invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties
@@ -73,30 +85,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @application.to_s.size > 5000
-      return false if @description.to_s.size > 5000
       return false if @_type.to_s.size > 5000
+      return false if !@application.nil? && @application.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] application Value to be assigned
-    def application=(application)
-      if application.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"application\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @application = application
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -109,16 +102,24 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        application == o.application &&
-        currency == o.currency &&
-        description == o.description &&
-        _type == o._type
+    # Custom attribute writer method with validation
+    # @param [Object] application Value to be assigned
+    def application=(application)
+      if !application.nil? && application.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"application\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @application = application
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
     end
 
     # @see the `==` method
@@ -127,8 +128,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @application, @currency, @description, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @currency, @_type, @application, @description)
   end
 end

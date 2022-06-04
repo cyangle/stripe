@@ -18,62 +18,62 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # [The merchant category code for the account](https://stripe.com/docs/connect/setting-mcc). MCCs are used to classify businesses based on the goods or services they provide.
-    @[JSON::Field(key: "mcc", type: String, presence: true, ignore_serialize: mcc.nil? && !mcc_present?)]
-    getter mcc : String
+    @[JSON::Field(key: "mcc", type: String?, presence: true, ignore_serialize: mcc.nil? && !mcc_present?)]
+    getter mcc : String?
 
     @[JSON::Field(ignore: true)]
     property? mcc_present : Bool = false
 
     # The customer-facing business name.
-    @[JSON::Field(key: "name", type: String, presence: true, ignore_serialize: name.nil? && !name_present?)]
-    getter name : String
+    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    getter name : String?
 
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
 
-    @[JSON::Field(key: "support_address", type: AccountBusinessProfileSupportAddress, presence: true, ignore_serialize: support_address.nil? && !support_address_present?)]
-    property support_address : AccountBusinessProfileSupportAddress
-
-    @[JSON::Field(ignore: true)]
-    property? support_address_present : Bool = false
-
-    # A publicly available email address for sending support issues to.
-    @[JSON::Field(key: "support_email", type: String, presence: true, ignore_serialize: support_email.nil? && !support_email_present?)]
-    getter support_email : String
-
-    @[JSON::Field(ignore: true)]
-    property? support_email_present : Bool = false
-
-    # A publicly available phone number to call with support issues.
-    @[JSON::Field(key: "support_phone", type: String, presence: true, ignore_serialize: support_phone.nil? && !support_phone_present?)]
-    getter support_phone : String
-
-    @[JSON::Field(ignore: true)]
-    property? support_phone_present : Bool = false
-
-    # A publicly available website for handling support issues.
-    @[JSON::Field(key: "support_url", type: String, presence: true, ignore_serialize: support_url.nil? && !support_url_present?)]
-    getter support_url : String
-
-    @[JSON::Field(ignore: true)]
-    property? support_url_present : Bool = false
-
-    # The business's publicly available website.
-    @[JSON::Field(key: "url", type: String, presence: true, ignore_serialize: url.nil? && !url_present?)]
-    getter url : String
-
-    @[JSON::Field(ignore: true)]
-    property? url_present : Bool = false
-
-    # Optional properties
     # Internal-only description of the product sold or service provided by the business. It's used by Stripe for risk and underwriting purposes.
     @[JSON::Field(key: "product_description", type: String?, presence: true, ignore_serialize: product_description.nil? && !product_description_present?)]
     getter product_description : String?
 
     @[JSON::Field(ignore: true)]
     property? product_description_present : Bool = false
+
+    @[JSON::Field(key: "support_address", type: AccountBusinessProfileSupportAddress?, presence: true, ignore_serialize: support_address.nil? && !support_address_present?)]
+    property support_address : AccountBusinessProfileSupportAddress?
+
+    @[JSON::Field(ignore: true)]
+    property? support_address_present : Bool = false
+
+    # A publicly available email address for sending support issues to.
+    @[JSON::Field(key: "support_email", type: String?, presence: true, ignore_serialize: support_email.nil? && !support_email_present?)]
+    getter support_email : String?
+
+    @[JSON::Field(ignore: true)]
+    property? support_email_present : Bool = false
+
+    # A publicly available phone number to call with support issues.
+    @[JSON::Field(key: "support_phone", type: String?, presence: true, ignore_serialize: support_phone.nil? && !support_phone_present?)]
+    getter support_phone : String?
+
+    @[JSON::Field(ignore: true)]
+    property? support_phone_present : Bool = false
+
+    # A publicly available website for handling support issues.
+    @[JSON::Field(key: "support_url", type: String?, presence: true, ignore_serialize: support_url.nil? && !support_url_present?)]
+    getter support_url : String?
+
+    @[JSON::Field(ignore: true)]
+    property? support_url_present : Bool = false
+
+    # The business's publicly available website.
+    @[JSON::Field(key: "url", type: String?, presence: true, ignore_serialize: url.nil? && !url_present?)]
+    getter url : String?
+
+    @[JSON::Field(ignore: true)]
+    property? url_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -84,7 +84,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @mcc : String?, @name : String?, @support_address : AccountBusinessProfileSupportAddress?, @support_email : String?, @support_phone : String?, @support_url : String?, @url : String?, @product_description : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @mcc : String? = nil,
+      @name : String? = nil,
+      @product_description : String? = nil,
+      @support_address : AccountBusinessProfileSupportAddress? = nil,
+      @support_email : String? = nil,
+      @support_phone : String? = nil,
+      @support_url : String? = nil,
+      @url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -92,11 +103,11 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @mcc.to_s.size > 5000
+      if !@mcc.nil? && @mcc.to_s.size > 5000
         invalid_properties.push("invalid value for \"mcc\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @name.to_s.size > 5000
+      if !@name.nil? && @name.to_s.size > 5000
         invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -104,19 +115,19 @@ module Stripe
         invalid_properties.push("invalid value for \"product_description\", the character length must be smaller than or equal to 40000.")
       end
 
-      if @support_email.to_s.size > 5000
+      if !@support_email.nil? && @support_email.to_s.size > 5000
         invalid_properties.push("invalid value for \"support_email\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @support_phone.to_s.size > 5000
+      if !@support_phone.nil? && @support_phone.to_s.size > 5000
         invalid_properties.push("invalid value for \"support_phone\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @support_url.to_s.size > 5000
+      if !@support_url.nil? && @support_url.to_s.size > 5000
         invalid_properties.push("invalid value for \"support_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @url.to_s.size > 5000
+      if !@url.nil? && @url.to_s.size > 5000
         invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -126,13 +137,14 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @mcc.to_s.size > 5000
-      return false if @name.to_s.size > 5000
+      return false if !@mcc.nil? && @mcc.to_s.size > 5000
+      return false if !@name.nil? && @name.to_s.size > 5000
       return false if !@product_description.nil? && @product_description.to_s.size > 40000
-      return false if @support_email.to_s.size > 5000
-      return false if @support_phone.to_s.size > 5000
-      return false if @support_url.to_s.size > 5000
-      return false if @url.to_s.size > 5000
+      return false if !@support_email.nil? && @support_email.to_s.size > 5000
+      return false if !@support_phone.nil? && @support_phone.to_s.size > 5000
+      return false if !@support_url.nil? && @support_url.to_s.size > 5000
+      return false if !@url.nil? && @url.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -144,10 +156,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -155,7 +164,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] mcc Value to be assigned
     def mcc=(mcc)
-      if mcc.to_s.size > 5000
+      if !mcc.nil? && mcc.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"mcc\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -165,7 +174,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
     def name=(name)
-      if name.to_s.size > 5000
+      if !name.nil? && name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -185,7 +194,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] support_email Value to be assigned
     def support_email=(support_email)
-      if support_email.to_s.size > 5000
+      if !support_email.nil? && support_email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"support_email\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -195,7 +204,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] support_phone Value to be assigned
     def support_phone=(support_phone)
-      if support_phone.to_s.size > 5000
+      if !support_phone.nil? && support_phone.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"support_phone\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -205,7 +214,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] support_url Value to be assigned
     def support_url=(support_url)
-      if support_url.to_s.size > 5000
+      if !support_url.nil? && support_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"support_url\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -215,26 +224,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
     def url=(url)
-      if url.to_s.size > 5000
+      if !url.nil? && url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
       @url = url
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        mcc == o.mcc &&
-        name == o.name &&
-        product_description == o.product_description &&
-        support_address == o.support_address &&
-        support_email == o.support_email &&
-        support_phone == o.support_phone &&
-        support_url == o.support_url &&
-        url == o.url
     end
 
     # @see the `==` method
@@ -243,8 +237,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@mcc, @name, @product_description, @support_address, @support_email, @support_phone, @support_url, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@mcc, @name, @product_description, @support_address, @support_email, @support_phone, @support_url, @url)
   end
 end

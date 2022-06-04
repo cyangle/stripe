@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Customer data associated with the transfer.
     @[JSON::Field(key: "customer_data", type: String?, presence: true, ignore_serialize: customer_data.nil? && !customer_data_present?)]
     getter customer_data : String?
@@ -49,7 +50,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @customer_data : String? = nil, @fingerprint : String? = nil, @last4 : String? = nil, @routing_number : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @customer_data : String? = nil,
+      @fingerprint : String? = nil,
+      @last4 : String? = nil,
+      @routing_number : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -83,6 +91,7 @@ module Stripe
       return false if !@fingerprint.nil? && @fingerprint.to_s.size > 5000
       return false if !@last4.nil? && @last4.to_s.size > 5000
       return false if !@routing_number.nil? && @routing_number.to_s.size > 5000
+
       true
     end
 
@@ -126,25 +135,16 @@ module Stripe
       @routing_number = routing_number
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        customer_data == o.customer_data &&
-        fingerprint == o.fingerprint &&
-        last4 == o.last4 &&
-        routing_number == o.routing_number
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@customer_data, @fingerprint, @last4, @routing_number)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@customer_data, @fingerprint, @last4, @routing_number)
   end
 end

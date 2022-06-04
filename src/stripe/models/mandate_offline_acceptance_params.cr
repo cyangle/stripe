@@ -12,20 +12,23 @@ require "time"
 require "log"
 
 module Stripe
-  # The parameters required to store a mandate accepted offline. Should only be set if `mandate[type]` is `offline`
   @[JSON::Serializable::Options(emit_nulls: true)]
   class MandateOfflineAcceptanceParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # An email to contact you with if a copy of the mandate is requested, required if `type` is `offline`.
+
     @[JSON::Field(key: "contact_email", type: String)]
     property contact_email : String
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @contact_email : String)
+    def initialize(
+      *,
+      # Required properties
+      @contact_email : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -42,22 +45,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        contact_email == o.contact_email
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@contact_email)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@contact_email)
   end
 end

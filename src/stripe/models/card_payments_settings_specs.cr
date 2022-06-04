@@ -12,20 +12,19 @@ require "time"
 require "log"
 
 module Stripe
-  # Settings specific to card charging on the account.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class CardPaymentsSettingsSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "decline_on", type: DeclineChargeOnSpecs?, presence: true, ignore_serialize: decline_on.nil? && !decline_on_present?)]
     property decline_on : DeclineChargeOnSpecs?
 
     @[JSON::Field(ignore: true)]
     property? decline_on_present : Bool = false
 
-    # The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge. `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic portion.
     @[JSON::Field(key: "statement_descriptor_prefix", type: String?, presence: true, ignore_serialize: statement_descriptor_prefix.nil? && !statement_descriptor_prefix_present?)]
     getter statement_descriptor_prefix : String?
 
@@ -34,7 +33,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @decline_on : DeclineChargeOnSpecs? = nil, @statement_descriptor_prefix : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @decline_on : DeclineChargeOnSpecs? = nil,
+      @statement_descriptor_prefix : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -53,6 +57,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@statement_descriptor_prefix.nil? && @statement_descriptor_prefix.to_s.size > 10
+
       true
     end
 
@@ -66,23 +71,16 @@ module Stripe
       @statement_descriptor_prefix = statement_descriptor_prefix
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        decline_on == o.decline_on &&
-        statement_descriptor_prefix == o.statement_descriptor_prefix
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@decline_on, @statement_descriptor_prefix)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@decline_on, @statement_descriptor_prefix)
   end
 end

@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
@@ -45,14 +46,15 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? discounts_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? expand_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -70,8 +72,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? price_present : Bool = false
 
-    @[JSON::Field(key: "price_data", type: OneTimePriceData?, presence: true, ignore_serialize: price_data.nil? && !price_data_present?)]
-    property price_data : OneTimePriceData?
+    @[JSON::Field(key: "price_data", type: OneTimePriceData1?, presence: true, ignore_serialize: price_data.nil? && !price_data_present?)]
+    property price_data : OneTimePriceData1?
 
     @[JSON::Field(ignore: true)]
     property? price_data_present : Bool = false
@@ -105,7 +107,23 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64? = nil, @description : String? = nil, @discountable : Bool? = nil, @discounts : PostInvoiceitemsInvoiceitemRequestDiscounts? = nil, @expand : Array(String)? = nil, @metadata : IndividualSpecsMetadata? = nil, @period : Period1? = nil, @price : String? = nil, @price_data : OneTimePriceData? = nil, @quantity : Int64? = nil, @tax_rates : PostInvoiceitemsInvoiceitemRequestTaxRates? = nil, @unit_amount : Int64? = nil, @unit_amount_decimal : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @amount : Int64? = nil,
+      @description : String? = nil,
+      @discountable : Bool? = nil,
+      @discounts : PostInvoiceitemsInvoiceitemRequestDiscounts? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @period : Period1? = nil,
+      @price : String? = nil,
+      @price_data : OneTimePriceData1? = nil,
+      @quantity : Int64? = nil,
+      @tax_rates : PostInvoiceitemsInvoiceitemRequestTaxRates? = nil,
+      @unit_amount : Int64? = nil,
+      @unit_amount_decimal : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -129,6 +147,7 @@ module Stripe
     def valid?
       return false if !@description.nil? && @description.to_s.size > 5000
       return false if !@price.nil? && @price.to_s.size > 5000
+
       true
     end
 
@@ -152,34 +171,16 @@ module Stripe
       @price = price
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        description == o.description &&
-        discountable == o.discountable &&
-        discounts == o.discounts &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        period == o.period &&
-        price == o.price &&
-        price_data == o.price_data &&
-        quantity == o.quantity &&
-        tax_rates == o.tax_rates &&
-        unit_amount == o.unit_amount &&
-        unit_amount_decimal == o.unit_amount_decimal
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @description, @discountable, @discounts, @expand, @metadata, @period, @price, @price_data, @quantity, @tax_rates, @unit_amount, @unit_amount_decimal)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @description, @discountable, @discounts, @expand, @metadata, @period, @price, @price_data, @quantity, @tax_rates, @unit_amount, @unit_amount_decimal)
   end
 end

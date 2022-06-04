@@ -12,35 +12,31 @@ require "time"
 require "log"
 
 module Stripe
-  # Settings used to apply the account's branding to email receipts, invoices, Checkout, and other products.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class BrandingSettingsSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the account. Must be square and at least 128px x 128px.
+
     @[JSON::Field(key: "icon", type: String?, presence: true, ignore_serialize: icon.nil? && !icon_present?)]
     getter icon : String?
 
     @[JSON::Field(ignore: true)]
     property? icon_present : Bool = false
 
-    # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the account that will be used in Checkout instead of the icon and without the account's name next to it if provided. Must be at least 128px x 128px.
     @[JSON::Field(key: "logo", type: String?, presence: true, ignore_serialize: logo.nil? && !logo_present?)]
     getter logo : String?
 
     @[JSON::Field(ignore: true)]
     property? logo_present : Bool = false
 
-    # A CSS hex color value representing the primary branding color for this account.
     @[JSON::Field(key: "primary_color", type: String?, presence: true, ignore_serialize: primary_color.nil? && !primary_color_present?)]
     getter primary_color : String?
 
     @[JSON::Field(ignore: true)]
     property? primary_color_present : Bool = false
 
-    # A CSS hex color value representing the secondary branding color for this account.
     @[JSON::Field(key: "secondary_color", type: String?, presence: true, ignore_serialize: secondary_color.nil? && !secondary_color_present?)]
     getter secondary_color : String?
 
@@ -49,7 +45,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @icon : String? = nil, @logo : String? = nil, @primary_color : String? = nil, @secondary_color : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @icon : String? = nil,
+      @logo : String? = nil,
+      @primary_color : String? = nil,
+      @secondary_color : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -83,6 +86,7 @@ module Stripe
       return false if !@logo.nil? && @logo.to_s.size > 5000
       return false if !@primary_color.nil? && @primary_color.to_s.size > 5000
       return false if !@secondary_color.nil? && @secondary_color.to_s.size > 5000
+
       true
     end
 
@@ -126,25 +130,16 @@ module Stripe
       @secondary_color = secondary_color
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        icon == o.icon &&
-        logo == o.logo &&
-        primary_color == o.primary_color &&
-        secondary_color == o.secondary_color
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@icon, @logo, @primary_color, @secondary_color)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@icon, @logo, @primary_color, @secondary_color)
   end
 end

@@ -12,14 +12,13 @@ require "time"
 require "log"
 
 module Stripe
-  # Configuration when `type=hosted_confirmation`.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class AfterCompletionConfirmationPageParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # A custom message to display to the customer after the purchase is complete.
+
     @[JSON::Field(key: "custom_message", type: String?, presence: true, ignore_serialize: custom_message.nil? && !custom_message_present?)]
     getter custom_message : String?
 
@@ -28,7 +27,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @custom_message : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @custom_message : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -47,6 +50,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@custom_message.nil? && @custom_message.to_s.size > 500
+
       true
     end
 
@@ -60,22 +64,16 @@ module Stripe
       @custom_message = custom_message
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        custom_message == o.custom_message
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@custom_message)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@custom_message)
   end
 end

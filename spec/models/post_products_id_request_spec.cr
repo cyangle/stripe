@@ -26,24 +26,6 @@ describe Stripe::PostProductsIdRequest do
     end
   end
 
-  describe "test attribute 'attributes'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'caption'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'deactivate_on'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'default_price'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

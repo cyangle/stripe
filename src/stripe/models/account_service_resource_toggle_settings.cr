@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Whether the FinancialAccount should have the Feature.
     @[JSON::Field(key: "requested", type: Bool)]
     property requested : Bool
@@ -35,7 +36,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @requested : Bool, @status : String, @status_details : Array(AccountServiceResourceStatusDetails))
+    def initialize(
+      *,
+      # Required properties
+      @requested : Bool,
+      @status : String,
+      @status_details : Array(AccountServiceResourceStatusDetails)
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -52,6 +59,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
       true
     end
 
@@ -62,24 +70,16 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        requested == o.requested &&
-        status == o.status &&
-        status_details == o.status_details
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@requested, @status, @status_details)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@requested, @status, @status_details)
   end
 end

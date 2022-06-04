@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The types of customer updates that are supported. When empty, customers are not updateable.
     @[JSON::Field(key: "allowed_updates", type: Array(String))]
     getter allowed_updates : Array(String)
@@ -31,13 +32,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @allowed_updates : Array(String), @enabled : Bool)
+    def initialize(
+      *,
+      # Required properties
+      @allowed_updates : Array(String),
+      @enabled : Bool
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_ALLOWED_UPDATES.error_message) unless ENUM_VALIDATOR_FOR_ALLOWED_UPDATES.all_valid?(@allowed_updates, false)
 
       invalid_properties
@@ -47,6 +54,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_ALLOWED_UPDATES.all_valid?(@allowed_updates, false)
+
       true
     end
 
@@ -57,23 +65,16 @@ module Stripe
       @allowed_updates = allowed_updates
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        allowed_updates == o.allowed_updates &&
-        enabled == o.enabled
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@allowed_updates, @enabled)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@allowed_updates, @enabled)
   end
 end

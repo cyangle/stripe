@@ -12,14 +12,13 @@ require "time"
 require "log"
 
 module Stripe
-  # Settings specific to the account's payouts.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PayoutSettingsSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # A Boolean indicating whether Stripe should try to reclaim negative balances from an attached bank account. For details, see [Understanding Connect Account Balances](https://stripe.com/docs/connect/account-balances).
+
     @[JSON::Field(key: "debit_negative_balances", type: Bool?, presence: true, ignore_serialize: debit_negative_balances.nil? && !debit_negative_balances_present?)]
     property debit_negative_balances : Bool?
 
@@ -32,7 +31,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? schedule_present : Bool = false
 
-    # The text that appears on the bank account statement for payouts. If not set, this defaults to the platform's bank descriptor as set in the Dashboard.
     @[JSON::Field(key: "statement_descriptor", type: String?, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
     getter statement_descriptor : String?
 
@@ -41,7 +39,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @debit_negative_balances : Bool? = nil, @schedule : TransferScheduleSpecs? = nil, @statement_descriptor : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @debit_negative_balances : Bool? = nil,
+      @schedule : TransferScheduleSpecs? = nil,
+      @statement_descriptor : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -60,6 +64,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
+
       true
     end
 
@@ -73,24 +78,16 @@ module Stripe
       @statement_descriptor = statement_descriptor
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        debit_negative_balances == o.debit_negative_balances &&
-        schedule == o.schedule &&
-        statement_descriptor == o.statement_descriptor
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@debit_negative_balances, @schedule, @statement_descriptor)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@debit_negative_balances, @schedule, @statement_descriptor)
   end
 end

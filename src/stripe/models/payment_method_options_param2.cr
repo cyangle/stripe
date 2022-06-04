@@ -12,23 +12,35 @@ require "time"
 require "log"
 
 module Stripe
-  # contains details about the Konbini payment method options.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodOptionsParam2
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The number of calendar days (between 1 and 60) after which Konbini payment instructions will expire. For example, if a PaymentIntent is confirmed with Konbini and `expires_after_days` set to 2 on Monday JST, the instructions will expire on Wednesday 23:59:59 JST. Defaults to 3 days.
-    @[JSON::Field(key: "expires_after_days", type: Int64?, presence: true, ignore_serialize: expires_after_days.nil? && !expires_after_days_present?)]
-    property expires_after_days : Int64?
+
+    @[JSON::Field(key: "financial_connections", type: LinkedAccountOptionsParam?, presence: true, ignore_serialize: financial_connections.nil? && !financial_connections_present?)]
+    property financial_connections : LinkedAccountOptionsParam?
 
     @[JSON::Field(ignore: true)]
-    property? expires_after_days_present : Bool = false
+    property? financial_connections_present : Bool = false
+
+    @[JSON::Field(key: "verification_method", type: String?, presence: true, ignore_serialize: verification_method.nil? && !verification_method_present?)]
+    getter verification_method : String?
+
+    @[JSON::Field(ignore: true)]
+    property? verification_method_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_VERIFICATION_METHOD = EnumValidator.new("verification_method", "String", ["automatic", "instant"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @expires_after_days : Int64? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @financial_connections : LinkedAccountOptionsParam? = nil,
+      @verification_method : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -36,21 +48,24 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
+      invalid_properties.push(ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
+
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        expires_after_days == o.expires_after_days
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] verification_method Object to be assigned
+    def verification_method=(verification_method)
+      ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid!(verification_method)
+      @verification_method = verification_method
     end
 
     # @see the `==` method
@@ -59,8 +74,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@expires_after_days)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@financial_connections, @verification_method)
   end
 end

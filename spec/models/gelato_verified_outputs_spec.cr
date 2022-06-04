@@ -47,7 +47,7 @@ describe Stripe::GelatoVerifiedOutputs do
   describe "test attribute 'id_number_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["br_cpf", "sg_nric", "us_ssn", "null"])
+      # validator = EnumValidator.new("String", ["br_cpf", "sg_nric", "us_ssn"])
       # validator.allowable_values.each do |value|
       #   expect { instance.id_number_type = value }.not_to raise_error
       # end

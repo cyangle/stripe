@@ -44,6 +44,12 @@ describe Stripe::PostChargesRequest do
     end
   end
 
+  describe "test attribute 'card'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'currency'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether the configuration is active and can be used to create portal sessions.
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
@@ -37,6 +38,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? default_return_url_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -49,15 +51,24 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? features_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool? = nil, @business_profile : BusinessProfileUpdateParam? = nil, @default_return_url : PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil, @expand : Array(String)? = nil, @features : FeaturesUpdatingParam? = nil, @metadata : IndividualSpecsMetadata? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @active : Bool? = nil,
+      @business_profile : BusinessProfileUpdateParam? = nil,
+      @default_return_url : PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
+      @expand : Array(String)? = nil,
+      @features : FeaturesUpdatingParam? = nil,
+      @metadata : PostAccountRequestMetadata? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -74,27 +85,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        business_profile == o.business_profile &&
-        default_return_url == o.default_return_url &&
-        expand == o.expand &&
-        features == o.features &&
-        metadata == o.metadata
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @business_profile, @default_return_url, @expand, @features, @metadata)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @business_profile, @default_return_url, @expand, @features, @metadata)
   end
 end

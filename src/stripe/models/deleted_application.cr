@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Always true for a deleted object
     @[JSON::Field(key: "deleted", type: Bool)]
     getter deleted : Bool
@@ -29,6 +30,14 @@ module Stripe
     @[JSON::Field(key: "id", type: String)]
     getter id : String
 
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
+
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["application"])
+
+    # Optional properties
+
     # The name of the application.
     @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
     getter name : String?
@@ -36,32 +45,35 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
 
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["application"])
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @deleted : Bool, @id : String, @name : String?, @object : String)
+    def initialize(
+      *,
+      # Required properties
+      @deleted : Bool,
+      @id : String,
+      @object : String,
+      # Optional properties
+      @name : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_DELETED.error_message) unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @name.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      if !@name.nil? && @name.to_s.size > 5000
         invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       invalid_properties
     end
@@ -71,8 +83,9 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
       return false if @id.to_s.size > 5000
-      return false if @name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if !@name.nil? && @name.to_s.size > 5000
+
       true
     end
 
@@ -93,16 +106,6 @@ module Stripe
       @id = id
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @name = name
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
     def object=(object)
@@ -110,15 +113,14 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        deleted == o.deleted &&
-        id == o.id &&
-        name == o.name &&
-        object == o.object
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if !name.nil? && name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @name = name
     end
 
     # @see the `==` method
@@ -127,8 +129,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@deleted, @id, @name, @object)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@deleted, @id, @object, @name)
   end
 end

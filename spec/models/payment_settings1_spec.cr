@@ -31,14 +31,4 @@ describe Stripe::PaymentSettings1 do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
-
-  describe "test attribute 'save_default_payment_method'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["off", "on_subscription"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.save_default_payment_method = value }.not_to raise_error
-      # end
-    end
-  end
 end

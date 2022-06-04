@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The types of subscription updates that are supported for items listed in the `products` attribute. When empty, subscriptions are not updateable.
     @[JSON::Field(key: "default_allowed_updates", type: Array(String))]
     getter default_allowed_updates : Array(String)
@@ -29,6 +30,14 @@ module Stripe
     @[JSON::Field(key: "enabled", type: Bool)]
     property enabled : Bool
 
+    # Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.
+    @[JSON::Field(key: "proration_behavior", type: String)]
+    getter proration_behavior : String
+
+    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
+
+    # Optional properties
+
     # The list of products that support subscription updates.
     @[JSON::Field(key: "products", type: Array(PortalSubscriptionUpdateProduct)?, presence: true, ignore_serialize: products.nil? && !products_present?)]
     property products : Array(PortalSubscriptionUpdateProduct)?
@@ -36,21 +45,24 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? products_present : Bool = false
 
-    # Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.
-    @[JSON::Field(key: "proration_behavior", type: String)]
-    getter proration_behavior : String
-
-    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @default_allowed_updates : Array(String), @enabled : Bool, @products : Array(PortalSubscriptionUpdateProduct)?, @proration_behavior : String)
+    def initialize(
+      *,
+      # Required properties
+      @default_allowed_updates : Array(String),
+      @enabled : Bool,
+      @proration_behavior : String,
+      # Optional properties
+      @products : Array(PortalSubscriptionUpdateProduct)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_DEFAULT_ALLOWED_UPDATES.error_message) unless ENUM_VALIDATOR_FOR_DEFAULT_ALLOWED_UPDATES.all_valid?(@default_allowed_updates, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior, false)
@@ -63,6 +75,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_DEFAULT_ALLOWED_UPDATES.all_valid?(@default_allowed_updates, false)
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior, false)
+
       true
     end
 
@@ -80,25 +93,16 @@ module Stripe
       @proration_behavior = proration_behavior
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        default_allowed_updates == o.default_allowed_updates &&
-        enabled == o.enabled &&
-        products == o.products &&
-        proration_behavior == o.proration_behavior
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@default_allowed_updates, @enabled, @products, @proration_behavior)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@default_allowed_updates, @enabled, @proration_behavior, @products)
   end
 end

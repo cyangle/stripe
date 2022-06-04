@@ -19,21 +19,19 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Whether the person is a director of the account's legal entity. Directors are typically members of the governing board of the company, or responsible for ensuring the company meets its regulatory obligations.
+
     @[JSON::Field(key: "director", type: Bool?, presence: true, ignore_serialize: director.nil? && !director_present?)]
     property director : Bool?
 
     @[JSON::Field(ignore: true)]
     property? director_present : Bool = false
 
-    # Whether the person has significant responsibility to control, manage, or direct the organization.
     @[JSON::Field(key: "executive", type: Bool?, presence: true, ignore_serialize: executive.nil? && !executive_present?)]
     property executive : Bool?
 
     @[JSON::Field(ignore: true)]
     property? executive_present : Bool = false
 
-    # Whether the person is an owner of the account’s legal entity.
     @[JSON::Field(key: "owner", type: Bool?, presence: true, ignore_serialize: owner.nil? && !owner_present?)]
     property owner : Bool?
 
@@ -46,14 +44,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? percent_ownership_present : Bool = false
 
-    # Whether the person is authorized as the primary representative of the account. This is the person nominated by the business to provide information about themselves, and general information about the account. There can only be one representative at any given time. At the time the account is created, this person should be set to the person responsible for opening the account.
     @[JSON::Field(key: "representative", type: Bool?, presence: true, ignore_serialize: representative.nil? && !representative_present?)]
     property representative : Bool?
 
     @[JSON::Field(ignore: true)]
     property? representative_present : Bool = false
 
-    # The person's title (e.g., CEO, Support Engineer).
     @[JSON::Field(key: "title", type: String?, presence: true, ignore_serialize: title.nil? && !title_present?)]
     getter title : String?
 
@@ -62,7 +58,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @director : Bool? = nil, @executive : Bool? = nil, @owner : Bool? = nil, @percent_ownership : RelationshipSpecsPercentOwnership? = nil, @representative : Bool? = nil, @title : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @director : Bool? = nil,
+      @executive : Bool? = nil,
+      @owner : Bool? = nil,
+      @percent_ownership : RelationshipSpecsPercentOwnership? = nil,
+      @representative : Bool? = nil,
+      @title : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -81,6 +86,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@title.nil? && @title.to_s.size > 5000
+
       true
     end
 
@@ -94,27 +100,16 @@ module Stripe
       @title = title
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        director == o.director &&
-        executive == o.executive &&
-        owner == o.owner &&
-        percent_ownership == o.percent_ownership &&
-        representative == o.representative &&
-        title == o.title
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@director, @executive, @owner, @percent_ownership, @representative, @title)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@director, @executive, @owner, @percent_ownership, @representative, @title)
   end
 end

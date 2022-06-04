@@ -50,12 +50,6 @@ describe Stripe::PostPricesPriceRequest do
     end
   end
 
-  describe "test attribute 'recurring'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'tax_behavior'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

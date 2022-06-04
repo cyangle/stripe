@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The status of the Canadian pre-authorized debits payments capability of the account, or whether the account can directly process Canadian pre-authorized debits charges.
     @[JSON::Field(key: "acss_debit_payments", type: String?, presence: true, ignore_serialize: acss_debit_payments.nil? && !acss_debit_payments_present?)]
     getter acss_debit_payments : String?
@@ -300,13 +301,48 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @acss_debit_payments : String? = nil, @affirm_payments : String? = nil, @afterpay_clearpay_payments : String? = nil, @au_becs_debit_payments : String? = nil, @bacs_debit_payments : String? = nil, @bancontact_payments : String? = nil, @bank_transfer_payments : String? = nil, @boleto_payments : String? = nil, @card_issuing : String? = nil, @card_payments : String? = nil, @cartes_bancaires_payments : String? = nil, @eps_payments : String? = nil, @fpx_payments : String? = nil, @giropay_payments : String? = nil, @grabpay_payments : String? = nil, @ideal_payments : String? = nil, @jcb_payments : String? = nil, @klarna_payments : String? = nil, @konbini_payments : String? = nil, @legacy_payments : String? = nil, @link_payments : String? = nil, @oxxo_payments : String? = nil, @p24_payments : String? = nil, @paynow_payments : String? = nil, @sepa_debit_payments : String? = nil, @sofort_payments : String? = nil, @tax_reporting_us_1099_k : String? = nil, @tax_reporting_us_1099_misc : String? = nil, @transfers : String? = nil, @treasury : String? = nil, @us_bank_account_ach_payments : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @acss_debit_payments : String? = nil,
+      @affirm_payments : String? = nil,
+      @afterpay_clearpay_payments : String? = nil,
+      @au_becs_debit_payments : String? = nil,
+      @bacs_debit_payments : String? = nil,
+      @bancontact_payments : String? = nil,
+      @bank_transfer_payments : String? = nil,
+      @boleto_payments : String? = nil,
+      @card_issuing : String? = nil,
+      @card_payments : String? = nil,
+      @cartes_bancaires_payments : String? = nil,
+      @eps_payments : String? = nil,
+      @fpx_payments : String? = nil,
+      @giropay_payments : String? = nil,
+      @grabpay_payments : String? = nil,
+      @ideal_payments : String? = nil,
+      @jcb_payments : String? = nil,
+      @klarna_payments : String? = nil,
+      @konbini_payments : String? = nil,
+      @legacy_payments : String? = nil,
+      @link_payments : String? = nil,
+      @oxxo_payments : String? = nil,
+      @p24_payments : String? = nil,
+      @paynow_payments : String? = nil,
+      @sepa_debit_payments : String? = nil,
+      @sofort_payments : String? = nil,
+      @tax_reporting_us_1099_k : String? = nil,
+      @tax_reporting_us_1099_misc : String? = nil,
+      @transfers : String? = nil,
+      @treasury : String? = nil,
+      @us_bank_account_ach_payments : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS.valid?(@acss_debit_payments)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_AFFIRM_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_AFFIRM_PAYMENTS.valid?(@affirm_payments)
@@ -406,6 +442,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_TRANSFERS.valid?(@transfers)
       return false unless ENUM_VALIDATOR_FOR_TREASURY.valid?(@treasury)
       return false unless ENUM_VALIDATOR_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS.valid?(@us_bank_account_ach_payments)
+
       true
     end
 
@@ -626,52 +663,16 @@ module Stripe
       @us_bank_account_ach_payments = us_bank_account_ach_payments
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit_payments == o.acss_debit_payments &&
-        affirm_payments == o.affirm_payments &&
-        afterpay_clearpay_payments == o.afterpay_clearpay_payments &&
-        au_becs_debit_payments == o.au_becs_debit_payments &&
-        bacs_debit_payments == o.bacs_debit_payments &&
-        bancontact_payments == o.bancontact_payments &&
-        bank_transfer_payments == o.bank_transfer_payments &&
-        boleto_payments == o.boleto_payments &&
-        card_issuing == o.card_issuing &&
-        card_payments == o.card_payments &&
-        cartes_bancaires_payments == o.cartes_bancaires_payments &&
-        eps_payments == o.eps_payments &&
-        fpx_payments == o.fpx_payments &&
-        giropay_payments == o.giropay_payments &&
-        grabpay_payments == o.grabpay_payments &&
-        ideal_payments == o.ideal_payments &&
-        jcb_payments == o.jcb_payments &&
-        klarna_payments == o.klarna_payments &&
-        konbini_payments == o.konbini_payments &&
-        legacy_payments == o.legacy_payments &&
-        link_payments == o.link_payments &&
-        oxxo_payments == o.oxxo_payments &&
-        p24_payments == o.p24_payments &&
-        paynow_payments == o.paynow_payments &&
-        sepa_debit_payments == o.sepa_debit_payments &&
-        sofort_payments == o.sofort_payments &&
-        tax_reporting_us_1099_k == o.tax_reporting_us_1099_k &&
-        tax_reporting_us_1099_misc == o.tax_reporting_us_1099_misc &&
-        transfers == o.transfers &&
-        treasury == o.treasury &&
-        us_bank_account_ach_payments == o.us_bank_account_ach_payments
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit_payments, @affirm_payments, @afterpay_clearpay_payments, @au_becs_debit_payments, @bacs_debit_payments, @bancontact_payments, @bank_transfer_payments, @boleto_payments, @card_issuing, @card_payments, @cartes_bancaires_payments, @eps_payments, @fpx_payments, @giropay_payments, @grabpay_payments, @ideal_payments, @jcb_payments, @klarna_payments, @konbini_payments, @legacy_payments, @link_payments, @oxxo_payments, @p24_payments, @paynow_payments, @sepa_debit_payments, @sofort_payments, @tax_reporting_us_1099_k, @tax_reporting_us_1099_misc, @transfers, @treasury, @us_bank_account_ach_payments)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@acss_debit_payments, @affirm_payments, @afterpay_clearpay_payments, @au_becs_debit_payments, @bacs_debit_payments, @bancontact_payments, @bank_transfer_payments, @boleto_payments, @card_issuing, @card_payments, @cartes_bancaires_payments, @eps_payments, @fpx_payments, @giropay_payments, @grabpay_payments, @ideal_payments, @jcb_payments, @klarna_payments, @konbini_payments, @legacy_payments, @link_payments, @oxxo_payments, @p24_payments, @paynow_payments, @sepa_debit_payments, @sofort_payments, @tax_reporting_us_1099_k, @tax_reporting_us_1099_misc, @transfers, @treasury, @us_bank_account_ach_payments)
   end
 end

@@ -18,14 +18,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The ID of an existing line item on the quote.
+
     @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
     getter id : String?
 
     @[JSON::Field(ignore: true)]
     property? id_present : Bool = false
 
-    # The ID of the price object. One of `price` or `price_data` is required.
     @[JSON::Field(key: "price", type: String?, presence: true, ignore_serialize: price.nil? && !price_present?)]
     getter price : String?
 
@@ -38,22 +37,29 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? price_data_present : Bool = false
 
-    # The quantity of the line item.
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
     property quantity : Int64?
 
     @[JSON::Field(ignore: true)]
     property? quantity_present : Bool = false
 
-    @[JSON::Field(key: "tax_rates", type: LineItemCreateParamsTaxRates?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
-    property tax_rates : LineItemCreateParamsTaxRates?
+    @[JSON::Field(key: "tax_rates", type: CreditNoteLineItemParamsTaxRates?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
+    property tax_rates : CreditNoteLineItemParamsTaxRates?
 
     @[JSON::Field(ignore: true)]
     property? tax_rates_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @id : String? = nil, @price : String? = nil, @price_data : PriceData? = nil, @quantity : Int64? = nil, @tax_rates : LineItemCreateParamsTaxRates? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @id : String? = nil,
+      @price : String? = nil,
+      @price_data : PriceData? = nil,
+      @quantity : Int64? = nil,
+      @tax_rates : CreditNoteLineItemParamsTaxRates? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -77,6 +83,7 @@ module Stripe
     def valid?
       return false if !@id.nil? && @id.to_s.size > 5000
       return false if !@price.nil? && @price.to_s.size > 5000
+
       true
     end
 
@@ -100,26 +107,16 @@ module Stripe
       @price = price
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        id == o.id &&
-        price == o.price &&
-        price_data == o.price_data &&
-        quantity == o.quantity &&
-        tax_rates == o.tax_rates
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@id, @price, @price_data, @quantity, @tax_rates)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@id, @price, @price_data, @quantity, @tax_rates)
   end
 end

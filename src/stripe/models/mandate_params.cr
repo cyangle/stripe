@@ -19,26 +19,25 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "acceptance", type: MandateAcceptanceParams?, presence: true, ignore_serialize: acceptance.nil? && !acceptance_present?)]
     property acceptance : MandateAcceptanceParams?
 
     @[JSON::Field(ignore: true)]
     property? acceptance_present : Bool = false
 
-    @[JSON::Field(key: "amount", type: MandateParamsAmount?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
-    property amount : MandateParamsAmount?
+    @[JSON::Field(key: "amount", type: UpdateParams1ApplicationFeeAmount?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
+    property amount : UpdateParams1ApplicationFeeAmount?
 
     @[JSON::Field(ignore: true)]
     property? amount_present : Bool = false
 
-    # The currency specified by the mandate. (Must match `currency` of the source)
     @[JSON::Field(key: "currency", type: String?, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
     property currency : String?
 
     @[JSON::Field(ignore: true)]
     property? currency_present : Bool = false
 
-    # The interval of debits permitted by the mandate. Either `one_time` (just permitting a single debit), `scheduled` (with debits on an agreed schedule or for clearly-defined events), or `variable`(for debits with any frequency)
     @[JSON::Field(key: "interval", type: String?, presence: true, ignore_serialize: interval.nil? && !interval_present?)]
     getter interval : String?
 
@@ -47,7 +46,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["one_time", "scheduled", "variable"])
 
-    # The method Stripe should use to notify the customer of upcoming debit instructions and/or mandate confirmation as required by the underlying debit network. Either `email` (an email is sent directly to the customer), `manual` (a `source.mandate_notification` event is sent to your webhooks endpoint and you should handle the notification) or `none` (the underlying debit network does not require any notification).
     @[JSON::Field(key: "notification_method", type: String?, presence: true, ignore_serialize: notification_method.nil? && !notification_method_present?)]
     getter notification_method : String?
 
@@ -58,7 +56,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @acceptance : MandateAcceptanceParams? = nil, @amount : MandateParamsAmount? = nil, @currency : String? = nil, @interval : String? = nil, @notification_method : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @acceptance : MandateAcceptanceParams? = nil,
+      @amount : UpdateParams1ApplicationFeeAmount? = nil,
+      @currency : String? = nil,
+      @interval : String? = nil,
+      @notification_method : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -88,6 +94,7 @@ module Stripe
       return false if !@interval.nil? && @interval.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD.valid?(@notification_method)
       return false if !@notification_method.nil? && @notification_method.to_s.size > 5000
+
       true
     end
 
@@ -105,26 +112,16 @@ module Stripe
       @notification_method = notification_method
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acceptance == o.acceptance &&
-        amount == o.amount &&
-        currency == o.currency &&
-        interval == o.interval &&
-        notification_method == o.notification_method
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acceptance, @amount, @currency, @interval, @notification_method)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@acceptance, @amount, @currency, @interval, @notification_method)
   end
 end

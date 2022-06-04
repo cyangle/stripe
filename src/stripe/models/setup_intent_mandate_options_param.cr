@@ -12,64 +12,55 @@ require "time"
 require "log"
 
 module Stripe
-  # Configuration options for setting up an eMandate for cards issued in India.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SetupIntentMandateOptionsParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Amount to be charged for future payments.
+
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
 
-    # One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
     @[JSON::Field(key: "amount_type", type: String)]
     getter amount_type : String
 
     ENUM_VALIDATOR_FOR_AMOUNT_TYPE = EnumValidator.new("amount_type", "String", ["fixed", "maximum"])
 
-    # Currency in which future payments will be charged. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
 
-    # Specifies payment frequency. One of `day`, `week`, `month`, `year`, or `sporadic`.
     @[JSON::Field(key: "interval", type: String)]
     getter interval : String
 
     ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["day", "month", "sporadic", "week", "year"])
 
-    # Unique identifier for the mandate or subscription.
     @[JSON::Field(key: "reference", type: String)]
     getter reference : String
 
-    # Start date of the mandate or subscription. Start date should not be lesser than yesterday.
     @[JSON::Field(key: "start_date", type: Int64)]
     property start_date : Int64
 
     # Optional properties
-    # A description of the mandate or subscription that is meant to be displayed to the customer.
+
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String?
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
-    # End date of the mandate or subscription. If not provided, the mandate will be active until canceled. If provided, end date should be after start date.
     @[JSON::Field(key: "end_date", type: Int64?, presence: true, ignore_serialize: end_date.nil? && !end_date_present?)]
     property end_date : Int64?
 
     @[JSON::Field(ignore: true)]
     property? end_date_present : Bool = false
 
-    # The number of intervals between payments. For example, `interval=month` and `interval_count=3` indicates one payment every three months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks). This parameter is optional when `interval=sporadic`.
     @[JSON::Field(key: "interval_count", type: Int64?, presence: true, ignore_serialize: interval_count.nil? && !interval_count_present?)]
     property interval_count : Int64?
 
     @[JSON::Field(ignore: true)]
     property? interval_count_present : Bool = false
 
-    # Specifies the type of mandates supported. Possible values are `india`.
     @[JSON::Field(key: "supported_types", type: Array(String)?, presence: true, ignore_serialize: supported_types.nil? && !supported_types_present?)]
     getter supported_types : Array(String)?
 
@@ -80,7 +71,21 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @amount_type : String, @currency : String, @interval : String, @reference : String, @start_date : Int64, @description : String? = nil, @end_date : Int64? = nil, @interval_count : Int64? = nil, @supported_types : Array(String)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @amount_type : String,
+      @currency : String,
+      @interval : String,
+      @reference : String,
+      @start_date : Int64,
+      # Optional properties
+      @description : String? = nil,
+      @end_date : Int64? = nil,
+      @interval_count : Int64? = nil,
+      @supported_types : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -90,14 +95,14 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_AMOUNT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid?(@amount_type, false)
 
-      if !@description.nil? && @description.to_s.size > 200
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 200.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
 
       if @reference.to_s.size > 80
         invalid_properties.push("invalid value for \"reference\", the character length must be smaller than or equal to 80.")
+      end
+
+      if !@description.nil? && @description.to_s.size > 200
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 200.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_TYPES.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_TYPES.all_valid?(@supported_types)
@@ -109,10 +114,11 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid?(@amount_type, false)
-      return false if !@description.nil? && @description.to_s.size > 200
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
       return false if @reference.to_s.size > 80
+      return false if !@description.nil? && @description.to_s.size > 200
       return false unless ENUM_VALIDATOR_FOR_SUPPORTED_TYPES.all_valid?(@supported_types)
+
       true
     end
 
@@ -121,16 +127,6 @@ module Stripe
     def amount_type=(amount_type)
       ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid!(amount_type, false)
       @amount_type = amount_type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if !description.nil? && description.to_s.size > 200
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 200.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -150,28 +146,21 @@ module Stripe
       @reference = reference
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 200
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 200.")
+      end
+
+      @description = description
+    end
+
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported_types Object to be assigned
     def supported_types=(supported_types)
       ENUM_VALIDATOR_FOR_SUPPORTED_TYPES.all_valid!(supported_types)
       @supported_types = supported_types
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        amount_type == o.amount_type &&
-        currency == o.currency &&
-        description == o.description &&
-        end_date == o.end_date &&
-        interval == o.interval &&
-        interval_count == o.interval_count &&
-        reference == o.reference &&
-        start_date == o.start_date &&
-        supported_types == o.supported_types
     end
 
     # @see the `==` method
@@ -180,8 +169,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @amount_type, @currency, @description, @end_date, @interval, @interval_count, @reference, @start_date, @supported_types)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @amount_type, @currency, @interval, @reference, @start_date, @description, @end_date, @interval_count, @supported_types)
   end
 end

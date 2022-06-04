@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "address", type: PostCustomersRequestAddress?, presence: true, ignore_serialize: address.nil? && !address_present?)]
     property address : PostCustomersRequestAddress?
 
@@ -57,6 +58,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -76,8 +78,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? invoice_settings_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -109,6 +111,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? phone_present : Bool = false
 
+    # Customer's preferred languages, ordered by preference.
     @[JSON::Field(key: "preferred_locales", type: Array(String)?, presence: true, ignore_serialize: preferred_locales.nil? && !preferred_locales_present?)]
     property preferred_locales : Array(String)?
 
@@ -165,7 +168,32 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : PostCustomersRequestAddress? = nil, @balance : Int64? = nil, @cash_balance : CashBalanceParam? = nil, @coupon : String? = nil, @description : String? = nil, @email : String? = nil, @expand : Array(String)? = nil, @invoice_prefix : String? = nil, @invoice_settings : CustomerParam? = nil, @metadata : IndividualSpecsMetadata? = nil, @name : String? = nil, @next_invoice_sequence : Int64? = nil, @payment_method : String? = nil, @phone : String? = nil, @preferred_locales : Array(String)? = nil, @promotion_code : String? = nil, @shipping : PostCustomersRequestShipping? = nil, @source : String? = nil, @tax : TaxParam? = nil, @tax_exempt : String? = nil, @tax_id_data : Array(DataParams)? = nil, @test_clock : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @address : PostCustomersRequestAddress? = nil,
+      @balance : Int64? = nil,
+      @cash_balance : CashBalanceParam? = nil,
+      @coupon : String? = nil,
+      @description : String? = nil,
+      @email : String? = nil,
+      @expand : Array(String)? = nil,
+      @invoice_prefix : String? = nil,
+      @invoice_settings : CustomerParam? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @name : String? = nil,
+      @next_invoice_sequence : Int64? = nil,
+      @payment_method : String? = nil,
+      @phone : String? = nil,
+      @preferred_locales : Array(String)? = nil,
+      @promotion_code : String? = nil,
+      @shipping : PostCustomersRequestShipping? = nil,
+      @source : String? = nil,
+      @tax : TaxParam? = nil,
+      @tax_exempt : String? = nil,
+      @tax_id_data : Array(DataParams)? = nil,
+      @test_clock : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -232,6 +260,7 @@ module Stripe
       return false if !@source.nil? && @source.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
       return false if !@test_clock.nil? && @test_clock.to_s.size > 5000
+
       true
     end
 
@@ -342,43 +371,16 @@ module Stripe
       @test_clock = test_clock
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        balance == o.balance &&
-        cash_balance == o.cash_balance &&
-        coupon == o.coupon &&
-        description == o.description &&
-        email == o.email &&
-        expand == o.expand &&
-        invoice_prefix == o.invoice_prefix &&
-        invoice_settings == o.invoice_settings &&
-        metadata == o.metadata &&
-        name == o.name &&
-        next_invoice_sequence == o.next_invoice_sequence &&
-        payment_method == o.payment_method &&
-        phone == o.phone &&
-        preferred_locales == o.preferred_locales &&
-        promotion_code == o.promotion_code &&
-        shipping == o.shipping &&
-        source == o.source &&
-        tax == o.tax &&
-        tax_exempt == o.tax_exempt &&
-        tax_id_data == o.tax_id_data &&
-        test_clock == o.test_clock
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @balance, @cash_balance, @coupon, @description, @email, @expand, @invoice_prefix, @invoice_settings, @metadata, @name, @next_invoice_sequence, @payment_method, @phone, @preferred_locales, @promotion_code, @shipping, @source, @tax, @tax_exempt, @tax_id_data, @test_clock)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address, @balance, @cash_balance, @coupon, @description, @email, @expand, @invoice_prefix, @invoice_settings, @metadata, @name, @next_invoice_sequence, @payment_method, @phone, @preferred_locales, @promotion_code, @shipping, @source, @tax, @tax_exempt, @tax_id_data, @test_clock)
   end
 end

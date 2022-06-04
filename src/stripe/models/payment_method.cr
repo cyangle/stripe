@@ -19,18 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "billing_details", type: BillingDetails)]
     property billing_details : BillingDetails
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
     property created : Int64
-
-    @[JSON::Field(key: "customer", type: PaymentMethodCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
-    property customer : PaymentMethodCustomer?
-
-    @[JSON::Field(ignore: true)]
-    property? customer_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
@@ -39,13 +34,6 @@ module Stripe
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool)]
     property livemode : Bool
-
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)?
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String)]
@@ -60,6 +48,7 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "card_present", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "interac_present", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
 
     # Optional properties
+
     @[JSON::Field(key: "acss_debit", type: PaymentMethodAcssDebit?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
     property acss_debit : PaymentMethodAcssDebit?
 
@@ -119,11 +108,17 @@ module Stripe
     property? card_present : Bool = false
 
     #
-    @[JSON::Field(key: "card_present", type: JSON::Any, presence: true, ignore_serialize: card_present.nil? && !card_present_present?)]
+    @[JSON::Field(key: "card_present", type: JSON::Any, presence: true, ignore_serialize: card_present2.nil? && !card_present2_present?)]
     property card_present2 : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? card_present2_present : Bool = false
+
+    @[JSON::Field(key: "customer", type: PaymentMethodCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
+    property customer : PaymentMethodCustomer?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_present : Bool = false
 
     #
     @[JSON::Field(key: "customer_balance", type: JSON::Any, presence: true, ignore_serialize: customer_balance.nil? && !customer_balance_present?)]
@@ -190,6 +185,13 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? link_present : Bool = false
 
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
+
     #
     @[JSON::Field(key: "oxxo", type: JSON::Any, presence: true, ignore_serialize: oxxo.nil? && !oxxo_present?)]
     property oxxo : JSON::Any
@@ -243,7 +245,47 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing_details : BillingDetails, @created : Int64, @customer : PaymentMethodCustomer?, @id : String, @livemode : Bool, @metadata : Hash(String, String)?, @object : String, @_type : String, @acss_debit : PaymentMethodAcssDebit? = nil, @affirm : JSON::Any = nil, @afterpay_clearpay : JSON::Any = nil, @alipay : JSON::Any = nil, @au_becs_debit : PaymentMethodAuBecsDebit? = nil, @bacs_debit : PaymentMethodBacsDebit? = nil, @bancontact : JSON::Any = nil, @boleto : PaymentMethodBoleto? = nil, @card : PaymentMethodCard? = nil, @card_present2 : JSON::Any = nil, @customer_balance : JSON::Any = nil, @eps : PaymentMethodEps? = nil, @fpx : PaymentMethodFpx? = nil, @giropay : JSON::Any = nil, @grabpay : JSON::Any = nil, @ideal : PaymentMethodIdeal? = nil, @interac_present : JSON::Any = nil, @klarna : PaymentMethodKlarna? = nil, @konbini : JSON::Any = nil, @link : PaymentMethodLink? = nil, @oxxo : JSON::Any = nil, @p24 : PaymentMethodP24? = nil, @paynow : JSON::Any = nil, @radar_options : RadarRadarOptions? = nil, @sepa_debit : PaymentMethodSepaDebit? = nil, @sofort : PaymentMethodSofort? = nil, @us_bank_account : PaymentMethodUsBankAccount? = nil, @wechat_pay : JSON::Any = nil)
+    def initialize(
+      *,
+      # Required properties
+      @billing_details : BillingDetails,
+      @created : Int64,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @_type : String,
+      # Optional properties
+      @acss_debit : PaymentMethodAcssDebit? = nil,
+      @affirm : JSON::Any = nil,
+      @afterpay_clearpay : JSON::Any = nil,
+      @alipay : JSON::Any = nil,
+      @au_becs_debit : PaymentMethodAuBecsDebit? = nil,
+      @bacs_debit : PaymentMethodBacsDebit? = nil,
+      @bancontact : JSON::Any = nil,
+      @boleto : PaymentMethodBoleto? = nil,
+      @card : PaymentMethodCard? = nil,
+      @card_present2 : JSON::Any = nil,
+      @customer : PaymentMethodCustomer? = nil,
+      @customer_balance : JSON::Any = nil,
+      @eps : PaymentMethodEps? = nil,
+      @fpx : PaymentMethodFpx? = nil,
+      @giropay : JSON::Any = nil,
+      @grabpay : JSON::Any = nil,
+      @ideal : PaymentMethodIdeal? = nil,
+      @interac_present : JSON::Any = nil,
+      @klarna : PaymentMethodKlarna? = nil,
+      @konbini : JSON::Any = nil,
+      @link : PaymentMethodLink? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @oxxo : JSON::Any = nil,
+      @p24 : PaymentMethodP24? = nil,
+      @paynow : JSON::Any = nil,
+      @radar_options : RadarRadarOptions? = nil,
+      @sepa_debit : PaymentMethodSepaDebit? = nil,
+      @sofort : PaymentMethodSofort? = nil,
+      @us_bank_account : PaymentMethodUsBankAccount? = nil,
+      @wechat_pay : JSON::Any = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -268,6 +310,7 @@ module Stripe
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       true
     end
 
@@ -295,57 +338,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit == o.acss_debit &&
-        affirm == o.affirm &&
-        afterpay_clearpay == o.afterpay_clearpay &&
-        alipay == o.alipay &&
-        au_becs_debit == o.au_becs_debit &&
-        bacs_debit == o.bacs_debit &&
-        bancontact == o.bancontact &&
-        billing_details == o.billing_details &&
-        boleto == o.boleto &&
-        card == o.card &&
-        card_present2 == o.card_present2 &&
-        created == o.created &&
-        customer == o.customer &&
-        customer_balance == o.customer_balance &&
-        eps == o.eps &&
-        fpx == o.fpx &&
-        giropay == o.giropay &&
-        grabpay == o.grabpay &&
-        id == o.id &&
-        ideal == o.ideal &&
-        interac_present == o.interac_present &&
-        klarna == o.klarna &&
-        konbini == o.konbini &&
-        link == o.link &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        oxxo == o.oxxo &&
-        p24 == o.p24 &&
-        paynow == o.paynow &&
-        radar_options == o.radar_options &&
-        sepa_debit == o.sepa_debit &&
-        sofort == o.sofort &&
-        _type == o._type &&
-        us_bank_account == o.us_bank_account &&
-        wechat_pay == o.wechat_pay
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @billing_details, @boleto, @card, @card_present2, @created, @customer, @customer_balance, @eps, @fpx, @giropay, @grabpay, @id, @ideal, @interac_present, @klarna, @konbini, @link, @livemode, @metadata, @object, @oxxo, @p24, @paynow, @radar_options, @sepa_debit, @sofort, @_type, @us_bank_account, @wechat_pay)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@billing_details, @created, @id, @livemode, @object, @_type, @acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @boleto, @card, @card_present2, @customer, @customer_balance, @eps, @fpx, @giropay, @grabpay, @ideal, @interac_present, @klarna, @konbini, @link, @metadata, @oxxo, @p24, @paynow, @radar_options, @sepa_debit, @sofort, @us_bank_account, @wechat_pay)
   end
 end

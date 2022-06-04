@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The browser used in this browser session (e.g., `Chrome`).
     @[JSON::Field(key: "browser", type: String?, presence: true, ignore_serialize: browser.nil? && !browser_present?)]
     getter browser : String?
@@ -49,7 +50,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @browser : String?, @device : String?, @platform : String?, @version : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @browser : String? = nil,
+      @device : String? = nil,
+      @platform : String? = nil,
+      @version : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -57,19 +65,19 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @browser.to_s.size > 5000
+      if !@browser.nil? && @browser.to_s.size > 5000
         invalid_properties.push("invalid value for \"browser\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @device.to_s.size > 5000
+      if !@device.nil? && @device.to_s.size > 5000
         invalid_properties.push("invalid value for \"device\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @platform.to_s.size > 5000
+      if !@platform.nil? && @platform.to_s.size > 5000
         invalid_properties.push("invalid value for \"platform\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @version.to_s.size > 5000
+      if !@version.nil? && @version.to_s.size > 5000
         invalid_properties.push("invalid value for \"version\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -79,17 +87,18 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @browser.to_s.size > 5000
-      return false if @device.to_s.size > 5000
-      return false if @platform.to_s.size > 5000
-      return false if @version.to_s.size > 5000
+      return false if !@browser.nil? && @browser.to_s.size > 5000
+      return false if !@device.nil? && @device.to_s.size > 5000
+      return false if !@platform.nil? && @platform.to_s.size > 5000
+      return false if !@version.nil? && @version.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] browser Value to be assigned
     def browser=(browser)
-      if browser.to_s.size > 5000
+      if !browser.nil? && browser.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"browser\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -99,7 +108,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] device Value to be assigned
     def device=(device)
-      if device.to_s.size > 5000
+      if !device.nil? && device.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"device\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -109,7 +118,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] platform Value to be assigned
     def platform=(platform)
-      if platform.to_s.size > 5000
+      if !platform.nil? && platform.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"platform\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -119,22 +128,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] version Value to be assigned
     def version=(version)
-      if version.to_s.size > 5000
+      if !version.nil? && version.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"version\", the character length must be smaller than or equal to 5000.")
       end
 
       @version = version
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        browser == o.browser &&
-        device == o.device &&
-        platform == o.platform &&
-        version == o.version
     end
 
     # @see the `==` method
@@ -143,8 +141,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@browser, @device, @platform, @version)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@browser, @device, @platform, @version)
   end
 end

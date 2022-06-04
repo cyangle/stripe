@@ -19,12 +19,12 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # ID of an existing, connected Stripe account.
+
     @[JSON::Field(key: "destination", type: String?)]
     property destination : String?
 
     # Optional properties
-    # The amount that will be transferred automatically when the invoice is paid. If no amount is set, the full amount is transferred.
+
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
 
@@ -34,14 +34,20 @@ module Stripe
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
-        String,
-        Stripe::TransferDataSpecs4,
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
+        Stripe::TransferDataSpecs5,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @destination : String, @amount : Int64? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @destination : String? = nil,
+      # Optional properties
+      @amount : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -66,21 +72,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        destination == o.destination
     end
 
     # @see the `==` method
@@ -89,8 +83,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @destination)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@destination, @amount)
   end
 end

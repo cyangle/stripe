@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?)]
     property currency : String?
@@ -27,16 +28,18 @@ module Stripe
     @[JSON::Field(key: "line_items", type: Array(TerminalReaderReaderResourceLineItem)?)]
     property line_items : Array(TerminalReaderReaderResourceLineItem)?
 
-    # Tax amount for the entire cart. A positive integer in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
-    @[JSON::Field(key: "tax", type: Int64, presence: true, ignore_serialize: tax.nil? && !tax_present?)]
-    property tax : Int64
-
-    @[JSON::Field(ignore: true)]
-    property? tax_present : Bool = false
-
     # Total amount for the entire cart, including tax. A positive integer in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
     @[JSON::Field(key: "total", type: Int64?)]
     property total : Int64?
+
+    # Optional properties
+
+    # Tax amount for the entire cart. A positive integer in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+    @[JSON::Field(key: "tax", type: Int64?, presence: true, ignore_serialize: tax.nil? && !tax_present?)]
+    property tax : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? tax_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -47,7 +50,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @currency : String, @line_items : Array(TerminalReaderReaderResourceLineItem), @tax : Int64?, @total : Int64)
+    def initialize(
+      *,
+      # Required properties
+      @currency : String? = nil,
+      @line_items : Array(TerminalReaderReaderResourceLineItem)? = nil,
+      @total : Int64? = nil,
+      # Optional properties
+      @tax : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -72,23 +83,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        currency == o.currency &&
-        line_items == o.line_items &&
-        tax == o.tax &&
-        total == o.total
     end
 
     # @see the `==` method
@@ -97,8 +94,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@currency, @line_items, @tax, @total)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@currency, @line_items, @total, @tax)
   end
 end

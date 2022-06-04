@@ -19,12 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The email address of the owner.
-    @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
-    getter email : String?
-
-    @[JSON::Field(ignore: true)]
-    property? email_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
@@ -43,6 +37,15 @@ module Stripe
     # The ownership object that this owner belongs to.
     @[JSON::Field(key: "ownership", type: String)]
     getter ownership : String
+
+    # Optional properties
+
+    # The email address of the owner.
+    @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
+    getter email : String?
+
+    @[JSON::Field(ignore: true)]
+    property? email_present : Bool = false
 
     # The raw phone number of the owner.
     @[JSON::Field(key: "phone", type: String?, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
@@ -67,17 +70,25 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @email : String?, @id : String, @name : String, @object : String, @ownership : String, @phone : String?, @raw_address : String?, @refreshed_at : Int64?)
+    def initialize(
+      *,
+      # Required properties
+      @id : String,
+      @name : String,
+      @object : String,
+      @ownership : String,
+      # Optional properties
+      @email : String? = nil,
+      @phone : String? = nil,
+      @raw_address : String? = nil,
+      @refreshed_at : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @email.to_s.size > 5000
-        invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
@@ -93,11 +104,15 @@ module Stripe
         invalid_properties.push("invalid value for \"ownership\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @phone.to_s.size > 5000
+      if !@email.nil? && @email.to_s.size > 5000
+        invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@phone.nil? && @phone.to_s.size > 5000
         invalid_properties.push("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @raw_address.to_s.size > 5000
+      if !@raw_address.nil? && @raw_address.to_s.size > 5000
         invalid_properties.push("invalid value for \"raw_address\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -107,24 +122,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @email.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false if @name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @ownership.to_s.size > 5000
-      return false if @phone.to_s.size > 5000
-      return false if @raw_address.to_s.size > 5000
+      return false if !@email.nil? && @email.to_s.size > 5000
+      return false if !@phone.nil? && @phone.to_s.size > 5000
+      return false if !@raw_address.nil? && @raw_address.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] email Value to be assigned
-    def email=(email)
-      if email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @email = email
     end
 
     # Custom attribute writer method with validation
@@ -165,9 +171,19 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] email Value to be assigned
+    def email=(email)
+      if !email.nil? && email.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @email = email
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] phone Value to be assigned
     def phone=(phone)
-      if phone.to_s.size > 5000
+      if !phone.nil? && phone.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -177,26 +193,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] raw_address Value to be assigned
     def raw_address=(raw_address)
-      if raw_address.to_s.size > 5000
+      if !raw_address.nil? && raw_address.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"raw_address\", the character length must be smaller than or equal to 5000.")
       end
 
       @raw_address = raw_address
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        email == o.email &&
-        id == o.id &&
-        name == o.name &&
-        object == o.object &&
-        ownership == o.ownership &&
-        phone == o.phone &&
-        raw_address == o.raw_address &&
-        refreshed_at == o.refreshed_at
     end
 
     # @see the `==` method
@@ -205,8 +206,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@email, @id, @name, @object, @ownership, @phone, @raw_address, @refreshed_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@id, @name, @object, @ownership, @email, @phone, @raw_address, @refreshed_at)
   end
 end

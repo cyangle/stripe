@@ -19,16 +19,19 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The Treasury [DebitReversal](https://stripe.com/docs/api/treasury/debit_reversals) representing this Issuing dispute
-    @[JSON::Field(key: "debit_reversal", type: String, presence: true, ignore_serialize: debit_reversal.nil? && !debit_reversal_present?)]
-    getter debit_reversal : String
-
-    @[JSON::Field(ignore: true)]
-    property? debit_reversal_present : Bool = false
 
     # The Treasury [ReceivedDebit](https://stripe.com/docs/api/treasury/received_debits) that is being disputed.
     @[JSON::Field(key: "received_debit", type: String?)]
     getter received_debit : String?
+
+    # Optional properties
+
+    # The Treasury [DebitReversal](https://stripe.com/docs/api/treasury/debit_reversals) representing this Issuing dispute
+    @[JSON::Field(key: "debit_reversal", type: String?, presence: true, ignore_serialize: debit_reversal.nil? && !debit_reversal_present?)]
+    getter debit_reversal : String?
+
+    @[JSON::Field(ignore: true)]
+    property? debit_reversal_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -39,7 +42,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @debit_reversal : String?, @received_debit : String)
+    def initialize(
+      *,
+      # Required properties
+      @received_debit : String? = nil,
+      # Optional properties
+      @debit_reversal : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -47,12 +56,12 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @debit_reversal.to_s.size > 5000
-        invalid_properties.push("invalid value for \"debit_reversal\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @received_debit.to_s.size > 5000
         invalid_properties.push("invalid value for \"received_debit\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@debit_reversal.nil? && @debit_reversal.to_s.size > 5000
+        invalid_properties.push("invalid value for \"debit_reversal\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties
@@ -61,8 +70,9 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @debit_reversal.to_s.size > 5000
       return false if @received_debit.to_s.size > 5000
+      return false if !@debit_reversal.nil? && @debit_reversal.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -74,22 +84,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] debit_reversal Value to be assigned
-    def debit_reversal=(debit_reversal)
-      if debit_reversal.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"debit_reversal\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @debit_reversal = debit_reversal
     end
 
     # Custom attribute writer method with validation
@@ -102,13 +99,14 @@ module Stripe
       @received_debit = received_debit
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        debit_reversal == o.debit_reversal &&
-        received_debit == o.received_debit
+    # Custom attribute writer method with validation
+    # @param [Object] debit_reversal Value to be assigned
+    def debit_reversal=(debit_reversal)
+      if !debit_reversal.nil? && debit_reversal.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"debit_reversal\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @debit_reversal = debit_reversal
     end
 
     # @see the `==` method
@@ -117,8 +115,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@debit_reversal, @received_debit)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@received_debit, @debit_reversal)
   end
 end

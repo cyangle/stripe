@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "address", type: PostCustomersRequestAddress?, presence: true, ignore_serialize: address.nil? && !address_present?)]
     property address : PostCustomersRequestAddress?
 
@@ -31,6 +32,18 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? balance_present : Bool = false
 
+    @[JSON::Field(key: "bank_account", type: PostCustomersCustomerRequestBankAccount?, presence: true, ignore_serialize: bank_account.nil? && !bank_account_present?)]
+    property bank_account : PostCustomersCustomerRequestBankAccount?
+
+    @[JSON::Field(ignore: true)]
+    property? bank_account_present : Bool = false
+
+    @[JSON::Field(key: "card", type: PostChargesRequestCard?, presence: true, ignore_serialize: card.nil? && !card_present?)]
+    property card : PostChargesRequestCard?
+
+    @[JSON::Field(ignore: true)]
+    property? card_present : Bool = false
+
     @[JSON::Field(key: "cash_balance", type: CashBalanceParam?, presence: true, ignore_serialize: cash_balance.nil? && !cash_balance_present?)]
     property cash_balance : CashBalanceParam?
 
@@ -42,6 +55,27 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? coupon_present : Bool = false
+
+    # ID of Alipay account to make the customer's new default for invoice payments.
+    @[JSON::Field(key: "default_alipay_account", type: String?, presence: true, ignore_serialize: default_alipay_account.nil? && !default_alipay_account_present?)]
+    getter default_alipay_account : String?
+
+    @[JSON::Field(ignore: true)]
+    property? default_alipay_account_present : Bool = false
+
+    # ID of bank account to make the customer's new default for invoice payments.
+    @[JSON::Field(key: "default_bank_account", type: String?, presence: true, ignore_serialize: default_bank_account.nil? && !default_bank_account_present?)]
+    getter default_bank_account : String?
+
+    @[JSON::Field(ignore: true)]
+    property? default_bank_account_present : Bool = false
+
+    # ID of card to make the customer's new default for invoice payments.
+    @[JSON::Field(key: "default_card", type: String?, presence: true, ignore_serialize: default_card.nil? && !default_card_present?)]
+    getter default_card : String?
+
+    @[JSON::Field(ignore: true)]
+    property? default_card_present : Bool = false
 
     # If you are using payment methods created via the PaymentMethods API, see the [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method) parameter.  Provide the ID of a payment source already attached to this customer to make it this customer's default payment source.  If you want to add a new payment source and make it the default, see the [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
     @[JSON::Field(key: "default_source", type: String?, presence: true, ignore_serialize: default_source.nil? && !default_source_present?)]
@@ -64,6 +98,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -83,8 +118,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? invoice_settings_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -110,6 +145,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? phone_present : Bool = false
 
+    # Customer's preferred languages, ordered by preference.
     @[JSON::Field(key: "preferred_locales", type: Array(String)?, presence: true, ignore_serialize: preferred_locales.nil? && !preferred_locales_present?)]
     property preferred_locales : Array(String)?
 
@@ -158,7 +194,36 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : PostCustomersRequestAddress? = nil, @balance : Int64? = nil, @cash_balance : CashBalanceParam? = nil, @coupon : String? = nil, @default_source : String? = nil, @description : String? = nil, @email : String? = nil, @expand : Array(String)? = nil, @invoice_prefix : String? = nil, @invoice_settings : CustomerParam? = nil, @metadata : IndividualSpecsMetadata? = nil, @name : String? = nil, @next_invoice_sequence : Int64? = nil, @phone : String? = nil, @preferred_locales : Array(String)? = nil, @promotion_code : String? = nil, @shipping : PostCustomersRequestShipping? = nil, @source : String? = nil, @tax : TaxParam? = nil, @tax_exempt : String? = nil, @trial_end : PostCustomersCustomerRequestTrialEnd? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @address : PostCustomersRequestAddress? = nil,
+      @balance : Int64? = nil,
+      @bank_account : PostCustomersCustomerRequestBankAccount? = nil,
+      @card : PostChargesRequestCard? = nil,
+      @cash_balance : CashBalanceParam? = nil,
+      @coupon : String? = nil,
+      @default_alipay_account : String? = nil,
+      @default_bank_account : String? = nil,
+      @default_card : String? = nil,
+      @default_source : String? = nil,
+      @description : String? = nil,
+      @email : String? = nil,
+      @expand : Array(String)? = nil,
+      @invoice_prefix : String? = nil,
+      @invoice_settings : CustomerParam? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @name : String? = nil,
+      @next_invoice_sequence : Int64? = nil,
+      @phone : String? = nil,
+      @preferred_locales : Array(String)? = nil,
+      @promotion_code : String? = nil,
+      @shipping : PostCustomersRequestShipping? = nil,
+      @source : String? = nil,
+      @tax : TaxParam? = nil,
+      @tax_exempt : String? = nil,
+      @trial_end : PostCustomersCustomerRequestTrialEnd? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -168,6 +233,18 @@ module Stripe
 
       if !@coupon.nil? && @coupon.to_s.size > 5000
         invalid_properties.push("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@default_alipay_account.nil? && @default_alipay_account.to_s.size > 500
+        invalid_properties.push("invalid value for \"default_alipay_account\", the character length must be smaller than or equal to 500.")
+      end
+
+      if !@default_bank_account.nil? && @default_bank_account.to_s.size > 500
+        invalid_properties.push("invalid value for \"default_bank_account\", the character length must be smaller than or equal to 500.")
+      end
+
+      if !@default_card.nil? && @default_card.to_s.size > 500
+        invalid_properties.push("invalid value for \"default_card\", the character length must be smaller than or equal to 500.")
       end
 
       if !@default_source.nil? && @default_source.to_s.size > 500
@@ -211,6 +288,9 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@coupon.nil? && @coupon.to_s.size > 5000
+      return false if !@default_alipay_account.nil? && @default_alipay_account.to_s.size > 500
+      return false if !@default_bank_account.nil? && @default_bank_account.to_s.size > 500
+      return false if !@default_card.nil? && @default_card.to_s.size > 500
       return false if !@default_source.nil? && @default_source.to_s.size > 500
       return false if !@description.nil? && @description.to_s.size > 5000
       return false if !@email.nil? && @email.to_s.size > 512
@@ -220,6 +300,7 @@ module Stripe
       return false if !@promotion_code.nil? && @promotion_code.to_s.size > 5000
       return false if !@source.nil? && @source.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
+
       true
     end
 
@@ -231,6 +312,36 @@ module Stripe
       end
 
       @coupon = coupon
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] default_alipay_account Value to be assigned
+    def default_alipay_account=(default_alipay_account)
+      if !default_alipay_account.nil? && default_alipay_account.to_s.size > 500
+        raise ArgumentError.new("invalid value for \"default_alipay_account\", the character length must be smaller than or equal to 500.")
+      end
+
+      @default_alipay_account = default_alipay_account
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] default_bank_account Value to be assigned
+    def default_bank_account=(default_bank_account)
+      if !default_bank_account.nil? && default_bank_account.to_s.size > 500
+        raise ArgumentError.new("invalid value for \"default_bank_account\", the character length must be smaller than or equal to 500.")
+      end
+
+      @default_bank_account = default_bank_account
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] default_card Value to be assigned
+    def default_card=(default_card)
+      if !default_card.nil? && default_card.to_s.size > 500
+        raise ArgumentError.new("invalid value for \"default_card\", the character length must be smaller than or equal to 500.")
+      end
+
+      @default_card = default_card
     end
 
     # Custom attribute writer method with validation
@@ -320,42 +431,16 @@ module Stripe
       @tax_exempt = tax_exempt
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        balance == o.balance &&
-        cash_balance == o.cash_balance &&
-        coupon == o.coupon &&
-        default_source == o.default_source &&
-        description == o.description &&
-        email == o.email &&
-        expand == o.expand &&
-        invoice_prefix == o.invoice_prefix &&
-        invoice_settings == o.invoice_settings &&
-        metadata == o.metadata &&
-        name == o.name &&
-        next_invoice_sequence == o.next_invoice_sequence &&
-        phone == o.phone &&
-        preferred_locales == o.preferred_locales &&
-        promotion_code == o.promotion_code &&
-        shipping == o.shipping &&
-        source == o.source &&
-        tax == o.tax &&
-        tax_exempt == o.tax_exempt &&
-        trial_end == o.trial_end
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @balance, @cash_balance, @coupon, @default_source, @description, @email, @expand, @invoice_prefix, @invoice_settings, @metadata, @name, @next_invoice_sequence, @phone, @preferred_locales, @promotion_code, @shipping, @source, @tax, @tax_exempt, @trial_end)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address, @balance, @bank_account, @card, @cash_balance, @coupon, @default_alipay_account, @default_bank_account, @default_card, @default_source, @description, @email, @expand, @invoice_prefix, @invoice_settings, @metadata, @name, @next_invoice_sequence, @phone, @preferred_locales, @promotion_code, @shipping, @source, @tax, @tax_exempt, @trial_end)
   end
 end

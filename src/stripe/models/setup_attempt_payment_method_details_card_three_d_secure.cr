@@ -18,42 +18,43 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # For authenticated transactions: how the customer was authenticated by the issuing bank.
-    @[JSON::Field(key: "authentication_flow", type: String, presence: true, ignore_serialize: authentication_flow.nil? && !authentication_flow_present?)]
-    getter authentication_flow : String
+    @[JSON::Field(key: "authentication_flow", type: String?, presence: true, ignore_serialize: authentication_flow.nil? && !authentication_flow_present?)]
+    getter authentication_flow : String?
 
     @[JSON::Field(ignore: true)]
     property? authentication_flow_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW = EnumValidator.new("authentication_flow", "String", ["challenge", "frictionless", "null"])
+    ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW = EnumValidator.new("authentication_flow", "String", ["challenge", "frictionless"])
 
     # Indicates the outcome of 3D Secure authentication.
-    @[JSON::Field(key: "result", type: String, presence: true, ignore_serialize: result.nil? && !result_present?)]
-    getter result : String
+    @[JSON::Field(key: "result", type: String?, presence: true, ignore_serialize: result.nil? && !result_present?)]
+    getter result : String?
 
     @[JSON::Field(ignore: true)]
     property? result_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_RESULT = EnumValidator.new("result", "String", ["attempt_acknowledged", "authenticated", "failed", "not_supported", "processing_error", "null"])
+    ENUM_VALIDATOR_FOR_RESULT = EnumValidator.new("result", "String", ["attempt_acknowledged", "authenticated", "failed", "not_supported", "processing_error"])
 
     # Additional information about why 3D Secure succeeded or failed based on the `result`.
-    @[JSON::Field(key: "result_reason", type: String, presence: true, ignore_serialize: result_reason.nil? && !result_reason_present?)]
-    getter result_reason : String
+    @[JSON::Field(key: "result_reason", type: String?, presence: true, ignore_serialize: result_reason.nil? && !result_reason_present?)]
+    getter result_reason : String?
 
     @[JSON::Field(ignore: true)]
     property? result_reason_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_RESULT_REASON = EnumValidator.new("result_reason", "String", ["abandoned", "bypassed", "canceled", "card_not_enrolled", "network_not_supported", "protocol_error", "rejected", "null"])
+    ENUM_VALIDATOR_FOR_RESULT_REASON = EnumValidator.new("result_reason", "String", ["abandoned", "bypassed", "canceled", "card_not_enrolled", "network_not_supported", "protocol_error", "rejected"])
 
     # The version of 3D Secure that was used.
-    @[JSON::Field(key: "version", type: String, presence: true, ignore_serialize: version.nil? && !version_present?)]
-    getter version : String
+    @[JSON::Field(key: "version", type: String?, presence: true, ignore_serialize: version.nil? && !version_present?)]
+    getter version : String?
 
     @[JSON::Field(ignore: true)]
     property? version_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_VERSION = EnumValidator.new("version", "String", ["1.0.2", "2.1.0", "2.2.0", "null"])
+    ENUM_VALIDATOR_FOR_VERSION = EnumValidator.new("version", "String", ["1.0.2", "2.1.0", "2.2.0"])
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -64,13 +65,21 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @authentication_flow : String?, @result : String?, @result_reason : String?, @version : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @authentication_flow : String? = nil,
+      @result : String? = nil,
+      @result_reason : String? = nil,
+      @version : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW.error_message) unless ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW.valid?(@authentication_flow)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_RESULT.error_message) unless ENUM_VALIDATOR_FOR_RESULT.valid?(@result)
@@ -89,6 +98,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_RESULT.valid?(@result)
       return false unless ENUM_VALIDATOR_FOR_RESULT_REASON.valid?(@result_reason)
       return false unless ENUM_VALIDATOR_FOR_VERSION.valid?(@version)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -100,10 +110,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -136,25 +143,16 @@ module Stripe
       @version = version
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        authentication_flow == o.authentication_flow &&
-        result == o.result &&
-        result_reason == o.result_reason &&
-        version == o.version
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@authentication_flow, @result, @result_reason, @version)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@authentication_flow, @result, @result_reason, @version)
   end
 end

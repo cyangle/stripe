@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The description of the item. The maximum length of this field is 26 characters.
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String?
@@ -49,7 +50,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @description : String?, @quantity : Float64?, @total : Int64?, @unit_cost : Int64?)
+    def initialize(
+      *,
+      # Optional properties
+      @description : String? = nil,
+      @quantity : Float64? = nil,
+      @total : Int64? = nil,
+      @unit_cost : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -57,7 +65,7 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @description.to_s.size > 5000
+      if !@description.nil? && @description.to_s.size > 5000
         invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -67,29 +75,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @description.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
     def description=(description)
-      if description.to_s.size > 5000
+      if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
       @description = description
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        description == o.description &&
-        quantity == o.quantity &&
-        total == o.total &&
-        unit_cost == o.unit_cost
     end
 
     # @see the `==` method
@@ -98,8 +96,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@description, @quantity, @total, @unit_cost)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@description, @quantity, @total, @unit_cost)
   end
 end

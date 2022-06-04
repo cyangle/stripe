@@ -19,8 +19,9 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "acss_debit", type: SetupIntentPaymentMethodOptionsAcssDebit?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
-    property acss_debit : SetupIntentPaymentMethodOptionsAcssDebit?
+
+    @[JSON::Field(key: "acss_debit", type: SetupIntentPaymentMethodOptionsAcssDebit1?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
+    property acss_debit : SetupIntentPaymentMethodOptionsAcssDebit1?
 
     @[JSON::Field(ignore: true)]
     property? acss_debit_present : Bool = false
@@ -31,27 +32,35 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
-    @[JSON::Field(key: "link", type: SetupIntentPaymentMethodOptionsLink?, presence: true, ignore_serialize: link.nil? && !link_present?)]
-    property link : SetupIntentPaymentMethodOptionsLink?
+    @[JSON::Field(key: "link", type: SetupIntentPaymentMethodOptionsLink1?, presence: true, ignore_serialize: link.nil? && !link_present?)]
+    property link : SetupIntentPaymentMethodOptionsLink1?
 
     @[JSON::Field(ignore: true)]
     property? link_present : Bool = false
 
-    @[JSON::Field(key: "sepa_debit", type: SetupIntentPaymentMethodOptionsSepaDebit?, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
-    property sepa_debit : SetupIntentPaymentMethodOptionsSepaDebit?
+    @[JSON::Field(key: "sepa_debit", type: SetupIntentPaymentMethodOptionsSepaDebit1?, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
+    property sepa_debit : SetupIntentPaymentMethodOptionsSepaDebit1?
 
     @[JSON::Field(ignore: true)]
     property? sepa_debit_present : Bool = false
 
-    @[JSON::Field(key: "us_bank_account", type: SetupIntentPaymentMethodOptionsUsBankAccount?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
-    property us_bank_account : SetupIntentPaymentMethodOptionsUsBankAccount?
+    @[JSON::Field(key: "us_bank_account", type: SetupIntentPaymentMethodOptionsUsBankAccount1?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
+    property us_bank_account : SetupIntentPaymentMethodOptionsUsBankAccount1?
 
     @[JSON::Field(ignore: true)]
     property? us_bank_account_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @acss_debit : SetupIntentPaymentMethodOptionsAcssDebit? = nil, @card : SetupIntentPaymentMethodOptionsCard? = nil, @link : SetupIntentPaymentMethodOptionsLink? = nil, @sepa_debit : SetupIntentPaymentMethodOptionsSepaDebit? = nil, @us_bank_account : SetupIntentPaymentMethodOptionsUsBankAccount? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @acss_debit : SetupIntentPaymentMethodOptionsAcssDebit1? = nil,
+      @card : SetupIntentPaymentMethodOptionsCard? = nil,
+      @link : SetupIntentPaymentMethodOptionsLink1? = nil,
+      @sepa_debit : SetupIntentPaymentMethodOptionsSepaDebit1? = nil,
+      @us_bank_account : SetupIntentPaymentMethodOptionsUsBankAccount1? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -68,26 +77,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit == o.acss_debit &&
-        card == o.card &&
-        link == o.link &&
-        sepa_debit == o.sepa_debit &&
-        us_bank_account == o.us_bank_account
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit, @card, @link, @sepa_debit, @us_bank_account)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@acss_debit, @card, @link, @sepa_debit, @us_bank_account)
   end
 end

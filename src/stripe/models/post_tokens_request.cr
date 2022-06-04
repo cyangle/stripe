@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "account", type: ConnectJsAccountTokenSpecs?, presence: true, ignore_serialize: account.nil? && !account_present?)]
     property account : ConnectJsAccountTokenSpecs?
 
@@ -49,6 +50,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? cvc_update_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -69,7 +71,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account : ConnectJsAccountTokenSpecs? = nil, @bank_account : TokenCreateBankAccount? = nil, @card : PostTokensRequestCard? = nil, @customer : String? = nil, @cvc_update : CvcParams? = nil, @expand : Array(String)? = nil, @person : PersonTokenSpecs? = nil, @pii : PiiTokenSpecs? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @account : ConnectJsAccountTokenSpecs? = nil,
+      @bank_account : TokenCreateBankAccount? = nil,
+      @card : PostTokensRequestCard? = nil,
+      @customer : String? = nil,
+      @cvc_update : CvcParams? = nil,
+      @expand : Array(String)? = nil,
+      @person : PersonTokenSpecs? = nil,
+      @pii : PiiTokenSpecs? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -88,6 +101,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@customer.nil? && @customer.to_s.size > 5000
+
       true
     end
 
@@ -101,29 +115,16 @@ module Stripe
       @customer = customer
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account == o.account &&
-        bank_account == o.bank_account &&
-        card == o.card &&
-        customer == o.customer &&
-        cvc_update == o.cvc_update &&
-        expand == o.expand &&
-        person == o.person &&
-        pii == o.pii
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account, @bank_account, @card, @customer, @cvc_update, @expand, @person, @pii)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account, @bank_account, @card, @customer, @cvc_update, @expand, @person, @pii)
   end
 end

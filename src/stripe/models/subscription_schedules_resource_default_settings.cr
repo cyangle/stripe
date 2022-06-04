@@ -19,6 +19,15 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # Possible values are `phase_start` or `automatic`. If `phase_start` then billing cycle anchor of the subscription is set to the start of the phase when entering the phase. If `automatic` then the billing cycle anchor is automatically modified as needed when entering the phase. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
+    @[JSON::Field(key: "billing_cycle_anchor", type: String)]
+    getter billing_cycle_anchor : String
+
+    ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR = EnumValidator.new("billing_cycle_anchor", "String", ["automatic", "phase_start"])
+
+    # Optional properties
+
     # A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account during this phase of the schedule.
     @[JSON::Field(key: "application_fee_percent", type: Float64?, presence: true, ignore_serialize: application_fee_percent.nil? && !application_fee_percent_present?)]
     property application_fee_percent : Float64?
@@ -26,11 +35,11 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? application_fee_percent_present : Bool = false
 
-    # Possible values are `phase_start` or `automatic`. If `phase_start` then billing cycle anchor of the subscription is set to the start of the phase when entering the phase. If `automatic` then the billing cycle anchor is automatically modified as needed when entering the phase. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
-    @[JSON::Field(key: "billing_cycle_anchor", type: String)]
-    getter billing_cycle_anchor : String
+    @[JSON::Field(key: "automatic_tax", type: SubscriptionSchedulesResourceDefaultSettingsAutomaticTax?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
+    property automatic_tax : SubscriptionSchedulesResourceDefaultSettingsAutomaticTax?
 
-    ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR = EnumValidator.new("billing_cycle_anchor", "String", ["automatic", "phase_start"])
+    @[JSON::Field(ignore: true)]
+    property? automatic_tax_present : Bool = false
 
     @[JSON::Field(key: "billing_thresholds", type: SubscriptionBillingThresholds1?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
     property billing_thresholds : SubscriptionBillingThresholds1?
@@ -45,7 +54,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? collection_method_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_COLLECTION_METHOD = EnumValidator.new("collection_method", "String", ["charge_automatically", "send_invoice", "null"])
+    ENUM_VALIDATOR_FOR_COLLECTION_METHOD = EnumValidator.new("collection_method", "String", ["charge_automatically", "send_invoice"])
 
     @[JSON::Field(key: "default_payment_method", type: SubscriptionSchedulesResourceDefaultSettingsDefaultPaymentMethod?, presence: true, ignore_serialize: default_payment_method.nil? && !default_payment_method_present?)]
     property default_payment_method : SubscriptionSchedulesResourceDefaultSettingsDefaultPaymentMethod?
@@ -65,16 +74,21 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? transfer_data_present : Bool = false
 
-    # Optional properties
-    @[JSON::Field(key: "automatic_tax", type: SubscriptionSchedulesResourceDefaultSettingsAutomaticTax?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
-    property automatic_tax : SubscriptionSchedulesResourceDefaultSettingsAutomaticTax?
-
-    @[JSON::Field(ignore: true)]
-    property? automatic_tax_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @application_fee_percent : Float64?, @billing_cycle_anchor : String, @billing_thresholds : SubscriptionBillingThresholds1?, @collection_method : String?, @default_payment_method : SubscriptionSchedulesResourceDefaultSettingsDefaultPaymentMethod?, @invoice_settings : SubscriptionSchedulesResourceDefaultSettingsInvoiceSettings?, @transfer_data : SubscriptionSchedulePhaseConfigurationTransferData?, @automatic_tax : SubscriptionSchedulesResourceDefaultSettingsAutomaticTax? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @billing_cycle_anchor : String,
+      # Optional properties
+      @application_fee_percent : Float64? = nil,
+      @automatic_tax : SubscriptionSchedulesResourceDefaultSettingsAutomaticTax? = nil,
+      @billing_thresholds : SubscriptionBillingThresholds1? = nil,
+      @collection_method : String? = nil,
+      @default_payment_method : SubscriptionSchedulesResourceDefaultSettingsDefaultPaymentMethod? = nil,
+      @invoice_settings : SubscriptionSchedulesResourceDefaultSettingsInvoiceSettings? = nil,
+      @transfer_data : SubscriptionSchedulePhaseConfigurationTransferData? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -94,6 +108,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid?(@billing_cycle_anchor, false)
       return false unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
+
       true
     end
 
@@ -111,29 +126,16 @@ module Stripe
       @collection_method = collection_method
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        application_fee_percent == o.application_fee_percent &&
-        automatic_tax == o.automatic_tax &&
-        billing_cycle_anchor == o.billing_cycle_anchor &&
-        billing_thresholds == o.billing_thresholds &&
-        collection_method == o.collection_method &&
-        default_payment_method == o.default_payment_method &&
-        invoice_settings == o.invoice_settings &&
-        transfer_data == o.transfer_data
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@application_fee_percent, @automatic_tax, @billing_cycle_anchor, @billing_thresholds, @collection_method, @default_payment_method, @invoice_settings, @transfer_data)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@billing_cycle_anchor, @application_fee_percent, @automatic_tax, @billing_thresholds, @collection_method, @default_payment_method, @invoice_settings, @transfer_data)
   end
 end

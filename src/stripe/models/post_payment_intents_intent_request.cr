@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
@@ -52,14 +53,15 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? expand_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -77,12 +79,13 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_method_data_present : Bool = false
 
-    @[JSON::Field(key: "payment_method_options", type: PaymentMethodOptionsParam21?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
-    property payment_method_options : PaymentMethodOptionsParam21?
+    @[JSON::Field(key: "payment_method_options", type: PaymentMethodOptionsParam11?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
+    property payment_method_options : PaymentMethodOptionsParam11?
 
     @[JSON::Field(ignore: true)]
     property? payment_method_options_present : Bool = false
 
+    # The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, presence: true, ignore_serialize: payment_method_types.nil? && !payment_method_types_present?)]
     property payment_method_types : Array(String)?
 
@@ -139,7 +142,28 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64? = nil, @application_fee_amount : PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil, @currency : String? = nil, @customer : String? = nil, @description : String? = nil, @expand : Array(String)? = nil, @metadata : IndividualSpecsMetadata? = nil, @payment_method : String? = nil, @payment_method_data : PaymentMethodDataParams? = nil, @payment_method_options : PaymentMethodOptionsParam21? = nil, @payment_method_types : Array(String)? = nil, @receipt_email : PostPaymentIntentsIntentRequestReceiptEmail? = nil, @setup_future_usage : String? = nil, @shipping : PostPaymentIntentsIntentRequestShipping? = nil, @statement_descriptor : String? = nil, @statement_descriptor_suffix : String? = nil, @transfer_data : TransferDataUpdateParams? = nil, @transfer_group : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @amount : Int64? = nil,
+      @application_fee_amount : PostPaymentIntentsIntentRequestApplicationFeeAmount? = nil,
+      @currency : String? = nil,
+      @customer : String? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @payment_method : String? = nil,
+      @payment_method_data : PaymentMethodDataParams? = nil,
+      @payment_method_options : PaymentMethodOptionsParam11? = nil,
+      @payment_method_types : Array(String)? = nil,
+      @receipt_email : PostPaymentIntentsIntentRequestReceiptEmail? = nil,
+      @setup_future_usage : String? = nil,
+      @shipping : PostPaymentIntentsIntentRequestShipping? = nil,
+      @statement_descriptor : String? = nil,
+      @statement_descriptor_suffix : String? = nil,
+      @transfer_data : TransferDataUpdateParams? = nil,
+      @transfer_group : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -181,6 +205,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
       return false if !@statement_descriptor_suffix.nil? && @statement_descriptor_suffix.to_s.size > 22
+
       true
     end
 
@@ -241,39 +266,16 @@ module Stripe
       @statement_descriptor_suffix = statement_descriptor_suffix
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        application_fee_amount == o.application_fee_amount &&
-        currency == o.currency &&
-        customer == o.customer &&
-        description == o.description &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        payment_method == o.payment_method &&
-        payment_method_data == o.payment_method_data &&
-        payment_method_options == o.payment_method_options &&
-        payment_method_types == o.payment_method_types &&
-        receipt_email == o.receipt_email &&
-        setup_future_usage == o.setup_future_usage &&
-        shipping == o.shipping &&
-        statement_descriptor == o.statement_descriptor &&
-        statement_descriptor_suffix == o.statement_descriptor_suffix &&
-        transfer_data == o.transfer_data &&
-        transfer_group == o.transfer_group
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @application_fee_amount, @currency, @customer, @description, @expand, @metadata, @payment_method, @payment_method_data, @payment_method_options, @payment_method_types, @receipt_email, @setup_future_usage, @shipping, @statement_descriptor, @statement_descriptor_suffix, @transfer_data, @transfer_group)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @application_fee_amount, @currency, @customer, @description, @expand, @metadata, @payment_method, @payment_method_data, @payment_method_options, @payment_method_types, @receipt_email, @setup_future_usage, @shipping, @statement_descriptor, @statement_descriptor_suffix, @transfer_data, @transfer_group)
   end
 end

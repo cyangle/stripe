@@ -19,15 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The total amount that was authorized or rejected. This amount is in the card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
-
-    @[JSON::Field(key: "amount_details", type: IssuingAuthorizationAmountDetails1?, presence: true, ignore_serialize: amount_details.nil? && !amount_details_present?)]
-    property amount_details : IssuingAuthorizationAmountDetails1?
-
-    @[JSON::Field(ignore: true)]
-    property? amount_details_present : Bool = false
 
     # Whether the authorization has been approved.
     @[JSON::Field(key: "approved", type: Bool)]
@@ -45,12 +40,6 @@ module Stripe
 
     @[JSON::Field(key: "card", type: IssuingCard)]
     property card : IssuingCard
-
-    @[JSON::Field(key: "cardholder", type: IssuingAuthorizationCardholder?, presence: true, ignore_serialize: cardholder.nil? && !cardholder_present?)]
-    property cardholder : IssuingAuthorizationCardholder?
-
-    @[JSON::Field(ignore: true)]
-    property? cardholder_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
@@ -89,12 +78,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["issuing.authorization"])
 
-    @[JSON::Field(key: "pending_request", type: IssuingAuthorizationPendingRequest1?, presence: true, ignore_serialize: pending_request.nil? && !pending_request_present?)]
-    property pending_request : IssuingAuthorizationPendingRequest1?
-
-    @[JSON::Field(ignore: true)]
-    property? pending_request_present : Bool = false
-
     # History of every time `pending_request` was approved/denied, either by you directly or by Stripe (e.g. based on your `spending_controls`). If the merchant changes the authorization by performing an [incremental authorization](https://stripe.com/docs/issuing/purchases/authorizations), you can look at this field to see the previous requests for the authorization.
     @[JSON::Field(key: "request_history", type: Array(IssuingAuthorizationRequest))]
     property request_history : Array(IssuingAuthorizationRequest)
@@ -112,6 +95,32 @@ module Stripe
     @[JSON::Field(key: "verification_data", type: IssuingAuthorizationVerificationData)]
     property verification_data : IssuingAuthorizationVerificationData
 
+    # Optional properties
+
+    @[JSON::Field(key: "amount_details", type: IssuingAuthorizationAmountDetails1?, presence: true, ignore_serialize: amount_details.nil? && !amount_details_present?)]
+    property amount_details : IssuingAuthorizationAmountDetails1?
+
+    @[JSON::Field(ignore: true)]
+    property? amount_details_present : Bool = false
+
+    @[JSON::Field(key: "cardholder", type: IssuingAuthorizationCardholder?, presence: true, ignore_serialize: cardholder.nil? && !cardholder_present?)]
+    property cardholder : IssuingAuthorizationCardholder?
+
+    @[JSON::Field(ignore: true)]
+    property? cardholder_present : Bool = false
+
+    @[JSON::Field(key: "pending_request", type: IssuingAuthorizationPendingRequest1?, presence: true, ignore_serialize: pending_request.nil? && !pending_request_present?)]
+    property pending_request : IssuingAuthorizationPendingRequest1?
+
+    @[JSON::Field(ignore: true)]
+    property? pending_request_present : Bool = false
+
+    @[JSON::Field(key: "treasury", type: IssuingAuthorizationTreasury1?, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
+    property treasury : IssuingAuthorizationTreasury1?
+
+    @[JSON::Field(ignore: true)]
+    property? treasury_present : Bool = false
+
     # The digital wallet used for this authorization. One of `apple_pay`, `google_pay`, or `samsung_pay`.
     @[JSON::Field(key: "wallet", type: String?, presence: true, ignore_serialize: wallet.nil? && !wallet_present?)]
     getter wallet : String?
@@ -119,16 +128,36 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? wallet_present : Bool = false
 
-    # Optional properties
-    @[JSON::Field(key: "treasury", type: IssuingAuthorizationTreasury1?, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
-    property treasury : IssuingAuthorizationTreasury1?
-
-    @[JSON::Field(ignore: true)]
-    property? treasury_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @amount_details : IssuingAuthorizationAmountDetails1?, @approved : Bool, @authorization_method : String, @balance_transactions : Array(BalanceTransaction), @card : IssuingCard, @cardholder : IssuingAuthorizationCardholder?, @created : Int64, @currency : String, @id : String, @livemode : Bool, @merchant_amount : Int64, @merchant_currency : String, @merchant_data : IssuingAuthorizationMerchantData, @metadata : Hash(String, String), @object : String, @pending_request : IssuingAuthorizationPendingRequest1?, @request_history : Array(IssuingAuthorizationRequest), @status : String, @transactions : Array(IssuingTransaction), @verification_data : IssuingAuthorizationVerificationData, @wallet : String?, @treasury : IssuingAuthorizationTreasury1? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @approved : Bool,
+      @authorization_method : String,
+      @balance_transactions : Array(BalanceTransaction),
+      @card : IssuingCard,
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @livemode : Bool,
+      @merchant_amount : Int64,
+      @merchant_currency : String,
+      @merchant_data : IssuingAuthorizationMerchantData,
+      @metadata : Hash(String, String),
+      @object : String,
+      @request_history : Array(IssuingAuthorizationRequest),
+      @status : String,
+      @transactions : Array(IssuingTransaction),
+      @verification_data : IssuingAuthorizationVerificationData,
+      # Optional properties
+      @amount_details : IssuingAuthorizationAmountDetails1? = nil,
+      @cardholder : IssuingAuthorizationCardholder? = nil,
+      @pending_request : IssuingAuthorizationPendingRequest1? = nil,
+      @treasury : IssuingAuthorizationTreasury1? = nil,
+      @wallet : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -146,7 +175,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
-      if @wallet.to_s.size > 5000
+      if !@wallet.nil? && @wallet.to_s.size > 5000
         invalid_properties.push("invalid value for \"wallet\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -160,7 +189,8 @@ module Stripe
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      return false if @wallet.to_s.size > 5000
+      return false if !@wallet.nil? && @wallet.to_s.size > 5000
+
       true
     end
 
@@ -198,41 +228,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] wallet Value to be assigned
     def wallet=(wallet)
-      if wallet.to_s.size > 5000
+      if !wallet.nil? && wallet.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"wallet\", the character length must be smaller than or equal to 5000.")
       end
 
       @wallet = wallet
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        amount_details == o.amount_details &&
-        approved == o.approved &&
-        authorization_method == o.authorization_method &&
-        balance_transactions == o.balance_transactions &&
-        card == o.card &&
-        cardholder == o.cardholder &&
-        created == o.created &&
-        currency == o.currency &&
-        id == o.id &&
-        livemode == o.livemode &&
-        merchant_amount == o.merchant_amount &&
-        merchant_currency == o.merchant_currency &&
-        merchant_data == o.merchant_data &&
-        metadata == o.metadata &&
-        object == o.object &&
-        pending_request == o.pending_request &&
-        request_history == o.request_history &&
-        status == o.status &&
-        transactions == o.transactions &&
-        treasury == o.treasury &&
-        verification_data == o.verification_data &&
-        wallet == o.wallet
     end
 
     # @see the `==` method
@@ -241,8 +241,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @amount_details, @approved, @authorization_method, @balance_transactions, @card, @cardholder, @created, @currency, @id, @livemode, @merchant_amount, @merchant_currency, @merchant_data, @metadata, @object, @pending_request, @request_history, @status, @transactions, @treasury, @verification_data, @wallet)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @approved, @authorization_method, @balance_transactions, @card, @created, @currency, @id, @livemode, @merchant_amount, @merchant_currency, @merchant_data, @metadata, @object, @request_history, @status, @transactions, @verification_data, @amount_details, @cardholder, @pending_request, @treasury, @wallet)
   end
 end

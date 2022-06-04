@@ -19,15 +19,15 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The ID of the shipping rate to use for this order.
+
     @[JSON::Field(key: "shipping_rate", type: String?, presence: true, ignore_serialize: shipping_rate.nil? && !shipping_rate_present?)]
     getter shipping_rate : String?
 
     @[JSON::Field(ignore: true)]
     property? shipping_rate_present : Bool = false
 
-    @[JSON::Field(key: "shipping_rate_data", type: MethodParams1?, presence: true, ignore_serialize: shipping_rate_data.nil? && !shipping_rate_data_present?)]
-    property shipping_rate_data : MethodParams1?
+    @[JSON::Field(key: "shipping_rate_data", type: MethodParams?, presence: true, ignore_serialize: shipping_rate_data.nil? && !shipping_rate_data_present?)]
+    property shipping_rate_data : MethodParams?
 
     @[JSON::Field(ignore: true)]
     property? shipping_rate_data_present : Bool = false
@@ -35,14 +35,19 @@ module Stripe
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
         Stripe::ShippingCost,
-        String,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @shipping_rate : String? = nil, @shipping_rate_data : MethodParams1? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @shipping_rate : String? = nil,
+      @shipping_rate_data : MethodParams? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -61,6 +66,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@shipping_rate.nil? && @shipping_rate.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -72,10 +78,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -90,23 +93,16 @@ module Stripe
       @shipping_rate = shipping_rate
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        shipping_rate == o.shipping_rate &&
-        shipping_rate_data == o.shipping_rate_data
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@shipping_rate, @shipping_rate_data)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@shipping_rate, @shipping_rate_data)
   end
 end

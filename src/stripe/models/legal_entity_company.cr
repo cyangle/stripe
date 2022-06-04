@@ -18,15 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
-    # The company's legal name.
-    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
-    getter name : String?
-
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
-
     # Optional properties
+
     @[JSON::Field(key: "address", type: Address?, presence: true, ignore_serialize: address.nil? && !address_present?)]
     property address : Address?
 
@@ -58,6 +51,13 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? executives_provided_present : Bool = false
+
+    # The company's legal name.
+    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    getter name : String?
+
+    @[JSON::Field(ignore: true)]
+    property? name_present : Bool = false
 
     # The Kana variation of the company's legal name (Japan only).
     @[JSON::Field(key: "name_kana", type: String?, presence: true, ignore_serialize: name_kana.nil? && !name_kana_present?)]
@@ -131,7 +131,26 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @name : String?, @address : Address? = nil, @address_kana : LegalEntityCompanyAddressKana? = nil, @address_kanji : LegalEntityCompanyAddressKanji? = nil, @directors_provided : Bool? = nil, @executives_provided : Bool? = nil, @name_kana : String? = nil, @name_kanji : String? = nil, @owners_provided : Bool? = nil, @ownership_declaration : LegalEntityCompanyOwnershipDeclaration? = nil, @phone : String? = nil, @structure : String? = nil, @tax_id_provided : Bool? = nil, @tax_id_registrar : String? = nil, @vat_id_provided : Bool? = nil, @verification : LegalEntityCompanyVerification1? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @address : Address? = nil,
+      @address_kana : LegalEntityCompanyAddressKana? = nil,
+      @address_kanji : LegalEntityCompanyAddressKanji? = nil,
+      @directors_provided : Bool? = nil,
+      @executives_provided : Bool? = nil,
+      @name : String? = nil,
+      @name_kana : String? = nil,
+      @name_kanji : String? = nil,
+      @owners_provided : Bool? = nil,
+      @ownership_declaration : LegalEntityCompanyOwnershipDeclaration? = nil,
+      @phone : String? = nil,
+      @structure : String? = nil,
+      @tax_id_provided : Bool? = nil,
+      @tax_id_registrar : String? = nil,
+      @vat_id_provided : Bool? = nil,
+      @verification : LegalEntityCompanyVerification1? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -139,7 +158,7 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @name.to_s.size > 5000
+      if !@name.nil? && @name.to_s.size > 5000
         invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -167,19 +186,20 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @name.to_s.size > 5000
+      return false if !@name.nil? && @name.to_s.size > 5000
       return false if !@name_kana.nil? && @name_kana.to_s.size > 5000
       return false if !@name_kanji.nil? && @name_kanji.to_s.size > 5000
       return false if !@phone.nil? && @phone.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_STRUCTURE.valid?(@structure)
       return false if !@tax_id_registrar.nil? && @tax_id_registrar.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
     def name=(name)
-      if name.to_s.size > 5000
+      if !name.nil? && name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -233,37 +253,16 @@ module Stripe
       @tax_id_registrar = tax_id_registrar
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        address_kana == o.address_kana &&
-        address_kanji == o.address_kanji &&
-        directors_provided == o.directors_provided &&
-        executives_provided == o.executives_provided &&
-        name == o.name &&
-        name_kana == o.name_kana &&
-        name_kanji == o.name_kanji &&
-        owners_provided == o.owners_provided &&
-        ownership_declaration == o.ownership_declaration &&
-        phone == o.phone &&
-        structure == o.structure &&
-        tax_id_provided == o.tax_id_provided &&
-        tax_id_registrar == o.tax_id_registrar &&
-        vat_id_provided == o.vat_id_provided &&
-        verification == o.verification
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @address_kana, @address_kanji, @directors_provided, @executives_provided, @name, @name_kana, @name_kanji, @owners_provided, @ownership_declaration, @phone, @structure, @tax_id_provided, @tax_id_registrar, @vat_id_provided, @verification)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address, @address_kana, @address_kanji, @directors_provided, @executives_provided, @name, @name_kana, @name_kanji, @owners_provided, @ownership_declaration, @phone, @structure, @tax_id_provided, @tax_id_registrar, @vat_id_provided, @verification)
   end
 end

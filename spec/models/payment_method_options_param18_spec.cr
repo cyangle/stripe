@@ -20,17 +20,31 @@ describe Stripe::PaymentMethodOptionsParam18 do
     end
   end
 
-  describe "test attribute 'setup_future_usage'" do
+  describe "test attribute 'acss_debit'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["none"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.setup_future_usage = value }.not_to raise_error
-      # end
     end
   end
 
-  describe "test attribute 'tos_shown_and_accepted'" do
+  describe "test attribute 'card'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'link'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'sepa_debit'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'us_bank_account'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

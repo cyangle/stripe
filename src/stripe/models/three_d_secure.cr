@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Amount of the charge that you will create when authentication completes.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -52,6 +53,12 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["three_d_secure"])
 
+    # Possible values are `redirect_pending`, `succeeded`, or `failed`. When the cardholder can be authenticated, the object starts with status `redirect_pending`. When liability will be shifted to the cardholder's bank (either because the cardholder was successfully authenticated, or because the bank has not implemented 3D Secure, the object wlil be in status `succeeded`. `failed` indicates that authentication was attempted unsuccessfully.
+    @[JSON::Field(key: "status", type: String)]
+    getter status : String
+
+    # Optional properties
+
     # If present, this is the URL that you should send the cardholder to for authentication. If you are going to use Stripe.js to display the authentication page in an iframe, you should use the value \"_callback\".
     @[JSON::Field(key: "redirect_url", type: String?, presence: true, ignore_serialize: redirect_url.nil? && !redirect_url_present?)]
     getter redirect_url : String?
@@ -59,13 +66,23 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? redirect_url_present : Bool = false
 
-    # Possible values are `redirect_pending`, `succeeded`, or `failed`. When the cardholder can be authenticated, the object starts with status `redirect_pending`. When liability will be shifted to the cardholder's bank (either because the cardholder was successfully authenticated, or because the bank has not implemented 3D Secure, the object wlil be in status `succeeded`. `failed` indicates that authentication was attempted unsuccessfully.
-    @[JSON::Field(key: "status", type: String)]
-    getter status : String
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @authenticated : Bool, @card : Card, @created : Int64, @currency : String, @id : String, @livemode : Bool, @object : String, @redirect_url : String?, @status : String)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @authenticated : Bool,
+      @card : Card,
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @status : String,
+      # Optional properties
+      @redirect_url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -83,12 +100,12 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
-      if @redirect_url.to_s.size > 5000
-        invalid_properties.push("invalid value for \"redirect_url\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @status.to_s.size > 5000
         invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@redirect_url.nil? && @redirect_url.to_s.size > 5000
+        invalid_properties.push("invalid value for \"redirect_url\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties
@@ -100,8 +117,9 @@ module Stripe
       return false if @currency.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @redirect_url.to_s.size > 5000
       return false if @status.to_s.size > 5000
+      return false if !@redirect_url.nil? && @redirect_url.to_s.size > 5000
+
       true
     end
 
@@ -133,16 +151,6 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] redirect_url Value to be assigned
-    def redirect_url=(redirect_url)
-      if redirect_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"redirect_url\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @redirect_url = redirect_url
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] status Value to be assigned
     def status=(status)
       if status.to_s.size > 5000
@@ -152,21 +160,14 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        authenticated == o.authenticated &&
-        card == o.card &&
-        created == o.created &&
-        currency == o.currency &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        redirect_url == o.redirect_url &&
-        status == o.status
+    # Custom attribute writer method with validation
+    # @param [Object] redirect_url Value to be assigned
+    def redirect_url=(redirect_url)
+      if !redirect_url.nil? && redirect_url.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"redirect_url\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @redirect_url = redirect_url
     end
 
     # @see the `==` method
@@ -175,8 +176,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @authenticated, @card, @created, @currency, @id, @livemode, @object, @redirect_url, @status)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @authenticated, @card, @created, @currency, @id, @livemode, @object, @status, @redirect_url)
   end
 end

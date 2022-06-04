@@ -12,24 +12,21 @@ require "time"
 require "log"
 
 module Stripe
-  # The selected installment plan to use for this payment attempt. This parameter can only be provided during confirmation.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class InstallmentsParamPlan
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.
+
     @[JSON::Field(key: "count", type: Int64?)]
     property count : Int64?
 
-    # For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card. One of `month`.
     @[JSON::Field(key: "interval", type: String?)]
     getter interval : String?
 
     ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["month"])
 
-    # Type of installment plan, one of `fixed_count`.
     @[JSON::Field(key: "type", type: String?)]
     getter _type : String?
 
@@ -38,14 +35,20 @@ module Stripe
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
         Stripe::InstallmentPlan,
-        String,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @count : Int64, @interval : String, @_type : String)
+    def initialize(
+      *,
+      # Required properties
+      @count : Int64? = nil,
+      @interval : String? = nil,
+      @_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -65,6 +68,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -76,10 +80,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -98,24 +99,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        count == o.count &&
-        interval == o.interval &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@count, @interval, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@count, @interval, @_type)
   end
 end

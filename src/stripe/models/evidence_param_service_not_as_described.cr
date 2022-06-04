@@ -12,41 +12,39 @@ require "time"
 require "log"
 
 module Stripe
-  # Evidence provided when `reason` is 'service_not_as_described'.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class EvidenceParamServiceNotAsDescribed
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "additional_documentation", type: CanceledAdditionalDocumentation?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
-    property additional_documentation : CanceledAdditionalDocumentation?
+
+    @[JSON::Field(key: "additional_documentation", type: BusinessProfileSpecsSupportUrl?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
+    property additional_documentation : BusinessProfileSpecsSupportUrl?
 
     @[JSON::Field(ignore: true)]
     property? additional_documentation_present : Bool = false
 
-    @[JSON::Field(key: "canceled_at", type: CanceledCanceledAt?, presence: true, ignore_serialize: canceled_at.nil? && !canceled_at_present?)]
-    property canceled_at : CanceledCanceledAt?
+    @[JSON::Field(key: "canceled_at", type: GetInvoicesUpcomingSubscriptionCancelAtParameter?, presence: true, ignore_serialize: canceled_at.nil? && !canceled_at_present?)]
+    property canceled_at : GetInvoicesUpcomingSubscriptionCancelAtParameter?
 
     @[JSON::Field(ignore: true)]
     property? canceled_at_present : Bool = false
 
-    # Reason for canceling the order.
     @[JSON::Field(key: "cancellation_reason", type: String?, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
     getter cancellation_reason : String?
 
     @[JSON::Field(ignore: true)]
     property? cancellation_reason_present : Bool = false
 
-    # Explanation of why the cardholder is disputing this transaction.
     @[JSON::Field(key: "explanation", type: String?, presence: true, ignore_serialize: explanation.nil? && !explanation_present?)]
     getter explanation : String?
 
     @[JSON::Field(ignore: true)]
     property? explanation_present : Bool = false
 
-    @[JSON::Field(key: "received_at", type: MerchandiseNotAsDescribedReceivedAt?, presence: true, ignore_serialize: received_at.nil? && !received_at_present?)]
-    property received_at : MerchandiseNotAsDescribedReceivedAt?
+    @[JSON::Field(key: "received_at", type: GetInvoicesUpcomingSubscriptionCancelAtParameter?, presence: true, ignore_serialize: received_at.nil? && !received_at_present?)]
+    property received_at : GetInvoicesUpcomingSubscriptionCancelAtParameter?
 
     @[JSON::Field(ignore: true)]
     property? received_at_present : Bool = false
@@ -54,14 +52,22 @@ module Stripe
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
         Stripe::ServiceNotAsDescribed,
-        String,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @additional_documentation : CanceledAdditionalDocumentation? = nil, @canceled_at : CanceledCanceledAt? = nil, @cancellation_reason : String? = nil, @explanation : String? = nil, @received_at : MerchandiseNotAsDescribedReceivedAt? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @additional_documentation : BusinessProfileSpecsSupportUrl? = nil,
+      @canceled_at : GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil,
+      @cancellation_reason : String? = nil,
+      @explanation : String? = nil,
+      @received_at : GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -85,6 +91,7 @@ module Stripe
     def valid?
       return false if !@cancellation_reason.nil? && @cancellation_reason.to_s.size > 1500
       return false if !@explanation.nil? && @explanation.to_s.size > 1500
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -96,10 +103,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -124,26 +128,16 @@ module Stripe
       @explanation = explanation
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        additional_documentation == o.additional_documentation &&
-        canceled_at == o.canceled_at &&
-        cancellation_reason == o.cancellation_reason &&
-        explanation == o.explanation &&
-        received_at == o.received_at
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@additional_documentation, @canceled_at, @cancellation_reason, @explanation, @received_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@additional_documentation, @canceled_at, @cancellation_reason, @explanation, @received_at)
   end
 end

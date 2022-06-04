@@ -26,6 +26,12 @@ describe Stripe::PostAccountsRequest do
     end
   end
 
+  describe "test attribute 'bank_account'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'business_profile'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

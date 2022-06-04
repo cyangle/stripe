@@ -23,7 +23,7 @@ describe Stripe::SetupAttemptPaymentMethodDetailsCardThreeDSecure do
   describe "test attribute 'authentication_flow'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["challenge", "frictionless", "null"])
+      # validator = EnumValidator.new("String", ["challenge", "frictionless"])
       # validator.allowable_values.each do |value|
       #   expect { instance.authentication_flow = value }.not_to raise_error
       # end
@@ -33,7 +33,7 @@ describe Stripe::SetupAttemptPaymentMethodDetailsCardThreeDSecure do
   describe "test attribute 'result'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["attempt_acknowledged", "authenticated", "failed", "not_supported", "processing_error", "null"])
+      # validator = EnumValidator.new("String", ["attempt_acknowledged", "authenticated", "failed", "not_supported", "processing_error"])
       # validator.allowable_values.each do |value|
       #   expect { instance.result = value }.not_to raise_error
       # end
@@ -43,7 +43,7 @@ describe Stripe::SetupAttemptPaymentMethodDetailsCardThreeDSecure do
   describe "test attribute 'result_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["abandoned", "bypassed", "canceled", "card_not_enrolled", "network_not_supported", "protocol_error", "rejected", "null"])
+      # validator = EnumValidator.new("String", ["abandoned", "bypassed", "canceled", "card_not_enrolled", "network_not_supported", "protocol_error", "rejected"])
       # validator.allowable_values.each do |value|
       #   expect { instance.result_reason = value }.not_to raise_error
       # end
@@ -53,7 +53,7 @@ describe Stripe::SetupAttemptPaymentMethodDetailsCardThreeDSecure do
   describe "test attribute 'version'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["1.0.2", "2.1.0", "2.2.0", "null"])
+      # validator = EnumValidator.new("String", ["1.0.2", "2.1.0", "2.2.0"])
       # validator.allowable_values.each do |value|
       #   expect { instance.version = value }.not_to raise_error
       # end

@@ -18,11 +18,14 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The ReceivedCredit to reverse.
     @[JSON::Field(key: "received_credit", type: String)]
     getter received_credit : String
 
     # Optional properties
+
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -38,7 +41,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @received_credit : String, @expand : Array(String)? = nil, @metadata : Hash(String, String)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @received_credit : String,
+      # Optional properties
+      @expand : Array(String)? = nil,
+      @metadata : Hash(String, String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -57,6 +67,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @received_credit.to_s.size > 5000
+
       true
     end
 
@@ -70,24 +81,16 @@ module Stripe
       @received_credit = received_credit
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        received_credit == o.received_credit
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@expand, @metadata, @received_credit)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@received_credit, @expand, @metadata)
   end
 end

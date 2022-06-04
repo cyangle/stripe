@@ -12,14 +12,13 @@ require "time"
 require "log"
 
 module Stripe
-  # Settings controlling the behavior of the customer's cash balance, such as reconciliation of funds received.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class BalanceSettingsParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Method for using the customer balance to pay outstanding `customer_balance` PaymentIntents. If set to `automatic`, all available funds will automatically be used to pay any outstanding PaymentIntent. If set to `manual`, only customer balance funds from bank transfers with a reference code matching `payment_intent.next_action.display_bank_transfer_intructions.reference_code` will automatically be used to pay the corresponding outstanding PaymentIntent.
+
     @[JSON::Field(key: "reconciliation_mode", type: String?, presence: true, ignore_serialize: reconciliation_mode.nil? && !reconciliation_mode_present?)]
     getter reconciliation_mode : String?
 
@@ -30,13 +29,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @reconciliation_mode : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @reconciliation_mode : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_RECONCILIATION_MODE.error_message) unless ENUM_VALIDATOR_FOR_RECONCILIATION_MODE.valid?(@reconciliation_mode)
 
       invalid_properties
@@ -46,6 +50,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_RECONCILIATION_MODE.valid?(@reconciliation_mode)
+
       true
     end
 
@@ -56,22 +61,16 @@ module Stripe
       @reconciliation_mode = reconciliation_mode
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        reconciliation_mode == o.reconciliation_mode
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@reconciliation_mode)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@reconciliation_mode)
   end
 end

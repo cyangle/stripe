@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
     property created : Int64
@@ -26,12 +27,6 @@ module Stripe
     # When the query was run, Sigma contained a snapshot of your Stripe data at this time.
     @[JSON::Field(key: "data_load_time", type: Int64)]
     property data_load_time : Int64
-
-    @[JSON::Field(key: "file", type: ScheduledQueryRunFile?, presence: true, ignore_serialize: file.nil? && !file_present?)]
-    property file : ScheduledQueryRunFile?
-
-    @[JSON::Field(ignore: true)]
-    property? file_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
@@ -64,15 +59,37 @@ module Stripe
     getter title : String
 
     # Optional properties
+
     @[JSON::Field(key: "error", type: SigmaScheduledQueryRunError?, presence: true, ignore_serialize: error.nil? && !error_present?)]
     property error : SigmaScheduledQueryRunError?
 
     @[JSON::Field(ignore: true)]
     property? error_present : Bool = false
 
+    @[JSON::Field(key: "file", type: ScheduledQueryRunFile?, presence: true, ignore_serialize: file.nil? && !file_present?)]
+    property file : ScheduledQueryRunFile?
+
+    @[JSON::Field(ignore: true)]
+    property? file_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @created : Int64, @data_load_time : Int64, @file : ScheduledQueryRunFile?, @id : String, @livemode : Bool, @object : String, @result_available_until : Int64, @sql : String, @status : String, @title : String, @error : SigmaScheduledQueryRunError? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @data_load_time : Int64,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @result_available_until : Int64,
+      @sql : String,
+      @status : String,
+      @title : String,
+      # Optional properties
+      @error : SigmaScheduledQueryRunError? = nil,
+      @file : ScheduledQueryRunFile? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -109,6 +126,7 @@ module Stripe
       return false if @sql.to_s.size > 100000
       return false if @status.to_s.size > 5000
       return false if @title.to_s.size > 5000
+
       true
     end
 
@@ -159,32 +177,16 @@ module Stripe
       @title = title
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        created == o.created &&
-        data_load_time == o.data_load_time &&
-        error == o.error &&
-        file == o.file &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        result_available_until == o.result_available_until &&
-        sql == o.sql &&
-        status == o.status &&
-        title == o.title
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@created, @data_load_time, @error, @file, @id, @livemode, @object, @result_available_until, @sql, @status, @title)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @data_load_time, @id, @livemode, @object, @result_available_until, @sql, @status, @title, @error, @file)
   end
 end

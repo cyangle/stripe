@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "exp_month", type: String)]
     getter exp_month : String
 
@@ -28,6 +29,7 @@ module Stripe
     getter number : String
 
     # Optional properties
+
     @[JSON::Field(key: "address_city", type: String?, presence: true, ignore_serialize: address_city.nil? && !address_city_present?)]
     getter address_city : String?
 
@@ -84,13 +86,41 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @exp_month : String, @exp_year : String, @number : String, @address_city : String? = nil, @address_country : String? = nil, @address_line1 : String? = nil, @address_line2 : String? = nil, @address_state : String? = nil, @address_zip : String? = nil, @currency : String? = nil, @cvc : String? = nil, @name : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @exp_month : String,
+      @exp_year : String,
+      @number : String,
+      # Optional properties
+      @address_city : String? = nil,
+      @address_country : String? = nil,
+      @address_line1 : String? = nil,
+      @address_line2 : String? = nil,
+      @address_state : String? = nil,
+      @address_zip : String? = nil,
+      @currency : String? = nil,
+      @cvc : String? = nil,
+      @name : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
+      if @exp_month.to_s.size > 5000
+        invalid_properties.push("invalid value for \"exp_month\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if @exp_year.to_s.size > 5000
+        invalid_properties.push("invalid value for \"exp_year\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if @number.to_s.size > 5000
+        invalid_properties.push("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
+      end
 
       if !@address_city.nil? && @address_city.to_s.size > 5000
         invalid_properties.push("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
@@ -124,20 +154,8 @@ module Stripe
         invalid_properties.push("invalid value for \"cvc\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @exp_month.to_s.size > 5000
-        invalid_properties.push("invalid value for \"exp_month\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @exp_year.to_s.size > 5000
-        invalid_properties.push("invalid value for \"exp_year\", the character length must be smaller than or equal to 5000.")
-      end
-
       if !@name.nil? && @name.to_s.size > 5000
         invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @number.to_s.size > 5000
-        invalid_properties.push("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties
@@ -146,6 +164,9 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @exp_month.to_s.size > 5000
+      return false if @exp_year.to_s.size > 5000
+      return false if @number.to_s.size > 5000
       return false if !@address_city.nil? && @address_city.to_s.size > 5000
       return false if !@address_country.nil? && @address_country.to_s.size > 5000
       return false if !@address_line1.nil? && @address_line1.to_s.size > 5000
@@ -154,11 +175,39 @@ module Stripe
       return false if !@address_zip.nil? && @address_zip.to_s.size > 5000
       return false if !@currency.nil? && @currency.to_s.size > 5000
       return false if !@cvc.nil? && @cvc.to_s.size > 5000
-      return false if @exp_month.to_s.size > 5000
-      return false if @exp_year.to_s.size > 5000
       return false if !@name.nil? && @name.to_s.size > 5000
-      return false if @number.to_s.size > 5000
+
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] exp_month Value to be assigned
+    def exp_month=(exp_month)
+      if exp_month.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"exp_month\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @exp_month = exp_month
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] exp_year Value to be assigned
+    def exp_year=(exp_year)
+      if exp_year.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"exp_year\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @exp_year = exp_year
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] number Value to be assigned
+    def number=(number)
+      if number.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @number = number
     end
 
     # Custom attribute writer method with validation
@@ -242,26 +291,6 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] exp_month Value to be assigned
-    def exp_month=(exp_month)
-      if exp_month.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"exp_month\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @exp_month = exp_month
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] exp_year Value to be assigned
-    def exp_year=(exp_year)
-      if exp_year.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"exp_year\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @exp_year = exp_year
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
     def name=(name)
       if !name.nil? && name.to_s.size > 5000
@@ -271,43 +300,16 @@ module Stripe
       @name = name
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] number Value to be assigned
-    def number=(number)
-      if number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @number = number
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address_city == o.address_city &&
-        address_country == o.address_country &&
-        address_line1 == o.address_line1 &&
-        address_line2 == o.address_line2 &&
-        address_state == o.address_state &&
-        address_zip == o.address_zip &&
-        currency == o.currency &&
-        cvc == o.cvc &&
-        exp_month == o.exp_month &&
-        exp_year == o.exp_year &&
-        name == o.name &&
-        number == o.number
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address_city, @address_country, @address_line1, @address_line2, @address_state, @address_zip, @currency, @cvc, @exp_month, @exp_year, @name, @number)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@exp_month, @exp_year, @number, @address_city, @address_country, @address_line1, @address_line2, @address_state, @address_zip, @currency, @cvc, @name)
   end
 end

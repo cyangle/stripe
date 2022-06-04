@@ -18,24 +18,22 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "financial_connections", type: InvoiceLinkedAccountOptionsParam?, presence: true, ignore_serialize: financial_connections.nil? && !financial_connections_present?)]
-    property financial_connections : InvoiceLinkedAccountOptionsParam?
+
+    @[JSON::Field(key: "request_three_d_secure", type: String?, presence: true, ignore_serialize: request_three_d_secure.nil? && !request_three_d_secure_present?)]
+    getter request_three_d_secure : String?
 
     @[JSON::Field(ignore: true)]
-    property? financial_connections_present : Bool = false
+    property? request_three_d_secure_present : Bool = false
 
-    # Verification method for the intent
-    @[JSON::Field(key: "verification_method", type: String?, presence: true, ignore_serialize: verification_method.nil? && !verification_method_present?)]
-    getter verification_method : String?
-
-    @[JSON::Field(ignore: true)]
-    property? verification_method_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_VERIFICATION_METHOD = EnumValidator.new("verification_method", "String", ["automatic", "instant", "microdeposits"])
+    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = EnumValidator.new("request_three_d_secure", "String", ["any", "automatic"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @financial_connections : InvoiceLinkedAccountOptionsParam? = nil, @verification_method : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @request_three_d_secure : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -43,7 +41,7 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
+      invalid_properties.push(ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.error_message) unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
 
       invalid_properties
     end
@@ -51,24 +49,16 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
+      return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
+
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] verification_method Object to be assigned
-    def verification_method=(verification_method)
-      ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid!(verification_method)
-      @verification_method = verification_method
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        financial_connections == o.financial_connections &&
-        verification_method == o.verification_method
+    # @param [Object] request_three_d_secure Object to be assigned
+    def request_three_d_secure=(request_three_d_secure)
+      ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid!(request_three_d_secure)
+      @request_three_d_secure = request_three_d_secure
     end
 
     # @see the `==` method
@@ -77,8 +67,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@financial_connections, @verification_method)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@request_three_d_secure)
   end
 end

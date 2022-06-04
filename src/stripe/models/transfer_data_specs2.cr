@@ -12,19 +12,18 @@ require "time"
 require "log"
 
 module Stripe
-  # If specified, the funds from the subscription's invoices will be transferred to the destination and the ID of the resulting transfers will be found on the resulting charges.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class TransferDataSpecs2
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # ID of an existing, connected Stripe account.
+
     @[JSON::Field(key: "destination", type: String)]
     property destination : String
 
     # Optional properties
-    # A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount is transferred to the destination.
+
     @[JSON::Field(key: "amount_percent", type: Float64?, presence: true, ignore_serialize: amount_percent.nil? && !amount_percent_present?)]
     property amount_percent : Float64?
 
@@ -33,7 +32,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @destination : String, @amount_percent : Float64? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @destination : String,
+      # Optional properties
+      @amount_percent : Float64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -50,23 +55,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount_percent == o.amount_percent &&
-        destination == o.destination
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount_percent, @destination)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@destination, @amount_percent)
   end
 end

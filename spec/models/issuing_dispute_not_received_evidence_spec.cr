@@ -47,7 +47,7 @@ describe Stripe::IssuingDisputeNotReceivedEvidence do
   describe "test attribute 'product_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["merchandise", "service", "null"])
+      # validator = EnumValidator.new("String", ["merchandise", "service"])
       # validator.allowable_values.each do |value|
       #   expect { instance.product_type = value }.not_to raise_error
       # end

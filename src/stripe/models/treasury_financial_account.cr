@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The array of paths to active Features in the Features hash.
     @[JSON::Field(key: "active_features", type: Array(String))]
     getter active_features : Array(String)
@@ -48,13 +49,6 @@ module Stripe
     @[JSON::Field(key: "livemode", type: Bool)]
     property livemode : Bool
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)?
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
-
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String)]
     getter object : String
@@ -66,12 +60,6 @@ module Stripe
     getter pending_features : Array(String)
 
     ENUM_VALIDATOR_FOR_PENDING_FEATURES = EnumValidator.new("pending_features", "Array(String)", ["card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture"])
-
-    @[JSON::Field(key: "platform_restrictions", type: TreasuryFinancialAccountPlatformRestrictions?, presence: true, ignore_serialize: platform_restrictions.nil? && !platform_restrictions_present?)]
-    property platform_restrictions : TreasuryFinancialAccountPlatformRestrictions?
-
-    @[JSON::Field(ignore: true)]
-    property? platform_restrictions_present : Bool = false
 
     # The array of paths to restricted Features in the Features hash.
     @[JSON::Field(key: "restricted_features", type: Array(String))]
@@ -93,21 +81,56 @@ module Stripe
     property supported_currencies : Array(String)
 
     # Optional properties
+
     @[JSON::Field(key: "features", type: TreasuryFinancialAccountFeatures?, presence: true, ignore_serialize: features.nil? && !features_present?)]
     property features : TreasuryFinancialAccountFeatures?
 
     @[JSON::Field(ignore: true)]
     property? features_present : Bool = false
 
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
+
+    @[JSON::Field(key: "platform_restrictions", type: TreasuryFinancialAccountPlatformRestrictions?, presence: true, ignore_serialize: platform_restrictions.nil? && !platform_restrictions_present?)]
+    property platform_restrictions : TreasuryFinancialAccountPlatformRestrictions?
+
+    @[JSON::Field(ignore: true)]
+    property? platform_restrictions_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active_features : Array(String), @balance : AccountServiceResourceBalance, @country : String, @created : Int64, @financial_addresses : Array(AccountServiceResourceFinancialAddress), @id : String, @livemode : Bool, @metadata : Hash(String, String)?, @object : String, @pending_features : Array(String), @platform_restrictions : TreasuryFinancialAccountPlatformRestrictions?, @restricted_features : Array(String), @status : String, @status_details : AccountServiceResourceTreasuryStatusDetails, @supported_currencies : Array(String), @features : TreasuryFinancialAccountFeatures? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @active_features : Array(String),
+      @balance : AccountServiceResourceBalance,
+      @country : String,
+      @created : Int64,
+      @financial_addresses : Array(AccountServiceResourceFinancialAddress),
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @pending_features : Array(String),
+      @restricted_features : Array(String),
+      @status : String,
+      @status_details : AccountServiceResourceTreasuryStatusDetails,
+      @supported_currencies : Array(String),
+      # Optional properties
+      @features : TreasuryFinancialAccountFeatures? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @platform_restrictions : TreasuryFinancialAccountPlatformRestrictions? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_ACTIVE_FEATURES.error_message) unless ENUM_VALIDATOR_FOR_ACTIVE_FEATURES.all_valid?(@active_features, false)
 
       if @country.to_s.size > 5000
@@ -139,6 +162,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_PENDING_FEATURES.all_valid?(@pending_features, false)
       return false unless ENUM_VALIDATOR_FOR_RESTRICTED_FEATURES.all_valid?(@restricted_features, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
       true
     end
 
@@ -197,37 +221,16 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active_features == o.active_features &&
-        balance == o.balance &&
-        country == o.country &&
-        created == o.created &&
-        features == o.features &&
-        financial_addresses == o.financial_addresses &&
-        id == o.id &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        pending_features == o.pending_features &&
-        platform_restrictions == o.platform_restrictions &&
-        restricted_features == o.restricted_features &&
-        status == o.status &&
-        status_details == o.status_details &&
-        supported_currencies == o.supported_currencies
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active_features, @balance, @country, @created, @features, @financial_addresses, @id, @livemode, @metadata, @object, @pending_features, @platform_restrictions, @restricted_features, @status, @status_details, @supported_currencies)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active_features, @balance, @country, @created, @financial_addresses, @id, @livemode, @object, @pending_features, @restricted_features, @status, @status_details, @supported_currencies, @features, @metadata, @platform_restrictions)
   end
 end

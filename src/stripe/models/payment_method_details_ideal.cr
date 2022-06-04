@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
     @[JSON::Field(key: "bank", type: String?, presence: true, ignore_serialize: bank.nil? && !bank_present?)]
     getter bank : String?
@@ -26,7 +27,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? bank_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_BANK = EnumValidator.new("bank", "String", ["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot", "null"])
+    ENUM_VALIDATOR_FOR_BANK = EnumValidator.new("bank", "String", ["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"])
 
     # The Bank Identifier Code of the customer's bank.
     @[JSON::Field(key: "bic", type: String?, presence: true, ignore_serialize: bic.nil? && !bic_present?)]
@@ -35,7 +36,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? bic_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_BIC = EnumValidator.new("bic", "String", ["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U", "null"])
+    ENUM_VALIDATOR_FOR_BIC = EnumValidator.new("bic", "String", ["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U"])
 
     @[JSON::Field(key: "generated_sepa_debit", type: PaymentMethodDetailsBancontactGeneratedSepaDebit?, presence: true, ignore_serialize: generated_sepa_debit.nil? && !generated_sepa_debit_present?)]
     property generated_sepa_debit : PaymentMethodDetailsBancontactGeneratedSepaDebit?
@@ -65,22 +66,32 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bank : String?, @bic : String?, @generated_sepa_debit : PaymentMethodDetailsBancontactGeneratedSepaDebit?, @generated_sepa_debit_mandate : PaymentMethodDetailsBancontactGeneratedSepaDebitMandate?, @iban_last4 : String?, @verified_name : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @bank : String? = nil,
+      @bic : String? = nil,
+      @generated_sepa_debit : PaymentMethodDetailsBancontactGeneratedSepaDebit? = nil,
+      @generated_sepa_debit_mandate : PaymentMethodDetailsBancontactGeneratedSepaDebitMandate? = nil,
+      @iban_last4 : String? = nil,
+      @verified_name : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_BANK.error_message) unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BIC.error_message) unless ENUM_VALIDATOR_FOR_BIC.valid?(@bic)
 
-      if @iban_last4.to_s.size > 5000
+      if !@iban_last4.nil? && @iban_last4.to_s.size > 5000
         invalid_properties.push("invalid value for \"iban_last4\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @verified_name.to_s.size > 5000
+      if !@verified_name.nil? && @verified_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -92,8 +103,9 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank)
       return false unless ENUM_VALIDATOR_FOR_BIC.valid?(@bic)
-      return false if @iban_last4.to_s.size > 5000
-      return false if @verified_name.to_s.size > 5000
+      return false if !@iban_last4.nil? && @iban_last4.to_s.size > 5000
+      return false if !@verified_name.nil? && @verified_name.to_s.size > 5000
+
       true
     end
 
@@ -114,7 +126,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] iban_last4 Value to be assigned
     def iban_last4=(iban_last4)
-      if iban_last4.to_s.size > 5000
+      if !iban_last4.nil? && iban_last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"iban_last4\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -124,24 +136,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] verified_name Value to be assigned
     def verified_name=(verified_name)
-      if verified_name.to_s.size > 5000
+      if !verified_name.nil? && verified_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
       end
 
       @verified_name = verified_name
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bank == o.bank &&
-        bic == o.bic &&
-        generated_sepa_debit == o.generated_sepa_debit &&
-        generated_sepa_debit_mandate == o.generated_sepa_debit_mandate &&
-        iban_last4 == o.iban_last4 &&
-        verified_name == o.verified_name
     end
 
     # @see the `==` method
@@ -150,8 +149,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bank, @bic, @generated_sepa_debit, @generated_sepa_debit_mandate, @iban_last4, @verified_name)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bank, @bic, @generated_sepa_debit, @generated_sepa_debit_mandate, @iban_last4, @verified_name)
   end
 end

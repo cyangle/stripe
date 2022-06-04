@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Amount of the charge that you will create when authentication completes.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -31,6 +32,7 @@ module Stripe
     property return_url : String
 
     # Optional properties
+
     # The ID of a card token, or the ID of a card belonging to the given customer.
     @[JSON::Field(key: "card", type: String?, presence: true, ignore_serialize: card.nil? && !card_present?)]
     getter card : String?
@@ -45,6 +47,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? customer_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -53,7 +56,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @currency : String, @return_url : String, @card : String? = nil, @customer : String? = nil, @expand : Array(String)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @currency : String,
+      @return_url : String,
+      # Optional properties
+      @card : String? = nil,
+      @customer : String? = nil,
+      @expand : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -77,6 +90,7 @@ module Stripe
     def valid?
       return false if !@card.nil? && @card.to_s.size > 5000
       return false if !@customer.nil? && @customer.to_s.size > 5000
+
       true
     end
 
@@ -100,27 +114,16 @@ module Stripe
       @customer = customer
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        card == o.card &&
-        currency == o.currency &&
-        customer == o.customer &&
-        expand == o.expand &&
-        return_url == o.return_url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @card, @currency, @customer, @expand, @return_url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @currency, @return_url, @card, @customer, @expand)
   end
 end

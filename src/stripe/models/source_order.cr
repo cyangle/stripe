@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the order.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -27,20 +28,21 @@ module Stripe
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
 
-    # List of items constituting the order.
-    @[JSON::Field(key: "items", type: Array(SourceOrderItem)?, presence: true, ignore_serialize: items.nil? && !items_present?)]
-    property items : Array(SourceOrderItem)?
-
-    @[JSON::Field(ignore: true)]
-    property? items_present : Bool = false
-
     # Optional properties
+
     # The email address of the customer placing the order.
     @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
     getter email : String?
 
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
+
+    # List of items constituting the order.
+    @[JSON::Field(key: "items", type: Array(SourceOrderItem)?, presence: true, ignore_serialize: items.nil? && !items_present?)]
+    property items : Array(SourceOrderItem)?
+
+    @[JSON::Field(ignore: true)]
+    property? items_present : Bool = false
 
     @[JSON::Field(key: "shipping", type: Shipping?, presence: true, ignore_serialize: shipping.nil? && !shipping_present?)]
     property shipping : Shipping?
@@ -50,7 +52,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @currency : String, @items : Array(SourceOrderItem)?, @email : String? = nil, @shipping : Shipping? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @currency : String,
+      # Optional properties
+      @email : String? = nil,
+      @items : Array(SourceOrderItem)? = nil,
+      @shipping : Shipping? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -69,6 +80,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@email.nil? && @email.to_s.size > 5000
+
       true
     end
 
@@ -82,26 +94,16 @@ module Stripe
       @email = email
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        currency == o.currency &&
-        email == o.email &&
-        items == o.items &&
-        shipping == o.shipping
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @currency, @email, @items, @shipping)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @currency, @email, @items, @shipping)
   end
 end

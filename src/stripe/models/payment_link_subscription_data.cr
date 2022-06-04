@@ -18,10 +18,11 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Integer representing the number of trial period days before the customer is charged for the first time.
-    @[JSON::Field(key: "trial_period_days", type: Int64, presence: true, ignore_serialize: trial_period_days.nil? && !trial_period_days_present?)]
-    property trial_period_days : Int64
+    @[JSON::Field(key: "trial_period_days", type: Int64?, presence: true, ignore_serialize: trial_period_days.nil? && !trial_period_days_present?)]
+    property trial_period_days : Int64?
 
     @[JSON::Field(ignore: true)]
     property? trial_period_days_present : Bool = false
@@ -35,7 +36,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @trial_period_days : Int64?)
+    def initialize(
+      *,
+      # Optional properties
+      @trial_period_days : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -60,20 +65,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        trial_period_days == o.trial_period_days
     end
 
     # @see the `==` method
@@ -82,8 +76,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@trial_period_days)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@trial_period_days)
   end
 end

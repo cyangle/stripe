@@ -19,15 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The `pending_request.amount` at the time of the request, presented in your card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). Stripe held this amount from your account to fund the authorization if the request was approved.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
-
-    @[JSON::Field(key: "amount_details", type: IssuingAuthorizationAmountDetails1?, presence: true, ignore_serialize: amount_details.nil? && !amount_details_present?)]
-    property amount_details : IssuingAuthorizationAmountDetails1?
-
-    @[JSON::Field(ignore: true)]
-    property? amount_details_present : Bool = false
 
     # Whether this request was approved.
     @[JSON::Field(key: "approved", type: Bool)]
@@ -55,9 +50,29 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_REASON = EnumValidator.new("reason", "String", ["account_disabled", "card_active", "card_inactive", "cardholder_inactive", "cardholder_verification_required", "insufficient_funds", "not_allowed", "spending_controls", "suspected_fraud", "verification_failed", "webhook_approved", "webhook_declined", "webhook_timeout"])
 
+    # Optional properties
+
+    @[JSON::Field(key: "amount_details", type: IssuingAuthorizationAmountDetails1?, presence: true, ignore_serialize: amount_details.nil? && !amount_details_present?)]
+    property amount_details : IssuingAuthorizationAmountDetails1?
+
+    @[JSON::Field(ignore: true)]
+    property? amount_details_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @amount_details : IssuingAuthorizationAmountDetails1?, @approved : Bool, @created : Int64, @currency : String, @merchant_amount : Int64, @merchant_currency : String, @reason : String)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @approved : Bool,
+      @created : Int64,
+      @currency : String,
+      @merchant_amount : Int64,
+      @merchant_currency : String,
+      @reason : String,
+      # Optional properties
+      @amount_details : IssuingAuthorizationAmountDetails1? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -84,6 +99,7 @@ module Stripe
       return false if @currency.to_s.size > 5000
       return false if @merchant_currency.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason, false)
+
       true
     end
 
@@ -114,29 +130,16 @@ module Stripe
       @reason = reason
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        amount_details == o.amount_details &&
-        approved == o.approved &&
-        created == o.created &&
-        currency == o.currency &&
-        merchant_amount == o.merchant_amount &&
-        merchant_currency == o.merchant_currency &&
-        reason == o.reason
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @amount_details, @approved, @created, @currency, @merchant_amount, @merchant_currency, @reason)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @approved, @created, @currency, @merchant_amount, @merchant_currency, @reason, @amount_details)
   end
 end

@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Request ability to capture this payment beyond the standard [authorization validity window](https://stripe.com/docs/terminal/features/extended-authorizations#authorization-validity)
     @[JSON::Field(key: "request_extended_authorization", type: Bool?, presence: true, ignore_serialize: request_extended_authorization.nil? && !request_extended_authorization_present?)]
     property request_extended_authorization : Bool?
@@ -35,7 +36,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @request_extended_authorization : Bool?, @request_incremental_authorization_support : Bool?)
+    def initialize(
+      *,
+      # Optional properties
+      @request_extended_authorization : Bool? = nil,
+      @request_incremental_authorization_support : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -52,23 +58,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        request_extended_authorization == o.request_extended_authorization &&
-        request_incremental_authorization_support == o.request_incremental_authorization_support
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@request_extended_authorization, @request_incremental_authorization_support)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@request_extended_authorization, @request_incremental_authorization_support)
   end
 end

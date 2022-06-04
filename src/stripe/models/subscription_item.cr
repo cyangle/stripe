@@ -19,11 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    @[JSON::Field(key: "billing_thresholds", type: SubscriptionItemBillingThresholds1?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
-    property billing_thresholds : SubscriptionItemBillingThresholds1?
-
-    @[JSON::Field(ignore: true)]
-    property? billing_thresholds_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
@@ -43,15 +38,27 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["subscription_item"])
 
-    @[JSON::Field(key: "plan", type: Plan)]
-    property plan : Plan
-
     @[JSON::Field(key: "price", type: Price)]
     property price : Price
 
     # The `subscription` this `subscription_item` belongs to.
     @[JSON::Field(key: "subscription", type: String)]
     getter subscription : String
+
+    # Optional properties
+
+    @[JSON::Field(key: "billing_thresholds", type: SubscriptionItemBillingThresholds1?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
+    property billing_thresholds : SubscriptionItemBillingThresholds1?
+
+    @[JSON::Field(ignore: true)]
+    property? billing_thresholds_present : Bool = false
+
+    # The [quantity](https://stripe.com/docs/subscriptions/quantities) of the plan to which the customer should be subscribed.
+    @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
+    property quantity : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? quantity_present : Bool = false
 
     # The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on the subscription do not apply to this `subscription_item`.
     @[JSON::Field(key: "tax_rates", type: Array(TaxRate)?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
@@ -60,17 +67,22 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? tax_rates_present : Bool = false
 
-    # Optional properties
-    # The [quantity](https://stripe.com/docs/subscriptions/quantities) of the plan to which the customer should be subscribed.
-    @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
-    property quantity : Int64?
-
-    @[JSON::Field(ignore: true)]
-    property? quantity_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing_thresholds : SubscriptionItemBillingThresholds1?, @created : Int64, @id : String, @metadata : Hash(String, String), @object : String, @plan : Plan, @price : Price, @subscription : String, @tax_rates : Array(TaxRate)?, @quantity : Int64? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @id : String,
+      @metadata : Hash(String, String),
+      @object : String,
+      @price : Price,
+      @subscription : String,
+      # Optional properties
+      @billing_thresholds : SubscriptionItemBillingThresholds1? = nil,
+      @quantity : Int64? = nil,
+      @tax_rates : Array(TaxRate)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -97,6 +109,7 @@ module Stripe
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @subscription.to_s.size > 5000
+
       true
     end
 
@@ -127,31 +140,16 @@ module Stripe
       @subscription = subscription
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        billing_thresholds == o.billing_thresholds &&
-        created == o.created &&
-        id == o.id &&
-        metadata == o.metadata &&
-        object == o.object &&
-        plan == o.plan &&
-        price == o.price &&
-        quantity == o.quantity &&
-        subscription == o.subscription &&
-        tax_rates == o.tax_rates
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@billing_thresholds, @created, @id, @metadata, @object, @plan, @price, @quantity, @subscription, @tax_rates)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @metadata, @object, @price, @subscription, @billing_thresholds, @quantity, @tax_rates)
   end
 end

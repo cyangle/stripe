@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Whether the SKU is available for purchase.
     @[JSON::Field(key: "active", type: Bool)]
     property active : Bool
@@ -39,13 +40,6 @@ module Stripe
     @[JSON::Field(key: "id", type: String)]
     getter id : String
 
-    # The URL of an image for this SKU, meant to be displayable to the customer.
-    @[JSON::Field(key: "image", type: String?, presence: true, ignore_serialize: image.nil? && !image_present?)]
-    getter image : String?
-
-    @[JSON::Field(ignore: true)]
-    property? image_present : Bool = false
-
     @[JSON::Field(key: "inventory", type: SkuInventory)]
     property inventory : SkuInventory
 
@@ -63,12 +57,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["sku"])
 
-    @[JSON::Field(key: "package_dimensions", type: SkuPackageDimensions?, presence: true, ignore_serialize: package_dimensions.nil? && !package_dimensions_present?)]
-    property package_dimensions : SkuPackageDimensions?
-
-    @[JSON::Field(ignore: true)]
-    property? package_dimensions_present : Bool = false
-
     # The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
     @[JSON::Field(key: "price", type: Int64)]
     property price : Int64
@@ -80,9 +68,42 @@ module Stripe
     @[JSON::Field(key: "updated", type: Int64)]
     property updated : Int64
 
+    # Optional properties
+
+    # The URL of an image for this SKU, meant to be displayable to the customer.
+    @[JSON::Field(key: "image", type: String?, presence: true, ignore_serialize: image.nil? && !image_present?)]
+    getter image : String?
+
+    @[JSON::Field(ignore: true)]
+    property? image_present : Bool = false
+
+    @[JSON::Field(key: "package_dimensions", type: SkuPackageDimensions?, presence: true, ignore_serialize: package_dimensions.nil? && !package_dimensions_present?)]
+    property package_dimensions : SkuPackageDimensions?
+
+    @[JSON::Field(ignore: true)]
+    property? package_dimensions_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool, @attributes : Hash(String, String), @created : Int64, @currency : String, @id : String, @image : String?, @inventory : SkuInventory, @livemode : Bool, @metadata : Hash(String, String), @object : String, @package_dimensions : SkuPackageDimensions?, @price : Int64, @product : SkuProduct, @updated : Int64)
+    def initialize(
+      *,
+      # Required properties
+      @active : Bool,
+      @attributes : Hash(String, String),
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @inventory : SkuInventory,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      @price : Int64,
+      @product : SkuProduct,
+      @updated : Int64,
+      # Optional properties
+      @image : String? = nil,
+      @package_dimensions : SkuPackageDimensions? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -94,11 +115,11 @@ module Stripe
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @image.to_s.size > 2048
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      if !@image.nil? && @image.to_s.size > 2048
         invalid_properties.push("invalid value for \"image\", the character length must be smaller than or equal to 2048.")
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       invalid_properties
     end
@@ -107,8 +128,9 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @id.to_s.size > 5000
-      return false if @image.to_s.size > 2048
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if !@image.nil? && @image.to_s.size > 2048
+
       true
     end
 
@@ -122,16 +144,6 @@ module Stripe
       @id = id
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] image Value to be assigned
-    def image=(image)
-      if image.to_s.size > 2048
-        raise ArgumentError.new("invalid value for \"image\", the character length must be smaller than or equal to 2048.")
-      end
-
-      @image = image
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
     def object=(object)
@@ -139,25 +151,14 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        attributes == o.attributes &&
-        created == o.created &&
-        currency == o.currency &&
-        id == o.id &&
-        image == o.image &&
-        inventory == o.inventory &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        package_dimensions == o.package_dimensions &&
-        price == o.price &&
-        product == o.product &&
-        updated == o.updated
+    # Custom attribute writer method with validation
+    # @param [Object] image Value to be assigned
+    def image=(image)
+      if !image.nil? && image.to_s.size > 2048
+        raise ArgumentError.new("invalid value for \"image\", the character length must be smaller than or equal to 2048.")
+      end
+
+      @image = image
     end
 
     # @see the `==` method
@@ -166,8 +167,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @attributes, @created, @currency, @id, @image, @inventory, @livemode, @metadata, @object, @package_dimensions, @price, @product, @updated)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @attributes, @created, @currency, @id, @inventory, @livemode, @metadata, @object, @price, @product, @updated, @image, @package_dimensions)
   end
 end

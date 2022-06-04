@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Total before any discounts or taxes are applied.
     @[JSON::Field(key: "amount_subtotal", type: Int64?)]
     property amount_subtotal : Int64?
@@ -49,7 +50,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount_subtotal : Int64, @amount_total : Int64, @interval : String, @interval_count : Int64, @total_details : QuotesResourceTotalDetails)
+    def initialize(
+      *,
+      # Required properties
+      @amount_subtotal : Int64? = nil,
+      @amount_total : Int64? = nil,
+      @interval : String? = nil,
+      @interval_count : Int64? = nil,
+      @total_details : QuotesResourceTotalDetails? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -66,6 +75,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -77,10 +87,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -92,26 +99,16 @@ module Stripe
       @interval = interval
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount_subtotal == o.amount_subtotal &&
-        amount_total == o.amount_total &&
-        interval == o.interval &&
-        interval_count == o.interval_count &&
-        total_details == o.total_details
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount_subtotal, @amount_total, @interval, @interval_count, @total_details)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount_subtotal, @amount_total, @interval, @interval_count, @total_details)
   end
 end

@@ -18,38 +18,37 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "additional_documentation", type: CanceledAdditionalDocumentation?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
-    property additional_documentation : CanceledAdditionalDocumentation?
+
+    @[JSON::Field(key: "additional_documentation", type: BusinessProfileSpecsSupportUrl?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
+    property additional_documentation : BusinessProfileSpecsSupportUrl?
 
     @[JSON::Field(ignore: true)]
     property? additional_documentation_present : Bool = false
 
-    @[JSON::Field(key: "card_statement", type: DuplicateCardStatement?, presence: true, ignore_serialize: card_statement.nil? && !card_statement_present?)]
-    property card_statement : DuplicateCardStatement?
+    @[JSON::Field(key: "card_statement", type: BusinessProfileSpecsSupportUrl?, presence: true, ignore_serialize: card_statement.nil? && !card_statement_present?)]
+    property card_statement : BusinessProfileSpecsSupportUrl?
 
     @[JSON::Field(ignore: true)]
     property? card_statement_present : Bool = false
 
-    @[JSON::Field(key: "cash_receipt", type: DuplicateCashReceipt?, presence: true, ignore_serialize: cash_receipt.nil? && !cash_receipt_present?)]
-    property cash_receipt : DuplicateCashReceipt?
+    @[JSON::Field(key: "cash_receipt", type: BusinessProfileSpecsSupportUrl?, presence: true, ignore_serialize: cash_receipt.nil? && !cash_receipt_present?)]
+    property cash_receipt : BusinessProfileSpecsSupportUrl?
 
     @[JSON::Field(ignore: true)]
     property? cash_receipt_present : Bool = false
 
-    @[JSON::Field(key: "check_image", type: DuplicateCheckImage?, presence: true, ignore_serialize: check_image.nil? && !check_image_present?)]
-    property check_image : DuplicateCheckImage?
+    @[JSON::Field(key: "check_image", type: BusinessProfileSpecsSupportUrl?, presence: true, ignore_serialize: check_image.nil? && !check_image_present?)]
+    property check_image : BusinessProfileSpecsSupportUrl?
 
     @[JSON::Field(ignore: true)]
     property? check_image_present : Bool = false
 
-    # Explanation of why the cardholder is disputing this transaction.
     @[JSON::Field(key: "explanation", type: String?, presence: true, ignore_serialize: explanation.nil? && !explanation_present?)]
     getter explanation : String?
 
     @[JSON::Field(ignore: true)]
     property? explanation_present : Bool = false
 
-    # Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of. Of the two or more transactions that are copies of each other, this is original undisputed one.
     @[JSON::Field(key: "original_transaction", type: String?, presence: true, ignore_serialize: original_transaction.nil? && !original_transaction_present?)]
     getter original_transaction : String?
 
@@ -58,7 +57,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @additional_documentation : CanceledAdditionalDocumentation? = nil, @card_statement : DuplicateCardStatement? = nil, @cash_receipt : DuplicateCashReceipt? = nil, @check_image : DuplicateCheckImage? = nil, @explanation : String? = nil, @original_transaction : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @additional_documentation : BusinessProfileSpecsSupportUrl? = nil,
+      @card_statement : BusinessProfileSpecsSupportUrl? = nil,
+      @cash_receipt : BusinessProfileSpecsSupportUrl? = nil,
+      @check_image : BusinessProfileSpecsSupportUrl? = nil,
+      @explanation : String? = nil,
+      @original_transaction : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -82,6 +90,7 @@ module Stripe
     def valid?
       return false if !@explanation.nil? && @explanation.to_s.size > 1500
       return false if !@original_transaction.nil? && @original_transaction.to_s.size > 5000
+
       true
     end
 
@@ -105,27 +114,16 @@ module Stripe
       @original_transaction = original_transaction
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        additional_documentation == o.additional_documentation &&
-        card_statement == o.card_statement &&
-        cash_receipt == o.cash_receipt &&
-        check_image == o.check_image &&
-        explanation == o.explanation &&
-        original_transaction == o.original_transaction
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@additional_documentation, @card_statement, @cash_receipt, @check_image, @explanation, @original_transaction)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@additional_documentation, @card_statement, @cash_receipt, @check_image, @explanation, @original_transaction)
   end
 end

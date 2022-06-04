@@ -19,12 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The preferred network.
-    @[JSON::Field(key: "preferred", type: String?, presence: true, ignore_serialize: preferred.nil? && !preferred_present?)]
-    getter preferred : String?
-
-    @[JSON::Field(ignore: true)]
-    property? preferred_present : Bool = false
 
     # All supported networks.
     @[JSON::Field(key: "supported", type: Array(String))]
@@ -32,9 +26,24 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_SUPPORTED = EnumValidator.new("supported", "Array(String)", ["ach", "us_domestic_wire"])
 
+    # Optional properties
+
+    # The preferred network.
+    @[JSON::Field(key: "preferred", type: String?, presence: true, ignore_serialize: preferred.nil? && !preferred_present?)]
+    getter preferred : String?
+
+    @[JSON::Field(ignore: true)]
+    property? preferred_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @preferred : String?, @supported : Array(String))
+    def initialize(
+      *,
+      # Required properties
+      @supported : Array(String),
+      # Optional properties
+      @preferred : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -42,11 +51,11 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @preferred.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED.all_valid?(@supported, false)
+
+      if !@preferred.nil? && @preferred.to_s.size > 5000
         invalid_properties.push("invalid value for \"preferred\", the character length must be smaller than or equal to 5000.")
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED.all_valid?(@supported, false)
 
       invalid_properties
     end
@@ -54,19 +63,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @preferred.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_SUPPORTED.all_valid?(@supported, false)
+      return false if !@preferred.nil? && @preferred.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] preferred Value to be assigned
-    def preferred=(preferred)
-      if preferred.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"preferred\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @preferred = preferred
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -76,13 +76,14 @@ module Stripe
       @supported = supported
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        preferred == o.preferred &&
-        supported == o.supported
+    # Custom attribute writer method with validation
+    # @param [Object] preferred Value to be assigned
+    def preferred=(preferred)
+      if !preferred.nil? && preferred.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"preferred\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @preferred = preferred
     end
 
     # @see the `==` method
@@ -91,8 +92,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@preferred, @supported)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@supported, @preferred)
   end
 end

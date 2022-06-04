@@ -19,6 +19,15 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # Status of this `id_number` check.
+    @[JSON::Field(key: "status", type: String)]
+    getter status : String
+
+    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["unverified", "verified"])
+
+    # Optional properties
+
     @[JSON::Field(key: "dob", type: GelatoIdNumberReportDob?, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
     property dob : GelatoIdNumberReportDob?
 
@@ -52,7 +61,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? id_number_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE = EnumValidator.new("id_number_type", "String", ["br_cpf", "sg_nric", "us_ssn", "null"])
+    ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE = EnumValidator.new("id_number_type", "String", ["br_cpf", "sg_nric", "us_ssn"])
 
     # Last name.
     @[JSON::Field(key: "last_name", type: String?, presence: true, ignore_serialize: last_name.nil? && !last_name_present?)]
@@ -61,15 +70,20 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? last_name_present : Bool = false
 
-    # Status of this `id_number` check.
-    @[JSON::Field(key: "status", type: String)]
-    getter status : String
-
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["unverified", "verified"])
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @dob : GelatoIdNumberReportDob?, @error : GelatoIdNumberReportError1?, @first_name : String?, @id_number : String?, @id_number_type : String?, @last_name : String?, @status : String)
+    def initialize(
+      *,
+      # Required properties
+      @status : String,
+      # Optional properties
+      @dob : GelatoIdNumberReportDob? = nil,
+      @error : GelatoIdNumberReportError1? = nil,
+      @first_name : String? = nil,
+      @id_number : String? = nil,
+      @id_number_type : String? = nil,
+      @last_name : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -77,21 +91,21 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @first_name.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
+      if !@first_name.nil? && @first_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @id_number.to_s.size > 5000
+      if !@id_number.nil? && @id_number.to_s.size > 5000
         invalid_properties.push("invalid value for \"id_number\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid?(@id_number_type)
 
-      if @last_name.to_s.size > 5000
+      if !@last_name.nil? && @last_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
       invalid_properties
     end
@@ -99,18 +113,26 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @first_name.to_s.size > 5000
-      return false if @id_number.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid?(@id_number_type)
-      return false if @last_name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false if !@first_name.nil? && @first_name.to_s.size > 5000
+      return false if !@id_number.nil? && @id_number.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid?(@id_number_type)
+      return false if !@last_name.nil? && @last_name.to_s.size > 5000
+
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
+      @status = status
     end
 
     # Custom attribute writer method with validation
     # @param [Object] first_name Value to be assigned
     def first_name=(first_name)
-      if first_name.to_s.size > 5000
+      if !first_name.nil? && first_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -120,7 +142,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] id_number Value to be assigned
     def id_number=(id_number)
-      if id_number.to_s.size > 5000
+      if !id_number.nil? && id_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id_number\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -137,32 +159,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] last_name Value to be assigned
     def last_name=(last_name)
-      if last_name.to_s.size > 5000
+      if !last_name.nil? && last_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
       end
 
       @last_name = last_name
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
-      @status = status
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        dob == o.dob &&
-        error == o.error &&
-        first_name == o.first_name &&
-        id_number == o.id_number &&
-        id_number_type == o.id_number_type &&
-        last_name == o.last_name &&
-        status == o.status
     end
 
     # @see the `==` method
@@ -171,8 +172,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@dob, @error, @first_name, @id_number, @id_number_type, @last_name, @status)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@status, @dob, @error, @first_name, @id_number, @id_number_type, @last_name)
   end
 end

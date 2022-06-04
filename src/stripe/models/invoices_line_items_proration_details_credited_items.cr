@@ -19,10 +19,12 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Invoice containing the credited invoice line items
     @[JSON::Field(key: "invoice", type: String?)]
     getter invoice : String?
 
+    # Credited invoice line items
     @[JSON::Field(key: "invoice_line_items", type: Array(String)?)]
     property invoice_line_items : Array(String)?
 
@@ -35,7 +37,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @invoice : String, @invoice_line_items : Array(String))
+    def initialize(
+      *,
+      # Required properties
+      @invoice : String? = nil,
+      @invoice_line_items : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -54,6 +61,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @invoice.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -65,10 +73,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -83,23 +88,16 @@ module Stripe
       @invoice = invoice
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        invoice == o.invoice &&
-        invoice_line_items == o.invoice_line_items
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@invoice, @invoice_line_items)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@invoice, @invoice_line_items)
   end
 end

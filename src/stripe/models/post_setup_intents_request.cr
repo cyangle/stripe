@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Set to `true` to attempt to confirm this SetupIntent immediately. This parameter defaults to `false`. If the payment method attached is a card, a return_url may be provided in case additional authentication is required.
     @[JSON::Field(key: "confirm", type: Bool?, presence: true, ignore_serialize: confirm.nil? && !confirm_present?)]
     property confirm : Bool?
@@ -39,6 +40,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -78,12 +80,13 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_method_data_present : Bool = false
 
-    @[JSON::Field(key: "payment_method_options", type: PaymentMethodOptionsParam28?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
-    property payment_method_options : PaymentMethodOptionsParam28?
+    @[JSON::Field(key: "payment_method_options", type: PaymentMethodOptionsParam18?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
+    property payment_method_options : PaymentMethodOptionsParam18?
 
     @[JSON::Field(ignore: true)]
     property? payment_method_options_present : Bool = false
 
+    # The list of payment method types (e.g. card) that this SetupIntent is allowed to use. If this is not provided, defaults to [\"card\"].
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, presence: true, ignore_serialize: payment_method_types.nil? && !payment_method_types_present?)]
     property payment_method_types : Array(String)?
 
@@ -114,7 +117,24 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @confirm : Bool? = nil, @customer : String? = nil, @description : String? = nil, @expand : Array(String)? = nil, @mandate_data : SecretKeyParam2? = nil, @metadata : Hash(String, String)? = nil, @on_behalf_of : String? = nil, @payment_method : String? = nil, @payment_method_data : PaymentMethodDataParams1? = nil, @payment_method_options : PaymentMethodOptionsParam28? = nil, @payment_method_types : Array(String)? = nil, @return_url : String? = nil, @single_use : SetupIntentSingleUseParams? = nil, @usage : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @confirm : Bool? = nil,
+      @customer : String? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @mandate_data : SecretKeyParam2? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @on_behalf_of : String? = nil,
+      @payment_method : String? = nil,
+      @payment_method_data : PaymentMethodDataParams1? = nil,
+      @payment_method_options : PaymentMethodOptionsParam18? = nil,
+      @payment_method_types : Array(String)? = nil,
+      @return_url : String? = nil,
+      @single_use : SetupIntentSingleUseParams? = nil,
+      @usage : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -146,6 +166,7 @@ module Stripe
       return false if !@description.nil? && @description.to_s.size > 1000
       return false if !@payment_method.nil? && @payment_method.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_USAGE.valid?(@usage)
+
       true
     end
 
@@ -186,35 +207,16 @@ module Stripe
       @usage = usage
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        confirm == o.confirm &&
-        customer == o.customer &&
-        description == o.description &&
-        expand == o.expand &&
-        mandate_data == o.mandate_data &&
-        metadata == o.metadata &&
-        on_behalf_of == o.on_behalf_of &&
-        payment_method == o.payment_method &&
-        payment_method_data == o.payment_method_data &&
-        payment_method_options == o.payment_method_options &&
-        payment_method_types == o.payment_method_types &&
-        return_url == o.return_url &&
-        single_use == o.single_use &&
-        usage == o.usage
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@confirm, @customer, @description, @expand, @mandate_data, @metadata, @on_behalf_of, @payment_method, @payment_method_data, @payment_method_options, @payment_method_types, @return_url, @single_use, @usage)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@confirm, @customer, @description, @expand, @mandate_data, @metadata, @on_behalf_of, @payment_method, @payment_method_data, @payment_method_options, @payment_method_types, @return_url, @single_use, @usage)
   end
 end

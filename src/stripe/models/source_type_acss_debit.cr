@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "bank_address_city", type: String?, presence: true, ignore_serialize: bank_address_city.nil? && !bank_address_city_present?)]
     property bank_address_city : String?
 
@@ -80,7 +81,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bank_address_city : String? = nil, @bank_address_line_1 : String? = nil, @bank_address_line_2 : String? = nil, @bank_address_postal_code : String? = nil, @bank_name : String? = nil, @category : String? = nil, @country : String? = nil, @fingerprint : String? = nil, @last4 : String? = nil, @routing_number : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @bank_address_city : String? = nil,
+      @bank_address_line_1 : String? = nil,
+      @bank_address_line_2 : String? = nil,
+      @bank_address_postal_code : String? = nil,
+      @bank_name : String? = nil,
+      @category : String? = nil,
+      @country : String? = nil,
+      @fingerprint : String? = nil,
+      @last4 : String? = nil,
+      @routing_number : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -97,31 +111,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bank_address_city == o.bank_address_city &&
-        bank_address_line_1 == o.bank_address_line_1 &&
-        bank_address_line_2 == o.bank_address_line_2 &&
-        bank_address_postal_code == o.bank_address_postal_code &&
-        bank_name == o.bank_name &&
-        category == o.category &&
-        country == o.country &&
-        fingerprint == o.fingerprint &&
-        last4 == o.last4 &&
-        routing_number == o.routing_number
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bank_address_city, @bank_address_line_1, @bank_address_line_2, @bank_address_postal_code, @bank_name, @category, @country, @fingerprint, @last4, @routing_number)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bank_address_city, @bank_address_line_1, @bank_address_line_2, @bank_address_postal_code, @bank_name, @category, @country, @fingerprint, @last4, @routing_number)
   end
 end

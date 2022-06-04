@@ -29,7 +29,7 @@ describe Stripe::QuotesResourceAutomaticTax do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["complete", "failed", "requires_location_inputs", "null"])
+      # validator = EnumValidator.new("String", ["complete", "failed", "requires_location_inputs"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

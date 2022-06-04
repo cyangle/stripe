@@ -19,18 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    @[JSON::Field(key: "application", type: SubscriptionApplication?, presence: true, ignore_serialize: application.nil? && !application_present?)]
-    property application : SubscriptionApplication?
-
-    @[JSON::Field(ignore: true)]
-    property? application_present : Bool = false
-
-    # A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account.
-    @[JSON::Field(key: "application_fee_percent", type: Float64?, presence: true, ignore_serialize: application_fee_percent.nil? && !application_fee_percent_present?)]
-    property application_fee_percent : Float64?
-
-    @[JSON::Field(ignore: true)]
-    property? application_fee_percent_present : Bool = false
 
     @[JSON::Field(key: "automatic_tax", type: SubscriptionAutomaticTax)]
     property automatic_tax : SubscriptionAutomaticTax
@@ -39,29 +27,9 @@ module Stripe
     @[JSON::Field(key: "billing_cycle_anchor", type: Int64)]
     property billing_cycle_anchor : Int64
 
-    @[JSON::Field(key: "billing_thresholds", type: SubscriptionBillingThresholds1?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
-    property billing_thresholds : SubscriptionBillingThresholds1?
-
-    @[JSON::Field(ignore: true)]
-    property? billing_thresholds_present : Bool = false
-
-    # A date in the future at which the subscription will automatically get canceled
-    @[JSON::Field(key: "cancel_at", type: Int64?, presence: true, ignore_serialize: cancel_at.nil? && !cancel_at_present?)]
-    property cancel_at : Int64?
-
-    @[JSON::Field(ignore: true)]
-    property? cancel_at_present : Bool = false
-
     # If the subscription has been canceled with the `at_period_end` flag set to `true`, `cancel_at_period_end` on the subscription will be true. You can use this attribute to determine whether a subscription that has a status of active is scheduled to be canceled at the end of the current period.
     @[JSON::Field(key: "cancel_at_period_end", type: Bool)]
     property cancel_at_period_end : Bool
-
-    # If the subscription has been canceled, the date of that cancellation. If the subscription was canceled with `cancel_at_period_end`, `canceled_at` will reflect the time of the most recent update request, not the end of the subscription period when the subscription is automatically moved to a canceled state.
-    @[JSON::Field(key: "canceled_at", type: Int64?, presence: true, ignore_serialize: canceled_at.nil? && !canceled_at_present?)]
-    property canceled_at : Int64?
-
-    @[JSON::Field(ignore: true)]
-    property? canceled_at_present : Bool = false
 
     # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions.
     @[JSON::Field(key: "collection_method", type: String)]
@@ -84,6 +52,72 @@ module Stripe
     @[JSON::Field(key: "customer", type: SubscriptionCustomer)]
     property customer : SubscriptionCustomer
 
+    # Unique identifier for the object.
+    @[JSON::Field(key: "id", type: String)]
+    getter id : String
+
+    @[JSON::Field(key: "items", type: SubscriptionItemList)]
+    property items : SubscriptionItemList
+
+    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    @[JSON::Field(key: "livemode", type: Bool)]
+    property livemode : Bool
+
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String))]
+    property metadata : Hash(String, String)
+
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
+
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["subscription"])
+
+    # Date when the subscription was first created. The date might differ from the `created` date due to backdating.
+    @[JSON::Field(key: "start_date", type: Int64)]
+    property start_date : Int64
+
+    # Possible values are `incomplete`, `incomplete_expired`, `trialing`, `active`, `past_due`, `canceled`, or `unpaid`.   For `collection_method=charge_automatically` a subscription moves into `incomplete` if the initial payment attempt fails. A subscription in this state can only have metadata and default_source updated. Once the first invoice is paid, the subscription moves into an `active` state. If the first invoice is not paid within 23 hours, the subscription transitions to `incomplete_expired`. This is a terminal state, the open invoice will be voided and no further invoices will be generated.   A subscription that is currently in a trial period is `trialing` and moves to `active` when the trial period is over.   If subscription `collection_method=charge_automatically` it becomes `past_due` when payment to renew it fails and `canceled` or `unpaid` (depending on your subscriptions settings) when Stripe has exhausted all payment retry attempts.   If subscription `collection_method=send_invoice` it becomes `past_due` when its invoice is not paid by the due date, and `canceled` or `unpaid` if it is still not paid by an additional deadline after that. Note that when a subscription has a status of `unpaid`, no subsequent invoices will be attempted (invoices will be created, but then immediately automatically closed). After receiving updated payment information from a customer, you may choose to reopen and pay their closed invoices.
+    @[JSON::Field(key: "status", type: String)]
+    getter status : String
+
+    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["active", "canceled", "incomplete", "incomplete_expired", "past_due", "trialing", "unpaid"])
+
+    # Optional properties
+
+    @[JSON::Field(key: "application", type: SubscriptionApplication?, presence: true, ignore_serialize: application.nil? && !application_present?)]
+    property application : SubscriptionApplication?
+
+    @[JSON::Field(ignore: true)]
+    property? application_present : Bool = false
+
+    # A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account.
+    @[JSON::Field(key: "application_fee_percent", type: Float64?, presence: true, ignore_serialize: application_fee_percent.nil? && !application_fee_percent_present?)]
+    property application_fee_percent : Float64?
+
+    @[JSON::Field(ignore: true)]
+    property? application_fee_percent_present : Bool = false
+
+    @[JSON::Field(key: "billing_thresholds", type: SubscriptionBillingThresholds1?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
+    property billing_thresholds : SubscriptionBillingThresholds1?
+
+    @[JSON::Field(ignore: true)]
+    property? billing_thresholds_present : Bool = false
+
+    # A date in the future at which the subscription will automatically get canceled
+    @[JSON::Field(key: "cancel_at", type: Int64?, presence: true, ignore_serialize: cancel_at.nil? && !cancel_at_present?)]
+    property cancel_at : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? cancel_at_present : Bool = false
+
+    # If the subscription has been canceled, the date of that cancellation. If the subscription was canceled with `cancel_at_period_end`, `canceled_at` will reflect the time of the most recent update request, not the end of the subscription period when the subscription is automatically moved to a canceled state.
+    @[JSON::Field(key: "canceled_at", type: Int64?, presence: true, ignore_serialize: canceled_at.nil? && !canceled_at_present?)]
+    property canceled_at : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? canceled_at_present : Bool = false
+
     # Number of days a customer has to pay invoices generated by this subscription. This value will be `null` for subscriptions where `collection_method=charge_automatically`.
     @[JSON::Field(key: "days_until_due", type: Int64?, presence: true, ignore_serialize: days_until_due.nil? && !days_until_due_present?)]
     property days_until_due : Int64?
@@ -102,6 +136,13 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? default_source_present : Bool = false
+
+    # The tax rates that will apply to any subscription item that does not have `tax_rates` set. Invoices created will have their `default_tax_rates` populated from the subscription.
+    @[JSON::Field(key: "default_tax_rates", type: Array(TaxRate)?, presence: true, ignore_serialize: default_tax_rates.nil? && !default_tax_rates_present?)]
+    property default_tax_rates : Array(TaxRate)?
+
+    @[JSON::Field(ignore: true)]
+    property? default_tax_rates_present : Bool = false
 
     # The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces.
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
@@ -123,26 +164,11 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? ended_at_present : Bool = false
 
-    # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
-
-    @[JSON::Field(key: "items", type: SubscriptionItemList)]
-    property items : SubscriptionItemList
-
     @[JSON::Field(key: "latest_invoice", type: SubscriptionLatestInvoice?, presence: true, ignore_serialize: latest_invoice.nil? && !latest_invoice_present?)]
     property latest_invoice : SubscriptionLatestInvoice?
 
     @[JSON::Field(ignore: true)]
     property? latest_invoice_present : Bool = false
-
-    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-    @[JSON::Field(key: "livemode", type: Bool)]
-    property livemode : Bool
-
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String))]
-    property metadata : Hash(String, String)
 
     # Specifies the approximate timestamp on which any pending invoice items will be billed according to the schedule provided at `pending_invoice_item_interval`.
     @[JSON::Field(key: "next_pending_invoice_item_invoice", type: Int64?, presence: true, ignore_serialize: next_pending_invoice_item_invoice.nil? && !next_pending_invoice_item_invoice_present?)]
@@ -150,12 +176,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? next_pending_invoice_item_invoice_present : Bool = false
-
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["subscription"])
 
     @[JSON::Field(key: "pause_collection", type: SubscriptionPauseCollection?, presence: true, ignore_serialize: pause_collection.nil? && !pause_collection_present?)]
     property pause_collection : SubscriptionPauseCollection?
@@ -193,16 +213,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? schedule_present : Bool = false
 
-    # Date when the subscription was first created. The date might differ from the `created` date due to backdating.
-    @[JSON::Field(key: "start_date", type: Int64)]
-    property start_date : Int64
-
-    # Possible values are `incomplete`, `incomplete_expired`, `trialing`, `active`, `past_due`, `canceled`, or `unpaid`.   For `collection_method=charge_automatically` a subscription moves into `incomplete` if the initial payment attempt fails. A subscription in this state can only have metadata and default_source updated. Once the first invoice is paid, the subscription moves into an `active` state. If the first invoice is not paid within 23 hours, the subscription transitions to `incomplete_expired`. This is a terminal state, the open invoice will be voided and no further invoices will be generated.   A subscription that is currently in a trial period is `trialing` and moves to `active` when the trial period is over.   If subscription `collection_method=charge_automatically` it becomes `past_due` when payment to renew it fails and `canceled` or `unpaid` (depending on your subscriptions settings) when Stripe has exhausted all payment retry attempts.   If subscription `collection_method=send_invoice` it becomes `past_due` when its invoice is not paid by the due date, and `canceled` or `unpaid` if it is still not paid by an additional deadline after that. Note that when a subscription has a status of `unpaid`, no subsequent invoices will be attempted (invoices will be created, but then immediately automatically closed). After receiving updated payment information from a customer, you may choose to reopen and pay their closed invoices.
-    @[JSON::Field(key: "status", type: String)]
-    getter status : String
-
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["active", "canceled", "incomplete", "incomplete_expired", "past_due", "trialing", "unpaid"])
-
     @[JSON::Field(key: "test_clock", type: SubscriptionTestClock?, presence: true, ignore_serialize: test_clock.nil? && !test_clock_present?)]
     property test_clock : SubscriptionTestClock?
 
@@ -229,17 +239,52 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? trial_start_present : Bool = false
 
-    # Optional properties
-    # The tax rates that will apply to any subscription item that does not have `tax_rates` set. Invoices created will have their `default_tax_rates` populated from the subscription.
-    @[JSON::Field(key: "default_tax_rates", type: Array(TaxRate)?, presence: true, ignore_serialize: default_tax_rates.nil? && !default_tax_rates_present?)]
-    property default_tax_rates : Array(TaxRate)?
-
-    @[JSON::Field(ignore: true)]
-    property? default_tax_rates_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @application : SubscriptionApplication?, @application_fee_percent : Float64?, @automatic_tax : SubscriptionAutomaticTax, @billing_cycle_anchor : Int64, @billing_thresholds : SubscriptionBillingThresholds1?, @cancel_at : Int64?, @cancel_at_period_end : Bool, @canceled_at : Int64?, @collection_method : String, @created : Int64, @current_period_end : Int64, @current_period_start : Int64, @customer : SubscriptionCustomer, @days_until_due : Int64?, @default_payment_method : SubscriptionDefaultPaymentMethod?, @default_source : SubscriptionDefaultSource?, @description : String?, @discount : SubscriptionDiscount?, @ended_at : Int64?, @id : String, @items : SubscriptionItemList, @latest_invoice : SubscriptionLatestInvoice?, @livemode : Bool, @metadata : Hash(String, String), @next_pending_invoice_item_invoice : Int64?, @object : String, @pause_collection : SubscriptionPauseCollection?, @payment_settings : SubscriptionPaymentSettings?, @pending_invoice_item_interval : SubscriptionPendingInvoiceItemInterval1?, @pending_setup_intent : SubscriptionPendingSetupIntent?, @pending_update : SubscriptionPendingUpdate?, @schedule : SubscriptionSchedule1?, @start_date : Int64, @status : String, @test_clock : SubscriptionTestClock?, @transfer_data : SubscriptionTransferData1?, @trial_end : Int64?, @trial_start : Int64?, @default_tax_rates : Array(TaxRate)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @automatic_tax : SubscriptionAutomaticTax,
+      @billing_cycle_anchor : Int64,
+      @cancel_at_period_end : Bool,
+      @collection_method : String,
+      @created : Int64,
+      @current_period_end : Int64,
+      @current_period_start : Int64,
+      @customer : SubscriptionCustomer,
+      @id : String,
+      @items : SubscriptionItemList,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      @start_date : Int64,
+      @status : String,
+      # Optional properties
+      @application : SubscriptionApplication? = nil,
+      @application_fee_percent : Float64? = nil,
+      @billing_thresholds : SubscriptionBillingThresholds1? = nil,
+      @cancel_at : Int64? = nil,
+      @canceled_at : Int64? = nil,
+      @days_until_due : Int64? = nil,
+      @default_payment_method : SubscriptionDefaultPaymentMethod? = nil,
+      @default_source : SubscriptionDefaultSource? = nil,
+      @default_tax_rates : Array(TaxRate)? = nil,
+      @description : String? = nil,
+      @discount : SubscriptionDiscount? = nil,
+      @ended_at : Int64? = nil,
+      @latest_invoice : SubscriptionLatestInvoice? = nil,
+      @next_pending_invoice_item_invoice : Int64? = nil,
+      @pause_collection : SubscriptionPauseCollection? = nil,
+      @payment_settings : SubscriptionPaymentSettings? = nil,
+      @pending_invoice_item_interval : SubscriptionPendingInvoiceItemInterval1? = nil,
+      @pending_setup_intent : SubscriptionPendingSetupIntent? = nil,
+      @pending_update : SubscriptionPendingUpdate? = nil,
+      @schedule : SubscriptionSchedule1? = nil,
+      @test_clock : SubscriptionTestClock? = nil,
+      @transfer_data : SubscriptionTransferData1? = nil,
+      @trial_end : Int64? = nil,
+      @trial_start : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -249,10 +294,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECTION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method, false)
 
-      if @description.to_s.size > 500
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 500.")
-      end
-
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -261,6 +302,10 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
+      if !@description.nil? && @description.to_s.size > 500
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 500.")
+      end
+
       invalid_properties
     end
 
@@ -268,10 +313,11 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method, false)
-      return false if @description.to_s.size > 500
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false if !@description.nil? && @description.to_s.size > 500
+
       true
     end
 
@@ -280,16 +326,6 @@ module Stripe
     def collection_method=(collection_method)
       ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(collection_method, false)
       @collection_method = collection_method
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 500
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 500.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -316,50 +352,14 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        application == o.application &&
-        application_fee_percent == o.application_fee_percent &&
-        automatic_tax == o.automatic_tax &&
-        billing_cycle_anchor == o.billing_cycle_anchor &&
-        billing_thresholds == o.billing_thresholds &&
-        cancel_at == o.cancel_at &&
-        cancel_at_period_end == o.cancel_at_period_end &&
-        canceled_at == o.canceled_at &&
-        collection_method == o.collection_method &&
-        created == o.created &&
-        current_period_end == o.current_period_end &&
-        current_period_start == o.current_period_start &&
-        customer == o.customer &&
-        days_until_due == o.days_until_due &&
-        default_payment_method == o.default_payment_method &&
-        default_source == o.default_source &&
-        default_tax_rates == o.default_tax_rates &&
-        description == o.description &&
-        discount == o.discount &&
-        ended_at == o.ended_at &&
-        id == o.id &&
-        items == o.items &&
-        latest_invoice == o.latest_invoice &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        next_pending_invoice_item_invoice == o.next_pending_invoice_item_invoice &&
-        object == o.object &&
-        pause_collection == o.pause_collection &&
-        payment_settings == o.payment_settings &&
-        pending_invoice_item_interval == o.pending_invoice_item_interval &&
-        pending_setup_intent == o.pending_setup_intent &&
-        pending_update == o.pending_update &&
-        schedule == o.schedule &&
-        start_date == o.start_date &&
-        status == o.status &&
-        test_clock == o.test_clock &&
-        transfer_data == o.transfer_data &&
-        trial_end == o.trial_end &&
-        trial_start == o.trial_start
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 500
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 500.")
+      end
+
+      @description = description
     end
 
     # @see the `==` method
@@ -368,8 +368,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@application, @application_fee_percent, @automatic_tax, @billing_cycle_anchor, @billing_thresholds, @cancel_at, @cancel_at_period_end, @canceled_at, @collection_method, @created, @current_period_end, @current_period_start, @customer, @days_until_due, @default_payment_method, @default_source, @default_tax_rates, @description, @discount, @ended_at, @id, @items, @latest_invoice, @livemode, @metadata, @next_pending_invoice_item_invoice, @object, @pause_collection, @payment_settings, @pending_invoice_item_interval, @pending_setup_intent, @pending_update, @schedule, @start_date, @status, @test_clock, @transfer_data, @trial_end, @trial_start)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@automatic_tax, @billing_cycle_anchor, @cancel_at_period_end, @collection_method, @created, @current_period_end, @current_period_start, @customer, @id, @items, @livemode, @metadata, @object, @start_date, @status, @application, @application_fee_percent, @billing_thresholds, @cancel_at, @canceled_at, @days_until_due, @default_payment_method, @default_source, @default_tax_rates, @description, @discount, @ended_at, @latest_invoice, @next_pending_invoice_item_invoice, @pause_collection, @payment_settings, @pending_invoice_item_interval, @pending_setup_intent, @pending_update, @schedule, @test_clock, @transfer_data, @trial_end, @trial_start)
   end
 end

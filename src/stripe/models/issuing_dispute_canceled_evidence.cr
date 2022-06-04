@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     @[JSON::Field(key: "additional_documentation", type: IssuingDisputeCanceledEvidenceAdditionalDocumentation?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
     property additional_documentation : IssuingDisputeCanceledEvidenceAdditionalDocumentation?
 
@@ -74,7 +75,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? product_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PRODUCT_TYPE = EnumValidator.new("product_type", "String", ["merchandise", "service", "null"])
+    ENUM_VALIDATOR_FOR_PRODUCT_TYPE = EnumValidator.new("product_type", "String", ["merchandise", "service"])
 
     # Result of cardholder's attempt to return the product.
     @[JSON::Field(key: "return_status", type: String?, presence: true, ignore_serialize: return_status.nil? && !return_status_present?)]
@@ -83,7 +84,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? return_status_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_RETURN_STATUS = EnumValidator.new("return_status", "String", ["merchant_rejected", "successful", "null"])
+    ENUM_VALIDATOR_FOR_RETURN_STATUS = EnumValidator.new("return_status", "String", ["merchant_rejected", "successful"])
 
     # Date when the product was returned or attempted to be returned.
     @[JSON::Field(key: "returned_at", type: Int64?, presence: true, ignore_serialize: returned_at.nil? && !returned_at_present?)]
@@ -94,7 +95,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @additional_documentation : IssuingDisputeCanceledEvidenceAdditionalDocumentation?, @canceled_at : Int64?, @cancellation_policy_provided : Bool?, @cancellation_reason : String?, @expected_at : Int64?, @explanation : String?, @product_description : String?, @product_type : String?, @return_status : String?, @returned_at : Int64?)
+    def initialize(
+      *,
+      # Optional properties
+      @additional_documentation : IssuingDisputeCanceledEvidenceAdditionalDocumentation? = nil,
+      @canceled_at : Int64? = nil,
+      @cancellation_policy_provided : Bool? = nil,
+      @cancellation_reason : String? = nil,
+      @expected_at : Int64? = nil,
+      @explanation : String? = nil,
+      @product_description : String? = nil,
+      @product_type : String? = nil,
+      @return_status : String? = nil,
+      @returned_at : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -102,15 +116,15 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @cancellation_reason.to_s.size > 5000
+      if !@cancellation_reason.nil? && @cancellation_reason.to_s.size > 5000
         invalid_properties.push("invalid value for \"cancellation_reason\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @explanation.to_s.size > 5000
+      if !@explanation.nil? && @explanation.to_s.size > 5000
         invalid_properties.push("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @product_description.to_s.size > 5000
+      if !@product_description.nil? && @product_description.to_s.size > 5000
         invalid_properties.push("invalid value for \"product_description\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -124,18 +138,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @cancellation_reason.to_s.size > 5000
-      return false if @explanation.to_s.size > 5000
-      return false if @product_description.to_s.size > 5000
+      return false if !@cancellation_reason.nil? && @cancellation_reason.to_s.size > 5000
+      return false if !@explanation.nil? && @explanation.to_s.size > 5000
+      return false if !@product_description.nil? && @product_description.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid?(@product_type)
       return false unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] cancellation_reason Value to be assigned
     def cancellation_reason=(cancellation_reason)
-      if cancellation_reason.to_s.size > 5000
+      if !cancellation_reason.nil? && cancellation_reason.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"cancellation_reason\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -145,7 +160,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] explanation Value to be assigned
     def explanation=(explanation)
-      if explanation.to_s.size > 5000
+      if !explanation.nil? && explanation.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -155,7 +170,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] product_description Value to be assigned
     def product_description=(product_description)
-      if product_description.to_s.size > 5000
+      if !product_description.nil? && product_description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -176,31 +191,16 @@ module Stripe
       @return_status = return_status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        additional_documentation == o.additional_documentation &&
-        canceled_at == o.canceled_at &&
-        cancellation_policy_provided == o.cancellation_policy_provided &&
-        cancellation_reason == o.cancellation_reason &&
-        expected_at == o.expected_at &&
-        explanation == o.explanation &&
-        product_description == o.product_description &&
-        product_type == o.product_type &&
-        return_status == o.return_status &&
-        returned_at == o.returned_at
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@additional_documentation, @canceled_at, @cancellation_policy_provided, @cancellation_reason, @expected_at, @explanation, @product_description, @product_type, @return_status, @returned_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@additional_documentation, @canceled_at, @cancellation_policy_provided, @cancellation_reason, @expected_at, @explanation, @product_description, @product_type, @return_status, @returned_at)
   end
 end

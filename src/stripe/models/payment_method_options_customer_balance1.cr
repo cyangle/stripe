@@ -12,20 +12,19 @@ require "time"
 require "log"
 
 module Stripe
-  # If paying by `customer_balance`, this sub-hash contains details about the Bank transfer payment method options to pass to the invoice’s PaymentIntent.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodOptionsCustomerBalance1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "bank_transfer", type: BankTransferParam?, presence: true, ignore_serialize: bank_transfer.nil? && !bank_transfer_present?)]
     property bank_transfer : BankTransferParam?
 
     @[JSON::Field(ignore: true)]
     property? bank_transfer_present : Bool = false
 
-    # The funding method type to be used when there are not enough funds in the customer balance. Permitted values include: `bank_transfer`.
     @[JSON::Field(key: "funding_type", type: String?, presence: true, ignore_serialize: funding_type.nil? && !funding_type_present?)]
     property funding_type : String?
 
@@ -35,14 +34,19 @@ module Stripe
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
-        Stripe::InvoicePaymentMethodOptionsParam3,
-        String,
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
+        Stripe::InvoicePaymentMethodOptionsParam2,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bank_transfer : BankTransferParam? = nil, @funding_type : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @bank_transfer : BankTransferParam? = nil,
+      @funding_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -67,21 +71,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bank_transfer == o.bank_transfer &&
-        funding_type == o.funding_type
     end
 
     # @see the `==` method
@@ -90,8 +82,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bank_transfer, @funding_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bank_transfer, @funding_type)
   end
 end

@@ -19,14 +19,14 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The type of the `bank_transfer`
+
     @[JSON::Field(key: "type", type: String)]
     getter _type : String
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["jp_bank_transfer"])
 
     # Optional properties
-    # List of address types that should be returned in the financial_addresses response. If not specified, all valid types will be returned.  Permitted values include: `zengin`.
+
     @[JSON::Field(key: "requested_address_types", type: Array(String)?, presence: true, ignore_serialize: requested_address_types.nil? && !requested_address_types_present?)]
     getter requested_address_types : Array(String)?
 
@@ -37,16 +37,23 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_type : String, @requested_address_types : Array(String)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String,
+      # Optional properties
+      @requested_address_types : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-      invalid_properties.push(ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.error_message) unless ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.all_valid?(@requested_address_types)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.error_message) unless ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.all_valid?(@requested_address_types)
 
       invalid_properties
     end
@@ -54,16 +61,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.all_valid?(@requested_address_types)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      true
-    end
+      return false unless ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.all_valid?(@requested_address_types)
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] requested_address_types Object to be assigned
-    def requested_address_types=(requested_address_types)
-      ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.all_valid!(requested_address_types)
-      @requested_address_types = requested_address_types
+      true
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -73,13 +74,11 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        requested_address_types == o.requested_address_types &&
-        _type == o._type
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] requested_address_types Object to be assigned
+    def requested_address_types=(requested_address_types)
+      ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.all_valid!(requested_address_types)
+      @requested_address_types = requested_address_types
     end
 
     # @see the `==` method
@@ -88,8 +87,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@requested_address_types, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @requested_address_types)
   end
 end

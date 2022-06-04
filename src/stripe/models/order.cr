@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Order cost before any discounts or taxes are applied. A positive integer representing the subtotal of the order in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
     @[JSON::Field(key: "amount_subtotal", type: Int64)]
     property amount_subtotal : Int64
@@ -27,11 +28,53 @@ module Stripe
     @[JSON::Field(key: "amount_total", type: Int64)]
     property amount_total : Int64
 
+    # Time at which the object was created. Measured in seconds since the Unix epoch.
+    @[JSON::Field(key: "created", type: Int64)]
+    property created : Int64
+
+    # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+    @[JSON::Field(key: "currency", type: String)]
+    property currency : String
+
+    # Unique identifier for the object.
+    @[JSON::Field(key: "id", type: String)]
+    getter id : String
+
+    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    @[JSON::Field(key: "livemode", type: Bool)]
+    property livemode : Bool
+
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
+
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["order"])
+
+    @[JSON::Field(key: "payment", type: OrdersV2ResourcePayment)]
+    property payment : OrdersV2ResourcePayment
+
+    # The overall status of the order.
+    @[JSON::Field(key: "status", type: String)]
+    getter status : String
+
+    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["canceled", "complete", "open", "processing", "submitted"])
+
+    @[JSON::Field(key: "total_details", type: OrdersV2ResourceTotalDetails)]
+    property total_details : OrdersV2ResourceTotalDetails
+
+    # Optional properties
+
     @[JSON::Field(key: "application", type: OrderApplication?, presence: true, ignore_serialize: application.nil? && !application_present?)]
     property application : OrderApplication?
 
     @[JSON::Field(ignore: true)]
     property? application_present : Bool = false
+
+    @[JSON::Field(key: "automatic_tax", type: OrdersV2ResourceAutomaticTax?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
+    property automatic_tax : OrdersV2ResourceAutomaticTax?
+
+    @[JSON::Field(ignore: true)]
+    property? automatic_tax_present : Bool = false
 
     @[JSON::Field(key: "billing_details", type: OrderBillingDetails?, presence: true, ignore_serialize: billing_details.nil? && !billing_details_present?)]
     property billing_details : OrderBillingDetails?
@@ -45,14 +88,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? client_secret_present : Bool = false
-
-    # Time at which the object was created. Measured in seconds since the Unix epoch.
-    @[JSON::Field(key: "created", type: Int64)]
-    property created : Int64
-
-    # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    @[JSON::Field(key: "currency", type: String)]
-    property currency : String
 
     @[JSON::Field(key: "customer", type: OrderCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
     property customer : OrderCustomer?
@@ -74,10 +109,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? discounts_present : Bool = false
 
-    # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
-
     # A recent IP address of the purchaser used for tax reporting and tax location inference.
     @[JSON::Field(key: "ip_address", type: String?, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
     getter ip_address : String?
@@ -85,9 +116,11 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? ip_address_present : Bool = false
 
-    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-    @[JSON::Field(key: "livemode", type: Bool)]
-    property livemode : Bool
+    @[JSON::Field(key: "line_items", type: OrdersV2ResourceLineItemList1?, presence: true, ignore_serialize: line_items.nil? && !line_items_present?)]
+    property line_items : OrdersV2ResourceLineItemList1?
+
+    @[JSON::Field(ignore: true)]
+    property? line_items_present : Bool = false
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
@@ -95,15 +128,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
-
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["order"])
-
-    @[JSON::Field(key: "payment", type: OrdersV2ResourcePayment)]
-    property payment : OrdersV2ResourcePayment
 
     @[JSON::Field(key: "shipping_cost", type: OrderShippingCost?, presence: true, ignore_serialize: shipping_cost.nil? && !shipping_cost_present?)]
     property shipping_cost : OrderShippingCost?
@@ -117,28 +141,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? shipping_details_present : Bool = false
 
-    # The overall status of the order.
-    @[JSON::Field(key: "status", type: String)]
-    getter status : String
-
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["canceled", "complete", "open", "processing", "submitted"])
-
-    @[JSON::Field(key: "total_details", type: OrdersV2ResourceTotalDetails)]
-    property total_details : OrdersV2ResourceTotalDetails
-
-    # Optional properties
-    @[JSON::Field(key: "automatic_tax", type: OrdersV2ResourceAutomaticTax?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
-    property automatic_tax : OrdersV2ResourceAutomaticTax?
-
-    @[JSON::Field(ignore: true)]
-    property? automatic_tax_present : Bool = false
-
-    @[JSON::Field(key: "line_items", type: OrdersV2ResourceLineItemList1?, presence: true, ignore_serialize: line_items.nil? && !line_items_present?)]
-    property line_items : OrdersV2ResourceLineItemList1?
-
-    @[JSON::Field(ignore: true)]
-    property? line_items_present : Bool = false
-
     @[JSON::Field(key: "tax_details", type: OrdersV2ResourceTaxDetails?, presence: true, ignore_serialize: tax_details.nil? && !tax_details_present?)]
     property tax_details : OrdersV2ResourceTaxDetails?
 
@@ -147,7 +149,34 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount_subtotal : Int64, @amount_total : Int64, @application : OrderApplication?, @billing_details : OrderBillingDetails?, @client_secret : String?, @created : Int64, @currency : String, @customer : OrderCustomer?, @description : String?, @discounts : Array(InvoiceitemDiscountsInner)?, @id : String, @ip_address : String?, @livemode : Bool, @metadata : Hash(String, String)?, @object : String, @payment : OrdersV2ResourcePayment, @shipping_cost : OrderShippingCost?, @shipping_details : OrderShippingDetails?, @status : String, @total_details : OrdersV2ResourceTotalDetails, @automatic_tax : OrdersV2ResourceAutomaticTax? = nil, @line_items : OrdersV2ResourceLineItemList1? = nil, @tax_details : OrdersV2ResourceTaxDetails? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount_subtotal : Int64,
+      @amount_total : Int64,
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @payment : OrdersV2ResourcePayment,
+      @status : String,
+      @total_details : OrdersV2ResourceTotalDetails,
+      # Optional properties
+      @application : OrderApplication? = nil,
+      @automatic_tax : OrdersV2ResourceAutomaticTax? = nil,
+      @billing_details : OrderBillingDetails? = nil,
+      @client_secret : String? = nil,
+      @customer : OrderCustomer? = nil,
+      @description : String? = nil,
+      @discounts : Array(InvoiceitemDiscountsInner)? = nil,
+      @ip_address : String? = nil,
+      @line_items : OrdersV2ResourceLineItemList1? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @shipping_cost : OrderShippingCost? = nil,
+      @shipping_details : OrderShippingDetails? = nil,
+      @tax_details : OrdersV2ResourceTaxDetails? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -155,25 +184,25 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @client_secret.to_s.size > 5000
-        invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @ip_address.to_s.size > 5000
-        invalid_properties.push("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
+      if !@client_secret.nil? && @client_secret.to_s.size > 5000
+        invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@ip_address.nil? && @ip_address.to_s.size > 5000
+        invalid_properties.push("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
+      end
 
       invalid_properties
     end
@@ -181,33 +210,14 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @client_secret.to_s.size > 5000
-      return false if @description.to_s.size > 5000
       return false if @id.to_s.size > 5000
-      return false if @ip_address.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false if !@client_secret.nil? && @client_secret.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@ip_address.nil? && @ip_address.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] client_secret Value to be assigned
-    def client_secret=(client_secret)
-      if client_secret.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @client_secret = client_secret
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -218,16 +228,6 @@ module Stripe
       end
 
       @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] ip_address Value to be assigned
-    def ip_address=(ip_address)
-      if ip_address.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @ip_address = ip_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -244,34 +244,34 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount_subtotal == o.amount_subtotal &&
-        amount_total == o.amount_total &&
-        application == o.application &&
-        automatic_tax == o.automatic_tax &&
-        billing_details == o.billing_details &&
-        client_secret == o.client_secret &&
-        created == o.created &&
-        currency == o.currency &&
-        customer == o.customer &&
-        description == o.description &&
-        discounts == o.discounts &&
-        id == o.id &&
-        ip_address == o.ip_address &&
-        line_items == o.line_items &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        payment == o.payment &&
-        shipping_cost == o.shipping_cost &&
-        shipping_details == o.shipping_details &&
-        status == o.status &&
-        tax_details == o.tax_details &&
-        total_details == o.total_details
+    # Custom attribute writer method with validation
+    # @param [Object] client_secret Value to be assigned
+    def client_secret=(client_secret)
+      if !client_secret.nil? && client_secret.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @client_secret = client_secret
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] ip_address Value to be assigned
+    def ip_address=(ip_address)
+      if !ip_address.nil? && ip_address.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @ip_address = ip_address
     end
 
     # @see the `==` method
@@ -280,8 +280,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount_subtotal, @amount_total, @application, @automatic_tax, @billing_details, @client_secret, @created, @currency, @customer, @description, @discounts, @id, @ip_address, @line_items, @livemode, @metadata, @object, @payment, @shipping_cost, @shipping_details, @status, @tax_details, @total_details)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount_subtotal, @amount_total, @created, @currency, @id, @livemode, @object, @payment, @status, @total_details, @application, @automatic_tax, @billing_details, @client_secret, @customer, @description, @discounts, @ip_address, @line_items, @metadata, @shipping_cost, @shipping_details, @tax_details)
   end
 end

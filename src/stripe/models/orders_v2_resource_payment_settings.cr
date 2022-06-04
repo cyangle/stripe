@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account.
     @[JSON::Field(key: "application_fee_amount", type: Int64?, presence: true, ignore_serialize: application_fee_amount.nil? && !application_fee_amount_present?)]
     property application_fee_amount : Int64?
@@ -39,7 +40,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_method_types_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES = EnumValidator.new("payment_method_types", "Array(String)", ["acss_debit", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "link", "oxxo", "p24", "paypal", "sepa_debit", "sofort", "wechat_pay"])
+    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES = EnumValidator.new("payment_method_types", "String", ["acss_debit", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "link", "oxxo", "p24", "paypal", "sepa_debit", "sofort", "wechat_pay"])
 
     # The URL to redirect the customer to after they authenticate their payment.
     @[JSON::Field(key: "return_url", type: String?, presence: true, ignore_serialize: return_url.nil? && !return_url_present?)]
@@ -70,7 +71,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @application_fee_amount : Int64?, @payment_method_options : OrdersV2ResourcePaymentSettingsPaymentMethodOptions?, @payment_method_types : Array(String)?, @return_url : String?, @statement_descriptor : String?, @statement_descriptor_suffix : String?, @transfer_data : OrdersV2ResourcePaymentSettingsTransferData?)
+    def initialize(
+      *,
+      # Optional properties
+      @application_fee_amount : Int64? = nil,
+      @payment_method_options : OrdersV2ResourcePaymentSettingsPaymentMethodOptions? = nil,
+      @payment_method_types : Array(String)? = nil,
+      @return_url : String? = nil,
+      @statement_descriptor : String? = nil,
+      @statement_descriptor_suffix : String? = nil,
+      @transfer_data : OrdersV2ResourcePaymentSettingsTransferData? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -80,15 +91,15 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
 
-      if @return_url.to_s.size > 5000
+      if !@return_url.nil? && @return_url.to_s.size > 5000
         invalid_properties.push("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @statement_descriptor.to_s.size > 5000
+      if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
         invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @statement_descriptor_suffix.to_s.size > 5000
+      if !@statement_descriptor_suffix.nil? && @statement_descriptor_suffix.to_s.size > 5000
         invalid_properties.push("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -99,9 +110,10 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
-      return false if @return_url.to_s.size > 5000
-      return false if @statement_descriptor.to_s.size > 5000
-      return false if @statement_descriptor_suffix.to_s.size > 5000
+      return false if !@return_url.nil? && @return_url.to_s.size > 5000
+      return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
+      return false if !@statement_descriptor_suffix.nil? && @statement_descriptor_suffix.to_s.size > 5000
+
       true
     end
 
@@ -115,7 +127,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] return_url Value to be assigned
     def return_url=(return_url)
-      if return_url.to_s.size > 5000
+      if !return_url.nil? && return_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -125,7 +137,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
     def statement_descriptor=(statement_descriptor)
-      if statement_descriptor.to_s.size > 5000
+      if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -135,25 +147,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor_suffix Value to be assigned
     def statement_descriptor_suffix=(statement_descriptor_suffix)
-      if statement_descriptor_suffix.to_s.size > 5000
+      if !statement_descriptor_suffix.nil? && statement_descriptor_suffix.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 5000.")
       end
 
       @statement_descriptor_suffix = statement_descriptor_suffix
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        application_fee_amount == o.application_fee_amount &&
-        payment_method_options == o.payment_method_options &&
-        payment_method_types == o.payment_method_types &&
-        return_url == o.return_url &&
-        statement_descriptor == o.statement_descriptor &&
-        statement_descriptor_suffix == o.statement_descriptor_suffix &&
-        transfer_data == o.transfer_data
     end
 
     # @see the `==` method
@@ -162,8 +160,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@application_fee_amount, @payment_method_options, @payment_method_types, @return_url, @statement_descriptor, @statement_descriptor_suffix, @transfer_data)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@application_fee_amount, @payment_method_options, @payment_method_types, @return_url, @statement_descriptor, @statement_descriptor_suffix, @transfer_data)
   end
 end

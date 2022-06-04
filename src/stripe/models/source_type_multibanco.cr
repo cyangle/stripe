@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "entity", type: String?, presence: true, ignore_serialize: entity.nil? && !entity_present?)]
     property entity : String?
 
@@ -80,7 +81,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @entity : String? = nil, @reference : String? = nil, @refund_account_holder_address_city : String? = nil, @refund_account_holder_address_country : String? = nil, @refund_account_holder_address_line1 : String? = nil, @refund_account_holder_address_line2 : String? = nil, @refund_account_holder_address_postal_code : String? = nil, @refund_account_holder_address_state : String? = nil, @refund_account_holder_name : String? = nil, @refund_iban : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @entity : String? = nil,
+      @reference : String? = nil,
+      @refund_account_holder_address_city : String? = nil,
+      @refund_account_holder_address_country : String? = nil,
+      @refund_account_holder_address_line1 : String? = nil,
+      @refund_account_holder_address_line2 : String? = nil,
+      @refund_account_holder_address_postal_code : String? = nil,
+      @refund_account_holder_address_state : String? = nil,
+      @refund_account_holder_name : String? = nil,
+      @refund_iban : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -97,31 +111,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        entity == o.entity &&
-        reference == o.reference &&
-        refund_account_holder_address_city == o.refund_account_holder_address_city &&
-        refund_account_holder_address_country == o.refund_account_holder_address_country &&
-        refund_account_holder_address_line1 == o.refund_account_holder_address_line1 &&
-        refund_account_holder_address_line2 == o.refund_account_holder_address_line2 &&
-        refund_account_holder_address_postal_code == o.refund_account_holder_address_postal_code &&
-        refund_account_holder_address_state == o.refund_account_holder_address_state &&
-        refund_account_holder_name == o.refund_account_holder_name &&
-        refund_iban == o.refund_iban
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@entity, @reference, @refund_account_holder_address_city, @refund_account_holder_address_country, @refund_account_holder_address_line1, @refund_account_holder_address_line2, @refund_account_holder_address_postal_code, @refund_account_holder_address_state, @refund_account_holder_name, @refund_iban)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@entity, @reference, @refund_account_holder_address_city, @refund_account_holder_address_country, @refund_account_holder_address_line1, @refund_account_holder_address_line2, @refund_account_holder_address_postal_code, @refund_account_holder_address_state, @refund_account_holder_name, @refund_iban)
   end
 end

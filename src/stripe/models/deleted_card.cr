@@ -19,12 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.
-    @[JSON::Field(key: "currency", type: String?, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
-    getter currency : String?
-
-    @[JSON::Field(ignore: true)]
-    property? currency_present : Bool = false
 
     # Always true for a deleted object
     @[JSON::Field(key: "deleted", type: Bool)]
@@ -42,19 +36,32 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["card"])
 
+    # Optional properties
+
+    # Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.
+    @[JSON::Field(key: "currency", type: String?, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
+    getter currency : String?
+
+    @[JSON::Field(ignore: true)]
+    property? currency_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @currency : String?, @deleted : Bool, @id : String, @object : String)
+    def initialize(
+      *,
+      # Required properties
+      @deleted : Bool,
+      @id : String,
+      @object : String,
+      # Optional properties
+      @currency : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @currency.to_s.size > 5000
-        invalid_properties.push("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
-      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_DELETED.error_message) unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
 
@@ -64,27 +71,22 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
+      if !@currency.nil? && @currency.to_s.size > 5000
+        invalid_properties.push("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @currency.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if !@currency.nil? && @currency.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] currency Value to be assigned
-    def currency=(currency)
-      if currency.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @currency = currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -111,15 +113,14 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        currency == o.currency &&
-        deleted == o.deleted &&
-        id == o.id &&
-        object == o.object
+    # Custom attribute writer method with validation
+    # @param [Object] currency Value to be assigned
+    def currency=(currency)
+      if !currency.nil? && currency.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @currency = currency
     end
 
     # @see the `==` method
@@ -128,8 +129,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@currency, @deleted, @id, @object)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@deleted, @id, @object, @currency)
   end
 end

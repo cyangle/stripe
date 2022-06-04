@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
 
@@ -30,6 +31,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? charge_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -42,8 +44,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? instructions_email_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -76,7 +78,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64? = nil, @charge : String? = nil, @expand : Array(String)? = nil, @instructions_email : String? = nil, @metadata : IndividualSpecsMetadata? = nil, @payment_intent : String? = nil, @reason : String? = nil, @refund_application_fee : Bool? = nil, @reverse_transfer : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @amount : Int64? = nil,
+      @charge : String? = nil,
+      @expand : Array(String)? = nil,
+      @instructions_email : String? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @payment_intent : String? = nil,
+      @reason : String? = nil,
+      @refund_application_fee : Bool? = nil,
+      @reverse_transfer : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -108,6 +122,7 @@ module Stripe
       return false if !@payment_intent.nil? && @payment_intent.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
       return false if !@reason.nil? && @reason.to_s.size > 5000
+
       true
     end
 
@@ -138,30 +153,16 @@ module Stripe
       @reason = reason
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        charge == o.charge &&
-        expand == o.expand &&
-        instructions_email == o.instructions_email &&
-        metadata == o.metadata &&
-        payment_intent == o.payment_intent &&
-        reason == o.reason &&
-        refund_application_fee == o.refund_application_fee &&
-        reverse_transfer == o.reverse_transfer
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @charge, @expand, @instructions_email, @metadata, @payment_intent, @reason, @refund_application_fee, @reverse_transfer)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @charge, @expand, @instructions_email, @metadata, @payment_intent, @reason, @refund_application_fee, @reverse_transfer)
   end
 end

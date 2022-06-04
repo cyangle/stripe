@@ -19,47 +19,42 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The product's name, meant to be displayable to the customer.
+
     @[JSON::Field(key: "name", type: String)]
     getter name : String
 
     # Optional properties
-    # Whether the product is currently available for purchase. Defaults to `true`.
+
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
 
     @[JSON::Field(ignore: true)]
     property? active_present : Bool = false
 
-    # The identifier for the product. Must be unique. If not provided, an identifier will be randomly generated.
     @[JSON::Field(key: "id", type: String?, presence: true, ignore_serialize: id.nil? && !id_present?)]
     getter id : String?
 
     @[JSON::Field(ignore: true)]
     property? id_present : Bool = false
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
     property metadata : Hash(String, String)?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
-    # An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include `<`, `>`, `\\`, `\"`, `'` characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.
     @[JSON::Field(key: "statement_descriptor", type: String?, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
     getter statement_descriptor : String?
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_present : Bool = false
 
-    # A [tax code](https://stripe.com/docs/tax/tax-categories) ID.
     @[JSON::Field(key: "tax_code", type: String?, presence: true, ignore_serialize: tax_code.nil? && !tax_code_present?)]
     getter tax_code : String?
 
     @[JSON::Field(ignore: true)]
     property? tax_code_present : Bool = false
 
-    # A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
     @[JSON::Field(key: "unit_label", type: String?, presence: true, ignore_serialize: unit_label.nil? && !unit_label_present?)]
     getter unit_label : String?
 
@@ -68,7 +63,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @name : String, @active : Bool? = nil, @id : String? = nil, @metadata : Hash(String, String)? = nil, @statement_descriptor : String? = nil, @tax_code : String? = nil, @unit_label : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @name : String,
+      # Optional properties
+      @active : Bool? = nil,
+      @id : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @statement_descriptor : String? = nil,
+      @tax_code : String? = nil,
+      @unit_label : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -76,12 +82,12 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if !@id.nil? && @id.to_s.size > 5000
-        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @name.to_s.size > 5000
         invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@id.nil? && @id.to_s.size > 5000
+        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
       if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
@@ -102,22 +108,13 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@id.nil? && @id.to_s.size > 5000
       return false if @name.to_s.size > 5000
+      return false if !@id.nil? && @id.to_s.size > 5000
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
       return false if !@tax_code.nil? && @tax_code.to_s.size > 5000
       return false if !@unit_label.nil? && @unit_label.to_s.size > 12
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id)
-      if !id.nil? && id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @id = id
     end
 
     # Custom attribute writer method with validation
@@ -128,6 +125,16 @@ module Stripe
       end
 
       @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if !id.nil? && id.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @id = id
     end
 
     # Custom attribute writer method with validation
@@ -160,28 +167,16 @@ module Stripe
       @unit_label = unit_label
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        id == o.id &&
-        metadata == o.metadata &&
-        name == o.name &&
-        statement_descriptor == o.statement_descriptor &&
-        tax_code == o.tax_code &&
-        unit_label == o.unit_label
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @id, @metadata, @name, @statement_descriptor, @tax_code, @unit_label)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@name, @active, @id, @metadata, @statement_descriptor, @tax_code, @unit_label)
   end
 end

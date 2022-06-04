@@ -19,6 +19,17 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # Two-digit number representing the card's expiration month.
+    @[JSON::Field(key: "exp_month", type: Int64)]
+    property exp_month : Int64
+
+    # Four-digit number representing the card's expiration year.
+    @[JSON::Field(key: "exp_year", type: Int64)]
+    property exp_year : Int64
+
+    # Optional properties
+
     # Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     @[JSON::Field(key: "brand", type: String?, presence: true, ignore_serialize: brand.nil? && !brand_present?)]
     getter brand : String?
@@ -39,13 +50,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? country_present : Bool = false
 
-    # Two-digit number representing the card's expiration month.
-    @[JSON::Field(key: "exp_month", type: Int64)]
-    property exp_month : Int64
+    # Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.  *Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*
+    @[JSON::Field(key: "fingerprint", type: String?, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
+    getter fingerprint : String?
 
-    # Four-digit number representing the card's expiration year.
-    @[JSON::Field(key: "exp_year", type: Int64)]
-    property exp_year : Int64
+    @[JSON::Field(ignore: true)]
+    property? fingerprint_present : Bool = false
 
     # Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     @[JSON::Field(key: "funding", type: String?, presence: true, ignore_serialize: funding.nil? && !funding_present?)]
@@ -93,45 +103,26 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? wallet_present : Bool = false
 
-    # Optional properties
-    # A high-level description of the type of cards issued in this range. (For internal use only and not typically available in standard API requests.)
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
-    # Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.  *Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*
-    @[JSON::Field(key: "fingerprint", type: String?, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
-    getter fingerprint : String?
-
-    @[JSON::Field(ignore: true)]
-    property? fingerprint_present : Bool = false
-
-    # Issuer identification number of the card. (For internal use only and not typically available in standard API requests.)
-    @[JSON::Field(key: "iin", type: String?, presence: true, ignore_serialize: iin.nil? && !iin_present?)]
-    getter iin : String?
-
-    @[JSON::Field(ignore: true)]
-    property? iin_present : Bool = false
-
-    # The name of the card's issuing bank. (For internal use only and not typically available in standard API requests.)
-    @[JSON::Field(key: "issuer", type: String?, presence: true, ignore_serialize: issuer.nil? && !issuer_present?)]
-    getter issuer : String?
-
-    @[JSON::Field(ignore: true)]
-    property? issuer_present : Bool = false
-
-    # True if this payment was marked as MOTO and out of scope for SCA.
-    @[JSON::Field(key: "moto", type: Bool?, presence: true, ignore_serialize: moto.nil? && !moto_present?)]
-    property moto : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? moto_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @brand : String?, @checks : PaymentMethodDetailsCardChecks1?, @country : String?, @exp_month : Int64, @exp_year : Int64, @funding : String?, @installments : PaymentMethodDetailsCardInstallments1?, @last4 : String?, @mandate : String?, @network : String?, @three_d_secure : PaymentMethodDetailsCardThreeDSecure?, @wallet : PaymentMethodDetailsCardWallet1?, @description : String? = nil, @fingerprint : String? = nil, @iin : String? = nil, @issuer : String? = nil, @moto : Bool? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @exp_month : Int64,
+      @exp_year : Int64,
+      # Optional properties
+      @brand : String? = nil,
+      @checks : PaymentMethodDetailsCardChecks1? = nil,
+      @country : String? = nil,
+      @fingerprint : String? = nil,
+      @funding : String? = nil,
+      @installments : PaymentMethodDetailsCardInstallments1? = nil,
+      @last4 : String? = nil,
+      @mandate : String? = nil,
+      @network : String? = nil,
+      @three_d_secure : PaymentMethodDetailsCardThreeDSecure? = nil,
+      @wallet : PaymentMethodDetailsCardWallet1? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -139,43 +130,31 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @brand.to_s.size > 5000
+      if !@brand.nil? && @brand.to_s.size > 5000
         invalid_properties.push("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @country.to_s.size > 5000
+      if !@country.nil? && @country.to_s.size > 5000
         invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@description.nil? && @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
       if !@fingerprint.nil? && @fingerprint.to_s.size > 5000
         invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @funding.to_s.size > 5000
+      if !@funding.nil? && @funding.to_s.size > 5000
         invalid_properties.push("invalid value for \"funding\", the character length must be smaller than or equal to 5000.")
       end
 
-      if !@iin.nil? && @iin.to_s.size > 5000
-        invalid_properties.push("invalid value for \"iin\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@issuer.nil? && @issuer.to_s.size > 5000
-        invalid_properties.push("invalid value for \"issuer\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @last4.to_s.size > 5000
+      if !@last4.nil? && @last4.to_s.size > 5000
         invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @mandate.to_s.size > 5000
+      if !@mandate.nil? && @mandate.to_s.size > 5000
         invalid_properties.push("invalid value for \"mandate\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @network.to_s.size > 5000
+      if !@network.nil? && @network.to_s.size > 5000
         invalid_properties.push("invalid value for \"network\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -185,23 +164,21 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @brand.to_s.size > 5000
-      return false if @country.to_s.size > 5000
-      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@brand.nil? && @brand.to_s.size > 5000
+      return false if !@country.nil? && @country.to_s.size > 5000
       return false if !@fingerprint.nil? && @fingerprint.to_s.size > 5000
-      return false if @funding.to_s.size > 5000
-      return false if !@iin.nil? && @iin.to_s.size > 5000
-      return false if !@issuer.nil? && @issuer.to_s.size > 5000
-      return false if @last4.to_s.size > 5000
-      return false if @mandate.to_s.size > 5000
-      return false if @network.to_s.size > 5000
+      return false if !@funding.nil? && @funding.to_s.size > 5000
+      return false if !@last4.nil? && @last4.to_s.size > 5000
+      return false if !@mandate.nil? && @mandate.to_s.size > 5000
+      return false if !@network.nil? && @network.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] brand Value to be assigned
     def brand=(brand)
-      if brand.to_s.size > 5000
+      if !brand.nil? && brand.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -211,21 +188,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
     def country=(country)
-      if country.to_s.size > 5000
+      if !country.nil? && country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
       @country = country
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if !description.nil? && description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -241,7 +208,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] funding Value to be assigned
     def funding=(funding)
-      if funding.to_s.size > 5000
+      if !funding.nil? && funding.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"funding\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -249,29 +216,9 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] iin Value to be assigned
-    def iin=(iin)
-      if !iin.nil? && iin.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"iin\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @iin = iin
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] issuer Value to be assigned
-    def issuer=(issuer)
-      if !issuer.nil? && issuer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"issuer\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @issuer = issuer
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] last4 Value to be assigned
     def last4=(last4)
-      if last4.to_s.size > 5000
+      if !last4.nil? && last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -281,7 +228,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] mandate Value to be assigned
     def mandate=(mandate)
-      if mandate.to_s.size > 5000
+      if !mandate.nil? && mandate.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"mandate\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -291,35 +238,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] network Value to be assigned
     def network=(network)
-      if network.to_s.size > 5000
+      if !network.nil? && network.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"network\", the character length must be smaller than or equal to 5000.")
       end
 
       @network = network
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        brand == o.brand &&
-        checks == o.checks &&
-        country == o.country &&
-        description == o.description &&
-        exp_month == o.exp_month &&
-        exp_year == o.exp_year &&
-        fingerprint == o.fingerprint &&
-        funding == o.funding &&
-        iin == o.iin &&
-        installments == o.installments &&
-        issuer == o.issuer &&
-        last4 == o.last4 &&
-        mandate == o.mandate &&
-        moto == o.moto &&
-        network == o.network &&
-        three_d_secure == o.three_d_secure &&
-        wallet == o.wallet
     end
 
     # @see the `==` method
@@ -328,8 +251,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@brand, @checks, @country, @description, @exp_month, @exp_year, @fingerprint, @funding, @iin, @installments, @issuer, @last4, @mandate, @moto, @network, @three_d_secure, @wallet)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@exp_month, @exp_year, @brand, @checks, @country, @fingerprint, @funding, @installments, @last4, @mandate, @network, @three_d_secure, @wallet)
   end
 end

@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # A positive integer in cents representing how much to payout.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -27,6 +28,7 @@ module Stripe
     property currency : String
 
     # Optional properties
+
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String?
@@ -41,6 +43,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? destination_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -81,7 +84,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @currency : String, @description : String? = nil, @destination : String? = nil, @expand : Array(String)? = nil, @metadata : Hash(String, String)? = nil, @method : String? = nil, @source_type : String? = nil, @statement_descriptor : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @currency : String,
+      # Optional properties
+      @description : String? = nil,
+      @destination : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @method : String? = nil,
+      @source_type : String? = nil,
+      @statement_descriptor : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -121,6 +137,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_SOURCE_TYPE.valid?(@source_type)
       return false if !@source_type.nil? && @source_type.to_s.size > 5000
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
+
       true
     end
 
@@ -158,30 +175,16 @@ module Stripe
       @statement_descriptor = statement_descriptor
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        currency == o.currency &&
-        description == o.description &&
-        destination == o.destination &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        method == o.method &&
-        source_type == o.source_type &&
-        statement_descriptor == o.statement_descriptor
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @currency, @description, @destination, @expand, @metadata, @method, @source_type, @statement_descriptor)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @currency, @description, @destination, @expand, @metadata, @method, @source_type, @statement_descriptor)
   end
 end

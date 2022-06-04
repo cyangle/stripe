@@ -19,15 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Two-digit number representing the card's expiration month.
+
     @[JSON::Field(key: "exp_month", type: Int64?)]
     property exp_month : Int64?
 
-    # Four-digit number representing the card's expiration year.
     @[JSON::Field(key: "exp_year", type: Int64?)]
     property exp_year : Int64?
 
-    # The card number, as a string without any separators.
     @[JSON::Field(key: "number", type: String?)]
     getter number : String?
 
@@ -35,7 +33,7 @@ module Stripe
     getter token : String?
 
     # Optional properties
-    # The card's CVC. It is highly recommended to always include this value.
+
     @[JSON::Field(key: "cvc", type: String?, presence: true, ignore_serialize: cvc.nil? && !cvc_present?)]
     getter cvc : String?
 
@@ -52,17 +50,22 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @exp_month : Int64, @exp_year : Int64, @number : String, @token : String, @cvc : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @exp_month : Int64? = nil,
+      @exp_year : Int64? = nil,
+      @number : String? = nil,
+      @token : String? = nil,
+      # Optional properties
+      @cvc : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if !@cvc.nil? && @cvc.to_s.size > 5000
-        invalid_properties.push("invalid value for \"cvc\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @number.to_s.size > 5000
         invalid_properties.push("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
@@ -72,15 +75,20 @@ module Stripe
         invalid_properties.push("invalid value for \"token\", the character length must be smaller than or equal to 5000.")
       end
 
+      if !@cvc.nil? && @cvc.to_s.size > 5000
+        invalid_properties.push("invalid value for \"cvc\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@cvc.nil? && @cvc.to_s.size > 5000
       return false if @number.to_s.size > 5000
       return false if @token.to_s.size > 5000
+      return false if !@cvc.nil? && @cvc.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -92,22 +100,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] cvc Value to be assigned
-    def cvc=(cvc)
-      if !cvc.nil? && cvc.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"cvc\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @cvc = cvc
     end
 
     # Custom attribute writer method with validation
@@ -130,16 +125,14 @@ module Stripe
       @token = token
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        cvc == o.cvc &&
-        exp_month == o.exp_month &&
-        exp_year == o.exp_year &&
-        number == o.number &&
-        token == o.token
+    # Custom attribute writer method with validation
+    # @param [Object] cvc Value to be assigned
+    def cvc=(cvc)
+      if !cvc.nil? && cvc.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"cvc\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @cvc = cvc
     end
 
     # @see the `==` method
@@ -148,8 +141,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@cvc, @exp_month, @exp_year, @number, @token)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@exp_month, @exp_year, @number, @token, @cvc)
   end
 end

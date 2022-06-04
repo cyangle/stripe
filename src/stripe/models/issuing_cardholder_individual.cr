@@ -19,11 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    @[JSON::Field(key: "dob", type: IssuingCardholderIndividualDob1?, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
-    property dob : IssuingCardholderIndividualDob1?
-
-    @[JSON::Field(ignore: true)]
-    property? dob_present : Bool = false
 
     # The first name of this cardholder.
     @[JSON::Field(key: "first_name", type: String)]
@@ -33,6 +28,14 @@ module Stripe
     @[JSON::Field(key: "last_name", type: String)]
     getter last_name : String
 
+    # Optional properties
+
+    @[JSON::Field(key: "dob", type: IssuingCardholderIndividualDob1?, presence: true, ignore_serialize: dob.nil? && !dob_present?)]
+    property dob : IssuingCardholderIndividualDob1?
+
+    @[JSON::Field(ignore: true)]
+    property? dob_present : Bool = false
+
     @[JSON::Field(key: "verification", type: IssuingCardholderIndividualVerification?, presence: true, ignore_serialize: verification.nil? && !verification_present?)]
     property verification : IssuingCardholderIndividualVerification?
 
@@ -41,7 +44,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @dob : IssuingCardholderIndividualDob1?, @first_name : String, @last_name : String, @verification : IssuingCardholderIndividualVerification?)
+    def initialize(
+      *,
+      # Required properties
+      @first_name : String,
+      @last_name : String,
+      # Optional properties
+      @dob : IssuingCardholderIndividualDob1? = nil,
+      @verification : IssuingCardholderIndividualVerification? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -65,6 +76,7 @@ module Stripe
     def valid?
       return false if @first_name.to_s.size > 5000
       return false if @last_name.to_s.size > 5000
+
       true
     end
 
@@ -88,25 +100,16 @@ module Stripe
       @last_name = last_name
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        dob == o.dob &&
-        first_name == o.first_name &&
-        last_name == o.last_name &&
-        verification == o.verification
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@dob, @first_name, @last_name, @verification)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@first_name, @last_name, @dob, @verification)
   end
 end

@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The Bacs Direct Debit Display Name for this account. For payments made with Bacs Direct Debit, this will appear on the mandate, and as the statement descriptor.
     @[JSON::Field(key: "display_name", type: String?, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
     getter display_name : String?
@@ -28,7 +29,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @display_name : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @display_name : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -47,6 +52,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@display_name.nil? && @display_name.to_s.size > 5000
+
       true
     end
 
@@ -60,22 +66,16 @@ module Stripe
       @display_name = display_name
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        display_name == o.display_name
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@display_name)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@display_name)
   end
 end

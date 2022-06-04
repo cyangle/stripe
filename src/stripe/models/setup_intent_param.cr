@@ -12,27 +12,19 @@ require "time"
 require "log"
 
 module Stripe
-  # Configuration for any card setup attempted on this SetupIntent.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SetupIntentParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "mandate_options", type: SetupIntentMandateOptionsParam?, presence: true, ignore_serialize: mandate_options.nil? && !mandate_options_present?)]
     property mandate_options : SetupIntentMandateOptionsParam?
 
     @[JSON::Field(ignore: true)]
     property? mandate_options_present : Bool = false
 
-    # When specified, this parameter signals that a card has been collected as MOTO (Mail Order Telephone Order) and thus out of scope for SCA. This parameter can only be provided during confirmation.
-    @[JSON::Field(key: "moto", type: Bool?, presence: true, ignore_serialize: moto.nil? && !moto_present?)]
-    property moto : Bool?
-
-    @[JSON::Field(ignore: true)]
-    property? moto_present : Bool = false
-
-    # We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
     @[JSON::Field(key: "request_three_d_secure", type: String?, presence: true, ignore_serialize: request_three_d_secure.nil? && !request_three_d_secure_present?)]
     getter request_three_d_secure : String?
 
@@ -43,7 +35,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @mandate_options : SetupIntentMandateOptionsParam? = nil, @moto : Bool? = nil, @request_three_d_secure : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @mandate_options : SetupIntentMandateOptionsParam? = nil,
+      @request_three_d_secure : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -65,6 +62,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
       return false if !@request_three_d_secure.nil? && @request_three_d_secure.to_s.size > 5000
+
       true
     end
 
@@ -75,24 +73,16 @@ module Stripe
       @request_three_d_secure = request_three_d_secure
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        mandate_options == o.mandate_options &&
-        moto == o.moto &&
-        request_three_d_secure == o.request_three_d_secure
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@mandate_options, @moto, @request_three_d_secure)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@mandate_options, @request_three_d_secure)
   end
 end

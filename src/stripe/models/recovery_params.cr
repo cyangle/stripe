@@ -12,19 +12,18 @@ require "time"
 require "log"
 
 module Stripe
-  # Configure a Checkout Session that can be used to recover an expired session.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class RecoveryParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # If `true`, a recovery URL will be generated to recover this Checkout Session if it expires before a successful transaction is completed. It will be attached to the Checkout Session object upon expiration.
+
     @[JSON::Field(key: "enabled", type: Bool)]
     property enabled : Bool
 
     # Optional properties
-    # Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to `false`
+
     @[JSON::Field(key: "allow_promotion_codes", type: Bool?, presence: true, ignore_serialize: allow_promotion_codes.nil? && !allow_promotion_codes_present?)]
     property allow_promotion_codes : Bool?
 
@@ -33,7 +32,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @enabled : Bool, @allow_promotion_codes : Bool? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @enabled : Bool,
+      # Optional properties
+      @allow_promotion_codes : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -50,23 +55,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        allow_promotion_codes == o.allow_promotion_codes &&
-        enabled == o.enabled
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@allow_promotion_codes, @enabled)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@enabled, @allow_promotion_codes)
   end
 end

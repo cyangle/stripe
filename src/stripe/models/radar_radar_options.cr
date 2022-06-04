@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # A [Radar Session](https://stripe.com/docs/radar/radar-session) is a snapshot of the browser metadata and device details that help Radar make more accurate predictions on your payments.
     @[JSON::Field(key: "session", type: String?, presence: true, ignore_serialize: session.nil? && !session_present?)]
     getter session : String?
@@ -28,7 +29,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @session : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @session : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -47,6 +52,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@session.nil? && @session.to_s.size > 5000
+
       true
     end
 
@@ -60,22 +66,16 @@ module Stripe
       @session = session
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        session == o.session
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@session)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@session)
   end
 end

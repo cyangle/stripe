@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The name of the value list for use in rules.
     @[JSON::Field(key: "alias", type: String)]
     getter _alias : String
@@ -64,7 +65,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_alias : String, @created : Int64, @created_by : String, @id : String, @item_type : String, @list_items : RadarListListItemList, @livemode : Bool, @metadata : Hash(String, String), @name : String, @object : String)
+    def initialize(
+      *,
+      # Required properties
+      @_alias : String,
+      @created : Int64,
+      @created_by : String,
+      @id : String,
+      @item_type : String,
+      @list_items : RadarListListItemList,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @name : String,
+      @object : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -104,6 +118,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_ITEM_TYPE.valid?(@item_type, false)
       return false if @name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
       true
     end
 
@@ -161,31 +176,16 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        _alias == o._alias &&
-        created == o.created &&
-        created_by == o.created_by &&
-        id == o.id &&
-        item_type == o.item_type &&
-        list_items == o.list_items &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        name == o.name &&
-        object == o.object
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@_alias, @created, @created_by, @id, @item_type, @list_items, @livemode, @metadata, @name, @object)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_alias, @created, @created_by, @id, @item_type, @list_items, @livemode, @metadata, @name, @object)
   end
 end

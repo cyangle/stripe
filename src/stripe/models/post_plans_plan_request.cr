@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether the plan is currently available for new subscriptions.
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
@@ -25,14 +26,15 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? active_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? expand_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -60,7 +62,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool? = nil, @expand : Array(String)? = nil, @metadata : IndividualSpecsMetadata? = nil, @nickname : String? = nil, @product : String? = nil, @trial_period_days : Int64? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @active : Bool? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @nickname : String? = nil,
+      @product : String? = nil,
+      @trial_period_days : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -84,6 +95,7 @@ module Stripe
     def valid?
       return false if !@nickname.nil? && @nickname.to_s.size > 5000
       return false if !@product.nil? && @product.to_s.size > 5000
+
       true
     end
 
@@ -107,27 +119,16 @@ module Stripe
       @product = product
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        nickname == o.nickname &&
-        product == o.product &&
-        trial_period_days == o.trial_period_days
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @expand, @metadata, @nickname, @product, @trial_period_days)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @expand, @metadata, @nickname, @product, @trial_period_days)
   end
 end

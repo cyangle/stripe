@@ -19,83 +19,18 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    @[JSON::Field(key: "application", type: SetupIntentApplication, presence: true, ignore_serialize: application.nil? && !application_present?)]
-    property application : SetupIntentApplication
-
-    @[JSON::Field(ignore: true)]
-    property? application_present : Bool = false
-
-    # Reason for cancellation of this SetupIntent, one of `abandoned`, `requested_by_customer`, or `duplicate`.
-    @[JSON::Field(key: "cancellation_reason", type: String, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
-    getter cancellation_reason : String
-
-    @[JSON::Field(ignore: true)]
-    property? cancellation_reason_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_CANCELLATION_REASON = EnumValidator.new("cancellation_reason", "String", ["abandoned", "duplicate", "requested_by_customer", "null"])
-
-    # The client secret of this SetupIntent. Used for client-side retrieval using a publishable key.  The client secret can be used to complete payment setup from your frontend. It should not be stored, logged, or exposed to anyone other than the customer. Make sure that you have TLS enabled on any page that includes the client secret.
-    @[JSON::Field(key: "client_secret", type: String, presence: true, ignore_serialize: client_secret.nil? && !client_secret_present?)]
-    getter client_secret : String
-
-    @[JSON::Field(ignore: true)]
-    property? client_secret_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?)]
     property created : Int64?
 
-    @[JSON::Field(key: "customer", type: SetupIntentCustomer, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
-    property customer : SetupIntentCustomer
-
-    @[JSON::Field(ignore: true)]
-    property? customer_present : Bool = false
-
-    # An arbitrary string attached to the object. Often useful for displaying to users.
-    @[JSON::Field(key: "description", type: String, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?)]
     getter id : String?
 
-    @[JSON::Field(key: "last_setup_error", type: SetupIntentLastSetupError, presence: true, ignore_serialize: last_setup_error.nil? && !last_setup_error_present?)]
-    property last_setup_error : SetupIntentLastSetupError
-
-    @[JSON::Field(ignore: true)]
-    property? last_setup_error_present : Bool = false
-
-    @[JSON::Field(key: "latest_attempt", type: SetupIntentLatestAttempt, presence: true, ignore_serialize: latest_attempt.nil? && !latest_attempt_present?)]
-    property latest_attempt : SetupIntentLatestAttempt
-
-    @[JSON::Field(ignore: true)]
-    property? latest_attempt_present : Bool = false
-
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?)]
     property livemode : Bool?
-
-    @[JSON::Field(key: "mandate", type: SetupIntentMandate, presence: true, ignore_serialize: mandate.nil? && !mandate_present?)]
-    property mandate : SetupIntentMandate
-
-    @[JSON::Field(ignore: true)]
-    property? mandate_present : Bool = false
-
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String), presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
-
-    @[JSON::Field(key: "next_action", type: SetupIntentNextAction1, presence: true, ignore_serialize: next_action.nil? && !next_action_present?)]
-    property next_action : SetupIntentNextAction1
-
-    @[JSON::Field(ignore: true)]
-    property? next_action_present : Bool = false
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?)]
@@ -103,32 +38,9 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["setup_intent"])
 
-    @[JSON::Field(key: "on_behalf_of", type: SetupIntentOnBehalfOf, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
-    property on_behalf_of : SetupIntentOnBehalfOf
-
-    @[JSON::Field(ignore: true)]
-    property? on_behalf_of_present : Bool = false
-
-    @[JSON::Field(key: "payment_method", type: SetupIntentPaymentMethod, presence: true, ignore_serialize: payment_method.nil? && !payment_method_present?)]
-    property payment_method : SetupIntentPaymentMethod
-
-    @[JSON::Field(ignore: true)]
-    property? payment_method_present : Bool = false
-
-    @[JSON::Field(key: "payment_method_options", type: SetupIntentPaymentMethodOptions1, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
-    property payment_method_options : SetupIntentPaymentMethodOptions1
-
-    @[JSON::Field(ignore: true)]
-    property? payment_method_options_present : Bool = false
-
+    # The list of payment method types (e.g. card) that this SetupIntent is allowed to set up.
     @[JSON::Field(key: "payment_method_types", type: Array(String)?)]
     property payment_method_types : Array(String)?
-
-    @[JSON::Field(key: "single_use_mandate", type: SetupIntentSingleUseMandate, presence: true, ignore_serialize: single_use_mandate.nil? && !single_use_mandate_present?)]
-    property single_use_mandate : SetupIntentSingleUseMandate
-
-    @[JSON::Field(ignore: true)]
-    property? single_use_mandate_present : Bool = false
 
     # [Status](https://stripe.com/docs/payments/intents#intent-statuses) of this SetupIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `canceled`, or `succeeded`.
     @[JSON::Field(key: "status", type: String?)]
@@ -141,12 +53,48 @@ module Stripe
     getter usage : String?
 
     # Optional properties
+
+    @[JSON::Field(key: "application", type: SetupIntentApplication?, presence: true, ignore_serialize: application.nil? && !application_present?)]
+    property application : SetupIntentApplication?
+
+    @[JSON::Field(ignore: true)]
+    property? application_present : Bool = false
+
     # If present, the SetupIntent's payment method will be attached to the in-context Stripe Account.  It can only be used for this Stripe Account’s own money movement flows like InboundTransfer and OutboundTransfers. It cannot be set to true when setting up a PaymentMethod for a Customer, and defaults to false when attaching a PaymentMethod to a Customer.
     @[JSON::Field(key: "attach_to_self", type: Bool?, presence: true, ignore_serialize: attach_to_self.nil? && !attach_to_self_present?)]
     property attach_to_self : Bool?
 
     @[JSON::Field(ignore: true)]
     property? attach_to_self_present : Bool = false
+
+    # Reason for cancellation of this SetupIntent, one of `abandoned`, `requested_by_customer`, or `duplicate`.
+    @[JSON::Field(key: "cancellation_reason", type: String?, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
+    getter cancellation_reason : String?
+
+    @[JSON::Field(ignore: true)]
+    property? cancellation_reason_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_CANCELLATION_REASON = EnumValidator.new("cancellation_reason", "String", ["abandoned", "duplicate", "requested_by_customer"])
+
+    # The client secret of this SetupIntent. Used for client-side retrieval using a publishable key.  The client secret can be used to complete payment setup from your frontend. It should not be stored, logged, or exposed to anyone other than the customer. Make sure that you have TLS enabled on any page that includes the client secret.
+    @[JSON::Field(key: "client_secret", type: String?, presence: true, ignore_serialize: client_secret.nil? && !client_secret_present?)]
+    getter client_secret : String?
+
+    @[JSON::Field(ignore: true)]
+    property? client_secret_present : Bool = false
+
+    @[JSON::Field(key: "customer", type: SetupIntentCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
+    property customer : SetupIntentCustomer?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_present : Bool = false
+
+    # An arbitrary string attached to the object. Often useful for displaying to users.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
 
     # Indicates the directions of money movement for which this payment method is intended to be used.  Include `inbound` if you intend to use the payment method as the origin to pull funds from. Include `outbound` if you intend to use the payment method as the destination to send funds to. You can include both if you intend to use the payment method for both purposes.
     @[JSON::Field(key: "flow_directions", type: Array(String)?, presence: true, ignore_serialize: flow_directions.nil? && !flow_directions_present?)]
@@ -156,6 +104,61 @@ module Stripe
     property? flow_directions_present : Bool = false
 
     ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS = EnumValidator.new("flow_directions", "String", ["inbound", "outbound"])
+
+    @[JSON::Field(key: "last_setup_error", type: SetupIntentLastSetupError?, presence: true, ignore_serialize: last_setup_error.nil? && !last_setup_error_present?)]
+    property last_setup_error : SetupIntentLastSetupError?
+
+    @[JSON::Field(ignore: true)]
+    property? last_setup_error_present : Bool = false
+
+    @[JSON::Field(key: "latest_attempt", type: SetupIntentLatestAttempt?, presence: true, ignore_serialize: latest_attempt.nil? && !latest_attempt_present?)]
+    property latest_attempt : SetupIntentLatestAttempt?
+
+    @[JSON::Field(ignore: true)]
+    property? latest_attempt_present : Bool = false
+
+    @[JSON::Field(key: "mandate", type: SetupIntentMandate?, presence: true, ignore_serialize: mandate.nil? && !mandate_present?)]
+    property mandate : SetupIntentMandate?
+
+    @[JSON::Field(ignore: true)]
+    property? mandate_present : Bool = false
+
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
+
+    @[JSON::Field(key: "next_action", type: SetupIntentNextAction1?, presence: true, ignore_serialize: next_action.nil? && !next_action_present?)]
+    property next_action : SetupIntentNextAction1?
+
+    @[JSON::Field(ignore: true)]
+    property? next_action_present : Bool = false
+
+    @[JSON::Field(key: "on_behalf_of", type: SetupIntentOnBehalfOf?, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
+    property on_behalf_of : SetupIntentOnBehalfOf?
+
+    @[JSON::Field(ignore: true)]
+    property? on_behalf_of_present : Bool = false
+
+    @[JSON::Field(key: "payment_method", type: SetupIntentPaymentMethod?, presence: true, ignore_serialize: payment_method.nil? && !payment_method_present?)]
+    property payment_method : SetupIntentPaymentMethod?
+
+    @[JSON::Field(ignore: true)]
+    property? payment_method_present : Bool = false
+
+    @[JSON::Field(key: "payment_method_options", type: SetupIntentPaymentMethodOptions1?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
+    property payment_method_options : SetupIntentPaymentMethodOptions1?
+
+    @[JSON::Field(ignore: true)]
+    property? payment_method_options_present : Bool = false
+
+    @[JSON::Field(key: "single_use_mandate", type: SetupIntentSingleUseMandate?, presence: true, ignore_serialize: single_use_mandate.nil? && !single_use_mandate_present?)]
+    property single_use_mandate : SetupIntentSingleUseMandate?
+
+    @[JSON::Field(ignore: true)]
+    property? single_use_mandate_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -167,25 +170,40 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @application : SetupIntentApplication?, @cancellation_reason : String?, @client_secret : String?, @created : Int64, @customer : SetupIntentCustomer?, @description : String?, @id : String, @last_setup_error : SetupIntentLastSetupError?, @latest_attempt : SetupIntentLatestAttempt?, @livemode : Bool, @mandate : SetupIntentMandate?, @metadata : Hash(String, String)?, @next_action : SetupIntentNextAction1?, @object : String, @on_behalf_of : SetupIntentOnBehalfOf?, @payment_method : SetupIntentPaymentMethod?, @payment_method_options : SetupIntentPaymentMethodOptions1?, @payment_method_types : Array(String), @single_use_mandate : SetupIntentSingleUseMandate?, @status : String, @usage : String, @attach_to_self : Bool? = nil, @flow_directions : Array(String)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @object : String? = nil,
+      @payment_method_types : Array(String)? = nil,
+      @status : String? = nil,
+      @usage : String? = nil,
+      # Optional properties
+      @application : SetupIntentApplication? = nil,
+      @attach_to_self : Bool? = nil,
+      @cancellation_reason : String? = nil,
+      @client_secret : String? = nil,
+      @customer : SetupIntentCustomer? = nil,
+      @description : String? = nil,
+      @flow_directions : Array(String)? = nil,
+      @last_setup_error : SetupIntentLastSetupError? = nil,
+      @latest_attempt : SetupIntentLatestAttempt? = nil,
+      @mandate : SetupIntentMandate? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @next_action : SetupIntentNextAction1? = nil,
+      @on_behalf_of : SetupIntentOnBehalfOf? = nil,
+      @payment_method : SetupIntentPaymentMethod? = nil,
+      @payment_method_options : SetupIntentPaymentMethodOptions1? = nil,
+      @single_use_mandate : SetupIntentSingleUseMandate? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CANCELLATION_REASON.error_message) unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
-
-      if @client_secret.to_s.size > 5000
-        invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.error_message) unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
@@ -199,20 +217,33 @@ module Stripe
         invalid_properties.push("invalid value for \"usage\", the character length must be smaller than or equal to 5000.")
       end
 
+      invalid_properties.push(ENUM_VALIDATOR_FOR_CANCELLATION_REASON.error_message) unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
+
+      if !@client_secret.nil? && @client_secret.to_s.size > 5000
+        invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.error_message) unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
-      return false if @client_secret.to_s.size > 5000
-      return false if @description.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false if @usage.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
+      return false if !@client_secret.nil? && @client_secret.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -224,46 +255,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] cancellation_reason Object to be assigned
-    def cancellation_reason=(cancellation_reason)
-      ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid!(cancellation_reason)
-      @cancellation_reason = cancellation_reason
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] client_secret Value to be assigned
-    def client_secret=(client_secret)
-      if client_secret.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @client_secret = client_secret
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] flow_directions Object to be assigned
-    def flow_directions=(flow_directions)
-      ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid!(flow_directions)
-      @flow_directions = flow_directions
     end
 
     # Custom attribute writer method with validation
@@ -300,34 +294,38 @@ module Stripe
       @usage = usage
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        application == o.application &&
-        attach_to_self == o.attach_to_self &&
-        cancellation_reason == o.cancellation_reason &&
-        client_secret == o.client_secret &&
-        created == o.created &&
-        customer == o.customer &&
-        description == o.description &&
-        flow_directions == o.flow_directions &&
-        id == o.id &&
-        last_setup_error == o.last_setup_error &&
-        latest_attempt == o.latest_attempt &&
-        livemode == o.livemode &&
-        mandate == o.mandate &&
-        metadata == o.metadata &&
-        next_action == o.next_action &&
-        object == o.object &&
-        on_behalf_of == o.on_behalf_of &&
-        payment_method == o.payment_method &&
-        payment_method_options == o.payment_method_options &&
-        payment_method_types == o.payment_method_types &&
-        single_use_mandate == o.single_use_mandate &&
-        status == o.status &&
-        usage == o.usage
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] cancellation_reason Object to be assigned
+    def cancellation_reason=(cancellation_reason)
+      ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid!(cancellation_reason)
+      @cancellation_reason = cancellation_reason
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] client_secret Value to be assigned
+    def client_secret=(client_secret)
+      if !client_secret.nil? && client_secret.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @client_secret = client_secret
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] flow_directions Object to be assigned
+    def flow_directions=(flow_directions)
+      ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid!(flow_directions)
+      @flow_directions = flow_directions
     end
 
     # @see the `==` method
@@ -336,8 +334,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@application, @attach_to_self, @cancellation_reason, @client_secret, @created, @customer, @description, @flow_directions, @id, @last_setup_error, @latest_attempt, @livemode, @mandate, @metadata, @next_action, @object, @on_behalf_of, @payment_method, @payment_method_options, @payment_method_types, @single_use_mandate, @status, @usage)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @livemode, @object, @payment_method_types, @status, @usage, @application, @attach_to_self, @cancellation_reason, @client_secret, @customer, @description, @flow_directions, @last_setup_error, @latest_attempt, @mandate, @metadata, @next_action, @on_behalf_of, @payment_method, @payment_method_options, @single_use_mandate)
   end
 end

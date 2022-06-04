@@ -18,6 +18,15 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
+    # The client secret of the SetupIntent.
+    @[JSON::Field(key: "client_secret", type: String?, presence: true, ignore_serialize: client_secret.nil? && !client_secret_present?)]
+    getter client_secret : String?
+
+    @[JSON::Field(ignore: true)]
+    property? client_secret_present : Bool = false
+
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -43,8 +52,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_method_data_present : Bool = false
 
-    @[JSON::Field(key: "payment_method_options", type: PaymentMethodOptionsParam28?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
-    property payment_method_options : PaymentMethodOptionsParam28?
+    @[JSON::Field(key: "payment_method_options", type: PaymentMethodOptionsParam18?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
+    property payment_method_options : PaymentMethodOptionsParam18?
 
     @[JSON::Field(ignore: true)]
     property? payment_method_options_present : Bool = false
@@ -58,13 +67,27 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @expand : Array(String)? = nil, @mandate_data : PostPaymentIntentsIntentConfirmRequestMandateData? = nil, @payment_method : String? = nil, @payment_method_data : PaymentMethodDataParams1? = nil, @payment_method_options : PaymentMethodOptionsParam28? = nil, @return_url : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @client_secret : String? = nil,
+      @expand : Array(String)? = nil,
+      @mandate_data : PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
+      @payment_method : String? = nil,
+      @payment_method_data : PaymentMethodDataParams1? = nil,
+      @payment_method_options : PaymentMethodOptionsParam18? = nil,
+      @return_url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
+      if !@client_secret.nil? && @client_secret.to_s.size > 5000
+        invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      end
 
       if !@payment_method.nil? && @payment_method.to_s.size > 5000
         invalid_properties.push("invalid value for \"payment_method\", the character length must be smaller than or equal to 5000.")
@@ -76,8 +99,20 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@client_secret.nil? && @client_secret.to_s.size > 5000
       return false if !@payment_method.nil? && @payment_method.to_s.size > 5000
+
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] client_secret Value to be assigned
+    def client_secret=(client_secret)
+      if !client_secret.nil? && client_secret.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @client_secret = client_secret
     end
 
     # Custom attribute writer method with validation
@@ -90,27 +125,16 @@ module Stripe
       @payment_method = payment_method
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        expand == o.expand &&
-        mandate_data == o.mandate_data &&
-        payment_method == o.payment_method &&
-        payment_method_data == o.payment_method_data &&
-        payment_method_options == o.payment_method_options &&
-        return_url == o.return_url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@expand, @mandate_data, @payment_method, @payment_method_data, @payment_method_options, @return_url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@client_secret, @expand, @mandate_data, @payment_method, @payment_method_data, @payment_method_options, @return_url)
   end
 end

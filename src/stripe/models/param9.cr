@@ -12,14 +12,13 @@ require "time"
 require "log"
 
 module Stripe
-  # If this is a `sofort` PaymentMethod, this hash contains details about the SOFORT payment method.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class Param9
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Two-letter ISO code representing the country the bank account is located in.
+
     @[JSON::Field(key: "country", type: String)]
     getter country : String
 
@@ -27,13 +26,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @country : String)
+    def initialize(
+      *,
+      # Required properties
+      @country : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_COUNTRY.error_message) unless ENUM_VALIDATOR_FOR_COUNTRY.valid?(@country, false)
 
       invalid_properties
@@ -43,6 +47,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_COUNTRY.valid?(@country, false)
+
       true
     end
 
@@ -53,22 +58,16 @@ module Stripe
       @country = country
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        country == o.country
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@country)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@country)
   end
 end

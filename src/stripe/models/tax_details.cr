@@ -19,7 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The purchaser's tax exemption status. One of `none`, `exempt`, or `reverse`.
+
     @[JSON::Field(key: "tax_exempt", type: String?, presence: true, ignore_serialize: tax_exempt.nil? && !tax_exempt_present?)]
     getter tax_exempt : String?
 
@@ -28,7 +28,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_TAX_EXEMPT = EnumValidator.new("tax_exempt", "String", ["", "exempt", "none", "reverse"])
 
-    # The purchaser's tax IDs to be used for this order.
     @[JSON::Field(key: "tax_ids", type: Array(DataParams)?, presence: true, ignore_serialize: tax_ids.nil? && !tax_ids_present?)]
     property tax_ids : Array(DataParams)?
 
@@ -37,13 +36,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @tax_exempt : String? = nil, @tax_ids : Array(DataParams)? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @tax_exempt : String? = nil,
+      @tax_ids : Array(DataParams)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_EXEMPT.error_message) unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
 
       invalid_properties
@@ -53,6 +58,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
+
       true
     end
 
@@ -63,23 +69,16 @@ module Stripe
       @tax_exempt = tax_exempt
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        tax_exempt == o.tax_exempt &&
-        tax_ids == o.tax_ids
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@tax_exempt, @tax_ids)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@tax_exempt, @tax_ids)
   end
 end

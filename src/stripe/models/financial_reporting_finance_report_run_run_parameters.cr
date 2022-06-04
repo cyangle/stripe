@@ -19,6 +19,8 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
+    # The set of output columns requested for inclusion in the report run.
     @[JSON::Field(key: "columns", type: Array(String)?, presence: true, ignore_serialize: columns.nil? && !columns_present?)]
     property columns : Array(String)?
 
@@ -76,7 +78,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @columns : Array(String)? = nil, @connected_account : String? = nil, @currency : String? = nil, @interval_end : Int64? = nil, @interval_start : Int64? = nil, @payout : String? = nil, @reporting_category : String? = nil, @timezone : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @columns : Array(String)? = nil,
+      @connected_account : String? = nil,
+      @currency : String? = nil,
+      @interval_end : Int64? = nil,
+      @interval_start : Int64? = nil,
+      @payout : String? = nil,
+      @reporting_category : String? = nil,
+      @timezone : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -110,6 +123,7 @@ module Stripe
       return false if !@payout.nil? && @payout.to_s.size > 5000
       return false if !@reporting_category.nil? && @reporting_category.to_s.size > 5000
       return false if !@timezone.nil? && @timezone.to_s.size > 5000
+
       true
     end
 
@@ -153,29 +167,16 @@ module Stripe
       @timezone = timezone
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        columns == o.columns &&
-        connected_account == o.connected_account &&
-        currency == o.currency &&
-        interval_end == o.interval_end &&
-        interval_start == o.interval_start &&
-        payout == o.payout &&
-        reporting_category == o.reporting_category &&
-        timezone == o.timezone
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@columns, @connected_account, @currency, @interval_end, @interval_start, @payout, @reporting_category, @timezone)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@columns, @connected_account, @currency, @interval_end, @interval_start, @payout, @reporting_category, @timezone)
   end
 end

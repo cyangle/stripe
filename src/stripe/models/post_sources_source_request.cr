@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Amount associated with the source.
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
@@ -25,6 +26,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? amount_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -37,8 +39,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? mandate_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -57,7 +59,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64? = nil, @expand : Array(String)? = nil, @mandate : MandateParams? = nil, @metadata : IndividualSpecsMetadata? = nil, @owner : Owner1? = nil, @source_order : OrderParams? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @amount : Int64? = nil,
+      @expand : Array(String)? = nil,
+      @mandate : MandateParams? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @owner : Owner1? = nil,
+      @source_order : OrderParams? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -74,27 +85,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        expand == o.expand &&
-        mandate == o.mandate &&
-        metadata == o.metadata &&
-        owner == o.owner &&
-        source_order == o.source_order
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @expand, @mandate, @metadata, @owner, @source_order)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @expand, @mandate, @metadata, @owner, @source_order)
   end
 end

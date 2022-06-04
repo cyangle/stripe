@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Bank code of bank associated with the bank account.
     @[JSON::Field(key: "bank_code", type: String?, presence: true, ignore_serialize: bank_code.nil? && !bank_code_present?)]
     getter bank_code : String?
@@ -63,7 +64,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bank_code : String?, @branch_code : String?, @country : String?, @fingerprint : String?, @last4 : String?, @mandate : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @bank_code : String? = nil,
+      @branch_code : String? = nil,
+      @country : String? = nil,
+      @fingerprint : String? = nil,
+      @last4 : String? = nil,
+      @mandate : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -71,27 +81,27 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @bank_code.to_s.size > 5000
+      if !@bank_code.nil? && @bank_code.to_s.size > 5000
         invalid_properties.push("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @branch_code.to_s.size > 5000
+      if !@branch_code.nil? && @branch_code.to_s.size > 5000
         invalid_properties.push("invalid value for \"branch_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @country.to_s.size > 5000
+      if !@country.nil? && @country.to_s.size > 5000
         invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @fingerprint.to_s.size > 5000
+      if !@fingerprint.nil? && @fingerprint.to_s.size > 5000
         invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @last4.to_s.size > 5000
+      if !@last4.nil? && @last4.to_s.size > 5000
         invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @mandate.to_s.size > 5000
+      if !@mandate.nil? && @mandate.to_s.size > 5000
         invalid_properties.push("invalid value for \"mandate\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -101,19 +111,20 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @bank_code.to_s.size > 5000
-      return false if @branch_code.to_s.size > 5000
-      return false if @country.to_s.size > 5000
-      return false if @fingerprint.to_s.size > 5000
-      return false if @last4.to_s.size > 5000
-      return false if @mandate.to_s.size > 5000
+      return false if !@bank_code.nil? && @bank_code.to_s.size > 5000
+      return false if !@branch_code.nil? && @branch_code.to_s.size > 5000
+      return false if !@country.nil? && @country.to_s.size > 5000
+      return false if !@fingerprint.nil? && @fingerprint.to_s.size > 5000
+      return false if !@last4.nil? && @last4.to_s.size > 5000
+      return false if !@mandate.nil? && @mandate.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] bank_code Value to be assigned
     def bank_code=(bank_code)
-      if bank_code.to_s.size > 5000
+      if !bank_code.nil? && bank_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -123,7 +134,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] branch_code Value to be assigned
     def branch_code=(branch_code)
-      if branch_code.to_s.size > 5000
+      if !branch_code.nil? && branch_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"branch_code\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -133,7 +144,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
     def country=(country)
-      if country.to_s.size > 5000
+      if !country.nil? && country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -143,7 +154,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] fingerprint Value to be assigned
     def fingerprint=(fingerprint)
-      if fingerprint.to_s.size > 5000
+      if !fingerprint.nil? && fingerprint.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -153,7 +164,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] last4 Value to be assigned
     def last4=(last4)
-      if last4.to_s.size > 5000
+      if !last4.nil? && last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -163,24 +174,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] mandate Value to be assigned
     def mandate=(mandate)
-      if mandate.to_s.size > 5000
+      if !mandate.nil? && mandate.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"mandate\", the character length must be smaller than or equal to 5000.")
       end
 
       @mandate = mandate
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bank_code == o.bank_code &&
-        branch_code == o.branch_code &&
-        country == o.country &&
-        fingerprint == o.fingerprint &&
-        last4 == o.last4 &&
-        mandate == o.mandate
     end
 
     # @see the `==` method
@@ -189,8 +187,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bank_code, @branch_code, @country, @fingerprint, @last4, @mandate)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bank_code, @branch_code, @country, @fingerprint, @last4, @mandate)
   end
 end

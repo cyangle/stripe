@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "bank_code", type: String?, presence: true, ignore_serialize: bank_code.nil? && !bank_code_present?)]
     property bank_code : String?
 
@@ -62,7 +63,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bank_code : String? = nil, @bank_name : String? = nil, @bic : String? = nil, @country : String? = nil, @iban_last4 : String? = nil, @preferred_language : String? = nil, @statement_descriptor : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @bank_code : String? = nil,
+      @bank_name : String? = nil,
+      @bic : String? = nil,
+      @country : String? = nil,
+      @iban_last4 : String? = nil,
+      @preferred_language : String? = nil,
+      @statement_descriptor : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -79,28 +90,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bank_code == o.bank_code &&
-        bank_name == o.bank_name &&
-        bic == o.bic &&
-        country == o.country &&
-        iban_last4 == o.iban_last4 &&
-        preferred_language == o.preferred_language &&
-        statement_descriptor == o.statement_descriptor
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bank_code, @bank_name, @bic, @country, @iban_last4, @preferred_language, @statement_descriptor)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bank_code, @bank_name, @bic, @country, @iban_last4, @preferred_language, @statement_descriptor)
   end
 end

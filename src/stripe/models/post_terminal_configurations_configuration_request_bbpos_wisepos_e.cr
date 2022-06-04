@@ -19,8 +19,9 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "splashscreen", type: BbposWisePoseSplashscreen?, presence: true, ignore_serialize: splashscreen.nil? && !splashscreen_present?)]
-    property splashscreen : BbposWisePoseSplashscreen?
+
+    @[JSON::Field(key: "splashscreen", type: BusinessProfileSpecsSupportUrl?, presence: true, ignore_serialize: splashscreen.nil? && !splashscreen_present?)]
+    property splashscreen : BusinessProfileSpecsSupportUrl?
 
     @[JSON::Field(ignore: true)]
     property? splashscreen_present : Bool = false
@@ -29,13 +30,17 @@ module Stripe
     def self.openapi_any_of
       [
         Stripe::BbposWisePose1,
-        String,
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @splashscreen : BbposWisePoseSplashscreen? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @splashscreen : BusinessProfileSpecsSupportUrl? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -60,20 +65,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        splashscreen == o.splashscreen
     end
 
     # @see the `==` method
@@ -82,8 +76,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@splashscreen)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@splashscreen)
   end
 end

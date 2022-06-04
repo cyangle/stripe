@@ -19,15 +19,23 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # Fields that can be provided to satisfy all fields in `original_fields_due`.
     @[JSON::Field(key: "alternative_fields_due", type: Array(String))]
     property alternative_fields_due : Array(String)
 
+    # Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.
     @[JSON::Field(key: "original_fields_due", type: Array(String))]
     property original_fields_due : Array(String)
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @alternative_fields_due : Array(String), @original_fields_due : Array(String))
+    def initialize(
+      *,
+      # Required properties
+      @alternative_fields_due : Array(String),
+      @original_fields_due : Array(String)
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -44,23 +52,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        alternative_fields_due == o.alternative_fields_due &&
-        original_fields_due == o.original_fields_due
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@alternative_fields_due, @original_fields_due)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@alternative_fields_due, @original_fields_due)
   end
 end

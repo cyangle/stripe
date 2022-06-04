@@ -29,7 +29,7 @@ describe Stripe::IssuingCardShipping1 do
   describe "test attribute 'carrier'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["dhl", "fedex", "royal_mail", "usps", "null"])
+      # validator = EnumValidator.new("String", ["dhl", "fedex", "royal_mail", "usps"])
       # validator.allowable_values.each do |value|
       #   expect { instance.carrier = value }.not_to raise_error
       # end
@@ -61,7 +61,7 @@ describe Stripe::IssuingCardShipping1 do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["canceled", "delivered", "failure", "pending", "returned", "shipped", "null"])
+      # validator = EnumValidator.new("String", ["canceled", "delivered", "failure", "pending", "returned", "shipped"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "branding", type: AccountBrandingSettings)]
     property branding : AccountBrandingSettings
 
@@ -32,6 +33,7 @@ module Stripe
     property payments : AccountPaymentsSettings
 
     # Optional properties
+
     @[JSON::Field(key: "bacs_debit_payments", type: AccountBacsDebitPaymentsSettings?, presence: true, ignore_serialize: bacs_debit_payments.nil? && !bacs_debit_payments_present?)]
     property bacs_debit_payments : AccountBacsDebitPaymentsSettings?
 
@@ -58,7 +60,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @branding : AccountBrandingSettings, @card_payments : AccountCardPaymentsSettings, @dashboard : AccountDashboardSettings, @payments : AccountPaymentsSettings, @bacs_debit_payments : AccountBacsDebitPaymentsSettings? = nil, @card_issuing : AccountCardIssuingSettings? = nil, @payouts : AccountPayoutSettings? = nil, @sepa_debit_payments : AccountSepaDebitPaymentsSettings? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @branding : AccountBrandingSettings,
+      @card_payments : AccountCardPaymentsSettings,
+      @dashboard : AccountDashboardSettings,
+      @payments : AccountPaymentsSettings,
+      # Optional properties
+      @bacs_debit_payments : AccountBacsDebitPaymentsSettings? = nil,
+      @card_issuing : AccountCardIssuingSettings? = nil,
+      @payouts : AccountPayoutSettings? = nil,
+      @sepa_debit_payments : AccountSepaDebitPaymentsSettings? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -75,29 +89,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bacs_debit_payments == o.bacs_debit_payments &&
-        branding == o.branding &&
-        card_issuing == o.card_issuing &&
-        card_payments == o.card_payments &&
-        dashboard == o.dashboard &&
-        payments == o.payments &&
-        payouts == o.payouts &&
-        sepa_debit_payments == o.sepa_debit_payments
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bacs_debit_payments, @branding, @card_issuing, @card_payments, @dashboard, @payments, @payouts, @sepa_debit_payments)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@branding, @card_payments, @dashboard, @payments, @bacs_debit_payments, @card_issuing, @payouts, @sepa_debit_payments)
   end
 end

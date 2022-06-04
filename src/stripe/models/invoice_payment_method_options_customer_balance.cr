@@ -18,7 +18,14 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
+    @[JSON::Field(key: "bank_transfer", type: InvoicePaymentMethodOptionsCustomerBalanceBankTransfer?, presence: true, ignore_serialize: bank_transfer.nil? && !bank_transfer_present?)]
+    property bank_transfer : InvoicePaymentMethodOptionsCustomerBalanceBankTransfer?
+
+    @[JSON::Field(ignore: true)]
+    property? bank_transfer_present : Bool = false
+
     # The funding method type to be used when there are not enough funds in the customer balance. Permitted values include: `bank_transfer`.
     @[JSON::Field(key: "funding_type", type: String?, presence: true, ignore_serialize: funding_type.nil? && !funding_type_present?)]
     getter funding_type : String?
@@ -26,18 +33,16 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? funding_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_FUNDING_TYPE = EnumValidator.new("funding_type", "String", ["bank_transfer", "null"])
-
-    # Optional properties
-    @[JSON::Field(key: "bank_transfer", type: InvoicePaymentMethodOptionsCustomerBalanceBankTransfer?, presence: true, ignore_serialize: bank_transfer.nil? && !bank_transfer_present?)]
-    property bank_transfer : InvoicePaymentMethodOptionsCustomerBalanceBankTransfer?
-
-    @[JSON::Field(ignore: true)]
-    property? bank_transfer_present : Bool = false
+    ENUM_VALIDATOR_FOR_FUNDING_TYPE = EnumValidator.new("funding_type", "String", ["bank_transfer"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @funding_type : String?, @bank_transfer : InvoicePaymentMethodOptionsCustomerBalanceBankTransfer? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @bank_transfer : InvoicePaymentMethodOptionsCustomerBalanceBankTransfer? = nil,
+      @funding_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -54,6 +59,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_FUNDING_TYPE.valid?(@funding_type)
+
       true
     end
 
@@ -64,23 +70,16 @@ module Stripe
       @funding_type = funding_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bank_transfer == o.bank_transfer &&
-        funding_type == o.funding_type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bank_transfer, @funding_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bank_transfer, @funding_type)
   end
 end

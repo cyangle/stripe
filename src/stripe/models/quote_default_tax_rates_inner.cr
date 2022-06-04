@@ -18,27 +18,14 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
     @[JSON::Field(key: "active", type: Bool?)]
     property active : Bool?
 
-    # Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
-    @[JSON::Field(key: "country", type: String, presence: true, ignore_serialize: country.nil? && !country_present?)]
-    getter country : String
-
-    @[JSON::Field(ignore: true)]
-    property? country_present : Bool = false
-
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?)]
     property created : Int64?
-
-    # An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
-    @[JSON::Field(key: "description", type: String, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
 
     # The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.
     @[JSON::Field(key: "display_name", type: String?)]
@@ -52,23 +39,9 @@ module Stripe
     @[JSON::Field(key: "inclusive", type: Bool?)]
     property inclusive : Bool?
 
-    # The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
-    @[JSON::Field(key: "jurisdiction", type: String, presence: true, ignore_serialize: jurisdiction.nil? && !jurisdiction_present?)]
-    getter jurisdiction : String
-
-    @[JSON::Field(ignore: true)]
-    property? jurisdiction_present : Bool = false
-
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?)]
     property livemode : Bool?
-
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String), presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?)]
@@ -80,21 +53,51 @@ module Stripe
     @[JSON::Field(key: "percentage", type: Float64?)]
     property percentage : Float64?
 
+    # Optional properties
+
+    # Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+    @[JSON::Field(key: "country", type: String?, presence: true, ignore_serialize: country.nil? && !country_present?)]
+    getter country : String?
+
+    @[JSON::Field(ignore: true)]
+    property? country_present : Bool = false
+
+    # An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
+
+    # The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
+    @[JSON::Field(key: "jurisdiction", type: String?, presence: true, ignore_serialize: jurisdiction.nil? && !jurisdiction_present?)]
+    getter jurisdiction : String?
+
+    @[JSON::Field(ignore: true)]
+    property? jurisdiction_present : Bool = false
+
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
+
     # [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.
-    @[JSON::Field(key: "state", type: String, presence: true, ignore_serialize: state.nil? && !state_present?)]
-    getter state : String
+    @[JSON::Field(key: "state", type: String?, presence: true, ignore_serialize: state.nil? && !state_present?)]
+    getter state : String?
 
     @[JSON::Field(ignore: true)]
     property? state_present : Bool = false
 
     # The high-level tax type, such as `vat` or `sales_tax`.
-    @[JSON::Field(key: "tax_type", type: String, presence: true, ignore_serialize: tax_type.nil? && !tax_type_present?)]
-    getter tax_type : String
+    @[JSON::Field(key: "tax_type", type: String?, presence: true, ignore_serialize: tax_type.nil? && !tax_type_present?)]
+    getter tax_type : String?
 
     @[JSON::Field(ignore: true)]
     property? tax_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_TAX_TYPE = EnumValidator.new("tax_type", "String", ["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat", "null"])
+    ENUM_VALIDATOR_FOR_TAX_TYPE = EnumValidator.new("tax_type", "String", ["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"])
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -106,21 +109,31 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool, @country : String?, @created : Int64, @description : String?, @display_name : String, @id : String, @inclusive : Bool, @jurisdiction : String?, @livemode : Bool, @metadata : Hash(String, String)?, @object : String, @percentage : Float64, @state : String?, @tax_type : String?)
+    def initialize(
+      *,
+      # Required properties
+      @active : Bool? = nil,
+      @created : Int64? = nil,
+      @display_name : String? = nil,
+      @id : String? = nil,
+      @inclusive : Bool? = nil,
+      @livemode : Bool? = nil,
+      @object : String? = nil,
+      @percentage : Float64? = nil,
+      # Optional properties
+      @country : String? = nil,
+      @description : String? = nil,
+      @jurisdiction : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @state : String? = nil,
+      @tax_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @country.to_s.size > 5000
-        invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @display_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
@@ -130,13 +143,21 @@ module Stripe
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @jurisdiction.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      if !@country.nil? && @country.to_s.size > 5000
+        invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@jurisdiction.nil? && @jurisdiction.to_s.size > 5000
         invalid_properties.push("invalid value for \"jurisdiction\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
-      if @state.to_s.size > 5000
+      if !@state.nil? && @state.to_s.size > 5000
         invalid_properties.push("invalid value for \"state\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -148,14 +169,15 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @country.to_s.size > 5000
-      return false if @description.to_s.size > 5000
       return false if @display_name.to_s.size > 5000
       return false if @id.to_s.size > 5000
-      return false if @jurisdiction.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @state.to_s.size > 5000
+      return false if !@country.nil? && @country.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@jurisdiction.nil? && @jurisdiction.to_s.size > 5000
+      return false if !@state.nil? && @state.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_TAX_TYPE.valid?(@tax_type)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -167,32 +189,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] country Value to be assigned
-    def country=(country)
-      if country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @country = country
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -215,16 +214,6 @@ module Stripe
       @id = id
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] jurisdiction Value to be assigned
-    def jurisdiction=(jurisdiction)
-      if jurisdiction.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"jurisdiction\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @jurisdiction = jurisdiction
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
     def object=(object)
@@ -233,9 +222,39 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] country Value to be assigned
+    def country=(country)
+      if !country.nil? && country.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @country = country
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] jurisdiction Value to be assigned
+    def jurisdiction=(jurisdiction)
+      if !jurisdiction.nil? && jurisdiction.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"jurisdiction\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @jurisdiction = jurisdiction
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] state Value to be assigned
     def state=(state)
-      if state.to_s.size > 5000
+      if !state.nil? && state.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"state\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -249,35 +268,16 @@ module Stripe
       @tax_type = tax_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        country == o.country &&
-        created == o.created &&
-        description == o.description &&
-        display_name == o.display_name &&
-        id == o.id &&
-        inclusive == o.inclusive &&
-        jurisdiction == o.jurisdiction &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        percentage == o.percentage &&
-        state == o.state &&
-        tax_type == o.tax_type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @country, @created, @description, @display_name, @id, @inclusive, @jurisdiction, @livemode, @metadata, @object, @percentage, @state, @tax_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @created, @display_name, @id, @inclusive, @livemode, @object, @percentage, @country, @description, @jurisdiction, @metadata, @state, @tax_type)
   end
 end

@@ -19,9 +19,16 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # This is the sum of all the discounts.
     @[JSON::Field(key: "amount_discount", type: Int64)]
     property amount_discount : Int64
+
+    # This is the sum of all the tax amounts.
+    @[JSON::Field(key: "amount_tax", type: Int64)]
+    property amount_tax : Int64
+
+    # Optional properties
 
     # This is the sum of all the shipping amounts.
     @[JSON::Field(key: "amount_shipping", type: Int64?, presence: true, ignore_serialize: amount_shipping.nil? && !amount_shipping_present?)]
@@ -30,11 +37,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? amount_shipping_present : Bool = false
 
-    # This is the sum of all the tax amounts.
-    @[JSON::Field(key: "amount_tax", type: Int64)]
-    property amount_tax : Int64
-
-    # Optional properties
     @[JSON::Field(key: "breakdown", type: OrdersV2ResourceTotalDetailsApiResourceBreakdown?, presence: true, ignore_serialize: breakdown.nil? && !breakdown_present?)]
     property breakdown : OrdersV2ResourceTotalDetailsApiResourceBreakdown?
 
@@ -43,7 +45,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount_discount : Int64, @amount_shipping : Int64?, @amount_tax : Int64, @breakdown : OrdersV2ResourceTotalDetailsApiResourceBreakdown? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount_discount : Int64,
+      @amount_tax : Int64,
+      # Optional properties
+      @amount_shipping : Int64? = nil,
+      @breakdown : OrdersV2ResourceTotalDetailsApiResourceBreakdown? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -60,25 +70,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount_discount == o.amount_discount &&
-        amount_shipping == o.amount_shipping &&
-        amount_tax == o.amount_tax &&
-        breakdown == o.breakdown
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount_discount, @amount_shipping, @amount_tax, @breakdown)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount_discount, @amount_tax, @amount_shipping, @breakdown)
   end
 end

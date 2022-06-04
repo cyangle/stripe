@@ -19,16 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
     property created : Int64
-
-    # If something should go wrong during the run, a message about the failure (populated when  `status=failed`).
-    @[JSON::Field(key: "error", type: String?, presence: true, ignore_serialize: error.nil? && !error_present?)]
-    getter error : String?
-
-    @[JSON::Field(ignore: true)]
-    property? error_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
@@ -51,15 +45,24 @@ module Stripe
     @[JSON::Field(key: "report_type", type: String)]
     getter report_type : String
 
+    # Status of this report run. This will be `pending` when the run is initially created.  When the run finishes, this will be set to `succeeded` and the `result` field will be populated.  Rarely, we may encounter an error, at which point this will be set to `failed` and the `error` field will be populated.
+    @[JSON::Field(key: "status", type: String)]
+    getter status : String
+
+    # Optional properties
+
+    # If something should go wrong during the run, a message about the failure (populated when  `status=failed`).
+    @[JSON::Field(key: "error", type: String?, presence: true, ignore_serialize: error.nil? && !error_present?)]
+    getter error : String?
+
+    @[JSON::Field(ignore: true)]
+    property? error_present : Bool = false
+
     @[JSON::Field(key: "result", type: ReportingReportRunResult?, presence: true, ignore_serialize: result.nil? && !result_present?)]
     property result : ReportingReportRunResult?
 
     @[JSON::Field(ignore: true)]
     property? result_present : Bool = false
-
-    # Status of this report run. This will be `pending` when the run is initially created.  When the run finishes, this will be set to `succeeded` and the `result` field will be populated.  Rarely, we may encounter an error, at which point this will be set to `failed` and the `error` field will be populated.
-    @[JSON::Field(key: "status", type: String)]
-    getter status : String
 
     # Timestamp at which this run successfully finished (populated when  `status=succeeded`). Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "succeeded_at", type: Int64?, presence: true, ignore_serialize: succeeded_at.nil? && !succeeded_at_present?)]
@@ -70,17 +73,27 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @created : Int64, @error : String?, @id : String, @livemode : Bool, @object : String, @parameters : FinancialReportingFinanceReportRunRunParameters, @report_type : String, @result : ReportingReportRunResult?, @status : String, @succeeded_at : Int64?)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @parameters : FinancialReportingFinanceReportRunRunParameters,
+      @report_type : String,
+      @status : String,
+      # Optional properties
+      @error : String? = nil,
+      @result : ReportingReportRunResult? = nil,
+      @succeeded_at : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @error.to_s.size > 5000
-        invalid_properties.push("invalid value for \"error\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
@@ -96,28 +109,23 @@ module Stripe
         invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
+      if !@error.nil? && @error.to_s.size > 5000
+        invalid_properties.push("invalid value for \"error\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @error.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @report_type.to_s.size > 5000
       return false if @status.to_s.size > 5000
+      return false if !@error.nil? && @error.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] error Value to be assigned
-    def error=(error)
-      if error.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"error\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @error = error
     end
 
     # Custom attribute writer method with validation
@@ -157,21 +165,14 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        created == o.created &&
-        error == o.error &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        parameters == o.parameters &&
-        report_type == o.report_type &&
-        result == o.result &&
-        status == o.status &&
-        succeeded_at == o.succeeded_at
+    # Custom attribute writer method with validation
+    # @param [Object] error Value to be assigned
+    def error=(error)
+      if !error.nil? && error.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"error\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @error = error
     end
 
     # @see the `==` method
@@ -180,8 +181,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@created, @error, @id, @livemode, @object, @parameters, @report_type, @result, @status, @succeeded_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @livemode, @object, @parameters, @report_type, @status, @error, @result, @succeeded_at)
   end
 end

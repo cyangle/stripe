@@ -20,6 +20,12 @@ describe Stripe::PostSetupIntentsIntentConfirmRequest do
     end
   end
 
+  describe "test attribute 'client_secret'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'expand'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

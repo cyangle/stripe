@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The time that the invoice draft was finalized.
     @[JSON::Field(key: "finalized_at", type: Int64?, presence: true, ignore_serialize: finalized_at.nil? && !finalized_at_present?)]
     property finalized_at : Int64?
@@ -49,7 +50,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @finalized_at : Int64?, @marked_uncollectible_at : Int64?, @paid_at : Int64?, @voided_at : Int64?)
+    def initialize(
+      *,
+      # Optional properties
+      @finalized_at : Int64? = nil,
+      @marked_uncollectible_at : Int64? = nil,
+      @paid_at : Int64? = nil,
+      @voided_at : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -66,25 +74,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        finalized_at == o.finalized_at &&
-        marked_uncollectible_at == o.marked_uncollectible_at &&
-        paid_at == o.paid_at &&
-        voided_at == o.voided_at
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@finalized_at, @marked_uncollectible_at, @paid_at, @voided_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@finalized_at, @marked_uncollectible_at, @paid_at, @voided_at)
   end
 end

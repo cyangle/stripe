@@ -18,29 +18,30 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
-    @[JSON::Field(key: "back", type: LegalEntityPersonVerificationDocumentBack, presence: true, ignore_serialize: back.nil? && !back_present?)]
-    property back : LegalEntityPersonVerificationDocumentBack
+    # Optional properties
+
+    @[JSON::Field(key: "back", type: LegalEntityPersonVerificationDocumentBack?, presence: true, ignore_serialize: back.nil? && !back_present?)]
+    property back : LegalEntityPersonVerificationDocumentBack?
 
     @[JSON::Field(ignore: true)]
     property? back_present : Bool = false
 
     # A user-displayable string describing the verification state of this document. For example, if a document is uploaded and the picture is too fuzzy, this may say \"Identity document is too unclear to read\".
-    @[JSON::Field(key: "details", type: String, presence: true, ignore_serialize: details.nil? && !details_present?)]
-    getter details : String
+    @[JSON::Field(key: "details", type: String?, presence: true, ignore_serialize: details.nil? && !details_present?)]
+    getter details : String?
 
     @[JSON::Field(ignore: true)]
     property? details_present : Bool = false
 
     # One of `document_corrupt`, `document_country_not_supported`, `document_expired`, `document_failed_copy`, `document_failed_other`, `document_failed_test_mode`, `document_fraudulent`, `document_failed_greyscale`, `document_incomplete`, `document_invalid`, `document_manipulated`, `document_missing_back`, `document_missing_front`, `document_not_readable`, `document_not_uploaded`, `document_photo_mismatch`, `document_too_large`, or `document_type_not_supported`. A machine-readable code specifying the verification state for this document.
-    @[JSON::Field(key: "details_code", type: String, presence: true, ignore_serialize: details_code.nil? && !details_code_present?)]
-    getter details_code : String
+    @[JSON::Field(key: "details_code", type: String?, presence: true, ignore_serialize: details_code.nil? && !details_code_present?)]
+    getter details_code : String?
 
     @[JSON::Field(ignore: true)]
     property? details_code_present : Bool = false
 
-    @[JSON::Field(key: "front", type: LegalEntityPersonVerificationDocumentFront, presence: true, ignore_serialize: front.nil? && !front_present?)]
-    property front : LegalEntityPersonVerificationDocumentFront
+    @[JSON::Field(key: "front", type: LegalEntityPersonVerificationDocumentFront?, presence: true, ignore_serialize: front.nil? && !front_present?)]
+    property front : LegalEntityPersonVerificationDocumentFront?
 
     @[JSON::Field(ignore: true)]
     property? front_present : Bool = false
@@ -54,7 +55,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @back : LegalEntityPersonVerificationDocumentBack?, @details : String?, @details_code : String?, @front : LegalEntityPersonVerificationDocumentFront?)
+    def initialize(
+      *,
+      # Optional properties
+      @back : LegalEntityPersonVerificationDocumentBack? = nil,
+      @details : String? = nil,
+      @details_code : String? = nil,
+      @front : LegalEntityPersonVerificationDocumentFront? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -62,11 +70,11 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @details.to_s.size > 5000
+      if !@details.nil? && @details.to_s.size > 5000
         invalid_properties.push("invalid value for \"details\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @details_code.to_s.size > 5000
+      if !@details_code.nil? && @details_code.to_s.size > 5000
         invalid_properties.push("invalid value for \"details_code\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -76,8 +84,9 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @details.to_s.size > 5000
-      return false if @details_code.to_s.size > 5000
+      return false if !@details.nil? && @details.to_s.size > 5000
+      return false if !@details_code.nil? && @details_code.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -89,10 +98,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -100,7 +106,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] details Value to be assigned
     def details=(details)
-      if details.to_s.size > 5000
+      if !details.nil? && details.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"details\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -110,22 +116,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] details_code Value to be assigned
     def details_code=(details_code)
-      if details_code.to_s.size > 5000
+      if !details_code.nil? && details_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"details_code\", the character length must be smaller than or equal to 5000.")
       end
 
       @details_code = details_code
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        back == o.back &&
-        details == o.details &&
-        details_code == o.details_code &&
-        front == o.front
     end
 
     # @see the `==` method
@@ -134,8 +129,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@back, @details, @details_code, @front)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@back, @details, @details_code, @front)
   end
 end

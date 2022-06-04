@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # A categorization of the seller's type of business. See our [merchant categories guide](https://stripe.com/docs/issuing/merchant-categories) for a list of possible values.
     @[JSON::Field(key: "category", type: String)]
     getter category : String
@@ -26,6 +27,12 @@ module Stripe
     # The merchant category code for the seller’s business
     @[JSON::Field(key: "category_code", type: String)]
     getter category_code : String
+
+    # Identifier assigned to the seller by the card brand
+    @[JSON::Field(key: "network_id", type: String)]
+    getter network_id : String
+
+    # Optional properties
 
     # City where the seller is located
     @[JSON::Field(key: "city", type: String?, presence: true, ignore_serialize: city.nil? && !city_present?)]
@@ -48,10 +55,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
 
-    # Identifier assigned to the seller by the card brand
-    @[JSON::Field(key: "network_id", type: String)]
-    getter network_id : String
-
     # Postal code where the seller is located
     @[JSON::Field(key: "postal_code", type: String?, presence: true, ignore_serialize: postal_code.nil? && !postal_code_present?)]
     getter postal_code : String?
@@ -68,7 +71,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @category : String, @category_code : String, @city : String?, @country : String?, @name : String?, @network_id : String, @postal_code : String?, @state : String?)
+    def initialize(
+      *,
+      # Required properties
+      @category : String,
+      @category_code : String,
+      @network_id : String,
+      # Optional properties
+      @city : String? = nil,
+      @country : String? = nil,
+      @name : String? = nil,
+      @postal_code : String? = nil,
+      @state : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -84,27 +99,27 @@ module Stripe
         invalid_properties.push("invalid value for \"category_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @city.to_s.size > 5000
-        invalid_properties.push("invalid value for \"city\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @country.to_s.size > 5000
-        invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @network_id.to_s.size > 5000
         invalid_properties.push("invalid value for \"network_id\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @postal_code.to_s.size > 5000
+      if !@city.nil? && @city.to_s.size > 5000
+        invalid_properties.push("invalid value for \"city\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@country.nil? && @country.to_s.size > 5000
+        invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@name.nil? && @name.to_s.size > 5000
+        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@postal_code.nil? && @postal_code.to_s.size > 5000
         invalid_properties.push("invalid value for \"postal_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @state.to_s.size > 5000
+      if !@state.nil? && @state.to_s.size > 5000
         invalid_properties.push("invalid value for \"state\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -116,12 +131,13 @@ module Stripe
     def valid?
       return false if @category.to_s.size > 5000
       return false if @category_code.to_s.size > 5000
-      return false if @city.to_s.size > 5000
-      return false if @country.to_s.size > 5000
-      return false if @name.to_s.size > 5000
       return false if @network_id.to_s.size > 5000
-      return false if @postal_code.to_s.size > 5000
-      return false if @state.to_s.size > 5000
+      return false if !@city.nil? && @city.to_s.size > 5000
+      return false if !@country.nil? && @country.to_s.size > 5000
+      return false if !@name.nil? && @name.to_s.size > 5000
+      return false if !@postal_code.nil? && @postal_code.to_s.size > 5000
+      return false if !@state.nil? && @state.to_s.size > 5000
+
       true
     end
 
@@ -146,36 +162,6 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] city Value to be assigned
-    def city=(city)
-      if city.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"city\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @city = city
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] country Value to be assigned
-    def country=(country)
-      if country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @country = country
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @name = name
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] network_id Value to be assigned
     def network_id=(network_id)
       if network_id.to_s.size > 5000
@@ -186,9 +172,39 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] city Value to be assigned
+    def city=(city)
+      if !city.nil? && city.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"city\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @city = city
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] country Value to be assigned
+    def country=(country)
+      if !country.nil? && country.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @country = country
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if !name.nil? && name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] postal_code Value to be assigned
     def postal_code=(postal_code)
-      if postal_code.to_s.size > 5000
+      if !postal_code.nil? && postal_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"postal_code\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -198,26 +214,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] state Value to be assigned
     def state=(state)
-      if state.to_s.size > 5000
+      if !state.nil? && state.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"state\", the character length must be smaller than or equal to 5000.")
       end
 
       @state = state
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        category == o.category &&
-        category_code == o.category_code &&
-        city == o.city &&
-        country == o.country &&
-        name == o.name &&
-        network_id == o.network_id &&
-        postal_code == o.postal_code &&
-        state == o.state
     end
 
     # @see the `==` method
@@ -226,8 +227,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@category, @category_code, @city, @country, @name, @network_id, @postal_code, @state)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@category, @category_code, @network_id, @city, @country, @name, @postal_code, @state)
   end
 end

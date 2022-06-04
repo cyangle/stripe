@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "configuration", type: BillingPortalSessionConfiguration)]
     property configuration : BillingPortalSessionConfiguration
 
@@ -38,6 +39,18 @@ module Stripe
     @[JSON::Field(key: "livemode", type: Bool)]
     property livemode : Bool
 
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
+
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["billing_portal.session"])
+
+    # The short-lived URL of the session that gives customers access to the customer portal.
+    @[JSON::Field(key: "url", type: String)]
+    getter url : String
+
+    # Optional properties
+
     # The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the customer’s `preferred_locales` or browser’s locale is used.
     @[JSON::Field(key: "locale", type: String?, presence: true, ignore_serialize: locale.nil? && !locale_present?)]
     getter locale : String?
@@ -45,13 +58,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? locale_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_LOCALE = EnumValidator.new("locale", "String", ["auto", "bg", "cs", "da", "de", "el", "en", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-SG", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW", "null"])
-
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["billing_portal.session"])
+    ENUM_VALIDATOR_FOR_LOCALE = EnumValidator.new("locale", "String", ["auto", "bg", "cs", "da", "de", "el", "en", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-SG", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"])
 
     # The account for which the session was created on behalf of. When specified, only subscriptions and invoices with this `on_behalf_of` account appear in the portal. For more information, see the [docs](https://stripe.com/docs/connect/charges-transfers#on-behalf-of). Use the [Accounts API](https://stripe.com/docs/api/accounts/object#account_object-settings-branding) to modify the `on_behalf_of` account's branding settings, which the portal displays.
     @[JSON::Field(key: "on_behalf_of", type: String?, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
@@ -67,13 +74,23 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? return_url_present : Bool = false
 
-    # The short-lived URL of the session that gives customers access to the customer portal.
-    @[JSON::Field(key: "url", type: String)]
-    getter url : String
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @configuration : BillingPortalSessionConfiguration, @created : Int64, @customer : String, @id : String, @livemode : Bool, @locale : String?, @object : String, @on_behalf_of : String?, @return_url : String?, @url : String)
+    def initialize(
+      *,
+      # Required properties
+      @configuration : BillingPortalSessionConfiguration,
+      @created : Int64,
+      @customer : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @url : String,
+      # Optional properties
+      @locale : String? = nil,
+      @on_behalf_of : String? = nil,
+      @return_url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -89,20 +106,20 @@ module Stripe
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_LOCALE.error_message) unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
-      if @on_behalf_of.to_s.size > 5000
-        invalid_properties.push("invalid value for \"on_behalf_of\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @return_url.to_s.size > 5000
-        invalid_properties.push("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @url.to_s.size > 5000
         invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_LOCALE.error_message) unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
+
+      if !@on_behalf_of.nil? && @on_behalf_of.to_s.size > 5000
+        invalid_properties.push("invalid value for \"on_behalf_of\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@return_url.nil? && @return_url.to_s.size > 5000
+        invalid_properties.push("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties
@@ -113,11 +130,12 @@ module Stripe
     def valid?
       return false if @customer.to_s.size > 5000
       return false if @id.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @on_behalf_of.to_s.size > 5000
-      return false if @return_url.to_s.size > 5000
       return false if @url.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
+      return false if !@on_behalf_of.nil? && @on_behalf_of.to_s.size > 5000
+      return false if !@return_url.nil? && @return_url.to_s.size > 5000
+
       true
     end
 
@@ -142,37 +160,10 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] locale Object to be assigned
-    def locale=(locale)
-      ENUM_VALIDATOR_FOR_LOCALE.valid!(locale)
-      @locale = locale
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
     def object=(object)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] on_behalf_of Value to be assigned
-    def on_behalf_of=(on_behalf_of)
-      if on_behalf_of.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"on_behalf_of\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @on_behalf_of = on_behalf_of
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] return_url Value to be assigned
-    def return_url=(return_url)
-      if return_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @return_url = return_url
     end
 
     # Custom attribute writer method with validation
@@ -185,21 +176,31 @@ module Stripe
       @url = url
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        configuration == o.configuration &&
-        created == o.created &&
-        customer == o.customer &&
-        id == o.id &&
-        livemode == o.livemode &&
-        locale == o.locale &&
-        object == o.object &&
-        on_behalf_of == o.on_behalf_of &&
-        return_url == o.return_url &&
-        url == o.url
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] locale Object to be assigned
+    def locale=(locale)
+      ENUM_VALIDATOR_FOR_LOCALE.valid!(locale)
+      @locale = locale
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] on_behalf_of Value to be assigned
+    def on_behalf_of=(on_behalf_of)
+      if !on_behalf_of.nil? && on_behalf_of.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"on_behalf_of\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @on_behalf_of = on_behalf_of
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] return_url Value to be assigned
+    def return_url=(return_url)
+      if !return_url.nil? && return_url.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @return_url = return_url
     end
 
     # @see the `==` method
@@ -208,8 +209,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@configuration, @created, @customer, @id, @livemode, @locale, @object, @on_behalf_of, @return_url, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@configuration, @created, @customer, @id, @livemode, @object, @url, @locale, @on_behalf_of, @return_url)
   end
 end

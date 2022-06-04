@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Total before any discounts or taxes are applied.
     @[JSON::Field(key: "amount_subtotal", type: Int64)]
     property amount_subtotal : Int64
@@ -45,20 +46,8 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["item"])
 
-    @[JSON::Field(key: "price", type: ItemPrice?, presence: true, ignore_serialize: price.nil? && !price_present?)]
-    property price : ItemPrice?
-
-    @[JSON::Field(ignore: true)]
-    property? price_present : Bool = false
-
-    # The quantity of products being purchased.
-    @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
-    property quantity : Int64?
-
-    @[JSON::Field(ignore: true)]
-    property? quantity_present : Bool = false
-
     # Optional properties
+
     # Total discount amount applied. If no discounts were applied, defaults to 0.
     @[JSON::Field(key: "amount_discount", type: Int64?, presence: true, ignore_serialize: amount_discount.nil? && !amount_discount_present?)]
     property amount_discount : Int64?
@@ -80,11 +69,24 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? discounts_present : Bool = false
 
+    @[JSON::Field(key: "price", type: ItemPrice?, presence: true, ignore_serialize: price.nil? && !price_present?)]
+    property price : ItemPrice?
+
+    @[JSON::Field(ignore: true)]
+    property? price_present : Bool = false
+
     @[JSON::Field(key: "product", type: ItemProduct?, presence: true, ignore_serialize: product.nil? && !product_present?)]
     property product : ItemProduct?
 
     @[JSON::Field(ignore: true)]
     property? product_present : Bool = false
+
+    # The quantity of products being purchased.
+    @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
+    property quantity : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? quantity_present : Bool = false
 
     # The taxes applied to the line item.
     @[JSON::Field(key: "taxes", type: Array(LineItemsTaxAmount)?, presence: true, ignore_serialize: taxes.nil? && !taxes_present?)]
@@ -95,7 +97,24 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount_subtotal : Int64, @amount_total : Int64, @currency : String, @description : String, @id : String, @object : String, @price : ItemPrice?, @quantity : Int64?, @amount_discount : Int64? = nil, @amount_tax : Int64? = nil, @discounts : Array(LineItemsDiscountAmount)? = nil, @product : ItemProduct? = nil, @taxes : Array(LineItemsTaxAmount)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount_subtotal : Int64,
+      @amount_total : Int64,
+      @currency : String,
+      @description : String,
+      @id : String,
+      @object : String,
+      # Optional properties
+      @amount_discount : Int64? = nil,
+      @amount_tax : Int64? = nil,
+      @discounts : Array(LineItemsDiscountAmount)? = nil,
+      @price : ItemPrice? = nil,
+      @product : ItemProduct? = nil,
+      @quantity : Int64? = nil,
+      @taxes : Array(LineItemsTaxAmount)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -122,6 +141,7 @@ module Stripe
       return false if @description.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
       true
     end
 
@@ -152,34 +172,16 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount_discount == o.amount_discount &&
-        amount_subtotal == o.amount_subtotal &&
-        amount_tax == o.amount_tax &&
-        amount_total == o.amount_total &&
-        currency == o.currency &&
-        description == o.description &&
-        discounts == o.discounts &&
-        id == o.id &&
-        object == o.object &&
-        price == o.price &&
-        product == o.product &&
-        quantity == o.quantity &&
-        taxes == o.taxes
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount_discount, @amount_subtotal, @amount_tax, @amount_total, @currency, @description, @discounts, @id, @object, @price, @product, @quantity, @taxes)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount_subtotal, @amount_total, @currency, @description, @id, @object, @amount_discount, @amount_tax, @discounts, @price, @product, @quantity, @taxes)
   end
 end

@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Amount (in cents) transferred.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -38,28 +39,9 @@ module Stripe
     @[JSON::Field(key: "description", type: String)]
     getter description : String
 
-    @[JSON::Field(key: "entries", type: TransactionsResourceTreasuryTransactionEntryList1?, presence: true, ignore_serialize: entries.nil? && !entries_present?)]
-    property entries : TransactionsResourceTreasuryTransactionEntryList1?
-
-    @[JSON::Field(ignore: true)]
-    property? entries_present : Bool = false
-
     # The FinancialAccount associated with this object.
     @[JSON::Field(key: "financial_account", type: String)]
     getter financial_account : String
-
-    # ID of the flow that created the Transaction.
-    @[JSON::Field(key: "flow", type: String?, presence: true, ignore_serialize: flow.nil? && !flow_present?)]
-    getter flow : String?
-
-    @[JSON::Field(ignore: true)]
-    property? flow_present : Bool = false
-
-    @[JSON::Field(key: "flow_details", type: TreasuryTransactionFlowDetails?, presence: true, ignore_serialize: flow_details.nil? && !flow_details_present?)]
-    property flow_details : TreasuryTransactionFlowDetails?
-
-    @[JSON::Field(ignore: true)]
-    property? flow_details_present : Bool = false
 
     # Type of the flow that created the Transaction.
     @[JSON::Field(key: "flow_type", type: String)]
@@ -90,9 +72,49 @@ module Stripe
     @[JSON::Field(key: "status_transitions", type: TransactionsResourceAbstractTransactionResourceStatusTransitions)]
     property status_transitions : TransactionsResourceAbstractTransactionResourceStatusTransitions
 
+    # Optional properties
+
+    @[JSON::Field(key: "entries", type: TransactionsResourceTreasuryTransactionEntryList1?, presence: true, ignore_serialize: entries.nil? && !entries_present?)]
+    property entries : TransactionsResourceTreasuryTransactionEntryList1?
+
+    @[JSON::Field(ignore: true)]
+    property? entries_present : Bool = false
+
+    # ID of the flow that created the Transaction.
+    @[JSON::Field(key: "flow", type: String?, presence: true, ignore_serialize: flow.nil? && !flow_present?)]
+    getter flow : String?
+
+    @[JSON::Field(ignore: true)]
+    property? flow_present : Bool = false
+
+    @[JSON::Field(key: "flow_details", type: TreasuryTransactionFlowDetails?, presence: true, ignore_serialize: flow_details.nil? && !flow_details_present?)]
+    property flow_details : TreasuryTransactionFlowDetails?
+
+    @[JSON::Field(ignore: true)]
+    property? flow_details_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @balance_impact : TransactionsResourceBalanceImpact, @created : Int64, @currency : String, @description : String, @entries : TransactionsResourceTreasuryTransactionEntryList1?, @financial_account : String, @flow : String?, @flow_details : TreasuryTransactionFlowDetails?, @flow_type : String, @id : String, @livemode : Bool, @object : String, @status : String, @status_transitions : TransactionsResourceAbstractTransactionResourceStatusTransitions)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @balance_impact : TransactionsResourceBalanceImpact,
+      @created : Int64,
+      @currency : String,
+      @description : String,
+      @financial_account : String,
+      @flow_type : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @status : String,
+      @status_transitions : TransactionsResourceAbstractTransactionResourceStatusTransitions,
+      # Optional properties
+      @entries : TransactionsResourceTreasuryTransactionEntryList1? = nil,
+      @flow : String? = nil,
+      @flow_details : TreasuryTransactionFlowDetails? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -108,10 +130,6 @@ module Stripe
         invalid_properties.push("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @flow.to_s.size > 5000
-        invalid_properties.push("invalid value for \"flow\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_FLOW_TYPE.error_message) unless ENUM_VALIDATOR_FOR_FLOW_TYPE.valid?(@flow_type, false)
 
       if @id.to_s.size > 5000
@@ -122,6 +140,10 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
+      if !@flow.nil? && @flow.to_s.size > 5000
+        invalid_properties.push("invalid value for \"flow\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
@@ -130,11 +152,12 @@ module Stripe
     def valid?
       return false if @description.to_s.size > 5000
       return false if @financial_account.to_s.size > 5000
-      return false if @flow.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_FLOW_TYPE.valid?(@flow_type, false)
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false if !@flow.nil? && @flow.to_s.size > 5000
+
       true
     end
 
@@ -156,16 +179,6 @@ module Stripe
       end
 
       @financial_account = financial_account
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] flow Value to be assigned
-    def flow=(flow)
-      if flow.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"flow\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @flow = flow
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -199,26 +212,14 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        balance_impact == o.balance_impact &&
-        created == o.created &&
-        currency == o.currency &&
-        description == o.description &&
-        entries == o.entries &&
-        financial_account == o.financial_account &&
-        flow == o.flow &&
-        flow_details == o.flow_details &&
-        flow_type == o.flow_type &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        status == o.status &&
-        status_transitions == o.status_transitions
+    # Custom attribute writer method with validation
+    # @param [Object] flow Value to be assigned
+    def flow=(flow)
+      if !flow.nil? && flow.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"flow\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @flow = flow
     end
 
     # @see the `==` method
@@ -227,8 +228,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @balance_impact, @created, @currency, @description, @entries, @financial_account, @flow, @flow_details, @flow_type, @id, @livemode, @object, @status, @status_transitions)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @balance_impact, @created, @currency, @description, @financial_account, @flow_type, @id, @livemode, @object, @status, @status_transitions, @entries, @flow, @flow_details)
   end
 end

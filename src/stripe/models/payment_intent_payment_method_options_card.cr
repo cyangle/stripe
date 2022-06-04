@@ -18,7 +18,17 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
+    # Controls when the funds will be captured from the customer's account.
+    @[JSON::Field(key: "capture_method", type: String?, presence: true, ignore_serialize: capture_method.nil? && !capture_method_present?)]
+    getter capture_method : String?
+
+    @[JSON::Field(ignore: true)]
+    property? capture_method_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = EnumValidator.new("capture_method", "String", ["manual"])
+
     @[JSON::Field(key: "installments", type: PaymentIntentPaymentMethodOptionsCardInstallments?, presence: true, ignore_serialize: installments.nil? && !installments_present?)]
     property installments : PaymentIntentPaymentMethodOptionsCardInstallments?
 
@@ -38,7 +48,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? network_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_NETWORK = EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa", "null"])
+    ENUM_VALIDATOR_FOR_NETWORK = EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
 
     # We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
     @[JSON::Field(key: "request_three_d_secure", type: String?, presence: true, ignore_serialize: request_three_d_secure.nil? && !request_three_d_secure_present?)]
@@ -47,17 +57,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? request_three_d_secure_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = EnumValidator.new("request_three_d_secure", "String", ["any", "automatic", "challenge_only", "null"])
-
-    # Optional properties
-    # Controls when the funds will be captured from the customer's account.
-    @[JSON::Field(key: "capture_method", type: String?, presence: true, ignore_serialize: capture_method.nil? && !capture_method_present?)]
-    getter capture_method : String?
-
-    @[JSON::Field(ignore: true)]
-    property? capture_method_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = EnumValidator.new("capture_method", "String", ["manual"])
+    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = EnumValidator.new("request_three_d_secure", "String", ["any", "automatic", "challenge_only"])
 
     # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
     @[JSON::Field(key: "setup_future_usage", type: String?, presence: true, ignore_serialize: setup_future_usage.nil? && !setup_future_usage_present?)]
@@ -70,13 +70,23 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @installments : PaymentIntentPaymentMethodOptionsCardInstallments?, @mandate_options : PaymentIntentPaymentMethodOptionsCardMandateOptions?, @network : String?, @request_three_d_secure : String?, @capture_method : String? = nil, @setup_future_usage : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @capture_method : String? = nil,
+      @installments : PaymentIntentPaymentMethodOptionsCardInstallments? = nil,
+      @mandate_options : PaymentIntentPaymentMethodOptionsCardMandateOptions? = nil,
+      @network : String? = nil,
+      @request_three_d_secure : String? = nil,
+      @setup_future_usage : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
@@ -95,6 +105,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
       return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+
       true
     end
 
@@ -126,27 +137,16 @@ module Stripe
       @setup_future_usage = setup_future_usage
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        capture_method == o.capture_method &&
-        installments == o.installments &&
-        mandate_options == o.mandate_options &&
-        network == o.network &&
-        request_three_d_secure == o.request_three_d_secure &&
-        setup_future_usage == o.setup_future_usage
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@capture_method, @installments, @mandate_options, @network, @request_three_d_secure, @setup_future_usage)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@capture_method, @installments, @mandate_options, @network, @request_three_d_secure, @setup_future_usage)
   end
 end

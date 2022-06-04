@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "billing_details", type: UfaResourceBillingDetails?)]
     property billing_details : UfaResourceBillingDetails?
 
@@ -29,6 +30,7 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["us_bank_account"])
 
     # Optional properties
+
     @[JSON::Field(key: "us_bank_account", type: InboundTransfersPaymentMethodDetailsUsBankAccount?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
     property us_bank_account : InboundTransfersPaymentMethodDetailsUsBankAccount?
 
@@ -44,7 +46,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing_details : UfaResourceBillingDetails, @_type : String, @us_bank_account : InboundTransfersPaymentMethodDetailsUsBankAccount? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @billing_details : UfaResourceBillingDetails? = nil,
+      @_type : String? = nil,
+      # Optional properties
+      @us_bank_account : InboundTransfersPaymentMethodDetailsUsBankAccount? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -61,6 +70,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -72,10 +82,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -87,24 +94,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        billing_details == o.billing_details &&
-        _type == o._type &&
-        us_bank_account == o.us_bank_account
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@billing_details, @_type, @us_bank_account)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@billing_details, @_type, @us_bank_account)
   end
 end

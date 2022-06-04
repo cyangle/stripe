@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Gross amount of the transaction, in %s.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -34,20 +35,6 @@ module Stripe
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
-
-    # An arbitrary string attached to the object. Often useful for displaying to users.
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
-    # The exchange rate used, if applicable, for this transaction. Specifically, if money was converted from currency A to currency B, then the `amount` in currency A, times `exchange_rate`, would be the `amount` in currency B. For example, suppose you charged a customer 10.00 EUR. Then the PaymentIntent's `amount` would be `1000` and `currency` would be `eur`. Suppose this was converted into 12.34 USD in your Stripe account. Then the BalanceTransaction's `amount` would be `1234`, `currency` would be `usd`, and `exchange_rate` would be `1.234`.
-    @[JSON::Field(key: "exchange_rate", type: Float64?, presence: true, ignore_serialize: exchange_rate.nil? && !exchange_rate_present?)]
-    property exchange_rate : Float64?
-
-    @[JSON::Field(ignore: true)]
-    property? exchange_rate_present : Bool = false
 
     # Fees (in %s) paid for this transaction.
     @[JSON::Field(key: "fee", type: Int64)]
@@ -75,12 +62,6 @@ module Stripe
     @[JSON::Field(key: "reporting_category", type: String)]
     getter reporting_category : String
 
-    @[JSON::Field(key: "source", type: BalanceTransactionSource1?, presence: true, ignore_serialize: source.nil? && !source_present?)]
-    property source : BalanceTransactionSource1?
-
-    @[JSON::Field(ignore: true)]
-    property? source_present : Bool = false
-
     # If the transaction's net funds are available in the Stripe balance yet. Either `available` or `pending`.
     @[JSON::Field(key: "status", type: String)]
     getter status : String
@@ -91,19 +72,56 @@ module Stripe
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["adjustment", "advance", "advance_funding", "anticipation_repayment", "application_fee", "application_fee_refund", "charge", "connect_collection_transfer", "contribution", "issuing_authorization_hold", "issuing_authorization_release", "issuing_dispute", "issuing_transaction", "payment", "payment_failure_refund", "payment_refund", "payout", "payout_cancel", "payout_failure", "refund", "refund_failure", "reserve_transaction", "reserved_funds", "stripe_fee", "stripe_fx_fee", "tax_fee", "topup", "topup_reversal", "transfer", "transfer_cancel", "transfer_failure", "transfer_refund"])
 
+    # Optional properties
+
+    # An arbitrary string attached to the object. Often useful for displaying to users.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
+
+    # The exchange rate used, if applicable, for this transaction. Specifically, if money was converted from currency A to currency B, then the `amount` in currency A, times `exchange_rate`, would be the `amount` in currency B. For example, suppose you charged a customer 10.00 EUR. Then the PaymentIntent's `amount` would be `1000` and `currency` would be `eur`. Suppose this was converted into 12.34 USD in your Stripe account. Then the BalanceTransaction's `amount` would be `1234`, `currency` would be `usd`, and `exchange_rate` would be `1.234`.
+    @[JSON::Field(key: "exchange_rate", type: Float64?, presence: true, ignore_serialize: exchange_rate.nil? && !exchange_rate_present?)]
+    property exchange_rate : Float64?
+
+    @[JSON::Field(ignore: true)]
+    property? exchange_rate_present : Bool = false
+
+    @[JSON::Field(key: "source", type: BalanceTransactionSource?, presence: true, ignore_serialize: source.nil? && !source_present?)]
+    property source : BalanceTransactionSource?
+
+    @[JSON::Field(ignore: true)]
+    property? source_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @available_on : Int64, @created : Int64, @currency : String, @description : String?, @exchange_rate : Float64?, @fee : Int64, @fee_details : Array(Fee), @id : String, @net : Int64, @object : String, @reporting_category : String, @source : BalanceTransactionSource1?, @status : String, @_type : String)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @available_on : Int64,
+      @created : Int64,
+      @currency : String,
+      @fee : Int64,
+      @fee_details : Array(Fee),
+      @id : String,
+      @net : Int64,
+      @object : String,
+      @reporting_category : String,
+      @status : String,
+      @_type : String,
+      # Optional properties
+      @description : String? = nil,
+      @exchange_rate : Float64? = nil,
+      @source : BalanceTransactionSource? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
@@ -121,29 +139,24 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @description.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @reporting_category.to_s.size > 5000
       return false if @status.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if !@description.nil? && @description.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -190,26 +203,14 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        available_on == o.available_on &&
-        created == o.created &&
-        currency == o.currency &&
-        description == o.description &&
-        exchange_rate == o.exchange_rate &&
-        fee == o.fee &&
-        fee_details == o.fee_details &&
-        id == o.id &&
-        net == o.net &&
-        object == o.object &&
-        reporting_category == o.reporting_category &&
-        source == o.source &&
-        status == o.status &&
-        _type == o._type
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
     end
 
     # @see the `==` method
@@ -218,8 +219,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @available_on, @created, @currency, @description, @exchange_rate, @fee, @fee_details, @id, @net, @object, @reporting_category, @source, @status, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @available_on, @created, @currency, @fee, @fee_details, @id, @net, @object, @reporting_category, @status, @_type, @description, @exchange_rate, @source)
   end
 end

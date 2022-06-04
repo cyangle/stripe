@@ -29,7 +29,7 @@ describe Stripe::PaymentMethodOptionsWechatPay do
   describe "test attribute 'client'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["android", "ios", "web", "null"])
+      # validator = EnumValidator.new("String", ["android", "ios", "web"])
       # validator.allowable_values.each do |value|
       #   expect { instance.client = value }.not_to raise_error
       # end

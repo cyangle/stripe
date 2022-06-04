@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Whether the price can be used for new purchases.
     @[JSON::Field(key: "active", type: Bool?)]
     property active : Bool?
@@ -45,23 +46,9 @@ module Stripe
     @[JSON::Field(key: "livemode", type: Bool?)]
     property livemode : Bool?
 
-    # A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
-    @[JSON::Field(key: "lookup_key", type: String, presence: true, ignore_serialize: lookup_key.nil? && !lookup_key_present?)]
-    getter lookup_key : String
-
-    @[JSON::Field(ignore: true)]
-    property? lookup_key_present : Bool = false
-
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?)]
     property metadata : Hash(String, String)?
-
-    # A brief description of the price, hidden from customers.
-    @[JSON::Field(key: "nickname", type: String, presence: true, ignore_serialize: nickname.nil? && !nickname_present?)]
-    getter nickname : String
-
-    @[JSON::Field(ignore: true)]
-    property? nickname_present : Bool = false
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?)]
@@ -72,63 +59,78 @@ module Stripe
     @[JSON::Field(key: "product", type: PriceProduct?)]
     property product : PriceProduct?
 
-    @[JSON::Field(key: "recurring", type: PriceRecurring, presence: true, ignore_serialize: recurring.nil? && !recurring_present?)]
-    property recurring : PriceRecurring
-
-    @[JSON::Field(ignore: true)]
-    property? recurring_present : Bool = false
-
-    # Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
-    @[JSON::Field(key: "tax_behavior", type: String, presence: true, ignore_serialize: tax_behavior.nil? && !tax_behavior_present?)]
-    getter tax_behavior : String
-
-    @[JSON::Field(ignore: true)]
-    property? tax_behavior_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified", "null"])
-
-    # Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.
-    @[JSON::Field(key: "tiers_mode", type: String, presence: true, ignore_serialize: tiers_mode.nil? && !tiers_mode_present?)]
-    getter tiers_mode : String
-
-    @[JSON::Field(ignore: true)]
-    property? tiers_mode_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_TIERS_MODE = EnumValidator.new("tiers_mode", "String", ["graduated", "volume", "null"])
-
-    @[JSON::Field(key: "transform_quantity", type: PriceTransformQuantity, presence: true, ignore_serialize: transform_quantity.nil? && !transform_quantity_present?)]
-    property transform_quantity : PriceTransformQuantity
-
-    @[JSON::Field(ignore: true)]
-    property? transform_quantity_present : Bool = false
-
     # One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.
     @[JSON::Field(key: "type", type: String?)]
     getter _type : String?
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["one_time", "recurring"])
 
-    # The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.
-    @[JSON::Field(key: "unit_amount", type: Int64, presence: true, ignore_serialize: unit_amount.nil? && !unit_amount_present?)]
-    property unit_amount : Int64
-
-    @[JSON::Field(ignore: true)]
-    property? unit_amount_present : Bool = false
-
-    # The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.
-    @[JSON::Field(key: "unit_amount_decimal", type: String, presence: true, ignore_serialize: unit_amount_decimal.nil? && !unit_amount_decimal_present?)]
-    property unit_amount_decimal : String
-
-    @[JSON::Field(ignore: true)]
-    property? unit_amount_decimal_present : Bool = false
-
     # Optional properties
+
+    # A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
+    @[JSON::Field(key: "lookup_key", type: String?, presence: true, ignore_serialize: lookup_key.nil? && !lookup_key_present?)]
+    getter lookup_key : String?
+
+    @[JSON::Field(ignore: true)]
+    property? lookup_key_present : Bool = false
+
+    # A brief description of the price, hidden from customers.
+    @[JSON::Field(key: "nickname", type: String?, presence: true, ignore_serialize: nickname.nil? && !nickname_present?)]
+    getter nickname : String?
+
+    @[JSON::Field(ignore: true)]
+    property? nickname_present : Bool = false
+
+    @[JSON::Field(key: "recurring", type: PriceRecurring?, presence: true, ignore_serialize: recurring.nil? && !recurring_present?)]
+    property recurring : PriceRecurring?
+
+    @[JSON::Field(ignore: true)]
+    property? recurring_present : Bool = false
+
+    # Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
+    @[JSON::Field(key: "tax_behavior", type: String?, presence: true, ignore_serialize: tax_behavior.nil? && !tax_behavior_present?)]
+    getter tax_behavior : String?
+
+    @[JSON::Field(ignore: true)]
+    property? tax_behavior_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
+
     # Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.
     @[JSON::Field(key: "tiers", type: Array(PriceTier)?, presence: true, ignore_serialize: tiers.nil? && !tiers_present?)]
     property tiers : Array(PriceTier)?
 
     @[JSON::Field(ignore: true)]
     property? tiers_present : Bool = false
+
+    # Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.
+    @[JSON::Field(key: "tiers_mode", type: String?, presence: true, ignore_serialize: tiers_mode.nil? && !tiers_mode_present?)]
+    getter tiers_mode : String?
+
+    @[JSON::Field(ignore: true)]
+    property? tiers_mode_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_TIERS_MODE = EnumValidator.new("tiers_mode", "String", ["graduated", "volume"])
+
+    @[JSON::Field(key: "transform_quantity", type: PriceTransformQuantity?, presence: true, ignore_serialize: transform_quantity.nil? && !transform_quantity_present?)]
+    property transform_quantity : PriceTransformQuantity?
+
+    @[JSON::Field(ignore: true)]
+    property? transform_quantity_present : Bool = false
+
+    # The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.
+    @[JSON::Field(key: "unit_amount", type: Int64?, presence: true, ignore_serialize: unit_amount.nil? && !unit_amount_present?)]
+    property unit_amount : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? unit_amount_present : Bool = false
+
+    # The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.
+    @[JSON::Field(key: "unit_amount_decimal", type: String?, presence: true, ignore_serialize: unit_amount_decimal.nil? && !unit_amount_decimal_present?)]
+    property unit_amount_decimal : String?
+
+    @[JSON::Field(ignore: true)]
+    property? unit_amount_decimal_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -139,7 +141,30 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool, @billing_scheme : String, @created : Int64, @currency : String, @id : String, @livemode : Bool, @lookup_key : String?, @metadata : Hash(String, String), @nickname : String?, @object : String, @product : PriceProduct, @recurring : PriceRecurring?, @tax_behavior : String?, @tiers_mode : String?, @transform_quantity : PriceTransformQuantity?, @_type : String, @unit_amount : Int64?, @unit_amount_decimal : String?, @tiers : Array(PriceTier)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @active : Bool? = nil,
+      @billing_scheme : String? = nil,
+      @created : Int64? = nil,
+      @currency : String? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @object : String? = nil,
+      @product : PriceProduct? = nil,
+      @_type : String? = nil,
+      # Optional properties
+      @lookup_key : String? = nil,
+      @nickname : String? = nil,
+      @recurring : PriceRecurring? = nil,
+      @tax_behavior : String? = nil,
+      @tiers : Array(PriceTier)? = nil,
+      @tiers_mode : String? = nil,
+      @transform_quantity : PriceTransformQuantity? = nil,
+      @unit_amount : Int64? = nil,
+      @unit_amount_decimal : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -153,21 +178,21 @@ module Stripe
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @lookup_key.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      if !@lookup_key.nil? && @lookup_key.to_s.size > 5000
         invalid_properties.push("invalid value for \"lookup_key\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @nickname.to_s.size > 5000
+      if !@nickname.nil? && @nickname.to_s.size > 5000
         invalid_properties.push("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TIERS_MODE.error_message) unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       invalid_properties
     end
@@ -177,12 +202,13 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid?(@billing_scheme, false)
       return false if @id.to_s.size > 5000
-      return false if @lookup_key.to_s.size > 5000
-      return false if @nickname.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if !@lookup_key.nil? && @lookup_key.to_s.size > 5000
+      return false if !@nickname.nil? && @nickname.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
       return false unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -194,10 +220,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -219,10 +242,24 @@ module Stripe
       @id = id
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] object Object to be assigned
+    def object=(object)
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+      @object = object
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type)
+      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
+      @_type = _type
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] lookup_key Value to be assigned
     def lookup_key=(lookup_key)
-      if lookup_key.to_s.size > 5000
+      if !lookup_key.nil? && lookup_key.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"lookup_key\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -232,18 +269,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] nickname Value to be assigned
     def nickname=(nickname)
-      if nickname.to_s.size > 5000
+      if !nickname.nil? && nickname.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
       end
 
       @nickname = nickname
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
-      @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -260,47 +290,16 @@ module Stripe
       @tiers_mode = tiers_mode
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] _type Object to be assigned
-    def _type=(_type)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
-      @_type = _type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        billing_scheme == o.billing_scheme &&
-        created == o.created &&
-        currency == o.currency &&
-        id == o.id &&
-        livemode == o.livemode &&
-        lookup_key == o.lookup_key &&
-        metadata == o.metadata &&
-        nickname == o.nickname &&
-        object == o.object &&
-        product == o.product &&
-        recurring == o.recurring &&
-        tax_behavior == o.tax_behavior &&
-        tiers == o.tiers &&
-        tiers_mode == o.tiers_mode &&
-        transform_quantity == o.transform_quantity &&
-        _type == o._type &&
-        unit_amount == o.unit_amount &&
-        unit_amount_decimal == o.unit_amount_decimal
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @billing_scheme, @created, @currency, @id, @livemode, @lookup_key, @metadata, @nickname, @object, @product, @recurring, @tax_behavior, @tiers, @tiers_mode, @transform_quantity, @_type, @unit_amount, @unit_amount_decimal)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @billing_scheme, @created, @currency, @id, @livemode, @metadata, @object, @product, @_type, @lookup_key, @nickname, @recurring, @tax_behavior, @tiers, @tiers_mode, @transform_quantity, @unit_amount, @unit_amount_decimal)
   end
 end

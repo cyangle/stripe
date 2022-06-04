@@ -20,12 +20,79 @@ describe "DefaultApi" do
     end
   end
 
+  # unit tests for delete_account
+  # &lt;p&gt;With &lt;a href&#x3D;\&quot;/docs/connect\&quot;&gt;Connect&lt;/a&gt;, you can delete accounts you manage.&lt;/p&gt;  &lt;p&gt;Accounts created using test-mode keys can be deleted at any time. Standard accounts created using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys can only be deleted once all balances are zero.&lt;/p&gt;  &lt;p&gt;If you want to delete your own account, use the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account\&quot;&gt;account information tab in your account settings&lt;/a&gt; instead.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account
+  # @return [DeletedAccount]
+  describe "delete_account test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for delete_account_bank_accounts_id
+  # &lt;p&gt;Delete a specified external account for a given account.&lt;/p&gt;
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @return [DeletedExternalAccount]
+  describe "delete_account_bank_accounts_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for delete_account_external_accounts_id
+  # &lt;p&gt;Delete a specified external account for a given account.&lt;/p&gt;
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @return [DeletedExternalAccount]
+  describe "delete_account_external_accounts_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for delete_account_people_person
+  # &lt;p&gt;Deletes an existing person’s relationship to the account’s legal entity. Any person with a relationship for an account can be deleted through the API, except if the person is the &lt;code&gt;account_opener&lt;/code&gt;. If your integration is using the &lt;code&gt;executive&lt;/code&gt; parameter, you cannot delete the only verified &lt;code&gt;executive&lt;/code&gt; on file.&lt;/p&gt;
+  # @param person
+  # @param [Hash] opts the optional parameters
+  # @return [DeletedPerson]
+  describe "delete_account_people_person test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for delete_account_persons_person
+  # &lt;p&gt;Deletes an existing person’s relationship to the account’s legal entity. Any person with a relationship for an account can be deleted through the API, except if the person is the &lt;code&gt;account_opener&lt;/code&gt;. If your integration is using the &lt;code&gt;executive&lt;/code&gt; parameter, you cannot delete the only verified &lt;code&gt;executive&lt;/code&gt; on file.&lt;/p&gt;
+  # @param person
+  # @param [Hash] opts the optional parameters
+  # @return [DeletedPerson]
+  describe "delete_account_persons_person test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for delete_accounts_account
   # &lt;p&gt;With &lt;a href&#x3D;\&quot;/docs/connect\&quot;&gt;Connect&lt;/a&gt;, you can delete accounts you manage.&lt;/p&gt;  &lt;p&gt;Accounts created using test-mode keys can be deleted at any time. Standard accounts created using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys can only be deleted once all balances are zero.&lt;/p&gt;  &lt;p&gt;If you want to delete your own account, use the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account\&quot;&gt;account information tab in your account settings&lt;/a&gt; instead.&lt;/p&gt;
   # @param account
   # @param [Hash] opts the optional parameters
   # @return [DeletedAccount]
   describe "delete_accounts_account test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for delete_accounts_account_bank_accounts_id
+  # &lt;p&gt;Delete a specified external account for a given account.&lt;/p&gt;
+  # @param account
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @return [DeletedExternalAccount]
+  describe "delete_accounts_account_bank_accounts_id test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -38,6 +105,18 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @return [DeletedExternalAccount]
   describe "delete_accounts_account_external_accounts_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for delete_accounts_account_people_person
+  # &lt;p&gt;Deletes an existing person’s relationship to the account’s legal entity. Any person with a relationship for an account can be deleted through the API, except if the person is the &lt;code&gt;account_opener&lt;/code&gt;. If your integration is using the &lt;code&gt;executive&lt;/code&gt; parameter, you cannot delete the only verified &lt;code&gt;executive&lt;/code&gt; on file.&lt;/p&gt;
+  # @param account
+  # @param person
+  # @param [Hash] opts the optional parameters
+  # @return [DeletedPerson]
+  describe "delete_accounts_account_people_person test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -88,6 +167,32 @@ describe "DefaultApi" do
     end
   end
 
+  # unit tests for delete_customers_customer_bank_accounts_id
+  # &lt;p&gt;Delete a specified source for a given customer.&lt;/p&gt;
+  # @param customer
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [DeleteCustomersCustomerBankAccountsId200Response]
+  describe "delete_customers_customer_bank_accounts_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for delete_customers_customer_cards_id
+  # &lt;p&gt;Delete a specified source for a given customer.&lt;/p&gt;
+  # @param customer
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [DeleteCustomersCustomerBankAccountsId200Response]
+  describe "delete_customers_customer_cards_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for delete_customers_customer_discount
   # &lt;p&gt;Removes the currently applied discount on a customer.&lt;/p&gt;
   # @param customer
@@ -104,9 +209,36 @@ describe "DefaultApi" do
   # @param customer
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @return [DeleteCustomersCustomerSourcesId200Response]
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [DeleteCustomersCustomerBankAccountsId200Response]
   describe "delete_customers_customer_sources_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for delete_customers_customer_subscriptions_subscription_exposed_id
+  # &lt;p&gt;Cancels a customer’s subscription. If you set the &lt;code&gt;at_period_end&lt;/code&gt; parameter to &lt;code&gt;true&lt;/code&gt;, the subscription will remain active until the end of the period, at which point it will be canceled and not renewed. Otherwise, with the default &lt;code&gt;false&lt;/code&gt; value, the subscription is terminated immediately. In either case, the customer will not be charged again for the subscription.&lt;/p&gt;  &lt;p&gt;Note, however, that any pending invoice items that you’ve created will still be charged for at the end of the period, unless manually &lt;a href&#x3D;\&quot;#delete_invoiceitem\&quot;&gt;deleted&lt;/a&gt;. If you’ve set the subscription to cancel at the end of the period, any pending prorations will also be left in place and collected at the end of the period. But if the subscription is set to cancel immediately, pending prorations will be removed.&lt;/p&gt;  &lt;p&gt;By default, upon subscription cancellation, Stripe will stop automatic collection of all finalized invoices for the customer. This is intended to prevent unexpected payment attempts after the customer has canceled a subscription. However, you can resume automatic collection of the invoices manually after subscription cancellation to have us proceed. Or, you could check for unpaid invoices before allowing the customer to cancel the subscription at all.&lt;/p&gt;
+  # @param customer
+  # @param subscription_exposed_id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Bool] :invoice_now Can be set to &#x60;true&#x60; if &#x60;at_period_end&#x60; is not set to &#x60;true&#x60;. Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending proration invoice items.
+  # @option opts [Bool] :prorate Can be set to &#x60;true&#x60; if &#x60;at_period_end&#x60; is not set to &#x60;true&#x60;. Will generate a proration invoice item that credits remaining unused time until the subscription period end.
+  # @return [Subscription]
+  describe "delete_customers_customer_subscriptions_subscription_exposed_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for delete_customers_customer_subscriptions_subscription_exposed_id_discount
+  # &lt;p&gt;Removes the currently applied discount on a customer.&lt;/p&gt;
+  # @param customer
+  # @param subscription_exposed_id
+  # @param [Hash] opts the optional parameters
+  # @return [DeletedDiscount]
+  describe "delete_customers_customer_subscriptions_subscription_exposed_id_discount test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -128,7 +260,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Invalidates a short-lived API key for a given resource.&lt;/p&gt;
   # @param key
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [EphemeralKey]
   describe "delete_ephemeral_keys_key test" do
     it "should work" do
@@ -230,7 +362,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :clear_usage Delete all usage for the given subscription item. Allowed only when the current plan&#39;s &#x60;usage_type&#x60; is &#x60;metered&#x60;.
   # @option opts [String] :proration_behavior Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting &#x60;billing_cycle_anchor&#x3D;now&#x60;, or starting a trial), or if an item&#39;s &#x60;quantity&#x60; changes. Valid values are &#x60;create_prorations&#x60;, &#x60;none&#x60;, or &#x60;always_invoice&#x60;.  Passing &#x60;create_prorations&#x60; will cause proration invoice items to be created when applicable. These proration items will only be invoiced immediately under [certain conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment). In order to always invoice immediately for prorations, pass &#x60;always_invoice&#x60;.  Prorations can be disabled by passing &#x60;none&#x60;.
-  # @option opts [Int64] :proration_date If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
+  # @option opts [Int32] :proration_date If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
   # @return [DeletedSubscriptionItem]
   describe "delete_subscription_items_item test" do
     it "should work" do
@@ -242,7 +374,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Cancels a customer’s subscription immediately. The customer will not be charged again for the subscription.&lt;/p&gt;  &lt;p&gt;Note, however, that any pending invoice items that you’ve created will still be charged for at the end of the period, unless manually &lt;a href&#x3D;\&quot;#delete_invoiceitem\&quot;&gt;deleted&lt;/a&gt;. If you’ve set the subscription to cancel at the end of the period, any pending prorations will also be left in place and collected at the end of the period. But if the subscription is set to cancel immediately, pending prorations will be removed.&lt;/p&gt;  &lt;p&gt;By default, upon subscription cancellation, Stripe will stop automatic collection of all finalized invoices for the customer. This is intended to prevent unexpected payment attempts after the customer has canceled a subscription. However, you can resume automatic collection of the invoices manually after subscription cancellation to have us proceed. Or, you could check for unpaid invoices before allowing the customer to cancel the subscription at all.&lt;/p&gt;
   # @param subscription_exposed_id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Bool] :invoice_now Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending proration invoice items.
   # @option opts [Bool] :prorate Will generate a proration invoice item that credits remaining unused time until the subscription period end.
   # @return [Subscription]
@@ -341,13 +473,128 @@ describe "DefaultApi" do
     end
   end
 
+  # unit tests for get_account_bank_accounts_id
+  # &lt;p&gt;Retrieve a specified external account for a given account.&lt;/p&gt;
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [ExternalAccount]
+  describe "get_account_bank_accounts_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_account_capabilities
+  # &lt;p&gt;Returns a list of capabilities associated with the account. The capabilities are returned sorted by creation date, with the most recent capability appearing first.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [ListAccountCapability]
+  describe "get_account_capabilities test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_account_capabilities_capability
+  # &lt;p&gt;Retrieves information about the specified Account Capability.&lt;/p&gt;
+  # @param capability
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [Capability]
+  describe "get_account_capabilities_capability test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_account_external_accounts
+  # &lt;p&gt;List external accounts for an account.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @return [ExternalAccountList]
+  describe "get_account_external_accounts test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_account_external_accounts_id
+  # &lt;p&gt;Retrieve a specified external account for a given account.&lt;/p&gt;
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [ExternalAccount]
+  describe "get_account_external_accounts_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_account_people
+  # &lt;p&gt;Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [AllPeopleRelationshipSpecs] :relationship Filters on the list of people returned based on the person&#39;s relationship to the account&#39;s company.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @return [GetAccountPeople200Response]
+  describe "get_account_people test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_account_people_person
+  # &lt;p&gt;Retrieves an existing person.&lt;/p&gt;
+  # @param person
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [Person]
+  describe "get_account_people_person test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_account_persons
+  # &lt;p&gt;Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [AllPeopleRelationshipSpecs] :relationship Filters on the list of people returned based on the person&#39;s relationship to the account&#39;s company.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @return [GetAccountPeople200Response]
+  describe "get_account_persons test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_account_persons_person
+  # &lt;p&gt;Retrieves an existing person.&lt;/p&gt;
+  # @param person
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [Person]
+  describe "get_account_persons_person test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for get_accounts
   # &lt;p&gt;Returns a list of accounts connected to your platform via &lt;a href&#x3D;\&quot;/docs/connect\&quot;&gt;Connect&lt;/a&gt;. If you’re not a platform, the list is empty.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetAccounts200Response]
   describe "get_accounts test" do
@@ -363,6 +610,19 @@ describe "DefaultApi" do
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Account]
   describe "get_accounts_account test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_accounts_account_bank_accounts_id
+  # &lt;p&gt;Retrieve a specified external account for a given account.&lt;/p&gt;
+  # @param account
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [ExternalAccount]
+  describe "get_accounts_account_bank_accounts_id test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -399,7 +659,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [ExternalAccountList]
   describe "get_accounts_account_external_accounts test" do
@@ -421,16 +681,45 @@ describe "DefaultApi" do
     end
   end
 
+  # unit tests for get_accounts_account_people
+  # &lt;p&gt;Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.&lt;/p&gt;
+  # @param account
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [AllPeopleRelationshipSpecs] :relationship Filters on the list of people returned based on the person&#39;s relationship to the account&#39;s company.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @return [GetAccountPeople200Response]
+  describe "get_accounts_account_people test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_accounts_account_people_person
+  # &lt;p&gt;Retrieves an existing person.&lt;/p&gt;
+  # @param account
+  # @param person
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [Person]
+  describe "get_accounts_account_people_person test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for get_accounts_account_persons
   # &lt;p&gt;Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.&lt;/p&gt;
   # @param account
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [AllPeopleRelationshipSpecs] :relationship Filters on the list of people returned based on the person&#39;s relationship to the account&#39;s company.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
-  # @return [GetAccountsAccountPersons200Response]
+  # @return [GetAccountPeople200Response]
   describe "get_accounts_account_persons test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -456,7 +745,7 @@ describe "DefaultApi" do
   # @option opts [String] :domain_name
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [ApplePayDomainList]
   describe "get_apple_pay_domains test" do
@@ -484,7 +773,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetApplicationFees200Response]
   describe "get_application_fees test" do
@@ -524,7 +813,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [FeeRefundList]
   describe "get_application_fees_id_refunds test" do
@@ -539,7 +828,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetAppsSecrets200Response]
   describe "get_apps_secrets test" do
@@ -572,15 +861,45 @@ describe "DefaultApi" do
     end
   end
 
-  # unit tests for get_balance_transactions
+  # unit tests for get_balance_history
   # &lt;p&gt;Returns a list of transactions that have contributed to the Stripe account balance (e.g., charges, transfers, and so forth). The transactions are returned in sorted order, with the most recent transactions appearing first.&lt;/p&gt;  &lt;p&gt;Note that this endpoint was previously called “Balance history” and used the path &lt;code&gt;/v1/balance/history&lt;/code&gt;.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [GetAccountsCreatedParameter] :available_on This parameter is deprecated and we recommend listing by created and filtering in memory instead.
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :currency Only return transactions in a certain currency. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [String] :payout For automatic Stripe payouts only, only returns transactions that were paid out on the specified payout ID.
+  # @option opts [String] :source Only returns the original transaction.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @option opts [String] :_type Only returns transactions of the given type. One of: &#x60;adjustment&#x60;, &#x60;advance&#x60;, &#x60;advance_funding&#x60;, &#x60;anticipation_repayment&#x60;, &#x60;application_fee&#x60;, &#x60;application_fee_refund&#x60;, &#x60;charge&#x60;, &#x60;connect_collection_transfer&#x60;, &#x60;contribution&#x60;, &#x60;issuing_authorization_hold&#x60;, &#x60;issuing_authorization_release&#x60;, &#x60;issuing_dispute&#x60;, &#x60;issuing_transaction&#x60;, &#x60;payment&#x60;, &#x60;payment_failure_refund&#x60;, &#x60;payment_refund&#x60;, &#x60;payout&#x60;, &#x60;payout_cancel&#x60;, &#x60;payout_failure&#x60;, &#x60;refund&#x60;, &#x60;refund_failure&#x60;, &#x60;reserve_transaction&#x60;, &#x60;reserved_funds&#x60;, &#x60;stripe_fee&#x60;, &#x60;stripe_fx_fee&#x60;, &#x60;tax_fee&#x60;, &#x60;topup&#x60;, &#x60;topup_reversal&#x60;, &#x60;transfer&#x60;, &#x60;transfer_cancel&#x60;, &#x60;transfer_failure&#x60;, or &#x60;transfer_refund&#x60;.
+  # @return [BalanceTransactionsList]
+  describe "get_balance_history test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_balance_history_id
+  # &lt;p&gt;Retrieves the balance transaction with the given ID.&lt;/p&gt;  &lt;p&gt;Note that this endpoint previously used the path &lt;code&gt;/v1/balance/history/:id&lt;/code&gt;.&lt;/p&gt;
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [BalanceTransaction]
+  describe "get_balance_history_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_balance_transactions
+  # &lt;p&gt;Returns a list of transactions that have contributed to the Stripe account balance (e.g., charges, transfers, and so forth). The transactions are returned in sorted order, with the most recent transactions appearing first.&lt;/p&gt;  &lt;p&gt;Note that this endpoint was previously called “Balance history” and used the path &lt;code&gt;/v1/balance/history&lt;/code&gt;.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [GetAccountsCreatedParameter] :created
+  # @option opts [String] :currency Only return transactions in a certain currency. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :payout For automatic Stripe payouts only, only returns transactions that were paid out on the specified payout ID.
   # @option opts [String] :source Only returns the original transaction.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
@@ -611,7 +930,7 @@ describe "DefaultApi" do
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Bool] :is_default Only return the default or non-default configurations (e.g., pass &#x60;true&#x60; to only list the default configuration).
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetBillingPortalConfigurations200Response]
   describe "get_billing_portal_configurations test" do
@@ -639,7 +958,7 @@ describe "DefaultApi" do
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Bool] :filled Filter for filled receivers.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [Bool] :uncaptured_funds Filter for receivers with uncaptured funds.
   # @return [GetBitcoinReceivers200Response]
@@ -668,10 +987,26 @@ describe "DefaultApi" do
   # @option opts [String] :customer Only return transactions for the customer specified by this customer ID.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [BitcoinTransactionList]
   describe "get_bitcoin_receivers_receiver_transactions test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_bitcoin_transactions
+  # &lt;p&gt;List bitcoin transacitons for a given receiver.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :customer Only return transactions for the customer specified by this customer ID.
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [String] :receiver
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @return [BitcoinTransactionList]
+  describe "get_bitcoin_transactions test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -684,7 +1019,7 @@ describe "DefaultApi" do
   # @option opts [String] :customer Only return charges for the customer specified by this customer ID.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :payment_intent Only return charges that were created by the PaymentIntent specified by this PaymentIntent ID.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :transfer_group Only return charges for this transfer group.
@@ -707,13 +1042,25 @@ describe "DefaultApi" do
     end
   end
 
+  # unit tests for get_charges_charge_dispute
+  # &lt;p&gt;Retrieve a dispute for a specified charge.&lt;/p&gt;
+  # @param charge
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [Dispute]
+  describe "get_charges_charge_dispute test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for get_charges_charge_refunds
   # &lt;p&gt;You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent refunds are always available by default on the charge object. If you need more than those 10, you can use this API method and the &lt;code&gt;limit&lt;/code&gt; and &lt;code&gt;starting_after&lt;/code&gt; parameters to page through additional refunds.&lt;/p&gt;
   # @param charge
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [RefundList]
   describe "get_charges_charge_refunds test" do
@@ -740,7 +1087,7 @@ describe "DefaultApi" do
   # @param query The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for charges](https://stripe.com/docs/search#query-fields-for-charges).
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :page A cursor for pagination across multiple pages of results. Don&#39;t include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
   # @return [SearchResult]
   describe "get_charges_search test" do
@@ -754,7 +1101,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :payment_intent Only return the Checkout Session for the PaymentIntent specified.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :subscription Only return the Checkout Session for the subscription specified.
@@ -783,7 +1130,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [PaymentPagesCheckoutSessionListLineItems]
   describe "get_checkout_sessions_session_line_items test" do
@@ -797,7 +1144,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetCountrySpecs200Response]
   describe "get_country_specs test" do
@@ -824,7 +1171,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created A filter on the list, based on the object &#x60;created&#x60; field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetCoupons200Response]
   describe "get_coupons test" do
@@ -852,7 +1199,7 @@ describe "DefaultApi" do
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :invoice Only return credit notes for the invoice specified by this invoice ID.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [CreditNotesList]
   describe "get_credit_notes test" do
@@ -867,7 +1214,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [CreditNoteLinesList]
   describe "get_credit_notes_credit_note_lines test" do
@@ -892,16 +1239,16 @@ describe "DefaultApi" do
   # &lt;p&gt;Get a preview of a credit note without creating it.&lt;/p&gt;
   # @param invoice ID of the invoice.
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount The integer amount in cents (or local equivalent) representing the total amount of the credit note.
-  # @option opts [Int64] :credit_amount The integer amount in cents (or local equivalent) representing the amount to credit the customer&#39;s balance, which will be automatically applied to their next invoice.
+  # @option opts [Int32] :amount The integer amount in cents (or local equivalent) representing the total amount of the credit note.
+  # @option opts [Int32] :credit_amount The integer amount in cents (or local equivalent) representing the amount to credit the customer&#39;s balance, which will be automatically applied to their next invoice.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Array(CreditNoteLineItemParams)] :lines Line items that make up the credit note.
   # @option opts [String] :memo The credit note&#39;s memo appears on the credit note PDF.
   # @option opts [Hash(String, String)] :metadata Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to &#x60;metadata&#x60;.
-  # @option opts [Int64] :out_of_band_amount The integer amount in cents (or local equivalent) representing the amount that is credited outside of Stripe.
+  # @option opts [Int32] :out_of_band_amount The integer amount in cents (or local equivalent) representing the amount that is credited outside of Stripe.
   # @option opts [String] :reason Reason for issuing this credit note, one of &#x60;duplicate&#x60;, &#x60;fraudulent&#x60;, &#x60;order_change&#x60;, or &#x60;product_unsatisfactory&#x60;
   # @option opts [String] :refund ID of an existing refund to link this credit note to.
-  # @option opts [Int64] :refund_amount The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+  # @option opts [Int32] :refund_amount The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
   # @return [CreditNote]
   describe "get_credit_notes_preview test" do
     it "should work" do
@@ -913,18 +1260,18 @@ describe "DefaultApi" do
   # &lt;p&gt;When retrieving a credit note preview, you’ll get a &lt;strong&gt;lines&lt;/strong&gt; property containing the first handful of those items. This URL you can retrieve the full (paginated) list of line items.&lt;/p&gt;
   # @param invoice ID of the invoice.
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount The integer amount in cents (or local equivalent) representing the total amount of the credit note.
-  # @option opts [Int64] :credit_amount The integer amount in cents (or local equivalent) representing the amount to credit the customer&#39;s balance, which will be automatically applied to their next invoice.
+  # @option opts [Int32] :amount The integer amount in cents (or local equivalent) representing the total amount of the credit note.
+  # @option opts [Int32] :credit_amount The integer amount in cents (or local equivalent) representing the amount to credit the customer&#39;s balance, which will be automatically applied to their next invoice.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [Array(CreditNoteLineItemParams)] :lines Line items that make up the credit note.
   # @option opts [String] :memo The credit note&#39;s memo appears on the credit note PDF.
   # @option opts [Hash(String, String)] :metadata Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to &#x60;metadata&#x60;.
-  # @option opts [Int64] :out_of_band_amount The integer amount in cents (or local equivalent) representing the amount that is credited outside of Stripe.
+  # @option opts [Int32] :out_of_band_amount The integer amount in cents (or local equivalent) representing the amount that is credited outside of Stripe.
   # @option opts [String] :reason Reason for issuing this credit note, one of &#x60;duplicate&#x60;, &#x60;fraudulent&#x60;, &#x60;order_change&#x60;, or &#x60;product_unsatisfactory&#x60;
   # @option opts [String] :refund ID of an existing refund to link this credit note to.
-  # @option opts [Int64] :refund_amount The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+  # @option opts [Int32] :refund_amount The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [CreditNoteLinesList]
   describe "get_credit_notes_preview_lines test" do
@@ -940,7 +1287,7 @@ describe "DefaultApi" do
   # @option opts [String] :email A case-sensitive filter on the list based on the customer&#39;s &#x60;email&#x60; field. The value must be a string.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :test_clock Provides a list of customers that are associated with the specified test clock. The response will not include customers with test clocks if this parameter is not set.
   # @return [GetCustomers200Response]
@@ -968,7 +1315,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [CustomerBalanceTransactionList]
   describe "get_customers_customer_balance_transactions test" do
@@ -990,6 +1337,62 @@ describe "DefaultApi" do
     end
   end
 
+  # unit tests for get_customers_customer_bank_accounts
+  # &lt;p&gt;You can see a list of the bank accounts belonging to a Customer. Note that the 10 most recent sources are always available by default on the Customer. If you need more than those 10, you can use this API method and the &lt;code&gt;limit&lt;/code&gt; and &lt;code&gt;starting_after&lt;/code&gt; parameters to page through additional bank accounts.&lt;/p&gt;
+  # @param customer
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @return [BankAccountList]
+  describe "get_customers_customer_bank_accounts test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_customers_customer_bank_accounts_id
+  # &lt;p&gt;By default, you can see the 10 most recent sources stored on a Customer directly on the object, but you can also retrieve details about a specific bank account stored on the Stripe account.&lt;/p&gt;
+  # @param customer
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [BankAccount]
+  describe "get_customers_customer_bank_accounts_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_customers_customer_cards
+  # &lt;p&gt;You can see a list of the cards belonging to a customer. Note that the 10 most recent sources are always available on the &lt;code&gt;Customer&lt;/code&gt; object. If you need more than those 10, you can use this API method and the &lt;code&gt;limit&lt;/code&gt; and &lt;code&gt;starting_after&lt;/code&gt; parameters to page through additional cards.&lt;/p&gt;
+  # @param customer
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @return [CardList]
+  describe "get_customers_customer_cards test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_customers_customer_cards_id
+  # &lt;p&gt;You can always see the 10 most recent cards directly on a customer; this method lets you retrieve details about a specific card stored on the customer.&lt;/p&gt;
+  # @param customer
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [Card]
+  describe "get_customers_customer_cards_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for get_customers_customer_cash_balance
   # &lt;p&gt;Retrieves a customer’s cash balance.&lt;/p&gt;
   # @param customer
@@ -1002,6 +1405,18 @@ describe "DefaultApi" do
     end
   end
 
+  # unit tests for get_customers_customer_discount
+  #
+  # @param customer
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [Discount]
+  describe "get_customers_customer_discount test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for get_customers_customer_payment_methods
   # &lt;p&gt;Returns a list of PaymentMethods for a given Customer&lt;/p&gt;
   # @param customer
@@ -1009,7 +1424,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [CustomerPaymentMethodResourceList]
   describe "get_customers_customer_payment_methods test" do
@@ -1037,7 +1452,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :object Filter sources according to a particular object type.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [ApmsSourcesSourceList]
@@ -1060,13 +1475,54 @@ describe "DefaultApi" do
     end
   end
 
+  # unit tests for get_customers_customer_subscriptions
+  # &lt;p&gt;You can see a list of the customer’s active subscriptions. Note that the 10 most recent active subscriptions are always available by default on the customer object. If you need more than those 10, you can use the limit and starting_after parameters to page through additional subscriptions.&lt;/p&gt;
+  # @param customer
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @return [SubscriptionList]
+  describe "get_customers_customer_subscriptions test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_customers_customer_subscriptions_subscription_exposed_id
+  # &lt;p&gt;Retrieves the subscription with the given ID.&lt;/p&gt;
+  # @param customer
+  # @param subscription_exposed_id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [Subscription]
+  describe "get_customers_customer_subscriptions_subscription_exposed_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_customers_customer_subscriptions_subscription_exposed_id_discount
+  #
+  # @param customer
+  # @param subscription_exposed_id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [Discount]
+  describe "get_customers_customer_subscriptions_subscription_exposed_id_discount test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for get_customers_customer_tax_ids
   # &lt;p&gt;Returns a list of tax IDs for a customer.&lt;/p&gt;
   # @param customer
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [TaxIDsList]
   describe "get_customers_customer_tax_ids test" do
@@ -1093,7 +1549,7 @@ describe "DefaultApi" do
   # @param query The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for customers](https://stripe.com/docs/search#query-fields-for-customers).
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :page A cursor for pagination across multiple pages of results. Don&#39;t include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
   # @return [SearchResult1]
   describe "get_customers_search test" do
@@ -1109,7 +1565,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :payment_intent Only return disputes associated to the PaymentIntent specified by this PaymentIntent ID.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetDisputes200Response]
@@ -1138,7 +1594,7 @@ describe "DefaultApi" do
   # @option opts [Bool] :delivery_success Filter events by whether all webhooks were successfully delivered. If false, events which are still pending or have failed all delivery attempts to a webhook endpoint will be returned.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :_type A string containing a specific event name, or group of events using * as a wildcard. The list will be filtered to include only events with a matching event property.
   # @option opts [Array(String)] :types An array of up to 20 strings containing specific event names. The list will be filtered to include only events with a matching event property. You may pass either &#x60;type&#x60; or &#x60;types&#x60;, but not both.
@@ -1166,7 +1622,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is the currency that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with the exchange rate for currency X your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and total number of supported payout currencies, and the default is the max.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and total number of supported payout currencies, and the default is the max.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is the currency that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with the exchange rate for currency X, your subsequent call can include &#x60;starting_after&#x3D;X&#x60; in order to fetch the next page of the list.
   # @return [GetExchangeRates200Response]
   describe "get_exchange_rates test" do
@@ -1195,7 +1651,7 @@ describe "DefaultApi" do
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Bool] :expired Filter links by their expiration status. By default, all links are returned.
   # @option opts [String] :file Only return links for the given file.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetFileLinks200Response]
   describe "get_file_links test" do
@@ -1222,7 +1678,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :purpose The file purpose to filter queries by. If none is provided, files will not be filtered by purpose.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetFiles200Response]
@@ -1250,7 +1706,7 @@ describe "DefaultApi" do
   # @option opts [AccountholderParams] :account_holder If present, only return accounts that belong to the specified account holder. &#x60;account_holder[customer]&#x60; and &#x60;account_holder[account]&#x60; are mutually exclusive.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :session If present, only return accounts that were collected as part of the given session.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [BankConnectionsResourceLinkedAccountList]
@@ -1279,7 +1735,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [BankConnectionsResourceOwnerList]
   describe "get_financial_connections_accounts_account_owners test" do
@@ -1306,7 +1762,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :_type Only return VerificationReports of this type
   # @option opts [String] :verification_session Only return VerificationReports created by this VerificationSession ID. It is allowed to provide a VerificationIntent ID.
@@ -1335,7 +1791,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return VerificationSessions with this status. [Learn more about the lifecycle of sessions](https://stripe.com/docs/identity/how-sessions-work).
   # @return [GetIdentityVerificationSessions200Response]
@@ -1365,7 +1821,7 @@ describe "DefaultApi" do
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :invoice Only return invoice items belonging to this invoice. If none is provided, all invoice items will be returned. If specifying an invoice, no customer identifier is needed.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [Bool] :pending Set to &#x60;true&#x60; to only show pending invoice items, which are not yet attached to any invoices. Set to &#x60;false&#x60; to only show invoice items already attached to invoices. If unspecified, no filter is applied.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetInvoiceitems200Response]
@@ -1396,7 +1852,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :due_date
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status The status of the invoice, one of &#x60;draft&#x60;, &#x60;open&#x60;, &#x60;paid&#x60;, &#x60;uncollectible&#x60;, or &#x60;void&#x60;. [Learn more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
   # @option opts [String] :subscription Only return invoices for the subscription specified by this subscription ID.
@@ -1425,7 +1881,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [InvoiceLinesList]
   describe "get_invoices_invoice_lines test" do
@@ -1439,7 +1895,7 @@ describe "DefaultApi" do
   # @param query The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for invoices](https://stripe.com/docs/search#query-fields-for-invoices).
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :page A cursor for pagination across multiple pages of results. Don&#39;t include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
   # @return [SearchResult2]
   describe "get_invoices_search test" do
@@ -1464,11 +1920,11 @@ describe "DefaultApi" do
   # @option opts [GetInvoicesUpcomingSubscriptionCancelAtParameter] :subscription_cancel_at Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if within the current period and prorations have been enabled using &#x60;proration_behavior&#x60;.
   # @option opts [Bool] :subscription_cancel_at_period_end Boolean indicating whether this subscription should cancel at the end of the current period.
   # @option opts [Bool] :subscription_cancel_now This simulates the subscription being canceled or expired immediately.
-  # @option opts [GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter] :subscription_default_tax_rates If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have &#x60;tax_rates&#x60; set.
+  # @option opts [CreditNoteLineItemParamsTaxRates] :subscription_default_tax_rates If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have &#x60;tax_rates&#x60; set.
   # @option opts [Array(SubscriptionItemUpdateParams)] :subscription_items A list of up to 20 subscription items, each with an attached price.
   # @option opts [String] :subscription_proration_behavior Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting &#x60;billing_cycle_anchor&#x3D;now&#x60;, or starting a trial), or if an item&#39;s &#x60;quantity&#x60; changes. Valid values are &#x60;create_prorations&#x60;, &#x60;none&#x60;, or &#x60;always_invoice&#x60;.  Passing &#x60;create_prorations&#x60; will cause proration invoice items to be created when applicable. These proration items will only be invoiced immediately under [certain conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment). In order to always invoice immediately for prorations, pass &#x60;always_invoice&#x60;.  Prorations can be disabled by passing &#x60;none&#x60;.
-  # @option opts [Int64] :subscription_proration_date If previewing an update to a subscription, and doing proration, &#x60;subscription_proration_date&#x60; forces the proration to be calculated as though the update was done at the specified time. The time given must be within the current subscription period, and cannot be before the subscription was on its current plan. If set, &#x60;subscription&#x60;, and one of &#x60;subscription_items&#x60;, or &#x60;subscription_trial_end&#x60; are required. Also, &#x60;subscription_proration_behavior&#x60; cannot be set to &#39;none&#39;.
-  # @option opts [Int64] :subscription_start_date Date a subscription is intended to start (can be future or past)
+  # @option opts [Int32] :subscription_proration_date If previewing an update to a subscription, and doing proration, &#x60;subscription_proration_date&#x60; forces the proration to be calculated as though the update was done at the specified time. The time given must be within the current subscription period, and cannot be before the subscription was on its current plan. If set, &#x60;subscription&#x60;, and one of &#x60;subscription_items&#x60;, or &#x60;subscription_trial_end&#x60; are required. Also, &#x60;subscription_proration_behavior&#x60; cannot be set to &#39;none&#39;.
+  # @option opts [Int32] :subscription_start_date Date a subscription is intended to start (can be future or past)
   # @option opts [GetInvoicesUpcomingSubscriptionTrialEndParameter] :subscription_trial_end If provided, the invoice returned will preview updating or creating a subscription with that trial end. If set, one of &#x60;subscription_items&#x60; or &#x60;subscription&#x60; is required.
   # @option opts [Bool] :subscription_trial_from_plan Indicates if a plan&#39;s &#x60;trial_period_days&#x60; should be applied to the subscription. Setting &#x60;subscription_trial_end&#x60; per subscription is preferred, and this defaults to &#x60;false&#x60;. Setting this flag to &#x60;true&#x60; together with &#x60;subscription_trial_end&#x60; is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
   # @return [Invoice]
@@ -1489,7 +1945,7 @@ describe "DefaultApi" do
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Array(InvoiceItemPreviewParams)] :invoice_items List of invoice items to add or update in the upcoming invoice preview.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :schedule The identifier of the unstarted schedule whose upcoming invoice you&#39;d like to retrieve. Cannot be used with subscription or subscription fields.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :subscription The identifier of the subscription for which you&#39;d like to retrieve the upcoming invoice. If not provided, but a &#x60;subscription_items&#x60; is provided, you will preview creating a subscription with those items. If neither &#x60;subscription&#x60; nor &#x60;subscription_items&#x60; is provided, you will retrieve the next upcoming invoice from among the customer&#39;s subscriptions.
@@ -1497,11 +1953,11 @@ describe "DefaultApi" do
   # @option opts [GetInvoicesUpcomingSubscriptionCancelAtParameter] :subscription_cancel_at Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if within the current period and prorations have been enabled using &#x60;proration_behavior&#x60;.
   # @option opts [Bool] :subscription_cancel_at_period_end Boolean indicating whether this subscription should cancel at the end of the current period.
   # @option opts [Bool] :subscription_cancel_now This simulates the subscription being canceled or expired immediately.
-  # @option opts [GetInvoicesUpcomingSubscriptionDefaultTaxRatesParameter] :subscription_default_tax_rates If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have &#x60;tax_rates&#x60; set.
+  # @option opts [CreditNoteLineItemParamsTaxRates] :subscription_default_tax_rates If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have &#x60;tax_rates&#x60; set.
   # @option opts [Array(SubscriptionItemUpdateParams)] :subscription_items A list of up to 20 subscription items, each with an attached price.
   # @option opts [String] :subscription_proration_behavior Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting &#x60;billing_cycle_anchor&#x3D;now&#x60;, or starting a trial), or if an item&#39;s &#x60;quantity&#x60; changes. Valid values are &#x60;create_prorations&#x60;, &#x60;none&#x60;, or &#x60;always_invoice&#x60;.  Passing &#x60;create_prorations&#x60; will cause proration invoice items to be created when applicable. These proration items will only be invoiced immediately under [certain conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment). In order to always invoice immediately for prorations, pass &#x60;always_invoice&#x60;.  Prorations can be disabled by passing &#x60;none&#x60;.
-  # @option opts [Int64] :subscription_proration_date If previewing an update to a subscription, and doing proration, &#x60;subscription_proration_date&#x60; forces the proration to be calculated as though the update was done at the specified time. The time given must be within the current subscription period, and cannot be before the subscription was on its current plan. If set, &#x60;subscription&#x60;, and one of &#x60;subscription_items&#x60;, or &#x60;subscription_trial_end&#x60; are required. Also, &#x60;subscription_proration_behavior&#x60; cannot be set to &#39;none&#39;.
-  # @option opts [Int64] :subscription_start_date Date a subscription is intended to start (can be future or past)
+  # @option opts [Int32] :subscription_proration_date If previewing an update to a subscription, and doing proration, &#x60;subscription_proration_date&#x60; forces the proration to be calculated as though the update was done at the specified time. The time given must be within the current subscription period, and cannot be before the subscription was on its current plan. If set, &#x60;subscription&#x60;, and one of &#x60;subscription_items&#x60;, or &#x60;subscription_trial_end&#x60; are required. Also, &#x60;subscription_proration_behavior&#x60; cannot be set to &#39;none&#39;.
+  # @option opts [Int32] :subscription_start_date Date a subscription is intended to start (can be future or past)
   # @option opts [GetInvoicesUpcomingSubscriptionTrialEndParameter] :subscription_trial_end If provided, the invoice returned will preview updating or creating a subscription with that trial end. If set, one of &#x60;subscription_items&#x60; or &#x60;subscription&#x60; is required.
   # @option opts [Bool] :subscription_trial_from_plan Indicates if a plan&#39;s &#x60;trial_period_days&#x60; should be applied to the subscription. Setting &#x60;subscription_trial_end&#x60; per subscription is preferred, and this defaults to &#x60;false&#x60;. Setting this flag to &#x60;true&#x60; together with &#x60;subscription_trial_end&#x60; is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
   # @return [InvoiceLinesList]
@@ -1517,7 +1973,7 @@ describe "DefaultApi" do
   # @option opts [String] :charge Only return issuer fraud records for the charge specified by this charge ID.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [RadarIssuerFraudRecordList]
   describe "get_issuer_fraud_records test" do
@@ -1546,7 +2002,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created Only return authorizations that were created during the given date interval.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return authorizations with the given status. One of &#x60;pending&#x60;, &#x60;closed&#x60;, or &#x60;reversed&#x60;.
   # @return [GetIssuingAuthorizations200Response]
@@ -1575,7 +2031,7 @@ describe "DefaultApi" do
   # @option opts [String] :email Only return cardholders that have the given email address.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :phone_number Only return cardholders that have the given phone number.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return cardholders that have the given status. One of &#x60;active&#x60;, &#x60;inactive&#x60;, or &#x60;blocked&#x60;.
@@ -1605,11 +2061,11 @@ describe "DefaultApi" do
   # @option opts [String] :cardholder Only return cards belonging to the Cardholder with the provided ID.
   # @option opts [GetAccountsCreatedParameter] :created Only return cards that were issued during the given date interval.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
-  # @option opts [Int64] :exp_month Only return cards that have the given expiration month.
-  # @option opts [Int64] :exp_year Only return cards that have the given expiration year.
+  # @option opts [Int32] :exp_month Only return cards that have the given expiration month.
+  # @option opts [Int32] :exp_year Only return cards that have the given expiration year.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :last4 Only return cards that have the given last four digits.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return cards that have the given status. One of &#x60;active&#x60;, &#x60;inactive&#x60;, or &#x60;canceled&#x60;.
   # @option opts [String] :_type Only return cards that have the given type. One of &#x60;virtual&#x60; or &#x60;physical&#x60;.
@@ -1638,7 +2094,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created Select Issuing disputes that were created during the given date interval.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Select Issuing disputes with the given status.
   # @option opts [String] :transaction Select the Issuing dispute for the given transaction.
@@ -1661,6 +2117,33 @@ describe "DefaultApi" do
     end
   end
 
+  # unit tests for get_issuing_settlements
+  # &lt;p&gt;Returns a list of Issuing &lt;code&gt;Settlement&lt;/code&gt; objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [GetAccountsCreatedParameter] :created Only return issuing settlements that were created during the given date interval.
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @return [GetIssuingSettlements200Response]
+  describe "get_issuing_settlements test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_issuing_settlements_settlement
+  # &lt;p&gt;Retrieves an Issuing &lt;code&gt;Settlement&lt;/code&gt; object.&lt;/p&gt;
+  # @param settlement
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [IssuingSettlement]
+  describe "get_issuing_settlements_settlement test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for get_issuing_transactions
   # &lt;p&gt;Returns a list of Issuing &lt;code&gt;Transaction&lt;/code&gt; objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
@@ -1669,7 +2152,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created Only return transactions that were created during the given date interval.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :_type Only return transactions that have the given type. One of &#x60;capture&#x60; or &#x60;refund&#x60;.
   # @return [GetIssuingTransactions200Response]
@@ -1686,6 +2169,62 @@ describe "DefaultApi" do
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [IssuingTransaction]
   describe "get_issuing_transactions_transaction test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_link_account_sessions_session
+  # &lt;p&gt;Retrieves the details of a Financial Connections &lt;code&gt;Session&lt;/code&gt;&lt;/p&gt;
+  # @param session
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [FinancialConnectionsSession]
+  describe "get_link_account_sessions_session test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_linked_accounts
+  # &lt;p&gt;Returns a list of Financial Connections &lt;code&gt;Account&lt;/code&gt; objects.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [AccountholderParams] :account_holder If present, only return accounts that belong to the specified account holder. &#x60;account_holder[customer]&#x60; and &#x60;account_holder[account]&#x60; are mutually exclusive.
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [String] :session If present, only return accounts that were collected as part of the given session.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @return [BankConnectionsResourceLinkedAccountList]
+  describe "get_linked_accounts test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_linked_accounts_account
+  # &lt;p&gt;Retrieves the details of an Financial Connections &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
+  # @param account
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [FinancialConnectionsAccount]
+  describe "get_linked_accounts_account test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_linked_accounts_account_owners
+  # &lt;p&gt;Lists all owners for a given &lt;code&gt;Account&lt;/code&gt;&lt;/p&gt;
+  # @param account
+  # @param ownership The ID of the ownership object to fetch owners from.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
+  # @return [BankConnectionsResourceOwnerList]
+  describe "get_linked_accounts_account_owners test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -1709,7 +2248,7 @@ describe "DefaultApi" do
   # @option opts [String] :customer Only return orders for the given customer.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [OrdersV2ResourceOrderList]
   describe "get_orders test" do
@@ -1736,7 +2275,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [OrdersV2ResourceLineItemList]
   describe "get_orders_id_line_items test" do
@@ -1752,7 +2291,7 @@ describe "DefaultApi" do
   # @option opts [String] :customer Only return PaymentIntents for the customer specified by this customer ID.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [PaymentFlowsPaymentIntentList]
   describe "get_payment_intents test" do
@@ -1779,7 +2318,7 @@ describe "DefaultApi" do
   # @param query The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for payment intents](https://stripe.com/docs/search#query-fields-for-payment-intents).
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :page A cursor for pagination across multiple pages of results. Don&#39;t include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
   # @return [SearchResult3]
   describe "get_payment_intents_search test" do
@@ -1794,7 +2333,7 @@ describe "DefaultApi" do
   # @option opts [Bool] :active Only return payment links that are active or inactive (e.g., pass &#x60;false&#x60; to list all inactive payment links).
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetPaymentLinks200Response]
   describe "get_payment_links test" do
@@ -1821,7 +2360,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [PaymentLinksResourceListLineItems]
   describe "get_payment_links_payment_link_line_items test" do
@@ -1837,7 +2376,7 @@ describe "DefaultApi" do
   # @option opts [String] :customer The ID of the customer whose PaymentMethods will be retrieved. If not provided, the response list will be empty.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [PaymentFlowsPaymentMethodList]
   describe "get_payment_methods test" do
@@ -1866,7 +2405,7 @@ describe "DefaultApi" do
   # @option opts [String] :destination The ID of an external account - only return payouts sent to this external account.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return payouts that have the given status: &#x60;pending&#x60;, &#x60;paid&#x60;, &#x60;failed&#x60;, or &#x60;canceled&#x60;.
   # @return [PayoutList]
@@ -1895,7 +2434,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created A filter on the list, based on the object &#x60;created&#x60; field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :product Only return plans for the given product.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [PlanList]
@@ -1925,7 +2464,7 @@ describe "DefaultApi" do
   # @option opts [String] :currency Only return prices for the given currency.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [Array(String)] :lookup_keys Only return the price with these lookup_keys, if any exist.
   # @option opts [String] :product Only return prices for the given product.
   # @option opts [AllPricesRecurringParams] :recurring Only return prices with these recurring fields.
@@ -1955,7 +2494,7 @@ describe "DefaultApi" do
   # @param query The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for prices](https://stripe.com/docs/search#query-fields-for-prices).
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :page A cursor for pagination across multiple pages of results. Don&#39;t include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
   # @return [SearchResult4]
   describe "get_prices_search test" do
@@ -1972,10 +2511,9 @@ describe "DefaultApi" do
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Array(String)] :ids Only return products with the given IDs.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [Bool] :shippable Only return products that can be shipped (i.e., physical, not digital products).
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
-  # @option opts [String] :_type Only return products of this type.
   # @option opts [String] :url Only return products with the given url.
   # @return [ProductList]
   describe "get_products test" do
@@ -2001,7 +2539,7 @@ describe "DefaultApi" do
   # @param query The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for products](https://stripe.com/docs/search#query-fields-for-products).
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :page A cursor for pagination across multiple pages of results. Don&#39;t include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
   # @return [SearchResult5]
   describe "get_products_search test" do
@@ -2020,7 +2558,7 @@ describe "DefaultApi" do
   # @option opts [String] :customer Only return promotion codes that are restricted to this customer.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetPromotionCodes200Response]
   describe "get_promotion_codes test" do
@@ -2047,7 +2585,7 @@ describe "DefaultApi" do
   # @option opts [String] :customer The ID of the customer whose quotes will be retrieved.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status The status of the quote.
   # @option opts [String] :test_clock Provides a list of quotes that are associated with the specified test clock. The response will not include quotes with test clocks if this and the customer parameter is not set.
@@ -2076,7 +2614,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [QuotesResourceListLineItems]
   describe "get_quotes_quote_computed_upfront_line_items test" do
@@ -2091,7 +2629,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [QuotesResourceListLineItems]
   describe "get_quotes_quote_line_items test" do
@@ -2118,7 +2656,7 @@ describe "DefaultApi" do
   # @option opts [String] :charge Only return early fraud warnings for the charge specified by this charge ID.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :payment_intent Only return early fraud warnings for charges that were created by the PaymentIntent specified by this PaymentIntent ID.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [RadarEarlyFraudWarningList]
@@ -2147,7 +2685,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :value Return items belonging to the parent list whose value matches the specified value (using an \&quot;is like\&quot; match).
   # @return [GetRadarValueListItems200Response]
@@ -2177,7 +2715,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetRadarValueLists200Response]
   describe "get_radar_value_lists test" do
@@ -2204,7 +2742,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :_type
   # @option opts [Bool] :verified Only return recipients that are verified or unverified.
@@ -2234,7 +2772,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :payment_intent Only return refunds for the PaymentIntent specified by this ID.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetRefunds200Response]
@@ -2262,7 +2800,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetReportingReportRuns200Response]
   describe "get_reporting_report_runs test" do
@@ -2312,7 +2850,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetReviews200Response]
   describe "get_reviews test" do
@@ -2340,7 +2878,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created A filter on the list, based on the object &#x60;created&#x60; field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [PaymentFlowsSetupIntentSetupAttemptList]
   describe "get_setup_attempts test" do
@@ -2356,7 +2894,7 @@ describe "DefaultApi" do
   # @option opts [String] :customer Only return SetupIntents for the customer specified by this customer ID.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :payment_method Only return SetupIntents associated with the specified payment method.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [PaymentFlowsSetupIntentList]
@@ -2387,7 +2925,7 @@ describe "DefaultApi" do
   # @option opts [String] :currency Only return shipping rates for the given currency.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [ShippingResourcesShippingRateList]
   describe "get_shipping_rates test" do
@@ -2413,7 +2951,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetSigmaScheduledQueryRuns200Response]
   describe "get_sigma_scheduled_query_runs test" do
@@ -2443,7 +2981,7 @@ describe "DefaultApi" do
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Array(String)] :ids Only return SKUs with the given IDs.
   # @option opts [Bool] :in_stock Only return SKUs that are either in stock or out of stock (e.g., pass &#x60;false&#x60; to list all SKUs that are out of stock). If no value is provided, all SKUs are returned.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :product The ID of the product whose SKUs will be retrieved. Must be a product with type &#x60;good&#x60;.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetSkus200Response]
@@ -2478,16 +3016,42 @@ describe "DefaultApi" do
     end
   end
 
+  # unit tests for get_sources_source_mandate_notifications_mandate_notification
+  # &lt;p&gt;Retrieves a new Source MandateNotification.&lt;/p&gt;
+  # @param mandate_notification
+  # @param source
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [SourceMandateNotification]
+  describe "get_sources_source_mandate_notifications_mandate_notification test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for get_sources_source_source_transactions
   # &lt;p&gt;List source transactions for a given source.&lt;/p&gt;
   # @param source
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [ApmsSourcesSourceTransactionList]
   describe "get_sources_source_source_transactions test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for get_sources_source_source_transactions_source_transaction
+  # &lt;p&gt;Retrieve an existing source transaction object. Supply the unique source ID from a source creation request and the source transaction ID and Stripe will return the corresponding up-to-date source object information.&lt;/p&gt;
+  # @param source
+  # @param source_transaction
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [SourceTransaction]
+  describe "get_sources_source_source_transactions_source_transaction test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -2499,7 +3063,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetSubscriptionItems200Response]
   describe "get_subscription_items test" do
@@ -2526,7 +3090,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetSubscriptionItemsSubscriptionItemUsageRecordSummaries200Response]
   describe "get_subscription_items_subscription_item_usage_record_summaries test" do
@@ -2544,7 +3108,7 @@ describe "DefaultApi" do
   # @option opts [String] :customer Only return subscription schedules for the given customer.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [GetAccountsCreatedParameter] :released_at Only return subscription schedules that were released during the given date interval.
   # @option opts [Bool] :scheduled Only return subscription schedules that have not started yet.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
@@ -2577,8 +3141,7 @@ describe "DefaultApi" do
   # @option opts [String] :customer The ID of the customer whose subscriptions will be retrieved.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-  # @option opts [String] :plan The ID of the plan whose subscriptions will be retrieved.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :price Filter for subscriptions that contain this recurring price ID.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status The status of the subscriptions to retrieve. Passing in a value of &#x60;canceled&#x60; will return all canceled subscriptions, including those belonging to deleted customers. Pass &#x60;ended&#x60; to find subscriptions that are canceled and subscriptions that are expired due to [incomplete payment](https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses). Passing in a value of &#x60;all&#x60; will return subscriptions of all statuses. If no value is supplied, all subscriptions that have not been canceled are returned.
@@ -2595,7 +3158,7 @@ describe "DefaultApi" do
   # @param query The search query string. See [search query language](https://stripe.com/docs/search#search-query-language) and the list of supported [query fields for subscriptions](https://stripe.com/docs/search#query-fields-for-subscriptions).
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :page A cursor for pagination across multiple pages of results. Don&#39;t include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
   # @return [SearchResult6]
   describe "get_subscriptions_search test" do
@@ -2621,7 +3184,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [TaxProductResourceTaxCodeList]
   describe "get_tax_codes test" do
@@ -2650,7 +3213,7 @@ describe "DefaultApi" do
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Bool] :inclusive Optional flag to filter by tax rates that are inclusive (or those that are not inclusive).
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetTaxRates200Response]
   describe "get_tax_rates test" do
@@ -2677,7 +3240,7 @@ describe "DefaultApi" do
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Bool] :is_account_default if present, only return the account default or non-default configurations.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [TerminalConfigurationConfigurationList]
   describe "get_terminal_configurations test" do
@@ -2703,7 +3266,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [TerminalLocationLocationList]
   describe "get_terminal_locations test" do
@@ -2730,7 +3293,7 @@ describe "DefaultApi" do
   # @option opts [String] :device_type Filters readers by device type
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :location A location ID to filter the response list to only readers at the specific location
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status A status filter to filter readers to only offline or online readers
@@ -2758,7 +3321,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetTestHelpersTestClocks200Response]
   describe "get_test_helpers_test_clocks test" do
@@ -2798,7 +3361,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created A filter on the list, based on the object &#x60;created&#x60; field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return top-ups that have the given status. One of &#x60;canceled&#x60;, &#x60;failed&#x60;, &#x60;pending&#x60; or &#x60;succeeded&#x60;.
   # @return [TopupList]
@@ -2827,7 +3390,7 @@ describe "DefaultApi" do
   # @option opts [String] :destination Only return transfers for the destination specified by this account ID.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :transfer_group Only return transfers with the specified transfer group.
   # @return [TransferList]
@@ -2843,7 +3406,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [TransferReversalList]
   describe "get_transfers_id_reversals test" do
@@ -2883,7 +3446,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :received_credit Only return CreditReversals for the ReceivedCredit ID.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return CreditReversals for a given status.
@@ -2912,7 +3475,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :received_debit Only return DebitReversals for the ReceivedDebit ID.
   # @option opts [String] :resolution Only return DebitReversals for a given resolution.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
@@ -2942,7 +3505,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before An object ID cursor for use in pagination.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit ranging from 1 to 100 (defaults to 10).
+  # @option opts [Int32] :limit A limit ranging from 1 to 100 (defaults to 10).
   # @option opts [String] :starting_after An object ID cursor for use in pagination.
   # @return [GetTreasuryFinancialAccounts200Response]
   describe "get_treasury_financial_accounts test" do
@@ -2981,7 +3544,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return InboundTransfers that have the given status: &#x60;processing&#x60;, &#x60;succeeded&#x60;, &#x60;failed&#x60; or &#x60;canceled&#x60;.
   # @return [InboundTransfersResourceTreasuryInboundTransferList]
@@ -3010,7 +3573,7 @@ describe "DefaultApi" do
   # @option opts [String] :customer Only return OutboundPayments sent to this customer.
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return OutboundPayments that have the given status: &#x60;processing&#x60;, &#x60;failed&#x60;, &#x60;posted&#x60;, &#x60;returned&#x60;, or &#x60;canceled&#x60;.
   # @return [OutboundPaymentsResourceTreasuryOutboundPaymentList]
@@ -3038,7 +3601,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return OutboundTransfers that have the given status: &#x60;processing&#x60;, &#x60;canceled&#x60;, &#x60;failed&#x60;, &#x60;posted&#x60;, or &#x60;returned&#x60;.
   # @return [OutboundTransfersResourceTreasuryOutboundTransferList]
@@ -3066,7 +3629,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [LinkedFlowsParam] :linked_flows Only return ReceivedCredits described by the flow.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return ReceivedCredits that have the given status: &#x60;succeeded&#x60; or &#x60;failed&#x60;.
@@ -3095,7 +3658,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return ReceivedDebits that have the given status: &#x60;succeeded&#x60; or &#x60;failed&#x60;.
   # @return [ReceivedDebitsResourceTreasuryReceivedDebitList]
@@ -3125,7 +3688,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :effective_at
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :order_by The results are in reverse chronological order by &#x60;created&#x60; or &#x60;effective_at&#x60;. The default is &#x60;created&#x60;.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :transaction Only return TransactionEntries associated with this Transaction.
@@ -3155,7 +3718,7 @@ describe "DefaultApi" do
   # @option opts [GetAccountsCreatedParameter] :created
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :order_by The results are in reverse chronological order by &#x60;created&#x60; or &#x60;posted_at&#x60;. The default is &#x60;created&#x60;.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @option opts [String] :status Only return Transactions that have the given status: &#x60;open&#x60;, &#x60;posted&#x60;, or &#x60;void&#x60;.
@@ -3184,7 +3747,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ending_before A cursor for use in pagination. &#x60;ending_before&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with &#x60;obj_bar&#x60;, your subsequent call can include &#x60;ending_before&#x3D;obj_bar&#x60; in order to fetch the previous page of the list.
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
-  # @option opts [Int64] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+  # @option opts [Int32] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
   # @option opts [String] :starting_after A cursor for use in pagination. &#x60;starting_after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with &#x60;obj_foo&#x60;, your subsequent call can include &#x60;starting_after&#x3D;obj_foo&#x60; in order to fetch the next page of the list.
   # @return [GetWebhookEndpoints200Response]
   describe "get_webhook_endpoints test" do
@@ -3213,9 +3776,127 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :card The ID of a card token, or the ID of a card belonging to the given customer.
   # @option opts [String] :customer The customer associated with this 3D secure authentication.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [ThreeDSecure]
   describe "post3d_secure test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_account
+  # &lt;p&gt;Updates a &lt;a href&#x3D;\&quot;/docs/connect/accounts\&quot;&gt;connected account&lt;/a&gt; by setting the values of the parameters passed. Any parameters not provided are left unchanged. Most parameters can be changed only for Custom accounts. (These are marked &lt;strong&gt;Custom Only&lt;/strong&gt; below.) Parameters marked &lt;strong&gt;Custom and Express&lt;/strong&gt; are not supported for Standard accounts.&lt;/p&gt;  &lt;p&gt;To update your own account, use the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account\&quot;&gt;Dashboard&lt;/a&gt;. Refer to our &lt;a href&#x3D;\&quot;/docs/connect/updating-accounts\&quot;&gt;Connect&lt;/a&gt; documentation to learn more about updating accounts.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account_token An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
+  # @option opts [PostAccountRequestBankAccount] :bank_account
+  # @option opts [BusinessProfileSpecs] :business_profile
+  # @option opts [String] :business_type The business type.
+  # @option opts [CapabilitiesParam] :capabilities
+  # @option opts [CompanySpecs] :company
+  # @option opts [String] :default_currency Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account&#39;s country](https://stripe.com/docs/payouts).
+  # @option opts [DocumentsSpecs] :documents
+  # @option opts [String] :email The email address of the account holder. This is only to make the account easier to identify to you. Stripe only emails Custom accounts with your consent.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :external_account A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary, as documented in the &#x60;external_account&#x60; parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
+  # @option opts [IndividualSpecs] :individual
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [SettingsSpecsUpdate] :settings
+  # @option opts [TosAcceptanceSpecs] :tos_acceptance
+  # @return [Account]
+  describe "post_account test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_account_bank_accounts
+  # &lt;p&gt;Create an external account for a given account.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [PostAccountRequestBankAccount] :bank_account
+  # @option opts [Bool] :default_for_currency When set to true, or if this is the first external account added in this currency, this account becomes the default external account for its currency.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :external_account Please refer to full [documentation](https://stripe.com/docs/api) instead.
+  # @return [ExternalAccount]
+  describe "post_account_bank_accounts test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_account_bank_accounts_id
+  # &lt;p&gt;Updates the metadata, account holder name, account holder type of a bank account belonging to a &lt;a href&#x3D;\&quot;/docs/connect/custom-accounts\&quot;&gt;Custom account&lt;/a&gt;, and optionally sets it as the default for its currency. Other bank account details are not editable by design.&lt;/p&gt;  &lt;p&gt;You can re-enable a disabled bank account by performing an update call without providing any arguments or changes.&lt;/p&gt;
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account_holder_name The name of the person or business that owns the bank account.
+  # @option opts [String] :account_holder_type The type of entity that holds the account. This can be either &#x60;individual&#x60; or &#x60;company&#x60;.
+  # @option opts [String] :account_type The bank account type. This can only be &#x60;checking&#x60; or &#x60;savings&#x60; in most countries. In Japan, this can only be &#x60;futsu&#x60; or &#x60;toza&#x60;.
+  # @option opts [String] :address_city City/District/Suburb/Town/Village.
+  # @option opts [String] :address_country Billing address country, if provided when creating card.
+  # @option opts [String] :address_line1 Address line 1 (Street address/PO Box/Company name).
+  # @option opts [String] :address_line2 Address line 2 (Apartment/Suite/Unit/Building).
+  # @option opts [String] :address_state State/County/Province/Region.
+  # @option opts [String] :address_zip ZIP or postal code.
+  # @option opts [Bool] :default_for_currency When set to true, this becomes the default external account for its currency.
+  # @option opts [String] :exp_month Two digit number representing the card’s expiration month.
+  # @option opts [String] :exp_year Four digit number representing the card’s expiration year.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :name Cardholder name.
+  # @return [ExternalAccount]
+  describe "post_account_bank_accounts_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_account_capabilities_capability
+  # &lt;p&gt;Updates an existing Account Capability.&lt;/p&gt;
+  # @param capability
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Bool] :requested Passing true requests the capability for the account, if it is not already requested. A requested capability may not immediately become active. Any requirements to activate the capability are returned in the &#x60;requirements&#x60; arrays.
+  # @return [Capability]
+  describe "post_account_capabilities_capability test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_account_external_accounts
+  # &lt;p&gt;Create an external account for a given account.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [PostAccountRequestBankAccount] :bank_account
+  # @option opts [Bool] :default_for_currency When set to true, or if this is the first external account added in this currency, this account becomes the default external account for its currency.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :external_account Please refer to full [documentation](https://stripe.com/docs/api) instead.
+  # @return [ExternalAccount]
+  describe "post_account_external_accounts test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_account_external_accounts_id
+  # &lt;p&gt;Updates the metadata, account holder name, account holder type of a bank account belonging to a &lt;a href&#x3D;\&quot;/docs/connect/custom-accounts\&quot;&gt;Custom account&lt;/a&gt;, and optionally sets it as the default for its currency. Other bank account details are not editable by design.&lt;/p&gt;  &lt;p&gt;You can re-enable a disabled bank account by performing an update call without providing any arguments or changes.&lt;/p&gt;
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account_holder_name The name of the person or business that owns the bank account.
+  # @option opts [String] :account_holder_type The type of entity that holds the account. This can be either &#x60;individual&#x60; or &#x60;company&#x60;.
+  # @option opts [String] :account_type The bank account type. This can only be &#x60;checking&#x60; or &#x60;savings&#x60; in most countries. In Japan, this can only be &#x60;futsu&#x60; or &#x60;toza&#x60;.
+  # @option opts [String] :address_city City/District/Suburb/Town/Village.
+  # @option opts [String] :address_country Billing address country, if provided when creating card.
+  # @option opts [String] :address_line1 Address line 1 (Street address/PO Box/Company name).
+  # @option opts [String] :address_line2 Address line 2 (Apartment/Suite/Unit/Building).
+  # @option opts [String] :address_state State/County/Province/Region.
+  # @option opts [String] :address_zip ZIP or postal code.
+  # @option opts [Bool] :default_for_currency When set to true, this becomes the default external account for its currency.
+  # @option opts [String] :exp_month Two digit number representing the card’s expiration month.
+  # @option opts [String] :exp_year Four digit number representing the card’s expiration year.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :name Cardholder name.
+  # @return [ExternalAccount]
+  describe "post_account_external_accounts_id test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -3227,7 +3908,7 @@ describe "DefaultApi" do
   # @param _type The type of account link the user is requesting. Possible values are &#x60;account_onboarding&#x60; or &#x60;account_update&#x60;.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :collect Which information the platform needs to collect from the user. One of &#x60;currently_due&#x60; or &#x60;eventually_due&#x60;. Default is &#x60;currently_due&#x60;.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :refresh_url The URL the user will be redirected to if the account link is expired, has been previously-visited, or is otherwise invalid. The URL you specify should attempt to generate a new account link with the same parameters used to create the original account link, then redirect the user to the new account link&#39;s URL so they can continue with Connect Onboarding. If a new account link cannot be generated or the redirect fails you should display a useful error to the user.
   # @option opts [String] :return_url The URL that the user will be redirected to upon leaving or completing the linked flow.
   # @return [AccountLink]
@@ -3237,10 +3918,178 @@ describe "DefaultApi" do
     end
   end
 
+  # unit tests for post_account_login_links
+  # &lt;p&gt;Creates a single-use login link for an Express account to access their Stripe dashboard.&lt;/p&gt;  &lt;p&gt;&lt;strong&gt;You may only create login links for &lt;a href&#x3D;\&quot;/docs/connect/express-accounts\&quot;&gt;Express accounts&lt;/a&gt; connected to your platform&lt;/strong&gt;.&lt;/p&gt;
+  # @param account
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :redirect_url Where to redirect the user after they log out of their dashboard.
+  # @return [LoginLink]
+  describe "post_account_login_links test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_account_people
+  # &lt;p&gt;Creates a new person.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account
+  # @option opts [AddressSpecs1] :address
+  # @option opts [JapanAddressKanaSpecs1] :address_kana
+  # @option opts [JapanAddressKanjiSpecs1] :address_kanji
+  # @option opts [PostAccountPeopleRequestDob] :dob
+  # @option opts [PersonDocumentsSpecs] :documents
+  # @option opts [String] :email The person&#39;s email address.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :first_name The person&#39;s first name.
+  # @option opts [String] :first_name_kana The Kana variation of the person&#39;s first name (Japan only).
+  # @option opts [String] :first_name_kanji The Kanji variation of the person&#39;s first name (Japan only).
+  # @option opts [PostAccountPeopleRequestFullNameAliases] :full_name_aliases
+  # @option opts [String] :gender The person&#39;s gender (International regulations require either \\\&quot;male\\\&quot; or \\\&quot;female\\\&quot;).
+  # @option opts [String] :id_number The person&#39;s ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
+  # @option opts [String] :id_number_secondary The person&#39;s secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
+  # @option opts [String] :last_name The person&#39;s last name.
+  # @option opts [String] :last_name_kana The Kana variation of the person&#39;s last name (Japan only).
+  # @option opts [String] :last_name_kanji The Kanji variation of the person&#39;s last name (Japan only).
+  # @option opts [String] :maiden_name The person&#39;s maiden name.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :nationality The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\&quot;XX\\\&quot; if unavailable.
+  # @option opts [String] :person_token A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
+  # @option opts [String] :phone The person&#39;s phone number.
+  # @option opts [String] :political_exposure Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
+  # @option opts [AddressSpecs2] :registered_address
+  # @option opts [RelationshipSpecs] :relationship
+  # @option opts [String] :ssn_last_4 The last four digits of the person&#39;s Social Security number (U.S. only).
+  # @option opts [PersonVerificationSpecs1] :verification
+  # @return [Person]
+  describe "post_account_people test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_account_people_person
+  # &lt;p&gt;Updates an existing person.&lt;/p&gt;
+  # @param person
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account
+  # @option opts [AddressSpecs1] :address
+  # @option opts [JapanAddressKanaSpecs1] :address_kana
+  # @option opts [JapanAddressKanjiSpecs1] :address_kanji
+  # @option opts [PostAccountPeopleRequestDob] :dob
+  # @option opts [PersonDocumentsSpecs] :documents
+  # @option opts [String] :email The person&#39;s email address.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :first_name The person&#39;s first name.
+  # @option opts [String] :first_name_kana The Kana variation of the person&#39;s first name (Japan only).
+  # @option opts [String] :first_name_kanji The Kanji variation of the person&#39;s first name (Japan only).
+  # @option opts [PostAccountPeopleRequestFullNameAliases] :full_name_aliases
+  # @option opts [String] :gender The person&#39;s gender (International regulations require either \\\&quot;male\\\&quot; or \\\&quot;female\\\&quot;).
+  # @option opts [String] :id_number The person&#39;s ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
+  # @option opts [String] :id_number_secondary The person&#39;s secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
+  # @option opts [String] :last_name The person&#39;s last name.
+  # @option opts [String] :last_name_kana The Kana variation of the person&#39;s last name (Japan only).
+  # @option opts [String] :last_name_kanji The Kanji variation of the person&#39;s last name (Japan only).
+  # @option opts [String] :maiden_name The person&#39;s maiden name.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :nationality The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\&quot;XX\\\&quot; if unavailable.
+  # @option opts [String] :person_token A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
+  # @option opts [String] :phone The person&#39;s phone number.
+  # @option opts [String] :political_exposure Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
+  # @option opts [AddressSpecs2] :registered_address
+  # @option opts [RelationshipSpecs] :relationship
+  # @option opts [String] :ssn_last_4 The last four digits of the person&#39;s Social Security number (U.S. only).
+  # @option opts [PersonVerificationSpecs1] :verification
+  # @return [Person]
+  describe "post_account_people_person test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_account_persons
+  # &lt;p&gt;Creates a new person.&lt;/p&gt;
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account
+  # @option opts [AddressSpecs1] :address
+  # @option opts [JapanAddressKanaSpecs1] :address_kana
+  # @option opts [JapanAddressKanjiSpecs1] :address_kanji
+  # @option opts [PostAccountPeopleRequestDob] :dob
+  # @option opts [PersonDocumentsSpecs] :documents
+  # @option opts [String] :email The person&#39;s email address.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :first_name The person&#39;s first name.
+  # @option opts [String] :first_name_kana The Kana variation of the person&#39;s first name (Japan only).
+  # @option opts [String] :first_name_kanji The Kanji variation of the person&#39;s first name (Japan only).
+  # @option opts [PostAccountPeopleRequestFullNameAliases] :full_name_aliases
+  # @option opts [String] :gender The person&#39;s gender (International regulations require either \\\&quot;male\\\&quot; or \\\&quot;female\\\&quot;).
+  # @option opts [String] :id_number The person&#39;s ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
+  # @option opts [String] :id_number_secondary The person&#39;s secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
+  # @option opts [String] :last_name The person&#39;s last name.
+  # @option opts [String] :last_name_kana The Kana variation of the person&#39;s last name (Japan only).
+  # @option opts [String] :last_name_kanji The Kanji variation of the person&#39;s last name (Japan only).
+  # @option opts [String] :maiden_name The person&#39;s maiden name.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :nationality The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\&quot;XX\\\&quot; if unavailable.
+  # @option opts [String] :person_token A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
+  # @option opts [String] :phone The person&#39;s phone number.
+  # @option opts [String] :political_exposure Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
+  # @option opts [AddressSpecs2] :registered_address
+  # @option opts [RelationshipSpecs] :relationship
+  # @option opts [String] :ssn_last_4 The last four digits of the person&#39;s Social Security number (U.S. only).
+  # @option opts [PersonVerificationSpecs1] :verification
+  # @return [Person]
+  describe "post_account_persons test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_account_persons_person
+  # &lt;p&gt;Updates an existing person.&lt;/p&gt;
+  # @param person
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account
+  # @option opts [AddressSpecs1] :address
+  # @option opts [JapanAddressKanaSpecs1] :address_kana
+  # @option opts [JapanAddressKanjiSpecs1] :address_kanji
+  # @option opts [PostAccountPeopleRequestDob] :dob
+  # @option opts [PersonDocumentsSpecs] :documents
+  # @option opts [String] :email The person&#39;s email address.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :first_name The person&#39;s first name.
+  # @option opts [String] :first_name_kana The Kana variation of the person&#39;s first name (Japan only).
+  # @option opts [String] :first_name_kanji The Kanji variation of the person&#39;s first name (Japan only).
+  # @option opts [PostAccountPeopleRequestFullNameAliases] :full_name_aliases
+  # @option opts [String] :gender The person&#39;s gender (International regulations require either \\\&quot;male\\\&quot; or \\\&quot;female\\\&quot;).
+  # @option opts [String] :id_number The person&#39;s ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
+  # @option opts [String] :id_number_secondary The person&#39;s secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
+  # @option opts [String] :last_name The person&#39;s last name.
+  # @option opts [String] :last_name_kana The Kana variation of the person&#39;s last name (Japan only).
+  # @option opts [String] :last_name_kanji The Kanji variation of the person&#39;s last name (Japan only).
+  # @option opts [String] :maiden_name The person&#39;s maiden name.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :nationality The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\&quot;XX\\\&quot; if unavailable.
+  # @option opts [String] :person_token A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
+  # @option opts [String] :phone The person&#39;s phone number.
+  # @option opts [String] :political_exposure Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
+  # @option opts [AddressSpecs2] :registered_address
+  # @option opts [RelationshipSpecs] :relationship
+  # @option opts [String] :ssn_last_4 The last four digits of the person&#39;s Social Security number (U.S. only).
+  # @option opts [PersonVerificationSpecs1] :verification
+  # @return [Person]
+  describe "post_account_persons_person test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   # unit tests for post_accounts
   # &lt;p&gt;With &lt;a href&#x3D;\&quot;/docs/connect\&quot;&gt;Connect&lt;/a&gt;, you can create Stripe accounts for your users. To do this, you’ll first need to &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/applications/settings\&quot;&gt;register your platform&lt;/a&gt;.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
   # @option opts [String] :account_token An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
+  # @option opts [PostAccountRequestBankAccount] :bank_account
   # @option opts [BusinessProfileSpecs] :business_profile
   # @option opts [String] :business_type The business type.
   # @option opts [CapabilitiesParam] :capabilities
@@ -3249,10 +4098,10 @@ describe "DefaultApi" do
   # @option opts [String] :default_currency Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account&#39;s country](https://stripe.com/docs/payouts).
   # @option opts [DocumentsSpecs] :documents
   # @option opts [String] :email The email address of the account holder. This is only to make the account easier to identify to you. Stripe only emails Custom accounts with your consent.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :external_account A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary, as documented in the &#x60;external_account&#x60; parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
   # @option opts [IndividualSpecs] :individual
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [SettingsSpecs] :settings
   # @option opts [TosAcceptanceSpecs] :tos_acceptance
   # @option opts [String] :_type The type of Stripe account to create. May be one of &#x60;custom&#x60;, &#x60;express&#x60; or &#x60;standard&#x60;.
@@ -3268,6 +4117,7 @@ describe "DefaultApi" do
   # @param account
   # @param [Hash] opts the optional parameters
   # @option opts [String] :account_token An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
+  # @option opts [PostAccountRequestBankAccount] :bank_account
   # @option opts [BusinessProfileSpecs] :business_profile
   # @option opts [String] :business_type The business type.
   # @option opts [CapabilitiesParam] :capabilities
@@ -3275,14 +4125,56 @@ describe "DefaultApi" do
   # @option opts [String] :default_currency Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account&#39;s country](https://stripe.com/docs/payouts).
   # @option opts [DocumentsSpecs] :documents
   # @option opts [String] :email The email address of the account holder. This is only to make the account easier to identify to you. Stripe only emails Custom accounts with your consent.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :external_account A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary, as documented in the &#x60;external_account&#x60; parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
   # @option opts [IndividualSpecs] :individual
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [SettingsSpecsUpdate] :settings
   # @option opts [TosAcceptanceSpecs] :tos_acceptance
   # @return [Account]
   describe "post_accounts_account test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_accounts_account_bank_accounts
+  # &lt;p&gt;Create an external account for a given account.&lt;/p&gt;
+  # @param account
+  # @param [Hash] opts the optional parameters
+  # @option opts [PostAccountRequestBankAccount] :bank_account
+  # @option opts [Bool] :default_for_currency When set to true, or if this is the first external account added in this currency, this account becomes the default external account for its currency.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :external_account Please refer to full [documentation](https://stripe.com/docs/api) instead.
+  # @return [ExternalAccount]
+  describe "post_accounts_account_bank_accounts test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_accounts_account_bank_accounts_id
+  # &lt;p&gt;Updates the metadata, account holder name, account holder type of a bank account belonging to a &lt;a href&#x3D;\&quot;/docs/connect/custom-accounts\&quot;&gt;Custom account&lt;/a&gt;, and optionally sets it as the default for its currency. Other bank account details are not editable by design.&lt;/p&gt;  &lt;p&gt;You can re-enable a disabled bank account by performing an update call without providing any arguments or changes.&lt;/p&gt;
+  # @param account
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account_holder_name The name of the person or business that owns the bank account.
+  # @option opts [String] :account_holder_type The type of entity that holds the account. This can be either &#x60;individual&#x60; or &#x60;company&#x60;.
+  # @option opts [String] :account_type The bank account type. This can only be &#x60;checking&#x60; or &#x60;savings&#x60; in most countries. In Japan, this can only be &#x60;futsu&#x60; or &#x60;toza&#x60;.
+  # @option opts [String] :address_city City/District/Suburb/Town/Village.
+  # @option opts [String] :address_country Billing address country, if provided when creating card.
+  # @option opts [String] :address_line1 Address line 1 (Street address/PO Box/Company name).
+  # @option opts [String] :address_line2 Address line 2 (Apartment/Suite/Unit/Building).
+  # @option opts [String] :address_state State/County/Province/Region.
+  # @option opts [String] :address_zip ZIP or postal code.
+  # @option opts [Bool] :default_for_currency When set to true, this becomes the default external account for its currency.
+  # @option opts [String] :exp_month Two digit number representing the card’s expiration month.
+  # @option opts [String] :exp_year Four digit number representing the card’s expiration year.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :name Cardholder name.
+  # @return [ExternalAccount]
+  describe "post_accounts_account_bank_accounts_id test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -3293,7 +4185,7 @@ describe "DefaultApi" do
   # @param account
   # @param capability
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Bool] :requested Passing true requests the capability for the account, if it is not already requested. A requested capability may not immediately become active. Any requirements to activate the capability are returned in the &#x60;requirements&#x60; arrays.
   # @return [Capability]
   describe "post_accounts_account_capabilities_capability test" do
@@ -3305,10 +4197,11 @@ describe "DefaultApi" do
   # unit tests for post_accounts_account_external_accounts
   # &lt;p&gt;Create an external account for a given account.&lt;/p&gt;
   # @param account
-  # @param external_account Please refer to full [documentation](https://stripe.com/docs/api) instead.
   # @param [Hash] opts the optional parameters
+  # @option opts [PostAccountRequestBankAccount] :bank_account
   # @option opts [Bool] :default_for_currency When set to true, or if this is the first external account added in this currency, this account becomes the default external account for its currency.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :external_account Please refer to full [documentation](https://stripe.com/docs/api) instead.
   # @return [ExternalAccount]
   describe "post_accounts_account_external_accounts test" do
     it "should work" do
@@ -3333,8 +4226,8 @@ describe "DefaultApi" do
   # @option opts [Bool] :default_for_currency When set to true, this becomes the default external account for its currency.
   # @option opts [String] :exp_month Two digit number representing the card’s expiration month.
   # @option opts [String] :exp_year Four digit number representing the card’s expiration year.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :name Cardholder name.
   # @return [ExternalAccount]
   describe "post_accounts_account_external_accounts_id test" do
@@ -3347,10 +4240,87 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates a single-use login link for an Express account to access their Stripe dashboard.&lt;/p&gt;  &lt;p&gt;&lt;strong&gt;You may only create login links for &lt;a href&#x3D;\&quot;/docs/connect/express-accounts\&quot;&gt;Express accounts&lt;/a&gt; connected to your platform&lt;/strong&gt;.&lt;/p&gt;
   # @param account
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :redirect_url Where to redirect the user after they log out of their dashboard.
   # @return [LoginLink]
   describe "post_accounts_account_login_links test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_accounts_account_people
+  # &lt;p&gt;Creates a new person.&lt;/p&gt;
+  # @param account
+  # @param [Hash] opts the optional parameters
+  # @option opts [AddressSpecs1] :address
+  # @option opts [JapanAddressKanaSpecs1] :address_kana
+  # @option opts [JapanAddressKanjiSpecs1] :address_kanji
+  # @option opts [PostAccountPeopleRequestDob] :dob
+  # @option opts [PersonDocumentsSpecs] :documents
+  # @option opts [String] :email The person&#39;s email address.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :first_name The person&#39;s first name.
+  # @option opts [String] :first_name_kana The Kana variation of the person&#39;s first name (Japan only).
+  # @option opts [String] :first_name_kanji The Kanji variation of the person&#39;s first name (Japan only).
+  # @option opts [PostAccountPeopleRequestFullNameAliases] :full_name_aliases
+  # @option opts [String] :gender The person&#39;s gender (International regulations require either \\\&quot;male\\\&quot; or \\\&quot;female\\\&quot;).
+  # @option opts [String] :id_number The person&#39;s ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
+  # @option opts [String] :id_number_secondary The person&#39;s secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
+  # @option opts [String] :last_name The person&#39;s last name.
+  # @option opts [String] :last_name_kana The Kana variation of the person&#39;s last name (Japan only).
+  # @option opts [String] :last_name_kanji The Kanji variation of the person&#39;s last name (Japan only).
+  # @option opts [String] :maiden_name The person&#39;s maiden name.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :nationality The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\&quot;XX\\\&quot; if unavailable.
+  # @option opts [String] :person_token A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
+  # @option opts [String] :phone The person&#39;s phone number.
+  # @option opts [String] :political_exposure Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
+  # @option opts [AddressSpecs2] :registered_address
+  # @option opts [RelationshipSpecs] :relationship
+  # @option opts [String] :ssn_last_4 The last four digits of the person&#39;s Social Security number (U.S. only).
+  # @option opts [PersonVerificationSpecs1] :verification
+  # @return [Person]
+  describe "post_accounts_account_people test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_accounts_account_people_person
+  # &lt;p&gt;Updates an existing person.&lt;/p&gt;
+  # @param account
+  # @param person
+  # @param [Hash] opts the optional parameters
+  # @option opts [AddressSpecs1] :address
+  # @option opts [JapanAddressKanaSpecs1] :address_kana
+  # @option opts [JapanAddressKanjiSpecs1] :address_kanji
+  # @option opts [PostAccountPeopleRequestDob] :dob
+  # @option opts [PersonDocumentsSpecs] :documents
+  # @option opts [String] :email The person&#39;s email address.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :first_name The person&#39;s first name.
+  # @option opts [String] :first_name_kana The Kana variation of the person&#39;s first name (Japan only).
+  # @option opts [String] :first_name_kanji The Kanji variation of the person&#39;s first name (Japan only).
+  # @option opts [PostAccountPeopleRequestFullNameAliases] :full_name_aliases
+  # @option opts [String] :gender The person&#39;s gender (International regulations require either \\\&quot;male\\\&quot; or \\\&quot;female\\\&quot;).
+  # @option opts [String] :id_number The person&#39;s ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
+  # @option opts [String] :id_number_secondary The person&#39;s secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
+  # @option opts [String] :last_name The person&#39;s last name.
+  # @option opts [String] :last_name_kana The Kana variation of the person&#39;s last name (Japan only).
+  # @option opts [String] :last_name_kanji The Kanji variation of the person&#39;s last name (Japan only).
+  # @option opts [String] :maiden_name The person&#39;s maiden name.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :nationality The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\&quot;XX\\\&quot; if unavailable.
+  # @option opts [String] :person_token A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
+  # @option opts [String] :phone The person&#39;s phone number.
+  # @option opts [String] :political_exposure Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
+  # @option opts [AddressSpecs2] :registered_address
+  # @option opts [RelationshipSpecs] :relationship
+  # @option opts [String] :ssn_last_4 The last four digits of the person&#39;s Social Security number (U.S. only).
+  # @option opts [PersonVerificationSpecs1] :verification
+  # @return [Person]
+  describe "post_accounts_account_people_person test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -3360,17 +4330,17 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates a new person.&lt;/p&gt;
   # @param account
   # @param [Hash] opts the optional parameters
-  # @option opts [AddressSpecs4] :address
-  # @option opts [JapanAddressKanaSpecs2] :address_kana
-  # @option opts [JapanAddressKanjiSpecs2] :address_kanji
-  # @option opts [PostAccountsAccountPersonsRequestDob] :dob
+  # @option opts [AddressSpecs1] :address
+  # @option opts [JapanAddressKanaSpecs1] :address_kana
+  # @option opts [JapanAddressKanjiSpecs1] :address_kanji
+  # @option opts [PostAccountPeopleRequestDob] :dob
   # @option opts [PersonDocumentsSpecs] :documents
   # @option opts [String] :email The person&#39;s email address.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :first_name The person&#39;s first name.
   # @option opts [String] :first_name_kana The Kana variation of the person&#39;s first name (Japan only).
   # @option opts [String] :first_name_kanji The Kanji variation of the person&#39;s first name (Japan only).
-  # @option opts [PostAccountsAccountPersonsRequestFullNameAliases] :full_name_aliases
+  # @option opts [PostAccountPeopleRequestFullNameAliases] :full_name_aliases
   # @option opts [String] :gender The person&#39;s gender (International regulations require either \\\&quot;male\\\&quot; or \\\&quot;female\\\&quot;).
   # @option opts [String] :id_number The person&#39;s ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
   # @option opts [String] :id_number_secondary The person&#39;s secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
@@ -3378,12 +4348,12 @@ describe "DefaultApi" do
   # @option opts [String] :last_name_kana The Kana variation of the person&#39;s last name (Japan only).
   # @option opts [String] :last_name_kanji The Kanji variation of the person&#39;s last name (Japan only).
   # @option opts [String] :maiden_name The person&#39;s maiden name.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :nationality The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\&quot;XX\\\&quot; if unavailable.
   # @option opts [String] :person_token A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
   # @option opts [String] :phone The person&#39;s phone number.
   # @option opts [String] :political_exposure Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
-  # @option opts [AddressSpecs5] :registered_address
+  # @option opts [AddressSpecs2] :registered_address
   # @option opts [RelationshipSpecs] :relationship
   # @option opts [String] :ssn_last_4 The last four digits of the person&#39;s Social Security number (U.S. only).
   # @option opts [PersonVerificationSpecs1] :verification
@@ -3399,17 +4369,17 @@ describe "DefaultApi" do
   # @param account
   # @param person
   # @param [Hash] opts the optional parameters
-  # @option opts [AddressSpecs4] :address
-  # @option opts [JapanAddressKanaSpecs2] :address_kana
-  # @option opts [JapanAddressKanjiSpecs2] :address_kanji
-  # @option opts [PostAccountsAccountPersonsRequestDob] :dob
+  # @option opts [AddressSpecs1] :address
+  # @option opts [JapanAddressKanaSpecs1] :address_kana
+  # @option opts [JapanAddressKanjiSpecs1] :address_kanji
+  # @option opts [PostAccountPeopleRequestDob] :dob
   # @option opts [PersonDocumentsSpecs] :documents
   # @option opts [String] :email The person&#39;s email address.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :first_name The person&#39;s first name.
   # @option opts [String] :first_name_kana The Kana variation of the person&#39;s first name (Japan only).
   # @option opts [String] :first_name_kanji The Kanji variation of the person&#39;s first name (Japan only).
-  # @option opts [PostAccountsAccountPersonsRequestFullNameAliases] :full_name_aliases
+  # @option opts [PostAccountPeopleRequestFullNameAliases] :full_name_aliases
   # @option opts [String] :gender The person&#39;s gender (International regulations require either \\\&quot;male\\\&quot; or \\\&quot;female\\\&quot;).
   # @option opts [String] :id_number The person&#39;s ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
   # @option opts [String] :id_number_secondary The person&#39;s secondary ID number, as appropriate for their country, will be used for enhanced verification checks. In Thailand, this would be the laser code found on the back of an ID card. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type&#x3D;pii).
@@ -3417,12 +4387,12 @@ describe "DefaultApi" do
   # @option opts [String] :last_name_kana The Kana variation of the person&#39;s last name (Japan only).
   # @option opts [String] :last_name_kanji The Kanji variation of the person&#39;s last name (Japan only).
   # @option opts [String] :maiden_name The person&#39;s maiden name.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :nationality The country where the person is a national. Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), or \\\&quot;XX\\\&quot; if unavailable.
   # @option opts [String] :person_token A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide details to the person.
   # @option opts [String] :phone The person&#39;s phone number.
   # @option opts [String] :political_exposure Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
-  # @option opts [AddressSpecs5] :registered_address
+  # @option opts [AddressSpecs2] :registered_address
   # @option opts [RelationshipSpecs] :relationship
   # @option opts [String] :ssn_last_4 The last four digits of the person&#39;s Social Security number (U.S. only).
   # @option opts [PersonVerificationSpecs1] :verification
@@ -3438,7 +4408,7 @@ describe "DefaultApi" do
   # @param account
   # @param reason The reason for rejecting the account. Can be &#x60;fraud&#x60;, &#x60;terms_of_service&#x60;, or &#x60;other&#x60;.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Account]
   describe "post_accounts_account_reject test" do
     it "should work" do
@@ -3450,7 +4420,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Create an apple pay domain.&lt;/p&gt;
   # @param domain_name
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [ApplePayDomain]
   describe "post_apple_pay_domains test" do
     it "should work" do
@@ -3463,10 +4433,24 @@ describe "DefaultApi" do
   # @param fee
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [FeeRefund]
   describe "post_application_fees_fee_refunds_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_application_fees_id_refund
+  #
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Int32] :amount
+  # @option opts [String] :directive
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [ApplicationFee]
+  describe "post_application_fees_id_refund test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -3476,8 +4460,8 @@ describe "DefaultApi" do
   # &lt;p&gt;Refunds an application fee that has previously been collected but not yet refunded. Funds will be refunded to the Stripe account from which the fee was originally collected.&lt;/p&gt;  &lt;p&gt;You can optionally refund only part of an application fee. You can do so multiple times, until the entire fee has been refunded.&lt;/p&gt;  &lt;p&gt;Once entirely refunded, an application fee can’t be refunded again. This method will raise an error when called on an already-refunded application fee, or when trying to refund more money than is left on an application fee.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount A positive integer, in _cents (or local equivalent)_, representing how much of this fee to refund. Can refund only up to the remaining unrefunded amount of the fee.
-  # @option opts [Array(String)] :expand
+  # @option opts [Int32] :amount A positive integer, in _cents (or local equivalent)_, representing how much of this fee to refund. Can refund only up to the remaining unrefunded amount of the fee.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [FeeRefund]
   describe "post_application_fees_id_refunds test" do
     it "should work" do
@@ -3491,7 +4475,7 @@ describe "DefaultApi" do
   # @param payload The plaintext secret value to be stored.
   # @param scope
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [AppsSecret]
   describe "post_apps_secrets test" do
     it "should work" do
@@ -3504,7 +4488,7 @@ describe "DefaultApi" do
   # @param name A name for the secret that&#39;s unique within the scope.
   # @param scope
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [AppsSecret]
   describe "post_apps_secrets_delete test" do
     it "should work" do
@@ -3518,7 +4502,7 @@ describe "DefaultApi" do
   # @param features
   # @param [Hash] opts the optional parameters
   # @option opts [PostBillingPortalConfigurationsRequestDefaultReturnUrl] :default_return_url
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [BillingPortalConfiguration]
   describe "post_billing_portal_configurations test" do
     it "should work" do
@@ -3533,9 +4517,9 @@ describe "DefaultApi" do
   # @option opts [Bool] :active Whether the configuration is active and can be used to create portal sessions.
   # @option opts [BusinessProfileUpdateParam] :business_profile
   # @option opts [PostBillingPortalConfigurationsRequestDefaultReturnUrl] :default_return_url
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [FeaturesUpdatingParam] :features
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [BillingPortalConfiguration]
   describe "post_billing_portal_configurations_configuration test" do
     it "should work" do
@@ -3548,7 +4532,7 @@ describe "DefaultApi" do
   # @param customer The ID of an existing customer.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :configuration The ID of an existing [configuration](https://stripe.com/docs/api/customer_portal/configuration) to use for this session, describing its functionality and features. If not specified, the session uses the default configuration.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :locale The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the customer’s &#x60;preferred_locales&#x60; or browser’s locale is used.
   # @option opts [String] :on_behalf_of The &#x60;on_behalf_of&#x60; account to use for this session. When specified, only subscriptions and invoices with this &#x60;on_behalf_of&#x60; account appear in the portal. For more information, see the [docs](https://stripe.com/docs/connect/charges-transfers#on-behalf-of). Use the [Accounts API](https://stripe.com/docs/api/accounts/object#account_object-settings-branding) to modify the &#x60;on_behalf_of&#x60; account&#39;s branding settings, which the portal displays.
   # @option opts [String] :return_url The default URL to redirect customers to when they click on the portal&#39;s link to return to your website.
@@ -3562,16 +4546,17 @@ describe "DefaultApi" do
   # unit tests for post_charges
   # &lt;p&gt;To charge a credit card or other payment source, you create a &lt;code&gt;Charge&lt;/code&gt; object. If your API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged, although everything else will occur as if in live mode. (Stripe assumes that the charge would have completed successfully).&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
-  # @option opts [Int64] :application_fee
-  # @option opts [Int64] :application_fee_amount A fee in cents (or local equivalent) that will be applied to the charge and transferred to the application owner&#39;s Stripe account. The request must be made with an OAuth key or the &#x60;Stripe-Account&#x60; header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
+  # @option opts [Int32] :amount Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
+  # @option opts [Int32] :application_fee
+  # @option opts [Int32] :application_fee_amount A fee in cents (or local equivalent) that will be applied to the charge and transferred to the application owner&#39;s Stripe account. The request must be made with an OAuth key or the &#x60;Stripe-Account&#x60; header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
   # @option opts [Bool] :capture Whether to immediately capture the charge. Defaults to &#x60;true&#x60;. When &#x60;false&#x60;, the charge issues an authorization (or pre-authorization), and will need to be [captured](https://stripe.com/docs/api#capture_charge) later. Uncaptured charges expire after a set number of days (7 by default). For more information, see the [authorizing charges and settling later](https://stripe.com/docs/charges/placing-a-hold) documentation.
+  # @option opts [PostChargesRequestCard] :card
   # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   # @option opts [String] :customer The ID of an existing customer that will be charged in this request.
   # @option opts [String] :description An arbitrary string which you can attach to a &#x60;Charge&#x60; object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the &#x60;description&#x60; of the charge(s) that they are describing.
-  # @option opts [DestinationSpecs] :destination
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostChargesRequestDestination] :destination
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :on_behalf_of The Stripe account ID for which these funds are intended. Automatically set if you use the &#x60;destination&#x60; parameter. For details, see [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers#on-behalf-of).
   # @option opts [RadarOptions] :radar_options
   # @option opts [String] :receipt_email The email address to which this charge&#39;s [receipt](https://stripe.com/docs/dashboard/receipts) will be sent. The receipt will not be sent until the charge is paid, and no receipts will be sent for test mode charges. If this charge is for a [Customer](https://stripe.com/docs/api/customers/object), the email address specified here will override the customer&#39;s email address. If &#x60;receipt_email&#x60; is specified for a charge in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
@@ -3594,9 +4579,9 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :customer The ID of an existing customer that will be associated with this request. This field may only be updated if there is no existing associated customer with this charge.
   # @option opts [String] :description An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the &#x60;description&#x60; of the charge(s) that they are describing.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [FraudDetails] :fraud_details
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :receipt_email This is the email address that the receipt for this charge will be sent to. If this field is updated, then a new email receipt will be sent to the updated address.
   # @option opts [OptionalFieldsShipping] :shipping
   # @option opts [String] :transfer_group A string that identifies this transaction as part of a group. &#x60;transfer_group&#x60; may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
@@ -3611,10 +4596,10 @@ describe "DefaultApi" do
   # &lt;p&gt;Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step payment flow, where first you &lt;a href&#x3D;\&quot;#create_charge\&quot;&gt;created a charge&lt;/a&gt; with the capture option set to false.&lt;/p&gt;  &lt;p&gt;Uncaptured payments expire a set number of days after they are created (&lt;a href&#x3D;\&quot;/docs/charges/placing-a-hold\&quot;&gt;7 by default&lt;/a&gt;). If they are not captured by that point in time, they will be marked as refunded and will no longer be capturable.&lt;/p&gt;
   # @param charge
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount The amount to capture, which must be less than or equal to the original amount. Any additional amount will be automatically refunded.
-  # @option opts [Int64] :application_fee An application fee to add on to this charge.
-  # @option opts [Int64] :application_fee_amount An application fee amount to add on to this charge, which must be less than or equal to the original amount.
-  # @option opts [Array(String)] :expand
+  # @option opts [Int32] :amount The amount to capture, which must be less than or equal to the original amount. Any additional amount will be automatically refunded.
+  # @option opts [Int32] :application_fee An application fee to add on to this charge.
+  # @option opts [Int32] :application_fee_amount An application fee amount to add on to this charge, which must be less than or equal to the original amount.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :receipt_email The email address to send this charge&#39;s receipt to. This will override the previously-specified email address for this charge, if one was set. Receipts will not be sent in test mode.
   # @option opts [String] :statement_descriptor For card charges, use &#x60;statement_descriptor_suffix&#x60; instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.
   # @option opts [String] :statement_descriptor_suffix Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
@@ -3622,6 +4607,85 @@ describe "DefaultApi" do
   # @option opts [String] :transfer_group A string that identifies this transaction as part of a group. &#x60;transfer_group&#x60; may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
   # @return [Charge]
   describe "post_charges_charge_capture test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_charges_charge_dispute
+  #
+  # @param charge
+  # @param [Hash] opts the optional parameters
+  # @option opts [DisputeEvidenceParams] :evidence
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [Bool] :submit Whether to immediately submit evidence to the bank. If &#x60;false&#x60;, evidence is staged on the dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank by making another request with this attribute set to &#x60;true&#x60; (the default).
+  # @return [Dispute]
+  describe "post_charges_charge_dispute test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_charges_charge_dispute_close
+  #
+  # @param charge
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [Dispute]
+  describe "post_charges_charge_dispute_close test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_charges_charge_refund
+  # &lt;p&gt;When you create a new refund, you must specify a Charge or a PaymentIntent object on which to create it.&lt;/p&gt;  &lt;p&gt;Creating a new refund will refund a charge that has previously been created but not yet refunded. Funds will be refunded to the credit or debit card that was originally charged.&lt;/p&gt;  &lt;p&gt;You can optionally refund only part of a charge. You can do so multiple times, until the entire charge has been refunded.&lt;/p&gt;  &lt;p&gt;Once entirely refunded, a charge can’t be refunded again. This method will raise an error when called on an already-refunded charge, or when trying to refund more money than is left on a charge.&lt;/p&gt;
+  # @param charge
+  # @param [Hash] opts the optional parameters
+  # @option opts [Int32] :amount
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :instructions_email
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :payment_intent
+  # @option opts [String] :reason
+  # @option opts [Bool] :refund_application_fee
+  # @option opts [Bool] :reverse_transfer
+  # @return [Charge]
+  describe "post_charges_charge_refund test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_charges_charge_refunds
+  # &lt;p&gt;Create a refund.&lt;/p&gt;
+  # @param charge
+  # @param [Hash] opts the optional parameters
+  # @option opts [Int32] :amount
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :instructions_email
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :payment_intent
+  # @option opts [String] :reason
+  # @option opts [Bool] :refund_application_fee
+  # @option opts [Bool] :reverse_transfer
+  # @return [Refund]
+  describe "post_charges_charge_refunds test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_charges_charge_refunds_refund
+  # &lt;p&gt;Update a specified refund.&lt;/p&gt;
+  # @param charge
+  # @param refund
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [IndividualSpecsMetadata] :metadata
+  # @return [Refund]
+  describe "post_charges_charge_refunds_refund test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -3643,8 +4707,8 @@ describe "DefaultApi" do
   # @option opts [String] :customer_email If provided, this value will be used when the Customer object is created. If not provided, customers will be asked to enter their email address. Use this parameter to prefill customer data if you already have an email on file. To access information about the customer once a session is complete, use the &#x60;customer&#x60; field.
   # @option opts [CustomerUpdateParams] :customer_update
   # @option opts [Array(DiscountParams)] :discounts The coupon or promotion code to apply to this Session. Currently, only up to one may be specified.
-  # @option opts [Array(String)] :expand
-  # @option opts [Int64] :expires_at The Epoch time in seconds at which the Checkout Session will expire. It can be anywhere from 1 to 24 hours after Checkout Session creation. By default, this value is 24 hours from creation.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :expires_at The Epoch time in seconds at which the Checkout Session will expire. It can be anywhere from 1 to 24 hours after Checkout Session creation. By default, this value is 24 hours from creation.
   # @option opts [Array(LineItemParams)] :line_items A list of items the customer is purchasing. Use this parameter to pass one-time or recurring [Prices](https://stripe.com/docs/api/prices).  For &#x60;payment&#x60; mode, there is a maximum of 100 line items, however it is recommended to consolidate line items if there are more than a few dozen.  For &#x60;subscription&#x60; mode, there is a maximum of 20 line items with recurring Prices and 20 line items with one-time Prices. Line items with one-time Prices in will be on the initial invoice only.
   # @option opts [String] :locale The IETF language tag of the locale Checkout is displayed in. If blank or &#x60;auto&#x60;, the browser&#39;s locale is used.
   # @option opts [String] :mode The mode of the Checkout Session. Required when using prices or &#x60;setup&#x60; mode. Pass &#x60;subscription&#x60; if the Checkout Session includes at least one recurring item.
@@ -3655,7 +4719,6 @@ describe "DefaultApi" do
   # @option opts [SetupIntentDataParam] :setup_intent_data
   # @option opts [ShippingAddressCollectionParams] :shipping_address_collection
   # @option opts [Array(ShippingOptionParams)] :shipping_options The shipping rate options to apply to this Session.
-  # @option opts [Array(String)] :shipping_rates [Deprecated] The shipping rate to apply to this Session. Only up to one may be specified.
   # @option opts [String] :submit_type Describes the type of transaction being performed by Checkout in order to customize relevant text on the page, such as the submit button. &#x60;submit_type&#x60; can only be specified on Checkout Sessions in &#x60;payment&#x60; mode, but not Checkout Sessions in &#x60;subscription&#x60; or &#x60;setup&#x60; mode.
   # @option opts [SubscriptionDataParams] :subscription_data
   # @option opts [TaxIdCollectionParams] :tax_id_collection
@@ -3670,7 +4733,7 @@ describe "DefaultApi" do
   # &lt;p&gt;A Session can be expired when it is in one of these statuses: &lt;code&gt;open&lt;/code&gt; &lt;/p&gt;  &lt;p&gt;After it expires, a customer can’t complete a Session and customers loading the Session see a message saying the Session is expired.&lt;/p&gt;
   # @param session
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [CheckoutSession]
   describe "post_checkout_sessions_session_expire test" do
     it "should work" do
@@ -3681,18 +4744,18 @@ describe "DefaultApi" do
   # unit tests for post_coupons
   # &lt;p&gt;You can create coupons easily via the &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/coupons\&quot;&gt;coupon management&lt;/a&gt; page of the Stripe dashboard. Coupon creation is also accessible via the API if you need to create coupons on the fly.&lt;/p&gt;  &lt;p&gt;A coupon has either a &lt;code&gt;percent_off&lt;/code&gt; or an &lt;code&gt;amount_off&lt;/code&gt; and &lt;code&gt;currency&lt;/code&gt;. If you set an &lt;code&gt;amount_off&lt;/code&gt;, that amount will be subtracted from any invoice’s subtotal. For example, an invoice with a subtotal of &lt;currency&gt;100&lt;/currency&gt; will have a final total of &lt;currency&gt;0&lt;/currency&gt; if a coupon with an &lt;code&gt;amount_off&lt;/code&gt; of &lt;amount&gt;200&lt;/amount&gt; is applied to it and an invoice with a subtotal of &lt;currency&gt;300&lt;/currency&gt; will have a final total of &lt;currency&gt;100&lt;/currency&gt; if a coupon with an &lt;code&gt;amount_off&lt;/code&gt; of &lt;amount&gt;200&lt;/amount&gt; is applied to it.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount_off A positive integer representing the amount to subtract from an invoice total (required if &#x60;percent_off&#x60; is not passed).
+  # @option opts [Int32] :amount_off A positive integer representing the amount to subtract from an invoice total (required if &#x60;percent_off&#x60; is not passed).
   # @option opts [AppliesToParams] :applies_to
   # @option opts [String] :currency Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the &#x60;amount_off&#x60; parameter (required if &#x60;amount_off&#x60; is passed).
   # @option opts [String] :duration Specifies how long the discount will be in effect if used on a subscription. Can be &#x60;forever&#x60;, &#x60;once&#x60;, or &#x60;repeating&#x60;. Defaults to &#x60;once&#x60;.
-  # @option opts [Int64] :duration_in_months Required only if &#x60;duration&#x60; is &#x60;repeating&#x60;, in which case it must be a positive integer that specifies the number of months the discount will be in effect.
-  # @option opts [Array(String)] :expand
+  # @option opts [Int32] :duration_in_months Required only if &#x60;duration&#x60; is &#x60;repeating&#x60;, in which case it must be a positive integer that specifies the number of months the discount will be in effect.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :id Unique string of your choice that will be used to identify this coupon when applying it to a customer. If you don&#39;t want to specify a particular code, you can leave the ID blank and we&#39;ll generate a random code for you.
-  # @option opts [Int64] :max_redemptions A positive integer specifying the number of times the coupon can be redeemed before it&#39;s no longer valid. For example, you might have a 50% off coupon that the first 20 readers of your blog can use.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Int32] :max_redemptions A positive integer specifying the number of times the coupon can be redeemed before it&#39;s no longer valid. For example, you might have a 50% off coupon that the first 20 readers of your blog can use.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :name Name of the coupon displayed to customers on, for instance invoices, or receipts. By default the &#x60;id&#x60; is shown if &#x60;name&#x60; is not set.
   # @option opts [Float64] :percent_off A positive float larger than 0, and smaller or equal to 100, that represents the discount the coupon will apply (required if &#x60;amount_off&#x60; is not passed).
-  # @option opts [Int64] :redeem_by Unix timestamp specifying the last time at which the coupon can be redeemed. After the redeem_by date, the coupon can no longer be applied to new customers.
+  # @option opts [Int32] :redeem_by Unix timestamp specifying the last time at which the coupon can be redeemed. After the redeem_by date, the coupon can no longer be applied to new customers.
   # @return [Coupon]
   describe "post_coupons test" do
     it "should work" do
@@ -3704,8 +4767,8 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by design, not editable.&lt;/p&gt;
   # @param coupon
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :name Name of the coupon displayed to customers on, for instance invoices, or receipts. By default the &#x60;id&#x60; is shown if &#x60;name&#x60; is not set.
   # @return [Coupon]
   describe "post_coupons_coupon test" do
@@ -3718,15 +4781,15 @@ describe "DefaultApi" do
   # &lt;p&gt;Issue a credit note to adjust the amount of a finalized invoice. For a &lt;code&gt;status&#x3D;open&lt;/code&gt; invoice, a credit note reduces its &lt;code&gt;amount_due&lt;/code&gt;. For a &lt;code&gt;status&#x3D;paid&lt;/code&gt; invoice, a credit note does not affect its &lt;code&gt;amount_due&lt;/code&gt;. Instead, it can result in any combination of the following:&lt;/p&gt;  &lt;ul&gt; &lt;li&gt;Refund: create a new refund (using &lt;code&gt;refund_amount&lt;/code&gt;) or link an existing refund (using &lt;code&gt;refund&lt;/code&gt;).&lt;/li&gt; &lt;li&gt;Customer balance credit: credit the customer’s balance (using &lt;code&gt;credit_amount&lt;/code&gt;) which will be automatically applied to their next invoice when it’s finalized.&lt;/li&gt; &lt;li&gt;Outside of Stripe credit: record the amount that is or will be credited outside of Stripe (using &lt;code&gt;out_of_band_amount&lt;/code&gt;).&lt;/li&gt; &lt;/ul&gt;  &lt;p&gt;For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts must equal the credit note total.&lt;/p&gt;  &lt;p&gt;You may issue multiple credit notes for an invoice. Each credit note will increment the invoice’s &lt;code&gt;pre_payment_credit_notes_amount&lt;/code&gt; or &lt;code&gt;post_payment_credit_notes_amount&lt;/code&gt; depending on its &lt;code&gt;status&lt;/code&gt; at the time of credit note creation.&lt;/p&gt;
   # @param invoice ID of the invoice.
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount The integer amount in cents (or local equivalent) representing the total amount of the credit note.
-  # @option opts [Int64] :credit_amount The integer amount in cents (or local equivalent) representing the amount to credit the customer&#39;s balance, which will be automatically applied to their next invoice.
-  # @option opts [Array(String)] :expand
+  # @option opts [Int32] :amount The integer amount in cents (or local equivalent) representing the total amount of the credit note.
+  # @option opts [Int32] :credit_amount The integer amount in cents (or local equivalent) representing the amount to credit the customer&#39;s balance, which will be automatically applied to their next invoice.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Array(CreditNoteLineItemParams)] :lines Line items that make up the credit note.
   # @option opts [String] :memo The credit note&#39;s memo appears on the credit note PDF.
-  # @option opts [Int64] :out_of_band_amount The integer amount in cents (or local equivalent) representing the amount that is credited outside of Stripe.
+  # @option opts [Int32] :out_of_band_amount The integer amount in cents (or local equivalent) representing the amount that is credited outside of Stripe.
   # @option opts [String] :reason Reason for issuing this credit note, one of &#x60;duplicate&#x60;, &#x60;fraudulent&#x60;, &#x60;order_change&#x60;, or &#x60;product_unsatisfactory&#x60;
   # @option opts [String] :refund ID of an existing refund to link this credit note to.
-  # @option opts [Int64] :refund_amount The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+  # @option opts [Int32] :refund_amount The integer amount in cents (or local equivalent) representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
   # @return [CreditNote]
   describe "post_credit_notes test" do
     it "should work" do
@@ -3738,7 +4801,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates an existing credit note.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :memo Credit note memo.
   # @return [CreditNote]
   describe "post_credit_notes_id test" do
@@ -3751,7 +4814,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Marks a credit note as void. Learn more about &lt;a href&#x3D;\&quot;/docs/billing/invoices/credit-notes#voiding\&quot;&gt;voiding credit notes&lt;/a&gt;.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [CreditNote]
   describe "post_credit_notes_id_void test" do
     it "should work" do
@@ -3763,20 +4826,20 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates a new customer object.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
   # @option opts [PostCustomersRequestAddress] :address
-  # @option opts [Int64] :balance An integer amount in cents (or local equivalent) that represents the customer&#39;s current balance, which affect the customer&#39;s future invoices. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice.
+  # @option opts [Int32] :balance An integer amount in cents (or local equivalent) that represents the customer&#39;s current balance, which affect the customer&#39;s future invoices. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice.
   # @option opts [CashBalanceParam] :cash_balance
   # @option opts [String] :coupon
   # @option opts [String] :description An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard.
   # @option opts [String] :email Customer&#39;s email address. It&#39;s displayed alongside the customer in your dashboard and can be useful for searching and tracking. This may be up to *512 characters*.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :invoice_prefix The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase letters or numbers.
   # @option opts [CustomerParam] :invoice_settings
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :name The customer&#39;s full name or business name.
-  # @option opts [Int64] :next_invoice_sequence The sequence to be used on the customer&#39;s next invoice. Defaults to 1.
+  # @option opts [Int32] :next_invoice_sequence The sequence to be used on the customer&#39;s next invoice. Defaults to 1.
   # @option opts [String] :payment_method
   # @option opts [String] :phone The customer&#39;s phone number.
-  # @option opts [Array(String)] :preferred_locales
+  # @option opts [Array(String)] :preferred_locales Customer&#39;s preferred languages, ordered by preference.
   # @option opts [String] :promotion_code The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
   # @option opts [PostCustomersRequestShipping] :shipping
   # @option opts [String] :source
@@ -3796,20 +4859,25 @@ describe "DefaultApi" do
   # @param customer
   # @param [Hash] opts the optional parameters
   # @option opts [PostCustomersRequestAddress] :address
-  # @option opts [Int64] :balance An integer amount in cents (or local equivalent) that represents the customer&#39;s current balance, which affect the customer&#39;s future invoices. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice.
+  # @option opts [Int32] :balance An integer amount in cents (or local equivalent) that represents the customer&#39;s current balance, which affect the customer&#39;s future invoices. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice.
+  # @option opts [PostCustomersCustomerRequestBankAccount] :bank_account
+  # @option opts [PostChargesRequestCard] :card
   # @option opts [CashBalanceParam] :cash_balance
   # @option opts [String] :coupon
+  # @option opts [String] :default_alipay_account ID of Alipay account to make the customer&#39;s new default for invoice payments.
+  # @option opts [String] :default_bank_account ID of bank account to make the customer&#39;s new default for invoice payments.
+  # @option opts [String] :default_card ID of card to make the customer&#39;s new default for invoice payments.
   # @option opts [String] :default_source If you are using payment methods created via the PaymentMethods API, see the [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method) parameter.  Provide the ID of a payment source already attached to this customer to make it this customer&#39;s default payment source.  If you want to add a new payment source and make it the default, see the [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
   # @option opts [String] :description An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard.
   # @option opts [String] :email Customer&#39;s email address. It&#39;s displayed alongside the customer in your dashboard and can be useful for searching and tracking. This may be up to *512 characters*.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :invoice_prefix The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase letters or numbers.
   # @option opts [CustomerParam] :invoice_settings
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :name The customer&#39;s full name or business name.
-  # @option opts [Int64] :next_invoice_sequence The sequence to be used on the customer&#39;s next invoice. Defaults to 1.
+  # @option opts [Int32] :next_invoice_sequence The sequence to be used on the customer&#39;s next invoice. Defaults to 1.
   # @option opts [String] :phone The customer&#39;s phone number.
-  # @option opts [Array(String)] :preferred_locales
+  # @option opts [Array(String)] :preferred_locales Customer&#39;s preferred languages, ordered by preference.
   # @option opts [String] :promotion_code The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
   # @option opts [PostCustomersRequestShipping] :shipping
   # @option opts [String] :source
@@ -3830,8 +4898,8 @@ describe "DefaultApi" do
   # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). If the customer&#39;s [&#x60;currency&#x60;](https://stripe.com/docs/api/customers/object#customer_object-currency) is set, this value must match it. If the customer&#39;s &#x60;currency&#x60; is not set, it will be updated to this value.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [CustomerBalanceTransaction]
   describe "post_customers_customer_balance_transactions test" do
     it "should work" do
@@ -3845,10 +4913,108 @@ describe "DefaultApi" do
   # @param transaction
   # @param [Hash] opts the optional parameters
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [CustomerBalanceTransaction]
   describe "post_customers_customer_balance_transactions_transaction test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_customers_customer_bank_accounts
+  # &lt;p&gt;When you create a new credit card, you must specify a customer or recipient on which to create it.&lt;/p&gt;  &lt;p&gt;If the card’s owner has no default card, then the new card will become the default. However, if the owner already has a default, then it will not change. To change the default, you should &lt;a href&#x3D;\&quot;/docs/api#update_customer\&quot;&gt;update the customer&lt;/a&gt; to have a new &lt;code&gt;default_source&lt;/code&gt;.&lt;/p&gt;
+  # @param customer
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :alipay_account A token returned by [Stripe.js](https://stripe.com/docs/js) representing the user’s Alipay account details.
+  # @option opts [PostCustomersCustomerRequestBankAccount] :bank_account
+  # @option opts [PostChargesRequestCard] :card
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :source Please refer to full [documentation](https://stripe.com/docs/api) instead.
+  # @return [PaymentSource]
+  describe "post_customers_customer_bank_accounts test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_customers_customer_bank_accounts_id
+  # &lt;p&gt;Update a specified source for a given customer.&lt;/p&gt;
+  # @param customer
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account_holder_name The name of the person or business that owns the bank account.
+  # @option opts [String] :account_holder_type The type of entity that holds the account. This can be either &#x60;individual&#x60; or &#x60;company&#x60;.
+  # @option opts [String] :address_city City/District/Suburb/Town/Village.
+  # @option opts [String] :address_country Billing address country, if provided when creating card.
+  # @option opts [String] :address_line1 Address line 1 (Street address/PO Box/Company name).
+  # @option opts [String] :address_line2 Address line 2 (Apartment/Suite/Unit/Building).
+  # @option opts [String] :address_state State/County/Province/Region.
+  # @option opts [String] :address_zip ZIP or postal code.
+  # @option opts [String] :exp_month Two digit number representing the card’s expiration month.
+  # @option opts [String] :exp_year Four digit number representing the card’s expiration year.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :name Cardholder name.
+  # @option opts [Owner] :owner
+  # @return [PostCustomersCustomerBankAccountsId200Response]
+  describe "post_customers_customer_bank_accounts_id test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_customers_customer_bank_accounts_id_verify
+  # &lt;p&gt;Verify a specified bank account for a given customer.&lt;/p&gt;
+  # @param customer
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(Int32)] :amounts Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [BankAccount]
+  describe "post_customers_customer_bank_accounts_id_verify test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_customers_customer_cards
+  # &lt;p&gt;When you create a new credit card, you must specify a customer or recipient on which to create it.&lt;/p&gt;  &lt;p&gt;If the card’s owner has no default card, then the new card will become the default. However, if the owner already has a default, then it will not change. To change the default, you should &lt;a href&#x3D;\&quot;/docs/api#update_customer\&quot;&gt;update the customer&lt;/a&gt; to have a new &lt;code&gt;default_source&lt;/code&gt;.&lt;/p&gt;
+  # @param customer
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :alipay_account A token returned by [Stripe.js](https://stripe.com/docs/js) representing the user’s Alipay account details.
+  # @option opts [PostCustomersCustomerRequestBankAccount] :bank_account
+  # @option opts [PostChargesRequestCard] :card
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :source Please refer to full [documentation](https://stripe.com/docs/api) instead.
+  # @return [PaymentSource]
+  describe "post_customers_customer_cards test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_customers_customer_cards_id
+  # &lt;p&gt;Update a specified source for a given customer.&lt;/p&gt;
+  # @param customer
+  # @param id
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account_holder_name The name of the person or business that owns the bank account.
+  # @option opts [String] :account_holder_type The type of entity that holds the account. This can be either &#x60;individual&#x60; or &#x60;company&#x60;.
+  # @option opts [String] :address_city City/District/Suburb/Town/Village.
+  # @option opts [String] :address_country Billing address country, if provided when creating card.
+  # @option opts [String] :address_line1 Address line 1 (Street address/PO Box/Company name).
+  # @option opts [String] :address_line2 Address line 2 (Apartment/Suite/Unit/Building).
+  # @option opts [String] :address_state State/County/Province/Region.
+  # @option opts [String] :address_zip ZIP or postal code.
+  # @option opts [String] :exp_month Two digit number representing the card’s expiration month.
+  # @option opts [String] :exp_year Four digit number representing the card’s expiration year.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [String] :name Cardholder name.
+  # @option opts [Owner] :owner
+  # @return [PostCustomersCustomerBankAccountsId200Response]
+  describe "post_customers_customer_cards_id test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -3858,8 +5024,8 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates a customer’s cash balance.&lt;/p&gt;
   # @param customer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @option opts [BalanceSettingsParam1] :settings
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [BalanceSettingsParam] :settings
   # @return [CashBalance]
   describe "post_customers_customer_cash_balance test" do
     it "should work" do
@@ -3874,7 +5040,7 @@ describe "DefaultApi" do
   # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   # @param funding_type The &#x60;funding_type&#x60; to get the instructions for.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [FundingInstructions]
   describe "post_customers_customer_funding_instructions test" do
     it "should work" do
@@ -3885,9 +5051,12 @@ describe "DefaultApi" do
   # unit tests for post_customers_customer_sources
   # &lt;p&gt;When you create a new credit card, you must specify a customer or recipient on which to create it.&lt;/p&gt;  &lt;p&gt;If the card’s owner has no default card, then the new card will become the default. However, if the owner already has a default, then it will not change. To change the default, you should &lt;a href&#x3D;\&quot;/docs/api#update_customer\&quot;&gt;update the customer&lt;/a&gt; to have a new &lt;code&gt;default_source&lt;/code&gt;.&lt;/p&gt;
   # @param customer
-  # @param source Please refer to full [documentation](https://stripe.com/docs/api) instead.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [String] :alipay_account A token returned by [Stripe.js](https://stripe.com/docs/js) representing the user’s Alipay account details.
+  # @option opts [PostCustomersCustomerRequestBankAccount] :bank_account
+  # @option opts [PostChargesRequestCard] :card
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [String] :source Please refer to full [documentation](https://stripe.com/docs/api) instead.
   # @return [PaymentSource]
   describe "post_customers_customer_sources test" do
     it "should work" do
@@ -3910,11 +5079,11 @@ describe "DefaultApi" do
   # @option opts [String] :address_zip ZIP or postal code.
   # @option opts [String] :exp_month Two digit number representing the card’s expiration month.
   # @option opts [String] :exp_year Four digit number representing the card’s expiration year.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :name Cardholder name.
   # @option opts [Owner] :owner
-  # @return [PostCustomersCustomerSourcesId200Response]
+  # @return [PostCustomersCustomerBankAccountsId200Response]
   describe "post_customers_customer_sources_id test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -3926,10 +5095,87 @@ describe "DefaultApi" do
   # @param customer
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(Int64)] :amounts Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(Int32)] :amounts Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [BankAccount]
   describe "post_customers_customer_sources_id_verify test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_customers_customer_subscriptions
+  # &lt;p&gt;Creates a new subscription on an existing customer.&lt;/p&gt;
+  # @param customer
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(AddInvoiceItemEntry)] :add_invoice_items A list of prices and quantities that will generate invoice items appended to the first invoice for this subscription. You may pass up to 20 items.
+  # @option opts [Float64] :application_fee_percent A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner&#39;s Stripe account. The request must be made by a platform account on a connected account in order to set an application fee percentage. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
+  # @option opts [AutomaticTaxConfig] :automatic_tax
+  # @option opts [Int32] :backdate_start_date For new subscriptions, a past timestamp to backdate the subscription&#39;s start date to. If set, the first invoice will contain a proration for the timespan between the start date and the current time. Can be combined with trials and the billing cycle anchor.
+  # @option opts [Int32] :billing_cycle_anchor A future timestamp to anchor the subscription&#39;s [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with &#x60;month&#x60; or &#x60;year&#x60; intervals, the day of the month for subsequent invoices.
+  # @option opts [PostCustomersCustomerSubscriptionsRequestBillingThresholds] :billing_thresholds
+  # @option opts [Int32] :cancel_at A timestamp at which the subscription should cancel. If set to a date before the current period ends, this will cause a proration if prorations have been enabled using &#x60;proration_behavior&#x60;. If set during a future period, this will always cause a proration for that period.
+  # @option opts [Bool] :cancel_at_period_end Boolean indicating whether this subscription should cancel at the end of the current period.
+  # @option opts [String] :collection_method Either &#x60;charge_automatically&#x60;, or &#x60;send_invoice&#x60;. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions. Defaults to &#x60;charge_automatically&#x60;.
+  # @option opts [String] :coupon The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
+  # @option opts [Int32] :days_until_due Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where &#x60;collection_method&#x60; is set to &#x60;send_invoice&#x60;.
+  # @option opts [String] :default_payment_method ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over &#x60;default_source&#x60;. If neither are set, invoices will use the customer&#39;s [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
+  # @option opts [String] :default_source ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If &#x60;default_payment_method&#x60; is also set, &#x60;default_payment_method&#x60; will take precedence. If neither are set, invoices will use the customer&#39;s [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
+  # @option opts [PostCustomersCustomerSubscriptionsRequestDefaultTaxRates] :default_tax_rates
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Array(SubscriptionItemCreateParams)] :items A list of up to 20 subscription items, each with an attached price.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [Bool] :off_session Indicates if a customer is on or off-session while an invoice payment is attempted.
+  # @option opts [String] :payment_behavior Use &#x60;allow_incomplete&#x60; to create subscriptions with &#x60;status&#x3D;incomplete&#x60; if the first invoice cannot be paid. Creating subscriptions with this status allows you to manage scenarios where additional user actions are needed to pay a subscription&#39;s invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use &#x60;default_incomplete&#x60; to create Subscriptions with &#x60;status&#x3D;incomplete&#x60; when the first invoice requires payment, otherwise start as active. Subscriptions transition to &#x60;status&#x3D;active&#x60; when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to &#x60;status&#x3D;incomplete_expired&#x60;, which is a terminal state.  Use &#x60;error_if_incomplete&#x60; if you want Stripe to return an HTTP 402 status code if a subscription&#39;s first invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not create a subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.  &#x60;pending_if_incomplete&#x60; is only used with updates and cannot be passed when creating a subscription.
+  # @option opts [PaymentSettings] :payment_settings
+  # @option opts [PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval] :pending_invoice_item_interval
+  # @option opts [String] :promotion_code The API ID of a promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
+  # @option opts [String] :proration_behavior Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) resulting from the &#x60;billing_cycle_anchor&#x60;. Valid values are &#x60;create_prorations&#x60; or &#x60;none&#x60;.  Passing &#x60;create_prorations&#x60; will cause proration invoice items to be created when applicable. Prorations can be disabled by passing &#x60;none&#x60;. If no value is passed, the default is &#x60;create_prorations&#x60;.
+  # @option opts [TransferDataSpecs3] :transfer_data
+  # @option opts [PostCustomersCustomerSubscriptionsRequestTrialEnd] :trial_end
+  # @option opts [Bool] :trial_from_plan Indicates if a plan&#39;s &#x60;trial_period_days&#x60; should be applied to the subscription. Setting &#x60;trial_end&#x60; per subscription is preferred, and this defaults to &#x60;false&#x60;. Setting this flag to &#x60;true&#x60; together with &#x60;trial_end&#x60; is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
+  # @option opts [Int32] :trial_period_days Integer representing the number of trial period days before the customer is charged for the first time. This will always overwrite any trials that might apply via a subscribed plan. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
+  # @return [Subscription]
+  describe "post_customers_customer_subscriptions test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_customers_customer_subscriptions_subscription_exposed_id
+  # &lt;p&gt;Updates an existing subscription on a customer to match the specified parameters. When changing plans or quantities, we will optionally prorate the price we charge next month to make up for any price changes. To preview how the proration will be calculated, use the &lt;a href&#x3D;\&quot;#upcoming_invoice\&quot;&gt;upcoming invoice&lt;/a&gt; endpoint.&lt;/p&gt;
+  # @param customer
+  # @param subscription_exposed_id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(AddInvoiceItemEntry)] :add_invoice_items A list of prices and quantities that will generate invoice items appended to the first invoice for this subscription. You may pass up to 20 items.
+  # @option opts [Float64] :application_fee_percent A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner&#39;s Stripe account. The request must be made by a platform account on a connected account in order to set an application fee percentage. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
+  # @option opts [AutomaticTaxConfig] :automatic_tax
+  # @option opts [String] :billing_cycle_anchor Either &#x60;now&#x60; or &#x60;unchanged&#x60;. Setting the value to &#x60;now&#x60; resets the subscription&#39;s billing cycle anchor to the current time. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
+  # @option opts [PostCustomersCustomerSubscriptionsRequestBillingThresholds] :billing_thresholds
+  # @option opts [PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestCancelAt] :cancel_at
+  # @option opts [Bool] :cancel_at_period_end Boolean indicating whether this subscription should cancel at the end of the current period.
+  # @option opts [String] :collection_method Either &#x60;charge_automatically&#x60;, or &#x60;send_invoice&#x60;. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions. Defaults to &#x60;charge_automatically&#x60;.
+  # @option opts [String] :coupon The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
+  # @option opts [Int32] :days_until_due Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where &#x60;collection_method&#x60; is set to &#x60;send_invoice&#x60;.
+  # @option opts [String] :default_payment_method ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over &#x60;default_source&#x60;. If neither are set, invoices will use the customer&#39;s [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
+  # @option opts [String] :default_source ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If &#x60;default_payment_method&#x60; is also set, &#x60;default_payment_method&#x60; will take precedence. If neither are set, invoices will use the customer&#39;s [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
+  # @option opts [PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates] :default_tax_rates
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Array(SubscriptionItemUpdateParams)] :items A list of up to 20 subscription items, each with an attached price.
+  # @option opts [PostAccountRequestMetadata] :metadata
+  # @option opts [Bool] :off_session Indicates if a customer is on or off-session while an invoice payment is attempted.
+  # @option opts [PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestPauseCollection] :pause_collection
+  # @option opts [String] :payment_behavior Use &#x60;allow_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription&#39;s invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use &#x60;default_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; when payment is required and await explicit confirmation of the invoice&#39;s payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use &#x60;pending_if_incomplete&#x60; to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use &#x60;pending_if_incomplete&#x60; you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use &#x60;error_if_incomplete&#x60; if you want Stripe to return an HTTP 402 status code if a subscription&#39;s invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
+  # @option opts [PaymentSettings] :payment_settings
+  # @option opts [PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval] :pending_invoice_item_interval
+  # @option opts [String] :promotion_code The promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
+  # @option opts [String] :proration_behavior Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting &#x60;billing_cycle_anchor&#x3D;now&#x60;, or starting a trial), or if an item&#39;s &#x60;quantity&#x60; changes. Valid values are &#x60;create_prorations&#x60;, &#x60;none&#x60;, or &#x60;always_invoice&#x60;.  Passing &#x60;create_prorations&#x60; will cause proration invoice items to be created when applicable. These proration items will only be invoiced immediately under [certain conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment). In order to always invoice immediately for prorations, pass &#x60;always_invoice&#x60;.  Prorations can be disabled by passing &#x60;none&#x60;.
+  # @option opts [Int32] :proration_date If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply exactly the same proration that was previewed with [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint. It can also be used to implement custom proration logic, such as prorating by day instead of by second, by providing the time that you wish to use for proration calculations.
+  # @option opts [PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTransferData] :transfer_data
+  # @option opts [PostCustomersCustomerRequestTrialEnd] :trial_end
+  # @option opts [Bool] :trial_from_plan Indicates if a plan&#39;s &#x60;trial_period_days&#x60; should be applied to the subscription. Setting &#x60;trial_end&#x60; per subscription is preferred, and this defaults to &#x60;false&#x60;. Setting this flag to &#x60;true&#x60; together with &#x60;trial_end&#x60; is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
+  # @return [Subscription]
+  describe "post_customers_customer_subscriptions_subscription_exposed_id test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -3941,7 +5187,7 @@ describe "DefaultApi" do
   # @param _type Type of the tax ID, one of &#x60;ae_trn&#x60;, &#x60;au_abn&#x60;, &#x60;au_arn&#x60;, &#x60;bg_uic&#x60;, &#x60;br_cnpj&#x60;, &#x60;br_cpf&#x60;, &#x60;ca_bn&#x60;, &#x60;ca_gst_hst&#x60;, &#x60;ca_pst_bc&#x60;, &#x60;ca_pst_mb&#x60;, &#x60;ca_pst_sk&#x60;, &#x60;ca_qst&#x60;, &#x60;ch_vat&#x60;, &#x60;cl_tin&#x60;, &#x60;es_cif&#x60;, &#x60;eu_oss_vat&#x60;, &#x60;eu_vat&#x60;, &#x60;gb_vat&#x60;, &#x60;ge_vat&#x60;, &#x60;hk_br&#x60;, &#x60;hu_tin&#x60;, &#x60;id_npwp&#x60;, &#x60;il_vat&#x60;, &#x60;in_gst&#x60;, &#x60;is_vat&#x60;, &#x60;jp_cn&#x60;, &#x60;jp_rn&#x60;, &#x60;kr_brn&#x60;, &#x60;li_uid&#x60;, &#x60;mx_rfc&#x60;, &#x60;my_frp&#x60;, &#x60;my_itn&#x60;, &#x60;my_sst&#x60;, &#x60;no_vat&#x60;, &#x60;nz_gst&#x60;, &#x60;ru_inn&#x60;, &#x60;ru_kpp&#x60;, &#x60;sa_vat&#x60;, &#x60;sg_gst&#x60;, &#x60;sg_uen&#x60;, &#x60;si_tin&#x60;, &#x60;th_vat&#x60;, &#x60;tw_vat&#x60;, &#x60;ua_vat&#x60;, &#x60;us_ein&#x60;, or &#x60;za_vat&#x60;
   # @param value Value of the tax ID.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TaxId]
   describe "post_customers_customer_tax_ids test" do
     it "should work" do
@@ -3954,8 +5200,8 @@ describe "DefaultApi" do
   # @param dispute
   # @param [Hash] opts the optional parameters
   # @option opts [DisputeEvidenceParams] :evidence
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [Bool] :submit Whether to immediately submit evidence to the bank. If &#x60;false&#x60;, evidence is staged on the dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank by making another request with this attribute set to &#x60;true&#x60; (the default).
   # @return [Dispute]
   describe "post_disputes_dispute test" do
@@ -3968,7 +5214,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Closing the dispute for a charge indicates that you do not have any evidence to submit and are essentially dismissing the dispute, acknowledging it as lost.&lt;/p&gt;  &lt;p&gt;The status of the dispute will change from &lt;code&gt;needs_response&lt;/code&gt; to &lt;code&gt;lost&lt;/code&gt;. &lt;em&gt;Closing a dispute is irreversible&lt;/em&gt;.&lt;/p&gt;
   # @param dispute
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Dispute]
   describe "post_disputes_dispute_close test" do
     it "should work" do
@@ -3980,7 +5226,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates a short-lived API key for a given resource.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
   # @option opts [String] :customer The ID of the Customer you&#39;d like to modify using the resulting ephemeral key.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :issuing_card The ID of the Issuing Card you&#39;d like to access using the resulting ephemeral key.
   # @return [EphemeralKey]
   describe "post_ephemeral_keys test" do
@@ -3993,9 +5239,9 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates a new file link object.&lt;/p&gt;
   # @param file The ID of the file. The file&#39;s &#x60;purpose&#x60; must be one of the following: &#x60;business_icon&#x60;, &#x60;business_logo&#x60;, &#x60;customer_signature&#x60;, &#x60;dispute_evidence&#x60;, &#x60;finance_report_run&#x60;, &#x60;identity_document_downloadable&#x60;, &#x60;pci_document&#x60;, &#x60;selfie&#x60;, &#x60;sigma_scheduled_query&#x60;, or &#x60;tax_document_user_upload&#x60;.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @option opts [Int64] :expires_at A future timestamp after which the link will no longer be usable.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :expires_at A future timestamp after which the link will no longer be usable.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [FileLink]
   describe "post_file_links test" do
     it "should work" do
@@ -4007,9 +5253,9 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates an existing file link object. Expired links can no longer be updated.&lt;/p&gt;
   # @param link
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [PostFileLinksLinkRequestExpiresAt] :expires_at
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [FileLink]
   describe "post_file_links_link test" do
     it "should work" do
@@ -4022,7 +5268,7 @@ describe "DefaultApi" do
   # @param file A file to upload. The file should follow the specifications of RFC 2388 (which defines file transfers for the &#x60;multipart/form-data&#x60; protocol).
   # @param purpose The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [FileLinkCreationParams] :file_link_data
   # @return [::File]
   describe "post_files test" do
@@ -4035,7 +5281,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Disables your access to a Financial Connections &lt;code&gt;Account&lt;/code&gt;. You will no longer be able to access data associated with the account (e.g. balances, transactions).&lt;/p&gt;
   # @param account
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [FinancialConnectionsAccount]
   describe "post_financial_connections_accounts_account_disconnect test" do
     it "should work" do
@@ -4048,7 +5294,7 @@ describe "DefaultApi" do
   # @param account
   # @param features The list of account features that you would like to refresh. Either: &#x60;balance&#x60; or &#x60;ownership&#x60;.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [FinancialConnectionsAccount]
   describe "post_financial_connections_accounts_account_refresh test" do
     it "should work" do
@@ -4061,7 +5307,7 @@ describe "DefaultApi" do
   # @param account_holder
   # @param permissions List of data features that you would like to request access to.  Possible values are &#x60;balances&#x60;, &#x60;transactions&#x60;, &#x60;ownership&#x60;, and &#x60;payment_method&#x60;.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [FiltersParams] :filters
   # @option opts [String] :return_url For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
   # @return [FinancialConnectionsSession]
@@ -4075,7 +5321,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates a VerificationSession object.&lt;/p&gt;  &lt;p&gt;After the VerificationSession is created, display a verification modal using the session &lt;code&gt;client_secret&lt;/code&gt; or send your users to the session’s &lt;code&gt;url&lt;/code&gt;.&lt;/p&gt;  &lt;p&gt;If your API key is in test mode, verification checks won’t actually process, though everything else will occur as if in live mode.&lt;/p&gt;  &lt;p&gt;Related guide: &lt;a href&#x3D;\&quot;/docs/identity/verify-identity-documents\&quot;&gt;Verify your users’ identity documents&lt;/a&gt;.&lt;/p&gt;
   # @param _type The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [SessionOptionsParam] :options
   # @option opts [String] :return_url The URL that the user will be redirected to upon completing the verification flow.
   # @return [IdentityVerificationSession]
@@ -4089,7 +5335,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates a VerificationSession object.&lt;/p&gt;  &lt;p&gt;When the session status is &lt;code&gt;requires_input&lt;/code&gt;, you can use this method to update the verification check and options.&lt;/p&gt;
   # @param session
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [SessionOptionsParam] :options
   # @option opts [String] :_type The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
   # @return [IdentityVerificationSession]
@@ -4103,7 +5349,7 @@ describe "DefaultApi" do
   # &lt;p&gt;A VerificationSession object can be canceled when it is in &lt;code&gt;requires_input&lt;/code&gt; &lt;a href&#x3D;\&quot;/docs/identity/how-sessions-work\&quot;&gt;status&lt;/a&gt;.&lt;/p&gt;  &lt;p&gt;Once canceled, future submission attempts are disabled. This cannot be undone. &lt;a href&#x3D;\&quot;/docs/identity/verification-sessions#cancel\&quot;&gt;Learn more&lt;/a&gt;.&lt;/p&gt;
   # @param session
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [IdentityVerificationSession]
   describe "post_identity_verification_sessions_session_cancel test" do
     it "should work" do
@@ -4115,7 +5361,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Redact a VerificationSession to remove all collected information from Stripe. This will redact the VerificationSession and all objects related to it, including VerificationReports, Events, request logs, etc.&lt;/p&gt;  &lt;p&gt;A VerificationSession object can be redacted when it is in &lt;code&gt;requires_input&lt;/code&gt; or &lt;code&gt;verified&lt;/code&gt; &lt;a href&#x3D;\&quot;/docs/identity/how-sessions-work\&quot;&gt;status&lt;/a&gt;. Redacting a VerificationSession in &lt;code&gt;requires_action&lt;/code&gt; state will automatically cancel it.&lt;/p&gt;  &lt;p&gt;The redaction process may take up to four days. When the redaction process is in progress, the VerificationSession’s &lt;code&gt;redaction.status&lt;/code&gt; field will be set to &lt;code&gt;processing&lt;/code&gt;; when the process is finished, it will change to &lt;code&gt;redacted&lt;/code&gt; and an &lt;code&gt;identity.verification_session.redacted&lt;/code&gt; event will be emitted.&lt;/p&gt;  &lt;p&gt;Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all the fields that contain personal data will be replaced by the string &lt;code&gt;[redacted]&lt;/code&gt; or a similar placeholder. The &lt;code&gt;metadata&lt;/code&gt; field will also be erased. Redacted objects cannot be updated or used for any purpose.&lt;/p&gt;  &lt;p&gt;&lt;a href&#x3D;\&quot;/docs/identity/verification-sessions#redact\&quot;&gt;Learn more&lt;/a&gt;.&lt;/p&gt;
   # @param session
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [IdentityVerificationSession]
   describe "post_identity_verification_sessions_session_redact test" do
     it "should work" do
@@ -4127,21 +5373,21 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is specified, the item will be on the next invoice created for the customer specified.&lt;/p&gt;
   # @param customer The ID of the customer who will be billed when this invoice item is billed.
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. Passing in a negative &#x60;amount&#x60; will reduce the &#x60;amount_due&#x60; on the invoice.
+  # @option opts [Int32] :amount The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. Passing in a negative &#x60;amount&#x60; will reduce the &#x60;amount_due&#x60; on the invoice.
   # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   # @option opts [String] :description An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
   # @option opts [Bool] :discountable Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items.
   # @option opts [PostInvoiceitemsRequestDiscounts] :discounts
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :invoice The ID of an existing invoice to add this invoice item to. When left blank, the invoice item will be added to the next upcoming scheduled invoice. This is useful when adding invoice items in response to an invoice.created webhook. You can only add invoice items to draft invoices and there is a maximum of 250 items per invoice.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [Period1] :period
   # @option opts [String] :price The ID of the price object.
-  # @option opts [OneTimePriceData] :price_data
-  # @option opts [Int64] :quantity Non-negative integer. The quantity of units for the invoice item.
+  # @option opts [OneTimePriceData1] :price_data
+  # @option opts [Int32] :quantity Non-negative integer. The quantity of units for the invoice item.
   # @option opts [String] :subscription The ID of a subscription to add this invoice item to. When left blank, the invoice item will be be added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription.
-  # @option opts [Array(String)] :tax_rates
-  # @option opts [Int64] :unit_amount The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This &#x60;unit_amount&#x60; will be multiplied by the quantity to get the full amount. Passing in a negative &#x60;unit_amount&#x60; will reduce the &#x60;amount_due&#x60; on the invoice.
+  # @option opts [Array(String)] :tax_rates The tax rates which apply to the invoice item. When set, the &#x60;default_tax_rates&#x60; on the invoice do not apply to this invoice item.
+  # @option opts [Int32] :unit_amount The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This &#x60;unit_amount&#x60; will be multiplied by the quantity to get the full amount. Passing in a negative &#x60;unit_amount&#x60; will reduce the &#x60;amount_due&#x60; on the invoice.
   # @option opts [String] :unit_amount_decimal Same as &#x60;unit_amount&#x60;, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of &#x60;unit_amount&#x60; and &#x60;unit_amount_decimal&#x60; can be set.
   # @return [Invoiceitem]
   describe "post_invoiceitems test" do
@@ -4154,18 +5400,18 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates the amount or description of an invoice item on an upcoming invoice. Updating an invoice item is only possible before the invoice it’s attached to is closed.&lt;/p&gt;
   # @param invoiceitem
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer&#39;s account, pass a negative amount.
+  # @option opts [Int32] :amount The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer&#39;s account, pass a negative amount.
   # @option opts [String] :description An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
   # @option opts [Bool] :discountable Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations.
   # @option opts [PostInvoiceitemsInvoiceitemRequestDiscounts] :discounts
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [Period1] :period
   # @option opts [String] :price The ID of the price object.
-  # @option opts [OneTimePriceData] :price_data
-  # @option opts [Int64] :quantity Non-negative integer. The quantity of units for the invoice item.
+  # @option opts [OneTimePriceData1] :price_data
+  # @option opts [Int32] :quantity Non-negative integer. The quantity of units for the invoice item.
   # @option opts [PostInvoiceitemsInvoiceitemRequestTaxRates] :tax_rates
-  # @option opts [Int64] :unit_amount The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer&#39;s account, pass a negative unit_amount.
+  # @option opts [Int32] :unit_amount The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer&#39;s account, pass a negative unit_amount.
   # @option opts [String] :unit_amount_decimal Same as &#x60;unit_amount&#x60;, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of &#x60;unit_amount&#x60; and &#x60;unit_amount_decimal&#x60; can be set.
   # @return [Invoiceitem]
   describe "post_invoiceitems_invoiceitem test" do
@@ -4178,28 +5424,28 @@ describe "DefaultApi" do
   # &lt;p&gt;This endpoint creates a draft invoice for a given customer. The draft invoice created pulls in all pending invoice items on that customer, including prorations. The invoice remains a draft until you &lt;a href&#x3D;\&quot;#finalize_invoice\&quot;&gt;finalize&lt;/a&gt; the invoice, which allows you to &lt;a href&#x3D;\&quot;#pay_invoice\&quot;&gt;pay&lt;/a&gt; or &lt;a href&#x3D;\&quot;#send_invoice\&quot;&gt;send&lt;/a&gt; the invoice to your customers.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
   # @option opts [PostInvoicesRequestAccountTaxIds] :account_tax_ids
-  # @option opts [Int64] :application_fee_amount A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner&#39;s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
+  # @option opts [Int32] :application_fee_amount A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner&#39;s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
   # @option opts [Bool] :auto_advance Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice. When &#x60;false&#x60;, the invoice&#39;s state will not automatically advance without an explicit action.
   # @option opts [AutomaticTaxParam] :automatic_tax
   # @option opts [String] :collection_method Either &#x60;charge_automatically&#x60;, or &#x60;send_invoice&#x60;. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions. Defaults to &#x60;charge_automatically&#x60;.
   # @option opts [PostInvoicesRequestCustomFields] :custom_fields
   # @option opts [String] :customer The ID of the customer who will be billed.
-  # @option opts [Int64] :days_until_due The number of days from when the invoice is created until it is due. Valid only for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;.
+  # @option opts [Int32] :days_until_due The number of days from when the invoice is created until it is due. Valid only for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;.
   # @option opts [String] :default_payment_method ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription&#39;s default payment method, if any, or to the default payment method in the customer&#39;s invoice settings.
   # @option opts [String] :default_source ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription&#39;s default source, if any, or to the customer&#39;s default source.
-  # @option opts [Array(String)] :default_tax_rates
+  # @option opts [Array(String)] :default_tax_rates The tax rates that will apply to any line item that does not have &#x60;tax_rates&#x60; set.
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users. Referenced as &#39;memo&#39; in the Dashboard.
   # @option opts [PostInvoicesRequestDiscounts] :discounts
-  # @option opts [Int64] :due_date The date on which payment for this invoice is due. Valid only for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;.
-  # @option opts [Array(String)] :expand
+  # @option opts [Int32] :due_date The date on which payment for this invoice is due. Valid only for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :footer Footer to be displayed on the invoice.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :on_behalf_of The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
-  # @option opts [PaymentSettings] :payment_settings
+  # @option opts [PaymentSettings1] :payment_settings
   # @option opts [String] :pending_invoice_items_behavior How to handle pending invoice items on invoice creation. One of &#x60;include&#x60;, &#x60;exclude&#x60;, or &#x60;include_and_require&#x60;. &#x60;include&#x60; will include any pending invoice items, and will create an empty draft invoice if no pending invoice items exist. &#x60;include_and_require&#x60; will include any pending invoice items, if no pending invoice items exist then the request will fail. &#x60;exclude&#x60; will always create an empty invoice draft regardless if there are pending invoice items or not. Defaults to &#x60;include_and_require&#x60; if the parameter is omitted.
   # @option opts [String] :statement_descriptor Extra information about a charge for the customer&#39;s credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default &#x60;statement_descriptor&#x60; will be set to the first subscription item&#39;s product&#39;s &#x60;statement_descriptor&#x60;.
   # @option opts [String] :subscription The ID of the subscription to invoice, if any. If not set, the created invoice will include all pending invoice items for the customer. If set, the created invoice will only include pending invoice items for that subscription and pending invoice items not associated with any subscription. The subscription&#39;s billing cycle and regular subscription events won&#39;t be affected.
-  # @option opts [TransferDataSpecs3] :transfer_data
+  # @option opts [TransferDataSpecs4] :transfer_data
   # @return [Invoice]
   describe "post_invoices test" do
     it "should work" do
@@ -4212,23 +5458,23 @@ describe "DefaultApi" do
   # @param invoice
   # @param [Hash] opts the optional parameters
   # @option opts [PostInvoicesRequestAccountTaxIds] :account_tax_ids
-  # @option opts [Int64] :application_fee_amount A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner&#39;s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
+  # @option opts [Int32] :application_fee_amount A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the application owner&#39;s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
   # @option opts [Bool] :auto_advance Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
   # @option opts [AutomaticTaxParam] :automatic_tax
   # @option opts [String] :collection_method Either &#x60;charge_automatically&#x60; or &#x60;send_invoice&#x60;. This field can be updated only on &#x60;draft&#x60; invoices.
   # @option opts [PostInvoicesInvoiceRequestCustomFields] :custom_fields
-  # @option opts [Int64] :days_until_due The number of days from which the invoice is created until it is due. Only valid for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;. This field can only be updated on &#x60;draft&#x60; invoices.
+  # @option opts [Int32] :days_until_due The number of days from which the invoice is created until it is due. Only valid for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;. This field can only be updated on &#x60;draft&#x60; invoices.
   # @option opts [String] :default_payment_method ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription&#39;s default payment method, if any, or to the default payment method in the customer&#39;s invoice settings.
   # @option opts [String] :default_source ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription&#39;s default source, if any, or to the customer&#39;s default source.
   # @option opts [PostInvoicesInvoiceRequestDefaultTaxRates] :default_tax_rates
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users. Referenced as &#39;memo&#39; in the Dashboard.
   # @option opts [PostInvoicesInvoiceRequestDiscounts] :discounts
-  # @option opts [Int64] :due_date The date on which payment for this invoice is due. Only valid for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;. This field can only be updated on &#x60;draft&#x60; invoices.
-  # @option opts [Array(String)] :expand
+  # @option opts [Int32] :due_date The date on which payment for this invoice is due. Only valid for invoices where &#x60;collection_method&#x3D;send_invoice&#x60;. This field can only be updated on &#x60;draft&#x60; invoices.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :footer Footer to be displayed on the invoice.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [PostInvoicesInvoiceRequestOnBehalfOf] :on_behalf_of
-  # @option opts [PaymentSettings] :payment_settings
+  # @option opts [PaymentSettings1] :payment_settings
   # @option opts [String] :statement_descriptor Extra information about a charge for the customer&#39;s credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default &#x60;statement_descriptor&#x60; will be set to the first subscription item&#39;s product&#39;s &#x60;statement_descriptor&#x60;.
   # @option opts [PostInvoicesInvoiceRequestTransferData] :transfer_data
   # @return [Invoice]
@@ -4243,7 +5489,7 @@ describe "DefaultApi" do
   # @param invoice
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :auto_advance Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/invoicing/automatic-charging) of the invoice. When &#x60;false&#x60;, the invoice&#39;s state will not automatically advance without an explicit action.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Invoice]
   describe "post_invoices_invoice_finalize test" do
     it "should work" do
@@ -4255,7 +5501,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Marking an invoice as uncollectible is useful for keeping track of bad debts that can be written off for accounting purposes.&lt;/p&gt;
   # @param invoice
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Invoice]
   describe "post_invoices_invoice_mark_uncollectible test" do
     it "should work" do
@@ -4267,7 +5513,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Stripe automatically creates and then attempts to collect payment on invoices for customers on subscriptions according to your &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/billing/automatic\&quot;&gt;subscriptions settings&lt;/a&gt;. However, if you’d like to attempt payment on an invoice out of the normal collection schedule or for some other reason, you can do so.&lt;/p&gt;
   # @param invoice
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Bool] :forgive In cases where the source used to pay the invoice has insufficient funds, passing &#x60;forgive&#x3D;true&#x60; controls whether a charge should be attempted for the full amount available on the source, up to the amount to fully pay the invoice. This effectively forgives the difference between the amount available on the source and the amount due.   Passing &#x60;forgive&#x3D;false&#x60; will fail the charge if the source hasn&#39;t been pre-funded with the right amount. An example for this case is with ACH Credit Transfers and wires: if the amount wired is less than the amount due by a small amount, you might want to forgive the difference. Defaults to &#x60;false&#x60;.
   # @option opts [Bool] :off_session Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to &#x60;true&#x60; (off-session).
   # @option opts [Bool] :paid_out_of_band Boolean representing whether an invoice is paid outside of Stripe. This will result in no charge being made. Defaults to &#x60;false&#x60;.
@@ -4284,7 +5530,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Stripe will automatically send invoices to customers according to your &lt;a href&#x3D;\&quot;https://dashboard.stripe.com/account/billing/automatic\&quot;&gt;subscriptions settings&lt;/a&gt;. However, if you’d like to manually send an invoice to your customer out of the normal schedule, you can do so. When sending invoices that have already been paid, there will be no reference to the payment in the email.&lt;/p&gt;  &lt;p&gt;Requests made in test-mode result in no emails being sent, despite sending an &lt;code&gt;invoice.sent&lt;/code&gt; event.&lt;/p&gt;
   # @param invoice
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Invoice]
   describe "post_invoices_invoice_send test" do
     it "should work" do
@@ -4296,7 +5542,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to &lt;a href&#x3D;\&quot;#delete_invoice\&quot;&gt;deletion&lt;/a&gt;, however it only applies to finalized invoices and maintains a papertrail where the invoice can still be found.&lt;/p&gt;
   # @param invoice
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Invoice]
   describe "post_invoices_invoice_void test" do
     it "should work" do
@@ -4308,8 +5554,8 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Authorization&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
   # @param authorization
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [IssuingAuthorization]
   describe "post_issuing_authorizations_authorization test" do
     it "should work" do
@@ -4321,9 +5567,9 @@ describe "DefaultApi" do
   # &lt;p&gt;Approves a pending Issuing &lt;code&gt;Authorization&lt;/code&gt; object. This request should be made within the timeout window of the &lt;a href&#x3D;\&quot;/docs/issuing/controls/real-time-authorizations\&quot;&gt;real-time authorization&lt;/a&gt; flow.&lt;/p&gt;
   # @param authorization
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount If the authorization&#39;s &#x60;pending_request.is_amount_controllable&#x60; property is &#x60;true&#x60;, you may provide this value to control how much to hold for the authorization. Must be positive (use [&#x60;decline&#x60;](https://stripe.com/docs/api/issuing/authorizations/decline) to decline an authorization request).
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Int32] :amount If the authorization&#39;s &#x60;pending_request.is_amount_controllable&#x60; property is &#x60;true&#x60;, you may provide this value to control how much to hold for the authorization. Must be positive (use [&#x60;decline&#x60;](https://stripe.com/docs/api/issuing/authorizations/decline) to decline an authorization request).
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [IssuingAuthorization]
   describe "post_issuing_authorizations_authorization_approve test" do
     it "should work" do
@@ -4335,8 +5581,8 @@ describe "DefaultApi" do
   # &lt;p&gt;Declines a pending Issuing &lt;code&gt;Authorization&lt;/code&gt; object. This request should be made within the timeout window of the &lt;a href&#x3D;\&quot;/docs/issuing/controls/real-time-authorizations\&quot;&gt;real time authorization&lt;/a&gt; flow.&lt;/p&gt;
   # @param authorization
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [IssuingAuthorization]
   describe "post_issuing_authorizations_authorization_decline test" do
     it "should work" do
@@ -4352,7 +5598,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [CompanyParam] :company
   # @option opts [String] :email The cardholder&#39;s email address.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [IndividualParam] :individual
   # @option opts [String] :phone_number The cardholder&#39;s phone number. This will be transformed to [E.164](https://en.wikipedia.org/wiki/E.164) if it is not provided in that format already. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied) for more details.
   # @option opts [AuthorizationControlsParamV2] :spending_controls
@@ -4371,7 +5617,7 @@ describe "DefaultApi" do
   # @option opts [BillingSpecs] :billing
   # @option opts [CompanyParam] :company
   # @option opts [String] :email The cardholder&#39;s email address.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [IndividualParam] :individual
   # @option opts [String] :phone_number The cardholder&#39;s phone number. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure) for more details.
   # @option opts [AuthorizationControlsParamV2] :spending_controls
@@ -4389,7 +5635,7 @@ describe "DefaultApi" do
   # @param _type The type of card to issue. Possible values are &#x60;physical&#x60; or &#x60;virtual&#x60;.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :cardholder The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the card will be associated.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :financial_account
   # @option opts [String] :replacement_for The card this is meant to be a replacement for (if any).
   # @option opts [String] :replacement_reason If &#x60;replacement_for&#x60; is specified, this should indicate why that card is being replaced.
@@ -4408,8 +5654,8 @@ describe "DefaultApi" do
   # @param card
   # @param [Hash] opts the optional parameters
   # @option opts [String] :cancellation_reason Reason why the &#x60;status&#x60; of this card is &#x60;canceled&#x60;.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [EncryptedPinParam] :pin
   # @option opts [AuthorizationControlsParam] :spending_controls
   # @option opts [String] :status Dictates whether authorizations can be approved on this card. If this card is being canceled because it was lost or stolen, this information should be provided as &#x60;cancellation_reason&#x60;.
@@ -4424,7 +5670,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates an Issuing &lt;code&gt;Dispute&lt;/code&gt; object. Individual pieces of evidence within the &lt;code&gt;evidence&lt;/code&gt; object are optional at this point. Stripe only validates that required evidence is present during submission. Refer to &lt;a href&#x3D;\&quot;/docs/issuing/purchases/disputes#dispute-reasons-and-evidence\&quot;&gt;Dispute reasons and evidence&lt;/a&gt; for more details about evidence requirements.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
   # @option opts [EvidenceParam] :evidence
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :transaction The ID of the issuing transaction to create a dispute for. For transaction on Treasury FinancialAccounts, use &#x60;treasury.received_debit&#x60;.
   # @option opts [TreasuryParam] :treasury
   # @return [IssuingDispute]
@@ -4439,8 +5685,8 @@ describe "DefaultApi" do
   # @param dispute
   # @param [Hash] opts the optional parameters
   # @option opts [EvidenceParam] :evidence
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [IssuingDispute]
   describe "post_issuing_disputes_dispute test" do
     it "should work" do
@@ -4452,10 +5698,22 @@ describe "DefaultApi" do
   # &lt;p&gt;Submits an Issuing &lt;code&gt;Dispute&lt;/code&gt; to the card network. Stripe validates that all evidence fields required for the dispute’s reason are present. For more details, see &lt;a href&#x3D;\&quot;/docs/issuing/purchases/disputes#dispute-reasons-and-evidence\&quot;&gt;Dispute reasons and evidence&lt;/a&gt;.&lt;/p&gt;
   # @param dispute
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [IssuingDispute]
   describe "post_issuing_disputes_dispute_submit test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_issuing_settlements_settlement
+  # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Settlement&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
+  # @param settlement
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [IssuingSettlement]
+  describe "post_issuing_settlements_settlement test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -4465,10 +5723,50 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates the specified Issuing &lt;code&gt;Transaction&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
   # @param transaction
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [IssuingTransaction]
   describe "post_issuing_transactions_transaction test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_link_account_sessions
+  # &lt;p&gt;To launch the Financial Connections authorization flow, create a &lt;code&gt;Session&lt;/code&gt;. The session’s &lt;code&gt;client_secret&lt;/code&gt; can be used to launch the flow using Stripe.js.&lt;/p&gt;
+  # @param account_holder
+  # @param permissions List of data features that you would like to request access to.  Possible values are &#x60;balances&#x60;, &#x60;transactions&#x60;, &#x60;ownership&#x60;, and &#x60;payment_method&#x60;.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [FiltersParams] :filters
+  # @option opts [String] :return_url For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
+  # @return [FinancialConnectionsSession]
+  describe "post_link_account_sessions test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_linked_accounts_account_disconnect
+  # &lt;p&gt;Disables your access to a Financial Connections &lt;code&gt;Account&lt;/code&gt;. You will no longer be able to access data associated with the account (e.g. balances, transactions).&lt;/p&gt;
+  # @param account
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [FinancialConnectionsAccount]
+  describe "post_linked_accounts_account_disconnect test" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  # unit tests for post_linked_accounts_account_refresh
+  # &lt;p&gt;Refreshes the data associated with a Financial Connections &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
+  # @param account
+  # @param features The list of account features that you would like to refresh. Either: &#x60;balance&#x60; or &#x60;ownership&#x60;.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @return [FinancialConnectionsAccount]
+  describe "post_linked_accounts_account_refresh test" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -4484,7 +5782,7 @@ describe "DefaultApi" do
   # @option opts [String] :customer The customer associated with this order.
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
   # @option opts [PostOrdersRequestDiscounts] :discounts
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :ip_address The IP address of the purchaser for this order.
   # @option opts [CreateParams1] :payment
   # @option opts [PostOrdersRequestShippingCost] :shipping_cost
@@ -4507,10 +5805,10 @@ describe "DefaultApi" do
   # @option opts [String] :customer The customer associated with this order.
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
   # @option opts [PostOrdersIdRequestDiscounts] :discounts
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :ip_address The IP address of the purchaser for this order.
   # @option opts [Array(UpdateParams)] :line_items A list of line items the customer is ordering. Each line item includes information about the product, the quantity, and the resulting cost.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [UpdateParams1] :payment
   # @option opts [PostOrdersRequestShippingCost] :shipping_cost
   # @option opts [PostOrdersRequestShippingDetails] :shipping_details
@@ -4526,7 +5824,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Cancels the order as well as the payment intent if one is attached.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Order]
   describe "post_orders_id_cancel test" do
     it "should work" do
@@ -4538,7 +5836,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Reopens a &lt;code&gt;submitted&lt;/code&gt; order.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Order]
   describe "post_orders_id_reopen test" do
     it "should work" do
@@ -4551,7 +5849,7 @@ describe "DefaultApi" do
   # @param id
   # @param expected_total &#x60;expected_total&#x60; should always be set to the order&#39;s &#x60;amount_total&#x60; field. If they don&#39;t match, submitting the order will fail. This helps detect race conditions where something else concurrently modifies the order.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Order]
   describe "post_orders_id_submit test" do
     it "should work" do
@@ -4564,7 +5862,7 @@ describe "DefaultApi" do
   # @param amount Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
   # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :application_fee_amount The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner&#39;s Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
+  # @option opts [Int32] :application_fee_amount The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner&#39;s Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
   # @option opts [AutomaticPaymentMethodsParam] :automatic_payment_methods
   # @option opts [String] :capture_method Controls when the funds will be captured from the customer&#39;s account.
   # @option opts [Bool] :confirm Set to &#x60;true&#x60; to attempt to [confirm](https://stripe.com/docs/api/payment_intents/confirm) this PaymentIntent immediately. This parameter defaults to &#x60;false&#x60;. When creating and confirming a PaymentIntent at the same time, parameters available in the [confirm](https://stripe.com/docs/api/payment_intents/confirm) API may also be provided.
@@ -4572,15 +5870,15 @@ describe "DefaultApi" do
   # @option opts [String] :customer ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent&#39;s payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
   # @option opts [Bool] :error_on_requires_action Set to &#x60;true&#x60; to fail the payment attempt if the PaymentIntent transitions into &#x60;requires_action&#x60;. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication). This parameter can only be used with [&#x60;confirm&#x3D;true&#x60;](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :mandate ID of the mandate to be used for this payment. This parameter can only be used with [&#x60;confirm&#x3D;true&#x60;](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
   # @option opts [SecretKeyParam] :mandate_data
   # @option opts [PostPaymentIntentsRequestOffSession] :off_session
   # @option opts [String] :on_behalf_of The Stripe account ID for which these funds are intended. For details, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-  # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods#compatibility) object) to attach to this PaymentIntent.  If neither the &#x60;payment_method&#x60; parameter nor the &#x60;source&#x60; parameter are provided with &#x60;confirm&#x3D;true&#x60;, &#x60;source&#x60; will be automatically populated with &#x60;customer.default_source&#x60; to improve the migration experience for users of the Charges API. We recommend that you explicitly provide the &#x60;payment_method&#x60; going forward.
+  # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.  If this parameter is omitted with &#x60;confirm&#x3D;true&#x60;, &#x60;customer.default_source&#x60; will be attached as this PaymentIntent&#39;s payment instrument to improve the migration experience for users of the Charges API. We recommend that you explicitly provide the &#x60;payment_method&#x60; going forward.
   # @option opts [PaymentMethodDataParams] :payment_method_data
-  # @option opts [PaymentMethodOptionsParam21] :payment_method_options
-  # @option opts [Array(String)] :payment_method_types
+  # @option opts [PaymentMethodOptionsParam11] :payment_method_options
+  # @option opts [Array(String)] :payment_method_types The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. If this is not provided, defaults to [\\\&quot;card\\\&quot;]. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
   # @option opts [RadarOptions] :radar_options
   # @option opts [String] :receipt_email Email address that the receipt for the resulting payment will be sent to. If &#x60;receipt_email&#x60; is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
   # @option opts [String] :return_url The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method&#39;s app or site. If you&#39;d prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter can only be used with [&#x60;confirm&#x3D;true&#x60;](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
@@ -4602,17 +5900,17 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates properties on a PaymentIntent object without confirming.&lt;/p&gt;  &lt;p&gt;Depending on which properties you update, you may need to confirm the PaymentIntent again. For example, updating the &lt;code&gt;payment_method&lt;/code&gt; will always require you to confirm the PaymentIntent again. If you prefer to update and confirm at the same time, we recommend updating properties via the &lt;a href&#x3D;\&quot;/docs/api/payment_intents/confirm\&quot;&gt;confirm API&lt;/a&gt; instead.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
+  # @option opts [Int32] :amount Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
   # @option opts [PostPaymentIntentsIntentRequestApplicationFeeAmount] :application_fee_amount
   # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   # @option opts [String] :customer ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent&#39;s payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.
   # @option opts [PaymentMethodDataParams] :payment_method_data
-  # @option opts [PaymentMethodOptionsParam21] :payment_method_options
-  # @option opts [Array(String)] :payment_method_types
+  # @option opts [PaymentMethodOptionsParam11] :payment_method_options
+  # @option opts [Array(String)] :payment_method_types The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
   # @option opts [PostPaymentIntentsIntentRequestReceiptEmail] :receipt_email
   # @option opts [String] :setup_future_usage Indicates that you intend to make future payments with this PaymentIntent&#39;s payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent&#39;s Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses &#x60;setup_future_usage&#x60; to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If &#x60;setup_future_usage&#x60; is already set and you are performing a request using a publishable key, you may only update the value from &#x60;on_session&#x60; to &#x60;off_session&#x60;.
   # @option opts [PostPaymentIntentsIntentRequestShipping] :shipping
@@ -4631,9 +5929,9 @@ describe "DefaultApi" do
   # &lt;p&gt;Manually reconcile the remaining amount for a customer_balance PaymentIntent.&lt;/p&gt;  &lt;p&gt;This can be used when the cash balance for &lt;a href&#x3D;\&quot;docs/payments/customer-balance/reconciliation#cash-manual-reconciliation\&quot;&gt;a customer in manual reconciliation mode&lt;/a&gt; received funds.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount Amount intended to be applied to this PaymentIntent from the customer’s cash balance.  A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).  The maximum amount is the amount of the PaymentIntent.  When omitted, the amount defaults to the remaining amount requested on the PaymentIntent.
+  # @option opts [Int32] :amount Amount intended to be applied to this PaymentIntent from the customer’s cash balance.  A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).  The maximum amount is the amount of the PaymentIntent.  When omitted, the amount defaults to the remaining amount requested on the PaymentIntent.
   # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [PaymentIntent]
   describe "post_payment_intents_intent_apply_customer_balance test" do
     it "should work" do
@@ -4646,7 +5944,7 @@ describe "DefaultApi" do
   # @param intent
   # @param [Hash] opts the optional parameters
   # @option opts [String] :cancellation_reason Reason for canceling this PaymentIntent. Possible values are &#x60;duplicate&#x60;, &#x60;fraudulent&#x60;, &#x60;requested_by_customer&#x60;, or &#x60;abandoned&#x60;
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [PaymentIntent]
   describe "post_payment_intents_intent_cancel test" do
     it "should work" do
@@ -4658,9 +5956,9 @@ describe "DefaultApi" do
   # &lt;p&gt;Capture the funds of an existing uncaptured PaymentIntent when its status is &lt;code&gt;requires_capture&lt;/code&gt;.&lt;/p&gt;  &lt;p&gt;Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by default).&lt;/p&gt;  &lt;p&gt;Learn more about &lt;a href&#x3D;\&quot;/docs/payments/capture-later\&quot;&gt;separate authorization and capture&lt;/a&gt;.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount_to_capture The amount to capture from the PaymentIntent, which must be less than or equal to the original amount. Any additional amount will be automatically refunded. Defaults to the full &#x60;amount_capturable&#x60; if not provided.
-  # @option opts [Int64] :application_fee_amount The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner&#39;s Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
-  # @option opts [Array(String)] :expand
+  # @option opts [Int32] :amount_to_capture The amount to capture from the PaymentIntent, which must be less than or equal to the original amount. Any additional amount will be automatically refunded. Defaults to the full &#x60;amount_capturable&#x60; if not provided.
+  # @option opts [Int32] :application_fee_amount The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner&#39;s Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :statement_descriptor For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
   # @option opts [String] :statement_descriptor_suffix Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
   # @option opts [TransferDataUpdateParams1] :transfer_data
@@ -4675,14 +5973,16 @@ describe "DefaultApi" do
   # &lt;p&gt;Confirm that your customer intends to pay with current or provided payment method. Upon confirmation, the PaymentIntent will attempt to initiate a payment.&lt;/p&gt;  &lt;p&gt;If the selected payment method requires additional authentication steps, the PaymentIntent will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If payment fails, the PaymentIntent will transition to the &lt;code&gt;requires_payment_method&lt;/code&gt; status. If payment succeeds, the PaymentIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status (or &lt;code&gt;requires_capture&lt;/code&gt;, if &lt;code&gt;capture_method&lt;/code&gt; is set to &lt;code&gt;manual&lt;/code&gt;).&lt;/p&gt;  &lt;p&gt;If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;automatic&lt;/code&gt;, payment may be attempted using our &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-handle-card-payment\&quot;&gt;client SDKs&lt;/a&gt; and the PaymentIntent’s &lt;a href&#x3D;\&quot;#payment_intent_object-client_secret\&quot;&gt;client_secret&lt;/a&gt;. After &lt;code&gt;next_action&lt;/code&gt;s are handled by the client, no additional confirmation is required to complete the payment.&lt;/p&gt;  &lt;p&gt;If the &lt;code&gt;confirmation_method&lt;/code&gt; is &lt;code&gt;manual&lt;/code&gt;, all payment attempts must be initiated using a secret key. If any actions are required for the payment, the PaymentIntent will return to the &lt;code&gt;requires_confirmation&lt;/code&gt; state after those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment attempt. Read the &lt;a href&#x3D;\&quot;/docs/payments/payment-intents/web-manual\&quot;&gt;expanded documentation&lt;/a&gt; to learn more about manual confirmation.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :client_secret The client secret of the PaymentIntent.
   # @option opts [Bool] :error_on_requires_action Set to &#x60;true&#x60; to fail the payment attempt if the PaymentIntent transitions into &#x60;requires_action&#x60;. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication).
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :mandate ID of the mandate to be used for this payment.
   # @option opts [PostPaymentIntentsIntentConfirmRequestMandateData] :mandate_data
   # @option opts [PostPaymentIntentsIntentConfirmRequestOffSession] :off_session
   # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.
   # @option opts [PaymentMethodDataParams] :payment_method_data
-  # @option opts [PaymentMethodOptionsParam21] :payment_method_options
+  # @option opts [PaymentMethodOptionsParam11] :payment_method_options
+  # @option opts [Array(String)] :payment_method_types The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. Use automatic_payment_methods to manage payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
   # @option opts [RadarOptions] :radar_options
   # @option opts [PostPaymentIntentsIntentRequestReceiptEmail] :receipt_email
   # @option opts [String] :return_url The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method&#39;s app or site. If you&#39;d prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
@@ -4701,9 +6001,9 @@ describe "DefaultApi" do
   # @param intent
   # @param amount The updated total amount you intend to collect from the cardholder. This amount must be greater than the currently authorized amount.
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :application_fee_amount The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner&#39;s Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
+  # @option opts [Int32] :application_fee_amount The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner&#39;s Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [TransferDataUpdateParams2] :transfer_data
   # @return [PaymentIntent]
   describe "post_payment_intents_intent_increment_authorization test" do
@@ -4716,9 +6016,10 @@ describe "DefaultApi" do
   # &lt;p&gt;Verifies microdeposits on a PaymentIntent object.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(Int64)] :amounts Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
+  # @option opts [Array(Int32)] :amounts Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
+  # @option opts [String] :client_secret The client secret of the PaymentIntent.
   # @option opts [String] :descriptor_code A six-character code starting with SM present in the microdeposit sent to the bank account.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [PaymentIntent]
   describe "post_payment_intents_intent_verify_microdeposits test" do
     it "should work" do
@@ -4732,13 +6033,13 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [AfterCompletionParams] :after_completion
   # @option opts [Bool] :allow_promotion_codes Enables user redeemable promotion codes.
-  # @option opts [Int64] :application_fee_amount The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner&#39;s Stripe account. Can only be applied when there are no line items with recurring prices.
+  # @option opts [Int32] :application_fee_amount The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner&#39;s Stripe account. Can only be applied when there are no line items with recurring prices.
   # @option opts [Float64] :application_fee_percent A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner&#39;s Stripe account. There must be at least 1 line item with a recurring price to use this field.
   # @option opts [AutomaticTaxParams1] :automatic_tax
   # @option opts [String] :billing_address_collection Configuration for collecting the customer&#39;s billing address.
   # @option opts [ConsentCollectionParams1] :consent_collection
   # @option opts [String] :customer_creation Configures whether [checkout sessions](https://stripe.com/docs/api/checkout/sessions) created by this payment link create a [Customer](https://stripe.com/docs/api/customers).
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :on_behalf_of The account on behalf of which to charge.
   # @option opts [PaymentIntentDataParams1] :payment_intent_data
   # @option opts [Array(String)] :payment_method_types The list of payment method types that customers can use. Only &#x60;card&#x60; is supported. If no value is passed, Stripe will dynamically show relevant payment methods from your [payment method settings](https://dashboard.stripe.com/settings/payment_methods) (20+ payment methods [supported](https://stripe.com/docs/payments/payment-methods/integration-options#payment-method-product-support)).
@@ -4766,7 +6067,7 @@ describe "DefaultApi" do
   # @option opts [AutomaticTaxParams1] :automatic_tax
   # @option opts [String] :billing_address_collection Configuration for collecting the customer&#39;s billing address.
   # @option opts [String] :customer_creation Configures whether [checkout sessions](https://stripe.com/docs/api/checkout/sessions) created by this payment link create a [Customer](https://stripe.com/docs/api/customers).
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Array(LineItemsUpdateParams)] :line_items The line items representing what is being sold. Each line item represents an item being sold. Up to 20 line items are supported.
   # @option opts [PostPaymentLinksPaymentLinkRequestPaymentMethodTypes] :payment_method_types
   # @option opts [PostPaymentLinksPaymentLinkRequestShippingAddressCollection] :shipping_address_collection
@@ -4780,37 +6081,37 @@ describe "DefaultApi" do
   # unit tests for post_payment_methods
   # &lt;p&gt;Creates a PaymentMethod object. Read the &lt;a href&#x3D;\&quot;/docs/stripe-js/reference#stripe-create-payment-method\&quot;&gt;Stripe.js reference&lt;/a&gt; to learn how to create PaymentMethods via Stripe.js.&lt;/p&gt;  &lt;p&gt;Instead of creating a PaymentMethod directly, we recommend using the &lt;a href&#x3D;\&quot;/docs/payments/accept-a-payment\&quot;&gt;PaymentIntents&lt;/a&gt; API to accept a payment immediately or the &lt;a href&#x3D;\&quot;/docs/payments/save-and-reuse\&quot;&gt;SetupIntent&lt;/a&gt; API to collect payment method details ahead of a future payment.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [PaymentMethodParam] :acss_debit
+  # @option opts [PaymentMethodParam2] :acss_debit
   # @option opts [Object] :affirm If this is an &#x60;affirm&#x60; PaymentMethod, this hash contains details about the Affirm payment method.
   # @option opts [Object] :afterpay_clearpay If this is an &#x60;AfterpayClearpay&#x60; PaymentMethod, this hash contains details about the AfterpayClearpay payment method.
   # @option opts [Object] :alipay If this is an &#x60;Alipay&#x60; PaymentMethod, this hash contains details about the Alipay payment method.
-  # @option opts [Param] :au_becs_debit
-  # @option opts [Param1] :bacs_debit
+  # @option opts [Param10] :au_becs_debit
+  # @option opts [Param11] :bacs_debit
   # @option opts [Object] :bancontact If this is a &#x60;bancontact&#x60; PaymentMethod, this hash contains details about the Bancontact payment method.
-  # @option opts [BillingDetailsInnerParams] :billing_details
-  # @option opts [Param2] :boleto
+  # @option opts [BillingDetailsInnerParams1] :billing_details
+  # @option opts [Param12] :boleto
   # @option opts [PostPaymentMethodsRequestCard] :card
   # @option opts [String] :customer The &#x60;Customer&#x60; to whom the original PaymentMethod is attached.
   # @option opts [Object] :customer_balance If this is a &#x60;customer_balance&#x60; PaymentMethod, this hash contains details about the CustomerBalance payment method.
-  # @option opts [Param3] :eps
-  # @option opts [Array(String)] :expand
-  # @option opts [Param4] :fpx
+  # @option opts [Param13] :eps
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Param14] :fpx
   # @option opts [Object] :giropay If this is a &#x60;giropay&#x60; PaymentMethod, this hash contains details about the Giropay payment method.
   # @option opts [Object] :grabpay If this is a &#x60;grabpay&#x60; PaymentMethod, this hash contains details about the GrabPay payment method.
-  # @option opts [Param5] :ideal
+  # @option opts [Param15] :ideal
   # @option opts [Object] :interac_present If this is an &#x60;interac_present&#x60; PaymentMethod, this hash contains details about the Interac Present payment method.
-  # @option opts [Param6] :klarna
+  # @option opts [Param16] :klarna
   # @option opts [Object] :konbini If this is a &#x60;konbini&#x60; PaymentMethod, this hash contains details about the Konbini payment method.
   # @option opts [Object] :link If this is an &#x60;Link&#x60; PaymentMethod, this hash contains details about the Link payment method.
   # @option opts [Object] :oxxo If this is an &#x60;oxxo&#x60; PaymentMethod, this hash contains details about the OXXO payment method.
-  # @option opts [Param7] :p24
+  # @option opts [Param17] :p24
   # @option opts [String] :payment_method The PaymentMethod to share.
   # @option opts [Object] :paynow If this is a &#x60;paynow&#x60; PaymentMethod, this hash contains details about the PayNow payment method.
   # @option opts [RadarOptions] :radar_options
-  # @option opts [Param8] :sepa_debit
-  # @option opts [Param9] :sofort
+  # @option opts [Param18] :sepa_debit
+  # @option opts [Param19] :sofort
   # @option opts [String] :_type The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
-  # @option opts [PaymentMethodParam1] :us_bank_account
+  # @option opts [PaymentMethodParam3] :us_bank_account
   # @option opts [Object] :wechat_pay If this is an &#x60;wechat_pay&#x60; PaymentMethod, this hash contains details about the wechat_pay payment method.
   # @return [PaymentMethod]
   describe "post_payment_methods test" do
@@ -4823,16 +6124,11 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated.&lt;/p&gt;
   # @param payment_method
   # @param [Hash] opts the optional parameters
-  # @option opts [Object] :acss_debit This is a legacy parameter that will be removed in the future. It is a hash that does not accept any keys.
-  # @option opts [Object] :affirm This is a legacy parameter that will be removed in the future. It is a hash that does not accept any keys.
-  # @option opts [Object] :au_becs_debit This is a legacy parameter that will be removed in the future. It is a hash that does not accept any keys.
-  # @option opts [Object] :bacs_debit This is a legacy parameter that will be removed in the future. It is a hash that does not accept any keys.
-  # @option opts [BillingDetailsInnerParams] :billing_details
+  # @option opts [BillingDetailsInnerParams1] :billing_details
   # @option opts [UpdateApiParam] :card
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Object] :link If this is an &#x60;Link&#x60; PaymentMethod, this hash contains details about the Link payment method.
-  # @option opts [IndividualSpecsMetadata] :metadata
-  # @option opts [Object] :sepa_debit This is a legacy parameter that will be removed in the future. It is a hash that does not accept any keys.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [UpdateParam] :us_bank_account
   # @return [PaymentMethod]
   describe "post_payment_methods_payment_method test" do
@@ -4846,7 +6142,7 @@ describe "DefaultApi" do
   # @param payment_method
   # @param customer The ID of the customer to which to attach the PaymentMethod.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [PaymentMethod]
   describe "post_payment_methods_payment_method_attach test" do
     it "should work" do
@@ -4858,7 +6154,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no longer be used for a payment or re-attached to a Customer.&lt;/p&gt;
   # @param payment_method
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [PaymentMethod]
   describe "post_payment_methods_payment_method_detach test" do
     it "should work" do
@@ -4873,7 +6169,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
   # @option opts [String] :destination The ID of a bank account or a card to send the payout to. If no destination is supplied, the default external account for the specified currency will be used.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :method The method used to send this payout, which can be &#x60;standard&#x60; or &#x60;instant&#x60;. &#x60;instant&#x60; is only supported for payouts to debit cards. (See [Instant payouts for marketplaces for more information](https://stripe.com/blog/instant-payouts-for-marketplaces).)
   # @option opts [String] :source_type The balance type of your Stripe balance to draw this payout from. Balances for different payment sources are kept separately. You can find the amounts with the balances API. One of &#x60;bank_account&#x60;, &#x60;card&#x60;, or &#x60;fpx&#x60;.
   # @option opts [String] :statement_descriptor A string to be displayed on the recipient&#39;s bank or card statement. This may be at most 22 characters. Attempting to use a &#x60;statement_descriptor&#x60; longer than 22 characters will return an error. Note: Most banks will truncate this information and/or display it inconsistently. Some may not display it at all.
@@ -4888,8 +6184,8 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates the specified payout by setting the values of the parameters passed. Any parameters not provided will be left unchanged. This request accepts only the metadata as arguments.&lt;/p&gt;
   # @param payout
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [Payout]
   describe "post_payouts_payout test" do
     it "should work" do
@@ -4901,7 +6197,7 @@ describe "DefaultApi" do
   # &lt;p&gt;A previously created payout can be canceled if it has not yet been paid out. Funds will be refunded to your available balance. You may not cancel automatic Stripe payouts.&lt;/p&gt;
   # @param payout
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Payout]
   describe "post_payouts_payout_cancel test" do
     it "should work" do
@@ -4913,7 +6209,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Reverses a payout by debiting the destination bank account. Only payouts for connected accounts to US bank accounts may be reversed at this time. If the payout is in the &lt;code&gt;pending&lt;/code&gt; status, &lt;code&gt;/v1/payouts/:id/cancel&lt;/code&gt; should be used instead.&lt;/p&gt;  &lt;p&gt;By requesting a reversal via &lt;code&gt;/v1/payouts/:id/reverse&lt;/code&gt;, you confirm that the authorized signatory of the selected bank account has authorized the debit on the bank account and that no other authorization is required.&lt;/p&gt;
   # @param payout
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Payout]
   describe "post_payouts_payout_reverse test" do
     it "should work" do
@@ -4928,19 +6224,19 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :active Whether the plan is currently available for new subscriptions. Defaults to &#x60;true&#x60;.
   # @option opts [String] :aggregate_usage Specifies a usage aggregation strategy for plans of &#x60;usage_type&#x3D;metered&#x60;. Allowed values are &#x60;sum&#x60; for summing up all usage during a period, &#x60;last_during_period&#x60; for using the last usage record reported within a period, &#x60;last_ever&#x60; for using the last usage record ever (across period bounds) or &#x60;max&#x60; which uses the usage record with the maximum reported usage during a period. Defaults to &#x60;sum&#x60;.
-  # @option opts [Int64] :amount A positive integer in cents (or local equivalent) (or 0 for a free plan) representing how much to charge on a recurring basis.
+  # @option opts [Int32] :amount A positive integer in cents (or local equivalent) (or 0 for a free plan) representing how much to charge on a recurring basis.
   # @option opts [String] :amount_decimal Same as &#x60;amount&#x60;, but accepts a decimal value with at most 12 decimal places. Only one of &#x60;amount&#x60; and &#x60;amount_decimal&#x60; can be set.
   # @option opts [String] :billing_scheme Describes how to compute the price per period. Either &#x60;per_unit&#x60; or &#x60;tiered&#x60;. &#x60;per_unit&#x60; indicates that the fixed amount (specified in &#x60;amount&#x60;) will be charged per unit in &#x60;quantity&#x60; (for plans with &#x60;usage_type&#x3D;licensed&#x60;), or per unit of total usage (for plans with &#x60;usage_type&#x3D;metered&#x60;). &#x60;tiered&#x60; indicates that the unit pricing will be computed using a tiering strategy as defined using the &#x60;tiers&#x60; and &#x60;tiers_mode&#x60; attributes.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :id An identifier randomly generated by Stripe. Used to identify this plan when subscribing a customer. You can optionally override this ID, but the ID must be unique across all plans in your Stripe account. You can, however, use the same plan ID in both live and test modes.
-  # @option opts [Int64] :interval_count The number of intervals between subscription billings. For example, &#x60;interval&#x3D;month&#x60; and &#x60;interval_count&#x3D;3&#x60; bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Int32] :interval_count The number of intervals between subscription billings. For example, &#x60;interval&#x3D;month&#x60; and &#x60;interval_count&#x3D;3&#x60; bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :nickname A brief description of the plan, hidden from customers.
   # @option opts [PostPlansRequestProduct] :product
   # @option opts [Array(Tier)] :tiers Each element represents a pricing tier. This parameter requires &#x60;billing_scheme&#x60; to be set to &#x60;tiered&#x60;. See also the documentation for &#x60;billing_scheme&#x60;.
   # @option opts [String] :tiers_mode Defines if the tiering price should be &#x60;graduated&#x60; or &#x60;volume&#x60; based. In &#x60;volume&#x60;-based tiering, the maximum quantity within a period determines the per unit price, in &#x60;graduated&#x60; tiering pricing can successively change as the quantity grows.
   # @option opts [TransformUsageParam] :transform_usage
-  # @option opts [Int64] :trial_period_days Default number of trial days when subscribing a customer to this plan using [&#x60;trial_from_plan&#x3D;true&#x60;](https://stripe.com/docs/api#create_subscription-trial_from_plan).
+  # @option opts [Int32] :trial_period_days Default number of trial days when subscribing a customer to this plan using [&#x60;trial_from_plan&#x3D;true&#x60;](https://stripe.com/docs/api#create_subscription-trial_from_plan).
   # @option opts [String] :usage_type Configures how the quantity per period should be determined. Can be either &#x60;metered&#x60; or &#x60;licensed&#x60;. &#x60;licensed&#x60; automatically bills the &#x60;quantity&#x60; set when adding it to a subscription. &#x60;metered&#x60; aggregates the total usage based on usage records. Defaults to &#x60;licensed&#x60;.
   # @return [Plan]
   describe "post_plans test" do
@@ -4954,11 +6250,11 @@ describe "DefaultApi" do
   # @param plan
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :active Whether the plan is currently available for new subscriptions.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :nickname A brief description of the plan, hidden from customers.
   # @option opts [String] :product The product the plan belongs to. This cannot be changed once it has been used in a subscription or subscription schedule.
-  # @option opts [Int64] :trial_period_days Default number of trial days when subscribing a customer to this plan using [&#x60;trial_from_plan&#x3D;true&#x60;](https://stripe.com/docs/api#create_subscription-trial_from_plan).
+  # @option opts [Int32] :trial_period_days Default number of trial days when subscribing a customer to this plan using [&#x60;trial_from_plan&#x3D;true&#x60;](https://stripe.com/docs/api#create_subscription-trial_from_plan).
   # @return [Plan]
   describe "post_plans_plan test" do
     it "should work" do
@@ -4972,7 +6268,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :active Whether the price can be used for new purchases. Defaults to &#x60;true&#x60;.
   # @option opts [String] :billing_scheme Describes how to compute the price per period. Either &#x60;per_unit&#x60; or &#x60;tiered&#x60;. &#x60;per_unit&#x60; indicates that the fixed amount (specified in &#x60;unit_amount&#x60; or &#x60;unit_amount_decimal&#x60;) will be charged per unit in &#x60;quantity&#x60; (for prices with &#x60;usage_type&#x3D;licensed&#x60;), or per unit of total usage (for prices with &#x60;usage_type&#x3D;metered&#x60;). &#x60;tiered&#x60; indicates that the unit pricing will be computed using a tiering strategy as defined using the &#x60;tiers&#x60; and &#x60;tiers_mode&#x60; attributes.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :lookup_key A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
   # @option opts [String] :nickname A brief description of the price, hidden from customers.
   # @option opts [String] :product The ID of the product that this price will belong to.
@@ -4983,7 +6279,7 @@ describe "DefaultApi" do
   # @option opts [String] :tiers_mode Defines if the tiering price should be &#x60;graduated&#x60; or &#x60;volume&#x60; based. In &#x60;volume&#x60;-based tiering, the maximum quantity within a period determines the per unit price, in &#x60;graduated&#x60; tiering pricing can successively change as the quantity grows.
   # @option opts [Bool] :transfer_lookup_key If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
   # @option opts [TransformUsageParam] :transform_quantity
-  # @option opts [Int64] :unit_amount A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge.
+  # @option opts [Int32] :unit_amount A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge.
   # @option opts [String] :unit_amount_decimal Same as &#x60;unit_amount&#x60;, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of &#x60;unit_amount&#x60; and &#x60;unit_amount_decimal&#x60; can be set.
   # @return [Price]
   describe "post_prices test" do
@@ -4997,11 +6293,10 @@ describe "DefaultApi" do
   # @param price
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :active Whether the price can be used for new purchases. Defaults to &#x60;true&#x60;.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :lookup_key A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :nickname A brief description of the price, hidden from customers.
-  # @option opts [PostPricesPriceRequestRecurring] :recurring
   # @option opts [String] :tax_behavior Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of &#x60;inclusive&#x60;, &#x60;exclusive&#x60;, or &#x60;unspecified&#x60;. Once specified as either &#x60;inclusive&#x60; or &#x60;exclusive&#x60;, it cannot be changed.
   # @option opts [Bool] :transfer_lookup_key If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
   # @return [Price]
@@ -5016,19 +6311,15 @@ describe "DefaultApi" do
   # @param name The product&#39;s name, meant to be displayable to the customer.
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :active Whether the product is currently available for purchase. Defaults to &#x60;true&#x60;.
-  # @option opts [Array(String)] :attributes
-  # @option opts [String] :caption A short one-line description of the product, meant to be displayable to the customer. May only be set if type&#x3D;&#x60;good&#x60;.
-  # @option opts [Array(String)] :deactivate_on
   # @option opts [PriceDataWithoutProduct] :default_price_data
   # @option opts [String] :description The product&#39;s description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :id An identifier will be randomly generated by Stripe. You can optionally override this ID, but the ID must be unique across all products in your Stripe account.
   # @option opts [Array(String)] :images A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
   # @option opts [PackageDimensionsSpecs] :package_dimensions
   # @option opts [Bool] :shippable Whether this product is shipped (i.e., physical goods).
   # @option opts [String] :statement_descriptor An arbitrary string to be displayed on your customer&#39;s credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include &#x60;&lt;&#x60;, &#x60;&gt;&#x60;, &#x60;\\\\&#x60;, &#x60;\\\&quot;&#x60;, &#x60;&#39;&#x60; characters, and will appear on your customer&#39;s statement in capital letters. Non-ASCII characters are automatically stripped.  It must contain at least one letter.
   # @option opts [String] :tax_code A [tax code](https://stripe.com/docs/tax/tax-categories) ID.
-  # @option opts [String] :_type The type of the product. Defaults to &#x60;service&#x60; if not explicitly specified, enabling use of this product with Subscriptions and Plans. Set this parameter to &#x60;good&#x60; to use this product with Orders and SKUs. On API versions before &#x60;2018-02-05&#x60;, this field defaults to &#x60;good&#x60; for compatibility reasons.
   # @option opts [String] :unit_label A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
   # @option opts [String] :url A URL of a publicly-accessible webpage for this product.
   # @return [Product]
@@ -5043,14 +6334,11 @@ describe "DefaultApi" do
   # @param id
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :active Whether the product is available for purchase.
-  # @option opts [PostProductsIdRequestAttributes] :attributes
-  # @option opts [String] :caption A short one-line description of the product, meant to be displayable to the customer. May only be set if &#x60;type&#x3D;good&#x60;.
-  # @option opts [Array(String)] :deactivate_on
   # @option opts [String] :default_price The ID of the [Price](https://stripe.com/docs/api/prices) object that is the default price for this product.
   # @option opts [String] :description The product&#39;s description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [PostProductsIdRequestImages] :images
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :name The product&#39;s name, meant to be displayable to the customer.
   # @option opts [PostProductsIdRequestPackageDimensions] :package_dimensions
   # @option opts [Bool] :shippable Whether this product is shipped (i.e., physical goods).
@@ -5072,9 +6360,9 @@ describe "DefaultApi" do
   # @option opts [Bool] :active Whether the promotion code is currently active.
   # @option opts [String] :code The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific customer. If left blank, we will generate one automatically.
   # @option opts [String] :customer The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
-  # @option opts [Array(String)] :expand
-  # @option opts [Int64] :expires_at The timestamp at which this promotion code will expire. If the coupon has specified a &#x60;redeems_by&#x60;, then this value cannot be after the coupon&#39;s &#x60;redeems_by&#x60;.
-  # @option opts [Int64] :max_redemptions A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a &#x60;max_redemptions&#x60;, then this value cannot be greater than the coupon&#39;s &#x60;max_redemptions&#x60;.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :expires_at The timestamp at which this promotion code will expire. If the coupon has specified a &#x60;redeems_by&#x60;, then this value cannot be after the coupon&#39;s &#x60;redeems_by&#x60;.
+  # @option opts [Int32] :max_redemptions A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a &#x60;max_redemptions&#x60;, then this value cannot be greater than the coupon&#39;s &#x60;max_redemptions&#x60;.
   # @option opts [RestrictionsParams] :restrictions
   # @return [PromotionCode]
   describe "post_promotion_codes test" do
@@ -5088,8 +6376,8 @@ describe "DefaultApi" do
   # @param promotion_code
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :active Whether the promotion code is currently active. A promotion code can only be reactivated when the coupon is still valid and the promotion code is otherwise redeemable.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [PromotionCode]
   describe "post_promotion_codes_promotion_code test" do
     it "should work" do
@@ -5108,8 +6396,8 @@ describe "DefaultApi" do
   # @option opts [PostQuotesRequestDefaultTaxRates] :default_tax_rates
   # @option opts [String] :description A description that will be displayed on the quote PDF. If no value is passed, the default description configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
   # @option opts [PostQuotesRequestDiscounts] :discounts
-  # @option opts [Array(String)] :expand
-  # @option opts [Int64] :expires_at A future timestamp on which the quote will be canceled if in &#x60;open&#x60; or &#x60;draft&#x60; status. Measured in seconds since the Unix epoch. If no value is passed, the default expiration date configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :expires_at A future timestamp on which the quote will be canceled if in &#x60;open&#x60; or &#x60;draft&#x60; status. Measured in seconds since the Unix epoch. If no value is passed, the default expiration date configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
   # @option opts [String] :footer A footer that will be displayed on the quote PDF. If no value is passed, the default footer configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
   # @option opts [FromQuoteParams] :from_quote
   # @option opts [String] :header A header that will be displayed on the quote PDF. If no value is passed, the default header configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
@@ -5138,8 +6426,8 @@ describe "DefaultApi" do
   # @option opts [PostQuotesRequestDefaultTaxRates] :default_tax_rates
   # @option opts [String] :description A description that will be displayed on the quote PDF.
   # @option opts [PostQuotesRequestDiscounts] :discounts
-  # @option opts [Array(String)] :expand
-  # @option opts [Int64] :expires_at A future timestamp on which the quote will be canceled if in &#x60;open&#x60; or &#x60;draft&#x60; status. Measured in seconds since the Unix epoch.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :expires_at A future timestamp on which the quote will be canceled if in &#x60;open&#x60; or &#x60;draft&#x60; status. Measured in seconds since the Unix epoch.
   # @option opts [String] :footer A footer that will be displayed on the quote PDF.
   # @option opts [String] :header A header that will be displayed on the quote PDF.
   # @option opts [QuoteParam] :invoice_settings
@@ -5158,7 +6446,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Accepts the specified quote.&lt;/p&gt;
   # @param quote
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Quote]
   describe "post_quotes_quote_accept test" do
     it "should work" do
@@ -5170,7 +6458,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Cancels the quote.&lt;/p&gt;
   # @param quote
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Quote]
   describe "post_quotes_quote_cancel test" do
     it "should work" do
@@ -5182,8 +6470,8 @@ describe "DefaultApi" do
   # &lt;p&gt;Finalizes the quote.&lt;/p&gt;
   # @param quote
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @option opts [Int64] :expires_at A future timestamp on which the quote will be canceled if in &#x60;open&#x60; or &#x60;draft&#x60; status. Measured in seconds since the Unix epoch.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [Int32] :expires_at A future timestamp on which the quote will be canceled if in &#x60;open&#x60; or &#x60;draft&#x60; status. Measured in seconds since the Unix epoch.
   # @return [Quote]
   describe "post_quotes_quote_finalize test" do
     it "should work" do
@@ -5196,7 +6484,7 @@ describe "DefaultApi" do
   # @param value The value of the item (whose type must match the type of the parent value list).
   # @param value_list The identifier of the value list which the created item will be added to.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [RadarValueListItem]
   describe "post_radar_value_list_items test" do
     it "should work" do
@@ -5209,7 +6497,7 @@ describe "DefaultApi" do
   # @param _alias The name of the value list for use in rules.
   # @param name The human-readable name of the value list.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :item_type Type of the items in the value list. One of &#x60;card_fingerprint&#x60;, &#x60;card_bin&#x60;, &#x60;email&#x60;, &#x60;ip_address&#x60;, &#x60;country&#x60;, &#x60;string&#x60;, &#x60;case_sensitive_string&#x60;, or &#x60;customer_id&#x60;. Use &#x60;string&#x60; if the item type is unknown or mixed.
   # @return [RadarValueList]
   describe "post_radar_value_lists test" do
@@ -5223,7 +6511,7 @@ describe "DefaultApi" do
   # @param value_list
   # @param [Hash] opts the optional parameters
   # @option opts [String] :_alias The name of the value list for use in rules.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :name The human-readable name of the value list.
   # @return [RadarValueList]
   describe "post_radar_value_lists_value_list test" do
@@ -5241,8 +6529,8 @@ describe "DefaultApi" do
   # @option opts [String] :card A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit card is not valid, recipient creation will fail. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user&#39;s debit card details, with the options described below. Although not all information is required, the extra info helps prevent fraud.
   # @option opts [String] :description An arbitrary string which you can attach to a &#x60;Recipient&#x60; object. It is displayed alongside the recipient in the web interface.
   # @option opts [String] :email The recipient&#39;s email address. It is displayed alongside the recipient in the web interface, and can be useful for searching and tracking.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :tax_id The recipient&#39;s tax ID, as a string. For type &#x60;individual&#x60;, the full SSN; for type &#x60;corporation&#x60;, the full EIN.
   # @return [Recipient]
   describe "post_recipients test" do
@@ -5260,8 +6548,8 @@ describe "DefaultApi" do
   # @option opts [String] :default_card ID of the card to set as the recipient&#39;s new default for payouts.
   # @option opts [String] :description An arbitrary string which you can attach to a &#x60;Recipient&#x60; object. It is displayed alongside the recipient in the web interface.
   # @option opts [String] :email The recipient&#39;s email address. It is displayed alongside the recipient in the web interface, and can be useful for searching and tracking.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :name The recipient&#39;s full, legal name. For type &#x60;individual&#x60;, should be in the format &#x60;First Last&#x60;, &#x60;First Middle Last&#x60;, or &#x60;First M Last&#x60; (no prefixes or suffixes). For &#x60;corporation&#x60;, the full, incorporated name.
   # @option opts [String] :tax_id The recipient&#39;s tax ID, as a string. For type &#x60;individual&#x60;, the full SSN; for type &#x60;corporation&#x60;, the full EIN.
   # @return [Recipient]
@@ -5274,11 +6562,11 @@ describe "DefaultApi" do
   # unit tests for post_refunds
   # &lt;p&gt;Create a refund.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount
+  # @option opts [Int32] :amount
   # @option opts [String] :charge
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :instructions_email
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :payment_intent
   # @option opts [String] :reason
   # @option opts [Bool] :refund_application_fee
@@ -5294,8 +6582,8 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates the specified refund by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;This request only accepts &lt;code&gt;metadata&lt;/code&gt; as an argument.&lt;/p&gt;
   # @param refund
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [Refund]
   describe "post_refunds_refund test" do
     it "should work" do
@@ -5307,7 +6595,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Cancels a refund with a status of &lt;code&gt;requires_action&lt;/code&gt;.&lt;/p&gt;  &lt;p&gt;Refunds in other states cannot be canceled, and only refunds for payment methods that require customer action will enter the &lt;code&gt;requires_action&lt;/code&gt; state.&lt;/p&gt;
   # @param refund
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Refund]
   describe "post_refunds_refund_cancel test" do
     it "should work" do
@@ -5319,7 +6607,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates a new object and begin running the report. (Certain report types require a &lt;a href&#x3D;\&quot;https://stripe.com/docs/keys#test-live-modes\&quot;&gt;live-mode API key&lt;/a&gt;.)&lt;/p&gt;
   # @param report_type The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to run, such as &#x60;\\\&quot;balance.summary.1\\\&quot;&#x60;.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [RunParameterSpecs] :parameters
   # @return [ReportingReportRun]
   describe "post_reporting_report_runs test" do
@@ -5332,7 +6620,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Approves a &lt;code&gt;Review&lt;/code&gt; object, closing it and removing it from the list of reviews.&lt;/p&gt;
   # @param review
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Review]
   describe "post_reviews_review_approve test" do
     it "should work" do
@@ -5346,13 +6634,13 @@ describe "DefaultApi" do
   # @option opts [Bool] :confirm Set to &#x60;true&#x60; to attempt to confirm this SetupIntent immediately. This parameter defaults to &#x60;false&#x60;. If the payment method attached is a card, a return_url may be provided in case additional authentication is required.
   # @option opts [String] :customer ID of the Customer this SetupIntent belongs to, if one exists.  If present, the SetupIntent&#39;s payment method will be attached to the Customer on successful setup. Payment methods attached to other Customers cannot be used with this SetupIntent.
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [SecretKeyParam2] :mandate_data
   # @option opts [String] :on_behalf_of The Stripe account ID for which this SetupIntent is created.
   # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this SetupIntent.
   # @option opts [PaymentMethodDataParams1] :payment_method_data
-  # @option opts [PaymentMethodOptionsParam28] :payment_method_options
-  # @option opts [Array(String)] :payment_method_types
+  # @option opts [PaymentMethodOptionsParam18] :payment_method_options
+  # @option opts [Array(String)] :payment_method_types The list of payment method types (e.g. card) that this SetupIntent is allowed to use. If this is not provided, defaults to [\\\&quot;card\\\&quot;].
   # @option opts [String] :return_url The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method&#39;s app or site. If you&#39;d prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter can only be used with [&#x60;confirm&#x3D;true&#x60;](https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm).
   # @option opts [SetupIntentSingleUseParams] :single_use
   # @option opts [String] :usage Indicates how the payment method is intended to be used in the future. If not provided, this value defaults to &#x60;off_session&#x60;.
@@ -5369,12 +6657,12 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :customer ID of the Customer this SetupIntent belongs to, if one exists.  If present, the SetupIntent&#39;s payment method will be attached to the Customer on successful setup. Payment methods attached to other Customers cannot be used with this SetupIntent.
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this SetupIntent.
   # @option opts [PaymentMethodDataParams1] :payment_method_data
-  # @option opts [PaymentMethodOptionsParam28] :payment_method_options
-  # @option opts [Array(String)] :payment_method_types
+  # @option opts [PaymentMethodOptionsParam18] :payment_method_options
+  # @option opts [Array(String)] :payment_method_types The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. If this is not provided, defaults to [\\\&quot;card\\\&quot;].
   # @return [SetupIntent]
   describe "post_setup_intents_intent test" do
     it "should work" do
@@ -5387,7 +6675,7 @@ describe "DefaultApi" do
   # @param intent
   # @param [Hash] opts the optional parameters
   # @option opts [String] :cancellation_reason Reason for canceling this SetupIntent. Possible values are &#x60;abandoned&#x60;, &#x60;requested_by_customer&#x60;, or &#x60;duplicate&#x60;
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [SetupIntent]
   describe "post_setup_intents_intent_cancel test" do
     it "should work" do
@@ -5399,11 +6687,12 @@ describe "DefaultApi" do
   # &lt;p&gt;Confirm that your customer intends to set up the current or provided payment method. For example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment method management page on your website.&lt;/p&gt;  &lt;p&gt;If the selected payment method does not require any additional steps from the customer, the SetupIntent will transition to the &lt;code&gt;succeeded&lt;/code&gt; status.&lt;/p&gt;  &lt;p&gt;Otherwise, it will transition to the &lt;code&gt;requires_action&lt;/code&gt; status and suggest additional actions via &lt;code&gt;next_action&lt;/code&gt;. If setup fails, the SetupIntent will transition to the &lt;code&gt;requires_payment_method&lt;/code&gt; status.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [String] :client_secret The client secret of the SetupIntent.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [PostPaymentIntentsIntentConfirmRequestMandateData] :mandate_data
   # @option opts [String] :payment_method ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this SetupIntent.
   # @option opts [PaymentMethodDataParams1] :payment_method_data
-  # @option opts [PaymentMethodOptionsParam28] :payment_method_options
+  # @option opts [PaymentMethodOptionsParam18] :payment_method_options
   # @option opts [String] :return_url The URL to redirect your customer back to after they authenticate on the payment method&#39;s app or site. If you&#39;d prefer to redirect to a mobile application, you can alternatively supply an application URI scheme. This parameter is only used for cards and other redirect-based payment methods.
   # @return [SetupIntent]
   describe "post_setup_intents_intent_confirm test" do
@@ -5416,9 +6705,10 @@ describe "DefaultApi" do
   # &lt;p&gt;Verifies microdeposits on a SetupIntent object.&lt;/p&gt;
   # @param intent
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(Int64)] :amounts Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
+  # @option opts [Array(Int32)] :amounts Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank account.
+  # @option opts [String] :client_secret The client secret of the SetupIntent.
   # @option opts [String] :descriptor_code A six-character code starting with SM present in the microdeposit sent to the bank account.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [SetupIntent]
   describe "post_setup_intents_intent_verify_microdeposits test" do
     it "should work" do
@@ -5430,9 +6720,9 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates a new shipping rate object.&lt;/p&gt;
   # @param display_name The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
   # @param [Hash] opts the optional parameters
-  # @option opts [DeliveryEstimate] :delivery_estimate
-  # @option opts [Array(String)] :expand
-  # @option opts [FixedAmount] :fixed_amount
+  # @option opts [DeliveryEstimate1] :delivery_estimate
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [FixedAmount1] :fixed_amount
   # @option opts [String] :tax_behavior Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of &#x60;inclusive&#x60;, &#x60;exclusive&#x60;, or &#x60;unspecified&#x60;.
   # @option opts [String] :tax_code A [tax code](https://stripe.com/docs/tax/tax-categories) ID. The Shipping tax code is &#x60;txcd_92010001&#x60;.
   # @option opts [String] :_type The type of calculation to use on the shipping rate. Can only be &#x60;fixed_amount&#x60; for now.
@@ -5448,8 +6738,8 @@ describe "DefaultApi" do
   # @param shipping_rate_token
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :active Whether the shipping rate can be used for new purchases. Defaults to &#x60;true&#x60;.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [ShippingRate]
   describe "post_shipping_rates_shipping_rate_token test" do
     it "should work" do
@@ -5465,7 +6755,7 @@ describe "DefaultApi" do
   # @param product The ID of the product this SKU is associated with. Must be a product with type &#x60;good&#x60;.
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :active Whether the SKU is available for purchase. Default to &#x60;true&#x60;.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :id The identifier for the SKU. Must be unique. If not provided, an identifier will be randomly generated.
   # @option opts [String] :image The URL of an image for this SKU, meant to be displayable to the customer.
   # @option opts [PackageDimensionsSpecs2] :package_dimensions
@@ -5482,12 +6772,12 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [Bool] :active Whether this SKU is available for purchase.
   # @option opts [String] :currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :image The URL of an image for this SKU, meant to be displayable to the customer.
   # @option opts [InventoryUpdateSpecs] :inventory
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [PostSkusIdRequestPackageDimensions] :package_dimensions
-  # @option opts [Int64] :price The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
+  # @option opts [Int32] :price The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
   # @option opts [String] :product The ID of the product that this SKU should belong to. The product must exist, have the same set of attribute names as the SKU&#39;s current product, and be of type &#x60;good&#x60;.
   # @return [Sku]
   describe "post_skus_id test" do
@@ -5499,10 +6789,10 @@ describe "DefaultApi" do
   # unit tests for post_sources
   # &lt;p&gt;Creates a new source object.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount Amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for &#x60;single_use&#x60; sources. Not supported for &#x60;receiver&#x60; type sources, where charge amount may not be specified until funds land.
+  # @option opts [Int32] :amount Amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for &#x60;single_use&#x60; sources. Not supported for &#x60;receiver&#x60; type sources, where charge amount may not be specified until funds land.
   # @option opts [String] :currency Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with the source. This is the currency for which the source will be chargeable once ready.
   # @option opts [String] :customer The &#x60;Customer&#x60; to whom the original source is attached to. Must be set when the original source is not a &#x60;Source&#x60; (e.g., &#x60;Card&#x60;).
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :flow The authentication &#x60;flow&#x60; of the source to create. &#x60;flow&#x60; is one of &#x60;redirect&#x60;, &#x60;receiver&#x60;, &#x60;code_verification&#x60;, &#x60;none&#x60;. It is generally inferred unless a type supports multiple flows.
   # @option opts [MandateParams] :mandate
   # @option opts [String] :original_source The source to share.
@@ -5525,10 +6815,10 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates the specified source by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;  &lt;p&gt;This request accepts the &lt;code&gt;metadata&lt;/code&gt; and &lt;code&gt;owner&lt;/code&gt; as arguments. It is also possible to update type specific information for selected payment methods. Please refer to our &lt;a href&#x3D;\&quot;/docs/sources\&quot;&gt;payment method guides&lt;/a&gt; for more detail.&lt;/p&gt;
   # @param source
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount Amount associated with the source.
-  # @option opts [Array(String)] :expand
+  # @option opts [Int32] :amount Amount associated with the source.
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [MandateParams] :mandate
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [Owner1] :owner
   # @option opts [OrderParams] :source_order
   # @return [Source]
@@ -5541,9 +6831,9 @@ describe "DefaultApi" do
   # unit tests for post_sources_source_verify
   # &lt;p&gt;Verify a given source.&lt;/p&gt;
   # @param source
-  # @param values
+  # @param values The values needed to verify the source.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Source]
   describe "post_sources_source_verify test" do
     it "should work" do
@@ -5555,16 +6845,15 @@ describe "DefaultApi" do
   # &lt;p&gt;Adds a new item to an existing subscription. No existing items will be changed or replaced.&lt;/p&gt;
   # @param subscription The identifier of the subscription to modify.
   # @param [Hash] opts the optional parameters
-  # @option opts [SubscriptionItemUpdateParamsBillingThresholds] :billing_thresholds
-  # @option opts [Array(String)] :expand
+  # @option opts [PostSubscriptionItemsRequestBillingThresholds] :billing_thresholds
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :payment_behavior Use &#x60;allow_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription&#39;s invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use &#x60;default_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; when payment is required and await explicit confirmation of the invoice&#39;s payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use &#x60;pending_if_incomplete&#x60; to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use &#x60;pending_if_incomplete&#x60; you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use &#x60;error_if_incomplete&#x60; if you want Stripe to return an HTTP 402 status code if a subscription&#39;s invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-  # @option opts [String] :plan The identifier of the plan to add to the subscription.
   # @option opts [String] :price The ID of the price object.
-  # @option opts [RecurringPriceData] :price_data
+  # @option opts [RecurringPriceData1] :price_data
   # @option opts [String] :proration_behavior Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting &#x60;billing_cycle_anchor&#x3D;now&#x60;, or starting a trial), or if an item&#39;s &#x60;quantity&#x60; changes. Valid values are &#x60;create_prorations&#x60;, &#x60;none&#x60;, or &#x60;always_invoice&#x60;.  Passing &#x60;create_prorations&#x60; will cause proration invoice items to be created when applicable. These proration items will only be invoiced immediately under [certain conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment). In order to always invoice immediately for prorations, pass &#x60;always_invoice&#x60;.  Prorations can be disabled by passing &#x60;none&#x60;.
-  # @option opts [Int64] :proration_date If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
-  # @option opts [Int64] :quantity The quantity you&#39;d like to apply to the subscription item you&#39;re creating.
-  # @option opts [SubscriptionItemUpdateParamsTaxRates] :tax_rates
+  # @option opts [Int32] :proration_date If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
+  # @option opts [Int32] :quantity The quantity you&#39;d like to apply to the subscription item you&#39;re creating.
+  # @option opts [PostSubscriptionItemsRequestTaxRates] :tax_rates
   # @return [SubscriptionItem]
   describe "post_subscription_items test" do
     it "should work" do
@@ -5576,18 +6865,17 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates the plan or quantity of an item on a current subscription.&lt;/p&gt;
   # @param item
   # @param [Hash] opts the optional parameters
-  # @option opts [SubscriptionItemUpdateParamsBillingThresholds] :billing_thresholds
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostSubscriptionItemsRequestBillingThresholds] :billing_thresholds
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [Bool] :off_session Indicates if a customer is on or off-session while an invoice payment is attempted.
   # @option opts [String] :payment_behavior Use &#x60;allow_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription&#39;s invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use &#x60;default_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; when payment is required and await explicit confirmation of the invoice&#39;s payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use &#x60;pending_if_incomplete&#x60; to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use &#x60;pending_if_incomplete&#x60; you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use &#x60;error_if_incomplete&#x60; if you want Stripe to return an HTTP 402 status code if a subscription&#39;s invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-  # @option opts [String] :plan The identifier of the new plan for this subscription item.
   # @option opts [String] :price The ID of the price object. When changing a subscription item&#39;s price, &#x60;quantity&#x60; is set to 1 unless a &#x60;quantity&#x60; parameter is provided.
-  # @option opts [RecurringPriceData] :price_data
+  # @option opts [RecurringPriceData1] :price_data
   # @option opts [String] :proration_behavior Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting &#x60;billing_cycle_anchor&#x3D;now&#x60;, or starting a trial), or if an item&#39;s &#x60;quantity&#x60; changes. Valid values are &#x60;create_prorations&#x60;, &#x60;none&#x60;, or &#x60;always_invoice&#x60;.  Passing &#x60;create_prorations&#x60; will cause proration invoice items to be created when applicable. These proration items will only be invoiced immediately under [certain conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment). In order to always invoice immediately for prorations, pass &#x60;always_invoice&#x60;.  Prorations can be disabled by passing &#x60;none&#x60;.
-  # @option opts [Int64] :proration_date If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
-  # @option opts [Int64] :quantity The quantity you&#39;d like to apply to the subscription item you&#39;re creating.
-  # @option opts [SubscriptionItemUpdateParamsTaxRates] :tax_rates
+  # @option opts [Int32] :proration_date If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
+  # @option opts [Int32] :quantity The quantity you&#39;d like to apply to the subscription item you&#39;re creating.
+  # @option opts [PostSubscriptionItemsRequestTaxRates] :tax_rates
   # @return [SubscriptionItem]
   describe "post_subscription_items_item test" do
     it "should work" do
@@ -5601,7 +6889,7 @@ describe "DefaultApi" do
   # @param quantity The usage quantity for the specified timestamp.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :action Valid values are &#x60;increment&#x60; (default) or &#x60;set&#x60;. When using &#x60;increment&#x60; the specified &#x60;quantity&#x60; will be added to the usage at the specified timestamp. The &#x60;set&#x60; action will overwrite the usage quantity at that timestamp. If the subscription has [billing thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds), &#x60;increment&#x60; is the only allowed value.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp] :timestamp
   # @return [UsageRecord]
   describe "post_subscription_items_subscription_item_usage_records test" do
@@ -5616,9 +6904,9 @@ describe "DefaultApi" do
   # @option opts [String] :customer The identifier of the customer to create the subscription schedule for.
   # @option opts [DefaultSettingsParams] :default_settings
   # @option opts [String] :end_behavior Configures how the subscription schedule behaves when it ends. Possible values are &#x60;release&#x60; or &#x60;cancel&#x60; with the default being &#x60;release&#x60;. &#x60;release&#x60; will end the subscription schedule and keep the underlying subscription running.&#x60;cancel&#x60; will end the subscription schedule and cancel the underlying subscription.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :from_subscription Migrate an existing subscription to be managed by a subscription schedule. If this parameter is set, a subscription schedule will be created using the subscription&#39;s item(s), set to auto-renew using the subscription&#39;s interval. When using this parameter, other parameters (such as phase values) cannot be set. To create a subscription schedule with other modifications, we recommend making two separate API calls.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [Array(PhaseConfigurationParams)] :phases List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the &#x60;end_date&#x60; of one phase will always equal the &#x60;start_date&#x60; of the next phase.
   # @option opts [PostSubscriptionSchedulesRequestStartDate] :start_date
   # @return [SubscriptionSchedule]
@@ -5634,8 +6922,8 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [DefaultSettingsParams] :default_settings
   # @option opts [String] :end_behavior Configures how the subscription schedule behaves when it ends. Possible values are &#x60;release&#x60; or &#x60;cancel&#x60; with the default being &#x60;release&#x60;. &#x60;release&#x60; will end the subscription schedule and keep the underlying subscription running.&#x60;cancel&#x60; will end the subscription schedule and cancel the underlying subscription.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [Array(PhaseConfigurationParams1)] :phases List representing phases of the subscription schedule. Each phase can be customized to have different durations, plans, and coupons. If there are multiple phases, the &#x60;end_date&#x60; of one phase will always equal the &#x60;start_date&#x60; of the next phase. Note that past phases can be omitted.
   # @option opts [String] :proration_behavior If the update changes the current phase, indicates whether the changes should be prorated. The default value is &#x60;create_prorations&#x60;.
   # @return [SubscriptionSchedule]
@@ -5649,7 +6937,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Cancels a subscription schedule and its associated subscription immediately (if the subscription schedule has an active subscription). A subscription schedule can only be canceled if its status is &lt;code&gt;not_started&lt;/code&gt; or &lt;code&gt;active&lt;/code&gt;.&lt;/p&gt;
   # @param schedule
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Bool] :invoice_now If the subscription schedule is &#x60;active&#x60;, indicates if a final invoice will be generated that contains any un-invoiced metered usage and new/pending proration invoice items. Defaults to &#x60;true&#x60;.
   # @option opts [Bool] :prorate If the subscription schedule is &#x60;active&#x60;, indicates if the cancellation should be prorated. Defaults to &#x60;true&#x60;.
   # @return [SubscriptionSchedule]
@@ -5663,7 +6951,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Releases the subscription schedule immediately, which will stop scheduling of its phases, but leave any existing subscription in place. A schedule can only be released if its status is &lt;code&gt;not_started&lt;/code&gt; or &lt;code&gt;active&lt;/code&gt;. If the subscription schedule is currently associated with a subscription, releasing it will remove its &lt;code&gt;subscription&lt;/code&gt; property and set the subscription’s ID to the &lt;code&gt;released_subscription&lt;/code&gt; property.&lt;/p&gt;
   # @param schedule
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Bool] :preserve_cancel_date Keep any cancellation on the subscription that the schedule has set
   # @return [SubscriptionSchedule]
   describe "post_subscription_schedules_schedule_release test" do
@@ -5678,32 +6966,32 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [Array(AddInvoiceItemEntry)] :add_invoice_items A list of prices and quantities that will generate invoice items appended to the first invoice for this subscription. You may pass up to 20 items.
   # @option opts [Float64] :application_fee_percent A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner&#39;s Stripe account. The request must be made by a platform account on a connected account in order to set an application fee percentage. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
-  # @option opts [AutomaticTaxConfig2] :automatic_tax
-  # @option opts [Int64] :backdate_start_date For new subscriptions, a past timestamp to backdate the subscription&#39;s start date to. If set, the first invoice will contain a proration for the timespan between the start date and the current time. Can be combined with trials and the billing cycle anchor.
-  # @option opts [Int64] :billing_cycle_anchor A future timestamp to anchor the subscription&#39;s [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with &#x60;month&#x60; or &#x60;year&#x60; intervals, the day of the month for subsequent invoices.
-  # @option opts [DefaultSettingsParamsBillingThresholds] :billing_thresholds
-  # @option opts [Int64] :cancel_at A timestamp at which the subscription should cancel. If set to a date before the current period ends, this will cause a proration if prorations have been enabled using &#x60;proration_behavior&#x60;. If set during a future period, this will always cause a proration for that period.
+  # @option opts [AutomaticTaxConfig] :automatic_tax
+  # @option opts [Int32] :backdate_start_date For new subscriptions, a past timestamp to backdate the subscription&#39;s start date to. If set, the first invoice will contain a proration for the timespan between the start date and the current time. Can be combined with trials and the billing cycle anchor.
+  # @option opts [Int32] :billing_cycle_anchor A future timestamp to anchor the subscription&#39;s [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with &#x60;month&#x60; or &#x60;year&#x60; intervals, the day of the month for subsequent invoices.
+  # @option opts [PostCustomersCustomerSubscriptionsRequestBillingThresholds] :billing_thresholds
+  # @option opts [Int32] :cancel_at A timestamp at which the subscription should cancel. If set to a date before the current period ends, this will cause a proration if prorations have been enabled using &#x60;proration_behavior&#x60;. If set during a future period, this will always cause a proration for that period.
   # @option opts [Bool] :cancel_at_period_end Boolean indicating whether this subscription should cancel at the end of the current period.
   # @option opts [String] :collection_method Either &#x60;charge_automatically&#x60;, or &#x60;send_invoice&#x60;. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions. Defaults to &#x60;charge_automatically&#x60;.
   # @option opts [String] :coupon The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
-  # @option opts [Int64] :days_until_due Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where &#x60;collection_method&#x60; is set to &#x60;send_invoice&#x60;.
+  # @option opts [Int32] :days_until_due Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where &#x60;collection_method&#x60; is set to &#x60;send_invoice&#x60;.
   # @option opts [String] :default_payment_method ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over &#x60;default_source&#x60;. If neither are set, invoices will use the customer&#39;s [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
   # @option opts [String] :default_source ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If &#x60;default_payment_method&#x60; is also set, &#x60;default_payment_method&#x60; will take precedence. If neither are set, invoices will use the customer&#39;s [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-  # @option opts [PostSubscriptionsRequestDefaultTaxRates] :default_tax_rates
+  # @option opts [PostCustomersCustomerSubscriptionsRequestDefaultTaxRates] :default_tax_rates
   # @option opts [String] :description The subscription&#39;s description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Array(SubscriptionItemCreateParams)] :items A list of up to 20 subscription items, each with an attached price.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [Bool] :off_session Indicates if a customer is on or off-session while an invoice payment is attempted.
   # @option opts [String] :payment_behavior Use &#x60;allow_incomplete&#x60; to create subscriptions with &#x60;status&#x3D;incomplete&#x60; if the first invoice cannot be paid. Creating subscriptions with this status allows you to manage scenarios where additional user actions are needed to pay a subscription&#39;s invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use &#x60;default_incomplete&#x60; to create Subscriptions with &#x60;status&#x3D;incomplete&#x60; when the first invoice requires payment, otherwise start as active. Subscriptions transition to &#x60;status&#x3D;active&#x60; when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to &#x60;status&#x3D;incomplete_expired&#x60;, which is a terminal state.  Use &#x60;error_if_incomplete&#x60; if you want Stripe to return an HTTP 402 status code if a subscription&#39;s first invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not create a subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.  &#x60;pending_if_incomplete&#x60; is only used with updates and cannot be passed when creating a subscription.
-  # @option opts [PaymentSettings1] :payment_settings
-  # @option opts [PostSubscriptionsRequestPendingInvoiceItemInterval] :pending_invoice_item_interval
+  # @option opts [PaymentSettings] :payment_settings
+  # @option opts [PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval] :pending_invoice_item_interval
   # @option opts [String] :promotion_code The API ID of a promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
   # @option opts [String] :proration_behavior Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) resulting from the &#x60;billing_cycle_anchor&#x60;. Valid values are &#x60;create_prorations&#x60; or &#x60;none&#x60;.  Passing &#x60;create_prorations&#x60; will cause proration invoice items to be created when applicable. Prorations can be disabled by passing &#x60;none&#x60;. If no value is passed, the default is &#x60;create_prorations&#x60;.
-  # @option opts [TransferDataSpecs2] :transfer_data
-  # @option opts [PostSubscriptionsRequestTrialEnd] :trial_end
+  # @option opts [TransferDataSpecs3] :transfer_data
+  # @option opts [PostCustomersCustomerSubscriptionsRequestTrialEnd] :trial_end
   # @option opts [Bool] :trial_from_plan Indicates if a plan&#39;s &#x60;trial_period_days&#x60; should be applied to the subscription. Setting &#x60;trial_end&#x60; per subscription is preferred, and this defaults to &#x60;false&#x60;. Setting this flag to &#x60;true&#x60; together with &#x60;trial_end&#x60; is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-  # @option opts [Int64] :trial_period_days Integer representing the number of trial period days before the customer is charged for the first time. This will always overwrite any trials that might apply via a subscribed plan. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
+  # @option opts [Int32] :trial_period_days Integer representing the number of trial period days before the customer is charged for the first time. This will always overwrite any trials that might apply via a subscribed plan. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
   # @return [Subscription]
   describe "post_subscriptions test" do
     it "should work" do
@@ -5717,30 +7005,30 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [Array(AddInvoiceItemEntry)] :add_invoice_items A list of prices and quantities that will generate invoice items appended to the first invoice for this subscription. You may pass up to 20 items.
   # @option opts [Float64] :application_fee_percent A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner&#39;s Stripe account. The request must be made by a platform account on a connected account in order to set an application fee percentage. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
-  # @option opts [AutomaticTaxConfig2] :automatic_tax
+  # @option opts [AutomaticTaxConfig] :automatic_tax
   # @option opts [String] :billing_cycle_anchor Either &#x60;now&#x60; or &#x60;unchanged&#x60;. Setting the value to &#x60;now&#x60; resets the subscription&#39;s billing cycle anchor to the current time. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
-  # @option opts [DefaultSettingsParamsBillingThresholds] :billing_thresholds
-  # @option opts [PostSubscriptionsSubscriptionExposedIdRequestCancelAt] :cancel_at
+  # @option opts [PostCustomersCustomerSubscriptionsRequestBillingThresholds] :billing_thresholds
+  # @option opts [PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestCancelAt] :cancel_at
   # @option opts [Bool] :cancel_at_period_end Boolean indicating whether this subscription should cancel at the end of the current period.
   # @option opts [String] :collection_method Either &#x60;charge_automatically&#x60;, or &#x60;send_invoice&#x60;. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions. Defaults to &#x60;charge_automatically&#x60;.
   # @option opts [String] :coupon The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
-  # @option opts [Int64] :days_until_due Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where &#x60;collection_method&#x60; is set to &#x60;send_invoice&#x60;.
+  # @option opts [Int32] :days_until_due Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where &#x60;collection_method&#x60; is set to &#x60;send_invoice&#x60;.
   # @option opts [String] :default_payment_method ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over &#x60;default_source&#x60;. If neither are set, invoices will use the customer&#39;s [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
   # @option opts [String] :default_source ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If &#x60;default_payment_method&#x60; is also set, &#x60;default_payment_method&#x60; will take precedence. If neither are set, invoices will use the customer&#39;s [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
-  # @option opts [PostSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates] :default_tax_rates
+  # @option opts [PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates] :default_tax_rates
   # @option opts [String] :description The subscription&#39;s description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [Array(SubscriptionItemUpdateParams)] :items A list of up to 20 subscription items, each with an attached price.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [Bool] :off_session Indicates if a customer is on or off-session while an invoice payment is attempted.
-  # @option opts [PostSubscriptionsSubscriptionExposedIdRequestPauseCollection] :pause_collection
+  # @option opts [PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestPauseCollection] :pause_collection
   # @option opts [String] :payment_behavior Use &#x60;allow_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; if a payment is required but cannot be paid. This allows you to manage scenarios where additional user actions are needed to pay a subscription&#39;s invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use &#x60;default_incomplete&#x60; to transition the subscription to &#x60;status&#x3D;past_due&#x60; when payment is required and await explicit confirmation of the invoice&#39;s payment intent. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method.  Use &#x60;pending_if_incomplete&#x60; to update the subscription using [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates). When you use &#x60;pending_if_incomplete&#x60; you can only pass the parameters [supported by pending updates](https://stripe.com/docs/billing/pending-updates-reference#supported-attributes).  Use &#x60;error_if_incomplete&#x60; if you want Stripe to return an HTTP 402 status code if a subscription&#39;s invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not update the subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
-  # @option opts [PaymentSettings1] :payment_settings
-  # @option opts [PostSubscriptionsRequestPendingInvoiceItemInterval] :pending_invoice_item_interval
+  # @option opts [PaymentSettings] :payment_settings
+  # @option opts [PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval] :pending_invoice_item_interval
   # @option opts [String] :promotion_code The promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
   # @option opts [String] :proration_behavior Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting &#x60;billing_cycle_anchor&#x3D;now&#x60;, or starting a trial), or if an item&#39;s &#x60;quantity&#x60; changes. Valid values are &#x60;create_prorations&#x60;, &#x60;none&#x60;, or &#x60;always_invoice&#x60;.  Passing &#x60;create_prorations&#x60; will cause proration invoice items to be created when applicable. These proration items will only be invoiced immediately under [certain conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment). In order to always invoice immediately for prorations, pass &#x60;always_invoice&#x60;.  Prorations can be disabled by passing &#x60;none&#x60;.
-  # @option opts [Int64] :proration_date If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply exactly the same proration that was previewed with [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint. It can also be used to implement custom proration logic, such as prorating by day instead of by second, by providing the time that you wish to use for proration calculations.
-  # @option opts [PostSubscriptionsSubscriptionExposedIdRequestTransferData] :transfer_data
+  # @option opts [Int32] :proration_date If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply exactly the same proration that was previewed with [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint. It can also be used to implement custom proration logic, such as prorating by day instead of by second, by providing the time that you wish to use for proration calculations.
+  # @option opts [PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTransferData] :transfer_data
   # @option opts [PostCustomersCustomerRequestTrialEnd] :trial_end
   # @option opts [Bool] :trial_from_plan Indicates if a plan&#39;s &#x60;trial_period_days&#x60; should be applied to the subscription. Setting &#x60;trial_end&#x60; per subscription is preferred, and this defaults to &#x60;false&#x60;. Setting this flag to &#x60;true&#x60; together with &#x60;trial_end&#x60; is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
   # @return [Subscription]
@@ -5759,7 +7047,7 @@ describe "DefaultApi" do
   # @option opts [Bool] :active Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
   # @option opts [String] :country Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
   # @option opts [String] :description An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :jurisdiction The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
   # @option opts [String] :state [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\&quot;NY\\\&quot; for New York, United States.
   # @option opts [String] :tax_type The high-level tax type, such as &#x60;vat&#x60; or &#x60;sales_tax&#x60;.
@@ -5778,9 +7066,9 @@ describe "DefaultApi" do
   # @option opts [String] :country Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
   # @option opts [String] :description An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
   # @option opts [String] :display_name The display name of the tax rate, which will be shown to users.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :jurisdiction The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :state [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \\\&quot;NY\\\&quot; for New York, United States.
   # @option opts [String] :tax_type The high-level tax type, such as &#x60;vat&#x60; or &#x60;sales_tax&#x60;.
   # @return [TaxRate]
@@ -5794,7 +7082,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates a new &lt;code&gt;Configuration&lt;/code&gt; object.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
   # @option opts [BbposWisePose] :bbpos_wisepos_e
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [PostTerminalConfigurationsRequestTipping] :tipping
   # @option opts [VerifoneP400] :verifone_p400
   # @return [TerminalConfiguration]
@@ -5809,7 +7097,7 @@ describe "DefaultApi" do
   # @param configuration
   # @param [Hash] opts the optional parameters
   # @option opts [PostTerminalConfigurationsConfigurationRequestBbposWiseposE] :bbpos_wisepos_e
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [PostTerminalConfigurationsRequestTipping] :tipping
   # @option opts [PostTerminalConfigurationsConfigurationRequestVerifoneP400] :verifone_p400
   # @return [GetTerminalConfigurationsConfiguration200Response]
@@ -5822,7 +7110,7 @@ describe "DefaultApi" do
   # unit tests for post_terminal_connection_tokens
   # &lt;p&gt;To connect to a reader the Stripe Terminal SDK needs to retrieve a short-lived connection token from Stripe, proxied through your server. On your backend, add an endpoint that creates and returns a connection token.&lt;/p&gt;
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :location The id of the location that this connection token is scoped to. If specified the connection token will only be usable with readers assigned to that location, otherwise the connection token will be usable with all readers. Note that location scoping only applies to internet-connected readers. For more details, see [the docs on scoping connection tokens](https://stripe.com/docs/terminal/fleet/locations#connection-tokens).
   # @return [TerminalConnectionToken]
   describe "post_terminal_connection_tokens test" do
@@ -5837,8 +7125,8 @@ describe "DefaultApi" do
   # @param display_name A name for the location.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :configuration_overrides The ID of a configuration that will be used to customize all readers in this location.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [TerminalLocation]
   describe "post_terminal_locations test" do
     it "should work" do
@@ -5850,11 +7138,11 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates a &lt;code&gt;Location&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
   # @param location
   # @param [Hash] opts the optional parameters
-  # @option opts [OptionalFieldsAddress3] :address
+  # @option opts [OptionalFieldsAddress1] :address
   # @option opts [String] :configuration_overrides The ID of a configuration that will be used to customize all readers in this location.
   # @option opts [String] :display_name A name for the location.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [GetTerminalLocationsLocation200Response]
   describe "post_terminal_locations_location test" do
     it "should work" do
@@ -5866,10 +7154,10 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates a new &lt;code&gt;Reader&lt;/code&gt; object.&lt;/p&gt;
   # @param registration_code A code generated by the reader used for registering to an account.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :label Custom label given to the reader for easier identification. If no label is specified, the registration code will be used.
   # @option opts [String] :location The location to assign the reader to.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [TerminalReader]
   describe "post_terminal_readers test" do
     it "should work" do
@@ -5881,9 +7169,9 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates a &lt;code&gt;Reader&lt;/code&gt; object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.&lt;/p&gt;
   # @param reader
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :label The new label of the reader.
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [GetTerminalReadersReader200Response]
   describe "post_terminal_readers_reader test" do
     it "should work" do
@@ -5895,7 +7183,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Cancels the current reader action.&lt;/p&gt;
   # @param reader
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TerminalReader]
   describe "post_terminal_readers_reader_cancel_action test" do
     it "should work" do
@@ -5908,7 +7196,7 @@ describe "DefaultApi" do
   # @param reader
   # @param payment_intent PaymentIntent ID
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [ProcessConfig] :process_config
   # @return [TerminalReader]
   describe "post_terminal_readers_reader_process_payment_intent test" do
@@ -5923,7 +7211,7 @@ describe "DefaultApi" do
   # @param customer_consent_collected Customer Consent Collected
   # @param setup_intent SetupIntent ID
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TerminalReader]
   describe "post_terminal_readers_reader_process_setup_intent test" do
     it "should work" do
@@ -5937,7 +7225,7 @@ describe "DefaultApi" do
   # @param _type Type
   # @param [Hash] opts the optional parameters
   # @option opts [Cart] :cart
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TerminalReader]
   describe "post_terminal_readers_reader_set_reader_display test" do
     it "should work" do
@@ -5949,7 +7237,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Expire a refund with a status of &lt;code&gt;requires_action&lt;/code&gt;.&lt;/p&gt;
   # @param refund
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Refund]
   describe "post_test_helpers_refunds_refund_expire test" do
     it "should work" do
@@ -5962,7 +7250,7 @@ describe "DefaultApi" do
   # @param reader
   # @param [Hash] opts the optional parameters
   # @option opts [CardPresent] :card_present
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :_type Simulated payment type
   # @return [TerminalReader]
   describe "post_test_helpers_terminal_readers_reader_present_payment_method test" do
@@ -5975,7 +7263,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Creates a new test clock that can be attached to new customers and quotes.&lt;/p&gt;
   # @param frozen_time The initial frozen time for this test clock.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :name The name for this test clock.
   # @return [TestHelpersTestClock]
   describe "post_test_helpers_test_clocks test" do
@@ -5989,7 +7277,7 @@ describe "DefaultApi" do
   # @param test_clock
   # @param frozen_time The time to advance the test clock. Must be after the test clock&#39;s current frozen time. Cannot be more than two intervals in the future from the shortest subscription in this test clock. If there are no subscriptions in this test clock, it cannot be more than two years in the future.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TestHelpersTestClock]
   describe "post_test_helpers_test_clocks_test_clock_advance test" do
     it "should work" do
@@ -6001,7 +7289,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Transitions a test mode created InboundTransfer to the &lt;code&gt;failed&lt;/code&gt; status. The InboundTransfer must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [FailureDetailsParams] :failure_details
   # @return [TreasuryInboundTransfer]
   describe "post_test_helpers_treasury_inbound_transfers_id_fail test" do
@@ -6014,7 +7302,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a ReceivedDebit. The InboundTransfer must already be in the &lt;code&gt;succeeded&lt;/code&gt; state.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryInboundTransfer]
   describe "post_test_helpers_treasury_inbound_transfers_id_return test" do
     it "should work" do
@@ -6026,7 +7314,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Transitions a test mode created InboundTransfer to the &lt;code&gt;succeeded&lt;/code&gt; status. The InboundTransfer must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryInboundTransfer]
   describe "post_test_helpers_treasury_inbound_transfers_id_succeed test" do
     it "should work" do
@@ -6038,7 +7326,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Transitions a test mode created OutboundPayment to the &lt;code&gt;failed&lt;/code&gt; status. The OutboundPayment must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryOutboundPayment]
   describe "post_test_helpers_treasury_outbound_payments_id_fail test" do
     it "should work" do
@@ -6050,7 +7338,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Transitions a test mode created OutboundPayment to the &lt;code&gt;posted&lt;/code&gt; status. The OutboundPayment must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryOutboundPayment]
   describe "post_test_helpers_treasury_outbound_payments_id_post test" do
     it "should work" do
@@ -6062,7 +7350,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Transitions a test mode created OutboundPayment to the &lt;code&gt;returned&lt;/code&gt; status. The OutboundPayment must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [ReturnedDetailsParams] :returned_details
   # @return [TreasuryOutboundPayment]
   describe "post_test_helpers_treasury_outbound_payments_id_return test" do
@@ -6075,7 +7363,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Transitions a test mode created OutboundTransfer to the &lt;code&gt;failed&lt;/code&gt; status. The OutboundTransfer must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param outbound_transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryOutboundTransfer]
   describe "post_test_helpers_treasury_outbound_transfers_outbound_transfer_fail test" do
     it "should work" do
@@ -6087,7 +7375,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Transitions a test mode created OutboundTransfer to the &lt;code&gt;posted&lt;/code&gt; status. The OutboundTransfer must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param outbound_transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryOutboundTransfer]
   describe "post_test_helpers_treasury_outbound_transfers_outbound_transfer_post test" do
     it "should work" do
@@ -6099,7 +7387,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Transitions a test mode created OutboundTransfer to the &lt;code&gt;returned&lt;/code&gt; status. The OutboundTransfer must already be in the &lt;code&gt;processing&lt;/code&gt; state.&lt;/p&gt;
   # @param outbound_transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [ReturnedDetailsParams1] :returned_details
   # @return [TreasuryOutboundTransfer]
   describe "post_test_helpers_treasury_outbound_transfers_outbound_transfer_return test" do
@@ -6116,7 +7404,7 @@ describe "DefaultApi" do
   # @param network The rails used for the object.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [SourceParams] :initiating_payment_method_details
   # @return [TreasuryReceivedCredit]
   describe "post_test_helpers_treasury_received_credits test" do
@@ -6133,7 +7421,7 @@ describe "DefaultApi" do
   # @param network The rails used for the object.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [SourceParams] :initiating_payment_method_details
   # @return [TreasuryReceivedDebit]
   describe "post_test_helpers_treasury_received_debits test" do
@@ -6150,7 +7438,7 @@ describe "DefaultApi" do
   # @option opts [PostTokensRequestCard] :card
   # @option opts [String] :customer The customer (owned by the application&#39;s account) for which to create a token. This can be used only with an [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or [Stripe-Account header](https://stripe.com/docs/connect/authentication). For more details, see [Cloning Saved Payment Methods](https://stripe.com/docs/connect/cloning-saved-payment-methods).
   # @option opts [CvcParams] :cvc_update
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [PersonTokenSpecs] :person
   # @option opts [PiiTokenSpecs] :pii
   # @return [Token]
@@ -6166,8 +7454,8 @@ describe "DefaultApi" do
   # @param currency Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
   # @param [Hash] opts the optional parameters
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :source The ID of a source to transfer funds from. For most users, this should be left unspecified which will use the bank account that was set up in the dashboard for the specified currency. In test mode, this can be a test bank token (see [Testing Top-ups](https://stripe.com/docs/connect/testing#testing-top-ups)).
   # @option opts [String] :statement_descriptor Extra information about a top-up for the source&#39;s bank statement. Limited to 15 ASCII characters.
   # @option opts [String] :transfer_group A string that identifies this top-up as part of a group.
@@ -6183,8 +7471,8 @@ describe "DefaultApi" do
   # @param topup
   # @param [Hash] opts the optional parameters
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [Topup]
   describe "post_topups_topup test" do
     it "should work" do
@@ -6196,7 +7484,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Cancels a top-up. Only pending top-ups can be canceled.&lt;/p&gt;
   # @param topup
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [Topup]
   describe "post_topups_topup_cancel test" do
     it "should work" do
@@ -6209,9 +7497,9 @@ describe "DefaultApi" do
   # @param currency 3-letter [ISO code for currency](https://stripe.com/docs/payouts).
   # @param destination The ID of a connected Stripe account. &lt;a href&#x3D;\\\&quot;/docs/connect/charges-transfers\\\&quot;&gt;See the Connect documentation&lt;/a&gt; for details.
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount A positive integer in cents (or local equivalent) representing how much to transfer.
+  # @option opts [Int32] :amount A positive integer in cents (or local equivalent) representing how much to transfer.
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :source_transaction You can use this parameter to transfer funds from a charge before they are added to your available balance. A pending balance will transfer immediately but the funds will not become available until the original charge becomes available. [See the Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-availability) for details.
   # @option opts [String] :source_type The source balance to use for this transfer. One of &#x60;bank_account&#x60;, &#x60;card&#x60;, or &#x60;fpx&#x60;. For most users, this will default to &#x60;card&#x60;.
   # @option opts [String] :transfer_group A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
@@ -6226,10 +7514,10 @@ describe "DefaultApi" do
   # &lt;p&gt;When you create a new reversal, you must specify a transfer to create it on.&lt;/p&gt;  &lt;p&gt;When reversing transfers, you can optionally reverse part of the transfer. You can do so as many times as you wish until the entire transfer has been reversed.&lt;/p&gt;  &lt;p&gt;Once entirely reversed, a transfer can’t be reversed again. This method will return an error when called on an already-reversed transfer, or when trying to reverse more money than is left on a transfer.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Int64] :amount A positive integer in cents (or local equivalent) representing how much of this transfer to reverse. Can only reverse up to the unreversed amount remaining of the transfer. Partial transfer reversals are only allowed for transfers to Stripe Accounts. Defaults to the entire transfer amount.
+  # @option opts [Int32] :amount A positive integer in cents (or local equivalent) representing how much of this transfer to reverse. Can only reverse up to the unreversed amount remaining of the transfer. Partial transfer reversals are only allowed for transfers to Stripe Accounts. Defaults to the entire transfer amount.
   # @option opts [String] :description An arbitrary string which you can attach to a reversal object. It is displayed alongside the reversal in the Dashboard. This will be unset if you POST an empty value.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [Bool] :refund_application_fee Boolean indicating whether the application fee should be refunded when reversing this transfer. If a full transfer reversal is given, the full application fee will be refunded. Otherwise, the application fee will be refunded with an amount proportional to the amount of the transfer reversed.
   # @return [TransferReversal]
   describe "post_transfers_id_reversals test" do
@@ -6243,8 +7531,8 @@ describe "DefaultApi" do
   # @param transfer
   # @param [Hash] opts the optional parameters
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [Transfer]
   describe "post_transfers_transfer test" do
     it "should work" do
@@ -6257,8 +7545,8 @@ describe "DefaultApi" do
   # @param id
   # @param transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [TransferReversal]
   describe "post_transfers_transfer_reversals_id test" do
     it "should work" do
@@ -6270,7 +7558,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Reverses a ReceivedCredit and creates a CreditReversal object.&lt;/p&gt;
   # @param received_credit The ReceivedCredit to reverse.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryCreditReversal]
   describe "post_treasury_credit_reversals test" do
     it "should work" do
@@ -6282,7 +7570,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Reverses a ReceivedDebit and creates a DebitReversal object.&lt;/p&gt;
   # @param received_debit The ReceivedDebit to reverse.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryDebitReversal]
   describe "post_treasury_debit_reversals test" do
     it "should work" do
@@ -6292,9 +7580,9 @@ describe "DefaultApi" do
 
   # unit tests for post_treasury_financial_accounts
   # &lt;p&gt;Creates a new FinancialAccount. For now, each connected account can only have one FinancialAccount.&lt;/p&gt;
-  # @param supported_currencies
+  # @param supported_currencies The currencies the FinancialAccount can hold a balance in.
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [FeatureAccess] :features
   # @option opts [PlatformRestrictions] :platform_restrictions
   # @return [TreasuryFinancialAccount]
@@ -6308,7 +7596,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates the details of a FinancialAccount.&lt;/p&gt;
   # @param financial_account
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [FeatureAccess1] :features
   # @option opts [PlatformRestrictions] :platform_restrictions
   # @return [TreasuryFinancialAccount]
@@ -6322,14 +7610,14 @@ describe "DefaultApi" do
   # &lt;p&gt;Updates the Features associated with a FinancialAccount.&lt;/p&gt;
   # @param financial_account
   # @param [Hash] opts the optional parameters
-  # @option opts [Access] :card_issuing
-  # @option opts [Access1] :deposit_insurance
-  # @option opts [Array(String)] :expand
-  # @option opts [FinancialAddresses] :financial_addresses
-  # @option opts [InboundTransfers1] :inbound_transfers
-  # @option opts [Access4] :intra_stripe_flows
-  # @option opts [OutboundPayments] :outbound_payments
-  # @option opts [OutboundTransfers] :outbound_transfers
+  # @option opts [Access1] :card_issuing
+  # @option opts [Access2] :deposit_insurance
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [FinancialAddresses1] :financial_addresses
+  # @option opts [InboundTransfers2] :inbound_transfers
+  # @option opts [Access3] :intra_stripe_flows
+  # @option opts [OutboundPayments1] :outbound_payments
+  # @option opts [OutboundTransfers1] :outbound_transfers
   # @return [TreasuryFinancialAccountFeatures]
   describe "post_treasury_financial_accounts_financial_account_features test" do
     it "should work" do
@@ -6345,7 +7633,7 @@ describe "DefaultApi" do
   # @param origin_payment_method The origin payment method to be debited for the InboundTransfer.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :statement_descriptor The complete description that appears on your customers&#39; statements. Maximum 10 characters.
   # @return [TreasuryInboundTransfer]
   describe "post_treasury_inbound_transfers test" do
@@ -6358,7 +7646,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Cancels an InboundTransfer.&lt;/p&gt;
   # @param inbound_transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryInboundTransfer]
   describe "post_treasury_inbound_transfers_inbound_transfer_cancel test" do
     it "should work" do
@@ -6378,7 +7666,7 @@ describe "DefaultApi" do
   # @option opts [PaymentMethodData] :destination_payment_method_data
   # @option opts [PaymentMethodOptions2] :destination_payment_method_options
   # @option opts [EndUserDetailsParams] :end_user_details
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :statement_descriptor The description that appears on the receiving end for this OutboundPayment (for example, bank statement for external bank transfer). Maximum 10 characters for &#x60;ach&#x60; payments, 140 characters for &#x60;wire&#x60; payments, or 500 characters for &#x60;stripe&#x60; network transfers. The default value is &#x60;payment&#x60;.
   # @return [TreasuryOutboundPayment]
   describe "post_treasury_outbound_payments test" do
@@ -6391,7 +7679,7 @@ describe "DefaultApi" do
   # &lt;p&gt;Cancel an OutboundPayment.&lt;/p&gt;
   # @param id
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryOutboundPayment]
   describe "post_treasury_outbound_payments_id_cancel test" do
     it "should work" do
@@ -6408,7 +7696,7 @@ describe "DefaultApi" do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :description An arbitrary string attached to the object. Often useful for displaying to users.
   # @option opts [PaymentMethodOptions3] :destination_payment_method_options
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @option opts [String] :statement_descriptor Statement descriptor to be shown on the receiving end of an OutboundTransfer. Maximum 10 characters for &#x60;ach&#x60; transfers or 140 characters for &#x60;wire&#x60; transfers. The default value is &#x60;transfer&#x60;.
   # @return [TreasuryOutboundTransfer]
   describe "post_treasury_outbound_transfers test" do
@@ -6421,7 +7709,7 @@ describe "DefaultApi" do
   # &lt;p&gt;An OutboundTransfer can be canceled if the funds have not yet been paid out.&lt;/p&gt;
   # @param outbound_transfer
   # @param [Hash] opts the optional parameters
-  # @option opts [Array(String)] :expand
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
   # @return [TreasuryOutboundTransfer]
   describe "post_treasury_outbound_transfers_outbound_transfer_cancel test" do
     it "should work" do
@@ -6437,8 +7725,8 @@ describe "DefaultApi" do
   # @option opts [String] :api_version Events sent to this endpoint will be generated with this Stripe Version instead of your account&#39;s default Stripe Version.
   # @option opts [Bool] :connect Whether this endpoint should receive events from connected accounts (&#x60;true&#x60;), or from your account (&#x60;false&#x60;). Defaults to &#x60;false&#x60;.
   # @option opts [String] :description An optional description of what the webhook is used for.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @return [WebhookEndpoint]
   describe "post_webhook_endpoints test" do
     it "should work" do
@@ -6453,8 +7741,8 @@ describe "DefaultApi" do
   # @option opts [String] :description An optional description of what the webhook is used for.
   # @option opts [Bool] :disabled Disable the webhook endpoint if set to true.
   # @option opts [Array(String)] :enabled_events The list of events to enable for this endpoint. You may specify &#x60;[&#39;*&#39;]&#x60; to enable all events, except those that require explicit selection.
-  # @option opts [Array(String)] :expand
-  # @option opts [IndividualSpecsMetadata] :metadata
+  # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
+  # @option opts [PostAccountRequestMetadata] :metadata
   # @option opts [String] :url The URL of the webhook endpoint.
   # @return [WebhookEndpoint]
   describe "post_webhook_endpoints_webhook_endpoint test" do

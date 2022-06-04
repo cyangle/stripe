@@ -19,11 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The type of the payment method used in the SetupIntent (e.g., `card`). An additional hash is included on `payment_method_details` with a name matching this value. It contains confirmation-specific information for the payment method.
     @[JSON::Field(key: "type", type: String)]
     getter _type : String
 
     # Optional properties
+
     #
     @[JSON::Field(key: "acss_debit", type: JSON::Any, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
     property acss_debit : JSON::Any
@@ -64,7 +66,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
-    @[JSON::Field(key: "card_present", type: SetupAttemptPaymentMethodDetailsCardPresent?, presence: true, ignore_serialize: card_present.nil? && !card_present_present?)]
+    @[JSON::Field(key: "card_present", type: SetupAttemptPaymentMethodDetailsCardPresent?, presence: true, ignore_serialize: card_present2.nil? && !card_present2_present?)]
     property card_present2 : SetupAttemptPaymentMethodDetailsCardPresent?
 
     @[JSON::Field(ignore: true)]
@@ -105,7 +107,24 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_type : String, @acss_debit : JSON::Any = nil, @au_becs_debit : JSON::Any = nil, @bacs_debit : JSON::Any = nil, @bancontact : SetupAttemptPaymentMethodDetailsBancontact? = nil, @boleto : JSON::Any = nil, @card : SetupAttemptPaymentMethodDetailsCard? = nil, @card_present2 : SetupAttemptPaymentMethodDetailsCardPresent? = nil, @ideal : SetupAttemptPaymentMethodDetailsIdeal? = nil, @link : JSON::Any = nil, @sepa_debit : JSON::Any = nil, @sofort : SetupAttemptPaymentMethodDetailsSofort? = nil, @us_bank_account : JSON::Any = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String,
+      # Optional properties
+      @acss_debit : JSON::Any = nil,
+      @au_becs_debit : JSON::Any = nil,
+      @bacs_debit : JSON::Any = nil,
+      @bancontact : SetupAttemptPaymentMethodDetailsBancontact? = nil,
+      @boleto : JSON::Any = nil,
+      @card : SetupAttemptPaymentMethodDetailsCard? = nil,
+      @card_present2 : SetupAttemptPaymentMethodDetailsCardPresent? = nil,
+      @ideal : SetupAttemptPaymentMethodDetailsIdeal? = nil,
+      @link : JSON::Any = nil,
+      @sepa_debit : JSON::Any = nil,
+      @sofort : SetupAttemptPaymentMethodDetailsSofort? = nil,
+      @us_bank_account : JSON::Any = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -124,6 +143,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @_type.to_s.size > 5000
+
       true
     end
 
@@ -137,34 +157,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit == o.acss_debit &&
-        au_becs_debit == o.au_becs_debit &&
-        bacs_debit == o.bacs_debit &&
-        bancontact == o.bancontact &&
-        boleto == o.boleto &&
-        card == o.card &&
-        card_present2 == o.card_present2 &&
-        ideal == o.ideal &&
-        link == o.link &&
-        sepa_debit == o.sepa_debit &&
-        sofort == o.sofort &&
-        _type == o._type &&
-        us_bank_account == o.us_bank_account
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit, @au_becs_debit, @bacs_debit, @bancontact, @boleto, @card, @card_present2, @ideal, @link, @sepa_debit, @sofort, @_type, @us_bank_account)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @acss_debit, @au_becs_debit, @bacs_debit, @bancontact, @boleto, @card, @card_present2, @ideal, @link, @sepa_debit, @sofort, @us_bank_account)
   end
 end

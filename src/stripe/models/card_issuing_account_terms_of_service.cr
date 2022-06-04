@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The Unix timestamp marking when the account representative accepted the service agreement.
     @[JSON::Field(key: "date", type: Int64?, presence: true, ignore_serialize: date.nil? && !date_present?)]
     property date : Int64?
@@ -33,7 +34,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? ip_present : Bool = false
 
-    # Optional properties
     # The user agent of the browser from which the account representative accepted the service agreement.
     @[JSON::Field(key: "user_agent", type: String?, presence: true, ignore_serialize: user_agent.nil? && !user_agent_present?)]
     getter user_agent : String?
@@ -43,7 +43,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @date : Int64?, @ip : String?, @user_agent : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @date : Int64? = nil,
+      @ip : String? = nil,
+      @user_agent : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -51,7 +57,7 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @ip.to_s.size > 5000
+      if !@ip.nil? && @ip.to_s.size > 5000
         invalid_properties.push("invalid value for \"ip\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -65,15 +71,16 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @ip.to_s.size > 5000
+      return false if !@ip.nil? && @ip.to_s.size > 5000
       return false if !@user_agent.nil? && @user_agent.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] ip Value to be assigned
     def ip=(ip)
-      if ip.to_s.size > 5000
+      if !ip.nil? && ip.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"ip\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -90,24 +97,16 @@ module Stripe
       @user_agent = user_agent
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        date == o.date &&
-        ip == o.ip &&
-        user_agent == o.user_agent
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@date, @ip, @user_agent)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@date, @ip, @user_agent)
   end
 end

@@ -48,12 +48,6 @@ describe Stripe::PaymentIntentParam do
     end
   end
 
-  describe "test attribute 'moto'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'network'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

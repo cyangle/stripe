@@ -19,15 +19,23 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # Additional fields which are only required for some users.
     @[JSON::Field(key: "additional", type: Array(String))]
     property additional : Array(String)
 
+    # Fields which every account must eventually provide.
     @[JSON::Field(key: "minimum", type: Array(String))]
     property minimum : Array(String)
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @additional : Array(String), @minimum : Array(String))
+    def initialize(
+      *,
+      # Required properties
+      @additional : Array(String),
+      @minimum : Array(String)
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -44,23 +52,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        additional == o.additional &&
-        minimum == o.minimum
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@additional, @minimum)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@additional, @minimum)
   end
 end

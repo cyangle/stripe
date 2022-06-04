@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     @[JSON::Field(key: "maximum", type: ShippingRateDeliveryEstimateMaximum?, presence: true, ignore_serialize: maximum.nil? && !maximum_present?)]
     property maximum : ShippingRateDeliveryEstimateMaximum?
 
@@ -33,7 +34,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @maximum : ShippingRateDeliveryEstimateMaximum?, @minimum : ShippingRateDeliveryEstimateMinimum?)
+    def initialize(
+      *,
+      # Optional properties
+      @maximum : ShippingRateDeliveryEstimateMaximum? = nil,
+      @minimum : ShippingRateDeliveryEstimateMinimum? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -50,23 +56,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        maximum == o.maximum &&
-        minimum == o.minimum
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@maximum, @minimum)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@maximum, @minimum)
   end
 end

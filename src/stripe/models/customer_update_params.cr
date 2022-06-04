@@ -19,7 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Describes whether Checkout saves the billing address onto `customer.address`. To always collect a full billing address, use `billing_address_collection`. Defaults to `never`.
+
     @[JSON::Field(key: "address", type: String?, presence: true, ignore_serialize: address.nil? && !address_present?)]
     getter address : String?
 
@@ -28,7 +28,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_ADDRESS = EnumValidator.new("address", "String", ["auto", "never"])
 
-    # Describes whether Checkout saves the name onto `customer.name`. Defaults to `never`.
     @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
     getter name : String?
 
@@ -37,7 +36,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_NAME = EnumValidator.new("name", "String", ["auto", "never"])
 
-    # Describes whether Checkout saves shipping information onto `customer.shipping`. To collect shipping information, use `shipping_address_collection`. Defaults to `never`.
     @[JSON::Field(key: "shipping", type: String?, presence: true, ignore_serialize: shipping.nil? && !shipping_present?)]
     getter shipping : String?
 
@@ -48,13 +46,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : String? = nil, @name : String? = nil, @shipping : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @address : String? = nil,
+      @name : String? = nil,
+      @shipping : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_ADDRESS.error_message) unless ENUM_VALIDATOR_FOR_ADDRESS.valid?(@address)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_NAME.error_message) unless ENUM_VALIDATOR_FOR_NAME.valid?(@name)
@@ -70,6 +75,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_ADDRESS.valid?(@address)
       return false unless ENUM_VALIDATOR_FOR_NAME.valid?(@name)
       return false unless ENUM_VALIDATOR_FOR_SHIPPING.valid?(@shipping)
+
       true
     end
 
@@ -94,24 +100,16 @@ module Stripe
       @shipping = shipping
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        name == o.name &&
-        shipping == o.shipping
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @name, @shipping)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address, @name, @shipping)
   end
 end

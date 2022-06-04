@@ -19,7 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The method Stripe should use to request information needed to process a refund or mispayment. Either `email` (an email is sent directly to the customer) or `manual` (a `source.refund_attributes_required` event is sent to your webhooks endpoint). Refer to each payment method's documentation to learn which refund attributes may be required.
+
     @[JSON::Field(key: "refund_attributes_method", type: String?, presence: true, ignore_serialize: refund_attributes_method.nil? && !refund_attributes_method_present?)]
     getter refund_attributes_method : String?
 
@@ -30,13 +30,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @refund_attributes_method : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @refund_attributes_method : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_REFUND_ATTRIBUTES_METHOD.error_message) unless ENUM_VALIDATOR_FOR_REFUND_ATTRIBUTES_METHOD.valid?(@refund_attributes_method)
 
       if !@refund_attributes_method.nil? && @refund_attributes_method.to_s.size > 5000
@@ -51,6 +56,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_REFUND_ATTRIBUTES_METHOD.valid?(@refund_attributes_method)
       return false if !@refund_attributes_method.nil? && @refund_attributes_method.to_s.size > 5000
+
       true
     end
 
@@ -61,22 +67,16 @@ module Stripe
       @refund_attributes_method = refund_attributes_method
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        refund_attributes_method == o.refund_attributes_method
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@refund_attributes_method)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@refund_attributes_method)
   end
 end

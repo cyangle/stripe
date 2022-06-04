@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The amount (price) for this order item.
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
@@ -47,14 +48,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? parent_present : Bool = false
 
-    # The type of this order item. Must be `sku`, `tax`, or `shipping`.
-    @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
-    getter _type : String?
-
-    @[JSON::Field(ignore: true)]
-    property? _type_present : Bool = false
-
-    # Optional properties
     # The quantity of this order item. When type is `sku`, this is the number of instances of the SKU to be ordered.
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
     property quantity : Int64?
@@ -62,9 +55,25 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? quantity_present : Bool = false
 
+    # The type of this order item. Must be `sku`, `tax`, or `shipping`.
+    @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
+    getter _type : String?
+
+    @[JSON::Field(ignore: true)]
+    property? _type_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64?, @currency : String?, @description : String?, @parent : String?, @_type : String?, @quantity : Int64? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @amount : Int64? = nil,
+      @currency : String? = nil,
+      @description : String? = nil,
+      @parent : String? = nil,
+      @quantity : Int64? = nil,
+      @_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -72,19 +81,19 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @currency.to_s.size > 5000
+      if !@currency.nil? && @currency.to_s.size > 5000
         invalid_properties.push("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @description.to_s.size > 5000
+      if !@description.nil? && @description.to_s.size > 5000
         invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @parent.to_s.size > 5000
+      if !@parent.nil? && @parent.to_s.size > 5000
         invalid_properties.push("invalid value for \"parent\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @_type.to_s.size > 5000
+      if !@_type.nil? && @_type.to_s.size > 5000
         invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -94,17 +103,18 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @currency.to_s.size > 5000
-      return false if @description.to_s.size > 5000
-      return false if @parent.to_s.size > 5000
-      return false if @_type.to_s.size > 5000
+      return false if !@currency.nil? && @currency.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@parent.nil? && @parent.to_s.size > 5000
+      return false if !@_type.nil? && @_type.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] currency Value to be assigned
     def currency=(currency)
-      if currency.to_s.size > 5000
+      if !currency.nil? && currency.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -114,7 +124,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
     def description=(description)
-      if description.to_s.size > 5000
+      if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -124,7 +134,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] parent Value to be assigned
     def parent=(parent)
-      if parent.to_s.size > 5000
+      if !parent.nil? && parent.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"parent\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -134,24 +144,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] _type Value to be assigned
     def _type=(_type)
-      if _type.to_s.size > 5000
+      if !_type.nil? && _type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
       @_type = _type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        currency == o.currency &&
-        description == o.description &&
-        parent == o.parent &&
-        quantity == o.quantity &&
-        _type == o._type
     end
 
     # @see the `==` method
@@ -160,8 +157,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @currency, @description, @parent, @quantity, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @currency, @description, @parent, @quantity, @_type)
   end
 end

@@ -20,12 +20,6 @@ describe Stripe::PaymentMethodOptions1Card do
     end
   end
 
-  describe "test attribute 'mandate_options'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'request_three_d_secure'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

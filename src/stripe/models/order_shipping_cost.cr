@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Total shipping cost before any discounts or taxes are applied.
     @[JSON::Field(key: "amount_subtotal", type: Int64?)]
     property amount_subtotal : Int64?
@@ -31,13 +32,14 @@ module Stripe
     @[JSON::Field(key: "amount_total", type: Int64?)]
     property amount_total : Int64?
 
-    @[JSON::Field(key: "shipping_rate", type: OrdersV2ResourceShippingCostShippingRate, presence: true, ignore_serialize: shipping_rate.nil? && !shipping_rate_present?)]
-    property shipping_rate : OrdersV2ResourceShippingCostShippingRate
+    # Optional properties
+
+    @[JSON::Field(key: "shipping_rate", type: OrdersV2ResourceShippingCostShippingRate?, presence: true, ignore_serialize: shipping_rate.nil? && !shipping_rate_present?)]
+    property shipping_rate : OrdersV2ResourceShippingCostShippingRate?
 
     @[JSON::Field(ignore: true)]
     property? shipping_rate_present : Bool = false
 
-    # Optional properties
     # The taxes applied to the shipping rate.
     @[JSON::Field(key: "taxes", type: Array(LineItemsTaxAmount)?, presence: true, ignore_serialize: taxes.nil? && !taxes_present?)]
     property taxes : Array(LineItemsTaxAmount)?
@@ -54,7 +56,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount_subtotal : Int64, @amount_tax : Int64, @amount_total : Int64, @shipping_rate : OrdersV2ResourceShippingCostShippingRate?, @taxes : Array(LineItemsTaxAmount)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount_subtotal : Int64? = nil,
+      @amount_tax : Int64? = nil,
+      @amount_total : Int64? = nil,
+      # Optional properties
+      @shipping_rate : OrdersV2ResourceShippingCostShippingRate? = nil,
+      @taxes : Array(LineItemsTaxAmount)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -79,24 +90,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount_subtotal == o.amount_subtotal &&
-        amount_tax == o.amount_tax &&
-        amount_total == o.amount_total &&
-        shipping_rate == o.shipping_rate &&
-        taxes == o.taxes
     end
 
     # @see the `==` method
@@ -105,8 +101,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount_subtotal, @amount_tax, @amount_total, @shipping_rate, @taxes)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount_subtotal, @amount_tax, @amount_total, @shipping_rate, @taxes)
   end
 end

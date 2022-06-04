@@ -41,4 +41,48 @@ describe Stripe::MandateOptionsParam3 do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
+
+  describe "test attribute 'end_date'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'interval'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("String", ["day", "month", "sporadic", "week", "year"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.interval = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe "test attribute 'interval_count'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'reference'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'start_date'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'supported_types'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+      # validator = EnumValidator.new("Array(String)", ["india"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.supported_types = value }.not_to raise_error
+      # end
+    end
+  end
 end

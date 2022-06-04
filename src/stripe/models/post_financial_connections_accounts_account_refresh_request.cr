@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The list of account features that you would like to refresh. Either: `balance` or `ownership`.
     @[JSON::Field(key: "features", type: Array(String))]
     getter features : Array(String)
@@ -25,6 +26,8 @@ module Stripe
     ENUM_VALIDATOR_FOR_FEATURES = EnumValidator.new("features", "Array(String)", ["balance", "ownership"])
 
     # Optional properties
+
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -33,7 +36,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @features : Array(String), @expand : Array(String)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @features : Array(String),
+      # Optional properties
+      @expand : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -50,6 +59,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_FEATURES.all_valid?(@features, false)
+
       true
     end
 
@@ -60,23 +70,16 @@ module Stripe
       @features = features
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        expand == o.expand &&
-        features == o.features
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@expand, @features)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@features, @expand)
   end
 end

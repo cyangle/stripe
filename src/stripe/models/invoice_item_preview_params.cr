@@ -18,41 +18,37 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The integer amount in cents (or local equivalent) of previewed invoice item.
+
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
 
     @[JSON::Field(ignore: true)]
     property? amount_present : Bool = false
 
-    # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). Only applicable to new invoice items.
     @[JSON::Field(key: "currency", type: String?, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
     property currency : String?
 
     @[JSON::Field(ignore: true)]
     property? currency_present : Bool = false
 
-    # An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String?
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
-    # Explicitly controls whether discounts apply to this invoice item. Defaults to true, except for negative invoice items.
     @[JSON::Field(key: "discountable", type: Bool?, presence: true, ignore_serialize: discountable.nil? && !discountable_present?)]
     property discountable : Bool?
 
     @[JSON::Field(ignore: true)]
     property? discountable_present : Bool = false
 
-    @[JSON::Field(key: "discounts", type: InvoiceItemPreviewParamsDiscounts?, presence: true, ignore_serialize: discounts.nil? && !discounts_present?)]
-    property discounts : InvoiceItemPreviewParamsDiscounts?
+    @[JSON::Field(key: "discounts", type: GetInvoicesUpcomingDiscountsParameter?, presence: true, ignore_serialize: discounts.nil? && !discounts_present?)]
+    property discounts : GetInvoicesUpcomingDiscountsParameter?
 
     @[JSON::Field(ignore: true)]
     property? discounts_present : Bool = false
 
-    # The ID of the invoice item to update in preview. If not specified, a new invoice item will be added to the preview of the upcoming invoice.
     @[JSON::Field(key: "invoiceitem", type: String?, presence: true, ignore_serialize: invoiceitem.nil? && !invoiceitem_present?)]
     getter invoiceitem : String?
 
@@ -65,13 +61,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
-    @[JSON::Field(key: "period", type: Period1?, presence: true, ignore_serialize: period.nil? && !period_present?)]
-    property period : Period1?
+    @[JSON::Field(key: "period", type: Period2?, presence: true, ignore_serialize: period.nil? && !period_present?)]
+    property period : Period2?
 
     @[JSON::Field(ignore: true)]
     property? period_present : Bool = false
 
-    # The ID of the price object.
     @[JSON::Field(key: "price", type: String?, presence: true, ignore_serialize: price.nil? && !price_present?)]
     getter price : String?
 
@@ -84,27 +79,24 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? price_data_present : Bool = false
 
-    # Non-negative integer. The quantity of units for the invoice item.
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
     property quantity : Int64?
 
     @[JSON::Field(ignore: true)]
     property? quantity_present : Bool = false
 
-    @[JSON::Field(key: "tax_rates", type: InvoiceItemPreviewParamsTaxRates?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
-    property tax_rates : InvoiceItemPreviewParamsTaxRates?
+    @[JSON::Field(key: "tax_rates", type: CreditNoteLineItemParamsTaxRates?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
+    property tax_rates : CreditNoteLineItemParamsTaxRates?
 
     @[JSON::Field(ignore: true)]
     property? tax_rates_present : Bool = false
 
-    # The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
     @[JSON::Field(key: "unit_amount", type: Int64?, presence: true, ignore_serialize: unit_amount.nil? && !unit_amount_present?)]
     property unit_amount : Int64?
 
     @[JSON::Field(ignore: true)]
     property? unit_amount_present : Bool = false
 
-    # Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
     @[JSON::Field(key: "unit_amount_decimal", type: String?, presence: true, ignore_serialize: unit_amount_decimal.nil? && !unit_amount_decimal_present?)]
     property unit_amount_decimal : String?
 
@@ -113,7 +105,24 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64? = nil, @currency : String? = nil, @description : String? = nil, @discountable : Bool? = nil, @discounts : InvoiceItemPreviewParamsDiscounts? = nil, @invoiceitem : String? = nil, @metadata : IndividualSpecsMetadata? = nil, @period : Period1? = nil, @price : String? = nil, @price_data : OneTimePriceData? = nil, @quantity : Int64? = nil, @tax_rates : InvoiceItemPreviewParamsTaxRates? = nil, @unit_amount : Int64? = nil, @unit_amount_decimal : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @amount : Int64? = nil,
+      @currency : String? = nil,
+      @description : String? = nil,
+      @discountable : Bool? = nil,
+      @discounts : GetInvoicesUpcomingDiscountsParameter? = nil,
+      @invoiceitem : String? = nil,
+      @metadata : IndividualSpecsMetadata? = nil,
+      @period : Period2? = nil,
+      @price : String? = nil,
+      @price_data : OneTimePriceData? = nil,
+      @quantity : Int64? = nil,
+      @tax_rates : CreditNoteLineItemParamsTaxRates? = nil,
+      @unit_amount : Int64? = nil,
+      @unit_amount_decimal : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -142,6 +151,7 @@ module Stripe
       return false if !@description.nil? && @description.to_s.size > 5000
       return false if !@invoiceitem.nil? && @invoiceitem.to_s.size > 5000
       return false if !@price.nil? && @price.to_s.size > 5000
+
       true
     end
 
@@ -175,35 +185,16 @@ module Stripe
       @price = price
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        currency == o.currency &&
-        description == o.description &&
-        discountable == o.discountable &&
-        discounts == o.discounts &&
-        invoiceitem == o.invoiceitem &&
-        metadata == o.metadata &&
-        period == o.period &&
-        price == o.price &&
-        price_data == o.price_data &&
-        quantity == o.quantity &&
-        tax_rates == o.tax_rates &&
-        unit_amount == o.unit_amount &&
-        unit_amount_decimal == o.unit_amount_decimal
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @currency, @description, @discountable, @discounts, @invoiceitem, @metadata, @period, @price, @price_data, @quantity, @tax_rates, @unit_amount, @unit_amount_decimal)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @currency, @description, @discountable, @discounts, @invoiceitem, @metadata, @period, @price, @price_data, @quantity, @tax_rates, @unit_amount, @unit_amount_decimal)
   end
 end

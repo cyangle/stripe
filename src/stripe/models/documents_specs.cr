@@ -19,51 +19,62 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "bank_account_ownership_verification", type: DocumentsParam?, presence: true, ignore_serialize: bank_account_ownership_verification.nil? && !bank_account_ownership_verification_present?)]
     property bank_account_ownership_verification : DocumentsParam?
 
     @[JSON::Field(ignore: true)]
     property? bank_account_ownership_verification_present : Bool = false
 
-    @[JSON::Field(key: "company_license", type: DocumentsParam1?, presence: true, ignore_serialize: company_license.nil? && !company_license_present?)]
-    property company_license : DocumentsParam1?
+    @[JSON::Field(key: "company_license", type: DocumentsParam?, presence: true, ignore_serialize: company_license.nil? && !company_license_present?)]
+    property company_license : DocumentsParam?
 
     @[JSON::Field(ignore: true)]
     property? company_license_present : Bool = false
 
-    @[JSON::Field(key: "company_memorandum_of_association", type: DocumentsParam2?, presence: true, ignore_serialize: company_memorandum_of_association.nil? && !company_memorandum_of_association_present?)]
-    property company_memorandum_of_association : DocumentsParam2?
+    @[JSON::Field(key: "company_memorandum_of_association", type: DocumentsParam?, presence: true, ignore_serialize: company_memorandum_of_association.nil? && !company_memorandum_of_association_present?)]
+    property company_memorandum_of_association : DocumentsParam?
 
     @[JSON::Field(ignore: true)]
     property? company_memorandum_of_association_present : Bool = false
 
-    @[JSON::Field(key: "company_ministerial_decree", type: DocumentsParam3?, presence: true, ignore_serialize: company_ministerial_decree.nil? && !company_ministerial_decree_present?)]
-    property company_ministerial_decree : DocumentsParam3?
+    @[JSON::Field(key: "company_ministerial_decree", type: DocumentsParam?, presence: true, ignore_serialize: company_ministerial_decree.nil? && !company_ministerial_decree_present?)]
+    property company_ministerial_decree : DocumentsParam?
 
     @[JSON::Field(ignore: true)]
     property? company_ministerial_decree_present : Bool = false
 
-    @[JSON::Field(key: "company_registration_verification", type: DocumentsParam4?, presence: true, ignore_serialize: company_registration_verification.nil? && !company_registration_verification_present?)]
-    property company_registration_verification : DocumentsParam4?
+    @[JSON::Field(key: "company_registration_verification", type: DocumentsParam?, presence: true, ignore_serialize: company_registration_verification.nil? && !company_registration_verification_present?)]
+    property company_registration_verification : DocumentsParam?
 
     @[JSON::Field(ignore: true)]
     property? company_registration_verification_present : Bool = false
 
-    @[JSON::Field(key: "company_tax_id_verification", type: DocumentsParam5?, presence: true, ignore_serialize: company_tax_id_verification.nil? && !company_tax_id_verification_present?)]
-    property company_tax_id_verification : DocumentsParam5?
+    @[JSON::Field(key: "company_tax_id_verification", type: DocumentsParam?, presence: true, ignore_serialize: company_tax_id_verification.nil? && !company_tax_id_verification_present?)]
+    property company_tax_id_verification : DocumentsParam?
 
     @[JSON::Field(ignore: true)]
     property? company_tax_id_verification_present : Bool = false
 
-    @[JSON::Field(key: "proof_of_registration", type: DocumentsParam6?, presence: true, ignore_serialize: proof_of_registration.nil? && !proof_of_registration_present?)]
-    property proof_of_registration : DocumentsParam6?
+    @[JSON::Field(key: "proof_of_registration", type: DocumentsParam?, presence: true, ignore_serialize: proof_of_registration.nil? && !proof_of_registration_present?)]
+    property proof_of_registration : DocumentsParam?
 
     @[JSON::Field(ignore: true)]
     property? proof_of_registration_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bank_account_ownership_verification : DocumentsParam? = nil, @company_license : DocumentsParam1? = nil, @company_memorandum_of_association : DocumentsParam2? = nil, @company_ministerial_decree : DocumentsParam3? = nil, @company_registration_verification : DocumentsParam4? = nil, @company_tax_id_verification : DocumentsParam5? = nil, @proof_of_registration : DocumentsParam6? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @bank_account_ownership_verification : DocumentsParam? = nil,
+      @company_license : DocumentsParam? = nil,
+      @company_memorandum_of_association : DocumentsParam? = nil,
+      @company_ministerial_decree : DocumentsParam? = nil,
+      @company_registration_verification : DocumentsParam? = nil,
+      @company_tax_id_verification : DocumentsParam? = nil,
+      @proof_of_registration : DocumentsParam? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -80,28 +91,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bank_account_ownership_verification == o.bank_account_ownership_verification &&
-        company_license == o.company_license &&
-        company_memorandum_of_association == o.company_memorandum_of_association &&
-        company_ministerial_decree == o.company_ministerial_decree &&
-        company_registration_verification == o.company_registration_verification &&
-        company_tax_id_verification == o.company_tax_id_verification &&
-        proof_of_registration == o.proof_of_registration
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bank_account_ownership_verification, @company_license, @company_memorandum_of_association, @company_ministerial_decree, @company_registration_verification, @company_tax_id_verification, @proof_of_registration)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bank_account_ownership_verification, @company_license, @company_memorandum_of_association, @company_ministerial_decree, @company_registration_verification, @company_tax_id_verification, @proof_of_registration)
   end
 end

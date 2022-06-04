@@ -19,11 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Object containing the API resource relevant to the event. For example, an `invoice.created` event will have a full [invoice object](https://stripe.com/docs/api#invoice_object) as the value of the object key.
     @[JSON::Field(key: "object", type: JSON::Any)]
     property object : JSON::Any
 
     # Optional properties
+
     # Object containing the names of the attributes that have changed, and their previous values (sent along only with *.updated events).
     @[JSON::Field(key: "previous_attributes", type: JSON::Any, presence: true, ignore_serialize: previous_attributes.nil? && !previous_attributes_present?)]
     property previous_attributes : JSON::Any
@@ -33,7 +35,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @object : JSON::Any, @previous_attributes : JSON::Any = nil)
+    def initialize(
+      *,
+      # Required properties
+      @object : JSON::Any,
+      # Optional properties
+      @previous_attributes : JSON::Any = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -50,23 +58,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        object == o.object &&
-        previous_attributes == o.previous_attributes
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@object, @previous_attributes)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@object, @previous_attributes)
   end
 end

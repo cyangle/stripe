@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # app_id is the APP ID registered on WeChat open platform
     @[JSON::Field(key: "app_id", type: String)]
     getter app_id : String
@@ -49,7 +50,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @app_id : String, @nonce_str : String, @package : String, @partner_id : String, @prepay_id : String, @sign : String, @timestamp : String)
+    def initialize(
+      *,
+      # Required properties
+      @app_id : String,
+      @nonce_str : String,
+      @package : String,
+      @partner_id : String,
+      @prepay_id : String,
+      @sign : String,
+      @timestamp : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -98,6 +109,7 @@ module Stripe
       return false if @prepay_id.to_s.size > 5000
       return false if @sign.to_s.size > 5000
       return false if @timestamp.to_s.size > 5000
+
       true
     end
 
@@ -171,28 +183,16 @@ module Stripe
       @timestamp = timestamp
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        app_id == o.app_id &&
-        nonce_str == o.nonce_str &&
-        package == o.package &&
-        partner_id == o.partner_id &&
-        prepay_id == o.prepay_id &&
-        sign == o.sign &&
-        timestamp == o.timestamp
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@app_id, @nonce_str, @package, @partner_id, @prepay_id, @sign, @timestamp)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@app_id, @nonce_str, @package, @partner_id, @prepay_id, @sign, @timestamp)
   end
 end

@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "financial_connections", type: InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions?, presence: true, ignore_serialize: financial_connections.nil? && !financial_connections_present?)]
     property financial_connections : InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions?
 
@@ -36,7 +37,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @financial_connections : InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions? = nil, @verification_method : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @financial_connections : InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions? = nil,
+      @verification_method : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -53,6 +59,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
+
       true
     end
 
@@ -63,23 +70,16 @@ module Stripe
       @verification_method = verification_method
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        financial_connections == o.financial_connections &&
-        verification_method == o.verification_method
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@financial_connections, @verification_method)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@financial_connections, @verification_method)
   end
 end

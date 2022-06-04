@@ -23,7 +23,7 @@ describe Stripe::TreasuryFinancialAccountPlatformRestrictions do
   describe "test attribute 'inbound_flows'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["restricted", "unrestricted", "null"])
+      # validator = EnumValidator.new("String", ["restricted", "unrestricted"])
       # validator.allowable_values.each do |value|
       #   expect { instance.inbound_flows = value }.not_to raise_error
       # end
@@ -33,7 +33,7 @@ describe Stripe::TreasuryFinancialAccountPlatformRestrictions do
   describe "test attribute 'outbound_flows'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["restricted", "unrestricted", "null"])
+      # validator = EnumValidator.new("String", ["restricted", "unrestricted"])
       # validator.allowable_values.each do |value|
       #   expect { instance.outbound_flows = value }.not_to raise_error
       # end

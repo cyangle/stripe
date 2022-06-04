@@ -19,11 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The state of verification for the person. Possible values are `unverified`, `pending`, or `verified`.
     @[JSON::Field(key: "status", type: String)]
     getter status : String
 
     # Optional properties
+
     @[JSON::Field(key: "additional_document", type: LegalEntityPersonVerificationAdditionalDocument?, presence: true, ignore_serialize: additional_document.nil? && !additional_document_present?)]
     property additional_document : LegalEntityPersonVerificationAdditionalDocument?
 
@@ -52,13 +54,26 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @status : String, @additional_document : LegalEntityPersonVerificationAdditionalDocument? = nil, @details : String? = nil, @details_code : String? = nil, @document : LegalEntityPersonVerificationDocument? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @status : String,
+      # Optional properties
+      @additional_document : LegalEntityPersonVerificationAdditionalDocument? = nil,
+      @details : String? = nil,
+      @details_code : String? = nil,
+      @document : LegalEntityPersonVerificationDocument? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
+      if @status.to_s.size > 5000
+        invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      end
 
       if !@details.nil? && @details.to_s.size > 5000
         invalid_properties.push("invalid value for \"details\", the character length must be smaller than or equal to 5000.")
@@ -68,20 +83,27 @@ module Stripe
         invalid_properties.push("invalid value for \"details_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @status.to_s.size > 5000
-        invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @status.to_s.size > 5000
       return false if !@details.nil? && @details.to_s.size > 5000
       return false if !@details_code.nil? && @details_code.to_s.size > 5000
-      return false if @status.to_s.size > 5000
+
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] status Value to be assigned
+    def status=(status)
+      if status.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @status = status
     end
 
     # Custom attribute writer method with validation
@@ -104,36 +126,16 @@ module Stripe
       @details_code = details_code
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] status Value to be assigned
-    def status=(status)
-      if status.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @status = status
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        additional_document == o.additional_document &&
-        details == o.details &&
-        details_code == o.details_code &&
-        document == o.document &&
-        status == o.status
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@additional_document, @details, @details_code, @document, @status)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@status, @additional_document, @details, @details_code, @document)
   end
 end

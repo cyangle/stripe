@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "data", type: Array(IdentityVerificationReport))]
     property data : Array(IdentityVerificationReport)
 
@@ -38,7 +39,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @data : Array(IdentityVerificationReport), @has_more : Bool, @object : String, @url : String)
+    def initialize(
+      *,
+      # Required properties
+      @data : Array(IdentityVerificationReport),
+      @has_more : Bool,
+      @object : String,
+      @url : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -66,6 +74,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @url.to_s.size > 5000
       return false if @url !~ /^\/v1\/identity\/verification_reports/
+
       true
     end
 
@@ -91,25 +100,16 @@ module Stripe
       @url = url
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        data == o.data &&
-        has_more == o.has_more &&
-        object == o.object &&
-        url == o.url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@data, @has_more, @object, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@data, @has_more, @object, @url)
   end
 end

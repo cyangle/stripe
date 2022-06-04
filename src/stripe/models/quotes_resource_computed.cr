@@ -19,18 +19,27 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    @[JSON::Field(key: "upfront", type: QuotesResourceUpfront)]
+    property upfront : QuotesResourceUpfront
+
+    # Optional properties
+
     @[JSON::Field(key: "recurring", type: QuotesResourceComputedRecurring?, presence: true, ignore_serialize: recurring.nil? && !recurring_present?)]
     property recurring : QuotesResourceComputedRecurring?
 
     @[JSON::Field(ignore: true)]
     property? recurring_present : Bool = false
 
-    @[JSON::Field(key: "upfront", type: QuotesResourceUpfront)]
-    property upfront : QuotesResourceUpfront
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @recurring : QuotesResourceComputedRecurring?, @upfront : QuotesResourceUpfront)
+    def initialize(
+      *,
+      # Required properties
+      @upfront : QuotesResourceUpfront,
+      # Optional properties
+      @recurring : QuotesResourceComputedRecurring? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -47,23 +56,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        recurring == o.recurring &&
-        upfront == o.upfront
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@recurring, @upfront)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@upfront, @recurring)
   end
 end

@@ -20,26 +20,10 @@ describe Stripe::PaymentMethodOptionsParam13 do
     end
   end
 
-  describe "test attribute 'app_id'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'client'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["android", "ios", "web"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.client = value }.not_to raise_error
-      # end
-    end
-  end
-
   describe "test attribute 'setup_future_usage'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["none"])
+      # validator = EnumValidator.new("String", ["", "none", "off_session", "on_session"])
       # validator.allowable_values.each do |value|
       #   expect { instance.setup_future_usage = value }.not_to raise_error
       # end

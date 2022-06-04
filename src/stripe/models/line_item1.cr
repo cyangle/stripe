@@ -18,21 +18,25 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The price of the item in cents.
+
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
 
-    # The description or name of the item.
     @[JSON::Field(key: "description", type: String)]
     getter description : String
 
-    # The quantity of the line item being purchased.
     @[JSON::Field(key: "quantity", type: Int64)]
     property quantity : Int64
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @description : String, @quantity : Int64)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @description : String,
+      @quantity : Int64
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -51,6 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @description.to_s.size > 5000
+
       true
     end
 
@@ -64,24 +69,16 @@ module Stripe
       @description = description
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        description == o.description &&
-        quantity == o.quantity
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @description, @quantity)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @description, @quantity)
   end
 end

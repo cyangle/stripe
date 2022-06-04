@@ -29,7 +29,7 @@ describe Stripe::IssuingCard do
   describe "test attribute 'cancellation_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["lost", "stolen", "null"])
+      # validator = EnumValidator.new("String", ["lost", "stolen"])
       # validator.allowable_values.each do |value|
       #   expect { instance.cancellation_reason = value }.not_to raise_error
       # end
@@ -133,7 +133,7 @@ describe Stripe::IssuingCard do
   describe "test attribute 'replacement_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["damaged", "expired", "lost", "stolen", "null"])
+      # validator = EnumValidator.new("String", ["damaged", "expired", "lost", "stolen"])
       # validator.allowable_values.each do |value|
       #   expect { instance.replacement_reason = value }.not_to raise_error
       # end

@@ -19,15 +19,15 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    @[JSON::Field(key: "address", type: RequiredAddress1)]
-    property address : RequiredAddress1
 
-    # The name printed on the shipping label when shipping the card.
+    @[JSON::Field(key: "address", type: RequiredAddress)]
+    property address : RequiredAddress
+
     @[JSON::Field(key: "name", type: String)]
     getter name : String
 
     # Optional properties
-    # Shipment service.
+
     @[JSON::Field(key: "service", type: String?, presence: true, ignore_serialize: service.nil? && !service_present?)]
     getter service : String?
 
@@ -36,7 +36,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_SERVICE = EnumValidator.new("service", "String", ["express", "priority", "standard"])
 
-    # Packaging options.
     @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
     getter _type : String?
 
@@ -47,7 +46,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : RequiredAddress1, @name : String, @service : String? = nil, @_type : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @address : RequiredAddress,
+      @name : String,
+      # Optional properties
+      @service : String? = nil,
+      @_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -72,6 +79,7 @@ module Stripe
       return false if @name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_SERVICE.valid?(@service)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+
       true
     end
 
@@ -99,25 +107,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        name == o.name &&
-        service == o.service &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @name, @service, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@address, @name, @service, @_type)
   end
 end

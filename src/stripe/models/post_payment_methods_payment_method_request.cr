@@ -18,36 +18,9 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # This is a legacy parameter that will be removed in the future. It is a hash that does not accept any keys.
-    @[JSON::Field(key: "acss_debit", type: JSON::Any, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
-    property acss_debit : JSON::Any
 
-    @[JSON::Field(ignore: true)]
-    property? acss_debit_present : Bool = false
-
-    # This is a legacy parameter that will be removed in the future. It is a hash that does not accept any keys.
-    @[JSON::Field(key: "affirm", type: JSON::Any, presence: true, ignore_serialize: affirm.nil? && !affirm_present?)]
-    property affirm : JSON::Any
-
-    @[JSON::Field(ignore: true)]
-    property? affirm_present : Bool = false
-
-    # This is a legacy parameter that will be removed in the future. It is a hash that does not accept any keys.
-    @[JSON::Field(key: "au_becs_debit", type: JSON::Any, presence: true, ignore_serialize: au_becs_debit.nil? && !au_becs_debit_present?)]
-    property au_becs_debit : JSON::Any
-
-    @[JSON::Field(ignore: true)]
-    property? au_becs_debit_present : Bool = false
-
-    # This is a legacy parameter that will be removed in the future. It is a hash that does not accept any keys.
-    @[JSON::Field(key: "bacs_debit", type: JSON::Any, presence: true, ignore_serialize: bacs_debit.nil? && !bacs_debit_present?)]
-    property bacs_debit : JSON::Any
-
-    @[JSON::Field(ignore: true)]
-    property? bacs_debit_present : Bool = false
-
-    @[JSON::Field(key: "billing_details", type: BillingDetailsInnerParams?, presence: true, ignore_serialize: billing_details.nil? && !billing_details_present?)]
-    property billing_details : BillingDetailsInnerParams?
+    @[JSON::Field(key: "billing_details", type: BillingDetailsInnerParams1?, presence: true, ignore_serialize: billing_details.nil? && !billing_details_present?)]
+    property billing_details : BillingDetailsInnerParams1?
 
     @[JSON::Field(ignore: true)]
     property? billing_details_present : Bool = false
@@ -58,6 +31,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -71,18 +45,11 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? link_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
-
-    # This is a legacy parameter that will be removed in the future. It is a hash that does not accept any keys.
-    @[JSON::Field(key: "sepa_debit", type: JSON::Any, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
-    property sepa_debit : JSON::Any
-
-    @[JSON::Field(ignore: true)]
-    property? sepa_debit_present : Bool = false
 
     @[JSON::Field(key: "us_bank_account", type: UpdateParam?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
     property us_bank_account : UpdateParam?
@@ -92,7 +59,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @acss_debit : JSON::Any = nil, @affirm : JSON::Any = nil, @au_becs_debit : JSON::Any = nil, @bacs_debit : JSON::Any = nil, @billing_details : BillingDetailsInnerParams? = nil, @card : UpdateApiParam? = nil, @expand : Array(String)? = nil, @link : JSON::Any = nil, @metadata : IndividualSpecsMetadata? = nil, @sepa_debit : JSON::Any = nil, @us_bank_account : UpdateParam? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @billing_details : BillingDetailsInnerParams1? = nil,
+      @card : UpdateApiParam? = nil,
+      @expand : Array(String)? = nil,
+      @link : JSON::Any = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @us_bank_account : UpdateParam? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -109,32 +85,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit == o.acss_debit &&
-        affirm == o.affirm &&
-        au_becs_debit == o.au_becs_debit &&
-        bacs_debit == o.bacs_debit &&
-        billing_details == o.billing_details &&
-        card == o.card &&
-        expand == o.expand &&
-        link == o.link &&
-        metadata == o.metadata &&
-        sepa_debit == o.sepa_debit &&
-        us_bank_account == o.us_bank_account
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit, @affirm, @au_becs_debit, @bacs_debit, @billing_details, @card, @expand, @link, @metadata, @sepa_debit, @us_bank_account)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@billing_details, @card, @expand, @link, @metadata, @us_bank_account)
   end
 end

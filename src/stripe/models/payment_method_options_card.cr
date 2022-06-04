@@ -12,14 +12,19 @@ require "time"
 require "log"
 
 module Stripe
-  # If paying by `card`, this sub-hash contains details about the Card payment method options to pass to the invoice’s PaymentIntent.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodOptionsCard
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
+
+    @[JSON::Field(key: "mandate_options", type: MandateOptionsParam2?, presence: true, ignore_serialize: mandate_options.nil? && !mandate_options_present?)]
+    property mandate_options : MandateOptionsParam2?
+
+    @[JSON::Field(ignore: true)]
+    property? mandate_options_present : Bool = false
+
     @[JSON::Field(key: "request_three_d_secure", type: String?, presence: true, ignore_serialize: request_three_d_secure.nil? && !request_three_d_secure_present?)]
     getter request_three_d_secure : String?
 
@@ -31,20 +36,26 @@ module Stripe
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
-        Stripe::InvoicePaymentMethodOptionsParam2,
-        String,
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
+        Stripe::SubscriptionPaymentMethodOptionsParam,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @request_three_d_secure : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @mandate_options : MandateOptionsParam2? = nil,
+      @request_three_d_secure : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.error_message) unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
 
       invalid_properties
@@ -54,6 +65,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -65,10 +77,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -80,22 +89,16 @@ module Stripe
       @request_three_d_secure = request_three_d_secure
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        request_three_d_secure == o.request_three_d_secure
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@request_three_d_secure)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@mandate_options, @request_three_d_secure)
   end
 end

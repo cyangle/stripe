@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     @[JSON::Field(key: "additional_documentation", type: IssuingDisputeCanceledEvidenceAdditionalDocumentation?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
     property additional_documentation : IssuingDisputeCanceledEvidenceAdditionalDocumentation?
 
@@ -59,7 +60,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @additional_documentation : IssuingDisputeCanceledEvidenceAdditionalDocumentation?, @card_statement : IssuingDisputeDuplicateEvidenceCardStatement?, @cash_receipt : IssuingDisputeDuplicateEvidenceCashReceipt?, @check_image : IssuingDisputeDuplicateEvidenceCheckImage?, @explanation : String?, @original_transaction : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @additional_documentation : IssuingDisputeCanceledEvidenceAdditionalDocumentation? = nil,
+      @card_statement : IssuingDisputeDuplicateEvidenceCardStatement? = nil,
+      @cash_receipt : IssuingDisputeDuplicateEvidenceCashReceipt? = nil,
+      @check_image : IssuingDisputeDuplicateEvidenceCheckImage? = nil,
+      @explanation : String? = nil,
+      @original_transaction : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -67,11 +77,11 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @explanation.to_s.size > 5000
+      if !@explanation.nil? && @explanation.to_s.size > 5000
         invalid_properties.push("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @original_transaction.to_s.size > 5000
+      if !@original_transaction.nil? && @original_transaction.to_s.size > 5000
         invalid_properties.push("invalid value for \"original_transaction\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -81,15 +91,16 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @explanation.to_s.size > 5000
-      return false if @original_transaction.to_s.size > 5000
+      return false if !@explanation.nil? && @explanation.to_s.size > 5000
+      return false if !@original_transaction.nil? && @original_transaction.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] explanation Value to be assigned
     def explanation=(explanation)
-      if explanation.to_s.size > 5000
+      if !explanation.nil? && explanation.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -99,24 +110,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] original_transaction Value to be assigned
     def original_transaction=(original_transaction)
-      if original_transaction.to_s.size > 5000
+      if !original_transaction.nil? && original_transaction.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"original_transaction\", the character length must be smaller than or equal to 5000.")
       end
 
       @original_transaction = original_transaction
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        additional_documentation == o.additional_documentation &&
-        card_statement == o.card_statement &&
-        cash_receipt == o.cash_receipt &&
-        check_image == o.check_image &&
-        explanation == o.explanation &&
-        original_transaction == o.original_transaction
     end
 
     # @see the `==` method
@@ -125,8 +123,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@additional_documentation, @card_statement, @cash_receipt, @check_image, @explanation, @original_transaction)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@additional_documentation, @card_statement, @cash_receipt, @check_image, @explanation, @original_transaction)
   end
 end

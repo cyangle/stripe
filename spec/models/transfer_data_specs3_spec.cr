@@ -20,7 +20,7 @@ describe Stripe::TransferDataSpecs3 do
     end
   end
 
-  describe "test attribute 'amount'" do
+  describe "test attribute 'amount_percent'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

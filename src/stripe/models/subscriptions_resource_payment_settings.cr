@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     @[JSON::Field(key: "payment_method_options", type: SubscriptionsResourcePaymentSettingsPaymentMethodOptions?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
     property payment_method_options : SubscriptionsResourcePaymentSettingsPaymentMethodOptions?
 
@@ -32,7 +33,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_method_types_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES = EnumValidator.new("payment_method_types", "Array(String)", ["ach_credit_transfer", "ach_debit", "acss_debit", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "customer_balance", "fpx", "giropay", "grabpay", "ideal", "konbini", "link", "paynow", "sepa_credit_transfer", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
+    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES = EnumValidator.new("payment_method_types", "String", ["ach_credit_transfer", "ach_debit", "acss_debit", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "customer_balance", "fpx", "giropay", "grabpay", "ideal", "konbini", "link", "paynow", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
 
     # Either `off`, or `on_subscription`. With `on_subscription` Stripe updates `subscription.default_payment_method` when a subscription payment succeeds.
     @[JSON::Field(key: "save_default_payment_method", type: String?, presence: true, ignore_serialize: save_default_payment_method.nil? && !save_default_payment_method_present?)]
@@ -41,11 +42,17 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? save_default_payment_method_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD = EnumValidator.new("save_default_payment_method", "String", ["off", "on_subscription", "null"])
+    ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD = EnumValidator.new("save_default_payment_method", "String", ["off", "on_subscription"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @payment_method_options : SubscriptionsResourcePaymentSettingsPaymentMethodOptions?, @payment_method_types : Array(String)?, @save_default_payment_method : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @payment_method_options : SubscriptionsResourcePaymentSettingsPaymentMethodOptions? = nil,
+      @payment_method_types : Array(String)? = nil,
+      @save_default_payment_method : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -65,6 +72,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
       return false unless ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD.valid?(@save_default_payment_method)
+
       true
     end
 
@@ -82,24 +90,16 @@ module Stripe
       @save_default_payment_method = save_default_payment_method
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        payment_method_options == o.payment_method_options &&
-        payment_method_types == o.payment_method_types &&
-        save_default_payment_method == o.save_default_payment_method
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@payment_method_options, @payment_method_types, @save_default_payment_method)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@payment_method_options, @payment_method_types, @save_default_payment_method)
   end
 end

@@ -12,14 +12,13 @@ require "time"
 require "log"
 
 module Stripe
-  # If this is a `acss_debit` SetupIntent, this sub-hash contains details about the ACSS Debit payment method options.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SetupIntentPaymentMethodOptionsParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+
     @[JSON::Field(key: "currency", type: String?, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
     getter currency : String?
 
@@ -34,7 +33,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? mandate_options_present : Bool = false
 
-    # Verification method for the intent
     @[JSON::Field(key: "verification_method", type: String?, presence: true, ignore_serialize: verification_method.nil? && !verification_method_present?)]
     getter verification_method : String?
 
@@ -45,13 +43,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @currency : String? = nil, @mandate_options : SetupIntentPaymentMethodOptionsMandateOptionsParam? = nil, @verification_method : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @currency : String? = nil,
+      @mandate_options : SetupIntentPaymentMethodOptionsMandateOptionsParam? = nil,
+      @verification_method : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_CURRENCY.error_message) unless ENUM_VALIDATOR_FOR_CURRENCY.valid?(@currency)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
@@ -64,6 +69,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_CURRENCY.valid?(@currency)
       return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
+
       true
     end
 
@@ -81,24 +87,16 @@ module Stripe
       @verification_method = verification_method
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        currency == o.currency &&
-        mandate_options == o.mandate_options &&
-        verification_method == o.verification_method
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@currency, @mandate_options, @verification_method)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@currency, @mandate_options, @verification_method)
   end
 end

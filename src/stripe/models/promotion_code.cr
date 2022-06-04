@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Whether the promotion code is currently active. A promotion code is only active if the coupon is also valid.
     @[JSON::Field(key: "active", type: Bool)]
     property active : Bool
@@ -34,6 +35,29 @@ module Stripe
     @[JSON::Field(key: "created", type: Int64)]
     property created : Int64
 
+    # Unique identifier for the object.
+    @[JSON::Field(key: "id", type: String)]
+    getter id : String
+
+    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    @[JSON::Field(key: "livemode", type: Bool)]
+    property livemode : Bool
+
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
+
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["promotion_code"])
+
+    @[JSON::Field(key: "restrictions", type: PromotionCodesResourceRestrictions)]
+    property restrictions : PromotionCodesResourceRestrictions
+
+    # Number of times this promotion code has been used.
+    @[JSON::Field(key: "times_redeemed", type: Int64)]
+    property times_redeemed : Int64
+
+    # Optional properties
+
     @[JSON::Field(key: "customer", type: PromotionCodeCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
     property customer : PromotionCodeCustomer?
 
@@ -46,14 +70,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? expires_at_present : Bool = false
-
-    # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
-
-    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-    @[JSON::Field(key: "livemode", type: Bool)]
-    property livemode : Bool
 
     # Maximum number of times this promotion code can be redeemed.
     @[JSON::Field(key: "max_redemptions", type: Int64?, presence: true, ignore_serialize: max_redemptions.nil? && !max_redemptions_present?)]
@@ -69,22 +85,26 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["promotion_code"])
-
-    @[JSON::Field(key: "restrictions", type: PromotionCodesResourceRestrictions)]
-    property restrictions : PromotionCodesResourceRestrictions
-
-    # Number of times this promotion code has been used.
-    @[JSON::Field(key: "times_redeemed", type: Int64)]
-    property times_redeemed : Int64
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool, @code : String, @coupon : Coupon, @created : Int64, @customer : PromotionCodeCustomer?, @expires_at : Int64?, @id : String, @livemode : Bool, @max_redemptions : Int64?, @metadata : Hash(String, String)?, @object : String, @restrictions : PromotionCodesResourceRestrictions, @times_redeemed : Int64)
+    def initialize(
+      *,
+      # Required properties
+      @active : Bool,
+      @code : String,
+      @coupon : Coupon,
+      @created : Int64,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @restrictions : PromotionCodesResourceRestrictions,
+      @times_redeemed : Int64,
+      # Optional properties
+      @customer : PromotionCodeCustomer? = nil,
+      @expires_at : Int64? = nil,
+      @max_redemptions : Int64? = nil,
+      @metadata : Hash(String, String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -111,6 +131,7 @@ module Stripe
       return false if @code.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
       true
     end
 
@@ -141,34 +162,16 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        code == o.code &&
-        coupon == o.coupon &&
-        created == o.created &&
-        customer == o.customer &&
-        expires_at == o.expires_at &&
-        id == o.id &&
-        livemode == o.livemode &&
-        max_redemptions == o.max_redemptions &&
-        metadata == o.metadata &&
-        object == o.object &&
-        restrictions == o.restrictions &&
-        times_redeemed == o.times_redeemed
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @code, @coupon, @created, @customer, @expires_at, @id, @livemode, @max_redemptions, @metadata, @object, @restrictions, @times_redeemed)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @code, @coupon, @created, @id, @livemode, @object, @restrictions, @times_redeemed, @customer, @expires_at, @max_redemptions, @metadata)
   end
 end

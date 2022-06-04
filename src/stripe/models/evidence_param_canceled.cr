@@ -12,21 +12,21 @@ require "time"
 require "log"
 
 module Stripe
-  # Evidence provided when `reason` is 'canceled'.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class EvidenceParamCanceled
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "additional_documentation", type: CanceledAdditionalDocumentation?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
-    property additional_documentation : CanceledAdditionalDocumentation?
+
+    @[JSON::Field(key: "additional_documentation", type: BusinessProfileSpecsSupportUrl?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
+    property additional_documentation : BusinessProfileSpecsSupportUrl?
 
     @[JSON::Field(ignore: true)]
     property? additional_documentation_present : Bool = false
 
-    @[JSON::Field(key: "canceled_at", type: CanceledCanceledAt?, presence: true, ignore_serialize: canceled_at.nil? && !canceled_at_present?)]
-    property canceled_at : CanceledCanceledAt?
+    @[JSON::Field(key: "canceled_at", type: GetInvoicesUpcomingSubscriptionCancelAtParameter?, presence: true, ignore_serialize: canceled_at.nil? && !canceled_at_present?)]
+    property canceled_at : GetInvoicesUpcomingSubscriptionCancelAtParameter?
 
     @[JSON::Field(ignore: true)]
     property? canceled_at_present : Bool = false
@@ -37,34 +37,30 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? cancellation_policy_provided_present : Bool = false
 
-    # Reason for canceling the order.
     @[JSON::Field(key: "cancellation_reason", type: String?, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
     getter cancellation_reason : String?
 
     @[JSON::Field(ignore: true)]
     property? cancellation_reason_present : Bool = false
 
-    @[JSON::Field(key: "expected_at", type: CanceledExpectedAt?, presence: true, ignore_serialize: expected_at.nil? && !expected_at_present?)]
-    property expected_at : CanceledExpectedAt?
+    @[JSON::Field(key: "expected_at", type: GetInvoicesUpcomingSubscriptionCancelAtParameter?, presence: true, ignore_serialize: expected_at.nil? && !expected_at_present?)]
+    property expected_at : GetInvoicesUpcomingSubscriptionCancelAtParameter?
 
     @[JSON::Field(ignore: true)]
     property? expected_at_present : Bool = false
 
-    # Explanation of why the cardholder is disputing this transaction.
     @[JSON::Field(key: "explanation", type: String?, presence: true, ignore_serialize: explanation.nil? && !explanation_present?)]
     getter explanation : String?
 
     @[JSON::Field(ignore: true)]
     property? explanation_present : Bool = false
 
-    # Description of the merchandise or service that was purchased.
     @[JSON::Field(key: "product_description", type: String?, presence: true, ignore_serialize: product_description.nil? && !product_description_present?)]
     getter product_description : String?
 
     @[JSON::Field(ignore: true)]
     property? product_description_present : Bool = false
 
-    # Whether the product was a merchandise or service.
     @[JSON::Field(key: "product_type", type: String?, presence: true, ignore_serialize: product_type.nil? && !product_type_present?)]
     getter product_type : String?
 
@@ -73,7 +69,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_PRODUCT_TYPE = EnumValidator.new("product_type", "String", ["", "merchandise", "service"])
 
-    # Result of cardholder's attempt to return the product.
     @[JSON::Field(key: "return_status", type: String?, presence: true, ignore_serialize: return_status.nil? && !return_status_present?)]
     getter return_status : String?
 
@@ -82,8 +77,8 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_RETURN_STATUS = EnumValidator.new("return_status", "String", ["", "merchant_rejected", "successful"])
 
-    @[JSON::Field(key: "returned_at", type: CanceledReturnedAt?, presence: true, ignore_serialize: returned_at.nil? && !returned_at_present?)]
-    property returned_at : CanceledReturnedAt?
+    @[JSON::Field(key: "returned_at", type: GetInvoicesUpcomingSubscriptionCancelAtParameter?, presence: true, ignore_serialize: returned_at.nil? && !returned_at_present?)]
+    property returned_at : GetInvoicesUpcomingSubscriptionCancelAtParameter?
 
     @[JSON::Field(ignore: true)]
     property? returned_at_present : Bool = false
@@ -91,14 +86,27 @@ module Stripe
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
         Stripe::Canceled,
-        String,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @additional_documentation : CanceledAdditionalDocumentation? = nil, @canceled_at : CanceledCanceledAt? = nil, @cancellation_policy_provided : CanceledCancellationPolicyProvided? = nil, @cancellation_reason : String? = nil, @expected_at : CanceledExpectedAt? = nil, @explanation : String? = nil, @product_description : String? = nil, @product_type : String? = nil, @return_status : String? = nil, @returned_at : CanceledReturnedAt? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @additional_documentation : BusinessProfileSpecsSupportUrl? = nil,
+      @canceled_at : GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil,
+      @cancellation_policy_provided : CanceledCancellationPolicyProvided? = nil,
+      @cancellation_reason : String? = nil,
+      @expected_at : GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil,
+      @explanation : String? = nil,
+      @product_description : String? = nil,
+      @product_type : String? = nil,
+      @return_status : String? = nil,
+      @returned_at : GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -133,6 +141,7 @@ module Stripe
       return false if !@product_description.nil? && @product_description.to_s.size > 1500
       return false unless ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid?(@product_type)
       return false unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -144,10 +153,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -196,31 +202,16 @@ module Stripe
       @return_status = return_status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        additional_documentation == o.additional_documentation &&
-        canceled_at == o.canceled_at &&
-        cancellation_policy_provided == o.cancellation_policy_provided &&
-        cancellation_reason == o.cancellation_reason &&
-        expected_at == o.expected_at &&
-        explanation == o.explanation &&
-        product_description == o.product_description &&
-        product_type == o.product_type &&
-        return_status == o.return_status &&
-        returned_at == o.returned_at
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@additional_documentation, @canceled_at, @cancellation_policy_provided, @cancellation_reason, @expected_at, @explanation, @product_description, @product_type, @return_status, @returned_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@additional_documentation, @canceled_at, @cancellation_policy_provided, @cancellation_reason, @expected_at, @explanation, @product_description, @product_type, @return_status, @returned_at)
   end
 end

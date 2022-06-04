@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # A unit of time.
     @[JSON::Field(key: "unit", type: String)]
     getter unit : String
@@ -31,13 +32,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @unit : String, @value : Int64)
+    def initialize(
+      *,
+      # Required properties
+      @unit : String,
+      @value : Int64
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_UNIT.error_message) unless ENUM_VALIDATOR_FOR_UNIT.valid?(@unit, false)
 
       invalid_properties
@@ -47,6 +54,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_UNIT.valid?(@unit, false)
+
       true
     end
 
@@ -57,23 +65,16 @@ module Stripe
       @unit = unit
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        unit == o.unit &&
-        value == o.value
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@unit, @value)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@unit, @value)
   end
 end

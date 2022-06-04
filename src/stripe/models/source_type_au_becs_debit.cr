@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "bsb_number", type: String?, presence: true, ignore_serialize: bsb_number.nil? && !bsb_number_present?)]
     property bsb_number : String?
 
@@ -38,7 +39,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bsb_number : String? = nil, @fingerprint : String? = nil, @last4 : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @bsb_number : String? = nil,
+      @fingerprint : String? = nil,
+      @last4 : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -55,24 +62,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bsb_number == o.bsb_number &&
-        fingerprint == o.fingerprint &&
-        last4 == o.last4
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bsb_number, @fingerprint, @last4)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bsb_number, @fingerprint, @last4)
   end
 end

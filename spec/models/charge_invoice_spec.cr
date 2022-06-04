@@ -95,7 +95,7 @@ describe Stripe::ChargeInvoice do
   describe "test attribute 'billing_reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["automatic_pending_invoice_item_invoice", "manual", "quote_accept", "subscription", "subscription_create", "subscription_cycle", "subscription_threshold", "subscription_update", "upcoming", "null"])
+      # validator = EnumValidator.new("String", ["automatic_pending_invoice_item_invoice", "manual", "quote_accept", "subscription", "subscription_create", "subscription_cycle", "subscription_threshold", "subscription_update", "upcoming"])
       # validator.allowable_values.each do |value|
       #   expect { instance.billing_reason = value }.not_to raise_error
       # end
@@ -175,7 +175,7 @@ describe Stripe::ChargeInvoice do
   describe "test attribute 'customer_tax_exempt'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["exempt", "none", "reverse", "null"])
+      # validator = EnumValidator.new("String", ["exempt", "none", "reverse"])
       # validator.allowable_values.each do |value|
       #   expect { instance.customer_tax_exempt = value }.not_to raise_error
       # end
@@ -387,7 +387,7 @@ describe Stripe::ChargeInvoice do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["deleted", "draft", "open", "paid", "uncollectible", "void", "null"])
+      # validator = EnumValidator.new("String", ["deleted", "draft", "open", "paid", "uncollectible", "void"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

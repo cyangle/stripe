@@ -12,56 +12,50 @@ require "time"
 require "log"
 
 module Stripe
-  # The Kanji variation of the the individual's primary address (Japan only).
+  # The Kanji variation of the person's address (Japan only).
   @[JSON::Serializable::Options(emit_nulls: true)]
   class JapanAddressKanjiSpecs1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # City or ward.
+
     @[JSON::Field(key: "city", type: String?, presence: true, ignore_serialize: city.nil? && !city_present?)]
     getter city : String?
 
     @[JSON::Field(ignore: true)]
     property? city_present : Bool = false
 
-    # Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     @[JSON::Field(key: "country", type: String?, presence: true, ignore_serialize: country.nil? && !country_present?)]
     getter country : String?
 
     @[JSON::Field(ignore: true)]
     property? country_present : Bool = false
 
-    # Block or building number.
     @[JSON::Field(key: "line1", type: String?, presence: true, ignore_serialize: line1.nil? && !line1_present?)]
     getter line1 : String?
 
     @[JSON::Field(ignore: true)]
     property? line1_present : Bool = false
 
-    # Building details.
     @[JSON::Field(key: "line2", type: String?, presence: true, ignore_serialize: line2.nil? && !line2_present?)]
     getter line2 : String?
 
     @[JSON::Field(ignore: true)]
     property? line2_present : Bool = false
 
-    # Postal code.
     @[JSON::Field(key: "postal_code", type: String?, presence: true, ignore_serialize: postal_code.nil? && !postal_code_present?)]
     getter postal_code : String?
 
     @[JSON::Field(ignore: true)]
     property? postal_code_present : Bool = false
 
-    # Prefecture.
     @[JSON::Field(key: "state", type: String?, presence: true, ignore_serialize: state.nil? && !state_present?)]
     getter state : String?
 
     @[JSON::Field(ignore: true)]
     property? state_present : Bool = false
 
-    # Town or cho-me.
     @[JSON::Field(key: "town", type: String?, presence: true, ignore_serialize: town.nil? && !town_present?)]
     getter town : String?
 
@@ -70,7 +64,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @city : String? = nil, @country : String? = nil, @line1 : String? = nil, @line2 : String? = nil, @postal_code : String? = nil, @state : String? = nil, @town : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @city : String? = nil,
+      @country : String? = nil,
+      @line1 : String? = nil,
+      @line2 : String? = nil,
+      @postal_code : String? = nil,
+      @state : String? = nil,
+      @town : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -119,6 +123,7 @@ module Stripe
       return false if !@postal_code.nil? && @postal_code.to_s.size > 5000
       return false if !@state.nil? && @state.to_s.size > 5000
       return false if !@town.nil? && @town.to_s.size > 5000
+
       true
     end
 
@@ -192,28 +197,16 @@ module Stripe
       @town = town
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        city == o.city &&
-        country == o.country &&
-        line1 == o.line1 &&
-        line2 == o.line2 &&
-        postal_code == o.postal_code &&
-        state == o.state &&
-        town == o.town
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@city, @country, @line1, @line2, @postal_code, @state, @town)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@city, @country, @line1, @line2, @postal_code, @state, @town)
   end
 end

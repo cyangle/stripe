@@ -19,12 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # A hash of all cash balances available to this customer. You cannot delete a customer with any cash balances, even if the balance is 0.
-    @[JSON::Field(key: "available", type: Hash(String, Int64)?, presence: true, ignore_serialize: available.nil? && !available_present?)]
-    property available : Hash(String, Int64)?
-
-    @[JSON::Field(ignore: true)]
-    property? available_present : Bool = false
 
     # The ID of the customer whose cash balance this object represents.
     @[JSON::Field(key: "customer", type: String)]
@@ -43,9 +37,27 @@ module Stripe
     @[JSON::Field(key: "settings", type: CustomerBalanceCustomerBalanceSettings)]
     property settings : CustomerBalanceCustomerBalanceSettings
 
+    # Optional properties
+
+    # A hash of all cash balances available to this customer. You cannot delete a customer with any cash balances, even if the balance is 0.
+    @[JSON::Field(key: "available", type: Hash(String, Int64)?, presence: true, ignore_serialize: available.nil? && !available_present?)]
+    property available : Hash(String, Int64)?
+
+    @[JSON::Field(ignore: true)]
+    property? available_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @available : Hash(String, Int64)?, @customer : String, @livemode : Bool, @object : String, @settings : CustomerBalanceCustomerBalanceSettings)
+    def initialize(
+      *,
+      # Required properties
+      @customer : String,
+      @livemode : Bool,
+      @object : String,
+      @settings : CustomerBalanceCustomerBalanceSettings,
+      # Optional properties
+      @available : Hash(String, Int64)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -67,6 +79,7 @@ module Stripe
     def valid?
       return false if @customer.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
       true
     end
 
@@ -87,26 +100,16 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        available == o.available &&
-        customer == o.customer &&
-        livemode == o.livemode &&
-        object == o.object &&
-        settings == o.settings
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@available, @customer, @livemode, @object, @settings)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@customer, @livemode, @object, @settings, @available)
   end
 end

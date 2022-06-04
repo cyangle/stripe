@@ -18,11 +18,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
 
     # Optional properties
+
     # Whether the price can be used for new purchases. Defaults to `true`.
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
@@ -39,6 +41,7 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_BILLING_SCHEME = EnumValidator.new("billing_scheme", "String", ["per_unit", "tiered"])
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -139,7 +142,28 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @currency : String, @active : Bool? = nil, @billing_scheme : String? = nil, @expand : Array(String)? = nil, @lookup_key : String? = nil, @metadata : Hash(String, String)? = nil, @nickname : String? = nil, @product : String? = nil, @product_data : InlineProductParams1? = nil, @recurring : Recurring1? = nil, @tax_behavior : String? = nil, @tiers : Array(Tier)? = nil, @tiers_mode : String? = nil, @transfer_lookup_key : Bool? = nil, @transform_quantity : TransformUsageParam? = nil, @unit_amount : Int64? = nil, @unit_amount_decimal : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @currency : String,
+      # Optional properties
+      @active : Bool? = nil,
+      @billing_scheme : String? = nil,
+      @expand : Array(String)? = nil,
+      @lookup_key : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @nickname : String? = nil,
+      @product : String? = nil,
+      @product_data : InlineProductParams1? = nil,
+      @recurring : Recurring1? = nil,
+      @tax_behavior : String? = nil,
+      @tiers : Array(Tier)? = nil,
+      @tiers_mode : String? = nil,
+      @transfer_lookup_key : Bool? = nil,
+      @transform_quantity : TransformUsageParam? = nil,
+      @unit_amount : Int64? = nil,
+      @unit_amount_decimal : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -177,6 +201,7 @@ module Stripe
       return false if !@product.nil? && @product.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
       return false unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
+
       true
     end
 
@@ -231,38 +256,16 @@ module Stripe
       @tiers_mode = tiers_mode
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        billing_scheme == o.billing_scheme &&
-        currency == o.currency &&
-        expand == o.expand &&
-        lookup_key == o.lookup_key &&
-        metadata == o.metadata &&
-        nickname == o.nickname &&
-        product == o.product &&
-        product_data == o.product_data &&
-        recurring == o.recurring &&
-        tax_behavior == o.tax_behavior &&
-        tiers == o.tiers &&
-        tiers_mode == o.tiers_mode &&
-        transfer_lookup_key == o.transfer_lookup_key &&
-        transform_quantity == o.transform_quantity &&
-        unit_amount == o.unit_amount &&
-        unit_amount_decimal == o.unit_amount_decimal
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @billing_scheme, @currency, @expand, @lookup_key, @metadata, @nickname, @product, @product_data, @recurring, @tax_behavior, @tiers, @tiers_mode, @transfer_lookup_key, @transform_quantity, @unit_amount, @unit_amount_decimal)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@currency, @active, @billing_scheme, @expand, @lookup_key, @metadata, @nickname, @product, @product_data, @recurring, @tax_behavior, @tiers, @tiers_mode, @transfer_lookup_key, @transform_quantity, @unit_amount, @unit_amount_decimal)
   end
 end

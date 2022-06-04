@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
     property created : Int64
@@ -41,17 +42,11 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["apps.secret"])
 
-    # The plaintext secret value to be stored.
-    @[JSON::Field(key: "payload", type: String?, presence: true, ignore_serialize: payload.nil? && !payload_present?)]
-    getter payload : String?
-
-    @[JSON::Field(ignore: true)]
-    property? payload_present : Bool = false
-
     @[JSON::Field(key: "scope", type: SecretServiceResourceScope)]
     property scope : SecretServiceResourceScope
 
     # Optional properties
+
     # If true, indicates that this secret has been deleted
     @[JSON::Field(key: "deleted", type: Bool?, presence: true, ignore_serialize: deleted.nil? && !deleted_present?)]
     property deleted : Bool?
@@ -59,9 +54,28 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? deleted_present : Bool = false
 
+    # The plaintext secret value to be stored.
+    @[JSON::Field(key: "payload", type: String?, presence: true, ignore_serialize: payload.nil? && !payload_present?)]
+    getter payload : String?
+
+    @[JSON::Field(ignore: true)]
+    property? payload_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @created : Int64, @id : String, @livemode : Bool, @name : String, @object : String, @payload : String?, @scope : SecretServiceResourceScope, @deleted : Bool? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @id : String,
+      @livemode : Bool,
+      @name : String,
+      @object : String,
+      @scope : SecretServiceResourceScope,
+      # Optional properties
+      @deleted : Bool? = nil,
+      @payload : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -79,7 +93,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
-      if @payload.to_s.size > 5000
+      if !@payload.nil? && @payload.to_s.size > 5000
         invalid_properties.push("invalid value for \"payload\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -92,7 +106,8 @@ module Stripe
       return false if @id.to_s.size > 5000
       return false if @name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @payload.to_s.size > 5000
+      return false if !@payload.nil? && @payload.to_s.size > 5000
+
       true
     end
 
@@ -126,26 +141,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] payload Value to be assigned
     def payload=(payload)
-      if payload.to_s.size > 5000
+      if !payload.nil? && payload.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"payload\", the character length must be smaller than or equal to 5000.")
       end
 
       @payload = payload
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        created == o.created &&
-        deleted == o.deleted &&
-        id == o.id &&
-        livemode == o.livemode &&
-        name == o.name &&
-        object == o.object &&
-        payload == o.payload &&
-        scope == o.scope
     end
 
     # @see the `==` method
@@ -154,8 +154,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@created, @deleted, @id, @livemode, @name, @object, @payload, @scope)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @livemode, @name, @object, @scope, @deleted, @payload)
   end
 end

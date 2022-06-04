@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The amount to capture from the PaymentIntent, which must be less than or equal to the original amount. Any additional amount will be automatically refunded. Defaults to the full `amount_capturable` if not provided.
     @[JSON::Field(key: "amount_to_capture", type: Int64?, presence: true, ignore_serialize: amount_to_capture.nil? && !amount_to_capture_present?)]
     property amount_to_capture : Int64?
@@ -32,6 +33,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? application_fee_amount_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -60,7 +62,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount_to_capture : Int64? = nil, @application_fee_amount : Int64? = nil, @expand : Array(String)? = nil, @statement_descriptor : String? = nil, @statement_descriptor_suffix : String? = nil, @transfer_data : TransferDataUpdateParams1? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @amount_to_capture : Int64? = nil,
+      @application_fee_amount : Int64? = nil,
+      @expand : Array(String)? = nil,
+      @statement_descriptor : String? = nil,
+      @statement_descriptor_suffix : String? = nil,
+      @transfer_data : TransferDataUpdateParams1? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -84,6 +95,7 @@ module Stripe
     def valid?
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
       return false if !@statement_descriptor_suffix.nil? && @statement_descriptor_suffix.to_s.size > 22
+
       true
     end
 
@@ -107,27 +119,16 @@ module Stripe
       @statement_descriptor_suffix = statement_descriptor_suffix
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount_to_capture == o.amount_to_capture &&
-        application_fee_amount == o.application_fee_amount &&
-        expand == o.expand &&
-        statement_descriptor == o.statement_descriptor &&
-        statement_descriptor_suffix == o.statement_descriptor_suffix &&
-        transfer_data == o.transfer_data
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount_to_capture, @application_fee_amount, @expand, @statement_descriptor, @statement_descriptor_suffix, @transfer_data)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount_to_capture, @application_fee_amount, @expand, @statement_descriptor, @statement_descriptor_suffix, @transfer_data)
   end
 end

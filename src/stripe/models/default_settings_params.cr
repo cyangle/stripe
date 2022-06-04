@@ -19,20 +19,19 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account. The request must be made by a platform account on a connected account in order to set an application fee percentage. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
+
     @[JSON::Field(key: "application_fee_percent", type: Float64?, presence: true, ignore_serialize: application_fee_percent.nil? && !application_fee_percent_present?)]
     property application_fee_percent : Float64?
 
     @[JSON::Field(ignore: true)]
     property? application_fee_percent_present : Bool = false
 
-    @[JSON::Field(key: "automatic_tax", type: AutomaticTaxConfig?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
-    property automatic_tax : AutomaticTaxConfig?
+    @[JSON::Field(key: "automatic_tax", type: AutomaticTaxConfig1?, presence: true, ignore_serialize: automatic_tax.nil? && !automatic_tax_present?)]
+    property automatic_tax : AutomaticTaxConfig1?
 
     @[JSON::Field(ignore: true)]
     property? automatic_tax_present : Bool = false
 
-    # Can be set to `phase_start` to set the anchor to the start of the phase or `automatic` to automatically change it if needed. Cannot be set to `phase_start` if this phase specifies a trial. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
     @[JSON::Field(key: "billing_cycle_anchor", type: String?, presence: true, ignore_serialize: billing_cycle_anchor.nil? && !billing_cycle_anchor_present?)]
     getter billing_cycle_anchor : String?
 
@@ -47,7 +46,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? billing_thresholds_present : Bool = false
 
-    # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions. Defaults to `charge_automatically` on creation.
     @[JSON::Field(key: "collection_method", type: String?, presence: true, ignore_serialize: collection_method.nil? && !collection_method_present?)]
     getter collection_method : String?
 
@@ -56,7 +54,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_COLLECTION_METHOD = EnumValidator.new("collection_method", "String", ["charge_automatically", "send_invoice"])
 
-    # ID of the default payment method for the subscription schedule. It must belong to the customer associated with the subscription schedule. If not set, invoices will use the default payment method in the customer's invoice settings.
     @[JSON::Field(key: "default_payment_method", type: String?, presence: true, ignore_serialize: default_payment_method.nil? && !default_payment_method_present?)]
     getter default_payment_method : String?
 
@@ -77,7 +74,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @application_fee_percent : Float64? = nil, @automatic_tax : AutomaticTaxConfig? = nil, @billing_cycle_anchor : String? = nil, @billing_thresholds : DefaultSettingsParamsBillingThresholds? = nil, @collection_method : String? = nil, @default_payment_method : String? = nil, @invoice_settings : SubscriptionSchedulesParam? = nil, @transfer_data : DefaultSettingsParamsTransferData? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @application_fee_percent : Float64? = nil,
+      @automatic_tax : AutomaticTaxConfig1? = nil,
+      @billing_cycle_anchor : String? = nil,
+      @billing_thresholds : DefaultSettingsParamsBillingThresholds? = nil,
+      @collection_method : String? = nil,
+      @default_payment_method : String? = nil,
+      @invoice_settings : SubscriptionSchedulesParam? = nil,
+      @transfer_data : DefaultSettingsParamsTransferData? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -102,6 +110,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid?(@billing_cycle_anchor)
       return false unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
       return false if !@default_payment_method.nil? && @default_payment_method.to_s.size > 5000
+
       true
     end
 
@@ -129,29 +138,16 @@ module Stripe
       @default_payment_method = default_payment_method
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        application_fee_percent == o.application_fee_percent &&
-        automatic_tax == o.automatic_tax &&
-        billing_cycle_anchor == o.billing_cycle_anchor &&
-        billing_thresholds == o.billing_thresholds &&
-        collection_method == o.collection_method &&
-        default_payment_method == o.default_payment_method &&
-        invoice_settings == o.invoice_settings &&
-        transfer_data == o.transfer_data
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@application_fee_percent, @automatic_tax, @billing_cycle_anchor, @billing_thresholds, @collection_method, @default_payment_method, @invoice_settings, @transfer_data)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@application_fee_percent, @automatic_tax, @billing_cycle_anchor, @billing_thresholds, @collection_method, @default_payment_method, @invoice_settings, @transfer_data)
   end
 end

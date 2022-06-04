@@ -111,7 +111,7 @@ describe Stripe::TransferReversalSourceRefund do
   describe "test attribute 'reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["duplicate", "expired_uncaptured_charge", "fraudulent", "requested_by_customer", "null"])
+      # validator = EnumValidator.new("String", ["duplicate", "expired_uncaptured_charge", "fraudulent", "requested_by_customer"])
       # validator.allowable_values.each do |value|
       #   expect { instance.reason = value }.not_to raise_error
       # end

@@ -12,13 +12,14 @@ require "time"
 require "log"
 
 module Stripe
-  # Payment settings to pass to invoices created by the subscription.
+  # Configuration settings for the PaymentIntent that is generated when the invoice is finalized.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentSettings1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "payment_method_options", type: PaymentMethodOptions1?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
     property payment_method_options : PaymentMethodOptions1?
 
@@ -31,18 +32,14 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_method_types_present : Bool = false
 
-    # Either `off`, or `on_subscription`. With `on_subscription` Stripe updates `subscription.default_payment_method` when a subscription payment succeeds.
-    @[JSON::Field(key: "save_default_payment_method", type: String?, presence: true, ignore_serialize: save_default_payment_method.nil? && !save_default_payment_method_present?)]
-    getter save_default_payment_method : String?
-
-    @[JSON::Field(ignore: true)]
-    property? save_default_payment_method_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD = EnumValidator.new("save_default_payment_method", "String", ["off", "on_subscription"])
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @payment_method_options : PaymentMethodOptions1? = nil, @payment_method_types : PaymentSettingsPaymentMethodTypes? = nil, @save_default_payment_method : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @payment_method_options : PaymentMethodOptions1? = nil,
+      @payment_method_types : PaymentSettingsPaymentMethodTypes? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -50,33 +47,13 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD.error_message) unless ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD.valid?(@save_default_payment_method)
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD.valid?(@save_default_payment_method)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] save_default_payment_method Object to be assigned
-    def save_default_payment_method=(save_default_payment_method)
-      ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD.valid!(save_default_payment_method)
-      @save_default_payment_method = save_default_payment_method
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        payment_method_options == o.payment_method_options &&
-        payment_method_types == o.payment_method_types &&
-        save_default_payment_method == o.save_default_payment_method
     end
 
     # @see the `==` method
@@ -85,8 +62,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@payment_method_options, @payment_method_types, @save_default_payment_method)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@payment_method_options, @payment_method_types)
   end
 end

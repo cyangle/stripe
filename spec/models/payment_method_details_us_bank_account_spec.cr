@@ -23,7 +23,7 @@ describe Stripe::PaymentMethodDetailsUsBankAccount do
   describe "test attribute 'account_holder_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["company", "individual", "null"])
+      # validator = EnumValidator.new("String", ["company", "individual"])
       # validator.allowable_values.each do |value|
       #   expect { instance.account_holder_type = value }.not_to raise_error
       # end
@@ -33,7 +33,7 @@ describe Stripe::PaymentMethodDetailsUsBankAccount do
   describe "test attribute 'account_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["checking", "savings", "null"])
+      # validator = EnumValidator.new("String", ["checking", "savings"])
       # validator.allowable_values.each do |value|
       #   expect { instance.account_type = value }.not_to raise_error
       # end

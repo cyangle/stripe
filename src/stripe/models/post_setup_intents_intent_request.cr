@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # ID of the Customer this SetupIntent belongs to, if one exists.  If present, the SetupIntent's payment method will be attached to the Customer on successful setup. Payment methods attached to other Customers cannot be used with this SetupIntent.
     @[JSON::Field(key: "customer", type: String?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
     getter customer : String?
@@ -32,14 +33,15 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? expand_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -57,12 +59,13 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_method_data_present : Bool = false
 
-    @[JSON::Field(key: "payment_method_options", type: PaymentMethodOptionsParam28?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
-    property payment_method_options : PaymentMethodOptionsParam28?
+    @[JSON::Field(key: "payment_method_options", type: PaymentMethodOptionsParam18?, presence: true, ignore_serialize: payment_method_options.nil? && !payment_method_options_present?)]
+    property payment_method_options : PaymentMethodOptionsParam18?
 
     @[JSON::Field(ignore: true)]
     property? payment_method_options_present : Bool = false
 
+    # The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. If this is not provided, defaults to [\"card\"].
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, presence: true, ignore_serialize: payment_method_types.nil? && !payment_method_types_present?)]
     property payment_method_types : Array(String)?
 
@@ -71,7 +74,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @customer : String? = nil, @description : String? = nil, @expand : Array(String)? = nil, @metadata : IndividualSpecsMetadata? = nil, @payment_method : String? = nil, @payment_method_data : PaymentMethodDataParams1? = nil, @payment_method_options : PaymentMethodOptionsParam28? = nil, @payment_method_types : Array(String)? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @customer : String? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @payment_method : String? = nil,
+      @payment_method_data : PaymentMethodDataParams1? = nil,
+      @payment_method_options : PaymentMethodOptionsParam18? = nil,
+      @payment_method_types : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -100,6 +114,7 @@ module Stripe
       return false if !@customer.nil? && @customer.to_s.size > 5000
       return false if !@description.nil? && @description.to_s.size > 1000
       return false if !@payment_method.nil? && @payment_method.to_s.size > 5000
+
       true
     end
 
@@ -133,29 +148,16 @@ module Stripe
       @payment_method = payment_method
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        customer == o.customer &&
-        description == o.description &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        payment_method == o.payment_method &&
-        payment_method_data == o.payment_method_data &&
-        payment_method_options == o.payment_method_options &&
-        payment_method_types == o.payment_method_types
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@customer, @description, @expand, @metadata, @payment_method, @payment_method_data, @payment_method_options, @payment_method_types)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@customer, @description, @expand, @metadata, @payment_method, @payment_method_data, @payment_method_options, @payment_method_types)
   end
 end

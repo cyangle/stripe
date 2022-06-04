@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The native data to be used with Alipay SDK you must redirect your customer to in order to authenticate the payment in an Android App.
     @[JSON::Field(key: "native_data", type: String?, presence: true, ignore_serialize: native_data.nil? && !native_data_present?)]
     getter native_data : String?
@@ -49,7 +50,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @native_data : String?, @native_url : String?, @return_url : String?, @url : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @native_data : String? = nil,
+      @native_url : String? = nil,
+      @return_url : String? = nil,
+      @url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -57,19 +65,19 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @native_data.to_s.size > 5000
+      if !@native_data.nil? && @native_data.to_s.size > 5000
         invalid_properties.push("invalid value for \"native_data\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @native_url.to_s.size > 5000
+      if !@native_url.nil? && @native_url.to_s.size > 5000
         invalid_properties.push("invalid value for \"native_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @return_url.to_s.size > 5000
+      if !@return_url.nil? && @return_url.to_s.size > 5000
         invalid_properties.push("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @url.to_s.size > 5000
+      if !@url.nil? && @url.to_s.size > 5000
         invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -79,17 +87,18 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @native_data.to_s.size > 5000
-      return false if @native_url.to_s.size > 5000
-      return false if @return_url.to_s.size > 5000
-      return false if @url.to_s.size > 5000
+      return false if !@native_data.nil? && @native_data.to_s.size > 5000
+      return false if !@native_url.nil? && @native_url.to_s.size > 5000
+      return false if !@return_url.nil? && @return_url.to_s.size > 5000
+      return false if !@url.nil? && @url.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] native_data Value to be assigned
     def native_data=(native_data)
-      if native_data.to_s.size > 5000
+      if !native_data.nil? && native_data.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"native_data\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -99,7 +108,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] native_url Value to be assigned
     def native_url=(native_url)
-      if native_url.to_s.size > 5000
+      if !native_url.nil? && native_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"native_url\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -109,7 +118,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] return_url Value to be assigned
     def return_url=(return_url)
-      if return_url.to_s.size > 5000
+      if !return_url.nil? && return_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -119,22 +128,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
     def url=(url)
-      if url.to_s.size > 5000
+      if !url.nil? && url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
       @url = url
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        native_data == o.native_data &&
-        native_url == o.native_url &&
-        return_url == o.return_url &&
-        url == o.url
     end
 
     # @see the `==` method
@@ -143,8 +141,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@native_data, @native_url, @return_url, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@native_data, @native_url, @return_url, @url)
   end
 end

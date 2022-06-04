@@ -29,7 +29,7 @@ describe Stripe::Plan do
   describe "test attribute 'aggregate_usage'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["last_during_period", "last_ever", "max", "sum", "null"])
+      # validator = EnumValidator.new("String", ["last_during_period", "last_ever", "max", "sum"])
       # validator.allowable_values.each do |value|
       #   expect { instance.aggregate_usage = value }.not_to raise_error
       # end
@@ -135,7 +135,7 @@ describe Stripe::Plan do
   describe "test attribute 'tiers_mode'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["graduated", "volume", "null"])
+      # validator = EnumValidator.new("String", ["graduated", "volume"])
       # validator.allowable_values.each do |value|
       #   expect { instance.tiers_mode = value }.not_to raise_error
       # end

@@ -23,7 +23,7 @@ describe Stripe::PriceRecurring do
   describe "test attribute 'aggregate_usage'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["last_during_period", "last_ever", "max", "sum", "null"])
+      # validator = EnumValidator.new("String", ["last_during_period", "last_ever", "max", "sum"])
       # validator.allowable_values.each do |value|
       #   expect { instance.aggregate_usage = value }.not_to raise_error
       # end
@@ -41,12 +41,6 @@ describe Stripe::PriceRecurring do
   end
 
   describe "test attribute 'interval_count'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'trial_period_days'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

@@ -12,28 +12,25 @@ require "time"
 require "log"
 
 module Stripe
-  # Settings that apply across payment methods for charging on the account.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentsSettingsSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge.
+
     @[JSON::Field(key: "statement_descriptor", type: String?, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
     getter statement_descriptor : String?
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_present : Bool = false
 
-    # The Kana variation of the default text that appears on credit card statements when a charge is made (Japan only).
     @[JSON::Field(key: "statement_descriptor_kana", type: String?, presence: true, ignore_serialize: statement_descriptor_kana.nil? && !statement_descriptor_kana_present?)]
     getter statement_descriptor_kana : String?
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_kana_present : Bool = false
 
-    # The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only).
     @[JSON::Field(key: "statement_descriptor_kanji", type: String?, presence: true, ignore_serialize: statement_descriptor_kanji.nil? && !statement_descriptor_kanji_present?)]
     getter statement_descriptor_kanji : String?
 
@@ -42,7 +39,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @statement_descriptor : String? = nil, @statement_descriptor_kana : String? = nil, @statement_descriptor_kanji : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @statement_descriptor : String? = nil,
+      @statement_descriptor_kana : String? = nil,
+      @statement_descriptor_kanji : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -71,6 +74,7 @@ module Stripe
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
       return false if !@statement_descriptor_kana.nil? && @statement_descriptor_kana.to_s.size > 22
       return false if !@statement_descriptor_kanji.nil? && @statement_descriptor_kanji.to_s.size > 22
+
       true
     end
 
@@ -104,24 +108,16 @@ module Stripe
       @statement_descriptor_kanji = statement_descriptor_kanji
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        statement_descriptor == o.statement_descriptor &&
-        statement_descriptor_kana == o.statement_descriptor_kana &&
-        statement_descriptor_kanji == o.statement_descriptor_kanji
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@statement_descriptor, @statement_descriptor_kana, @statement_descriptor_kanji)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@statement_descriptor, @statement_descriptor_kana, @statement_descriptor_kanji)
   end
 end

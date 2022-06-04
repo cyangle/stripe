@@ -19,27 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The ZIP or postal code of the card used, if applicable.
-    @[JSON::Field(key: "billing_zip", type: String?, presence: true, ignore_serialize: billing_zip.nil? && !billing_zip_present?)]
-    getter billing_zip : String?
-
-    @[JSON::Field(ignore: true)]
-    property? billing_zip_present : Bool = false
-
-    @[JSON::Field(key: "charge", type: ReviewCharge?, presence: true, ignore_serialize: charge.nil? && !charge_present?)]
-    property charge : ReviewCharge?
-
-    @[JSON::Field(ignore: true)]
-    property? charge_present : Bool = false
-
-    # The reason the review was closed, or null if it has not yet been closed. One of `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
-    @[JSON::Field(key: "closed_reason", type: String?, presence: true, ignore_serialize: closed_reason.nil? && !closed_reason_present?)]
-    getter closed_reason : String?
-
-    @[JSON::Field(ignore: true)]
-    property? closed_reason_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_CLOSED_REASON = EnumValidator.new("closed_reason", "String", ["approved", "disputed", "redacted", "refunded", "refunded_as_fraud", "null"])
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
@@ -48,19 +27,6 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
     getter id : String
-
-    # The IP address where the payment originated.
-    @[JSON::Field(key: "ip_address", type: String?, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
-    getter ip_address : String?
-
-    @[JSON::Field(ignore: true)]
-    property? ip_address_present : Bool = false
-
-    @[JSON::Field(key: "ip_address_location", type: ReviewIpAddressLocation?, presence: true, ignore_serialize: ip_address_location.nil? && !ip_address_location_present?)]
-    property ip_address_location : ReviewIpAddressLocation?
-
-    @[JSON::Field(ignore: true)]
-    property? ip_address_location_present : Bool = false
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool)]
@@ -86,22 +52,76 @@ module Stripe
     @[JSON::Field(key: "reason", type: String)]
     getter reason : String
 
-    @[JSON::Field(key: "session", type: ReviewSession?, presence: true, ignore_serialize: session.nil? && !session_present?)]
-    property session : ReviewSession?
+    # Optional properties
+
+    # The ZIP or postal code of the card used, if applicable.
+    @[JSON::Field(key: "billing_zip", type: String?, presence: true, ignore_serialize: billing_zip.nil? && !billing_zip_present?)]
+    getter billing_zip : String?
 
     @[JSON::Field(ignore: true)]
-    property? session_present : Bool = false
+    property? billing_zip_present : Bool = false
 
-    # Optional properties
+    @[JSON::Field(key: "charge", type: ReviewCharge?, presence: true, ignore_serialize: charge.nil? && !charge_present?)]
+    property charge : ReviewCharge?
+
+    @[JSON::Field(ignore: true)]
+    property? charge_present : Bool = false
+
+    # The reason the review was closed, or null if it has not yet been closed. One of `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
+    @[JSON::Field(key: "closed_reason", type: String?, presence: true, ignore_serialize: closed_reason.nil? && !closed_reason_present?)]
+    getter closed_reason : String?
+
+    @[JSON::Field(ignore: true)]
+    property? closed_reason_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_CLOSED_REASON = EnumValidator.new("closed_reason", "String", ["approved", "disputed", "redacted", "refunded", "refunded_as_fraud"])
+
+    # The IP address where the payment originated.
+    @[JSON::Field(key: "ip_address", type: String?, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
+    getter ip_address : String?
+
+    @[JSON::Field(ignore: true)]
+    property? ip_address_present : Bool = false
+
+    @[JSON::Field(key: "ip_address_location", type: ReviewIpAddressLocation?, presence: true, ignore_serialize: ip_address_location.nil? && !ip_address_location_present?)]
+    property ip_address_location : ReviewIpAddressLocation?
+
+    @[JSON::Field(ignore: true)]
+    property? ip_address_location_present : Bool = false
+
     @[JSON::Field(key: "payment_intent", type: ReviewPaymentIntent?, presence: true, ignore_serialize: payment_intent.nil? && !payment_intent_present?)]
     property payment_intent : ReviewPaymentIntent?
 
     @[JSON::Field(ignore: true)]
     property? payment_intent_present : Bool = false
 
+    @[JSON::Field(key: "session", type: ReviewSession?, presence: true, ignore_serialize: session.nil? && !session_present?)]
+    property session : ReviewSession?
+
+    @[JSON::Field(ignore: true)]
+    property? session_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing_zip : String?, @charge : ReviewCharge?, @closed_reason : String?, @created : Int64, @id : String, @ip_address : String?, @ip_address_location : ReviewIpAddressLocation?, @livemode : Bool, @object : String, @open : Bool, @opened_reason : String, @reason : String, @session : ReviewSession?, @payment_intent : ReviewPaymentIntent? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @open : Bool,
+      @opened_reason : String,
+      @reason : String,
+      # Optional properties
+      @billing_zip : String? = nil,
+      @charge : ReviewCharge? = nil,
+      @closed_reason : String? = nil,
+      @ip_address : String? = nil,
+      @ip_address_location : ReviewIpAddressLocation? = nil,
+      @payment_intent : ReviewPaymentIntent? = nil,
+      @session : ReviewSession? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -109,18 +129,8 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @billing_zip.to_s.size > 5000
-        invalid_properties.push("invalid value for \"billing_zip\", the character length must be smaller than or equal to 5000.")
-      end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CLOSED_REASON.error_message) unless ENUM_VALIDATOR_FOR_CLOSED_REASON.valid?(@closed_reason)
-
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @ip_address.to_s.size > 5000
-        invalid_properties.push("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
@@ -131,37 +141,31 @@ module Stripe
         invalid_properties.push("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
       end
 
+      if !@billing_zip.nil? && @billing_zip.to_s.size > 5000
+        invalid_properties.push("invalid value for \"billing_zip\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_CLOSED_REASON.error_message) unless ENUM_VALIDATOR_FOR_CLOSED_REASON.valid?(@closed_reason)
+
+      if !@ip_address.nil? && @ip_address.to_s.size > 5000
+        invalid_properties.push("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @billing_zip.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_CLOSED_REASON.valid?(@closed_reason)
       return false if @id.to_s.size > 5000
-      return false if @ip_address.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_OPENED_REASON.valid?(@opened_reason, false)
       return false if @reason.to_s.size > 5000
+      return false if !@billing_zip.nil? && @billing_zip.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_CLOSED_REASON.valid?(@closed_reason)
+      return false if !@ip_address.nil? && @ip_address.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] billing_zip Value to be assigned
-    def billing_zip=(billing_zip)
-      if billing_zip.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"billing_zip\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @billing_zip = billing_zip
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] closed_reason Object to be assigned
-    def closed_reason=(closed_reason)
-      ENUM_VALIDATOR_FOR_CLOSED_REASON.valid!(closed_reason)
-      @closed_reason = closed_reason
     end
 
     # Custom attribute writer method with validation
@@ -172,16 +176,6 @@ module Stripe
       end
 
       @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] ip_address Value to be assigned
-    def ip_address=(ip_address)
-      if ip_address.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @ip_address = ip_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -208,25 +202,31 @@ module Stripe
       @reason = reason
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        billing_zip == o.billing_zip &&
-        charge == o.charge &&
-        closed_reason == o.closed_reason &&
-        created == o.created &&
-        id == o.id &&
-        ip_address == o.ip_address &&
-        ip_address_location == o.ip_address_location &&
-        livemode == o.livemode &&
-        object == o.object &&
-        open == o.open &&
-        opened_reason == o.opened_reason &&
-        payment_intent == o.payment_intent &&
-        reason == o.reason &&
-        session == o.session
+    # Custom attribute writer method with validation
+    # @param [Object] billing_zip Value to be assigned
+    def billing_zip=(billing_zip)
+      if !billing_zip.nil? && billing_zip.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"billing_zip\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @billing_zip = billing_zip
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] closed_reason Object to be assigned
+    def closed_reason=(closed_reason)
+      ENUM_VALIDATOR_FOR_CLOSED_REASON.valid!(closed_reason)
+      @closed_reason = closed_reason
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] ip_address Value to be assigned
+    def ip_address=(ip_address)
+      if !ip_address.nil? && ip_address.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @ip_address = ip_address
     end
 
     # @see the `==` method
@@ -235,8 +235,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@billing_zip, @charge, @closed_reason, @created, @id, @ip_address, @ip_address_location, @livemode, @object, @open, @opened_reason, @payment_intent, @reason, @session)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @livemode, @object, @open, @opened_reason, @reason, @billing_zip, @charge, @closed_reason, @ip_address, @ip_address_location, @payment_intent, @session)
   end
 end

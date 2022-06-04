@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The display name for this account. This is used on the Stripe Dashboard to differentiate between accounts.
     @[JSON::Field(key: "display_name", type: String?, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
     getter display_name : String?
@@ -35,7 +36,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @display_name : String?, @timezone : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @display_name : String? = nil,
+      @timezone : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -43,11 +49,11 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @display_name.to_s.size > 5000
+      if !@display_name.nil? && @display_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @timezone.to_s.size > 5000
+      if !@timezone.nil? && @timezone.to_s.size > 5000
         invalid_properties.push("invalid value for \"timezone\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -57,15 +63,16 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @display_name.to_s.size > 5000
-      return false if @timezone.to_s.size > 5000
+      return false if !@display_name.nil? && @display_name.to_s.size > 5000
+      return false if !@timezone.nil? && @timezone.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] display_name Value to be assigned
     def display_name=(display_name)
-      if display_name.to_s.size > 5000
+      if !display_name.nil? && display_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -75,20 +82,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] timezone Value to be assigned
     def timezone=(timezone)
-      if timezone.to_s.size > 5000
+      if !timezone.nil? && timezone.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"timezone\", the character length must be smaller than or equal to 5000.")
       end
 
       @timezone = timezone
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        display_name == o.display_name &&
-        timezone == o.timezone
     end
 
     # @see the `==` method
@@ -97,8 +95,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@display_name, @timezone)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@display_name, @timezone)
   end
 end

@@ -19,12 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The address of the receiver source. This is the value that should be communicated to the customer to send their funds to.
-    @[JSON::Field(key: "address", type: String?, presence: true, ignore_serialize: address.nil? && !address_present?)]
-    getter address : String?
-
-    @[JSON::Field(ignore: true)]
-    property? address_present : Bool = false
 
     # The total amount that was moved to your balance. This is almost always equal to the amount charged. In rare cases when customers deposit excess funds and we are unable to refund those, those funds get moved to your balance and show up in amount_charged as well. The amount charged is expressed in the source's currency.
     @[JSON::Field(key: "amount_charged", type: Int64)]
@@ -46,19 +40,34 @@ module Stripe
     @[JSON::Field(key: "refund_attributes_status", type: String)]
     getter refund_attributes_status : String
 
+    # Optional properties
+
+    # The address of the receiver source. This is the value that should be communicated to the customer to send their funds to.
+    @[JSON::Field(key: "address", type: String?, presence: true, ignore_serialize: address.nil? && !address_present?)]
+    getter address : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : String?, @amount_charged : Int64, @amount_received : Int64, @amount_returned : Int64, @refund_attributes_method : String, @refund_attributes_status : String)
+    def initialize(
+      *,
+      # Required properties
+      @amount_charged : Int64,
+      @amount_received : Int64,
+      @amount_returned : Int64,
+      @refund_attributes_method : String,
+      @refund_attributes_status : String,
+      # Optional properties
+      @address : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @address.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @refund_attributes_method.to_s.size > 5000
         invalid_properties.push("invalid value for \"refund_attributes_method\", the character length must be smaller than or equal to 5000.")
@@ -68,26 +77,21 @@ module Stripe
         invalid_properties.push("invalid value for \"refund_attributes_status\", the character length must be smaller than or equal to 5000.")
       end
 
+      if !@address.nil? && @address.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @address.to_s.size > 5000
       return false if @refund_attributes_method.to_s.size > 5000
       return false if @refund_attributes_status.to_s.size > 5000
+      return false if !@address.nil? && @address.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address Value to be assigned
-    def address=(address)
-      if address.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address = address
     end
 
     # Custom attribute writer method with validation
@@ -110,17 +114,14 @@ module Stripe
       @refund_attributes_status = refund_attributes_status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        amount_charged == o.amount_charged &&
-        amount_received == o.amount_received &&
-        amount_returned == o.amount_returned &&
-        refund_attributes_method == o.refund_attributes_method &&
-        refund_attributes_status == o.refund_attributes_status
+    # Custom attribute writer method with validation
+    # @param [Object] address Value to be assigned
+    def address=(address)
+      if !address.nil? && address.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address = address
     end
 
     # @see the `==` method
@@ -129,8 +130,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @amount_charged, @amount_received, @amount_returned, @refund_attributes_method, @refund_attributes_status)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount_charged, @amount_received, @amount_returned, @refund_attributes_method, @refund_attributes_status, @address)
   end
 end

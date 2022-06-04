@@ -18,20 +18,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "billing_thresholds", type: SubscriptionItemUpdateParamsBillingThresholds?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
-    property billing_thresholds : SubscriptionItemUpdateParamsBillingThresholds?
+
+    @[JSON::Field(key: "billing_thresholds", type: SubscriptionItemCreateParamsBillingThresholds?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
+    property billing_thresholds : SubscriptionItemCreateParamsBillingThresholds?
 
     @[JSON::Field(ignore: true)]
     property? billing_thresholds_present : Bool = false
 
-    # The plan ID to subscribe to. You may specify the same ID in `plan` and `price`.
-    @[JSON::Field(key: "plan", type: String?, presence: true, ignore_serialize: plan.nil? && !plan_present?)]
-    getter plan : String?
-
-    @[JSON::Field(ignore: true)]
-    property? plan_present : Bool = false
-
-    # The ID of the price object.
     @[JSON::Field(key: "price", type: String?, presence: true, ignore_serialize: price.nil? && !price_present?)]
     getter price : String?
 
@@ -44,32 +37,35 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? price_data_present : Bool = false
 
-    # Quantity for the given price. Can be set only if the price's `usage_type` is `licensed` and not `metered`.
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
     property quantity : Int64?
 
     @[JSON::Field(ignore: true)]
     property? quantity_present : Bool = false
 
-    @[JSON::Field(key: "tax_rates", type: SubscriptionItemUpdateParamsTaxRates?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
-    property tax_rates : SubscriptionItemUpdateParamsTaxRates?
+    @[JSON::Field(key: "tax_rates", type: CreditNoteLineItemParamsTaxRates?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
+    property tax_rates : CreditNoteLineItemParamsTaxRates?
 
     @[JSON::Field(ignore: true)]
     property? tax_rates_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing_thresholds : SubscriptionItemUpdateParamsBillingThresholds? = nil, @plan : String? = nil, @price : String? = nil, @price_data : RecurringPriceData? = nil, @quantity : Int64? = nil, @tax_rates : SubscriptionItemUpdateParamsTaxRates? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @billing_thresholds : SubscriptionItemCreateParamsBillingThresholds? = nil,
+      @price : String? = nil,
+      @price_data : RecurringPriceData? = nil,
+      @quantity : Int64? = nil,
+      @tax_rates : CreditNoteLineItemParamsTaxRates? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if !@plan.nil? && @plan.to_s.size > 5000
-        invalid_properties.push("invalid value for \"plan\", the character length must be smaller than or equal to 5000.")
-      end
 
       if !@price.nil? && @price.to_s.size > 5000
         invalid_properties.push("invalid value for \"price\", the character length must be smaller than or equal to 5000.")
@@ -81,19 +77,9 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@plan.nil? && @plan.to_s.size > 5000
       return false if !@price.nil? && @price.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] plan Value to be assigned
-    def plan=(plan)
-      if !plan.nil? && plan.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"plan\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @plan = plan
     end
 
     # Custom attribute writer method with validation
@@ -106,27 +92,16 @@ module Stripe
       @price = price
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        billing_thresholds == o.billing_thresholds &&
-        plan == o.plan &&
-        price == o.price &&
-        price_data == o.price_data &&
-        quantity == o.quantity &&
-        tax_rates == o.tax_rates
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@billing_thresholds, @plan, @price, @price_data, @quantity, @tax_rates)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@billing_thresholds, @price, @price_data, @quantity, @tax_rates)
   end
 end

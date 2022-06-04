@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # The identifier of the customer to create the subscription schedule for.
     @[JSON::Field(key: "customer", type: String?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
     getter customer : String?
@@ -40,6 +41,7 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_END_BEHAVIOR = EnumValidator.new("end_behavior", "String", ["cancel", "none", "release", "renew"])
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -53,8 +55,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? from_subscription_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -74,7 +76,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @customer : String? = nil, @default_settings : DefaultSettingsParams? = nil, @end_behavior : String? = nil, @expand : Array(String)? = nil, @from_subscription : String? = nil, @metadata : IndividualSpecsMetadata? = nil, @phases : Array(PhaseConfigurationParams)? = nil, @start_date : PostSubscriptionSchedulesRequestStartDate? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @customer : String? = nil,
+      @default_settings : DefaultSettingsParams? = nil,
+      @end_behavior : String? = nil,
+      @expand : Array(String)? = nil,
+      @from_subscription : String? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @phases : Array(PhaseConfigurationParams)? = nil,
+      @start_date : PostSubscriptionSchedulesRequestStartDate? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -101,6 +114,7 @@ module Stripe
       return false if !@customer.nil? && @customer.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior)
       return false if !@from_subscription.nil? && @from_subscription.to_s.size > 5000
+
       true
     end
 
@@ -131,29 +145,16 @@ module Stripe
       @from_subscription = from_subscription
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        customer == o.customer &&
-        default_settings == o.default_settings &&
-        end_behavior == o.end_behavior &&
-        expand == o.expand &&
-        from_subscription == o.from_subscription &&
-        metadata == o.metadata &&
-        phases == o.phases &&
-        start_date == o.start_date
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@customer, @default_settings, @end_behavior, @expand, @from_subscription, @metadata, @phases, @start_date)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@customer, @default_settings, @end_behavior, @expand, @from_subscription, @metadata, @phases, @start_date)
   end
 end

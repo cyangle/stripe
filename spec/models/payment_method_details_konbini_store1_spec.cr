@@ -23,7 +23,7 @@ describe Stripe::PaymentMethodDetailsKonbiniStore1 do
   describe "test attribute 'chain'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["familymart", "lawson", "ministop", "seicomart", "null"])
+      # validator = EnumValidator.new("String", ["familymart", "lawson", "ministop", "seicomart"])
       # validator.allowable_values.each do |value|
       #   expect { instance.chain = value }.not_to raise_error
       # end

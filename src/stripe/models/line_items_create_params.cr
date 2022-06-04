@@ -18,24 +18,31 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The ID of the [Price](https://stripe.com/docs/api/prices) or [Plan](https://stripe.com/docs/api/plans) object.
+
     @[JSON::Field(key: "price", type: String)]
     getter price : String
 
-    # The quantity of the line item being purchased.
     @[JSON::Field(key: "quantity", type: Int64)]
     property quantity : Int64
 
     # Optional properties
-    @[JSON::Field(key: "adjustable_quantity", type: AdjustableQuantityParams1?, presence: true, ignore_serialize: adjustable_quantity.nil? && !adjustable_quantity_present?)]
-    property adjustable_quantity : AdjustableQuantityParams1?
+
+    @[JSON::Field(key: "adjustable_quantity", type: AdjustableQuantityParams?, presence: true, ignore_serialize: adjustable_quantity.nil? && !adjustable_quantity_present?)]
+    property adjustable_quantity : AdjustableQuantityParams?
 
     @[JSON::Field(ignore: true)]
     property? adjustable_quantity_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @price : String, @quantity : Int64, @adjustable_quantity : AdjustableQuantityParams1? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @price : String,
+      @quantity : Int64,
+      # Optional properties
+      @adjustable_quantity : AdjustableQuantityParams? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -54,6 +61,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @price.to_s.size > 5000
+
       true
     end
 
@@ -67,24 +75,16 @@ module Stripe
       @price = price
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        adjustable_quantity == o.adjustable_quantity &&
-        price == o.price &&
-        quantity == o.quantity
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@adjustable_quantity, @price, @quantity)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@price, @quantity, @adjustable_quantity)
   end
 end

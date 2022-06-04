@@ -19,33 +19,37 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Height, in inches. Maximum precision is 2 decimal places.
+
     @[JSON::Field(key: "height", type: Float64?)]
     property height : Float64?
 
-    # Length, in inches. Maximum precision is 2 decimal places.
     @[JSON::Field(key: "length", type: Float64?)]
     property length : Float64?
 
-    # Weight, in ounces. Maximum precision is 2 decimal places.
     @[JSON::Field(key: "weight", type: Float64?)]
     property weight : Float64?
 
-    # Width, in inches. Maximum precision is 2 decimal places.
     @[JSON::Field(key: "width", type: Float64?)]
     property width : Float64?
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
         Stripe::PackageDimensionsSpecs1,
-        String,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @height : Float64, @length : Float64, @weight : Float64, @width : Float64)
+    def initialize(
+      *,
+      # Required properties
+      @height : Float64? = nil,
+      @length : Float64? = nil,
+      @weight : Float64? = nil,
+      @width : Float64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -70,23 +74,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        height == o.height &&
-        length == o.length &&
-        weight == o.weight &&
-        width == o.width
     end
 
     # @see the `==` method
@@ -95,8 +85,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@height, @length, @weight, @width)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@height, @length, @weight, @width)
   end
 end

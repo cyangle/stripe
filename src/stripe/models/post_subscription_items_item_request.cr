@@ -18,20 +18,22 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "billing_thresholds", type: SubscriptionItemUpdateParamsBillingThresholds?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
-    property billing_thresholds : SubscriptionItemUpdateParamsBillingThresholds?
+
+    @[JSON::Field(key: "billing_thresholds", type: PostSubscriptionItemsRequestBillingThresholds?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
+    property billing_thresholds : PostSubscriptionItemsRequestBillingThresholds?
 
     @[JSON::Field(ignore: true)]
     property? billing_thresholds_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? expand_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -52,13 +54,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR = EnumValidator.new("payment_behavior", "String", ["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"])
 
-    # The identifier of the new plan for this subscription item.
-    @[JSON::Field(key: "plan", type: String?, presence: true, ignore_serialize: plan.nil? && !plan_present?)]
-    getter plan : String?
-
-    @[JSON::Field(ignore: true)]
-    property? plan_present : Bool = false
-
     # The ID of the price object. When changing a subscription item's price, `quantity` is set to 1 unless a `quantity` parameter is provided.
     @[JSON::Field(key: "price", type: String?, presence: true, ignore_serialize: price.nil? && !price_present?)]
     getter price : String?
@@ -66,8 +61,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? price_present : Bool = false
 
-    @[JSON::Field(key: "price_data", type: RecurringPriceData?, presence: true, ignore_serialize: price_data.nil? && !price_data_present?)]
-    property price_data : RecurringPriceData?
+    @[JSON::Field(key: "price_data", type: RecurringPriceData1?, presence: true, ignore_serialize: price_data.nil? && !price_data_present?)]
+    property price_data : RecurringPriceData1?
 
     @[JSON::Field(ignore: true)]
     property? price_data_present : Bool = false
@@ -95,15 +90,29 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? quantity_present : Bool = false
 
-    @[JSON::Field(key: "tax_rates", type: SubscriptionItemUpdateParamsTaxRates?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
-    property tax_rates : SubscriptionItemUpdateParamsTaxRates?
+    @[JSON::Field(key: "tax_rates", type: PostSubscriptionItemsRequestTaxRates?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
+    property tax_rates : PostSubscriptionItemsRequestTaxRates?
 
     @[JSON::Field(ignore: true)]
     property? tax_rates_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing_thresholds : SubscriptionItemUpdateParamsBillingThresholds? = nil, @expand : Array(String)? = nil, @metadata : IndividualSpecsMetadata? = nil, @off_session : Bool? = nil, @payment_behavior : String? = nil, @plan : String? = nil, @price : String? = nil, @price_data : RecurringPriceData? = nil, @proration_behavior : String? = nil, @proration_date : Int64? = nil, @quantity : Int64? = nil, @tax_rates : SubscriptionItemUpdateParamsTaxRates? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @billing_thresholds : PostSubscriptionItemsRequestBillingThresholds? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @off_session : Bool? = nil,
+      @payment_behavior : String? = nil,
+      @price : String? = nil,
+      @price_data : RecurringPriceData1? = nil,
+      @proration_behavior : String? = nil,
+      @proration_date : Int64? = nil,
+      @quantity : Int64? = nil,
+      @tax_rates : PostSubscriptionItemsRequestTaxRates? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -112,10 +121,6 @@ module Stripe
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.valid?(@payment_behavior)
-
-      if !@plan.nil? && @plan.to_s.size > 5000
-        invalid_properties.push("invalid value for \"plan\", the character length must be smaller than or equal to 5000.")
-      end
 
       if !@price.nil? && @price.to_s.size > 5000
         invalid_properties.push("invalid value for \"price\", the character length must be smaller than or equal to 5000.")
@@ -130,9 +135,9 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.valid?(@payment_behavior)
-      return false if !@plan.nil? && @plan.to_s.size > 5000
       return false if !@price.nil? && @price.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+
       true
     end
 
@@ -141,16 +146,6 @@ module Stripe
     def payment_behavior=(payment_behavior)
       ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.valid!(payment_behavior)
       @payment_behavior = payment_behavior
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] plan Value to be assigned
-    def plan=(plan)
-      if !plan.nil? && plan.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"plan\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @plan = plan
     end
 
     # Custom attribute writer method with validation
@@ -170,33 +165,16 @@ module Stripe
       @proration_behavior = proration_behavior
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        billing_thresholds == o.billing_thresholds &&
-        expand == o.expand &&
-        metadata == o.metadata &&
-        off_session == o.off_session &&
-        payment_behavior == o.payment_behavior &&
-        plan == o.plan &&
-        price == o.price &&
-        price_data == o.price_data &&
-        proration_behavior == o.proration_behavior &&
-        proration_date == o.proration_date &&
-        quantity == o.quantity &&
-        tax_rates == o.tax_rates
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@billing_thresholds, @expand, @metadata, @off_session, @payment_behavior, @plan, @price, @price_data, @proration_behavior, @proration_date, @quantity, @tax_rates)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@billing_thresholds, @expand, @metadata, @off_session, @payment_behavior, @price, @price_data, @proration_behavior, @proration_date, @quantity, @tax_rates)
   end
 end

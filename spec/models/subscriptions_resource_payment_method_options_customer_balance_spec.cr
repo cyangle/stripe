@@ -29,7 +29,7 @@ describe Stripe::SubscriptionsResourcePaymentMethodOptionsCustomerBalance do
   describe "test attribute 'funding_type'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["bank_transfer", "null"])
+      # validator = EnumValidator.new("String", ["bank_transfer"])
       # validator.allowable_values.each do |value|
       #   expect { instance.funding_type = value }.not_to raise_error
       # end

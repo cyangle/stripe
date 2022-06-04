@@ -41,7 +41,7 @@ describe Stripe::SubscriptionSchedulePhaseConfiguration do
   describe "test attribute 'billing_cycle_anchor'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["automatic", "phase_start", "null"])
+      # validator = EnumValidator.new("String", ["automatic", "phase_start"])
       # validator.allowable_values.each do |value|
       #   expect { instance.billing_cycle_anchor = value }.not_to raise_error
       # end
@@ -57,7 +57,7 @@ describe Stripe::SubscriptionSchedulePhaseConfiguration do
   describe "test attribute 'collection_method'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["charge_automatically", "send_invoice", "null"])
+      # validator = EnumValidator.new("String", ["charge_automatically", "send_invoice"])
       # validator.allowable_values.each do |value|
       #   expect { instance.collection_method = value }.not_to raise_error
       # end

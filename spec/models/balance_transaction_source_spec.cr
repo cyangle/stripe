@@ -108,12 +108,6 @@ describe Stripe::BalanceTransactionSource do
     end
   end
 
-  describe "test attribute 'alternate_statement_descriptors'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'amount_captured'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -127,12 +121,6 @@ describe Stripe::BalanceTransactionSource do
   end
 
   describe "test attribute 'application_fee_amount'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'authorization_code'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -163,18 +151,6 @@ describe Stripe::BalanceTransactionSource do
   end
 
   describe "test attribute 'description'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'destination'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'dispute'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -211,12 +187,6 @@ describe Stripe::BalanceTransactionSource do
   end
 
   describe "test attribute 'invoice'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'level3'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -300,12 +270,6 @@ describe Stripe::BalanceTransactionSource do
     end
   end
 
-  describe "test attribute 'source'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'source_transfer'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -352,6 +316,12 @@ describe Stripe::BalanceTransactionSource do
     end
   end
 
+  describe "test attribute 'destination'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
   describe "test attribute 'balance_transactions'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -376,16 +346,10 @@ describe Stripe::BalanceTransactionSource do
     end
   end
 
-  describe "test attribute 'network_reason_code'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'reason'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["duplicate", "expired_uncaptured_charge", "fraudulent", "requested_by_customer", "null"])
+      # validator = EnumValidator.new("String", ["duplicate", "expired_uncaptured_charge", "fraudulent", "requested_by_customer"])
       # validator.allowable_values.each do |value|
       #   expect { instance.reason = value }.not_to raise_error
       # end
@@ -483,7 +447,7 @@ describe Stripe::BalanceTransactionSource do
   describe "test attribute 'wallet'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["apple_pay", "google_pay", "samsung_pay", "null"])
+      # validator = EnumValidator.new("String", ["apple_pay", "google_pay", "samsung_pay"])
       # validator.allowable_values.each do |value|
       #   expect { instance.wallet = value }.not_to raise_error
       # end
@@ -497,6 +461,12 @@ describe Stripe::BalanceTransactionSource do
   end
 
   describe "test attribute 'authorization'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'dispute'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
@@ -605,6 +575,12 @@ describe Stripe::BalanceTransactionSource do
   end
 
   describe "test attribute 'expected_availability_date'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
+    end
+  end
+
+  describe "test attribute 'source'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

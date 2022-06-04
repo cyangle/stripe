@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     @[JSON::Field(key: "closed", type: AccountServiceResourceTreasuryStatusDetailsClosed?, presence: true, ignore_serialize: closed.nil? && !closed_present?)]
     property closed : AccountServiceResourceTreasuryStatusDetailsClosed?
 
@@ -27,7 +28,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @closed : AccountServiceResourceTreasuryStatusDetailsClosed?)
+    def initialize(
+      *,
+      # Optional properties
+      @closed : AccountServiceResourceTreasuryStatusDetailsClosed? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -44,22 +49,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        closed == o.closed
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@closed)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@closed)
   end
 end

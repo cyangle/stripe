@@ -20,23 +20,15 @@ describe Stripe::PaymentMethodOptionsParam15 do
     end
   end
 
-  describe "test attribute 'preferred_language'" do
+  describe "test attribute 'request_extended_authorization'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["de", "en", "fr", "nl"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.preferred_language = value }.not_to raise_error
-      # end
     end
   end
 
-  describe "test attribute 'setup_future_usage'" do
+  describe "test attribute 'request_incremental_authorization_support'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["", "none", "off_session"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.setup_future_usage = value }.not_to raise_error
-      # end
     end
   end
 end

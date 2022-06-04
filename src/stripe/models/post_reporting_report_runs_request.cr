@@ -18,11 +18,14 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to run, such as `\"balance.summary.1\"`.
     @[JSON::Field(key: "report_type", type: String)]
     property report_type : String
 
     # Optional properties
+
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -37,7 +40,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @report_type : String, @expand : Array(String)? = nil, @parameters : RunParameterSpecs? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @report_type : String,
+      # Optional properties
+      @expand : Array(String)? = nil,
+      @parameters : RunParameterSpecs? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -54,24 +64,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        expand == o.expand &&
-        parameters == o.parameters &&
-        report_type == o.report_type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@expand, @parameters, @report_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@report_type, @expand, @parameters)
   end
 end

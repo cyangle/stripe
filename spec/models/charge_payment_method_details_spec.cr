@@ -176,12 +176,6 @@ describe Stripe::ChargePaymentMethodDetails do
     end
   end
 
-  describe "test attribute 'sepa_credit_transfer'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'sepa_debit'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

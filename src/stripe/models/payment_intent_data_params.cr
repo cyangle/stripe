@@ -19,14 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
+
     @[JSON::Field(key: "application_fee_amount", type: Int64?, presence: true, ignore_serialize: application_fee_amount.nil? && !application_fee_amount_present?)]
     property application_fee_amount : Int64?
 
     @[JSON::Field(ignore: true)]
     property? application_fee_amount_present : Bool = false
 
-    # Controls when the funds will be captured from the customer's account.
     @[JSON::Field(key: "capture_method", type: String?, presence: true, ignore_serialize: capture_method.nil? && !capture_method_present?)]
     getter capture_method : String?
 
@@ -35,35 +34,30 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_CAPTURE_METHOD = EnumValidator.new("capture_method", "String", ["automatic", "manual"])
 
-    # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String?
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
     property metadata : Hash(String, String)?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
-    # The Stripe account ID for which these funds are intended. For details, see the PaymentIntents [use case for connected accounts](/docs/payments/connected-accounts).
     @[JSON::Field(key: "on_behalf_of", type: String?, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
     property on_behalf_of : String?
 
     @[JSON::Field(ignore: true)]
     property? on_behalf_of_present : Bool = false
 
-    # Email address that the receipt for the resulting payment will be sent to. If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
     @[JSON::Field(key: "receipt_email", type: String?, presence: true, ignore_serialize: receipt_email.nil? && !receipt_email_present?)]
     property receipt_email : String?
 
     @[JSON::Field(ignore: true)]
     property? receipt_email_present : Bool = false
 
-    # Indicates that you intend to [make future payments](https://stripe.com/docs/payments/payment-intents#future-usage) with the payment method collected by this Checkout Session.  When setting this to `on_session`, Checkout will show a notice to the customer that their payment details will be saved.  When setting this to `off_session`, Checkout will show a notice to the customer that their payment details will be saved and used for future payments.  If a Customer has been provided or Checkout creates a new Customer, Checkout will attach the payment method to the Customer.  If Checkout does not create a Customer, the payment method is not attached to a Customer. To reuse the payment method, you can retrieve it from the Checkout Session's PaymentIntent.  When processing card payments, Checkout also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as SCA.
     @[JSON::Field(key: "setup_future_usage", type: String?, presence: true, ignore_serialize: setup_future_usage.nil? && !setup_future_usage_present?)]
     getter setup_future_usage : String?
 
@@ -78,14 +72,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? shipping_present : Bool = false
 
-    # Extra information about the payment. This will appear on your customer's statement when this payment succeeds in creating a charge.
     @[JSON::Field(key: "statement_descriptor", type: String?, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
     getter statement_descriptor : String?
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_present : Bool = false
 
-    # Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
     @[JSON::Field(key: "statement_descriptor_suffix", type: String?, presence: true, ignore_serialize: statement_descriptor_suffix.nil? && !statement_descriptor_suffix_present?)]
     getter statement_descriptor_suffix : String?
 
@@ -98,7 +90,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? transfer_data_present : Bool = false
 
-    # A string that identifies the resulting payment as part of a group. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
     @[JSON::Field(key: "transfer_group", type: String?, presence: true, ignore_serialize: transfer_group.nil? && !transfer_group_present?)]
     property transfer_group : String?
 
@@ -107,7 +98,22 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @application_fee_amount : Int64? = nil, @capture_method : String? = nil, @description : String? = nil, @metadata : Hash(String, String)? = nil, @on_behalf_of : String? = nil, @receipt_email : String? = nil, @setup_future_usage : String? = nil, @shipping : Shipping1? = nil, @statement_descriptor : String? = nil, @statement_descriptor_suffix : String? = nil, @transfer_data : TransferDataParams? = nil, @transfer_group : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @application_fee_amount : Int64? = nil,
+      @capture_method : String? = nil,
+      @description : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @on_behalf_of : String? = nil,
+      @receipt_email : String? = nil,
+      @setup_future_usage : String? = nil,
+      @shipping : Shipping1? = nil,
+      @statement_descriptor : String? = nil,
+      @statement_descriptor_suffix : String? = nil,
+      @transfer_data : TransferDataParams? = nil,
+      @transfer_group : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -142,6 +148,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
       return false if !@statement_descriptor_suffix.nil? && @statement_descriptor_suffix.to_s.size > 22
+
       true
     end
 
@@ -189,33 +196,16 @@ module Stripe
       @statement_descriptor_suffix = statement_descriptor_suffix
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        application_fee_amount == o.application_fee_amount &&
-        capture_method == o.capture_method &&
-        description == o.description &&
-        metadata == o.metadata &&
-        on_behalf_of == o.on_behalf_of &&
-        receipt_email == o.receipt_email &&
-        setup_future_usage == o.setup_future_usage &&
-        shipping == o.shipping &&
-        statement_descriptor == o.statement_descriptor &&
-        statement_descriptor_suffix == o.statement_descriptor_suffix &&
-        transfer_data == o.transfer_data &&
-        transfer_group == o.transfer_group
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@application_fee_amount, @capture_method, @description, @metadata, @on_behalf_of, @receipt_email, @setup_future_usage, @shipping, @statement_descriptor, @statement_descriptor_suffix, @transfer_data, @transfer_group)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@application_fee_amount, @capture_method, @description, @metadata, @on_behalf_of, @receipt_email, @setup_future_usage, @shipping, @statement_descriptor, @statement_descriptor_suffix, @transfer_data, @transfer_group)
   end
 end

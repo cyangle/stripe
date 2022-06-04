@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The type of error returned. One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`
     @[JSON::Field(key: "type", type: String?)]
     getter _type : String?
@@ -26,6 +27,7 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["api_error", "card_error", "idempotency_error", "invalid_request_error"])
 
     # Optional properties
+
     # For card errors, the ID of the failed charge.
     @[JSON::Field(key: "charge", type: String?, presence: true, ignore_serialize: charge.nil? && !charge_present?)]
     getter charge : String?
@@ -93,8 +95,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? setup_intent_present : Bool = false
 
-    @[JSON::Field(key: "source", type: PaymentSource?, presence: true, ignore_serialize: source.nil? && !source_present?)]
-    property source : PaymentSource?
+    @[JSON::Field(key: "source", type: ApiErrorsSource?, presence: true, ignore_serialize: source.nil? && !source_present?)]
+    property source : ApiErrorsSource?
 
     @[JSON::Field(ignore: true)]
     property? source_present : Bool = false
@@ -108,13 +110,31 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_type : String, @charge : String? = nil, @code : String? = nil, @decline_code : String? = nil, @doc_url : String? = nil, @message : String? = nil, @param : String? = nil, @payment_intent : PaymentIntent? = nil, @payment_method : PaymentMethod? = nil, @payment_method_type : String? = nil, @setup_intent : SetupIntent? = nil, @source : PaymentSource? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String? = nil,
+      # Optional properties
+      @charge : String? = nil,
+      @code : String? = nil,
+      @decline_code : String? = nil,
+      @doc_url : String? = nil,
+      @message : String? = nil,
+      @param : String? = nil,
+      @payment_intent : PaymentIntent? = nil,
+      @payment_method : PaymentMethod? = nil,
+      @payment_method_type : String? = nil,
+      @setup_intent : SetupIntent? = nil,
+      @source : ApiErrorsSource? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       if !@charge.nil? && @charge.to_s.size > 5000
         invalid_properties.push("invalid value for \"charge\", the character length must be smaller than or equal to 5000.")
@@ -144,14 +164,13 @@ module Stripe
         invalid_properties.push("invalid value for \"payment_method_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       return false if !@charge.nil? && @charge.to_s.size > 5000
       return false if !@code.nil? && @code.to_s.size > 5000
       return false if !@decline_code.nil? && @decline_code.to_s.size > 5000
@@ -159,7 +178,7 @@ module Stripe
       return false if !@message.nil? && @message.to_s.size > 40000
       return false if !@param.nil? && @param.to_s.size > 5000
       return false if !@payment_method_type.nil? && @payment_method_type.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -171,12 +190,16 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type)
+      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
+      @_type = _type
     end
 
     # Custom attribute writer method with validation
@@ -249,40 +272,16 @@ module Stripe
       @payment_method_type = payment_method_type
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] _type Object to be assigned
-    def _type=(_type)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
-      @_type = _type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        charge == o.charge &&
-        code == o.code &&
-        decline_code == o.decline_code &&
-        doc_url == o.doc_url &&
-        message == o.message &&
-        param == o.param &&
-        payment_intent == o.payment_intent &&
-        payment_method == o.payment_method &&
-        payment_method_type == o.payment_method_type &&
-        setup_intent == o.setup_intent &&
-        source == o.source &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@charge, @code, @decline_code, @doc_url, @message, @param, @payment_intent, @payment_method, @payment_method_type, @setup_intent, @source, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @charge, @code, @decline_code, @doc_url, @message, @param, @payment_intent, @payment_method, @payment_method_type, @setup_intent, @source)
   end
 end

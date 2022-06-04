@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The integer amount in %s representing the total amount of the credit note, including tax.
     @[JSON::Field(key: "amount", type: Int64?)]
     property amount : Int64?
@@ -33,12 +34,6 @@ module Stripe
 
     @[JSON::Field(key: "customer", type: CreditNoteCustomer?)]
     property customer : CreditNoteCustomer?
-
-    @[JSON::Field(key: "customer_balance_transaction", type: CreditNoteCustomerBalanceTransaction, presence: true, ignore_serialize: customer_balance_transaction.nil? && !customer_balance_transaction_present?)]
-    property customer_balance_transaction : CreditNoteCustomerBalanceTransaction
-
-    @[JSON::Field(ignore: true)]
-    property? customer_balance_transaction_present : Bool = false
 
     # The integer amount in %s representing the total amount of discount that was credited.
     @[JSON::Field(key: "discount_amount", type: Int64?)]
@@ -62,20 +57,6 @@ module Stripe
     @[JSON::Field(key: "livemode", type: Bool?)]
     property livemode : Bool?
 
-    # Customer-facing text that appears on the credit note PDF.
-    @[JSON::Field(key: "memo", type: String, presence: true, ignore_serialize: memo.nil? && !memo_present?)]
-    getter memo : String
-
-    @[JSON::Field(ignore: true)]
-    property? memo_present : Bool = false
-
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String), presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
-
     # A unique number that identifies this particular credit note and appears on the PDF of the credit note and its associated invoice.
     @[JSON::Field(key: "number", type: String?)]
     getter number : String?
@@ -86,31 +67,9 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["credit_note"])
 
-    # Amount that was credited outside of Stripe.
-    @[JSON::Field(key: "out_of_band_amount", type: Int64, presence: true, ignore_serialize: out_of_band_amount.nil? && !out_of_band_amount_present?)]
-    property out_of_band_amount : Int64
-
-    @[JSON::Field(ignore: true)]
-    property? out_of_band_amount_present : Bool = false
-
     # The link to download the PDF of the credit note.
     @[JSON::Field(key: "pdf", type: String?)]
     getter pdf : String?
-
-    # Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
-    @[JSON::Field(key: "reason", type: String, presence: true, ignore_serialize: reason.nil? && !reason_present?)]
-    getter reason : String
-
-    @[JSON::Field(ignore: true)]
-    property? reason_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_REASON = EnumValidator.new("reason", "String", ["duplicate", "fraudulent", "order_change", "product_unsatisfactory", "null"])
-
-    @[JSON::Field(key: "refund", type: CreditNoteRefund, presence: true, ignore_serialize: refund.nil? && !refund_present?)]
-    property refund : CreditNoteRefund
-
-    @[JSON::Field(ignore: true)]
-    property? refund_present : Bool = false
 
     # Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).
     @[JSON::Field(key: "status", type: String?)]
@@ -136,9 +95,53 @@ module Stripe
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["post_payment", "pre_payment"])
 
+    # Optional properties
+
+    @[JSON::Field(key: "customer_balance_transaction", type: CreditNoteCustomerBalanceTransaction?, presence: true, ignore_serialize: customer_balance_transaction.nil? && !customer_balance_transaction_present?)]
+    property customer_balance_transaction : CreditNoteCustomerBalanceTransaction?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_balance_transaction_present : Bool = false
+
+    # Customer-facing text that appears on the credit note PDF.
+    @[JSON::Field(key: "memo", type: String?, presence: true, ignore_serialize: memo.nil? && !memo_present?)]
+    getter memo : String?
+
+    @[JSON::Field(ignore: true)]
+    property? memo_present : Bool = false
+
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
+
+    # Amount that was credited outside of Stripe.
+    @[JSON::Field(key: "out_of_band_amount", type: Int64?, presence: true, ignore_serialize: out_of_band_amount.nil? && !out_of_band_amount_present?)]
+    property out_of_band_amount : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? out_of_band_amount_present : Bool = false
+
+    # Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
+    @[JSON::Field(key: "reason", type: String?, presence: true, ignore_serialize: reason.nil? && !reason_present?)]
+    getter reason : String?
+
+    @[JSON::Field(ignore: true)]
+    property? reason_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_REASON = EnumValidator.new("reason", "String", ["duplicate", "fraudulent", "order_change", "product_unsatisfactory"])
+
+    @[JSON::Field(key: "refund", type: CreditNoteRefund?, presence: true, ignore_serialize: refund.nil? && !refund_present?)]
+    property refund : CreditNoteRefund?
+
+    @[JSON::Field(ignore: true)]
+    property? refund_present : Bool = false
+
     # The time that the credit note was voided.
-    @[JSON::Field(key: "voided_at", type: Int64, presence: true, ignore_serialize: voided_at.nil? && !voided_at_present?)]
-    property voided_at : Int64
+    @[JSON::Field(key: "voided_at", type: Int64?, presence: true, ignore_serialize: voided_at.nil? && !voided_at_present?)]
+    property voided_at : Int64?
 
     @[JSON::Field(ignore: true)]
     property? voided_at_present : Bool = false
@@ -153,7 +156,36 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @created : Int64, @currency : String, @customer : CreditNoteCustomer, @customer_balance_transaction : CreditNoteCustomerBalanceTransaction?, @discount_amount : Int64, @discount_amounts : Array(DiscountsResourceDiscountAmount), @id : String, @invoice : CreditNoteInvoice, @lines : CreditNoteLinesList1, @livemode : Bool, @memo : String?, @metadata : Hash(String, String)?, @number : String, @object : String, @out_of_band_amount : Int64?, @pdf : String, @reason : String?, @refund : CreditNoteRefund?, @status : String, @subtotal : Int64, @tax_amounts : Array(CreditNoteTaxAmount), @total : Int64, @_type : String, @voided_at : Int64?)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64? = nil,
+      @created : Int64? = nil,
+      @currency : String? = nil,
+      @customer : CreditNoteCustomer? = nil,
+      @discount_amount : Int64? = nil,
+      @discount_amounts : Array(DiscountsResourceDiscountAmount)? = nil,
+      @id : String? = nil,
+      @invoice : CreditNoteInvoice? = nil,
+      @lines : CreditNoteLinesList1? = nil,
+      @livemode : Bool? = nil,
+      @number : String? = nil,
+      @object : String? = nil,
+      @pdf : String? = nil,
+      @status : String? = nil,
+      @subtotal : Int64? = nil,
+      @tax_amounts : Array(CreditNoteTaxAmount)? = nil,
+      @total : Int64? = nil,
+      @_type : String? = nil,
+      # Optional properties
+      @customer_balance_transaction : CreditNoteCustomerBalanceTransaction? = nil,
+      @memo : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @out_of_band_amount : Int64? = nil,
+      @reason : String? = nil,
+      @refund : CreditNoteRefund? = nil,
+      @voided_at : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -163,10 +195,6 @@ module Stripe
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @memo.to_s.size > 5000
-        invalid_properties.push("invalid value for \"memo\", the character length must be smaller than or equal to 5000.")
       end
 
       if @number.to_s.size > 5000
@@ -179,11 +207,15 @@ module Stripe
         invalid_properties.push("invalid value for \"pdf\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_REASON.error_message) unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      if !@memo.nil? && @memo.to_s.size > 5000
+        invalid_properties.push("invalid value for \"memo\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_REASON.error_message) unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
 
       invalid_properties
     end
@@ -192,13 +224,14 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @id.to_s.size > 5000
-      return false if @memo.to_s.size > 5000
       return false if @number.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @pdf.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if !@memo.nil? && @memo.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -210,10 +243,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -226,16 +256,6 @@ module Stripe
       end
 
       @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] memo Value to be assigned
-    def memo=(memo)
-      if memo.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"memo\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @memo = memo
     end
 
     # Custom attribute writer method with validation
@@ -266,13 +286,6 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] reason Object to be assigned
-    def reason=(reason)
-      ENUM_VALIDATOR_FOR_REASON.valid!(reason)
-      @reason = reason
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
@@ -286,36 +299,21 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        created == o.created &&
-        currency == o.currency &&
-        customer == o.customer &&
-        customer_balance_transaction == o.customer_balance_transaction &&
-        discount_amount == o.discount_amount &&
-        discount_amounts == o.discount_amounts &&
-        id == o.id &&
-        invoice == o.invoice &&
-        lines == o.lines &&
-        livemode == o.livemode &&
-        memo == o.memo &&
-        metadata == o.metadata &&
-        number == o.number &&
-        object == o.object &&
-        out_of_band_amount == o.out_of_band_amount &&
-        pdf == o.pdf &&
-        reason == o.reason &&
-        refund == o.refund &&
-        status == o.status &&
-        subtotal == o.subtotal &&
-        tax_amounts == o.tax_amounts &&
-        total == o.total &&
-        _type == o._type &&
-        voided_at == o.voided_at
+    # Custom attribute writer method with validation
+    # @param [Object] memo Value to be assigned
+    def memo=(memo)
+      if !memo.nil? && memo.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"memo\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @memo = memo
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] reason Object to be assigned
+    def reason=(reason)
+      ENUM_VALIDATOR_FOR_REASON.valid!(reason)
+      @reason = reason
     end
 
     # @see the `==` method
@@ -324,8 +322,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @created, @currency, @customer, @customer_balance_transaction, @discount_amount, @discount_amounts, @id, @invoice, @lines, @livemode, @memo, @metadata, @number, @object, @out_of_band_amount, @pdf, @reason, @refund, @status, @subtotal, @tax_amounts, @total, @_type, @voided_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @created, @currency, @customer, @discount_amount, @discount_amounts, @id, @invoice, @lines, @livemode, @number, @object, @pdf, @status, @subtotal, @tax_amounts, @total, @_type, @customer_balance_transaction, @memo, @metadata, @out_of_band_amount, @reason, @refund, @voided_at)
   end
 end

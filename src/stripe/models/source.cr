@@ -19,12 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for `single_use` sources.
-    @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
-    property amount : Int64?
-
-    @[JSON::Field(ignore: true)]
-    property? amount_present : Bool = false
 
     # The client secret of the source. Used for client-side retrieval using a publishable key.
     @[JSON::Field(key: "client_secret", type: String)]
@@ -33,13 +27,6 @@ module Stripe
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
     property created : Int64
-
-    # Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with the source. This is the currency for which the source will be chargeable once ready. Required for `single_use` sources.
-    @[JSON::Field(key: "currency", type: String?, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
-    property currency : String?
-
-    @[JSON::Field(ignore: true)]
-    property? currency_present : Bool = false
 
     # The authentication `flow` of the source. `flow` is one of `redirect`, `receiver`, `code_verification`, `none`.
     @[JSON::Field(key: "flow", type: String)]
@@ -53,31 +40,11 @@ module Stripe
     @[JSON::Field(key: "livemode", type: Bool)]
     property livemode : Bool
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)?
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
-
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String)]
     getter object : String
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["source"])
-
-    @[JSON::Field(key: "owner", type: SourceOwner1?, presence: true, ignore_serialize: owner.nil? && !owner_present?)]
-    property owner : SourceOwner1?
-
-    @[JSON::Field(ignore: true)]
-    property? owner_present : Bool = false
-
-    # Extra information about a source. This will appear on your customer's statement every time you charge the source.
-    @[JSON::Field(key: "statement_descriptor", type: String?, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
-    getter statement_descriptor : String?
-
-    @[JSON::Field(ignore: true)]
-    property? statement_descriptor_present : Bool = false
 
     # The status of the source, one of `canceled`, `chargeable`, `consumed`, `failed`, or `pending`. Only `chargeable` sources can be used to create a charge.
     @[JSON::Field(key: "status", type: String)]
@@ -87,16 +54,10 @@ module Stripe
     @[JSON::Field(key: "type", type: String)]
     getter _type : String
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["ach_credit_transfer", "ach_debit", "acss_debit", "alipay", "au_becs_debit", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_credit_transfer", "sepa_debit", "sofort", "three_d_secure", "wechat"])
-
-    # Either `reusable` or `single_use`. Whether this source should be reusable or not. Some source types may or may not be reusable by construction, while others may leave the option at creation. If an incompatible value is passed, an error will be returned.
-    @[JSON::Field(key: "usage", type: String?, presence: true, ignore_serialize: usage.nil? && !usage_present?)]
-    getter usage : String?
-
-    @[JSON::Field(ignore: true)]
-    property? usage_present : Bool = false
+    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["ach_credit_transfer", "ach_debit", "acss_debit", "alipay", "au_becs_debit", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_debit", "sofort", "three_d_secure", "wechat"])
 
     # Optional properties
+
     @[JSON::Field(key: "ach_credit_transfer", type: SourceTypeAchCreditTransfer?, presence: true, ignore_serialize: ach_credit_transfer.nil? && !ach_credit_transfer_present?)]
     property ach_credit_transfer : SourceTypeAchCreditTransfer?
 
@@ -121,6 +82,13 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? alipay_present : Bool = false
 
+    # A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for `single_use` sources.
+    @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
+    property amount : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? amount_present : Bool = false
+
     @[JSON::Field(key: "au_becs_debit", type: SourceTypeAuBecsDebit?, presence: true, ignore_serialize: au_becs_debit.nil? && !au_becs_debit_present?)]
     property au_becs_debit : SourceTypeAuBecsDebit?
 
@@ -139,7 +107,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
-    @[JSON::Field(key: "card_present", type: SourceTypeCardPresent?, presence: true, ignore_serialize: card_present.nil? && !card_present_present?)]
+    @[JSON::Field(key: "card_present", type: SourceTypeCardPresent?, presence: true, ignore_serialize: card_present2.nil? && !card_present2_present?)]
     property card_present2 : SourceTypeCardPresent?
 
     @[JSON::Field(ignore: true)]
@@ -150,6 +118,13 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? code_verification_present : Bool = false
+
+    # Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with the source. This is the currency for which the source will be chargeable once ready. Required for `single_use` sources.
+    @[JSON::Field(key: "currency", type: String?, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
+    property currency : String?
+
+    @[JSON::Field(ignore: true)]
+    property? currency_present : Bool = false
 
     # The ID of the customer to which this source is attached. This will not be present when the source has not been attached to a customer.
     @[JSON::Field(key: "customer", type: String?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
@@ -182,11 +157,24 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? klarna_present : Bool = false
 
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
+
     @[JSON::Field(key: "multibanco", type: SourceTypeMultibanco?, presence: true, ignore_serialize: multibanco.nil? && !multibanco_present?)]
     property multibanco : SourceTypeMultibanco?
 
     @[JSON::Field(ignore: true)]
     property? multibanco_present : Bool = false
+
+    @[JSON::Field(key: "owner", type: SourceOwner1?, presence: true, ignore_serialize: owner.nil? && !owner_present?)]
+    property owner : SourceOwner1?
+
+    @[JSON::Field(ignore: true)]
+    property? owner_present : Bool = false
 
     @[JSON::Field(key: "p24", type: SourceTypeP24?, presence: true, ignore_serialize: p24.nil? && !p24_present?)]
     property p24 : SourceTypeP24?
@@ -206,12 +194,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? redirect_present : Bool = false
 
-    @[JSON::Field(key: "sepa_credit_transfer", type: SourceTypeSepaCreditTransfer?, presence: true, ignore_serialize: sepa_credit_transfer.nil? && !sepa_credit_transfer_present?)]
-    property sepa_credit_transfer : SourceTypeSepaCreditTransfer?
-
-    @[JSON::Field(ignore: true)]
-    property? sepa_credit_transfer_present : Bool = false
-
     @[JSON::Field(key: "sepa_debit", type: SourceTypeSepaDebit?, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
     property sepa_debit : SourceTypeSepaDebit?
 
@@ -230,11 +212,25 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? source_order_present : Bool = false
 
+    # Extra information about a source. This will appear on your customer's statement every time you charge the source.
+    @[JSON::Field(key: "statement_descriptor", type: String?, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
+    getter statement_descriptor : String?
+
+    @[JSON::Field(ignore: true)]
+    property? statement_descriptor_present : Bool = false
+
     @[JSON::Field(key: "three_d_secure", type: SourceTypeThreeDSecure?, presence: true, ignore_serialize: three_d_secure.nil? && !three_d_secure_present?)]
     property three_d_secure : SourceTypeThreeDSecure?
 
     @[JSON::Field(ignore: true)]
     property? three_d_secure_present : Bool = false
+
+    # Either `reusable` or `single_use`. Whether this source should be reusable or not. Some source types may or may not be reusable by construction, while others may leave the option at creation. If an incompatible value is passed, an error will be returned.
+    @[JSON::Field(key: "usage", type: String?, presence: true, ignore_serialize: usage.nil? && !usage_present?)]
+    getter usage : String?
+
+    @[JSON::Field(ignore: true)]
+    property? usage_present : Bool = false
 
     @[JSON::Field(key: "wechat", type: SourceTypeWechat?, presence: true, ignore_serialize: wechat.nil? && !wechat_present?)]
     property wechat : SourceTypeWechat?
@@ -244,7 +240,48 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64?, @client_secret : String, @created : Int64, @currency : String?, @flow : String, @id : String, @livemode : Bool, @metadata : Hash(String, String)?, @object : String, @owner : SourceOwner1?, @statement_descriptor : String?, @status : String, @_type : String, @usage : String?, @ach_credit_transfer : SourceTypeAchCreditTransfer? = nil, @ach_debit : SourceTypeAchDebit? = nil, @acss_debit : SourceTypeAcssDebit? = nil, @alipay : SourceTypeAlipay? = nil, @au_becs_debit : SourceTypeAuBecsDebit? = nil, @bancontact : SourceTypeBancontact? = nil, @card : SourceTypeCard? = nil, @card_present2 : SourceTypeCardPresent? = nil, @code_verification : SourceCodeVerificationFlow? = nil, @customer : String? = nil, @eps : SourceTypeEps? = nil, @giropay : SourceTypeGiropay? = nil, @ideal : SourceTypeIdeal? = nil, @klarna : SourceTypeKlarna? = nil, @multibanco : SourceTypeMultibanco? = nil, @p24 : SourceTypeP24? = nil, @receiver : SourceReceiverFlow? = nil, @redirect : SourceRedirectFlow? = nil, @sepa_credit_transfer : SourceTypeSepaCreditTransfer? = nil, @sepa_debit : SourceTypeSepaDebit? = nil, @sofort : SourceTypeSofort? = nil, @source_order : SourceOrder? = nil, @three_d_secure : SourceTypeThreeDSecure? = nil, @wechat : SourceTypeWechat? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @client_secret : String,
+      @created : Int64,
+      @flow : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @status : String,
+      @_type : String,
+      # Optional properties
+      @ach_credit_transfer : SourceTypeAchCreditTransfer? = nil,
+      @ach_debit : SourceTypeAchDebit? = nil,
+      @acss_debit : SourceTypeAcssDebit? = nil,
+      @alipay : SourceTypeAlipay? = nil,
+      @amount : Int64? = nil,
+      @au_becs_debit : SourceTypeAuBecsDebit? = nil,
+      @bancontact : SourceTypeBancontact? = nil,
+      @card : SourceTypeCard? = nil,
+      @card_present2 : SourceTypeCardPresent? = nil,
+      @code_verification : SourceCodeVerificationFlow? = nil,
+      @currency : String? = nil,
+      @customer : String? = nil,
+      @eps : SourceTypeEps? = nil,
+      @giropay : SourceTypeGiropay? = nil,
+      @ideal : SourceTypeIdeal? = nil,
+      @klarna : SourceTypeKlarna? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @multibanco : SourceTypeMultibanco? = nil,
+      @owner : SourceOwner1? = nil,
+      @p24 : SourceTypeP24? = nil,
+      @receiver : SourceReceiverFlow? = nil,
+      @redirect : SourceRedirectFlow? = nil,
+      @sepa_debit : SourceTypeSepaDebit? = nil,
+      @sofort : SourceTypeSofort? = nil,
+      @source_order : SourceOrder? = nil,
+      @statement_descriptor : String? = nil,
+      @three_d_secure : SourceTypeThreeDSecure? = nil,
+      @usage : String? = nil,
+      @wechat : SourceTypeWechat? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -254,10 +291,6 @@ module Stripe
 
       if @client_secret.to_s.size > 5000
         invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@customer.nil? && @customer.to_s.size > 5000
-        invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
 
       if @flow.to_s.size > 5000
@@ -270,17 +303,21 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
-      if @statement_descriptor.to_s.size > 5000
-        invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @status.to_s.size > 5000
         invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
-      if @usage.to_s.size > 5000
+      if !@customer.nil? && @customer.to_s.size > 5000
+        invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
+        invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@usage.nil? && @usage.to_s.size > 5000
         invalid_properties.push("invalid value for \"usage\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -291,14 +328,15 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @client_secret.to_s.size > 5000
-      return false if !@customer.nil? && @customer.to_s.size > 5000
       return false if @flow.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @statement_descriptor.to_s.size > 5000
       return false if @status.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      return false if @usage.to_s.size > 5000
+      return false if !@customer.nil? && @customer.to_s.size > 5000
+      return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
+      return false if !@usage.nil? && @usage.to_s.size > 5000
+
       true
     end
 
@@ -310,16 +348,6 @@ module Stripe
       end
 
       @client_secret = client_secret
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] customer Value to be assigned
-    def customer=(customer)
-      if !customer.nil? && customer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @customer = customer
     end
 
     # Custom attribute writer method with validation
@@ -350,16 +378,6 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] statement_descriptor Value to be assigned
-    def statement_descriptor=(statement_descriptor)
-      if statement_descriptor.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @statement_descriptor = statement_descriptor
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] status Value to be assigned
     def status=(status)
       if status.to_s.size > 5000
@@ -377,58 +395,33 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] customer Value to be assigned
+    def customer=(customer)
+      if !customer.nil? && customer.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @customer = customer
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] statement_descriptor Value to be assigned
+    def statement_descriptor=(statement_descriptor)
+      if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @statement_descriptor = statement_descriptor
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] usage Value to be assigned
     def usage=(usage)
-      if usage.to_s.size > 5000
+      if !usage.nil? && usage.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"usage\", the character length must be smaller than or equal to 5000.")
       end
 
       @usage = usage
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        ach_credit_transfer == o.ach_credit_transfer &&
-        ach_debit == o.ach_debit &&
-        acss_debit == o.acss_debit &&
-        alipay == o.alipay &&
-        amount == o.amount &&
-        au_becs_debit == o.au_becs_debit &&
-        bancontact == o.bancontact &&
-        card == o.card &&
-        card_present2 == o.card_present2 &&
-        client_secret == o.client_secret &&
-        code_verification == o.code_verification &&
-        created == o.created &&
-        currency == o.currency &&
-        customer == o.customer &&
-        eps == o.eps &&
-        flow == o.flow &&
-        giropay == o.giropay &&
-        id == o.id &&
-        ideal == o.ideal &&
-        klarna == o.klarna &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        multibanco == o.multibanco &&
-        object == o.object &&
-        owner == o.owner &&
-        p24 == o.p24 &&
-        receiver == o.receiver &&
-        redirect == o.redirect &&
-        sepa_credit_transfer == o.sepa_credit_transfer &&
-        sepa_debit == o.sepa_debit &&
-        sofort == o.sofort &&
-        source_order == o.source_order &&
-        statement_descriptor == o.statement_descriptor &&
-        status == o.status &&
-        three_d_secure == o.three_d_secure &&
-        _type == o._type &&
-        usage == o.usage &&
-        wechat == o.wechat
     end
 
     # @see the `==` method
@@ -437,8 +430,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@ach_credit_transfer, @ach_debit, @acss_debit, @alipay, @amount, @au_becs_debit, @bancontact, @card, @card_present2, @client_secret, @code_verification, @created, @currency, @customer, @eps, @flow, @giropay, @id, @ideal, @klarna, @livemode, @metadata, @multibanco, @object, @owner, @p24, @receiver, @redirect, @sepa_credit_transfer, @sepa_debit, @sofort, @source_order, @statement_descriptor, @status, @three_d_secure, @_type, @usage, @wechat)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@client_secret, @created, @flow, @id, @livemode, @object, @status, @_type, @ach_credit_transfer, @ach_debit, @acss_debit, @alipay, @amount, @au_becs_debit, @bancontact, @card, @card_present2, @code_verification, @currency, @customer, @eps, @giropay, @ideal, @klarna, @metadata, @multibanco, @owner, @p24, @receiver, @redirect, @sepa_debit, @sofort, @source_order, @statement_descriptor, @three_d_secure, @usage, @wechat)
   end
 end

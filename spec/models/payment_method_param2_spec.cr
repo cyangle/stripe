@@ -20,39 +20,19 @@ describe Stripe::PaymentMethodParam2 do
     end
   end
 
-  describe "test attribute 'account_holder_type'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["company", "individual"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.account_holder_type = value }.not_to raise_error
-      # end
-    end
-  end
-
   describe "test attribute 'account_number'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 
-  describe "test attribute 'account_type'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["checking", "savings"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.account_type = value }.not_to raise_error
-      # end
-    end
-  end
-
-  describe "test attribute 'financial_connections_account'" do
+  describe "test attribute 'institution_number'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 
-  describe "test attribute 'routing_number'" do
+  describe "test attribute 'transit_number'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end

@@ -12,20 +12,23 @@ require "time"
 require "log"
 
 module Stripe
-  # If this is a `sepa_debit` PaymentMethod, this hash contains details about the SEPA debit bank account.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class Param8
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # IBAN of the bank account.
+
     @[JSON::Field(key: "iban", type: String)]
     getter iban : String
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @iban : String)
+    def initialize(
+      *,
+      # Required properties
+      @iban : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -44,6 +47,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @iban.to_s.size > 5000
+
       true
     end
 
@@ -57,22 +61,16 @@ module Stripe
       @iban = iban
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        iban == o.iban
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@iban)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@iban)
   end
 end

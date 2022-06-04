@@ -54,12 +54,6 @@ describe Stripe::SubscriptionItem do
     end
   end
 
-  describe "test attribute 'plan'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'price'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

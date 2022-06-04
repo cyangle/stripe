@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Account number to transfer funds to.
     @[JSON::Field(key: "account_number", type: String?, presence: true, ignore_serialize: account_number.nil? && !account_number_present?)]
     getter account_number : String?
@@ -49,7 +50,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account_number : String?, @bank_name : String?, @routing_number : String?, @swift_code : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @account_number : String? = nil,
+      @bank_name : String? = nil,
+      @routing_number : String? = nil,
+      @swift_code : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -57,19 +65,19 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @account_number.to_s.size > 5000
+      if !@account_number.nil? && @account_number.to_s.size > 5000
         invalid_properties.push("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @bank_name.to_s.size > 5000
+      if !@bank_name.nil? && @bank_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @routing_number.to_s.size > 5000
+      if !@routing_number.nil? && @routing_number.to_s.size > 5000
         invalid_properties.push("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @swift_code.to_s.size > 5000
+      if !@swift_code.nil? && @swift_code.to_s.size > 5000
         invalid_properties.push("invalid value for \"swift_code\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -79,17 +87,18 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @account_number.to_s.size > 5000
-      return false if @bank_name.to_s.size > 5000
-      return false if @routing_number.to_s.size > 5000
-      return false if @swift_code.to_s.size > 5000
+      return false if !@account_number.nil? && @account_number.to_s.size > 5000
+      return false if !@bank_name.nil? && @bank_name.to_s.size > 5000
+      return false if !@routing_number.nil? && @routing_number.to_s.size > 5000
+      return false if !@swift_code.nil? && @swift_code.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] account_number Value to be assigned
     def account_number=(account_number)
-      if account_number.to_s.size > 5000
+      if !account_number.nil? && account_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -99,7 +108,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] bank_name Value to be assigned
     def bank_name=(bank_name)
-      if bank_name.to_s.size > 5000
+      if !bank_name.nil? && bank_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -109,7 +118,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] routing_number Value to be assigned
     def routing_number=(routing_number)
-      if routing_number.to_s.size > 5000
+      if !routing_number.nil? && routing_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -119,22 +128,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] swift_code Value to be assigned
     def swift_code=(swift_code)
-      if swift_code.to_s.size > 5000
+      if !swift_code.nil? && swift_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"swift_code\", the character length must be smaller than or equal to 5000.")
       end
 
       @swift_code = swift_code
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account_number == o.account_number &&
-        bank_name == o.bank_name &&
-        routing_number == o.routing_number &&
-        swift_code == o.swift_code
     end
 
     # @see the `==` method
@@ -143,8 +141,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account_number, @bank_name, @routing_number, @swift_code)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account_number, @bank_name, @routing_number, @swift_code)
   end
 end

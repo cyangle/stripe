@@ -18,15 +18,16 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # If `opt_in`, the customer consents to receiving promotional communications from the merchant about this Checkout Session.
-    @[JSON::Field(key: "promotions", type: String, presence: true, ignore_serialize: promotions.nil? && !promotions_present?)]
-    getter promotions : String
+    @[JSON::Field(key: "promotions", type: String?, presence: true, ignore_serialize: promotions.nil? && !promotions_present?)]
+    getter promotions : String?
 
     @[JSON::Field(ignore: true)]
     property? promotions_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PROMOTIONS = EnumValidator.new("promotions", "String", ["opt_in", "opt_out", "null"])
+    ENUM_VALIDATOR_FOR_PROMOTIONS = EnumValidator.new("promotions", "String", ["opt_in", "opt_out"])
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -37,13 +38,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @promotions : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @promotions : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_PROMOTIONS.error_message) unless ENUM_VALIDATOR_FOR_PROMOTIONS.valid?(@promotions)
 
       invalid_properties
@@ -53,6 +59,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_PROMOTIONS.valid?(@promotions)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -64,10 +71,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -79,22 +83,16 @@ module Stripe
       @promotions = promotions
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        promotions == o.promotions
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@promotions)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@promotions)
   end
 end

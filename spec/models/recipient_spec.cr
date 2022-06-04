@@ -107,10 +107,4 @@ describe Stripe::Recipient do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
-
-  describe "test attribute 'verified'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
 end

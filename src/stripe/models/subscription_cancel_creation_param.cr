@@ -12,25 +12,24 @@ require "time"
 require "log"
 
 module Stripe
-  # Information about canceling subscriptions in the portal.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SubscriptionCancelCreationParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Whether the feature is enabled.
+
     @[JSON::Field(key: "enabled", type: Bool)]
     property enabled : Bool
 
     # Optional properties
+
     @[JSON::Field(key: "cancellation_reason", type: SubscriptionCancellationReasonCreationParam?, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
     property cancellation_reason : SubscriptionCancellationReasonCreationParam?
 
     @[JSON::Field(ignore: true)]
     property? cancellation_reason_present : Bool = false
 
-    # Whether to cancel subscriptions immediately or at the end of the billing period.
     @[JSON::Field(key: "mode", type: String?, presence: true, ignore_serialize: mode.nil? && !mode_present?)]
     getter mode : String?
 
@@ -39,7 +38,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_MODE = EnumValidator.new("mode", "String", ["at_period_end", "immediately"])
 
-    # Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`, which is only compatible with `mode=immediately`. No prorations are generated when canceling a subscription at the end of its natural billing period.
     @[JSON::Field(key: "proration_behavior", type: String?, presence: true, ignore_serialize: proration_behavior.nil? && !proration_behavior_present?)]
     getter proration_behavior : String?
 
@@ -50,7 +48,15 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @enabled : Bool, @cancellation_reason : SubscriptionCancellationReasonCreationParam? = nil, @mode : String? = nil, @proration_behavior : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @enabled : Bool,
+      # Optional properties
+      @cancellation_reason : SubscriptionCancellationReasonCreationParam? = nil,
+      @mode : String? = nil,
+      @proration_behavior : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -70,6 +76,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode)
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+
       true
     end
 
@@ -87,25 +94,16 @@ module Stripe
       @proration_behavior = proration_behavior
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        cancellation_reason == o.cancellation_reason &&
-        enabled == o.enabled &&
-        mode == o.mode &&
-        proration_behavior == o.proration_behavior
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@cancellation_reason, @enabled, @mode, @proration_behavior)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@enabled, @cancellation_reason, @mode, @proration_behavior)
   end
 end

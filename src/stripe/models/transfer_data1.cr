@@ -12,19 +12,18 @@ require "time"
 require "log"
 
 module Stripe
-  # Provides configuration for completing a transfer for the order after it is paid.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class TransferData1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # ID of the Connected account receiving the transfer.
+
     @[JSON::Field(key: "destination", type: String)]
     property destination : String
 
     # Optional properties
-    # The amount that will be transferred automatically when the order is paid. If no amount is set, the full amount is transferred. There cannot be any line items with recurring prices when using this field.
+
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
 
@@ -33,7 +32,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @destination : String, @amount : Int64? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @destination : String,
+      # Optional properties
+      @amount : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -50,23 +55,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        destination == o.destination
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @destination)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@destination, @amount)
   end
 end

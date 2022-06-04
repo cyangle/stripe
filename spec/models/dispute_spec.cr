@@ -86,12 +86,6 @@ describe Stripe::Dispute do
     end
   end
 
-  describe "test attribute 'network_reason_code'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'object'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html

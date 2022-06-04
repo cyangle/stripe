@@ -26,24 +26,6 @@ describe Stripe::PostProductsRequest do
     end
   end
 
-  describe "test attribute 'attributes'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'caption'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute 'deactivate_on'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
   describe "test attribute 'default_price_data'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
@@ -107,16 +89,6 @@ describe Stripe::PostProductsRequest do
   describe "test attribute 'tax_code'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-    end
-  end
-
-  describe "test attribute '_type'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["good", "service"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance._type = value }.not_to raise_error
-      # end
     end
   end
 

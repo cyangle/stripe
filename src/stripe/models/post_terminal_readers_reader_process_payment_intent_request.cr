@@ -18,11 +18,14 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # PaymentIntent ID
     @[JSON::Field(key: "payment_intent", type: String)]
     getter payment_intent : String
 
     # Optional properties
+
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -37,7 +40,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @payment_intent : String, @expand : Array(String)? = nil, @process_config : ProcessConfig? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @payment_intent : String,
+      # Optional properties
+      @expand : Array(String)? = nil,
+      @process_config : ProcessConfig? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -56,6 +66,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @payment_intent.to_s.size > 5000
+
       true
     end
 
@@ -69,24 +80,16 @@ module Stripe
       @payment_intent = payment_intent
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        expand == o.expand &&
-        payment_intent == o.payment_intent &&
-        process_config == o.process_config
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@expand, @payment_intent, @process_config)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@payment_intent, @expand, @process_config)
   end
 end

@@ -18,31 +18,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether the product is available for purchase.
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
 
     @[JSON::Field(ignore: true)]
     property? active_present : Bool = false
-
-    @[JSON::Field(key: "attributes", type: PostProductsIdRequestAttributes?, presence: true, ignore_serialize: attributes.nil? && !attributes_present?)]
-    property attributes : PostProductsIdRequestAttributes?
-
-    @[JSON::Field(ignore: true)]
-    property? attributes_present : Bool = false
-
-    # A short one-line description of the product, meant to be displayable to the customer. May only be set if `type=good`.
-    @[JSON::Field(key: "caption", type: String?, presence: true, ignore_serialize: caption.nil? && !caption_present?)]
-    getter caption : String?
-
-    @[JSON::Field(ignore: true)]
-    property? caption_present : Bool = false
-
-    @[JSON::Field(key: "deactivate_on", type: Array(String)?, presence: true, ignore_serialize: deactivate_on.nil? && !deactivate_on_present?)]
-    property deactivate_on : Array(String)?
-
-    @[JSON::Field(ignore: true)]
-    property? deactivate_on_present : Bool = false
 
     # The ID of the [Price](https://stripe.com/docs/api/prices) object that is the default price for this product.
     @[JSON::Field(key: "default_price", type: String?, presence: true, ignore_serialize: default_price.nil? && !default_price_present?)]
@@ -58,6 +40,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -70,8 +53,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? images_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -124,17 +107,29 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool? = nil, @attributes : PostProductsIdRequestAttributes? = nil, @caption : String? = nil, @deactivate_on : Array(String)? = nil, @default_price : String? = nil, @description : String? = nil, @expand : Array(String)? = nil, @images : PostProductsIdRequestImages? = nil, @metadata : IndividualSpecsMetadata? = nil, @name : String? = nil, @package_dimensions : PostProductsIdRequestPackageDimensions? = nil, @shippable : Bool? = nil, @statement_descriptor : String? = nil, @tax_code : PostProductsIdRequestTaxCode? = nil, @unit_label : String? = nil, @url : PostProductsIdRequestUrl? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @active : Bool? = nil,
+      @default_price : String? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @images : PostProductsIdRequestImages? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @name : String? = nil,
+      @package_dimensions : PostProductsIdRequestPackageDimensions? = nil,
+      @shippable : Bool? = nil,
+      @statement_descriptor : String? = nil,
+      @tax_code : PostProductsIdRequestTaxCode? = nil,
+      @unit_label : String? = nil,
+      @url : PostProductsIdRequestUrl? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if !@caption.nil? && @caption.to_s.size > 5000
-        invalid_properties.push("invalid value for \"caption\", the character length must be smaller than or equal to 5000.")
-      end
 
       if !@default_price.nil? && @default_price.to_s.size > 5000
         invalid_properties.push("invalid value for \"default_price\", the character length must be smaller than or equal to 5000.")
@@ -162,23 +157,13 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@caption.nil? && @caption.to_s.size > 5000
       return false if !@default_price.nil? && @default_price.to_s.size > 5000
       return false if !@description.nil? && @description.to_s.size > 40000
       return false if !@name.nil? && @name.to_s.size > 5000
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
       return false if !@unit_label.nil? && @unit_label.to_s.size > 12
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] caption Value to be assigned
-    def caption=(caption)
-      if !caption.nil? && caption.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"caption\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @caption = caption
     end
 
     # Custom attribute writer method with validation
@@ -231,37 +216,16 @@ module Stripe
       @unit_label = unit_label
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        attributes == o.attributes &&
-        caption == o.caption &&
-        deactivate_on == o.deactivate_on &&
-        default_price == o.default_price &&
-        description == o.description &&
-        expand == o.expand &&
-        images == o.images &&
-        metadata == o.metadata &&
-        name == o.name &&
-        package_dimensions == o.package_dimensions &&
-        shippable == o.shippable &&
-        statement_descriptor == o.statement_descriptor &&
-        tax_code == o.tax_code &&
-        unit_label == o.unit_label &&
-        url == o.url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @attributes, @caption, @deactivate_on, @default_price, @description, @expand, @images, @metadata, @name, @package_dimensions, @shippable, @statement_descriptor, @tax_code, @unit_label, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @default_price, @description, @expand, @images, @metadata, @name, @package_dimensions, @shippable, @statement_descriptor, @tax_code, @unit_label, @url)
   end
 end

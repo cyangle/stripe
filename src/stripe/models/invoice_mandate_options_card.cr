@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Amount to be charged for future payments.
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
@@ -33,7 +34,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? amount_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_AMOUNT_TYPE = EnumValidator.new("amount_type", "String", ["fixed", "maximum", "null"])
+    ENUM_VALIDATOR_FOR_AMOUNT_TYPE = EnumValidator.new("amount_type", "String", ["fixed", "maximum"])
 
     # A description of the mandate or subscription that is meant to be displayed to the customer.
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
@@ -44,7 +45,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64?, @amount_type : String?, @description : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @amount : Int64? = nil,
+      @amount_type : String? = nil,
+      @description : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -54,7 +61,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_AMOUNT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid?(@amount_type)
 
-      if @description.to_s.size > 200
+      if !@description.nil? && @description.to_s.size > 200
         invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 200.")
       end
 
@@ -65,7 +72,8 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid?(@amount_type)
-      return false if @description.to_s.size > 200
+      return false if !@description.nil? && @description.to_s.size > 200
+
       true
     end
 
@@ -79,21 +87,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
     def description=(description)
-      if description.to_s.size > 200
+      if !description.nil? && description.to_s.size > 200
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 200.")
       end
 
       @description = description
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        amount_type == o.amount_type &&
-        description == o.description
     end
 
     # @see the `==` method
@@ -102,8 +100,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @amount_type, @description)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @amount_type, @description)
   end
 end

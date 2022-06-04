@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Amount in %s to be transferred.
     @[JSON::Field(key: "amount", type: Int64?)]
     property amount : Int64?
@@ -27,12 +28,6 @@ module Stripe
     @[JSON::Field(key: "amount_reversed", type: Int64?)]
     property amount_reversed : Int64?
 
-    @[JSON::Field(key: "balance_transaction", type: TransferBalanceTransaction, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
-    property balance_transaction : TransferBalanceTransaction
-
-    @[JSON::Field(ignore: true)]
-    property? balance_transaction_present : Bool = false
-
     # Time that this record of the transfer was first created.
     @[JSON::Field(key: "created", type: Int64?)]
     property created : Int64?
@@ -40,19 +35,6 @@ module Stripe
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?)]
     property currency : String?
-
-    # An arbitrary string attached to the object. Often useful for displaying to users.
-    @[JSON::Field(key: "description", type: String, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
-    @[JSON::Field(key: "destination", type: TransferDestination, presence: true, ignore_serialize: destination.nil? && !destination_present?)]
-    property destination : TransferDestination
-
-    @[JSON::Field(ignore: true)]
-    property? destination_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?)]
@@ -79,32 +61,52 @@ module Stripe
     @[JSON::Field(key: "reversed", type: Bool?)]
     property reversed : Bool?
 
-    @[JSON::Field(key: "source_transaction", type: TransferSourceTransaction, presence: true, ignore_serialize: source_transaction.nil? && !source_transaction_present?)]
-    property source_transaction : TransferSourceTransaction
-
-    @[JSON::Field(ignore: true)]
-    property? source_transaction_present : Bool = false
-
-    # The source balance this transfer came from. One of `card`, `fpx`, or `bank_account`.
-    @[JSON::Field(key: "source_type", type: String, presence: true, ignore_serialize: source_type.nil? && !source_type_present?)]
-    getter source_type : String
-
-    @[JSON::Field(ignore: true)]
-    property? source_type_present : Bool = false
-
-    # A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
-    @[JSON::Field(key: "transfer_group", type: String, presence: true, ignore_serialize: transfer_group.nil? && !transfer_group_present?)]
-    getter transfer_group : String
-
-    @[JSON::Field(ignore: true)]
-    property? transfer_group_present : Bool = false
-
     # Optional properties
+
+    @[JSON::Field(key: "balance_transaction", type: TransferBalanceTransaction?, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
+    property balance_transaction : TransferBalanceTransaction?
+
+    @[JSON::Field(ignore: true)]
+    property? balance_transaction_present : Bool = false
+
+    # An arbitrary string attached to the object. Often useful for displaying to users.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
+
+    @[JSON::Field(key: "destination", type: TransferDestination?, presence: true, ignore_serialize: destination.nil? && !destination_present?)]
+    property destination : TransferDestination?
+
+    @[JSON::Field(ignore: true)]
+    property? destination_present : Bool = false
+
     @[JSON::Field(key: "destination_payment", type: TransferDestinationPayment?, presence: true, ignore_serialize: destination_payment.nil? && !destination_payment_present?)]
     property destination_payment : TransferDestinationPayment?
 
     @[JSON::Field(ignore: true)]
     property? destination_payment_present : Bool = false
+
+    @[JSON::Field(key: "source_transaction", type: TransferSourceTransaction?, presence: true, ignore_serialize: source_transaction.nil? && !source_transaction_present?)]
+    property source_transaction : TransferSourceTransaction?
+
+    @[JSON::Field(ignore: true)]
+    property? source_transaction_present : Bool = false
+
+    # The source balance this transfer came from. One of `card`, `fpx`, or `bank_account`.
+    @[JSON::Field(key: "source_type", type: String?, presence: true, ignore_serialize: source_type.nil? && !source_type_present?)]
+    getter source_type : String?
+
+    @[JSON::Field(ignore: true)]
+    property? source_type_present : Bool = false
+
+    # A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
+    @[JSON::Field(key: "transfer_group", type: String?, presence: true, ignore_serialize: transfer_group.nil? && !transfer_group_present?)]
+    getter transfer_group : String?
+
+    @[JSON::Field(ignore: true)]
+    property? transfer_group_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -116,7 +118,28 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @amount_reversed : Int64, @balance_transaction : TransferBalanceTransaction?, @created : Int64, @currency : String, @description : String?, @destination : TransferDestination?, @id : String, @livemode : Bool, @metadata : Hash(String, String), @object : String, @reversals : TransferReversalList1, @reversed : Bool, @source_transaction : TransferSourceTransaction?, @source_type : String?, @transfer_group : String?, @destination_payment : TransferDestinationPayment? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64? = nil,
+      @amount_reversed : Int64? = nil,
+      @created : Int64? = nil,
+      @currency : String? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @object : String? = nil,
+      @reversals : TransferReversalList1? = nil,
+      @reversed : Bool? = nil,
+      # Optional properties
+      @balance_transaction : TransferBalanceTransaction? = nil,
+      @description : String? = nil,
+      @destination : TransferDestination? = nil,
+      @destination_payment : TransferDestinationPayment? = nil,
+      @source_transaction : TransferSourceTransaction? = nil,
+      @source_type : String? = nil,
+      @transfer_group : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -124,21 +147,21 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
-      if @source_type.to_s.size > 5000
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@source_type.nil? && @source_type.to_s.size > 5000
         invalid_properties.push("invalid value for \"source_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @transfer_group.to_s.size > 5000
+      if !@transfer_group.nil? && @transfer_group.to_s.size > 5000
         invalid_properties.push("invalid value for \"transfer_group\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -148,11 +171,12 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @description.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @source_type.to_s.size > 5000
-      return false if @transfer_group.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@source_type.nil? && @source_type.to_s.size > 5000
+      return false if !@transfer_group.nil? && @transfer_group.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -164,22 +188,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -200,9 +211,19 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] source_type Value to be assigned
     def source_type=(source_type)
-      if source_type.to_s.size > 5000
+      if !source_type.nil? && source_type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"source_type\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -212,35 +233,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] transfer_group Value to be assigned
     def transfer_group=(transfer_group)
-      if transfer_group.to_s.size > 5000
+      if !transfer_group.nil? && transfer_group.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"transfer_group\", the character length must be smaller than or equal to 5000.")
       end
 
       @transfer_group = transfer_group
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        amount_reversed == o.amount_reversed &&
-        balance_transaction == o.balance_transaction &&
-        created == o.created &&
-        currency == o.currency &&
-        description == o.description &&
-        destination == o.destination &&
-        destination_payment == o.destination_payment &&
-        id == o.id &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        reversals == o.reversals &&
-        reversed == o.reversed &&
-        source_transaction == o.source_transaction &&
-        source_type == o.source_type &&
-        transfer_group == o.transfer_group
     end
 
     # @see the `==` method
@@ -249,8 +246,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @amount_reversed, @balance_transaction, @created, @currency, @description, @destination, @destination_payment, @id, @livemode, @metadata, @object, @reversals, @reversed, @source_transaction, @source_type, @transfer_group)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @amount_reversed, @created, @currency, @id, @livemode, @metadata, @object, @reversals, @reversed, @balance_transaction, @description, @destination, @destination_payment, @source_transaction, @source_type, @transfer_group)
   end
 end

@@ -18,11 +18,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The line items representing what is being sold. Each line item represents an item being sold. Up to 20 line items are supported.
     @[JSON::Field(key: "line_items", type: Array(LineItemsCreateParams))]
     property line_items : Array(LineItemsCreateParams)
 
     # Optional properties
+
     @[JSON::Field(key: "after_completion", type: AfterCompletionParams?, presence: true, ignore_serialize: after_completion.nil? && !after_completion_present?)]
     property after_completion : AfterCompletionParams?
 
@@ -80,6 +82,7 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_CUSTOMER_CREATION = EnumValidator.new("customer_creation", "String", ["always", "if_required"])
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -163,7 +166,32 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @line_items : Array(LineItemsCreateParams), @after_completion : AfterCompletionParams? = nil, @allow_promotion_codes : Bool? = nil, @application_fee_amount : Int64? = nil, @application_fee_percent : Float64? = nil, @automatic_tax : AutomaticTaxParams1? = nil, @billing_address_collection : String? = nil, @consent_collection : ConsentCollectionParams1? = nil, @customer_creation : String? = nil, @expand : Array(String)? = nil, @metadata : Hash(String, String)? = nil, @on_behalf_of : String? = nil, @payment_intent_data : PaymentIntentDataParams1? = nil, @payment_method_types : Array(String)? = nil, @phone_number_collection : PhoneNumberCollectionParams1? = nil, @shipping_address_collection : ShippingAddressCollectionParams1? = nil, @shipping_options : Array(ShippingOptionParams1)? = nil, @submit_type : String? = nil, @subscription_data : SubscriptionDataParams1? = nil, @tax_id_collection : TaxIdCollectionParams1? = nil, @transfer_data : TransferDataParams1? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @line_items : Array(LineItemsCreateParams),
+      # Optional properties
+      @after_completion : AfterCompletionParams? = nil,
+      @allow_promotion_codes : Bool? = nil,
+      @application_fee_amount : Int64? = nil,
+      @application_fee_percent : Float64? = nil,
+      @automatic_tax : AutomaticTaxParams1? = nil,
+      @billing_address_collection : String? = nil,
+      @consent_collection : ConsentCollectionParams1? = nil,
+      @customer_creation : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @on_behalf_of : String? = nil,
+      @payment_intent_data : PaymentIntentDataParams1? = nil,
+      @payment_method_types : Array(String)? = nil,
+      @phone_number_collection : PhoneNumberCollectionParams1? = nil,
+      @shipping_address_collection : ShippingAddressCollectionParams1? = nil,
+      @shipping_options : Array(ShippingOptionParams1)? = nil,
+      @submit_type : String? = nil,
+      @subscription_data : SubscriptionDataParams1? = nil,
+      @tax_id_collection : TaxIdCollectionParams1? = nil,
+      @transfer_data : TransferDataParams1? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -189,6 +217,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid?(@customer_creation)
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
       return false unless ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid?(@submit_type)
+
       true
     end
 
@@ -220,42 +249,16 @@ module Stripe
       @submit_type = submit_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        after_completion == o.after_completion &&
-        allow_promotion_codes == o.allow_promotion_codes &&
-        application_fee_amount == o.application_fee_amount &&
-        application_fee_percent == o.application_fee_percent &&
-        automatic_tax == o.automatic_tax &&
-        billing_address_collection == o.billing_address_collection &&
-        consent_collection == o.consent_collection &&
-        customer_creation == o.customer_creation &&
-        expand == o.expand &&
-        line_items == o.line_items &&
-        metadata == o.metadata &&
-        on_behalf_of == o.on_behalf_of &&
-        payment_intent_data == o.payment_intent_data &&
-        payment_method_types == o.payment_method_types &&
-        phone_number_collection == o.phone_number_collection &&
-        shipping_address_collection == o.shipping_address_collection &&
-        shipping_options == o.shipping_options &&
-        submit_type == o.submit_type &&
-        subscription_data == o.subscription_data &&
-        tax_id_collection == o.tax_id_collection &&
-        transfer_data == o.transfer_data
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@after_completion, @allow_promotion_codes, @application_fee_amount, @application_fee_percent, @automatic_tax, @billing_address_collection, @consent_collection, @customer_creation, @expand, @line_items, @metadata, @on_behalf_of, @payment_intent_data, @payment_method_types, @phone_number_collection, @shipping_address_collection, @shipping_options, @submit_type, @subscription_data, @tax_id_collection, @transfer_data)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@line_items, @after_completion, @allow_promotion_codes, @application_fee_amount, @application_fee_percent, @automatic_tax, @billing_address_collection, @consent_collection, @customer_creation, @expand, @metadata, @on_behalf_of, @payment_intent_data, @payment_method_types, @phone_number_collection, @shipping_address_collection, @shipping_options, @submit_type, @subscription_data, @tax_id_collection, @transfer_data)
   end
 end

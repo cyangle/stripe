@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The identifier of the account to create an account link for.
     @[JSON::Field(key: "account", type: String)]
     getter account : String
@@ -26,9 +27,10 @@ module Stripe
     @[JSON::Field(key: "type", type: String)]
     getter _type : String
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["account_onboarding", "account_update", "custom_account_update", "custom_account_verification"])
+    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["account_onboarding", "account_update"])
 
     # Optional properties
+
     # Which information the platform needs to collect from the user. One of `currently_due` or `eventually_due`. Default is `currently_due`.
     @[JSON::Field(key: "collect", type: String?, presence: true, ignore_serialize: collect.nil? && !collect_present?)]
     getter collect : String?
@@ -38,6 +40,7 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_COLLECT = EnumValidator.new("collect", "String", ["currently_due", "eventually_due"])
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -60,7 +63,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account : String, @_type : String, @collect : String? = nil, @expand : Array(String)? = nil, @refresh_url : String? = nil, @return_url : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @account : String,
+      @_type : String,
+      # Optional properties
+      @collect : String? = nil,
+      @expand : Array(String)? = nil,
+      @refresh_url : String? = nil,
+      @return_url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -72,9 +85,9 @@ module Stripe
         invalid_properties.push("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECT.error_message) unless ENUM_VALIDATOR_FOR_COLLECT.valid?(@collect)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECT.error_message) unless ENUM_VALIDATOR_FOR_COLLECT.valid?(@collect)
 
       invalid_properties
     end
@@ -83,8 +96,9 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @account.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_COLLECT.valid?(@collect)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false unless ENUM_VALIDATOR_FOR_COLLECT.valid?(@collect)
+
       true
     end
 
@@ -99,30 +113,17 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] collect Object to be assigned
-    def collect=(collect)
-      ENUM_VALIDATOR_FOR_COLLECT.valid!(collect)
-      @collect = collect
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
     def _type=(_type)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account == o.account &&
-        collect == o.collect &&
-        expand == o.expand &&
-        refresh_url == o.refresh_url &&
-        return_url == o.return_url &&
-        _type == o._type
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] collect Object to be assigned
+    def collect=(collect)
+      ENUM_VALIDATOR_FOR_COLLECT.valid!(collect)
+      @collect = collect
     end
 
     # @see the `==` method
@@ -131,8 +132,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account, @collect, @expand, @refresh_url, @return_url, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account, @_type, @collect, @expand, @refresh_url, @return_url)
   end
 end

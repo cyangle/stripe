@@ -19,12 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the amount associated with the mandate notification. The amount is expressed in the currency of the underlying source. Required if the notification type is `debit_initiated`.
-    @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
-    property amount : Int64?
-
-    @[JSON::Field(ignore: true)]
-    property? amount_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
@@ -60,11 +54,19 @@ module Stripe
     getter _type : String
 
     # Optional properties
+
     @[JSON::Field(key: "acss_debit", type: SourceMandateNotificationAcssDebitData?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
     property acss_debit : SourceMandateNotificationAcssDebitData?
 
     @[JSON::Field(ignore: true)]
     property? acss_debit_present : Bool = false
+
+    # A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the amount associated with the mandate notification. The amount is expressed in the currency of the underlying source. Required if the notification type is `debit_initiated`.
+    @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
+    property amount : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? amount_present : Bool = false
 
     @[JSON::Field(key: "bacs_debit", type: SourceMandateNotificationBacsDebitData?, presence: true, ignore_serialize: bacs_debit.nil? && !bacs_debit_present?)]
     property bacs_debit : SourceMandateNotificationBacsDebitData?
@@ -80,7 +82,23 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64?, @created : Int64, @id : String, @livemode : Bool, @object : String, @reason : String, @source : Source, @status : String, @_type : String, @acss_debit : SourceMandateNotificationAcssDebitData? = nil, @bacs_debit : SourceMandateNotificationBacsDebitData? = nil, @sepa_debit : SourceMandateNotificationSepaDebitData? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @reason : String,
+      @source : Source,
+      @status : String,
+      @_type : String,
+      # Optional properties
+      @acss_debit : SourceMandateNotificationAcssDebitData? = nil,
+      @amount : Int64? = nil,
+      @bacs_debit : SourceMandateNotificationBacsDebitData? = nil,
+      @sepa_debit : SourceMandateNotificationSepaDebitData? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -117,6 +135,7 @@ module Stripe
       return false if @reason.to_s.size > 5000
       return false if @status.to_s.size > 5000
       return false if @_type.to_s.size > 5000
+
       true
     end
 
@@ -167,33 +186,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit == o.acss_debit &&
-        amount == o.amount &&
-        bacs_debit == o.bacs_debit &&
-        created == o.created &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        reason == o.reason &&
-        sepa_debit == o.sepa_debit &&
-        source == o.source &&
-        status == o.status &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit, @amount, @bacs_debit, @created, @id, @livemode, @object, @reason, @sepa_debit, @source, @status, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @livemode, @object, @reason, @source, @status, @_type, @acss_debit, @amount, @bacs_debit, @sepa_debit)
   end
 end

@@ -19,8 +19,11 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "price", type: SubscriptionScheduleAddInvoiceItemPrice)]
     property price : SubscriptionScheduleAddInvoiceItemPrice
+
+    # Optional properties
 
     # The quantity of the invoice item.
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
@@ -29,7 +32,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? quantity_present : Bool = false
 
-    # Optional properties
     # The tax rates which apply to the item. When set, the `default_tax_rates` do not apply to this item.
     @[JSON::Field(key: "tax_rates", type: Array(TaxRate)?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
     property tax_rates : Array(TaxRate)?
@@ -39,7 +41,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @price : SubscriptionScheduleAddInvoiceItemPrice, @quantity : Int64?, @tax_rates : Array(TaxRate)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @price : SubscriptionScheduleAddInvoiceItemPrice,
+      # Optional properties
+      @quantity : Int64? = nil,
+      @tax_rates : Array(TaxRate)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -56,24 +65,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        price == o.price &&
-        quantity == o.quantity &&
-        tax_rates == o.tax_rates
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@price, @quantity, @tax_rates)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@price, @quantity, @tax_rates)
   end
 end

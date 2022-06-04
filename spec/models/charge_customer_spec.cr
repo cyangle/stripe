@@ -171,7 +171,7 @@ describe Stripe::ChargeCustomer do
   describe "test attribute 'tax_exempt'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["exempt", "none", "reverse", "null"])
+      # validator = EnumValidator.new("String", ["exempt", "none", "reverse"])
       # validator.allowable_values.each do |value|
       #   expect { instance.tax_exempt = value }.not_to raise_error
       # end

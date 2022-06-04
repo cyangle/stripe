@@ -19,16 +19,19 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.
+    @[JSON::Field(key: "type", type: String)]
+    getter _type : String
+
+    # Optional properties
+
     # The count of inventory available. Will be present if and only if `type` is `finite`.
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
     property quantity : Int64?
 
     @[JSON::Field(ignore: true)]
     property? quantity_present : Bool = false
-
-    # Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.
-    @[JSON::Field(key: "type", type: String)]
-    getter _type : String
 
     # An indicator of the inventory available. Possible values are `in_stock`, `limited`, and `out_of_stock`. Will be present if and only if `type` is `bucket`.
     @[JSON::Field(key: "value", type: String?, presence: true, ignore_serialize: value.nil? && !value_present?)]
@@ -39,7 +42,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @quantity : Int64?, @_type : String, @value : String?)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String,
+      # Optional properties
+      @quantity : Int64? = nil,
+      @value : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -51,7 +61,7 @@ module Stripe
         invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @value.to_s.size > 5000
+      if !@value.nil? && @value.to_s.size > 5000
         invalid_properties.push("invalid value for \"value\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -62,7 +72,8 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @_type.to_s.size > 5000
-      return false if @value.to_s.size > 5000
+      return false if !@value.nil? && @value.to_s.size > 5000
+
       true
     end
 
@@ -79,21 +90,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] value Value to be assigned
     def value=(value)
-      if value.to_s.size > 5000
+      if !value.nil? && value.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"value\", the character length must be smaller than or equal to 5000.")
       end
 
       @value = value
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        quantity == o.quantity &&
-        _type == o._type &&
-        value == o.value
     end
 
     # @see the `==` method
@@ -102,8 +103,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@quantity, @_type, @value)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @quantity, @value)
   end
 end

@@ -19,15 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Amount transferred.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
-
-    @[JSON::Field(key: "balance_transaction", type: TopupBalanceTransaction?, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
-    property balance_transaction : TopupBalanceTransaction?
-
-    @[JSON::Field(ignore: true)]
-    property? balance_transaction_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
@@ -36,6 +31,41 @@ module Stripe
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String)]
     getter currency : String
+
+    # Unique identifier for the object.
+    @[JSON::Field(key: "id", type: String)]
+    getter id : String
+
+    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    @[JSON::Field(key: "livemode", type: Bool)]
+    property livemode : Bool
+
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String))]
+    property metadata : Hash(String, String)
+
+    # String representing the object's type. Objects of the same type share the same value.
+    @[JSON::Field(key: "object", type: String)]
+    getter object : String
+
+    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["topup"])
+
+    @[JSON::Field(key: "source", type: Source)]
+    property source : Source
+
+    # The status of the top-up is either `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
+    @[JSON::Field(key: "status", type: String)]
+    getter status : String
+
+    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["canceled", "failed", "pending", "reversed", "succeeded"])
+
+    # Optional properties
+
+    @[JSON::Field(key: "balance_transaction", type: TopupBalanceTransaction?, presence: true, ignore_serialize: balance_transaction.nil? && !balance_transaction_present?)]
+    property balance_transaction : TopupBalanceTransaction?
+
+    @[JSON::Field(ignore: true)]
+    property? balance_transaction_present : Bool = false
 
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
@@ -65,39 +95,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? failure_message_present : Bool = false
 
-    # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
-
-    # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-    @[JSON::Field(key: "livemode", type: Bool)]
-    property livemode : Bool
-
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String))]
-    property metadata : Hash(String, String)
-
-    # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
-
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["topup"])
-
-    @[JSON::Field(key: "source", type: Source)]
-    property source : Source
-
     # Extra information about a top-up. This will appear on your source's bank statement. It must contain at least one letter.
     @[JSON::Field(key: "statement_descriptor", type: String?, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
     getter statement_descriptor : String?
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_present : Bool = false
-
-    # The status of the top-up is either `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
-    @[JSON::Field(key: "status", type: String)]
-    getter status : String
-
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["canceled", "failed", "pending", "reversed", "succeeded"])
 
     # A string that identifies this top-up as part of a group.
     @[JSON::Field(key: "transfer_group", type: String?, presence: true, ignore_serialize: transfer_group.nil? && !transfer_group_present?)]
@@ -108,7 +111,27 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @balance_transaction : TopupBalanceTransaction?, @created : Int64, @currency : String, @description : String?, @expected_availability_date : Int64?, @failure_code : String?, @failure_message : String?, @id : String, @livemode : Bool, @metadata : Hash(String, String), @object : String, @source : Source, @statement_descriptor : String?, @status : String, @transfer_group : String?)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      @source : Source,
+      @status : String,
+      # Optional properties
+      @balance_transaction : TopupBalanceTransaction? = nil,
+      @description : String? = nil,
+      @expected_availability_date : Int64? = nil,
+      @failure_code : String? = nil,
+      @failure_message : String? = nil,
+      @statement_descriptor : String? = nil,
+      @transfer_group : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -120,31 +143,31 @@ module Stripe
         invalid_properties.push("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @failure_code.to_s.size > 5000
-        invalid_properties.push("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @failure_message.to_s.size > 5000
-        invalid_properties.push("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
-      if @statement_descriptor.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@failure_code.nil? && @failure_code.to_s.size > 5000
+        invalid_properties.push("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@failure_message.nil? && @failure_message.to_s.size > 5000
+        invalid_properties.push("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
         invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-
-      if @transfer_group.to_s.size > 5000
+      if !@transfer_group.nil? && @transfer_group.to_s.size > 5000
         invalid_properties.push("invalid value for \"transfer_group\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -155,14 +178,15 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @currency.to_s.size > 5000
-      return false if @description.to_s.size > 5000
-      return false if @failure_code.to_s.size > 5000
-      return false if @failure_message.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @statement_descriptor.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      return false if @transfer_group.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@failure_code.nil? && @failure_code.to_s.size > 5000
+      return false if !@failure_message.nil? && @failure_message.to_s.size > 5000
+      return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
+      return false if !@transfer_group.nil? && @transfer_group.to_s.size > 5000
+
       true
     end
 
@@ -174,36 +198,6 @@ module Stripe
       end
 
       @currency = currency
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] failure_code Value to be assigned
-    def failure_code=(failure_code)
-      if failure_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @failure_code = failure_code
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] failure_message Value to be assigned
-    def failure_message=(failure_message)
-      if failure_message.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @failure_message = failure_message
     end
 
     # Custom attribute writer method with validation
@@ -223,16 +217,6 @@ module Stripe
       @object = object
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] statement_descriptor Value to be assigned
-    def statement_descriptor=(statement_descriptor)
-      if statement_descriptor.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @statement_descriptor = statement_descriptor
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
@@ -241,36 +225,53 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] failure_code Value to be assigned
+    def failure_code=(failure_code)
+      if !failure_code.nil? && failure_code.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @failure_code = failure_code
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] failure_message Value to be assigned
+    def failure_message=(failure_message)
+      if !failure_message.nil? && failure_message.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @failure_message = failure_message
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] statement_descriptor Value to be assigned
+    def statement_descriptor=(statement_descriptor)
+      if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @statement_descriptor = statement_descriptor
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] transfer_group Value to be assigned
     def transfer_group=(transfer_group)
-      if transfer_group.to_s.size > 5000
+      if !transfer_group.nil? && transfer_group.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"transfer_group\", the character length must be smaller than or equal to 5000.")
       end
 
       @transfer_group = transfer_group
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        balance_transaction == o.balance_transaction &&
-        created == o.created &&
-        currency == o.currency &&
-        description == o.description &&
-        expected_availability_date == o.expected_availability_date &&
-        failure_code == o.failure_code &&
-        failure_message == o.failure_message &&
-        id == o.id &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        source == o.source &&
-        statement_descriptor == o.statement_descriptor &&
-        status == o.status &&
-        transfer_group == o.transfer_group
     end
 
     # @see the `==` method
@@ -279,8 +280,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @balance_transaction, @created, @currency, @description, @expected_availability_date, @failure_code, @failure_message, @id, @livemode, @metadata, @object, @source, @statement_descriptor, @status, @transfer_group)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @created, @currency, @id, @livemode, @metadata, @object, @source, @status, @balance_transaction, @description, @expected_availability_date, @failure_code, @failure_message, @statement_descriptor, @transfer_group)
   end
 end

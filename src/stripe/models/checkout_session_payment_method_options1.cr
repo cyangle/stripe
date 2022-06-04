@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "acss_debit", type: CheckoutAcssDebitPaymentMethodOptions?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
     property acss_debit : CheckoutAcssDebitPaymentMethodOptions?
 
@@ -135,7 +136,26 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @acss_debit : CheckoutAcssDebitPaymentMethodOptions? = nil, @afterpay_clearpay : JSON::Any = nil, @alipay : JSON::Any = nil, @au_becs_debit : JSON::Any = nil, @bacs_debit : JSON::Any = nil, @boleto : CheckoutBoletoPaymentMethodOptions? = nil, @eps : JSON::Any = nil, @fpx : JSON::Any = nil, @giropay : JSON::Any = nil, @grabpay : JSON::Any = nil, @klarna : JSON::Any = nil, @konbini : CheckoutKonbiniPaymentMethodOptions? = nil, @oxxo : CheckoutOxxoPaymentMethodOptions? = nil, @paynow : JSON::Any = nil, @sepa_debit : JSON::Any = nil, @us_bank_account : CheckoutUsBankAccountPaymentMethodOptions? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @acss_debit : CheckoutAcssDebitPaymentMethodOptions? = nil,
+      @afterpay_clearpay : JSON::Any = nil,
+      @alipay : JSON::Any = nil,
+      @au_becs_debit : JSON::Any = nil,
+      @bacs_debit : JSON::Any = nil,
+      @boleto : CheckoutBoletoPaymentMethodOptions? = nil,
+      @eps : JSON::Any = nil,
+      @fpx : JSON::Any = nil,
+      @giropay : JSON::Any = nil,
+      @grabpay : JSON::Any = nil,
+      @klarna : JSON::Any = nil,
+      @konbini : CheckoutKonbiniPaymentMethodOptions? = nil,
+      @oxxo : CheckoutOxxoPaymentMethodOptions? = nil,
+      @paynow : JSON::Any = nil,
+      @sepa_debit : JSON::Any = nil,
+      @us_bank_account : CheckoutUsBankAccountPaymentMethodOptions? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -160,35 +180,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        acss_debit == o.acss_debit &&
-        afterpay_clearpay == o.afterpay_clearpay &&
-        alipay == o.alipay &&
-        au_becs_debit == o.au_becs_debit &&
-        bacs_debit == o.bacs_debit &&
-        boleto == o.boleto &&
-        eps == o.eps &&
-        fpx == o.fpx &&
-        giropay == o.giropay &&
-        grabpay == o.grabpay &&
-        klarna == o.klarna &&
-        konbini == o.konbini &&
-        oxxo == o.oxxo &&
-        paynow == o.paynow &&
-        sepa_debit == o.sepa_debit &&
-        us_bank_account == o.us_bank_account
     end
 
     # @see the `==` method
@@ -197,8 +191,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@acss_debit, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @boleto, @eps, @fpx, @giropay, @grabpay, @klarna, @konbini, @oxxo, @paynow, @sepa_debit, @us_bank_account)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@acss_debit, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @boleto, @eps, @fpx, @giropay, @grabpay, @klarna, @konbini, @oxxo, @paynow, @sepa_debit, @us_bank_account)
   end
 end

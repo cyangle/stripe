@@ -18,15 +18,16 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
-    @[JSON::Field(key: "charge", type: SepaDebitGeneratedFromCharge, presence: true, ignore_serialize: charge.nil? && !charge_present?)]
-    property charge : SepaDebitGeneratedFromCharge
+    # Optional properties
+
+    @[JSON::Field(key: "charge", type: SepaDebitGeneratedFromCharge?, presence: true, ignore_serialize: charge.nil? && !charge_present?)]
+    property charge : SepaDebitGeneratedFromCharge?
 
     @[JSON::Field(ignore: true)]
     property? charge_present : Bool = false
 
-    @[JSON::Field(key: "setup_attempt", type: SepaDebitGeneratedFromSetupAttempt, presence: true, ignore_serialize: setup_attempt.nil? && !setup_attempt_present?)]
-    property setup_attempt : SepaDebitGeneratedFromSetupAttempt
+    @[JSON::Field(key: "setup_attempt", type: PaymentMethodCardGeneratedCardSetupAttempt?, presence: true, ignore_serialize: setup_attempt.nil? && !setup_attempt_present?)]
+    property setup_attempt : PaymentMethodCardGeneratedCardSetupAttempt?
 
     @[JSON::Field(ignore: true)]
     property? setup_attempt_present : Bool = false
@@ -40,7 +41,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @charge : SepaDebitGeneratedFromCharge?, @setup_attempt : SepaDebitGeneratedFromSetupAttempt?)
+    def initialize(
+      *,
+      # Optional properties
+      @charge : SepaDebitGeneratedFromCharge? = nil,
+      @setup_attempt : PaymentMethodCardGeneratedCardSetupAttempt? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -65,21 +71,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        charge == o.charge &&
-        setup_attempt == o.setup_attempt
     end
 
     # @see the `==` method
@@ -88,8 +82,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@charge, @setup_attempt)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@charge, @setup_attempt)
   end
 end

@@ -12,36 +12,39 @@ require "time"
 require "log"
 
 module Stripe
-  # The individual's date of birth.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class IndividualSpecsDob
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The day of birth, between 1 and 31.
+
     @[JSON::Field(key: "day", type: Int64?)]
     property day : Int64?
 
-    # The month of birth, between 1 and 12.
     @[JSON::Field(key: "month", type: Int64?)]
     property month : Int64?
 
-    # The four-digit year of birth.
     @[JSON::Field(key: "year", type: Int64?)]
     property year : Int64?
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
+        Stripe::BusinessProfileSpecsSupportUrlAnyOf,
         Stripe::DateOfBirthSpecs,
-        String,
       ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @day : Int64, @month : Int64, @year : Int64)
+    def initialize(
+      *,
+      # Required properties
+      @day : Int64? = nil,
+      @month : Int64? = nil,
+      @year : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -66,22 +69,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        day == o.day &&
-        month == o.month &&
-        year == o.year
     end
 
     # @see the `==` method
@@ -90,8 +80,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@day, @month, @year)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@day, @month, @year)
   end
 end

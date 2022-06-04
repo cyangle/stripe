@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?)]
     getter id : String?
@@ -29,6 +30,7 @@ module Stripe
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["account"])
 
     # Optional properties
+
     @[JSON::Field(key: "business_profile", type: AccountBusinessProfile1?, presence: true, ignore_serialize: business_profile.nil? && !business_profile_present?)]
     property business_profile : AccountBusinessProfile1?
 
@@ -42,7 +44,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? business_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_BUSINESS_TYPE = EnumValidator.new("business_type", "String", ["company", "government_entity", "individual", "non_profit", "null"])
+    ENUM_VALIDATOR_FOR_BUSINESS_TYPE = EnumValidator.new("business_type", "String", ["company", "government_entity", "individual", "non_profit"])
 
     @[JSON::Field(key: "capabilities", type: AccountCapabilities?, presence: true, ignore_serialize: capabilities.nil? && !capabilities_present?)]
     property capabilities : AccountCapabilities?
@@ -173,13 +175,45 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @id : String, @object : String, @business_profile : AccountBusinessProfile1? = nil, @business_type : String? = nil, @capabilities : AccountCapabilities? = nil, @charges_enabled : Bool? = nil, @company : LegalEntityCompany? = nil, @controller : AccountUnificationAccountController? = nil, @country : String? = nil, @created : Int64? = nil, @default_currency : String? = nil, @details_submitted : Bool? = nil, @email : String? = nil, @external_accounts : ExternalAccountList1? = nil, @future_requirements : AccountFutureRequirements? = nil, @individual : Person? = nil, @metadata : Hash(String, String)? = nil, @payouts_enabled : Bool? = nil, @requirements : AccountRequirements? = nil, @settings : AccountSettings1? = nil, @tos_acceptance : AccountTosAcceptance? = nil, @_type : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @id : String? = nil,
+      @object : String? = nil,
+      # Optional properties
+      @business_profile : AccountBusinessProfile1? = nil,
+      @business_type : String? = nil,
+      @capabilities : AccountCapabilities? = nil,
+      @charges_enabled : Bool? = nil,
+      @company : LegalEntityCompany? = nil,
+      @controller : AccountUnificationAccountController? = nil,
+      @country : String? = nil,
+      @created : Int64? = nil,
+      @default_currency : String? = nil,
+      @details_submitted : Bool? = nil,
+      @email : String? = nil,
+      @external_accounts : ExternalAccountList1? = nil,
+      @future_requirements : AccountFutureRequirements? = nil,
+      @individual : Person? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @payouts_enabled : Bool? = nil,
+      @requirements : AccountRequirements? = nil,
+      @settings : AccountSettings1? = nil,
+      @tos_acceptance : AccountTosAcceptance? = nil,
+      @_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
+      if @id.to_s.size > 5000
+        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BUSINESS_TYPE.error_message) unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
 
@@ -195,12 +229,6 @@ module Stripe
         invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @id.to_s.size > 5000
-        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
       invalid_properties
@@ -209,13 +237,14 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
       return false if !@country.nil? && @country.to_s.size > 5000
       return false if !@default_currency.nil? && @default_currency.to_s.size > 5000
       return false if !@email.nil? && @email.to_s.size > 5000
-      return false if @id.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -227,12 +256,26 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @id = id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] object Object to be assigned
+    def object=(object)
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+      @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -272,57 +315,11 @@ module Stripe
       @email = email
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id)
-      if id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @id = id
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
-      @object = object
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
     def _type=(_type)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type)
       @_type = _type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        business_profile == o.business_profile &&
-        business_type == o.business_type &&
-        capabilities == o.capabilities &&
-        charges_enabled == o.charges_enabled &&
-        company == o.company &&
-        controller == o.controller &&
-        country == o.country &&
-        created == o.created &&
-        default_currency == o.default_currency &&
-        details_submitted == o.details_submitted &&
-        email == o.email &&
-        external_accounts == o.external_accounts &&
-        future_requirements == o.future_requirements &&
-        id == o.id &&
-        individual == o.individual &&
-        metadata == o.metadata &&
-        object == o.object &&
-        payouts_enabled == o.payouts_enabled &&
-        requirements == o.requirements &&
-        settings == o.settings &&
-        tos_acceptance == o.tos_acceptance &&
-        _type == o._type
     end
 
     # @see the `==` method
@@ -331,8 +328,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@business_profile, @business_type, @capabilities, @charges_enabled, @company, @controller, @country, @created, @default_currency, @details_submitted, @email, @external_accounts, @future_requirements, @id, @individual, @metadata, @object, @payouts_enabled, @requirements, @settings, @tos_acceptance, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@id, @object, @business_profile, @business_type, @capabilities, @charges_enabled, @company, @controller, @country, @created, @default_currency, @details_submitted, @email, @external_accounts, @future_requirements, @individual, @metadata, @payouts_enabled, @requirements, @settings, @tos_acceptance, @_type)
   end
 end

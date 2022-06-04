@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Time at which the deposited funds will be available for use. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "available_at", type: String?, presence: true, ignore_serialize: available_at.nil? && !available_at_present?)]
     getter available_at : String?
@@ -35,7 +36,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @available_at : String? = nil, @invoices : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @available_at : String? = nil,
+      @invoices : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -59,6 +65,7 @@ module Stripe
     def valid?
       return false if !@available_at.nil? && @available_at.to_s.size > 5000
       return false if !@invoices.nil? && @invoices.to_s.size > 5000
+
       true
     end
 
@@ -82,23 +89,16 @@ module Stripe
       @invoices = invoices
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        available_at == o.available_at &&
-        invoices == o.invoices
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@available_at, @invoices)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@available_at, @invoices)
   end
 end

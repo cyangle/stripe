@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The amount, in %s.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -27,30 +28,9 @@ module Stripe
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
 
-    # An arbitrary string attached to the object. Often useful for displaying to users.
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
-    # The amount of discount calculated per discount for this line item.
-    @[JSON::Field(key: "discount_amounts", type: Array(DiscountsResourceDiscountAmount)?, presence: true, ignore_serialize: discount_amounts.nil? && !discount_amounts_present?)]
-    property discount_amounts : Array(DiscountsResourceDiscountAmount)?
-
-    @[JSON::Field(ignore: true)]
-    property? discount_amounts_present : Bool = false
-
     # If true, discounts will apply to this line item. Always false for prorations.
     @[JSON::Field(key: "discountable", type: Bool)]
     property discountable : Bool
-
-    # The discounts applied to the invoice line item. Line item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
-    @[JSON::Field(key: "discounts", type: Array(InvoiceitemDiscountsInner)?, presence: true, ignore_serialize: discounts.nil? && !discounts_present?)]
-    property discounts : Array(InvoiceitemDiscountsInner)?
-
-    @[JSON::Field(ignore: true)]
-    property? discounts_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
@@ -73,21 +53,51 @@ module Stripe
     @[JSON::Field(key: "period", type: InvoiceLineItemPeriod)]
     property period : InvoiceLineItemPeriod
 
-    @[JSON::Field(key: "plan", type: LineItemPlan?, presence: true, ignore_serialize: plan.nil? && !plan_present?)]
-    property plan : LineItemPlan?
+    # Whether this is a proration.
+    @[JSON::Field(key: "proration", type: Bool)]
+    property proration : Bool
+
+    # A string identifying the type of the source of this line item, either an `invoiceitem` or a `subscription`.
+    @[JSON::Field(key: "type", type: String)]
+    getter _type : String
+
+    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["invoiceitem", "subscription"])
+
+    # Optional properties
+
+    # An arbitrary string attached to the object. Often useful for displaying to users.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
 
     @[JSON::Field(ignore: true)]
-    property? plan_present : Bool = false
+    property? description_present : Bool = false
+
+    # The amount of discount calculated per discount for this line item.
+    @[JSON::Field(key: "discount_amounts", type: Array(DiscountsResourceDiscountAmount)?, presence: true, ignore_serialize: discount_amounts.nil? && !discount_amounts_present?)]
+    property discount_amounts : Array(DiscountsResourceDiscountAmount)?
+
+    @[JSON::Field(ignore: true)]
+    property? discount_amounts_present : Bool = false
+
+    # The discounts applied to the invoice line item. Line item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
+    @[JSON::Field(key: "discounts", type: Array(InvoiceitemDiscountsInner)?, presence: true, ignore_serialize: discounts.nil? && !discounts_present?)]
+    property discounts : Array(InvoiceitemDiscountsInner)?
+
+    @[JSON::Field(ignore: true)]
+    property? discounts_present : Bool = false
+
+    # The ID of the [invoice item](https://stripe.com/docs/api/invoiceitems) associated with this line item if any.
+    @[JSON::Field(key: "invoice_item", type: String?, presence: true, ignore_serialize: invoice_item.nil? && !invoice_item_present?)]
+    getter invoice_item : String?
+
+    @[JSON::Field(ignore: true)]
+    property? invoice_item_present : Bool = false
 
     @[JSON::Field(key: "price", type: LineItemPrice?, presence: true, ignore_serialize: price.nil? && !price_present?)]
     property price : LineItemPrice?
 
     @[JSON::Field(ignore: true)]
     property? price_present : Bool = false
-
-    # Whether this is a proration.
-    @[JSON::Field(key: "proration", type: Bool)]
-    property proration : Bool
 
     @[JSON::Field(key: "proration_details", type: LineItemProrationDetails?, presence: true, ignore_serialize: proration_details.nil? && !proration_details_present?)]
     property proration_details : LineItemProrationDetails?
@@ -108,20 +118,6 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? subscription_present : Bool = false
-
-    # A string identifying the type of the source of this line item, either an `invoiceitem` or a `subscription`.
-    @[JSON::Field(key: "type", type: String)]
-    getter _type : String
-
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["invoiceitem", "subscription"])
-
-    # Optional properties
-    # The ID of the [invoice item](https://stripe.com/docs/api/invoiceitems) associated with this line item if any.
-    @[JSON::Field(key: "invoice_item", type: String?, presence: true, ignore_serialize: invoice_item.nil? && !invoice_item_present?)]
-    getter invoice_item : String?
-
-    @[JSON::Field(ignore: true)]
-    property? invoice_item_present : Bool = false
 
     # The subscription item that generated this invoice item. Left empty if the line item is not an explicit result of a subscription.
     @[JSON::Field(key: "subscription_item", type: String?, presence: true, ignore_serialize: subscription_item.nil? && !subscription_item_present?)]
@@ -146,7 +142,32 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @currency : String, @description : String?, @discount_amounts : Array(DiscountsResourceDiscountAmount)?, @discountable : Bool, @discounts : Array(InvoiceitemDiscountsInner)?, @id : String, @livemode : Bool, @metadata : Hash(String, String), @object : String, @period : InvoiceLineItemPeriod, @plan : LineItemPlan?, @price : LineItemPrice?, @proration : Bool, @proration_details : LineItemProrationDetails?, @quantity : Int64?, @subscription : String?, @_type : String, @invoice_item : String? = nil, @subscription_item : String? = nil, @tax_amounts : Array(InvoiceTaxAmount)? = nil, @tax_rates : Array(TaxRate)? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @currency : String,
+      @discountable : Bool,
+      @id : String,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      @period : InvoiceLineItemPeriod,
+      @proration : Bool,
+      @_type : String,
+      # Optional properties
+      @description : String? = nil,
+      @discount_amounts : Array(DiscountsResourceDiscountAmount)? = nil,
+      @discounts : Array(InvoiceitemDiscountsInner)? = nil,
+      @invoice_item : String? = nil,
+      @price : LineItemPrice? = nil,
+      @proration_details : LineItemProrationDetails? = nil,
+      @quantity : Int64? = nil,
+      @subscription : String? = nil,
+      @subscription_item : String? = nil,
+      @tax_amounts : Array(InvoiceTaxAmount)? = nil,
+      @tax_rates : Array(TaxRate)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -154,21 +175,23 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
       if !@invoice_item.nil? && @invoice_item.to_s.size > 5000
         invalid_properties.push("invalid value for \"invoice_item\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
-      if @subscription.to_s.size > 5000
+      if !@subscription.nil? && @subscription.to_s.size > 5000
         invalid_properties.push("invalid value for \"subscription\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -176,32 +199,21 @@ module Stripe
         invalid_properties.push("invalid value for \"subscription_item\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @description.to_s.size > 5000
       return false if @id.to_s.size > 5000
-      return false if !@invoice_item.nil? && @invoice_item.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @subscription.to_s.size > 5000
-      return false if !@subscription_item.nil? && @subscription_item.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@invoice_item.nil? && @invoice_item.to_s.size > 5000
+      return false if !@subscription.nil? && @subscription.to_s.size > 5000
+      return false if !@subscription_item.nil? && @subscription_item.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -214,6 +226,30 @@ module Stripe
       @id = id
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] object Object to be assigned
+    def object=(object)
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+      @object = object
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type)
+      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
+      @_type = _type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] invoice_item Value to be assigned
     def invoice_item=(invoice_item)
@@ -224,17 +260,10 @@ module Stripe
       @invoice_item = invoice_item
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
-      @object = object
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] subscription Value to be assigned
     def subscription=(subscription)
-      if subscription.to_s.size > 5000
+      if !subscription.nil? && subscription.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"subscription\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -251,50 +280,16 @@ module Stripe
       @subscription_item = subscription_item
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] _type Object to be assigned
-    def _type=(_type)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
-      @_type = _type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        currency == o.currency &&
-        description == o.description &&
-        discount_amounts == o.discount_amounts &&
-        discountable == o.discountable &&
-        discounts == o.discounts &&
-        id == o.id &&
-        invoice_item == o.invoice_item &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        period == o.period &&
-        plan == o.plan &&
-        price == o.price &&
-        proration == o.proration &&
-        proration_details == o.proration_details &&
-        quantity == o.quantity &&
-        subscription == o.subscription &&
-        subscription_item == o.subscription_item &&
-        tax_amounts == o.tax_amounts &&
-        tax_rates == o.tax_rates &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @currency, @description, @discount_amounts, @discountable, @discounts, @id, @invoice_item, @livemode, @metadata, @object, @period, @plan, @price, @proration, @proration_details, @quantity, @subscription, @subscription_item, @tax_amounts, @tax_rates, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @currency, @discountable, @id, @livemode, @metadata, @object, @period, @proration, @_type, @description, @discount_amounts, @discounts, @invoice_item, @price, @proration_details, @quantity, @subscription, @subscription_item, @tax_amounts, @tax_rates)
   end
 end

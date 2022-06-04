@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The CreditReversal created as a result of this ReceivedCredit being reversed.
     @[JSON::Field(key: "credit_reversal", type: String?, presence: true, ignore_serialize: credit_reversal.nil? && !credit_reversal_present?)]
     getter credit_reversal : String?
@@ -62,7 +63,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @credit_reversal : String?, @issuing_authorization : String?, @issuing_transaction : String?, @source_flow : String?, @source_flow_details : ReceivedCreditsResourceTreasuryLinkedFlowsSourceFlowDetails?, @source_flow_type : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @credit_reversal : String? = nil,
+      @issuing_authorization : String? = nil,
+      @issuing_transaction : String? = nil,
+      @source_flow : String? = nil,
+      @source_flow_details : ReceivedCreditsResourceTreasuryLinkedFlowsSourceFlowDetails? = nil,
+      @source_flow_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -70,23 +80,23 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @credit_reversal.to_s.size > 5000
+      if !@credit_reversal.nil? && @credit_reversal.to_s.size > 5000
         invalid_properties.push("invalid value for \"credit_reversal\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @issuing_authorization.to_s.size > 5000
+      if !@issuing_authorization.nil? && @issuing_authorization.to_s.size > 5000
         invalid_properties.push("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @issuing_transaction.to_s.size > 5000
+      if !@issuing_transaction.nil? && @issuing_transaction.to_s.size > 5000
         invalid_properties.push("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @source_flow.to_s.size > 5000
+      if !@source_flow.nil? && @source_flow.to_s.size > 5000
         invalid_properties.push("invalid value for \"source_flow\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @source_flow_type.to_s.size > 5000
+      if !@source_flow_type.nil? && @source_flow_type.to_s.size > 5000
         invalid_properties.push("invalid value for \"source_flow_type\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -96,18 +106,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @credit_reversal.to_s.size > 5000
-      return false if @issuing_authorization.to_s.size > 5000
-      return false if @issuing_transaction.to_s.size > 5000
-      return false if @source_flow.to_s.size > 5000
-      return false if @source_flow_type.to_s.size > 5000
+      return false if !@credit_reversal.nil? && @credit_reversal.to_s.size > 5000
+      return false if !@issuing_authorization.nil? && @issuing_authorization.to_s.size > 5000
+      return false if !@issuing_transaction.nil? && @issuing_transaction.to_s.size > 5000
+      return false if !@source_flow.nil? && @source_flow.to_s.size > 5000
+      return false if !@source_flow_type.nil? && @source_flow_type.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] credit_reversal Value to be assigned
     def credit_reversal=(credit_reversal)
-      if credit_reversal.to_s.size > 5000
+      if !credit_reversal.nil? && credit_reversal.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"credit_reversal\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -117,7 +128,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] issuing_authorization Value to be assigned
     def issuing_authorization=(issuing_authorization)
-      if issuing_authorization.to_s.size > 5000
+      if !issuing_authorization.nil? && issuing_authorization.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -127,7 +138,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] issuing_transaction Value to be assigned
     def issuing_transaction=(issuing_transaction)
-      if issuing_transaction.to_s.size > 5000
+      if !issuing_transaction.nil? && issuing_transaction.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -137,7 +148,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] source_flow Value to be assigned
     def source_flow=(source_flow)
-      if source_flow.to_s.size > 5000
+      if !source_flow.nil? && source_flow.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"source_flow\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -147,24 +158,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] source_flow_type Value to be assigned
     def source_flow_type=(source_flow_type)
-      if source_flow_type.to_s.size > 5000
+      if !source_flow_type.nil? && source_flow_type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"source_flow_type\", the character length must be smaller than or equal to 5000.")
       end
 
       @source_flow_type = source_flow_type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        credit_reversal == o.credit_reversal &&
-        issuing_authorization == o.issuing_authorization &&
-        issuing_transaction == o.issuing_transaction &&
-        source_flow == o.source_flow &&
-        source_flow_details == o.source_flow_details &&
-        source_flow_type == o.source_flow_type
     end
 
     # @see the `==` method
@@ -173,8 +171,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@credit_reversal, @issuing_authorization, @issuing_transaction, @source_flow, @source_flow_details, @source_flow_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@credit_reversal, @issuing_authorization, @issuing_transaction, @source_flow, @source_flow_details, @source_flow_type)
   end
 end

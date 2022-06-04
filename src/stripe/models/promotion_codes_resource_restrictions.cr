@@ -19,9 +19,12 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # A Boolean indicating if the Promotion Code should only be redeemed for Customers without any successful payments or invoices
     @[JSON::Field(key: "first_time_transaction", type: Bool)]
     property first_time_transaction : Bool
+
+    # Optional properties
 
     # Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
     @[JSON::Field(key: "minimum_amount", type: Int64?, presence: true, ignore_serialize: minimum_amount.nil? && !minimum_amount_present?)]
@@ -39,7 +42,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @first_time_transaction : Bool, @minimum_amount : Int64?, @minimum_amount_currency : String?)
+    def initialize(
+      *,
+      # Required properties
+      @first_time_transaction : Bool,
+      # Optional properties
+      @minimum_amount : Int64? = nil,
+      @minimum_amount_currency : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -47,7 +57,7 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @minimum_amount_currency.to_s.size > 5000
+      if !@minimum_amount_currency.nil? && @minimum_amount_currency.to_s.size > 5000
         invalid_properties.push("invalid value for \"minimum_amount_currency\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -57,28 +67,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @minimum_amount_currency.to_s.size > 5000
+      return false if !@minimum_amount_currency.nil? && @minimum_amount_currency.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] minimum_amount_currency Value to be assigned
     def minimum_amount_currency=(minimum_amount_currency)
-      if minimum_amount_currency.to_s.size > 5000
+      if !minimum_amount_currency.nil? && minimum_amount_currency.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"minimum_amount_currency\", the character length must be smaller than or equal to 5000.")
       end
 
       @minimum_amount_currency = minimum_amount_currency
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        first_time_transaction == o.first_time_transaction &&
-        minimum_amount == o.minimum_amount &&
-        minimum_amount_currency == o.minimum_amount_currency
     end
 
     # @see the `==` method
@@ -87,8 +88,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@first_time_transaction, @minimum_amount, @minimum_amount_currency)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@first_time_transaction, @minimum_amount, @minimum_amount_currency)
   end
 end

@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # Whether the payment link's `url` is active. If `false`, customers visiting the URL will be shown a page saying that the link has been deactivated.
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
@@ -62,6 +63,7 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_CUSTOMER_CREATION = EnumValidator.new("customer_creation", "String", ["always", "if_required"])
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -96,7 +98,21 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool? = nil, @after_completion : AfterCompletionParams? = nil, @allow_promotion_codes : Bool? = nil, @automatic_tax : AutomaticTaxParams1? = nil, @billing_address_collection : String? = nil, @customer_creation : String? = nil, @expand : Array(String)? = nil, @line_items : Array(LineItemsUpdateParams)? = nil, @metadata : Hash(String, String)? = nil, @payment_method_types : PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil, @shipping_address_collection : PostPaymentLinksPaymentLinkRequestShippingAddressCollection? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @active : Bool? = nil,
+      @after_completion : AfterCompletionParams? = nil,
+      @allow_promotion_codes : Bool? = nil,
+      @automatic_tax : AutomaticTaxParams1? = nil,
+      @billing_address_collection : String? = nil,
+      @customer_creation : String? = nil,
+      @expand : Array(String)? = nil,
+      @line_items : Array(LineItemsUpdateParams)? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @payment_method_types : PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil,
+      @shipping_address_collection : PostPaymentLinksPaymentLinkRequestShippingAddressCollection? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -116,6 +132,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
       return false unless ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid?(@customer_creation)
+
       true
     end
 
@@ -133,32 +150,16 @@ module Stripe
       @customer_creation = customer_creation
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        after_completion == o.after_completion &&
-        allow_promotion_codes == o.allow_promotion_codes &&
-        automatic_tax == o.automatic_tax &&
-        billing_address_collection == o.billing_address_collection &&
-        customer_creation == o.customer_creation &&
-        expand == o.expand &&
-        line_items == o.line_items &&
-        metadata == o.metadata &&
-        payment_method_types == o.payment_method_types &&
-        shipping_address_collection == o.shipping_address_collection
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @after_completion, @allow_promotion_codes, @automatic_tax, @billing_address_collection, @customer_creation, @expand, @line_items, @metadata, @payment_method_types, @shipping_address_collection)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @after_completion, @allow_promotion_codes, @automatic_tax, @billing_address_collection, @customer_creation, @expand, @line_items, @metadata, @payment_method_types, @shipping_address_collection)
   end
 end

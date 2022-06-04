@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Amount (in the `currency` specified) of the invoice item. This should always be equal to `unit_amount * quantity`.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -34,44 +35,17 @@ module Stripe
     @[JSON::Field(key: "date", type: Int64)]
     property date : Int64
 
-    # An arbitrary string attached to the object. Often useful for displaying to users.
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
     # If true, discounts will apply to this invoice item. Always false for prorations.
     @[JSON::Field(key: "discountable", type: Bool)]
     property discountable : Bool
-
-    # The discounts which apply to the invoice item. Item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
-    @[JSON::Field(key: "discounts", type: Array(InvoiceitemDiscountsInner)?, presence: true, ignore_serialize: discounts.nil? && !discounts_present?)]
-    property discounts : Array(InvoiceitemDiscountsInner)?
-
-    @[JSON::Field(ignore: true)]
-    property? discounts_present : Bool = false
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
     getter id : String
 
-    @[JSON::Field(key: "invoice", type: InvoiceitemInvoice?, presence: true, ignore_serialize: invoice.nil? && !invoice_present?)]
-    property invoice : InvoiceitemInvoice?
-
-    @[JSON::Field(ignore: true)]
-    property? invoice_present : Bool = false
-
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool)]
     property livemode : Bool
-
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)?
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String)]
@@ -82,18 +56,6 @@ module Stripe
     @[JSON::Field(key: "period", type: InvoiceLineItemPeriod)]
     property period : InvoiceLineItemPeriod
 
-    @[JSON::Field(key: "plan", type: InvoiceitemPlan?, presence: true, ignore_serialize: plan.nil? && !plan_present?)]
-    property plan : InvoiceitemPlan?
-
-    @[JSON::Field(ignore: true)]
-    property? plan_present : Bool = false
-
-    @[JSON::Field(key: "price", type: InvoiceitemPrice?, presence: true, ignore_serialize: price.nil? && !price_present?)]
-    property price : InvoiceitemPrice?
-
-    @[JSON::Field(ignore: true)]
-    property? price_present : Bool = false
-
     # Whether the invoice item was created automatically as a proration adjustment when the customer switched plans.
     @[JSON::Field(key: "proration", type: Bool)]
     property proration : Bool
@@ -102,11 +64,53 @@ module Stripe
     @[JSON::Field(key: "quantity", type: Int64)]
     property quantity : Int64
 
+    # Optional properties
+
+    # An arbitrary string attached to the object. Often useful for displaying to users.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
+
+    # The discounts which apply to the invoice item. Item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
+    @[JSON::Field(key: "discounts", type: Array(InvoiceitemDiscountsInner)?, presence: true, ignore_serialize: discounts.nil? && !discounts_present?)]
+    property discounts : Array(InvoiceitemDiscountsInner)?
+
+    @[JSON::Field(ignore: true)]
+    property? discounts_present : Bool = false
+
+    @[JSON::Field(key: "invoice", type: InvoiceitemInvoice?, presence: true, ignore_serialize: invoice.nil? && !invoice_present?)]
+    property invoice : InvoiceitemInvoice?
+
+    @[JSON::Field(ignore: true)]
+    property? invoice_present : Bool = false
+
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
+
+    @[JSON::Field(key: "price", type: InvoiceitemPrice?, presence: true, ignore_serialize: price.nil? && !price_present?)]
+    property price : InvoiceitemPrice?
+
+    @[JSON::Field(ignore: true)]
+    property? price_present : Bool = false
+
     @[JSON::Field(key: "subscription", type: InvoiceitemSubscription?, presence: true, ignore_serialize: subscription.nil? && !subscription_present?)]
     property subscription : InvoiceitemSubscription?
 
     @[JSON::Field(ignore: true)]
     property? subscription_present : Bool = false
+
+    # The subscription item that this invoice item has been created for, if any.
+    @[JSON::Field(key: "subscription_item", type: String?, presence: true, ignore_serialize: subscription_item.nil? && !subscription_item_present?)]
+    getter subscription_item : String?
+
+    @[JSON::Field(ignore: true)]
+    property? subscription_item_present : Bool = false
 
     # The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice do not apply to this invoice item.
     @[JSON::Field(key: "tax_rates", type: Array(TaxRate)?, presence: true, ignore_serialize: tax_rates.nil? && !tax_rates_present?)]
@@ -135,17 +139,35 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? unit_amount_decimal_present : Bool = false
 
-    # Optional properties
-    # The subscription item that this invoice item has been created for, if any.
-    @[JSON::Field(key: "subscription_item", type: String?, presence: true, ignore_serialize: subscription_item.nil? && !subscription_item_present?)]
-    getter subscription_item : String?
-
-    @[JSON::Field(ignore: true)]
-    property? subscription_item_present : Bool = false
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @currency : String, @customer : InvoiceitemCustomer, @date : Int64, @description : String?, @discountable : Bool, @discounts : Array(InvoiceitemDiscountsInner)?, @id : String, @invoice : InvoiceitemInvoice?, @livemode : Bool, @metadata : Hash(String, String)?, @object : String, @period : InvoiceLineItemPeriod, @plan : InvoiceitemPlan?, @price : InvoiceitemPrice?, @proration : Bool, @quantity : Int64, @subscription : InvoiceitemSubscription?, @tax_rates : Array(TaxRate)?, @test_clock : InvoiceitemTestClock?, @unit_amount : Int64?, @unit_amount_decimal : String?, @subscription_item : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @currency : String,
+      @customer : InvoiceitemCustomer,
+      @date : Int64,
+      @discountable : Bool,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @period : InvoiceLineItemPeriod,
+      @proration : Bool,
+      @quantity : Int64,
+      # Optional properties
+      @description : String? = nil,
+      @discounts : Array(InvoiceitemDiscountsInner)? = nil,
+      @invoice : InvoiceitemInvoice? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @price : InvoiceitemPrice? = nil,
+      @subscription : InvoiceitemSubscription? = nil,
+      @subscription_item : String? = nil,
+      @tax_rates : Array(TaxRate)? = nil,
+      @test_clock : InvoiceitemTestClock? = nil,
+      @unit_amount : Int64? = nil,
+      @unit_amount_decimal : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -153,15 +175,15 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
 
       if !@subscription_item.nil? && @subscription_item.to_s.size > 5000
         invalid_properties.push("invalid value for \"subscription_item\", the character length must be smaller than or equal to 5000.")
@@ -173,21 +195,12 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @description.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if !@description.nil? && @description.to_s.size > 5000
       return false if !@subscription_item.nil? && @subscription_item.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -208,6 +221,16 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] subscription_item Value to be assigned
     def subscription_item=(subscription_item)
       if !subscription_item.nil? && subscription_item.to_s.size > 5000
@@ -217,44 +240,16 @@ module Stripe
       @subscription_item = subscription_item
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        currency == o.currency &&
-        customer == o.customer &&
-        date == o.date &&
-        description == o.description &&
-        discountable == o.discountable &&
-        discounts == o.discounts &&
-        id == o.id &&
-        invoice == o.invoice &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        period == o.period &&
-        plan == o.plan &&
-        price == o.price &&
-        proration == o.proration &&
-        quantity == o.quantity &&
-        subscription == o.subscription &&
-        subscription_item == o.subscription_item &&
-        tax_rates == o.tax_rates &&
-        test_clock == o.test_clock &&
-        unit_amount == o.unit_amount &&
-        unit_amount_decimal == o.unit_amount_decimal
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @currency, @customer, @date, @description, @discountable, @discounts, @id, @invoice, @livemode, @metadata, @object, @period, @plan, @price, @proration, @quantity, @subscription, @subscription_item, @tax_rates, @test_clock, @unit_amount, @unit_amount_decimal)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @currency, @customer, @date, @discountable, @id, @livemode, @object, @period, @proration, @quantity, @description, @discounts, @invoice, @metadata, @price, @subscription, @subscription_item, @tax_rates, @test_clock, @unit_amount, @unit_amount_decimal)
   end
 end

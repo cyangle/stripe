@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The customer's bank. Can be one of `ing`, `citi_handlowy`, `tmobile_usbugi_bankowe`, `plus_bank`, `etransfer_pocztowy24`, `banki_spbdzielcze`, `bank_nowy_bfg_sa`, `getin_bank`, `blik`, `noble_pay`, `ideabank`, `envelobank`, `santander_przelew24`, `nest_przelew`, `mbank_mtransfer`, `inteligo`, `pbac_z_ipko`, `bnp_paribas`, `credit_agricole`, `toyota_bank`, `bank_pekao_sa`, `volkswagen_bank`, `bank_millennium`, `alior_bank`, or `boz`.
     @[JSON::Field(key: "bank", type: String?, presence: true, ignore_serialize: bank.nil? && !bank_present?)]
     getter bank : String?
@@ -26,7 +27,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? bank_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_BANK = EnumValidator.new("bank", "String", ["alior_bank", "bank_millennium", "bank_nowy_bfg_sa", "bank_pekao_sa", "banki_spbdzielcze", "blik", "bnp_paribas", "boz", "citi_handlowy", "credit_agricole", "envelobank", "etransfer_pocztowy24", "getin_bank", "ideabank", "ing", "inteligo", "mbank_mtransfer", "nest_przelew", "noble_pay", "pbac_z_ipko", "plus_bank", "santander_przelew24", "tmobile_usbugi_bankowe", "toyota_bank", "volkswagen_bank", "null"])
+    ENUM_VALIDATOR_FOR_BANK = EnumValidator.new("bank", "String", ["alior_bank", "bank_millennium", "bank_nowy_bfg_sa", "bank_pekao_sa", "banki_spbdzielcze", "blik", "bnp_paribas", "boz", "citi_handlowy", "credit_agricole", "envelobank", "etransfer_pocztowy24", "getin_bank", "ideabank", "ing", "inteligo", "mbank_mtransfer", "nest_przelew", "noble_pay", "pbac_z_ipko", "plus_bank", "santander_przelew24", "tmobile_usbugi_bankowe", "toyota_bank", "volkswagen_bank"])
 
     # Unique reference for this Przelewy24 payment.
     @[JSON::Field(key: "reference", type: String?, presence: true, ignore_serialize: reference.nil? && !reference_present?)]
@@ -44,20 +45,27 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bank : String?, @reference : String?, @verified_name : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @bank : String? = nil,
+      @reference : String? = nil,
+      @verified_name : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_BANK.error_message) unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank)
 
-      if @reference.to_s.size > 5000
+      if !@reference.nil? && @reference.to_s.size > 5000
         invalid_properties.push("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @verified_name.to_s.size > 5000
+      if !@verified_name.nil? && @verified_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -68,8 +76,9 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank)
-      return false if @reference.to_s.size > 5000
-      return false if @verified_name.to_s.size > 5000
+      return false if !@reference.nil? && @reference.to_s.size > 5000
+      return false if !@verified_name.nil? && @verified_name.to_s.size > 5000
+
       true
     end
 
@@ -83,7 +92,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] reference Value to be assigned
     def reference=(reference)
-      if reference.to_s.size > 5000
+      if !reference.nil? && reference.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -93,21 +102,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] verified_name Value to be assigned
     def verified_name=(verified_name)
-      if verified_name.to_s.size > 5000
+      if !verified_name.nil? && verified_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
       end
 
       @verified_name = verified_name
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bank == o.bank &&
-        reference == o.reference &&
-        verified_name == o.verified_name
     end
 
     # @see the `==` method
@@ -116,8 +115,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bank, @reference, @verified_name)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bank, @reference, @verified_name)
   end
 end

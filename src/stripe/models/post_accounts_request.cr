@@ -18,12 +18,19 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     # An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
     @[JSON::Field(key: "account_token", type: String?, presence: true, ignore_serialize: account_token.nil? && !account_token_present?)]
     getter account_token : String?
 
     @[JSON::Field(ignore: true)]
     property? account_token_present : Bool = false
+
+    @[JSON::Field(key: "bank_account", type: PostAccountRequestBankAccount?, presence: true, ignore_serialize: bank_account.nil? && !bank_account_present?)]
+    property bank_account : PostAccountRequestBankAccount?
+
+    @[JSON::Field(ignore: true)]
+    property? bank_account_present : Bool = false
 
     @[JSON::Field(key: "business_profile", type: BusinessProfileSpecs?, presence: true, ignore_serialize: business_profile.nil? && !business_profile_present?)]
     property business_profile : BusinessProfileSpecs?
@@ -79,6 +86,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -98,8 +106,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? individual_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
@@ -127,7 +135,27 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account_token : String? = nil, @business_profile : BusinessProfileSpecs? = nil, @business_type : String? = nil, @capabilities : CapabilitiesParam? = nil, @company : CompanySpecs? = nil, @country : String? = nil, @default_currency : String? = nil, @documents : DocumentsSpecs? = nil, @email : String? = nil, @expand : Array(String)? = nil, @external_account : String? = nil, @individual : IndividualSpecs? = nil, @metadata : IndividualSpecsMetadata? = nil, @settings : SettingsSpecs? = nil, @tos_acceptance : TosAcceptanceSpecs? = nil, @_type : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @account_token : String? = nil,
+      @bank_account : PostAccountRequestBankAccount? = nil,
+      @business_profile : BusinessProfileSpecs? = nil,
+      @business_type : String? = nil,
+      @capabilities : CapabilitiesParam? = nil,
+      @company : CompanySpecs? = nil,
+      @country : String? = nil,
+      @default_currency : String? = nil,
+      @documents : DocumentsSpecs? = nil,
+      @email : String? = nil,
+      @expand : Array(String)? = nil,
+      @external_account : String? = nil,
+      @individual : IndividualSpecs? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @settings : SettingsSpecs? = nil,
+      @tos_acceptance : TosAcceptanceSpecs? = nil,
+      @_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -162,6 +190,7 @@ module Stripe
       return false if !@country.nil? && @country.to_s.size > 5000
       return false if !@external_account.nil? && @external_account.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+
       true
     end
 
@@ -209,37 +238,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account_token == o.account_token &&
-        business_profile == o.business_profile &&
-        business_type == o.business_type &&
-        capabilities == o.capabilities &&
-        company == o.company &&
-        country == o.country &&
-        default_currency == o.default_currency &&
-        documents == o.documents &&
-        email == o.email &&
-        expand == o.expand &&
-        external_account == o.external_account &&
-        individual == o.individual &&
-        metadata == o.metadata &&
-        settings == o.settings &&
-        tos_acceptance == o.tos_acceptance &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account_token, @business_profile, @business_type, @capabilities, @company, @country, @default_currency, @documents, @email, @expand, @external_account, @individual, @metadata, @settings, @tos_acceptance, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account_token, @bank_account, @business_profile, @business_type, @capabilities, @company, @country, @default_currency, @documents, @email, @expand, @external_account, @individual, @metadata, @settings, @tos_acceptance, @_type)
   end
 end

@@ -19,86 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # City/District/Suburb/Town/Village.
-    @[JSON::Field(key: "address_city", type: String, presence: true, ignore_serialize: address_city.nil? && !address_city_present?)]
-    getter address_city : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_city_present : Bool = false
-
-    # Billing address country, if provided when creating card.
-    @[JSON::Field(key: "address_country", type: String, presence: true, ignore_serialize: address_country.nil? && !address_country_present?)]
-    getter address_country : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_country_present : Bool = false
-
-    # Address line 1 (Street address/PO Box/Company name).
-    @[JSON::Field(key: "address_line1", type: String, presence: true, ignore_serialize: address_line1.nil? && !address_line1_present?)]
-    getter address_line1 : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_line1_present : Bool = false
-
-    # If `address_line1` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.
-    @[JSON::Field(key: "address_line1_check", type: String, presence: true, ignore_serialize: address_line1_check.nil? && !address_line1_check_present?)]
-    getter address_line1_check : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_line1_check_present : Bool = false
-
-    # Address line 2 (Apartment/Suite/Unit/Building).
-    @[JSON::Field(key: "address_line2", type: String, presence: true, ignore_serialize: address_line2.nil? && !address_line2_present?)]
-    getter address_line2 : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_line2_present : Bool = false
-
-    # State/County/Province/Region.
-    @[JSON::Field(key: "address_state", type: String, presence: true, ignore_serialize: address_state.nil? && !address_state_present?)]
-    getter address_state : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_state_present : Bool = false
-
-    # ZIP or postal code.
-    @[JSON::Field(key: "address_zip", type: String, presence: true, ignore_serialize: address_zip.nil? && !address_zip_present?)]
-    getter address_zip : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_zip_present : Bool = false
-
-    # If `address_zip` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.
-    @[JSON::Field(key: "address_zip_check", type: String, presence: true, ignore_serialize: address_zip_check.nil? && !address_zip_check_present?)]
-    getter address_zip_check : String
-
-    @[JSON::Field(ignore: true)]
-    property? address_zip_check_present : Bool = false
 
     # Card brand. Can be `American Express`, `Diners Club`, `Discover`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.
     @[JSON::Field(key: "brand", type: String?)]
     getter brand : String?
-
-    # Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
-    @[JSON::Field(key: "country", type: String, presence: true, ignore_serialize: country.nil? && !country_present?)]
-    getter country : String
-
-    @[JSON::Field(ignore: true)]
-    property? country_present : Bool = false
-
-    # If a CVC was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`. A result of unchecked indicates that CVC was provided but hasn't been checked yet. Checks are typically performed when attaching a card to a Customer object, or when creating a charge. For more details, see [Check if a card is valid without a charge](https://support.stripe.com/questions/check-if-a-card-is-valid-without-a-charge).
-    @[JSON::Field(key: "cvc_check", type: String, presence: true, ignore_serialize: cvc_check.nil? && !cvc_check_present?)]
-    getter cvc_check : String
-
-    @[JSON::Field(ignore: true)]
-    property? cvc_check_present : Bool = false
-
-    # (For tokenized numbers only.) The last four digits of the device account number.
-    @[JSON::Field(key: "dynamic_last4", type: String, presence: true, ignore_serialize: dynamic_last4.nil? && !dynamic_last4_present?)]
-    getter dynamic_last4 : String
-
-    @[JSON::Field(ignore: true)]
-    property? dynamic_last4_present : Bool = false
 
     # Two-digit number representing the card's expiration month.
     @[JSON::Field(key: "exp_month", type: Int64?)]
@@ -120,39 +44,75 @@ module Stripe
     @[JSON::Field(key: "last4", type: String?)]
     getter last4 : String?
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String), presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
-
-    # Cardholder name.
-    @[JSON::Field(key: "name", type: String, presence: true, ignore_serialize: name.nil? && !name_present?)]
-    getter name : String
-
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
-
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?)]
     getter object : String?
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["card"])
 
-    # If the card number is tokenized, this is the method that was used. Can be `android_pay` (includes Google Pay), `apple_pay`, `masterpass`, `visa_checkout`, or null.
-    @[JSON::Field(key: "tokenization_method", type: String, presence: true, ignore_serialize: tokenization_method.nil? && !tokenization_method_present?)]
-    getter tokenization_method : String
-
-    @[JSON::Field(ignore: true)]
-    property? tokenization_method_present : Bool = false
-
     # Optional properties
+
     @[JSON::Field(key: "account", type: CardAccount?, presence: true, ignore_serialize: account.nil? && !account_present?)]
     property account : CardAccount?
 
     @[JSON::Field(ignore: true)]
     property? account_present : Bool = false
+
+    # City/District/Suburb/Town/Village.
+    @[JSON::Field(key: "address_city", type: String?, presence: true, ignore_serialize: address_city.nil? && !address_city_present?)]
+    getter address_city : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_city_present : Bool = false
+
+    # Billing address country, if provided when creating card.
+    @[JSON::Field(key: "address_country", type: String?, presence: true, ignore_serialize: address_country.nil? && !address_country_present?)]
+    getter address_country : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_country_present : Bool = false
+
+    # Address line 1 (Street address/PO Box/Company name).
+    @[JSON::Field(key: "address_line1", type: String?, presence: true, ignore_serialize: address_line1.nil? && !address_line1_present?)]
+    getter address_line1 : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_line1_present : Bool = false
+
+    # If `address_line1` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.
+    @[JSON::Field(key: "address_line1_check", type: String?, presence: true, ignore_serialize: address_line1_check.nil? && !address_line1_check_present?)]
+    getter address_line1_check : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_line1_check_present : Bool = false
+
+    # Address line 2 (Apartment/Suite/Unit/Building).
+    @[JSON::Field(key: "address_line2", type: String?, presence: true, ignore_serialize: address_line2.nil? && !address_line2_present?)]
+    getter address_line2 : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_line2_present : Bool = false
+
+    # State/County/Province/Region.
+    @[JSON::Field(key: "address_state", type: String?, presence: true, ignore_serialize: address_state.nil? && !address_state_present?)]
+    getter address_state : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_state_present : Bool = false
+
+    # ZIP or postal code.
+    @[JSON::Field(key: "address_zip", type: String?, presence: true, ignore_serialize: address_zip.nil? && !address_zip_present?)]
+    getter address_zip : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_zip_present : Bool = false
+
+    # If `address_zip` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.
+    @[JSON::Field(key: "address_zip_check", type: String?, presence: true, ignore_serialize: address_zip_check.nil? && !address_zip_check_present?)]
+    getter address_zip_check : String?
+
+    @[JSON::Field(ignore: true)]
+    property? address_zip_check_present : Bool = false
 
     # A set of available payout methods for this card. Only values from this set should be passed as the `method` when creating a payout.
     @[JSON::Field(key: "available_payout_methods", type: Array(String)?, presence: true, ignore_serialize: available_payout_methods.nil? && !available_payout_methods_present?)]
@@ -162,6 +122,13 @@ module Stripe
     property? available_payout_methods_present : Bool = false
 
     ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS = EnumValidator.new("available_payout_methods", "String", ["instant", "standard"])
+
+    # Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
+    @[JSON::Field(key: "country", type: String?, presence: true, ignore_serialize: country.nil? && !country_present?)]
+    getter country : String?
+
+    @[JSON::Field(ignore: true)]
+    property? country_present : Bool = false
 
     # Three-letter [ISO code for currency](https://stripe.com/docs/payouts). Only applicable on accounts (not customers or recipients). The card can be used as a transfer destination for funds in this currency.
     @[JSON::Field(key: "currency", type: String?, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
@@ -176,6 +143,13 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? customer_present : Bool = false
 
+    # If a CVC was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`. A result of unchecked indicates that CVC was provided but hasn't been checked yet. Checks are typically performed when attaching a card to a Customer object, or when creating a charge. For more details, see [Check if a card is valid without a charge](https://support.stripe.com/questions/check-if-a-card-is-valid-without-a-charge).
+    @[JSON::Field(key: "cvc_check", type: String?, presence: true, ignore_serialize: cvc_check.nil? && !cvc_check_present?)]
+    getter cvc_check : String?
+
+    @[JSON::Field(ignore: true)]
+    property? cvc_check_present : Bool = false
+
     # Whether this card is the default external account for its currency.
     @[JSON::Field(key: "default_for_currency", type: Bool?, presence: true, ignore_serialize: default_for_currency.nil? && !default_for_currency_present?)]
     property default_for_currency : Bool?
@@ -183,12 +157,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? default_for_currency_present : Bool = false
 
-    # A high-level description of the type of cards issued in this range. (For internal use only and not typically available in standard API requests.)
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String?
+    # (For tokenized numbers only.) The last four digits of the device account number.
+    @[JSON::Field(key: "dynamic_last4", type: String?, presence: true, ignore_serialize: dynamic_last4.nil? && !dynamic_last4_present?)]
+    getter dynamic_last4 : String?
 
     @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
+    property? dynamic_last4_present : Bool = false
 
     # Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.  *Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*
     @[JSON::Field(key: "fingerprint", type: String?, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
@@ -197,19 +171,19 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? fingerprint_present : Bool = false
 
-    # Issuer identification number of the card. (For internal use only and not typically available in standard API requests.)
-    @[JSON::Field(key: "iin", type: String?, presence: true, ignore_serialize: iin.nil? && !iin_present?)]
-    getter iin : String?
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
 
     @[JSON::Field(ignore: true)]
-    property? iin_present : Bool = false
+    property? metadata_present : Bool = false
 
-    # The name of the card's issuing bank. (For internal use only and not typically available in standard API requests.)
-    @[JSON::Field(key: "issuer", type: String?, presence: true, ignore_serialize: issuer.nil? && !issuer_present?)]
-    getter issuer : String?
+    # Cardholder name.
+    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    getter name : String?
 
     @[JSON::Field(ignore: true)]
-    property? issuer_present : Bool = false
+    property? name_present : Bool = false
 
     @[JSON::Field(key: "recipient", type: CardRecipient?, presence: true, ignore_serialize: recipient.nil? && !recipient_present?)]
     property recipient : CardRecipient?
@@ -224,6 +198,13 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false
 
+    # If the card number is tokenized, this is the method that was used. Can be `android_pay` (includes Google Pay), `apple_pay`, `masterpass`, `visa_checkout`, or null.
+    @[JSON::Field(key: "tokenization_method", type: String?, presence: true, ignore_serialize: tokenization_method.nil? && !tokenization_method_present?)]
+    getter tokenization_method : String?
+
+    @[JSON::Field(ignore: true)]
+    property? tokenization_method_present : Bool = false
+
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
@@ -234,7 +215,40 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address_city : String?, @address_country : String?, @address_line1 : String?, @address_line1_check : String?, @address_line2 : String?, @address_state : String?, @address_zip : String?, @address_zip_check : String?, @brand : String, @country : String?, @cvc_check : String?, @dynamic_last4 : String?, @exp_month : Int64, @exp_year : Int64, @funding : String, @id : String, @last4 : String, @metadata : Hash(String, String)?, @name : String?, @object : String, @tokenization_method : String?, @account : CardAccount? = nil, @available_payout_methods : Array(String)? = nil, @currency : String? = nil, @customer : CardCustomer? = nil, @default_for_currency : Bool? = nil, @description : String? = nil, @fingerprint : String? = nil, @iin : String? = nil, @issuer : String? = nil, @recipient : CardRecipient? = nil, @status : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @brand : String? = nil,
+      @exp_month : Int64? = nil,
+      @exp_year : Int64? = nil,
+      @funding : String? = nil,
+      @id : String? = nil,
+      @last4 : String? = nil,
+      @object : String? = nil,
+      # Optional properties
+      @account : CardAccount? = nil,
+      @address_city : String? = nil,
+      @address_country : String? = nil,
+      @address_line1 : String? = nil,
+      @address_line1_check : String? = nil,
+      @address_line2 : String? = nil,
+      @address_state : String? = nil,
+      @address_zip : String? = nil,
+      @address_zip_check : String? = nil,
+      @available_payout_methods : Array(String)? = nil,
+      @country : String? = nil,
+      @currency : String? = nil,
+      @customer : CardCustomer? = nil,
+      @cvc_check : String? = nil,
+      @default_for_currency : Bool? = nil,
+      @dynamic_last4 : String? = nil,
+      @fingerprint : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @name : String? = nil,
+      @recipient : CardRecipient? = nil,
+      @status : String? = nil,
+      @tokenization_method : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -242,62 +256,8 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @address_city.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_country.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_line1.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_line1_check.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_line1_check\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_line2.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_state.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_zip.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @address_zip_check.to_s.size > 5000
-        invalid_properties.push("invalid value for \"address_zip_check\", the character length must be smaller than or equal to 5000.")
-      end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.error_message) unless ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid?(@available_payout_methods)
-
       if @brand.to_s.size > 5000
         invalid_properties.push("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @country.to_s.size > 5000
-        invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @cvc_check.to_s.size > 5000
-        invalid_properties.push("invalid value for \"cvc_check\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@description.nil? && @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @dynamic_last4.to_s.size > 5000
-        invalid_properties.push("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@fingerprint.nil? && @fingerprint.to_s.size > 5000
-        invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
       if @funding.to_s.size > 5000
@@ -308,29 +268,71 @@ module Stripe
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      if !@iin.nil? && @iin.to_s.size > 5000
-        invalid_properties.push("invalid value for \"iin\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if !@issuer.nil? && @issuer.to_s.size > 5000
-        invalid_properties.push("invalid value for \"issuer\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @last4.to_s.size > 5000
         invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      if !@address_city.nil? && @address_city.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if !@address_country.nil? && @address_country.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_line1.nil? && @address_line1.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_line1_check.nil? && @address_line1_check.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_line1_check\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_line2.nil? && @address_line2.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_state.nil? && @address_state.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_zip.nil? && @address_zip.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@address_zip_check.nil? && @address_zip_check.to_s.size > 5000
+        invalid_properties.push("invalid value for \"address_zip_check\", the character length must be smaller than or equal to 5000.")
+      end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.error_message) unless ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid?(@available_payout_methods)
+
+      if !@country.nil? && @country.to_s.size > 5000
+        invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@cvc_check.nil? && @cvc_check.to_s.size > 5000
+        invalid_properties.push("invalid value for \"cvc_check\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@dynamic_last4.nil? && @dynamic_last4.to_s.size > 5000
+        invalid_properties.push("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@fingerprint.nil? && @fingerprint.to_s.size > 5000
+        invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@name.nil? && @name.to_s.size > 5000
+        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
 
       if !@status.nil? && @status.to_s.size > 5000
         invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @tokenization_method.to_s.size > 5000
+      if !@tokenization_method.nil? && @tokenization_method.to_s.size > 5000
         invalid_properties.push("invalid value for \"tokenization_method\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -340,30 +342,28 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @address_city.to_s.size > 5000
-      return false if @address_country.to_s.size > 5000
-      return false if @address_line1.to_s.size > 5000
-      return false if @address_line1_check.to_s.size > 5000
-      return false if @address_line2.to_s.size > 5000
-      return false if @address_state.to_s.size > 5000
-      return false if @address_zip.to_s.size > 5000
-      return false if @address_zip_check.to_s.size > 5000
-      return false unless ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid?(@available_payout_methods)
       return false if @brand.to_s.size > 5000
-      return false if @country.to_s.size > 5000
-      return false if @cvc_check.to_s.size > 5000
-      return false if !@description.nil? && @description.to_s.size > 5000
-      return false if @dynamic_last4.to_s.size > 5000
-      return false if !@fingerprint.nil? && @fingerprint.to_s.size > 5000
       return false if @funding.to_s.size > 5000
       return false if @id.to_s.size > 5000
-      return false if !@iin.nil? && @iin.to_s.size > 5000
-      return false if !@issuer.nil? && @issuer.to_s.size > 5000
       return false if @last4.to_s.size > 5000
-      return false if @name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if !@address_city.nil? && @address_city.to_s.size > 5000
+      return false if !@address_country.nil? && @address_country.to_s.size > 5000
+      return false if !@address_line1.nil? && @address_line1.to_s.size > 5000
+      return false if !@address_line1_check.nil? && @address_line1_check.to_s.size > 5000
+      return false if !@address_line2.nil? && @address_line2.to_s.size > 5000
+      return false if !@address_state.nil? && @address_state.to_s.size > 5000
+      return false if !@address_zip.nil? && @address_zip.to_s.size > 5000
+      return false if !@address_zip_check.nil? && @address_zip_check.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid?(@available_payout_methods)
+      return false if !@country.nil? && @country.to_s.size > 5000
+      return false if !@cvc_check.nil? && @cvc_check.to_s.size > 5000
+      return false if !@dynamic_last4.nil? && @dynamic_last4.to_s.size > 5000
+      return false if !@fingerprint.nil? && @fingerprint.to_s.size > 5000
+      return false if !@name.nil? && @name.to_s.size > 5000
       return false if !@status.nil? && @status.to_s.size > 5000
-      return false if @tokenization_method.to_s.size > 5000
+      return false if !@tokenization_method.nil? && @tokenization_method.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -375,99 +375,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_city Value to be assigned
-    def address_city=(address_city)
-      if address_city.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_city = address_city
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_country Value to be assigned
-    def address_country=(address_country)
-      if address_country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_country = address_country
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_line1 Value to be assigned
-    def address_line1=(address_line1)
-      if address_line1.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_line1 = address_line1
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_line1_check Value to be assigned
-    def address_line1_check=(address_line1_check)
-      if address_line1_check.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_line1_check\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_line1_check = address_line1_check
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_line2 Value to be assigned
-    def address_line2=(address_line2)
-      if address_line2.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_line2 = address_line2
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_state Value to be assigned
-    def address_state=(address_state)
-      if address_state.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_state = address_state
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_zip Value to be assigned
-    def address_zip=(address_zip)
-      if address_zip.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_zip = address_zip
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address_zip_check Value to be assigned
-    def address_zip_check=(address_zip_check)
-      if address_zip_check.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_zip_check\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @address_zip_check = address_zip_check
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] available_payout_methods Object to be assigned
-    def available_payout_methods=(available_payout_methods)
-      ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid!(available_payout_methods)
-      @available_payout_methods = available_payout_methods
     end
 
     # Custom attribute writer method with validation
@@ -478,56 +388,6 @@ module Stripe
       end
 
       @brand = brand
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] country Value to be assigned
-    def country=(country)
-      if country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @country = country
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] cvc_check Value to be assigned
-    def cvc_check=(cvc_check)
-      if cvc_check.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"cvc_check\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @cvc_check = cvc_check
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if !description.nil? && description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] dynamic_last4 Value to be assigned
-    def dynamic_last4=(dynamic_last4)
-      if dynamic_last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @dynamic_last4 = dynamic_last4
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] fingerprint Value to be assigned
-    def fingerprint=(fingerprint)
-      if !fingerprint.nil? && fingerprint.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @fingerprint = fingerprint
     end
 
     # Custom attribute writer method with validation
@@ -551,26 +411,6 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] iin Value to be assigned
-    def iin=(iin)
-      if !iin.nil? && iin.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"iin\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @iin = iin
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] issuer Value to be assigned
-    def issuer=(issuer)
-      if !issuer.nil? && issuer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"issuer\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @issuer = issuer
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] last4 Value to be assigned
     def last4=(last4)
       if last4.to_s.size > 5000
@@ -580,21 +420,148 @@ module Stripe
       @last4 = last4
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @name = name
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
     def object=(object)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_city Value to be assigned
+    def address_city=(address_city)
+      if !address_city.nil? && address_city.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_city = address_city
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_country Value to be assigned
+    def address_country=(address_country)
+      if !address_country.nil? && address_country.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_country = address_country
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_line1 Value to be assigned
+    def address_line1=(address_line1)
+      if !address_line1.nil? && address_line1.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_line1 = address_line1
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_line1_check Value to be assigned
+    def address_line1_check=(address_line1_check)
+      if !address_line1_check.nil? && address_line1_check.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_line1_check\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_line1_check = address_line1_check
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_line2 Value to be assigned
+    def address_line2=(address_line2)
+      if !address_line2.nil? && address_line2.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_line2 = address_line2
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_state Value to be assigned
+    def address_state=(address_state)
+      if !address_state.nil? && address_state.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_state = address_state
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_zip Value to be assigned
+    def address_zip=(address_zip)
+      if !address_zip.nil? && address_zip.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_zip = address_zip
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address_zip_check Value to be assigned
+    def address_zip_check=(address_zip_check)
+      if !address_zip_check.nil? && address_zip_check.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"address_zip_check\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @address_zip_check = address_zip_check
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] available_payout_methods Object to be assigned
+    def available_payout_methods=(available_payout_methods)
+      ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid!(available_payout_methods)
+      @available_payout_methods = available_payout_methods
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] country Value to be assigned
+    def country=(country)
+      if !country.nil? && country.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @country = country
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] cvc_check Value to be assigned
+    def cvc_check=(cvc_check)
+      if !cvc_check.nil? && cvc_check.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"cvc_check\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @cvc_check = cvc_check
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] dynamic_last4 Value to be assigned
+    def dynamic_last4=(dynamic_last4)
+      if !dynamic_last4.nil? && dynamic_last4.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @dynamic_last4 = dynamic_last4
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] fingerprint Value to be assigned
+    def fingerprint=(fingerprint)
+      if !fingerprint.nil? && fingerprint.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @fingerprint = fingerprint
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if !name.nil? && name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @name = name
     end
 
     # Custom attribute writer method with validation
@@ -610,50 +577,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] tokenization_method Value to be assigned
     def tokenization_method=(tokenization_method)
-      if tokenization_method.to_s.size > 5000
+      if !tokenization_method.nil? && tokenization_method.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"tokenization_method\", the character length must be smaller than or equal to 5000.")
       end
 
       @tokenization_method = tokenization_method
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account == o.account &&
-        address_city == o.address_city &&
-        address_country == o.address_country &&
-        address_line1 == o.address_line1 &&
-        address_line1_check == o.address_line1_check &&
-        address_line2 == o.address_line2 &&
-        address_state == o.address_state &&
-        address_zip == o.address_zip &&
-        address_zip_check == o.address_zip_check &&
-        available_payout_methods == o.available_payout_methods &&
-        brand == o.brand &&
-        country == o.country &&
-        currency == o.currency &&
-        customer == o.customer &&
-        cvc_check == o.cvc_check &&
-        default_for_currency == o.default_for_currency &&
-        description == o.description &&
-        dynamic_last4 == o.dynamic_last4 &&
-        exp_month == o.exp_month &&
-        exp_year == o.exp_year &&
-        fingerprint == o.fingerprint &&
-        funding == o.funding &&
-        id == o.id &&
-        iin == o.iin &&
-        issuer == o.issuer &&
-        last4 == o.last4 &&
-        metadata == o.metadata &&
-        name == o.name &&
-        object == o.object &&
-        recipient == o.recipient &&
-        status == o.status &&
-        tokenization_method == o.tokenization_method
     end
 
     # @see the `==` method
@@ -662,8 +590,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account, @address_city, @address_country, @address_line1, @address_line1_check, @address_line2, @address_state, @address_zip, @address_zip_check, @available_payout_methods, @brand, @country, @currency, @customer, @cvc_check, @default_for_currency, @description, @dynamic_last4, @exp_month, @exp_year, @fingerprint, @funding, @id, @iin, @issuer, @last4, @metadata, @name, @object, @recipient, @status, @tokenization_method)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@brand, @exp_month, @exp_year, @funding, @id, @last4, @object, @account, @address_city, @address_country, @address_line1, @address_line1_check, @address_line2, @address_state, @address_zip, @address_zip_check, @available_payout_methods, @country, @currency, @customer, @cvc_check, @default_for_currency, @dynamic_last4, @fingerprint, @metadata, @name, @recipient, @status, @tokenization_method)
   end
 end

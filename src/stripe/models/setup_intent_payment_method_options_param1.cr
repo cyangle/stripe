@@ -12,14 +12,13 @@ require "time"
 require "log"
 
 module Stripe
-  # If this is a `link` PaymentMethod, this sub-hash contains details about the Link payment method options.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SetupIntentPaymentMethodOptionsParam1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Token used for persistent Link logins.
+
     @[JSON::Field(key: "persistent_token", type: String?, presence: true, ignore_serialize: persistent_token.nil? && !persistent_token_present?)]
     getter persistent_token : String?
 
@@ -28,7 +27,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @persistent_token : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @persistent_token : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -47,6 +50,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@persistent_token.nil? && @persistent_token.to_s.size > 5000
+
       true
     end
 
@@ -60,22 +64,16 @@ module Stripe
       @persistent_token = persistent_token
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        persistent_token == o.persistent_token
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@persistent_token)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@persistent_token)
   end
 end

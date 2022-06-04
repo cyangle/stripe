@@ -12,19 +12,18 @@ require "time"
 require "log"
 
 module Stripe
-  # Data used to generate a new [Price](https://stripe.com/docs/api/prices) object inline. One of `price` or `price_data` is required.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PriceDataWithProductData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
 
     # Optional properties
-    # The ID of the product that this price will belong to. One of `product` or `product_data` is required.
+
     @[JSON::Field(key: "product", type: String?, presence: true, ignore_serialize: product.nil? && !product_present?)]
     getter product : String?
 
@@ -43,7 +42,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? recurring_present : Bool = false
 
-    # Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
     @[JSON::Field(key: "tax_behavior", type: String?, presence: true, ignore_serialize: tax_behavior.nil? && !tax_behavior_present?)]
     getter tax_behavior : String?
 
@@ -52,14 +50,12 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
 
-    # A non-negative integer in cents (or local equivalent) representing how much to charge. One of `unit_amount` or `unit_amount_decimal` is required.
     @[JSON::Field(key: "unit_amount", type: Int64?, presence: true, ignore_serialize: unit_amount.nil? && !unit_amount_present?)]
     property unit_amount : Int64?
 
     @[JSON::Field(ignore: true)]
     property? unit_amount_present : Bool = false
 
-    # Same as `unit_amount`, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
     @[JSON::Field(key: "unit_amount_decimal", type: String?, presence: true, ignore_serialize: unit_amount_decimal.nil? && !unit_amount_decimal_present?)]
     property unit_amount_decimal : String?
 
@@ -68,7 +64,18 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @currency : String, @product : String? = nil, @product_data : ProductData? = nil, @recurring : RecurringAdhoc? = nil, @tax_behavior : String? = nil, @unit_amount : Int64? = nil, @unit_amount_decimal : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @currency : String,
+      # Optional properties
+      @product : String? = nil,
+      @product_data : ProductData? = nil,
+      @recurring : RecurringAdhoc? = nil,
+      @tax_behavior : String? = nil,
+      @unit_amount : Int64? = nil,
+      @unit_amount_decimal : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -90,6 +97,7 @@ module Stripe
     def valid?
       return false if !@product.nil? && @product.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
+
       true
     end
 
@@ -110,28 +118,16 @@ module Stripe
       @tax_behavior = tax_behavior
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        currency == o.currency &&
-        product == o.product &&
-        product_data == o.product_data &&
-        recurring == o.recurring &&
-        tax_behavior == o.tax_behavior &&
-        unit_amount == o.unit_amount &&
-        unit_amount_decimal == o.unit_amount_decimal
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@currency, @product, @product_data, @recurring, @tax_behavior, @unit_amount, @unit_amount_decimal)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@currency, @product, @product_data, @recurring, @tax_behavior, @unit_amount, @unit_amount_decimal)
   end
 end

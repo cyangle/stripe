@@ -19,12 +19,12 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The `id` of the quote that will be cloned.
+
     @[JSON::Field(key: "quote", type: String)]
     getter quote : String
 
     # Optional properties
-    # Whether this quote is a revision of the previous quote.
+
     @[JSON::Field(key: "is_revision", type: Bool?, presence: true, ignore_serialize: is_revision.nil? && !is_revision_present?)]
     property is_revision : Bool?
 
@@ -33,7 +33,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @quote : String, @is_revision : Bool? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @quote : String,
+      # Optional properties
+      @is_revision : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -52,6 +58,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @quote.to_s.size > 5000
+
       true
     end
 
@@ -65,23 +72,16 @@ module Stripe
       @quote = quote
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        is_revision == o.is_revision &&
-        quote == o.quote
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@is_revision, @quote)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@quote, @is_revision)
   end
 end

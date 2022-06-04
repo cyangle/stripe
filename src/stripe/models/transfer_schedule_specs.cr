@@ -12,20 +12,19 @@ require "time"
 require "log"
 
 module Stripe
-  # Details on when funds from charges are available, and when they are paid out to an external account. For details, see our [Setting Bank and Debit Card Payouts](https://stripe.com/docs/connect/bank-transfers#payout-information) documentation.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class TransferScheduleSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "delay_days", type: TransferScheduleSpecsDelayDays?, presence: true, ignore_serialize: delay_days.nil? && !delay_days_present?)]
     property delay_days : TransferScheduleSpecsDelayDays?
 
     @[JSON::Field(ignore: true)]
     property? delay_days_present : Bool = false
 
-    # How frequently available funds are paid out. One of: `daily`, `manual`, `weekly`, or `monthly`. Default is `daily`.
     @[JSON::Field(key: "interval", type: String?, presence: true, ignore_serialize: interval.nil? && !interval_present?)]
     getter interval : String?
 
@@ -34,14 +33,12 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["daily", "manual", "monthly", "weekly"])
 
-    # The day of the month when available funds are paid out, specified as a number between 1--31. Payouts nominally scheduled between the 29th and 31st of the month are instead sent on the last day of a shorter month. Required and applicable only if `interval` is `monthly`.
     @[JSON::Field(key: "monthly_anchor", type: Int64?, presence: true, ignore_serialize: monthly_anchor.nil? && !monthly_anchor_present?)]
     property monthly_anchor : Int64?
 
     @[JSON::Field(ignore: true)]
     property? monthly_anchor_present : Bool = false
 
-    # The day of the week when available funds are paid out, specified as `monday`, `tuesday`, etc. (required and applicable only if `interval` is `weekly`.)
     @[JSON::Field(key: "weekly_anchor", type: String?, presence: true, ignore_serialize: weekly_anchor.nil? && !weekly_anchor_present?)]
     getter weekly_anchor : String?
 
@@ -52,7 +49,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @delay_days : TransferScheduleSpecsDelayDays? = nil, @interval : String? = nil, @monthly_anchor : Int64? = nil, @weekly_anchor : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @delay_days : TransferScheduleSpecsDelayDays? = nil,
+      @interval : String? = nil,
+      @monthly_anchor : Int64? = nil,
+      @weekly_anchor : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -82,6 +86,7 @@ module Stripe
       return false if !@interval.nil? && @interval.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR.valid?(@weekly_anchor)
       return false if !@weekly_anchor.nil? && @weekly_anchor.to_s.size > 5000
+
       true
     end
 
@@ -99,25 +104,16 @@ module Stripe
       @weekly_anchor = weekly_anchor
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        delay_days == o.delay_days &&
-        interval == o.interval &&
-        monthly_anchor == o.monthly_anchor &&
-        weekly_anchor == o.weekly_anchor
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@delay_days, @interval, @monthly_anchor, @weekly_anchor)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@delay_days, @interval, @monthly_anchor, @weekly_anchor)
   end
 end

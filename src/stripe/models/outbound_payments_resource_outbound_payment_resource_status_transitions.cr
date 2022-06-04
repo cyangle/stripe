@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Timestamp describing when an OutboundPayment changed status to `canceled`.
     @[JSON::Field(key: "canceled_at", type: Int64?, presence: true, ignore_serialize: canceled_at.nil? && !canceled_at_present?)]
     property canceled_at : Int64?
@@ -49,7 +50,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @canceled_at : Int64?, @failed_at : Int64?, @posted_at : Int64?, @returned_at : Int64?)
+    def initialize(
+      *,
+      # Optional properties
+      @canceled_at : Int64? = nil,
+      @failed_at : Int64? = nil,
+      @posted_at : Int64? = nil,
+      @returned_at : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -66,25 +74,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        canceled_at == o.canceled_at &&
-        failed_at == o.failed_at &&
-        posted_at == o.posted_at &&
-        returned_at == o.returned_at
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@canceled_at, @failed_at, @posted_at, @returned_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@canceled_at, @failed_at, @posted_at, @returned_at)
   end
 end

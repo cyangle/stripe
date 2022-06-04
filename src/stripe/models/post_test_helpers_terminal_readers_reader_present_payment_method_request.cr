@@ -18,12 +18,14 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "card_present", type: CardPresent?, presence: true, ignore_serialize: card_present.nil? && !card_present_present?)]
+
+    @[JSON::Field(key: "card_present", type: CardPresent?, presence: true, ignore_serialize: card_present2.nil? && !card_present2_present?)]
     property card_present2 : CardPresent?
 
     @[JSON::Field(ignore: true)]
     property? card_present2_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -41,7 +43,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @card_present2 : CardPresent? = nil, @expand : Array(String)? = nil, @_type : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @card_present2 : CardPresent? = nil,
+      @expand : Array(String)? = nil,
+      @_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -58,6 +66,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+
       true
     end
 
@@ -68,24 +77,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        card_present2 == o.card_present2 &&
-        expand == o.expand &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@card_present2, @expand, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@card_present2, @expand, @_type)
   end
 end

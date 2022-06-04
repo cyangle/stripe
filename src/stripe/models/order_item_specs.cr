@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
     property amount : Int64?
 
@@ -36,14 +37,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
-    # The ID of the SKU being ordered.
     @[JSON::Field(key: "parent", type: String?, presence: true, ignore_serialize: parent.nil? && !parent_present?)]
     getter parent : String?
 
     @[JSON::Field(ignore: true)]
     property? parent_present : Bool = false
 
-    # The quantity of this order item. When type is `sku`, this is the number of instances of the SKU to be ordered.
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
     property quantity : Int64?
 
@@ -60,7 +59,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64? = nil, @currency : String? = nil, @description : String? = nil, @parent : String? = nil, @quantity : Int64? = nil, @_type : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @amount : Int64? = nil,
+      @currency : String? = nil,
+      @description : String? = nil,
+      @parent : String? = nil,
+      @quantity : Int64? = nil,
+      @_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -92,6 +100,7 @@ module Stripe
       return false if !@parent.nil? && @parent.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
       return false if !@_type.nil? && @_type.to_s.size > 5000
+
       true
     end
 
@@ -122,27 +131,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        currency == o.currency &&
-        description == o.description &&
-        parent == o.parent &&
-        quantity == o.quantity &&
-        _type == o._type
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @currency, @description, @parent, @quantity, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @currency, @description, @parent, @quantity, @_type)
   end
 end

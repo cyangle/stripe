@@ -18,57 +18,70 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    @[JSON::Field(key: "card_issuing", type: Access?, presence: true, ignore_serialize: card_issuing.nil? && !card_issuing_present?)]
-    property card_issuing : Access?
+
+    @[JSON::Field(key: "card_issuing", type: Access1?, presence: true, ignore_serialize: card_issuing.nil? && !card_issuing_present?)]
+    property card_issuing : Access1?
 
     @[JSON::Field(ignore: true)]
     property? card_issuing_present : Bool = false
 
-    @[JSON::Field(key: "deposit_insurance", type: Access1?, presence: true, ignore_serialize: deposit_insurance.nil? && !deposit_insurance_present?)]
-    property deposit_insurance : Access1?
+    @[JSON::Field(key: "deposit_insurance", type: Access2?, presence: true, ignore_serialize: deposit_insurance.nil? && !deposit_insurance_present?)]
+    property deposit_insurance : Access2?
 
     @[JSON::Field(ignore: true)]
     property? deposit_insurance_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? expand_present : Bool = false
 
-    @[JSON::Field(key: "financial_addresses", type: FinancialAddresses?, presence: true, ignore_serialize: financial_addresses.nil? && !financial_addresses_present?)]
-    property financial_addresses : FinancialAddresses?
+    @[JSON::Field(key: "financial_addresses", type: FinancialAddresses1?, presence: true, ignore_serialize: financial_addresses.nil? && !financial_addresses_present?)]
+    property financial_addresses : FinancialAddresses1?
 
     @[JSON::Field(ignore: true)]
     property? financial_addresses_present : Bool = false
 
-    @[JSON::Field(key: "inbound_transfers", type: InboundTransfers1?, presence: true, ignore_serialize: inbound_transfers.nil? && !inbound_transfers_present?)]
-    property inbound_transfers : InboundTransfers1?
+    @[JSON::Field(key: "inbound_transfers", type: InboundTransfers2?, presence: true, ignore_serialize: inbound_transfers.nil? && !inbound_transfers_present?)]
+    property inbound_transfers : InboundTransfers2?
 
     @[JSON::Field(ignore: true)]
     property? inbound_transfers_present : Bool = false
 
-    @[JSON::Field(key: "intra_stripe_flows", type: Access4?, presence: true, ignore_serialize: intra_stripe_flows.nil? && !intra_stripe_flows_present?)]
-    property intra_stripe_flows : Access4?
+    @[JSON::Field(key: "intra_stripe_flows", type: Access3?, presence: true, ignore_serialize: intra_stripe_flows.nil? && !intra_stripe_flows_present?)]
+    property intra_stripe_flows : Access3?
 
     @[JSON::Field(ignore: true)]
     property? intra_stripe_flows_present : Bool = false
 
-    @[JSON::Field(key: "outbound_payments", type: OutboundPayments?, presence: true, ignore_serialize: outbound_payments.nil? && !outbound_payments_present?)]
-    property outbound_payments : OutboundPayments?
+    @[JSON::Field(key: "outbound_payments", type: OutboundPayments1?, presence: true, ignore_serialize: outbound_payments.nil? && !outbound_payments_present?)]
+    property outbound_payments : OutboundPayments1?
 
     @[JSON::Field(ignore: true)]
     property? outbound_payments_present : Bool = false
 
-    @[JSON::Field(key: "outbound_transfers", type: OutboundTransfers?, presence: true, ignore_serialize: outbound_transfers.nil? && !outbound_transfers_present?)]
-    property outbound_transfers : OutboundTransfers?
+    @[JSON::Field(key: "outbound_transfers", type: OutboundTransfers1?, presence: true, ignore_serialize: outbound_transfers.nil? && !outbound_transfers_present?)]
+    property outbound_transfers : OutboundTransfers1?
 
     @[JSON::Field(ignore: true)]
     property? outbound_transfers_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @card_issuing : Access? = nil, @deposit_insurance : Access1? = nil, @expand : Array(String)? = nil, @financial_addresses : FinancialAddresses? = nil, @inbound_transfers : InboundTransfers1? = nil, @intra_stripe_flows : Access4? = nil, @outbound_payments : OutboundPayments? = nil, @outbound_transfers : OutboundTransfers? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @card_issuing : Access1? = nil,
+      @deposit_insurance : Access2? = nil,
+      @expand : Array(String)? = nil,
+      @financial_addresses : FinancialAddresses1? = nil,
+      @inbound_transfers : InboundTransfers2? = nil,
+      @intra_stripe_flows : Access3? = nil,
+      @outbound_payments : OutboundPayments1? = nil,
+      @outbound_transfers : OutboundTransfers1? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -85,29 +98,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        card_issuing == o.card_issuing &&
-        deposit_insurance == o.deposit_insurance &&
-        expand == o.expand &&
-        financial_addresses == o.financial_addresses &&
-        inbound_transfers == o.inbound_transfers &&
-        intra_stripe_flows == o.intra_stripe_flows &&
-        outbound_payments == o.outbound_payments &&
-        outbound_transfers == o.outbound_transfers
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@card_issuing, @deposit_insurance, @expand, @financial_addresses, @inbound_transfers, @intra_stripe_flows, @outbound_payments, @outbound_transfers)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@card_issuing, @deposit_insurance, @expand, @financial_addresses, @inbound_transfers, @intra_stripe_flows, @outbound_payments, @outbound_transfers)
   end
 end

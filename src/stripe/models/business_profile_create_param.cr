@@ -19,21 +19,19 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The messaging shown to customers in the portal.
+
     @[JSON::Field(key: "headline", type: String?, presence: true, ignore_serialize: headline.nil? && !headline_present?)]
     getter headline : String?
 
     @[JSON::Field(ignore: true)]
     property? headline_present : Bool = false
 
-    # A link to the business’s publicly available privacy policy.
     @[JSON::Field(key: "privacy_policy_url", type: String?, presence: true, ignore_serialize: privacy_policy_url.nil? && !privacy_policy_url_present?)]
     property privacy_policy_url : String?
 
     @[JSON::Field(ignore: true)]
     property? privacy_policy_url_present : Bool = false
 
-    # A link to the business’s publicly available terms of service.
     @[JSON::Field(key: "terms_of_service_url", type: String?, presence: true, ignore_serialize: terms_of_service_url.nil? && !terms_of_service_url_present?)]
     property terms_of_service_url : String?
 
@@ -42,7 +40,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @headline : String? = nil, @privacy_policy_url : String? = nil, @terms_of_service_url : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @headline : String? = nil,
+      @privacy_policy_url : String? = nil,
+      @terms_of_service_url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -61,6 +65,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@headline.nil? && @headline.to_s.size > 60
+
       true
     end
 
@@ -74,24 +79,16 @@ module Stripe
       @headline = headline
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        headline == o.headline &&
-        privacy_policy_url == o.privacy_policy_url &&
-        terms_of_service_url == o.terms_of_service_url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@headline, @privacy_policy_url, @terms_of_service_url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@headline, @privacy_policy_url, @terms_of_service_url)
   end
 end

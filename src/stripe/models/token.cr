@@ -19,12 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # IP address of the client that generated the token.
-    @[JSON::Field(key: "client_ip", type: String?, presence: true, ignore_serialize: client_ip.nil? && !client_ip_present?)]
-    getter client_ip : String?
-
-    @[JSON::Field(ignore: true)]
-    property? client_ip_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
@@ -53,6 +47,7 @@ module Stripe
     property used : Bool
 
     # Optional properties
+
     @[JSON::Field(key: "bank_account", type: BankAccount?, presence: true, ignore_serialize: bank_account.nil? && !bank_account_present?)]
     property bank_account : BankAccount?
 
@@ -65,19 +60,35 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
+    # IP address of the client that generated the token.
+    @[JSON::Field(key: "client_ip", type: String?, presence: true, ignore_serialize: client_ip.nil? && !client_ip_present?)]
+    getter client_ip : String?
+
+    @[JSON::Field(ignore: true)]
+    property? client_ip_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @client_ip : String?, @created : Int64, @id : String, @livemode : Bool, @object : String, @_type : String, @used : Bool, @bank_account : BankAccount? = nil, @card : Card? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @_type : String,
+      @used : Bool,
+      # Optional properties
+      @bank_account : BankAccount? = nil,
+      @card : Card? = nil,
+      @client_ip : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @client_ip.to_s.size > 5000
-        invalid_properties.push("invalid value for \"client_ip\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
@@ -89,27 +100,22 @@ module Stripe
         invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
+      if !@client_ip.nil? && @client_ip.to_s.size > 5000
+        invalid_properties.push("invalid value for \"client_ip\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @client_ip.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @_type.to_s.size > 5000
+      return false if !@client_ip.nil? && @client_ip.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] client_ip Value to be assigned
-    def client_ip=(client_ip)
-      if client_ip.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"client_ip\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @client_ip = client_ip
     end
 
     # Custom attribute writer method with validation
@@ -139,20 +145,14 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bank_account == o.bank_account &&
-        card == o.card &&
-        client_ip == o.client_ip &&
-        created == o.created &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        _type == o._type &&
-        used == o.used
+    # Custom attribute writer method with validation
+    # @param [Object] client_ip Value to be assigned
+    def client_ip=(client_ip)
+      if !client_ip.nil? && client_ip.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"client_ip\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @client_ip = client_ip
     end
 
     # @see the `==` method
@@ -161,8 +161,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bank_account, @card, @client_ip, @created, @id, @livemode, @object, @_type, @used)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @id, @livemode, @object, @_type, @used, @bank_account, @card, @client_ip)
   end
 end

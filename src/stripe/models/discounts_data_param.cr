@@ -18,14 +18,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # ID of the coupon to create a new discount for.
+
     @[JSON::Field(key: "coupon", type: String?, presence: true, ignore_serialize: coupon.nil? && !coupon_present?)]
     getter coupon : String?
 
     @[JSON::Field(ignore: true)]
     property? coupon_present : Bool = false
 
-    # ID of an existing discount on the object (or one of its ancestors) to reuse.
     @[JSON::Field(key: "discount", type: String?, presence: true, ignore_serialize: discount.nil? && !discount_present?)]
     getter discount : String?
 
@@ -34,7 +33,12 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @coupon : String? = nil, @discount : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @coupon : String? = nil,
+      @discount : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -58,6 +62,7 @@ module Stripe
     def valid?
       return false if !@coupon.nil? && @coupon.to_s.size > 5000
       return false if !@discount.nil? && @discount.to_s.size > 5000
+
       true
     end
 
@@ -81,23 +86,16 @@ module Stripe
       @discount = discount
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        coupon == o.coupon &&
-        discount == o.discount
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@coupon, @discount)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@coupon, @discount)
   end
 end

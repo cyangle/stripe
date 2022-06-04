@@ -12,39 +12,215 @@ require "time"
 require "log"
 
 module Stripe
-  # If paying by `p24`, this sub-hash contains details about the P24 payment method options to pass to the order's PaymentIntent.
+  # Payment-method-specific configuration for this PaymentIntent.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodOptionsParam11
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.
-    @[JSON::Field(key: "setup_future_usage", type: String?, presence: true, ignore_serialize: setup_future_usage.nil? && !setup_future_usage_present?)]
-    getter setup_future_usage : String?
+
+    @[JSON::Field(key: "acss_debit", type: UpdateParams1AcssDebit?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
+    property acss_debit : UpdateParams1AcssDebit?
 
     @[JSON::Field(ignore: true)]
-    property? setup_future_usage_present : Bool = false
+    property? acss_debit_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["none"])
-
-    # Confirm that the payer has accepted the P24 terms and conditions.
-    @[JSON::Field(key: "tos_shown_and_accepted", type: Bool?, presence: true, ignore_serialize: tos_shown_and_accepted.nil? && !tos_shown_and_accepted_present?)]
-    property tos_shown_and_accepted : Bool?
+    @[JSON::Field(key: "affirm", type: PaymentMethodOptionsParam11Affirm?, presence: true, ignore_serialize: affirm.nil? && !affirm_present?)]
+    property affirm : PaymentMethodOptionsParam11Affirm?
 
     @[JSON::Field(ignore: true)]
-    property? tos_shown_and_accepted_present : Bool = false
+    property? affirm_present : Bool = false
+
+    @[JSON::Field(key: "afterpay_clearpay", type: PaymentMethodOptionsParam11AfterpayClearpay?, presence: true, ignore_serialize: afterpay_clearpay.nil? && !afterpay_clearpay_present?)]
+    property afterpay_clearpay : PaymentMethodOptionsParam11AfterpayClearpay?
+
+    @[JSON::Field(ignore: true)]
+    property? afterpay_clearpay_present : Bool = false
+
+    @[JSON::Field(key: "alipay", type: UpdateParams1Alipay?, presence: true, ignore_serialize: alipay.nil? && !alipay_present?)]
+    property alipay : UpdateParams1Alipay?
+
+    @[JSON::Field(ignore: true)]
+    property? alipay_present : Bool = false
+
+    @[JSON::Field(key: "au_becs_debit", type: PaymentMethodOptionsParam11AuBecsDebit?, presence: true, ignore_serialize: au_becs_debit.nil? && !au_becs_debit_present?)]
+    property au_becs_debit : PaymentMethodOptionsParam11AuBecsDebit?
+
+    @[JSON::Field(ignore: true)]
+    property? au_becs_debit_present : Bool = false
+
+    @[JSON::Field(key: "bacs_debit", type: PaymentMethodOptionsParam11BacsDebit?, presence: true, ignore_serialize: bacs_debit.nil? && !bacs_debit_present?)]
+    property bacs_debit : PaymentMethodOptionsParam11BacsDebit?
+
+    @[JSON::Field(ignore: true)]
+    property? bacs_debit_present : Bool = false
+
+    @[JSON::Field(key: "bancontact", type: UpdateParams1Bancontact?, presence: true, ignore_serialize: bancontact.nil? && !bancontact_present?)]
+    property bancontact : UpdateParams1Bancontact?
+
+    @[JSON::Field(ignore: true)]
+    property? bancontact_present : Bool = false
+
+    @[JSON::Field(key: "boleto", type: PaymentMethodOptionsParam11Boleto?, presence: true, ignore_serialize: boleto.nil? && !boleto_present?)]
+    property boleto : PaymentMethodOptionsParam11Boleto?
+
+    @[JSON::Field(ignore: true)]
+    property? boleto_present : Bool = false
+
+    @[JSON::Field(key: "card", type: PaymentMethodOptionsParam11Card?, presence: true, ignore_serialize: card.nil? && !card_present?)]
+    property card : PaymentMethodOptionsParam11Card?
+
+    @[JSON::Field(ignore: true)]
+    property? card_present : Bool = false
+
+    @[JSON::Field(key: "card_present", type: PaymentMethodOptionsParam11CardPresent?, presence: true, ignore_serialize: card_present2.nil? && !card_present2_present?)]
+    property card_present2 : PaymentMethodOptionsParam11CardPresent?
+
+    @[JSON::Field(ignore: true)]
+    property? card_present2_present : Bool = false
+
+    @[JSON::Field(key: "customer_balance", type: UpdateParams1CustomerBalance?, presence: true, ignore_serialize: customer_balance.nil? && !customer_balance_present?)]
+    property customer_balance : UpdateParams1CustomerBalance?
+
+    @[JSON::Field(ignore: true)]
+    property? customer_balance_present : Bool = false
+
+    @[JSON::Field(key: "eps", type: PaymentMethodOptionsParam11Eps?, presence: true, ignore_serialize: eps.nil? && !eps_present?)]
+    property eps : PaymentMethodOptionsParam11Eps?
+
+    @[JSON::Field(ignore: true)]
+    property? eps_present : Bool = false
+
+    @[JSON::Field(key: "fpx", type: PaymentMethodOptionsParam11Fpx?, presence: true, ignore_serialize: fpx.nil? && !fpx_present?)]
+    property fpx : PaymentMethodOptionsParam11Fpx?
+
+    @[JSON::Field(ignore: true)]
+    property? fpx_present : Bool = false
+
+    @[JSON::Field(key: "giropay", type: PaymentMethodOptionsParam11Fpx?, presence: true, ignore_serialize: giropay.nil? && !giropay_present?)]
+    property giropay : PaymentMethodOptionsParam11Fpx?
+
+    @[JSON::Field(ignore: true)]
+    property? giropay_present : Bool = false
+
+    @[JSON::Field(key: "grabpay", type: PaymentMethodOptionsParam11Fpx?, presence: true, ignore_serialize: grabpay.nil? && !grabpay_present?)]
+    property grabpay : PaymentMethodOptionsParam11Fpx?
+
+    @[JSON::Field(ignore: true)]
+    property? grabpay_present : Bool = false
+
+    @[JSON::Field(key: "ideal", type: UpdateParams1Alipay?, presence: true, ignore_serialize: ideal.nil? && !ideal_present?)]
+    property ideal : UpdateParams1Alipay?
+
+    @[JSON::Field(ignore: true)]
+    property? ideal_present : Bool = false
+
+    @[JSON::Field(key: "interac_present", type: PaymentMethodOptionsParam11InteracPresent?, presence: true, ignore_serialize: interac_present.nil? && !interac_present_present?)]
+    property interac_present : PaymentMethodOptionsParam11InteracPresent?
+
+    @[JSON::Field(ignore: true)]
+    property? interac_present_present : Bool = false
+
+    @[JSON::Field(key: "klarna", type: UpdateParams1Klarna?, presence: true, ignore_serialize: klarna.nil? && !klarna_present?)]
+    property klarna : UpdateParams1Klarna?
+
+    @[JSON::Field(ignore: true)]
+    property? klarna_present : Bool = false
+
+    @[JSON::Field(key: "konbini", type: PaymentMethodOptionsParam11Konbini?, presence: true, ignore_serialize: konbini.nil? && !konbini_present?)]
+    property konbini : PaymentMethodOptionsParam11Konbini?
+
+    @[JSON::Field(ignore: true)]
+    property? konbini_present : Bool = false
+
+    @[JSON::Field(key: "link", type: UpdateParams1Link?, presence: true, ignore_serialize: link.nil? && !link_present?)]
+    property link : UpdateParams1Link?
+
+    @[JSON::Field(ignore: true)]
+    property? link_present : Bool = false
+
+    @[JSON::Field(key: "oxxo", type: UpdateParams1Oxxo?, presence: true, ignore_serialize: oxxo.nil? && !oxxo_present?)]
+    property oxxo : UpdateParams1Oxxo?
+
+    @[JSON::Field(ignore: true)]
+    property? oxxo_present : Bool = false
+
+    @[JSON::Field(key: "p24", type: UpdateParams1P24?, presence: true, ignore_serialize: p24.nil? && !p24_present?)]
+    property p24 : UpdateParams1P24?
+
+    @[JSON::Field(ignore: true)]
+    property? p24_present : Bool = false
+
+    @[JSON::Field(key: "paynow", type: PaymentMethodOptionsParam11Fpx?, presence: true, ignore_serialize: paynow.nil? && !paynow_present?)]
+    property paynow : PaymentMethodOptionsParam11Fpx?
+
+    @[JSON::Field(ignore: true)]
+    property? paynow_present : Bool = false
+
+    @[JSON::Field(key: "sepa_debit", type: UpdateParams1SepaDebit?, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
+    property sepa_debit : UpdateParams1SepaDebit?
+
+    @[JSON::Field(ignore: true)]
+    property? sepa_debit_present : Bool = false
+
+    @[JSON::Field(key: "sofort", type: UpdateParams1Sofort?, presence: true, ignore_serialize: sofort.nil? && !sofort_present?)]
+    property sofort : UpdateParams1Sofort?
+
+    @[JSON::Field(ignore: true)]
+    property? sofort_present : Bool = false
+
+    @[JSON::Field(key: "us_bank_account", type: PaymentMethodOptionsParam11UsBankAccount?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
+    property us_bank_account : PaymentMethodOptionsParam11UsBankAccount?
+
+    @[JSON::Field(ignore: true)]
+    property? us_bank_account_present : Bool = false
+
+    @[JSON::Field(key: "wechat_pay", type: UpdateParams1WechatPay?, presence: true, ignore_serialize: wechat_pay.nil? && !wechat_pay_present?)]
+    property wechat_pay : UpdateParams1WechatPay?
+
+    @[JSON::Field(ignore: true)]
+    property? wechat_pay_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @setup_future_usage : String? = nil, @tos_shown_and_accepted : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @acss_debit : UpdateParams1AcssDebit? = nil,
+      @affirm : PaymentMethodOptionsParam11Affirm? = nil,
+      @afterpay_clearpay : PaymentMethodOptionsParam11AfterpayClearpay? = nil,
+      @alipay : UpdateParams1Alipay? = nil,
+      @au_becs_debit : PaymentMethodOptionsParam11AuBecsDebit? = nil,
+      @bacs_debit : PaymentMethodOptionsParam11BacsDebit? = nil,
+      @bancontact : UpdateParams1Bancontact? = nil,
+      @boleto : PaymentMethodOptionsParam11Boleto? = nil,
+      @card : PaymentMethodOptionsParam11Card? = nil,
+      @card_present2 : PaymentMethodOptionsParam11CardPresent? = nil,
+      @customer_balance : UpdateParams1CustomerBalance? = nil,
+      @eps : PaymentMethodOptionsParam11Eps? = nil,
+      @fpx : PaymentMethodOptionsParam11Fpx? = nil,
+      @giropay : PaymentMethodOptionsParam11Fpx? = nil,
+      @grabpay : PaymentMethodOptionsParam11Fpx? = nil,
+      @ideal : UpdateParams1Alipay? = nil,
+      @interac_present : PaymentMethodOptionsParam11InteracPresent? = nil,
+      @klarna : UpdateParams1Klarna? = nil,
+      @konbini : PaymentMethodOptionsParam11Konbini? = nil,
+      @link : UpdateParams1Link? = nil,
+      @oxxo : UpdateParams1Oxxo? = nil,
+      @p24 : UpdateParams1P24? = nil,
+      @paynow : PaymentMethodOptionsParam11Fpx? = nil,
+      @sepa_debit : UpdateParams1SepaDebit? = nil,
+      @sofort : UpdateParams1Sofort? = nil,
+      @us_bank_account : PaymentMethodOptionsParam11UsBankAccount? = nil,
+      @wechat_pay : UpdateParams1WechatPay? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
 
       invalid_properties
     end
@@ -52,24 +228,7 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage)
-      ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(setup_future_usage)
-      @setup_future_usage = setup_future_usage
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        setup_future_usage == o.setup_future_usage &&
-        tos_shown_and_accepted == o.tos_shown_and_accepted
     end
 
     # @see the `==` method
@@ -78,8 +237,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@setup_future_usage, @tos_shown_and_accepted)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @boleto, @card, @card_present2, @customer_balance, @eps, @fpx, @giropay, @grabpay, @ideal, @interac_present, @klarna, @konbini, @link, @oxxo, @p24, @paynow, @sepa_debit, @sofort, @us_bank_account, @wechat_pay)
   end
 end

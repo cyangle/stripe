@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Whether the payment link's `url` is active. If `false`, customers visiting the URL will be shown a page saying that the link has been deactivated.
     @[JSON::Field(key: "active", type: Bool?)]
     property active : Bool?
@@ -30,20 +31,6 @@ module Stripe
     @[JSON::Field(key: "allow_promotion_codes", type: Bool?)]
     property allow_promotion_codes : Bool?
 
-    # The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account.
-    @[JSON::Field(key: "application_fee_amount", type: Int64, presence: true, ignore_serialize: application_fee_amount.nil? && !application_fee_amount_present?)]
-    property application_fee_amount : Int64
-
-    @[JSON::Field(ignore: true)]
-    property? application_fee_amount_present : Bool = false
-
-    # This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account.
-    @[JSON::Field(key: "application_fee_percent", type: Float64, presence: true, ignore_serialize: application_fee_percent.nil? && !application_fee_percent_present?)]
-    property application_fee_percent : Float64
-
-    @[JSON::Field(ignore: true)]
-    property? application_fee_percent_present : Bool = false
-
     @[JSON::Field(key: "automatic_tax", type: PaymentLinksResourceAutomaticTax?)]
     property automatic_tax : PaymentLinksResourceAutomaticTax?
 
@@ -52,12 +39,6 @@ module Stripe
     getter billing_address_collection : String?
 
     ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION = EnumValidator.new("billing_address_collection", "String", ["auto", "required"])
-
-    @[JSON::Field(key: "consent_collection", type: PaymentLinkConsentCollection, presence: true, ignore_serialize: consent_collection.nil? && !consent_collection_present?)]
-    property consent_collection : PaymentLinkConsentCollection
-
-    @[JSON::Field(ignore: true)]
-    property? consent_collection_present : Bool = false
 
     # Configuration for Customer creation during checkout.
     @[JSON::Field(key: "customer_creation", type: String?)]
@@ -83,35 +64,8 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["payment_link"])
 
-    @[JSON::Field(key: "on_behalf_of", type: PaymentLinkOnBehalfOf, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
-    property on_behalf_of : PaymentLinkOnBehalfOf
-
-    @[JSON::Field(ignore: true)]
-    property? on_behalf_of_present : Bool = false
-
-    @[JSON::Field(key: "payment_intent_data", type: PaymentLinkPaymentIntentData, presence: true, ignore_serialize: payment_intent_data.nil? && !payment_intent_data_present?)]
-    property payment_intent_data : PaymentLinkPaymentIntentData
-
-    @[JSON::Field(ignore: true)]
-    property? payment_intent_data_present : Bool = false
-
-    # The list of payment method types that customers can use. When `null`, Stripe will dynamically show relevant payment methods you've enabled in your [payment method settings](https://dashboard.stripe.com/settings/payment_methods).
-    @[JSON::Field(key: "payment_method_types", type: Array(String), presence: true, ignore_serialize: payment_method_types.nil? && !payment_method_types_present?)]
-    getter payment_method_types : Array(String)
-
-    @[JSON::Field(ignore: true)]
-    property? payment_method_types_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES = EnumValidator.new("payment_method_types", "Array(String)", ["card"])
-
     @[JSON::Field(key: "phone_number_collection", type: PaymentLinksResourcePhoneNumberCollection?)]
     property phone_number_collection : PaymentLinksResourcePhoneNumberCollection?
-
-    @[JSON::Field(key: "shipping_address_collection", type: PaymentLinkShippingAddressCollection, presence: true, ignore_serialize: shipping_address_collection.nil? && !shipping_address_collection_present?)]
-    property shipping_address_collection : PaymentLinkShippingAddressCollection
-
-    @[JSON::Field(ignore: true)]
-    property? shipping_address_collection_present : Bool = false
 
     # The shipping rate options applied to the session.
     @[JSON::Field(key: "shipping_options", type: Array(PaymentLinksResourceShippingOption)?)]
@@ -123,31 +77,79 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_SUBMIT_TYPE = EnumValidator.new("submit_type", "String", ["auto", "book", "donate", "pay"])
 
-    @[JSON::Field(key: "subscription_data", type: PaymentLinkSubscriptionData, presence: true, ignore_serialize: subscription_data.nil? && !subscription_data_present?)]
-    property subscription_data : PaymentLinkSubscriptionData
-
-    @[JSON::Field(ignore: true)]
-    property? subscription_data_present : Bool = false
-
     @[JSON::Field(key: "tax_id_collection", type: PaymentLinksResourceTaxIdCollection?)]
     property tax_id_collection : PaymentLinksResourceTaxIdCollection?
-
-    @[JSON::Field(key: "transfer_data", type: PaymentLinkTransferData, presence: true, ignore_serialize: transfer_data.nil? && !transfer_data_present?)]
-    property transfer_data : PaymentLinkTransferData
-
-    @[JSON::Field(ignore: true)]
-    property? transfer_data_present : Bool = false
 
     # The public URL that can be shared with customers.
     @[JSON::Field(key: "url", type: String?)]
     getter url : String?
 
     # Optional properties
+
+    # The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account.
+    @[JSON::Field(key: "application_fee_amount", type: Int64?, presence: true, ignore_serialize: application_fee_amount.nil? && !application_fee_amount_present?)]
+    property application_fee_amount : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? application_fee_amount_present : Bool = false
+
+    # This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account.
+    @[JSON::Field(key: "application_fee_percent", type: Float64?, presence: true, ignore_serialize: application_fee_percent.nil? && !application_fee_percent_present?)]
+    property application_fee_percent : Float64?
+
+    @[JSON::Field(ignore: true)]
+    property? application_fee_percent_present : Bool = false
+
+    @[JSON::Field(key: "consent_collection", type: PaymentLinkConsentCollection?, presence: true, ignore_serialize: consent_collection.nil? && !consent_collection_present?)]
+    property consent_collection : PaymentLinkConsentCollection?
+
+    @[JSON::Field(ignore: true)]
+    property? consent_collection_present : Bool = false
+
     @[JSON::Field(key: "line_items", type: PaymentLinksResourceListLineItems1?, presence: true, ignore_serialize: line_items.nil? && !line_items_present?)]
     property line_items : PaymentLinksResourceListLineItems1?
 
     @[JSON::Field(ignore: true)]
     property? line_items_present : Bool = false
+
+    @[JSON::Field(key: "on_behalf_of", type: PaymentLinkOnBehalfOf?, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
+    property on_behalf_of : PaymentLinkOnBehalfOf?
+
+    @[JSON::Field(ignore: true)]
+    property? on_behalf_of_present : Bool = false
+
+    @[JSON::Field(key: "payment_intent_data", type: PaymentLinkPaymentIntentData?, presence: true, ignore_serialize: payment_intent_data.nil? && !payment_intent_data_present?)]
+    property payment_intent_data : PaymentLinkPaymentIntentData?
+
+    @[JSON::Field(ignore: true)]
+    property? payment_intent_data_present : Bool = false
+
+    # The list of payment method types that customers can use. When `null`, Stripe will dynamically show relevant payment methods you've enabled in your [payment method settings](https://dashboard.stripe.com/settings/payment_methods).
+    @[JSON::Field(key: "payment_method_types", type: Array(String)?, presence: true, ignore_serialize: payment_method_types.nil? && !payment_method_types_present?)]
+    getter payment_method_types : Array(String)?
+
+    @[JSON::Field(ignore: true)]
+    property? payment_method_types_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES = EnumValidator.new("payment_method_types", "String", ["card"])
+
+    @[JSON::Field(key: "shipping_address_collection", type: PaymentLinkShippingAddressCollection?, presence: true, ignore_serialize: shipping_address_collection.nil? && !shipping_address_collection_present?)]
+    property shipping_address_collection : PaymentLinkShippingAddressCollection?
+
+    @[JSON::Field(ignore: true)]
+    property? shipping_address_collection_present : Bool = false
+
+    @[JSON::Field(key: "subscription_data", type: PaymentLinkSubscriptionData?, presence: true, ignore_serialize: subscription_data.nil? && !subscription_data_present?)]
+    property subscription_data : PaymentLinkSubscriptionData?
+
+    @[JSON::Field(ignore: true)]
+    property? subscription_data_present : Bool = false
+
+    @[JSON::Field(key: "transfer_data", type: PaymentLinkTransferData?, presence: true, ignore_serialize: transfer_data.nil? && !transfer_data_present?)]
+    property transfer_data : PaymentLinkTransferData?
+
+    @[JSON::Field(ignore: true)]
+    property? transfer_data_present : Bool = false
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -159,7 +161,36 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @active : Bool, @after_completion : PaymentLinksResourceAfterCompletion, @allow_promotion_codes : Bool, @application_fee_amount : Int64?, @application_fee_percent : Float64?, @automatic_tax : PaymentLinksResourceAutomaticTax, @billing_address_collection : String, @consent_collection : PaymentLinkConsentCollection?, @customer_creation : String, @id : String, @livemode : Bool, @metadata : Hash(String, String), @object : String, @on_behalf_of : PaymentLinkOnBehalfOf?, @payment_intent_data : PaymentLinkPaymentIntentData?, @payment_method_types : Array(String)?, @phone_number_collection : PaymentLinksResourcePhoneNumberCollection, @shipping_address_collection : PaymentLinkShippingAddressCollection?, @shipping_options : Array(PaymentLinksResourceShippingOption), @submit_type : String, @subscription_data : PaymentLinkSubscriptionData?, @tax_id_collection : PaymentLinksResourceTaxIdCollection, @transfer_data : PaymentLinkTransferData?, @url : String, @line_items : PaymentLinksResourceListLineItems1? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @active : Bool? = nil,
+      @after_completion : PaymentLinksResourceAfterCompletion? = nil,
+      @allow_promotion_codes : Bool? = nil,
+      @automatic_tax : PaymentLinksResourceAutomaticTax? = nil,
+      @billing_address_collection : String? = nil,
+      @customer_creation : String? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @object : String? = nil,
+      @phone_number_collection : PaymentLinksResourcePhoneNumberCollection? = nil,
+      @shipping_options : Array(PaymentLinksResourceShippingOption)? = nil,
+      @submit_type : String? = nil,
+      @tax_id_collection : PaymentLinksResourceTaxIdCollection? = nil,
+      @url : String? = nil,
+      # Optional properties
+      @application_fee_amount : Int64? = nil,
+      @application_fee_percent : Float64? = nil,
+      @consent_collection : PaymentLinkConsentCollection? = nil,
+      @line_items : PaymentLinksResourceListLineItems1? = nil,
+      @on_behalf_of : PaymentLinkOnBehalfOf? = nil,
+      @payment_intent_data : PaymentLinkPaymentIntentData? = nil,
+      @payment_method_types : Array(String)? = nil,
+      @shipping_address_collection : PaymentLinkShippingAddressCollection? = nil,
+      @subscription_data : PaymentLinkSubscriptionData? = nil,
+      @transfer_data : PaymentLinkTransferData? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -177,13 +208,13 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUBMIT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid?(@submit_type, false)
 
       if @url.to_s.size > 5000
         invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
 
       invalid_properties
     end
@@ -195,9 +226,10 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid?(@customer_creation, false)
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
       return false unless ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid?(@submit_type, false)
       return false if @url.to_s.size > 5000
+      return false unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -209,10 +241,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -249,13 +278,6 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] payment_method_types Object to be assigned
-    def payment_method_types=(payment_method_types)
-      ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid!(payment_method_types)
-      @payment_method_types = payment_method_types
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] submit_type Object to be assigned
     def submit_type=(submit_type)
       ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid!(submit_type, false)
@@ -272,36 +294,11 @@ module Stripe
       @url = url
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        after_completion == o.after_completion &&
-        allow_promotion_codes == o.allow_promotion_codes &&
-        application_fee_amount == o.application_fee_amount &&
-        application_fee_percent == o.application_fee_percent &&
-        automatic_tax == o.automatic_tax &&
-        billing_address_collection == o.billing_address_collection &&
-        consent_collection == o.consent_collection &&
-        customer_creation == o.customer_creation &&
-        id == o.id &&
-        line_items == o.line_items &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        on_behalf_of == o.on_behalf_of &&
-        payment_intent_data == o.payment_intent_data &&
-        payment_method_types == o.payment_method_types &&
-        phone_number_collection == o.phone_number_collection &&
-        shipping_address_collection == o.shipping_address_collection &&
-        shipping_options == o.shipping_options &&
-        submit_type == o.submit_type &&
-        subscription_data == o.subscription_data &&
-        tax_id_collection == o.tax_id_collection &&
-        transfer_data == o.transfer_data &&
-        url == o.url
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] payment_method_types Object to be assigned
+    def payment_method_types=(payment_method_types)
+      ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid!(payment_method_types)
+      @payment_method_types = payment_method_types
     end
 
     # @see the `==` method
@@ -310,8 +307,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @after_completion, @allow_promotion_codes, @application_fee_amount, @application_fee_percent, @automatic_tax, @billing_address_collection, @consent_collection, @customer_creation, @id, @line_items, @livemode, @metadata, @object, @on_behalf_of, @payment_intent_data, @payment_method_types, @phone_number_collection, @shipping_address_collection, @shipping_options, @submit_type, @subscription_data, @tax_id_collection, @transfer_data, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@active, @after_completion, @allow_promotion_codes, @automatic_tax, @billing_address_collection, @customer_creation, @id, @livemode, @metadata, @object, @phone_number_collection, @shipping_options, @submit_type, @tax_id_collection, @url, @application_fee_amount, @application_fee_percent, @consent_collection, @line_items, @on_behalf_of, @payment_intent_data, @payment_method_types, @shipping_address_collection, @subscription_data, @transfer_data)
   end
 end

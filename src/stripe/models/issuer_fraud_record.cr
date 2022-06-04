@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # An IFR is actionable if it has not received a dispute and has not been fully refunded. You may wish to proactively refund a charge that receives an IFR, in order to avoid receiving a dispute later.
     @[JSON::Field(key: "actionable", type: Bool)]
     property actionable : Bool
@@ -58,7 +59,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @actionable : Bool, @charge : IssuerFraudRecordCharge, @created : Int64, @fraud_type : String, @has_liability_shift : Bool, @id : String, @livemode : Bool, @object : String, @post_date : Int64)
+    def initialize(
+      *,
+      # Required properties
+      @actionable : Bool,
+      @charge : IssuerFraudRecordCharge,
+      @created : Int64,
+      @fraud_type : String,
+      @has_liability_shift : Bool,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @post_date : Int64
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -85,6 +98,7 @@ module Stripe
       return false if @fraud_type.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
       true
     end
 
@@ -115,30 +129,16 @@ module Stripe
       @object = object
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        actionable == o.actionable &&
-        charge == o.charge &&
-        created == o.created &&
-        fraud_type == o.fraud_type &&
-        has_liability_shift == o.has_liability_shift &&
-        id == o.id &&
-        livemode == o.livemode &&
-        object == o.object &&
-        post_date == o.post_date
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@actionable, @charge, @created, @fraud_type, @has_liability_shift, @id, @livemode, @object, @post_date)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@actionable, @charge, @created, @fraud_type, @has_liability_shift, @id, @livemode, @object, @post_date)
   end
 end

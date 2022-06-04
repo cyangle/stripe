@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "background_image_url", type: String?, presence: true, ignore_serialize: background_image_url.nil? && !background_image_url_present?)]
     property background_image_url : String?
 
@@ -176,7 +177,36 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @background_image_url : String? = nil, @client_token : String? = nil, @first_name : String? = nil, @last_name : String? = nil, @locale : String? = nil, @logo_url : String? = nil, @page_title : String? = nil, @pay_later_asset_urls_descriptive : String? = nil, @pay_later_asset_urls_standard : String? = nil, @pay_later_name : String? = nil, @pay_later_redirect_url : String? = nil, @pay_now_asset_urls_descriptive : String? = nil, @pay_now_asset_urls_standard : String? = nil, @pay_now_name : String? = nil, @pay_now_redirect_url : String? = nil, @pay_over_time_asset_urls_descriptive : String? = nil, @pay_over_time_asset_urls_standard : String? = nil, @pay_over_time_name : String? = nil, @pay_over_time_redirect_url : String? = nil, @payment_method_categories : String? = nil, @purchase_country : String? = nil, @purchase_type : String? = nil, @redirect_url : String? = nil, @shipping_delay : Int64? = nil, @shipping_first_name : String? = nil, @shipping_last_name : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @background_image_url : String? = nil,
+      @client_token : String? = nil,
+      @first_name : String? = nil,
+      @last_name : String? = nil,
+      @locale : String? = nil,
+      @logo_url : String? = nil,
+      @page_title : String? = nil,
+      @pay_later_asset_urls_descriptive : String? = nil,
+      @pay_later_asset_urls_standard : String? = nil,
+      @pay_later_name : String? = nil,
+      @pay_later_redirect_url : String? = nil,
+      @pay_now_asset_urls_descriptive : String? = nil,
+      @pay_now_asset_urls_standard : String? = nil,
+      @pay_now_name : String? = nil,
+      @pay_now_redirect_url : String? = nil,
+      @pay_over_time_asset_urls_descriptive : String? = nil,
+      @pay_over_time_asset_urls_standard : String? = nil,
+      @pay_over_time_name : String? = nil,
+      @pay_over_time_redirect_url : String? = nil,
+      @payment_method_categories : String? = nil,
+      @purchase_country : String? = nil,
+      @purchase_type : String? = nil,
+      @redirect_url : String? = nil,
+      @shipping_delay : Int64? = nil,
+      @shipping_first_name : String? = nil,
+      @shipping_last_name : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -193,47 +223,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        background_image_url == o.background_image_url &&
-        client_token == o.client_token &&
-        first_name == o.first_name &&
-        last_name == o.last_name &&
-        locale == o.locale &&
-        logo_url == o.logo_url &&
-        page_title == o.page_title &&
-        pay_later_asset_urls_descriptive == o.pay_later_asset_urls_descriptive &&
-        pay_later_asset_urls_standard == o.pay_later_asset_urls_standard &&
-        pay_later_name == o.pay_later_name &&
-        pay_later_redirect_url == o.pay_later_redirect_url &&
-        pay_now_asset_urls_descriptive == o.pay_now_asset_urls_descriptive &&
-        pay_now_asset_urls_standard == o.pay_now_asset_urls_standard &&
-        pay_now_name == o.pay_now_name &&
-        pay_now_redirect_url == o.pay_now_redirect_url &&
-        pay_over_time_asset_urls_descriptive == o.pay_over_time_asset_urls_descriptive &&
-        pay_over_time_asset_urls_standard == o.pay_over_time_asset_urls_standard &&
-        pay_over_time_name == o.pay_over_time_name &&
-        pay_over_time_redirect_url == o.pay_over_time_redirect_url &&
-        payment_method_categories == o.payment_method_categories &&
-        purchase_country == o.purchase_country &&
-        purchase_type == o.purchase_type &&
-        redirect_url == o.redirect_url &&
-        shipping_delay == o.shipping_delay &&
-        shipping_first_name == o.shipping_first_name &&
-        shipping_last_name == o.shipping_last_name
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@background_image_url, @client_token, @first_name, @last_name, @locale, @logo_url, @page_title, @pay_later_asset_urls_descriptive, @pay_later_asset_urls_standard, @pay_later_name, @pay_later_redirect_url, @pay_now_asset_urls_descriptive, @pay_now_asset_urls_standard, @pay_now_name, @pay_now_redirect_url, @pay_over_time_asset_urls_descriptive, @pay_over_time_asset_urls_standard, @pay_over_time_name, @pay_over_time_redirect_url, @payment_method_categories, @purchase_country, @purchase_type, @redirect_url, @shipping_delay, @shipping_first_name, @shipping_last_name)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@background_image_url, @client_token, @first_name, @last_name, @locale, @logo_url, @page_title, @pay_later_asset_urls_descriptive, @pay_later_asset_urls_standard, @pay_later_name, @pay_later_redirect_url, @pay_now_asset_urls_descriptive, @pay_now_asset_urls_standard, @pay_now_name, @pay_now_redirect_url, @pay_over_time_asset_urls_descriptive, @pay_over_time_asset_urls_standard, @pay_over_time_name, @pay_over_time_redirect_url, @payment_method_categories, @purchase_country, @purchase_type, @redirect_url, @shipping_delay, @shipping_first_name, @shipping_last_name)
   end
 end

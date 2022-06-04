@@ -19,7 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The business type.
+
     @[JSON::Field(key: "business_type", type: String?, presence: true, ignore_serialize: business_type.nil? && !business_type_present?)]
     getter business_type : String?
 
@@ -40,7 +40,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? individual_present : Bool = false
 
-    # Whether the user described by the data in the token has been shown [the Stripe Connected Account Agreement](https://stripe.com/docs/connect/account-tokens#stripe-connected-account-agreement). When creating an account token to create a new Connect account, this value must be `true`.
     @[JSON::Field(key: "tos_shown_and_accepted", type: Bool?, presence: true, ignore_serialize: tos_shown_and_accepted.nil? && !tos_shown_and_accepted_present?)]
     property tos_shown_and_accepted : Bool?
 
@@ -49,13 +48,21 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @business_type : String? = nil, @company : ConnectJsAccountTokenCompanySpecs? = nil, @individual : IndividualSpecs1? = nil, @tos_shown_and_accepted : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @business_type : String? = nil,
+      @company : ConnectJsAccountTokenCompanySpecs? = nil,
+      @individual : IndividualSpecs1? = nil,
+      @tos_shown_and_accepted : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_BUSINESS_TYPE.error_message) unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
 
       invalid_properties
@@ -65,6 +72,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
+
       true
     end
 
@@ -75,25 +83,16 @@ module Stripe
       @business_type = business_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        business_type == o.business_type &&
-        company == o.company &&
-        individual == o.individual &&
-        tos_shown_and_accepted == o.tos_shown_and_accepted
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@business_type, @company, @individual, @tos_shown_and_accepted)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@business_type, @company, @individual, @tos_shown_and_accepted)
   end
 end

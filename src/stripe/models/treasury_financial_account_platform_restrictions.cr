@@ -18,24 +18,25 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Restricts all inbound money movement.
-    @[JSON::Field(key: "inbound_flows", type: String, presence: true, ignore_serialize: inbound_flows.nil? && !inbound_flows_present?)]
-    getter inbound_flows : String
+    @[JSON::Field(key: "inbound_flows", type: String?, presence: true, ignore_serialize: inbound_flows.nil? && !inbound_flows_present?)]
+    getter inbound_flows : String?
 
     @[JSON::Field(ignore: true)]
     property? inbound_flows_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_INBOUND_FLOWS = EnumValidator.new("inbound_flows", "String", ["restricted", "unrestricted", "null"])
+    ENUM_VALIDATOR_FOR_INBOUND_FLOWS = EnumValidator.new("inbound_flows", "String", ["restricted", "unrestricted"])
 
     # Restricts all outbound money movement.
-    @[JSON::Field(key: "outbound_flows", type: String, presence: true, ignore_serialize: outbound_flows.nil? && !outbound_flows_present?)]
-    getter outbound_flows : String
+    @[JSON::Field(key: "outbound_flows", type: String?, presence: true, ignore_serialize: outbound_flows.nil? && !outbound_flows_present?)]
+    getter outbound_flows : String?
 
     @[JSON::Field(ignore: true)]
     property? outbound_flows_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS = EnumValidator.new("outbound_flows", "String", ["restricted", "unrestricted", "null"])
+    ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS = EnumValidator.new("outbound_flows", "String", ["restricted", "unrestricted"])
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -46,13 +47,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @inbound_flows : String?, @outbound_flows : String?)
+    def initialize(
+      *,
+      # Optional properties
+      @inbound_flows : String? = nil,
+      @outbound_flows : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_INBOUND_FLOWS.error_message) unless ENUM_VALIDATOR_FOR_INBOUND_FLOWS.valid?(@inbound_flows)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS.error_message) unless ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS.valid?(@outbound_flows)
@@ -65,6 +72,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_INBOUND_FLOWS.valid?(@inbound_flows)
       return false unless ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS.valid?(@outbound_flows)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -76,10 +84,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -98,23 +103,16 @@ module Stripe
       @outbound_flows = outbound_flows
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        inbound_flows == o.inbound_flows &&
-        outbound_flows == o.outbound_flows
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@inbound_flows, @outbound_flows)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@inbound_flows, @outbound_flows)
   end
 end

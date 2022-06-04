@@ -18,36 +18,19 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The product's name, meant to be displayable to the customer.
     @[JSON::Field(key: "name", type: String)]
     getter name : String
 
     # Optional properties
+
     # Whether the product is currently available for purchase. Defaults to `true`.
     @[JSON::Field(key: "active", type: Bool?, presence: true, ignore_serialize: active.nil? && !active_present?)]
     property active : Bool?
 
     @[JSON::Field(ignore: true)]
     property? active_present : Bool = false
-
-    @[JSON::Field(key: "attributes", type: Array(String)?, presence: true, ignore_serialize: attributes.nil? && !attributes_present?)]
-    property attributes : Array(String)?
-
-    @[JSON::Field(ignore: true)]
-    property? attributes_present : Bool = false
-
-    # A short one-line description of the product, meant to be displayable to the customer. May only be set if type=`good`.
-    @[JSON::Field(key: "caption", type: String?, presence: true, ignore_serialize: caption.nil? && !caption_present?)]
-    getter caption : String?
-
-    @[JSON::Field(ignore: true)]
-    property? caption_present : Bool = false
-
-    @[JSON::Field(key: "deactivate_on", type: Array(String)?, presence: true, ignore_serialize: deactivate_on.nil? && !deactivate_on_present?)]
-    property deactivate_on : Array(String)?
-
-    @[JSON::Field(ignore: true)]
-    property? deactivate_on_present : Bool = false
 
     @[JSON::Field(key: "default_price_data", type: PriceDataWithoutProduct?, presence: true, ignore_serialize: default_price_data.nil? && !default_price_data_present?)]
     property default_price_data : PriceDataWithoutProduct?
@@ -62,6 +45,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -116,15 +100,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? tax_code_present : Bool = false
 
-    # The type of the product. Defaults to `service` if not explicitly specified, enabling use of this product with Subscriptions and Plans. Set this parameter to `good` to use this product with Orders and SKUs. On API versions before `2018-02-05`, this field defaults to `good` for compatibility reasons.
-    @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
-    getter _type : String?
-
-    @[JSON::Field(ignore: true)]
-    property? _type_present : Bool = false
-
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["good", "service"])
-
     # A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
     @[JSON::Field(key: "unit_label", type: String?, presence: true, ignore_serialize: unit_label.nil? && !unit_label_present?)]
     getter unit_label : String?
@@ -141,7 +116,25 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @name : String, @active : Bool? = nil, @attributes : Array(String)? = nil, @caption : String? = nil, @deactivate_on : Array(String)? = nil, @default_price_data : PriceDataWithoutProduct? = nil, @description : String? = nil, @expand : Array(String)? = nil, @id : String? = nil, @images : Array(String)? = nil, @metadata : Hash(String, String)? = nil, @package_dimensions : PackageDimensionsSpecs? = nil, @shippable : Bool? = nil, @statement_descriptor : String? = nil, @tax_code : String? = nil, @_type : String? = nil, @unit_label : String? = nil, @url : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @name : String,
+      # Optional properties
+      @active : Bool? = nil,
+      @default_price_data : PriceDataWithoutProduct? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @id : String? = nil,
+      @images : Array(String)? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @package_dimensions : PackageDimensionsSpecs? = nil,
+      @shippable : Bool? = nil,
+      @statement_descriptor : String? = nil,
+      @tax_code : String? = nil,
+      @unit_label : String? = nil,
+      @url : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -149,8 +142,8 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if !@caption.nil? && @caption.to_s.size > 5000
-        invalid_properties.push("invalid value for \"caption\", the character length must be smaller than or equal to 5000.")
+      if @name.to_s.size > 5000
+        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
       if !@description.nil? && @description.to_s.size > 40000
@@ -161,15 +154,9 @@ module Stripe
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
       if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
         invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
       if !@unit_label.nil? && @unit_label.to_s.size > 12
         invalid_properties.push("invalid value for \"unit_label\", the character length must be smaller than or equal to 12.")
@@ -185,25 +172,24 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@caption.nil? && @caption.to_s.size > 5000
+      return false if @name.to_s.size > 5000
       return false if !@description.nil? && @description.to_s.size > 40000
       return false if !@id.nil? && @id.to_s.size > 5000
-      return false if @name.to_s.size > 5000
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
       return false if !@unit_label.nil? && @unit_label.to_s.size > 12
       return false if !@url.nil? && @url.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] caption Value to be assigned
-    def caption=(caption)
-      if !caption.nil? && caption.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"caption\", the character length must be smaller than or equal to 5000.")
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @caption = caption
+      @name = name
     end
 
     # Custom attribute writer method with validation
@@ -227,16 +213,6 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @name = name
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
     def statement_descriptor=(statement_descriptor)
       if !statement_descriptor.nil? && statement_descriptor.to_s.size > 22
@@ -244,13 +220,6 @@ module Stripe
       end
 
       @statement_descriptor = statement_descriptor
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] _type Object to be assigned
-    def _type=(_type)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type)
-      @_type = _type
     end
 
     # Custom attribute writer method with validation
@@ -273,39 +242,16 @@ module Stripe
       @url = url
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        active == o.active &&
-        attributes == o.attributes &&
-        caption == o.caption &&
-        deactivate_on == o.deactivate_on &&
-        default_price_data == o.default_price_data &&
-        description == o.description &&
-        expand == o.expand &&
-        id == o.id &&
-        images == o.images &&
-        metadata == o.metadata &&
-        name == o.name &&
-        package_dimensions == o.package_dimensions &&
-        shippable == o.shippable &&
-        statement_descriptor == o.statement_descriptor &&
-        tax_code == o.tax_code &&
-        _type == o._type &&
-        unit_label == o.unit_label &&
-        url == o.url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@active, @attributes, @caption, @deactivate_on, @default_price_data, @description, @expand, @id, @images, @metadata, @name, @package_dimensions, @shippable, @statement_descriptor, @tax_code, @_type, @unit_label, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@name, @active, @default_price_data, @description, @expand, @id, @images, @metadata, @package_dimensions, @shippable, @statement_descriptor, @tax_code, @unit_label, @url)
   end
 end

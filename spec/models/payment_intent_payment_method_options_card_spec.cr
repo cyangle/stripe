@@ -45,7 +45,7 @@ describe Stripe::PaymentIntentPaymentMethodOptionsCard do
   describe "test attribute 'network'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa", "null"])
+      # validator = EnumValidator.new("String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
       # validator.allowable_values.each do |value|
       #   expect { instance.network = value }.not_to raise_error
       # end
@@ -55,7 +55,7 @@ describe Stripe::PaymentIntentPaymentMethodOptionsCard do
   describe "test attribute 'request_three_d_secure'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["any", "automatic", "challenge_only", "null"])
+      # validator = EnumValidator.new("String", ["any", "automatic", "challenge_only"])
       # validator.allowable_values.each do |value|
       #   expect { instance.request_three_d_secure = value }.not_to raise_error
       # end

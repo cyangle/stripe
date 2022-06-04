@@ -19,11 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Type of the next action to perform, one of `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.
     @[JSON::Field(key: "type", type: String?)]
     getter _type : String?
 
     # Optional properties
+
     @[JSON::Field(key: "alipay_handle_redirect", type: PaymentIntentNextActionAlipayHandleRedirect?, presence: true, ignore_serialize: alipay_handle_redirect.nil? && !alipay_handle_redirect_present?)]
     property alipay_handle_redirect : PaymentIntentNextActionAlipayHandleRedirect?
 
@@ -112,7 +114,25 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @_type : String, @alipay_handle_redirect : PaymentIntentNextActionAlipayHandleRedirect? = nil, @boleto_display_details : PaymentIntentNextActionBoleto? = nil, @card_await_notification : PaymentIntentNextActionCardAwaitNotification? = nil, @display_bank_transfer_instructions : PaymentIntentNextActionDisplayBankTransferInstructions? = nil, @konbini_display_details : PaymentIntentNextActionKonbini? = nil, @oxxo_display_details : PaymentIntentNextActionDisplayOxxoDetails? = nil, @paynow_display_qr_code : PaymentIntentNextActionPaynowDisplayQrCode? = nil, @redirect_to_url : PaymentIntentNextActionRedirectToUrl? = nil, @use_stripe_sdk : JSON::Any = nil, @verify_with_microdeposits : PaymentIntentNextActionVerifyWithMicrodeposits? = nil, @wechat_pay_display_qr_code : PaymentIntentNextActionWechatPayDisplayQrCode? = nil, @wechat_pay_redirect_to_android_app : PaymentIntentNextActionWechatPayRedirectToAndroidApp? = nil, @wechat_pay_redirect_to_ios_app : PaymentIntentNextActionWechatPayRedirectToIosApp? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String? = nil,
+      # Optional properties
+      @alipay_handle_redirect : PaymentIntentNextActionAlipayHandleRedirect? = nil,
+      @boleto_display_details : PaymentIntentNextActionBoleto? = nil,
+      @card_await_notification : PaymentIntentNextActionCardAwaitNotification? = nil,
+      @display_bank_transfer_instructions : PaymentIntentNextActionDisplayBankTransferInstructions? = nil,
+      @konbini_display_details : PaymentIntentNextActionKonbini? = nil,
+      @oxxo_display_details : PaymentIntentNextActionDisplayOxxoDetails? = nil,
+      @paynow_display_qr_code : PaymentIntentNextActionPaynowDisplayQrCode? = nil,
+      @redirect_to_url : PaymentIntentNextActionRedirectToUrl? = nil,
+      @use_stripe_sdk : JSON::Any = nil,
+      @verify_with_microdeposits : PaymentIntentNextActionVerifyWithMicrodeposits? = nil,
+      @wechat_pay_display_qr_code : PaymentIntentNextActionWechatPayDisplayQrCode? = nil,
+      @wechat_pay_redirect_to_android_app : PaymentIntentNextActionWechatPayRedirectToAndroidApp? = nil,
+      @wechat_pay_redirect_to_ios_app : PaymentIntentNextActionWechatPayRedirectToIosApp? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -131,6 +151,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @_type.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -142,10 +163,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -160,35 +178,16 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        alipay_handle_redirect == o.alipay_handle_redirect &&
-        boleto_display_details == o.boleto_display_details &&
-        card_await_notification == o.card_await_notification &&
-        display_bank_transfer_instructions == o.display_bank_transfer_instructions &&
-        konbini_display_details == o.konbini_display_details &&
-        oxxo_display_details == o.oxxo_display_details &&
-        paynow_display_qr_code == o.paynow_display_qr_code &&
-        redirect_to_url == o.redirect_to_url &&
-        _type == o._type &&
-        use_stripe_sdk == o.use_stripe_sdk &&
-        verify_with_microdeposits == o.verify_with_microdeposits &&
-        wechat_pay_display_qr_code == o.wechat_pay_display_qr_code &&
-        wechat_pay_redirect_to_android_app == o.wechat_pay_redirect_to_android_app &&
-        wechat_pay_redirect_to_ios_app == o.wechat_pay_redirect_to_ios_app
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@alipay_handle_redirect, @boleto_display_details, @card_await_notification, @display_bank_transfer_instructions, @konbini_display_details, @oxxo_display_details, @paynow_display_qr_code, @redirect_to_url, @_type, @use_stripe_sdk, @verify_with_microdeposits, @wechat_pay_display_qr_code, @wechat_pay_redirect_to_android_app, @wechat_pay_redirect_to_ios_app)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @alipay_handle_redirect, @boleto_display_details, @card_await_notification, @display_bank_transfer_instructions, @konbini_display_details, @oxxo_display_details, @paynow_display_qr_code, @redirect_to_url, @use_stripe_sdk, @verify_with_microdeposits, @wechat_pay_display_qr_code, @wechat_pay_redirect_to_android_app, @wechat_pay_redirect_to_ios_app)
   end
 end

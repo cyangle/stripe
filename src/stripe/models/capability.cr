@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "account", type: CapabilityAccount)]
     property account : CapabilityAccount
 
@@ -36,13 +37,6 @@ module Stripe
     @[JSON::Field(key: "requested", type: Bool)]
     property requested : Bool
 
-    # Time at which the capability was requested. Measured in seconds since the Unix epoch.
-    @[JSON::Field(key: "requested_at", type: Int64?, presence: true, ignore_serialize: requested_at.nil? && !requested_at_present?)]
-    property requested_at : Int64?
-
-    @[JSON::Field(ignore: true)]
-    property? requested_at_present : Bool = false
-
     # The status of the capability. Can be `active`, `inactive`, `pending`, or `unrequested`.
     @[JSON::Field(key: "status", type: String)]
     getter status : String
@@ -50,11 +44,19 @@ module Stripe
     ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["active", "disabled", "inactive", "pending", "unrequested"])
 
     # Optional properties
+
     @[JSON::Field(key: "future_requirements", type: AccountCapabilityFutureRequirements?, presence: true, ignore_serialize: future_requirements.nil? && !future_requirements_present?)]
     property future_requirements : AccountCapabilityFutureRequirements?
 
     @[JSON::Field(ignore: true)]
     property? future_requirements_present : Bool = false
+
+    # Time at which the capability was requested. Measured in seconds since the Unix epoch.
+    @[JSON::Field(key: "requested_at", type: Int64?, presence: true, ignore_serialize: requested_at.nil? && !requested_at_present?)]
+    property requested_at : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? requested_at_present : Bool = false
 
     @[JSON::Field(key: "requirements", type: AccountCapabilityRequirements?, presence: true, ignore_serialize: requirements.nil? && !requirements_present?)]
     property requirements : AccountCapabilityRequirements?
@@ -64,7 +66,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account : CapabilityAccount, @id : String, @object : String, @requested : Bool, @requested_at : Int64?, @status : String, @future_requirements : AccountCapabilityFutureRequirements? = nil, @requirements : AccountCapabilityRequirements? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @account : CapabilityAccount,
+      @id : String,
+      @object : String,
+      @requested : Bool,
+      @status : String,
+      # Optional properties
+      @future_requirements : AccountCapabilityFutureRequirements? = nil,
+      @requested_at : Int64? = nil,
+      @requirements : AccountCapabilityRequirements? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -89,6 +103,7 @@ module Stripe
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
       true
     end
 
@@ -116,29 +131,16 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account == o.account &&
-        future_requirements == o.future_requirements &&
-        id == o.id &&
-        object == o.object &&
-        requested == o.requested &&
-        requested_at == o.requested_at &&
-        requirements == o.requirements &&
-        status == o.status
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account, @future_requirements, @id, @object, @requested, @requested_at, @requirements, @status)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@account, @id, @object, @requested, @status, @future_requirements, @requested_at, @requirements)
   end
 end

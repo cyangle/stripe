@@ -19,35 +19,17 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "billing", type: IssuingCardholderAddress?)]
     property billing : IssuingCardholderAddress?
-
-    @[JSON::Field(key: "company", type: IssuingCardholderCompany1, presence: true, ignore_serialize: company.nil? && !company_present?)]
-    property company : IssuingCardholderCompany1
-
-    @[JSON::Field(ignore: true)]
-    property? company_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?)]
     property created : Int64?
 
-    # The cardholder's email address.
-    @[JSON::Field(key: "email", type: String, presence: true, ignore_serialize: email.nil? && !email_present?)]
-    getter email : String
-
-    @[JSON::Field(ignore: true)]
-    property? email_present : Bool = false
-
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?)]
     getter id : String?
-
-    @[JSON::Field(key: "individual", type: IssuingCardholderIndividual1, presence: true, ignore_serialize: individual.nil? && !individual_present?)]
-    property individual : IssuingCardholderIndividual1
-
-    @[JSON::Field(ignore: true)]
-    property? individual_present : Bool = false
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?)]
@@ -67,21 +49,8 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["issuing.cardholder"])
 
-    # The cardholder's phone number. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied) for more details.
-    @[JSON::Field(key: "phone_number", type: String, presence: true, ignore_serialize: phone_number.nil? && !phone_number_present?)]
-    getter phone_number : String
-
-    @[JSON::Field(ignore: true)]
-    property? phone_number_present : Bool = false
-
     @[JSON::Field(key: "requirements", type: IssuingCardholderRequirements?)]
     property requirements : IssuingCardholderRequirements?
-
-    @[JSON::Field(key: "spending_controls", type: IssuingCardholderSpendingControls, presence: true, ignore_serialize: spending_controls.nil? && !spending_controls_present?)]
-    property spending_controls : IssuingCardholderSpendingControls
-
-    @[JSON::Field(ignore: true)]
-    property? spending_controls_present : Bool = false
 
     # Specifies whether to permit authorizations on this cardholder's cards.
     @[JSON::Field(key: "status", type: String?)]
@@ -95,6 +64,40 @@ module Stripe
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["company", "individual"])
 
+    # Optional properties
+
+    @[JSON::Field(key: "company", type: IssuingCardholderCompany1?, presence: true, ignore_serialize: company.nil? && !company_present?)]
+    property company : IssuingCardholderCompany1?
+
+    @[JSON::Field(ignore: true)]
+    property? company_present : Bool = false
+
+    # The cardholder's email address.
+    @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
+    getter email : String?
+
+    @[JSON::Field(ignore: true)]
+    property? email_present : Bool = false
+
+    @[JSON::Field(key: "individual", type: IssuingCardholderIndividual1?, presence: true, ignore_serialize: individual.nil? && !individual_present?)]
+    property individual : IssuingCardholderIndividual1?
+
+    @[JSON::Field(ignore: true)]
+    property? individual_present : Bool = false
+
+    # The cardholder's phone number. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied) for more details.
+    @[JSON::Field(key: "phone_number", type: String?, presence: true, ignore_serialize: phone_number.nil? && !phone_number_present?)]
+    getter phone_number : String?
+
+    @[JSON::Field(ignore: true)]
+    property? phone_number_present : Bool = false
+
+    @[JSON::Field(key: "spending_controls", type: IssuingCardholderSpendingControls?, presence: true, ignore_serialize: spending_controls.nil? && !spending_controls_present?)]
+    property spending_controls : IssuingCardholderSpendingControls?
+
+    @[JSON::Field(ignore: true)]
+    property? spending_controls_present : Bool = false
+
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
@@ -105,17 +108,32 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing : IssuingCardholderAddress, @company : IssuingCardholderCompany1?, @created : Int64, @email : String?, @id : String, @individual : IssuingCardholderIndividual1?, @livemode : Bool, @metadata : Hash(String, String), @name : String, @object : String, @phone_number : String?, @requirements : IssuingCardholderRequirements, @spending_controls : IssuingCardholderSpendingControls?, @status : String, @_type : String)
+    def initialize(
+      *,
+      # Required properties
+      @billing : IssuingCardholderAddress? = nil,
+      @created : Int64? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @name : String? = nil,
+      @object : String? = nil,
+      @requirements : IssuingCardholderRequirements? = nil,
+      @status : String? = nil,
+      @_type : String? = nil,
+      # Optional properties
+      @company : IssuingCardholderCompany1? = nil,
+      @email : String? = nil,
+      @individual : IssuingCardholderIndividual1? = nil,
+      @phone_number : String? = nil,
+      @spending_controls : IssuingCardholderSpendingControls? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @email.to_s.size > 5000
-        invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
@@ -127,13 +145,17 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
-      if @phone_number.to_s.size > 5000
-        invalid_properties.push("invalid value for \"phone_number\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      if !@email.nil? && @email.to_s.size > 5000
+        invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@phone_number.nil? && @phone_number.to_s.size > 5000
+        invalid_properties.push("invalid value for \"phone_number\", the character length must be smaller than or equal to 5000.")
+      end
 
       invalid_properties
     end
@@ -141,13 +163,14 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @email.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false if @name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @phone_number.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if !@email.nil? && @email.to_s.size > 5000
+      return false if !@phone_number.nil? && @phone_number.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -159,22 +182,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] email Value to be assigned
-    def email=(email)
-      if email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @email = email
     end
 
     # Custom attribute writer method with validation
@@ -204,16 +214,6 @@ module Stripe
       @object = object
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] phone_number Value to be assigned
-    def phone_number=(phone_number)
-      if phone_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"phone_number\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @phone_number = phone_number
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
@@ -228,26 +228,24 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        billing == o.billing &&
-        company == o.company &&
-        created == o.created &&
-        email == o.email &&
-        id == o.id &&
-        individual == o.individual &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        name == o.name &&
-        object == o.object &&
-        phone_number == o.phone_number &&
-        requirements == o.requirements &&
-        spending_controls == o.spending_controls &&
-        status == o.status &&
-        _type == o._type
+    # Custom attribute writer method with validation
+    # @param [Object] email Value to be assigned
+    def email=(email)
+      if !email.nil? && email.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @email = email
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] phone_number Value to be assigned
+    def phone_number=(phone_number)
+      if !phone_number.nil? && phone_number.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"phone_number\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @phone_number = phone_number
     end
 
     # @see the `==` method
@@ -256,8 +254,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@billing, @company, @created, @email, @id, @individual, @livemode, @metadata, @name, @object, @phone_number, @requirements, @spending_controls, @status, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@billing, @created, @id, @livemode, @metadata, @name, @object, @requirements, @status, @_type, @company, @email, @individual, @phone_number, @spending_controls)
   end
 end

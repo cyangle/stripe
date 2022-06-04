@@ -19,16 +19,10 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Disputed amount. Usually the amount of the `transaction`, but can differ (usually because of currency fluctuation).
     @[JSON::Field(key: "amount", type: Int64?)]
     property amount : Int64?
-
-    # List of balance transactions associated with the dispute.
-    @[JSON::Field(key: "balance_transactions", type: Array(BalanceTransaction), presence: true, ignore_serialize: balance_transactions.nil? && !balance_transactions_present?)]
-    property balance_transactions : Array(BalanceTransaction)
-
-    @[JSON::Field(ignore: true)]
-    property? balance_transactions_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?)]
@@ -69,6 +63,14 @@ module Stripe
     property transaction : IssuingDisputeTransaction?
 
     # Optional properties
+
+    # List of balance transactions associated with the dispute.
+    @[JSON::Field(key: "balance_transactions", type: Array(BalanceTransaction)?, presence: true, ignore_serialize: balance_transactions.nil? && !balance_transactions_present?)]
+    property balance_transactions : Array(BalanceTransaction)?
+
+    @[JSON::Field(ignore: true)]
+    property? balance_transactions_present : Bool = false
+
     @[JSON::Field(key: "treasury", type: IssuingDisputeTreasury1?, presence: true, ignore_serialize: treasury.nil? && !treasury_present?)]
     property treasury : IssuingDisputeTreasury1?
 
@@ -85,7 +87,23 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @balance_transactions : Array(BalanceTransaction)?, @created : Int64, @currency : String, @evidence : IssuingDisputeEvidence, @id : String, @livemode : Bool, @metadata : Hash(String, String), @object : String, @status : String, @transaction : IssuingDisputeTransaction, @treasury : IssuingDisputeTreasury1? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64? = nil,
+      @created : Int64? = nil,
+      @currency : String? = nil,
+      @evidence : IssuingDisputeEvidence? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @object : String? = nil,
+      @status : String? = nil,
+      @transaction : IssuingDisputeTransaction? = nil,
+      # Optional properties
+      @balance_transactions : Array(BalanceTransaction)? = nil,
+      @treasury : IssuingDisputeTreasury1? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -110,6 +128,7 @@ module Stripe
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -121,10 +140,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -153,33 +169,16 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        balance_transactions == o.balance_transactions &&
-        created == o.created &&
-        currency == o.currency &&
-        evidence == o.evidence &&
-        id == o.id &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        status == o.status &&
-        transaction == o.transaction &&
-        treasury == o.treasury
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @balance_transactions, @created, @currency, @evidence, @id, @livemode, @metadata, @object, @status, @transaction, @treasury)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @created, @currency, @evidence, @id, @livemode, @metadata, @object, @status, @transaction, @balance_transactions, @treasury)
   end
 end

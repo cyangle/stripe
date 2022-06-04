@@ -145,7 +145,7 @@ describe Stripe::IssuingDisputeTransaction do
   describe "test attribute 'wallet'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["apple_pay", "google_pay", "samsung_pay", "null"])
+      # validator = EnumValidator.new("String", ["apple_pay", "google_pay", "samsung_pay"])
       # validator.allowable_values.each do |value|
       #   expect { instance.wallet = value }.not_to raise_error
       # end

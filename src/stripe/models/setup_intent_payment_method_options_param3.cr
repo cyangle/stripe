@@ -12,13 +12,13 @@ require "time"
 require "log"
 
 module Stripe
-  # If this is a `us_bank_account` SetupIntent, this sub-hash contains details about the US bank account payment method options.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SetupIntentPaymentMethodOptionsParam3
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "financial_connections", type: LinkedAccountOptionsParam1?, presence: true, ignore_serialize: financial_connections.nil? && !financial_connections_present?)]
     property financial_connections : LinkedAccountOptionsParam1?
 
@@ -31,7 +31,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? networks_present : Bool = false
 
-    # Verification method for the intent
     @[JSON::Field(key: "verification_method", type: String?, presence: true, ignore_serialize: verification_method.nil? && !verification_method_present?)]
     getter verification_method : String?
 
@@ -42,7 +41,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @financial_connections : LinkedAccountOptionsParam1? = nil, @networks : NetworksOptionsParam? = nil, @verification_method : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @financial_connections : LinkedAccountOptionsParam1? = nil,
+      @networks : NetworksOptionsParam? = nil,
+      @verification_method : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -59,6 +64,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
+
       true
     end
 
@@ -69,24 +75,16 @@ module Stripe
       @verification_method = verification_method
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        financial_connections == o.financial_connections &&
-        networks == o.networks &&
-        verification_method == o.verification_method
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@financial_connections, @networks, @verification_method)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@financial_connections, @networks, @verification_method)
   end
 end

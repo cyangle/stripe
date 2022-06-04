@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # Fields that are due and can be satisfied by providing the corresponding alternative fields instead.
     @[JSON::Field(key: "alternatives", type: Array(AccountRequirementsAlternative)?, presence: true, ignore_serialize: alternatives.nil? && !alternatives_present?)]
     property alternatives : Array(AccountRequirementsAlternative)?
@@ -33,8 +34,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? current_deadline_present : Bool = false
 
-    @[JSON::Field(key: "currently_due", type: Array(String))]
-    property currently_due : Array(String)
+    # Fields that need to be collected to keep the account enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+    @[JSON::Field(key: "currently_due", type: Array(String)?, presence: true, ignore_serialize: currently_due.nil? && !currently_due_present?)]
+    property currently_due : Array(String)?
+
+    @[JSON::Field(ignore: true)]
+    property? currently_due_present : Bool = false
 
     # This is typed as a string for consistency with `requirements.disabled_reason`, but it safe to assume `future_requirements.disabled_reason` is empty because fields in `future_requirements` will never disable the account.
     @[JSON::Field(key: "disabled_reason", type: String?, presence: true, ignore_serialize: disabled_reason.nil? && !disabled_reason_present?)]
@@ -50,18 +55,41 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? errors_present : Bool = false
 
-    @[JSON::Field(key: "eventually_due", type: Array(String))]
-    property eventually_due : Array(String)
+    # Fields that need to be collected assuming all volume thresholds are reached. As they become required, they appear in `currently_due` as well.
+    @[JSON::Field(key: "eventually_due", type: Array(String)?, presence: true, ignore_serialize: eventually_due.nil? && !eventually_due_present?)]
+    property eventually_due : Array(String)?
 
-    @[JSON::Field(key: "past_due", type: Array(String))]
-    property past_due : Array(String)
+    @[JSON::Field(ignore: true)]
+    property? eventually_due_present : Bool = false
 
-    @[JSON::Field(key: "pending_verification", type: Array(String))]
-    property pending_verification : Array(String)
+    # Fields that weren't collected by `requirements.current_deadline`. These fields need to be collected to enable the capability on the account. New fields will never appear here; `future_requirements.past_due` will always be a subset of `requirements.past_due`.
+    @[JSON::Field(key: "past_due", type: Array(String)?, presence: true, ignore_serialize: past_due.nil? && !past_due_present?)]
+    property past_due : Array(String)?
+
+    @[JSON::Field(ignore: true)]
+    property? past_due_present : Bool = false
+
+    # Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due` or `currently_due`.
+    @[JSON::Field(key: "pending_verification", type: Array(String)?, presence: true, ignore_serialize: pending_verification.nil? && !pending_verification_present?)]
+    property pending_verification : Array(String)?
+
+    @[JSON::Field(ignore: true)]
+    property? pending_verification_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @alternatives : Array(AccountRequirementsAlternative)?, @current_deadline : Int64?, @currently_due : Array(String), @disabled_reason : String?, @errors : Array(AccountRequirementsError)?, @eventually_due : Array(String), @past_due : Array(String), @pending_verification : Array(String))
+    def initialize(
+      *,
+      # Optional properties
+      @alternatives : Array(AccountRequirementsAlternative)? = nil,
+      @current_deadline : Int64? = nil,
+      @currently_due : Array(String)? = nil,
+      @disabled_reason : String? = nil,
+      @errors : Array(AccountRequirementsError)? = nil,
+      @eventually_due : Array(String)? = nil,
+      @past_due : Array(String)? = nil,
+      @pending_verification : Array(String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -69,7 +97,7 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @disabled_reason.to_s.size > 5000
+      if !@disabled_reason.nil? && @disabled_reason.to_s.size > 5000
         invalid_properties.push("invalid value for \"disabled_reason\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -79,33 +107,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @disabled_reason.to_s.size > 5000
+      return false if !@disabled_reason.nil? && @disabled_reason.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] disabled_reason Value to be assigned
     def disabled_reason=(disabled_reason)
-      if disabled_reason.to_s.size > 5000
+      if !disabled_reason.nil? && disabled_reason.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"disabled_reason\", the character length must be smaller than or equal to 5000.")
       end
 
       @disabled_reason = disabled_reason
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        alternatives == o.alternatives &&
-        current_deadline == o.current_deadline &&
-        currently_due == o.currently_due &&
-        disabled_reason == o.disabled_reason &&
-        errors == o.errors &&
-        eventually_due == o.eventually_due &&
-        past_due == o.past_due &&
-        pending_verification == o.pending_verification
     end
 
     # @see the `==` method
@@ -114,8 +128,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@alternatives, @current_deadline, @currently_due, @disabled_reason, @errors, @eventually_due, @past_due, @pending_verification)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@alternatives, @current_deadline, @currently_due, @disabled_reason, @errors, @eventually_due, @past_due, @pending_verification)
   end
 end

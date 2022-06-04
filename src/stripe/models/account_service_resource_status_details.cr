@@ -19,11 +19,14 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Represents the reason why the status is `pending` or `restricted`.
     @[JSON::Field(key: "code", type: String)]
     getter code : String
 
     ENUM_VALIDATOR_FOR_CODE = EnumValidator.new("code", "String", ["activating", "capability_not_requested", "financial_account_closed", "rejected_other", "rejected_unsupported_business", "requirements_past_due", "requirements_pending_verification", "restricted_by_platform", "restricted_other"])
+
+    # Optional properties
 
     # Represents what the user should do, if anything, to activate the Feature.
     @[JSON::Field(key: "resolution", type: String?, presence: true, ignore_serialize: resolution.nil? && !resolution_present?)]
@@ -32,9 +35,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? resolution_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_RESOLUTION = EnumValidator.new("resolution", "String", ["contact_stripe", "provide_information", "remove_restriction", "null"])
+    ENUM_VALIDATOR_FOR_RESOLUTION = EnumValidator.new("resolution", "String", ["contact_stripe", "provide_information", "remove_restriction"])
 
-    # Optional properties
     # The `platform_restrictions` that are restricting this Feature.
     @[JSON::Field(key: "restriction", type: String?, presence: true, ignore_serialize: restriction.nil? && !restriction_present?)]
     getter restriction : String?
@@ -46,13 +48,21 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @code : String, @resolution : String?, @restriction : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @code : String,
+      # Optional properties
+      @resolution : String? = nil,
+      @restriction : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_RESOLUTION.error_message) unless ENUM_VALIDATOR_FOR_RESOLUTION.valid?(@resolution)
@@ -68,6 +78,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
       return false unless ENUM_VALIDATOR_FOR_RESOLUTION.valid?(@resolution)
       return false unless ENUM_VALIDATOR_FOR_RESTRICTION.valid?(@restriction)
+
       true
     end
 
@@ -92,24 +103,16 @@ module Stripe
       @restriction = restriction
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        code == o.code &&
-        resolution == o.resolution &&
-        restriction == o.restriction
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@code, @resolution, @restriction)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@code, @resolution, @restriction)
   end
 end

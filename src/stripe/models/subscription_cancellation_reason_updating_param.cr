@@ -12,18 +12,18 @@ require "time"
 require "log"
 
 module Stripe
-  # Whether the cancellation reasons will be collected in the portal and which options are exposed to the customer
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SubscriptionCancellationReasonUpdatingParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Whether the feature is enabled.
+
     @[JSON::Field(key: "enabled", type: Bool)]
     property enabled : Bool
 
     # Optional properties
+
     @[JSON::Field(key: "options", type: SubscriptionCancellationReasonCreationParamOptions?, presence: true, ignore_serialize: options.nil? && !options_present?)]
     property options : SubscriptionCancellationReasonCreationParamOptions?
 
@@ -32,7 +32,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @enabled : Bool, @options : SubscriptionCancellationReasonCreationParamOptions? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @enabled : Bool,
+      # Optional properties
+      @options : SubscriptionCancellationReasonCreationParamOptions? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -49,23 +55,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        enabled == o.enabled &&
-        options == o.options
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@enabled, @options)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@enabled, @options)
   end
 end

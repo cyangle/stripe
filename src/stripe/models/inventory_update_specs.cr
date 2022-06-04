@@ -19,14 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # The count of inventory available. Required if `type` is `finite`.
+
     @[JSON::Field(key: "quantity", type: Int64?, presence: true, ignore_serialize: quantity.nil? && !quantity_present?)]
     property quantity : Int64?
 
     @[JSON::Field(ignore: true)]
     property? quantity_present : Bool = false
 
-    # Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.
     @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
     getter _type : String?
 
@@ -35,7 +34,6 @@ module Stripe
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["bucket", "finite", "infinite"])
 
-    # An indicator of the inventory available. Possible values are `in_stock`, `limited`, and `out_of_stock`. Will be present if and only if `type` is `bucket`.
     @[JSON::Field(key: "value", type: String?, presence: true, ignore_serialize: value.nil? && !value_present?)]
     getter value : String?
 
@@ -46,7 +44,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @quantity : Int64? = nil, @_type : String? = nil, @value : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @quantity : Int64? = nil,
+      @_type : String? = nil,
+      @value : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -66,6 +70,7 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
       return false unless ENUM_VALIDATOR_FOR_VALUE.valid?(@value)
+
       true
     end
 
@@ -83,24 +88,16 @@ module Stripe
       @value = value
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        quantity == o.quantity &&
-        _type == o._type &&
-        value == o.value
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@quantity, @_type, @value)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@quantity, @_type, @value)
   end
 end

@@ -19,31 +19,12 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The API version events are rendered as for this webhook endpoint.
-    @[JSON::Field(key: "api_version", type: String?, presence: true, ignore_serialize: api_version.nil? && !api_version_present?)]
-    getter api_version : String?
-
-    @[JSON::Field(ignore: true)]
-    property? api_version_present : Bool = false
-
-    # The ID of the associated Connect application.
-    @[JSON::Field(key: "application", type: String?, presence: true, ignore_serialize: application.nil? && !application_present?)]
-    getter application : String?
-
-    @[JSON::Field(ignore: true)]
-    property? application_present : Bool = false
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64)]
     property created : Int64
 
-    # An optional description of what the webhook is used for.
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
-
+    # The list of events to enable for this endpoint. `['*']` indicates that all events are enabled, except those that require explicit selection.
     @[JSON::Field(key: "enabled_events", type: Array(String))]
     property enabled_events : Array(String)
 
@@ -74,6 +55,28 @@ module Stripe
     getter url : String
 
     # Optional properties
+
+    # The API version events are rendered as for this webhook endpoint.
+    @[JSON::Field(key: "api_version", type: String?, presence: true, ignore_serialize: api_version.nil? && !api_version_present?)]
+    getter api_version : String?
+
+    @[JSON::Field(ignore: true)]
+    property? api_version_present : Bool = false
+
+    # The ID of the associated Connect application.
+    @[JSON::Field(key: "application", type: String?, presence: true, ignore_serialize: application.nil? && !application_present?)]
+    getter application : String?
+
+    @[JSON::Field(ignore: true)]
+    property? application_present : Bool = false
+
+    # An optional description of what the webhook is used for.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
+
     # The endpoint's secret, used to generate [webhook signatures](https://stripe.com/docs/webhooks/signatures). Only returned at creation.
     @[JSON::Field(key: "secret", type: String?, presence: true, ignore_serialize: secret.nil? && !secret_present?)]
     getter secret : String?
@@ -83,7 +86,23 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @api_version : String?, @application : String?, @created : Int64, @description : String?, @enabled_events : Array(String), @id : String, @livemode : Bool, @metadata : Hash(String, String), @object : String, @status : String, @url : String, @secret : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64,
+      @enabled_events : Array(String),
+      @id : String,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      @status : String,
+      @url : String,
+      # Optional properties
+      @api_version : String? = nil,
+      @application : String? = nil,
+      @description : String? = nil,
+      @secret : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -91,27 +110,11 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @api_version.to_s.size > 5000
-        invalid_properties.push("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @application.to_s.size > 5000
-        invalid_properties.push("invalid value for \"application\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
-      if !@secret.nil? && @secret.to_s.size > 5000
-        invalid_properties.push("invalid value for \"secret\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @status.to_s.size > 5000
         invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
@@ -121,51 +124,38 @@ module Stripe
         invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
+      if !@api_version.nil? && @api_version.to_s.size > 5000
+        invalid_properties.push("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@application.nil? && @application.to_s.size > 5000
+        invalid_properties.push("invalid value for \"application\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@secret.nil? && @secret.to_s.size > 5000
+        invalid_properties.push("invalid value for \"secret\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @api_version.to_s.size > 5000
-      return false if @application.to_s.size > 5000
-      return false if @description.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if !@secret.nil? && @secret.to_s.size > 5000
       return false if @status.to_s.size > 5000
       return false if @url.to_s.size > 5000
+      return false if !@api_version.nil? && @api_version.to_s.size > 5000
+      return false if !@application.nil? && @application.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 5000
+      return false if !@secret.nil? && @secret.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] api_version Value to be assigned
-    def api_version=(api_version)
-      if api_version.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @api_version = api_version
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] application Value to be assigned
-    def application=(application)
-      if application.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"application\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @application = application
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -183,16 +173,6 @@ module Stripe
     def object=(object)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] secret Value to be assigned
-    def secret=(secret)
-      if !secret.nil? && secret.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"secret\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @secret = secret
     end
 
     # Custom attribute writer method with validation
@@ -215,23 +195,44 @@ module Stripe
       @url = url
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        api_version == o.api_version &&
-        application == o.application &&
-        created == o.created &&
-        description == o.description &&
-        enabled_events == o.enabled_events &&
-        id == o.id &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        secret == o.secret &&
-        status == o.status &&
-        url == o.url
+    # Custom attribute writer method with validation
+    # @param [Object] api_version Value to be assigned
+    def api_version=(api_version)
+      if !api_version.nil? && api_version.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @api_version = api_version
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] application Value to be assigned
+    def application=(application)
+      if !application.nil? && application.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"application\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @application = application
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] secret Value to be assigned
+    def secret=(secret)
+      if !secret.nil? && secret.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"secret\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @secret = secret
     end
 
     # @see the `==` method
@@ -240,8 +241,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@api_version, @application, @created, @description, @enabled_events, @id, @livemode, @metadata, @object, @secret, @status, @url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @enabled_events, @id, @livemode, @metadata, @object, @status, @url, @api_version, @application, @description, @secret)
   end
 end

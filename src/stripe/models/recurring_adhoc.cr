@@ -12,21 +12,20 @@ require "time"
 require "log"
 
 module Stripe
-  # The recurring components of a price such as `interval` and `interval_count`.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class RecurringAdhoc
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Specifies billing frequency. Either `day`, `week`, `month` or `year`.
+
     @[JSON::Field(key: "interval", type: String)]
     getter interval : String
 
     ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
 
     # Optional properties
-    # The number of intervals between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).
+
     @[JSON::Field(key: "interval_count", type: Int64?, presence: true, ignore_serialize: interval_count.nil? && !interval_count_present?)]
     property interval_count : Int64?
 
@@ -35,13 +34,20 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @interval : String, @interval_count : Int64? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @interval : String,
+      # Optional properties
+      @interval_count : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
 
       invalid_properties
@@ -51,6 +57,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
+
       true
     end
 
@@ -61,23 +68,16 @@ module Stripe
       @interval = interval
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        interval == o.interval &&
-        interval_count == o.interval_count
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@interval, @interval_count)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@interval, @interval_count)
   end
 end

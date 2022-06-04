@@ -19,7 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
-    # Override showing a tipping selection screen on this transaction.
+
     @[JSON::Field(key: "skip_tipping", type: Bool?, presence: true, ignore_serialize: skip_tipping.nil? && !skip_tipping_present?)]
     property skip_tipping : Bool?
 
@@ -28,7 +28,11 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @skip_tipping : Bool? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @skip_tipping : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -45,22 +49,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        skip_tipping == o.skip_tipping
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@skip_tipping)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@skip_tipping)
   end
 end

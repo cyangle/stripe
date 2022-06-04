@@ -18,12 +18,14 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "bbpos_wisepos_e", type: BbposWisePose?, presence: true, ignore_serialize: bbpos_wisepos_e.nil? && !bbpos_wisepos_e_present?)]
     property bbpos_wisepos_e : BbposWisePose?
 
     @[JSON::Field(ignore: true)]
     property? bbpos_wisepos_e_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -44,7 +46,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @bbpos_wisepos_e : BbposWisePose? = nil, @expand : Array(String)? = nil, @tipping : PostTerminalConfigurationsRequestTipping? = nil, @verifone_p400 : VerifoneP400? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @bbpos_wisepos_e : BbposWisePose? = nil,
+      @expand : Array(String)? = nil,
+      @tipping : PostTerminalConfigurationsRequestTipping? = nil,
+      @verifone_p400 : VerifoneP400? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -61,25 +70,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        bbpos_wisepos_e == o.bbpos_wisepos_e &&
-        expand == o.expand &&
-        tipping == o.tipping &&
-        verifone_p400 == o.verifone_p400
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@bbpos_wisepos_e, @expand, @tipping, @verifone_p400)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bbpos_wisepos_e, @expand, @tipping, @verifone_p400)
   end
 end

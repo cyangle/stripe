@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     @[JSON::Field(key: "billing", type: BillingSpecs)]
     property billing : BillingSpecs
 
@@ -32,6 +33,7 @@ module Stripe
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["company", "individual"])
 
     # Optional properties
+
     @[JSON::Field(key: "company", type: CompanyParam?, presence: true, ignore_serialize: company.nil? && !company_present?)]
     property company : CompanyParam?
 
@@ -45,6 +47,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -88,7 +91,22 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing : BillingSpecs, @name : String, @_type : String, @company : CompanyParam? = nil, @email : String? = nil, @expand : Array(String)? = nil, @individual : IndividualParam? = nil, @metadata : Hash(String, String)? = nil, @phone_number : String? = nil, @spending_controls : AuthorizationControlsParamV2? = nil, @status : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @billing : BillingSpecs,
+      @name : String,
+      @_type : String,
+      # Optional properties
+      @company : CompanyParam? = nil,
+      @email : String? = nil,
+      @expand : Array(String)? = nil,
+      @individual : IndividualParam? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @phone_number : String? = nil,
+      @spending_controls : AuthorizationControlsParamV2? = nil,
+      @status : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -96,9 +114,9 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
-
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
       invalid_properties
     end
@@ -106,16 +124,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      true
-    end
+      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      ENUM_VALIDATOR_FOR_STATUS.valid!(status)
-      @status = status
+      true
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -125,22 +137,11 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        billing == o.billing &&
-        company == o.company &&
-        email == o.email &&
-        expand == o.expand &&
-        individual == o.individual &&
-        metadata == o.metadata &&
-        name == o.name &&
-        phone_number == o.phone_number &&
-        spending_controls == o.spending_controls &&
-        status == o.status &&
-        _type == o._type
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      ENUM_VALIDATOR_FOR_STATUS.valid!(status)
+      @status = status
     end
 
     # @see the `==` method
@@ -149,8 +150,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@billing, @company, @email, @expand, @individual, @metadata, @name, @phone_number, @spending_controls, @status, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@billing, @name, @_type, @company, @email, @expand, @individual, @metadata, @phone_number, @spending_controls, @status)
   end
 end

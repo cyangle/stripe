@@ -19,13 +19,17 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The URL you provide to redirect the customer back to you after they authenticated their payment. It can use your application URI scheme in the context of a mobile application.
+
     @[JSON::Field(key: "return_url", type: String)]
     property return_url : String
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @return_url : String)
+    def initialize(
+      *,
+      # Required properties
+      @return_url : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -42,22 +46,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        return_url == o.return_url
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@return_url)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@return_url)
   end
 end

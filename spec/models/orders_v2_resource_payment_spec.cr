@@ -35,7 +35,7 @@ describe Stripe::OrdersV2ResourcePayment do
   describe "test attribute 'status'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["canceled", "complete", "not_required", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method", "null"])
+      # validator = EnumValidator.new("String", ["canceled", "complete", "not_required", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

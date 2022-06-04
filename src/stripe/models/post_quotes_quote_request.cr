@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "application_fee_amount", type: PostQuotesRequestApplicationFeeAmount?, presence: true, ignore_serialize: application_fee_amount.nil? && !application_fee_amount_present?)]
     property application_fee_amount : PostQuotesRequestApplicationFeeAmount?
 
@@ -71,6 +72,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? discounts_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -138,7 +140,28 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @application_fee_amount : PostQuotesRequestApplicationFeeAmount? = nil, @application_fee_percent : PostQuotesRequestApplicationFeePercent? = nil, @automatic_tax : AutomaticTaxParam2? = nil, @collection_method : String? = nil, @customer : String? = nil, @default_tax_rates : PostQuotesRequestDefaultTaxRates? = nil, @description : String? = nil, @discounts : PostQuotesRequestDiscounts? = nil, @expand : Array(String)? = nil, @expires_at : Int64? = nil, @footer : String? = nil, @header : String? = nil, @invoice_settings : QuoteParam? = nil, @line_items : Array(LineItemUpdateParams)? = nil, @metadata : Hash(String, String)? = nil, @on_behalf_of : PostQuotesRequestOnBehalfOf? = nil, @subscription_data : SubscriptionDataUpdateParams? = nil, @transfer_data : PostQuotesRequestTransferData? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @application_fee_amount : PostQuotesRequestApplicationFeeAmount? = nil,
+      @application_fee_percent : PostQuotesRequestApplicationFeePercent? = nil,
+      @automatic_tax : AutomaticTaxParam2? = nil,
+      @collection_method : String? = nil,
+      @customer : String? = nil,
+      @default_tax_rates : PostQuotesRequestDefaultTaxRates? = nil,
+      @description : String? = nil,
+      @discounts : PostQuotesRequestDiscounts? = nil,
+      @expand : Array(String)? = nil,
+      @expires_at : Int64? = nil,
+      @footer : String? = nil,
+      @header : String? = nil,
+      @invoice_settings : QuoteParam? = nil,
+      @line_items : Array(LineItemUpdateParams)? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @on_behalf_of : PostQuotesRequestOnBehalfOf? = nil,
+      @subscription_data : SubscriptionDataUpdateParams? = nil,
+      @transfer_data : PostQuotesRequestTransferData? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -175,6 +198,7 @@ module Stripe
       return false if !@description.nil? && @description.to_s.size > 500
       return false if !@footer.nil? && @footer.to_s.size > 500
       return false if !@header.nil? && @header.to_s.size > 50
+
       true
     end
 
@@ -225,39 +249,16 @@ module Stripe
       @header = header
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        application_fee_amount == o.application_fee_amount &&
-        application_fee_percent == o.application_fee_percent &&
-        automatic_tax == o.automatic_tax &&
-        collection_method == o.collection_method &&
-        customer == o.customer &&
-        default_tax_rates == o.default_tax_rates &&
-        description == o.description &&
-        discounts == o.discounts &&
-        expand == o.expand &&
-        expires_at == o.expires_at &&
-        footer == o.footer &&
-        header == o.header &&
-        invoice_settings == o.invoice_settings &&
-        line_items == o.line_items &&
-        metadata == o.metadata &&
-        on_behalf_of == o.on_behalf_of &&
-        subscription_data == o.subscription_data &&
-        transfer_data == o.transfer_data
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@application_fee_amount, @application_fee_percent, @automatic_tax, @collection_method, @customer, @default_tax_rates, @description, @discounts, @expand, @expires_at, @footer, @header, @invoice_settings, @line_items, @metadata, @on_behalf_of, @subscription_data, @transfer_data)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@application_fee_amount, @application_fee_percent, @automatic_tax, @collection_method, @customer, @default_tax_rates, @description, @discounts, @expand, @expires_at, @footer, @header, @invoice_settings, @line_items, @metadata, @on_behalf_of, @subscription_data, @transfer_data)
   end
 end

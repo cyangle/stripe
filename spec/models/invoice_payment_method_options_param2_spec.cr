@@ -20,13 +20,15 @@ describe Stripe::InvoicePaymentMethodOptionsParam2 do
     end
   end
 
-  describe "test attribute 'request_three_d_secure'" do
+  describe "test attribute 'bank_transfer'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["any", "automatic"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.request_three_d_secure = value }.not_to raise_error
-      # end
+    end
+  end
+
+  describe "test attribute 'funding_type'" do
+    it "should work" do
+      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
     end
   end
 end

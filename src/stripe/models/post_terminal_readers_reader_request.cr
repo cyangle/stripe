@@ -18,6 +18,8 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -31,15 +33,21 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? label_present : Bool = false
 
-    @[JSON::Field(key: "metadata", type: IndividualSpecsMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : IndividualSpecsMetadata?
+    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : PostAccountRequestMetadata?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @expand : Array(String)? = nil, @label : String? = nil, @metadata : IndividualSpecsMetadata? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @expand : Array(String)? = nil,
+      @label : String? = nil,
+      @metadata : PostAccountRequestMetadata? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -58,6 +66,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if !@label.nil? && @label.to_s.size > 5000
+
       true
     end
 
@@ -71,24 +80,16 @@ module Stripe
       @label = label
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        expand == o.expand &&
-        label == o.label &&
-        metadata == o.metadata
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@expand, @label, @metadata)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@expand, @label, @metadata)
   end
 end

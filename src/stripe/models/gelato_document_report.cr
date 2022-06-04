@@ -19,6 +19,15 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # Status of this `document` check.
+    @[JSON::Field(key: "status", type: String)]
+    getter status : String
+
+    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["unverified", "verified"])
+
+    # Optional properties
+
     @[JSON::Field(key: "address", type: GelatoDocumentReportAddress?, presence: true, ignore_serialize: address.nil? && !address_present?)]
     property address : GelatoDocumentReportAddress?
 
@@ -43,8 +52,12 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? expiration_date_present : Bool = false
 
-    @[JSON::Field(key: "files", type: Array(String))]
-    property files : Array(String)
+    # Array of [File](https://stripe.com/docs/api/files) ids containing images for this document.
+    @[JSON::Field(key: "files", type: Array(String)?, presence: true, ignore_serialize: files.nil? && !files_present?)]
+    property files : Array(String)?
+
+    @[JSON::Field(ignore: true)]
+    property? files_present : Bool = false
 
     # First name as it appears in the document.
     @[JSON::Field(key: "first_name", type: String?, presence: true, ignore_serialize: first_name.nil? && !first_name_present?)]
@@ -80,12 +93,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? number_present : Bool = false
 
-    # Status of this `document` check.
-    @[JSON::Field(key: "status", type: String)]
-    getter status : String
-
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["unverified", "verified"])
-
     # Type of the document.
     @[JSON::Field(key: "type", type: String?, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
     getter _type : String?
@@ -93,11 +100,27 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? _type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["driving_license", "id_card", "passport", "null"])
+    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["driving_license", "id_card", "passport"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @address : GelatoDocumentReportAddress?, @dob : GelatoDocumentReportDob?, @error : GelatoDocumentReportError1?, @expiration_date : GelatoDocumentReportExpirationDate?, @files : Array(String), @first_name : String?, @issued_date : GelatoDocumentReportIssuedDate?, @issuing_country : String?, @last_name : String?, @number : String?, @status : String, @_type : String?)
+    def initialize(
+      *,
+      # Required properties
+      @status : String,
+      # Optional properties
+      @address : GelatoDocumentReportAddress? = nil,
+      @dob : GelatoDocumentReportDob? = nil,
+      @error : GelatoDocumentReportError1? = nil,
+      @expiration_date : GelatoDocumentReportExpirationDate? = nil,
+      @files : Array(String)? = nil,
+      @first_name : String? = nil,
+      @issued_date : GelatoDocumentReportIssuedDate? = nil,
+      @issuing_country : String? = nil,
+      @last_name : String? = nil,
+      @number : String? = nil,
+      @_type : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -105,23 +128,23 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @first_name.to_s.size > 5000
+      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
+      if !@first_name.nil? && @first_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @issuing_country.to_s.size > 5000
+      if !@issuing_country.nil? && @issuing_country.to_s.size > 5000
         invalid_properties.push("invalid value for \"issuing_country\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @last_name.to_s.size > 5000
+      if !@last_name.nil? && @last_name.to_s.size > 5000
         invalid_properties.push("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @number.to_s.size > 5000
+      if !@number.nil? && @number.to_s.size > 5000
         invalid_properties.push("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
@@ -131,53 +154,14 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @first_name.to_s.size > 5000
-      return false if @issuing_country.to_s.size > 5000
-      return false if @last_name.to_s.size > 5000
-      return false if @number.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false if !@first_name.nil? && @first_name.to_s.size > 5000
+      return false if !@issuing_country.nil? && @issuing_country.to_s.size > 5000
+      return false if !@last_name.nil? && @last_name.to_s.size > 5000
+      return false if !@number.nil? && @number.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] first_name Value to be assigned
-    def first_name=(first_name)
-      if first_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @first_name = first_name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] issuing_country Value to be assigned
-    def issuing_country=(issuing_country)
-      if issuing_country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"issuing_country\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @issuing_country = issuing_country
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] last_name Value to be assigned
-    def last_name=(last_name)
-      if last_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @last_name = last_name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] number Value to be assigned
-    def number=(number)
-      if number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @number = number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -187,30 +171,51 @@ module Stripe
       @status = status
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] first_name Value to be assigned
+    def first_name=(first_name)
+      if !first_name.nil? && first_name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @first_name = first_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] issuing_country Value to be assigned
+    def issuing_country=(issuing_country)
+      if !issuing_country.nil? && issuing_country.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"issuing_country\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @issuing_country = issuing_country
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] last_name Value to be assigned
+    def last_name=(last_name)
+      if !last_name.nil? && last_name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @last_name = last_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] number Value to be assigned
+    def number=(number)
+      if !number.nil? && number.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @number = number
+    end
+
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
     def _type=(_type)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type)
       @_type = _type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        address == o.address &&
-        dob == o.dob &&
-        error == o.error &&
-        expiration_date == o.expiration_date &&
-        files == o.files &&
-        first_name == o.first_name &&
-        issued_date == o.issued_date &&
-        issuing_country == o.issuing_country &&
-        last_name == o.last_name &&
-        number == o.number &&
-        status == o.status &&
-        _type == o._type
     end
 
     # @see the `==` method
@@ -219,8 +224,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@address, @dob, @error, @expiration_date, @files, @first_name, @issued_date, @issuing_country, @last_name, @number, @status, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@status, @address, @dob, @error, @expiration_date, @files, @first_name, @issued_date, @issuing_country, @last_name, @number, @_type)
   end
 end

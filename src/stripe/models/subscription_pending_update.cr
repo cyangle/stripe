@@ -19,34 +19,37 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # If the update is applied, determines the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.
-    @[JSON::Field(key: "billing_cycle_anchor", type: Int64, presence: true, ignore_serialize: billing_cycle_anchor.nil? && !billing_cycle_anchor_present?)]
-    property billing_cycle_anchor : Int64
-
-    @[JSON::Field(ignore: true)]
-    property? billing_cycle_anchor_present : Bool = false
 
     # The point after which the changes reflected by this update will be discarded and no longer applied.
     @[JSON::Field(key: "expires_at", type: Int64?)]
     property expires_at : Int64?
 
+    # Optional properties
+
+    # If the update is applied, determines the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.
+    @[JSON::Field(key: "billing_cycle_anchor", type: Int64?, presence: true, ignore_serialize: billing_cycle_anchor.nil? && !billing_cycle_anchor_present?)]
+    property billing_cycle_anchor : Int64?
+
+    @[JSON::Field(ignore: true)]
+    property? billing_cycle_anchor_present : Bool = false
+
     # List of subscription items, each with an attached plan, that will be set if the update is applied.
-    @[JSON::Field(key: "subscription_items", type: Array(SubscriptionItem), presence: true, ignore_serialize: subscription_items.nil? && !subscription_items_present?)]
-    property subscription_items : Array(SubscriptionItem)
+    @[JSON::Field(key: "subscription_items", type: Array(SubscriptionItem)?, presence: true, ignore_serialize: subscription_items.nil? && !subscription_items_present?)]
+    property subscription_items : Array(SubscriptionItem)?
 
     @[JSON::Field(ignore: true)]
     property? subscription_items_present : Bool = false
 
     # Unix timestamp representing the end of the trial period the customer will get before being charged for the first time, if the update is applied.
-    @[JSON::Field(key: "trial_end", type: Int64, presence: true, ignore_serialize: trial_end.nil? && !trial_end_present?)]
-    property trial_end : Int64
+    @[JSON::Field(key: "trial_end", type: Int64?, presence: true, ignore_serialize: trial_end.nil? && !trial_end_present?)]
+    property trial_end : Int64?
 
     @[JSON::Field(ignore: true)]
     property? trial_end_present : Bool = false
 
     # Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
-    @[JSON::Field(key: "trial_from_plan", type: Bool, presence: true, ignore_serialize: trial_from_plan.nil? && !trial_from_plan_present?)]
-    property trial_from_plan : Bool
+    @[JSON::Field(key: "trial_from_plan", type: Bool?, presence: true, ignore_serialize: trial_from_plan.nil? && !trial_from_plan_present?)]
+    property trial_from_plan : Bool?
 
     @[JSON::Field(ignore: true)]
     property? trial_from_plan_present : Bool = false
@@ -60,7 +63,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing_cycle_anchor : Int64?, @expires_at : Int64, @subscription_items : Array(SubscriptionItem)?, @trial_end : Int64?, @trial_from_plan : Bool?)
+    def initialize(
+      *,
+      # Required properties
+      @expires_at : Int64? = nil,
+      # Optional properties
+      @billing_cycle_anchor : Int64? = nil,
+      @subscription_items : Array(SubscriptionItem)? = nil,
+      @trial_end : Int64? = nil,
+      @trial_from_plan : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -85,24 +97,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        billing_cycle_anchor == o.billing_cycle_anchor &&
-        expires_at == o.expires_at &&
-        subscription_items == o.subscription_items &&
-        trial_end == o.trial_end &&
-        trial_from_plan == o.trial_from_plan
     end
 
     # @see the `==` method
@@ -111,8 +108,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@billing_cycle_anchor, @expires_at, @subscription_items, @trial_end, @trial_from_plan)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@expires_at, @billing_cycle_anchor, @subscription_items, @trial_end, @trial_from_plan)
   end
 end

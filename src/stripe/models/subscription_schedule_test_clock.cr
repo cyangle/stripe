@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?)]
     property created : Int64?
@@ -39,13 +40,6 @@ module Stripe
     @[JSON::Field(key: "livemode", type: Bool?)]
     property livemode : Bool?
 
-    # The custom name supplied at creation.
-    @[JSON::Field(key: "name", type: String, presence: true, ignore_serialize: name.nil? && !name_present?)]
-    getter name : String
-
-    @[JSON::Field(ignore: true)]
-    property? name_present : Bool = false
-
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?)]
     getter object : String?
@@ -58,6 +52,15 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["advancing", "internal_failure", "ready"])
 
+    # Optional properties
+
+    # The custom name supplied at creation.
+    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    getter name : String?
+
+    @[JSON::Field(ignore: true)]
+    property? name_present : Bool = false
+
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
       [
@@ -68,7 +71,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @created : Int64, @deletes_after : Int64, @frozen_time : Int64, @id : String, @livemode : Bool, @name : String?, @object : String, @status : String)
+    def initialize(
+      *,
+      # Required properties
+      @created : Int64? = nil,
+      @deletes_after : Int64? = nil,
+      @frozen_time : Int64? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @object : String? = nil,
+      @status : String? = nil,
+      # Optional properties
+      @name : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -80,13 +95,13 @@ module Stripe
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
+      if !@name.nil? && @name.to_s.size > 5000
+        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
 
       invalid_properties
     end
@@ -95,9 +110,10 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false if @id.to_s.size > 5000
-      return false if @name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false if !@name.nil? && @name.to_s.size > 5000
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -109,10 +125,7 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
     end
@@ -125,16 +138,6 @@ module Stripe
       end
 
       @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @name = name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -151,19 +154,14 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        created == o.created &&
-        deletes_after == o.deletes_after &&
-        frozen_time == o.frozen_time &&
-        id == o.id &&
-        livemode == o.livemode &&
-        name == o.name &&
-        object == o.object &&
-        status == o.status
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if !name.nil? && name.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @name = name
     end
 
     # @see the `==` method
@@ -172,8 +170,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@created, @deletes_after, @frozen_time, @id, @livemode, @name, @object, @status)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@created, @deletes_after, @frozen_time, @id, @livemode, @object, @status, @name)
   end
 end

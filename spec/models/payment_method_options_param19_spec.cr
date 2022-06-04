@@ -20,22 +20,12 @@ describe Stripe::PaymentMethodOptionsParam19 do
     end
   end
 
-  describe "test attribute 'preferred_language'" do
+  describe "test attribute 'network'" do
     it "should work" do
       # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["", "de", "en", "es", "fr", "it", "nl", "pl"])
+      # validator = EnumValidator.new("String", ["ach", "us_domestic_wire"])
       # validator.allowable_values.each do |value|
-      #   expect { instance.preferred_language = value }.not_to raise_error
-      # end
-    end
-  end
-
-  describe "test attribute 'setup_future_usage'" do
-    it "should work" do
-      # assertion here. ref: https://crystal-lang.org/reference/guides/testing.html
-      # validator = EnumValidator.new("String", ["", "none", "off_session"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.setup_future_usage = value }.not_to raise_error
+      #   expect { instance.network = value }.not_to raise_error
       # end
     end
   end

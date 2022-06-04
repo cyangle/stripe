@@ -12,40 +12,36 @@ require "time"
 require "log"
 
 module Stripe
-  # Data used to generate a new product object inline. One of `product` or `product_data` is required.
   @[JSON::Serializable::Options(emit_nulls: true)]
   class ProductData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # The product's name, meant to be displayable to the customer.
+
     @[JSON::Field(key: "name", type: String)]
     getter name : String
 
     # Optional properties
-    # The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
+
     @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String?
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
-    # A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
     @[JSON::Field(key: "images", type: Array(String)?, presence: true, ignore_serialize: images.nil? && !images_present?)]
     property images : Array(String)?
 
     @[JSON::Field(ignore: true)]
     property? images_present : Bool = false
 
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
     property metadata : Hash(String, String)?
 
     @[JSON::Field(ignore: true)]
     property? metadata_present : Bool = false
 
-    # A [tax code](https://stripe.com/docs/tax/tax-categories) ID.
     @[JSON::Field(key: "tax_code", type: String?, presence: true, ignore_serialize: tax_code.nil? && !tax_code_present?)]
     getter tax_code : String?
 
@@ -54,7 +50,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @name : String, @description : String? = nil, @images : Array(String)? = nil, @metadata : Hash(String, String)? = nil, @tax_code : String? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @name : String,
+      # Optional properties
+      @description : String? = nil,
+      @images : Array(String)? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @tax_code : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -62,12 +67,12 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if !@description.nil? && @description.to_s.size > 40000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
-      end
-
       if @name.to_s.size > 5000
         invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@description.nil? && @description.to_s.size > 40000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
       end
 
       if !@tax_code.nil? && @tax_code.to_s.size > 5000
@@ -80,20 +85,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@description.nil? && @description.to_s.size > 40000
       return false if @name.to_s.size > 5000
+      return false if !@description.nil? && @description.to_s.size > 40000
       return false if !@tax_code.nil? && @tax_code.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if !description.nil? && description.to_s.size > 40000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -107,6 +103,16 @@ module Stripe
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 40000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] tax_code Value to be assigned
     def tax_code=(tax_code)
       if !tax_code.nil? && tax_code.to_s.size > 5000
@@ -116,26 +122,16 @@ module Stripe
       @tax_code = tax_code
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        description == o.description &&
-        images == o.images &&
-        metadata == o.metadata &&
-        name == o.name &&
-        tax_code == o.tax_code
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@description, @images, @metadata, @name, @tax_code)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@name, @description, @images, @metadata, @tax_code)
   end
 end

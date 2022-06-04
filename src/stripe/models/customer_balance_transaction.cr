@@ -19,6 +19,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # The amount of the transaction. A negative value is a credit for the customer's balance, and a positive value is a debit to the customer's `balance`.
     @[JSON::Field(key: "amount", type: Int64)]
     property amount : Int64
@@ -27,25 +28,12 @@ module Stripe
     @[JSON::Field(key: "created", type: Int64)]
     property created : Int64
 
-    @[JSON::Field(key: "credit_note", type: CustomerBalanceTransactionCreditNote?, presence: true, ignore_serialize: credit_note.nil? && !credit_note_present?)]
-    property credit_note : CustomerBalanceTransactionCreditNote?
-
-    @[JSON::Field(ignore: true)]
-    property? credit_note_present : Bool = false
-
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String)]
     property currency : String
 
     @[JSON::Field(key: "customer", type: CustomerBalanceTransactionCustomer)]
     property customer : CustomerBalanceTransactionCustomer
-
-    # An arbitrary string attached to the object. Often useful for displaying to users.
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
 
     # The customer's `balance` after the transaction was applied. A negative value decreases the amount due on the customer's next invoice. A positive value increases the amount due on the customer's next invoice.
     @[JSON::Field(key: "ending_balance", type: Int64)]
@@ -55,22 +43,9 @@ module Stripe
     @[JSON::Field(key: "id", type: String)]
     getter id : String
 
-    @[JSON::Field(key: "invoice", type: CustomerBalanceTransactionInvoice?, presence: true, ignore_serialize: invoice.nil? && !invoice_present?)]
-    property invoice : CustomerBalanceTransactionInvoice?
-
-    @[JSON::Field(ignore: true)]
-    property? invoice_present : Bool = false
-
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool)]
     property livemode : Bool
-
-    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)?
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String)]
@@ -84,19 +59,60 @@ module Stripe
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["adjustment", "applied_to_invoice", "credit_note", "initial", "invoice_too_large", "invoice_too_small", "migration", "unapplied_from_invoice", "unspent_receiver_credit"])
 
+    # Optional properties
+
+    @[JSON::Field(key: "credit_note", type: CustomerBalanceTransactionCreditNote?, presence: true, ignore_serialize: credit_note.nil? && !credit_note_present?)]
+    property credit_note : CustomerBalanceTransactionCreditNote?
+
+    @[JSON::Field(ignore: true)]
+    property? credit_note_present : Bool = false
+
+    # An arbitrary string attached to the object. Often useful for displaying to users.
+    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String?
+
+    @[JSON::Field(ignore: true)]
+    property? description_present : Bool = false
+
+    @[JSON::Field(key: "invoice", type: CustomerBalanceTransactionInvoice?, presence: true, ignore_serialize: invoice.nil? && !invoice_present?)]
+    property invoice : CustomerBalanceTransactionInvoice?
+
+    @[JSON::Field(ignore: true)]
+    property? invoice_present : Bool = false
+
+    # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
+    property metadata : Hash(String, String)?
+
+    @[JSON::Field(ignore: true)]
+    property? metadata_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @amount : Int64, @created : Int64, @credit_note : CustomerBalanceTransactionCreditNote?, @currency : String, @customer : CustomerBalanceTransactionCustomer, @description : String?, @ending_balance : Int64, @id : String, @invoice : CustomerBalanceTransactionInvoice?, @livemode : Bool, @metadata : Hash(String, String)?, @object : String, @_type : String)
+    def initialize(
+      *,
+      # Required properties
+      @amount : Int64,
+      @created : Int64,
+      @currency : String,
+      @customer : CustomerBalanceTransactionCustomer,
+      @ending_balance : Int64,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @_type : String,
+      # Optional properties
+      @credit_note : CustomerBalanceTransactionCreditNote? = nil,
+      @description : String? = nil,
+      @invoice : CustomerBalanceTransactionInvoice? = nil,
+      @metadata : Hash(String, String)? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
 
       if @id.to_s.size > 5000
         invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
@@ -106,27 +122,22 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
+      if !@description.nil? && @description.to_s.size > 5000
+        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @description.to_s.size > 5000
       return false if @id.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if !@description.nil? && @description.to_s.size > 5000
+
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @description = description
     end
 
     # Custom attribute writer method with validation
@@ -153,24 +164,14 @@ module Stripe
       @_type = _type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        amount == o.amount &&
-        created == o.created &&
-        credit_note == o.credit_note &&
-        currency == o.currency &&
-        customer == o.customer &&
-        description == o.description &&
-        ending_balance == o.ending_balance &&
-        id == o.id &&
-        invoice == o.invoice &&
-        livemode == o.livemode &&
-        metadata == o.metadata &&
-        object == o.object &&
-        _type == o._type
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @description = description
     end
 
     # @see the `==` method
@@ -179,8 +180,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@amount, @created, @credit_note, @currency, @customer, @description, @ending_balance, @id, @invoice, @livemode, @metadata, @object, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@amount, @created, @currency, @customer, @ending_balance, @id, @livemode, @object, @_type, @credit_note, @description, @invoice, @metadata)
   end
 end

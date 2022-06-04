@@ -19,12 +19,12 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Set this to `true` to create a file link for the newly created file. Creating a link is only possible when the file's `purpose` is one of the following: `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`, `pci_document`, or `tax_document_user_upload`.
+
     @[JSON::Field(key: "create", type: Bool)]
     property create : Bool
 
     # Optional properties
-    # A future timestamp after which the link will no longer be usable.
+
     @[JSON::Field(key: "expires_at", type: Int64?, presence: true, ignore_serialize: expires_at.nil? && !expires_at_present?)]
     property expires_at : Int64?
 
@@ -39,7 +39,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @create : Bool, @expires_at : Int64? = nil, @metadata : IndividualSpecsMetadata? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @create : Bool,
+      # Optional properties
+      @expires_at : Int64? = nil,
+      @metadata : IndividualSpecsMetadata? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -56,24 +63,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        create == o.create &&
-        expires_at == o.expires_at &&
-        metadata == o.metadata
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@create, @expires_at, @metadata)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@create, @expires_at, @metadata)
   end
 end

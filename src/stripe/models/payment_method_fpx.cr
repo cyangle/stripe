@@ -19,14 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Account holder type, if provided. Can be one of `individual` or `company`.
-    @[JSON::Field(key: "account_holder_type", type: String?, presence: true, ignore_serialize: account_holder_type.nil? && !account_holder_type_present?)]
-    getter account_holder_type : String?
-
-    @[JSON::Field(ignore: true)]
-    property? account_holder_type_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE = EnumValidator.new("account_holder_type", "String", ["company", "individual", "null"])
 
     # The customer's bank, if provided. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, or `pb_enterprise`.
     @[JSON::Field(key: "bank", type: String)]
@@ -36,14 +28,17 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @account_holder_type : String?, @bank : String)
+    def initialize(
+      *,
+      # Required properties
+      @bank : String
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid?(@account_holder_type)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BANK.error_message) unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank, false)
 
@@ -53,16 +48,9 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid?(@account_holder_type)
       return false unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank, false)
-      true
-    end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] account_holder_type Object to be assigned
-    def account_holder_type=(account_holder_type)
-      ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid!(account_holder_type)
-      @account_holder_type = account_holder_type
+      true
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,23 +60,16 @@ module Stripe
       @bank = bank
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        account_holder_type == o.account_holder_type &&
-        bank == o.bank
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@account_holder_type, @bank)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@bank)
   end
 end

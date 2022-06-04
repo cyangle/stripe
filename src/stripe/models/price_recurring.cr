@@ -19,14 +19,6 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
-    # Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.
-    @[JSON::Field(key: "aggregate_usage", type: String, presence: true, ignore_serialize: aggregate_usage.nil? && !aggregate_usage_present?)]
-    getter aggregate_usage : String
-
-    @[JSON::Field(ignore: true)]
-    property? aggregate_usage_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_AGGREGATE_USAGE = EnumValidator.new("aggregate_usage", "String", ["last_during_period", "last_ever", "max", "sum", "null"])
 
     # The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.
     @[JSON::Field(key: "interval", type: String?)]
@@ -38,18 +30,22 @@ module Stripe
     @[JSON::Field(key: "interval_count", type: Int64?)]
     property interval_count : Int64?
 
-    # Default number of trial days when subscribing a customer to this price using [`trial_from_plan=true`](https://stripe.com/docs/api#create_subscription-trial_from_plan).
-    @[JSON::Field(key: "trial_period_days", type: Int64, presence: true, ignore_serialize: trial_period_days.nil? && !trial_period_days_present?)]
-    property trial_period_days : Int64
-
-    @[JSON::Field(ignore: true)]
-    property? trial_period_days_present : Bool = false
-
     # Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.
     @[JSON::Field(key: "usage_type", type: String?)]
     getter usage_type : String?
 
     ENUM_VALIDATOR_FOR_USAGE_TYPE = EnumValidator.new("usage_type", "String", ["licensed", "metered"])
+
+    # Optional properties
+
+    # Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are `sum` for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.
+    @[JSON::Field(key: "aggregate_usage", type: String?, presence: true, ignore_serialize: aggregate_usage.nil? && !aggregate_usage_present?)]
+    getter aggregate_usage : String?
+
+    @[JSON::Field(ignore: true)]
+    property? aggregate_usage_present : Bool = false
+
+    ENUM_VALIDATOR_FOR_AGGREGATE_USAGE = EnumValidator.new("aggregate_usage", "String", ["last_during_period", "last_ever", "max", "sum"])
 
     # List of class defined in anyOf (OpenAPI v3)
     def self.openapi_any_of
@@ -60,18 +56,27 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @aggregate_usage : String?, @interval : String, @interval_count : Int64, @trial_period_days : Int64?, @usage_type : String)
+    def initialize(
+      *,
+      # Required properties
+      @interval : String? = nil,
+      @interval_count : Int64? = nil,
+      @usage_type : String? = nil,
+      # Optional properties
+      @aggregate_usage : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid?(@aggregate_usage)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_USAGE_TYPE.error_message) unless ENUM_VALIDATOR_FOR_USAGE_TYPE.valid?(@usage_type, false)
+
+      invalid_properties.push(ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid?(@aggregate_usage)
 
       invalid_properties
     end
@@ -79,9 +84,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false unless ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid?(@aggregate_usage)
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
       return false unless ENUM_VALIDATOR_FOR_USAGE_TYPE.valid?(@usage_type, false)
+      return false unless ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid?(@aggregate_usage)
+
       _any_of_found = false
       json_string : String = self.to_json
       _any_of_found = self.class.openapi_any_of.any? do |_class|
@@ -93,19 +99,9 @@ module Stripe
 
         !_any_of.nil? && _any_of.not_nil!.valid?
       end
-
-      if !_any_of_found
-        return false
-      end
+      return false if !_any_of_found
 
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] aggregate_usage Object to be assigned
-    def aggregate_usage=(aggregate_usage)
-      ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid!(aggregate_usage)
-      @aggregate_usage = aggregate_usage
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -122,16 +118,11 @@ module Stripe
       @usage_type = usage_type
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        aggregate_usage == o.aggregate_usage &&
-        interval == o.interval &&
-        interval_count == o.interval_count &&
-        trial_period_days == o.trial_period_days &&
-        usage_type == o.usage_type
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] aggregate_usage Object to be assigned
+    def aggregate_usage=(aggregate_usage)
+      ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid!(aggregate_usage)
+      @aggregate_usage = aggregate_usage
     end
 
     # @see the `==` method
@@ -140,8 +131,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@aggregate_usage, @interval, @interval_count, @trial_period_days, @usage_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@interval, @interval_count, @usage_type, @aggregate_usage)
   end
 end

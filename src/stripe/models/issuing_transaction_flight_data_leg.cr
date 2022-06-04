@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The three-letter IATA airport code of the flight's destination.
     @[JSON::Field(key: "arrival_airport_code", type: String?, presence: true, ignore_serialize: arrival_airport_code.nil? && !arrival_airport_code_present?)]
     getter arrival_airport_code : String?
@@ -63,7 +64,16 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @arrival_airport_code : String?, @carrier : String?, @departure_airport_code : String?, @flight_number : String?, @service_class : String?, @stopover_allowed : Bool?)
+    def initialize(
+      *,
+      # Optional properties
+      @arrival_airport_code : String? = nil,
+      @carrier : String? = nil,
+      @departure_airport_code : String? = nil,
+      @flight_number : String? = nil,
+      @service_class : String? = nil,
+      @stopover_allowed : Bool? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -71,23 +81,23 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @arrival_airport_code.to_s.size > 5000
+      if !@arrival_airport_code.nil? && @arrival_airport_code.to_s.size > 5000
         invalid_properties.push("invalid value for \"arrival_airport_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @carrier.to_s.size > 5000
+      if !@carrier.nil? && @carrier.to_s.size > 5000
         invalid_properties.push("invalid value for \"carrier\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @departure_airport_code.to_s.size > 5000
+      if !@departure_airport_code.nil? && @departure_airport_code.to_s.size > 5000
         invalid_properties.push("invalid value for \"departure_airport_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @flight_number.to_s.size > 5000
+      if !@flight_number.nil? && @flight_number.to_s.size > 5000
         invalid_properties.push("invalid value for \"flight_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @service_class.to_s.size > 5000
+      if !@service_class.nil? && @service_class.to_s.size > 5000
         invalid_properties.push("invalid value for \"service_class\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -97,18 +107,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @arrival_airport_code.to_s.size > 5000
-      return false if @carrier.to_s.size > 5000
-      return false if @departure_airport_code.to_s.size > 5000
-      return false if @flight_number.to_s.size > 5000
-      return false if @service_class.to_s.size > 5000
+      return false if !@arrival_airport_code.nil? && @arrival_airport_code.to_s.size > 5000
+      return false if !@carrier.nil? && @carrier.to_s.size > 5000
+      return false if !@departure_airport_code.nil? && @departure_airport_code.to_s.size > 5000
+      return false if !@flight_number.nil? && @flight_number.to_s.size > 5000
+      return false if !@service_class.nil? && @service_class.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] arrival_airport_code Value to be assigned
     def arrival_airport_code=(arrival_airport_code)
-      if arrival_airport_code.to_s.size > 5000
+      if !arrival_airport_code.nil? && arrival_airport_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"arrival_airport_code\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -118,7 +129,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] carrier Value to be assigned
     def carrier=(carrier)
-      if carrier.to_s.size > 5000
+      if !carrier.nil? && carrier.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"carrier\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -128,7 +139,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] departure_airport_code Value to be assigned
     def departure_airport_code=(departure_airport_code)
-      if departure_airport_code.to_s.size > 5000
+      if !departure_airport_code.nil? && departure_airport_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"departure_airport_code\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -138,7 +149,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] flight_number Value to be assigned
     def flight_number=(flight_number)
-      if flight_number.to_s.size > 5000
+      if !flight_number.nil? && flight_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"flight_number\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -148,24 +159,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] service_class Value to be assigned
     def service_class=(service_class)
-      if service_class.to_s.size > 5000
+      if !service_class.nil? && service_class.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"service_class\", the character length must be smaller than or equal to 5000.")
       end
 
       @service_class = service_class
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        arrival_airport_code == o.arrival_airport_code &&
-        carrier == o.carrier &&
-        departure_airport_code == o.departure_airport_code &&
-        flight_number == o.flight_number &&
-        service_class == o.service_class &&
-        stopover_allowed == o.stopover_allowed
     end
 
     # @see the `==` method
@@ -174,8 +172,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@arrival_airport_code, @carrier, @departure_airport_code, @flight_number, @service_class, @stopover_allowed)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@arrival_airport_code, @carrier, @departure_airport_code, @flight_number, @service_class, @stopover_allowed)
   end
 end

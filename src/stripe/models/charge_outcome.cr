@@ -19,6 +19,13 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
+    # Possible values are `authorized`, `manual_review`, `issuer_declined`, `blocked`, and `invalid`. See [understanding declines](https://stripe.com/docs/declines) and [Radar reviews](https://stripe.com/docs/radar/reviews) for details.
+    @[JSON::Field(key: "type", type: String)]
+    getter _type : String
+
+    # Optional properties
+
     # Possible values are `approved_by_network`, `declined_by_network`, `not_sent_to_network`, and `reversed_after_approval`. The value `reversed_after_approval` indicates the payment was [blocked by Stripe](https://stripe.com/docs/declines#blocked-payments) after bank authorization, and may temporarily appear as \"pending\" on a cardholder's statement.
     @[JSON::Field(key: "network_status", type: String?, presence: true, ignore_serialize: network_status.nil? && !network_status_present?)]
     getter network_status : String?
@@ -33,18 +40,6 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? reason_present : Bool = false
 
-    # A human-readable description of the outcome type and reason, designed for you (the recipient of the payment), not your customer.
-    @[JSON::Field(key: "seller_message", type: String?, presence: true, ignore_serialize: seller_message.nil? && !seller_message_present?)]
-    getter seller_message : String?
-
-    @[JSON::Field(ignore: true)]
-    property? seller_message_present : Bool = false
-
-    # Possible values are `authorized`, `manual_review`, `issuer_declined`, `blocked`, and `invalid`. See [understanding declines](https://stripe.com/docs/declines) and [Radar reviews](https://stripe.com/docs/radar/reviews) for details.
-    @[JSON::Field(key: "type", type: String)]
-    getter _type : String
-
-    # Optional properties
     # Stripe Radar's evaluation of the riskiness of the payment. Possible values for evaluated payments are `normal`, `elevated`, `highest`. For non-card payments, and card-based payments predating the public assignment of risk levels, this field will have the value `not_assessed`. In the event of an error in the evaluation, this field will have the value `unknown`. This field is only available with Radar.
     @[JSON::Field(key: "risk_level", type: String?, presence: true, ignore_serialize: risk_level.nil? && !risk_level_present?)]
     getter risk_level : String?
@@ -65,9 +60,27 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? rule_present : Bool = false
 
+    # A human-readable description of the outcome type and reason, designed for you (the recipient of the payment), not your customer.
+    @[JSON::Field(key: "seller_message", type: String?, presence: true, ignore_serialize: seller_message.nil? && !seller_message_present?)]
+    getter seller_message : String?
+
+    @[JSON::Field(ignore: true)]
+    property? seller_message_present : Bool = false
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @network_status : String?, @reason : String?, @seller_message : String?, @_type : String, @risk_level : String? = nil, @risk_score : Int64? = nil, @rule : ChargeOutcomeRule? = nil)
+    def initialize(
+      *,
+      # Required properties
+      @_type : String,
+      # Optional properties
+      @network_status : String? = nil,
+      @reason : String? = nil,
+      @risk_level : String? = nil,
+      @risk_score : Int64? = nil,
+      @rule : ChargeOutcomeRule? = nil,
+      @seller_message : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -75,11 +88,15 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @network_status.to_s.size > 5000
+      if @_type.to_s.size > 5000
+        invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      end
+
+      if !@network_status.nil? && @network_status.to_s.size > 5000
         invalid_properties.push("invalid value for \"network_status\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @reason.to_s.size > 5000
+      if !@reason.nil? && @reason.to_s.size > 5000
         invalid_properties.push("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -87,12 +104,8 @@ module Stripe
         invalid_properties.push("invalid value for \"risk_level\", the character length must be smaller than or equal to 5000.")
       end
 
-      if @seller_message.to_s.size > 5000
+      if !@seller_message.nil? && @seller_message.to_s.size > 5000
         invalid_properties.push("invalid value for \"seller_message\", the character length must be smaller than or equal to 5000.")
-      end
-
-      if @_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
       invalid_properties
@@ -101,18 +114,29 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @network_status.to_s.size > 5000
-      return false if @reason.to_s.size > 5000
-      return false if !@risk_level.nil? && @risk_level.to_s.size > 5000
-      return false if @seller_message.to_s.size > 5000
       return false if @_type.to_s.size > 5000
+      return false if !@network_status.nil? && @network_status.to_s.size > 5000
+      return false if !@reason.nil? && @reason.to_s.size > 5000
+      return false if !@risk_level.nil? && @risk_level.to_s.size > 5000
+      return false if !@seller_message.nil? && @seller_message.to_s.size > 5000
+
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] _type Value to be assigned
+    def _type=(_type)
+      if _type.to_s.size > 5000
+        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      end
+
+      @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] network_status Value to be assigned
     def network_status=(network_status)
-      if network_status.to_s.size > 5000
+      if !network_status.nil? && network_status.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"network_status\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -122,7 +146,7 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] reason Value to be assigned
     def reason=(reason)
-      if reason.to_s.size > 5000
+      if !reason.nil? && reason.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -142,35 +166,11 @@ module Stripe
     # Custom attribute writer method with validation
     # @param [Object] seller_message Value to be assigned
     def seller_message=(seller_message)
-      if seller_message.to_s.size > 5000
+      if !seller_message.nil? && seller_message.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"seller_message\", the character length must be smaller than or equal to 5000.")
       end
 
       @seller_message = seller_message
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] _type Value to be assigned
-    def _type=(_type)
-      if _type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
-      end
-
-      @_type = _type
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        network_status == o.network_status &&
-        reason == o.reason &&
-        risk_level == o.risk_level &&
-        risk_score == o.risk_score &&
-        rule == o.rule &&
-        seller_message == o.seller_message &&
-        _type == o._type
     end
 
     # @see the `==` method
@@ -179,8 +179,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@network_status, @reason, @risk_level, @risk_score, @rule, @seller_message, @_type)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@_type, @network_status, @reason, @risk_level, @risk_score, @rule, @seller_message)
   end
 end

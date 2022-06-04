@@ -18,6 +18,7 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Optional properties
+
     @[JSON::Field(key: "billing", type: BillingSpecs?, presence: true, ignore_serialize: billing.nil? && !billing_present?)]
     property billing : BillingSpecs?
 
@@ -37,6 +38,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
+    # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
     property expand : Array(String)?
 
@@ -80,7 +82,19 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @billing : BillingSpecs? = nil, @company : CompanyParam? = nil, @email : String? = nil, @expand : Array(String)? = nil, @individual : IndividualParam? = nil, @metadata : Hash(String, String)? = nil, @phone_number : String? = nil, @spending_controls : AuthorizationControlsParamV2? = nil, @status : String? = nil)
+    def initialize(
+      *,
+      # Optional properties
+      @billing : BillingSpecs? = nil,
+      @company : CompanyParam? = nil,
+      @email : String? = nil,
+      @expand : Array(String)? = nil,
+      @individual : IndividualParam? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @phone_number : String? = nil,
+      @spending_controls : AuthorizationControlsParamV2? = nil,
+      @status : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -97,6 +111,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
+
       true
     end
 
@@ -107,30 +122,16 @@ module Stripe
       @status = status
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        billing == o.billing &&
-        company == o.company &&
-        email == o.email &&
-        expand == o.expand &&
-        individual == o.individual &&
-        metadata == o.metadata &&
-        phone_number == o.phone_number &&
-        spending_controls == o.spending_controls &&
-        status == o.status
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@billing, @company, @email, @expand, @individual, @metadata, @phone_number, @spending_controls, @status)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@billing, @company, @email, @expand, @individual, @metadata, @phone_number, @spending_controls, @status)
   end
 end

@@ -19,12 +19,15 @@ module Stripe
     include JSON::Serializable::Unmapped
 
     # Required properties
+
     # A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See our [Understanding Connect Account Balances](https://stripe.com/docs/connect/account-balances) documentation for details. Default value is `false` for Custom accounts, otherwise `true`.
     @[JSON::Field(key: "debit_negative_balances", type: Bool)]
     property debit_negative_balances : Bool
 
     @[JSON::Field(key: "schedule", type: TransferSchedule)]
     property schedule : TransferSchedule
+
+    # Optional properties
 
     # The text that appears on the bank account statement for payouts. If not set, this defaults to the platform's bank descriptor as set in the Dashboard.
     @[JSON::Field(key: "statement_descriptor", type: String?, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
@@ -35,7 +38,14 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @debit_negative_balances : Bool, @schedule : TransferSchedule, @statement_descriptor : String?)
+    def initialize(
+      *,
+      # Required properties
+      @debit_negative_balances : Bool,
+      @schedule : TransferSchedule,
+      # Optional properties
+      @statement_descriptor : String? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -43,7 +53,7 @@ module Stripe
     def list_invalid_properties
       invalid_properties = Array(String).new
 
-      if @statement_descriptor.to_s.size > 5000
+      if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
         invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -53,28 +63,19 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @statement_descriptor.to_s.size > 5000
+      return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
+
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
     def statement_descriptor=(statement_descriptor)
-      if statement_descriptor.to_s.size > 5000
+      if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
 
       @statement_descriptor = statement_descriptor
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        debit_negative_balances == o.debit_negative_balances &&
-        schedule == o.schedule &&
-        statement_descriptor == o.statement_descriptor
     end
 
     # @see the `==` method
@@ -83,8 +84,10 @@ module Stripe
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@debit_negative_balances, @schedule, @statement_descriptor)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@debit_negative_balances, @schedule, @statement_descriptor)
   end
 end

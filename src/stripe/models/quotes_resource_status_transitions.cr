@@ -18,7 +18,8 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-    # Required properties
+    # Optional properties
+
     # The time that the quote was accepted. Measured in seconds since Unix epoch.
     @[JSON::Field(key: "accepted_at", type: Int64?, presence: true, ignore_serialize: accepted_at.nil? && !accepted_at_present?)]
     property accepted_at : Int64?
@@ -42,7 +43,13 @@ module Stripe
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(*, @accepted_at : Int64?, @canceled_at : Int64?, @finalized_at : Int64?)
+    def initialize(
+      *,
+      # Optional properties
+      @accepted_at : Int64? = nil,
+      @canceled_at : Int64? = nil,
+      @finalized_at : Int64? = nil
+    )
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -59,24 +66,16 @@ module Stripe
       true
     end
 
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.same?(o)
-      self.class == o.class &&
-        accepted_at == o.accepted_at &&
-        canceled_at == o.canceled_at &&
-        finalized_at == o.finalized_at
-    end
-
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
 
-    # Calculates hash code according to all attributes.
-    # @return [UInt64] Hash code
-    def_hash(@accepted_at, @canceled_at, @finalized_at)
+    # Generates #hash and #== methods from all fields
+    # #== @return [Bool]
+    # #hash calculates hash code according to all attributes.
+    # #hash @return [UInt64] Hash code
+    def_equals_and_hash(@accepted_at, @canceled_at, @finalized_at)
   end
 end
