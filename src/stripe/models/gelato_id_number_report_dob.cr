@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Date of birth.
   alias GelatoIdNumberReportDob = GelatoDataIdNumberReportDate
-
 end

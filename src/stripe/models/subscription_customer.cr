@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the customer who owns the subscription.
   alias SubscriptionCustomer = Customer | DeletedCustomer | String
-
 end

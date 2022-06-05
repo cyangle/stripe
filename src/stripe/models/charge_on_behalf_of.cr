@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account (if any) the charge was made on behalf of without triggering an automatic transfer. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers) for details.
   alias ChargeOnBehalfOf = Account | String
-
 end

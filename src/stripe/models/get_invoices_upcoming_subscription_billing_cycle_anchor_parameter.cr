@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameter = GetInvoicesUpcomingSubscriptionBillingCycleAnchorParameterOneOf | Int64
-
 end

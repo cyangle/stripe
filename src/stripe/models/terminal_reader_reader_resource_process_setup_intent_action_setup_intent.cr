@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Most recent SetupIntent processed by the reader.
   alias TerminalReaderReaderResourceProcessSetupIntentActionSetupIntent = SetupIntent | String
-
 end

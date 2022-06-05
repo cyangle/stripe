@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The user’s verified date of birth.
   alias GelatoVerifiedOutputsDob = GelatoDataVerifiedOutputsDate
-
 end

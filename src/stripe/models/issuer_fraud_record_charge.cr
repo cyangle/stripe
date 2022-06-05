@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the charge this issuer fraud record is for, optionally expanded.
   alias IssuerFraudRecordCharge = Charge | String
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The subscription that was created or updated from this quote.
   alias QuoteSubscription = String | Subscription
-
 end

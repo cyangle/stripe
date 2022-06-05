@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing proof that a service was provided to the customer. This could include a copy of a signed contract, work order, or other form of written agreement.
   alias DisputeEvidenceServiceDocumentation = File | String
-
 end

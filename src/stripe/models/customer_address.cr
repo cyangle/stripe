@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The customer's address.
   alias CustomerAddress = Address
-
 end

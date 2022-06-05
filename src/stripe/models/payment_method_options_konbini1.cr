@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PaymentMethodOptionsKonbini1 = BusinessProfileSpecsSupportUrlOneOf | JSON::Any
-
 end

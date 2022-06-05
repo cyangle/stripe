@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If paying by `konbini`, this sub-hash contains details about the Konbini payment method options to pass to the invoice’s PaymentIntent.
   alias InvoicesPaymentMethodOptionsKonbini = JSON::Any
-
 end

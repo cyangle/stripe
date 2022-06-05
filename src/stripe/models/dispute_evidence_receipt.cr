@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message sent to the customer notifying them of the charge.
   alias DisputeEvidenceReceipt = File | String
-
 end

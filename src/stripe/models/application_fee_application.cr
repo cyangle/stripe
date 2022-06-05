@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Connect application that earned the fee.
   alias ApplicationFeeApplication = Application | String
-
 end

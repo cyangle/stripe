@@ -136,25 +136,25 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @customer : String, 
+      @customer : String,
       # Optional properties
-      @amount : Int64? = nil, 
-      @currency : String? = nil, 
-      @description : String? = nil, 
-      @discountable : Bool? = nil, 
-      @discounts : PostInvoiceitemsRequestDiscounts? = nil, 
-      @expand : Array(String)? = nil, 
-      @invoice : String? = nil, 
-      @metadata : PostAccountRequestMetadata? = nil, 
-      @period : Period1? = nil, 
-      @price : String? = nil, 
-      @price_data : OneTimePriceData1? = nil, 
-      @quantity : Int64? = nil, 
-      @subscription : String? = nil, 
-      @tax_rates : Array(String)? = nil, 
-      @unit_amount : Int64? = nil, 
+      @amount : Int64? = nil,
+      @currency : String? = nil,
+      @description : String? = nil,
+      @discountable : Bool? = nil,
+      @discounts : PostInvoiceitemsRequestDiscounts? = nil,
+      @expand : Array(String)? = nil,
+      @invoice : String? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @period : Period1? = nil,
+      @price : String? = nil,
+      @price_data : OneTimePriceData1? = nil,
+      @quantity : Int64? = nil,
+      @subscription : String? = nil,
+      @tax_rates : Array(String)? = nil,
+      @unit_amount : Int64? = nil,
       @unit_amount_decimal : String? = nil
     )
     end

@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class TransferSchedule
     include JSON::Serializable
@@ -47,12 +47,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @delay_days : Int64, 
-      @interval : String, 
+      @delay_days : Int64,
+      @interval : String,
       # Optional properties
-      @monthly_anchor : Int64? = nil, 
+      @monthly_anchor : Int64? = nil,
       @weekly_anchor : String? = nil
     )
     end

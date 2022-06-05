@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the customer who will be billed when this invoice item is billed.
   alias InvoiceitemCustomer = Customer | DeletedCustomer | String
-
 end

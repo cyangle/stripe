@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias DefaultSettingsParamsBillingThresholds = BillingThresholdsParam | BusinessProfileSpecsSupportUrlOneOf
-
 end

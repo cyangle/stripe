@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
   alias IssuingDisputeCanceledEvidenceAdditionalDocumentation = File | String
-
 end

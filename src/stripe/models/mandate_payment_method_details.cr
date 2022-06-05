@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class MandatePaymentMethodDetails
     include JSON::Serializable
@@ -44,16 +44,16 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? bacs_debit_present : Bool = false
 
-    # 
-    @[JSON::Field(key: "card", type: JSON::Any?, presence: true, ignore_serialize: card.nil? && !card_present?)]
-    property card : JSON::Any?
+    #
+    @[JSON::Field(key: "card", type: JSON::Any, presence: true, ignore_serialize: card.nil? && !card_present?)]
+    property card : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
-    # 
-    @[JSON::Field(key: "link", type: JSON::Any?, presence: true, ignore_serialize: link.nil? && !link_present?)]
-    property link : JSON::Any?
+    #
+    @[JSON::Field(key: "link", type: JSON::Any, presence: true, ignore_serialize: link.nil? && !link_present?)]
+    property link : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? link_present : Bool = false
@@ -64,9 +64,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? sepa_debit_present : Bool = false
 
-    # 
-    @[JSON::Field(key: "us_bank_account", type: JSON::Any?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
-    property us_bank_account : JSON::Any?
+    #
+    @[JSON::Field(key: "us_bank_account", type: JSON::Any, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
+    property us_bank_account : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? us_bank_account_present : Bool = false
@@ -74,17 +74,17 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @_type : String, 
+      @_type : String,
       # Optional properties
-      @acss_debit : MandateAcssDebit? = nil, 
-      @au_becs_debit : MandateAuBecsDebit? = nil, 
-      @bacs_debit : MandateBacsDebit? = nil, 
-      @card : JSON::Any? = nil, 
-      @link : JSON::Any? = nil, 
-      @sepa_debit : MandateSepaDebit? = nil, 
-      @us_bank_account : JSON::Any? = nil
+      @acss_debit : MandateAcssDebit? = nil,
+      @au_becs_debit : MandateAuBecsDebit? = nil,
+      @bacs_debit : MandateBacsDebit? = nil,
+      @card : JSON::Any = nil,
+      @link : JSON::Any = nil,
+      @sepa_debit : MandateSepaDebit? = nil,
+      @us_bank_account : JSON::Any = nil
     )
     end
 

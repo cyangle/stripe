@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PaymentIntentPaymentMethodOptionsGrabpay = PaymentIntentTypeSpecificPaymentMethodOptionsClient | PaymentMethodOptionsGrabpay
-
 end

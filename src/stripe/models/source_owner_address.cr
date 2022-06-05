@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Owner's address.
   alias SourceOwnerAddress = Address
-
 end

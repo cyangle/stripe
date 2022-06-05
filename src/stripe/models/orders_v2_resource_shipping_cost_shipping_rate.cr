@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the ShippingRate for this order.
   alias OrdersV2ResourceShippingCostShippingRate = ShippingRate | String
-
 end

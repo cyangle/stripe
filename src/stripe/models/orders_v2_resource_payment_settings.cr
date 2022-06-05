@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class OrdersV2ResourcePaymentSettings
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -73,14 +72,14 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @application_fee_amount : Int64? = nil, 
-      @payment_method_options : OrdersV2ResourcePaymentSettingsPaymentMethodOptions? = nil, 
-      @payment_method_types : Array(String)? = nil, 
-      @return_url : String? = nil, 
-      @statement_descriptor : String? = nil, 
-      @statement_descriptor_suffix : String? = nil, 
+      @application_fee_amount : Int64? = nil,
+      @payment_method_options : OrdersV2ResourcePaymentSettingsPaymentMethodOptions? = nil,
+      @payment_method_types : Array(String)? = nil,
+      @return_url : String? = nil,
+      @statement_descriptor : String? = nil,
+      @statement_descriptor_suffix : String? = nil,
       @transfer_data : OrdersV2ResourcePaymentSettingsTransferData? = nil
     )
     end

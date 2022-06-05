@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Payment-method-specific configuration to provide to invoices created by the subscription.
   alias SubscriptionsResourcePaymentSettingsPaymentMethodOptions = SubscriptionsResourcePaymentMethodOptions
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the SetupIntent for Checkout Sessions in `setup` mode.
   alias CheckoutSessionSetupIntent = SetupIntent | String
-
 end

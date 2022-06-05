@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias IndividualSpecsFullNameAliases = Array(String) | BusinessProfileSpecsSupportUrlOneOf
-
 end

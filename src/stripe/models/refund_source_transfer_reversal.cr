@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The transfer reversal that is associated with the refund. Only present if the charge came from another Stripe account. See the Connect documentation for details.
   alias RefundSourceTransferReversal = String | TransferReversal
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # An object containing device type specific settings for BBPOS WisePOS E readers
   alias PostTerminalConfigurationsConfigurationRequestBbposWiseposE = BbposWisePose1 | BusinessProfileSpecsSupportUrlOneOf
-
 end

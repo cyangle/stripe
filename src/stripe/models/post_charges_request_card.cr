@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # A token, like the ones returned by [Stripe.js](https://stripe.com/docs/js).
   alias PostChargesRequestCard = CustomerPaymentSourceCard | String
-
 end

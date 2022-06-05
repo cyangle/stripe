@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "allowed_types", type: Array(String)?, presence: true, ignore_serialize: allowed_types.nil? && !allowed_types_present?)]
@@ -49,11 +48,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @allowed_types : Array(String)? = nil, 
-      @require_id_number : Bool? = nil, 
-      @require_live_capture : Bool? = nil, 
+      @allowed_types : Array(String)? = nil,
+      @require_id_number : Bool? = nil,
+      @require_live_capture : Bool? = nil,
       @require_matching_selfie : Bool? = nil
     )
     end

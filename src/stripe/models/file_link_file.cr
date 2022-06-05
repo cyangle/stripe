@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The file object this link points to.
   alias FileLinkFile = File | String
-
 end

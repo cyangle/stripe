@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The subscription that this invoice was prepared for, if any.
   alias InvoiceSubscription = String | Subscription
-
 end

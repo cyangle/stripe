@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription's default source, if any, or to the customer's default source.
   alias InvoiceDefaultSource = AlipayAccount | BankAccount | BitcoinReceiver | Card | Source | String
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The card used to make this transaction.
   alias IssuingTransactionCard = IssuingCard | String
-
 end

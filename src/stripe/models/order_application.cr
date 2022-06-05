@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Connect application that created the Order, if any.
   alias OrderApplication = Application | String
-
 end

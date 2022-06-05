@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SetupAttemptPaymentMethodDetails
     include JSON::Serializable
@@ -26,23 +26,23 @@ module Stripe
 
     # Optional properties
 
-    # 
-    @[JSON::Field(key: "acss_debit", type: JSON::Any?, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
-    property acss_debit : JSON::Any?
+    #
+    @[JSON::Field(key: "acss_debit", type: JSON::Any, presence: true, ignore_serialize: acss_debit.nil? && !acss_debit_present?)]
+    property acss_debit : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? acss_debit_present : Bool = false
 
-    # 
-    @[JSON::Field(key: "au_becs_debit", type: JSON::Any?, presence: true, ignore_serialize: au_becs_debit.nil? && !au_becs_debit_present?)]
-    property au_becs_debit : JSON::Any?
+    #
+    @[JSON::Field(key: "au_becs_debit", type: JSON::Any, presence: true, ignore_serialize: au_becs_debit.nil? && !au_becs_debit_present?)]
+    property au_becs_debit : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? au_becs_debit_present : Bool = false
 
-    # 
-    @[JSON::Field(key: "bacs_debit", type: JSON::Any?, presence: true, ignore_serialize: bacs_debit.nil? && !bacs_debit_present?)]
-    property bacs_debit : JSON::Any?
+    #
+    @[JSON::Field(key: "bacs_debit", type: JSON::Any, presence: true, ignore_serialize: bacs_debit.nil? && !bacs_debit_present?)]
+    property bacs_debit : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? bacs_debit_present : Bool = false
@@ -53,9 +53,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? bancontact_present : Bool = false
 
-    # 
-    @[JSON::Field(key: "boleto", type: JSON::Any?, presence: true, ignore_serialize: boleto.nil? && !boleto_present?)]
-    property boleto : JSON::Any?
+    #
+    @[JSON::Field(key: "boleto", type: JSON::Any, presence: true, ignore_serialize: boleto.nil? && !boleto_present?)]
+    property boleto : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? boleto_present : Bool = false
@@ -78,16 +78,16 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? ideal_present : Bool = false
 
-    # 
-    @[JSON::Field(key: "link", type: JSON::Any?, presence: true, ignore_serialize: link.nil? && !link_present?)]
-    property link : JSON::Any?
+    #
+    @[JSON::Field(key: "link", type: JSON::Any, presence: true, ignore_serialize: link.nil? && !link_present?)]
+    property link : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? link_present : Bool = false
 
-    # 
-    @[JSON::Field(key: "sepa_debit", type: JSON::Any?, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
-    property sepa_debit : JSON::Any?
+    #
+    @[JSON::Field(key: "sepa_debit", type: JSON::Any, presence: true, ignore_serialize: sepa_debit.nil? && !sepa_debit_present?)]
+    property sepa_debit : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? sepa_debit_present : Bool = false
@@ -98,9 +98,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? sofort_present : Bool = false
 
-    # 
-    @[JSON::Field(key: "us_bank_account", type: JSON::Any?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
-    property us_bank_account : JSON::Any?
+    #
+    @[JSON::Field(key: "us_bank_account", type: JSON::Any, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
+    property us_bank_account : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? us_bank_account_present : Bool = false
@@ -108,22 +108,22 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @_type : String, 
+      @_type : String,
       # Optional properties
-      @acss_debit : JSON::Any? = nil, 
-      @au_becs_debit : JSON::Any? = nil, 
-      @bacs_debit : JSON::Any? = nil, 
-      @bancontact : SetupAttemptPaymentMethodDetailsBancontact? = nil, 
-      @boleto : JSON::Any? = nil, 
-      @card : SetupAttemptPaymentMethodDetailsCard? = nil, 
-      @card_present2 : SetupAttemptPaymentMethodDetailsCardPresent? = nil, 
-      @ideal : SetupAttemptPaymentMethodDetailsIdeal? = nil, 
-      @link : JSON::Any? = nil, 
-      @sepa_debit : JSON::Any? = nil, 
-      @sofort : SetupAttemptPaymentMethodDetailsSofort? = nil, 
-      @us_bank_account : JSON::Any? = nil
+      @acss_debit : JSON::Any = nil,
+      @au_becs_debit : JSON::Any = nil,
+      @bacs_debit : JSON::Any = nil,
+      @bancontact : SetupAttemptPaymentMethodDetailsBancontact? = nil,
+      @boleto : JSON::Any = nil,
+      @card : SetupAttemptPaymentMethodDetailsCard? = nil,
+      @card_present2 : SetupAttemptPaymentMethodDetailsCardPresent? = nil,
+      @ideal : SetupAttemptPaymentMethodDetailsIdeal? = nil,
+      @link : JSON::Any = nil,
+      @sepa_debit : JSON::Any = nil,
+      @sofort : SetupAttemptPaymentMethodDetailsSofort? = nil,
+      @us_bank_account : JSON::Any = nil
     )
     end
 

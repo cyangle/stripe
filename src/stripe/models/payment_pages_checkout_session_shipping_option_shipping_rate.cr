@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The shipping rate.
   alias PaymentPagesCheckoutSessionShippingOptionShippingRate = ShippingRate | String
-
 end

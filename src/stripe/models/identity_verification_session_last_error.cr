@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If present, this property tells you the last error encountered when processing the verification.
   alias IdentityVerificationSessionLastError = GelatoSessionLastError
-
 end

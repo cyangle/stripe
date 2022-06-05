@@ -88,22 +88,22 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @amount : Int64, 
-      @balance_transactions : Array(BalanceTransaction), 
-      @charge : DisputeCharge, 
-      @created : Int64, 
-      @currency : String, 
-      @evidence : DisputeEvidence, 
-      @evidence_details : DisputeEvidenceDetails, 
-      @id : String, 
-      @is_charge_refundable : Bool, 
-      @livemode : Bool, 
-      @metadata : Hash(String, String), 
-      @object : String, 
-      @reason : String, 
-      @status : String, 
+      @amount : Int64,
+      @balance_transactions : Array(BalanceTransaction),
+      @charge : DisputeCharge,
+      @created : Int64,
+      @currency : String,
+      @evidence : DisputeEvidence,
+      @evidence_details : DisputeEvidenceDetails,
+      @id : String,
+      @is_charge_refundable : Bool,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      @reason : String,
+      @status : String,
       # Optional properties
       @payment_intent : DisputePaymentIntent? = nil
     )

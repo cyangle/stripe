@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentIntentNextActionWechatPayDisplayQrCode
     include JSON::Serializable
@@ -39,11 +39,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @data : String, 
-      @image_data_url : String, 
-      @image_url_png : String, 
+      @data : String,
+      @image_data_url : String,
+      @image_url_png : String,
       @image_url_svg : String
     )
     end

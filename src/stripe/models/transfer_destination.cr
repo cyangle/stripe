@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Stripe account the transfer was sent to.
   alias TransferDestination = Account | String
-
 end

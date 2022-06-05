@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence or statements.
   alias DisputeEvidenceUncategorizedFile = File | String
-
 end

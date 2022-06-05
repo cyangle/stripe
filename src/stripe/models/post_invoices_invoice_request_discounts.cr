@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The discounts that will apply to the invoice. Pass an empty string to remove previously-defined discounts.
   alias PostInvoicesInvoiceRequestDiscounts = Array(DiscountsDataParam) | BusinessProfileSpecsSupportUrlOneOf
-
 end

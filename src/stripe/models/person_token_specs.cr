@@ -18,7 +18,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "address", type: AddressSpecs?, presence: true, ignore_serialize: address.nil? && !address_present?)]
@@ -174,32 +173,32 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @address : AddressSpecs? = nil, 
-      @address_kana : JapanAddressKanaSpecs? = nil, 
-      @address_kanji : JapanAddressKanjiSpecs? = nil, 
-      @dob : IndividualSpecsDob? = nil, 
-      @documents : PersonDocumentsSpecs1? = nil, 
-      @email : String? = nil, 
-      @first_name : String? = nil, 
-      @first_name_kana : String? = nil, 
-      @first_name_kanji : String? = nil, 
-      @full_name_aliases : CreditNoteLineItemParamsTaxRates? = nil, 
-      @gender : String? = nil, 
-      @id_number : String? = nil, 
-      @id_number_secondary : String? = nil, 
-      @last_name : String? = nil, 
-      @last_name_kana : String? = nil, 
-      @last_name_kanji : String? = nil, 
-      @maiden_name : String? = nil, 
-      @metadata : IndividualSpecsMetadata? = nil, 
-      @nationality : String? = nil, 
-      @phone : String? = nil, 
-      @political_exposure : String? = nil, 
-      @registered_address : AddressSpecs? = nil, 
-      @relationship : RelationshipSpecs1? = nil, 
-      @ssn_last_4 : String? = nil, 
+      @address : AddressSpecs? = nil,
+      @address_kana : JapanAddressKanaSpecs? = nil,
+      @address_kanji : JapanAddressKanjiSpecs? = nil,
+      @dob : IndividualSpecsDob? = nil,
+      @documents : PersonDocumentsSpecs1? = nil,
+      @email : String? = nil,
+      @first_name : String? = nil,
+      @first_name_kana : String? = nil,
+      @first_name_kanji : String? = nil,
+      @full_name_aliases : CreditNoteLineItemParamsTaxRates? = nil,
+      @gender : String? = nil,
+      @id_number : String? = nil,
+      @id_number_secondary : String? = nil,
+      @last_name : String? = nil,
+      @last_name_kana : String? = nil,
+      @last_name_kanji : String? = nil,
+      @maiden_name : String? = nil,
+      @metadata : IndividualSpecsMetadata? = nil,
+      @nationality : String? = nil,
+      @phone : String? = nil,
+      @political_exposure : String? = nil,
+      @registered_address : AddressSpecs? = nil,
+      @relationship : RelationshipSpecs1? = nil,
+      @ssn_last_4 : String? = nil,
       @verification : PersonVerificationSpecs? = nil
     )
     end

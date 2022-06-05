@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Configuration for collecting the customer's shipping address.
   alias PostPaymentLinksPaymentLinkRequestShippingAddressCollection = BusinessProfileSpecsSupportUrlOneOf | ShippingAddressCollectionParams2
-
 end

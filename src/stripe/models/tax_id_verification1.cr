@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Tax ID verification information.
   alias TaxIdVerification1 = TaxIdVerification
-
 end

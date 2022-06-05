@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
@@ -87,16 +86,16 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @active : Bool? = nil, 
-      @country : String? = nil, 
-      @description : String? = nil, 
-      @display_name : String? = nil, 
-      @expand : Array(String)? = nil, 
-      @jurisdiction : String? = nil, 
-      @metadata : PostAccountRequestMetadata? = nil, 
-      @state : String? = nil, 
+      @active : Bool? = nil,
+      @country : String? = nil,
+      @description : String? = nil,
+      @display_name : String? = nil,
+      @expand : Array(String)? = nil,
+      @jurisdiction : String? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @state : String? = nil,
       @tax_type : String? = nil
     )
     end

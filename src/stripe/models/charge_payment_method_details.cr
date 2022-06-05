@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Details about the payment method at the time of the transaction.
   alias ChargePaymentMethodDetails = PaymentMethodDetails
-
 end

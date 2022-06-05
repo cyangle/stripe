@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Where and how the card will be shipped.
   alias IssuingCardShipping1 = IssuingCardShipping
-
 end

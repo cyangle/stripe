@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Cart object to be displayed by the reader.
   alias TerminalReaderReaderResourceSetReaderDisplayActionCart = TerminalReaderReaderResourceCart
-
 end

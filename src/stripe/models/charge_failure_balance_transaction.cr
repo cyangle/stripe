@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the balance transaction that describes the reversal of the balance on your account due to payment failure.
   alias ChargeFailureBalanceTransaction = BalanceTransaction | String
-
 end

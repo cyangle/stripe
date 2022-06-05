@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Populated if this authorization used 3D Secure authentication.
   alias SetupAttemptPaymentMethodDetailsCardThreeDSecure = ThreeDSecureDetails
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # When set, provides configuration to gather active consent from customers.
   alias PaymentLinkConsentCollection = PaymentLinksResourceConsentCollection
-
 end

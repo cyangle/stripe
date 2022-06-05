@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the charge or payment that was used to fund the transfer. If null, the transfer was funded from the available balance.
   alias TransferSourceTransaction = Charge | String
-
 end

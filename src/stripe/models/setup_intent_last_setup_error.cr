@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The error encountered in the previous SetupIntent confirmation.
   alias SetupIntentLastSetupError = ApiErrors
-
 end

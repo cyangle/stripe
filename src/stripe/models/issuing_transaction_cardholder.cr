@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The cardholder to whom this transaction belongs.
   alias IssuingTransactionCardholder = IssuingCardholder | String
-
 end

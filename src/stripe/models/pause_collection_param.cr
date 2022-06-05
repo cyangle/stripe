@@ -35,9 +35,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @behavior : String, 
+      @behavior : String,
       # Optional properties
       @resumes_at : Int64? = nil
     )

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The definitive totals and line items the customer will be charged on a recurring basis. Takes into account the line items with recurring prices and discounts with `duration=forever` coupons only. Defaults to `null` if no inputted line items with recurring prices.
   alias QuotesResourceComputedRecurring = QuotesResourceRecurring
-
 end

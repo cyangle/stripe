@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The customer's address. Until the invoice is finalized, this field will equal `customer.address`. Once the invoice is finalized, this field will no longer be updated.
   alias InvoiceCustomerAddress = Address
-
 end

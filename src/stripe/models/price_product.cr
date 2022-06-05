@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the product this price is associated with.
   alias PriceProduct = DeletedProduct | Product | String
-
 end

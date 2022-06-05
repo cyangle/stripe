@@ -14,7 +14,7 @@ require "log"
 module Stripe
   class TransferScheduleSpecsDelayDaysOneOf
     MINIMUM = "minimum"
-   
+
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value

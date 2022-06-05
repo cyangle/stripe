@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The error encountered during the previous attempt to finalize the invoice. This field is cleared when the invoice is successfully finalized.
   alias InvoiceLastFinalizationError = ApiErrors
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the default payment method for the subscription schedule. It must belong to the customer associated with the subscription schedule. If not set, invoices will use the default payment method in the customer's invoice settings.
   alias SubscriptionSchedulePhaseConfigurationDefaultPaymentMethod = PaymentMethod | String
-
 end

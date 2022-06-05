@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Details of the original PaymentMethod that created this object.
   alias PaymentMethodCardGeneratedFrom = PaymentMethodCardGeneratedCard
-
 end

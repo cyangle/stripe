@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias GetAccountsCreatedParameter = Int64 | RangeQuerySpecs
-
 end

@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias UpdateParams1Klarna = BusinessProfileSpecsSupportUrlOneOf | PaymentMethodOptionsParam6
-
 end

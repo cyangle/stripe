@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class LegalEntityJapanAddress
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -73,14 +72,14 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @city : String? = nil, 
-      @country : String? = nil, 
-      @line1 : String? = nil, 
-      @line2 : String? = nil, 
-      @postal_code : String? = nil, 
-      @state : String? = nil, 
+      @city : String? = nil,
+      @country : String? = nil,
+      @line1 : String? = nil,
+      @line2 : String? = nil,
+      @postal_code : String? = nil,
+      @state : String? = nil,
       @town : String? = nil
     )
     end

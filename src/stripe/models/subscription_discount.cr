@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Describes the current discount applied to this subscription, if there is one. When billing, a discount applied to a subscription overrides a discount applied on a customer-wide basis.
   alias SubscriptionDiscount = Discount
-
 end

@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias UpdateParams1CustomerBalance = BusinessProfileSpecsSupportUrlOneOf | PaymentIntentPaymentMethodOptionsParam1
-
 end

@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "adjustable_quantity", type: AdjustableQuantityParams?, presence: true, ignore_serialize: adjustable_quantity.nil? && !adjustable_quantity_present?)]
@@ -59,13 +58,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @adjustable_quantity : AdjustableQuantityParams? = nil, 
-      @dynamic_tax_rates : Array(String)? = nil, 
-      @price : String? = nil, 
-      @price_data : PriceDataWithProductData? = nil, 
-      @quantity : Int64? = nil, 
+      @adjustable_quantity : AdjustableQuantityParams? = nil,
+      @dynamic_tax_rates : Array(String)? = nil,
+      @price : String? = nil,
+      @price_data : PriceDataWithProductData? = nil,
+      @quantity : Int64? = nil,
       @tax_rates : Array(String)? = nil
     )
     end

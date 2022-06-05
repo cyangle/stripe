@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the SetupIntent that this attempt belongs to.
   alias SetupAttemptSetupIntent = SetupIntent | String
-
 end

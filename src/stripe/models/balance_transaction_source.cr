@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The Stripe object to which this transaction is related.
   alias BalanceTransactionSource = ApplicationFee | Charge | ConnectCollectionTransfer | Dispute | FeeRefund | IssuingAuthorization | IssuingDispute | IssuingTransaction | Payout | PlatformTaxFee | Refund | ReserveTransaction | String | TaxDeductedAtSource | Topup | Transfer | TransferReversal
-
 end

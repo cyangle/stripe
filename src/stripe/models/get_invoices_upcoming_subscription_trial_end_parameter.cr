@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias GetInvoicesUpcomingSubscriptionTrialEndParameter = Int64 | PostCustomersCustomerRequestTrialEndOneOf
-
 end

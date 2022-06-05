@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class BitcoinTransaction
     include JSON::Serializable
@@ -53,14 +53,14 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @amount : Int64, 
-      @bitcoin_amount : Int64, 
-      @created : Int64, 
-      @currency : String, 
-      @id : String, 
-      @object : String, 
+      @amount : Int64,
+      @bitcoin_amount : Int64,
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @object : String,
       @receiver : String
     )
     end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # FamilyMart instruction details.
   alias PaymentIntentNextActionKonbiniStoresFamilymart = PaymentIntentNextActionKonbiniFamilymart
-
 end

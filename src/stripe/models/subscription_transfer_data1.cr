@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account (if any) the subscription's payments will be attributed to for tax reporting, and where funds from each payment will be transferred to for each of the subscription's invoices.
   alias SubscriptionTransferData1 = SubscriptionTransferData
-
 end

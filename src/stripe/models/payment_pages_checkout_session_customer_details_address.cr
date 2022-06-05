@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The customer's address at the time of checkout. Note: This property is populated only for sessions on or after March 30, 2022.
   alias PaymentPagesCheckoutSessionCustomerDetailsAddress = Address
-
 end

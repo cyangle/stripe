@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentIntentNextActionDisplayOxxoDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -45,10 +44,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @expires_after : Int64? = nil, 
-      @hosted_voucher_url : String? = nil, 
+      @expires_after : Int64? = nil,
+      @hosted_voucher_url : String? = nil,
       @number : String? = nil
     )
     end

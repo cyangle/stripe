@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # PaymentMethod-specific configuration to provide to the order's PaymentIntent.
   alias OrdersV2ResourcePaymentSettingsPaymentMethodOptions = OrdersV2ResourcePaymentMethodOptions
-
 end

@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class GelatoVerificationSessionOptions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -27,9 +26,9 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? document_present : Bool = false
 
-    # 
-    @[JSON::Field(key: "id_number", type: JSON::Any?, presence: true, ignore_serialize: id_number.nil? && !id_number_present?)]
-    property id_number : JSON::Any?
+    #
+    @[JSON::Field(key: "id_number", type: JSON::Any, presence: true, ignore_serialize: id_number.nil? && !id_number_present?)]
+    property id_number : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? id_number_present : Bool = false
@@ -37,10 +36,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @document : GelatoSessionDocumentOptions? = nil, 
-      @id_number : JSON::Any? = nil
+      @document : GelatoSessionDocumentOptions? = nil,
+      @id_number : JSON::Any = nil
     )
     end
 
@@ -55,7 +54,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

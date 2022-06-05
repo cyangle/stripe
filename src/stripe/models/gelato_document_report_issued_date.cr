@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Issued date of the document.
   alias GelatoDocumentReportIssuedDate = GelatoDataDocumentReportIssuedDate
-
 end

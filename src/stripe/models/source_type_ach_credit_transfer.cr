@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "account_number", type: String?, presence: true, ignore_serialize: account_number.nil? && !account_number_present?)]
@@ -71,15 +70,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @account_number : String? = nil, 
-      @bank_name : String? = nil, 
-      @fingerprint : String? = nil, 
-      @refund_account_holder_name : String? = nil, 
-      @refund_account_holder_type : String? = nil, 
-      @refund_routing_number : String? = nil, 
-      @routing_number : String? = nil, 
+      @account_number : String? = nil,
+      @bank_name : String? = nil,
+      @fingerprint : String? = nil,
+      @refund_account_holder_name : String? = nil,
+      @refund_account_holder_type : String? = nil,
+      @refund_routing_number : String? = nil,
+      @routing_number : String? = nil,
       @swift_code : String? = nil
     )
     end
@@ -95,7 +94,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the payment method associated with this mandate.
   alias MandatePaymentMethod = PaymentMethod | String
-
 end

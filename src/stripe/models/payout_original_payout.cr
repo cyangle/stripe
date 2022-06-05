@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If the payout reverses another, this is the ID of the original payout.
   alias PayoutOriginalPayout = Payout | String
-
 end

@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PostTokensRequestCard = CreditCardSpecs | String
-
 end

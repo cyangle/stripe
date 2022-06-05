@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Additional details for proration line items
   alias LineItemProrationDetails = InvoicesLineItemsProrationDetails
-
 end

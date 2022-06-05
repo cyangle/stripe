@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # The amount to capture from the PaymentIntent, which must be less than or equal to the original amount. Any additional amount will be automatically refunded. Defaults to the full `amount_capturable` if not provided.
@@ -64,13 +63,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @amount_to_capture : Int64? = nil, 
-      @application_fee_amount : Int64? = nil, 
-      @expand : Array(String)? = nil, 
-      @statement_descriptor : String? = nil, 
-      @statement_descriptor_suffix : String? = nil, 
+      @amount_to_capture : Int64? = nil,
+      @application_fee_amount : Int64? = nil,
+      @expand : Array(String)? = nil,
+      @statement_descriptor : String? = nil,
+      @statement_descriptor_suffix : String? = nil,
       @transfer_data : TransferDataUpdateParams1? = nil
     )
     end

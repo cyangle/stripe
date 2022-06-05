@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the invoice.
   alias CreditNoteInvoice = Invoice | String
-
 end

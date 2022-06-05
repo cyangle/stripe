@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias GetTerminalReadersReader200Response = DeletedTerminalReader | TerminalReader
-
 end

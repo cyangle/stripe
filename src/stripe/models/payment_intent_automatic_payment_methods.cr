@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Settings to configure compatible payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods)
   alias PaymentIntentAutomaticPaymentMethods = PaymentFlowsAutomaticPaymentMethodsPaymentIntent
-
 end

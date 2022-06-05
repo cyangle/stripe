@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The charge associated with this review.
   alias ReviewCharge = Charge | String
-
 end

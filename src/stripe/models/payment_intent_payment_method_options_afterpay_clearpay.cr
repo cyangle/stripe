@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PaymentIntentPaymentMethodOptionsAfterpayClearpay = PaymentIntentTypeSpecificPaymentMethodOptionsClient | PaymentMethodOptionsAfterpayClearpay
-
 end

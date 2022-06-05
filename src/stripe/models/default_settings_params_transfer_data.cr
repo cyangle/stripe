@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias DefaultSettingsParamsTransferData = BusinessProfileSpecsSupportUrlOneOf | TransferDataSpecs2
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The state of the most recent attempt to refresh the account balance.
   alias FinancialConnectionsAccountBalanceRefresh = BankConnectionsResourceBalanceRefresh
-
 end

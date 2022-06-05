@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The connected account receiving the transfer.
   alias PaymentLinksResourceTransferDataDestination = Account | String
-
 end

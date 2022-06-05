@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Connect Application that created the subscription.
   alias SubscriptionApplication = Application | DeletedApplication | String
-
 end

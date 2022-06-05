@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The Kana variation of the company's primary address (Japan only).
   alias LegalEntityCompanyAddressKana = LegalEntityJapanAddress
-
 end

@@ -18,7 +18,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "acss_debit_payments", type: CapabilityParam?, presence: true, ignore_serialize: acss_debit_payments.nil? && !acss_debit_payments_present?)]
@@ -210,38 +209,38 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @acss_debit_payments : CapabilityParam? = nil, 
-      @affirm_payments : CapabilityParam? = nil, 
-      @afterpay_clearpay_payments : CapabilityParam? = nil, 
-      @au_becs_debit_payments : CapabilityParam? = nil, 
-      @bacs_debit_payments : CapabilityParam? = nil, 
-      @bancontact_payments : CapabilityParam? = nil, 
-      @bank_transfer_payments : CapabilityParam? = nil, 
-      @boleto_payments : CapabilityParam? = nil, 
-      @card_issuing : CapabilityParam? = nil, 
-      @card_payments : CapabilityParam? = nil, 
-      @cartes_bancaires_payments : CapabilityParam? = nil, 
-      @eps_payments : CapabilityParam? = nil, 
-      @fpx_payments : CapabilityParam? = nil, 
-      @giropay_payments : CapabilityParam? = nil, 
-      @grabpay_payments : CapabilityParam? = nil, 
-      @ideal_payments : CapabilityParam? = nil, 
-      @jcb_payments : CapabilityParam? = nil, 
-      @klarna_payments : CapabilityParam? = nil, 
-      @konbini_payments : CapabilityParam? = nil, 
-      @legacy_payments : CapabilityParam? = nil, 
-      @link_payments : CapabilityParam? = nil, 
-      @oxxo_payments : CapabilityParam? = nil, 
-      @p24_payments : CapabilityParam? = nil, 
-      @paynow_payments : CapabilityParam? = nil, 
-      @sepa_debit_payments : CapabilityParam? = nil, 
-      @sofort_payments : CapabilityParam? = nil, 
-      @tax_reporting_us_1099_k : CapabilityParam? = nil, 
-      @tax_reporting_us_1099_misc : CapabilityParam? = nil, 
-      @transfers : CapabilityParam? = nil, 
-      @treasury : CapabilityParam? = nil, 
+      @acss_debit_payments : CapabilityParam? = nil,
+      @affirm_payments : CapabilityParam? = nil,
+      @afterpay_clearpay_payments : CapabilityParam? = nil,
+      @au_becs_debit_payments : CapabilityParam? = nil,
+      @bacs_debit_payments : CapabilityParam? = nil,
+      @bancontact_payments : CapabilityParam? = nil,
+      @bank_transfer_payments : CapabilityParam? = nil,
+      @boleto_payments : CapabilityParam? = nil,
+      @card_issuing : CapabilityParam? = nil,
+      @card_payments : CapabilityParam? = nil,
+      @cartes_bancaires_payments : CapabilityParam? = nil,
+      @eps_payments : CapabilityParam? = nil,
+      @fpx_payments : CapabilityParam? = nil,
+      @giropay_payments : CapabilityParam? = nil,
+      @grabpay_payments : CapabilityParam? = nil,
+      @ideal_payments : CapabilityParam? = nil,
+      @jcb_payments : CapabilityParam? = nil,
+      @klarna_payments : CapabilityParam? = nil,
+      @konbini_payments : CapabilityParam? = nil,
+      @legacy_payments : CapabilityParam? = nil,
+      @link_payments : CapabilityParam? = nil,
+      @oxxo_payments : CapabilityParam? = nil,
+      @p24_payments : CapabilityParam? = nil,
+      @paynow_payments : CapabilityParam? = nil,
+      @sepa_debit_payments : CapabilityParam? = nil,
+      @sofort_payments : CapabilityParam? = nil,
+      @tax_reporting_us_1099_k : CapabilityParam? = nil,
+      @tax_reporting_us_1099_misc : CapabilityParam? = nil,
+      @transfers : CapabilityParam? = nil,
+      @treasury : CapabilityParam? = nil,
       @us_bank_account_ach_payments : CapabilityParam? = nil
     )
     end
@@ -257,7 +256,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

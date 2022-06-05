@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Contains details on how this Card maybe be used for 3D Secure authentication.
   alias PaymentMethodCardThreeDSecureUsage = ThreeDSecureUsage
-
 end

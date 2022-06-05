@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SourceCodeVerificationFlow
     include JSON::Serializable
@@ -31,9 +31,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @attempts_remaining : Int64, 
+      @attempts_remaining : Int64,
       @status : String
     )
     end

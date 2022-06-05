@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Information about the owner of the payment instrument that may be used or required by particular source types.
   alias SourceOwner1 = SourceOwner
-
 end

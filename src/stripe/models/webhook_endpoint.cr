@@ -87,20 +87,20 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @created : Int64, 
-      @enabled_events : Array(String), 
-      @id : String, 
-      @livemode : Bool, 
-      @metadata : Hash(String, String), 
-      @object : String, 
-      @status : String, 
-      @url : String, 
+      @created : Int64,
+      @enabled_events : Array(String),
+      @id : String,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      @status : String,
+      @url : String,
       # Optional properties
-      @api_version : String? = nil, 
-      @application : String? = nil, 
-      @description : String? = nil, 
+      @api_version : String? = nil,
+      @application : String? = nil,
+      @description : String? = nil,
       @secret : String? = nil
     )
     end

@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # ID of the Customer this SetupIntent belongs to, if one exists.  If present, the SetupIntent's payment method will be attached to the Customer on successful setup. Payment methods attached to other Customers cannot be used with this SetupIntent.
@@ -76,15 +75,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @customer : String? = nil, 
-      @description : String? = nil, 
-      @expand : Array(String)? = nil, 
-      @metadata : PostAccountRequestMetadata? = nil, 
-      @payment_method : String? = nil, 
-      @payment_method_data : PaymentMethodDataParams1? = nil, 
-      @payment_method_options : PaymentMethodOptionsParam18? = nil, 
+      @customer : String? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @payment_method : String? = nil,
+      @payment_method_data : PaymentMethodDataParams1? = nil,
+      @payment_method_options : PaymentMethodOptionsParam18? = nil,
       @payment_method_types : Array(String)? = nil
     )
     end

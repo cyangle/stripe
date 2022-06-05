@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The most recent invoice this subscription has generated.
   alias SubscriptionLatestInvoice = Invoice | String
-
 end

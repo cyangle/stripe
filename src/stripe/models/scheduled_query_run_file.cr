@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The file object representing the results of the query.
   alias ScheduledQueryRunFile = File
-
 end

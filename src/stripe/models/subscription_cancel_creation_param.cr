@@ -49,12 +49,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @enabled : Bool, 
+      @enabled : Bool,
       # Optional properties
-      @cancellation_reason : SubscriptionCancellationReasonCreationParam? = nil, 
-      @mode : String? = nil, 
+      @cancellation_reason : SubscriptionCancellationReasonCreationParam? = nil,
+      @mode : String? = nil,
       @proration_behavior : String? = nil
     )
     end

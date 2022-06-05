@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # An identifying document, either a passport or local ID card.
   alias IssuingCardholderVerificationDocument = IssuingCardholderIdDocument
-
 end

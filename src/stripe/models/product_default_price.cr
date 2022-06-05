@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the [Price](https://stripe.com/docs/api/prices) object that is the default price for this product.
   alias ProductDefaultPrice = Price | String
-
 end

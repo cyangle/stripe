@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The user's verified address.
   alias GelatoVerifiedOutputsAddress = Address
-
 end

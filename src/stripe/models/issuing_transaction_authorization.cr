@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The `Authorization` object that led to this transaction.
   alias IssuingTransactionAuthorization = IssuingAuthorization | String
-
 end

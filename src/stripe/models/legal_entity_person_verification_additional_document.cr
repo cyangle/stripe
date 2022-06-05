@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # A document showing address, either a passport, local ID card, or utility bill from a well-known utility company.
   alias LegalEntityPersonVerificationAdditionalDocument = LegalEntityPersonVerificationDocument
-
 end

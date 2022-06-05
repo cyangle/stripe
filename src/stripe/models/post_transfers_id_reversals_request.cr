@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # A positive integer in cents (or local equivalent) representing how much of this transfer to reverse. Can only reverse up to the unreversed amount remaining of the transfer. Partial transfer reversals are only allowed for transfers to Stripe Accounts. Defaults to the entire transfer amount.
@@ -57,12 +56,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @amount : Int64? = nil, 
-      @description : String? = nil, 
-      @expand : Array(String)? = nil, 
-      @metadata : PostAccountRequestMetadata? = nil, 
+      @amount : Int64? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
       @refund_application_fee : Bool? = nil
     )
     end

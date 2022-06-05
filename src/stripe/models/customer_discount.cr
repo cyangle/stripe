@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Describes the current discount active on the customer, if there is one.
   alias CustomerDiscount = Discount
-
 end

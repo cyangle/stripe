@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If present, this property tells you about the processing state of the payment.
   alias PaymentIntentProcessing1 = PaymentIntentProcessing
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Information about fuel that was purchased with this transaction.
   alias IssuingTransactionPurchaseDetailsFuel = IssuingTransactionFuelData
-
 end

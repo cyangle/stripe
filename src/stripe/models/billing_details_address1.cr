@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Billing address.
   alias BillingDetailsAddress1 = Address
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Other flows linked to a DebitReversal.
   alias TreasuryDebitReversalLinkedFlows = ReceivedDebitsResourceDebitReversalLinkedFlows
-
 end

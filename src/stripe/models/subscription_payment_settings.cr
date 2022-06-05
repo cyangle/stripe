@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Payment settings passed on to invoices created by the subscription.
   alias SubscriptionPaymentSettings = SubscriptionsResourcePaymentSettings
-
 end

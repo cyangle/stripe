@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # When set, provides configuration for actions to take if this Checkout Session expires.
   alias CheckoutSessionAfterExpiration = PaymentPagesCheckoutSessionAfterExpiration
-
 end

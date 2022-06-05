@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The recurring components of a price such as `interval` and `usage_type`.
   alias PriceRecurring = Recurring
-
 end

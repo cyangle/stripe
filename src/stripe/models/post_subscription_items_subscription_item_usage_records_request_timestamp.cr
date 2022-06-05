@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The timestamp for the usage event. This timestamp must be within the current billing period of the subscription of the provided `subscription_item`, and must not be in the future. When passing `\"now\"`, Stripe records usage for the current time. Default is `\"now\"` if a value is not provided.
   alias PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp = Int64 | PostCustomersCustomerRequestTrialEndOneOf
-
 end

@@ -116,25 +116,25 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @active : Bool, 
-      @created : Int64, 
-      @id : String, 
-      @images : Array(String), 
-      @livemode : Bool, 
-      @metadata : Hash(String, String), 
-      @name : String, 
-      @object : String, 
-      @updated : Int64, 
+      @active : Bool,
+      @created : Int64,
+      @id : String,
+      @images : Array(String),
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @name : String,
+      @object : String,
+      @updated : Int64,
       # Optional properties
-      @default_price : ProductDefaultPrice? = nil, 
-      @description : String? = nil, 
-      @package_dimensions : ProductPackageDimensions? = nil, 
-      @shippable : Bool? = nil, 
-      @statement_descriptor : String? = nil, 
-      @tax_code : ProductTaxCode? = nil, 
-      @unit_label : String? = nil, 
+      @default_price : ProductDefaultPrice? = nil,
+      @description : String? = nil,
+      @package_dimensions : ProductPackageDimensions? = nil,
+      @shippable : Bool? = nil,
+      @statement_descriptor : String? = nil,
+      @tax_code : ProductTaxCode? = nil,
+      @unit_label : String? = nil,
       @url : String? = nil
     )
     end

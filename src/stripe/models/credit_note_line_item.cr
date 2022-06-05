@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class CreditNoteLineItem
     include JSON::Serializable
@@ -100,22 +100,22 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @amount : Int64, 
-      @discount_amount : Int64, 
-      @discount_amounts : Array(DiscountsResourceDiscountAmount), 
-      @id : String, 
-      @livemode : Bool, 
-      @object : String, 
-      @tax_amounts : Array(CreditNoteTaxAmount), 
-      @tax_rates : Array(TaxRate), 
-      @_type : String, 
+      @amount : Int64,
+      @discount_amount : Int64,
+      @discount_amounts : Array(DiscountsResourceDiscountAmount),
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @tax_amounts : Array(CreditNoteTaxAmount),
+      @tax_rates : Array(TaxRate),
+      @_type : String,
       # Optional properties
-      @description : String? = nil, 
-      @invoice_line_item : String? = nil, 
-      @quantity : Int64? = nil, 
-      @unit_amount : Int64? = nil, 
+      @description : String? = nil,
+      @invoice_line_item : String? = nil,
+      @quantity : Int64? = nil,
+      @unit_amount : Int64? = nil,
       @unit_amount_decimal : String? = nil
     )
     end

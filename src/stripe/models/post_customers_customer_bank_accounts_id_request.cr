@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # The name of the person or business that owns the bank account.
@@ -121,21 +120,21 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @account_holder_name : String? = nil, 
-      @account_holder_type : String? = nil, 
-      @address_city : String? = nil, 
-      @address_country : String? = nil, 
-      @address_line1 : String? = nil, 
-      @address_line2 : String? = nil, 
-      @address_state : String? = nil, 
-      @address_zip : String? = nil, 
-      @exp_month : String? = nil, 
-      @exp_year : String? = nil, 
-      @expand : Array(String)? = nil, 
-      @metadata : PostAccountRequestMetadata? = nil, 
-      @name : String? = nil, 
+      @account_holder_name : String? = nil,
+      @account_holder_type : String? = nil,
+      @address_city : String? = nil,
+      @address_country : String? = nil,
+      @address_line1 : String? = nil,
+      @address_line2 : String? = nil,
+      @address_state : String? = nil,
+      @address_zip : String? = nil,
+      @exp_month : String? = nil,
+      @exp_year : String? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @name : String? = nil,
       @owner : Owner? = nil
     )
     end

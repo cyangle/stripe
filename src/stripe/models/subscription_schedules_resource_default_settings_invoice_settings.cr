@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The subscription schedule's default invoice settings.
   alias SubscriptionSchedulesResourceDefaultSettingsInvoiceSettings = InvoiceSettingSubscriptionScheduleSetting
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Balance transaction that describes the impact of this transfer on your account balance.
   alias TransferBalanceTransaction = BalanceTransaction | String
-
 end

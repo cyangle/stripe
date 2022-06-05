@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias SubscriptionCancellationReasonCreationParamOptions = Array(String) | BusinessProfileSpecsSupportUrlOneOf
-
 end

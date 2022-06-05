@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class ThreeDSecureDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -60,11 +59,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @authentication_flow : String? = nil, 
-      @result : String? = nil, 
-      @result_reason : String? = nil, 
+      @authentication_flow : String? = nil,
+      @result : String? = nil,
+      @result_reason : String? = nil,
       @version : String? = nil
     )
     end

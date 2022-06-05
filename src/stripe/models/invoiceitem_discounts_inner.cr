@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias InvoiceitemDiscountsInner = Discount | String
-
 end

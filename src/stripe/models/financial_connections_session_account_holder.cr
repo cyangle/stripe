@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account holder for whom accounts are collected in this session.
   alias FinancialConnectionsSessionAccountHolder = BankConnectionsResourceAccountholder
-
 end

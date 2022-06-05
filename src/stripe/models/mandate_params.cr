@@ -18,7 +18,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "acceptance", type: MandateAcceptanceParams?, presence: true, ignore_serialize: acceptance.nil? && !acceptance_present?)]
@@ -58,12 +57,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @acceptance : MandateAcceptanceParams? = nil, 
-      @amount : UpdateParams1ApplicationFeeAmount? = nil, 
-      @currency : String? = nil, 
-      @interval : String? = nil, 
+      @acceptance : MandateAcceptanceParams? = nil,
+      @amount : UpdateParams1ApplicationFeeAmount? = nil,
+      @currency : String? = nil,
+      @interval : String? = nil,
       @notification_method : String? = nil
     )
     end

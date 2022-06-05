@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Check results by Card networks on Card address and CVC at time of payment.
   alias PaymentMethodDetailsCardChecks1 = PaymentMethodDetailsCardChecks
-
 end

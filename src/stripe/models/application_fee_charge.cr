@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the charge that the application fee was taken from.
   alias ApplicationFeeCharge = Charge | String
-
 end

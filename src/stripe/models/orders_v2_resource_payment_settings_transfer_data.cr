@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Provides configuration for completing a transfer for the order after it is paid.
   alias OrdersV2ResourcePaymentSettingsTransferData = OrdersV2ResourceTransferData
-
 end

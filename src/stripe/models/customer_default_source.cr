@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the default payment source for the customer.  If you are using payment methods created via the PaymentMethods API, see the [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) field instead.
   alias CustomerDefaultSource = AlipayAccount | BankAccount | BitcoinReceiver | Card | Source | String
-
 end

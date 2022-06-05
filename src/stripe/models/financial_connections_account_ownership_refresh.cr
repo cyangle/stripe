@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The state of the most recent attempt to refresh the account owners.
   alias FinancialConnectionsAccountOwnershipRefresh = BankConnectionsResourceOwnershipRefresh
-
 end

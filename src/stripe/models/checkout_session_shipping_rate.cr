@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the ShippingRate for Checkout Sessions in `payment` mode.
   alias CheckoutSessionShippingRate = ShippingRate | String
-
 end

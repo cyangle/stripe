@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class LineItem
     include JSON::Serializable
@@ -143,29 +143,29 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @amount : Int64, 
-      @currency : String, 
-      @discountable : Bool, 
-      @id : String, 
-      @livemode : Bool, 
-      @metadata : Hash(String, String), 
-      @object : String, 
-      @period : InvoiceLineItemPeriod, 
-      @proration : Bool, 
-      @_type : String, 
+      @amount : Int64,
+      @currency : String,
+      @discountable : Bool,
+      @id : String,
+      @livemode : Bool,
+      @metadata : Hash(String, String),
+      @object : String,
+      @period : InvoiceLineItemPeriod,
+      @proration : Bool,
+      @_type : String,
       # Optional properties
-      @description : String? = nil, 
-      @discount_amounts : Array(DiscountsResourceDiscountAmount)? = nil, 
-      @discounts : Array(InvoiceitemDiscountsInner)? = nil, 
-      @invoice_item : String? = nil, 
-      @price : LineItemPrice? = nil, 
-      @proration_details : LineItemProrationDetails? = nil, 
-      @quantity : Int64? = nil, 
-      @subscription : String? = nil, 
-      @subscription_item : String? = nil, 
-      @tax_amounts : Array(InvoiceTaxAmount)? = nil, 
+      @description : String? = nil,
+      @discount_amounts : Array(DiscountsResourceDiscountAmount)? = nil,
+      @discounts : Array(InvoiceitemDiscountsInner)? = nil,
+      @invoice_item : String? = nil,
+      @price : LineItemPrice? = nil,
+      @proration_details : LineItemProrationDetails? = nil,
+      @quantity : Int64? = nil,
+      @subscription : String? = nil,
+      @subscription_item : String? = nil,
+      @tax_amounts : Array(InvoiceTaxAmount)? = nil,
       @tax_rates : Array(TaxRate)? = nil
     )
     end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The configuration used by this session, describing the features available.
   alias BillingPortalSessionConfiguration = BillingPortalConfiguration | String
-
 end

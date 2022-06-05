@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Results of `consent_collection` for this session.
   alias CheckoutSessionConsent = PaymentPagesCheckoutSessionConsent
-
 end

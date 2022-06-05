@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The value of [application](https://stripe.com/docs/api/setup_intents/object#setup_intent_object-application) on the SetupIntent at the time of this confirmation.
   alias SetupAttemptApplication = Application | String
-
 end

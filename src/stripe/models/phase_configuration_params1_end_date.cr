@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PhaseConfigurationParams1EndDate = Int64 | PostCustomersCustomerRequestTrialEndOneOf
-
 end

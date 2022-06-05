@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # This hash contains details about the Mandate to create
   alias PostPaymentIntentsIntentConfirmRequestMandateData = ClientKeyParam | SecretKeyParam1
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If the refund failed, this balance transaction describes the adjustment made on your account balance that reverses the initial balance transaction.
   alias RefundFailureBalanceTransaction = BalanceTransaction | String
-
 end

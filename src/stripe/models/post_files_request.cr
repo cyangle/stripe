@@ -47,12 +47,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @file : String, 
-      @purpose : String, 
+      @file : String,
+      @purpose : String,
       # Optional properties
-      @expand : Array(String)? = nil, 
+      @expand : Array(String)? = nil,
       @file_link_data : FileLinkCreationParams? = nil
     )
     end

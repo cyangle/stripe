@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The most recent action performed by the reader.
   alias TerminalReaderAction = TerminalReaderReaderResourceReaderAction
-
 end

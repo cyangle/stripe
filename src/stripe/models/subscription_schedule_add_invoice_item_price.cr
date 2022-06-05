@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the price used to generate the invoice item.
   alias SubscriptionScheduleAddInvoiceItemPrice = DeletedPrice | Price | String
-
 end

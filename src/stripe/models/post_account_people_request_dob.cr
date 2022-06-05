@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The person's date of birth.
   alias PostAccountPeopleRequestDob = BusinessProfileSpecsSupportUrlOneOf | DateOfBirthSpecs
-
 end

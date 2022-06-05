@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # A URL of a publicly-accessible webpage for this product.
   alias PostProductsIdRequestUrl = BusinessProfileSpecsSupportUrlOneOf | String
-
 end

@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "address_line1_check", type: String?, presence: true, ignore_serialize: address_line1_check.nil? && !address_line1_check_present?)]
@@ -107,21 +106,21 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @address_line1_check : String? = nil, 
-      @address_zip_check : String? = nil, 
-      @brand : String? = nil, 
-      @country : String? = nil, 
-      @cvc_check : String? = nil, 
-      @dynamic_last4 : String? = nil, 
-      @exp_month : Int64? = nil, 
-      @exp_year : Int64? = nil, 
-      @fingerprint : String? = nil, 
-      @funding : String? = nil, 
-      @last4 : String? = nil, 
-      @name : String? = nil, 
-      @three_d_secure : String? = nil, 
+      @address_line1_check : String? = nil,
+      @address_zip_check : String? = nil,
+      @brand : String? = nil,
+      @country : String? = nil,
+      @cvc_check : String? = nil,
+      @dynamic_last4 : String? = nil,
+      @exp_month : Int64? = nil,
+      @exp_year : Int64? = nil,
+      @fingerprint : String? = nil,
+      @funding : String? = nil,
+      @last4 : String? = nil,
+      @name : String? = nil,
+      @three_d_secure : String? = nil,
       @tokenization_method : String? = nil
     )
     end
@@ -137,7 +136,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

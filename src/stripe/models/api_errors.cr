@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class ApiErrors
     include JSON::Serializable
@@ -104,20 +104,20 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @_type : String, 
+      @_type : String,
       # Optional properties
-      @charge : String? = nil, 
-      @code : String? = nil, 
-      @decline_code : String? = nil, 
-      @doc_url : String? = nil, 
-      @message : String? = nil, 
-      @param : String? = nil, 
-      @payment_intent : PaymentIntent? = nil, 
-      @payment_method : PaymentMethod? = nil, 
-      @payment_method_type : String? = nil, 
-      @setup_intent : SetupIntent? = nil, 
+      @charge : String? = nil,
+      @code : String? = nil,
+      @decline_code : String? = nil,
+      @doc_url : String? = nil,
+      @message : String? = nil,
+      @param : String? = nil,
+      @payment_intent : PaymentIntent? = nil,
+      @payment_method : PaymentMethod? = nil,
+      @payment_method_type : String? = nil,
+      @setup_intent : SetupIntent? = nil,
       @source : ApiErrorsSource? = nil
     )
     end

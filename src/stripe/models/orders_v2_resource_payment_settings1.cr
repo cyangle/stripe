@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Settings describing how the order should configure generated PaymentIntents.
   alias OrdersV2ResourcePaymentSettings1 = OrdersV2ResourcePaymentSettings
-
 end

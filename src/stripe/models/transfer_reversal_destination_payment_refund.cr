@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Linked payment refund for the transfer reversal.
   alias TransferReversalDestinationPaymentRefund = Refund | String
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The location identifier of the reader.
   alias TerminalReaderLocation = String | TerminalLocation
-
 end

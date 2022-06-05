@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias CustomerParamCustomFields = Array(CustomFieldParams) | BusinessProfileSpecsSupportUrlOneOf
-
 end

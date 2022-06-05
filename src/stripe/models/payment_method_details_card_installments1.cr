@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Installment details for this payment (Mexico only).  For more information, see the [installments integration guide](https://stripe.com/docs/payments/installments).
   alias PaymentMethodDetailsCardInstallments1 = PaymentMethodDetailsCardInstallments
-
 end

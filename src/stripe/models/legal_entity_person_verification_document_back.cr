@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The back of an ID returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `identity_document`.
   alias LegalEntityPersonVerificationDocumentBack = File | String
-
 end

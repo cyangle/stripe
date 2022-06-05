@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "statement_descriptor", type: String?, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
@@ -41,10 +40,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @statement_descriptor : String? = nil, 
-      @statement_descriptor_kana : String? = nil, 
+      @statement_descriptor : String? = nil,
+      @statement_descriptor_kana : String? = nil,
       @statement_descriptor_kanji : String? = nil
     )
     end

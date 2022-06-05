@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Options for customizing how the account functions within Stripe.
   alias AccountSettings1 = AccountSettings
-
 end

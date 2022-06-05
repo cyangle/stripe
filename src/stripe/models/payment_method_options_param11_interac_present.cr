@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PaymentMethodOptionsParam11InteracPresent = BusinessProfileSpecsSupportUrlOneOf | JSON::Any
-
 end

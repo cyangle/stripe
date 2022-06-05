@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias GetCustomersCustomer200Response = Customer | DeletedCustomer
-
 end

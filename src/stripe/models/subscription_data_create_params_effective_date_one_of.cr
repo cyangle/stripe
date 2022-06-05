@@ -14,7 +14,7 @@ require "log"
 module Stripe
   class SubscriptionDataCreateParamsEffectiveDateOneOf
     CURRENT_PERIOD_END = "current_period_end"
-   
+
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value

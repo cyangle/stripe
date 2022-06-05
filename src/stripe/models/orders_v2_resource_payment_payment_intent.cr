@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the payment intent associated with this order. Null when the order is `open`.
   alias OrdersV2ResourcePaymentPaymentIntent = PaymentIntent | String
-
 end

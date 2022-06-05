@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the PaymentIntent that was refunded.
   alias RefundPaymentIntent = PaymentIntent | String
-
 end

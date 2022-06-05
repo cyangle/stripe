@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the application fee that was refunded.
   alias FeeRefundFee = ApplicationFee | String
-
 end

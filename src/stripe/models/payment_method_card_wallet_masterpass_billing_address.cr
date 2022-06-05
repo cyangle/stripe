@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
   alias PaymentMethodCardWalletMasterpassBillingAddress = Address
-
 end

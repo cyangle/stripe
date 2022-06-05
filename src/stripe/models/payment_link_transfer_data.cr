@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account (if any) the payments will be attributed to for tax reporting, and where funds from each payment will be transferred to.
   alias PaymentLinkTransferData = PaymentLinksResourceTransferData
-
 end

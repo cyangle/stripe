@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias UpdateParams1WechatPay = BusinessProfileSpecsSupportUrlOneOf | PaymentMethodOptionsParam10
-
 end

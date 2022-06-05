@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The tax rates that will apply to any subscription item that does not have `tax_rates` set. Invoices created will have their `default_tax_rates` populated from the subscription. Pass an empty string to remove previously-defined tax rates.
   alias PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates = Array(String) | BusinessProfileSpecsSupportUrlOneOf
-
 end

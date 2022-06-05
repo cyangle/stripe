@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The application fee (if any) for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.
   alias ChargeApplicationFee = ApplicationFee | String
-
 end

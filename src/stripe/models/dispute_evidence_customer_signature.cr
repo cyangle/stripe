@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or contract showing the customer's signature.
   alias DisputeEvidenceCustomerSignature = File | String
-
 end

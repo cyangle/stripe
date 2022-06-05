@@ -51,12 +51,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @status : String, 
+      @status : String,
       # Optional properties
-      @document : String? = nil, 
-      @error : GelatoSelfieReportError1? = nil, 
+      @document : String? = nil,
+      @error : GelatoSelfieReportError1? = nil,
       @selfie : String? = nil
     )
     end

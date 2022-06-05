@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "confirmation_number", type: String?, presence: true, ignore_serialize: confirmation_number.nil? && !confirmation_number_present?)]
@@ -55,12 +54,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @confirmation_number : String? = nil, 
-      @expires_after_days : UpdateParams1ApplicationFeeAmount? = nil, 
-      @expires_at : GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil, 
-      @product_description : String? = nil, 
+      @confirmation_number : String? = nil,
+      @expires_after_days : UpdateParams1ApplicationFeeAmount? = nil,
+      @expires_at : GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil,
+      @product_description : String? = nil,
       @setup_future_usage : String? = nil
     )
     end

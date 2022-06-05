@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Details about the PaymentMethod for an OutboundPayment.
   alias TreasuryOutboundPaymentDestinationPaymentMethodDetails = OutboundPaymentsPaymentMethodDetails
-
 end

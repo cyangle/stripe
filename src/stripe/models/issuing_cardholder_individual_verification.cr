@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Government-issued ID document for this cardholder.
   alias IssuingCardholderIndividualVerification = IssuingCardholderVerification
-
 end

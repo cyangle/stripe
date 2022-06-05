@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "expires_after_days", type: Int64?, presence: true, ignore_serialize: expires_after_days.nil? && !expires_after_days_present?)]
@@ -29,7 +28,7 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
       @expires_after_days : Int64? = nil
     )
@@ -46,7 +45,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

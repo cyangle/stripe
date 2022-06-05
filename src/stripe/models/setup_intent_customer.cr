@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Customer this SetupIntent belongs to, if one exists.  If present, the SetupIntent's payment method will be attached to the Customer on successful setup. Payment methods attached to other Customers cannot be used with this SetupIntent.
   alias SetupIntentCustomer = Customer | DeletedCustomer | String
-
 end

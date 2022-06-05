@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class AccountFutureRequirements
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -80,15 +79,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @alternatives : Array(AccountRequirementsAlternative)? = nil, 
-      @current_deadline : Int64? = nil, 
-      @currently_due : Array(String)? = nil, 
-      @disabled_reason : String? = nil, 
-      @errors : Array(AccountRequirementsError)? = nil, 
-      @eventually_due : Array(String)? = nil, 
-      @past_due : Array(String)? = nil, 
+      @alternatives : Array(AccountRequirementsAlternative)? = nil,
+      @current_deadline : Int64? = nil,
+      @currently_due : Array(String)? = nil,
+      @disabled_reason : String? = nil,
+      @errors : Array(AccountRequirementsError)? = nil,
+      @eventually_due : Array(String)? = nil,
+      @past_due : Array(String)? = nil,
       @pending_verification : Array(String)? = nil
     )
     end

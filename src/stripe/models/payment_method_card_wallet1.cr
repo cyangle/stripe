@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If this Card is part of a card wallet, this contains the details of the card wallet.
   alias PaymentMethodCardWallet1 = PaymentMethodCardWallet
-
 end

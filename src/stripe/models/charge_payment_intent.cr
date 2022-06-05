@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the PaymentIntent associated with this charge, if one exists.
   alias ChargePaymentIntent = PaymentIntent | String
-
 end

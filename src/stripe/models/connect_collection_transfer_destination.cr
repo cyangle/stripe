@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the account that funds are being collected for.
   alias ConnectCollectionTransferDestination = Account | String
-
 end

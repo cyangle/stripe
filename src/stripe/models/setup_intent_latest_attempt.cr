@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The most recent SetupAttempt for this SetupIntent.
   alias SetupIntentLatestAttempt = SetupAttempt | String
-
 end

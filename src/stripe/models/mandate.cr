@@ -57,9 +57,9 @@ module Stripe
 
     # Optional properties
 
-    # 
-    @[JSON::Field(key: "multi_use", type: JSON::Any?, presence: true, ignore_serialize: multi_use.nil? && !multi_use_present?)]
-    property multi_use : JSON::Any?
+    #
+    @[JSON::Field(key: "multi_use", type: JSON::Any, presence: true, ignore_serialize: multi_use.nil? && !multi_use_present?)]
+    property multi_use : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? multi_use_present : Bool = false
@@ -73,18 +73,18 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @customer_acceptance : CustomerAcceptance, 
-      @id : String, 
-      @livemode : Bool, 
-      @object : String, 
-      @payment_method : MandatePaymentMethod, 
-      @payment_method_details : MandatePaymentMethodDetails, 
-      @status : String, 
-      @_type : String, 
+      @customer_acceptance : CustomerAcceptance,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @payment_method : MandatePaymentMethod,
+      @payment_method_details : MandatePaymentMethodDetails,
+      @status : String,
+      @_type : String,
       # Optional properties
-      @multi_use : JSON::Any? = nil, 
+      @multi_use : JSON::Any = nil,
       @single_use : MandateSingleUse? = nil
     )
     end

@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "persistent_token", type: String?, presence: true, ignore_serialize: persistent_token.nil? && !persistent_token_present?)]
@@ -29,7 +28,7 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
       @persistent_token : String? = nil
     )

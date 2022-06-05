@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Balance transaction that describes the impact of this collected application fee on your account balance (not including refunds).
   alias ApplicationFeeBalanceTransaction = BalanceTransaction | String
-
 end

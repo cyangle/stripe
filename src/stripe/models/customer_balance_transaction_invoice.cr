@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the invoice (if any) related to the transaction.
   alias CustomerBalanceTransactionInvoice = Invoice | String
-
 end

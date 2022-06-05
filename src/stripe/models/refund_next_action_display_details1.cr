@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Contains the refund details.
   alias RefundNextActionDisplayDetails1 = RefundNextActionDisplayDetails
-
 end

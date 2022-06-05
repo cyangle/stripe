@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with `tiers`.
   alias PlanTransformUsage = TransformUsage
-
 end

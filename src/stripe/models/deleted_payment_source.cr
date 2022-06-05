@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias DeletedPaymentSource = DeletedAlipayAccount | DeletedBankAccount | DeletedBitcoinReceiver | DeletedCard
-
 end

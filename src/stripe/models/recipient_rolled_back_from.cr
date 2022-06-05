@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias RecipientRolledBackFrom = Account | String
-
 end

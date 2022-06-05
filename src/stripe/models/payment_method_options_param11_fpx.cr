@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PaymentMethodOptionsParam11Fpx = BusinessProfileSpecsSupportUrlOneOf | PaymentMethodOptionsParam16
-
 end

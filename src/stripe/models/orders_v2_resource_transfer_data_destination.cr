@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Connected account receiving the transfer.
   alias OrdersV2ResourceTransferDataDestination = Account | String
-
 end

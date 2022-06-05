@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias CanceledCancellationPolicyProvided = Bool | BusinessProfileSpecsSupportUrlOneOf
-
 end

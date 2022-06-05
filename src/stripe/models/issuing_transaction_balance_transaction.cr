@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the [balance transaction](https://stripe.com/docs/api/balance_transactions) associated with this transaction.
   alias IssuingTransactionBalanceTransaction = BalanceTransaction | String
-
 end

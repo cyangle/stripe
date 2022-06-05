@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PostPlansRequestProduct = InlineProductParams | String
-
 end

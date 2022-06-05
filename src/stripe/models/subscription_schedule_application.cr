@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Connect Application that created the schedule.
   alias SubscriptionScheduleApplication = Application | DeletedApplication | String
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the latest charge generated for this invoice, if any.
   alias InvoiceCharge = Charge | String
-
 end

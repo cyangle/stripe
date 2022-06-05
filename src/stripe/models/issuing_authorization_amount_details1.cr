@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
   alias IssuingAuthorizationAmountDetails1 = IssuingAuthorizationAmountDetails
-
 end

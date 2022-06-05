@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The customer details including the customer's tax exempt status and the customer's tax IDs. Only present on Sessions in `payment` or `subscription` mode.
   alias CheckoutSessionCustomerDetails = PaymentPagesCheckoutSessionCustomerDetails
-
 end

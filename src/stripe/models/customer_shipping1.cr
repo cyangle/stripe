@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Mailing and shipping address for the customer. Appears on invoices emailed to this customer.
   alias CustomerShipping1 = Shipping
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the balance transaction that describes the impact of this top-up on your account balance. May not be specified depending on status of top-up.
   alias TopupBalanceTransaction = BalanceTransaction | String
-
 end

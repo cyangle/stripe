@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Information about lodging that was purchased with this transaction.
   alias IssuingTransactionPurchaseDetailsLodging = IssuingTransactionLodgingData
-
 end

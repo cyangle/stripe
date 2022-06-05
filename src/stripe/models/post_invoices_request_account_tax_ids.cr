@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account tax IDs associated with the invoice. Only editable when the invoice is a draft.
   alias PostInvoicesRequestAccountTaxIds = Array(String) | BusinessProfileSpecsSupportUrlOneOf
-
 end

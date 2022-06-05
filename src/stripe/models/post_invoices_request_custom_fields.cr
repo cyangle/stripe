@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # A list of up to 4 custom fields to be displayed on the invoice.
   alias PostInvoicesRequestCustomFields = Array(CustomFieldParams) | BusinessProfileSpecsSupportUrlOneOf
-
 end

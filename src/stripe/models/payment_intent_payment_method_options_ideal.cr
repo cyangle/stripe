@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PaymentIntentPaymentMethodOptionsIdeal = PaymentIntentTypeSpecificPaymentMethodOptionsClient | PaymentMethodOptionsIdeal
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
   alias PaymentIntentCustomer = Customer | DeletedCustomer | String
-
 end

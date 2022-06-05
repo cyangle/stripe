@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # A collection of fields required to be displayed on receipts. Only required for EMV transactions.
   alias PaymentMethodDetailsCardPresentReceipt1 = PaymentMethodDetailsCardPresentReceipt
-
 end

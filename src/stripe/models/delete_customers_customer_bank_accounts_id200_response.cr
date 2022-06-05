@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias DeleteCustomersCustomerBankAccountsId200Response = DeletedPaymentSource | PaymentSource
-
 end

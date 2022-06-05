@@ -104,22 +104,22 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @created : Int64, 
-      @id : String, 
-      @livemode : Bool, 
-      @object : String, 
-      @open : Bool, 
-      @opened_reason : String, 
-      @reason : String, 
+      @created : Int64,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @open : Bool,
+      @opened_reason : String,
+      @reason : String,
       # Optional properties
-      @billing_zip : String? = nil, 
-      @charge : ReviewCharge? = nil, 
-      @closed_reason : String? = nil, 
-      @ip_address : String? = nil, 
-      @ip_address_location : ReviewIpAddressLocation? = nil, 
-      @payment_intent : ReviewPaymentIntent? = nil, 
+      @billing_zip : String? = nil,
+      @charge : ReviewCharge? = nil,
+      @closed_reason : String? = nil,
+      @ip_address : String? = nil,
+      @ip_address_location : ReviewIpAddressLocation? = nil,
+      @payment_intent : ReviewPaymentIntent? = nil,
       @session : ReviewSession? = nil
     )
     end

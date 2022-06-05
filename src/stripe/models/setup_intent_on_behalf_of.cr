@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account (if any) for which the setup is intended.
   alias SetupIntentOnBehalfOf = Account | String
-
 end

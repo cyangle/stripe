@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The data with which to automatically create a Transfer when the payment is finalized. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
   alias PaymentIntentTransferData = TransferData
-
 end

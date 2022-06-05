@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The Transaction associated with this object.
   alias TreasuryCreditReversalTransaction = String | TreasuryTransaction
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The discount that was applied to get this discount amount.
   alias DiscountsResourceDiscountAmountDiscount = DeletedDiscount | Discount | String
-
 end

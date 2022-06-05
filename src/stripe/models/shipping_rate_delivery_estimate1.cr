@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The estimated range for how long shipping will take, meant to be displayable to the customer. This will appear on CheckoutSessions.
   alias ShippingRateDeliveryEstimate1 = ShippingRateDeliveryEstimate
-
 end

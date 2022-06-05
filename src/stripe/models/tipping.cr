@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "aud", type: CurrencySpecificConfig?, presence: true, ignore_serialize: aud.nil? && !aud_present?)]
@@ -107,21 +106,21 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @aud : CurrencySpecificConfig? = nil, 
-      @cad : CurrencySpecificConfig? = nil, 
-      @chf : CurrencySpecificConfig? = nil, 
-      @czk : CurrencySpecificConfig? = nil, 
-      @dkk : CurrencySpecificConfig? = nil, 
-      @eur : CurrencySpecificConfig? = nil, 
-      @gbp : CurrencySpecificConfig? = nil, 
-      @hkd : CurrencySpecificConfig? = nil, 
-      @myr : CurrencySpecificConfig? = nil, 
-      @nok : CurrencySpecificConfig? = nil, 
-      @nzd : CurrencySpecificConfig? = nil, 
-      @sek : CurrencySpecificConfig? = nil, 
-      @sgd : CurrencySpecificConfig? = nil, 
+      @aud : CurrencySpecificConfig? = nil,
+      @cad : CurrencySpecificConfig? = nil,
+      @chf : CurrencySpecificConfig? = nil,
+      @czk : CurrencySpecificConfig? = nil,
+      @dkk : CurrencySpecificConfig? = nil,
+      @eur : CurrencySpecificConfig? = nil,
+      @gbp : CurrencySpecificConfig? = nil,
+      @hkd : CurrencySpecificConfig? = nil,
+      @myr : CurrencySpecificConfig? = nil,
+      @nok : CurrencySpecificConfig? = nil,
+      @nzd : CurrencySpecificConfig? = nil,
+      @sek : CurrencySpecificConfig? = nil,
+      @sgd : CurrencySpecificConfig? = nil,
       @usd : CurrencySpecificConfig? = nil
     )
     end
@@ -137,7 +136,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

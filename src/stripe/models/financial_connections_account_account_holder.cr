@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account holder that this account belongs to.
   alias FinancialConnectionsAccountAccountHolder = BankConnectionsResourceAccountholder
-
 end

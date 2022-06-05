@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the payment method used in this PaymentIntent.
   alias PaymentIntentPaymentMethod = PaymentMethod | String
-
 end

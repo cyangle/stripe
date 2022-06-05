@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # For a credit proration `line_item`, the original debit line_items to which the credit proration applies.
   alias InvoicesLineItemsProrationDetailsCreditedItems = InvoicesLineItemsCreditedItems
-
 end

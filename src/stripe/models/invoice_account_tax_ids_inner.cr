@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias InvoiceAccountTaxIdsInner = DeletedTaxId | String | TaxId
-
 end

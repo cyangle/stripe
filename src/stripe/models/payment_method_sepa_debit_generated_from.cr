@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Information about the object that generated this PaymentMethod.
   alias PaymentMethodSepaDebitGeneratedFrom = SepaDebitGeneratedFrom
-
 end

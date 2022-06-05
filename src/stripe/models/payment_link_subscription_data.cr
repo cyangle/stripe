@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # When creating a subscription, the specified configuration data will be used. There must be at least one line item with a recurring price to use `subscription_data`.
   alias PaymentLinkSubscriptionData = PaymentLinksResourceSubscriptionData
-
 end

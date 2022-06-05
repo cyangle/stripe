@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account (if any) for which the funds of the PaymentIntent are intended. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
   alias PaymentIntentOnBehalfOf = Account | String
-
 end

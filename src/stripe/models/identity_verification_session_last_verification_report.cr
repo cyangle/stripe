@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the most recent VerificationReport. [Learn more about accessing detailed verification results.](https://stripe.com/docs/identity/verification-sessions#results)
   alias IdentityVerificationSessionLastVerificationReport = IdentityVerificationReport | String
-
 end

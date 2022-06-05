@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Payment-method-specific configuration for this SetupIntent.
   alias SetupIntentPaymentMethodOptions1 = SetupIntentPaymentMethodOptions
-
 end

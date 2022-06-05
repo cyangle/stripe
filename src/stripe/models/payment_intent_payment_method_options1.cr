@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Payment-method-specific configuration for this PaymentIntent.
   alias PaymentIntentPaymentMethodOptions1 = PaymentIntentPaymentMethodOptions
-
 end

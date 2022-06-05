@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Object representing the start and end dates for the current phase of the subscription schedule, if it is `active`.
   alias SubscriptionScheduleCurrentPhase1 = SubscriptionScheduleCurrentPhase
-
 end

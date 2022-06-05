@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # A list of alternate names or aliases that the person is known by.
   alias PostAccountPeopleRequestFullNameAliases = Array(String) | BusinessProfileSpecsSupportUrlOneOf
-
 end

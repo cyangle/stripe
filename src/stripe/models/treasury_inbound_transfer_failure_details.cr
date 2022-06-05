@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Details about this InboundTransfer's failure. Only set when status is `failed`.
   alias TreasuryInboundTransferFailureDetails = InboundTransfersResourceFailureDetails
-
 end

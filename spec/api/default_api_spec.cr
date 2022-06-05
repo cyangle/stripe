@@ -1406,7 +1406,7 @@ describe "DefaultApi" do
   end
 
   # unit tests for get_customers_customer_discount
-  # 
+  #
   # @param customer
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.
@@ -1504,7 +1504,7 @@ describe "DefaultApi" do
   end
 
   # unit tests for get_customers_customer_subscriptions_subscription_exposed_id_discount
-  # 
+  #
   # @param customer
   # @param subscription_exposed_id
   # @param [Hash] opts the optional parameters
@@ -4443,7 +4443,7 @@ describe "DefaultApi" do
   end
 
   # unit tests for post_application_fees_id_refund
-  # 
+  #
   # @param id
   # @param [Hash] opts the optional parameters
   # @option opts [Int32] :amount
@@ -4613,7 +4613,7 @@ describe "DefaultApi" do
   end
 
   # unit tests for post_charges_charge_dispute
-  # 
+  #
   # @param charge
   # @param [Hash] opts the optional parameters
   # @option opts [DisputeEvidenceParams] :evidence
@@ -4628,7 +4628,7 @@ describe "DefaultApi" do
   end
 
   # unit tests for post_charges_charge_dispute_close
-  # 
+  #
   # @param charge
   # @param [Hash] opts the optional parameters
   # @option opts [Array(String)] :expand Specifies which fields in the response should be expanded.

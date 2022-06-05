@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the product for this line item.  This will always be the same as `price.product`.
   alias ItemProduct = DeletedProduct | Product | String
-
 end

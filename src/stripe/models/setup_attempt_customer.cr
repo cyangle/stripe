@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The value of [customer](https://stripe.com/docs/api/setup_intents/object#setup_intent_object-customer) on the SetupIntent at the time of this confirmation.
   alias SetupAttemptCustomer = Customer | DeletedCustomer | String
-
 end

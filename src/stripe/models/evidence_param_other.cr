@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias EvidenceParamOther = BusinessProfileSpecsSupportUrlOneOf | Other
-
 end

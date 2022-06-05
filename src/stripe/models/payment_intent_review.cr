@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the review associated with this PaymentIntent, if any.
   alias PaymentIntentReview = Review | String
-
 end

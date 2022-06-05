@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the customer that the bank account is associated with.
   alias BankAccountCustomer = Customer | DeletedCustomer | String
-
 end

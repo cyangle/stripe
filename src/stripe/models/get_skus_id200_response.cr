@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias GetSkusId200Response = DeletedSku | Sku
-
 end

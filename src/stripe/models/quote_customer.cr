@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The customer which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
   alias QuoteCustomer = Customer | DeletedCustomer | String
-
 end

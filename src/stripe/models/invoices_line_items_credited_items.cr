@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class InvoicesLineItemsCreditedItems
     include JSON::Serializable
@@ -31,9 +31,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @invoice : String, 
+      @invoice : String,
       @invoice_line_items : Array(String)
     )
     end

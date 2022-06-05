@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Details of the quote that was cloned. See the [cloning documentation](https://stripe.com/docs/quotes/clone) for more details.
   alias QuoteFromQuote = QuotesResourceFromQuote
-
 end

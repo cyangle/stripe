@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias UpdateParams1SepaDebit = BusinessProfileSpecsSupportUrlOneOf | PaymentIntentPaymentMethodOptionsParam3
-
 end

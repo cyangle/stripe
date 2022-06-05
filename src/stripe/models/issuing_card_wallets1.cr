@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Information relating to digital wallets (like Apple Pay and Google Pay).
   alias IssuingCardWallets1 = IssuingCardWallets
-
 end

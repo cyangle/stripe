@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the charge this early fraud warning is for, optionally expanded.
   alias RadarEarlyFraudWarningCharge = Charge | String
-
 end

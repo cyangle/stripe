@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Details of the flow associated with the TransactionEntry.
   alias TreasuryTransactionEntryFlowDetails = TransactionsResourceTreasuryFlowDetails
-
 end

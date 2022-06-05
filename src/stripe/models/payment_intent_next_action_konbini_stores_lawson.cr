@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Lawson instruction details.
   alias PaymentIntentNextActionKonbiniStoresLawson = PaymentIntentNextActionKonbiniLawson
-
 end

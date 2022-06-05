@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the SetupAttempt that generated this PaymentMethod, if any.
   alias PaymentMethodCardGeneratedCardSetupAttempt = SetupAttempt | String
-
 end

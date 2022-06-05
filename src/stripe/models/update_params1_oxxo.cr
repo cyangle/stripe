@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias UpdateParams1Oxxo = BusinessProfileSpecsSupportUrlOneOf | PaymentMethodOptionsParam7
-
 end

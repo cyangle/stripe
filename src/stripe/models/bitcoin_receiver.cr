@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class BitcoinReceiver
     include JSON::Serializable
@@ -138,30 +138,30 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @active : Bool, 
-      @amount : Int64, 
-      @amount_received : Int64, 
-      @bitcoin_amount : Int64, 
-      @bitcoin_amount_received : Int64, 
-      @bitcoin_uri : String, 
-      @created : Int64, 
-      @currency : String, 
-      @filled : Bool, 
-      @id : String, 
-      @inbound_address : String, 
-      @livemode : Bool, 
-      @object : String, 
-      @uncaptured_funds : Bool, 
+      @active : Bool,
+      @amount : Int64,
+      @amount_received : Int64,
+      @bitcoin_amount : Int64,
+      @bitcoin_amount_received : Int64,
+      @bitcoin_uri : String,
+      @created : Int64,
+      @currency : String,
+      @filled : Bool,
+      @id : String,
+      @inbound_address : String,
+      @livemode : Bool,
+      @object : String,
+      @uncaptured_funds : Bool,
       # Optional properties
-      @customer : String? = nil, 
-      @description : String? = nil, 
-      @email : String? = nil, 
-      @metadata : Hash(String, String)? = nil, 
-      @payment : String? = nil, 
-      @refund_address : String? = nil, 
-      @transactions : BitcoinTransactionList1? = nil, 
+      @customer : String? = nil,
+      @description : String? = nil,
+      @email : String? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @payment : String? = nil,
+      @refund_address : String? = nil,
+      @transactions : BitcoinTransactionList1? = nil,
       @used_for_payment : Bool? = nil
     )
     end

@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class AccountCardPaymentsSettings
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -37,9 +36,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @decline_on : AccountDeclineChargeOn? = nil, 
+      @decline_on : AccountDeclineChargeOn? = nil,
       @statement_descriptor_prefix : String? = nil
     )
     end

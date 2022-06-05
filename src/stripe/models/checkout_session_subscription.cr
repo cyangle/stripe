@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the subscription for Checkout Sessions in `subscription` mode.
   alias CheckoutSessionSubscription = String | Subscription
-
 end

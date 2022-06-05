@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The set of functionalities that the platform can restrict on the FinancialAccount.
   alias TreasuryFinancialAccountPlatformRestrictions = AccountServiceResourcePlatformRestrictions
-
 end

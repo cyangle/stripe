@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the Stripe account this account belongs to. Should only be present if `account_holder.type` is `account`.
   alias BankConnectionsResourceAccountholderAccount = Account | String
-
 end

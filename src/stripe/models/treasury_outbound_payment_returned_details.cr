@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Details about a returned OutboundPayment. Only set when the status is `returned`.
   alias TreasuryOutboundPaymentReturnedDetails = OutboundPaymentsResourceTreasuryReturnedStatus
-
 end

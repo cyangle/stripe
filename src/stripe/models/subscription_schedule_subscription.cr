@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the subscription managed by the subscription schedule.
   alias SubscriptionScheduleSubscription = String | Subscription
-
 end

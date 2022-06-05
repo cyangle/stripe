@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Additional purchase information that is optionally provided by the merchant.
   alias IssuingTransactionPurchaseDetails1 = IssuingTransactionPurchaseDetails
-
 end

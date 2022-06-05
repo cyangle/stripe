@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The discounts applied to the quote. You can only set up to one discount.
   alias PostQuotesRequestDiscounts = Array(DiscountsDataParam) | BusinessProfileSpecsSupportUrlOneOf
-
 end

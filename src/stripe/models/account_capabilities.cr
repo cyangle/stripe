@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class AccountCapabilities
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -303,38 +302,38 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @acss_debit_payments : String? = nil, 
-      @affirm_payments : String? = nil, 
-      @afterpay_clearpay_payments : String? = nil, 
-      @au_becs_debit_payments : String? = nil, 
-      @bacs_debit_payments : String? = nil, 
-      @bancontact_payments : String? = nil, 
-      @bank_transfer_payments : String? = nil, 
-      @boleto_payments : String? = nil, 
-      @card_issuing : String? = nil, 
-      @card_payments : String? = nil, 
-      @cartes_bancaires_payments : String? = nil, 
-      @eps_payments : String? = nil, 
-      @fpx_payments : String? = nil, 
-      @giropay_payments : String? = nil, 
-      @grabpay_payments : String? = nil, 
-      @ideal_payments : String? = nil, 
-      @jcb_payments : String? = nil, 
-      @klarna_payments : String? = nil, 
-      @konbini_payments : String? = nil, 
-      @legacy_payments : String? = nil, 
-      @link_payments : String? = nil, 
-      @oxxo_payments : String? = nil, 
-      @p24_payments : String? = nil, 
-      @paynow_payments : String? = nil, 
-      @sepa_debit_payments : String? = nil, 
-      @sofort_payments : String? = nil, 
-      @tax_reporting_us_1099_k : String? = nil, 
-      @tax_reporting_us_1099_misc : String? = nil, 
-      @transfers : String? = nil, 
-      @treasury : String? = nil, 
+      @acss_debit_payments : String? = nil,
+      @affirm_payments : String? = nil,
+      @afterpay_clearpay_payments : String? = nil,
+      @au_becs_debit_payments : String? = nil,
+      @bacs_debit_payments : String? = nil,
+      @bancontact_payments : String? = nil,
+      @bank_transfer_payments : String? = nil,
+      @boleto_payments : String? = nil,
+      @card_issuing : String? = nil,
+      @card_payments : String? = nil,
+      @cartes_bancaires_payments : String? = nil,
+      @eps_payments : String? = nil,
+      @fpx_payments : String? = nil,
+      @giropay_payments : String? = nil,
+      @grabpay_payments : String? = nil,
+      @ideal_payments : String? = nil,
+      @jcb_payments : String? = nil,
+      @klarna_payments : String? = nil,
+      @konbini_payments : String? = nil,
+      @legacy_payments : String? = nil,
+      @link_payments : String? = nil,
+      @oxxo_payments : String? = nil,
+      @p24_payments : String? = nil,
+      @paynow_payments : String? = nil,
+      @sepa_debit_payments : String? = nil,
+      @sofort_payments : String? = nil,
+      @tax_reporting_us_1099_k : String? = nil,
+      @tax_reporting_us_1099_misc : String? = nil,
+      @transfers : String? = nil,
+      @treasury : String? = nil,
       @us_bank_account_ach_payments : String? = nil
     )
     end

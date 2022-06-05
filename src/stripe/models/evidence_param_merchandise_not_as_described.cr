@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias EvidenceParamMerchandiseNotAsDescribed = BusinessProfileSpecsSupportUrlOneOf | MerchandiseNotAsDescribed
-
 end

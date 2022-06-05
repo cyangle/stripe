@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Connect Application that created the quote.
   alias QuoteApplication = Application | DeletedApplication | String
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The payment error encountered in the previous PaymentIntent confirmation. It will be cleared if the PaymentIntent is later updated for any reason.
   alias PaymentIntentLastPaymentError = ApiErrors
-
 end

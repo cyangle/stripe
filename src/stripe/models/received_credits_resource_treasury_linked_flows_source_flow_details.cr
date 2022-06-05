@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The expandable object of the source flow.
   alias ReceivedCreditsResourceTreasuryLinkedFlowsSourceFlowDetails = ReceivedCreditsResourceTreasurySourceFlowsDetails
-
 end

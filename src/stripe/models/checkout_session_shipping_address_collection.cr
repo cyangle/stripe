@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # When set, provides configuration for Checkout to collect a shipping address from a customer.
   alias CheckoutSessionShippingAddressCollection = PaymentPagesCheckoutSessionShippingAddressCollection
-
 end

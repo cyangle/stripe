@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription's default payment method, if any, or to the default payment method in the customer's invoice settings.
   alias InvoiceDefaultPaymentMethod = PaymentMethod | String
-
 end

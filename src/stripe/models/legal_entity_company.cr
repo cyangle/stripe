@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class LegalEntityCompany
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -133,23 +132,23 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @address : Address? = nil, 
-      @address_kana : LegalEntityCompanyAddressKana? = nil, 
-      @address_kanji : LegalEntityCompanyAddressKanji? = nil, 
-      @directors_provided : Bool? = nil, 
-      @executives_provided : Bool? = nil, 
-      @name : String? = nil, 
-      @name_kana : String? = nil, 
-      @name_kanji : String? = nil, 
-      @owners_provided : Bool? = nil, 
-      @ownership_declaration : LegalEntityCompanyOwnershipDeclaration? = nil, 
-      @phone : String? = nil, 
-      @structure : String? = nil, 
-      @tax_id_provided : Bool? = nil, 
-      @tax_id_registrar : String? = nil, 
-      @vat_id_provided : Bool? = nil, 
+      @address : Address? = nil,
+      @address_kana : LegalEntityCompanyAddressKana? = nil,
+      @address_kanji : LegalEntityCompanyAddressKanji? = nil,
+      @directors_provided : Bool? = nil,
+      @executives_provided : Bool? = nil,
+      @name : String? = nil,
+      @name_kana : String? = nil,
+      @name_kanji : String? = nil,
+      @owners_provided : Bool? = nil,
+      @ownership_declaration : LegalEntityCompanyOwnershipDeclaration? = nil,
+      @phone : String? = nil,
+      @structure : String? = nil,
+      @tax_id_provided : Bool? = nil,
+      @tax_id_registrar : String? = nil,
+      @vat_id_provided : Bool? = nil,
       @verification : LegalEntityCompanyVerification1? = nil
     )
     end

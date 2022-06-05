@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the PaymentIntent for Checkout Sessions in `payment` mode.
   alias CheckoutSessionPaymentIntent = PaymentIntent | String
-
 end

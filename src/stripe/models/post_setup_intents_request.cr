@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # Set to `true` to attempt to confirm this SetupIntent immediately. This parameter defaults to `false`. If the payment method attached is a card, a return_url may be provided in case additional authentication is required.
@@ -119,21 +118,21 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @confirm : Bool? = nil, 
-      @customer : String? = nil, 
-      @description : String? = nil, 
-      @expand : Array(String)? = nil, 
-      @mandate_data : SecretKeyParam2? = nil, 
-      @metadata : Hash(String, String)? = nil, 
-      @on_behalf_of : String? = nil, 
-      @payment_method : String? = nil, 
-      @payment_method_data : PaymentMethodDataParams1? = nil, 
-      @payment_method_options : PaymentMethodOptionsParam18? = nil, 
-      @payment_method_types : Array(String)? = nil, 
-      @return_url : String? = nil, 
-      @single_use : SetupIntentSingleUseParams? = nil, 
+      @confirm : Bool? = nil,
+      @customer : String? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @mandate_data : SecretKeyParam2? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @on_behalf_of : String? = nil,
+      @payment_method : String? = nil,
+      @payment_method_data : PaymentMethodDataParams1? = nil,
+      @payment_method_options : PaymentMethodOptionsParam18? = nil,
+      @payment_method_types : Array(String)? = nil,
+      @return_url : String? = nil,
+      @single_use : SetupIntentSingleUseParams? = nil,
       @usage : String? = nil
     )
     end

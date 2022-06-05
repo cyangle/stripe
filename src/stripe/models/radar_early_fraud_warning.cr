@@ -60,15 +60,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @actionable : Bool, 
-      @charge : RadarEarlyFraudWarningCharge, 
-      @created : Int64, 
-      @fraud_type : String, 
-      @id : String, 
-      @livemode : Bool, 
-      @object : String, 
+      @actionable : Bool,
+      @charge : RadarEarlyFraudWarningCharge,
+      @created : Int64,
+      @fraud_type : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
       # Optional properties
       @payment_intent : RadarEarlyFraudWarningPaymentIntent? = nil
     )

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Describes the current discount applied to this invoice, if there is one. Not populated if there are multiple discounts.
   alias InvoiceDiscount = Discount
-
 end

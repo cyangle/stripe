@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "background_image_url", type: String?, presence: true, ignore_serialize: background_image_url.nil? && !background_image_url_present?)]
@@ -179,33 +178,33 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @background_image_url : String? = nil, 
-      @client_token : String? = nil, 
-      @first_name : String? = nil, 
-      @last_name : String? = nil, 
-      @locale : String? = nil, 
-      @logo_url : String? = nil, 
-      @page_title : String? = nil, 
-      @pay_later_asset_urls_descriptive : String? = nil, 
-      @pay_later_asset_urls_standard : String? = nil, 
-      @pay_later_name : String? = nil, 
-      @pay_later_redirect_url : String? = nil, 
-      @pay_now_asset_urls_descriptive : String? = nil, 
-      @pay_now_asset_urls_standard : String? = nil, 
-      @pay_now_name : String? = nil, 
-      @pay_now_redirect_url : String? = nil, 
-      @pay_over_time_asset_urls_descriptive : String? = nil, 
-      @pay_over_time_asset_urls_standard : String? = nil, 
-      @pay_over_time_name : String? = nil, 
-      @pay_over_time_redirect_url : String? = nil, 
-      @payment_method_categories : String? = nil, 
-      @purchase_country : String? = nil, 
-      @purchase_type : String? = nil, 
-      @redirect_url : String? = nil, 
-      @shipping_delay : Int64? = nil, 
-      @shipping_first_name : String? = nil, 
+      @background_image_url : String? = nil,
+      @client_token : String? = nil,
+      @first_name : String? = nil,
+      @last_name : String? = nil,
+      @locale : String? = nil,
+      @logo_url : String? = nil,
+      @page_title : String? = nil,
+      @pay_later_asset_urls_descriptive : String? = nil,
+      @pay_later_asset_urls_standard : String? = nil,
+      @pay_later_name : String? = nil,
+      @pay_later_redirect_url : String? = nil,
+      @pay_now_asset_urls_descriptive : String? = nil,
+      @pay_now_asset_urls_standard : String? = nil,
+      @pay_now_name : String? = nil,
+      @pay_now_redirect_url : String? = nil,
+      @pay_over_time_asset_urls_descriptive : String? = nil,
+      @pay_over_time_asset_urls_standard : String? = nil,
+      @pay_over_time_name : String? = nil,
+      @pay_over_time_redirect_url : String? = nil,
+      @payment_method_categories : String? = nil,
+      @purchase_country : String? = nil,
+      @purchase_type : String? = nil,
+      @redirect_url : String? = nil,
+      @shipping_delay : Int64? = nil,
+      @shipping_first_name : String? = nil,
       @shipping_last_name : String? = nil
     )
     end
@@ -221,7 +220,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

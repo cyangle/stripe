@@ -17,11 +17,10 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
-    @[JSON::Field(key: "mandate_options", type: JSON::Any?, presence: true, ignore_serialize: mandate_options.nil? && !mandate_options_present?)]
-    property mandate_options : JSON::Any?
+    @[JSON::Field(key: "mandate_options", type: JSON::Any, presence: true, ignore_serialize: mandate_options.nil? && !mandate_options_present?)]
+    property mandate_options : JSON::Any
 
     @[JSON::Field(ignore: true)]
     property? mandate_options_present : Bool = false
@@ -29,9 +28,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @mandate_options : JSON::Any? = nil
+      @mandate_options : JSON::Any = nil
     )
     end
 
@@ -46,7 +45,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

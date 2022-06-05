@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # A publicly available mailing address for sending support issues to.
   alias AccountBusinessProfileSupportAddress = Address
-
 end

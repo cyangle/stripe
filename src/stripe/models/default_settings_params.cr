@@ -18,7 +18,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "application_fee_percent", type: Float64?, presence: true, ignore_serialize: application_fee_percent.nil? && !application_fee_percent_present?)]
@@ -76,15 +75,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @application_fee_percent : Float64? = nil, 
-      @automatic_tax : AutomaticTaxConfig1? = nil, 
-      @billing_cycle_anchor : String? = nil, 
-      @billing_thresholds : DefaultSettingsParamsBillingThresholds? = nil, 
-      @collection_method : String? = nil, 
-      @default_payment_method : String? = nil, 
-      @invoice_settings : SubscriptionSchedulesParam? = nil, 
+      @application_fee_percent : Float64? = nil,
+      @automatic_tax : AutomaticTaxConfig1? = nil,
+      @billing_cycle_anchor : String? = nil,
+      @billing_thresholds : DefaultSettingsParamsBillingThresholds? = nil,
+      @collection_method : String? = nil,
+      @default_payment_method : String? = nil,
+      @invoice_settings : SubscriptionSchedulesParam? = nil,
       @transfer_data : DefaultSettingsParamsTransferData? = nil
     )
     end

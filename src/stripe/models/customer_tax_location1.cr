@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The customer's location as identified by Stripe Tax.
   alias CustomerTaxLocation1 = CustomerTaxLocation
-
 end

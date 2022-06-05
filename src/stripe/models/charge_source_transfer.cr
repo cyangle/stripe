@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The transfer ID which created this charge. Only present if the charge came from another Stripe account. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.
   alias ChargeSourceTransfer = String | Transfer
-
 end

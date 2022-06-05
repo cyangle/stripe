@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If specified, [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates) that will be applied to the subscription once the `latest_invoice` has been paid.
   alias SubscriptionPendingUpdate = SubscriptionsResourcePendingUpdate
-
 end

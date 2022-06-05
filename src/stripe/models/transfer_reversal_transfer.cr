@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the transfer that was reversed.
   alias TransferReversalTransfer = String | Transfer
-
 end

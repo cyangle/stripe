@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Contains information about card networks that can be used to process the payment.
   alias PaymentMethodCardNetworks = Networks
-
 end

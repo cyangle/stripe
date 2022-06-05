@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the Payment Link that created this Session.
   alias CheckoutSessionPaymentLink = PaymentLink | String
-
 end

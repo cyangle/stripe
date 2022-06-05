@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Checks on Card address and CVC if provided.
   alias PaymentMethodCardChecks1 = PaymentMethodCardChecks
-
 end

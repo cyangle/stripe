@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period. Pass an empty string to remove previously-defined thresholds.
   alias PostCustomersCustomerSubscriptionsRequestBillingThresholds = BillingThresholdsParam | BusinessProfileSpecsSupportUrlOneOf
-
 end

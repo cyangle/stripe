@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class RadarReviewResourceLocation
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -59,12 +58,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @city : String? = nil, 
-      @country : String? = nil, 
-      @latitude : Float64? = nil, 
-      @longitude : Float64? = nil, 
+      @city : String? = nil,
+      @country : String? = nil,
+      @latitude : Float64? = nil,
+      @longitude : Float64? = nil,
       @region : String? = nil
     )
     end

@@ -18,7 +18,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # A short machine-readable string giving the reason for the verification or user-session failure.
@@ -40,9 +39,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @code : String? = nil, 
+      @code : String? = nil,
       @reason : String? = nil
     )
     end

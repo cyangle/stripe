@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Information on fraud assessments for the charge.
   alias ChargeFraudDetails1 = ChargeFraudDetails
-
 end

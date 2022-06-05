@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Address as it appears in the document.
   alias GelatoDocumentReportAddress = Address
-
 end

@@ -83,20 +83,20 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @created : Int64, 
-      @id : String, 
-      @livemode : Bool, 
-      @object : String, 
-      @reason : String, 
-      @source : Source, 
-      @status : String, 
-      @_type : String, 
+      @created : Int64,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @reason : String,
+      @source : Source,
+      @status : String,
+      @_type : String,
       # Optional properties
-      @acss_debit : SourceMandateNotificationAcssDebitData? = nil, 
-      @amount : Int64? = nil, 
-      @bacs_debit : SourceMandateNotificationBacsDebitData? = nil, 
+      @acss_debit : SourceMandateNotificationAcssDebitData? = nil,
+      @amount : Int64? = nil,
+      @bacs_debit : SourceMandateNotificationBacsDebitData? = nil,
       @sepa_debit : SourceMandateNotificationSepaDebitData? = nil
     )
     end

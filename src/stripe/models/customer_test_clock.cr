@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the test clock this customer belongs to.
   alias CustomerTestClock = String | TestHelpersTestClock
-
 end

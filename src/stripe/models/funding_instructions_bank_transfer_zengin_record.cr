@@ -18,7 +18,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # The account holder name
@@ -73,14 +72,14 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @account_holder_name : String? = nil, 
-      @account_number : String? = nil, 
-      @account_type : String? = nil, 
-      @bank_code : String? = nil, 
-      @bank_name : String? = nil, 
-      @branch_code : String? = nil, 
+      @account_holder_name : String? = nil,
+      @account_number : String? = nil,
+      @account_type : String? = nil,
+      @bank_code : String? = nil,
+      @bank_name : String? = nil,
+      @branch_code : String? = nil,
       @branch_name : String? = nil
     )
     end

@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PaymentMethodOptions2UsBankAccount = BusinessProfileSpecsSupportUrlOneOf | PaymentMethodOptionsParam19
-
 end

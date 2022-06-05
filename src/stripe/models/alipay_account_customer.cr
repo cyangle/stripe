@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the customer associated with this Alipay Account.
   alias AlipayAccountCustomer = Customer | DeletedCustomer | String
-
 end

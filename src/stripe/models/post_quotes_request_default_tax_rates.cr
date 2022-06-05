@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The tax rates that will apply to any line item that does not have `tax_rates` set.
   alias PostQuotesRequestDefaultTaxRates = Array(String) | BusinessProfileSpecsSupportUrlOneOf
-
 end

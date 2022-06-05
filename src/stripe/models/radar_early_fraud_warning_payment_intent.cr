@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Payment Intent this early fraud warning is for, optionally expanded.
   alias RadarEarlyFraudWarningPaymentIntent = PaymentIntent | String
-
 end

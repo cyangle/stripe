@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the balance transaction that describes the impact of this payout on your account balance.
   alias PayoutBalanceTransaction = BalanceTransaction | String
-
 end

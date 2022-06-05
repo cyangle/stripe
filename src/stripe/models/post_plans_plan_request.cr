@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # Whether the plan is currently available for new subscriptions.
@@ -64,13 +63,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @active : Bool? = nil, 
-      @expand : Array(String)? = nil, 
-      @metadata : PostAccountRequestMetadata? = nil, 
-      @nickname : String? = nil, 
-      @product : String? = nil, 
+      @active : Bool? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @nickname : String? = nil,
+      @product : String? = nil,
       @trial_period_days : Int64? = nil
     )
     end

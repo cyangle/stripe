@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If the payment succeeded, this contains the details of the convenience store where the payment was completed.
   alias PaymentMethodDetailsKonbiniStore1 = PaymentMethodDetailsKonbiniStore
-
 end

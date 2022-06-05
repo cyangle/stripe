@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The invoice that was created from this quote.
   alias QuoteInvoice = DeletedInvoice | Invoice | String
-
 end

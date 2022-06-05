@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the account that the bank account is associated with.
   alias BankAccountAccount = Account | String
-
 end

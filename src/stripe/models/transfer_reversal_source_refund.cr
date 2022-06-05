@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the refund responsible for the transfer reversal.
   alias TransferReversalSourceRefund = Refund | String
-
 end

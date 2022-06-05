@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Contains information about US bank account networks that can be used.
   alias PaymentMethodUsBankAccountNetworks = UsBankAccountNetworks
-
 end

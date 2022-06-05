@@ -70,17 +70,17 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @created : Int64, 
-      @id : String, 
-      @metadata : Hash(String, String), 
-      @object : String, 
-      @price : Price, 
-      @subscription : String, 
+      @created : Int64,
+      @id : String,
+      @metadata : Hash(String, String),
+      @object : String,
+      @price : Price,
+      @subscription : String,
       # Optional properties
-      @billing_thresholds : SubscriptionItemBillingThresholds1? = nil, 
-      @quantity : Int64? = nil, 
+      @billing_thresholds : SubscriptionItemBillingThresholds1? = nil,
+      @quantity : Int64? = nil,
       @tax_rates : Array(TaxRate)? = nil
     )
     end

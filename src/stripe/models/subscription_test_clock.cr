@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the test clock this subscription belongs to.
   alias SubscriptionTestClock = String | TestHelpersTestClock
-
 end

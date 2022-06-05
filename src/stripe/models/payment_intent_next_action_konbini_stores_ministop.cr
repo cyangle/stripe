@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Ministop instruction details.
   alias PaymentIntentNextActionKonbiniStoresMinistop = PaymentIntentNextActionKonbiniMinistop
-
 end

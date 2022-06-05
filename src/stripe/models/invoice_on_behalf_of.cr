@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
   alias InvoiceOnBehalfOf = Account | String
-
 end

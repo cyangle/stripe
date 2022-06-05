@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Verified owner's address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.
   alias SourceOwnerVerifiedAddress = Address
-
 end

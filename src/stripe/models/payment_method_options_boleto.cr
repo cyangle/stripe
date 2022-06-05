@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodOptionsBoleto
     include JSON::Serializable
@@ -38,9 +38,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @expires_after_days : Int64, 
+      @expires_after_days : Int64,
       # Optional properties
       @setup_future_usage : String? = nil
     )

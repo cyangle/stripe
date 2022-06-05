@@ -124,26 +124,26 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @created : Int64, 
-      @customer : SubscriptionScheduleCustomer, 
-      @default_settings : SubscriptionSchedulesResourceDefaultSettings, 
-      @end_behavior : String, 
-      @id : String, 
-      @livemode : Bool, 
-      @object : String, 
-      @phases : Array(SubscriptionSchedulePhaseConfiguration), 
-      @status : String, 
+      @created : Int64,
+      @customer : SubscriptionScheduleCustomer,
+      @default_settings : SubscriptionSchedulesResourceDefaultSettings,
+      @end_behavior : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @phases : Array(SubscriptionSchedulePhaseConfiguration),
+      @status : String,
       # Optional properties
-      @application : SubscriptionScheduleApplication? = nil, 
-      @canceled_at : Int64? = nil, 
-      @completed_at : Int64? = nil, 
-      @current_phase : SubscriptionScheduleCurrentPhase1? = nil, 
-      @metadata : Hash(String, String)? = nil, 
-      @released_at : Int64? = nil, 
-      @released_subscription : String? = nil, 
-      @subscription : SubscriptionScheduleSubscription? = nil, 
+      @application : SubscriptionScheduleApplication? = nil,
+      @canceled_at : Int64? = nil,
+      @completed_at : Int64? = nil,
+      @current_phase : SubscriptionScheduleCurrentPhase1? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @released_at : Int64? = nil,
+      @released_subscription : String? = nil,
+      @subscription : SubscriptionScheduleSubscription? = nil,
       @test_clock : SubscriptionScheduleTestClock? = nil
     )
     end

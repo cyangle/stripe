@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class SubscriptionSchedulesResourceDefaultSettings
     include JSON::Serializable
@@ -77,16 +77,16 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @billing_cycle_anchor : String, 
+      @billing_cycle_anchor : String,
       # Optional properties
-      @application_fee_percent : Float64? = nil, 
-      @automatic_tax : SubscriptionSchedulesResourceDefaultSettingsAutomaticTax? = nil, 
-      @billing_thresholds : SubscriptionBillingThresholds1? = nil, 
-      @collection_method : String? = nil, 
-      @default_payment_method : SubscriptionSchedulesResourceDefaultSettingsDefaultPaymentMethod? = nil, 
-      @invoice_settings : SubscriptionSchedulesResourceDefaultSettingsInvoiceSettings? = nil, 
+      @application_fee_percent : Float64? = nil,
+      @automatic_tax : SubscriptionSchedulesResourceDefaultSettingsAutomaticTax? = nil,
+      @billing_thresholds : SubscriptionBillingThresholds1? = nil,
+      @collection_method : String? = nil,
+      @default_payment_method : SubscriptionSchedulesResourceDefaultSettingsDefaultPaymentMethod? = nil,
+      @invoice_settings : SubscriptionSchedulesResourceDefaultSettingsInvoiceSettings? = nil,
       @transfer_data : SubscriptionSchedulePhaseConfigurationTransferData? = nil
     )
     end

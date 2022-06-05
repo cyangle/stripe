@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Information on the API request that instigated the event.
   alias EventRequest = NotificationEventRequest
-
 end

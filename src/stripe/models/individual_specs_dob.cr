@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias IndividualSpecsDob = BusinessProfileSpecsSupportUrlOneOf | DateOfBirthSpecs
-
 end

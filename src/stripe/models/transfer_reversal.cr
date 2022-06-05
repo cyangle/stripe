@@ -75,18 +75,18 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @amount : Int64, 
-      @created : Int64, 
-      @currency : String, 
-      @id : String, 
-      @object : String, 
-      @transfer : TransferReversalTransfer, 
+      @amount : Int64,
+      @created : Int64,
+      @currency : String,
+      @id : String,
+      @object : String,
+      @transfer : TransferReversalTransfer,
       # Optional properties
-      @balance_transaction : FeeRefundBalanceTransaction? = nil, 
-      @destination_payment_refund : TransferReversalDestinationPaymentRefund? = nil, 
-      @metadata : Hash(String, String)? = nil, 
+      @balance_transaction : FeeRefundBalanceTransaction? = nil,
+      @destination_payment_refund : TransferReversalDestinationPaymentRefund? = nil,
+      @metadata : Hash(String, String)? = nil,
       @source_refund : TransferReversalSourceRefund? = nil
     )
     end

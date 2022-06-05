@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Business information about the account.
   alias AccountBusinessProfile1 = AccountBusinessProfile
-
 end

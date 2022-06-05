@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class TaxIdVerification
     include JSON::Serializable
@@ -45,11 +45,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @status : String, 
+      @status : String,
       # Optional properties
-      @verified_address : String? = nil, 
+      @verified_address : String? = nil,
       @verified_name : String? = nil
     )
     end

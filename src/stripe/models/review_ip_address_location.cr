@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Information related to the location of the payment. Note that this information is an approximation and attempts to locate the nearest population center - it should not be used to determine a specific address.
   alias ReviewIpAddressLocation = RadarReviewResourceLocation
-
 end

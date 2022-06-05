@@ -69,15 +69,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @status : String, 
-      @_type : String, 
+      @status : String,
+      @_type : String,
       # Optional properties
-      @failure_code : String? = nil, 
-      @failure_message : String? = nil, 
-      @process_payment_intent : TerminalReaderReaderResourceProcessPaymentIntentAction? = nil, 
-      @process_setup_intent : TerminalReaderReaderResourceProcessSetupIntentAction? = nil, 
+      @failure_code : String? = nil,
+      @failure_message : String? = nil,
+      @process_payment_intent : TerminalReaderReaderResourceProcessPaymentIntentAction? = nil,
+      @process_setup_intent : TerminalReaderReaderResourceProcessSetupIntentAction? = nil,
       @set_reader_display : TerminalReaderReaderResourceSetReaderDisplayAction? = nil
     )
     end

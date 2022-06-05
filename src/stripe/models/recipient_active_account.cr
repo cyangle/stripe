@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Hash describing the current account on the recipient, if there is one.
   alias RecipientActiveAccount = BankAccount
-
 end

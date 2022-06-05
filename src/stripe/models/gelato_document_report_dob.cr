@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Date of birth as it appears in the document.
   alias GelatoDocumentReportDob = GelatoDataDocumentReportDateOfBirth
-
 end

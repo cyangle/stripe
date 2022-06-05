@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.
   alias ChargeTransferData1 = ChargeTransferData
-
 end

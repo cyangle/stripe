@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The customer's date of birth, if provided.
   alias PaymentMethodKlarnaDob = PaymentFlowsPrivatePaymentMethodsKlarnaDob
-
 end

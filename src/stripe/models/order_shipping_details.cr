@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Customer shipping information associated with the order.
   alias OrderShippingDetails = OrdersV2ResourceShippingDetails
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the transfer to the `destination` account (only applicable if the charge was created using the `destination` parameter).
   alias ChargeTransfer = String | Transfer
-
 end

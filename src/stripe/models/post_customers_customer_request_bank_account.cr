@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details.
   alias PostCustomersCustomerRequestBankAccount = CustomerPaymentSourceBankAccount | String
-
 end

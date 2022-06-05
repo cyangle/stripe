@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "allowed_updates", type: CustomerUpdateCreationParamAllowedUpdates?, presence: true, ignore_serialize: allowed_updates.nil? && !allowed_updates_present?)]
@@ -35,9 +34,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @allowed_updates : CustomerUpdateCreationParamAllowedUpdates? = nil, 
+      @allowed_updates : CustomerUpdateCreationParamAllowedUpdates? = nil,
       @enabled : Bool? = nil
     )
     end
@@ -53,7 +52,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

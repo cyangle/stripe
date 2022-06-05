@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias GetTerminalConfigurationsConfiguration200Response = DeletedTerminalConfiguration | TerminalConfiguration
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Balance transaction that describes the impact on your account balance.
   alias FeeRefundBalanceTransaction = BalanceTransaction | String
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Payment-method-specific configuration for the PaymentIntent or SetupIntent of this CheckoutSession.
   alias CheckoutSessionPaymentMethodOptions1 = CheckoutSessionPaymentMethodOptions
-
 end

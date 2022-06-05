@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Payment-method-specific configuration to provide to the invoice’s PaymentIntent.
   alias InvoicesPaymentSettingsPaymentMethodOptions = InvoicesPaymentMethodOptions
-
 end

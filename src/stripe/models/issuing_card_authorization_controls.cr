@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class IssuingCardAuthorizationControls
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -56,11 +55,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @allowed_categories : Array(String)? = nil, 
-      @blocked_categories : Array(String)? = nil, 
-      @spending_limits : Array(IssuingCardSpendingLimit)? = nil, 
+      @allowed_categories : Array(String)? = nil,
+      @blocked_categories : Array(String)? = nil,
+      @spending_limits : Array(IssuingCardSpendingLimit)? = nil,
       @spending_limits_currency : String? = nil
     )
     end

@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias CustomerUpdateCreationParamAllowedUpdates = Array(String) | BusinessProfileSpecsSupportUrlOneOf
-
 end

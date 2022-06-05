@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # Whether the configuration is active and can be used to create portal sessions.
@@ -61,13 +60,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @active : Bool? = nil, 
-      @business_profile : BusinessProfileUpdateParam? = nil, 
-      @default_return_url : PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil, 
-      @expand : Array(String)? = nil, 
-      @features : FeaturesUpdatingParam? = nil, 
+      @active : Bool? = nil,
+      @business_profile : BusinessProfileUpdateParam? = nil,
+      @default_return_url : PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
+      @expand : Array(String)? = nil,
+      @features : FeaturesUpdatingParam? = nil,
       @metadata : PostAccountRequestMetadata? = nil
     )
     end
@@ -83,7 +82,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

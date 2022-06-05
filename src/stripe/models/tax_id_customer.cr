@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the customer.
   alias TaxIdCustomer = Customer | String
-
 end

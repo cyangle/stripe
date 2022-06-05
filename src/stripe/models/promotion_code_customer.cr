@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The customer that this promotion code can be used by.
   alias PromotionCodeCustomer = Customer | DeletedCustomer | String
-
 end

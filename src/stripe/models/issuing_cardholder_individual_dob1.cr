@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The date of birth of this cardholder.
   alias IssuingCardholderIndividualDob1 = IssuingCardholderIndividualDob
-
 end

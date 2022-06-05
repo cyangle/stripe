@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentPagesCheckoutSessionAfterExpirationRecovery
     include JSON::Serializable
@@ -47,12 +47,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @allow_promotion_codes : Bool, 
-      @enabled : Bool, 
+      @allow_promotion_codes : Bool,
+      @enabled : Bool,
       # Optional properties
-      @expires_at : Int64? = nil, 
+      @expires_at : Int64? = nil,
       @url : String? = nil
     )
     end

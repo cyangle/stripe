@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PostChargesRequestDestination = DestinationSpecs | String
-
 end

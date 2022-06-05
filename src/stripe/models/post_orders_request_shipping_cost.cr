@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Settings for the customer cost of shipping for this order.
   alias PostOrdersRequestShippingCost = BusinessProfileSpecsSupportUrlOneOf | ShippingCost
-
 end

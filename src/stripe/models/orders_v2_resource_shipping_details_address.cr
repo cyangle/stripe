@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Recipient shipping address. Required if the order includes products that are shippable.
   alias OrdersV2ResourceShippingDetailsAddress = Address
-
 end

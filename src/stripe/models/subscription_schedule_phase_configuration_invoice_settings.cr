@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The invoice settings applicable during this phase.
   alias SubscriptionSchedulePhaseConfigurationInvoiceSettings = InvoiceSettingSubscriptionScheduleSetting
-
 end

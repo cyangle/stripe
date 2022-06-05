@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias GetTerminalLocationsLocation200Response = DeletedTerminalLocation | TerminalLocation
-
 end

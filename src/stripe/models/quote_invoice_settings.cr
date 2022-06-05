@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # All invoices will be billed using the specified settings.
   alias QuoteInvoiceSettings = InvoiceSettingQuoteSetting
-
 end

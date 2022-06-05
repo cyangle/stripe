@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The source object for errors returned on a request involving a source.
   alias ApiErrorsSource = BankAccount | Card | Source
-
 end

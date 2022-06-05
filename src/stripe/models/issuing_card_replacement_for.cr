@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The card this card replaces, if any.
   alias IssuingCardReplacementFor = IssuingCard | String
-
 end

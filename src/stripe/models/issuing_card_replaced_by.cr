@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The latest card that replaces this card, if any.
   alias IssuingCardReplacedBy = IssuingCard | String
-
 end

@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias IndividualSpecsMetadata = BusinessProfileSpecsSupportUrlOneOf | Hash(String, String)
-
 end

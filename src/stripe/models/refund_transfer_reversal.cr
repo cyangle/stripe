@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If the accompanying transfer was reversed, the transfer reversal object. Only applicable if the charge was created using the destination parameter.
   alias RefundTransferReversal = String | TransferReversal
-
 end

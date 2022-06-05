@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "preferred_language", type: String?, presence: true, ignore_serialize: preferred_language.nil? && !preferred_language_present?)]
@@ -39,9 +38,9 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @preferred_language : String? = nil, 
+      @preferred_language : String? = nil,
       @setup_future_usage : String? = nil
     )
     end

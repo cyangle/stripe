@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The cardholder to whom this authorization belongs.
   alias IssuingAuthorizationCardholder = IssuingCardholder | String
-
 end

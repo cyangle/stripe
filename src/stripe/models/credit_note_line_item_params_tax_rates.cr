@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias CreditNoteLineItemParamsTaxRates = Array(String) | BusinessProfileSpecsSupportUrlOneOf
-
 end

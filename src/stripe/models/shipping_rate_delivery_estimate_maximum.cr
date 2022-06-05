@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.
   alias ShippingRateDeliveryEstimateMaximum = ShippingRateDeliveryEstimateBound
-
 end

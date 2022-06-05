@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of an existing, connected Stripe account to transfer funds to if `transfer_data` was specified in the charge request.
   alias ChargeTransferDataDestination = Account | String
-
 end

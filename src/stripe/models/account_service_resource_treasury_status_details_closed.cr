@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Details related to the closure of this FinancialAccount
   alias AccountServiceResourceTreasuryStatusDetailsClosed = AccountServiceResourceTreasuryClosedStatusDetails
-
 end

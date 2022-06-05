@@ -26,6 +26,10 @@ tasks:
     file_glob: './src/**/*cr'
     changes:
       -
+        name: 'Correct JSON::Any?'
+        pattern: 'JSON::Any\?'
+        new_value: 'JSON::Any'
+      -
         name: 'Correct Stripe::String'
         pattern: 'Stripe::String'
         new_value: 'String'
@@ -37,6 +41,6 @@ tasks:
     file_glob: './src/stripe/api_error.cr'
     changes:
       -
-        name: 'Correct AnyType?'
+        name: 'Correct Int64'
         pattern: 'Int64'
         new_value: 'Int32'

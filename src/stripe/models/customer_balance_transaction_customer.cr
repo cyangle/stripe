@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the customer the transaction belongs to.
   alias CustomerBalanceTransactionCustomer = Customer | String
-
 end

@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # Whether the price can be used for new purchases. Defaults to `true`.
@@ -73,14 +72,14 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @active : Bool? = nil, 
-      @expand : Array(String)? = nil, 
-      @lookup_key : String? = nil, 
-      @metadata : PostAccountRequestMetadata? = nil, 
-      @nickname : String? = nil, 
-      @tax_behavior : String? = nil, 
+      @active : Bool? = nil,
+      @expand : Array(String)? = nil,
+      @lookup_key : String? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @nickname : String? = nil,
+      @tax_behavior : String? = nil,
       @transfer_lookup_key : Bool? = nil
     )
     end

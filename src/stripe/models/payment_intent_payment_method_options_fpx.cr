@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PaymentIntentPaymentMethodOptionsFpx = PaymentIntentTypeSpecificPaymentMethodOptionsClient | PaymentMethodOptionsFpx
-
 end

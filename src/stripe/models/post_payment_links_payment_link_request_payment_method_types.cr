@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The list of payment method types that customers can use. Only `card` is supported. Pass an empty string to enable automatic payment methods that use your [payment method settings](https://dashboard.stripe.com/settings/payment_methods).
   alias PostPaymentLinksPaymentLinkRequestPaymentMethodTypes = Array(String) | BusinessProfileSpecsSupportUrlOneOf
-
 end

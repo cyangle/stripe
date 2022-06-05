@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # When set, provides configuration for the Checkout Session to gather active consent from customers.
   alias CheckoutSessionConsentCollection = PaymentPagesCheckoutSessionConsentCollection
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The tax rate that was applied to get this tax amount.
   alias CreditNoteTaxAmountTaxRate = String | TaxRate
-
 end

@@ -54,13 +54,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @_type : String, 
+      @_type : String,
       # Optional properties
-      @billing_details : BillingDetailsInnerParams? = nil, 
-      @financial_account : String? = nil, 
-      @metadata : Hash(String, String)? = nil, 
+      @billing_details : BillingDetailsInnerParams? = nil,
+      @financial_account : String? = nil,
+      @metadata : Hash(String, String)? = nil,
       @us_bank_account : PaymentMethodParam1? = nil
     )
     end

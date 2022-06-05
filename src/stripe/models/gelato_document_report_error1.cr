@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Details on the verification error. Present when status is `unverified`.
   alias GelatoDocumentReportError1 = GelatoDocumentReportError
-
 end

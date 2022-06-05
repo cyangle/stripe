@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # The ID of an existing customer that will be associated with this request. This field may only be updated if there is no existing associated customer with this charge.
@@ -76,15 +75,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @customer : String? = nil, 
-      @description : String? = nil, 
-      @expand : Array(String)? = nil, 
-      @fraud_details : FraudDetails? = nil, 
-      @metadata : PostAccountRequestMetadata? = nil, 
-      @receipt_email : String? = nil, 
-      @shipping : OptionalFieldsShipping? = nil, 
+      @customer : String? = nil,
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
+      @fraud_details : FraudDetails? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @receipt_email : String? = nil,
+      @shipping : OptionalFieldsShipping? = nil,
       @transfer_group : String? = nil
     )
     end

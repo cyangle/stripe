@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # An arbitrary string attached to the object. Often useful for displaying to users.
@@ -43,10 +42,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @description : String? = nil, 
-      @expand : Array(String)? = nil, 
+      @description : String? = nil,
+      @expand : Array(String)? = nil,
       @metadata : PostAccountRequestMetadata? = nil
     )
     end

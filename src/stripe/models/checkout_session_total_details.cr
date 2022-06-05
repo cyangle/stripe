@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Tax and discount details for the computed total amount.
   alias CheckoutSessionTotalDetails = PaymentPagesCheckoutSessionTotalDetails
-
 end

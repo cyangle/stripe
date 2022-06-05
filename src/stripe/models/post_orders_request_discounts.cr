@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The coupons, promotion codes, and/or discounts to apply to the order.
   alias PostOrdersRequestDiscounts = Array(DiscountsDataParam1) | BusinessProfileSpecsSupportUrlOneOf
-
 end

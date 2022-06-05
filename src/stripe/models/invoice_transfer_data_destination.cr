@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account where funds from the payment will be transferred to upon payment success.
   alias InvoiceTransferDataDestination = Account | String
-
 end

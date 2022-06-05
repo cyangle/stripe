@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the Customer to which this PaymentMethod is saved. This will not be set when the PaymentMethod has not been saved to a Customer.
   alias PaymentMethodCustomer = Customer | String
-
 end

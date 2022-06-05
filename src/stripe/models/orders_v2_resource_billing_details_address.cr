@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Billing address for the order.
   alias OrdersV2ResourceBillingDetailsAddress = Address
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The promotion code applied to create this discount.
   alias DeletedDiscountPromotionCode = PromotionCode | String
-
 end

@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "billing_thresholds", type: SubscriptionItemCreateParamsBillingThresholds?, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
@@ -53,12 +52,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @billing_thresholds : SubscriptionItemCreateParamsBillingThresholds? = nil, 
-      @price : String? = nil, 
-      @price_data : RecurringPriceData? = nil, 
-      @quantity : Int64? = nil, 
+      @billing_thresholds : SubscriptionItemCreateParamsBillingThresholds? = nil,
+      @price : String? = nil,
+      @price_data : RecurringPriceData? = nil,
+      @quantity : Int64? = nil,
       @tax_rates : CreditNoteLineItemParamsTaxRates? = nil
     )
     end

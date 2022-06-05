@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Shipping information for this PaymentIntent.
   alias PaymentIntentShipping = Shipping
-
 end

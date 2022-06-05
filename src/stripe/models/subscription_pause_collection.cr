@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If specified, payment collection for this subscription will be paused.
   alias SubscriptionPauseCollection = SubscriptionsResourcePauseCollection
-
 end

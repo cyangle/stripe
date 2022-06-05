@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias UpdateParams1P24 = BusinessProfileSpecsSupportUrlOneOf | PaymentMethodOptionsParam8
-
 end

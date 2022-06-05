@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the customer this charge is for if one exists.
   alias ChargeCustomer = Customer | DeletedCustomer | String
-
 end

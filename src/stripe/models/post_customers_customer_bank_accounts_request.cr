@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # A token returned by [Stripe.js](https://stripe.com/docs/js) representing the user’s Alipay account details.
@@ -63,13 +62,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @alipay_account : String? = nil, 
-      @bank_account : PostCustomersCustomerRequestBankAccount? = nil, 
-      @card : PostChargesRequestCard? = nil, 
-      @expand : Array(String)? = nil, 
-      @metadata : Hash(String, String)? = nil, 
+      @alipay_account : String? = nil,
+      @bank_account : PostCustomersCustomerRequestBankAccount? = nil,
+      @card : PostChargesRequestCard? = nil,
+      @expand : Array(String)? = nil,
+      @metadata : Hash(String, String)? = nil,
       @source : String? = nil
     )
     end

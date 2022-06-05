@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentMethodOptionsKonbini
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -61,12 +60,12 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @confirmation_number : String? = nil, 
-      @expires_after_days : Int64? = nil, 
-      @expires_at : Int64? = nil, 
-      @product_description : String? = nil, 
+      @confirmation_number : String? = nil,
+      @expires_after_days : Int64? = nil,
+      @expires_at : Int64? = nil,
+      @product_description : String? = nil,
       @setup_future_usage : String? = nil
     )
     end

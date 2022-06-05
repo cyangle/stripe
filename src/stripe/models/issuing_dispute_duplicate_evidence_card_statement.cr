@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the card statement showing that the product had already been paid for.
   alias IssuingDisputeDuplicateEvidenceCardStatement = File | String
-
 end

@@ -18,7 +18,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "canceled", type: EvidenceParamCanceled?, presence: true, ignore_serialize: canceled.nil? && !canceled_present?)]
@@ -74,15 +73,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @canceled : EvidenceParamCanceled? = nil, 
-      @duplicate : EvidenceParamDuplicate? = nil, 
-      @fraudulent : EvidenceParamFraudulent? = nil, 
-      @merchandise_not_as_described : EvidenceParamMerchandiseNotAsDescribed? = nil, 
-      @not_received : EvidenceParamNotReceived? = nil, 
-      @other : EvidenceParamOther? = nil, 
-      @reason : String? = nil, 
+      @canceled : EvidenceParamCanceled? = nil,
+      @duplicate : EvidenceParamDuplicate? = nil,
+      @fraudulent : EvidenceParamFraudulent? = nil,
+      @merchandise_not_as_described : EvidenceParamMerchandiseNotAsDescribed? = nil,
+      @not_received : EvidenceParamNotReceived? = nil,
+      @other : EvidenceParamOther? = nil,
+      @reason : String? = nil,
       @service_not_as_described : EvidenceParamServiceNotAsDescribed? = nil
     )
     end

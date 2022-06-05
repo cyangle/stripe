@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The coupons to redeem into discounts for the invoice. If not specified, inherits the discount from the invoice's customer. Pass an empty string to avoid inheriting any discounts.
   alias PostInvoicesRequestDiscounts = Array(DiscountsDataParam) | BusinessProfileSpecsSupportUrlOneOf
-
 end

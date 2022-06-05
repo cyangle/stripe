@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the receipt showing that the product had been paid for in cash.
   alias IssuingDisputeDuplicateEvidenceCashReceipt = File | String
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the Radar rule that matched the payment, if applicable.
   alias ChargeOutcomeRule = Rule | String
-
 end

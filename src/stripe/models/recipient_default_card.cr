@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The default card to use for creating transfers to this recipient.
   alias RecipientDefaultCard = Card | String
-
 end

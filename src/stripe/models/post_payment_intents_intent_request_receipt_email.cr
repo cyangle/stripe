@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Email address that the receipt for the resulting payment will be sent to. If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
   alias PostPaymentIntentsIntentRequestReceiptEmail = BusinessProfileSpecsSupportUrlOneOf | String
-
 end

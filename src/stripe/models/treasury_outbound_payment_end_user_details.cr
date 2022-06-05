@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Details about the end user.
   alias TreasuryOutboundPaymentEndUserDetails = OutboundPaymentsResourceOutboundPaymentResourceEndUserDetails
-
 end

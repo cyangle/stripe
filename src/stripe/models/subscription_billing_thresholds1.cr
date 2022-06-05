@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period
   alias SubscriptionBillingThresholds1 = SubscriptionBillingThresholds
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the Charge that generated this PaymentMethod, if any.
   alias SepaDebitGeneratedFromCharge = Charge | String
-
 end

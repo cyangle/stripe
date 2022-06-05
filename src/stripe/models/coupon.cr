@@ -119,24 +119,24 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @created : Int64, 
-      @duration : String, 
-      @id : String, 
-      @livemode : Bool, 
-      @object : String, 
-      @times_redeemed : Int64, 
-      @valid : Bool, 
+      @created : Int64,
+      @duration : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @times_redeemed : Int64,
+      @valid : Bool,
       # Optional properties
-      @amount_off : Int64? = nil, 
-      @applies_to : CouponAppliesTo? = nil, 
-      @currency : String? = nil, 
-      @duration_in_months : Int64? = nil, 
-      @max_redemptions : Int64? = nil, 
-      @metadata : Hash(String, String)? = nil, 
-      @name : String? = nil, 
-      @percent_off : Float64? = nil, 
+      @amount_off : Int64? = nil,
+      @applies_to : CouponAppliesTo? = nil,
+      @currency : String? = nil,
+      @duration_in_months : Int64? = nil,
+      @max_redemptions : Int64? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @name : String? = nil,
+      @percent_off : Float64? = nil,
       @redeem_by : Int64? = nil
     )
     end

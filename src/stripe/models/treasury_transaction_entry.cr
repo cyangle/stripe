@@ -86,21 +86,21 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @balance_impact : TransactionsResourceBalanceImpact, 
-      @created : Int64, 
-      @currency : String, 
-      @effective_at : Int64, 
-      @financial_account : String, 
-      @flow_type : String, 
-      @id : String, 
-      @livemode : Bool, 
-      @object : String, 
-      @transaction : OutboundPaymentsResourceTreasuryReturnedStatusTransaction, 
-      @_type : String, 
+      @balance_impact : TransactionsResourceBalanceImpact,
+      @created : Int64,
+      @currency : String,
+      @effective_at : Int64,
+      @financial_account : String,
+      @flow_type : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @transaction : OutboundPaymentsResourceTreasuryReturnedStatusTransaction,
+      @_type : String,
       # Optional properties
-      @flow : String? = nil, 
+      @flow : String? = nil,
       @flow_details : TreasuryTransactionEntryFlowDetails? = nil
     )
     end

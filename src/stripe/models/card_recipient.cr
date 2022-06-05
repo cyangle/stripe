@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The recipient that this card belongs to. This attribute will not be in the card object if the card belongs to a customer or account instead.
   alias CardRecipient = Recipient | String
-
 end

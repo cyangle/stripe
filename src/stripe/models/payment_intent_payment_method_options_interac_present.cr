@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PaymentIntentPaymentMethodOptionsInteracPresent = JSON::Any | PaymentIntentTypeSpecificPaymentMethodOptionsClient
-
 end

@@ -71,17 +71,17 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @accounts : BankConnectionsResourceLinkedAccountList1, 
-      @client_secret : String, 
-      @id : String, 
-      @livemode : Bool, 
-      @object : String, 
-      @permissions : Array(String), 
+      @accounts : BankConnectionsResourceLinkedAccountList1,
+      @client_secret : String,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @permissions : Array(String),
       # Optional properties
-      @account_holder : FinancialConnectionsSessionAccountHolder? = nil, 
-      @filters : BankConnectionsResourceLinkAccountSessionFilters? = nil, 
+      @account_holder : FinancialConnectionsSessionAccountHolder? = nil,
+      @filters : BankConnectionsResourceLinkAccountSessionFilters? = nil,
       @return_url : String? = nil
     )
     end

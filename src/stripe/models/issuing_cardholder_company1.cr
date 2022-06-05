@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Additional information about a `company` cardholder.
   alias IssuingCardholderCompany1 = IssuingCardholderCompany
-
 end

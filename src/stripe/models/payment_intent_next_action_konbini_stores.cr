@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentIntentNextActionKonbiniStores
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -48,11 +47,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @familymart : PaymentIntentNextActionKonbiniStoresFamilymart? = nil, 
-      @lawson : PaymentIntentNextActionKonbiniStoresLawson? = nil, 
-      @ministop : PaymentIntentNextActionKonbiniStoresMinistop? = nil, 
+      @familymart : PaymentIntentNextActionKonbiniStoresFamilymart? = nil,
+      @lawson : PaymentIntentNextActionKonbiniStoresLawson? = nil,
+      @ministop : PaymentIntentNextActionKonbiniStoresMinistop? = nil,
       @seicomart : PaymentIntentNextActionKonbiniStoresSeicomart? = nil
     )
     end
@@ -68,7 +67,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

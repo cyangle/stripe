@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the coupon to use during this phase of the subscription schedule.
   alias SubscriptionSchedulePhaseConfigurationCoupon = Coupon | DeletedCoupon | String
-
 end

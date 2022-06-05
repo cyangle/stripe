@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "default_allowed_updates", type: SubscriptionUpdateCreationParamDefaultAllowedUpdates?, presence: true, ignore_serialize: default_allowed_updates.nil? && !default_allowed_updates_present?)]
@@ -49,11 +48,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @default_allowed_updates : SubscriptionUpdateCreationParamDefaultAllowedUpdates? = nil, 
-      @enabled : Bool? = nil, 
-      @products : SubscriptionUpdateCreationParamProducts? = nil, 
+      @default_allowed_updates : SubscriptionUpdateCreationParamDefaultAllowedUpdates? = nil,
+      @enabled : Bool? = nil,
+      @products : SubscriptionUpdateCreationParamProducts? = nil,
       @proration_behavior : String? = nil
     )
     end

@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PersonRelationship
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -66,13 +65,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @director : Bool? = nil, 
-      @executive : Bool? = nil, 
-      @owner : Bool? = nil, 
-      @percent_ownership : Float64? = nil, 
-      @representative : Bool? = nil, 
+      @director : Bool? = nil,
+      @executive : Bool? = nil,
+      @owner : Bool? = nil,
+      @percent_ownership : Float64? = nil,
+      @representative : Bool? = nil,
       @title : String? = nil
     )
     end

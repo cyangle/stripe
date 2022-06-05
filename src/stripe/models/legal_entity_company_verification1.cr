@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Information on the verification state of the company.
   alias LegalEntityCompanyVerification1 = LegalEntityCompanyVerification
-
 end

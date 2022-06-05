@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If the destination is a Stripe account, this will be the ID of the payment that the destination account received for the transfer.
   alias TransferDestinationPayment = Charge | String
-
 end

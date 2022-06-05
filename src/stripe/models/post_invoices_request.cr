@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "account_tax_ids", type: PostInvoicesRequestAccountTaxIds?, presence: true, ignore_serialize: account_tax_ids.nil? && !account_tax_ids_present?)]
@@ -181,30 +180,30 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @account_tax_ids : PostInvoicesRequestAccountTaxIds? = nil, 
-      @application_fee_amount : Int64? = nil, 
-      @auto_advance : Bool? = nil, 
-      @automatic_tax : AutomaticTaxParam? = nil, 
-      @collection_method : String? = nil, 
-      @custom_fields : PostInvoicesRequestCustomFields? = nil, 
-      @customer : String? = nil, 
-      @days_until_due : Int64? = nil, 
-      @default_payment_method : String? = nil, 
-      @default_source : String? = nil, 
-      @default_tax_rates : Array(String)? = nil, 
-      @description : String? = nil, 
-      @discounts : PostInvoicesRequestDiscounts? = nil, 
-      @due_date : Int64? = nil, 
-      @expand : Array(String)? = nil, 
-      @footer : String? = nil, 
-      @metadata : PostAccountRequestMetadata? = nil, 
-      @on_behalf_of : String? = nil, 
-      @payment_settings : PaymentSettings1? = nil, 
-      @pending_invoice_items_behavior : String? = nil, 
-      @statement_descriptor : String? = nil, 
-      @subscription : String? = nil, 
+      @account_tax_ids : PostInvoicesRequestAccountTaxIds? = nil,
+      @application_fee_amount : Int64? = nil,
+      @auto_advance : Bool? = nil,
+      @automatic_tax : AutomaticTaxParam? = nil,
+      @collection_method : String? = nil,
+      @custom_fields : PostInvoicesRequestCustomFields? = nil,
+      @customer : String? = nil,
+      @days_until_due : Int64? = nil,
+      @default_payment_method : String? = nil,
+      @default_source : String? = nil,
+      @default_tax_rates : Array(String)? = nil,
+      @description : String? = nil,
+      @discounts : PostInvoicesRequestDiscounts? = nil,
+      @due_date : Int64? = nil,
+      @expand : Array(String)? = nil,
+      @footer : String? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @on_behalf_of : String? = nil,
+      @payment_settings : PaymentSettings1? = nil,
+      @pending_invoice_items_behavior : String? = nil,
+      @statement_descriptor : String? = nil,
+      @subscription : String? = nil,
       @transfer_data : TransferDataSpecs4? = nil
     )
     end

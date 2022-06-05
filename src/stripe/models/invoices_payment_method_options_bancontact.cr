@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If paying by `bancontact`, this sub-hash contains details about the Bancontact payment method options to pass to the invoice’s PaymentIntent.
   alias InvoicesPaymentMethodOptionsBancontact = InvoicePaymentMethodOptionsBancontact
-
 end

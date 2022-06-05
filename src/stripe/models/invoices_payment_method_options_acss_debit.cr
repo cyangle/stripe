@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If paying by `acss_debit`, this sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
   alias InvoicesPaymentMethodOptionsAcssDebit = InvoicePaymentMethodOptionsAcssDebit
-
 end

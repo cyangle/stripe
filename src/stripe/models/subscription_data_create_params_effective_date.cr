@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias SubscriptionDataCreateParamsEffectiveDate = BusinessProfileSpecsSupportUrlOneOf | Int64 | SubscriptionDataCreateParamsEffectiveDateOneOf
-
 end

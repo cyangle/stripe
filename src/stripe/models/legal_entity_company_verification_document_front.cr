@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The front of a document returned by a [file upload](https://stripe.com/docs/api#create_file) with a `purpose` value of `additional_verification`.
   alias LegalEntityCompanyVerificationDocumentFront = File | String
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The value of [on_behalf_of](https://stripe.com/docs/api/setup_intents/object#setup_intent_object-on_behalf_of) on the SetupIntent at the time of this confirmation.
   alias SetupAttemptOnBehalfOf = Account | String
-
 end

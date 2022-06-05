@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "additional_documentation", type: BusinessProfileSpecsSupportUrl?, presence: true, ignore_serialize: additional_documentation.nil? && !additional_documentation_present?)]
@@ -61,13 +60,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @additional_documentation : BusinessProfileSpecsSupportUrl? = nil, 
-      @explanation : String? = nil, 
-      @received_at : GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil, 
-      @return_description : String? = nil, 
-      @return_status : String? = nil, 
+      @additional_documentation : BusinessProfileSpecsSupportUrl? = nil,
+      @explanation : String? = nil,
+      @received_at : GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil,
+      @return_description : String? = nil,
+      @return_status : String? = nil,
       @returned_at : GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil
     )
     end

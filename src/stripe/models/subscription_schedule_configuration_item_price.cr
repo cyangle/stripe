@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the price to which the customer should be subscribed.
   alias SubscriptionScheduleConfigurationItemPrice = DeletedPrice | Price | String
-
 end

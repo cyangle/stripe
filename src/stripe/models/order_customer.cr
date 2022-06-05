@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The customer which this orders belongs to.
   alias OrderCustomer = Customer | DeletedCustomer | String
-
 end

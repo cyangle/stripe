@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Refund related to this credit note.
   alias CreditNoteRefund = Refund | String
-
 end

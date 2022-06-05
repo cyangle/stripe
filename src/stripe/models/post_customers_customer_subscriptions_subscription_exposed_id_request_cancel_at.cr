@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # A timestamp at which the subscription should cancel. If set to a date before the current period ends, this will cause a proration if prorations have been enabled using `proration_behavior`. If set during a future period, this will always cause a proration for that period.
   alias PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestCancelAt = BusinessProfileSpecsSupportUrlOneOf | Int64
-
 end

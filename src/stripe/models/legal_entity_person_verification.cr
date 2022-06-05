@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class LegalEntityPersonVerification
     include JSON::Serializable
@@ -55,13 +55,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @status : String, 
+      @status : String,
       # Optional properties
-      @additional_document : LegalEntityPersonVerificationAdditionalDocument? = nil, 
-      @details : String? = nil, 
-      @details_code : String? = nil, 
+      @additional_document : LegalEntityPersonVerificationAdditionalDocument? = nil,
+      @details : String? = nil,
+      @details_code : String? = nil,
       @document : LegalEntityPersonVerificationDocument? = nil
     )
     end

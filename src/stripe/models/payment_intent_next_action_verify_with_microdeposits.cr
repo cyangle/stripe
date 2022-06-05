@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentIntentNextActionVerifyWithMicrodeposits
     include JSON::Serializable
@@ -42,10 +42,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @arrival_date : Int64, 
-      @hosted_verification_url : String, 
+      @arrival_date : Int64,
+      @hosted_verification_url : String,
       # Optional properties
       @microdeposit_type : String? = nil
     )

@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # Delete all usage for the given subscription item. Allowed only when the current plan's `usage_type` is `metered`.
@@ -46,10 +45,10 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @clear_usage : Bool? = nil, 
-      @proration_behavior : String? = nil, 
+      @clear_usage : Bool? = nil,
+      @proration_behavior : String? = nil,
       @proration_date : Int64? = nil
     )
     end

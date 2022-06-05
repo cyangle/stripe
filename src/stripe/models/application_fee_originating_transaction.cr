@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the corresponding charge on the platform account, if this fee was the result of a charge using the `destination` parameter.
   alias ApplicationFeeOriginatingTransaction = Charge | String
-
 end

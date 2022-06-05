@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The price of the line item.
   alias LineItemPrice = Price
-
 end

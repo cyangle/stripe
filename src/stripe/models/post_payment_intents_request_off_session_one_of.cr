@@ -14,9 +14,9 @@ require "log"
 module Stripe
   class PostPaymentIntentsRequestOffSessionOneOf
     ONE_OFF = "one_off"
-  
+
     RECURRING = "recurring"
-   
+
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value

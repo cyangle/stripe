@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # An object containing device type specific settings for Verifone P400 readers
   alias PostTerminalConfigurationsConfigurationRequestVerifoneP400 = BusinessProfileSpecsSupportUrlOneOf | VerifoneP4001
-
 end

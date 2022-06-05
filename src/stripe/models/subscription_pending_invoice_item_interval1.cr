@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Specifies an interval for how often to bill for any pending invoice items. It is analogous to calling [Create an invoice](https://stripe.com/docs/api#create_invoice) for the given subscription at the specified interval.
   alias SubscriptionPendingInvoiceItemInterval1 = SubscriptionPendingInvoiceItemInterval
-
 end

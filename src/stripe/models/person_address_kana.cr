@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PersonAddressKana = LegalEntityJapanAddress
-
 end

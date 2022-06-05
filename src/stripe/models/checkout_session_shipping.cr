@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Shipping information for this Checkout Session.
   alias CheckoutSessionShipping = Shipping
-
 end

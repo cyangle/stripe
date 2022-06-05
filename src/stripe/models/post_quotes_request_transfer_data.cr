@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The data with which to automatically create a Transfer for each of the invoices.
   alias PostQuotesRequestTransferData = BusinessProfileSpecsSupportUrlOneOf | TransferDataSpecs6
-
 end

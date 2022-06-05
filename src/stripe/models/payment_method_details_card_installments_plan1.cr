@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Installment plan selected for the payment.
   alias PaymentMethodDetailsCardInstallmentsPlan1 = PaymentMethodDetailsCardInstallmentsPlan
-
 end

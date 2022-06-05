@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class InboundTransfersResourceTreasuryInboundTransferList
     include JSON::Serializable
@@ -41,11 +41,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @data : Array(TreasuryInboundTransfer), 
-      @has_more : Bool, 
-      @object : String, 
+      @data : Array(TreasuryInboundTransfer),
+      @has_more : Bool,
+      @object : String,
       @url : String
     )
     end

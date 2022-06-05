@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Details about a returned OutboundTransfer. Only set when the status is `returned`.
   alias TreasuryOutboundTransferReturnedDetails = OutboundTransfersResourceTreasuryReturnedDetails
-
 end

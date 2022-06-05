@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "application_cryptogram", type: String?, presence: true, ignore_serialize: application_cryptogram.nil? && !application_cryptogram_present?)]
@@ -161,30 +160,30 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @application_cryptogram : String? = nil, 
-      @application_preferred_name : String? = nil, 
-      @authorization_code : String? = nil, 
-      @authorization_response_code : String? = nil, 
-      @brand : String? = nil, 
-      @country : String? = nil, 
-      @cvm_type : String? = nil, 
-      @data_type : String? = nil, 
-      @dedicated_file_name : String? = nil, 
-      @emv_auth_data : String? = nil, 
-      @evidence_customer_signature : String? = nil, 
-      @evidence_transaction_certificate : String? = nil, 
-      @exp_month : Int64? = nil, 
-      @exp_year : Int64? = nil, 
-      @fingerprint : String? = nil, 
-      @funding : String? = nil, 
-      @last4 : String? = nil, 
-      @pos_device_id : String? = nil, 
-      @pos_entry_mode : String? = nil, 
-      @read_method : String? = nil, 
-      @reader : String? = nil, 
-      @terminal_verification_results : String? = nil, 
+      @application_cryptogram : String? = nil,
+      @application_preferred_name : String? = nil,
+      @authorization_code : String? = nil,
+      @authorization_response_code : String? = nil,
+      @brand : String? = nil,
+      @country : String? = nil,
+      @cvm_type : String? = nil,
+      @data_type : String? = nil,
+      @dedicated_file_name : String? = nil,
+      @emv_auth_data : String? = nil,
+      @evidence_customer_signature : String? = nil,
+      @evidence_transaction_certificate : String? = nil,
+      @exp_month : Int64? = nil,
+      @exp_year : Int64? = nil,
+      @fingerprint : String? = nil,
+      @funding : String? = nil,
+      @last4 : String? = nil,
+      @pos_device_id : String? = nil,
+      @pos_entry_mode : String? = nil,
+      @read_method : String? = nil,
+      @reader : String? = nil,
+      @terminal_verification_results : String? = nil,
       @transaction_status_information : String? = nil
     )
     end
@@ -200,7 +199,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

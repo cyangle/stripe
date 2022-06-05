@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The lower bound of the estimated range. If empty, represents no lower bound.
   alias ShippingRateDeliveryEstimateMinimum = ShippingRateDeliveryEstimateBound
-
 end

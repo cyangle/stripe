@@ -12,12 +12,11 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentIntentNextActionAlipayHandleRedirect
     include JSON::Serializable
     include JSON::Serializable::Unmapped
-
 
     # Optional properties
 
@@ -52,11 +51,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @native_data : String? = nil, 
-      @native_url : String? = nil, 
-      @return_url : String? = nil, 
+      @native_data : String? = nil,
+      @native_url : String? = nil,
+      @return_url : String? = nil,
       @url : String? = nil
     )
     end

@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias SetupIntentPaymentMethodOptionsSepaDebit1 = SetupIntentPaymentMethodOptionsSepaDebit | SetupIntentTypeSpecificPaymentMethodOptionsClient
-
 end

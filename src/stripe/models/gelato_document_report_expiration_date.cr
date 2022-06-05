@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Expiration date of the document.
   alias GelatoDocumentReportExpirationDate = GelatoDataDocumentReportExpirationDate
-
 end

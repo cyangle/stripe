@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If present, this property tells you what actions you need to take in order for your customer to continue payment setup.
   alias SetupIntentNextAction1 = SetupIntentNextAction
-
 end

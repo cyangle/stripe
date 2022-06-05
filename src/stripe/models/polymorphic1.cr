@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias Polymorphic1 = AlipayAccount | BankAccount | BitcoinReceiver | Card | Source
-
 end

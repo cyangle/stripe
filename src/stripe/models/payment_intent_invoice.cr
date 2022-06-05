@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the invoice that created this PaymentIntent, if it exists.
   alias PaymentIntentInvoice = Invoice | String
-
 end

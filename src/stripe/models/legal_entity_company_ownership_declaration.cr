@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # This hash is used to attest that the beneficial owner information provided to Stripe is both current and correct.
   alias LegalEntityCompanyOwnershipDeclaration = LegalEntityUboDeclaration
-
 end

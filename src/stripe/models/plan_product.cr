@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The product whose pricing this plan determines.
   alias PlanProduct = DeletedProduct | Product | String
-
 end

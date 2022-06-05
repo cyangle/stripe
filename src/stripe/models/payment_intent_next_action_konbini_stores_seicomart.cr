@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Seicomart instruction details.
   alias PaymentIntentNextActionKonbiniStoresSeicomart = PaymentIntentNextActionKonbiniSeicomart
-
 end

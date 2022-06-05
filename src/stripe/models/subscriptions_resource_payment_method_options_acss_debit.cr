@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # This sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to invoices created by the subscription.
   alias SubscriptionsResourcePaymentMethodOptionsAcssDebit = InvoicePaymentMethodOptionsAcssDebit
-
 end

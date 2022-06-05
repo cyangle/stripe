@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # A File ID representing an image you would like displayed on the reader.
   alias TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfigSplashscreen = File | String
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Connect application that created the PaymentIntent.
   alias PaymentIntentApplication = Application | String
-
 end

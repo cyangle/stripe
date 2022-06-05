@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account for which the capability enables functionality.
   alias CapabilityAccount = Account | String
-
 end

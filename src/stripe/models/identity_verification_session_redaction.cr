@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Redaction status of this VerificationSession. If the VerificationSession is not redacted, this field will be null.
   alias IdentityVerificationSessionRedaction = VerificationSessionRedaction
-
 end

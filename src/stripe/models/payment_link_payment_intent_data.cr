@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Indicates the parameters to be passed to PaymentIntent creation during checkout.
   alias PaymentLinkPaymentIntentData = PaymentLinksResourcePaymentIntentData
-
 end

@@ -141,27 +141,27 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @items : Array(ConfigurationItemParams), 
+      @items : Array(ConfigurationItemParams),
       # Optional properties
-      @add_invoice_items : Array(AddInvoiceItemEntry)? = nil, 
-      @application_fee_percent : Float64? = nil, 
-      @automatic_tax : AutomaticTaxConfig1? = nil, 
-      @billing_cycle_anchor : String? = nil, 
-      @billing_thresholds : DefaultSettingsParamsBillingThresholds? = nil, 
-      @collection_method : String? = nil, 
-      @coupon : String? = nil, 
-      @default_payment_method : String? = nil, 
-      @default_tax_rates : CreditNoteLineItemParamsTaxRates? = nil, 
-      @end_date : PhaseConfigurationParams1EndDate? = nil, 
-      @invoice_settings : SubscriptionSchedulesParam? = nil, 
-      @iterations : Int64? = nil, 
-      @metadata : Hash(String, String)? = nil, 
-      @proration_behavior : String? = nil, 
-      @start_date : PhaseConfigurationParams1EndDate? = nil, 
-      @transfer_data : TransferDataSpecs2? = nil, 
-      @trial : Bool? = nil, 
+      @add_invoice_items : Array(AddInvoiceItemEntry)? = nil,
+      @application_fee_percent : Float64? = nil,
+      @automatic_tax : AutomaticTaxConfig1? = nil,
+      @billing_cycle_anchor : String? = nil,
+      @billing_thresholds : DefaultSettingsParamsBillingThresholds? = nil,
+      @collection_method : String? = nil,
+      @coupon : String? = nil,
+      @default_payment_method : String? = nil,
+      @default_tax_rates : CreditNoteLineItemParamsTaxRates? = nil,
+      @end_date : PhaseConfigurationParams1EndDate? = nil,
+      @invoice_settings : SubscriptionSchedulesParam? = nil,
+      @iterations : Int64? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @proration_behavior : String? = nil,
+      @start_date : PhaseConfigurationParams1EndDate? = nil,
+      @transfer_data : TransferDataSpecs2? = nil,
+      @trial : Bool? = nil,
       @trial_end : PhaseConfigurationParams1EndDate? = nil
     )
     end

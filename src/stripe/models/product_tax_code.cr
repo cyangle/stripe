@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # A [tax code](https://stripe.com/docs/tax/tax-categories) ID.
   alias ProductTaxCode = String | TaxCode
-
 end

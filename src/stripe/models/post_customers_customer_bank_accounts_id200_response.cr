@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PostCustomersCustomerBankAccountsId200Response = BankAccount | Card | Source
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The transaction being disputed.
   alias IssuingDisputeTransaction = IssuingTransaction | String
-
 end

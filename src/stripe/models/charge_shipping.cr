@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Shipping information for the charge.
   alias ChargeShipping = Shipping
-
 end

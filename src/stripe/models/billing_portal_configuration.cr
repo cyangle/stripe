@@ -81,20 +81,20 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @active : Bool, 
-      @business_profile : PortalBusinessProfile, 
-      @created : Int64, 
-      @features : PortalFeatures, 
-      @id : String, 
-      @is_default : Bool, 
-      @livemode : Bool, 
-      @object : String, 
-      @updated : Int64, 
+      @active : Bool,
+      @business_profile : PortalBusinessProfile,
+      @created : Int64,
+      @features : PortalFeatures,
+      @id : String,
+      @is_default : Bool,
+      @livemode : Bool,
+      @object : String,
+      @updated : Int64,
       # Optional properties
-      @application : BillingPortalConfigurationApplication? = nil, 
-      @default_return_url : String? = nil, 
+      @application : BillingPortalConfigurationApplication? = nil,
+      @default_return_url : String? = nil,
       @metadata : Hash(String, String)? = nil
     )
     end

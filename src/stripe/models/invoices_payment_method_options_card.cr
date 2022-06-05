@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If paying by `card`, this sub-hash contains details about the Card payment method options to pass to the invoice’s PaymentIntent.
   alias InvoicesPaymentMethodOptionsCard = InvoicePaymentMethodOptionsCard
-
 end

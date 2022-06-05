@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The pending authorization request. This field will only be non-null during an `issuing_authorization.request` webhook.
   alias IssuingAuthorizationPendingRequest1 = IssuingAuthorizationPendingRequest
-
 end

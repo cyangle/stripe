@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the Shipping Rate to use for this shipping option.
   alias PaymentLinksResourceShippingOptionShippingRate = ShippingRate | String
-
 end

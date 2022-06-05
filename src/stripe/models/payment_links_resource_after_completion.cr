@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PaymentLinksResourceAfterCompletion
     include JSON::Serializable
@@ -43,11 +43,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @_type : String, 
+      @_type : String,
       # Optional properties
-      @hosted_confirmation : PaymentLinksResourceCompletionBehaviorConfirmationPage? = nil, 
+      @hosted_confirmation : PaymentLinksResourceCompletionBehaviorConfirmationPage? = nil,
       @redirect : PaymentLinksResourceCompletionBehaviorRedirect? = nil
     )
     end

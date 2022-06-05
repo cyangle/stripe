@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Connect Application that created the configuration.
   alias BillingPortalConfigurationApplication = Application | DeletedApplication | String
-
 end

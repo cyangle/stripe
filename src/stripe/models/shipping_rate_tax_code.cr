@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # A [tax code](https://stripe.com/docs/tax/tax-categories) ID. The Shipping tax code is `txcd_92010001`.
   alias ShippingRateTaxCode = String | TaxCode
-
 end

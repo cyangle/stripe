@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     @[JSON::Field(key: "amount", type: Int64?, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
@@ -107,21 +106,21 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @amount : Int64? = nil, 
-      @currency : String? = nil, 
-      @description : String? = nil, 
-      @discountable : Bool? = nil, 
-      @discounts : GetInvoicesUpcomingDiscountsParameter? = nil, 
-      @invoiceitem : String? = nil, 
-      @metadata : IndividualSpecsMetadata? = nil, 
-      @period : Period2? = nil, 
-      @price : String? = nil, 
-      @price_data : OneTimePriceData? = nil, 
-      @quantity : Int64? = nil, 
-      @tax_rates : CreditNoteLineItemParamsTaxRates? = nil, 
-      @unit_amount : Int64? = nil, 
+      @amount : Int64? = nil,
+      @currency : String? = nil,
+      @description : String? = nil,
+      @discountable : Bool? = nil,
+      @discounts : GetInvoicesUpcomingDiscountsParameter? = nil,
+      @invoiceitem : String? = nil,
+      @metadata : IndividualSpecsMetadata? = nil,
+      @period : Period2? = nil,
+      @price : String? = nil,
+      @price_data : OneTimePriceData? = nil,
+      @quantity : Int64? = nil,
+      @tax_rates : CreditNoteLineItemParamsTaxRates? = nil,
+      @unit_amount : Int64? = nil,
       @unit_amount_decimal : String? = nil
     )
     end

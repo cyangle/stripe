@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PaymentMethodOptionsCustomerBalance1 = BusinessProfileSpecsSupportUrlOneOf | InvoicePaymentMethodOptionsParam2
-
 end

@@ -40,11 +40,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @currency : String, 
-      @line_items : Array(LineItem1), 
-      @total : Int64, 
+      @currency : String,
+      @line_items : Array(LineItem1),
+      @total : Int64,
       # Optional properties
       @tax : Int64? = nil
     )
@@ -61,7 +61,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

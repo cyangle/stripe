@@ -53,14 +53,14 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @currency : String, 
-      @product : String, 
-      @recurring : RecurringAdhoc, 
+      @currency : String,
+      @product : String,
+      @recurring : RecurringAdhoc,
       # Optional properties
-      @tax_behavior : String? = nil, 
-      @unit_amount : Int64? = nil, 
+      @tax_behavior : String? = nil,
+      @unit_amount : Int64? = nil,
       @unit_amount_decimal : String? = nil
     )
     end

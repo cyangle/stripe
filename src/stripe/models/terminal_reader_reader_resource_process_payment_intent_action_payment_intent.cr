@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Most recent PaymentIntent processed by the reader.
   alias TerminalReaderReaderResourceProcessPaymentIntentActionPaymentIntent = PaymentIntent | String
-
 end

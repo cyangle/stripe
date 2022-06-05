@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class IssuingTransactionFuelData
     include JSON::Serializable
@@ -44,11 +44,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @_type : String, 
-      @unit : String, 
-      @unit_cost_decimal : String, 
+      @_type : String,
+      @unit : String,
+      @unit_cost_decimal : String,
       # Optional properties
       @volume_decimal : String? = nil
     )

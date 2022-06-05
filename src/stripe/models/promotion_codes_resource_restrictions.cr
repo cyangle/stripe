@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PromotionCodesResourceRestrictions
     include JSON::Serializable
@@ -43,11 +43,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @first_time_transaction : Bool, 
+      @first_time_transaction : Bool,
       # Optional properties
-      @minimum_amount : Int64? = nil, 
+      @minimum_amount : Int64? = nil,
       @minimum_amount_currency : String? = nil
     )
     end

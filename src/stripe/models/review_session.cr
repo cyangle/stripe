@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Information related to the browsing session of the user who initiated the payment.
   alias ReviewSession = RadarReviewResourceSession
-
 end

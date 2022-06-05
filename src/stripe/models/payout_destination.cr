@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the bank account or card the payout was sent to.
   alias PayoutDestination = BankAccount | Card | DeletedBankAccount | DeletedCard | String
-
 end

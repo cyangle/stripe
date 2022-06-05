@@ -90,19 +90,19 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @created : Int64, 
-      @id : String, 
-      @object : String, 
-      @purpose : String, 
-      @size : Int64, 
+      @created : Int64,
+      @id : String,
+      @object : String,
+      @purpose : String,
+      @size : Int64,
       # Optional properties
-      @expires_at : Int64? = nil, 
-      @filename : String? = nil, 
-      @links : FileFileLinkList? = nil, 
-      @title : String? = nil, 
-      @_type : String? = nil, 
+      @expires_at : Int64? = nil,
+      @filename : String? = nil,
+      @links : FileFileLinkList? = nil,
+      @title : String? = nil,
+      @_type : String? = nil,
       @url : String? = nil
     )
     end

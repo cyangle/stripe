@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # The client secret of the PaymentIntent.
@@ -130,23 +129,23 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @client_secret : String? = nil, 
-      @error_on_requires_action : Bool? = nil, 
-      @expand : Array(String)? = nil, 
-      @mandate : String? = nil, 
-      @mandate_data : PostPaymentIntentsIntentConfirmRequestMandateData? = nil, 
-      @off_session : PostPaymentIntentsIntentConfirmRequestOffSession? = nil, 
-      @payment_method : String? = nil, 
-      @payment_method_data : PaymentMethodDataParams? = nil, 
-      @payment_method_options : PaymentMethodOptionsParam11? = nil, 
-      @payment_method_types : Array(String)? = nil, 
-      @radar_options : RadarOptions? = nil, 
-      @receipt_email : PostPaymentIntentsIntentRequestReceiptEmail? = nil, 
-      @return_url : String? = nil, 
-      @setup_future_usage : String? = nil, 
-      @shipping : PostPaymentIntentsIntentRequestShipping? = nil, 
+      @client_secret : String? = nil,
+      @error_on_requires_action : Bool? = nil,
+      @expand : Array(String)? = nil,
+      @mandate : String? = nil,
+      @mandate_data : PostPaymentIntentsIntentConfirmRequestMandateData? = nil,
+      @off_session : PostPaymentIntentsIntentConfirmRequestOffSession? = nil,
+      @payment_method : String? = nil,
+      @payment_method_data : PaymentMethodDataParams? = nil,
+      @payment_method_options : PaymentMethodOptionsParam11? = nil,
+      @payment_method_types : Array(String)? = nil,
+      @radar_options : RadarOptions? = nil,
+      @receipt_email : PostPaymentIntentsIntentRequestReceiptEmail? = nil,
+      @return_url : String? = nil,
+      @setup_future_usage : String? = nil,
+      @shipping : PostPaymentIntentsIntentRequestShipping? = nil,
       @use_stripe_sdk : Bool? = nil
     )
     end

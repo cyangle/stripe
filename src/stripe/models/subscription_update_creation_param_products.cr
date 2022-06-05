@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias SubscriptionUpdateCreationParamProducts = Array(SubscriptionUpdateProductParam) | BusinessProfileSpecsSupportUrlOneOf
-
 end

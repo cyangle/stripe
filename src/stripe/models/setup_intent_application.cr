@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Connect application that created the SetupIntent.
   alias SetupIntentApplication = Application | String
-
 end

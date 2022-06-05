@@ -75,19 +75,19 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @created : Int64, 
-      @data_load_time : Int64, 
-      @id : String, 
-      @livemode : Bool, 
-      @object : String, 
-      @result_available_until : Int64, 
-      @sql : String, 
-      @status : String, 
-      @title : String, 
+      @created : Int64,
+      @data_load_time : Int64,
+      @id : String,
+      @livemode : Bool,
+      @object : String,
+      @result_available_until : Int64,
+      @sql : String,
+      @status : String,
+      @title : String,
       # Optional properties
-      @error : SigmaScheduledQueryRunError? = nil, 
+      @error : SigmaScheduledQueryRunError? = nil,
       @file : ScheduledQueryRunFile? = nil
     )
     end

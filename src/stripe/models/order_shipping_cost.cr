@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The details of the customer cost of shipping, including the customer chosen ShippingRate.
   alias OrderShippingCost = OrdersV2ResourceShippingCost
-
 end

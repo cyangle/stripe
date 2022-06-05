@@ -12,7 +12,7 @@ require "time"
 require "log"
 
 module Stripe
-  # 
+  #
   @[JSON::Serializable::Options(emit_nulls: true)]
   class PortalSubscriptionCancel
     include JSON::Serializable
@@ -42,11 +42,11 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @cancellation_reason : PortalSubscriptionCancellationReason, 
-      @enabled : Bool, 
-      @mode : String, 
+      @cancellation_reason : PortalSubscriptionCancellationReason,
+      @enabled : Bool,
+      @mode : String,
       @proration_behavior : String
     )
     end

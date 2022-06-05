@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # A positive integer representing the amount to subtract from an invoice total (required if `percent_off` is not passed).
@@ -107,19 +106,19 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @amount_off : Int64? = nil, 
-      @applies_to : AppliesToParams? = nil, 
-      @currency : String? = nil, 
-      @duration : String? = nil, 
-      @duration_in_months : Int64? = nil, 
-      @expand : Array(String)? = nil, 
-      @id : String? = nil, 
-      @max_redemptions : Int64? = nil, 
-      @metadata : PostAccountRequestMetadata? = nil, 
-      @name : String? = nil, 
-      @percent_off : Float64? = nil, 
+      @amount_off : Int64? = nil,
+      @applies_to : AppliesToParams? = nil,
+      @currency : String? = nil,
+      @duration : String? = nil,
+      @duration_in_months : Int64? = nil,
+      @expand : Array(String)? = nil,
+      @id : String? = nil,
+      @max_redemptions : Int64? = nil,
+      @metadata : PostAccountRequestMetadata? = nil,
+      @name : String? = nil,
+      @percent_off : Float64? = nil,
       @redeem_by : Int64? = nil
     )
     end

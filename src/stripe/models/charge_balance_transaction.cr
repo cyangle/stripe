@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the balance transaction that describes the impact of this charge on your account balance (not including refunds or disputes).
   alias ChargeBalanceTransaction = BalanceTransaction | String
-
 end

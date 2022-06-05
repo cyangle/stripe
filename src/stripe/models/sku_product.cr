@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the product this SKU is associated with. The product must be currently active.
   alias SkuProduct = Product | String
-
 end

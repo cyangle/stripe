@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the credit note (if any) related to the transaction.
   alias CustomerBalanceTransactionCreditNote = CreditNote | String
-
 end

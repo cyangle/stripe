@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the review associated with this charge if one exists.
   alias ChargeReview = Review | String
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the PaymentIntent that was disputed.
   alias DisputePaymentIntent = PaymentIntent | String
-
 end

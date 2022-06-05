@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Details about whether the payment was accepted, and why. See [understanding declines](https://stripe.com/docs/declines) for details.
   alias ChargeOutcome1 = ChargeOutcome
-
 end

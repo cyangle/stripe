@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Stripe customer this account belongs to. Present if and only if `account_holder.type` is `customer`.
   alias BankConnectionsResourceAccountholderCustomer = Customer | String
-
 end

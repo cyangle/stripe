@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The file object representing the result of the report run (populated when  `status=succeeded`).
   alias ReportingReportRunResult = File
-
 end

@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Transaction-specific details of the payment method used in the payment.
   alias PaymentMethodCardGeneratedCardPaymentMethodDetails = CardGeneratedFromPaymentMethodDetails
-
 end

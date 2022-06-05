@@ -64,15 +64,15 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @id : String, 
-      @livemode : Bool, 
-      @object : String, 
+      @id : String,
+      @livemode : Bool,
+      @object : String,
       # Optional properties
-      @bbpos_wisepos_e : TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig? = nil, 
-      @is_account_default : Bool? = nil, 
-      @tipping : TerminalConfigurationConfigurationResourceTipping? = nil, 
+      @bbpos_wisepos_e : TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig? = nil,
+      @is_account_default : Bool? = nil,
+      @tipping : TerminalConfigurationConfigurationResourceTipping? = nil,
       @verifone_p400 : TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig? = nil
     )
     end

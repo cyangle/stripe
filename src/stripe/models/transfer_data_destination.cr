@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account (if any) the payment will be attributed to for tax reporting, and where funds from the payment will be transferred to upon payment success.
   alias TransferDataDestination = Account | String
-
 end

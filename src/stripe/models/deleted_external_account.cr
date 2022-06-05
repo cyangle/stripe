@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias DeletedExternalAccount = DeletedBankAccount | DeletedCard
-
 end

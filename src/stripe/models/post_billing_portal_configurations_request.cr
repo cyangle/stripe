@@ -50,13 +50,13 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @business_profile : BusinessProfileCreateParam, 
-      @features : FeaturesCreationParam, 
+      @business_profile : BusinessProfileCreateParam,
+      @features : FeaturesCreationParam,
       # Optional properties
-      @default_return_url : PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil, 
-      @expand : Array(String)? = nil, 
+      @default_return_url : PostBillingPortalConfigurationsRequestDefaultReturnUrl? = nil,
+      @expand : Array(String)? = nil,
       @metadata : Hash(String, String)? = nil
     )
     end
@@ -72,7 +72,6 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-
       true
     end
 

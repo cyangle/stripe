@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Information about the flight that was purchased with this transaction.
   alias IssuingTransactionPurchaseDetailsFlight = IssuingTransactionFlightData
-
 end

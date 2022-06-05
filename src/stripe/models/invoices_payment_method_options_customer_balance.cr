@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # If paying by `customer_balance`, this sub-hash contains details about the Bank transfer payment method options to pass to the invoice’s PaymentIntent.
   alias InvoicesPaymentMethodOptionsCustomerBalance = InvoicePaymentMethodOptionsCustomerBalance
-
 end

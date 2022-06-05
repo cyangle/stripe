@@ -17,7 +17,6 @@ module Stripe
     include JSON::Serializable
     include JSON::Serializable::Unmapped
 
-
     # Optional properties
 
     # Whether the payment link's `url` is active. If `false`, customers visiting the URL will be shown a page saying that the link has been deactivated.
@@ -100,18 +99,18 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Optional properties
-      @active : Bool? = nil, 
-      @after_completion : AfterCompletionParams? = nil, 
-      @allow_promotion_codes : Bool? = nil, 
-      @automatic_tax : AutomaticTaxParams1? = nil, 
-      @billing_address_collection : String? = nil, 
-      @customer_creation : String? = nil, 
-      @expand : Array(String)? = nil, 
-      @line_items : Array(LineItemsUpdateParams)? = nil, 
-      @metadata : Hash(String, String)? = nil, 
-      @payment_method_types : PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil, 
+      @active : Bool? = nil,
+      @after_completion : AfterCompletionParams? = nil,
+      @allow_promotion_codes : Bool? = nil,
+      @automatic_tax : AutomaticTaxParams1? = nil,
+      @billing_address_collection : String? = nil,
+      @customer_creation : String? = nil,
+      @expand : Array(String)? = nil,
+      @line_items : Array(LineItemsUpdateParams)? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @payment_method_types : PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil,
       @shipping_address_collection : PostPaymentLinksPaymentLinkRequestShippingAddressCollection? = nil
     )
     end

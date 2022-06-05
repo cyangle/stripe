@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The account on behalf of which to charge. See the [Connect documentation](https://support.stripe.com/questions/sending-invoices-on-behalf-of-connected-accounts) for details.
   alias PaymentLinkOnBehalfOf = Account | String
-
 end

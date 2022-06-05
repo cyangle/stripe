@@ -13,5 +13,4 @@ require "log"
 
 module Stripe
   alias PaymentSource = Account | AlipayAccount | BankAccount | BitcoinReceiver | Card | Source
-
 end

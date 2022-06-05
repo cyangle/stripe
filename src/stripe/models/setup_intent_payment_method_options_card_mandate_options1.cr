@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Configuration options for setting up an eMandate for cards issued in India.
   alias SetupIntentPaymentMethodOptionsCardMandateOptions1 = SetupIntentPaymentMethodOptionsCardMandateOptions
-
 end

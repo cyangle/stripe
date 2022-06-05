@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # ID of the Stripe account this fee was taken from.
   alias ApplicationFeeAccount = Account | String
-
 end

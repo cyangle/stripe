@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The ID of the customer associated with this discount.
   alias DeletedDiscountCustomer = Customer | DeletedCustomer | String
-
 end

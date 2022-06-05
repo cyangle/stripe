@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # The dimensions of this SKU for shipping purposes.
   alias SkuPackageDimensions = PackageDimensions
-
 end

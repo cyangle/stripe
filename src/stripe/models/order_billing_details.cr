@@ -14,5 +14,4 @@ require "log"
 module Stripe
   # Customer billing details associated with the order.
   alias OrderBillingDetails = OrdersV2ResourceBillingDetails
-
 end

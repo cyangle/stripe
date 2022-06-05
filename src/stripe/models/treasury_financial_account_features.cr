@@ -73,16 +73,16 @@ module Stripe
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
-      *, 
+      *,
       # Required properties
-      @object : String, 
+      @object : String,
       # Optional properties
-      @card_issuing : AccountServiceResourceToggleSettings? = nil, 
-      @deposit_insurance : AccountServiceResourceToggleSettings? = nil, 
-      @financial_addresses : AccountServiceResourceFinancialAddressesFeatures? = nil, 
-      @inbound_transfers : AccountServiceResourceInboundTransfers? = nil, 
-      @intra_stripe_flows : AccountServiceResourceToggleSettings? = nil, 
-      @outbound_payments : AccountServiceResourceOutboundPayments? = nil, 
+      @card_issuing : AccountServiceResourceToggleSettings? = nil,
+      @deposit_insurance : AccountServiceResourceToggleSettings? = nil,
+      @financial_addresses : AccountServiceResourceFinancialAddressesFeatures? = nil,
+      @inbound_transfers : AccountServiceResourceInboundTransfers? = nil,
+      @intra_stripe_flows : AccountServiceResourceToggleSettings? = nil,
+      @outbound_payments : AccountServiceResourceOutboundPayments? = nil,
       @outbound_transfers : AccountServiceResourceOutboundTransfers? = nil
     )
     end
