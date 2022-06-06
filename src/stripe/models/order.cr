@@ -21,20 +21,20 @@ module Stripe
     # Required properties
 
     # Order cost before any discounts or taxes are applied. A positive integer representing the subtotal of the order in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
-    @[JSON::Field(key: "amount_subtotal", type: Int64)]
-    property amount_subtotal : Int64
+    @[JSON::Field(key: "amount_subtotal", type: Int64?)]
+    property amount_subtotal : Int64?
 
     # Total order cost after discounts and taxes are applied. A positive integer representing the cost of the order in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). To submit an order, the total must be either 0 or at least $0.50 USD or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).
-    @[JSON::Field(key: "amount_total", type: Int64)]
-    property amount_total : Int64
+    @[JSON::Field(key: "amount_total", type: Int64?)]
+    property amount_total : Int64?
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
-    @[JSON::Field(key: "created", type: Int64)]
-    property created : Int64
+    @[JSON::Field(key: "created", type: Int64?)]
+    property created : Int64?
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    @[JSON::Field(key: "currency", type: String)]
-    property currency : String
+    @[JSON::Field(key: "currency", type: String?)]
+    property currency : String?
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String)]
@@ -50,17 +50,17 @@ module Stripe
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["order"])
 
-    @[JSON::Field(key: "payment", type: OrdersV2ResourcePayment)]
-    property payment : OrdersV2ResourcePayment
+    @[JSON::Field(key: "payment", type: OrdersV2ResourcePayment?)]
+    property payment : OrdersV2ResourcePayment?
 
     # The overall status of the order.
-    @[JSON::Field(key: "status", type: String)]
-    getter status : String
+    @[JSON::Field(key: "status", type: String?)]
+    getter status : String?
 
     ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["canceled", "complete", "open", "processing", "submitted"])
 
-    @[JSON::Field(key: "total_details", type: OrdersV2ResourceTotalDetails)]
-    property total_details : OrdersV2ResourceTotalDetails
+    @[JSON::Field(key: "total_details", type: OrdersV2ResourceTotalDetails?)]
+    property total_details : OrdersV2ResourceTotalDetails?
 
     # Optional properties
 
@@ -152,16 +152,16 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @amount_subtotal : Int64,
-      @amount_total : Int64,
-      @created : Int64,
+      @amount_subtotal : Int64?,
+      @amount_total : Int64?,
+      @created : Int64?,
       @currency : String,
       @id : String,
       @livemode : Bool,
       @object : String,
-      @payment : OrdersV2ResourcePayment,
-      @status : String,
-      @total_details : OrdersV2ResourceTotalDetails,
+      @payment : OrdersV2ResourcePayment?,
+      @status : String?,
+      @total_details : OrdersV2ResourceTotalDetails?,
       # Optional properties
       @application : OrderApplication? = nil,
       @automatic_tax : OrdersV2ResourceAutomaticTax? = nil,
@@ -239,8 +239,8 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String)
-      ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
+    def status=(status : String?)
+      ENUM_VALIDATOR_FOR_STATUS.valid!(status)
       @status = status
     end
 
@@ -283,7 +283,7 @@ module Stripe
     # Generates #hash and #== methods from all fields
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
-    # #hash @return [UInt64] Hash code
+    # #hash @return [UInt64?] Hash code
     def_equals_and_hash(@amount_subtotal, @amount_total, @created, @currency, @id, @livemode, @object, @payment, @status, @total_details, @application, @application_present, @automatic_tax, @automatic_tax_present, @billing_details, @billing_details_present, @client_secret, @client_secret_present, @customer, @customer_present, @description, @description_present, @discounts, @discounts_present, @ip_address, @ip_address_present, @line_items, @line_items_present, @metadata, @metadata_present, @shipping_cost, @shipping_cost_present, @shipping_details, @shipping_details_present, @tax_details, @tax_details_present)
   end
 end

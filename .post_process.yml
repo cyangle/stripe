@@ -28,7 +28,7 @@ tasks:
       -
         name: 'Correct JSON::Any?'
         pattern: 'JSON::Any\?'
-        new_value: 'JSON::Any'
+        new_value: 'JSON::Any?'
       -
         name: 'Correct Stripe::String'
         pattern: 'Stripe::String'

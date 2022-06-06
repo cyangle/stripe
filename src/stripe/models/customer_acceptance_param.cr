@@ -32,8 +32,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? accepted_at_present : Bool = false
 
-    @[JSON::Field(key: "offline", type: JSON::Any, presence: true, ignore_serialize: offline.nil? && !offline_present?)]
-    property offline : JSON::Any
+    @[JSON::Field(key: "offline", type: JSON::Any?, presence: true, ignore_serialize: offline.nil? && !offline_present?)]
+    property offline : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? offline_present : Bool = false
@@ -52,7 +52,7 @@ module Stripe
       @_type : String,
       # Optional properties
       @accepted_at : Int64? = nil,
-      @offline : JSON::Any = nil,
+      @offline : JSON::Any? = nil,
       @online : OnlineParam? = nil
     )
     end

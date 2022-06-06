@@ -19,8 +19,8 @@ module Stripe
 
     # Optional properties
 
-    @[JSON::Field(key: "mandate_options", type: JSON::Any, presence: true, ignore_serialize: mandate_options.nil? && !mandate_options_present?)]
-    property mandate_options : JSON::Any
+    @[JSON::Field(key: "mandate_options", type: JSON::Any?, presence: true, ignore_serialize: mandate_options.nil? && !mandate_options_present?)]
+    property mandate_options : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? mandate_options_present : Bool = false
@@ -38,7 +38,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @mandate_options : JSON::Any = nil,
+      @mandate_options : JSON::Any? = nil,
       @setup_future_usage : String? = nil
     )
     end

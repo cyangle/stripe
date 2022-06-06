@@ -29,15 +29,15 @@ module Stripe
     # Optional properties
 
     #
-    @[JSON::Field(key: "amex_express_checkout", type: JSON::Any, presence: true, ignore_serialize: amex_express_checkout.nil? && !amex_express_checkout_present?)]
-    property amex_express_checkout : JSON::Any
+    @[JSON::Field(key: "amex_express_checkout", type: JSON::Any?, presence: true, ignore_serialize: amex_express_checkout.nil? && !amex_express_checkout_present?)]
+    property amex_express_checkout : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? amex_express_checkout_present : Bool = false
 
     #
-    @[JSON::Field(key: "apple_pay", type: JSON::Any, presence: true, ignore_serialize: apple_pay.nil? && !apple_pay_present?)]
-    property apple_pay : JSON::Any
+    @[JSON::Field(key: "apple_pay", type: JSON::Any?, presence: true, ignore_serialize: apple_pay.nil? && !apple_pay_present?)]
+    property apple_pay : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? apple_pay_present : Bool = false
@@ -50,8 +50,8 @@ module Stripe
     property? dynamic_last4_present : Bool = false
 
     #
-    @[JSON::Field(key: "google_pay", type: JSON::Any, presence: true, ignore_serialize: google_pay.nil? && !google_pay_present?)]
-    property google_pay : JSON::Any
+    @[JSON::Field(key: "google_pay", type: JSON::Any?, presence: true, ignore_serialize: google_pay.nil? && !google_pay_present?)]
+    property google_pay : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? google_pay_present : Bool = false
@@ -63,8 +63,8 @@ module Stripe
     property? masterpass_present : Bool = false
 
     #
-    @[JSON::Field(key: "samsung_pay", type: JSON::Any, presence: true, ignore_serialize: samsung_pay.nil? && !samsung_pay_present?)]
-    property samsung_pay : JSON::Any
+    @[JSON::Field(key: "samsung_pay", type: JSON::Any?, presence: true, ignore_serialize: samsung_pay.nil? && !samsung_pay_present?)]
+    property samsung_pay : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? samsung_pay_present : Bool = false
@@ -82,12 +82,12 @@ module Stripe
       # Required properties
       @_type : String,
       # Optional properties
-      @amex_express_checkout : JSON::Any = nil,
-      @apple_pay : JSON::Any = nil,
+      @amex_express_checkout : JSON::Any? = nil,
+      @apple_pay : JSON::Any? = nil,
       @dynamic_last4 : String? = nil,
-      @google_pay : JSON::Any = nil,
+      @google_pay : JSON::Any? = nil,
       @masterpass : PaymentMethodDetailsCardWalletMasterpass? = nil,
-      @samsung_pay : JSON::Any = nil,
+      @samsung_pay : JSON::Any? = nil,
       @visa_checkout : PaymentMethodDetailsCardWalletVisaCheckout? = nil
     )
     end

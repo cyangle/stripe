@@ -45,15 +45,15 @@ module Stripe
     property? bacs_debit_present : Bool = false
 
     #
-    @[JSON::Field(key: "card", type: JSON::Any, presence: true, ignore_serialize: card.nil? && !card_present?)]
-    property card : JSON::Any
+    @[JSON::Field(key: "card", type: JSON::Any?, presence: true, ignore_serialize: card.nil? && !card_present?)]
+    property card : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? card_present : Bool = false
 
     #
-    @[JSON::Field(key: "link", type: JSON::Any, presence: true, ignore_serialize: link.nil? && !link_present?)]
-    property link : JSON::Any
+    @[JSON::Field(key: "link", type: JSON::Any?, presence: true, ignore_serialize: link.nil? && !link_present?)]
+    property link : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? link_present : Bool = false
@@ -65,8 +65,8 @@ module Stripe
     property? sepa_debit_present : Bool = false
 
     #
-    @[JSON::Field(key: "us_bank_account", type: JSON::Any, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
-    property us_bank_account : JSON::Any
+    @[JSON::Field(key: "us_bank_account", type: JSON::Any?, presence: true, ignore_serialize: us_bank_account.nil? && !us_bank_account_present?)]
+    property us_bank_account : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? us_bank_account_present : Bool = false
@@ -81,10 +81,10 @@ module Stripe
       @acss_debit : MandateAcssDebit? = nil,
       @au_becs_debit : MandateAuBecsDebit? = nil,
       @bacs_debit : MandateBacsDebit? = nil,
-      @card : JSON::Any = nil,
-      @link : JSON::Any = nil,
+      @card : JSON::Any? = nil,
+      @link : JSON::Any? = nil,
       @sepa_debit : MandateSepaDebit? = nil,
-      @us_bank_account : JSON::Any = nil
+      @us_bank_account : JSON::Any? = nil
     )
     end
 

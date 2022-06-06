@@ -27,8 +27,8 @@ module Stripe
     property? document_present : Bool = false
 
     #
-    @[JSON::Field(key: "id_number", type: JSON::Any, presence: true, ignore_serialize: id_number.nil? && !id_number_present?)]
-    property id_number : JSON::Any
+    @[JSON::Field(key: "id_number", type: JSON::Any?, presence: true, ignore_serialize: id_number.nil? && !id_number_present?)]
+    property id_number : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? id_number_present : Bool = false
@@ -39,7 +39,7 @@ module Stripe
       *,
       # Optional properties
       @document : GelatoSessionDocumentOptions? = nil,
-      @id_number : JSON::Any = nil
+      @id_number : JSON::Any? = nil
     )
     end
 

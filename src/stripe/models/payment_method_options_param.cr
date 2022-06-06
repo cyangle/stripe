@@ -26,8 +26,8 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? acss_debit_present : Bool = false
 
-    @[JSON::Field(key: "alipay", type: JSON::Any, presence: true, ignore_serialize: alipay.nil? && !alipay_present?)]
-    property alipay : JSON::Any
+    @[JSON::Field(key: "alipay", type: JSON::Any?, presence: true, ignore_serialize: alipay.nil? && !alipay_present?)]
+    property alipay : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? alipay_present : Bool = false
@@ -68,7 +68,7 @@ module Stripe
       *,
       # Optional properties
       @acss_debit : PaymentMethodOptionsParam? = nil,
-      @alipay : JSON::Any = nil,
+      @alipay : JSON::Any? = nil,
       @boleto : PaymentMethodOptionsParam1? = nil,
       @konbini : PaymentMethodOptionsParam1? = nil,
       @oxxo : PaymentMethodOptionsParam1? = nil,

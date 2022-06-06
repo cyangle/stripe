@@ -12,5 +12,5 @@ require "time"
 require "log"
 
 module Stripe
-  alias PaymentMethodOptionsKonbini1 = BusinessProfileSpecsSupportUrlOneOf | JSON::Any
+  alias PaymentMethodOptionsKonbini1 = BusinessProfileSpecsSupportUrlOneOf | JSON::Any?
 end

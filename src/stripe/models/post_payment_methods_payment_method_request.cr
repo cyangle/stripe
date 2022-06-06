@@ -39,8 +39,8 @@ module Stripe
     property? expand_present : Bool = false
 
     # If this is an `Link` PaymentMethod, this hash contains details about the Link payment method.
-    @[JSON::Field(key: "link", type: JSON::Any, presence: true, ignore_serialize: link.nil? && !link_present?)]
-    property link : JSON::Any
+    @[JSON::Field(key: "link", type: JSON::Any?, presence: true, ignore_serialize: link.nil? && !link_present?)]
+    property link : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? link_present : Bool = false
@@ -65,7 +65,7 @@ module Stripe
       @billing_details : BillingDetailsInnerParams1? = nil,
       @card : UpdateApiParam? = nil,
       @expand : Array(String)? = nil,
-      @link : JSON::Any = nil,
+      @link : JSON::Any? = nil,
       @metadata : PostAccountRequestMetadata? = nil,
       @us_bank_account : UpdateParam? = nil
     )

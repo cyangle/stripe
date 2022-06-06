@@ -21,14 +21,14 @@ module Stripe
     # Required properties
 
     # Object containing the API resource relevant to the event. For example, an `invoice.created` event will have a full [invoice object](https://stripe.com/docs/api#invoice_object) as the value of the object key.
-    @[JSON::Field(key: "object", type: JSON::Any)]
-    property object : JSON::Any
+    @[JSON::Field(key: "object", type: JSON::Any?)]
+    property object : JSON::Any?
 
     # Optional properties
 
     # Object containing the names of the attributes that have changed, and their previous values (sent along only with *.updated events).
-    @[JSON::Field(key: "previous_attributes", type: JSON::Any, presence: true, ignore_serialize: previous_attributes.nil? && !previous_attributes_present?)]
-    property previous_attributes : JSON::Any
+    @[JSON::Field(key: "previous_attributes", type: JSON::Any?, presence: true, ignore_serialize: previous_attributes.nil? && !previous_attributes_present?)]
+    property previous_attributes : JSON::Any?
 
     @[JSON::Field(ignore: true)]
     property? previous_attributes_present : Bool = false
@@ -38,9 +38,9 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @object : JSON::Any,
+      @object : JSON::Any?,
       # Optional properties
-      @previous_attributes : JSON::Any = nil
+      @previous_attributes : JSON::Any? = nil
     )
     end
 

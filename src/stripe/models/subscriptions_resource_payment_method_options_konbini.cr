@@ -13,5 +13,5 @@ require "log"
 
 module Stripe
   # This sub-hash contains details about the Konbini payment method options to pass to invoices created by the subscription.
-  alias SubscriptionsResourcePaymentMethodOptionsKonbini = JSON::Any
+  alias SubscriptionsResourcePaymentMethodOptionsKonbini = JSON::Any?
 end
