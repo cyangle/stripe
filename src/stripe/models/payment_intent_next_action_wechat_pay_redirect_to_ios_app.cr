@@ -55,7 +55,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] native_url Value to be assigned
-    def native_url=(native_url)
+    def native_url=(native_url : String)
       if native_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"native_url\", the character length must be smaller than or equal to 5000.")
       end

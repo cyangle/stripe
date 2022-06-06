@@ -204,14 +204,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] collection_method Object to be assigned
-    def collection_method=(collection_method)
+    def collection_method=(collection_method : String?)
       ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(collection_method)
       @collection_method = collection_method
     end
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String?)
       if !customer.nil? && customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
@@ -221,7 +221,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 500
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 500.")
       end
@@ -231,7 +231,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] footer Value to be assigned
-    def footer=(footer)
+    def footer=(footer : String?)
       if !footer.nil? && footer.to_s.size > 500
         raise ArgumentError.new("invalid value for \"footer\", the character length must be smaller than or equal to 500.")
       end
@@ -241,7 +241,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] header Value to be assigned
-    def header=(header)
+    def header=(header : String?)
       if !header.nil? && header.to_s.size > 50
         raise ArgumentError.new("invalid value for \"header\", the character length must be smaller than or equal to 50.")
       end
@@ -259,6 +259,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@application_fee_amount, @application_fee_percent, @automatic_tax, @collection_method, @customer, @default_tax_rates, @description, @discounts, @expand, @expires_at, @footer, @header, @invoice_settings, @line_items, @metadata, @on_behalf_of, @subscription_data, @transfer_data)
+    def_equals_and_hash(@application_fee_amount, @application_fee_amount_present, @application_fee_percent, @application_fee_percent_present, @automatic_tax, @automatic_tax_present, @collection_method, @collection_method_present, @customer, @customer_present, @default_tax_rates, @default_tax_rates_present, @description, @description_present, @discounts, @discounts_present, @expand, @expand_present, @expires_at, @expires_at_present, @footer, @footer_present, @header, @header_present, @invoice_settings, @invoice_settings_present, @line_items, @line_items_present, @metadata, @metadata_present, @on_behalf_of, @on_behalf_of_present, @subscription_data, @subscription_data_present, @transfer_data, @transfer_data_present)
   end
 end

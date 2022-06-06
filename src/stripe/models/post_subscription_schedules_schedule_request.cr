@@ -100,14 +100,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] end_behavior Object to be assigned
-    def end_behavior=(end_behavior)
+    def end_behavior=(end_behavior : String?)
       ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid!(end_behavior)
       @end_behavior = end_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] proration_behavior Object to be assigned
-    def proration_behavior=(proration_behavior)
+    def proration_behavior=(proration_behavior : String?)
       ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(proration_behavior)
       @proration_behavior = proration_behavior
     end
@@ -122,6 +122,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@default_settings, @end_behavior, @expand, @metadata, @phases, @proration_behavior)
+    def_equals_and_hash(@default_settings, @default_settings_present, @end_behavior, @end_behavior_present, @expand, @expand_present, @metadata, @metadata_present, @phases, @phases_present, @proration_behavior, @proration_behavior_present)
   end
 end

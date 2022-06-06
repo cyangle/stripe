@@ -95,15 +95,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REPORTING_CATEGORY.error_message) unless ENUM_VALIDATOR_FOR_REPORTING_CATEGORY.valid?(@reporting_category)
 
-      if !@reporting_category.nil? && @reporting_category.to_s.size > 5000
-        invalid_properties.push("invalid value for \"reporting_category\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_TIMEZONE.error_message) unless ENUM_VALIDATOR_FOR_TIMEZONE.valid?(@timezone)
-
-      if !@timezone.nil? && @timezone.to_s.size > 5000
-        invalid_properties.push("invalid value for \"timezone\", the character length must be smaller than or equal to 5000.")
-      end
 
       invalid_properties
     end
@@ -112,23 +104,21 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_REPORTING_CATEGORY.valid?(@reporting_category)
-      return false if !@reporting_category.nil? && @reporting_category.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_TIMEZONE.valid?(@timezone)
-      return false if !@timezone.nil? && @timezone.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reporting_category Object to be assigned
-    def reporting_category=(reporting_category)
+    def reporting_category=(reporting_category : String?)
       ENUM_VALIDATOR_FOR_REPORTING_CATEGORY.valid!(reporting_category)
       @reporting_category = reporting_category
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] timezone Object to be assigned
-    def timezone=(timezone)
+    def timezone=(timezone : String?)
       ENUM_VALIDATOR_FOR_TIMEZONE.valid!(timezone)
       @timezone = timezone
     end
@@ -143,6 +133,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@columns, @connected_account, @currency, @interval_end, @interval_start, @payout, @reporting_category, @timezone)
+    def_equals_and_hash(@columns, @columns_present, @connected_account, @connected_account_present, @currency, @currency_present, @interval_end, @interval_end_present, @interval_start, @interval_start_present, @payout, @payout_present, @reporting_category, @reporting_category_present, @timezone, @timezone_present)
   end
 end

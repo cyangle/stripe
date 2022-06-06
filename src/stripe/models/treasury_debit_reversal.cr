@@ -162,7 +162,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -172,21 +172,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network Object to be assigned
-    def network=(network)
+    def network=(network : String)
       ENUM_VALIDATOR_FOR_NETWORK.valid!(network, false)
       @network = network
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] received_debit Value to be assigned
-    def received_debit=(received_debit)
+    def received_debit=(received_debit : String)
       if received_debit.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"received_debit\", the character length must be smaller than or equal to 5000.")
       end
@@ -196,14 +196,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
 
     # Custom attribute writer method with validation
     # @param [Object] financial_account Value to be assigned
-    def financial_account=(financial_account)
+    def financial_account=(financial_account : String?)
       if !financial_account.nil? && financial_account.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
       end
@@ -213,7 +213,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] hosted_regulatory_receipt_url Value to be assigned
-    def hosted_regulatory_receipt_url=(hosted_regulatory_receipt_url)
+    def hosted_regulatory_receipt_url=(hosted_regulatory_receipt_url : String?)
       if !hosted_regulatory_receipt_url.nil? && hosted_regulatory_receipt_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"hosted_regulatory_receipt_url\", the character length must be smaller than or equal to 5000.")
       end
@@ -231,6 +231,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @currency, @id, @livemode, @metadata, @network, @object, @received_debit, @status, @status_transitions, @financial_account, @hosted_regulatory_receipt_url, @linked_flows, @transaction)
+    def_equals_and_hash(@amount, @currency, @id, @livemode, @metadata, @network, @object, @received_debit, @status, @status_transitions, @financial_account, @financial_account_present, @hosted_regulatory_receipt_url, @hosted_regulatory_receipt_url_present, @linked_flows, @linked_flows_present, @transaction, @transaction_present)
   end
 end

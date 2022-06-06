@@ -121,6 +121,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@entity, @reference, @refund_account_holder_address_city, @refund_account_holder_address_country, @refund_account_holder_address_line1, @refund_account_holder_address_line2, @refund_account_holder_address_postal_code, @refund_account_holder_address_state, @refund_account_holder_name, @refund_iban)
+    def_equals_and_hash(@entity, @entity_present, @reference, @reference_present, @refund_account_holder_address_city, @refund_account_holder_address_city_present, @refund_account_holder_address_country, @refund_account_holder_address_country_present, @refund_account_holder_address_line1, @refund_account_holder_address_line1_present, @refund_account_holder_address_line2, @refund_account_holder_address_line2_present, @refund_account_holder_address_postal_code, @refund_account_holder_address_postal_code_present, @refund_account_holder_address_state, @refund_account_holder_address_state_present, @refund_account_holder_name, @refund_account_holder_name_present, @refund_iban, @refund_iban_present)
   end
 end

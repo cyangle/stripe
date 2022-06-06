@@ -201,7 +201,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String)
       if customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
@@ -211,7 +211,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -221,7 +221,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] invoice Value to be assigned
-    def invoice=(invoice)
+    def invoice=(invoice : String?)
       if !invoice.nil? && invoice.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
       end
@@ -231,7 +231,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] price Value to be assigned
-    def price=(price)
+    def price=(price : String?)
       if !price.nil? && price.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"price\", the character length must be smaller than or equal to 5000.")
       end
@@ -241,7 +241,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] subscription Value to be assigned
-    def subscription=(subscription)
+    def subscription=(subscription : String?)
       if !subscription.nil? && subscription.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"subscription\", the character length must be smaller than or equal to 5000.")
       end
@@ -259,6 +259,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@customer, @amount, @currency, @description, @discountable, @discounts, @expand, @invoice, @metadata, @period, @price, @price_data, @quantity, @subscription, @tax_rates, @unit_amount, @unit_amount_decimal)
+    def_equals_and_hash(@customer, @amount, @amount_present, @currency, @currency_present, @description, @description_present, @discountable, @discountable_present, @discounts, @discounts_present, @expand, @expand_present, @invoice, @invoice_present, @metadata, @metadata_present, @period, @period_present, @price, @price_present, @price_data, @price_data_present, @quantity, @quantity_present, @subscription, @subscription_present, @tax_rates, @tax_rates_present, @unit_amount, @unit_amount_present, @unit_amount_decimal, @unit_amount_decimal_present)
   end
 end

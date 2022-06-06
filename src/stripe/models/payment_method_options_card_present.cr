@@ -68,6 +68,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@request_extended_authorization, @request_incremental_authorization_support)
+    def_equals_and_hash(@request_extended_authorization, @request_extended_authorization_present, @request_incremental_authorization_support, @request_incremental_authorization_support_present)
   end
 end

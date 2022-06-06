@@ -53,7 +53,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] token Value to be assigned
-    def token=(token)
+    def token=(token : String)
       if token.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"token\", the character length must be smaller than or equal to 5000.")
       end

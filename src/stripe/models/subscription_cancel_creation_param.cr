@@ -82,14 +82,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mode Object to be assigned
-    def mode=(mode)
+    def mode=(mode : String?)
       ENUM_VALIDATOR_FOR_MODE.valid!(mode)
       @mode = mode
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] proration_behavior Object to be assigned
-    def proration_behavior=(proration_behavior)
+    def proration_behavior=(proration_behavior : String?)
       ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(proration_behavior)
       @proration_behavior = proration_behavior
     end
@@ -104,6 +104,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@enabled, @cancellation_reason, @mode, @proration_behavior)
+    def_equals_and_hash(@enabled, @cancellation_reason, @cancellation_reason_present, @mode, @mode_present, @proration_behavior, @proration_behavior_present)
   end
 end

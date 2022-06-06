@@ -113,7 +113,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] currency Value to be assigned
-    def currency=(currency)
+    def currency=(currency : String?)
       if !currency.nil? && currency.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
       end
@@ -123,7 +123,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -133,7 +133,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] parent Value to be assigned
-    def parent=(parent)
+    def parent=(parent : String?)
       if !parent.nil? && parent.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"parent\", the character length must be smaller than or equal to 5000.")
       end
@@ -143,7 +143,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] _type Value to be assigned
-    def _type=(_type)
+    def _type=(_type : String?)
       if !_type.nil? && _type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
@@ -161,6 +161,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @currency, @description, @parent, @quantity, @_type)
+    def_equals_and_hash(@amount, @amount_present, @currency, @currency_present, @description, @description_present, @parent, @parent_present, @quantity, @quantity_present, @_type, @_type_present)
   end
 end

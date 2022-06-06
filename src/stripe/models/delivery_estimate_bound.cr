@@ -57,7 +57,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] unit Object to be assigned
-    def unit=(unit)
+    def unit=(unit : String)
       ENUM_VALIDATOR_FOR_UNIT.valid!(unit, false)
       @unit = unit
     end

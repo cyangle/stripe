@@ -97,7 +97,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] native_data Value to be assigned
-    def native_data=(native_data)
+    def native_data=(native_data : String?)
       if !native_data.nil? && native_data.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"native_data\", the character length must be smaller than or equal to 5000.")
       end
@@ -107,7 +107,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] native_url Value to be assigned
-    def native_url=(native_url)
+    def native_url=(native_url : String?)
       if !native_url.nil? && native_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"native_url\", the character length must be smaller than or equal to 5000.")
       end
@@ -117,7 +117,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] return_url Value to be assigned
-    def return_url=(return_url)
+    def return_url=(return_url : String?)
       if !return_url.nil? && return_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
@@ -127,7 +127,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
-    def url=(url)
+    def url=(url : String?)
       if !url.nil? && url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
@@ -145,6 +145,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@native_data, @native_url, @return_url, @url)
+    def_equals_and_hash(@native_data, @native_data_present, @native_url, @native_url_present, @return_url, @return_url_present, @url, @url_present)
   end
 end

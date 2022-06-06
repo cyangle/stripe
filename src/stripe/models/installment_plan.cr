@@ -66,14 +66,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval)
+    def interval=(interval : String)
       ENUM_VALIDATOR_FOR_INTERVAL.valid!(interval, false)
       @interval = interval
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end

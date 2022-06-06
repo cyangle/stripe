@@ -95,7 +95,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -105,14 +105,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] receiver Value to be assigned
-    def receiver=(receiver)
+    def receiver=(receiver : String)
       if receiver.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"receiver\", the character length must be smaller than or equal to 5000.")
       end

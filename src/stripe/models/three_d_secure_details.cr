@@ -97,28 +97,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] authentication_flow Object to be assigned
-    def authentication_flow=(authentication_flow)
+    def authentication_flow=(authentication_flow : String?)
       ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW.valid!(authentication_flow)
       @authentication_flow = authentication_flow
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] result Object to be assigned
-    def result=(result)
+    def result=(result : String?)
       ENUM_VALIDATOR_FOR_RESULT.valid!(result)
       @result = result
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] result_reason Object to be assigned
-    def result_reason=(result_reason)
+    def result_reason=(result_reason : String?)
       ENUM_VALIDATOR_FOR_RESULT_REASON.valid!(result_reason)
       @result_reason = result_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] version Object to be assigned
-    def version=(version)
+    def version=(version : String?)
       ENUM_VALIDATOR_FOR_VERSION.valid!(version)
       @version = version
     end
@@ -133,6 +133,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@authentication_flow, @result, @result_reason, @version)
+    def_equals_and_hash(@authentication_flow, @authentication_flow_present, @result, @result_present, @result_reason, @result_reason_present, @version, @version_present)
   end
 end

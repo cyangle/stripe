@@ -149,7 +149,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] brand Value to be assigned
-    def brand=(brand)
+    def brand=(brand : String)
       if brand.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
       end
@@ -159,7 +159,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] funding Value to be assigned
-    def funding=(funding)
+    def funding=(funding : String)
       if funding.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"funding\", the character length must be smaller than or equal to 5000.")
       end
@@ -169,7 +169,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] last4 Value to be assigned
-    def last4=(last4)
+    def last4=(last4 : String)
       if last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
@@ -179,7 +179,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
-    def country=(country)
+    def country=(country : String?)
       if !country.nil? && country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
@@ -189,7 +189,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] fingerprint Value to be assigned
-    def fingerprint=(fingerprint)
+    def fingerprint=(fingerprint : String?)
       if !fingerprint.nil? && fingerprint.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
@@ -207,6 +207,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@brand, @exp_month, @exp_year, @funding, @last4, @checks, @country, @fingerprint, @generated_from, @networks, @three_d_secure_usage, @wallet)
+    def_equals_and_hash(@brand, @exp_month, @exp_year, @funding, @last4, @checks, @checks_present, @country, @country_present, @fingerprint, @fingerprint_present, @generated_from, @generated_from_present, @networks, @networks_present, @three_d_secure_usage, @three_d_secure_usage_present, @wallet, @wallet_present)
   end
 end

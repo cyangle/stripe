@@ -95,6 +95,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@billing_details, @card, @expand, @link, @metadata, @us_bank_account)
+    def_equals_and_hash(@billing_details, @billing_details_present, @card, @card_present2, @expand, @expand_present, @link, @link_present, @metadata, @metadata_present, @us_bank_account, @us_bank_account_present)
   end
 end

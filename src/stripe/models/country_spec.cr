@@ -99,7 +99,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] default_currency Value to be assigned
-    def default_currency=(default_currency)
+    def default_currency=(default_currency : String)
       if default_currency.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"default_currency\", the character length must be smaller than or equal to 5000.")
       end
@@ -109,7 +109,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -119,7 +119,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end

@@ -91,14 +91,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
 
     # Custom attribute writer method with validation
     # @param [Object] document Value to be assigned
-    def document=(document)
+    def document=(document : String?)
       if !document.nil? && document.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"document\", the character length must be smaller than or equal to 5000.")
       end
@@ -108,7 +108,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] selfie Value to be assigned
-    def selfie=(selfie)
+    def selfie=(selfie : String?)
       if !selfie.nil? && selfie.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"selfie\", the character length must be smaller than or equal to 5000.")
       end
@@ -126,6 +126,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@status, @document, @error, @selfie)
+    def_equals_and_hash(@status, @document, @document_present, @error, @error_present, @selfie, @selfie_present)
   end
 end

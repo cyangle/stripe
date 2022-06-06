@@ -71,14 +71,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank Object to be assigned
-    def bank=(bank)
+    def bank=(bank : String?)
       ENUM_VALIDATOR_FOR_BANK.valid!(bank)
       @bank = bank
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bic Object to be assigned
-    def bic=(bic)
+    def bic=(bic : String?)
       ENUM_VALIDATOR_FOR_BIC.valid!(bic)
       @bic = bic
     end
@@ -93,6 +93,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@bank, @bic)
+    def_equals_and_hash(@bank, @bank_present, @bic, @bic_present)
   end
 end

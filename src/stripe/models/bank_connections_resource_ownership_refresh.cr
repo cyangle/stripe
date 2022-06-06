@@ -60,7 +60,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end

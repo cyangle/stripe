@@ -207,14 +207,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_scheme Object to be assigned
-    def billing_scheme=(billing_scheme)
+    def billing_scheme=(billing_scheme : String)
       ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid!(billing_scheme, false)
       @billing_scheme = billing_scheme
     end
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -224,21 +224,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] lookup_key Value to be assigned
-    def lookup_key=(lookup_key)
+    def lookup_key=(lookup_key : String?)
       if !lookup_key.nil? && lookup_key.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"lookup_key\", the character length must be smaller than or equal to 5000.")
       end
@@ -248,7 +248,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] nickname Value to be assigned
-    def nickname=(nickname)
+    def nickname=(nickname : String?)
       if !nickname.nil? && nickname.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
       end
@@ -258,14 +258,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_behavior Object to be assigned
-    def tax_behavior=(tax_behavior)
+    def tax_behavior=(tax_behavior : String?)
       ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid!(tax_behavior)
       @tax_behavior = tax_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tiers_mode Object to be assigned
-    def tiers_mode=(tiers_mode)
+    def tiers_mode=(tiers_mode : String?)
       ENUM_VALIDATOR_FOR_TIERS_MODE.valid!(tiers_mode)
       @tiers_mode = tiers_mode
     end
@@ -280,6 +280,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@active, @billing_scheme, @created, @currency, @id, @livemode, @metadata, @object, @product, @_type, @lookup_key, @nickname, @recurring, @tax_behavior, @tiers, @tiers_mode, @transform_quantity, @unit_amount, @unit_amount_decimal)
+    def_equals_and_hash(@active, @billing_scheme, @created, @currency, @id, @livemode, @metadata, @object, @product, @_type, @lookup_key, @lookup_key_present, @nickname, @nickname_present, @recurring, @recurring_present, @tax_behavior, @tax_behavior_present, @tiers, @tiers_present, @tiers_mode, @tiers_mode_present, @transform_quantity, @transform_quantity_present, @unit_amount, @unit_amount_present, @unit_amount_decimal, @unit_amount_decimal_present)
   end
 end

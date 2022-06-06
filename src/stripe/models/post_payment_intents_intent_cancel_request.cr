@@ -52,10 +52,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CANCELLATION_REASON.error_message) unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
 
-      if !@cancellation_reason.nil? && @cancellation_reason.to_s.size > 5000
-        invalid_properties.push("invalid value for \"cancellation_reason\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties
     end
 
@@ -63,14 +59,13 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
-      return false if !@cancellation_reason.nil? && @cancellation_reason.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_reason Object to be assigned
-    def cancellation_reason=(cancellation_reason)
+    def cancellation_reason=(cancellation_reason : String?)
       ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid!(cancellation_reason)
       @cancellation_reason = cancellation_reason
     end
@@ -85,6 +80,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@cancellation_reason, @expand)
+    def_equals_and_hash(@cancellation_reason, @cancellation_reason_present, @expand, @expand_present)
   end
 end

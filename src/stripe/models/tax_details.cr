@@ -64,7 +64,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_exempt Object to be assigned
-    def tax_exempt=(tax_exempt)
+    def tax_exempt=(tax_exempt : String?)
       ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid!(tax_exempt)
       @tax_exempt = tax_exempt
     end
@@ -79,6 +79,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@tax_exempt, @tax_ids)
+    def_equals_and_hash(@tax_exempt, @tax_exempt_present, @tax_ids, @tax_ids_present)
   end
 end

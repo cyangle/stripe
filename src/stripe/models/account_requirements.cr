@@ -114,7 +114,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] disabled_reason Value to be assigned
-    def disabled_reason=(disabled_reason)
+    def disabled_reason=(disabled_reason : String?)
       if !disabled_reason.nil? && disabled_reason.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"disabled_reason\", the character length must be smaller than or equal to 5000.")
       end
@@ -132,6 +132,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@alternatives, @current_deadline, @currently_due, @disabled_reason, @errors, @eventually_due, @past_due, @pending_verification)
+    def_equals_and_hash(@alternatives, @alternatives_present, @current_deadline, @current_deadline_present, @currently_due, @currently_due_present, @disabled_reason, @disabled_reason_present, @errors, @errors_present, @eventually_due, @eventually_due_present, @past_due, @past_due_present, @pending_verification, @pending_verification_present)
   end
 end

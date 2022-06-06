@@ -138,14 +138,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_address_collection Object to be assigned
-    def billing_address_collection=(billing_address_collection)
+    def billing_address_collection=(billing_address_collection : String?)
       ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid!(billing_address_collection)
       @billing_address_collection = billing_address_collection
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_creation Object to be assigned
-    def customer_creation=(customer_creation)
+    def customer_creation=(customer_creation : String?)
       ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid!(customer_creation)
       @customer_creation = customer_creation
     end
@@ -160,6 +160,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@active, @after_completion, @allow_promotion_codes, @automatic_tax, @billing_address_collection, @customer_creation, @expand, @line_items, @metadata, @payment_method_types, @shipping_address_collection)
+    def_equals_and_hash(@active, @active_present, @after_completion, @after_completion_present, @allow_promotion_codes, @allow_promotion_codes_present, @automatic_tax, @automatic_tax_present, @billing_address_collection, @billing_address_collection_present, @customer_creation, @customer_creation_present, @expand, @expand_present, @line_items, @line_items_present, @metadata, @metadata_present, @payment_method_types, @payment_method_types_present, @shipping_address_collection, @shipping_address_collection_present)
   end
 end

@@ -73,6 +73,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@first_time_transaction, @minimum_amount, @minimum_amount_currency)
+    def_equals_and_hash(@first_time_transaction, @first_time_transaction_present, @minimum_amount, @minimum_amount_present, @minimum_amount_currency, @minimum_amount_currency_present)
   end
 end

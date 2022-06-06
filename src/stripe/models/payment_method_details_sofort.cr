@@ -150,7 +150,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] bank_code Value to be assigned
-    def bank_code=(bank_code)
+    def bank_code=(bank_code : String?)
       if !bank_code.nil? && bank_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -160,7 +160,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] bank_name Value to be assigned
-    def bank_name=(bank_name)
+    def bank_name=(bank_name : String?)
       if !bank_name.nil? && bank_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -170,7 +170,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] bic Value to be assigned
-    def bic=(bic)
+    def bic=(bic : String?)
       if !bic.nil? && bic.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bic\", the character length must be smaller than or equal to 5000.")
       end
@@ -180,7 +180,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
-    def country=(country)
+    def country=(country : String?)
       if !country.nil? && country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
@@ -190,7 +190,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] iban_last4 Value to be assigned
-    def iban_last4=(iban_last4)
+    def iban_last4=(iban_last4 : String?)
       if !iban_last4.nil? && iban_last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"iban_last4\", the character length must be smaller than or equal to 5000.")
       end
@@ -200,14 +200,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] preferred_language Object to be assigned
-    def preferred_language=(preferred_language)
+    def preferred_language=(preferred_language : String?)
       ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE.valid!(preferred_language)
       @preferred_language = preferred_language
     end
 
     # Custom attribute writer method with validation
     # @param [Object] verified_name Value to be assigned
-    def verified_name=(verified_name)
+    def verified_name=(verified_name : String?)
       if !verified_name.nil? && verified_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -225,6 +225,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@bank_code, @bank_name, @bic, @country, @generated_sepa_debit, @generated_sepa_debit_mandate, @iban_last4, @preferred_language, @verified_name)
+    def_equals_and_hash(@bank_code, @bank_code_present, @bank_name, @bank_name_present, @bic, @bic_present, @country, @country_present, @generated_sepa_debit, @generated_sepa_debit_present, @generated_sepa_debit_mandate, @generated_sepa_debit_mandate_present, @iban_last4, @iban_last4_present, @preferred_language, @preferred_language_present, @verified_name, @verified_name_present)
   end
 end

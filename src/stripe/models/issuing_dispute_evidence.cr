@@ -107,7 +107,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason)
+    def reason=(reason : String)
       ENUM_VALIDATOR_FOR_REASON.valid!(reason, false)
       @reason = reason
     end
@@ -122,6 +122,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@reason, @canceled, @duplicate, @fraudulent, @merchandise_not_as_described, @not_received, @other, @service_not_as_described)
+    def_equals_and_hash(@reason, @canceled, @canceled_present, @duplicate, @duplicate_present, @fraudulent, @fraudulent_present, @merchandise_not_as_described, @merchandise_not_as_described_present, @not_received, @not_received_present, @other, @other_present, @service_not_as_described, @service_not_as_described_present)
   end
 end

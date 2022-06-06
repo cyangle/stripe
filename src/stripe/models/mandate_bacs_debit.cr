@@ -75,14 +75,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network_status Object to be assigned
-    def network_status=(network_status)
+    def network_status=(network_status : String)
       ENUM_VALIDATOR_FOR_NETWORK_STATUS.valid!(network_status, false)
       @network_status = network_status
     end
 
     # Custom attribute writer method with validation
     # @param [Object] reference Value to be assigned
-    def reference=(reference)
+    def reference=(reference : String)
       if reference.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
       end
@@ -92,7 +92,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
-    def url=(url)
+    def url=(url : String)
       if url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end

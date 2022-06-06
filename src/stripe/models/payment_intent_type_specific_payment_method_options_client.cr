@@ -84,21 +84,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] capture_method Object to be assigned
-    def capture_method=(capture_method)
+    def capture_method=(capture_method : String?)
       ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid!(capture_method)
       @capture_method = capture_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage)
+    def setup_future_usage=(setup_future_usage : String?)
       ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(setup_future_usage)
       @setup_future_usage = setup_future_usage
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification_method Object to be assigned
-    def verification_method=(verification_method)
+    def verification_method=(verification_method : String?)
       ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid!(verification_method)
       @verification_method = verification_method
     end
@@ -113,6 +113,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@capture_method, @setup_future_usage, @verification_method)
+    def_equals_and_hash(@capture_method, @capture_method_present, @setup_future_usage, @setup_future_usage_present, @verification_method, @verification_method_present)
   end
 end

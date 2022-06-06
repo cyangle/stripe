@@ -60,7 +60,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] options Object to be assigned
-    def options=(options)
+    def options=(options : Array(String))
       ENUM_VALIDATOR_FOR_OPTIONS.all_valid!(options, false)
       @options = options
     end

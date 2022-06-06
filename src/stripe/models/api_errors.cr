@@ -177,14 +177,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] charge Value to be assigned
-    def charge=(charge)
+    def charge=(charge : String?)
       if !charge.nil? && charge.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"charge\", the character length must be smaller than or equal to 5000.")
       end
@@ -194,7 +194,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] code Value to be assigned
-    def code=(code)
+    def code=(code : String?)
       if !code.nil? && code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"code\", the character length must be smaller than or equal to 5000.")
       end
@@ -204,7 +204,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] decline_code Value to be assigned
-    def decline_code=(decline_code)
+    def decline_code=(decline_code : String?)
       if !decline_code.nil? && decline_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"decline_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -214,7 +214,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] doc_url Value to be assigned
-    def doc_url=(doc_url)
+    def doc_url=(doc_url : String?)
       if !doc_url.nil? && doc_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"doc_url\", the character length must be smaller than or equal to 5000.")
       end
@@ -224,7 +224,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] message Value to be assigned
-    def message=(message)
+    def message=(message : String?)
       if !message.nil? && message.to_s.size > 40000
         raise ArgumentError.new("invalid value for \"message\", the character length must be smaller than or equal to 40000.")
       end
@@ -234,7 +234,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] param Value to be assigned
-    def param=(param)
+    def param=(param : String?)
       if !param.nil? && param.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"param\", the character length must be smaller than or equal to 5000.")
       end
@@ -244,7 +244,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] payment_method_type Value to be assigned
-    def payment_method_type=(payment_method_type)
+    def payment_method_type=(payment_method_type : String?)
       if !payment_method_type.nil? && payment_method_type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"payment_method_type\", the character length must be smaller than or equal to 5000.")
       end
@@ -262,6 +262,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @charge, @code, @decline_code, @doc_url, @message, @param, @payment_intent, @payment_method, @payment_method_type, @setup_intent, @source)
+    def_equals_and_hash(@_type, @charge, @charge_present, @code, @code_present, @decline_code, @decline_code_present, @doc_url, @doc_url_present, @message, @message_present, @param, @param_present, @payment_intent, @payment_intent_present, @payment_method, @payment_method_present, @payment_method_type, @payment_method_type_present, @setup_intent, @setup_intent_present, @source, @source_present)
   end
 end

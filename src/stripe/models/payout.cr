@@ -233,7 +233,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -243,7 +243,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] method Value to be assigned
-    def method=(method)
+    def method=(method : String)
       if method.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"method\", the character length must be smaller than or equal to 5000.")
       end
@@ -253,14 +253,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] source_type Value to be assigned
-    def source_type=(source_type)
+    def source_type=(source_type : String)
       if source_type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"source_type\", the character length must be smaller than or equal to 5000.")
       end
@@ -270,7 +270,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] status Value to be assigned
-    def status=(status)
+    def status=(status : String)
       if status.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
@@ -280,14 +280,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -297,7 +297,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] failure_code Value to be assigned
-    def failure_code=(failure_code)
+    def failure_code=(failure_code : String?)
       if !failure_code.nil? && failure_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -307,7 +307,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] failure_message Value to be assigned
-    def failure_message=(failure_message)
+    def failure_message=(failure_message : String?)
       if !failure_message.nil? && failure_message.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
       end
@@ -317,7 +317,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
-    def statement_descriptor=(statement_descriptor)
+    def statement_descriptor=(statement_descriptor : String?)
       if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
@@ -335,6 +335,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @arrival_date, @automatic, @created, @currency, @id, @livemode, @method, @object, @source_type, @status, @_type, @balance_transaction, @description, @destination, @failure_balance_transaction, @failure_code, @failure_message, @metadata, @original_payout, @reversed_by, @statement_descriptor)
+    def_equals_and_hash(@amount, @arrival_date, @automatic, @created, @currency, @id, @livemode, @method, @object, @source_type, @status, @_type, @balance_transaction, @balance_transaction_present, @description, @description_present, @destination, @destination_present, @failure_balance_transaction, @failure_balance_transaction_present, @failure_code, @failure_code_present, @failure_message, @failure_message_present, @metadata, @metadata_present, @original_payout, @original_payout_present, @reversed_by, @reversed_by_present, @statement_descriptor, @statement_descriptor_present)
   end
 end

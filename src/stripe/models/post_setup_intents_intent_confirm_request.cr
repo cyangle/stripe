@@ -107,7 +107,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] client_secret Value to be assigned
-    def client_secret=(client_secret)
+    def client_secret=(client_secret : String?)
       if !client_secret.nil? && client_secret.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
       end
@@ -117,7 +117,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] payment_method Value to be assigned
-    def payment_method=(payment_method)
+    def payment_method=(payment_method : String?)
       if !payment_method.nil? && payment_method.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"payment_method\", the character length must be smaller than or equal to 5000.")
       end
@@ -135,6 +135,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@client_secret, @expand, @mandate_data, @payment_method, @payment_method_data, @payment_method_options, @return_url)
+    def_equals_and_hash(@client_secret, @client_secret_present, @expand, @expand_present, @mandate_data, @mandate_data_present, @payment_method, @payment_method_present, @payment_method_data, @payment_method_data_present, @payment_method_options, @payment_method_options_present, @return_url, @return_url_present)
   end
 end

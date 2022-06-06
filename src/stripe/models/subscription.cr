@@ -323,14 +323,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] collection_method Object to be assigned
-    def collection_method=(collection_method)
+    def collection_method=(collection_method : String)
       ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(collection_method, false)
       @collection_method = collection_method
     end
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -340,21 +340,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 500
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 500.")
       end
@@ -372,6 +372,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@automatic_tax, @billing_cycle_anchor, @cancel_at_period_end, @collection_method, @created, @current_period_end, @current_period_start, @customer, @id, @items, @livemode, @metadata, @object, @start_date, @status, @application, @application_fee_percent, @billing_thresholds, @cancel_at, @canceled_at, @days_until_due, @default_payment_method, @default_source, @default_tax_rates, @description, @discount, @ended_at, @latest_invoice, @next_pending_invoice_item_invoice, @pause_collection, @payment_settings, @pending_invoice_item_interval, @pending_setup_intent, @pending_update, @schedule, @test_clock, @transfer_data, @trial_end, @trial_start)
+    def_equals_and_hash(@automatic_tax, @billing_cycle_anchor, @cancel_at_period_end, @collection_method, @created, @current_period_end, @current_period_start, @customer, @id, @items, @livemode, @metadata, @object, @start_date, @status, @application, @application_present, @application_fee_percent, @application_fee_percent_present, @billing_thresholds, @billing_thresholds_present, @cancel_at, @cancel_at_present, @canceled_at, @canceled_at_present, @days_until_due, @days_until_due_present, @default_payment_method, @default_payment_method_present, @default_source, @default_source_present, @default_tax_rates, @default_tax_rates_present, @description, @description_present, @discount, @discount_present, @ended_at, @ended_at_present, @latest_invoice, @latest_invoice_present, @next_pending_invoice_item_invoice, @next_pending_invoice_item_invoice_present, @pause_collection, @pause_collection_present, @payment_settings, @payment_settings_present, @pending_invoice_item_interval, @pending_invoice_item_interval_present, @pending_setup_intent, @pending_setup_intent_present, @pending_update, @pending_update_present, @schedule, @schedule_present, @test_clock, @test_clock_present, @transfer_data, @transfer_data_present, @trial_end, @trial_end_present, @trial_start, @trial_start_present)
   end
 end

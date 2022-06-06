@@ -239,7 +239,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] brand Value to be assigned
-    def brand=(brand)
+    def brand=(brand : String)
       if brand.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
       end
@@ -249,7 +249,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -259,7 +259,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] last4 Value to be assigned
-    def last4=(last4)
+    def last4=(last4 : String)
       if last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
@@ -269,35 +269,35 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_reason Object to be assigned
-    def cancellation_reason=(cancellation_reason)
+    def cancellation_reason=(cancellation_reason : String?)
       ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid!(cancellation_reason)
       @cancellation_reason = cancellation_reason
     end
 
     # Custom attribute writer method with validation
     # @param [Object] cvc Value to be assigned
-    def cvc=(cvc)
+    def cvc=(cvc : String?)
       if !cvc.nil? && cvc.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"cvc\", the character length must be smaller than or equal to 5000.")
       end
@@ -307,7 +307,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] financial_account Value to be assigned
-    def financial_account=(financial_account)
+    def financial_account=(financial_account : String?)
       if !financial_account.nil? && financial_account.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
       end
@@ -317,7 +317,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] number Value to be assigned
-    def number=(number)
+    def number=(number : String?)
       if !number.nil? && number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
       end
@@ -327,7 +327,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] replacement_reason Object to be assigned
-    def replacement_reason=(replacement_reason)
+    def replacement_reason=(replacement_reason : String?)
       ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.valid!(replacement_reason)
       @replacement_reason = replacement_reason
     end
@@ -342,6 +342,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@brand, @cardholder, @created, @currency, @exp_month, @exp_year, @id, @last4, @livemode, @metadata, @object, @spending_controls, @status, @_type, @cancellation_reason, @cvc, @financial_account, @number, @replaced_by, @replacement_for, @replacement_reason, @shipping, @wallets)
+    def_equals_and_hash(@brand, @cardholder, @created, @currency, @exp_month, @exp_year, @id, @last4, @livemode, @metadata, @object, @spending_controls, @status, @_type, @cancellation_reason, @cancellation_reason_present, @cvc, @cvc_present, @financial_account, @financial_account_present, @number, @number_present, @replaced_by, @replaced_by_present, @replacement_for, @replacement_for_present, @replacement_reason, @replacement_reason_present, @shipping, @shipping_present, @wallets, @wallets_present)
   end
 end

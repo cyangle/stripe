@@ -92,10 +92,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_API_VERSION.error_message) unless ENUM_VALIDATOR_FOR_API_VERSION.valid?(@api_version)
 
-      if !@api_version.nil? && @api_version.to_s.size > 5000
-        invalid_properties.push("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
-      end
-
       if !@description.nil? && @description.to_s.size > 5000
         invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -108,7 +104,6 @@ module Stripe
     def valid?
       return false unless ENUM_VALIDATOR_FOR_ENABLED_EVENTS.all_valid?(@enabled_events, false)
       return false unless ENUM_VALIDATOR_FOR_API_VERSION.valid?(@api_version)
-      return false if !@api_version.nil? && @api_version.to_s.size > 5000
       return false if !@description.nil? && @description.to_s.size > 5000
 
       true
@@ -116,21 +111,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] enabled_events Object to be assigned
-    def enabled_events=(enabled_events)
+    def enabled_events=(enabled_events : Array(String))
       ENUM_VALIDATOR_FOR_ENABLED_EVENTS.all_valid!(enabled_events, false)
       @enabled_events = enabled_events
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] api_version Object to be assigned
-    def api_version=(api_version)
+    def api_version=(api_version : String?)
       ENUM_VALIDATOR_FOR_API_VERSION.valid!(api_version)
       @api_version = api_version
     end
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -148,6 +143,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@enabled_events, @url, @api_version, @connect, @description, @expand, @metadata)
+    def_equals_and_hash(@enabled_events, @url, @api_version, @api_version_present, @connect, @connect_present, @description, @description_present, @expand, @expand_present, @metadata, @metadata_present)
   end
 end

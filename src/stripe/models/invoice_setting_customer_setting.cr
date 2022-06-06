@@ -73,7 +73,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] footer Value to be assigned
-    def footer=(footer)
+    def footer=(footer : String?)
       if !footer.nil? && footer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"footer\", the character length must be smaller than or equal to 5000.")
       end
@@ -91,6 +91,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@custom_fields, @default_payment_method, @footer)
+    def_equals_and_hash(@custom_fields, @custom_fields_present, @default_payment_method, @default_payment_method_present, @footer, @footer_present)
   end
 end

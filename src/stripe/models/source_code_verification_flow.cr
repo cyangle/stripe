@@ -60,7 +60,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] status Value to be assigned
-    def status=(status)
+    def status=(status : String)
       if status.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end

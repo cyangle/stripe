@@ -72,6 +72,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@prepay_id, @qr_code_url, @statement_descriptor)
+    def_equals_and_hash(@prepay_id, @prepay_id_present, @qr_code_url, @qr_code_url_present, @statement_descriptor, @statement_descriptor_present)
   end
 end

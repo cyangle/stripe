@@ -107,6 +107,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@account_number, @bank_name, @fingerprint, @refund_account_holder_name, @refund_account_holder_type, @refund_routing_number, @routing_number, @swift_code)
+    def_equals_and_hash(@account_number, @account_number_present, @bank_name, @bank_name_present, @fingerprint, @fingerprint_present, @refund_account_holder_name, @refund_account_holder_name_present, @refund_account_holder_type, @refund_account_holder_type_present, @refund_routing_number, @refund_routing_number_present, @routing_number, @routing_number_present, @swift_code, @swift_code_present)
   end
 end

@@ -80,7 +80,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] action Object to be assigned
-    def action=(action)
+    def action=(action : String?)
       ENUM_VALIDATOR_FOR_ACTION.valid!(action)
       @action = action
     end
@@ -95,6 +95,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@quantity, @action, @expand, @timestamp)
+    def_equals_and_hash(@quantity, @action, @action_present, @expand, @expand_present, @timestamp, @timestamp_present)
   end
 end

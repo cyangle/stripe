@@ -76,14 +76,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String?)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type)
       @_type = _type
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] value Object to be assigned
-    def value=(value)
+    def value=(value : String?)
       ENUM_VALIDATOR_FOR_VALUE.valid!(value)
       @value = value
     end
@@ -98,6 +98,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@quantity, @_type, @value)
+    def_equals_and_hash(@quantity, @quantity_present, @_type, @_type_present, @value, @value_present)
   end
 end

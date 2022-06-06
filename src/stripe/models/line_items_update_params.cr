@@ -70,7 +70,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -88,6 +88,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@id, @adjustable_quantity, @quantity)
+    def_equals_and_hash(@id, @adjustable_quantity, @adjustable_quantity_present, @quantity, @quantity_present)
   end
 end

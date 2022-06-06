@@ -119,14 +119,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_types Object to be assigned
-    def payment_method_types=(payment_method_types)
+    def payment_method_types=(payment_method_types : Array(String)?)
       ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid!(payment_method_types)
       @payment_method_types = payment_method_types
     end
 
     # Custom attribute writer method with validation
     # @param [Object] return_url Value to be assigned
-    def return_url=(return_url)
+    def return_url=(return_url : String?)
       if !return_url.nil? && return_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
@@ -136,7 +136,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
-    def statement_descriptor=(statement_descriptor)
+    def statement_descriptor=(statement_descriptor : String?)
       if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
@@ -146,7 +146,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor_suffix Value to be assigned
-    def statement_descriptor_suffix=(statement_descriptor_suffix)
+    def statement_descriptor_suffix=(statement_descriptor_suffix : String?)
       if !statement_descriptor_suffix.nil? && statement_descriptor_suffix.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 5000.")
       end
@@ -164,6 +164,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@application_fee_amount, @payment_method_options, @payment_method_types, @return_url, @statement_descriptor, @statement_descriptor_suffix, @transfer_data)
+    def_equals_and_hash(@application_fee_amount, @application_fee_amount_present, @payment_method_options, @payment_method_options_present, @payment_method_types, @payment_method_types_present, @return_url, @return_url_present, @statement_descriptor, @statement_descriptor_present, @statement_descriptor_suffix, @statement_descriptor_suffix_present, @transfer_data, @transfer_data_present)
   end
 end

@@ -78,14 +78,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_types Object to be assigned
-    def payment_method_types=(payment_method_types)
+    def payment_method_types=(payment_method_types : Array(String)?)
       ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid!(payment_method_types)
       @payment_method_types = payment_method_types
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] save_default_payment_method Object to be assigned
-    def save_default_payment_method=(save_default_payment_method)
+    def save_default_payment_method=(save_default_payment_method : String?)
       ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD.valid!(save_default_payment_method)
       @save_default_payment_method = save_default_payment_method
     end
@@ -100,6 +100,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@payment_method_options, @payment_method_types, @save_default_payment_method)
+    def_equals_and_hash(@payment_method_options, @payment_method_options_present, @payment_method_types, @payment_method_types_present, @save_default_payment_method, @save_default_payment_method_present)
   end
 end

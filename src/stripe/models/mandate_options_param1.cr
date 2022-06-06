@@ -56,7 +56,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transaction_type Object to be assigned
-    def transaction_type=(transaction_type)
+    def transaction_type=(transaction_type : String?)
       ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.valid!(transaction_type)
       @transaction_type = transaction_type
     end
@@ -71,6 +71,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@transaction_type)
+    def_equals_and_hash(@transaction_type, @transaction_type_present)
   end
 end

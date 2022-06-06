@@ -60,7 +60,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] round Object to be assigned
-    def round=(round)
+    def round=(round : String)
       ENUM_VALIDATOR_FOR_ROUND.valid!(round, false)
       @round = round
     end

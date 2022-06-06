@@ -55,7 +55,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank Object to be assigned
-    def bank=(bank)
+    def bank=(bank : String)
       ENUM_VALIDATOR_FOR_BANK.valid!(bank, false)
       @bank = bank
     end

@@ -44,10 +44,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BANK.error_message) unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank)
 
-      if !@bank.nil? && @bank.to_s.size > 5000
-        invalid_properties.push("invalid value for \"bank\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties
     end
 
@@ -55,14 +51,13 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank)
-      return false if !@bank.nil? && @bank.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank Object to be assigned
-    def bank=(bank)
+    def bank=(bank : String?)
       ENUM_VALIDATOR_FOR_BANK.valid!(bank)
       @bank = bank
     end
@@ -77,6 +72,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@bank)
+    def_equals_and_hash(@bank, @bank_present)
   end
 end

@@ -129,7 +129,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] connected_account Value to be assigned
-    def connected_account=(connected_account)
+    def connected_account=(connected_account : String?)
       if !connected_account.nil? && connected_account.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"connected_account\", the character length must be smaller than or equal to 5000.")
       end
@@ -139,7 +139,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] payout Value to be assigned
-    def payout=(payout)
+    def payout=(payout : String?)
       if !payout.nil? && payout.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"payout\", the character length must be smaller than or equal to 5000.")
       end
@@ -149,7 +149,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] reporting_category Value to be assigned
-    def reporting_category=(reporting_category)
+    def reporting_category=(reporting_category : String?)
       if !reporting_category.nil? && reporting_category.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"reporting_category\", the character length must be smaller than or equal to 5000.")
       end
@@ -159,7 +159,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] timezone Value to be assigned
-    def timezone=(timezone)
+    def timezone=(timezone : String?)
       if !timezone.nil? && timezone.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"timezone\", the character length must be smaller than or equal to 5000.")
       end
@@ -177,6 +177,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@columns, @connected_account, @currency, @interval_end, @interval_start, @payout, @reporting_category, @timezone)
+    def_equals_and_hash(@columns, @columns_present, @connected_account, @connected_account_present, @currency, @currency_present, @interval_end, @interval_end_present, @interval_start, @interval_start_present, @payout, @payout_present, @reporting_category, @reporting_category_present, @timezone, @timezone_present)
   end
 end

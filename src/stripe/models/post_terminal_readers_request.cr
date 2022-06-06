@@ -98,7 +98,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] registration_code Value to be assigned
-    def registration_code=(registration_code)
+    def registration_code=(registration_code : String)
       if registration_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"registration_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -108,7 +108,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] label Value to be assigned
-    def label=(label)
+    def label=(label : String?)
       if !label.nil? && label.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"label\", the character length must be smaller than or equal to 5000.")
       end
@@ -118,7 +118,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] location Value to be assigned
-    def location=(location)
+    def location=(location : String?)
       if !location.nil? && location.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"location\", the character length must be smaller than or equal to 5000.")
       end
@@ -136,6 +136,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@registration_code, @expand, @label, @location, @metadata)
+    def_equals_and_hash(@registration_code, @expand, @expand_present, @label, @label_present, @location, @location_present, @metadata, @metadata_present)
   end
 end

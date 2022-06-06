@@ -145,7 +145,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -155,21 +155,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] display_name Value to be assigned
-    def display_name=(display_name)
+    def display_name=(display_name : String?)
       if !display_name.nil? && display_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -179,7 +179,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_behavior Object to be assigned
-    def tax_behavior=(tax_behavior)
+    def tax_behavior=(tax_behavior : String?)
       ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid!(tax_behavior)
       @tax_behavior = tax_behavior
     end
@@ -194,6 +194,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@active, @created, @id, @livemode, @metadata, @object, @_type, @delivery_estimate, @display_name, @fixed_amount, @tax_behavior, @tax_code)
+    def_equals_and_hash(@active, @created, @id, @livemode, @metadata, @object, @_type, @delivery_estimate, @delivery_estimate_present, @display_name, @display_name_present, @fixed_amount, @fixed_amount_present, @tax_behavior, @tax_behavior_present, @tax_code, @tax_code_present)
   end
 end

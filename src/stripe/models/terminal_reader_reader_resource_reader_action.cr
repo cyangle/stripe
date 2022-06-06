@@ -115,21 +115,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] failure_code Value to be assigned
-    def failure_code=(failure_code)
+    def failure_code=(failure_code : String?)
       if !failure_code.nil? && failure_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -139,7 +139,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] failure_message Value to be assigned
-    def failure_message=(failure_message)
+    def failure_message=(failure_message : String?)
       if !failure_message.nil? && failure_message.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
       end
@@ -157,6 +157,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@status, @_type, @failure_code, @failure_message, @process_payment_intent, @process_setup_intent, @set_reader_display)
+    def_equals_and_hash(@status, @_type, @failure_code, @failure_code_present, @failure_message, @failure_message_present, @process_payment_intent, @process_payment_intent_present, @process_setup_intent, @process_setup_intent_present, @set_reader_display, @set_reader_display_present)
   end
 end

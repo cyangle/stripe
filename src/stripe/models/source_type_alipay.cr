@@ -72,6 +72,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@data_string, @native_url, @statement_descriptor)
+    def_equals_and_hash(@data_string, @data_string_present, @native_url, @native_url_present, @statement_descriptor, @statement_descriptor_present)
   end
 end

@@ -80,14 +80,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] client Object to be assigned
-    def client=(client)
+    def client=(client : String)
       ENUM_VALIDATOR_FOR_CLIENT.valid!(client, false)
       @client = client
     end
 
     # Custom attribute writer method with validation
     # @param [Object] app_id Value to be assigned
-    def app_id=(app_id)
+    def app_id=(app_id : String?)
       if !app_id.nil? && app_id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"app_id\", the character length must be smaller than or equal to 5000.")
       end
@@ -97,7 +97,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage)
+    def setup_future_usage=(setup_future_usage : String?)
       ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(setup_future_usage)
       @setup_future_usage = setup_future_usage
     end
@@ -112,6 +112,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@client, @app_id, @setup_future_usage)
+    def_equals_and_hash(@client, @app_id, @app_id_present, @setup_future_usage, @setup_future_usage_present)
   end
 end

@@ -60,7 +60,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_exempt Object to be assigned
-    def tax_exempt=(tax_exempt)
+    def tax_exempt=(tax_exempt : String)
       ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid!(tax_exempt, false)
       @tax_exempt = tax_exempt
     end

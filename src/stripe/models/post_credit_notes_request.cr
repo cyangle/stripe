@@ -147,7 +147,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] invoice Value to be assigned
-    def invoice=(invoice)
+    def invoice=(invoice : String)
       if invoice.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
       end
@@ -157,7 +157,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] memo Value to be assigned
-    def memo=(memo)
+    def memo=(memo : String?)
       if !memo.nil? && memo.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"memo\", the character length must be smaller than or equal to 5000.")
       end
@@ -167,7 +167,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason)
+    def reason=(reason : String?)
       ENUM_VALIDATOR_FOR_REASON.valid!(reason)
       @reason = reason
     end
@@ -182,6 +182,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@invoice, @amount, @credit_amount, @expand, @lines, @memo, @metadata, @out_of_band_amount, @reason, @refund, @refund_amount)
+    def_equals_and_hash(@invoice, @amount, @amount_present, @credit_amount, @credit_amount_present, @expand, @expand_present, @lines, @lines_present, @memo, @memo_present, @metadata, @metadata_present, @out_of_band_amount, @out_of_band_amount_present, @reason, @reason_present, @refund, @refund_present, @refund_amount, @refund_amount_present)
   end
 end

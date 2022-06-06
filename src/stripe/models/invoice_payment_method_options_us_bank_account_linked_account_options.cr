@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] permissions Object to be assigned
-    def permissions=(permissions)
+    def permissions=(permissions : Array(String)?)
       ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid!(permissions)
       @permissions = permissions
     end
@@ -73,6 +73,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@permissions)
+    def_equals_and_hash(@permissions, @permissions_present)
   end
 end

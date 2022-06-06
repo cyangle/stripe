@@ -195,21 +195,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_cycle_anchor Object to be assigned
-    def billing_cycle_anchor=(billing_cycle_anchor)
+    def billing_cycle_anchor=(billing_cycle_anchor : String?)
       ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid!(billing_cycle_anchor)
       @billing_cycle_anchor = billing_cycle_anchor
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] collection_method Object to be assigned
-    def collection_method=(collection_method)
+    def collection_method=(collection_method : String?)
       ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(collection_method)
       @collection_method = collection_method
     end
 
     # Custom attribute writer method with validation
     # @param [Object] coupon Value to be assigned
-    def coupon=(coupon)
+    def coupon=(coupon : String?)
       if !coupon.nil? && coupon.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
       end
@@ -219,7 +219,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] default_payment_method Value to be assigned
-    def default_payment_method=(default_payment_method)
+    def default_payment_method=(default_payment_method : String?)
       if !default_payment_method.nil? && default_payment_method.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"default_payment_method\", the character length must be smaller than or equal to 5000.")
       end
@@ -229,7 +229,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] proration_behavior Object to be assigned
-    def proration_behavior=(proration_behavior)
+    def proration_behavior=(proration_behavior : String?)
       ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(proration_behavior)
       @proration_behavior = proration_behavior
     end
@@ -244,6 +244,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@items, @add_invoice_items, @application_fee_percent, @automatic_tax, @billing_cycle_anchor, @billing_thresholds, @collection_method, @coupon, @default_payment_method, @default_tax_rates, @end_date, @invoice_settings, @iterations, @metadata, @proration_behavior, @transfer_data, @trial, @trial_end)
+    def_equals_and_hash(@items, @add_invoice_items, @add_invoice_items_present, @application_fee_percent, @application_fee_percent_present, @automatic_tax, @automatic_tax_present, @billing_cycle_anchor, @billing_cycle_anchor_present, @billing_thresholds, @billing_thresholds_present, @collection_method, @collection_method_present, @coupon, @coupon_present, @default_payment_method, @default_payment_method_present, @default_tax_rates, @default_tax_rates_present, @end_date, @end_date_present, @invoice_settings, @invoice_settings_present, @iterations, @iterations_present, @metadata, @metadata_present, @proration_behavior, @proration_behavior_present, @transfer_data, @transfer_data_present, @trial, @trial_present, @trial_end, @trial_end_present)
   end
 end

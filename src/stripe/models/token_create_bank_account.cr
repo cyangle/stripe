@@ -97,15 +97,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid?(@account_holder_type)
 
-      if !@account_holder_type.nil? && @account_holder_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"account_holder_type\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid?(@account_type)
-
-      if !@account_type.nil? && @account_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"account_type\", the character length must be smaller than or equal to 5000.")
-      end
 
       if !@routing_number.nil? && @routing_number.to_s.size > 5000
         invalid_properties.push("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
@@ -121,9 +113,7 @@ module Stripe
       return false if @country.to_s.size > 5000
       return false if !@account_holder_name.nil? && @account_holder_name.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid?(@account_holder_type)
-      return false if !@account_holder_type.nil? && @account_holder_type.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid?(@account_type)
-      return false if !@account_type.nil? && @account_type.to_s.size > 5000
       return false if !@routing_number.nil? && @routing_number.to_s.size > 5000
 
       true
@@ -131,7 +121,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] account_number Value to be assigned
-    def account_number=(account_number)
+    def account_number=(account_number : String)
       if account_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -141,7 +131,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
-    def country=(country)
+    def country=(country : String)
       if country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
@@ -151,7 +141,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] account_holder_name Value to be assigned
-    def account_holder_name=(account_holder_name)
+    def account_holder_name=(account_holder_name : String?)
       if !account_holder_name.nil? && account_holder_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -161,21 +151,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_holder_type Object to be assigned
-    def account_holder_type=(account_holder_type)
+    def account_holder_type=(account_holder_type : String?)
       ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid!(account_holder_type)
       @account_holder_type = account_holder_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_type Object to be assigned
-    def account_type=(account_type)
+    def account_type=(account_type : String?)
       ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid!(account_type)
       @account_type = account_type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] routing_number Value to be assigned
-    def routing_number=(routing_number)
+    def routing_number=(routing_number : String?)
       if !routing_number.nil? && routing_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -193,6 +183,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@account_number, @country, @account_holder_name, @account_holder_type, @account_type, @currency, @routing_number)
+    def_equals_and_hash(@account_number, @country, @account_holder_name, @account_holder_name_present, @account_holder_type, @account_holder_type_present, @account_type, @account_type_present, @currency, @currency_present, @routing_number, @routing_number_present)
   end
 end

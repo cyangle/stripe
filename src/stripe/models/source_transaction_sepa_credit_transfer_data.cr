@@ -84,7 +84,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] reference Value to be assigned
-    def reference=(reference)
+    def reference=(reference : String?)
       if !reference.nil? && reference.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
       end
@@ -94,7 +94,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] sender_iban Value to be assigned
-    def sender_iban=(sender_iban)
+    def sender_iban=(sender_iban : String?)
       if !sender_iban.nil? && sender_iban.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"sender_iban\", the character length must be smaller than or equal to 5000.")
       end
@@ -104,7 +104,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] sender_name Value to be assigned
-    def sender_name=(sender_name)
+    def sender_name=(sender_name : String?)
       if !sender_name.nil? && sender_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"sender_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -122,6 +122,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@reference, @sender_iban, @sender_name)
+    def_equals_and_hash(@reference, @reference_present, @sender_iban, @sender_iban_present, @sender_name, @sender_name_present)
   end
 end

@@ -145,7 +145,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
-    def country=(country)
+    def country=(country : String?)
       if !country.nil? && country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
@@ -155,7 +155,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -165,7 +165,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] display_name Value to be assigned
-    def display_name=(display_name)
+    def display_name=(display_name : String?)
       if !display_name.nil? && display_name.to_s.size > 50
         raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 50.")
       end
@@ -175,7 +175,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] jurisdiction Value to be assigned
-    def jurisdiction=(jurisdiction)
+    def jurisdiction=(jurisdiction : String?)
       if !jurisdiction.nil? && jurisdiction.to_s.size > 50
         raise ArgumentError.new("invalid value for \"jurisdiction\", the character length must be smaller than or equal to 50.")
       end
@@ -185,7 +185,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] state Value to be assigned
-    def state=(state)
+    def state=(state : String?)
       if !state.nil? && state.to_s.size > 2
         raise ArgumentError.new("invalid value for \"state\", the character length must be smaller than or equal to 2.")
       end
@@ -195,7 +195,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_type Object to be assigned
-    def tax_type=(tax_type)
+    def tax_type=(tax_type : String?)
       ENUM_VALIDATOR_FOR_TAX_TYPE.valid!(tax_type)
       @tax_type = tax_type
     end
@@ -210,6 +210,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@active, @country, @description, @display_name, @expand, @jurisdiction, @metadata, @state, @tax_type)
+    def_equals_and_hash(@active, @active_present, @country, @country_present, @description, @description_present, @display_name, @display_name_present, @expand, @expand_present, @jurisdiction, @jurisdiction_present, @metadata, @metadata_present, @state, @state_present, @tax_type, @tax_type_present)
   end
 end

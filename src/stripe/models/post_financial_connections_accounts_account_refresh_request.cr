@@ -65,7 +65,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] features Object to be assigned
-    def features=(features)
+    def features=(features : Array(String))
       ENUM_VALIDATOR_FOR_FEATURES.all_valid!(features, false)
       @features = features
     end
@@ -80,6 +80,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@features, @expand)
+    def_equals_and_hash(@features, @expand, @expand_present)
   end
 end

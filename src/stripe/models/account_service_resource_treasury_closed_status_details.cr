@@ -55,7 +55,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reasons Object to be assigned
-    def reasons=(reasons)
+    def reasons=(reasons : Array(String))
       ENUM_VALIDATOR_FOR_REASONS.all_valid!(reasons, false)
       @reasons = reasons
     end

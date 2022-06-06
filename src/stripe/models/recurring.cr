@@ -86,21 +86,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval)
+    def interval=(interval : String)
       ENUM_VALIDATOR_FOR_INTERVAL.valid!(interval, false)
       @interval = interval
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usage_type Object to be assigned
-    def usage_type=(usage_type)
+    def usage_type=(usage_type : String)
       ENUM_VALIDATOR_FOR_USAGE_TYPE.valid!(usage_type, false)
       @usage_type = usage_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] aggregate_usage Object to be assigned
-    def aggregate_usage=(aggregate_usage)
+    def aggregate_usage=(aggregate_usage : String?)
       ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid!(aggregate_usage)
       @aggregate_usage = aggregate_usage
     end
@@ -115,6 +115,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@interval, @interval_count, @usage_type, @aggregate_usage)
+    def_equals_and_hash(@interval, @interval_count, @usage_type, @aggregate_usage, @aggregate_usage_present)
   end
 end

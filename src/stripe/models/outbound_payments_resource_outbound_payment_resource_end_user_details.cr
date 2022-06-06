@@ -66,7 +66,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] ip_address Value to be assigned
-    def ip_address=(ip_address)
+    def ip_address=(ip_address : String?)
       if !ip_address.nil? && ip_address.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
       end
@@ -84,6 +84,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@present, @ip_address)
+    def_equals_and_hash(@present, @ip_address, @ip_address_present)
   end
 end

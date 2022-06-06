@@ -75,14 +75,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] currency Object to be assigned
-    def currency=(currency)
+    def currency=(currency : String?)
       ENUM_VALIDATOR_FOR_CURRENCY.valid!(currency)
       @currency = currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification_method Object to be assigned
-    def verification_method=(verification_method)
+    def verification_method=(verification_method : String?)
       ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid!(verification_method)
       @verification_method = verification_method
     end
@@ -97,6 +97,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@currency, @mandate_options, @verification_method)
+    def_equals_and_hash(@currency, @currency_present, @mandate_options, @mandate_options_present, @verification_method, @verification_method_present)
   end
 end

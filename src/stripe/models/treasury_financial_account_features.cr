@@ -107,7 +107,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
@@ -122,6 +122,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@object, @card_issuing, @deposit_insurance, @financial_addresses, @inbound_transfers, @intra_stripe_flows, @outbound_payments, @outbound_transfers)
+    def_equals_and_hash(@object, @card_issuing, @card_issuing_present, @deposit_insurance, @deposit_insurance_present, @financial_addresses, @financial_addresses_present, @inbound_transfers, @inbound_transfers_present, @intra_stripe_flows, @intra_stripe_flows_present, @outbound_payments, @outbound_payments_present, @outbound_transfers, @outbound_transfers_present)
   end
 end

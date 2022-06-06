@@ -308,7 +308,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String?)
       if !customer.nil? && customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
@@ -318,7 +318,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] payment_method Value to be assigned
-    def payment_method=(payment_method)
+    def payment_method=(payment_method : String?)
       if !payment_method.nil? && payment_method.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"payment_method\", the character length must be smaller than or equal to 5000.")
       end
@@ -328,7 +328,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String?)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type)
       @_type = _type
     end
@@ -343,6 +343,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @billing_details, @boleto, @card, @customer, @customer_balance, @eps, @expand, @fpx, @giropay, @grabpay, @ideal, @interac_present, @klarna, @konbini, @link, @metadata, @oxxo, @p24, @payment_method, @paynow, @radar_options, @sepa_debit, @sofort, @_type, @us_bank_account, @wechat_pay)
+    def_equals_and_hash(@acss_debit, @acss_debit_present, @affirm, @affirm_present, @afterpay_clearpay, @afterpay_clearpay_present, @alipay, @alipay_present, @au_becs_debit, @au_becs_debit_present, @bacs_debit, @bacs_debit_present, @bancontact, @bancontact_present, @billing_details, @billing_details_present, @boleto, @boleto_present, @card, @card_present2, @customer, @customer_present, @customer_balance, @customer_balance_present, @eps, @eps_present, @expand, @expand_present, @fpx, @fpx_present, @giropay, @giropay_present, @grabpay, @grabpay_present, @ideal, @ideal_present, @interac_present, @interac_present_present, @klarna, @klarna_present, @konbini, @konbini_present, @link, @link_present, @metadata, @metadata_present, @oxxo, @oxxo_present, @p24, @p24_present, @payment_method, @payment_method_present, @paynow, @paynow_present, @radar_options, @radar_options_present, @sepa_debit, @sepa_debit_present, @sofort, @sofort_present, @_type, @_type_present, @us_bank_account, @us_bank_account_present, @wechat_pay, @wechat_pay_present)
   end
 end

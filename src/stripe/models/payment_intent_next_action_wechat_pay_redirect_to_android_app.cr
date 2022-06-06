@@ -115,7 +115,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] app_id Value to be assigned
-    def app_id=(app_id)
+    def app_id=(app_id : String)
       if app_id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"app_id\", the character length must be smaller than or equal to 5000.")
       end
@@ -125,7 +125,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] nonce_str Value to be assigned
-    def nonce_str=(nonce_str)
+    def nonce_str=(nonce_str : String)
       if nonce_str.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"nonce_str\", the character length must be smaller than or equal to 5000.")
       end
@@ -135,7 +135,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] package Value to be assigned
-    def package=(package)
+    def package=(package : String)
       if package.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"package\", the character length must be smaller than or equal to 5000.")
       end
@@ -145,7 +145,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] partner_id Value to be assigned
-    def partner_id=(partner_id)
+    def partner_id=(partner_id : String)
       if partner_id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"partner_id\", the character length must be smaller than or equal to 5000.")
       end
@@ -155,7 +155,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] prepay_id Value to be assigned
-    def prepay_id=(prepay_id)
+    def prepay_id=(prepay_id : String)
       if prepay_id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"prepay_id\", the character length must be smaller than or equal to 5000.")
       end
@@ -165,7 +165,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] sign Value to be assigned
-    def sign=(sign)
+    def sign=(sign : String)
       if sign.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"sign\", the character length must be smaller than or equal to 5000.")
       end
@@ -175,7 +175,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] timestamp Value to be assigned
-    def timestamp=(timestamp)
+    def timestamp=(timestamp : String)
       if timestamp.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"timestamp\", the character length must be smaller than or equal to 5000.")
       end

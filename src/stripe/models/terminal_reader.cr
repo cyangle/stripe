@@ -161,14 +161,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] device_type Object to be assigned
-    def device_type=(device_type)
+    def device_type=(device_type : String)
       ENUM_VALIDATOR_FOR_DEVICE_TYPE.valid!(device_type, false)
       @device_type = device_type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -178,7 +178,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] label Value to be assigned
-    def label=(label)
+    def label=(label : String)
       if label.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"label\", the character length must be smaller than or equal to 5000.")
       end
@@ -188,14 +188,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] serial_number Value to be assigned
-    def serial_number=(serial_number)
+    def serial_number=(serial_number : String)
       if serial_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"serial_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -205,7 +205,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] device_sw_version Value to be assigned
-    def device_sw_version=(device_sw_version)
+    def device_sw_version=(device_sw_version : String?)
       if !device_sw_version.nil? && device_sw_version.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"device_sw_version\", the character length must be smaller than or equal to 5000.")
       end
@@ -215,7 +215,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] ip_address Value to be assigned
-    def ip_address=(ip_address)
+    def ip_address=(ip_address : String?)
       if !ip_address.nil? && ip_address.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
       end
@@ -225,7 +225,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] status Value to be assigned
-    def status=(status)
+    def status=(status : String?)
       if !status.nil? && status.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
@@ -243,6 +243,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@device_type, @id, @label, @livemode, @metadata, @object, @serial_number, @action, @device_sw_version, @ip_address, @location, @status)
+    def_equals_and_hash(@device_type, @id, @label, @livemode, @metadata, @object, @serial_number, @action, @action_present, @device_sw_version, @device_sw_version_present, @ip_address, @ip_address_present, @location, @location_present, @status, @status_present)
   end
 end

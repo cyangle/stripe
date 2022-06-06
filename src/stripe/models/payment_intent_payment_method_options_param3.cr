@@ -63,7 +63,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage)
+    def setup_future_usage=(setup_future_usage : String?)
       ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(setup_future_usage)
       @setup_future_usage = setup_future_usage
     end
@@ -78,6 +78,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@mandate_options, @setup_future_usage)
+    def_equals_and_hash(@mandate_options, @mandate_options_present, @setup_future_usage, @setup_future_usage_present)
   end
 end

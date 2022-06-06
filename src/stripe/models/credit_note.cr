@@ -229,7 +229,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -239,7 +239,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] number Value to be assigned
-    def number=(number)
+    def number=(number : String)
       if number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
       end
@@ -249,14 +249,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] pdf Value to be assigned
-    def pdf=(pdf)
+    def pdf=(pdf : String)
       if pdf.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"pdf\", the character length must be smaller than or equal to 5000.")
       end
@@ -266,21 +266,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] memo Value to be assigned
-    def memo=(memo)
+    def memo=(memo : String?)
       if !memo.nil? && memo.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"memo\", the character length must be smaller than or equal to 5000.")
       end
@@ -290,7 +290,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason)
+    def reason=(reason : String?)
       ENUM_VALIDATOR_FOR_REASON.valid!(reason)
       @reason = reason
     end
@@ -305,6 +305,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @created, @currency, @customer, @discount_amount, @discount_amounts, @id, @invoice, @lines, @livemode, @number, @object, @pdf, @status, @subtotal, @tax_amounts, @total, @_type, @customer_balance_transaction, @memo, @metadata, @out_of_band_amount, @reason, @refund, @voided_at)
+    def_equals_and_hash(@amount, @created, @currency, @customer, @discount_amount, @discount_amounts, @id, @invoice, @lines, @livemode, @number, @object, @pdf, @status, @subtotal, @tax_amounts, @total, @_type, @customer_balance_transaction, @customer_balance_transaction_present, @memo, @memo_present, @metadata, @metadata_present, @out_of_band_amount, @out_of_band_amount_present, @reason, @reason_present, @refund, @refund_present, @voided_at, @voided_at_present)
   end
 end

@@ -114,7 +114,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] origin_payment_method Value to be assigned
-    def origin_payment_method=(origin_payment_method)
+    def origin_payment_method=(origin_payment_method : String)
       if origin_payment_method.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"origin_payment_method\", the character length must be smaller than or equal to 5000.")
       end
@@ -124,7 +124,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -134,7 +134,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
-    def statement_descriptor=(statement_descriptor)
+    def statement_descriptor=(statement_descriptor : String?)
       if !statement_descriptor.nil? && statement_descriptor.to_s.size > 10
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 10.")
       end
@@ -152,6 +152,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @currency, @financial_account, @origin_payment_method, @description, @expand, @metadata, @statement_descriptor)
+    def_equals_and_hash(@amount, @currency, @financial_account, @origin_payment_method, @description, @description_present, @expand, @expand_present, @metadata, @metadata_present, @statement_descriptor, @statement_descriptor_present)
   end
 end

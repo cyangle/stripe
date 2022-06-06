@@ -150,7 +150,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] _type Value to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       if _type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
@@ -168,6 +168,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @alipay_handle_redirect, @boleto_display_details, @card_await_notification, @display_bank_transfer_instructions, @konbini_display_details, @oxxo_display_details, @paynow_display_qr_code, @redirect_to_url, @use_stripe_sdk, @verify_with_microdeposits, @wechat_pay_display_qr_code, @wechat_pay_redirect_to_android_app, @wechat_pay_redirect_to_ios_app)
+    def_equals_and_hash(@_type, @alipay_handle_redirect, @alipay_handle_redirect_present, @boleto_display_details, @boleto_display_details_present, @card_await_notification, @card_await_notification_present, @display_bank_transfer_instructions, @display_bank_transfer_instructions_present, @konbini_display_details, @konbini_display_details_present, @oxxo_display_details, @oxxo_display_details_present, @paynow_display_qr_code, @paynow_display_qr_code_present, @redirect_to_url, @redirect_to_url_present, @use_stripe_sdk, @use_stripe_sdk_present, @verify_with_microdeposits, @verify_with_microdeposits_present, @wechat_pay_display_qr_code, @wechat_pay_display_qr_code_present, @wechat_pay_redirect_to_android_app, @wechat_pay_redirect_to_android_app_present, @wechat_pay_redirect_to_ios_app, @wechat_pay_redirect_to_ios_app_present)
   end
 end

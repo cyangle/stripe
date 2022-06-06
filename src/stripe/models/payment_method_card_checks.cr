@@ -84,7 +84,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] address_line1_check Value to be assigned
-    def address_line1_check=(address_line1_check)
+    def address_line1_check=(address_line1_check : String?)
       if !address_line1_check.nil? && address_line1_check.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"address_line1_check\", the character length must be smaller than or equal to 5000.")
       end
@@ -94,7 +94,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] address_postal_code_check Value to be assigned
-    def address_postal_code_check=(address_postal_code_check)
+    def address_postal_code_check=(address_postal_code_check : String?)
       if !address_postal_code_check.nil? && address_postal_code_check.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"address_postal_code_check\", the character length must be smaller than or equal to 5000.")
       end
@@ -104,7 +104,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] cvc_check Value to be assigned
-    def cvc_check=(cvc_check)
+    def cvc_check=(cvc_check : String?)
       if !cvc_check.nil? && cvc_check.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"cvc_check\", the character length must be smaller than or equal to 5000.")
       end
@@ -122,6 +122,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@address_line1_check, @address_postal_code_check, @cvc_check)
+    def_equals_and_hash(@address_line1_check, @address_line1_check_present, @address_postal_code_check, @address_postal_code_check_present, @cvc_check, @cvc_check_present)
   end
 end

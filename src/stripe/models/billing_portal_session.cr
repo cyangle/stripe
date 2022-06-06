@@ -141,7 +141,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String)
       if customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
@@ -151,7 +151,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -161,14 +161,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
-    def url=(url)
+    def url=(url : String)
       if url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
@@ -178,14 +178,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] locale Object to be assigned
-    def locale=(locale)
+    def locale=(locale : String?)
       ENUM_VALIDATOR_FOR_LOCALE.valid!(locale)
       @locale = locale
     end
 
     # Custom attribute writer method with validation
     # @param [Object] on_behalf_of Value to be assigned
-    def on_behalf_of=(on_behalf_of)
+    def on_behalf_of=(on_behalf_of : String?)
       if !on_behalf_of.nil? && on_behalf_of.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"on_behalf_of\", the character length must be smaller than or equal to 5000.")
       end
@@ -195,7 +195,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] return_url Value to be assigned
-    def return_url=(return_url)
+    def return_url=(return_url : String?)
       if !return_url.nil? && return_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
@@ -213,6 +213,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@configuration, @created, @customer, @id, @livemode, @object, @url, @locale, @on_behalf_of, @return_url)
+    def_equals_and_hash(@configuration, @created, @customer, @id, @livemode, @object, @url, @locale, @locale_present, @on_behalf_of, @on_behalf_of_present, @return_url, @return_url_present)
   end
 end

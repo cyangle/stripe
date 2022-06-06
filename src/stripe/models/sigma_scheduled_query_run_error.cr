@@ -55,7 +55,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] message Value to be assigned
-    def message=(message)
+    def message=(message : String)
       if message.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"message\", the character length must be smaller than or equal to 5000.")
       end

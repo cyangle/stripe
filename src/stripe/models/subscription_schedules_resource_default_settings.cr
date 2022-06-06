@@ -114,14 +114,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_cycle_anchor Object to be assigned
-    def billing_cycle_anchor=(billing_cycle_anchor)
+    def billing_cycle_anchor=(billing_cycle_anchor : String)
       ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid!(billing_cycle_anchor, false)
       @billing_cycle_anchor = billing_cycle_anchor
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] collection_method Object to be assigned
-    def collection_method=(collection_method)
+    def collection_method=(collection_method : String?)
       ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(collection_method)
       @collection_method = collection_method
     end
@@ -136,6 +136,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@billing_cycle_anchor, @application_fee_percent, @automatic_tax, @billing_thresholds, @collection_method, @default_payment_method, @invoice_settings, @transfer_data)
+    def_equals_and_hash(@billing_cycle_anchor, @application_fee_percent, @application_fee_percent_present, @automatic_tax, @automatic_tax_present, @billing_thresholds, @billing_thresholds_present, @collection_method, @collection_method_present, @default_payment_method, @default_payment_method_present, @invoice_settings, @invoice_settings_present, @transfer_data, @transfer_data_present)
   end
 end

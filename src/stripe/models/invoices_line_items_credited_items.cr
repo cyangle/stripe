@@ -60,7 +60,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] invoice Value to be assigned
-    def invoice=(invoice)
+    def invoice=(invoice : String)
       if invoice.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
       end

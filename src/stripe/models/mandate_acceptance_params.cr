@@ -87,15 +87,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
-      if @status.to_s.size > 5000
-        invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
-
-      if !@_type.nil? && @_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
-      end
 
       if !@user_agent.nil? && @user_agent.to_s.size > 5000
         invalid_properties.push("invalid value for \"user_agent\", the character length must be smaller than or equal to 5000.")
@@ -108,9 +100,7 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      return false if @status.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
-      return false if !@_type.nil? && @_type.to_s.size > 5000
       return false if !@user_agent.nil? && @user_agent.to_s.size > 5000
 
       true
@@ -118,21 +108,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String?)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type)
       @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] user_agent Value to be assigned
-    def user_agent=(user_agent)
+    def user_agent=(user_agent : String?)
       if !user_agent.nil? && user_agent.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"user_agent\", the character length must be smaller than or equal to 5000.")
       end
@@ -150,6 +140,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@status, @date, @ip, @offline, @online, @_type, @user_agent)
+    def_equals_and_hash(@status, @date, @date_present, @ip, @ip_present, @offline, @offline_present, @online, @online_present, @_type, @_type_present, @user_agent, @user_agent_present)
   end
 end

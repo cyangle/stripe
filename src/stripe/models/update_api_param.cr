@@ -66,6 +66,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@exp_month, @exp_year)
+    def_equals_and_hash(@exp_month, @exp_month_present, @exp_year, @exp_year_present)
   end
 end

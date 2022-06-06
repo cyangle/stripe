@@ -85,28 +85,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_line1_check Object to be assigned
-    def address_line1_check=(address_line1_check)
+    def address_line1_check=(address_line1_check : String)
       ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK.valid!(address_line1_check, false)
       @address_line1_check = address_line1_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address_postal_code_check Object to be assigned
-    def address_postal_code_check=(address_postal_code_check)
+    def address_postal_code_check=(address_postal_code_check : String)
       ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK.valid!(address_postal_code_check, false)
       @address_postal_code_check = address_postal_code_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cvc_check Object to be assigned
-    def cvc_check=(cvc_check)
+    def cvc_check=(cvc_check : String)
       ENUM_VALIDATOR_FOR_CVC_CHECK.valid!(cvc_check, false)
       @cvc_check = cvc_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] expiry_check Object to be assigned
-    def expiry_check=(expiry_check)
+    def expiry_check=(expiry_check : String)
       ENUM_VALIDATOR_FOR_EXPIRY_CHECK.valid!(expiry_check, false)
       @expiry_check = expiry_check
     end

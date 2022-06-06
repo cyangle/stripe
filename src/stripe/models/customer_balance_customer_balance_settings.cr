@@ -55,7 +55,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reconciliation_mode Object to be assigned
-    def reconciliation_mode=(reconciliation_mode)
+    def reconciliation_mode=(reconciliation_mode : String)
       ENUM_VALIDATOR_FOR_RECONCILIATION_MODE.valid!(reconciliation_mode, false)
       @reconciliation_mode = reconciliation_mode
     end

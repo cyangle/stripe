@@ -120,7 +120,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -130,7 +130,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String?)
       if !id.nil? && id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -140,7 +140,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] price Value to be assigned
-    def price=(price)
+    def price=(price : String?)
       if !price.nil? && price.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"price\", the character length must be smaller than or equal to 5000.")
       end
@@ -150,7 +150,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] product Value to be assigned
-    def product=(product)
+    def product=(product : String?)
       if !product.nil? && product.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"product\", the character length must be smaller than or equal to 5000.")
       end
@@ -168,6 +168,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@description, @discounts, @id, @price, @price_data, @product, @quantity, @tax_rates)
+    def_equals_and_hash(@description, @description_present, @discounts, @discounts_present, @id, @id_present, @price, @price_present, @price_data, @price_data_present, @product, @product_present, @quantity, @quantity_present, @tax_rates, @tax_rates_present)
   end
 end

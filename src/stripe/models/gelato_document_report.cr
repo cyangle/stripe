@@ -166,14 +166,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
 
     # Custom attribute writer method with validation
     # @param [Object] first_name Value to be assigned
-    def first_name=(first_name)
+    def first_name=(first_name : String?)
       if !first_name.nil? && first_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -183,7 +183,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] issuing_country Value to be assigned
-    def issuing_country=(issuing_country)
+    def issuing_country=(issuing_country : String?)
       if !issuing_country.nil? && issuing_country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"issuing_country\", the character length must be smaller than or equal to 5000.")
       end
@@ -193,7 +193,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] last_name Value to be assigned
-    def last_name=(last_name)
+    def last_name=(last_name : String?)
       if !last_name.nil? && last_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -203,7 +203,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] number Value to be assigned
-    def number=(number)
+    def number=(number : String?)
       if !number.nil? && number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
       end
@@ -213,7 +213,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String?)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type)
       @_type = _type
     end
@@ -228,6 +228,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@status, @address, @dob, @error, @expiration_date, @files, @first_name, @issued_date, @issuing_country, @last_name, @number, @_type)
+    def_equals_and_hash(@status, @address, @address_present, @dob, @dob_present, @error, @error_present, @expiration_date, @expiration_date_present, @files, @files_present, @first_name, @first_name_present, @issued_date, @issued_date_present, @issuing_country, @issuing_country_present, @last_name, @last_name_present, @number, @number_present, @_type, @_type_present)
   end
 end

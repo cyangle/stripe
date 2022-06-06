@@ -73,7 +73,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] received_credit Value to be assigned
-    def received_credit=(received_credit)
+    def received_credit=(received_credit : String)
       if received_credit.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"received_credit\", the character length must be smaller than or equal to 5000.")
       end
@@ -91,6 +91,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@received_credit, @expand, @metadata)
+    def_equals_and_hash(@received_credit, @expand, @expand_present, @metadata, @metadata_present)
   end
 end

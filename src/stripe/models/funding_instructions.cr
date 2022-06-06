@@ -84,7 +84,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] currency Value to be assigned
-    def currency=(currency)
+    def currency=(currency : String)
       if currency.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
       end
@@ -94,14 +94,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] funding_type Object to be assigned
-    def funding_type=(funding_type)
+    def funding_type=(funding_type : String)
       ENUM_VALIDATOR_FOR_FUNDING_TYPE.valid!(funding_type, false)
       @funding_type = funding_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end

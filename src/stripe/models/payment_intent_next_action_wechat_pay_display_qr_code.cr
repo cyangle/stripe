@@ -85,7 +85,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] data Value to be assigned
-    def data=(data)
+    def data=(data : String)
       if data.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"data\", the character length must be smaller than or equal to 5000.")
       end
@@ -95,7 +95,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] image_data_url Value to be assigned
-    def image_data_url=(image_data_url)
+    def image_data_url=(image_data_url : String)
       if image_data_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"image_data_url\", the character length must be smaller than or equal to 5000.")
       end
@@ -105,7 +105,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] image_url_png Value to be assigned
-    def image_url_png=(image_url_png)
+    def image_url_png=(image_url_png : String)
       if image_url_png.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"image_url_png\", the character length must be smaller than or equal to 5000.")
       end
@@ -115,7 +115,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] image_url_svg Value to be assigned
-    def image_url_svg=(image_url_svg)
+    def image_url_svg=(image_url_svg : String)
       if image_url_svg.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"image_url_svg\", the character length must be smaller than or equal to 5000.")
       end

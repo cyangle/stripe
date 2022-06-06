@@ -118,7 +118,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] arrival_airport_code Value to be assigned
-    def arrival_airport_code=(arrival_airport_code)
+    def arrival_airport_code=(arrival_airport_code : String?)
       if !arrival_airport_code.nil? && arrival_airport_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"arrival_airport_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -128,7 +128,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] carrier Value to be assigned
-    def carrier=(carrier)
+    def carrier=(carrier : String?)
       if !carrier.nil? && carrier.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"carrier\", the character length must be smaller than or equal to 5000.")
       end
@@ -138,7 +138,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] departure_airport_code Value to be assigned
-    def departure_airport_code=(departure_airport_code)
+    def departure_airport_code=(departure_airport_code : String?)
       if !departure_airport_code.nil? && departure_airport_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"departure_airport_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -148,7 +148,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] flight_number Value to be assigned
-    def flight_number=(flight_number)
+    def flight_number=(flight_number : String?)
       if !flight_number.nil? && flight_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"flight_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -158,7 +158,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] service_class Value to be assigned
-    def service_class=(service_class)
+    def service_class=(service_class : String?)
       if !service_class.nil? && service_class.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"service_class\", the character length must be smaller than or equal to 5000.")
       end
@@ -176,6 +176,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@arrival_airport_code, @carrier, @departure_airport_code, @flight_number, @service_class, @stopover_allowed)
+    def_equals_and_hash(@arrival_airport_code, @arrival_airport_code_present, @carrier, @carrier_present, @departure_airport_code, @departure_airport_code_present, @flight_number, @flight_number_present, @service_class, @service_class_present, @stopover_allowed, @stopover_allowed_present)
   end
 end

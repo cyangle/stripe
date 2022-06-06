@@ -72,7 +72,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] payment_intent Value to be assigned
-    def payment_intent=(payment_intent)
+    def payment_intent=(payment_intent : String)
       if payment_intent.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"payment_intent\", the character length must be smaller than or equal to 5000.")
       end
@@ -90,6 +90,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@payment_intent, @expand, @process_config)
+    def_equals_and_hash(@payment_intent, @expand, @expand_present, @process_config, @process_config_present)
   end
 end

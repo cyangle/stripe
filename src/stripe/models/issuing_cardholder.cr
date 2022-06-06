@@ -168,7 +168,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -178,7 +178,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
-    def name=(name)
+    def name=(name : String)
       if name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
@@ -188,28 +188,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] email Value to be assigned
-    def email=(email)
+    def email=(email : String?)
       if !email.nil? && email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
@@ -219,7 +219,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] phone_number Value to be assigned
-    def phone_number=(phone_number)
+    def phone_number=(phone_number : String?)
       if !phone_number.nil? && phone_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"phone_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -237,6 +237,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@billing, @created, @id, @livemode, @metadata, @name, @object, @requirements, @status, @_type, @company, @email, @individual, @phone_number, @spending_controls)
+    def_equals_and_hash(@billing, @created, @id, @livemode, @metadata, @name, @object, @requirements, @status, @_type, @company, @company_present, @email, @email_present, @individual, @individual_present, @phone_number, @phone_number_present, @spending_controls, @spending_controls_present)
   end
 end

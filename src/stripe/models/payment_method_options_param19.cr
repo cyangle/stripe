@@ -56,7 +56,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network Object to be assigned
-    def network=(network)
+    def network=(network : String?)
       ENUM_VALIDATOR_FOR_NETWORK.valid!(network)
       @network = network
     end
@@ -71,6 +71,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@network)
+    def_equals_and_hash(@network, @network_present)
   end
 end

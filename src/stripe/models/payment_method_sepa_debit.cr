@@ -117,7 +117,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] bank_code Value to be assigned
-    def bank_code=(bank_code)
+    def bank_code=(bank_code : String?)
       if !bank_code.nil? && bank_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -127,7 +127,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] branch_code Value to be assigned
-    def branch_code=(branch_code)
+    def branch_code=(branch_code : String?)
       if !branch_code.nil? && branch_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"branch_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -137,7 +137,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
-    def country=(country)
+    def country=(country : String?)
       if !country.nil? && country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
@@ -147,7 +147,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] fingerprint Value to be assigned
-    def fingerprint=(fingerprint)
+    def fingerprint=(fingerprint : String?)
       if !fingerprint.nil? && fingerprint.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
@@ -157,7 +157,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] last4 Value to be assigned
-    def last4=(last4)
+    def last4=(last4 : String?)
       if !last4.nil? && last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
@@ -175,6 +175,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@bank_code, @branch_code, @country, @fingerprint, @generated_from, @last4)
+    def_equals_and_hash(@bank_code, @bank_code_present, @branch_code, @branch_code_present, @country, @country_present, @fingerprint, @fingerprint_present, @generated_from, @generated_from_present, @last4, @last4_present)
   end
 end

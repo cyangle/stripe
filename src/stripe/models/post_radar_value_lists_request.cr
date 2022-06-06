@@ -81,10 +81,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ITEM_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ITEM_TYPE.valid?(@item_type)
 
-      if !@item_type.nil? && @item_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"item_type\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties
     end
 
@@ -94,14 +90,13 @@ module Stripe
       return false if @_alias.to_s.size > 100
       return false if @name.to_s.size > 100
       return false unless ENUM_VALIDATOR_FOR_ITEM_TYPE.valid?(@item_type)
-      return false if !@item_type.nil? && @item_type.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] _alias Value to be assigned
-    def _alias=(_alias)
+    def _alias=(_alias : String)
       if _alias.to_s.size > 100
         raise ArgumentError.new("invalid value for \"_alias\", the character length must be smaller than or equal to 100.")
       end
@@ -111,7 +106,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
-    def name=(name)
+    def name=(name : String)
       if name.to_s.size > 100
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 100.")
       end
@@ -121,7 +116,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] item_type Object to be assigned
-    def item_type=(item_type)
+    def item_type=(item_type : String?)
       ENUM_VALIDATOR_FOR_ITEM_TYPE.valid!(item_type)
       @item_type = item_type
     end
@@ -136,6 +131,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_alias, @name, @expand, @item_type, @metadata)
+    def_equals_and_hash(@_alias, @name, @expand, @expand_present, @item_type, @item_type_present, @metadata, @metadata_present)
   end
 end

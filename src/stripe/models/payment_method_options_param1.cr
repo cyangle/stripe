@@ -58,6 +58,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@expires_after_days)
+    def_equals_and_hash(@expires_after_days, @expires_after_days_present)
   end
 end

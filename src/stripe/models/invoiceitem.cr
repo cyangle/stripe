@@ -205,7 +205,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -215,14 +215,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -232,7 +232,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] subscription_item Value to be assigned
-    def subscription_item=(subscription_item)
+    def subscription_item=(subscription_item : String?)
       if !subscription_item.nil? && subscription_item.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"subscription_item\", the character length must be smaller than or equal to 5000.")
       end
@@ -250,6 +250,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @currency, @customer, @date, @discountable, @id, @livemode, @object, @period, @proration, @quantity, @description, @discounts, @invoice, @metadata, @price, @subscription, @subscription_item, @tax_rates, @test_clock, @unit_amount, @unit_amount_decimal)
+    def_equals_and_hash(@amount, @currency, @customer, @date, @discountable, @id, @livemode, @object, @period, @proration, @quantity, @description, @description_present, @discounts, @discounts_present, @invoice, @invoice_present, @metadata, @metadata_present, @price, @price_present, @subscription, @subscription_present, @subscription_item, @subscription_item_present, @tax_rates, @tax_rates_present, @test_clock, @test_clock_present, @unit_amount, @unit_amount_present, @unit_amount_decimal, @unit_amount_decimal_present)
   end
 end

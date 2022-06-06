@@ -54,7 +54,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country Object to be assigned
-    def country=(country)
+    def country=(country : String)
       ENUM_VALIDATOR_FOR_COUNTRY.valid!(country, false)
       @country = country
     end

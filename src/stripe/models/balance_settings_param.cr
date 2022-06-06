@@ -56,7 +56,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reconciliation_mode Object to be assigned
-    def reconciliation_mode=(reconciliation_mode)
+    def reconciliation_mode=(reconciliation_mode : String?)
       ENUM_VALIDATOR_FOR_RECONCILIATION_MODE.valid!(reconciliation_mode)
       @reconciliation_mode = reconciliation_mode
     end
@@ -71,6 +71,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@reconciliation_mode)
+    def_equals_and_hash(@reconciliation_mode, @reconciliation_mode_present)
   end
 end

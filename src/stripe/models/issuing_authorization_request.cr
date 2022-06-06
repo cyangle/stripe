@@ -105,7 +105,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] currency Value to be assigned
-    def currency=(currency)
+    def currency=(currency : String)
       if currency.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
       end
@@ -115,7 +115,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] merchant_currency Value to be assigned
-    def merchant_currency=(merchant_currency)
+    def merchant_currency=(merchant_currency : String)
       if merchant_currency.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"merchant_currency\", the character length must be smaller than or equal to 5000.")
       end
@@ -125,7 +125,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason)
+    def reason=(reason : String)
       ENUM_VALIDATOR_FOR_REASON.valid!(reason, false)
       @reason = reason
     end
@@ -140,6 +140,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @approved, @created, @currency, @merchant_amount, @merchant_currency, @reason, @amount_details)
+    def_equals_and_hash(@amount, @approved, @created, @currency, @merchant_amount, @merchant_currency, @reason, @amount_details, @amount_details_present)
   end
 end

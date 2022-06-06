@@ -84,21 +84,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
-    def code=(code)
+    def code=(code : String)
       ENUM_VALIDATOR_FOR_CODE.valid!(code, false)
       @code = code
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] resolution Object to be assigned
-    def resolution=(resolution)
+    def resolution=(resolution : String?)
       ENUM_VALIDATOR_FOR_RESOLUTION.valid!(resolution)
       @resolution = resolution
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] restriction Object to be assigned
-    def restriction=(restriction)
+    def restriction=(restriction : String?)
       ENUM_VALIDATOR_FOR_RESTRICTION.valid!(restriction)
       @restriction = restriction
     end
@@ -113,6 +113,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@code, @resolution, @restriction)
+    def_equals_and_hash(@code, @resolution, @resolution_present, @restriction, @restriction_present)
   end
 end

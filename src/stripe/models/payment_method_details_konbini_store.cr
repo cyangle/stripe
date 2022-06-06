@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] chain Object to be assigned
-    def chain=(chain)
+    def chain=(chain : String?)
       ENUM_VALIDATOR_FOR_CHAIN.valid!(chain)
       @chain = chain
     end
@@ -73,6 +73,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@chain)
+    def_equals_and_hash(@chain, @chain_present)
   end
 end

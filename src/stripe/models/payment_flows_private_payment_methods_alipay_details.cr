@@ -84,7 +84,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] buyer_id Value to be assigned
-    def buyer_id=(buyer_id)
+    def buyer_id=(buyer_id : String?)
       if !buyer_id.nil? && buyer_id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"buyer_id\", the character length must be smaller than or equal to 5000.")
       end
@@ -94,7 +94,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] fingerprint Value to be assigned
-    def fingerprint=(fingerprint)
+    def fingerprint=(fingerprint : String?)
       if !fingerprint.nil? && fingerprint.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
@@ -104,7 +104,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] transaction_id Value to be assigned
-    def transaction_id=(transaction_id)
+    def transaction_id=(transaction_id : String?)
       if !transaction_id.nil? && transaction_id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"transaction_id\", the character length must be smaller than or equal to 5000.")
       end
@@ -122,6 +122,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@buyer_id, @fingerprint, @transaction_id)
+    def_equals_and_hash(@buyer_id, @buyer_id_present, @fingerprint, @fingerprint_present, @transaction_id, @transaction_id_present)
   end
 end

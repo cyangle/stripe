@@ -54,7 +54,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] iban Value to be assigned
-    def iban=(iban)
+    def iban=(iban : String)
       if iban.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"iban\", the character length must be smaller than or equal to 5000.")
       end

@@ -107,7 +107,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] explanation Value to be assigned
-    def explanation=(explanation)
+    def explanation=(explanation : String?)
       if !explanation.nil? && explanation.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
       end
@@ -117,7 +117,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] return_description Value to be assigned
-    def return_description=(return_description)
+    def return_description=(return_description : String?)
       if !return_description.nil? && return_description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"return_description\", the character length must be smaller than or equal to 5000.")
       end
@@ -127,7 +127,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] return_status Object to be assigned
-    def return_status=(return_status)
+    def return_status=(return_status : String?)
       ENUM_VALIDATOR_FOR_RETURN_STATUS.valid!(return_status)
       @return_status = return_status
     end
@@ -142,6 +142,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@additional_documentation, @explanation, @received_at, @return_description, @return_status, @returned_at)
+    def_equals_and_hash(@additional_documentation, @additional_documentation_present, @explanation, @explanation_present, @received_at, @received_at_present, @return_description, @return_description_present, @return_status, @return_status_present, @returned_at, @returned_at_present)
   end
 end

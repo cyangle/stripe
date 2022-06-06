@@ -70,7 +70,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] hosted_voucher_url Value to be assigned
-    def hosted_voucher_url=(hosted_voucher_url)
+    def hosted_voucher_url=(hosted_voucher_url : String?)
       if !hosted_voucher_url.nil? && hosted_voucher_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"hosted_voucher_url\", the character length must be smaller than or equal to 5000.")
       end
@@ -88,6 +88,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@expires_at, @stores, @hosted_voucher_url)
+    def_equals_and_hash(@expires_at, @stores, @hosted_voucher_url, @hosted_voucher_url_present)
   end
 end

@@ -53,7 +53,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source_flow_type Object to be assigned
-    def source_flow_type=(source_flow_type)
+    def source_flow_type=(source_flow_type : String)
       ENUM_VALIDATOR_FOR_SOURCE_FLOW_TYPE.valid!(source_flow_type, false)
       @source_flow_type = source_flow_type
     end

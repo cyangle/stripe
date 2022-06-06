@@ -198,7 +198,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
-    def name=(name)
+    def name=(name : String?)
       if !name.nil? && name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
@@ -208,7 +208,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] name_kana Value to be assigned
-    def name_kana=(name_kana)
+    def name_kana=(name_kana : String?)
       if !name_kana.nil? && name_kana.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name_kana\", the character length must be smaller than or equal to 5000.")
       end
@@ -218,7 +218,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] name_kanji Value to be assigned
-    def name_kanji=(name_kanji)
+    def name_kanji=(name_kanji : String?)
       if !name_kanji.nil? && name_kanji.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name_kanji\", the character length must be smaller than or equal to 5000.")
       end
@@ -228,7 +228,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] phone Value to be assigned
-    def phone=(phone)
+    def phone=(phone : String?)
       if !phone.nil? && phone.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
       end
@@ -238,14 +238,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] structure Object to be assigned
-    def structure=(structure)
+    def structure=(structure : String?)
       ENUM_VALIDATOR_FOR_STRUCTURE.valid!(structure)
       @structure = structure
     end
 
     # Custom attribute writer method with validation
     # @param [Object] tax_id_registrar Value to be assigned
-    def tax_id_registrar=(tax_id_registrar)
+    def tax_id_registrar=(tax_id_registrar : String?)
       if !tax_id_registrar.nil? && tax_id_registrar.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"tax_id_registrar\", the character length must be smaller than or equal to 5000.")
       end
@@ -263,6 +263,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@address, @address_kana, @address_kanji, @directors_provided, @executives_provided, @name, @name_kana, @name_kanji, @owners_provided, @ownership_declaration, @phone, @structure, @tax_id_provided, @tax_id_registrar, @vat_id_provided, @verification)
+    def_equals_and_hash(@address, @address_present, @address_kana, @address_kana_present, @address_kanji, @address_kanji_present, @directors_provided, @directors_provided_present, @executives_provided, @executives_provided_present, @name, @name_present, @name_kana, @name_kana_present, @name_kanji, @name_kanji_present, @owners_provided, @owners_provided_present, @ownership_declaration, @ownership_declaration_present, @phone, @phone_present, @structure, @structure_present, @tax_id_provided, @tax_id_provided_present, @tax_id_registrar, @tax_id_registrar_present, @vat_id_provided, @vat_id_provided_present, @verification, @verification_present)
   end
 end

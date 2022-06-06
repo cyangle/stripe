@@ -218,7 +218,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -228,14 +228,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -245,7 +245,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] failure_reason Value to be assigned
-    def failure_reason=(failure_reason)
+    def failure_reason=(failure_reason : String?)
       if !failure_reason.nil? && failure_reason.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"failure_reason\", the character length must be smaller than or equal to 5000.")
       end
@@ -255,7 +255,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] instructions_email Value to be assigned
-    def instructions_email=(instructions_email)
+    def instructions_email=(instructions_email : String?)
       if !instructions_email.nil? && instructions_email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"instructions_email\", the character length must be smaller than or equal to 5000.")
       end
@@ -265,14 +265,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason)
+    def reason=(reason : String?)
       ENUM_VALIDATOR_FOR_REASON.valid!(reason)
       @reason = reason
     end
 
     # Custom attribute writer method with validation
     # @param [Object] receipt_number Value to be assigned
-    def receipt_number=(receipt_number)
+    def receipt_number=(receipt_number : String?)
       if !receipt_number.nil? && receipt_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"receipt_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -282,7 +282,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] status Value to be assigned
-    def status=(status)
+    def status=(status : String?)
       if !status.nil? && status.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
@@ -300,6 +300,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @created, @currency, @id, @object, @balance_transaction, @charge, @description, @failure_balance_transaction, @failure_reason, @instructions_email, @metadata, @next_action, @payment_intent, @reason, @receipt_number, @source_transfer_reversal, @status, @transfer_reversal)
+    def_equals_and_hash(@amount, @created, @currency, @id, @object, @balance_transaction, @balance_transaction_present, @charge, @charge_present, @description, @description_present, @failure_balance_transaction, @failure_balance_transaction_present, @failure_reason, @failure_reason_present, @instructions_email, @instructions_email_present, @metadata, @metadata_present, @next_action, @next_action_present, @payment_intent, @payment_intent_present, @reason, @reason_present, @receipt_number, @receipt_number_present, @source_transfer_reversal, @source_transfer_reversal_present, @status, @status_present, @transfer_reversal, @transfer_reversal_present)
   end
 end

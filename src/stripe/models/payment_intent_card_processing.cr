@@ -59,6 +59,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@customer_notification)
+    def_equals_and_hash(@customer_notification, @customer_notification_present)
   end
 end

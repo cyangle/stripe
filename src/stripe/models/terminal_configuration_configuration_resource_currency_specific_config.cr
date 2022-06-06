@@ -76,6 +76,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@fixed_amounts, @percentages, @smart_tip_threshold)
+    def_equals_and_hash(@fixed_amounts, @fixed_amounts_present, @percentages, @percentages_present, @smart_tip_threshold, @smart_tip_threshold_present)
   end
 end

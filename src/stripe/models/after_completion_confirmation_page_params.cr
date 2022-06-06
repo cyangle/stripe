@@ -56,7 +56,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] custom_message Value to be assigned
-    def custom_message=(custom_message)
+    def custom_message=(custom_message : String?)
       if !custom_message.nil? && custom_message.to_s.size > 500
         raise ArgumentError.new("invalid value for \"custom_message\", the character length must be smaller than or equal to 500.")
       end
@@ -74,6 +74,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@custom_message)
+    def_equals_and_hash(@custom_message, @custom_message_present)
   end
 end

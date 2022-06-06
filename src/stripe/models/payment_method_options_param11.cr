@@ -241,6 +241,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@acss_debit, @affirm, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @bancontact, @boleto, @card, @card_present2, @customer_balance, @eps, @fpx, @giropay, @grabpay, @ideal, @interac_present, @klarna, @konbini, @link, @oxxo, @p24, @paynow, @sepa_debit, @sofort, @us_bank_account, @wechat_pay)
+    def_equals_and_hash(@acss_debit, @acss_debit_present, @affirm, @affirm_present, @afterpay_clearpay, @afterpay_clearpay_present, @alipay, @alipay_present, @au_becs_debit, @au_becs_debit_present, @bacs_debit, @bacs_debit_present, @bancontact, @bancontact_present, @boleto, @boleto_present, @card, @card_present2, @card_present2, @card_present2_present, @customer_balance, @customer_balance_present, @eps, @eps_present, @fpx, @fpx_present, @giropay, @giropay_present, @grabpay, @grabpay_present, @ideal, @ideal_present, @interac_present, @interac_present_present, @klarna, @klarna_present, @konbini, @konbini_present, @link, @link_present, @oxxo, @oxxo_present, @p24, @p24_present, @paynow, @paynow_present, @sepa_debit, @sepa_debit_present, @sofort, @sofort_present, @us_bank_account, @us_bank_account_present, @wechat_pay, @wechat_pay_present)
   end
 end

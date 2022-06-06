@@ -411,7 +411,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -421,21 +421,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
 
     # Custom attribute writer method with validation
     # @param [Object] calculated_statement_descriptor Value to be assigned
-    def calculated_statement_descriptor=(calculated_statement_descriptor)
+    def calculated_statement_descriptor=(calculated_statement_descriptor : String?)
       if !calculated_statement_descriptor.nil? && calculated_statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"calculated_statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
@@ -445,7 +445,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 40000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
       end
@@ -455,7 +455,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] failure_code Value to be assigned
-    def failure_code=(failure_code)
+    def failure_code=(failure_code : String?)
       if !failure_code.nil? && failure_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -465,7 +465,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] failure_message Value to be assigned
-    def failure_message=(failure_message)
+    def failure_message=(failure_message : String?)
       if !failure_message.nil? && failure_message.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
       end
@@ -475,7 +475,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] payment_method Value to be assigned
-    def payment_method=(payment_method)
+    def payment_method=(payment_method : String?)
       if !payment_method.nil? && payment_method.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"payment_method\", the character length must be smaller than or equal to 5000.")
       end
@@ -485,7 +485,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] receipt_email Value to be assigned
-    def receipt_email=(receipt_email)
+    def receipt_email=(receipt_email : String?)
       if !receipt_email.nil? && receipt_email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"receipt_email\", the character length must be smaller than or equal to 5000.")
       end
@@ -495,7 +495,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] receipt_number Value to be assigned
-    def receipt_number=(receipt_number)
+    def receipt_number=(receipt_number : String?)
       if !receipt_number.nil? && receipt_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"receipt_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -505,7 +505,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] receipt_url Value to be assigned
-    def receipt_url=(receipt_url)
+    def receipt_url=(receipt_url : String?)
       if !receipt_url.nil? && receipt_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"receipt_url\", the character length must be smaller than or equal to 5000.")
       end
@@ -515,7 +515,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
-    def statement_descriptor=(statement_descriptor)
+    def statement_descriptor=(statement_descriptor : String?)
       if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
@@ -525,7 +525,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor_suffix Value to be assigned
-    def statement_descriptor_suffix=(statement_descriptor_suffix)
+    def statement_descriptor_suffix=(statement_descriptor_suffix : String?)
       if !statement_descriptor_suffix.nil? && statement_descriptor_suffix.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 5000.")
       end
@@ -535,7 +535,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] transfer_group Value to be assigned
-    def transfer_group=(transfer_group)
+    def transfer_group=(transfer_group : String?)
       if !transfer_group.nil? && transfer_group.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"transfer_group\", the character length must be smaller than or equal to 5000.")
       end
@@ -553,6 +553,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @amount_captured, @amount_refunded, @billing_details, @captured, @created, @currency, @disputed, @id, @livemode, @metadata, @object, @paid, @refunded, @refunds, @status, @application, @application_fee, @application_fee_amount, @balance_transaction, @calculated_statement_descriptor, @customer, @description, @failure_balance_transaction, @failure_code, @failure_message, @fraud_details, @invoice, @on_behalf_of, @outcome, @payment_intent, @payment_method, @payment_method_details, @radar_options, @receipt_email, @receipt_number, @receipt_url, @review, @shipping, @source_transfer, @statement_descriptor, @statement_descriptor_suffix, @transfer, @transfer_data, @transfer_group)
+    def_equals_and_hash(@amount, @amount_captured, @amount_refunded, @billing_details, @captured, @created, @currency, @disputed, @id, @livemode, @metadata, @object, @paid, @refunded, @refunds, @status, @application, @application_present, @application_fee, @application_fee_present, @application_fee_amount, @application_fee_amount_present, @balance_transaction, @balance_transaction_present, @calculated_statement_descriptor, @calculated_statement_descriptor_present, @customer, @customer_present, @description, @description_present, @failure_balance_transaction, @failure_balance_transaction_present, @failure_code, @failure_code_present, @failure_message, @failure_message_present, @fraud_details, @fraud_details_present, @invoice, @invoice_present, @on_behalf_of, @on_behalf_of_present, @outcome, @outcome_present, @payment_intent, @payment_intent_present, @payment_method, @payment_method_present, @payment_method_details, @payment_method_details_present, @radar_options, @radar_options_present, @receipt_email, @receipt_email_present, @receipt_number, @receipt_number_present, @receipt_url, @receipt_url_present, @review, @review_present, @shipping, @shipping_present, @source_transfer, @source_transfer_present, @statement_descriptor, @statement_descriptor_present, @statement_descriptor_suffix, @statement_descriptor_suffix_present, @transfer, @transfer_present, @transfer_data, @transfer_data_present, @transfer_group, @transfer_group_present)
   end
 end

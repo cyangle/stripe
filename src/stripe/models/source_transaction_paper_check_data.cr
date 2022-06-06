@@ -71,7 +71,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] available_at Value to be assigned
-    def available_at=(available_at)
+    def available_at=(available_at : String?)
       if !available_at.nil? && available_at.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"available_at\", the character length must be smaller than or equal to 5000.")
       end
@@ -81,7 +81,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] invoices Value to be assigned
-    def invoices=(invoices)
+    def invoices=(invoices : String?)
       if !invoices.nil? && invoices.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"invoices\", the character length must be smaller than or equal to 5000.")
       end
@@ -99,6 +99,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@available_at, @invoices)
+    def_equals_and_hash(@available_at, @available_at_present, @invoices, @invoices_present)
   end
 end

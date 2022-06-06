@@ -41,10 +41,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_USER_REPORT.error_message) unless ENUM_VALIDATOR_FOR_USER_REPORT.valid?(@user_report, false)
 
-      if @user_report.to_s.size > 5000
-        invalid_properties.push("invalid value for \"user_report\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties
     end
 
@@ -52,14 +48,13 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_USER_REPORT.valid?(@user_report, false)
-      return false if @user_report.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] user_report Object to be assigned
-    def user_report=(user_report)
+    def user_report=(user_report : String)
       ENUM_VALIDATOR_FOR_USER_REPORT.valid!(user_report, false)
       @user_report = user_report
     end

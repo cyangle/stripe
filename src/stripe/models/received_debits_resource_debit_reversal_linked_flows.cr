@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] issuing_dispute Value to be assigned
-    def issuing_dispute=(issuing_dispute)
+    def issuing_dispute=(issuing_dispute : String?)
       if !issuing_dispute.nil? && issuing_dispute.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"issuing_dispute\", the character length must be smaller than or equal to 5000.")
       end
@@ -76,6 +76,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@issuing_dispute)
+    def_equals_and_hash(@issuing_dispute, @issuing_dispute_present)
   end
 end

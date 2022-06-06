@@ -80,6 +80,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@familymart, @lawson, @ministop, @seicomart)
+    def_equals_and_hash(@familymart, @familymart_present, @lawson, @lawson_present, @ministop, @ministop_present, @seicomart, @seicomart_present)
   end
 end

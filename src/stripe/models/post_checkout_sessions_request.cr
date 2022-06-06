@@ -312,7 +312,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] cancel_url Value to be assigned
-    def cancel_url=(cancel_url)
+    def cancel_url=(cancel_url : String)
       if cancel_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"cancel_url\", the character length must be smaller than or equal to 5000.")
       end
@@ -322,7 +322,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] success_url Value to be assigned
-    def success_url=(success_url)
+    def success_url=(success_url : String)
       if success_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"success_url\", the character length must be smaller than or equal to 5000.")
       end
@@ -332,14 +332,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_address_collection Object to be assigned
-    def billing_address_collection=(billing_address_collection)
+    def billing_address_collection=(billing_address_collection : String?)
       ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid!(billing_address_collection)
       @billing_address_collection = billing_address_collection
     end
 
     # Custom attribute writer method with validation
     # @param [Object] client_reference_id Value to be assigned
-    def client_reference_id=(client_reference_id)
+    def client_reference_id=(client_reference_id : String?)
       if !client_reference_id.nil? && client_reference_id.to_s.size > 200
         raise ArgumentError.new("invalid value for \"client_reference_id\", the character length must be smaller than or equal to 200.")
       end
@@ -349,7 +349,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String?)
       if !customer.nil? && customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
@@ -359,35 +359,35 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_creation Object to be assigned
-    def customer_creation=(customer_creation)
+    def customer_creation=(customer_creation : String?)
       ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid!(customer_creation)
       @customer_creation = customer_creation
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] locale Object to be assigned
-    def locale=(locale)
+    def locale=(locale : String?)
       ENUM_VALIDATOR_FOR_LOCALE.valid!(locale)
       @locale = locale
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mode Object to be assigned
-    def mode=(mode)
+    def mode=(mode : String?)
       ENUM_VALIDATOR_FOR_MODE.valid!(mode)
       @mode = mode
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_types Object to be assigned
-    def payment_method_types=(payment_method_types)
+    def payment_method_types=(payment_method_types : Array(String)?)
       ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid!(payment_method_types)
       @payment_method_types = payment_method_types
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] submit_type Object to be assigned
-    def submit_type=(submit_type)
+    def submit_type=(submit_type : String?)
       ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid!(submit_type)
       @submit_type = submit_type
     end
@@ -402,6 +402,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@cancel_url, @success_url, @after_expiration, @allow_promotion_codes, @automatic_tax, @billing_address_collection, @client_reference_id, @consent_collection, @customer, @customer_creation, @customer_email, @customer_update, @discounts, @expand, @expires_at, @line_items, @locale, @metadata, @mode, @payment_intent_data, @payment_method_options, @payment_method_types, @phone_number_collection, @setup_intent_data, @shipping_address_collection, @shipping_options, @submit_type, @subscription_data, @tax_id_collection)
+    def_equals_and_hash(@cancel_url, @success_url, @after_expiration, @after_expiration_present, @allow_promotion_codes, @allow_promotion_codes_present, @automatic_tax, @automatic_tax_present, @billing_address_collection, @billing_address_collection_present, @client_reference_id, @client_reference_id_present, @consent_collection, @consent_collection_present, @customer, @customer_present, @customer_creation, @customer_creation_present, @customer_email, @customer_email_present, @customer_update, @customer_update_present, @discounts, @discounts_present, @expand, @expand_present, @expires_at, @expires_at_present, @line_items, @line_items_present, @locale, @locale_present, @metadata, @metadata_present, @mode, @mode_present, @payment_intent_data, @payment_intent_data_present, @payment_method_options, @payment_method_options_present, @payment_method_types, @payment_method_types_present, @phone_number_collection, @phone_number_collection_present, @setup_intent_data, @setup_intent_data_present, @shipping_address_collection, @shipping_address_collection_present, @shipping_options, @shipping_options_present, @submit_type, @submit_type_present, @subscription_data, @subscription_data_present, @tax_id_collection, @tax_id_collection_present)
   end
 end

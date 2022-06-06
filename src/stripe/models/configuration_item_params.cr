@@ -84,7 +84,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] price Value to be assigned
-    def price=(price)
+    def price=(price : String?)
       if !price.nil? && price.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"price\", the character length must be smaller than or equal to 5000.")
       end
@@ -102,6 +102,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@billing_thresholds, @price, @price_data, @quantity, @tax_rates)
+    def_equals_and_hash(@billing_thresholds, @billing_thresholds_present, @price, @price_present, @price_data, @price_data_present, @quantity, @quantity_present, @tax_rates, @tax_rates_present)
   end
 end

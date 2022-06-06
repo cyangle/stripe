@@ -161,7 +161,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -171,28 +171,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] client_secret Value to be assigned
-    def client_secret=(client_secret)
+    def client_secret=(client_secret : String?)
       if !client_secret.nil? && client_secret.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
       end
@@ -202,7 +202,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
-    def url=(url)
+    def url=(url : String?)
       if !url.nil? && url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
@@ -220,6 +220,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@created, @id, @livemode, @metadata, @object, @options, @status, @_type, @client_secret, @last_error, @last_verification_report, @redaction, @url, @verified_outputs)
+    def_equals_and_hash(@created, @id, @livemode, @metadata, @object, @options, @status, @_type, @client_secret, @client_secret_present, @last_error, @last_error_present, @last_verification_report, @last_verification_report_present, @redaction, @redaction_present, @url, @url_present, @verified_outputs, @verified_outputs_present)
   end
 end

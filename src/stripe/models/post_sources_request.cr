@@ -163,10 +163,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_FLOW.error_message) unless ENUM_VALIDATOR_FOR_FLOW.valid?(@flow)
 
-      if !@flow.nil? && @flow.to_s.size > 5000
-        invalid_properties.push("invalid value for \"flow\", the character length must be smaller than or equal to 5000.")
-      end
-
       if !@original_source.nil? && @original_source.to_s.size > 5000
         invalid_properties.push("invalid value for \"original_source\", the character length must be smaller than or equal to 5000.")
       end
@@ -185,10 +181,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_USAGE.error_message) unless ENUM_VALIDATOR_FOR_USAGE.valid?(@usage)
 
-      if !@usage.nil? && @usage.to_s.size > 5000
-        invalid_properties.push("invalid value for \"usage\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties
     end
 
@@ -197,20 +189,18 @@ module Stripe
     def valid?
       return false if !@customer.nil? && @customer.to_s.size > 500
       return false unless ENUM_VALIDATOR_FOR_FLOW.valid?(@flow)
-      return false if !@flow.nil? && @flow.to_s.size > 5000
       return false if !@original_source.nil? && @original_source.to_s.size > 5000
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 5000
       return false if !@token.nil? && @token.to_s.size > 5000
       return false if !@_type.nil? && @_type.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_USAGE.valid?(@usage)
-      return false if !@usage.nil? && @usage.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String?)
       if !customer.nil? && customer.to_s.size > 500
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 500.")
       end
@@ -220,14 +210,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] flow Object to be assigned
-    def flow=(flow)
+    def flow=(flow : String?)
       ENUM_VALIDATOR_FOR_FLOW.valid!(flow)
       @flow = flow
     end
 
     # Custom attribute writer method with validation
     # @param [Object] original_source Value to be assigned
-    def original_source=(original_source)
+    def original_source=(original_source : String?)
       if !original_source.nil? && original_source.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"original_source\", the character length must be smaller than or equal to 5000.")
       end
@@ -237,7 +227,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
-    def statement_descriptor=(statement_descriptor)
+    def statement_descriptor=(statement_descriptor : String?)
       if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
@@ -247,7 +237,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] token Value to be assigned
-    def token=(token)
+    def token=(token : String?)
       if !token.nil? && token.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"token\", the character length must be smaller than or equal to 5000.")
       end
@@ -257,7 +247,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] _type Value to be assigned
-    def _type=(_type)
+    def _type=(_type : String?)
       if !_type.nil? && _type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
@@ -267,7 +257,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usage Object to be assigned
-    def usage=(usage)
+    def usage=(usage : String?)
       ENUM_VALIDATOR_FOR_USAGE.valid!(usage)
       @usage = usage
     end
@@ -282,6 +272,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @currency, @customer, @expand, @flow, @mandate, @metadata, @original_source, @owner, @receiver, @redirect, @source_order, @statement_descriptor, @token, @_type, @usage)
+    def_equals_and_hash(@amount, @amount_present, @currency, @currency_present, @customer, @customer_present, @expand, @expand_present, @flow, @flow_present, @mandate, @mandate_present, @metadata, @metadata_present, @original_source, @original_source_present, @owner, @owner_present, @receiver, @receiver_present, @redirect, @redirect_present, @source_order, @source_order_present, @statement_descriptor, @statement_descriptor_present, @token, @token_present, @_type, @_type_present, @usage, @usage_present)
   end
 end

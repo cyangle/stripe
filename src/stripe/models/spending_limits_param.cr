@@ -72,14 +72,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval)
+    def interval=(interval : String)
       ENUM_VALIDATOR_FOR_INTERVAL.valid!(interval, false)
       @interval = interval
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] categories Object to be assigned
-    def categories=(categories)
+    def categories=(categories : Array(String)?)
       ENUM_VALIDATOR_FOR_CATEGORIES.all_valid!(categories)
       @categories = categories
     end
@@ -94,6 +94,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @interval, @categories)
+    def_equals_and_hash(@amount, @interval, @categories, @categories_present)
   end
 end

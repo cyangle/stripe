@@ -143,7 +143,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] category Value to be assigned
-    def category=(category)
+    def category=(category : String)
       if category.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"category\", the character length must be smaller than or equal to 5000.")
       end
@@ -153,7 +153,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] category_code Value to be assigned
-    def category_code=(category_code)
+    def category_code=(category_code : String)
       if category_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"category_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -163,7 +163,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] network_id Value to be assigned
-    def network_id=(network_id)
+    def network_id=(network_id : String)
       if network_id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"network_id\", the character length must be smaller than or equal to 5000.")
       end
@@ -173,7 +173,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] city Value to be assigned
-    def city=(city)
+    def city=(city : String?)
       if !city.nil? && city.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"city\", the character length must be smaller than or equal to 5000.")
       end
@@ -183,7 +183,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
-    def country=(country)
+    def country=(country : String?)
       if !country.nil? && country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
@@ -193,7 +193,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
-    def name=(name)
+    def name=(name : String?)
       if !name.nil? && name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
@@ -203,7 +203,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] postal_code Value to be assigned
-    def postal_code=(postal_code)
+    def postal_code=(postal_code : String?)
       if !postal_code.nil? && postal_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"postal_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -213,7 +213,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] state Value to be assigned
-    def state=(state)
+    def state=(state : String?)
       if !state.nil? && state.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"state\", the character length must be smaller than or equal to 5000.")
       end
@@ -231,6 +231,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@category, @category_code, @network_id, @city, @country, @name, @postal_code, @state)
+    def_equals_and_hash(@category, @category_code, @network_id, @city, @city_present, @country, @country_present, @name, @name_present, @postal_code, @postal_code_present, @state, @state_present)
   end
 end

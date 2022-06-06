@@ -96,7 +96,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
-    def name=(name)
+    def name=(name : String)
       if name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
@@ -106,7 +106,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] carrier Value to be assigned
-    def carrier=(carrier)
+    def carrier=(carrier : String?)
       if !carrier.nil? && carrier.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"carrier\", the character length must be smaller than or equal to 5000.")
       end
@@ -116,7 +116,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] phone Value to be assigned
-    def phone=(phone)
+    def phone=(phone : String?)
       if !phone.nil? && phone.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
       end
@@ -126,7 +126,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] tracking_number Value to be assigned
-    def tracking_number=(tracking_number)
+    def tracking_number=(tracking_number : String?)
       if !tracking_number.nil? && tracking_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"tracking_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -144,6 +144,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@address, @name, @carrier, @phone, @tracking_number)
+    def_equals_and_hash(@address, @name, @carrier, @carrier_present, @phone, @phone_present, @tracking_number, @tracking_number_present)
   end
 end

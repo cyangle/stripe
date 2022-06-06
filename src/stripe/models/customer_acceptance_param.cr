@@ -64,10 +64,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
-      if @_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties
     end
 
@@ -75,14 +71,13 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      return false if @_type.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
@@ -97,6 +92,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @accepted_at, @offline, @online)
+    def_equals_and_hash(@_type, @accepted_at, @accepted_at_present, @offline, @offline_present, @online, @online_present)
   end
 end

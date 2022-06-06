@@ -322,7 +322,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] account Value to be assigned
-    def account=(account)
+    def account=(account : String?)
       if !account.nil? && account.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
       end
@@ -332,7 +332,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] first_name Value to be assigned
-    def first_name=(first_name)
+    def first_name=(first_name : String?)
       if !first_name.nil? && first_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -342,7 +342,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] first_name_kana Value to be assigned
-    def first_name_kana=(first_name_kana)
+    def first_name_kana=(first_name_kana : String?)
       if !first_name_kana.nil? && first_name_kana.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"first_name_kana\", the character length must be smaller than or equal to 5000.")
       end
@@ -352,7 +352,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] first_name_kanji Value to be assigned
-    def first_name_kanji=(first_name_kanji)
+    def first_name_kanji=(first_name_kanji : String?)
       if !first_name_kanji.nil? && first_name_kanji.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"first_name_kanji\", the character length must be smaller than or equal to 5000.")
       end
@@ -362,7 +362,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id_number Value to be assigned
-    def id_number=(id_number)
+    def id_number=(id_number : String?)
       if !id_number.nil? && id_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -372,7 +372,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id_number_secondary Value to be assigned
-    def id_number_secondary=(id_number_secondary)
+    def id_number_secondary=(id_number_secondary : String?)
       if !id_number_secondary.nil? && id_number_secondary.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id_number_secondary\", the character length must be smaller than or equal to 5000.")
       end
@@ -382,7 +382,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] last_name Value to be assigned
-    def last_name=(last_name)
+    def last_name=(last_name : String?)
       if !last_name.nil? && last_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -392,7 +392,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] last_name_kana Value to be assigned
-    def last_name_kana=(last_name_kana)
+    def last_name_kana=(last_name_kana : String?)
       if !last_name_kana.nil? && last_name_kana.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last_name_kana\", the character length must be smaller than or equal to 5000.")
       end
@@ -402,7 +402,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] last_name_kanji Value to be assigned
-    def last_name_kanji=(last_name_kanji)
+    def last_name_kanji=(last_name_kanji : String?)
       if !last_name_kanji.nil? && last_name_kanji.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last_name_kanji\", the character length must be smaller than or equal to 5000.")
       end
@@ -412,7 +412,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] maiden_name Value to be assigned
-    def maiden_name=(maiden_name)
+    def maiden_name=(maiden_name : String?)
       if !maiden_name.nil? && maiden_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"maiden_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -422,7 +422,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] nationality Value to be assigned
-    def nationality=(nationality)
+    def nationality=(nationality : String?)
       if !nationality.nil? && nationality.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"nationality\", the character length must be smaller than or equal to 5000.")
       end
@@ -432,7 +432,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] person_token Value to be assigned
-    def person_token=(person_token)
+    def person_token=(person_token : String?)
       if !person_token.nil? && person_token.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"person_token\", the character length must be smaller than or equal to 5000.")
       end
@@ -442,7 +442,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] political_exposure Value to be assigned
-    def political_exposure=(political_exposure)
+    def political_exposure=(political_exposure : String?)
       if !political_exposure.nil? && political_exposure.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"political_exposure\", the character length must be smaller than or equal to 5000.")
       end
@@ -460,6 +460,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@account, @address, @address_kana, @address_kanji, @dob, @documents, @email, @expand, @first_name, @first_name_kana, @first_name_kanji, @full_name_aliases, @gender, @id_number, @id_number_secondary, @last_name, @last_name_kana, @last_name_kanji, @maiden_name, @metadata, @nationality, @person_token, @phone, @political_exposure, @registered_address, @relationship, @ssn_last_4, @verification)
+    def_equals_and_hash(@account, @account_present, @address, @address_present, @address_kana, @address_kana_present, @address_kanji, @address_kanji_present, @dob, @dob_present, @documents, @documents_present, @email, @email_present, @expand, @expand_present, @first_name, @first_name_present, @first_name_kana, @first_name_kana_present, @first_name_kanji, @first_name_kanji_present, @full_name_aliases, @full_name_aliases_present, @gender, @gender_present, @id_number, @id_number_present, @id_number_secondary, @id_number_secondary_present, @last_name, @last_name_present, @last_name_kana, @last_name_kana_present, @last_name_kanji, @last_name_kanji_present, @maiden_name, @maiden_name_present, @metadata, @metadata_present, @nationality, @nationality_present, @person_token, @person_token_present, @phone, @phone_present, @political_exposure, @political_exposure_present, @registered_address, @registered_address_present, @relationship, @relationship_present, @ssn_last_4, @ssn_last_4_present, @verification, @verification_present)
   end
 end

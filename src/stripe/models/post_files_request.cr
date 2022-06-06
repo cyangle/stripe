@@ -77,7 +77,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] purpose Object to be assigned
-    def purpose=(purpose)
+    def purpose=(purpose : String)
       ENUM_VALIDATOR_FOR_PURPOSE.valid!(purpose, false)
       @purpose = purpose
     end
@@ -92,6 +92,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@file, @purpose, @expand, @file_link_data)
+    def_equals_and_hash(@file, @purpose, @expand, @expand_present, @file_link_data, @file_link_data_present)
   end
 end

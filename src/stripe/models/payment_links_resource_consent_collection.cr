@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] promotions Object to be assigned
-    def promotions=(promotions)
+    def promotions=(promotions : String?)
       ENUM_VALIDATOR_FOR_PROMOTIONS.valid!(promotions)
       @promotions = promotions
     end
@@ -73,6 +73,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@promotions)
+    def_equals_and_hash(@promotions, @promotions_present)
   end
 end

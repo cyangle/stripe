@@ -65,7 +65,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
-    def name=(name)
+    def name=(name : String)
       if name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
@@ -75,7 +75,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] value Value to be assigned
-    def value=(value)
+    def value=(value : String)
       if value.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"value\", the character length must be smaller than or equal to 5000.")
       end

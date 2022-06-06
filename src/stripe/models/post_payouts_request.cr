@@ -111,15 +111,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_METHOD.error_message) unless ENUM_VALIDATOR_FOR_METHOD.valid?(@method)
 
-      if !@method.nil? && @method.to_s.size > 5000
-        invalid_properties.push("invalid value for \"method\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_SOURCE_TYPE.error_message) unless ENUM_VALIDATOR_FOR_SOURCE_TYPE.valid?(@source_type)
-
-      if !@source_type.nil? && @source_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"source_type\", the character length must be smaller than or equal to 5000.")
-      end
 
       if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
         invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
@@ -133,9 +125,7 @@ module Stripe
     def valid?
       return false if !@description.nil? && @description.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_METHOD.valid?(@method)
-      return false if !@method.nil? && @method.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_SOURCE_TYPE.valid?(@source_type)
-      return false if !@source_type.nil? && @source_type.to_s.size > 5000
       return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.size > 22
 
       true
@@ -143,7 +133,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -153,21 +143,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] method Object to be assigned
-    def method=(method)
+    def method=(method : String?)
       ENUM_VALIDATOR_FOR_METHOD.valid!(method)
       @method = method
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source_type Object to be assigned
-    def source_type=(source_type)
+    def source_type=(source_type : String?)
       ENUM_VALIDATOR_FOR_SOURCE_TYPE.valid!(source_type)
       @source_type = source_type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
-    def statement_descriptor=(statement_descriptor)
+    def statement_descriptor=(statement_descriptor : String?)
       if !statement_descriptor.nil? && statement_descriptor.to_s.size > 22
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
       end
@@ -185,6 +175,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @currency, @description, @destination, @expand, @metadata, @method, @source_type, @statement_descriptor)
+    def_equals_and_hash(@amount, @currency, @description, @description_present, @destination, @destination_present, @expand, @expand_present, @metadata, @metadata_present, @method, @method_present, @source_type, @source_type_present, @statement_descriptor, @statement_descriptor_present)
   end
 end

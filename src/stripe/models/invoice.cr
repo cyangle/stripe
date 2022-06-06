@@ -611,21 +611,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] collection_method Object to be assigned
-    def collection_method=(collection_method)
+    def collection_method=(collection_method : String)
       ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(collection_method, false)
       @collection_method = collection_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] account_country Value to be assigned
-    def account_country=(account_country)
+    def account_country=(account_country : String?)
       if !account_country.nil? && account_country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_country\", the character length must be smaller than or equal to 5000.")
       end
@@ -635,7 +635,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] account_name Value to be assigned
-    def account_name=(account_name)
+    def account_name=(account_name : String?)
       if !account_name.nil? && account_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -645,14 +645,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_reason Object to be assigned
-    def billing_reason=(billing_reason)
+    def billing_reason=(billing_reason : String?)
       ENUM_VALIDATOR_FOR_BILLING_REASON.valid!(billing_reason)
       @billing_reason = billing_reason
     end
 
     # Custom attribute writer method with validation
     # @param [Object] customer_email Value to be assigned
-    def customer_email=(customer_email)
+    def customer_email=(customer_email : String?)
       if !customer_email.nil? && customer_email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer_email\", the character length must be smaller than or equal to 5000.")
       end
@@ -662,7 +662,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] customer_name Value to be assigned
-    def customer_name=(customer_name)
+    def customer_name=(customer_name : String?)
       if !customer_name.nil? && customer_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -672,7 +672,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] customer_phone Value to be assigned
-    def customer_phone=(customer_phone)
+    def customer_phone=(customer_phone : String?)
       if !customer_phone.nil? && customer_phone.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer_phone\", the character length must be smaller than or equal to 5000.")
       end
@@ -682,14 +682,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_tax_exempt Object to be assigned
-    def customer_tax_exempt=(customer_tax_exempt)
+    def customer_tax_exempt=(customer_tax_exempt : String?)
       ENUM_VALIDATOR_FOR_CUSTOMER_TAX_EXEMPT.valid!(customer_tax_exempt)
       @customer_tax_exempt = customer_tax_exempt
     end
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -699,7 +699,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] footer Value to be assigned
-    def footer=(footer)
+    def footer=(footer : String?)
       if !footer.nil? && footer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"footer\", the character length must be smaller than or equal to 5000.")
       end
@@ -709,7 +709,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] hosted_invoice_url Value to be assigned
-    def hosted_invoice_url=(hosted_invoice_url)
+    def hosted_invoice_url=(hosted_invoice_url : String?)
       if !hosted_invoice_url.nil? && hosted_invoice_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"hosted_invoice_url\", the character length must be smaller than or equal to 5000.")
       end
@@ -719,7 +719,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String?)
       if !id.nil? && id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -729,7 +729,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] invoice_pdf Value to be assigned
-    def invoice_pdf=(invoice_pdf)
+    def invoice_pdf=(invoice_pdf : String?)
       if !invoice_pdf.nil? && invoice_pdf.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"invoice_pdf\", the character length must be smaller than or equal to 5000.")
       end
@@ -739,7 +739,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] number Value to be assigned
-    def number=(number)
+    def number=(number : String?)
       if !number.nil? && number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
       end
@@ -749,7 +749,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] receipt_number Value to be assigned
-    def receipt_number=(receipt_number)
+    def receipt_number=(receipt_number : String?)
       if !receipt_number.nil? && receipt_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"receipt_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -759,7 +759,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
-    def statement_descriptor=(statement_descriptor)
+    def statement_descriptor=(statement_descriptor : String?)
       if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
@@ -769,7 +769,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String?)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status)
       @status = status
     end
@@ -784,6 +784,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount_due, @amount_paid, @amount_remaining, @attempt_count, @attempted, @automatic_tax, @collection_method, @created, @currency, @default_tax_rates, @lines, @livemode, @object, @paid, @paid_out_of_band, @payment_settings, @period_end, @period_start, @post_payment_credit_notes_amount, @pre_payment_credit_notes_amount, @starting_balance, @status_transitions, @subtotal, @total, @total_tax_amounts, @account_country, @account_name, @account_tax_ids, @application, @application_fee_amount, @auto_advance, @billing_reason, @charge, @custom_fields, @customer, @customer_address, @customer_email, @customer_name, @customer_phone, @customer_shipping, @customer_tax_exempt, @customer_tax_ids, @default_payment_method, @default_source, @description, @discount, @discounts, @due_date, @ending_balance, @footer, @hosted_invoice_url, @id, @invoice_pdf, @last_finalization_error, @metadata, @next_payment_attempt, @number, @on_behalf_of, @payment_intent, @quote, @receipt_number, @statement_descriptor, @status, @subscription, @subscription_proration_date, @tax, @test_clock, @threshold_reason, @total_discount_amounts, @transfer_data, @webhooks_delivered_at)
+    def_equals_and_hash(@amount_due, @amount_paid, @amount_remaining, @attempt_count, @attempted, @automatic_tax, @collection_method, @created, @currency, @default_tax_rates, @lines, @livemode, @object, @paid, @paid_out_of_band, @payment_settings, @period_end, @period_start, @post_payment_credit_notes_amount, @pre_payment_credit_notes_amount, @starting_balance, @status_transitions, @subtotal, @total, @total_tax_amounts, @account_country, @account_country_present, @account_name, @account_name_present, @account_tax_ids, @account_tax_ids_present, @application, @application_present, @application_fee_amount, @application_fee_amount_present, @auto_advance, @auto_advance_present, @billing_reason, @billing_reason_present, @charge, @charge_present, @custom_fields, @custom_fields_present, @customer, @customer_present, @customer_address, @customer_address_present, @customer_email, @customer_email_present, @customer_name, @customer_name_present, @customer_phone, @customer_phone_present, @customer_shipping, @customer_shipping_present, @customer_tax_exempt, @customer_tax_exempt_present, @customer_tax_ids, @customer_tax_ids_present, @default_payment_method, @default_payment_method_present, @default_source, @default_source_present, @description, @description_present, @discount, @discount_present, @discounts, @discounts_present, @due_date, @due_date_present, @ending_balance, @ending_balance_present, @footer, @footer_present, @hosted_invoice_url, @hosted_invoice_url_present, @id, @id_present, @invoice_pdf, @invoice_pdf_present, @last_finalization_error, @last_finalization_error_present, @metadata, @metadata_present, @next_payment_attempt, @next_payment_attempt_present, @number, @number_present, @on_behalf_of, @on_behalf_of_present, @payment_intent, @payment_intent_present, @quote, @quote_present, @receipt_number, @receipt_number_present, @statement_descriptor, @statement_descriptor_present, @status, @status_present, @subscription, @subscription_present, @subscription_proration_date, @subscription_proration_date_present, @tax, @tax_present, @test_clock, @test_clock_present, @threshold_reason, @threshold_reason_present, @total_discount_amounts, @total_discount_amounts_present, @transfer_data, @transfer_data_present, @webhooks_delivered_at, @webhooks_delivered_at_present)
   end
 end

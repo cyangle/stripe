@@ -223,28 +223,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_address_collection Object to be assigned
-    def billing_address_collection=(billing_address_collection)
+    def billing_address_collection=(billing_address_collection : String?)
       ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid!(billing_address_collection)
       @billing_address_collection = billing_address_collection
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_creation Object to be assigned
-    def customer_creation=(customer_creation)
+    def customer_creation=(customer_creation : String?)
       ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid!(customer_creation)
       @customer_creation = customer_creation
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_types Object to be assigned
-    def payment_method_types=(payment_method_types)
+    def payment_method_types=(payment_method_types : Array(String)?)
       ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid!(payment_method_types)
       @payment_method_types = payment_method_types
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] submit_type Object to be assigned
-    def submit_type=(submit_type)
+    def submit_type=(submit_type : String?)
       ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid!(submit_type)
       @submit_type = submit_type
     end
@@ -259,6 +259,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@line_items, @after_completion, @allow_promotion_codes, @application_fee_amount, @application_fee_percent, @automatic_tax, @billing_address_collection, @consent_collection, @customer_creation, @expand, @metadata, @on_behalf_of, @payment_intent_data, @payment_method_types, @phone_number_collection, @shipping_address_collection, @shipping_options, @submit_type, @subscription_data, @tax_id_collection, @transfer_data)
+    def_equals_and_hash(@line_items, @after_completion, @after_completion_present, @allow_promotion_codes, @allow_promotion_codes_present, @application_fee_amount, @application_fee_amount_present, @application_fee_percent, @application_fee_percent_present, @automatic_tax, @automatic_tax_present, @billing_address_collection, @billing_address_collection_present, @consent_collection, @consent_collection_present, @customer_creation, @customer_creation_present, @expand, @expand_present, @metadata, @metadata_present, @on_behalf_of, @on_behalf_of_present, @payment_intent_data, @payment_intent_data_present, @payment_method_types, @payment_method_types_present, @phone_number_collection, @phone_number_collection_present, @shipping_address_collection, @shipping_address_collection_present, @shipping_options, @shipping_options_present, @submit_type, @submit_type_present, @subscription_data, @subscription_data_present, @tax_id_collection, @tax_id_collection_present, @transfer_data, @transfer_data_present)
   end
 end

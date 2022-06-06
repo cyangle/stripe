@@ -110,7 +110,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] _type Value to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       if _type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
@@ -128,6 +128,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @acss_debit, @au_becs_debit, @bacs_debit, @card, @link, @sepa_debit, @us_bank_account)
+    def_equals_and_hash(@_type, @acss_debit, @acss_debit_present, @au_becs_debit, @au_becs_debit_present, @bacs_debit, @bacs_debit_present, @card, @card_present2, @link, @link_present, @sepa_debit, @sepa_debit_present, @us_bank_account, @us_bank_account_present)
   end
 end

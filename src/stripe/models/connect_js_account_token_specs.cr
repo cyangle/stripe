@@ -78,7 +78,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] business_type Object to be assigned
-    def business_type=(business_type)
+    def business_type=(business_type : String?)
       ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid!(business_type)
       @business_type = business_type
     end
@@ -93,6 +93,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@business_type, @company, @individual, @tos_shown_and_accepted)
+    def_equals_and_hash(@business_type, @business_type_present, @company, @company_present, @individual, @individual_present, @tos_shown_and_accepted, @tos_shown_and_accepted_present)
   end
 end

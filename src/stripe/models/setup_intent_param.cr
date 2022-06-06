@@ -50,10 +50,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.error_message) unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
 
-      if !@request_three_d_secure.nil? && @request_three_d_secure.to_s.size > 5000
-        invalid_properties.push("invalid value for \"request_three_d_secure\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties
     end
 
@@ -61,14 +57,13 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
-      return false if !@request_three_d_secure.nil? && @request_three_d_secure.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] request_three_d_secure Object to be assigned
-    def request_three_d_secure=(request_three_d_secure)
+    def request_three_d_secure=(request_three_d_secure : String?)
       ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid!(request_three_d_secure)
       @request_three_d_secure = request_three_d_secure
     end
@@ -83,6 +78,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@mandate_options, @request_three_d_secure)
+    def_equals_and_hash(@mandate_options, @mandate_options_present, @request_three_d_secure, @request_three_d_secure_present)
   end
 end

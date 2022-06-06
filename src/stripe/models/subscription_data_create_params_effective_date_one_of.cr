@@ -13,25 +13,48 @@ require "log"
 
 module Stripe
   class SubscriptionDataCreateParamsEffectiveDateOneOf
-    CURRENT_PERIOD_END = "current_period_end"
+    property data : String
 
-    # Builds the enum from string
-    # @param [String] The enum value in the form of the string
-    # @return [String] The enum value
-    def self.build_from_hash(value)
-      new.build_from_hash(value)
+    ENUM_VALIDATOR = EnumValidator.new("subscription_data_create_params_effective_date_oneOf", "String", ["current_period_end"])
+
+    delegate to_json_object_key, to: @data
+    delegate error_message, to: ENUM_VALIDATOR
+
+    def self.from_json(value : JSON::PullParser) : SubscriptionDataCreateParamsEffectiveDateOneOf
+      new(value)
     end
 
-    # Builds the enum from string
-    # @param [String] The enum value in the form of the string
-    # @return [String] The enum value
-    def build_from_hash(value)
-      case value
-      when "current_period_end"
-        CURRENT_PERIOD_END
-      else
-        raise "Invalid ENUM value #{value} for class #SubscriptionDataCreateParamsEffectiveDateOneOf"
-      end
+    def self.to_json(value : SubscriptionDataCreateParamsEffectiveDateOneOf, json : JSON::Builder) : Nil
+      value.to_json(json)
     end
+
+    def self.new(pull : JSON::PullParser)
+      new(String.new(pull))
+    end
+
+    def self.from_json_object_key?(key : String)
+      String.from_json_object_key?(key)
+    end
+
+    def self.new!(data : String)
+      new(data).tap(&.valid!)
+    end
+
+    def initialize(@data : String)
+    end
+
+    def valid?
+      ENUM_VALIDATOR.valid?(@data, false)
+    end
+
+    def valid!
+      ENUM_VALIDATOR.valid!(@data, false)
+    end
+
+    def to_json(json : JSON::Builder) : Nil
+      @data.to_json(json)
+    end
+
+    def_equals_and_hash(@data)
   end
 end

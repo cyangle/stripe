@@ -371,21 +371,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] capture_method Object to be assigned
-    def capture_method=(capture_method)
+    def capture_method=(capture_method : String)
       ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid!(capture_method, false)
       @capture_method = capture_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] confirmation_method Object to be assigned
-    def confirmation_method=(confirmation_method)
+    def confirmation_method=(confirmation_method : String)
       ENUM_VALIDATOR_FOR_CONFIRMATION_METHOD.valid!(confirmation_method, false)
       @confirmation_method = confirmation_method
     end
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -395,28 +395,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_reason Object to be assigned
-    def cancellation_reason=(cancellation_reason)
+    def cancellation_reason=(cancellation_reason : String?)
       ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid!(cancellation_reason)
       @cancellation_reason = cancellation_reason
     end
 
     # Custom attribute writer method with validation
     # @param [Object] client_secret Value to be assigned
-    def client_secret=(client_secret)
+    def client_secret=(client_secret : String?)
       if !client_secret.nil? && client_secret.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
       end
@@ -426,7 +426,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -436,7 +436,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] receipt_email Value to be assigned
-    def receipt_email=(receipt_email)
+    def receipt_email=(receipt_email : String?)
       if !receipt_email.nil? && receipt_email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"receipt_email\", the character length must be smaller than or equal to 5000.")
       end
@@ -446,14 +446,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage)
+    def setup_future_usage=(setup_future_usage : String?)
       ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(setup_future_usage)
       @setup_future_usage = setup_future_usage
     end
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
-    def statement_descriptor=(statement_descriptor)
+    def statement_descriptor=(statement_descriptor : String?)
       if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
@@ -463,7 +463,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor_suffix Value to be assigned
-    def statement_descriptor_suffix=(statement_descriptor_suffix)
+    def statement_descriptor_suffix=(statement_descriptor_suffix : String?)
       if !statement_descriptor_suffix.nil? && statement_descriptor_suffix.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 5000.")
       end
@@ -473,7 +473,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] transfer_group Value to be assigned
-    def transfer_group=(transfer_group)
+    def transfer_group=(transfer_group : String?)
       if !transfer_group.nil? && transfer_group.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"transfer_group\", the character length must be smaller than or equal to 5000.")
       end
@@ -491,6 +491,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @capture_method, @confirmation_method, @created, @currency, @id, @livemode, @object, @payment_method_types, @status, @amount_capturable, @amount_details, @amount_received, @application, @application_fee_amount, @automatic_payment_methods, @canceled_at, @cancellation_reason, @charges, @client_secret, @customer, @description, @invoice, @last_payment_error, @metadata, @next_action, @on_behalf_of, @payment_method, @payment_method_options, @processing, @receipt_email, @review, @setup_future_usage, @shipping, @statement_descriptor, @statement_descriptor_suffix, @transfer_data, @transfer_group)
+    def_equals_and_hash(@amount, @capture_method, @confirmation_method, @created, @currency, @id, @livemode, @object, @payment_method_types, @status, @amount_capturable, @amount_capturable_present, @amount_details, @amount_details_present, @amount_received, @amount_received_present, @application, @application_present, @application_fee_amount, @application_fee_amount_present, @automatic_payment_methods, @automatic_payment_methods_present, @canceled_at, @canceled_at_present, @cancellation_reason, @cancellation_reason_present, @charges, @charges_present, @client_secret, @client_secret_present, @customer, @customer_present, @description, @description_present, @invoice, @invoice_present, @last_payment_error, @last_payment_error_present, @metadata, @metadata_present, @next_action, @next_action_present, @on_behalf_of, @on_behalf_of_present, @payment_method, @payment_method_present, @payment_method_options, @payment_method_options_present, @processing, @processing_present, @receipt_email, @receipt_email_present, @review, @review_present, @setup_future_usage, @setup_future_usage_present, @shipping, @shipping_present, @statement_descriptor, @statement_descriptor_present, @statement_descriptor_suffix, @statement_descriptor_suffix_present, @transfer_data, @transfer_data_present, @transfer_group, @transfer_group_present)
   end
 end

@@ -72,6 +72,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@bsb_number, @fingerprint, @last4)
+    def_equals_and_hash(@bsb_number, @bsb_number_present, @fingerprint, @fingerprint_present, @last4, @last4_present)
   end
 end

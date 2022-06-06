@@ -342,7 +342,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] client_secret Value to be assigned
-    def client_secret=(client_secret)
+    def client_secret=(client_secret : String)
       if client_secret.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
       end
@@ -352,7 +352,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] flow Value to be assigned
-    def flow=(flow)
+    def flow=(flow : String)
       if flow.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"flow\", the character length must be smaller than or equal to 5000.")
       end
@@ -362,7 +362,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -372,14 +372,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] status Value to be assigned
-    def status=(status)
+    def status=(status : String)
       if status.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
@@ -389,14 +389,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String?)
       if !customer.nil? && customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
@@ -406,7 +406,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
-    def statement_descriptor=(statement_descriptor)
+    def statement_descriptor=(statement_descriptor : String?)
       if !statement_descriptor.nil? && statement_descriptor.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
@@ -416,7 +416,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] usage Value to be assigned
-    def usage=(usage)
+    def usage=(usage : String?)
       if !usage.nil? && usage.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"usage\", the character length must be smaller than or equal to 5000.")
       end
@@ -434,6 +434,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@client_secret, @created, @flow, @id, @livemode, @object, @status, @_type, @ach_credit_transfer, @ach_debit, @acss_debit, @alipay, @amount, @au_becs_debit, @bancontact, @card, @card_present2, @code_verification, @currency, @customer, @eps, @giropay, @ideal, @klarna, @metadata, @multibanco, @owner, @p24, @receiver, @redirect, @sepa_debit, @sofort, @source_order, @statement_descriptor, @three_d_secure, @usage, @wechat)
+    def_equals_and_hash(@client_secret, @created, @flow, @id, @livemode, @object, @status, @_type, @ach_credit_transfer, @ach_credit_transfer_present, @ach_debit, @ach_debit_present, @acss_debit, @acss_debit_present, @alipay, @alipay_present, @amount, @amount_present, @au_becs_debit, @au_becs_debit_present, @bancontact, @bancontact_present, @card, @card_present2, @card_present2, @card_present2_present, @code_verification, @code_verification_present, @currency, @currency_present, @customer, @customer_present, @eps, @eps_present, @giropay, @giropay_present, @ideal, @ideal_present, @klarna, @klarna_present, @metadata, @metadata_present, @multibanco, @multibanco_present, @owner, @owner_present, @p24, @p24_present, @receiver, @receiver_present, @redirect, @redirect_present, @sepa_debit, @sepa_debit_present, @sofort, @sofort_present, @source_order, @source_order_present, @statement_descriptor, @statement_descriptor_present, @three_d_secure, @three_d_secure_present, @usage, @usage_present, @wechat, @wechat_present)
   end
 end

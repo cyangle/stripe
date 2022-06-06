@@ -67,6 +67,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@expected_total, @expand)
+    def_equals_and_hash(@expected_total, @expand, @expand_present)
   end
 end

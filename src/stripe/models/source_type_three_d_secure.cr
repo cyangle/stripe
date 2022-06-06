@@ -170,6 +170,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@address_line1_check, @address_zip_check, @authenticated, @brand, @card, @country, @customer, @cvc_check, @dynamic_last4, @exp_month, @exp_year, @fingerprint, @funding, @last4, @name, @three_d_secure, @tokenization_method)
+    def_equals_and_hash(@address_line1_check, @address_line1_check_present, @address_zip_check, @address_zip_check_present, @authenticated, @authenticated_present, @brand, @brand_present, @card, @card_present2, @country, @country_present, @customer, @customer_present, @cvc_check, @cvc_check_present, @dynamic_last4, @dynamic_last4_present, @exp_month, @exp_month_present, @exp_year, @exp_year_present, @fingerprint, @fingerprint_present, @funding, @funding_present, @last4, @last4_present, @name, @name_present, @three_d_secure, @three_d_secure_present, @tokenization_method, @tokenization_method_present)
   end
 end

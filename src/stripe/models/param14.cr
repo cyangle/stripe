@@ -41,10 +41,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BANK.error_message) unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank, false)
 
-      if @bank.to_s.size > 5000
-        invalid_properties.push("invalid value for \"bank\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties
     end
 
@@ -52,14 +48,13 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank, false)
-      return false if @bank.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank Object to be assigned
-    def bank=(bank)
+    def bank=(bank : String)
       ENUM_VALIDATOR_FOR_BANK.valid!(bank, false)
       @bank = bank
     end

@@ -70,7 +70,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification_method Object to be assigned
-    def verification_method=(verification_method)
+    def verification_method=(verification_method : String?)
       ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid!(verification_method)
       @verification_method = verification_method
     end
@@ -85,6 +85,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@financial_connections, @networks, @verification_method)
+    def_equals_and_hash(@financial_connections, @financial_connections_present, @networks, @networks_present, @verification_method, @verification_method_present)
   end
 end

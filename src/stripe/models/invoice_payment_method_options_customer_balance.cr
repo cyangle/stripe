@@ -65,7 +65,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] funding_type Object to be assigned
-    def funding_type=(funding_type)
+    def funding_type=(funding_type : String?)
       ENUM_VALIDATOR_FOR_FUNDING_TYPE.valid!(funding_type)
       @funding_type = funding_type
     end
@@ -80,6 +80,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@bank_transfer, @funding_type)
+    def_equals_and_hash(@bank_transfer, @bank_transfer_present, @funding_type, @funding_type_present)
   end
 end

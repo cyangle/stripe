@@ -94,7 +94,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] cancellation_reason Value to be assigned
-    def cancellation_reason=(cancellation_reason)
+    def cancellation_reason=(cancellation_reason : String?)
       if !cancellation_reason.nil? && cancellation_reason.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"cancellation_reason\", the character length must be smaller than or equal to 5000.")
       end
@@ -104,7 +104,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] explanation Value to be assigned
-    def explanation=(explanation)
+    def explanation=(explanation : String?)
       if !explanation.nil? && explanation.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
       end
@@ -122,6 +122,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@additional_documentation, @canceled_at, @cancellation_reason, @explanation, @received_at)
+    def_equals_and_hash(@additional_documentation, @additional_documentation_present, @canceled_at, @canceled_at_present, @cancellation_reason, @cancellation_reason_present, @explanation, @explanation_present, @received_at, @received_at_present)
   end
 end

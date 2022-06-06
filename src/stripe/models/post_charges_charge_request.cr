@@ -120,7 +120,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String?)
       if !customer.nil? && customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
@@ -130,7 +130,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 40000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
       end
@@ -140,7 +140,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] receipt_email Value to be assigned
-    def receipt_email=(receipt_email)
+    def receipt_email=(receipt_email : String?)
       if !receipt_email.nil? && receipt_email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"receipt_email\", the character length must be smaller than or equal to 5000.")
       end
@@ -158,6 +158,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@customer, @description, @expand, @fraud_details, @metadata, @receipt_email, @shipping, @transfer_group)
+    def_equals_and_hash(@customer, @customer_present, @description, @description_present, @expand, @expand_present, @fraud_details, @fraud_details_present, @metadata, @metadata_present, @receipt_email, @receipt_email_present, @shipping, @shipping_present, @transfer_group, @transfer_group_present)
   end
 end

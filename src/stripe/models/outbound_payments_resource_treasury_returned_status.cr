@@ -59,7 +59,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
-    def code=(code)
+    def code=(code : String)
       ENUM_VALIDATOR_FOR_CODE.valid!(code, false)
       @code = code
     end

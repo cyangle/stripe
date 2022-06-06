@@ -70,7 +70,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] setup_intent Value to be assigned
-    def setup_intent=(setup_intent)
+    def setup_intent=(setup_intent : String)
       if setup_intent.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"setup_intent\", the character length must be smaller than or equal to 5000.")
       end
@@ -88,6 +88,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@customer_consent_collected, @setup_intent, @expand)
+    def_equals_and_hash(@customer_consent_collected, @setup_intent, @expand, @expand_present)
   end
 end

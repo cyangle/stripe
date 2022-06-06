@@ -81,14 +81,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] default_allowed_updates Object to be assigned
-    def default_allowed_updates=(default_allowed_updates)
+    def default_allowed_updates=(default_allowed_updates : Array(String))
       ENUM_VALIDATOR_FOR_DEFAULT_ALLOWED_UPDATES.all_valid!(default_allowed_updates, false)
       @default_allowed_updates = default_allowed_updates
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] proration_behavior Object to be assigned
-    def proration_behavior=(proration_behavior)
+    def proration_behavior=(proration_behavior : String)
       ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(proration_behavior, false)
       @proration_behavior = proration_behavior
     end
@@ -103,6 +103,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@default_allowed_updates, @enabled, @proration_behavior, @products)
+    def_equals_and_hash(@default_allowed_updates, @enabled, @proration_behavior, @products, @products_present)
   end
 end

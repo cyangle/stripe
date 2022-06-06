@@ -130,7 +130,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] coupon Value to be assigned
-    def coupon=(coupon)
+    def coupon=(coupon : String)
       if coupon.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
       end
@@ -140,7 +140,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] code Value to be assigned
-    def code=(code)
+    def code=(code : String?)
       if !code.nil? && code.to_s.size > 500
         raise ArgumentError.new("invalid value for \"code\", the character length must be smaller than or equal to 500.")
       end
@@ -150,7 +150,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String?)
       if !customer.nil? && customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
@@ -168,6 +168,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@coupon, @active, @code, @customer, @expand, @expires_at, @max_redemptions, @metadata, @restrictions)
+    def_equals_and_hash(@coupon, @active, @active_present, @code, @code_present, @customer, @customer_present, @expand, @expand_present, @expires_at, @expires_at_present, @max_redemptions, @max_redemptions_present, @metadata, @metadata_present, @restrictions, @restrictions_present)
   end
 end

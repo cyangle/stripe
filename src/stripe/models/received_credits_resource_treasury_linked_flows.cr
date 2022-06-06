@@ -117,7 +117,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] credit_reversal Value to be assigned
-    def credit_reversal=(credit_reversal)
+    def credit_reversal=(credit_reversal : String?)
       if !credit_reversal.nil? && credit_reversal.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"credit_reversal\", the character length must be smaller than or equal to 5000.")
       end
@@ -127,7 +127,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] issuing_authorization Value to be assigned
-    def issuing_authorization=(issuing_authorization)
+    def issuing_authorization=(issuing_authorization : String?)
       if !issuing_authorization.nil? && issuing_authorization.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
       end
@@ -137,7 +137,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] issuing_transaction Value to be assigned
-    def issuing_transaction=(issuing_transaction)
+    def issuing_transaction=(issuing_transaction : String?)
       if !issuing_transaction.nil? && issuing_transaction.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
       end
@@ -147,7 +147,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] source_flow Value to be assigned
-    def source_flow=(source_flow)
+    def source_flow=(source_flow : String?)
       if !source_flow.nil? && source_flow.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"source_flow\", the character length must be smaller than or equal to 5000.")
       end
@@ -157,7 +157,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] source_flow_type Value to be assigned
-    def source_flow_type=(source_flow_type)
+    def source_flow_type=(source_flow_type : String?)
       if !source_flow_type.nil? && source_flow_type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"source_flow_type\", the character length must be smaller than or equal to 5000.")
       end
@@ -175,6 +175,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@credit_reversal, @issuing_authorization, @issuing_transaction, @source_flow, @source_flow_details, @source_flow_type)
+    def_equals_and_hash(@credit_reversal, @credit_reversal_present, @issuing_authorization, @issuing_authorization_present, @issuing_transaction, @issuing_transaction_present, @source_flow, @source_flow_present, @source_flow_details, @source_flow_details_present, @source_flow_type, @source_flow_type_present)
   end
 end

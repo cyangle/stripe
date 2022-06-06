@@ -66,6 +66,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@effective_date, @trial_period_days)
+    def_equals_and_hash(@effective_date, @effective_date_present, @trial_period_days, @trial_period_days_present)
   end
 end

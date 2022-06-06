@@ -80,6 +80,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@bbpos_wisepos_e, @expand, @tipping, @verifone_p400)
+    def_equals_and_hash(@bbpos_wisepos_e, @bbpos_wisepos_e_present, @expand, @expand_present, @tipping, @tipping_present, @verifone_p400, @verifone_p400_present)
   end
 end

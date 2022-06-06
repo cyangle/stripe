@@ -177,7 +177,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] brand Value to be assigned
-    def brand=(brand)
+    def brand=(brand : String?)
       if !brand.nil? && brand.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
       end
@@ -187,7 +187,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
-    def country=(country)
+    def country=(country : String?)
       if !country.nil? && country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
@@ -197,7 +197,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] fingerprint Value to be assigned
-    def fingerprint=(fingerprint)
+    def fingerprint=(fingerprint : String?)
       if !fingerprint.nil? && fingerprint.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
@@ -207,7 +207,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] funding Value to be assigned
-    def funding=(funding)
+    def funding=(funding : String?)
       if !funding.nil? && funding.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"funding\", the character length must be smaller than or equal to 5000.")
       end
@@ -217,7 +217,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] last4 Value to be assigned
-    def last4=(last4)
+    def last4=(last4 : String?)
       if !last4.nil? && last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
@@ -227,7 +227,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] mandate Value to be assigned
-    def mandate=(mandate)
+    def mandate=(mandate : String?)
       if !mandate.nil? && mandate.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"mandate\", the character length must be smaller than or equal to 5000.")
       end
@@ -237,7 +237,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] network Value to be assigned
-    def network=(network)
+    def network=(network : String?)
       if !network.nil? && network.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"network\", the character length must be smaller than or equal to 5000.")
       end
@@ -255,6 +255,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@exp_month, @exp_year, @brand, @checks, @country, @fingerprint, @funding, @installments, @last4, @mandate, @network, @three_d_secure, @wallet)
+    def_equals_and_hash(@exp_month, @exp_year, @brand, @brand_present, @checks, @checks_present, @country, @country_present, @fingerprint, @fingerprint_present, @funding, @funding_present, @installments, @installments_present, @last4, @last4_present, @mandate, @mandate_present, @network, @network_present, @three_d_secure, @three_d_secure_present, @wallet, @wallet_present)
   end
 end

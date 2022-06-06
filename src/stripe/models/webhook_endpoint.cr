@@ -160,7 +160,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -170,14 +170,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] status Value to be assigned
-    def status=(status)
+    def status=(status : String)
       if status.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
@@ -187,7 +187,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
-    def url=(url)
+    def url=(url : String)
       if url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
@@ -197,7 +197,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] api_version Value to be assigned
-    def api_version=(api_version)
+    def api_version=(api_version : String?)
       if !api_version.nil? && api_version.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
       end
@@ -207,7 +207,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] application Value to be assigned
-    def application=(application)
+    def application=(application : String?)
       if !application.nil? && application.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"application\", the character length must be smaller than or equal to 5000.")
       end
@@ -217,7 +217,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -227,7 +227,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] secret Value to be assigned
-    def secret=(secret)
+    def secret=(secret : String?)
       if !secret.nil? && secret.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"secret\", the character length must be smaller than or equal to 5000.")
       end
@@ -245,6 +245,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@created, @enabled_events, @id, @livemode, @metadata, @object, @status, @url, @api_version, @application, @description, @secret)
+    def_equals_and_hash(@created, @enabled_events, @id, @livemode, @metadata, @object, @status, @url, @api_version, @api_version_present, @application, @application_present, @description, @description_present, @secret, @secret_present)
   end
 end

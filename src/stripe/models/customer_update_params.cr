@@ -81,21 +81,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] address Object to be assigned
-    def address=(address)
+    def address=(address : String?)
       ENUM_VALIDATOR_FOR_ADDRESS.valid!(address)
       @address = address
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
-    def name=(name)
+    def name=(name : String?)
       ENUM_VALIDATOR_FOR_NAME.valid!(name)
       @name = name
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] shipping Object to be assigned
-    def shipping=(shipping)
+    def shipping=(shipping : String?)
       ENUM_VALIDATOR_FOR_SHIPPING.valid!(shipping)
       @shipping = shipping
     end
@@ -110,6 +110,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@address, @name, @shipping)
+    def_equals_and_hash(@address, @address_present, @name, @name_present, @shipping, @shipping_present)
   end
 end

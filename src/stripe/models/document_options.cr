@@ -77,7 +77,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] allowed_types Object to be assigned
-    def allowed_types=(allowed_types)
+    def allowed_types=(allowed_types : Array(String)?)
       ENUM_VALIDATOR_FOR_ALLOWED_TYPES.all_valid!(allowed_types)
       @allowed_types = allowed_types
     end
@@ -92,6 +92,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@allowed_types, @require_id_number, @require_live_capture, @require_matching_selfie)
+    def_equals_and_hash(@allowed_types, @allowed_types_present, @require_id_number, @require_id_number_present, @require_live_capture, @require_live_capture_present, @require_matching_selfie, @require_matching_selfie_present)
   end
 end

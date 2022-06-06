@@ -71,7 +71,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] entity Value to be assigned
-    def entity=(entity)
+    def entity=(entity : String?)
       if !entity.nil? && entity.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"entity\", the character length must be smaller than or equal to 5000.")
       end
@@ -81,7 +81,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] reference Value to be assigned
-    def reference=(reference)
+    def reference=(reference : String?)
       if !reference.nil? && reference.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
       end
@@ -99,6 +99,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@entity, @reference)
+    def_equals_and_hash(@entity, @entity_present, @reference, @reference_present)
   end
 end

@@ -66,7 +66,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] behavior Object to be assigned
-    def behavior=(behavior)
+    def behavior=(behavior : String)
       ENUM_VALIDATOR_FOR_BEHAVIOR.valid!(behavior, false)
       @behavior = behavior
     end
@@ -81,6 +81,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@behavior, @resumes_at)
+    def_equals_and_hash(@behavior, @resumes_at, @resumes_at_present)
   end
 end

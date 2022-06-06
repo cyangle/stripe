@@ -101,7 +101,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] nickname Value to be assigned
-    def nickname=(nickname)
+    def nickname=(nickname : String?)
       if !nickname.nil? && nickname.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
       end
@@ -111,7 +111,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] product Value to be assigned
-    def product=(product)
+    def product=(product : String?)
       if !product.nil? && product.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"product\", the character length must be smaller than or equal to 5000.")
       end
@@ -129,6 +129,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@active, @expand, @metadata, @nickname, @product, @trial_period_days)
+    def_equals_and_hash(@active, @active_present, @expand, @expand_present, @metadata, @metadata_present, @nickname, @nickname_present, @product, @product_present, @trial_period_days, @trial_period_days_present)
   end
 end

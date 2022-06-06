@@ -81,14 +81,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] account Value to be assigned
-    def account=(account)
+    def account=(account : String?)
       if !account.nil? && account.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
       end
@@ -98,7 +98,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String?)
       if !customer.nil? && customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
@@ -116,6 +116,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @account, @customer)
+    def_equals_and_hash(@_type, @account, @account_present, @customer, @customer_present)
   end
 end

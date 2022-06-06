@@ -71,7 +71,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] email Value to be assigned
-    def email=(email)
+    def email=(email : String?)
       if !email.nil? && email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
@@ -81,7 +81,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] persistent_token Value to be assigned
-    def persistent_token=(persistent_token)
+    def persistent_token=(persistent_token : String?)
       if !persistent_token.nil? && persistent_token.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"persistent_token\", the character length must be smaller than or equal to 5000.")
       end
@@ -99,6 +99,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@email, @persistent_token)
+    def_equals_and_hash(@email, @email_present, @persistent_token, @persistent_token_present)
   end
 end

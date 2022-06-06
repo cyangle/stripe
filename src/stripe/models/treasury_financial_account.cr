@@ -168,14 +168,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] active_features Object to be assigned
-    def active_features=(active_features)
+    def active_features=(active_features : Array(String))
       ENUM_VALIDATOR_FOR_ACTIVE_FEATURES.all_valid!(active_features, false)
       @active_features = active_features
     end
 
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
-    def country=(country)
+    def country=(country : String)
       if country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
@@ -185,7 +185,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -195,28 +195,28 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] pending_features Object to be assigned
-    def pending_features=(pending_features)
+    def pending_features=(pending_features : Array(String))
       ENUM_VALIDATOR_FOR_PENDING_FEATURES.all_valid!(pending_features, false)
       @pending_features = pending_features
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] restricted_features Object to be assigned
-    def restricted_features=(restricted_features)
+    def restricted_features=(restricted_features : Array(String))
       ENUM_VALIDATOR_FOR_RESTRICTED_FEATURES.all_valid!(restricted_features, false)
       @restricted_features = restricted_features
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
       @status = status
     end
@@ -231,6 +231,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@active_features, @balance, @country, @created, @financial_addresses, @id, @livemode, @object, @pending_features, @restricted_features, @status, @status_details, @supported_currencies, @features, @metadata, @platform_restrictions)
+    def_equals_and_hash(@active_features, @balance, @country, @created, @financial_addresses, @id, @livemode, @object, @pending_features, @restricted_features, @status, @status_details, @supported_currencies, @features, @features_present, @metadata, @metadata_present, @platform_restrictions, @platform_restrictions_present)
   end
 end

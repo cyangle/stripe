@@ -172,7 +172,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String?)
       if !customer.nil? && customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
@@ -182,7 +182,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 1000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 1000.")
       end
@@ -192,7 +192,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] payment_method Value to be assigned
-    def payment_method=(payment_method)
+    def payment_method=(payment_method : String?)
       if !payment_method.nil? && payment_method.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"payment_method\", the character length must be smaller than or equal to 5000.")
       end
@@ -202,7 +202,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usage Object to be assigned
-    def usage=(usage)
+    def usage=(usage : String?)
       ENUM_VALIDATOR_FOR_USAGE.valid!(usage)
       @usage = usage
     end
@@ -217,6 +217,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@confirm, @customer, @description, @expand, @mandate_data, @metadata, @on_behalf_of, @payment_method, @payment_method_data, @payment_method_options, @payment_method_types, @return_url, @single_use, @usage)
+    def_equals_and_hash(@confirm, @confirm_present, @customer, @customer_present, @description, @description_present, @expand, @expand_present, @mandate_data, @mandate_data_present, @metadata, @metadata_present, @on_behalf_of, @on_behalf_of_present, @payment_method, @payment_method_present, @payment_method_data, @payment_method_data_present, @payment_method_options, @payment_method_options_present, @payment_method_types, @payment_method_types_present, @return_url, @return_url_present, @single_use, @single_use_present, @usage, @usage_present)
   end
 end

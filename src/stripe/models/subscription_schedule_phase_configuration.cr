@@ -178,21 +178,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] proration_behavior Object to be assigned
-    def proration_behavior=(proration_behavior)
+    def proration_behavior=(proration_behavior : String)
       ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(proration_behavior, false)
       @proration_behavior = proration_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_cycle_anchor Object to be assigned
-    def billing_cycle_anchor=(billing_cycle_anchor)
+    def billing_cycle_anchor=(billing_cycle_anchor : String?)
       ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid!(billing_cycle_anchor)
       @billing_cycle_anchor = billing_cycle_anchor
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] collection_method Object to be assigned
-    def collection_method=(collection_method)
+    def collection_method=(collection_method : String?)
       ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(collection_method)
       @collection_method = collection_method
     end
@@ -207,6 +207,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@add_invoice_items, @end_date, @items, @proration_behavior, @start_date, @application_fee_percent, @automatic_tax, @billing_cycle_anchor, @billing_thresholds, @collection_method, @coupon, @default_payment_method, @default_tax_rates, @invoice_settings, @metadata, @transfer_data, @trial_end)
+    def_equals_and_hash(@add_invoice_items, @end_date, @items, @proration_behavior, @start_date, @application_fee_percent, @application_fee_percent_present, @automatic_tax, @automatic_tax_present, @billing_cycle_anchor, @billing_cycle_anchor_present, @billing_thresholds, @billing_thresholds_present, @collection_method, @collection_method_present, @coupon, @coupon_present, @default_payment_method, @default_payment_method_present, @default_tax_rates, @default_tax_rates_present, @invoice_settings, @invoice_settings_present, @metadata, @metadata_present, @transfer_data, @transfer_data_present, @trial_end, @trial_end_present)
   end
 end

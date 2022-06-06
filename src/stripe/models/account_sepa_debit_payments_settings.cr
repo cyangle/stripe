@@ -58,7 +58,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] creditor_id Value to be assigned
-    def creditor_id=(creditor_id)
+    def creditor_id=(creditor_id : String?)
       if !creditor_id.nil? && creditor_id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"creditor_id\", the character length must be smaller than or equal to 5000.")
       end
@@ -76,6 +76,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@creditor_id)
+    def_equals_and_hash(@creditor_id, @creditor_id_present)
   end
 end

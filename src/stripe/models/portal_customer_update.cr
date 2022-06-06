@@ -60,7 +60,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] allowed_updates Object to be assigned
-    def allowed_updates=(allowed_updates)
+    def allowed_updates=(allowed_updates : Array(String))
       ENUM_VALIDATOR_FOR_ALLOWED_UPDATES.all_valid!(allowed_updates, false)
       @allowed_updates = allowed_updates
     end

@@ -137,7 +137,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] code Value to be assigned
-    def code=(code)
+    def code=(code : String)
       if code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"code\", the character length must be smaller than or equal to 5000.")
       end
@@ -147,7 +147,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -157,7 +157,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
@@ -172,6 +172,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@active, @code, @coupon, @created, @id, @livemode, @object, @restrictions, @times_redeemed, @customer, @expires_at, @max_redemptions, @metadata)
+    def_equals_and_hash(@active, @code, @coupon, @created, @id, @livemode, @object, @restrictions, @times_redeemed, @customer, @customer_present, @expires_at, @expires_at_present, @max_redemptions, @max_redemptions_present, @metadata, @metadata_present)
   end
 end

@@ -60,7 +60,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] email_sent_to Value to be assigned
-    def email_sent_to=(email_sent_to)
+    def email_sent_to=(email_sent_to : String)
       if email_sent_to.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"email_sent_to\", the character length must be smaller than or equal to 5000.")
       end

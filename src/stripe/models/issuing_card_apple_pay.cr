@@ -66,7 +66,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ineligible_reason Object to be assigned
-    def ineligible_reason=(ineligible_reason)
+    def ineligible_reason=(ineligible_reason : String?)
       ENUM_VALIDATOR_FOR_INELIGIBLE_REASON.valid!(ineligible_reason)
       @ineligible_reason = ineligible_reason
     end
@@ -81,6 +81,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@eligible, @ineligible_reason)
+    def_equals_and_hash(@eligible, @ineligible_reason, @ineligible_reason_present)
   end
 end

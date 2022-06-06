@@ -59,6 +59,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@days_until_due)
+    def_equals_and_hash(@days_until_due, @days_until_due_present)
   end
 end

@@ -92,6 +92,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@expires_at, @billing_cycle_anchor, @subscription_items, @trial_end, @trial_from_plan)
+    def_equals_and_hash(@expires_at, @billing_cycle_anchor, @billing_cycle_anchor_present, @subscription_items, @subscription_items_present, @trial_end, @trial_end_present, @trial_from_plan, @trial_from_plan_present)
   end
 end

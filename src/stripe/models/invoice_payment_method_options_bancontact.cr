@@ -55,7 +55,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] preferred_language Object to be assigned
-    def preferred_language=(preferred_language)
+    def preferred_language=(preferred_language : String)
       ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE.valid!(preferred_language, false)
       @preferred_language = preferred_language
     end

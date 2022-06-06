@@ -65,6 +65,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@maximum, @minimum)
+    def_equals_and_hash(@maximum, @maximum_present, @minimum, @minimum_present)
   end
 end

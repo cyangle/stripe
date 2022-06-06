@@ -66,15 +66,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
 
-      if !@interval.nil? && @interval.to_s.size > 5000
-        invalid_properties.push("invalid value for \"interval\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR.error_message) unless ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR.valid?(@weekly_anchor)
-
-      if !@weekly_anchor.nil? && @weekly_anchor.to_s.size > 5000
-        invalid_properties.push("invalid value for \"weekly_anchor\", the character length must be smaller than or equal to 5000.")
-      end
 
       invalid_properties
     end
@@ -83,23 +75,21 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
-      return false if !@interval.nil? && @interval.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR.valid?(@weekly_anchor)
-      return false if !@weekly_anchor.nil? && @weekly_anchor.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval)
+    def interval=(interval : String?)
       ENUM_VALIDATOR_FOR_INTERVAL.valid!(interval)
       @interval = interval
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] weekly_anchor Object to be assigned
-    def weekly_anchor=(weekly_anchor)
+    def weekly_anchor=(weekly_anchor : String?)
       ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR.valid!(weekly_anchor)
       @weekly_anchor = weekly_anchor
     end
@@ -114,6 +104,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@delay_days, @interval, @monthly_anchor, @weekly_anchor)
+    def_equals_and_hash(@delay_days, @delay_days_present, @interval, @interval_present, @monthly_anchor, @monthly_anchor_present, @weekly_anchor, @weekly_anchor_present)
   end
 end

@@ -175,6 +175,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@acss_debit, @afterpay_clearpay, @alipay, @au_becs_debit, @bacs_debit, @boleto, @eps, @fpx, @giropay, @grabpay, @klarna, @konbini, @oxxo, @paynow, @sepa_debit, @us_bank_account)
+    def_equals_and_hash(@acss_debit, @acss_debit_present, @afterpay_clearpay, @afterpay_clearpay_present, @alipay, @alipay_present, @au_becs_debit, @au_becs_debit_present, @bacs_debit, @bacs_debit_present, @boleto, @boleto_present, @eps, @eps_present, @fpx, @fpx_present, @giropay, @giropay_present, @grabpay, @grabpay_present, @klarna, @klarna_present, @konbini, @konbini_present, @oxxo, @oxxo_present, @paynow, @paynow_present, @sepa_debit, @sepa_debit_present, @us_bank_account, @us_bank_account_present)
   end
 end

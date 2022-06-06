@@ -99,14 +99,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cancellation_reason Object to be assigned
-    def cancellation_reason=(cancellation_reason)
+    def cancellation_reason=(cancellation_reason : String?)
       ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid!(cancellation_reason)
       @cancellation_reason = cancellation_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status)
+    def status=(status : String?)
       ENUM_VALIDATOR_FOR_STATUS.valid!(status)
       @status = status
     end
@@ -121,6 +121,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@cancellation_reason, @expand, @metadata, @pin, @spending_controls, @status)
+    def_equals_and_hash(@cancellation_reason, @cancellation_reason_present, @expand, @expand_present, @metadata, @metadata_present, @pin, @pin_present, @spending_controls, @spending_controls_present, @status, @status_present)
   end
 end

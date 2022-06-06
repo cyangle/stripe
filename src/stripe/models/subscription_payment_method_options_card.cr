@@ -65,7 +65,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] request_three_d_secure Object to be assigned
-    def request_three_d_secure=(request_three_d_secure)
+    def request_three_d_secure=(request_three_d_secure : String?)
       ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid!(request_three_d_secure)
       @request_three_d_secure = request_three_d_secure
     end
@@ -80,6 +80,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@mandate_options, @request_three_d_secure)
+    def_equals_and_hash(@mandate_options, @mandate_options_present, @request_three_d_secure, @request_three_d_secure_present)
   end
 end

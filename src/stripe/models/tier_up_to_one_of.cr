@@ -13,25 +13,48 @@ require "log"
 
 module Stripe
   class TierUpToOneOf
-    INF = "inf"
+    property data : String
 
-    # Builds the enum from string
-    # @param [String] The enum value in the form of the string
-    # @return [String] The enum value
-    def self.build_from_hash(value)
-      new.build_from_hash(value)
+    ENUM_VALIDATOR = EnumValidator.new("tier_up_to_oneOf", "String", ["inf"])
+
+    delegate to_json_object_key, to: @data
+    delegate error_message, to: ENUM_VALIDATOR
+
+    def self.from_json(value : JSON::PullParser) : TierUpToOneOf
+      new(value)
     end
 
-    # Builds the enum from string
-    # @param [String] The enum value in the form of the string
-    # @return [String] The enum value
-    def build_from_hash(value)
-      case value
-      when "inf"
-        INF
-      else
-        raise "Invalid ENUM value #{value} for class #TierUpToOneOf"
-      end
+    def self.to_json(value : TierUpToOneOf, json : JSON::Builder) : Nil
+      value.to_json(json)
     end
+
+    def self.new(pull : JSON::PullParser)
+      new(String.new(pull))
+    end
+
+    def self.from_json_object_key?(key : String)
+      String.from_json_object_key?(key)
+    end
+
+    def self.new!(data : String)
+      new(data).tap(&.valid!)
+    end
+
+    def initialize(@data : String)
+    end
+
+    def valid?
+      ENUM_VALIDATOR.valid?(@data, false)
+    end
+
+    def valid!
+      ENUM_VALIDATOR.valid!(@data, false)
+    end
+
+    def to_json(json : JSON::Builder) : Nil
+      @data.to_json(json)
+    end
+
+    def_equals_and_hash(@data)
   end
 end

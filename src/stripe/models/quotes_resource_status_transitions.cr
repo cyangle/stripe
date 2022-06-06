@@ -76,6 +76,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@accepted_at, @canceled_at, @finalized_at)
+    def_equals_and_hash(@accepted_at, @accepted_at_present, @canceled_at, @canceled_at_present, @finalized_at, @finalized_at_present)
   end
 end

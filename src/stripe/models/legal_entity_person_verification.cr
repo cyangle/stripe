@@ -98,7 +98,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] status Value to be assigned
-    def status=(status)
+    def status=(status : String)
       if status.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
@@ -108,7 +108,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] details Value to be assigned
-    def details=(details)
+    def details=(details : String?)
       if !details.nil? && details.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"details\", the character length must be smaller than or equal to 5000.")
       end
@@ -118,7 +118,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] details_code Value to be assigned
-    def details_code=(details_code)
+    def details_code=(details_code : String?)
       if !details_code.nil? && details_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"details_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -136,6 +136,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@status, @additional_document, @details, @details_code, @document)
+    def_equals_and_hash(@status, @additional_document, @additional_document_present, @details, @details_present, @details_code, @details_code_present, @document, @document_present)
   end
 end

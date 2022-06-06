@@ -216,14 +216,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_scheme Object to be assigned
-    def billing_scheme=(billing_scheme)
+    def billing_scheme=(billing_scheme : String)
       ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid!(billing_scheme, false)
       @billing_scheme = billing_scheme
     end
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -233,35 +233,35 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval)
+    def interval=(interval : String)
       ENUM_VALIDATOR_FOR_INTERVAL.valid!(interval, false)
       @interval = interval
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] usage_type Object to be assigned
-    def usage_type=(usage_type)
+    def usage_type=(usage_type : String)
       ENUM_VALIDATOR_FOR_USAGE_TYPE.valid!(usage_type, false)
       @usage_type = usage_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] aggregate_usage Object to be assigned
-    def aggregate_usage=(aggregate_usage)
+    def aggregate_usage=(aggregate_usage : String?)
       ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid!(aggregate_usage)
       @aggregate_usage = aggregate_usage
     end
 
     # Custom attribute writer method with validation
     # @param [Object] nickname Value to be assigned
-    def nickname=(nickname)
+    def nickname=(nickname : String?)
       if !nickname.nil? && nickname.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
       end
@@ -271,7 +271,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tiers_mode Object to be assigned
-    def tiers_mode=(tiers_mode)
+    def tiers_mode=(tiers_mode : String?)
       ENUM_VALIDATOR_FOR_TIERS_MODE.valid!(tiers_mode)
       @tiers_mode = tiers_mode
     end
@@ -286,6 +286,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@active, @billing_scheme, @created, @currency, @id, @interval, @interval_count, @livemode, @object, @usage_type, @aggregate_usage, @amount, @amount_decimal, @metadata, @nickname, @product, @tiers, @tiers_mode, @transform_usage, @trial_period_days)
+    def_equals_and_hash(@active, @billing_scheme, @created, @currency, @id, @interval, @interval_count, @livemode, @object, @usage_type, @aggregate_usage, @aggregate_usage_present, @amount, @amount_present, @amount_decimal, @amount_decimal_present, @metadata, @metadata_present, @nickname, @nickname_present, @product, @product_present, @tiers, @tiers_present, @tiers_mode, @tiers_mode_present, @transform_usage, @transform_usage_present, @trial_period_days, @trial_period_days_present)
   end
 end

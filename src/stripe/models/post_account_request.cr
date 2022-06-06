@@ -170,7 +170,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] account_token Value to be assigned
-    def account_token=(account_token)
+    def account_token=(account_token : String?)
       if !account_token.nil? && account_token.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_token\", the character length must be smaller than or equal to 5000.")
       end
@@ -180,14 +180,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] business_type Object to be assigned
-    def business_type=(business_type)
+    def business_type=(business_type : String?)
       ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid!(business_type)
       @business_type = business_type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] external_account Value to be assigned
-    def external_account=(external_account)
+    def external_account=(external_account : String?)
       if !external_account.nil? && external_account.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"external_account\", the character length must be smaller than or equal to 5000.")
       end
@@ -205,6 +205,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@account_token, @bank_account, @business_profile, @business_type, @capabilities, @company, @default_currency, @documents, @email, @expand, @external_account, @individual, @metadata, @settings, @tos_acceptance)
+    def_equals_and_hash(@account_token, @account_token_present, @bank_account, @bank_account_present, @business_profile, @business_profile_present, @business_type, @business_type_present, @capabilities, @capabilities_present, @company, @company_present, @default_currency, @default_currency_present, @documents, @documents_present, @email, @email_present, @expand, @expand_present, @external_account, @external_account_present, @individual, @individual_present, @metadata, @metadata_present, @settings, @settings_present, @tos_acceptance, @tos_acceptance_present)
   end
 end

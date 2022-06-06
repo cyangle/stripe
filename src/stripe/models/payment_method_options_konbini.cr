@@ -100,7 +100,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] confirmation_number Value to be assigned
-    def confirmation_number=(confirmation_number)
+    def confirmation_number=(confirmation_number : String?)
       if !confirmation_number.nil? && confirmation_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"confirmation_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -110,7 +110,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] product_description Value to be assigned
-    def product_description=(product_description)
+    def product_description=(product_description : String?)
       if !product_description.nil? && product_description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 5000.")
       end
@@ -120,7 +120,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage)
+    def setup_future_usage=(setup_future_usage : String?)
       ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(setup_future_usage)
       @setup_future_usage = setup_future_usage
     end
@@ -135,6 +135,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@confirmation_number, @expires_after_days, @expires_at, @product_description, @setup_future_usage)
+    def_equals_and_hash(@confirmation_number, @confirmation_number_present, @expires_after_days, @expires_after_days_present, @expires_at, @expires_at_present, @product_description, @product_description_present, @setup_future_usage, @setup_future_usage_present)
   end
 end

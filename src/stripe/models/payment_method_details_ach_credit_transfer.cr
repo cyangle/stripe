@@ -97,7 +97,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] account_number Value to be assigned
-    def account_number=(account_number)
+    def account_number=(account_number : String?)
       if !account_number.nil? && account_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -107,7 +107,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] bank_name Value to be assigned
-    def bank_name=(bank_name)
+    def bank_name=(bank_name : String?)
       if !bank_name.nil? && bank_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -117,7 +117,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] routing_number Value to be assigned
-    def routing_number=(routing_number)
+    def routing_number=(routing_number : String?)
       if !routing_number.nil? && routing_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -127,7 +127,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] swift_code Value to be assigned
-    def swift_code=(swift_code)
+    def swift_code=(swift_code : String?)
       if !swift_code.nil? && swift_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"swift_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -145,6 +145,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@account_number, @bank_name, @routing_number, @swift_code)
+    def_equals_and_hash(@account_number, @account_number_present, @bank_name, @bank_name_present, @routing_number, @routing_number_present, @swift_code, @swift_code_present)
   end
 end

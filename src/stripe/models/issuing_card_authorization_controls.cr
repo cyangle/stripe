@@ -87,14 +87,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] allowed_categories Object to be assigned
-    def allowed_categories=(allowed_categories)
+    def allowed_categories=(allowed_categories : Array(String)?)
       ENUM_VALIDATOR_FOR_ALLOWED_CATEGORIES.all_valid!(allowed_categories)
       @allowed_categories = allowed_categories
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] blocked_categories Object to be assigned
-    def blocked_categories=(blocked_categories)
+    def blocked_categories=(blocked_categories : Array(String)?)
       ENUM_VALIDATOR_FOR_BLOCKED_CATEGORIES.all_valid!(blocked_categories)
       @blocked_categories = blocked_categories
     end
@@ -109,6 +109,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@allowed_categories, @blocked_categories, @spending_limits, @spending_limits_currency)
+    def_equals_and_hash(@allowed_categories, @allowed_categories_present, @blocked_categories, @blocked_categories_present, @spending_limits, @spending_limits_present, @spending_limits_currency, @spending_limits_currency_present)
   end
 end

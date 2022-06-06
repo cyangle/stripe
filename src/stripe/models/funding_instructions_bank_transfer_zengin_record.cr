@@ -136,7 +136,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] account_holder_name Value to be assigned
-    def account_holder_name=(account_holder_name)
+    def account_holder_name=(account_holder_name : String?)
       if !account_holder_name.nil? && account_holder_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -146,7 +146,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] account_number Value to be assigned
-    def account_number=(account_number)
+    def account_number=(account_number : String?)
       if !account_number.nil? && account_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -156,7 +156,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] account_type Value to be assigned
-    def account_type=(account_type)
+    def account_type=(account_type : String?)
       if !account_type.nil? && account_type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_type\", the character length must be smaller than or equal to 5000.")
       end
@@ -166,7 +166,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] bank_code Value to be assigned
-    def bank_code=(bank_code)
+    def bank_code=(bank_code : String?)
       if !bank_code.nil? && bank_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -176,7 +176,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] bank_name Value to be assigned
-    def bank_name=(bank_name)
+    def bank_name=(bank_name : String?)
       if !bank_name.nil? && bank_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -186,7 +186,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] branch_code Value to be assigned
-    def branch_code=(branch_code)
+    def branch_code=(branch_code : String?)
       if !branch_code.nil? && branch_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"branch_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -196,7 +196,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] branch_name Value to be assigned
-    def branch_name=(branch_name)
+    def branch_name=(branch_name : String?)
       if !branch_name.nil? && branch_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"branch_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -214,6 +214,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@account_holder_name, @account_number, @account_type, @bank_code, @bank_name, @branch_code, @branch_name)
+    def_equals_and_hash(@account_holder_name, @account_holder_name_present, @account_number, @account_number_present, @account_type, @account_type_present, @bank_code, @bank_code_present, @bank_name, @bank_name_present, @branch_code, @branch_code_present, @branch_name, @branch_name_present)
   end
 end

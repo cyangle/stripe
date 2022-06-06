@@ -84,7 +84,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] creditor_identifier Value to be assigned
-    def creditor_identifier=(creditor_identifier)
+    def creditor_identifier=(creditor_identifier : String?)
       if !creditor_identifier.nil? && creditor_identifier.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"creditor_identifier\", the character length must be smaller than or equal to 5000.")
       end
@@ -94,7 +94,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] last4 Value to be assigned
-    def last4=(last4)
+    def last4=(last4 : String?)
       if !last4.nil? && last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
@@ -104,7 +104,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] mandate_reference Value to be assigned
-    def mandate_reference=(mandate_reference)
+    def mandate_reference=(mandate_reference : String?)
       if !mandate_reference.nil? && mandate_reference.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"mandate_reference\", the character length must be smaller than or equal to 5000.")
       end
@@ -122,6 +122,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@creditor_identifier, @last4, @mandate_reference)
+    def_equals_and_hash(@creditor_identifier, @creditor_identifier_present, @last4, @last4_present, @mandate_reference, @mandate_reference_present)
   end
 end

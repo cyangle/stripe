@@ -225,14 +225,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] collection_method Object to be assigned
-    def collection_method=(collection_method)
+    def collection_method=(collection_method : String?)
       ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(collection_method)
       @collection_method = collection_method
     end
 
     # Custom attribute writer method with validation
     # @param [Object] default_payment_method Value to be assigned
-    def default_payment_method=(default_payment_method)
+    def default_payment_method=(default_payment_method : String?)
       if !default_payment_method.nil? && default_payment_method.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"default_payment_method\", the character length must be smaller than or equal to 5000.")
       end
@@ -242,7 +242,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] default_source Value to be assigned
-    def default_source=(default_source)
+    def default_source=(default_source : String?)
       if !default_source.nil? && default_source.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"default_source\", the character length must be smaller than or equal to 5000.")
       end
@@ -252,7 +252,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 1500
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 1500.")
       end
@@ -262,7 +262,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] footer Value to be assigned
-    def footer=(footer)
+    def footer=(footer : String?)
       if !footer.nil? && footer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"footer\", the character length must be smaller than or equal to 5000.")
       end
@@ -272,7 +272,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
-    def statement_descriptor=(statement_descriptor)
+    def statement_descriptor=(statement_descriptor : String?)
       if !statement_descriptor.nil? && statement_descriptor.to_s.size > 22
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
       end
@@ -290,6 +290,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@account_tax_ids, @application_fee_amount, @auto_advance, @automatic_tax, @collection_method, @custom_fields, @days_until_due, @default_payment_method, @default_source, @default_tax_rates, @description, @discounts, @due_date, @expand, @footer, @metadata, @on_behalf_of, @payment_settings, @statement_descriptor, @transfer_data)
+    def_equals_and_hash(@account_tax_ids, @account_tax_ids_present, @application_fee_amount, @application_fee_amount_present, @auto_advance, @auto_advance_present, @automatic_tax, @automatic_tax_present, @collection_method, @collection_method_present, @custom_fields, @custom_fields_present, @days_until_due, @days_until_due_present, @default_payment_method, @default_payment_method_present, @default_source, @default_source_present, @default_tax_rates, @default_tax_rates_present, @description, @description_present, @discounts, @discounts_present, @due_date, @due_date_present, @expand, @expand_present, @footer, @footer_present, @metadata, @metadata_present, @on_behalf_of, @on_behalf_of_present, @payment_settings, @payment_settings_present, @statement_descriptor, @statement_descriptor_present, @transfer_data, @transfer_data_present)
   end
 end

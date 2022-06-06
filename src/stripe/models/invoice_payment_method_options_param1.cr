@@ -56,7 +56,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] preferred_language Object to be assigned
-    def preferred_language=(preferred_language)
+    def preferred_language=(preferred_language : String?)
       ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE.valid!(preferred_language)
       @preferred_language = preferred_language
     end
@@ -71,6 +71,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@preferred_language)
+    def_equals_and_hash(@preferred_language, @preferred_language_present)
   end
 end

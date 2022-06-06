@@ -79,7 +79,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
-    def url=(url)
+    def url=(url : String?)
       if !url.nil? && url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
@@ -97,6 +97,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@allow_promotion_codes, @enabled, @expires_at, @url)
+    def_equals_and_hash(@allow_promotion_codes, @enabled, @expires_at, @expires_at_present, @url, @url_present)
   end
 end

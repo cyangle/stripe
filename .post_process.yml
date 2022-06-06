@@ -23,7 +23,7 @@ tasks:
         pattern: 'card_present_present'
         new_value: 'card_present2_present'
   - name: 'Update all'
-    file_glob: './src/**/*cr'
+    file_glob: './src/stripe/**/cr'
     changes:
       -
         name: 'Correct JSON::Any?'

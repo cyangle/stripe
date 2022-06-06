@@ -130,21 +130,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] amount_type Object to be assigned
-    def amount_type=(amount_type)
+    def amount_type=(amount_type : String)
       ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid!(amount_type, false)
       @amount_type = amount_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval)
+    def interval=(interval : String)
       ENUM_VALIDATOR_FOR_INTERVAL.valid!(interval, false)
       @interval = interval
     end
 
     # Custom attribute writer method with validation
     # @param [Object] reference Value to be assigned
-    def reference=(reference)
+    def reference=(reference : String)
       if reference.to_s.size > 80
         raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 80.")
       end
@@ -154,7 +154,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 200
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 200.")
       end
@@ -164,7 +164,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported_types Object to be assigned
-    def supported_types=(supported_types)
+    def supported_types=(supported_types : Array(String)?)
       ENUM_VALIDATOR_FOR_SUPPORTED_TYPES.all_valid!(supported_types)
       @supported_types = supported_types
     end
@@ -179,6 +179,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @amount_type, @interval, @reference, @start_date, @description, @end_date, @interval_count, @supported_types)
+    def_equals_and_hash(@amount, @amount_type, @interval, @reference, @start_date, @description, @description_present, @end_date, @end_date_present, @interval_count, @interval_count_present, @supported_types, @supported_types_present)
   end
 end

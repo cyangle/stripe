@@ -71,14 +71,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] disabled_reason Object to be assigned
-    def disabled_reason=(disabled_reason)
+    def disabled_reason=(disabled_reason : String?)
       ENUM_VALIDATOR_FOR_DISABLED_REASON.valid!(disabled_reason)
       @disabled_reason = disabled_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] past_due Object to be assigned
-    def past_due=(past_due)
+    def past_due=(past_due : Array(String)?)
       ENUM_VALIDATOR_FOR_PAST_DUE.all_valid!(past_due)
       @past_due = past_due
     end
@@ -93,6 +93,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@disabled_reason, @past_due)
+    def_equals_and_hash(@disabled_reason, @disabled_reason_present, @past_due, @past_due_present)
   end
 end

@@ -72,7 +72,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] account_number Value to be assigned
-    def account_number=(account_number)
+    def account_number=(account_number : String)
       if account_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -82,7 +82,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] institution_number Value to be assigned
-    def institution_number=(institution_number)
+    def institution_number=(institution_number : String)
       if institution_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"institution_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -92,7 +92,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] transit_number Value to be assigned
-    def transit_number=(transit_number)
+    def transit_number=(transit_number : String)
       if transit_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"transit_number\", the character length must be smaller than or equal to 5000.")
       end

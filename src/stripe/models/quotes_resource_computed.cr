@@ -66,6 +66,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@upfront, @recurring)
+    def_equals_and_hash(@upfront, @recurring, @recurring_present)
   end
 end

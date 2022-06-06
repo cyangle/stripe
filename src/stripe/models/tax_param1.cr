@@ -58,6 +58,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@ip_address)
+    def_equals_and_hash(@ip_address, @ip_address_present)
   end
 end

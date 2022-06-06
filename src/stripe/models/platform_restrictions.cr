@@ -69,14 +69,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inbound_flows Object to be assigned
-    def inbound_flows=(inbound_flows)
+    def inbound_flows=(inbound_flows : String?)
       ENUM_VALIDATOR_FOR_INBOUND_FLOWS.valid!(inbound_flows)
       @inbound_flows = inbound_flows
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outbound_flows Object to be assigned
-    def outbound_flows=(outbound_flows)
+    def outbound_flows=(outbound_flows : String?)
       ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS.valid!(outbound_flows)
       @outbound_flows = outbound_flows
     end
@@ -91,6 +91,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@inbound_flows, @outbound_flows)
+    def_equals_and_hash(@inbound_flows, @inbound_flows_present, @outbound_flows, @outbound_flows_present)
   end
 end

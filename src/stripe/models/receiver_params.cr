@@ -44,10 +44,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REFUND_ATTRIBUTES_METHOD.error_message) unless ENUM_VALIDATOR_FOR_REFUND_ATTRIBUTES_METHOD.valid?(@refund_attributes_method)
 
-      if !@refund_attributes_method.nil? && @refund_attributes_method.to_s.size > 5000
-        invalid_properties.push("invalid value for \"refund_attributes_method\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties
     end
 
@@ -55,14 +51,13 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_REFUND_ATTRIBUTES_METHOD.valid?(@refund_attributes_method)
-      return false if !@refund_attributes_method.nil? && @refund_attributes_method.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] refund_attributes_method Object to be assigned
-    def refund_attributes_method=(refund_attributes_method)
+    def refund_attributes_method=(refund_attributes_method : String?)
       ENUM_VALIDATOR_FOR_REFUND_ATTRIBUTES_METHOD.valid!(refund_attributes_method)
       @refund_attributes_method = refund_attributes_method
     end
@@ -77,6 +72,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@refund_attributes_method)
+    def_equals_and_hash(@refund_attributes_method, @refund_attributes_method_present)
   end
 end

@@ -203,7 +203,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] brand Value to be assigned
-    def brand=(brand)
+    def brand=(brand : String?)
       if !brand.nil? && brand.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
       end
@@ -213,7 +213,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] cardholder_name Value to be assigned
-    def cardholder_name=(cardholder_name)
+    def cardholder_name=(cardholder_name : String?)
       if !cardholder_name.nil? && cardholder_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"cardholder_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -223,7 +223,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
-    def country=(country)
+    def country=(country : String?)
       if !country.nil? && country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
@@ -233,7 +233,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] emv_auth_data Value to be assigned
-    def emv_auth_data=(emv_auth_data)
+    def emv_auth_data=(emv_auth_data : String?)
       if !emv_auth_data.nil? && emv_auth_data.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"emv_auth_data\", the character length must be smaller than or equal to 5000.")
       end
@@ -243,7 +243,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] fingerprint Value to be assigned
-    def fingerprint=(fingerprint)
+    def fingerprint=(fingerprint : String?)
       if !fingerprint.nil? && fingerprint.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
@@ -253,7 +253,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] funding Value to be assigned
-    def funding=(funding)
+    def funding=(funding : String?)
       if !funding.nil? && funding.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"funding\", the character length must be smaller than or equal to 5000.")
       end
@@ -263,7 +263,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] generated_card Value to be assigned
-    def generated_card=(generated_card)
+    def generated_card=(generated_card : String?)
       if !generated_card.nil? && generated_card.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"generated_card\", the character length must be smaller than or equal to 5000.")
       end
@@ -273,7 +273,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] last4 Value to be assigned
-    def last4=(last4)
+    def last4=(last4 : String?)
       if !last4.nil? && last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
@@ -283,7 +283,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] network Value to be assigned
-    def network=(network)
+    def network=(network : String?)
       if !network.nil? && network.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"network\", the character length must be smaller than or equal to 5000.")
       end
@@ -293,7 +293,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] read_method Object to be assigned
-    def read_method=(read_method)
+    def read_method=(read_method : String?)
       ENUM_VALIDATOR_FOR_READ_METHOD.valid!(read_method)
       @read_method = read_method
     end
@@ -308,6 +308,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@exp_month, @exp_year, @brand, @cardholder_name, @country, @emv_auth_data, @fingerprint, @funding, @generated_card, @last4, @network, @preferred_locales, @read_method, @receipt)
+    def_equals_and_hash(@exp_month, @exp_year, @brand, @brand_present, @cardholder_name, @cardholder_name_present, @country, @country_present, @emv_auth_data, @emv_auth_data_present, @fingerprint, @fingerprint_present, @funding, @funding_present, @generated_card, @generated_card_present, @last4, @last4_present, @network, @network_present, @preferred_locales, @preferred_locales_present, @read_method, @read_method_present, @receipt, @receipt_present)
   end
 end

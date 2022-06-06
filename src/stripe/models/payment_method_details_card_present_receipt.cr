@@ -162,14 +162,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_type Object to be assigned
-    def account_type=(account_type)
+    def account_type=(account_type : String?)
       ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid!(account_type)
       @account_type = account_type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] application_cryptogram Value to be assigned
-    def application_cryptogram=(application_cryptogram)
+    def application_cryptogram=(application_cryptogram : String?)
       if !application_cryptogram.nil? && application_cryptogram.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"application_cryptogram\", the character length must be smaller than or equal to 5000.")
       end
@@ -179,7 +179,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] application_preferred_name Value to be assigned
-    def application_preferred_name=(application_preferred_name)
+    def application_preferred_name=(application_preferred_name : String?)
       if !application_preferred_name.nil? && application_preferred_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"application_preferred_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -189,7 +189,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] authorization_code Value to be assigned
-    def authorization_code=(authorization_code)
+    def authorization_code=(authorization_code : String?)
       if !authorization_code.nil? && authorization_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"authorization_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -199,7 +199,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] authorization_response_code Value to be assigned
-    def authorization_response_code=(authorization_response_code)
+    def authorization_response_code=(authorization_response_code : String?)
       if !authorization_response_code.nil? && authorization_response_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"authorization_response_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -209,7 +209,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] cardholder_verification_method Value to be assigned
-    def cardholder_verification_method=(cardholder_verification_method)
+    def cardholder_verification_method=(cardholder_verification_method : String?)
       if !cardholder_verification_method.nil? && cardholder_verification_method.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"cardholder_verification_method\", the character length must be smaller than or equal to 5000.")
       end
@@ -219,7 +219,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] dedicated_file_name Value to be assigned
-    def dedicated_file_name=(dedicated_file_name)
+    def dedicated_file_name=(dedicated_file_name : String?)
       if !dedicated_file_name.nil? && dedicated_file_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"dedicated_file_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -229,7 +229,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] terminal_verification_results Value to be assigned
-    def terminal_verification_results=(terminal_verification_results)
+    def terminal_verification_results=(terminal_verification_results : String?)
       if !terminal_verification_results.nil? && terminal_verification_results.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"terminal_verification_results\", the character length must be smaller than or equal to 5000.")
       end
@@ -239,7 +239,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] transaction_status_information Value to be assigned
-    def transaction_status_information=(transaction_status_information)
+    def transaction_status_information=(transaction_status_information : String?)
       if !transaction_status_information.nil? && transaction_status_information.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"transaction_status_information\", the character length must be smaller than or equal to 5000.")
       end
@@ -257,6 +257,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@account_type, @application_cryptogram, @application_preferred_name, @authorization_code, @authorization_response_code, @cardholder_verification_method, @dedicated_file_name, @terminal_verification_results, @transaction_status_information)
+    def_equals_and_hash(@account_type, @account_type_present, @application_cryptogram, @application_cryptogram_present, @application_preferred_name, @application_preferred_name_present, @authorization_code, @authorization_code_present, @authorization_response_code, @authorization_response_code_present, @cardholder_verification_method, @cardholder_verification_method_present, @dedicated_file_name, @dedicated_file_name_present, @terminal_verification_results, @terminal_verification_results_present, @transaction_status_information, @transaction_status_information_present)
   end
 end

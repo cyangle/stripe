@@ -448,217 +448,217 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] acss_debit_payments Object to be assigned
-    def acss_debit_payments=(acss_debit_payments)
+    def acss_debit_payments=(acss_debit_payments : String?)
       ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS.valid!(acss_debit_payments)
       @acss_debit_payments = acss_debit_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] affirm_payments Object to be assigned
-    def affirm_payments=(affirm_payments)
+    def affirm_payments=(affirm_payments : String?)
       ENUM_VALIDATOR_FOR_AFFIRM_PAYMENTS.valid!(affirm_payments)
       @affirm_payments = affirm_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] afterpay_clearpay_payments Object to be assigned
-    def afterpay_clearpay_payments=(afterpay_clearpay_payments)
+    def afterpay_clearpay_payments=(afterpay_clearpay_payments : String?)
       ENUM_VALIDATOR_FOR_AFTERPAY_CLEARPAY_PAYMENTS.valid!(afterpay_clearpay_payments)
       @afterpay_clearpay_payments = afterpay_clearpay_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] au_becs_debit_payments Object to be assigned
-    def au_becs_debit_payments=(au_becs_debit_payments)
+    def au_becs_debit_payments=(au_becs_debit_payments : String?)
       ENUM_VALIDATOR_FOR_AU_BECS_DEBIT_PAYMENTS.valid!(au_becs_debit_payments)
       @au_becs_debit_payments = au_becs_debit_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bacs_debit_payments Object to be assigned
-    def bacs_debit_payments=(bacs_debit_payments)
+    def bacs_debit_payments=(bacs_debit_payments : String?)
       ENUM_VALIDATOR_FOR_BACS_DEBIT_PAYMENTS.valid!(bacs_debit_payments)
       @bacs_debit_payments = bacs_debit_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bancontact_payments Object to be assigned
-    def bancontact_payments=(bancontact_payments)
+    def bancontact_payments=(bancontact_payments : String?)
       ENUM_VALIDATOR_FOR_BANCONTACT_PAYMENTS.valid!(bancontact_payments)
       @bancontact_payments = bancontact_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bank_transfer_payments Object to be assigned
-    def bank_transfer_payments=(bank_transfer_payments)
+    def bank_transfer_payments=(bank_transfer_payments : String?)
       ENUM_VALIDATOR_FOR_BANK_TRANSFER_PAYMENTS.valid!(bank_transfer_payments)
       @bank_transfer_payments = bank_transfer_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] boleto_payments Object to be assigned
-    def boleto_payments=(boleto_payments)
+    def boleto_payments=(boleto_payments : String?)
       ENUM_VALIDATOR_FOR_BOLETO_PAYMENTS.valid!(boleto_payments)
       @boleto_payments = boleto_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_issuing Object to be assigned
-    def card_issuing=(card_issuing)
+    def card_issuing=(card_issuing : String?)
       ENUM_VALIDATOR_FOR_CARD_ISSUING.valid!(card_issuing)
       @card_issuing = card_issuing
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] card_payments Object to be assigned
-    def card_payments=(card_payments)
+    def card_payments=(card_payments : String?)
       ENUM_VALIDATOR_FOR_CARD_PAYMENTS.valid!(card_payments)
       @card_payments = card_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] cartes_bancaires_payments Object to be assigned
-    def cartes_bancaires_payments=(cartes_bancaires_payments)
+    def cartes_bancaires_payments=(cartes_bancaires_payments : String?)
       ENUM_VALIDATOR_FOR_CARTES_BANCAIRES_PAYMENTS.valid!(cartes_bancaires_payments)
       @cartes_bancaires_payments = cartes_bancaires_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] eps_payments Object to be assigned
-    def eps_payments=(eps_payments)
+    def eps_payments=(eps_payments : String?)
       ENUM_VALIDATOR_FOR_EPS_PAYMENTS.valid!(eps_payments)
       @eps_payments = eps_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] fpx_payments Object to be assigned
-    def fpx_payments=(fpx_payments)
+    def fpx_payments=(fpx_payments : String?)
       ENUM_VALIDATOR_FOR_FPX_PAYMENTS.valid!(fpx_payments)
       @fpx_payments = fpx_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] giropay_payments Object to be assigned
-    def giropay_payments=(giropay_payments)
+    def giropay_payments=(giropay_payments : String?)
       ENUM_VALIDATOR_FOR_GIROPAY_PAYMENTS.valid!(giropay_payments)
       @giropay_payments = giropay_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] grabpay_payments Object to be assigned
-    def grabpay_payments=(grabpay_payments)
+    def grabpay_payments=(grabpay_payments : String?)
       ENUM_VALIDATOR_FOR_GRABPAY_PAYMENTS.valid!(grabpay_payments)
       @grabpay_payments = grabpay_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ideal_payments Object to be assigned
-    def ideal_payments=(ideal_payments)
+    def ideal_payments=(ideal_payments : String?)
       ENUM_VALIDATOR_FOR_IDEAL_PAYMENTS.valid!(ideal_payments)
       @ideal_payments = ideal_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] jcb_payments Object to be assigned
-    def jcb_payments=(jcb_payments)
+    def jcb_payments=(jcb_payments : String?)
       ENUM_VALIDATOR_FOR_JCB_PAYMENTS.valid!(jcb_payments)
       @jcb_payments = jcb_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] klarna_payments Object to be assigned
-    def klarna_payments=(klarna_payments)
+    def klarna_payments=(klarna_payments : String?)
       ENUM_VALIDATOR_FOR_KLARNA_PAYMENTS.valid!(klarna_payments)
       @klarna_payments = klarna_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] konbini_payments Object to be assigned
-    def konbini_payments=(konbini_payments)
+    def konbini_payments=(konbini_payments : String?)
       ENUM_VALIDATOR_FOR_KONBINI_PAYMENTS.valid!(konbini_payments)
       @konbini_payments = konbini_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] legacy_payments Object to be assigned
-    def legacy_payments=(legacy_payments)
+    def legacy_payments=(legacy_payments : String?)
       ENUM_VALIDATOR_FOR_LEGACY_PAYMENTS.valid!(legacy_payments)
       @legacy_payments = legacy_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] link_payments Object to be assigned
-    def link_payments=(link_payments)
+    def link_payments=(link_payments : String?)
       ENUM_VALIDATOR_FOR_LINK_PAYMENTS.valid!(link_payments)
       @link_payments = link_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] oxxo_payments Object to be assigned
-    def oxxo_payments=(oxxo_payments)
+    def oxxo_payments=(oxxo_payments : String?)
       ENUM_VALIDATOR_FOR_OXXO_PAYMENTS.valid!(oxxo_payments)
       @oxxo_payments = oxxo_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] p24_payments Object to be assigned
-    def p24_payments=(p24_payments)
+    def p24_payments=(p24_payments : String?)
       ENUM_VALIDATOR_FOR_P24_PAYMENTS.valid!(p24_payments)
       @p24_payments = p24_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] paynow_payments Object to be assigned
-    def paynow_payments=(paynow_payments)
+    def paynow_payments=(paynow_payments : String?)
       ENUM_VALIDATOR_FOR_PAYNOW_PAYMENTS.valid!(paynow_payments)
       @paynow_payments = paynow_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sepa_debit_payments Object to be assigned
-    def sepa_debit_payments=(sepa_debit_payments)
+    def sepa_debit_payments=(sepa_debit_payments : String?)
       ENUM_VALIDATOR_FOR_SEPA_DEBIT_PAYMENTS.valid!(sepa_debit_payments)
       @sepa_debit_payments = sepa_debit_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] sofort_payments Object to be assigned
-    def sofort_payments=(sofort_payments)
+    def sofort_payments=(sofort_payments : String?)
       ENUM_VALIDATOR_FOR_SOFORT_PAYMENTS.valid!(sofort_payments)
       @sofort_payments = sofort_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_reporting_us_1099_k Object to be assigned
-    def tax_reporting_us_1099_k=(tax_reporting_us_1099_k)
+    def tax_reporting_us_1099_k=(tax_reporting_us_1099_k : String?)
       ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_K.valid!(tax_reporting_us_1099_k)
       @tax_reporting_us_1099_k = tax_reporting_us_1099_k
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tax_reporting_us_1099_misc Object to be assigned
-    def tax_reporting_us_1099_misc=(tax_reporting_us_1099_misc)
+    def tax_reporting_us_1099_misc=(tax_reporting_us_1099_misc : String?)
       ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_MISC.valid!(tax_reporting_us_1099_misc)
       @tax_reporting_us_1099_misc = tax_reporting_us_1099_misc
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] transfers Object to be assigned
-    def transfers=(transfers)
+    def transfers=(transfers : String?)
       ENUM_VALIDATOR_FOR_TRANSFERS.valid!(transfers)
       @transfers = transfers
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] treasury Object to be assigned
-    def treasury=(treasury)
+    def treasury=(treasury : String?)
       ENUM_VALIDATOR_FOR_TREASURY.valid!(treasury)
       @treasury = treasury
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] us_bank_account_ach_payments Object to be assigned
-    def us_bank_account_ach_payments=(us_bank_account_ach_payments)
+    def us_bank_account_ach_payments=(us_bank_account_ach_payments : String?)
       ENUM_VALIDATOR_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS.valid!(us_bank_account_ach_payments)
       @us_bank_account_ach_payments = us_bank_account_ach_payments
     end
@@ -673,6 +673,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@acss_debit_payments, @affirm_payments, @afterpay_clearpay_payments, @au_becs_debit_payments, @bacs_debit_payments, @bancontact_payments, @bank_transfer_payments, @boleto_payments, @card_issuing, @card_payments, @cartes_bancaires_payments, @eps_payments, @fpx_payments, @giropay_payments, @grabpay_payments, @ideal_payments, @jcb_payments, @klarna_payments, @konbini_payments, @legacy_payments, @link_payments, @oxxo_payments, @p24_payments, @paynow_payments, @sepa_debit_payments, @sofort_payments, @tax_reporting_us_1099_k, @tax_reporting_us_1099_misc, @transfers, @treasury, @us_bank_account_ach_payments)
+    def_equals_and_hash(@acss_debit_payments, @acss_debit_payments_present, @affirm_payments, @affirm_payments_present, @afterpay_clearpay_payments, @afterpay_clearpay_payments_present, @au_becs_debit_payments, @au_becs_debit_payments_present, @bacs_debit_payments, @bacs_debit_payments_present, @bancontact_payments, @bancontact_payments_present, @bank_transfer_payments, @bank_transfer_payments_present, @boleto_payments, @boleto_payments_present, @card_issuing, @card_issuing_present, @card_payments, @card_payments_present, @cartes_bancaires_payments, @cartes_bancaires_payments_present, @eps_payments, @eps_payments_present, @fpx_payments, @fpx_payments_present, @giropay_payments, @giropay_payments_present, @grabpay_payments, @grabpay_payments_present, @ideal_payments, @ideal_payments_present, @jcb_payments, @jcb_payments_present, @klarna_payments, @klarna_payments_present, @konbini_payments, @konbini_payments_present, @legacy_payments, @legacy_payments_present, @link_payments, @link_payments_present, @oxxo_payments, @oxxo_payments_present, @p24_payments, @p24_payments_present, @paynow_payments, @paynow_payments_present, @sepa_debit_payments, @sepa_debit_payments_present, @sofort_payments, @sofort_payments_present, @tax_reporting_us_1099_k, @tax_reporting_us_1099_k_present, @tax_reporting_us_1099_misc, @tax_reporting_us_1099_misc_present, @transfers, @transfers_present, @treasury, @treasury_present, @us_bank_account_ach_payments, @us_bank_account_ach_payments_present)
   end
 end

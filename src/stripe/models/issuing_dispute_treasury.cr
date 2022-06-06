@@ -71,7 +71,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] received_debit Value to be assigned
-    def received_debit=(received_debit)
+    def received_debit=(received_debit : String)
       if received_debit.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"received_debit\", the character length must be smaller than or equal to 5000.")
       end
@@ -81,7 +81,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] debit_reversal Value to be assigned
-    def debit_reversal=(debit_reversal)
+    def debit_reversal=(debit_reversal : String?)
       if !debit_reversal.nil? && debit_reversal.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"debit_reversal\", the character length must be smaller than or equal to 5000.")
       end
@@ -99,6 +99,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@received_debit, @debit_reversal)
+    def_equals_and_hash(@received_debit, @debit_reversal, @debit_reversal_present)
   end
 end

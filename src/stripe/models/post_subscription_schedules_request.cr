@@ -120,7 +120,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String?)
       if !customer.nil? && customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
@@ -130,14 +130,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] end_behavior Object to be assigned
-    def end_behavior=(end_behavior)
+    def end_behavior=(end_behavior : String?)
       ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid!(end_behavior)
       @end_behavior = end_behavior
     end
 
     # Custom attribute writer method with validation
     # @param [Object] from_subscription Value to be assigned
-    def from_subscription=(from_subscription)
+    def from_subscription=(from_subscription : String?)
       if !from_subscription.nil? && from_subscription.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"from_subscription\", the character length must be smaller than or equal to 5000.")
       end
@@ -155,6 +155,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@customer, @default_settings, @end_behavior, @expand, @from_subscription, @metadata, @phases, @start_date)
+    def_equals_and_hash(@customer, @customer_present, @default_settings, @default_settings_present, @end_behavior, @end_behavior_present, @expand, @expand_present, @from_subscription, @from_subscription_present, @metadata, @metadata_present, @phases, @phases_present, @start_date, @start_date_present)
   end
 end

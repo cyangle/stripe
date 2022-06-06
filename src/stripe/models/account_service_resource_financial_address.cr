@@ -78,14 +78,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported_networks Object to be assigned
-    def supported_networks=(supported_networks)
+    def supported_networks=(supported_networks : Array(String)?)
       ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid!(supported_networks)
       @supported_networks = supported_networks
     end
@@ -100,6 +100,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @aba, @supported_networks)
+    def_equals_and_hash(@_type, @aba, @aba_present, @supported_networks, @supported_networks_present)
   end
 end

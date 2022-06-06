@@ -97,7 +97,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] bank_code Value to be assigned
-    def bank_code=(bank_code)
+    def bank_code=(bank_code : String?)
       if !bank_code.nil? && bank_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -107,7 +107,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] bank_name Value to be assigned
-    def bank_name=(bank_name)
+    def bank_name=(bank_name : String?)
       if !bank_name.nil? && bank_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -117,7 +117,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] bic Value to be assigned
-    def bic=(bic)
+    def bic=(bic : String?)
       if !bic.nil? && bic.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bic\", the character length must be smaller than or equal to 5000.")
       end
@@ -127,7 +127,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] verified_name Value to be assigned
-    def verified_name=(verified_name)
+    def verified_name=(verified_name : String?)
       if !verified_name.nil? && verified_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -145,6 +145,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@bank_code, @bank_name, @bic, @verified_name)
+    def_equals_and_hash(@bank_code, @bank_code_present, @bank_name, @bank_name_present, @bic, @bic_present, @verified_name, @verified_name_present)
   end
 end

@@ -86,7 +86,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] client_secret Value to be assigned
-    def client_secret=(client_secret)
+    def client_secret=(client_secret : String?)
       if !client_secret.nil? && client_secret.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
       end
@@ -96,7 +96,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] descriptor_code Value to be assigned
-    def descriptor_code=(descriptor_code)
+    def descriptor_code=(descriptor_code : String?)
       if !descriptor_code.nil? && descriptor_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"descriptor_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -114,6 +114,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amounts, @client_secret, @descriptor_code, @expand)
+    def_equals_and_hash(@amounts, @amounts_present, @client_secret, @client_secret_present, @descriptor_code, @descriptor_code_present, @expand, @expand_present)
   end
 end

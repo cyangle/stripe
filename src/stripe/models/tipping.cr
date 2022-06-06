@@ -149,6 +149,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@aud, @cad, @chf, @czk, @dkk, @eur, @gbp, @hkd, @myr, @nok, @nzd, @sek, @sgd, @usd)
+    def_equals_and_hash(@aud, @aud_present, @cad, @cad_present, @chf, @chf_present, @czk, @czk_present, @dkk, @dkk_present, @eur, @eur_present, @gbp, @gbp_present, @hkd, @hkd_present, @myr, @myr_present, @nok, @nok_present, @nzd, @nzd_present, @sek, @sek_present, @sgd, @sgd_present, @usd, @usd_present)
   end
 end

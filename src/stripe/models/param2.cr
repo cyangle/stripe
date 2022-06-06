@@ -53,7 +53,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] tax_id Value to be assigned
-    def tax_id=(tax_id)
+    def tax_id=(tax_id : String)
       if tax_id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"tax_id\", the character length must be smaller than or equal to 5000.")
       end

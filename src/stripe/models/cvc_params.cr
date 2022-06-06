@@ -54,7 +54,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] cvc Value to be assigned
-    def cvc=(cvc)
+    def cvc=(cvc : String)
       if cvc.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"cvc\", the character length must be smaller than or equal to 5000.")
       end

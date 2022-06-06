@@ -57,7 +57,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] user_agent Value to be assigned
-    def user_agent=(user_agent)
+    def user_agent=(user_agent : String)
       if user_agent.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"user_agent\", the character length must be smaller than or equal to 5000.")
       end

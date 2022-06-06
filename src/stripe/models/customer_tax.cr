@@ -78,14 +78,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] automatic_tax Object to be assigned
-    def automatic_tax=(automatic_tax)
+    def automatic_tax=(automatic_tax : String)
       ENUM_VALIDATOR_FOR_AUTOMATIC_TAX.valid!(automatic_tax, false)
       @automatic_tax = automatic_tax
     end
 
     # Custom attribute writer method with validation
     # @param [Object] ip_address Value to be assigned
-    def ip_address=(ip_address)
+    def ip_address=(ip_address : String?)
       if !ip_address.nil? && ip_address.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
       end
@@ -103,6 +103,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@automatic_tax, @ip_address, @location)
+    def_equals_and_hash(@automatic_tax, @ip_address, @ip_address_present, @location, @location_present)
   end
 end

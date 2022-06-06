@@ -92,7 +92,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] configuration_overrides Value to be assigned
-    def configuration_overrides=(configuration_overrides)
+    def configuration_overrides=(configuration_overrides : String?)
       if !configuration_overrides.nil? && configuration_overrides.to_s.size > 1000
         raise ArgumentError.new("invalid value for \"configuration_overrides\", the character length must be smaller than or equal to 1000.")
       end
@@ -102,7 +102,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] display_name Value to be assigned
-    def display_name=(display_name)
+    def display_name=(display_name : String?)
       if !display_name.nil? && display_name.to_s.size > 1000
         raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 1000.")
       end
@@ -120,6 +120,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@address, @configuration_overrides, @display_name, @expand, @metadata)
+    def_equals_and_hash(@address, @address_present, @configuration_overrides, @configuration_overrides_present, @display_name, @display_name_present, @expand, @expand_present, @metadata, @metadata_present)
   end
 end

@@ -69,7 +69,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] account_number Value to be assigned
-    def account_number=(account_number)
+    def account_number=(account_number : String?)
       if !account_number.nil? && account_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
@@ -79,7 +79,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] sort_code Value to be assigned
-    def sort_code=(sort_code)
+    def sort_code=(sort_code : String?)
       if !sort_code.nil? && sort_code.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"sort_code\", the character length must be smaller than or equal to 5000.")
       end
@@ -97,6 +97,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@account_number, @sort_code)
+    def_equals_and_hash(@account_number, @account_number_present, @sort_code, @sort_code_present)
   end
 end

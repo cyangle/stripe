@@ -56,7 +56,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] session Value to be assigned
-    def session=(session)
+    def session=(session : String?)
       if !session.nil? && session.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"session\", the character length must be smaller than or equal to 5000.")
       end
@@ -74,6 +74,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@session)
+    def_equals_and_hash(@session, @session_present)
   end
 end

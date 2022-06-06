@@ -99,7 +99,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] explanation Value to be assigned
-    def explanation=(explanation)
+    def explanation=(explanation : String?)
       if !explanation.nil? && explanation.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
       end
@@ -109,7 +109,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] original_transaction Value to be assigned
-    def original_transaction=(original_transaction)
+    def original_transaction=(original_transaction : String?)
       if !original_transaction.nil? && original_transaction.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"original_transaction\", the character length must be smaller than or equal to 5000.")
       end
@@ -127,6 +127,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@additional_documentation, @card_statement, @cash_receipt, @check_image, @explanation, @original_transaction)
+    def_equals_and_hash(@additional_documentation, @additional_documentation_present, @card_statement, @card_statement_present, @cash_receipt, @cash_receipt_present, @check_image, @check_image_present, @explanation, @explanation_present, @original_transaction, @original_transaction_present)
   end
 end

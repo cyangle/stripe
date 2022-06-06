@@ -155,7 +155,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] bin Value to be assigned
-    def bin=(bin)
+    def bin=(bin : String)
       if bin.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bin\", the character length must be smaller than or equal to 5000.")
       end
@@ -165,7 +165,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -175,14 +175,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] network Object to be assigned
-    def network=(network)
+    def network=(network : String)
       ENUM_VALIDATOR_FOR_NETWORK.valid!(network, false)
       @network = network
     end
 
     # Custom attribute writer method with validation
     # @param [Object] network_settlement_identifier Value to be assigned
-    def network_settlement_identifier=(network_settlement_identifier)
+    def network_settlement_identifier=(network_settlement_identifier : String)
       if network_settlement_identifier.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"network_settlement_identifier\", the character length must be smaller than or equal to 5000.")
       end
@@ -192,14 +192,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] settlement_service Value to be assigned
-    def settlement_service=(settlement_service)
+    def settlement_service=(settlement_service : String)
       if settlement_service.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"settlement_service\", the character length must be smaller than or equal to 5000.")
       end

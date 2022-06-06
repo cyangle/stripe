@@ -57,7 +57,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] account_holder_type Object to be assigned
-    def account_holder_type=(account_holder_type)
+    def account_holder_type=(account_holder_type : String?)
       ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid!(account_holder_type)
       @account_holder_type = account_holder_type
     end
@@ -72,6 +72,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@account_holder_type)
+    def_equals_and_hash(@account_holder_type, @account_holder_type_present)
   end
 end

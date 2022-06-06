@@ -226,7 +226,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] bitcoin_uri Value to be assigned
-    def bitcoin_uri=(bitcoin_uri)
+    def bitcoin_uri=(bitcoin_uri : String)
       if bitcoin_uri.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bitcoin_uri\", the character length must be smaller than or equal to 5000.")
       end
@@ -236,7 +236,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -246,7 +246,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] inbound_address Value to be assigned
-    def inbound_address=(inbound_address)
+    def inbound_address=(inbound_address : String)
       if inbound_address.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"inbound_address\", the character length must be smaller than or equal to 5000.")
       end
@@ -256,14 +256,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] customer Value to be assigned
-    def customer=(customer)
+    def customer=(customer : String?)
       if !customer.nil? && customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
@@ -273,7 +273,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -283,7 +283,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] email Value to be assigned
-    def email=(email)
+    def email=(email : String?)
       if !email.nil? && email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
@@ -293,7 +293,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] payment Value to be assigned
-    def payment=(payment)
+    def payment=(payment : String?)
       if !payment.nil? && payment.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"payment\", the character length must be smaller than or equal to 5000.")
       end
@@ -303,7 +303,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] refund_address Value to be assigned
-    def refund_address=(refund_address)
+    def refund_address=(refund_address : String?)
       if !refund_address.nil? && refund_address.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"refund_address\", the character length must be smaller than or equal to 5000.")
       end
@@ -321,6 +321,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@active, @amount, @amount_received, @bitcoin_amount, @bitcoin_amount_received, @bitcoin_uri, @created, @currency, @filled, @id, @inbound_address, @livemode, @object, @uncaptured_funds, @customer, @description, @email, @metadata, @payment, @refund_address, @transactions, @used_for_payment)
+    def_equals_and_hash(@active, @amount, @amount_received, @bitcoin_amount, @bitcoin_amount_received, @bitcoin_uri, @created, @currency, @filled, @id, @inbound_address, @livemode, @object, @uncaptured_funds, @customer, @customer_present, @description, @description_present, @email, @email_present, @metadata, @metadata_present, @payment, @payment_present, @refund_address, @refund_address_present, @transactions, @transactions_present, @used_for_payment, @used_for_payment_present)
   end
 end

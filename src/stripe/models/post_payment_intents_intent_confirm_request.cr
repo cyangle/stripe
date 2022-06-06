@@ -185,7 +185,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] client_secret Value to be assigned
-    def client_secret=(client_secret)
+    def client_secret=(client_secret : String?)
       if !client_secret.nil? && client_secret.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
       end
@@ -195,7 +195,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] mandate Value to be assigned
-    def mandate=(mandate)
+    def mandate=(mandate : String?)
       if !mandate.nil? && mandate.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"mandate\", the character length must be smaller than or equal to 5000.")
       end
@@ -205,7 +205,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] payment_method Value to be assigned
-    def payment_method=(payment_method)
+    def payment_method=(payment_method : String?)
       if !payment_method.nil? && payment_method.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"payment_method\", the character length must be smaller than or equal to 5000.")
       end
@@ -215,7 +215,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] setup_future_usage Object to be assigned
-    def setup_future_usage=(setup_future_usage)
+    def setup_future_usage=(setup_future_usage : String?)
       ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(setup_future_usage)
       @setup_future_usage = setup_future_usage
     end
@@ -230,6 +230,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@client_secret, @error_on_requires_action, @expand, @mandate, @mandate_data, @off_session, @payment_method, @payment_method_data, @payment_method_options, @payment_method_types, @radar_options, @receipt_email, @return_url, @setup_future_usage, @shipping, @use_stripe_sdk)
+    def_equals_and_hash(@client_secret, @client_secret_present, @error_on_requires_action, @error_on_requires_action_present, @expand, @expand_present, @mandate, @mandate_present, @mandate_data, @mandate_data_present, @off_session, @off_session_present, @payment_method, @payment_method_present, @payment_method_data, @payment_method_data_present, @payment_method_options, @payment_method_options_present, @payment_method_types, @payment_method_types_present, @radar_options, @radar_options_present, @receipt_email, @receipt_email_present, @return_url, @return_url_present, @setup_future_usage, @setup_future_usage_present, @shipping, @shipping_present, @use_stripe_sdk, @use_stripe_sdk_present)
   end
 end

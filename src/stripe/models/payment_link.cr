@@ -227,21 +227,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_address_collection Object to be assigned
-    def billing_address_collection=(billing_address_collection)
+    def billing_address_collection=(billing_address_collection : String)
       ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid!(billing_address_collection, false)
       @billing_address_collection = billing_address_collection
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] customer_creation Object to be assigned
-    def customer_creation=(customer_creation)
+    def customer_creation=(customer_creation : String)
       ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid!(customer_creation, false)
       @customer_creation = customer_creation
     end
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -251,21 +251,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] submit_type Object to be assigned
-    def submit_type=(submit_type)
+    def submit_type=(submit_type : String)
       ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid!(submit_type, false)
       @submit_type = submit_type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] url Value to be assigned
-    def url=(url)
+    def url=(url : String)
       if url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
@@ -275,7 +275,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] payment_method_types Object to be assigned
-    def payment_method_types=(payment_method_types)
+    def payment_method_types=(payment_method_types : Array(String)?)
       ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid!(payment_method_types)
       @payment_method_types = payment_method_types
     end
@@ -290,6 +290,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@active, @after_completion, @allow_promotion_codes, @automatic_tax, @billing_address_collection, @customer_creation, @id, @livemode, @metadata, @object, @phone_number_collection, @shipping_options, @submit_type, @tax_id_collection, @url, @application_fee_amount, @application_fee_percent, @consent_collection, @line_items, @on_behalf_of, @payment_intent_data, @payment_method_types, @shipping_address_collection, @subscription_data, @transfer_data)
+    def_equals_and_hash(@active, @after_completion, @allow_promotion_codes, @automatic_tax, @billing_address_collection, @customer_creation, @id, @livemode, @metadata, @object, @phone_number_collection, @shipping_options, @submit_type, @tax_id_collection, @url, @application_fee_amount, @application_fee_amount_present, @application_fee_percent, @application_fee_percent_present, @consent_collection, @consent_collection_present, @line_items, @line_items_present, @on_behalf_of, @on_behalf_of_present, @payment_intent_data, @payment_intent_data_present, @payment_method_types, @payment_method_types_present, @shipping_address_collection, @shipping_address_collection_present, @subscription_data, @subscription_data_present, @transfer_data, @transfer_data_present)
   end
 end

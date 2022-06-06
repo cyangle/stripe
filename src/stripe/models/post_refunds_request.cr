@@ -108,10 +108,6 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REASON.error_message) unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
 
-      if !@reason.nil? && @reason.to_s.size > 5000
-        invalid_properties.push("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties
     end
 
@@ -121,14 +117,13 @@ module Stripe
       return false if !@charge.nil? && @charge.to_s.size > 5000
       return false if !@payment_intent.nil? && @payment_intent.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
-      return false if !@reason.nil? && @reason.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] charge Value to be assigned
-    def charge=(charge)
+    def charge=(charge : String?)
       if !charge.nil? && charge.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"charge\", the character length must be smaller than or equal to 5000.")
       end
@@ -138,7 +133,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] payment_intent Value to be assigned
-    def payment_intent=(payment_intent)
+    def payment_intent=(payment_intent : String?)
       if !payment_intent.nil? && payment_intent.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"payment_intent\", the character length must be smaller than or equal to 5000.")
       end
@@ -148,7 +143,7 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reason Object to be assigned
-    def reason=(reason)
+    def reason=(reason : String?)
       ENUM_VALIDATOR_FOR_REASON.valid!(reason)
       @reason = reason
     end
@@ -163,6 +158,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @charge, @expand, @instructions_email, @metadata, @payment_intent, @reason, @refund_application_fee, @reverse_transfer)
+    def_equals_and_hash(@amount, @amount_present, @charge, @charge_present, @expand, @expand_present, @instructions_email, @instructions_email_present, @metadata, @metadata_present, @payment_intent, @payment_intent_present, @reason, @reason_present, @refund_application_fee, @refund_application_fee_present, @reverse_transfer, @reverse_transfer_present)
   end
 end

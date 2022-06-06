@@ -71,7 +71,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] headline Value to be assigned
-    def headline=(headline)
+    def headline=(headline : String?)
       if !headline.nil? && headline.to_s.size > 60
         raise ArgumentError.new("invalid value for \"headline\", the character length must be smaller than or equal to 60.")
       end
@@ -89,6 +89,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@headline, @privacy_policy_url, @terms_of_service_url)
+    def_equals_and_hash(@headline, @headline_present, @privacy_policy_url, @privacy_policy_url_present, @terms_of_service_url, @terms_of_service_url_present)
   end
 end

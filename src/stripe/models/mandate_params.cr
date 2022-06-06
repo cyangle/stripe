@@ -74,15 +74,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
 
-      if !@interval.nil? && @interval.to_s.size > 5000
-        invalid_properties.push("invalid value for \"interval\", the character length must be smaller than or equal to 5000.")
-      end
-
       invalid_properties.push(ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD.valid?(@notification_method)
-
-      if !@notification_method.nil? && @notification_method.to_s.size > 5000
-        invalid_properties.push("invalid value for \"notification_method\", the character length must be smaller than or equal to 5000.")
-      end
 
       invalid_properties
     end
@@ -91,23 +83,21 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
-      return false if !@interval.nil? && @interval.to_s.size > 5000
       return false unless ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD.valid?(@notification_method)
-      return false if !@notification_method.nil? && @notification_method.to_s.size > 5000
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] interval Object to be assigned
-    def interval=(interval)
+    def interval=(interval : String?)
       ENUM_VALIDATOR_FOR_INTERVAL.valid!(interval)
       @interval = interval
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] notification_method Object to be assigned
-    def notification_method=(notification_method)
+    def notification_method=(notification_method : String?)
       ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD.valid!(notification_method)
       @notification_method = notification_method
     end
@@ -122,6 +112,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@acceptance, @amount, @currency, @interval, @notification_method)
+    def_equals_and_hash(@acceptance, @acceptance_present, @amount, @amount_present, @currency, @currency_present, @interval, @interval_present, @notification_method, @notification_method_present)
   end
 end

@@ -75,7 +75,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] action Value to be assigned
-    def action=(action)
+    def action=(action : String)
       if action.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"action\", the character length must be smaller than or equal to 5000.")
       end
@@ -85,7 +85,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -95,7 +95,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] predicate Value to be assigned
-    def predicate=(predicate)
+    def predicate=(predicate : String)
       if predicate.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"predicate\", the character length must be smaller than or equal to 5000.")
       end

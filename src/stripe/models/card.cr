@@ -361,7 +361,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] brand Value to be assigned
-    def brand=(brand)
+    def brand=(brand : String)
       if brand.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
       end
@@ -371,7 +371,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] funding Value to be assigned
-    def funding=(funding)
+    def funding=(funding : String)
       if funding.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"funding\", the character length must be smaller than or equal to 5000.")
       end
@@ -381,7 +381,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -391,7 +391,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] last4 Value to be assigned
-    def last4=(last4)
+    def last4=(last4 : String)
       if last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
@@ -401,14 +401,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method with validation
     # @param [Object] address_city Value to be assigned
-    def address_city=(address_city)
+    def address_city=(address_city : String?)
       if !address_city.nil? && address_city.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
       end
@@ -418,7 +418,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] address_country Value to be assigned
-    def address_country=(address_country)
+    def address_country=(address_country : String?)
       if !address_country.nil? && address_country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
       end
@@ -428,7 +428,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] address_line1 Value to be assigned
-    def address_line1=(address_line1)
+    def address_line1=(address_line1 : String?)
       if !address_line1.nil? && address_line1.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
       end
@@ -438,7 +438,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] address_line1_check Value to be assigned
-    def address_line1_check=(address_line1_check)
+    def address_line1_check=(address_line1_check : String?)
       if !address_line1_check.nil? && address_line1_check.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"address_line1_check\", the character length must be smaller than or equal to 5000.")
       end
@@ -448,7 +448,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] address_line2 Value to be assigned
-    def address_line2=(address_line2)
+    def address_line2=(address_line2 : String?)
       if !address_line2.nil? && address_line2.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
       end
@@ -458,7 +458,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] address_state Value to be assigned
-    def address_state=(address_state)
+    def address_state=(address_state : String?)
       if !address_state.nil? && address_state.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
       end
@@ -468,7 +468,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] address_zip Value to be assigned
-    def address_zip=(address_zip)
+    def address_zip=(address_zip : String?)
       if !address_zip.nil? && address_zip.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
       end
@@ -478,7 +478,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] address_zip_check Value to be assigned
-    def address_zip_check=(address_zip_check)
+    def address_zip_check=(address_zip_check : String?)
       if !address_zip_check.nil? && address_zip_check.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"address_zip_check\", the character length must be smaller than or equal to 5000.")
       end
@@ -488,14 +488,14 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] available_payout_methods Object to be assigned
-    def available_payout_methods=(available_payout_methods)
+    def available_payout_methods=(available_payout_methods : Array(String)?)
       ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid!(available_payout_methods)
       @available_payout_methods = available_payout_methods
     end
 
     # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
-    def country=(country)
+    def country=(country : String?)
       if !country.nil? && country.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
@@ -505,7 +505,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] cvc_check Value to be assigned
-    def cvc_check=(cvc_check)
+    def cvc_check=(cvc_check : String?)
       if !cvc_check.nil? && cvc_check.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"cvc_check\", the character length must be smaller than or equal to 5000.")
       end
@@ -515,7 +515,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] dynamic_last4 Value to be assigned
-    def dynamic_last4=(dynamic_last4)
+    def dynamic_last4=(dynamic_last4 : String?)
       if !dynamic_last4.nil? && dynamic_last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
       end
@@ -525,7 +525,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] fingerprint Value to be assigned
-    def fingerprint=(fingerprint)
+    def fingerprint=(fingerprint : String?)
       if !fingerprint.nil? && fingerprint.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
@@ -535,7 +535,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
-    def name=(name)
+    def name=(name : String?)
       if !name.nil? && name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
@@ -545,7 +545,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] status Value to be assigned
-    def status=(status)
+    def status=(status : String?)
       if !status.nil? && status.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
@@ -555,7 +555,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] tokenization_method Value to be assigned
-    def tokenization_method=(tokenization_method)
+    def tokenization_method=(tokenization_method : String?)
       if !tokenization_method.nil? && tokenization_method.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"tokenization_method\", the character length must be smaller than or equal to 5000.")
       end
@@ -573,6 +573,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@brand, @exp_month, @exp_year, @funding, @id, @last4, @object, @account, @address_city, @address_country, @address_line1, @address_line1_check, @address_line2, @address_state, @address_zip, @address_zip_check, @available_payout_methods, @country, @currency, @customer, @cvc_check, @default_for_currency, @dynamic_last4, @fingerprint, @metadata, @name, @recipient, @status, @tokenization_method)
+    def_equals_and_hash(@brand, @exp_month, @exp_year, @funding, @id, @last4, @object, @account, @account_present, @address_city, @address_city_present, @address_country, @address_country_present, @address_line1, @address_line1_present, @address_line1_check, @address_line1_check_present, @address_line2, @address_line2_present, @address_state, @address_state_present, @address_zip, @address_zip_present, @address_zip_check, @address_zip_check_present, @available_payout_methods, @available_payout_methods_present, @country, @country_present, @currency, @currency_present, @customer, @customer_present, @cvc_check, @cvc_check_present, @default_for_currency, @default_for_currency_present, @dynamic_last4, @dynamic_last4_present, @fingerprint, @fingerprint_present, @metadata, @metadata_present, @name, @name_present, @recipient, @recipient_present, @status, @status_present, @tokenization_method, @tokenization_method_present)
   end
 end

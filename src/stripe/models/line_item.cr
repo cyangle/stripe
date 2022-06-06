@@ -218,7 +218,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] id Value to be assigned
-    def id=(id)
+    def id=(id : String)
       if id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
@@ -228,21 +228,21 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object)
+    def object=(object : String)
       ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
       @object = object
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type)
+    def _type=(_type : String)
       ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
       @_type = _type
     end
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
-    def description=(description)
+    def description=(description : String?)
       if !description.nil? && description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
@@ -252,7 +252,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] invoice_item Value to be assigned
-    def invoice_item=(invoice_item)
+    def invoice_item=(invoice_item : String?)
       if !invoice_item.nil? && invoice_item.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"invoice_item\", the character length must be smaller than or equal to 5000.")
       end
@@ -262,7 +262,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] subscription Value to be assigned
-    def subscription=(subscription)
+    def subscription=(subscription : String?)
       if !subscription.nil? && subscription.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"subscription\", the character length must be smaller than or equal to 5000.")
       end
@@ -272,7 +272,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] subscription_item Value to be assigned
-    def subscription_item=(subscription_item)
+    def subscription_item=(subscription_item : String?)
       if !subscription_item.nil? && subscription_item.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"subscription_item\", the character length must be smaller than or equal to 5000.")
       end
@@ -290,6 +290,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @currency, @discountable, @id, @livemode, @metadata, @object, @period, @proration, @_type, @description, @discount_amounts, @discounts, @invoice_item, @price, @proration_details, @quantity, @subscription, @subscription_item, @tax_amounts, @tax_rates)
+    def_equals_and_hash(@amount, @currency, @discountable, @id, @livemode, @metadata, @object, @period, @proration, @_type, @description, @description_present, @discount_amounts, @discount_amounts_present, @discounts, @discounts_present, @invoice_item, @invoice_item_present, @price, @price_present, @proration_details, @proration_details_present, @quantity, @quantity_present, @subscription, @subscription_present, @subscription_item, @subscription_item_present, @tax_amounts, @tax_amounts_present, @tax_rates, @tax_rates_present)
   end
 end

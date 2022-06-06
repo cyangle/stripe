@@ -71,7 +71,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] display_name Value to be assigned
-    def display_name=(display_name)
+    def display_name=(display_name : String?)
       if !display_name.nil? && display_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
       end
@@ -81,7 +81,7 @@ module Stripe
 
     # Custom attribute writer method with validation
     # @param [Object] timezone Value to be assigned
-    def timezone=(timezone)
+    def timezone=(timezone : String?)
       if !timezone.nil? && timezone.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"timezone\", the character length must be smaller than or equal to 5000.")
       end
@@ -99,6 +99,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@display_name, @timezone)
+    def_equals_and_hash(@display_name, @display_name_present, @timezone, @timezone_present)
   end
 end
