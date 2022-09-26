@@ -13,15 +13,15 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AccountServiceResourceTreasuryStatusDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 
-    @[JSON::Field(key: "closed", type: AccountServiceResourceTreasuryStatusDetailsClosed?, presence: true, ignore_serialize: closed.nil? && !closed_present?)]
-    property closed : AccountServiceResourceTreasuryStatusDetailsClosed?
+    @[JSON::Field(key: "closed", type: Stripe::AccountServiceResourceTreasuryStatusDetailsClosed?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: closed.nil? && !closed_present?)]
+    getter closed : Stripe::AccountServiceResourceTreasuryStatusDetailsClosed? = nil
 
     @[JSON::Field(ignore: true)]
     property? closed_present : Bool = false
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Optional properties
-      @closed : AccountServiceResourceTreasuryStatusDetailsClosed? = nil
+      @closed : Stripe::AccountServiceResourceTreasuryStatusDetailsClosed? = nil
     )
     end
 
@@ -39,6 +39,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      # This is a model closed : Stripe::AccountServiceResourceTreasuryStatusDetailsClosed?
 
       invalid_properties
     end
@@ -47,6 +48,15 @@ module Stripe
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] closed Object to be assigned
+    def closed=(closed : Stripe::AccountServiceResourceTreasuryStatusDetailsClosed?)
+      if closed.nil?
+        return @closed = nil
+      end
+      @closed = closed
     end
 
     # @see the `==` method

@@ -12,85 +12,64 @@ require "time"
 require "log"
 
 module Stripe
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class PostRecipientsRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # The recipient's full, legal name. For type `individual`, should be in the format `First Last`, `First Middle Last`, or `First M Last` (no prefixes or suffixes). For `corporation`, the full, incorporated name.
-    @[JSON::Field(key: "name", type: String)]
-    getter name : String
+    @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter name : String? = nil
 
     # Type of the recipient: either `individual` or `corporation`.
-    @[JSON::Field(key: "type", type: String)]
-    getter _type : String
+    @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter _type : String? = nil
 
     # Optional properties
 
     # A bank account to attach to the recipient. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details, with the options described below.
-    @[JSON::Field(key: "bank_account", type: String?, presence: true, ignore_serialize: bank_account.nil? && !bank_account_present?)]
-    getter bank_account : String?
-
-    @[JSON::Field(ignore: true)]
-    property? bank_account_present : Bool = false
+    @[JSON::Field(key: "bank_account", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter bank_account : String? = nil
 
     # A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit card is not valid, recipient creation will fail. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's debit card details, with the options described below. Although not all information is required, the extra info helps prevent fraud.
-    @[JSON::Field(key: "card", type: String?, presence: true, ignore_serialize: card.nil? && !card_present?)]
-    getter card : String?
-
-    @[JSON::Field(ignore: true)]
-    property? card_present : Bool = false
+    @[JSON::Field(key: "card", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter card : String? = nil
 
     # An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside the recipient in the web interface.
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String?
-
-    @[JSON::Field(ignore: true)]
-    property? description_present : Bool = false
+    @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter description : String? = nil
 
     # The recipient's email address. It is displayed alongside the recipient in the web interface, and can be useful for searching and tracking.
-    @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
-    getter email : String?
-
-    @[JSON::Field(ignore: true)]
-    property? email_present : Bool = false
+    @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter email : String? = nil
 
     # Specifies which fields in the response should be expanded.
-    @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
-    property expand : Array(String)?
+    @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter expand : Array(String)? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? expand_present : Bool = false
-
-    @[JSON::Field(key: "metadata", type: PostAccountRequestMetadata?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : PostAccountRequestMetadata?
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
+    @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Stripe::PostAccountRequestMetadata? = nil
 
     # The recipient's tax ID, as a string. For type `individual`, the full SSN; for type `corporation`, the full EIN.
-    @[JSON::Field(key: "tax_id", type: String?, presence: true, ignore_serialize: tax_id.nil? && !tax_id_present?)]
-    getter tax_id : String?
-
-    @[JSON::Field(ignore: true)]
-    property? tax_id_present : Bool = false
+    @[JSON::Field(key: "tax_id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter tax_id : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @name : String,
-      @_type : String,
+      @name : String? = nil,
+      @_type : String? = nil,
       # Optional properties
       @bank_account : String? = nil,
       @card : String? = nil,
       @description : String? = nil,
       @email : String? = nil,
       @expand : Array(String)? = nil,
-      @metadata : PostAccountRequestMetadata? = nil,
+      @metadata : Stripe::PostAccountRequestMetadata? = nil,
       @tax_id : String? = nil
     )
     end
@@ -99,33 +78,43 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
+      if _name = @name
+        if _name.to_s.size > 5000
+          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if @_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+      if __type = @_type
+        if __type.to_s.size > 5000
+          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@bank_account.nil? && @bank_account.to_s.size > 5000
-        invalid_properties.push("invalid value for \"bank_account\", the character length must be smaller than or equal to 5000.")
+      if _bank_account = @bank_account
+        if _bank_account.to_s.size > 5000
+          invalid_properties.push("invalid value for \"bank_account\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@card.nil? && @card.to_s.size > 5000
-        invalid_properties.push("invalid value for \"card\", the character length must be smaller than or equal to 5000.")
+      if _card = @card
+        if _card.to_s.size > 5000
+          invalid_properties.push("invalid value for \"card\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@description.nil? && @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if _description = @description
+        if _description.to_s.size > 5000
+          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@email.nil? && @email.to_s.size > 5000
-        invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      if _email = @email
+        if _email.to_s.size > 5000
+          invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@tax_id.nil? && @tax_id.to_s.size > 5000
-        invalid_properties.push("invalid value for \"tax_id\", the character length must be smaller than or equal to 5000.")
+      # This is a model metadata : Stripe::PostAccountRequestMetadata?
+      if _tax_id = @tax_id
+        if _tax_id.to_s.size > 5000
+          invalid_properties.push("invalid value for \"tax_id\", the character length must be smaller than or equal to 5000.")
+        end
       end
 
       invalid_properties
@@ -134,81 +123,143 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @name.to_s.size > 5000
-      return false if @_type.to_s.size > 5000
-      return false if !@bank_account.nil? && @bank_account.to_s.size > 5000
-      return false if !@card.nil? && @card.to_s.size > 5000
-      return false if !@description.nil? && @description.to_s.size > 5000
-      return false if !@email.nil? && @email.to_s.size > 5000
-      return false if !@tax_id.nil? && @tax_id.to_s.size > 5000
+      return false if @name.nil?
+      if _name = @name
+        return false if _name.to_s.size > 5000
+      end
+      return false if @_type.nil?
+      if __type = @_type
+        return false if __type.to_s.size > 5000
+      end
+      if _bank_account = @bank_account
+        return false if _bank_account.to_s.size > 5000
+      end
+      if _card = @card
+        return false if _card.to_s.size > 5000
+      end
+      if _description = @description
+        return false if _description.to_s.size > 5000
+      end
+      if _email = @email
+        return false if _email.to_s.size > 5000
+      end
+      if _tax_id = @tax_id
+        return false if _tax_id.to_s.size > 5000
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name : String)
-      if name.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] name Object to be assigned
+    def name=(name : String?)
+      if name.nil?
+        raise ArgumentError.new("\"name\" is required and cannot be null")
+      end
+      _name = name.not_nil!
+      if _name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
       @name = name
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] _type Value to be assigned
-    def _type=(_type : String)
-      if _type.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type : String?)
+      if _type.nil?
+        raise ArgumentError.new("\"_type\" is required and cannot be null")
+      end
+      __type = _type.not_nil!
+      if __type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
       @_type = _type
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] bank_account Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] bank_account Object to be assigned
     def bank_account=(bank_account : String?)
-      if !bank_account.nil? && bank_account.to_s.size > 5000
+      if bank_account.nil?
+        return @bank_account = nil
+      end
+      _bank_account = bank_account.not_nil!
+      if _bank_account.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_account\", the character length must be smaller than or equal to 5000.")
       end
 
       @bank_account = bank_account
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] card Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] card Object to be assigned
     def card=(card : String?)
-      if !card.nil? && card.to_s.size > 5000
+      if card.nil?
+        return @card = nil
+      end
+      _card = card.not_nil!
+      if _card.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"card\", the character length must be smaller than or equal to 5000.")
       end
 
       @card = card
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] description Object to be assigned
     def description=(description : String?)
-      if !description.nil? && description.to_s.size > 5000
+      if description.nil?
+        return @description = nil
+      end
+      _description = description.not_nil!
+      if _description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
       @description = description
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] email Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] email Object to be assigned
     def email=(email : String?)
-      if !email.nil? && email.to_s.size > 5000
+      if email.nil?
+        return @email = nil
+      end
+      _email = email.not_nil!
+      if _email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
 
       @email = email
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] tax_id Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] expand Object to be assigned
+    def expand=(expand : Array(String)?)
+      if expand.nil?
+        return @expand = nil
+      end
+      @expand = expand
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] metadata Object to be assigned
+    def metadata=(metadata : Stripe::PostAccountRequestMetadata?)
+      if metadata.nil?
+        return @metadata = nil
+      end
+      @metadata = metadata
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tax_id Object to be assigned
     def tax_id=(tax_id : String?)
-      if !tax_id.nil? && tax_id.to_s.size > 5000
+      if tax_id.nil?
+        return @tax_id = nil
+      end
+      _tax_id = tax_id.not_nil!
+      if _tax_id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"tax_id\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -225,6 +276,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@name, @_type, @bank_account, @bank_account_present, @card, @card_present2, @description, @description_present, @email, @email_present, @expand, @expand_present, @metadata, @metadata_present, @tax_id, @tax_id_present)
+    def_equals_and_hash(@name, @_type, @bank_account, @card, @description, @email, @expand, @metadata, @tax_id)
   end
 end

@@ -13,37 +13,37 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class OutboundTransfersResourceStatusTransitions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 
     # Timestamp describing when an OutboundTransfer changed status to `canceled`
-    @[JSON::Field(key: "canceled_at", type: Int64?, presence: true, ignore_serialize: canceled_at.nil? && !canceled_at_present?)]
-    property canceled_at : Int64?
+    @[JSON::Field(key: "canceled_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: canceled_at.nil? && !canceled_at_present?)]
+    getter canceled_at : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? canceled_at_present : Bool = false
 
     # Timestamp describing when an OutboundTransfer changed status to `failed`
-    @[JSON::Field(key: "failed_at", type: Int64?, presence: true, ignore_serialize: failed_at.nil? && !failed_at_present?)]
-    property failed_at : Int64?
+    @[JSON::Field(key: "failed_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: failed_at.nil? && !failed_at_present?)]
+    getter failed_at : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? failed_at_present : Bool = false
 
     # Timestamp describing when an OutboundTransfer changed status to `posted`
-    @[JSON::Field(key: "posted_at", type: Int64?, presence: true, ignore_serialize: posted_at.nil? && !posted_at_present?)]
-    property posted_at : Int64?
+    @[JSON::Field(key: "posted_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: posted_at.nil? && !posted_at_present?)]
+    getter posted_at : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? posted_at_present : Bool = false
 
     # Timestamp describing when an OutboundTransfer changed status to `returned`
-    @[JSON::Field(key: "returned_at", type: Int64?, presence: true, ignore_serialize: returned_at.nil? && !returned_at_present?)]
-    property returned_at : Int64?
+    @[JSON::Field(key: "returned_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: returned_at.nil? && !returned_at_present?)]
+    getter returned_at : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? returned_at_present : Bool = false
@@ -72,6 +72,42 @@ module Stripe
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] canceled_at Object to be assigned
+    def canceled_at=(canceled_at : Int64?)
+      if canceled_at.nil?
+        return @canceled_at = nil
+      end
+      @canceled_at = canceled_at
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] failed_at Object to be assigned
+    def failed_at=(failed_at : Int64?)
+      if failed_at.nil?
+        return @failed_at = nil
+      end
+      @failed_at = failed_at
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] posted_at Object to be assigned
+    def posted_at=(posted_at : Int64?)
+      if posted_at.nil?
+        return @posted_at = nil
+      end
+      @posted_at = posted_at
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] returned_at Object to be assigned
+    def returned_at=(returned_at : Int64?)
+      if returned_at.nil?
+        return @returned_at = nil
+      end
+      @returned_at = returned_at
     end
 
     # @see the `==` method

@@ -13,50 +13,50 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ReceivedCreditsResourceTreasuryLinkedFlows
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 
     # The CreditReversal created as a result of this ReceivedCredit being reversed.
-    @[JSON::Field(key: "credit_reversal", type: String?, presence: true, ignore_serialize: credit_reversal.nil? && !credit_reversal_present?)]
-    getter credit_reversal : String?
+    @[JSON::Field(key: "credit_reversal", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: credit_reversal.nil? && !credit_reversal_present?)]
+    getter credit_reversal : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? credit_reversal_present : Bool = false
 
     # Set if the ReceivedCredit was created due to an [Issuing Authorization](https://stripe.com/docs/api#issuing_authorizations) object.
-    @[JSON::Field(key: "issuing_authorization", type: String?, presence: true, ignore_serialize: issuing_authorization.nil? && !issuing_authorization_present?)]
-    getter issuing_authorization : String?
+    @[JSON::Field(key: "issuing_authorization", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: issuing_authorization.nil? && !issuing_authorization_present?)]
+    getter issuing_authorization : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? issuing_authorization_present : Bool = false
 
     # Set if the ReceivedCredit is also viewable as an [Issuing transaction](https://stripe.com/docs/api#issuing_transactions) object.
-    @[JSON::Field(key: "issuing_transaction", type: String?, presence: true, ignore_serialize: issuing_transaction.nil? && !issuing_transaction_present?)]
-    getter issuing_transaction : String?
+    @[JSON::Field(key: "issuing_transaction", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: issuing_transaction.nil? && !issuing_transaction_present?)]
+    getter issuing_transaction : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? issuing_transaction_present : Bool = false
 
     # ID of the source flow. Set if `network` is `stripe` and the source flow is visible to the merchant. Examples of source flows include OutboundPayments, payouts, or CreditReversals.
-    @[JSON::Field(key: "source_flow", type: String?, presence: true, ignore_serialize: source_flow.nil? && !source_flow_present?)]
-    getter source_flow : String?
+    @[JSON::Field(key: "source_flow", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: source_flow.nil? && !source_flow_present?)]
+    getter source_flow : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? source_flow_present : Bool = false
 
-    @[JSON::Field(key: "source_flow_details", type: ReceivedCreditsResourceTreasuryLinkedFlowsSourceFlowDetails?, presence: true, ignore_serialize: source_flow_details.nil? && !source_flow_details_present?)]
-    property source_flow_details : ReceivedCreditsResourceTreasuryLinkedFlowsSourceFlowDetails?
+    @[JSON::Field(key: "source_flow_details", type: Stripe::ReceivedCreditsResourceTreasuryLinkedFlowsSourceFlowDetails?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: source_flow_details.nil? && !source_flow_details_present?)]
+    getter source_flow_details : Stripe::ReceivedCreditsResourceTreasuryLinkedFlowsSourceFlowDetails? = nil
 
     @[JSON::Field(ignore: true)]
     property? source_flow_details_present : Bool = false
 
     # The type of flow that originated the ReceivedCredit (for example, `outbound_payment`).
-    @[JSON::Field(key: "source_flow_type", type: String?, presence: true, ignore_serialize: source_flow_type.nil? && !source_flow_type_present?)]
-    getter source_flow_type : String?
+    @[JSON::Field(key: "source_flow_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: source_flow_type.nil? && !source_flow_type_present?)]
+    getter source_flow_type : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? source_flow_type_present : Bool = false
@@ -70,7 +70,7 @@ module Stripe
       @issuing_authorization : String? = nil,
       @issuing_transaction : String? = nil,
       @source_flow : String? = nil,
-      @source_flow_details : ReceivedCreditsResourceTreasuryLinkedFlowsSourceFlowDetails? = nil,
+      @source_flow_details : Stripe::ReceivedCreditsResourceTreasuryLinkedFlowsSourceFlowDetails? = nil,
       @source_flow_type : String? = nil
     )
     end
@@ -79,25 +79,31 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if !@credit_reversal.nil? && @credit_reversal.to_s.size > 5000
-        invalid_properties.push("invalid value for \"credit_reversal\", the character length must be smaller than or equal to 5000.")
+      if _credit_reversal = @credit_reversal
+        if _credit_reversal.to_s.size > 5000
+          invalid_properties.push("invalid value for \"credit_reversal\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@issuing_authorization.nil? && @issuing_authorization.to_s.size > 5000
-        invalid_properties.push("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
+      if _issuing_authorization = @issuing_authorization
+        if _issuing_authorization.to_s.size > 5000
+          invalid_properties.push("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@issuing_transaction.nil? && @issuing_transaction.to_s.size > 5000
-        invalid_properties.push("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
+      if _issuing_transaction = @issuing_transaction
+        if _issuing_transaction.to_s.size > 5000
+          invalid_properties.push("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@source_flow.nil? && @source_flow.to_s.size > 5000
-        invalid_properties.push("invalid value for \"source_flow\", the character length must be smaller than or equal to 5000.")
+      if _source_flow = @source_flow
+        if _source_flow.to_s.size > 5000
+          invalid_properties.push("invalid value for \"source_flow\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@source_flow_type.nil? && @source_flow_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"source_flow_type\", the character length must be smaller than or equal to 5000.")
+      # This is a model source_flow_details : Stripe::ReceivedCreditsResourceTreasuryLinkedFlowsSourceFlowDetails?
+      if _source_flow_type = @source_flow_type
+        if _source_flow_type.to_s.size > 5000
+          invalid_properties.push("invalid value for \"source_flow_type\", the character length must be smaller than or equal to 5000.")
+        end
       end
 
       invalid_properties
@@ -106,59 +112,98 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@credit_reversal.nil? && @credit_reversal.to_s.size > 5000
-      return false if !@issuing_authorization.nil? && @issuing_authorization.to_s.size > 5000
-      return false if !@issuing_transaction.nil? && @issuing_transaction.to_s.size > 5000
-      return false if !@source_flow.nil? && @source_flow.to_s.size > 5000
-      return false if !@source_flow_type.nil? && @source_flow_type.to_s.size > 5000
+      if _credit_reversal = @credit_reversal
+        return false if _credit_reversal.to_s.size > 5000
+      end
+      if _issuing_authorization = @issuing_authorization
+        return false if _issuing_authorization.to_s.size > 5000
+      end
+      if _issuing_transaction = @issuing_transaction
+        return false if _issuing_transaction.to_s.size > 5000
+      end
+      if _source_flow = @source_flow
+        return false if _source_flow.to_s.size > 5000
+      end
+      if _source_flow_type = @source_flow_type
+        return false if _source_flow_type.to_s.size > 5000
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] credit_reversal Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] credit_reversal Object to be assigned
     def credit_reversal=(credit_reversal : String?)
-      if !credit_reversal.nil? && credit_reversal.to_s.size > 5000
+      if credit_reversal.nil?
+        return @credit_reversal = nil
+      end
+      _credit_reversal = credit_reversal.not_nil!
+      if _credit_reversal.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"credit_reversal\", the character length must be smaller than or equal to 5000.")
       end
 
       @credit_reversal = credit_reversal
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] issuing_authorization Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] issuing_authorization Object to be assigned
     def issuing_authorization=(issuing_authorization : String?)
-      if !issuing_authorization.nil? && issuing_authorization.to_s.size > 5000
+      if issuing_authorization.nil?
+        return @issuing_authorization = nil
+      end
+      _issuing_authorization = issuing_authorization.not_nil!
+      if _issuing_authorization.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
       end
 
       @issuing_authorization = issuing_authorization
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] issuing_transaction Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] issuing_transaction Object to be assigned
     def issuing_transaction=(issuing_transaction : String?)
-      if !issuing_transaction.nil? && issuing_transaction.to_s.size > 5000
+      if issuing_transaction.nil?
+        return @issuing_transaction = nil
+      end
+      _issuing_transaction = issuing_transaction.not_nil!
+      if _issuing_transaction.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
       end
 
       @issuing_transaction = issuing_transaction
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] source_flow Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] source_flow Object to be assigned
     def source_flow=(source_flow : String?)
-      if !source_flow.nil? && source_flow.to_s.size > 5000
+      if source_flow.nil?
+        return @source_flow = nil
+      end
+      _source_flow = source_flow.not_nil!
+      if _source_flow.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"source_flow\", the character length must be smaller than or equal to 5000.")
       end
 
       @source_flow = source_flow
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] source_flow_type Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] source_flow_details Object to be assigned
+    def source_flow_details=(source_flow_details : Stripe::ReceivedCreditsResourceTreasuryLinkedFlowsSourceFlowDetails?)
+      if source_flow_details.nil?
+        return @source_flow_details = nil
+      end
+      @source_flow_details = source_flow_details
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] source_flow_type Object to be assigned
     def source_flow_type=(source_flow_type : String?)
-      if !source_flow_type.nil? && source_flow_type.to_s.size > 5000
+      if source_flow_type.nil?
+        return @source_flow_type = nil
+      end
+      _source_flow_type = source_flow_type.not_nil!
+      if _source_flow_type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"source_flow_type\", the character length must be smaller than or equal to 5000.")
       end
 

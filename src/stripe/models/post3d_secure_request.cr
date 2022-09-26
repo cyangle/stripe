@@ -12,56 +12,47 @@ require "time"
 require "log"
 
 module Stripe
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Post3dSecureRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # Amount of the charge that you will create when authentication completes.
-    @[JSON::Field(key: "amount", type: Int64)]
-    property amount : Int64
+    @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter amount : Int64? = nil
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    @[JSON::Field(key: "currency", type: String)]
-    property currency : String
+    @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter currency : String? = nil
 
     # The URL that the cardholder's browser will be returned to when authentication completes.
-    @[JSON::Field(key: "return_url", type: String)]
-    property return_url : String
+    @[JSON::Field(key: "return_url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter return_url : String? = nil
 
     # Optional properties
 
     # The ID of a card token, or the ID of a card belonging to the given customer.
-    @[JSON::Field(key: "card", type: String?, presence: true, ignore_serialize: card.nil? && !card_present?)]
-    getter card : String?
-
-    @[JSON::Field(ignore: true)]
-    property? card_present : Bool = false
+    @[JSON::Field(key: "card", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter card : String? = nil
 
     # The customer associated with this 3D secure authentication.
-    @[JSON::Field(key: "customer", type: String?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
-    getter customer : String?
-
-    @[JSON::Field(ignore: true)]
-    property? customer_present : Bool = false
+    @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter customer : String? = nil
 
     # Specifies which fields in the response should be expanded.
-    @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
-    property expand : Array(String)?
-
-    @[JSON::Field(ignore: true)]
-    property? expand_present : Bool = false
+    @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter expand : Array(String)? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @amount : Int64,
-      @currency : String,
-      @return_url : String,
+      @amount : Int64? = nil,
+      @currency : String? = nil,
+      @return_url : String? = nil,
       # Optional properties
       @card : String? = nil,
       @customer : String? = nil,
@@ -73,13 +64,18 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if !@card.nil? && @card.to_s.size > 5000
-        invalid_properties.push("invalid value for \"card\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+      invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+      invalid_properties.push("\"return_url\" is required and cannot be null") if @return_url.nil?
+      if _card = @card
+        if _card.to_s.size > 5000
+          invalid_properties.push("invalid value for \"card\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@customer.nil? && @customer.to_s.size > 5000
-        invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      if _customer = @customer
+        if _customer.to_s.size > 5000
+          invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+        end
       end
 
       invalid_properties
@@ -88,30 +84,81 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@card.nil? && @card.to_s.size > 5000
-      return false if !@customer.nil? && @customer.to_s.size > 5000
+      return false if @amount.nil?
+      return false if @currency.nil?
+      return false if @return_url.nil?
+      if _card = @card
+        return false if _card.to_s.size > 5000
+      end
+      if _customer = @customer
+        return false if _customer.to_s.size > 5000
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] card Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] amount Object to be assigned
+    def amount=(amount : Int64?)
+      if amount.nil?
+        raise ArgumentError.new("\"amount\" is required and cannot be null")
+      end
+      @amount = amount
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] currency Object to be assigned
+    def currency=(currency : String?)
+      if currency.nil?
+        raise ArgumentError.new("\"currency\" is required and cannot be null")
+      end
+      @currency = currency
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] return_url Object to be assigned
+    def return_url=(return_url : String?)
+      if return_url.nil?
+        raise ArgumentError.new("\"return_url\" is required and cannot be null")
+      end
+      @return_url = return_url
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] card Object to be assigned
     def card=(card : String?)
-      if !card.nil? && card.to_s.size > 5000
+      if card.nil?
+        return @card = nil
+      end
+      _card = card.not_nil!
+      if _card.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"card\", the character length must be smaller than or equal to 5000.")
       end
 
       @card = card
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] customer Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] customer Object to be assigned
     def customer=(customer : String?)
-      if !customer.nil? && customer.to_s.size > 5000
+      if customer.nil?
+        return @customer = nil
+      end
+      _customer = customer.not_nil!
+      if _customer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
 
       @customer = customer
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] expand Object to be assigned
+    def expand=(expand : Array(String)?)
+      if expand.nil?
+        return @expand = nil
+      end
+      @expand = expand
     end
 
     # @see the `==` method
@@ -124,6 +171,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@amount, @currency, @return_url, @card, @card_present2, @customer, @customer_present, @expand, @expand_present)
+    def_equals_and_hash(@amount, @currency, @return_url, @card, @customer, @expand)
   end
 end

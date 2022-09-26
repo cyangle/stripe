@@ -13,16 +13,16 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class InboundTransfersResourceFailureDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # Reason for the failure.
-    @[JSON::Field(key: "code", type: String)]
-    getter code : String
+    @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter code : String? = nil
 
     ENUM_VALIDATOR_FOR_CODE = EnumValidator.new("code", "String", ["account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "debit_not_authorized", "incorrect_account_holder_address", "incorrect_account_holder_name", "incorrect_account_holder_tax_id", "insufficient_funds", "invalid_account_number", "invalid_currency", "no_account", "other"])
 
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @code : String
+      @code : String? = nil
     )
     end
 
@@ -55,8 +55,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
-    def code=(code : String)
-      ENUM_VALIDATOR_FOR_CODE.valid!(code, false)
+    def code=(code : String?)
+      if code.nil?
+        raise ArgumentError.new("\"code\" is required and cannot be null")
+      end
+      _code = code.not_nil!
+      ENUM_VALIDATOR_FOR_CODE.valid!(_code)
       @code = code
     end
 

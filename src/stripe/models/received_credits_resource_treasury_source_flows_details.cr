@@ -13,49 +13,40 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ReceivedCreditsResourceTreasurySourceFlowsDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # The type of the source flow that originated the ReceivedCredit.
-    @[JSON::Field(key: "type", type: String)]
-    getter _type : String
+    @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter _type : String? = nil
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["credit_reversal", "other", "outbound_payment", "payout"])
 
     # Optional properties
 
-    @[JSON::Field(key: "credit_reversal", type: TreasuryCreditReversal?, presence: true, ignore_serialize: credit_reversal.nil? && !credit_reversal_present?)]
-    property credit_reversal : TreasuryCreditReversal?
+    @[JSON::Field(key: "credit_reversal", type: Stripe::TreasuryCreditReversal?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter credit_reversal : Stripe::TreasuryCreditReversal? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? credit_reversal_present : Bool = false
+    @[JSON::Field(key: "outbound_payment", type: Stripe::TreasuryOutboundPayment?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter outbound_payment : Stripe::TreasuryOutboundPayment? = nil
 
-    @[JSON::Field(key: "outbound_payment", type: TreasuryOutboundPayment?, presence: true, ignore_serialize: outbound_payment.nil? && !outbound_payment_present?)]
-    property outbound_payment : TreasuryOutboundPayment?
-
-    @[JSON::Field(ignore: true)]
-    property? outbound_payment_present : Bool = false
-
-    @[JSON::Field(key: "payout", type: Payout?, presence: true, ignore_serialize: payout.nil? && !payout_present?)]
-    property payout : Payout?
-
-    @[JSON::Field(ignore: true)]
-    property? payout_present : Bool = false
+    @[JSON::Field(key: "payout", type: Stripe::Payout?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter payout : Stripe::Payout? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @_type : String,
+      @_type : String? = nil,
       # Optional properties
-      @credit_reversal : TreasuryCreditReversal? = nil,
-      @outbound_payment : TreasuryOutboundPayment? = nil,
-      @payout : Payout? = nil
+      @credit_reversal : Stripe::TreasuryCreditReversal? = nil,
+      @outbound_payment : Stripe::TreasuryOutboundPayment? = nil,
+      @payout : Stripe::Payout? = nil
     )
     end
 
@@ -65,6 +56,9 @@ module Stripe
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      # This is a model credit_reversal : Stripe::TreasuryCreditReversal?
+      # This is a model outbound_payment : Stripe::TreasuryOutboundPayment?
+      # This is a model payout : Stripe::Payout?
 
       invalid_properties
     end
@@ -79,9 +73,40 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
+    def _type=(_type : String?)
+      if _type.nil?
+        raise ArgumentError.new("\"_type\" is required and cannot be null")
+      end
+      __type = _type.not_nil!
+      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
       @_type = _type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] credit_reversal Object to be assigned
+    def credit_reversal=(credit_reversal : Stripe::TreasuryCreditReversal?)
+      if credit_reversal.nil?
+        return @credit_reversal = nil
+      end
+      @credit_reversal = credit_reversal
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] outbound_payment Object to be assigned
+    def outbound_payment=(outbound_payment : Stripe::TreasuryOutboundPayment?)
+      if outbound_payment.nil?
+        return @outbound_payment = nil
+      end
+      @outbound_payment = outbound_payment
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] payout Object to be assigned
+    def payout=(payout : Stripe::Payout?)
+      if payout.nil?
+        return @payout = nil
+      end
+      @payout = payout
     end
 
     # @see the `==` method
@@ -94,6 +119,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @credit_reversal, @credit_reversal_present, @outbound_payment, @outbound_payment_present, @payout, @payout_present)
+    def_equals_and_hash(@_type, @credit_reversal, @outbound_payment, @payout)
   end
 end

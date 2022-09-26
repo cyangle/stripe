@@ -13,29 +13,29 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class OutboundTransfersResourceTreasuryReturnedDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # Reason for the return.
-    @[JSON::Field(key: "code", type: String)]
-    getter code : String
+    @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter code : String? = nil
 
     ENUM_VALIDATOR_FOR_CODE = EnumValidator.new("code", "String", ["account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "declined", "incorrect_account_holder_name", "invalid_account_number", "invalid_currency", "no_account", "other"])
 
-    @[JSON::Field(key: "transaction", type: OutboundPaymentsResourceTreasuryReturnedStatusTransaction)]
-    property transaction : OutboundPaymentsResourceTreasuryReturnedStatusTransaction
+    @[JSON::Field(key: "transaction", type: Stripe::OutboundPaymentsResourceTreasuryReturnedStatusTransaction?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter transaction : Stripe::OutboundPaymentsResourceTreasuryReturnedStatusTransaction? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @code : String,
-      @transaction : OutboundPaymentsResourceTreasuryReturnedStatusTransaction
+      @code : String? = nil,
+      @transaction : Stripe::OutboundPaymentsResourceTreasuryReturnedStatusTransaction? = nil
     )
     end
 
@@ -45,6 +45,8 @@ module Stripe
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
+      invalid_properties.push("\"transaction\" is required and cannot be null") if @transaction.nil?
+      # This is a model transaction : Stripe::OutboundPaymentsResourceTreasuryReturnedStatusTransaction?
 
       invalid_properties
     end
@@ -53,15 +55,29 @@ module Stripe
     # @return true if the model is valid
     def valid?
       return false unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
+      return false if @transaction.nil?
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
-    def code=(code : String)
-      ENUM_VALIDATOR_FOR_CODE.valid!(code, false)
+    def code=(code : String?)
+      if code.nil?
+        raise ArgumentError.new("\"code\" is required and cannot be null")
+      end
+      _code = code.not_nil!
+      ENUM_VALIDATOR_FOR_CODE.valid!(_code)
       @code = code
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] transaction Object to be assigned
+    def transaction=(transaction : Stripe::OutboundPaymentsResourceTreasuryReturnedStatusTransaction?)
+      if transaction.nil?
+        raise ArgumentError.new("\"transaction\" is required and cannot be null")
+      end
+      @transaction = transaction
     end
 
     # @see the `==` method

@@ -13,6 +13,8 @@ require "log"
 
 module Stripe
   class PostCustomersCustomerRequestTrialEndOneOf
+    include OpenApi::Json
+
     property data : String
 
     ENUM_VALIDATOR = EnumValidator.new("PostCustomersCustomer_request_trial_end_oneOf", "String", ["now"])

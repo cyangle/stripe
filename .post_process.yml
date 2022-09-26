@@ -23,12 +23,16 @@ tasks:
         pattern: 'card_present_present'
         new_value: 'card_present2_present'
   - name: 'Update all'
-    file_glob: './src/stripe/**/cr'
+    file_glob: './src/stripe/**/*.cr'
     changes:
       -
         name: 'Correct JSON::Any?'
         pattern: 'JSON::Any\?'
         new_value: 'JSON::Any?'
+      -
+        name: 'Correct JSONAny'
+        pattern: 'JSONAny'
+        new_value: 'JSON::Any'
       -
         name: 'Correct Stripe::String'
         pattern: 'Stripe::String'
@@ -37,6 +41,10 @@ tasks:
         name: 'Correct Int32'
         pattern: 'Int32'
         new_value: 'Int64'
+      -
+        name: 'Correct ::::'
+        pattern: '::::'
+        new_value: '::'
   - name: 'Update api error'
     file_glob: './src/stripe/api_error.cr'
     changes:

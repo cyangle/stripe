@@ -13,35 +13,35 @@ require "log"
 
 module Stripe
   # Toggle settings for enabling/disabling a feature
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AccountServiceResourceToggleSettings
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # Whether the FinancialAccount should have the Feature.
-    @[JSON::Field(key: "requested", type: Bool)]
-    property requested : Bool
+    @[JSON::Field(key: "requested", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter requested : Bool? = nil
 
     # Whether the Feature is operational.
-    @[JSON::Field(key: "status", type: String)]
-    getter status : String
+    @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter status : String? = nil
 
     ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["active", "pending", "restricted"])
 
     # Additional details; includes at least one entry when the status is not `active`.
-    @[JSON::Field(key: "status_details", type: Array(AccountServiceResourceStatusDetails))]
-    property status_details : Array(AccountServiceResourceStatusDetails)
+    @[JSON::Field(key: "status_details", type: Array(Stripe::AccountServiceResourceStatusDetails)?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter status_details : Array(Stripe::AccountServiceResourceStatusDetails)? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @requested : Bool,
-      @status : String,
-      @status_details : Array(AccountServiceResourceStatusDetails)
+      @requested : Bool? = nil,
+      @status : String? = nil,
+      @status_details : Array(Stripe::AccountServiceResourceStatusDetails)? = nil
     )
     end
 
@@ -49,8 +49,11 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      invalid_properties.push("\"requested\" is required and cannot be null") if @requested.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      invalid_properties.push("\"status_details\" is required and cannot be null") if @status_details.nil?
+      # Container status_details array has values of Stripe::AccountServiceResourceStatusDetails
 
       invalid_properties
     end
@@ -58,16 +61,40 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @requested.nil?
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false if @status_details.nil?
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] requested Object to be assigned
+    def requested=(requested : Bool?)
+      if requested.nil?
+        raise ArgumentError.new("\"requested\" is required and cannot be null")
+      end
+      @requested = requested
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
-    def status=(status : String)
-      ENUM_VALIDATOR_FOR_STATUS.valid!(status, false)
+    def status=(status : String?)
+      if status.nil?
+        raise ArgumentError.new("\"status\" is required and cannot be null")
+      end
+      _status = status.not_nil!
+      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
       @status = status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status_details Object to be assigned
+    def status_details=(status_details : Array(Stripe::AccountServiceResourceStatusDetails)?)
+      if status_details.nil?
+        raise ArgumentError.new("\"status_details\" is required and cannot be null")
+      end
+      @status_details = status_details
     end
 
     # @see the `==` method

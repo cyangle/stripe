@@ -13,25 +13,22 @@ require "log"
 
 module Stripe
   # Settings related to Financial Addresses features on a Financial Account
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AccountServiceResourceFinancialAddressesFeatures
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 
-    @[JSON::Field(key: "aba", type: AccountServiceResourceToggleSettings?, presence: true, ignore_serialize: aba.nil? && !aba_present?)]
-    property aba : AccountServiceResourceToggleSettings?
-
-    @[JSON::Field(ignore: true)]
-    property? aba_present : Bool = false
+    @[JSON::Field(key: "aba", type: Stripe::AccountServiceResourceToggleSettings?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter aba : Stripe::AccountServiceResourceToggleSettings? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Optional properties
-      @aba : AccountServiceResourceToggleSettings? = nil
+      @aba : Stripe::AccountServiceResourceToggleSettings? = nil
     )
     end
 
@@ -39,6 +36,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      # This is a model aba : Stripe::AccountServiceResourceToggleSettings?
 
       invalid_properties
     end
@@ -47,6 +45,15 @@ module Stripe
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] aba Object to be assigned
+    def aba=(aba : Stripe::AccountServiceResourceToggleSettings?)
+      if aba.nil?
+        return @aba = nil
+      end
+      @aba = aba
     end
 
     # @see the `==` method
@@ -59,6 +66,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@aba, @aba_present)
+    def_equals_and_hash(@aba)
   end
 end

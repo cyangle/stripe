@@ -13,30 +13,30 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ReceivedDebitsResourceTreasuryLinkedFlows
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 
     # Set if the ReceivedDebit is associated with an InboundTransfer's return of funds.
-    @[JSON::Field(key: "inbound_transfer", type: String?, presence: true, ignore_serialize: inbound_transfer.nil? && !inbound_transfer_present?)]
-    getter inbound_transfer : String?
+    @[JSON::Field(key: "inbound_transfer", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: inbound_transfer.nil? && !inbound_transfer_present?)]
+    getter inbound_transfer : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? inbound_transfer_present : Bool = false
 
     # Set if the ReceivedCredit was created due to an [Issuing Authorization](https://stripe.com/docs/api#issuing_authorizations) object.
-    @[JSON::Field(key: "issuing_authorization", type: String?, presence: true, ignore_serialize: issuing_authorization.nil? && !issuing_authorization_present?)]
-    getter issuing_authorization : String?
+    @[JSON::Field(key: "issuing_authorization", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: issuing_authorization.nil? && !issuing_authorization_present?)]
+    getter issuing_authorization : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? issuing_authorization_present : Bool = false
 
     # Set if the ReceivedDebit is also viewable as an [Issuing Dispute](https://stripe.com/docs/api#issuing_disputes) object.
-    @[JSON::Field(key: "issuing_transaction", type: String?, presence: true, ignore_serialize: issuing_transaction.nil? && !issuing_transaction_present?)]
-    getter issuing_transaction : String?
+    @[JSON::Field(key: "issuing_transaction", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: issuing_transaction.nil? && !issuing_transaction_present?)]
+    getter issuing_transaction : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? issuing_transaction_present : Bool = false
@@ -56,17 +56,20 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if !@inbound_transfer.nil? && @inbound_transfer.to_s.size > 5000
-        invalid_properties.push("invalid value for \"inbound_transfer\", the character length must be smaller than or equal to 5000.")
+      if _inbound_transfer = @inbound_transfer
+        if _inbound_transfer.to_s.size > 5000
+          invalid_properties.push("invalid value for \"inbound_transfer\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@issuing_authorization.nil? && @issuing_authorization.to_s.size > 5000
-        invalid_properties.push("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
+      if _issuing_authorization = @issuing_authorization
+        if _issuing_authorization.to_s.size > 5000
+          invalid_properties.push("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@issuing_transaction.nil? && @issuing_transaction.to_s.size > 5000
-        invalid_properties.push("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
+      if _issuing_transaction = @issuing_transaction
+        if _issuing_transaction.to_s.size > 5000
+          invalid_properties.push("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
+        end
       end
 
       invalid_properties
@@ -75,37 +78,55 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@inbound_transfer.nil? && @inbound_transfer.to_s.size > 5000
-      return false if !@issuing_authorization.nil? && @issuing_authorization.to_s.size > 5000
-      return false if !@issuing_transaction.nil? && @issuing_transaction.to_s.size > 5000
+      if _inbound_transfer = @inbound_transfer
+        return false if _inbound_transfer.to_s.size > 5000
+      end
+      if _issuing_authorization = @issuing_authorization
+        return false if _issuing_authorization.to_s.size > 5000
+      end
+      if _issuing_transaction = @issuing_transaction
+        return false if _issuing_transaction.to_s.size > 5000
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] inbound_transfer Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] inbound_transfer Object to be assigned
     def inbound_transfer=(inbound_transfer : String?)
-      if !inbound_transfer.nil? && inbound_transfer.to_s.size > 5000
+      if inbound_transfer.nil?
+        return @inbound_transfer = nil
+      end
+      _inbound_transfer = inbound_transfer.not_nil!
+      if _inbound_transfer.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"inbound_transfer\", the character length must be smaller than or equal to 5000.")
       end
 
       @inbound_transfer = inbound_transfer
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] issuing_authorization Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] issuing_authorization Object to be assigned
     def issuing_authorization=(issuing_authorization : String?)
-      if !issuing_authorization.nil? && issuing_authorization.to_s.size > 5000
+      if issuing_authorization.nil?
+        return @issuing_authorization = nil
+      end
+      _issuing_authorization = issuing_authorization.not_nil!
+      if _issuing_authorization.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
       end
 
       @issuing_authorization = issuing_authorization
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] issuing_transaction Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] issuing_transaction Object to be assigned
     def issuing_transaction=(issuing_transaction : String?)
-      if !issuing_transaction.nil? && issuing_transaction.to_s.size > 5000
+      if issuing_transaction.nil?
+        return @issuing_transaction = nil
+      end
+      _issuing_transaction = issuing_transaction.not_nil!
+      if _issuing_transaction.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
       end
 

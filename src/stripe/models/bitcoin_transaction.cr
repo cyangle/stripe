@@ -13,55 +13,55 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class BitcoinTransaction
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # The amount of `currency` that the transaction was converted to in real-time.
-    @[JSON::Field(key: "amount", type: Int64)]
-    property amount : Int64
+    @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter amount : Int64? = nil
 
     # The amount of bitcoin contained in the transaction.
-    @[JSON::Field(key: "bitcoin_amount", type: Int64)]
-    property bitcoin_amount : Int64
+    @[JSON::Field(key: "bitcoin_amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter bitcoin_amount : Int64? = nil
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
-    @[JSON::Field(key: "created", type: Int64)]
-    property created : Int64
+    @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter created : Int64? = nil
 
     # Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) to which this transaction was converted.
-    @[JSON::Field(key: "currency", type: String)]
-    property currency : String
+    @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter currency : String? = nil
 
     # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
+    @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter id : String? = nil
 
     # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
+    @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter object : String? = nil
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["bitcoin_transaction"])
 
     # The receiver to which this transaction was sent.
-    @[JSON::Field(key: "receiver", type: String)]
-    getter receiver : String
+    @[JSON::Field(key: "receiver", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter receiver : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @amount : Int64,
-      @bitcoin_amount : Int64,
-      @created : Int64,
-      @currency : String,
-      @id : String,
-      @object : String,
-      @receiver : String
+      @amount : Int64? = nil,
+      @bitcoin_amount : Int64? = nil,
+      @created : Int64? = nil,
+      @currency : String? = nil,
+      @id : String? = nil,
+      @object : String? = nil,
+      @receiver : String? = nil
     )
     end
 
@@ -69,15 +69,23 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @id.to_s.size > 5000
-        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+      invalid_properties.push("\"bitcoin_amount\" is required and cannot be null") if @bitcoin_amount.nil?
+      invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+      invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+      invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+      if _id = @id
+        if _id.to_s.size > 5000
+          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
-      if @receiver.to_s.size > 5000
-        invalid_properties.push("invalid value for \"receiver\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"receiver\" is required and cannot be null") if @receiver.nil?
+      if _receiver = @receiver
+        if _receiver.to_s.size > 5000
+          invalid_properties.push("invalid value for \"receiver\", the character length must be smaller than or equal to 5000.")
+        end
       end
 
       invalid_properties
@@ -86,17 +94,67 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.to_s.size > 5000
+      return false if @amount.nil?
+      return false if @bitcoin_amount.nil?
+      return false if @created.nil?
+      return false if @currency.nil?
+      return false if @id.nil?
+      if _id = @id
+        return false if _id.to_s.size > 5000
+      end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @receiver.to_s.size > 5000
+      return false if @receiver.nil?
+      if _receiver = @receiver
+        return false if _receiver.to_s.size > 5000
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id : String)
-      if id.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] amount Object to be assigned
+    def amount=(amount : Int64?)
+      if amount.nil?
+        raise ArgumentError.new("\"amount\" is required and cannot be null")
+      end
+      @amount = amount
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] bitcoin_amount Object to be assigned
+    def bitcoin_amount=(bitcoin_amount : Int64?)
+      if bitcoin_amount.nil?
+        raise ArgumentError.new("\"bitcoin_amount\" is required and cannot be null")
+      end
+      @bitcoin_amount = bitcoin_amount
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] created Object to be assigned
+    def created=(created : Int64?)
+      if created.nil?
+        raise ArgumentError.new("\"created\" is required and cannot be null")
+      end
+      @created = created
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] currency Object to be assigned
+    def currency=(currency : String?)
+      if currency.nil?
+        raise ArgumentError.new("\"currency\" is required and cannot be null")
+      end
+      @currency = currency
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : String?)
+      if id.nil?
+        raise ArgumentError.new("\"id\" is required and cannot be null")
+      end
+      _id = id.not_nil!
+      if _id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -105,15 +163,23 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+    def object=(object : String?)
+      if object.nil?
+        raise ArgumentError.new("\"object\" is required and cannot be null")
+      end
+      _object = object.not_nil!
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
       @object = object
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] receiver Value to be assigned
-    def receiver=(receiver : String)
-      if receiver.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] receiver Object to be assigned
+    def receiver=(receiver : String?)
+      if receiver.nil?
+        raise ArgumentError.new("\"receiver\" is required and cannot be null")
+      end
+      _receiver = receiver.not_nil!
+      if _receiver.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"receiver\", the character length must be smaller than or equal to 5000.")
       end
 

@@ -13,16 +13,16 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AccountServiceResourceTreasuryClosedStatusDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # The array that contains reasons for a FinancialAccount closure.
-    @[JSON::Field(key: "reasons", type: Array(String))]
-    getter reasons : Array(String)
+    @[JSON::Field(key: "reasons", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter reasons : Array(String)? = nil
 
     ENUM_VALIDATOR_FOR_REASONS = EnumValidator.new("reasons", "Array(String)", ["account_rejected", "closed_by_platform", "other"])
 
@@ -31,7 +31,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @reasons : Array(String)
+      @reasons : Array(String)? = nil
     )
     end
 
@@ -55,8 +55,12 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] reasons Object to be assigned
-    def reasons=(reasons : Array(String))
-      ENUM_VALIDATOR_FOR_REASONS.all_valid!(reasons, false)
+    def reasons=(reasons : Array(String)?)
+      if reasons.nil?
+        raise ArgumentError.new("\"reasons\" is required and cannot be null")
+      end
+      _reasons = reasons.not_nil!
+      ENUM_VALIDATOR_FOR_REASONS.all_valid!(_reasons)
       @reasons = reasons
     end
 

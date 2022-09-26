@@ -13,24 +13,24 @@ require "log"
 
 module Stripe
   # Additional details on the FinancialAccount Features information.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AccountServiceResourceStatusDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # Represents the reason why the status is `pending` or `restricted`.
-    @[JSON::Field(key: "code", type: String)]
-    getter code : String
+    @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter code : String? = nil
 
     ENUM_VALIDATOR_FOR_CODE = EnumValidator.new("code", "String", ["activating", "capability_not_requested", "financial_account_closed", "rejected_other", "rejected_unsupported_business", "requirements_past_due", "requirements_pending_verification", "restricted_by_platform", "restricted_other"])
 
     # Optional properties
 
     # Represents what the user should do, if anything, to activate the Feature.
-    @[JSON::Field(key: "resolution", type: String?, presence: true, ignore_serialize: resolution.nil? && !resolution_present?)]
-    getter resolution : String?
+    @[JSON::Field(key: "resolution", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: resolution.nil? && !resolution_present?)]
+    getter resolution : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? resolution_present : Bool = false
@@ -38,11 +38,8 @@ module Stripe
     ENUM_VALIDATOR_FOR_RESOLUTION = EnumValidator.new("resolution", "String", ["contact_stripe", "provide_information", "remove_restriction"])
 
     # The `platform_restrictions` that are restricting this Feature.
-    @[JSON::Field(key: "restriction", type: String?, presence: true, ignore_serialize: restriction.nil? && !restriction_present?)]
-    getter restriction : String?
-
-    @[JSON::Field(ignore: true)]
-    property? restriction_present : Bool = false
+    @[JSON::Field(key: "restriction", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter restriction : String? = nil
 
     ENUM_VALIDATOR_FOR_RESTRICTION = EnumValidator.new("restriction", "String", ["inbound_flows", "outbound_flows"])
 
@@ -51,7 +48,7 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @code : String,
+      @code : String? = nil,
       # Optional properties
       @resolution : String? = nil,
       @restriction : String? = nil
@@ -84,22 +81,34 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
-    def code=(code : String)
-      ENUM_VALIDATOR_FOR_CODE.valid!(code, false)
+    def code=(code : String?)
+      if code.nil?
+        raise ArgumentError.new("\"code\" is required and cannot be null")
+      end
+      _code = code.not_nil!
+      ENUM_VALIDATOR_FOR_CODE.valid!(_code)
       @code = code
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] resolution Object to be assigned
     def resolution=(resolution : String?)
-      ENUM_VALIDATOR_FOR_RESOLUTION.valid!(resolution)
+      if resolution.nil?
+        return @resolution = nil
+      end
+      _resolution = resolution.not_nil!
+      ENUM_VALIDATOR_FOR_RESOLUTION.valid!(_resolution)
       @resolution = resolution
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] restriction Object to be assigned
     def restriction=(restriction : String?)
-      ENUM_VALIDATOR_FOR_RESTRICTION.valid!(restriction)
+      if restriction.nil?
+        return @restriction = nil
+      end
+      _restriction = restriction.not_nil!
+      ENUM_VALIDATOR_FOR_RESTRICTION.valid!(_restriction)
       @restriction = restriction
     end
 
@@ -113,6 +122,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@code, @resolution, @resolution_present, @restriction, @restriction_present)
+    def_equals_and_hash(@code, @resolution, @resolution_present, @restriction)
   end
 end

@@ -13,34 +13,34 @@ require "log"
 
 module Stripe
   # ABA Records contain U.S. bank account details per the ABA format.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AccountServiceResourceAbaRecord
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # The name of the person or business that owns the bank account.
-    @[JSON::Field(key: "account_holder_name", type: String)]
-    getter account_holder_name : String
+    @[JSON::Field(key: "account_holder_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter account_holder_name : String? = nil
 
     # The last four characters of the account number.
-    @[JSON::Field(key: "account_number_last4", type: String)]
-    getter account_number_last4 : String
+    @[JSON::Field(key: "account_number_last4", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter account_number_last4 : String? = nil
 
     # Name of the bank.
-    @[JSON::Field(key: "bank_name", type: String)]
-    getter bank_name : String
+    @[JSON::Field(key: "bank_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter bank_name : String? = nil
 
     # Routing number for the account.
-    @[JSON::Field(key: "routing_number", type: String)]
-    getter routing_number : String
+    @[JSON::Field(key: "routing_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter routing_number : String? = nil
 
     # Optional properties
 
     # The account number.
-    @[JSON::Field(key: "account_number", type: String?, presence: true, ignore_serialize: account_number.nil? && !account_number_present?)]
-    getter account_number : String?
+    @[JSON::Field(key: "account_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_number.nil? && !account_number_present?)]
+    getter account_number : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? account_number_present : Bool = false
@@ -50,10 +50,10 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @account_holder_name : String,
-      @account_number_last4 : String,
-      @bank_name : String,
-      @routing_number : String,
+      @account_holder_name : String? = nil,
+      @account_number_last4 : String? = nil,
+      @bank_name : String? = nil,
+      @routing_number : String? = nil,
       # Optional properties
       @account_number : String? = nil
     )
@@ -63,25 +63,34 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @account_holder_name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"account_holder_name\" is required and cannot be null") if @account_holder_name.nil?
+      if _account_holder_name = @account_holder_name
+        if _account_holder_name.to_s.size > 5000
+          invalid_properties.push("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if @account_number_last4.to_s.size > 5000
-        invalid_properties.push("invalid value for \"account_number_last4\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"account_number_last4\" is required and cannot be null") if @account_number_last4.nil?
+      if _account_number_last4 = @account_number_last4
+        if _account_number_last4.to_s.size > 5000
+          invalid_properties.push("invalid value for \"account_number_last4\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if @bank_name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"bank_name\" is required and cannot be null") if @bank_name.nil?
+      if _bank_name = @bank_name
+        if _bank_name.to_s.size > 5000
+          invalid_properties.push("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if @routing_number.to_s.size > 5000
-        invalid_properties.push("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"routing_number\" is required and cannot be null") if @routing_number.nil?
+      if _routing_number = @routing_number
+        if _routing_number.to_s.size > 5000
+          invalid_properties.push("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@account_number.nil? && @account_number.to_s.size > 5000
-        invalid_properties.push("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+      if _account_number = @account_number
+        if _account_number.to_s.size > 5000
+          invalid_properties.push("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+        end
       end
 
       invalid_properties
@@ -90,59 +99,93 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @account_holder_name.to_s.size > 5000
-      return false if @account_number_last4.to_s.size > 5000
-      return false if @bank_name.to_s.size > 5000
-      return false if @routing_number.to_s.size > 5000
-      return false if !@account_number.nil? && @account_number.to_s.size > 5000
+      return false if @account_holder_name.nil?
+      if _account_holder_name = @account_holder_name
+        return false if _account_holder_name.to_s.size > 5000
+      end
+      return false if @account_number_last4.nil?
+      if _account_number_last4 = @account_number_last4
+        return false if _account_number_last4.to_s.size > 5000
+      end
+      return false if @bank_name.nil?
+      if _bank_name = @bank_name
+        return false if _bank_name.to_s.size > 5000
+      end
+      return false if @routing_number.nil?
+      if _routing_number = @routing_number
+        return false if _routing_number.to_s.size > 5000
+      end
+      if _account_number = @account_number
+        return false if _account_number.to_s.size > 5000
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] account_holder_name Value to be assigned
-    def account_holder_name=(account_holder_name : String)
-      if account_holder_name.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] account_holder_name Object to be assigned
+    def account_holder_name=(account_holder_name : String?)
+      if account_holder_name.nil?
+        raise ArgumentError.new("\"account_holder_name\" is required and cannot be null")
+      end
+      _account_holder_name = account_holder_name.not_nil!
+      if _account_holder_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
       end
 
       @account_holder_name = account_holder_name
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] account_number_last4 Value to be assigned
-    def account_number_last4=(account_number_last4 : String)
-      if account_number_last4.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] account_number_last4 Object to be assigned
+    def account_number_last4=(account_number_last4 : String?)
+      if account_number_last4.nil?
+        raise ArgumentError.new("\"account_number_last4\" is required and cannot be null")
+      end
+      _account_number_last4 = account_number_last4.not_nil!
+      if _account_number_last4.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_number_last4\", the character length must be smaller than or equal to 5000.")
       end
 
       @account_number_last4 = account_number_last4
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] bank_name Value to be assigned
-    def bank_name=(bank_name : String)
-      if bank_name.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] bank_name Object to be assigned
+    def bank_name=(bank_name : String?)
+      if bank_name.nil?
+        raise ArgumentError.new("\"bank_name\" is required and cannot be null")
+      end
+      _bank_name = bank_name.not_nil!
+      if _bank_name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
       end
 
       @bank_name = bank_name
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] routing_number Value to be assigned
-    def routing_number=(routing_number : String)
-      if routing_number.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] routing_number Object to be assigned
+    def routing_number=(routing_number : String?)
+      if routing_number.nil?
+        raise ArgumentError.new("\"routing_number\" is required and cannot be null")
+      end
+      _routing_number = routing_number.not_nil!
+      if _routing_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
       end
 
       @routing_number = routing_number
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] account_number Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] account_number Object to be assigned
     def account_number=(account_number : String?)
-      if !account_number.nil? && account_number.to_s.size > 5000
+      if account_number.nil?
+        return @account_number = nil
+      end
+      _account_number = account_number.not_nil!
+      if _account_number.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
 

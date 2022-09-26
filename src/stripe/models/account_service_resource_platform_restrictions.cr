@@ -13,16 +13,16 @@ require "log"
 
 module Stripe
   # Restrictions that a Connect Platform has placed on this FinancialAccount.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AccountServiceResourcePlatformRestrictions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 
     # Restricts all inbound money movement.
-    @[JSON::Field(key: "inbound_flows", type: String?, presence: true, ignore_serialize: inbound_flows.nil? && !inbound_flows_present?)]
-    getter inbound_flows : String?
+    @[JSON::Field(key: "inbound_flows", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: inbound_flows.nil? && !inbound_flows_present?)]
+    getter inbound_flows : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? inbound_flows_present : Bool = false
@@ -30,8 +30,8 @@ module Stripe
     ENUM_VALIDATOR_FOR_INBOUND_FLOWS = EnumValidator.new("inbound_flows", "String", ["restricted", "unrestricted"])
 
     # Restricts all outbound money movement.
-    @[JSON::Field(key: "outbound_flows", type: String?, presence: true, ignore_serialize: outbound_flows.nil? && !outbound_flows_present?)]
-    getter outbound_flows : String?
+    @[JSON::Field(key: "outbound_flows", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: outbound_flows.nil? && !outbound_flows_present?)]
+    getter outbound_flows : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? outbound_flows_present : Bool = false
@@ -72,14 +72,22 @@ module Stripe
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] inbound_flows Object to be assigned
     def inbound_flows=(inbound_flows : String?)
-      ENUM_VALIDATOR_FOR_INBOUND_FLOWS.valid!(inbound_flows)
+      if inbound_flows.nil?
+        return @inbound_flows = nil
+      end
+      _inbound_flows = inbound_flows.not_nil!
+      ENUM_VALIDATOR_FOR_INBOUND_FLOWS.valid!(_inbound_flows)
       @inbound_flows = inbound_flows
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] outbound_flows Object to be assigned
     def outbound_flows=(outbound_flows : String?)
-      ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS.valid!(outbound_flows)
+      if outbound_flows.nil?
+        return @outbound_flows = nil
+      end
+      _outbound_flows = outbound_flows.not_nil!
+      ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS.valid!(_outbound_flows)
       @outbound_flows = outbound_flows
     end
 

@@ -13,16 +13,16 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ReceivedDebitsResourceStatusTransitions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 
     # Timestamp describing when the DebitReversal changed status to `completed`.
-    @[JSON::Field(key: "completed_at", type: Int64?, presence: true, ignore_serialize: completed_at.nil? && !completed_at_present?)]
-    property completed_at : Int64?
+    @[JSON::Field(key: "completed_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: completed_at.nil? && !completed_at_present?)]
+    getter completed_at : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? completed_at_present : Bool = false
@@ -48,6 +48,15 @@ module Stripe
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] completed_at Object to be assigned
+    def completed_at=(completed_at : Int64?)
+      if completed_at.nil?
+        return @completed_at = nil
+      end
+      @completed_at = completed_at
     end
 
     # @see the `==` method

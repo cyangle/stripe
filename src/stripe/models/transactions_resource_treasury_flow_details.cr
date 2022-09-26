@@ -13,84 +13,60 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class TransactionsResourceTreasuryFlowDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # Type of the flow that created the Transaction. Set to the same value as `flow_type`.
-    @[JSON::Field(key: "type", type: String)]
-    getter _type : String
+    @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter _type : String? = nil
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["credit_reversal", "debit_reversal", "inbound_transfer", "issuing_authorization", "other", "outbound_payment", "outbound_transfer", "received_credit", "received_debit"])
 
     # Optional properties
 
-    @[JSON::Field(key: "credit_reversal", type: TreasuryCreditReversal?, presence: true, ignore_serialize: credit_reversal.nil? && !credit_reversal_present?)]
-    property credit_reversal : TreasuryCreditReversal?
+    @[JSON::Field(key: "credit_reversal", type: Stripe::TreasuryCreditReversal?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter credit_reversal : Stripe::TreasuryCreditReversal? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? credit_reversal_present : Bool = false
+    @[JSON::Field(key: "debit_reversal", type: Stripe::TreasuryDebitReversal?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter debit_reversal : Stripe::TreasuryDebitReversal? = nil
 
-    @[JSON::Field(key: "debit_reversal", type: TreasuryDebitReversal?, presence: true, ignore_serialize: debit_reversal.nil? && !debit_reversal_present?)]
-    property debit_reversal : TreasuryDebitReversal?
+    @[JSON::Field(key: "inbound_transfer", type: Stripe::TreasuryInboundTransfer?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter inbound_transfer : Stripe::TreasuryInboundTransfer? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? debit_reversal_present : Bool = false
+    @[JSON::Field(key: "issuing_authorization", type: Stripe::IssuingAuthorization?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter issuing_authorization : Stripe::IssuingAuthorization? = nil
 
-    @[JSON::Field(key: "inbound_transfer", type: TreasuryInboundTransfer?, presence: true, ignore_serialize: inbound_transfer.nil? && !inbound_transfer_present?)]
-    property inbound_transfer : TreasuryInboundTransfer?
+    @[JSON::Field(key: "outbound_payment", type: Stripe::TreasuryOutboundPayment?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter outbound_payment : Stripe::TreasuryOutboundPayment? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? inbound_transfer_present : Bool = false
+    @[JSON::Field(key: "outbound_transfer", type: Stripe::TreasuryOutboundTransfer?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter outbound_transfer : Stripe::TreasuryOutboundTransfer? = nil
 
-    @[JSON::Field(key: "issuing_authorization", type: IssuingAuthorization?, presence: true, ignore_serialize: issuing_authorization.nil? && !issuing_authorization_present?)]
-    property issuing_authorization : IssuingAuthorization?
+    @[JSON::Field(key: "received_credit", type: Stripe::TreasuryReceivedCredit?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter received_credit : Stripe::TreasuryReceivedCredit? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? issuing_authorization_present : Bool = false
-
-    @[JSON::Field(key: "outbound_payment", type: TreasuryOutboundPayment?, presence: true, ignore_serialize: outbound_payment.nil? && !outbound_payment_present?)]
-    property outbound_payment : TreasuryOutboundPayment?
-
-    @[JSON::Field(ignore: true)]
-    property? outbound_payment_present : Bool = false
-
-    @[JSON::Field(key: "outbound_transfer", type: TreasuryOutboundTransfer?, presence: true, ignore_serialize: outbound_transfer.nil? && !outbound_transfer_present?)]
-    property outbound_transfer : TreasuryOutboundTransfer?
-
-    @[JSON::Field(ignore: true)]
-    property? outbound_transfer_present : Bool = false
-
-    @[JSON::Field(key: "received_credit", type: TreasuryReceivedCredit?, presence: true, ignore_serialize: received_credit.nil? && !received_credit_present?)]
-    property received_credit : TreasuryReceivedCredit?
-
-    @[JSON::Field(ignore: true)]
-    property? received_credit_present : Bool = false
-
-    @[JSON::Field(key: "received_debit", type: TreasuryReceivedDebit?, presence: true, ignore_serialize: received_debit.nil? && !received_debit_present?)]
-    property received_debit : TreasuryReceivedDebit?
-
-    @[JSON::Field(ignore: true)]
-    property? received_debit_present : Bool = false
+    @[JSON::Field(key: "received_debit", type: Stripe::TreasuryReceivedDebit?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter received_debit : Stripe::TreasuryReceivedDebit? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @_type : String,
+      @_type : String? = nil,
       # Optional properties
-      @credit_reversal : TreasuryCreditReversal? = nil,
-      @debit_reversal : TreasuryDebitReversal? = nil,
-      @inbound_transfer : TreasuryInboundTransfer? = nil,
-      @issuing_authorization : IssuingAuthorization? = nil,
-      @outbound_payment : TreasuryOutboundPayment? = nil,
-      @outbound_transfer : TreasuryOutboundTransfer? = nil,
-      @received_credit : TreasuryReceivedCredit? = nil,
-      @received_debit : TreasuryReceivedDebit? = nil
+      @credit_reversal : Stripe::TreasuryCreditReversal? = nil,
+      @debit_reversal : Stripe::TreasuryDebitReversal? = nil,
+      @inbound_transfer : Stripe::TreasuryInboundTransfer? = nil,
+      @issuing_authorization : Stripe::IssuingAuthorization? = nil,
+      @outbound_payment : Stripe::TreasuryOutboundPayment? = nil,
+      @outbound_transfer : Stripe::TreasuryOutboundTransfer? = nil,
+      @received_credit : Stripe::TreasuryReceivedCredit? = nil,
+      @received_debit : Stripe::TreasuryReceivedDebit? = nil
     )
     end
 
@@ -100,6 +76,14 @@ module Stripe
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      # This is a model credit_reversal : Stripe::TreasuryCreditReversal?
+      # This is a model debit_reversal : Stripe::TreasuryDebitReversal?
+      # This is a model inbound_transfer : Stripe::TreasuryInboundTransfer?
+      # This is a model issuing_authorization : Stripe::IssuingAuthorization?
+      # This is a model outbound_payment : Stripe::TreasuryOutboundPayment?
+      # This is a model outbound_transfer : Stripe::TreasuryOutboundTransfer?
+      # This is a model received_credit : Stripe::TreasuryReceivedCredit?
+      # This is a model received_debit : Stripe::TreasuryReceivedDebit?
 
       invalid_properties
     end
@@ -114,9 +98,85 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
+    def _type=(_type : String?)
+      if _type.nil?
+        raise ArgumentError.new("\"_type\" is required and cannot be null")
+      end
+      __type = _type.not_nil!
+      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
       @_type = _type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] credit_reversal Object to be assigned
+    def credit_reversal=(credit_reversal : Stripe::TreasuryCreditReversal?)
+      if credit_reversal.nil?
+        return @credit_reversal = nil
+      end
+      @credit_reversal = credit_reversal
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] debit_reversal Object to be assigned
+    def debit_reversal=(debit_reversal : Stripe::TreasuryDebitReversal?)
+      if debit_reversal.nil?
+        return @debit_reversal = nil
+      end
+      @debit_reversal = debit_reversal
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] inbound_transfer Object to be assigned
+    def inbound_transfer=(inbound_transfer : Stripe::TreasuryInboundTransfer?)
+      if inbound_transfer.nil?
+        return @inbound_transfer = nil
+      end
+      @inbound_transfer = inbound_transfer
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] issuing_authorization Object to be assigned
+    def issuing_authorization=(issuing_authorization : Stripe::IssuingAuthorization?)
+      if issuing_authorization.nil?
+        return @issuing_authorization = nil
+      end
+      @issuing_authorization = issuing_authorization
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] outbound_payment Object to be assigned
+    def outbound_payment=(outbound_payment : Stripe::TreasuryOutboundPayment?)
+      if outbound_payment.nil?
+        return @outbound_payment = nil
+      end
+      @outbound_payment = outbound_payment
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] outbound_transfer Object to be assigned
+    def outbound_transfer=(outbound_transfer : Stripe::TreasuryOutboundTransfer?)
+      if outbound_transfer.nil?
+        return @outbound_transfer = nil
+      end
+      @outbound_transfer = outbound_transfer
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] received_credit Object to be assigned
+    def received_credit=(received_credit : Stripe::TreasuryReceivedCredit?)
+      if received_credit.nil?
+        return @received_credit = nil
+      end
+      @received_credit = received_credit
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] received_debit Object to be assigned
+    def received_debit=(received_debit : Stripe::TreasuryReceivedDebit?)
+      if received_debit.nil?
+        return @received_debit = nil
+      end
+      @received_debit = received_debit
     end
 
     # @see the `==` method
@@ -129,6 +189,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @credit_reversal, @credit_reversal_present, @debit_reversal, @debit_reversal_present, @inbound_transfer, @inbound_transfer_present, @issuing_authorization, @issuing_authorization_present, @outbound_payment, @outbound_payment_present, @outbound_transfer, @outbound_transfer_present, @received_credit, @received_credit_present, @received_debit, @received_debit_present)
+    def_equals_and_hash(@_type, @credit_reversal, @debit_reversal, @inbound_transfer, @issuing_authorization, @outbound_payment, @outbound_transfer, @received_credit, @received_debit)
   end
 end

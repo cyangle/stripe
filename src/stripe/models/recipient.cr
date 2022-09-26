@@ -13,111 +13,108 @@ require "log"
 
 module Stripe
   # With `Recipient` objects, you can transfer money from your Stripe account to a third-party bank account or debit card. The API allows you to create, delete, and update your recipients. You can retrieve individual recipients as well as a list of all your recipients.  **`Recipient` objects have been deprecated in favor of [Connect](https://stripe.com/docs/connect), specifically Connect's much more powerful [Account objects](https://stripe.com/docs/api#account). Stripe accounts that don't already use recipients can no longer begin doing so. Please use `Account` objects instead.**
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class Recipient
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
-    @[JSON::Field(key: "created", type: Int64)]
-    property created : Int64
+    @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter created : Int64? = nil
 
     # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
+    @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter id : String? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-    @[JSON::Field(key: "livemode", type: Bool)]
-    property livemode : Bool
+    @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter livemode : Bool? = nil
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String))]
-    property metadata : Hash(String, String)
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter metadata : Hash(String, String)? = nil
 
     # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
+    @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter object : String? = nil
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["recipient"])
 
     # Type of the recipient, one of `individual` or `corporation`.
-    @[JSON::Field(key: "type", type: String)]
-    getter _type : String
+    @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter _type : String? = nil
 
     # Optional properties
 
-    @[JSON::Field(key: "active_account", type: RecipientActiveAccount?, presence: true, ignore_serialize: active_account.nil? && !active_account_present?)]
-    property active_account : RecipientActiveAccount?
+    @[JSON::Field(key: "active_account", type: Stripe::RecipientActiveAccount?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: active_account.nil? && !active_account_present?)]
+    getter active_account : Stripe::RecipientActiveAccount? = nil
 
     @[JSON::Field(ignore: true)]
     property? active_account_present : Bool = false
 
-    @[JSON::Field(key: "cards", type: CardList1?, presence: true, ignore_serialize: cards.nil? && !cards_present?)]
-    property cards : CardList1?
+    @[JSON::Field(key: "cards", type: Stripe::CardList1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cards.nil? && !cards_present?)]
+    getter cards : Stripe::CardList1? = nil
 
     @[JSON::Field(ignore: true)]
     property? cards_present : Bool = false
 
-    @[JSON::Field(key: "default_card", type: RecipientDefaultCard?, presence: true, ignore_serialize: default_card.nil? && !default_card_present?)]
-    property default_card : RecipientDefaultCard?
+    @[JSON::Field(key: "default_card", type: Stripe::RecipientDefaultCard?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: default_card.nil? && !default_card_present?)]
+    getter default_card : Stripe::RecipientDefaultCard? = nil
 
     @[JSON::Field(ignore: true)]
     property? default_card_present : Bool = false
 
     # An arbitrary string attached to the object. Often useful for displaying to users.
-    @[JSON::Field(key: "description", type: String?, presence: true, ignore_serialize: description.nil? && !description_present?)]
-    getter description : String?
+    @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: description.nil? && !description_present?)]
+    getter description : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
 
-    @[JSON::Field(key: "email", type: String?, presence: true, ignore_serialize: email.nil? && !email_present?)]
-    getter email : String?
+    @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: email.nil? && !email_present?)]
+    getter email : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
 
-    @[JSON::Field(key: "migrated_to", type: RecipientMigratedTo?, presence: true, ignore_serialize: migrated_to.nil? && !migrated_to_present?)]
-    property migrated_to : RecipientMigratedTo?
+    @[JSON::Field(key: "migrated_to", type: Stripe::RecipientMigratedTo?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: migrated_to.nil? && !migrated_to_present?)]
+    getter migrated_to : Stripe::RecipientMigratedTo? = nil
 
     @[JSON::Field(ignore: true)]
     property? migrated_to_present : Bool = false
 
     # Full, legal name of the recipient.
-    @[JSON::Field(key: "name", type: String?, presence: true, ignore_serialize: name.nil? && !name_present?)]
-    getter name : String?
+    @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: name.nil? && !name_present?)]
+    getter name : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
 
-    @[JSON::Field(key: "rolled_back_from", type: RecipientRolledBackFrom?, presence: true, ignore_serialize: rolled_back_from.nil? && !rolled_back_from_present?)]
-    property rolled_back_from : RecipientRolledBackFrom?
-
-    @[JSON::Field(ignore: true)]
-    property? rolled_back_from_present : Bool = false
+    @[JSON::Field(key: "rolled_back_from", type: Stripe::RecipientRolledBackFrom?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter rolled_back_from : Stripe::RecipientRolledBackFrom? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @created : Int64,
-      @id : String,
-      @livemode : Bool,
-      @metadata : Hash(String, String),
-      @object : String,
-      @_type : String,
+      @created : Int64? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @metadata : Hash(String, String)? = nil,
+      @object : String? = nil,
+      @_type : String? = nil,
       # Optional properties
-      @active_account : RecipientActiveAccount? = nil,
-      @cards : CardList1? = nil,
-      @default_card : RecipientDefaultCard? = nil,
+      @active_account : Stripe::RecipientActiveAccount? = nil,
+      @cards : Stripe::CardList1? = nil,
+      @default_card : Stripe::RecipientDefaultCard? = nil,
       @description : String? = nil,
       @email : String? = nil,
-      @migrated_to : RecipientMigratedTo? = nil,
+      @migrated_to : Stripe::RecipientMigratedTo? = nil,
       @name : String? = nil,
-      @rolled_back_from : RecipientRolledBackFrom? = nil
+      @rolled_back_from : Stripe::RecipientRolledBackFrom? = nil
     )
     end
 
@@ -125,28 +122,43 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @id.to_s.size > 5000
-        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+      invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+      if _id = @id
+        if _id.to_s.size > 5000
+          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        end
       end
+      invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
+      invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
-      if @_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+      if __type = @_type
+        if __type.to_s.size > 5000
+          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@description.nil? && @description.to_s.size > 5000
-        invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      # This is a model active_account : Stripe::RecipientActiveAccount?
+      # This is a model cards : Stripe::CardList1?
+      # This is a model default_card : Stripe::RecipientDefaultCard?
+      if _description = @description
+        if _description.to_s.size > 5000
+          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@email.nil? && @email.to_s.size > 5000
-        invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      if _email = @email
+        if _email.to_s.size > 5000
+          invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@name.nil? && @name.to_s.size > 5000
-        invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      # This is a model migrated_to : Stripe::RecipientMigratedTo?
+      if _name = @name
+        if _name.to_s.size > 5000
+          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        end
       end
+      # This is a model rolled_back_from : Stripe::RecipientRolledBackFrom?
 
       invalid_properties
     end
@@ -154,20 +166,48 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.to_s.size > 5000
+      return false if @created.nil?
+      return false if @id.nil?
+      if _id = @id
+        return false if _id.to_s.size > 5000
+      end
+      return false if @livemode.nil?
+      return false if @metadata.nil?
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @_type.to_s.size > 5000
-      return false if !@description.nil? && @description.to_s.size > 5000
-      return false if !@email.nil? && @email.to_s.size > 5000
-      return false if !@name.nil? && @name.to_s.size > 5000
+      return false if @_type.nil?
+      if __type = @_type
+        return false if __type.to_s.size > 5000
+      end
+      if _description = @description
+        return false if _description.to_s.size > 5000
+      end
+      if _email = @email
+        return false if _email.to_s.size > 5000
+      end
+      if _name = @name
+        return false if _name.to_s.size > 5000
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id : String)
-      if id.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] created Object to be assigned
+    def created=(created : Int64?)
+      if created.nil?
+        raise ArgumentError.new("\"created\" is required and cannot be null")
+      end
+      @created = created
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : String?)
+      if id.nil?
+        raise ArgumentError.new("\"id\" is required and cannot be null")
+      end
+      _id = id.not_nil!
+      if _id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -175,50 +215,133 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] livemode Object to be assigned
+    def livemode=(livemode : Bool?)
+      if livemode.nil?
+        raise ArgumentError.new("\"livemode\" is required and cannot be null")
+      end
+      @livemode = livemode
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] metadata Object to be assigned
+    def metadata=(metadata : Hash(String, String)?)
+      if metadata.nil?
+        raise ArgumentError.new("\"metadata\" is required and cannot be null")
+      end
+      @metadata = metadata
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+    def object=(object : String?)
+      if object.nil?
+        raise ArgumentError.new("\"object\" is required and cannot be null")
+      end
+      _object = object.not_nil!
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
       @object = object
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] _type Value to be assigned
-    def _type=(_type : String)
-      if _type.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] _type Object to be assigned
+    def _type=(_type : String?)
+      if _type.nil?
+        raise ArgumentError.new("\"_type\" is required and cannot be null")
+      end
+      __type = _type.not_nil!
+      if __type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
       @_type = _type
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] active_account Object to be assigned
+    def active_account=(active_account : Stripe::RecipientActiveAccount?)
+      if active_account.nil?
+        return @active_account = nil
+      end
+      @active_account = active_account
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] cards Object to be assigned
+    def cards=(cards : Stripe::CardList1?)
+      if cards.nil?
+        return @cards = nil
+      end
+      @cards = cards
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] default_card Object to be assigned
+    def default_card=(default_card : Stripe::RecipientDefaultCard?)
+      if default_card.nil?
+        return @default_card = nil
+      end
+      @default_card = default_card
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] description Object to be assigned
     def description=(description : String?)
-      if !description.nil? && description.to_s.size > 5000
+      if description.nil?
+        return @description = nil
+      end
+      _description = description.not_nil!
+      if _description.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
       @description = description
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] email Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] email Object to be assigned
     def email=(email : String?)
-      if !email.nil? && email.to_s.size > 5000
+      if email.nil?
+        return @email = nil
+      end
+      _email = email.not_nil!
+      if _email.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
 
       @email = email
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] migrated_to Object to be assigned
+    def migrated_to=(migrated_to : Stripe::RecipientMigratedTo?)
+      if migrated_to.nil?
+        return @migrated_to = nil
+      end
+      @migrated_to = migrated_to
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] name Object to be assigned
     def name=(name : String?)
-      if !name.nil? && name.to_s.size > 5000
+      if name.nil?
+        return @name = nil
+      end
+      _name = name.not_nil!
+      if _name.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
       @name = name
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] rolled_back_from Object to be assigned
+    def rolled_back_from=(rolled_back_from : Stripe::RecipientRolledBackFrom?)
+      if rolled_back_from.nil?
+        return @rolled_back_from = nil
+      end
+      @rolled_back_from = rolled_back_from
     end
 
     # @see the `==` method
@@ -231,6 +354,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@created, @id, @livemode, @metadata, @object, @_type, @active_account, @active_account_present, @cards, @cards_present, @default_card, @default_card_present, @description, @description_present, @email, @email_present, @migrated_to, @migrated_to_present, @name, @name_present, @rolled_back_from, @rolled_back_from_present)
+    def_equals_and_hash(@created, @id, @livemode, @metadata, @object, @_type, @active_account, @active_account_present, @cards, @cards_present, @default_card, @default_card_present, @description, @description_present, @email, @email_present, @migrated_to, @migrated_to_present, @name, @name_present, @rolled_back_from)
   end
 end

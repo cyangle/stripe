@@ -13,30 +13,30 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class InboundTransfersResourceInboundTransferResourceStatusTransitions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 
     # Timestamp describing when an InboundTransfer changed status to `canceled`.
-    @[JSON::Field(key: "canceled_at", type: Int64?, presence: true, ignore_serialize: canceled_at.nil? && !canceled_at_present?)]
-    property canceled_at : Int64?
+    @[JSON::Field(key: "canceled_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: canceled_at.nil? && !canceled_at_present?)]
+    getter canceled_at : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? canceled_at_present : Bool = false
 
     # Timestamp describing when an InboundTransfer changed status to `failed`.
-    @[JSON::Field(key: "failed_at", type: Int64?, presence: true, ignore_serialize: failed_at.nil? && !failed_at_present?)]
-    property failed_at : Int64?
+    @[JSON::Field(key: "failed_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: failed_at.nil? && !failed_at_present?)]
+    getter failed_at : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? failed_at_present : Bool = false
 
     # Timestamp describing when an InboundTransfer changed status to `succeeded`.
-    @[JSON::Field(key: "succeeded_at", type: Int64?, presence: true, ignore_serialize: succeeded_at.nil? && !succeeded_at_present?)]
-    property succeeded_at : Int64?
+    @[JSON::Field(key: "succeeded_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: succeeded_at.nil? && !succeeded_at_present?)]
+    getter succeeded_at : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? succeeded_at_present : Bool = false
@@ -64,6 +64,33 @@ module Stripe
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] canceled_at Object to be assigned
+    def canceled_at=(canceled_at : Int64?)
+      if canceled_at.nil?
+        return @canceled_at = nil
+      end
+      @canceled_at = canceled_at
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] failed_at Object to be assigned
+    def failed_at=(failed_at : Int64?)
+      if failed_at.nil?
+        return @failed_at = nil
+      end
+      @failed_at = failed_at
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] succeeded_at Object to be assigned
+    def succeeded_at=(succeeded_at : Int64?)
+      if succeeded_at.nil?
+        return @succeeded_at = nil
+      end
+      @succeeded_at = succeeded_at
     end
 
     # @see the `==` method

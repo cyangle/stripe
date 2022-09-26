@@ -13,72 +13,69 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AlipayAccount
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
-    @[JSON::Field(key: "created", type: Int64)]
-    property created : Int64
+    @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter created : Int64? = nil
 
     # Uniquely identifies the account and will be the same across all Alipay account objects that are linked to the same Alipay account.
-    @[JSON::Field(key: "fingerprint", type: String)]
-    getter fingerprint : String
+    @[JSON::Field(key: "fingerprint", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter fingerprint : String? = nil
 
     # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
+    @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter id : String? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-    @[JSON::Field(key: "livemode", type: Bool)]
-    property livemode : Bool
+    @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter livemode : Bool? = nil
 
     # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
+    @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter object : String? = nil
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["alipay_account"])
 
     # True if you can create multiple payments using this account. If the account is reusable, then you can freely choose the amount of each payment.
-    @[JSON::Field(key: "reusable", type: Bool)]
-    property reusable : Bool
+    @[JSON::Field(key: "reusable", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter reusable : Bool? = nil
 
     # Whether this Alipay account object has ever been used for a payment.
-    @[JSON::Field(key: "used", type: Bool)]
-    property used : Bool
+    @[JSON::Field(key: "used", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter used : Bool? = nil
 
     # The username for the Alipay account.
-    @[JSON::Field(key: "username", type: String)]
-    getter username : String
+    @[JSON::Field(key: "username", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter username : String? = nil
 
     # Optional properties
 
-    @[JSON::Field(key: "customer", type: AlipayAccountCustomer?, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
-    property customer : AlipayAccountCustomer?
+    @[JSON::Field(key: "customer", type: Stripe::AlipayAccountCustomer?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: customer.nil? && !customer_present?)]
+    getter customer : Stripe::AlipayAccountCustomer? = nil
 
     @[JSON::Field(ignore: true)]
     property? customer_present : Bool = false
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    @[JSON::Field(key: "metadata", type: Hash(String, String)?, presence: true, ignore_serialize: metadata.nil? && !metadata_present?)]
-    property metadata : Hash(String, String)?
-
-    @[JSON::Field(ignore: true)]
-    property? metadata_present : Bool = false
+    @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter metadata : Hash(String, String)? = nil
 
     # If the Alipay account object is not reusable, the exact amount that you can create a charge for.
-    @[JSON::Field(key: "payment_amount", type: Int64?, presence: true, ignore_serialize: payment_amount.nil? && !payment_amount_present?)]
-    property payment_amount : Int64?
+    @[JSON::Field(key: "payment_amount", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_amount.nil? && !payment_amount_present?)]
+    getter payment_amount : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? payment_amount_present : Bool = false
 
     # If the Alipay account object is not reusable, the exact currency that you can create a charge for.
-    @[JSON::Field(key: "payment_currency", type: String?, presence: true, ignore_serialize: payment_currency.nil? && !payment_currency_present?)]
-    property payment_currency : String?
+    @[JSON::Field(key: "payment_currency", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_currency.nil? && !payment_currency_present?)]
+    getter payment_currency : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? payment_currency_present : Bool = false
@@ -88,16 +85,16 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @created : Int64,
-      @fingerprint : String,
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @reusable : Bool,
-      @used : Bool,
-      @username : String,
+      @created : Int64? = nil,
+      @fingerprint : String? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @object : String? = nil,
+      @reusable : Bool? = nil,
+      @used : Bool? = nil,
+      @username : String? = nil,
       # Optional properties
-      @customer : AlipayAccountCustomer? = nil,
+      @customer : Stripe::AlipayAccountCustomer? = nil,
       @metadata : Hash(String, String)? = nil,
       @payment_amount : Int64? = nil,
       @payment_currency : String? = nil
@@ -108,20 +105,31 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @fingerprint.to_s.size > 5000
-        invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+      invalid_properties.push("\"fingerprint\" is required and cannot be null") if @fingerprint.nil?
+      if _fingerprint = @fingerprint
+        if _fingerprint.to_s.size > 5000
+          invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if @id.to_s.size > 5000
-        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+      if _id = @id
+        if _id.to_s.size > 5000
+          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        end
       end
+      invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
-      if @username.to_s.size > 5000
-        invalid_properties.push("invalid value for \"username\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"reusable\" is required and cannot be null") if @reusable.nil?
+      invalid_properties.push("\"used\" is required and cannot be null") if @used.nil?
+      invalid_properties.push("\"username\" is required and cannot be null") if @username.nil?
+      if _username = @username
+        if _username.to_s.size > 5000
+          invalid_properties.push("invalid value for \"username\", the character length must be smaller than or equal to 5000.")
+        end
       end
+      # This is a model customer : Stripe::AlipayAccountCustomer?
 
       invalid_properties
     end
@@ -129,28 +137,58 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @fingerprint.to_s.size > 5000
-      return false if @id.to_s.size > 5000
+      return false if @created.nil?
+      return false if @fingerprint.nil?
+      if _fingerprint = @fingerprint
+        return false if _fingerprint.to_s.size > 5000
+      end
+      return false if @id.nil?
+      if _id = @id
+        return false if _id.to_s.size > 5000
+      end
+      return false if @livemode.nil?
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @username.to_s.size > 5000
+      return false if @reusable.nil?
+      return false if @used.nil?
+      return false if @username.nil?
+      if _username = @username
+        return false if _username.to_s.size > 5000
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] fingerprint Value to be assigned
-    def fingerprint=(fingerprint : String)
-      if fingerprint.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] created Object to be assigned
+    def created=(created : Int64?)
+      if created.nil?
+        raise ArgumentError.new("\"created\" is required and cannot be null")
+      end
+      @created = created
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] fingerprint Object to be assigned
+    def fingerprint=(fingerprint : String?)
+      if fingerprint.nil?
+        raise ArgumentError.new("\"fingerprint\" is required and cannot be null")
+      end
+      _fingerprint = fingerprint.not_nil!
+      if _fingerprint.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
       @fingerprint = fingerprint
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id : String)
-      if id.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : String?)
+      if id.nil?
+        raise ArgumentError.new("\"id\" is required and cannot be null")
+      end
+      _id = id.not_nil!
+      if _id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -158,20 +196,91 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] livemode Object to be assigned
+    def livemode=(livemode : Bool?)
+      if livemode.nil?
+        raise ArgumentError.new("\"livemode\" is required and cannot be null")
+      end
+      @livemode = livemode
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+    def object=(object : String?)
+      if object.nil?
+        raise ArgumentError.new("\"object\" is required and cannot be null")
+      end
+      _object = object.not_nil!
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
       @object = object
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] username Value to be assigned
-    def username=(username : String)
-      if username.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] reusable Object to be assigned
+    def reusable=(reusable : Bool?)
+      if reusable.nil?
+        raise ArgumentError.new("\"reusable\" is required and cannot be null")
+      end
+      @reusable = reusable
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] used Object to be assigned
+    def used=(used : Bool?)
+      if used.nil?
+        raise ArgumentError.new("\"used\" is required and cannot be null")
+      end
+      @used = used
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] username Object to be assigned
+    def username=(username : String?)
+      if username.nil?
+        raise ArgumentError.new("\"username\" is required and cannot be null")
+      end
+      _username = username.not_nil!
+      if _username.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"username\", the character length must be smaller than or equal to 5000.")
       end
 
       @username = username
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] customer Object to be assigned
+    def customer=(customer : Stripe::AlipayAccountCustomer?)
+      if customer.nil?
+        return @customer = nil
+      end
+      @customer = customer
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] metadata Object to be assigned
+    def metadata=(metadata : Hash(String, String)?)
+      if metadata.nil?
+        return @metadata = nil
+      end
+      @metadata = metadata
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] payment_amount Object to be assigned
+    def payment_amount=(payment_amount : Int64?)
+      if payment_amount.nil?
+        return @payment_amount = nil
+      end
+      @payment_amount = payment_amount
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] payment_currency Object to be assigned
+    def payment_currency=(payment_currency : String?)
+      if payment_currency.nil?
+        return @payment_currency = nil
+      end
+      @payment_currency = payment_currency
     end
 
     # @see the `==` method
@@ -184,6 +293,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@created, @fingerprint, @id, @livemode, @object, @reusable, @used, @username, @customer, @customer_present, @metadata, @metadata_present, @payment_amount, @payment_amount_present, @payment_currency, @payment_currency_present)
+    def_equals_and_hash(@created, @fingerprint, @id, @livemode, @object, @reusable, @used, @username, @customer, @customer_present, @metadata, @payment_amount, @payment_amount_present, @payment_currency, @payment_currency_present)
   end
 end

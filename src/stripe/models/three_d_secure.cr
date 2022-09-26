@@ -13,55 +13,55 @@ require "log"
 
 module Stripe
   # Cardholder authentication via 3D Secure is initiated by creating a `3D Secure` object. Once the object has been created, you can use it to authenticate the cardholder and create a charge.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ThreeDSecure
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # Amount of the charge that you will create when authentication completes.
-    @[JSON::Field(key: "amount", type: Int64)]
-    property amount : Int64
+    @[JSON::Field(key: "amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter amount : Int64? = nil
 
     # True if the cardholder went through the authentication flow and their bank indicated that authentication succeeded.
-    @[JSON::Field(key: "authenticated", type: Bool)]
-    property authenticated : Bool
+    @[JSON::Field(key: "authenticated", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter authenticated : Bool? = nil
 
-    @[JSON::Field(key: "card", type: Card)]
-    property card : Card
+    @[JSON::Field(key: "card", type: Stripe::Card?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter card : Stripe::Card? = nil
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
-    @[JSON::Field(key: "created", type: Int64)]
-    property created : Int64
+    @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter created : Int64? = nil
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
-    @[JSON::Field(key: "currency", type: String)]
-    getter currency : String
+    @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter currency : String? = nil
 
     # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
+    @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter id : String? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-    @[JSON::Field(key: "livemode", type: Bool)]
-    property livemode : Bool
+    @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter livemode : Bool? = nil
 
     # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
+    @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter object : String? = nil
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["three_d_secure"])
 
     # Possible values are `redirect_pending`, `succeeded`, or `failed`. When the cardholder can be authenticated, the object starts with status `redirect_pending`. When liability will be shifted to the cardholder's bank (either because the cardholder was successfully authenticated, or because the bank has not implemented 3D Secure, the object wlil be in status `succeeded`. `failed` indicates that authentication was attempted unsuccessfully.
-    @[JSON::Field(key: "status", type: String)]
-    getter status : String
+    @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter status : String? = nil
 
     # Optional properties
 
     # If present, this is the URL that you should send the cardholder to for authentication. If you are going to use Stripe.js to display the authentication page in an iframe, you should use the value \"_callback\".
-    @[JSON::Field(key: "redirect_url", type: String?, presence: true, ignore_serialize: redirect_url.nil? && !redirect_url_present?)]
-    getter redirect_url : String?
+    @[JSON::Field(key: "redirect_url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: redirect_url.nil? && !redirect_url_present?)]
+    getter redirect_url : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? redirect_url_present : Bool = false
@@ -71,15 +71,15 @@ module Stripe
     def initialize(
       *,
       # Required properties
-      @amount : Int64,
-      @authenticated : Bool,
-      @card : Card,
-      @created : Int64,
-      @currency : String,
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @status : String,
+      @amount : Int64? = nil,
+      @authenticated : Bool? = nil,
+      @card : Stripe::Card? = nil,
+      @created : Int64? = nil,
+      @currency : String? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @object : String? = nil,
+      @status : String? = nil,
       # Optional properties
       @redirect_url : String? = nil
     )
@@ -89,23 +89,36 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @currency.to_s.size > 5000
-        invalid_properties.push("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+      invalid_properties.push("\"authenticated\" is required and cannot be null") if @authenticated.nil?
+      invalid_properties.push("\"card\" is required and cannot be null") if @card.nil?
+      # This is a model card : Stripe::Card?
+      invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+      invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+      if _currency = @currency
+        if _currency.to_s.size > 5000
+          invalid_properties.push("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if @id.to_s.size > 5000
-        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+      if _id = @id
+        if _id.to_s.size > 5000
+          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        end
       end
+      invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
-      if @status.to_s.size > 5000
-        invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
+      if _status = @status
+        if _status.to_s.size > 5000
+          invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if !@redirect_url.nil? && @redirect_url.to_s.size > 5000
-        invalid_properties.push("invalid value for \"redirect_url\", the character length must be smaller than or equal to 5000.")
+      if _redirect_url = @redirect_url
+        if _redirect_url.to_s.size > 5000
+          invalid_properties.push("invalid value for \"redirect_url\", the character length must be smaller than or equal to 5000.")
+        end
       end
 
       invalid_properties
@@ -114,29 +127,89 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @currency.to_s.size > 5000
-      return false if @id.to_s.size > 5000
+      return false if @amount.nil?
+      return false if @authenticated.nil?
+      return false if @card.nil?
+      return false if @created.nil?
+      return false if @currency.nil?
+      if _currency = @currency
+        return false if _currency.to_s.size > 5000
+      end
+      return false if @id.nil?
+      if _id = @id
+        return false if _id.to_s.size > 5000
+      end
+      return false if @livemode.nil?
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @status.to_s.size > 5000
-      return false if !@redirect_url.nil? && @redirect_url.to_s.size > 5000
+      return false if @status.nil?
+      if _status = @status
+        return false if _status.to_s.size > 5000
+      end
+      if _redirect_url = @redirect_url
+        return false if _redirect_url.to_s.size > 5000
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] currency Value to be assigned
-    def currency=(currency : String)
-      if currency.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] amount Object to be assigned
+    def amount=(amount : Int64?)
+      if amount.nil?
+        raise ArgumentError.new("\"amount\" is required and cannot be null")
+      end
+      @amount = amount
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] authenticated Object to be assigned
+    def authenticated=(authenticated : Bool?)
+      if authenticated.nil?
+        raise ArgumentError.new("\"authenticated\" is required and cannot be null")
+      end
+      @authenticated = authenticated
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] card Object to be assigned
+    def card=(card : Stripe::Card?)
+      if card.nil?
+        raise ArgumentError.new("\"card\" is required and cannot be null")
+      end
+      @card = card
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] created Object to be assigned
+    def created=(created : Int64?)
+      if created.nil?
+        raise ArgumentError.new("\"created\" is required and cannot be null")
+      end
+      @created = created
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] currency Object to be assigned
+    def currency=(currency : String?)
+      if currency.nil?
+        raise ArgumentError.new("\"currency\" is required and cannot be null")
+      end
+      _currency = currency.not_nil!
+      if _currency.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
       end
 
       @currency = currency
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id : String)
-      if id.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : String?)
+      if id.nil?
+        raise ArgumentError.new("\"id\" is required and cannot be null")
+      end
+      _id = id.not_nil!
+      if _id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -144,26 +217,47 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] livemode Object to be assigned
+    def livemode=(livemode : Bool?)
+      if livemode.nil?
+        raise ArgumentError.new("\"livemode\" is required and cannot be null")
+      end
+      @livemode = livemode
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+    def object=(object : String?)
+      if object.nil?
+        raise ArgumentError.new("\"object\" is required and cannot be null")
+      end
+      _object = object.not_nil!
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
       @object = object
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] status Value to be assigned
-    def status=(status : String)
-      if status.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status : String?)
+      if status.nil?
+        raise ArgumentError.new("\"status\" is required and cannot be null")
+      end
+      _status = status.not_nil!
+      if _status.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
       @status = status
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] redirect_url Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] redirect_url Object to be assigned
     def redirect_url=(redirect_url : String?)
-      if !redirect_url.nil? && redirect_url.to_s.size > 5000
+      if redirect_url.nil?
+        return @redirect_url = nil
+      end
+      _redirect_url = redirect_url.not_nil!
+      if _redirect_url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"redirect_url\", the character length must be smaller than or equal to 5000.")
       end
 

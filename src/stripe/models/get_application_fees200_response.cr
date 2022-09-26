@@ -13,39 +13,39 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class GetApplicationFees200Response
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
-    @[JSON::Field(key: "data", type: Array(ApplicationFee))]
-    property data : Array(ApplicationFee)
+    @[JSON::Field(key: "data", type: Array(Stripe::ApplicationFee)?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter data : Array(Stripe::ApplicationFee)? = nil
 
     # True if this list has another page of items after this one that can be fetched.
-    @[JSON::Field(key: "has_more", type: Bool)]
-    property has_more : Bool
+    @[JSON::Field(key: "has_more", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter has_more : Bool? = nil
 
     # String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
+    @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter object : String? = nil
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["list"])
 
     # The URL where this list can be accessed.
-    @[JSON::Field(key: "url", type: String)]
-    getter url : String
+    @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter url : String? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @data : Array(ApplicationFee),
-      @has_more : Bool,
-      @object : String,
-      @url : String
+      @data : Array(Stripe::ApplicationFee)? = nil,
+      @has_more : Bool? = nil,
+      @object : String? = nil,
+      @url : String? = nil
     )
     end
 
@@ -53,16 +53,21 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
+      invalid_properties.push("\"data\" is required and cannot be null") if @data.nil?
+      # Container data array has values of Stripe::ApplicationFee
+      invalid_properties.push("\"has_more\" is required and cannot be null") if @has_more.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
+      if _url = @url
+        if _url.to_s.size > 5000
+          invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+        end
 
-      if @url.to_s.size > 5000
-        invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
-      end
-
-      pattern = /^\/v1\/application_fees/
-      if @url !~ pattern
-        invalid_properties.push("invalid value for \"url\", must conform to the pattern #{pattern}.")
+        pattern = /^\/v1\/application_fees/
+        if _url !~ pattern
+          invalid_properties.push("invalid value for \"url\", must conform to the pattern #{pattern}.")
+        end
       end
 
       invalid_properties
@@ -71,29 +76,60 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @data.nil?
+      return false if @has_more.nil?
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false if @url.to_s.size > 5000
-      return false if @url !~ /^\/v1\/application_fees/
+      return false if @url.nil?
+      if _url = @url
+        return false if _url.to_s.size > 5000
+        return false if _url !~ /^\/v1\/application_fees/
+      end
 
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] data Object to be assigned
+    def data=(data : Array(Stripe::ApplicationFee)?)
+      if data.nil?
+        raise ArgumentError.new("\"data\" is required and cannot be null")
+      end
+      @data = data
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] has_more Object to be assigned
+    def has_more=(has_more : Bool?)
+      if has_more.nil?
+        raise ArgumentError.new("\"has_more\" is required and cannot be null")
+      end
+      @has_more = has_more
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+    def object=(object : String?)
+      if object.nil?
+        raise ArgumentError.new("\"object\" is required and cannot be null")
+      end
+      _object = object.not_nil!
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
       @object = object
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] url Value to be assigned
-    def url=(url : String)
-      if url.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] url Object to be assigned
+    def url=(url : String?)
+      if url.nil?
+        raise ArgumentError.new("\"url\" is required and cannot be null")
+      end
+      _url = url.not_nil!
+      if _url.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
       pattern = /^\/v1\/application_fees/
-      if url !~ pattern
+      if _url !~ pattern
         raise ArgumentError.new("invalid value for \"url\", must conform to the pattern #{pattern}.")
       end
 

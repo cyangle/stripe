@@ -13,16 +13,16 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class InboundTransfersResourceTreasuryInboundTransferResourceLinkedFlows
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 
     # If funds for this flow were returned after the flow went to the `succeeded` state, this field contains a reference to the ReceivedDebit return.
-    @[JSON::Field(key: "received_debit", type: String?, presence: true, ignore_serialize: received_debit.nil? && !received_debit_present?)]
-    getter received_debit : String?
+    @[JSON::Field(key: "received_debit", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: received_debit.nil? && !received_debit_present?)]
+    getter received_debit : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? received_debit_present : Bool = false
@@ -40,9 +40,10 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if !@received_debit.nil? && @received_debit.to_s.size > 5000
-        invalid_properties.push("invalid value for \"received_debit\", the character length must be smaller than or equal to 5000.")
+      if _received_debit = @received_debit
+        if _received_debit.to_s.size > 5000
+          invalid_properties.push("invalid value for \"received_debit\", the character length must be smaller than or equal to 5000.")
+        end
       end
 
       invalid_properties
@@ -51,15 +52,21 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@received_debit.nil? && @received_debit.to_s.size > 5000
+      if _received_debit = @received_debit
+        return false if _received_debit.to_s.size > 5000
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] received_debit Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] received_debit Object to be assigned
     def received_debit=(received_debit : String?)
-      if !received_debit.nil? && received_debit.to_s.size > 5000
+      if received_debit.nil?
+        return @received_debit = nil
+      end
+      _received_debit = received_debit.not_nil!
+      if _received_debit.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"received_debit\", the character length must be smaller than or equal to 5000.")
       end
 

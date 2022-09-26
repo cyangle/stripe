@@ -13,16 +13,16 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ReceivedDebitsResourceDebitReversalLinkedFlows
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 
     # Set if there is an Issuing dispute associated with the DebitReversal.
-    @[JSON::Field(key: "issuing_dispute", type: String?, presence: true, ignore_serialize: issuing_dispute.nil? && !issuing_dispute_present?)]
-    getter issuing_dispute : String?
+    @[JSON::Field(key: "issuing_dispute", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: issuing_dispute.nil? && !issuing_dispute_present?)]
+    getter issuing_dispute : String? = nil
 
     @[JSON::Field(ignore: true)]
     property? issuing_dispute_present : Bool = false
@@ -40,9 +40,10 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if !@issuing_dispute.nil? && @issuing_dispute.to_s.size > 5000
-        invalid_properties.push("invalid value for \"issuing_dispute\", the character length must be smaller than or equal to 5000.")
+      if _issuing_dispute = @issuing_dispute
+        if _issuing_dispute.to_s.size > 5000
+          invalid_properties.push("invalid value for \"issuing_dispute\", the character length must be smaller than or equal to 5000.")
+        end
       end
 
       invalid_properties
@@ -51,15 +52,21 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@issuing_dispute.nil? && @issuing_dispute.to_s.size > 5000
+      if _issuing_dispute = @issuing_dispute
+        return false if _issuing_dispute.to_s.size > 5000
+      end
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] issuing_dispute Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] issuing_dispute Object to be assigned
     def issuing_dispute=(issuing_dispute : String?)
-      if !issuing_dispute.nil? && issuing_dispute.to_s.size > 5000
+      if issuing_dispute.nil?
+        return @issuing_dispute = nil
+      end
+      _issuing_dispute = issuing_dispute.not_nil!
+      if _issuing_dispute.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"issuing_dispute\", the character length must be smaller than or equal to 5000.")
       end
 

@@ -12,19 +12,16 @@ require "time"
 require "log"
 
 module Stripe
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class PostChargesChargeDisputeCloseRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 
     # Specifies which fields in the response should be expanded.
-    @[JSON::Field(key: "expand", type: Array(String)?, presence: true, ignore_serialize: expand.nil? && !expand_present?)]
-    property expand : Array(String)?
-
-    @[JSON::Field(ignore: true)]
-    property? expand_present : Bool = false
+    @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter expand : Array(String)? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -49,6 +46,15 @@ module Stripe
       true
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] expand Object to be assigned
+    def expand=(expand : Array(String)?)
+      if expand.nil?
+        return @expand = nil
+      end
+      @expand = expand
+    end
+
     # @see the `==` method
     # @param [Object] Object to be compared
     def eql?(o)
@@ -59,6 +65,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@expand, @expand_present)
+    def_equals_and_hash(@expand)
   end
 end

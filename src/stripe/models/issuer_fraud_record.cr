@@ -13,64 +13,64 @@ require "log"
 
 module Stripe
   # This resource has been renamed to [Early Fraud Warning](#early_fraud_warning_object) and will be removed in a future API version.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class IssuerFraudRecord
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # An IFR is actionable if it has not received a dispute and has not been fully refunded. You may wish to proactively refund a charge that receives an IFR, in order to avoid receiving a dispute later.
-    @[JSON::Field(key: "actionable", type: Bool)]
-    property actionable : Bool
+    @[JSON::Field(key: "actionable", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter actionable : Bool? = nil
 
-    @[JSON::Field(key: "charge", type: IssuerFraudRecordCharge)]
-    property charge : IssuerFraudRecordCharge
+    @[JSON::Field(key: "charge", type: Stripe::IssuerFraudRecordCharge?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter charge : Stripe::IssuerFraudRecordCharge? = nil
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
-    @[JSON::Field(key: "created", type: Int64)]
-    property created : Int64
+    @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter created : Int64? = nil
 
     # The type of fraud labelled by the issuer. One of `card_never_received`, `fraudulent_card_application`, `made_with_counterfeit_card`, `made_with_lost_card`, `made_with_stolen_card`, `misc`, `unauthorized_use_of_card`.
-    @[JSON::Field(key: "fraud_type", type: String)]
-    getter fraud_type : String
+    @[JSON::Field(key: "fraud_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter fraud_type : String? = nil
 
     # If true, the associated charge is subject to [liability shift](https://stripe.com/docs/payments/3d-secure#disputed-payments).
-    @[JSON::Field(key: "has_liability_shift", type: Bool)]
-    property has_liability_shift : Bool
+    @[JSON::Field(key: "has_liability_shift", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter has_liability_shift : Bool? = nil
 
     # Unique identifier for the object.
-    @[JSON::Field(key: "id", type: String)]
-    getter id : String
+    @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter id : String? = nil
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-    @[JSON::Field(key: "livemode", type: Bool)]
-    property livemode : Bool
+    @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter livemode : Bool? = nil
 
     # String representing the object's type. Objects of the same type share the same value.
-    @[JSON::Field(key: "object", type: String)]
-    getter object : String
+    @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter object : String? = nil
 
     ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["issuer_fraud_record"])
 
     # The timestamp at which the card issuer posted the issuer fraud record.
-    @[JSON::Field(key: "post_date", type: Int64)]
-    property post_date : Int64
+    @[JSON::Field(key: "post_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter post_date : Int64? = nil
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @actionable : Bool,
-      @charge : IssuerFraudRecordCharge,
-      @created : Int64,
-      @fraud_type : String,
-      @has_liability_shift : Bool,
-      @id : String,
-      @livemode : Bool,
-      @object : String,
-      @post_date : Int64
+      @actionable : Bool? = nil,
+      @charge : Stripe::IssuerFraudRecordCharge? = nil,
+      @created : Int64? = nil,
+      @fraud_type : String? = nil,
+      @has_liability_shift : Bool? = nil,
+      @id : String? = nil,
+      @livemode : Bool? = nil,
+      @object : String? = nil,
+      @post_date : Int64? = nil
     )
     end
 
@@ -78,16 +78,27 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array(String).new
-
-      if @fraud_type.to_s.size > 5000
-        invalid_properties.push("invalid value for \"fraud_type\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"actionable\" is required and cannot be null") if @actionable.nil?
+      invalid_properties.push("\"charge\" is required and cannot be null") if @charge.nil?
+      # This is a model charge : Stripe::IssuerFraudRecordCharge?
+      invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+      invalid_properties.push("\"fraud_type\" is required and cannot be null") if @fraud_type.nil?
+      if _fraud_type = @fraud_type
+        if _fraud_type.to_s.size > 5000
+          invalid_properties.push("invalid value for \"fraud_type\", the character length must be smaller than or equal to 5000.")
+        end
       end
-
-      if @id.to_s.size > 5000
-        invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      invalid_properties.push("\"has_liability_shift\" is required and cannot be null") if @has_liability_shift.nil?
+      invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+      if _id = @id
+        if _id.to_s.size > 5000
+          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        end
       end
+      invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"post_date\" is required and cannot be null") if @post_date.nil?
 
       invalid_properties
     end
@@ -95,27 +106,83 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @fraud_type.to_s.size > 5000
-      return false if @id.to_s.size > 5000
+      return false if @actionable.nil?
+      return false if @charge.nil?
+      return false if @created.nil?
+      return false if @fraud_type.nil?
+      if _fraud_type = @fraud_type
+        return false if _fraud_type.to_s.size > 5000
+      end
+      return false if @has_liability_shift.nil?
+      return false if @id.nil?
+      if _id = @id
+        return false if _id.to_s.size > 5000
+      end
+      return false if @livemode.nil?
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @post_date.nil?
 
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] fraud_type Value to be assigned
-    def fraud_type=(fraud_type : String)
-      if fraud_type.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] actionable Object to be assigned
+    def actionable=(actionable : Bool?)
+      if actionable.nil?
+        raise ArgumentError.new("\"actionable\" is required and cannot be null")
+      end
+      @actionable = actionable
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] charge Object to be assigned
+    def charge=(charge : Stripe::IssuerFraudRecordCharge?)
+      if charge.nil?
+        raise ArgumentError.new("\"charge\" is required and cannot be null")
+      end
+      @charge = charge
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] created Object to be assigned
+    def created=(created : Int64?)
+      if created.nil?
+        raise ArgumentError.new("\"created\" is required and cannot be null")
+      end
+      @created = created
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] fraud_type Object to be assigned
+    def fraud_type=(fraud_type : String?)
+      if fraud_type.nil?
+        raise ArgumentError.new("\"fraud_type\" is required and cannot be null")
+      end
+      _fraud_type = fraud_type.not_nil!
+      if _fraud_type.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"fraud_type\", the character length must be smaller than or equal to 5000.")
       end
 
       @fraud_type = fraud_type
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id : String)
-      if id.to_s.size > 5000
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] has_liability_shift Object to be assigned
+    def has_liability_shift=(has_liability_shift : Bool?)
+      if has_liability_shift.nil?
+        raise ArgumentError.new("\"has_liability_shift\" is required and cannot be null")
+      end
+      @has_liability_shift = has_liability_shift
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] id Object to be assigned
+    def id=(id : String?)
+      if id.nil?
+        raise ArgumentError.new("\"id\" is required and cannot be null")
+      end
+      _id = id.not_nil!
+      if _id.to_s.size > 5000
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
@@ -123,10 +190,32 @@ module Stripe
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] livemode Object to be assigned
+    def livemode=(livemode : Bool?)
+      if livemode.nil?
+        raise ArgumentError.new("\"livemode\" is required and cannot be null")
+      end
+      @livemode = livemode
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
-    def object=(object : String)
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(object, false)
+    def object=(object : String?)
+      if object.nil?
+        raise ArgumentError.new("\"object\" is required and cannot be null")
+      end
+      _object = object.not_nil!
+      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
       @object = object
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] post_date Object to be assigned
+    def post_date=(post_date : Int64?)
+      if post_date.nil?
+        raise ArgumentError.new("\"post_date\" is required and cannot be null")
+      end
+      @post_date = post_date
     end
 
     # @see the `==` method

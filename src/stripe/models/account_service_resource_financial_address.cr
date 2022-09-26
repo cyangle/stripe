@@ -13,44 +13,38 @@ require "log"
 
 module Stripe
   # FinancialAddresses contain identifying information that resolves to a FinancialAccount.
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class AccountServiceResourceFinancialAddress
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Required properties
 
     # The type of financial address
-    @[JSON::Field(key: "type", type: String)]
-    getter _type : String
+    @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
+    getter _type : String? = nil
 
     ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["aba"])
 
     # Optional properties
 
-    @[JSON::Field(key: "aba", type: AccountServiceResourceAbaRecord?, presence: true, ignore_serialize: aba.nil? && !aba_present?)]
-    property aba : AccountServiceResourceAbaRecord?
-
-    @[JSON::Field(ignore: true)]
-    property? aba_present : Bool = false
+    @[JSON::Field(key: "aba", type: Stripe::AccountServiceResourceAbaRecord?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter aba : Stripe::AccountServiceResourceAbaRecord? = nil
 
     # The list of networks that the address supports
-    @[JSON::Field(key: "supported_networks", type: Array(String)?, presence: true, ignore_serialize: supported_networks.nil? && !supported_networks_present?)]
-    getter supported_networks : Array(String)?
+    @[JSON::Field(key: "supported_networks", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
+    getter supported_networks : Array(String)? = nil
 
-    @[JSON::Field(ignore: true)]
-    property? supported_networks_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS = EnumValidator.new("supported_networks", "String", ["ach", "us_domestic_wire"])
+    ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS = EnumValidator.new("supported_networks", "Array(String)", ["ach", "us_domestic_wire"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(
       *,
       # Required properties
-      @_type : String,
+      @_type : String? = nil,
       # Optional properties
-      @aba : AccountServiceResourceAbaRecord? = nil,
+      @aba : Stripe::AccountServiceResourceAbaRecord? = nil,
       @supported_networks : Array(String)? = nil
     )
     end
@@ -61,6 +55,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      # This is a model aba : Stripe::AccountServiceResourceAbaRecord?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
 
@@ -78,15 +73,32 @@ module Stripe
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] _type Object to be assigned
-    def _type=(_type : String)
-      ENUM_VALIDATOR_FOR__TYPE.valid!(_type, false)
+    def _type=(_type : String?)
+      if _type.nil?
+        raise ArgumentError.new("\"_type\" is required and cannot be null")
+      end
+      __type = _type.not_nil!
+      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
       @_type = _type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] aba Object to be assigned
+    def aba=(aba : Stripe::AccountServiceResourceAbaRecord?)
+      if aba.nil?
+        return @aba = nil
+      end
+      @aba = aba
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] supported_networks Object to be assigned
     def supported_networks=(supported_networks : Array(String)?)
-      ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid!(supported_networks)
+      if supported_networks.nil?
+        return @supported_networks = nil
+      end
+      _supported_networks = supported_networks.not_nil!
+      ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid!(_supported_networks)
       @supported_networks = supported_networks
     end
 
@@ -100,6 +112,6 @@ module Stripe
     # #== @return [Bool]
     # #hash calculates hash code according to all attributes.
     # #hash @return [UInt64] Hash code
-    def_equals_and_hash(@_type, @aba, @aba_present, @supported_networks, @supported_networks_present)
+    def_equals_and_hash(@_type, @aba, @supported_networks)
   end
 end

@@ -13,16 +13,16 @@ require "log"
 
 module Stripe
   #
-  @[JSON::Serializable::Options(emit_nulls: true)]
   class ReceivedCreditsResourceStatusTransitions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Json
 
     # Optional properties
 
     # Timestamp describing when the CreditReversal changed status to `posted`
-    @[JSON::Field(key: "posted_at", type: Int64?, presence: true, ignore_serialize: posted_at.nil? && !posted_at_present?)]
-    property posted_at : Int64?
+    @[JSON::Field(key: "posted_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: posted_at.nil? && !posted_at_present?)]
+    getter posted_at : Int64? = nil
 
     @[JSON::Field(ignore: true)]
     property? posted_at_present : Bool = false
@@ -48,6 +48,15 @@ module Stripe
     # @return true if the model is valid
     def valid?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] posted_at Object to be assigned
+    def posted_at=(posted_at : Int64?)
+      if posted_at.nil?
+        return @posted_at = nil
+      end
+      @posted_at = posted_at
     end
 
     # @see the `==` method
