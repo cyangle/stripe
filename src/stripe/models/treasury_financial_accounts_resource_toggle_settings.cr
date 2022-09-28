@@ -16,6 +16,7 @@ module Stripe
   class TreasuryFinancialAccountsResourceToggleSettings
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -47,23 +48,41 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"requested\" is required and cannot be null") if @requested.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       invalid_properties.push("\"status_details\" is required and cannot be null") if @status_details.nil?
-      # Container status_details array has values of Stripe::TreasuryFinancialAccountsResourceTogglesSettingStatusDetails
+      if _status_details = @status_details
+        if _status_details.is_a?(Array)
+          _status_details.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("status_details"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @requested.nil?
+
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false if @status_details.nil?
+      if _status_details = @status_details
+        if _status_details.is_a?(Array)
+          _status_details.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
 
       true
     end
@@ -74,7 +93,8 @@ module Stripe
       if requested.nil?
         raise ArgumentError.new("\"requested\" is required and cannot be null")
       end
-      @requested = requested
+      _requested = requested.not_nil!
+      @requested = _requested
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,7 +105,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -94,13 +114,15 @@ module Stripe
       if status_details.nil?
         raise ArgumentError.new("\"status_details\" is required and cannot be null")
       end
-      @status_details = status_details
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _status_details = status_details.not_nil!
+      if _status_details.is_a?(Array)
+        _status_details.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @status_details = _status_details
     end
 
     # Generates #hash and #== methods from all fields

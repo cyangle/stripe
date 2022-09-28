@@ -16,6 +16,7 @@ module Stripe
   class CountrySpecVerificationFields
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -38,21 +39,39 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"company\" is required and cannot be null") if @company.nil?
-      # This is a model company : Stripe::CountrySpecVerificationFieldDetails?
+      if _company = @company
+        if _company.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_company.list_invalid_properties_for("company"))
+        end
+      end
       invalid_properties.push("\"individual\" is required and cannot be null") if @individual.nil?
-      # This is a model individual : Stripe::CountrySpecVerificationFieldDetails?
+      if _individual = @individual
+        if _individual.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_individual.list_invalid_properties_for("individual"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @company.nil?
+      if _company = @company
+        if _company.is_a?(OpenApi::Validatable)
+          return false unless _company.valid?
+        end
+      end
       return false if @individual.nil?
+      if _individual = @individual
+        if _individual.is_a?(OpenApi::Validatable)
+          return false unless _individual.valid?
+        end
+      end
 
       true
     end
@@ -63,7 +82,11 @@ module Stripe
       if company.nil?
         raise ArgumentError.new("\"company\" is required and cannot be null")
       end
-      @company = company
+      _company = company.not_nil!
+      if _company.is_a?(OpenApi::Validatable)
+        _company.validate
+      end
+      @company = _company
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,13 +95,11 @@ module Stripe
       if individual.nil?
         raise ArgumentError.new("\"individual\" is required and cannot be null")
       end
-      @individual = individual
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _individual = individual.not_nil!
+      if _individual.is_a?(OpenApi::Validatable)
+        _individual.validate
+      end
+      @individual = _individual
     end
 
     # Generates #hash and #== methods from all fields

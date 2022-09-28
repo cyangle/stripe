@@ -16,6 +16,7 @@ module Stripe
   class FeaturesCreationParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -54,21 +55,76 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model customer_update : Stripe::CustomerUpdateCreationParam?
-      # This is a model invoice_history : Stripe::InvoiceListParam?
-      # This is a model payment_method_update : Stripe::PaymentMethodUpdateParam?
-      # This is a model subscription_cancel : Stripe::SubscriptionCancelCreationParam?
-      # This is a model subscription_pause : Stripe::SubscriptionPauseParam?
-      # This is a model subscription_update : Stripe::SubscriptionUpdateCreationParam?
+      if _customer_update = @customer_update
+        if _customer_update.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_customer_update.list_invalid_properties_for("customer_update"))
+        end
+      end
+      if _invoice_history = @invoice_history
+        if _invoice_history.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_invoice_history.list_invalid_properties_for("invoice_history"))
+        end
+      end
+      if _payment_method_update = @payment_method_update
+        if _payment_method_update.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_method_update.list_invalid_properties_for("payment_method_update"))
+        end
+      end
+      if _subscription_cancel = @subscription_cancel
+        if _subscription_cancel.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_subscription_cancel.list_invalid_properties_for("subscription_cancel"))
+        end
+      end
+      if _subscription_pause = @subscription_pause
+        if _subscription_pause.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_subscription_pause.list_invalid_properties_for("subscription_pause"))
+        end
+      end
+      if _subscription_update = @subscription_update
+        if _subscription_update.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_subscription_update.list_invalid_properties_for("subscription_update"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _customer_update = @customer_update
+        if _customer_update.is_a?(OpenApi::Validatable)
+          return false unless _customer_update.valid?
+        end
+      end
+      if _invoice_history = @invoice_history
+        if _invoice_history.is_a?(OpenApi::Validatable)
+          return false unless _invoice_history.valid?
+        end
+      end
+      if _payment_method_update = @payment_method_update
+        if _payment_method_update.is_a?(OpenApi::Validatable)
+          return false unless _payment_method_update.valid?
+        end
+      end
+      if _subscription_cancel = @subscription_cancel
+        if _subscription_cancel.is_a?(OpenApi::Validatable)
+          return false unless _subscription_cancel.valid?
+        end
+      end
+      if _subscription_pause = @subscription_pause
+        if _subscription_pause.is_a?(OpenApi::Validatable)
+          return false unless _subscription_pause.valid?
+        end
+      end
+      if _subscription_update = @subscription_update
+        if _subscription_update.is_a?(OpenApi::Validatable)
+          return false unless _subscription_update.valid?
+        end
+      end
+
       true
     end
 
@@ -78,7 +134,11 @@ module Stripe
       if customer_update.nil?
         return @customer_update = nil
       end
-      @customer_update = customer_update
+      _customer_update = customer_update.not_nil!
+      if _customer_update.is_a?(OpenApi::Validatable)
+        _customer_update.validate
+      end
+      @customer_update = _customer_update
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -87,7 +147,11 @@ module Stripe
       if invoice_history.nil?
         return @invoice_history = nil
       end
-      @invoice_history = invoice_history
+      _invoice_history = invoice_history.not_nil!
+      if _invoice_history.is_a?(OpenApi::Validatable)
+        _invoice_history.validate
+      end
+      @invoice_history = _invoice_history
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -96,7 +160,11 @@ module Stripe
       if payment_method_update.nil?
         return @payment_method_update = nil
       end
-      @payment_method_update = payment_method_update
+      _payment_method_update = payment_method_update.not_nil!
+      if _payment_method_update.is_a?(OpenApi::Validatable)
+        _payment_method_update.validate
+      end
+      @payment_method_update = _payment_method_update
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,7 +173,11 @@ module Stripe
       if subscription_cancel.nil?
         return @subscription_cancel = nil
       end
-      @subscription_cancel = subscription_cancel
+      _subscription_cancel = subscription_cancel.not_nil!
+      if _subscription_cancel.is_a?(OpenApi::Validatable)
+        _subscription_cancel.validate
+      end
+      @subscription_cancel = _subscription_cancel
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -114,7 +186,11 @@ module Stripe
       if subscription_pause.nil?
         return @subscription_pause = nil
       end
-      @subscription_pause = subscription_pause
+      _subscription_pause = subscription_pause.not_nil!
+      if _subscription_pause.is_a?(OpenApi::Validatable)
+        _subscription_pause.validate
+      end
+      @subscription_pause = _subscription_pause
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -123,13 +199,11 @@ module Stripe
       if subscription_update.nil?
         return @subscription_update = nil
       end
-      @subscription_update = subscription_update
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _subscription_update = subscription_update.not_nil!
+      if _subscription_update.is_a?(OpenApi::Validatable)
+        _subscription_update.validate
+      end
+      @subscription_update = _subscription_update
     end
 
     # Generates #hash and #== methods from all fields

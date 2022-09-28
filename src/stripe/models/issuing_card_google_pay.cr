@@ -16,6 +16,7 @@ module Stripe
   class IssuingCardGooglePay
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -48,7 +49,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"eligible\" is required and cannot be null") if @eligible.nil?
 
@@ -59,8 +60,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @eligible.nil?
+
       return false unless ENUM_VALIDATOR_FOR_INELIGIBLE_REASON.valid?(@ineligible_reason)
 
       true
@@ -72,7 +74,8 @@ module Stripe
       if eligible.nil?
         raise ArgumentError.new("\"eligible\" is required and cannot be null")
       end
-      @eligible = eligible
+      _eligible = eligible.not_nil!
+      @eligible = _eligible
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -83,13 +86,7 @@ module Stripe
       end
       _ineligible_reason = ineligible_reason.not_nil!
       ENUM_VALIDATOR_FOR_INELIGIBLE_REASON.valid!(_ineligible_reason)
-      @ineligible_reason = ineligible_reason
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @ineligible_reason = _ineligible_reason
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class PostAccountBankAccountsRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -53,9 +54,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model bank_account : Stripe::PostAccountRequestBankAccount?
+      if _bank_account = @bank_account
+        if _bank_account.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bank_account.list_invalid_properties_for("bank_account"))
+        end
+      end
+
       if _external_account = @external_account
         if _external_account.to_s.size > 5000
           invalid_properties.push("invalid value for \"external_account\", the character length must be smaller than or equal to 5000.")
@@ -67,7 +73,13 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _bank_account = @bank_account
+        if _bank_account.is_a?(OpenApi::Validatable)
+          return false unless _bank_account.valid?
+        end
+      end
+
       if _external_account = @external_account
         return false if _external_account.to_s.size > 5000
       end
@@ -81,7 +93,11 @@ module Stripe
       if bank_account.nil?
         return @bank_account = nil
       end
-      @bank_account = bank_account
+      _bank_account = bank_account.not_nil!
+      if _bank_account.is_a?(OpenApi::Validatable)
+        _bank_account.validate
+      end
+      @bank_account = _bank_account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -90,7 +106,8 @@ module Stripe
       if default_for_currency.nil?
         return @default_for_currency = nil
       end
-      @default_for_currency = default_for_currency
+      _default_for_currency = default_for_currency.not_nil!
+      @default_for_currency = _default_for_currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -99,7 +116,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,7 +131,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"external_account\", the character length must be smaller than or equal to 5000.")
       end
 
-      @external_account = external_account
+      @external_account = _external_account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -122,13 +140,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Generates #hash and #== methods from all fields

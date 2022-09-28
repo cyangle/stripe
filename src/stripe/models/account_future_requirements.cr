@@ -16,6 +16,7 @@ module Stripe
   class AccountFutureRequirements
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -94,24 +95,60 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # Container alternatives array has values of Stripe::AccountRequirementsAlternative
+      if _alternatives = @alternatives
+        if _alternatives.is_a?(Array)
+          _alternatives.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("alternatives"))
+            end
+          end
+        end
+      end
+
       if _disabled_reason = @disabled_reason
         if _disabled_reason.to_s.size > 5000
           invalid_properties.push("invalid value for \"disabled_reason\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # Container errors array has values of Stripe::AccountRequirementsError
+      if _errors = @errors
+        if _errors.is_a?(Array)
+          _errors.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("errors"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _alternatives = @alternatives
+        if _alternatives.is_a?(Array)
+          _alternatives.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
+
       if _disabled_reason = @disabled_reason
         return false if _disabled_reason.to_s.size > 5000
+      end
+      if _errors = @errors
+        if _errors.is_a?(Array)
+          _errors.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
       end
 
       true
@@ -123,7 +160,15 @@ module Stripe
       if alternatives.nil?
         return @alternatives = nil
       end
-      @alternatives = alternatives
+      _alternatives = alternatives.not_nil!
+      if _alternatives.is_a?(Array)
+        _alternatives.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @alternatives = _alternatives
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +177,8 @@ module Stripe
       if current_deadline.nil?
         return @current_deadline = nil
       end
-      @current_deadline = current_deadline
+      _current_deadline = current_deadline.not_nil!
+      @current_deadline = _current_deadline
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -141,7 +187,8 @@ module Stripe
       if currently_due.nil?
         return @currently_due = nil
       end
-      @currently_due = currently_due
+      _currently_due = currently_due.not_nil!
+      @currently_due = _currently_due
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -155,7 +202,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"disabled_reason\", the character length must be smaller than or equal to 5000.")
       end
 
-      @disabled_reason = disabled_reason
+      @disabled_reason = _disabled_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -164,7 +211,15 @@ module Stripe
       if errors.nil?
         return @errors = nil
       end
-      @errors = errors
+      _errors = errors.not_nil!
+      if _errors.is_a?(Array)
+        _errors.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @errors = _errors
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -173,7 +228,8 @@ module Stripe
       if eventually_due.nil?
         return @eventually_due = nil
       end
-      @eventually_due = eventually_due
+      _eventually_due = eventually_due.not_nil!
+      @eventually_due = _eventually_due
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -182,7 +238,8 @@ module Stripe
       if past_due.nil?
         return @past_due = nil
       end
-      @past_due = past_due
+      _past_due = past_due.not_nil!
+      @past_due = _past_due
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -191,13 +248,8 @@ module Stripe
       if pending_verification.nil?
         return @pending_verification = nil
       end
-      @pending_verification = pending_verification
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _pending_verification = pending_verification.not_nil!
+      @pending_verification = _pending_verification
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class PostTerminalLocationsRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -55,10 +56,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
-      # This is a model address : Stripe::CreateLocationAddressParam?
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_address.list_invalid_properties_for("address"))
+        end
+      end
       invalid_properties.push("\"display_name\" is required and cannot be null") if @display_name.nil?
       if _display_name = @display_name
         if _display_name.to_s.size > 1000
@@ -70,21 +75,37 @@ module Stripe
           invalid_properties.push("invalid value for \"configuration_overrides\", the character length must be smaller than or equal to 1000.")
         end
       end
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
+
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @address.nil?
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          return false unless _address.valid?
+        end
+      end
       return false if @display_name.nil?
       if _display_name = @display_name
         return false if _display_name.to_s.size > 1000
       end
       if _configuration_overrides = @configuration_overrides
         return false if _configuration_overrides.to_s.size > 1000
+      end
+
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
       end
 
       true
@@ -96,7 +117,11 @@ module Stripe
       if address.nil?
         raise ArgumentError.new("\"address\" is required and cannot be null")
       end
-      @address = address
+      _address = address.not_nil!
+      if _address.is_a?(OpenApi::Validatable)
+        _address.validate
+      end
+      @address = _address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -110,7 +135,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 1000.")
       end
 
-      @display_name = display_name
+      @display_name = _display_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -124,7 +149,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"configuration_overrides\", the character length must be smaller than or equal to 1000.")
       end
 
-      @configuration_overrides = configuration_overrides
+      @configuration_overrides = _configuration_overrides
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -133,7 +158,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -142,13 +168,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Generates #hash and #== methods from all fields

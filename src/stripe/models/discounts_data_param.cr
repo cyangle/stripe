@@ -15,6 +15,7 @@ module Stripe
   class DiscountsDataParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,7 +38,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _coupon = @coupon
         if _coupon.to_s.size > 5000
@@ -55,7 +56,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _coupon = @coupon
         return false if _coupon.to_s.size > 5000
       end
@@ -77,7 +78,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
       end
 
-      @coupon = coupon
+      @coupon = _coupon
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -91,13 +92,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"discount\", the character length must be smaller than or equal to 5000.")
       end
 
-      @discount = discount
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @discount = _discount
     end
 
     # Generates #hash and #== methods from all fields

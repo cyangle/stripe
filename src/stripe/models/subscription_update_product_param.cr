@@ -15,6 +15,7 @@ module Stripe
   class SubscriptionUpdateProductParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -37,9 +38,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"prices\" is required and cannot be null") if @prices.nil?
+
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
       if _product = @product
         if _product.to_s.size > 5000
@@ -52,8 +54,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @prices.nil?
+
       return false if @product.nil?
       if _product = @product
         return false if _product.to_s.size > 5000
@@ -68,7 +71,8 @@ module Stripe
       if prices.nil?
         raise ArgumentError.new("\"prices\" is required and cannot be null")
       end
-      @prices = prices
+      _prices = prices.not_nil!
+      @prices = _prices
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -82,13 +86,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"product\", the character length must be smaller than or equal to 5000.")
       end
 
-      @product = product
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @product = _product
     end
 
     # Generates #hash and #== methods from all fields

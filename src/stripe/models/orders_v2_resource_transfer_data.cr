@@ -16,6 +16,7 @@ module Stripe
   class OrdersV2ResourceTransferData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -45,18 +46,27 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"destination\" is required and cannot be null") if @destination.nil?
-      # This is a model destination : Stripe::OrdersV2ResourceTransferDataDestination?
+      if _destination = @destination
+        if _destination.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_destination.list_invalid_properties_for("destination"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @destination.nil?
+      if _destination = @destination
+        if _destination.is_a?(OpenApi::Validatable)
+          return false unless _destination.valid?
+        end
+      end
 
       true
     end
@@ -67,7 +77,11 @@ module Stripe
       if destination.nil?
         raise ArgumentError.new("\"destination\" is required and cannot be null")
       end
-      @destination = destination
+      _destination = destination.not_nil!
+      if _destination.is_a?(OpenApi::Validatable)
+        _destination.validate
+      end
+      @destination = _destination
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -76,13 +90,8 @@ module Stripe
       if amount.nil?
         return @amount = nil
       end
-      @amount = amount
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Generates #hash and #== methods from all fields

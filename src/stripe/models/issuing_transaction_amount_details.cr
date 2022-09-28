@@ -16,6 +16,7 @@ module Stripe
   class IssuingTransactionAmountDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -38,7 +39,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -46,7 +47,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -56,13 +57,8 @@ module Stripe
       if atm_fee.nil?
         return @atm_fee = nil
       end
-      @atm_fee = atm_fee
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _atm_fee = atm_fee.not_nil!
+      @atm_fee = _atm_fee
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class PersonRequirements
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -66,27 +67,69 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"currently_due\" is required and cannot be null") if @currently_due.nil?
+
       invalid_properties.push("\"errors\" is required and cannot be null") if @errors.nil?
-      # Container errors array has values of Stripe::AccountRequirementsError
+      if _errors = @errors
+        if _errors.is_a?(Array)
+          _errors.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("errors"))
+            end
+          end
+        end
+      end
       invalid_properties.push("\"eventually_due\" is required and cannot be null") if @eventually_due.nil?
+
       invalid_properties.push("\"past_due\" is required and cannot be null") if @past_due.nil?
+
       invalid_properties.push("\"pending_verification\" is required and cannot be null") if @pending_verification.nil?
-      # Container alternatives array has values of Stripe::AccountRequirementsAlternative
+
+      if _alternatives = @alternatives
+        if _alternatives.is_a?(Array)
+          _alternatives.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("alternatives"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @currently_due.nil?
+
       return false if @errors.nil?
+      if _errors = @errors
+        if _errors.is_a?(Array)
+          _errors.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       return false if @eventually_due.nil?
+
       return false if @past_due.nil?
+
       return false if @pending_verification.nil?
+
+      if _alternatives = @alternatives
+        if _alternatives.is_a?(Array)
+          _alternatives.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
 
       true
     end
@@ -97,7 +140,8 @@ module Stripe
       if currently_due.nil?
         raise ArgumentError.new("\"currently_due\" is required and cannot be null")
       end
-      @currently_due = currently_due
+      _currently_due = currently_due.not_nil!
+      @currently_due = _currently_due
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -106,7 +150,15 @@ module Stripe
       if errors.nil?
         raise ArgumentError.new("\"errors\" is required and cannot be null")
       end
-      @errors = errors
+      _errors = errors.not_nil!
+      if _errors.is_a?(Array)
+        _errors.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @errors = _errors
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -115,7 +167,8 @@ module Stripe
       if eventually_due.nil?
         raise ArgumentError.new("\"eventually_due\" is required and cannot be null")
       end
-      @eventually_due = eventually_due
+      _eventually_due = eventually_due.not_nil!
+      @eventually_due = _eventually_due
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -124,7 +177,8 @@ module Stripe
       if past_due.nil?
         raise ArgumentError.new("\"past_due\" is required and cannot be null")
       end
-      @past_due = past_due
+      _past_due = past_due.not_nil!
+      @past_due = _past_due
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -133,7 +187,8 @@ module Stripe
       if pending_verification.nil?
         raise ArgumentError.new("\"pending_verification\" is required and cannot be null")
       end
-      @pending_verification = pending_verification
+      _pending_verification = pending_verification.not_nil!
+      @pending_verification = _pending_verification
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -142,13 +197,15 @@ module Stripe
       if alternatives.nil?
         return @alternatives = nil
       end
-      @alternatives = alternatives
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _alternatives = alternatives.not_nil!
+      if _alternatives.is_a?(Array)
+        _alternatives.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @alternatives = _alternatives
     end
 
     # Generates #hash and #== methods from all fields

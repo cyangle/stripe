@@ -16,6 +16,7 @@ module Stripe
   class AccountRequirementsAlternative
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -40,9 +41,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"alternative_fields_due\" is required and cannot be null") if @alternative_fields_due.nil?
+
       invalid_properties.push("\"original_fields_due\" is required and cannot be null") if @original_fields_due.nil?
 
       invalid_properties
@@ -50,8 +52,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @alternative_fields_due.nil?
+
       return false if @original_fields_due.nil?
 
       true
@@ -63,7 +66,8 @@ module Stripe
       if alternative_fields_due.nil?
         raise ArgumentError.new("\"alternative_fields_due\" is required and cannot be null")
       end
-      @alternative_fields_due = alternative_fields_due
+      _alternative_fields_due = alternative_fields_due.not_nil!
+      @alternative_fields_due = _alternative_fields_due
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,13 +76,8 @@ module Stripe
       if original_fields_due.nil?
         raise ArgumentError.new("\"original_fields_due\" is required and cannot be null")
       end
-      @original_fields_due = original_fields_due
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _original_fields_due = original_fields_due.not_nil!
+      @original_fields_due = _original_fields_due
     end
 
     # Generates #hash and #== methods from all fields

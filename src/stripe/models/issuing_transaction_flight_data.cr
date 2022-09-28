@@ -16,6 +16,7 @@ module Stripe
   class IssuingTransactionFlightData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -70,14 +71,24 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _passenger_name = @passenger_name
         if _passenger_name.to_s.size > 5000
           invalid_properties.push("invalid value for \"passenger_name\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # Container segments array has values of Stripe::IssuingTransactionFlightDataLeg
+
+      if _segments = @segments
+        if _segments.is_a?(Array)
+          _segments.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("segments"))
+            end
+          end
+        end
+      end
       if _travel_agency = @travel_agency
         if _travel_agency.to_s.size > 5000
           invalid_properties.push("invalid value for \"travel_agency\", the character length must be smaller than or equal to 5000.")
@@ -89,9 +100,19 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _passenger_name = @passenger_name
         return false if _passenger_name.to_s.size > 5000
+      end
+
+      if _segments = @segments
+        if _segments.is_a?(Array)
+          _segments.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
       end
       if _travel_agency = @travel_agency
         return false if _travel_agency.to_s.size > 5000
@@ -106,7 +127,8 @@ module Stripe
       if departure_at.nil?
         return @departure_at = nil
       end
-      @departure_at = departure_at
+      _departure_at = departure_at.not_nil!
+      @departure_at = _departure_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -120,7 +142,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"passenger_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @passenger_name = passenger_name
+      @passenger_name = _passenger_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -129,7 +151,8 @@ module Stripe
       if refundable.nil?
         return @refundable = nil
       end
-      @refundable = refundable
+      _refundable = refundable.not_nil!
+      @refundable = _refundable
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -138,7 +161,15 @@ module Stripe
       if segments.nil?
         return @segments = nil
       end
-      @segments = segments
+      _segments = segments.not_nil!
+      if _segments.is_a?(Array)
+        _segments.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @segments = _segments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -152,13 +183,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"travel_agency\", the character length must be smaller than or equal to 5000.")
       end
 
-      @travel_agency = travel_agency
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @travel_agency = _travel_agency
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class IssuingAuthorizationVerificationData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -58,7 +59,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK.error_message) unless ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK.valid?(@address_line1_check, false)
@@ -74,7 +75,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK.valid?(@address_line1_check, false)
       return false unless ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK.valid?(@address_postal_code_check, false)
       return false unless ENUM_VALIDATOR_FOR_CVC_CHECK.valid?(@cvc_check, false)
@@ -91,7 +92,7 @@ module Stripe
       end
       _address_line1_check = address_line1_check.not_nil!
       ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK.valid!(_address_line1_check)
-      @address_line1_check = address_line1_check
+      @address_line1_check = _address_line1_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -102,7 +103,7 @@ module Stripe
       end
       _address_postal_code_check = address_postal_code_check.not_nil!
       ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK.valid!(_address_postal_code_check)
-      @address_postal_code_check = address_postal_code_check
+      @address_postal_code_check = _address_postal_code_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,7 +114,7 @@ module Stripe
       end
       _cvc_check = cvc_check.not_nil!
       ENUM_VALIDATOR_FOR_CVC_CHECK.valid!(_cvc_check)
-      @cvc_check = cvc_check
+      @cvc_check = _cvc_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -124,13 +125,7 @@ module Stripe
       end
       _expiry_check = expiry_check.not_nil!
       ENUM_VALIDATOR_FOR_EXPIRY_CHECK.valid!(_expiry_check)
-      @expiry_check = expiry_check
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @expiry_check = _expiry_check
     end
 
     # Generates #hash and #== methods from all fields

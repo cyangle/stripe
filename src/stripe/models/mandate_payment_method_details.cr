@@ -16,6 +16,7 @@ module Stripe
   class MandatePaymentMethodDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -73,7 +74,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
@@ -81,21 +82,68 @@ module Stripe
           invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model acss_debit : Stripe::MandateAcssDebit?
-      # This is a model au_becs_debit : Stripe::MandateAuBecsDebit?
-      # This is a model bacs_debit : Stripe::MandateBacsDebit?
-      # This is a model blik : Stripe::MandateBlik?
-      # This is a model sepa_debit : Stripe::MandateSepaDebit?
+      if _acss_debit = @acss_debit
+        if _acss_debit.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit"))
+        end
+      end
+      if _au_becs_debit = @au_becs_debit
+        if _au_becs_debit.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_au_becs_debit.list_invalid_properties_for("au_becs_debit"))
+        end
+      end
+      if _bacs_debit = @bacs_debit
+        if _bacs_debit.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bacs_debit.list_invalid_properties_for("bacs_debit"))
+        end
+      end
+      if _blik = @blik
+        if _blik.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_blik.list_invalid_properties_for("blik"))
+        end
+      end
+
+      if _sepa_debit = @sepa_debit
+        if _sepa_debit.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @_type.nil?
       if __type = @_type
         return false if __type.to_s.size > 5000
+      end
+      if _acss_debit = @acss_debit
+        if _acss_debit.is_a?(OpenApi::Validatable)
+          return false unless _acss_debit.valid?
+        end
+      end
+      if _au_becs_debit = @au_becs_debit
+        if _au_becs_debit.is_a?(OpenApi::Validatable)
+          return false unless _au_becs_debit.valid?
+        end
+      end
+      if _bacs_debit = @bacs_debit
+        if _bacs_debit.is_a?(OpenApi::Validatable)
+          return false unless _bacs_debit.valid?
+        end
+      end
+      if _blik = @blik
+        if _blik.is_a?(OpenApi::Validatable)
+          return false unless _blik.valid?
+        end
+      end
+
+      if _sepa_debit = @sepa_debit
+        if _sepa_debit.is_a?(OpenApi::Validatable)
+          return false unless _sepa_debit.valid?
+        end
       end
 
       true
@@ -112,7 +160,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -121,7 +169,11 @@ module Stripe
       if acss_debit.nil?
         return @acss_debit = nil
       end
-      @acss_debit = acss_debit
+      _acss_debit = acss_debit.not_nil!
+      if _acss_debit.is_a?(OpenApi::Validatable)
+        _acss_debit.validate
+      end
+      @acss_debit = _acss_debit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -130,7 +182,11 @@ module Stripe
       if au_becs_debit.nil?
         return @au_becs_debit = nil
       end
-      @au_becs_debit = au_becs_debit
+      _au_becs_debit = au_becs_debit.not_nil!
+      if _au_becs_debit.is_a?(OpenApi::Validatable)
+        _au_becs_debit.validate
+      end
+      @au_becs_debit = _au_becs_debit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -139,7 +195,11 @@ module Stripe
       if bacs_debit.nil?
         return @bacs_debit = nil
       end
-      @bacs_debit = bacs_debit
+      _bacs_debit = bacs_debit.not_nil!
+      if _bacs_debit.is_a?(OpenApi::Validatable)
+        _bacs_debit.validate
+      end
+      @bacs_debit = _bacs_debit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -148,7 +208,11 @@ module Stripe
       if blik.nil?
         return @blik = nil
       end
-      @blik = blik
+      _blik = blik.not_nil!
+      if _blik.is_a?(OpenApi::Validatable)
+        _blik.validate
+      end
+      @blik = _blik
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -157,7 +221,8 @@ module Stripe
       if card.nil?
         return @card = nil
       end
-      @card = card
+      _card = card.not_nil!
+      @card = _card
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -166,7 +231,8 @@ module Stripe
       if link.nil?
         return @link = nil
       end
-      @link = link
+      _link = link.not_nil!
+      @link = _link
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -175,7 +241,11 @@ module Stripe
       if sepa_debit.nil?
         return @sepa_debit = nil
       end
-      @sepa_debit = sepa_debit
+      _sepa_debit = sepa_debit.not_nil!
+      if _sepa_debit.is_a?(OpenApi::Validatable)
+        _sepa_debit.validate
+      end
+      @sepa_debit = _sepa_debit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -184,13 +254,8 @@ module Stripe
       if us_bank_account.nil?
         return @us_bank_account = nil
       end
-      @us_bank_account = us_bank_account
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _us_bank_account = us_bank_account.not_nil!
+      @us_bank_account = _us_bank_account
     end
 
     # Generates #hash and #== methods from all fields

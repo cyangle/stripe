@@ -16,6 +16,7 @@ module Stripe
   class TreasuryFinancialAccountsResourceStatusDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,16 +38,26 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model closed : Stripe::TreasuryFinancialAccountsResourceStatusDetailsClosed?
+      if _closed = @closed
+        if _closed.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_closed.list_invalid_properties_for("closed"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _closed = @closed
+        if _closed.is_a?(OpenApi::Validatable)
+          return false unless _closed.valid?
+        end
+      end
+
       true
     end
 
@@ -56,13 +67,11 @@ module Stripe
       if closed.nil?
         return @closed = nil
       end
-      @closed = closed
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _closed = closed.not_nil!
+      if _closed.is_a?(OpenApi::Validatable)
+        _closed.validate
+      end
+      @closed = _closed
     end
 
     # Generates #hash and #== methods from all fields

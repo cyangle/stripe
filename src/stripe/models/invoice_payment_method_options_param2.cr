@@ -15,6 +15,7 @@ module Stripe
   class InvoicePaymentMethodOptionsParam2
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,16 +38,26 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model bank_transfer : Stripe::BankTransferParam1?
+      if _bank_transfer = @bank_transfer
+        if _bank_transfer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bank_transfer.list_invalid_properties_for("bank_transfer"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _bank_transfer = @bank_transfer
+        if _bank_transfer.is_a?(OpenApi::Validatable)
+          return false unless _bank_transfer.valid?
+        end
+      end
+
       true
     end
 
@@ -56,7 +67,11 @@ module Stripe
       if bank_transfer.nil?
         return @bank_transfer = nil
       end
-      @bank_transfer = bank_transfer
+      _bank_transfer = bank_transfer.not_nil!
+      if _bank_transfer.is_a?(OpenApi::Validatable)
+        _bank_transfer.validate
+      end
+      @bank_transfer = _bank_transfer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -65,13 +80,8 @@ module Stripe
       if funding_type.nil?
         return @funding_type = nil
       end
-      @funding_type = funding_type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _funding_type = funding_type.not_nil!
+      @funding_type = _funding_type
     end
 
     # Generates #hash and #== methods from all fields

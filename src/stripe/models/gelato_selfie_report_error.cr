@@ -16,6 +16,7 @@ module Stripe
   class GelatoSelfieReportError
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -48,7 +49,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code)
@@ -63,7 +64,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_CODE.valid?(@code)
       if _reason = @reason
         return false if _reason.to_s.size > 5000
@@ -80,7 +81,7 @@ module Stripe
       end
       _code = code.not_nil!
       ENUM_VALIDATOR_FOR_CODE.valid!(_code)
-      @code = code
+      @code = _code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -94,13 +95,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
       end
 
-      @reason = reason
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @reason = _reason
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class RelationshipSpecs1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -53,9 +54,15 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model percent_ownership : Stripe::RelationshipSpecsPercentOwnership?
+
+      if _percent_ownership = @percent_ownership
+        if _percent_ownership.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_percent_ownership.list_invalid_properties_for("percent_ownership"))
+        end
+      end
+
       if _title = @title
         if _title.to_s.size > 5000
           invalid_properties.push("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
@@ -67,7 +74,13 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _percent_ownership = @percent_ownership
+        if _percent_ownership.is_a?(OpenApi::Validatable)
+          return false unless _percent_ownership.valid?
+        end
+      end
+
       if _title = @title
         return false if _title.to_s.size > 5000
       end
@@ -81,7 +94,8 @@ module Stripe
       if director.nil?
         return @director = nil
       end
-      @director = director
+      _director = director.not_nil!
+      @director = _director
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -90,7 +104,8 @@ module Stripe
       if executive.nil?
         return @executive = nil
       end
-      @executive = executive
+      _executive = executive.not_nil!
+      @executive = _executive
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -99,7 +114,8 @@ module Stripe
       if owner.nil?
         return @owner = nil
       end
-      @owner = owner
+      _owner = owner.not_nil!
+      @owner = _owner
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -108,7 +124,11 @@ module Stripe
       if percent_ownership.nil?
         return @percent_ownership = nil
       end
-      @percent_ownership = percent_ownership
+      _percent_ownership = percent_ownership.not_nil!
+      if _percent_ownership.is_a?(OpenApi::Validatable)
+        _percent_ownership.validate
+      end
+      @percent_ownership = _percent_ownership
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -117,7 +137,8 @@ module Stripe
       if representative.nil?
         return @representative = nil
       end
-      @representative = representative
+      _representative = representative.not_nil!
+      @representative = _representative
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -131,13 +152,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
       end
 
-      @title = title
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @title = _title
     end
 
     # Generates #hash and #== methods from all fields

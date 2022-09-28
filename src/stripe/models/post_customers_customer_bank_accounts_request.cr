@@ -15,6 +15,7 @@ module Stripe
   class PostCustomersCustomerBankAccountsRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -57,15 +58,24 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _alipay_account = @alipay_account
         if _alipay_account.to_s.size > 5000
           invalid_properties.push("invalid value for \"alipay_account\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model bank_account : Stripe::PostCustomersCustomerRequestBankAccount?
-      # This is a model card : Stripe::PostChargesRequestCard?
+      if _bank_account = @bank_account
+        if _bank_account.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bank_account.list_invalid_properties_for("bank_account"))
+        end
+      end
+      if _card = @card
+        if _card.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_card.list_invalid_properties_for("card"))
+        end
+      end
+
       if _source = @source
         if _source.to_s.size > 5000
           invalid_properties.push("invalid value for \"source\", the character length must be smaller than or equal to 5000.")
@@ -77,10 +87,21 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _alipay_account = @alipay_account
         return false if _alipay_account.to_s.size > 5000
       end
+      if _bank_account = @bank_account
+        if _bank_account.is_a?(OpenApi::Validatable)
+          return false unless _bank_account.valid?
+        end
+      end
+      if _card = @card
+        if _card.is_a?(OpenApi::Validatable)
+          return false unless _card.valid?
+        end
+      end
+
       if _source = @source
         return false if _source.to_s.size > 5000
       end
@@ -99,7 +120,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"alipay_account\", the character length must be smaller than or equal to 5000.")
       end
 
-      @alipay_account = alipay_account
+      @alipay_account = _alipay_account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -108,7 +129,11 @@ module Stripe
       if bank_account.nil?
         return @bank_account = nil
       end
-      @bank_account = bank_account
+      _bank_account = bank_account.not_nil!
+      if _bank_account.is_a?(OpenApi::Validatable)
+        _bank_account.validate
+      end
+      @bank_account = _bank_account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -117,7 +142,11 @@ module Stripe
       if card.nil?
         return @card = nil
       end
-      @card = card
+      _card = card.not_nil!
+      if _card.is_a?(OpenApi::Validatable)
+        _card.validate
+      end
+      @card = _card
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -126,7 +155,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -135,7 +165,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -149,13 +180,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"source\", the character length must be smaller than or equal to 5000.")
       end
 
-      @source = source
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @source = _source
     end
 
     # Generates #hash and #== methods from all fields

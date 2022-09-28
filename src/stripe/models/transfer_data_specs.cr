@@ -16,6 +16,7 @@ module Stripe
   class TransferDataSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -41,7 +42,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"destination\" is required and cannot be null") if @destination.nil?
       if _destination = @destination
@@ -55,7 +56,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @destination.nil?
       if _destination = @destination
         return false if _destination.to_s.size > 5000
@@ -75,7 +76,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"destination\", the character length must be smaller than or equal to 5000.")
       end
 
-      @destination = destination
+      @destination = _destination
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -84,13 +85,8 @@ module Stripe
       if amount.nil?
         return @amount = nil
       end
-      @amount = amount
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Generates #hash and #== methods from all fields

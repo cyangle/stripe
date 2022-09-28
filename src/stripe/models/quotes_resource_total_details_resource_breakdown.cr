@@ -16,6 +16,7 @@ module Stripe
   class QuotesResourceTotalDetailsResourceBreakdown
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -40,21 +41,55 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"discounts\" is required and cannot be null") if @discounts.nil?
-      # Container discounts array has values of Stripe::LineItemsDiscountAmount
+      if _discounts = @discounts
+        if _discounts.is_a?(Array)
+          _discounts.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("discounts"))
+            end
+          end
+        end
+      end
       invalid_properties.push("\"taxes\" is required and cannot be null") if @taxes.nil?
-      # Container taxes array has values of Stripe::LineItemsTaxAmount
+      if _taxes = @taxes
+        if _taxes.is_a?(Array)
+          _taxes.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("taxes"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @discounts.nil?
+      if _discounts = @discounts
+        if _discounts.is_a?(Array)
+          _discounts.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       return false if @taxes.nil?
+      if _taxes = @taxes
+        if _taxes.is_a?(Array)
+          _taxes.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
 
       true
     end
@@ -65,7 +100,15 @@ module Stripe
       if discounts.nil?
         raise ArgumentError.new("\"discounts\" is required and cannot be null")
       end
-      @discounts = discounts
+      _discounts = discounts.not_nil!
+      if _discounts.is_a?(Array)
+        _discounts.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @discounts = _discounts
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -74,13 +117,15 @@ module Stripe
       if taxes.nil?
         raise ArgumentError.new("\"taxes\" is required and cannot be null")
       end
-      @taxes = taxes
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _taxes = taxes.not_nil!
+      if _taxes.is_a?(Array)
+        _taxes.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @taxes = _taxes
     end
 
     # Generates #hash and #== methods from all fields

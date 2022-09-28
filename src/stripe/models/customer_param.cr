@@ -16,6 +16,7 @@ module Stripe
   class CustomerParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -46,9 +47,13 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model custom_fields : Stripe::CustomerParamCustomFields?
+      if _custom_fields = @custom_fields
+        if _custom_fields.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_custom_fields.list_invalid_properties_for("custom_fields"))
+        end
+      end
       if _default_payment_method = @default_payment_method
         if _default_payment_method.to_s.size > 5000
           invalid_properties.push("invalid value for \"default_payment_method\", the character length must be smaller than or equal to 5000.")
@@ -59,19 +64,33 @@ module Stripe
           invalid_properties.push("invalid value for \"footer\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model rendering_options : Stripe::CustomerParamRenderingOptions?
+      if _rendering_options = @rendering_options
+        if _rendering_options.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_rendering_options.list_invalid_properties_for("rendering_options"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _custom_fields = @custom_fields
+        if _custom_fields.is_a?(OpenApi::Validatable)
+          return false unless _custom_fields.valid?
+        end
+      end
       if _default_payment_method = @default_payment_method
         return false if _default_payment_method.to_s.size > 5000
       end
       if _footer = @footer
         return false if _footer.to_s.size > 5000
+      end
+      if _rendering_options = @rendering_options
+        if _rendering_options.is_a?(OpenApi::Validatable)
+          return false unless _rendering_options.valid?
+        end
       end
 
       true
@@ -83,7 +102,11 @@ module Stripe
       if custom_fields.nil?
         return @custom_fields = nil
       end
-      @custom_fields = custom_fields
+      _custom_fields = custom_fields.not_nil!
+      if _custom_fields.is_a?(OpenApi::Validatable)
+        _custom_fields.validate
+      end
+      @custom_fields = _custom_fields
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -97,7 +120,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"default_payment_method\", the character length must be smaller than or equal to 5000.")
       end
 
-      @default_payment_method = default_payment_method
+      @default_payment_method = _default_payment_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -111,7 +134,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"footer\", the character length must be smaller than or equal to 5000.")
       end
 
-      @footer = footer
+      @footer = _footer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -120,13 +143,11 @@ module Stripe
       if rendering_options.nil?
         return @rendering_options = nil
       end
-      @rendering_options = rendering_options
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _rendering_options = rendering_options.not_nil!
+      if _rendering_options.is_a?(OpenApi::Validatable)
+        _rendering_options.validate
+      end
+      @rendering_options = _rendering_options
     end
 
     # Generates #hash and #== methods from all fields

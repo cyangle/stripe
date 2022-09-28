@@ -15,6 +15,7 @@ module Stripe
   class LineItemsUpdateParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -44,7 +45,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
@@ -52,17 +53,26 @@ module Stripe
           invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model adjustable_quantity : Stripe::AdjustableQuantityParams?
+      if _adjustable_quantity = @adjustable_quantity
+        if _adjustable_quantity.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_adjustable_quantity.list_invalid_properties_for("adjustable_quantity"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
+      end
+      if _adjustable_quantity = @adjustable_quantity
+        if _adjustable_quantity.is_a?(OpenApi::Validatable)
+          return false unless _adjustable_quantity.valid?
+        end
       end
 
       true
@@ -79,7 +89,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -88,7 +98,11 @@ module Stripe
       if adjustable_quantity.nil?
         return @adjustable_quantity = nil
       end
-      @adjustable_quantity = adjustable_quantity
+      _adjustable_quantity = adjustable_quantity.not_nil!
+      if _adjustable_quantity.is_a?(OpenApi::Validatable)
+        _adjustable_quantity.validate
+      end
+      @adjustable_quantity = _adjustable_quantity
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -97,13 +111,8 @@ module Stripe
       if quantity.nil?
         return @quantity = nil
       end
-      @quantity = quantity
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _quantity = quantity.not_nil!
+      @quantity = _quantity
     end
 
     # Generates #hash and #== methods from all fields

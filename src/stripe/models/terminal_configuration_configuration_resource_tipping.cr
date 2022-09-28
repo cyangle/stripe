@@ -16,6 +16,7 @@ module Stripe
   class TerminalConfigurationConfigurationResourceTipping
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -86,29 +87,156 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model aud : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model cad : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model chf : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model czk : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model dkk : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model eur : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model gbp : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model hkd : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model myr : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model nok : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model nzd : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model sek : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model sgd : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
-      # This is a model usd : Stripe::TerminalConfigurationConfigurationResourceCurrencySpecificConfig?
+      if _aud = @aud
+        if _aud.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_aud.list_invalid_properties_for("aud"))
+        end
+      end
+      if _cad = @cad
+        if _cad.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_cad.list_invalid_properties_for("cad"))
+        end
+      end
+      if _chf = @chf
+        if _chf.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_chf.list_invalid_properties_for("chf"))
+        end
+      end
+      if _czk = @czk
+        if _czk.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_czk.list_invalid_properties_for("czk"))
+        end
+      end
+      if _dkk = @dkk
+        if _dkk.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_dkk.list_invalid_properties_for("dkk"))
+        end
+      end
+      if _eur = @eur
+        if _eur.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_eur.list_invalid_properties_for("eur"))
+        end
+      end
+      if _gbp = @gbp
+        if _gbp.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_gbp.list_invalid_properties_for("gbp"))
+        end
+      end
+      if _hkd = @hkd
+        if _hkd.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_hkd.list_invalid_properties_for("hkd"))
+        end
+      end
+      if _myr = @myr
+        if _myr.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_myr.list_invalid_properties_for("myr"))
+        end
+      end
+      if _nok = @nok
+        if _nok.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_nok.list_invalid_properties_for("nok"))
+        end
+      end
+      if _nzd = @nzd
+        if _nzd.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_nzd.list_invalid_properties_for("nzd"))
+        end
+      end
+      if _sek = @sek
+        if _sek.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_sek.list_invalid_properties_for("sek"))
+        end
+      end
+      if _sgd = @sgd
+        if _sgd.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_sgd.list_invalid_properties_for("sgd"))
+        end
+      end
+      if _usd = @usd
+        if _usd.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_usd.list_invalid_properties_for("usd"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _aud = @aud
+        if _aud.is_a?(OpenApi::Validatable)
+          return false unless _aud.valid?
+        end
+      end
+      if _cad = @cad
+        if _cad.is_a?(OpenApi::Validatable)
+          return false unless _cad.valid?
+        end
+      end
+      if _chf = @chf
+        if _chf.is_a?(OpenApi::Validatable)
+          return false unless _chf.valid?
+        end
+      end
+      if _czk = @czk
+        if _czk.is_a?(OpenApi::Validatable)
+          return false unless _czk.valid?
+        end
+      end
+      if _dkk = @dkk
+        if _dkk.is_a?(OpenApi::Validatable)
+          return false unless _dkk.valid?
+        end
+      end
+      if _eur = @eur
+        if _eur.is_a?(OpenApi::Validatable)
+          return false unless _eur.valid?
+        end
+      end
+      if _gbp = @gbp
+        if _gbp.is_a?(OpenApi::Validatable)
+          return false unless _gbp.valid?
+        end
+      end
+      if _hkd = @hkd
+        if _hkd.is_a?(OpenApi::Validatable)
+          return false unless _hkd.valid?
+        end
+      end
+      if _myr = @myr
+        if _myr.is_a?(OpenApi::Validatable)
+          return false unless _myr.valid?
+        end
+      end
+      if _nok = @nok
+        if _nok.is_a?(OpenApi::Validatable)
+          return false unless _nok.valid?
+        end
+      end
+      if _nzd = @nzd
+        if _nzd.is_a?(OpenApi::Validatable)
+          return false unless _nzd.valid?
+        end
+      end
+      if _sek = @sek
+        if _sek.is_a?(OpenApi::Validatable)
+          return false unless _sek.valid?
+        end
+      end
+      if _sgd = @sgd
+        if _sgd.is_a?(OpenApi::Validatable)
+          return false unless _sgd.valid?
+        end
+      end
+      if _usd = @usd
+        if _usd.is_a?(OpenApi::Validatable)
+          return false unless _usd.valid?
+        end
+      end
+
       true
     end
 
@@ -118,7 +246,11 @@ module Stripe
       if aud.nil?
         return @aud = nil
       end
-      @aud = aud
+      _aud = aud.not_nil!
+      if _aud.is_a?(OpenApi::Validatable)
+        _aud.validate
+      end
+      @aud = _aud
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,7 +259,11 @@ module Stripe
       if cad.nil?
         return @cad = nil
       end
-      @cad = cad
+      _cad = cad.not_nil!
+      if _cad.is_a?(OpenApi::Validatable)
+        _cad.validate
+      end
+      @cad = _cad
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,7 +272,11 @@ module Stripe
       if chf.nil?
         return @chf = nil
       end
-      @chf = chf
+      _chf = chf.not_nil!
+      if _chf.is_a?(OpenApi::Validatable)
+        _chf.validate
+      end
+      @chf = _chf
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -145,7 +285,11 @@ module Stripe
       if czk.nil?
         return @czk = nil
       end
-      @czk = czk
+      _czk = czk.not_nil!
+      if _czk.is_a?(OpenApi::Validatable)
+        _czk.validate
+      end
+      @czk = _czk
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -154,7 +298,11 @@ module Stripe
       if dkk.nil?
         return @dkk = nil
       end
-      @dkk = dkk
+      _dkk = dkk.not_nil!
+      if _dkk.is_a?(OpenApi::Validatable)
+        _dkk.validate
+      end
+      @dkk = _dkk
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -163,7 +311,11 @@ module Stripe
       if eur.nil?
         return @eur = nil
       end
-      @eur = eur
+      _eur = eur.not_nil!
+      if _eur.is_a?(OpenApi::Validatable)
+        _eur.validate
+      end
+      @eur = _eur
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -172,7 +324,11 @@ module Stripe
       if gbp.nil?
         return @gbp = nil
       end
-      @gbp = gbp
+      _gbp = gbp.not_nil!
+      if _gbp.is_a?(OpenApi::Validatable)
+        _gbp.validate
+      end
+      @gbp = _gbp
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -181,7 +337,11 @@ module Stripe
       if hkd.nil?
         return @hkd = nil
       end
-      @hkd = hkd
+      _hkd = hkd.not_nil!
+      if _hkd.is_a?(OpenApi::Validatable)
+        _hkd.validate
+      end
+      @hkd = _hkd
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -190,7 +350,11 @@ module Stripe
       if myr.nil?
         return @myr = nil
       end
-      @myr = myr
+      _myr = myr.not_nil!
+      if _myr.is_a?(OpenApi::Validatable)
+        _myr.validate
+      end
+      @myr = _myr
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -199,7 +363,11 @@ module Stripe
       if nok.nil?
         return @nok = nil
       end
-      @nok = nok
+      _nok = nok.not_nil!
+      if _nok.is_a?(OpenApi::Validatable)
+        _nok.validate
+      end
+      @nok = _nok
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -208,7 +376,11 @@ module Stripe
       if nzd.nil?
         return @nzd = nil
       end
-      @nzd = nzd
+      _nzd = nzd.not_nil!
+      if _nzd.is_a?(OpenApi::Validatable)
+        _nzd.validate
+      end
+      @nzd = _nzd
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -217,7 +389,11 @@ module Stripe
       if sek.nil?
         return @sek = nil
       end
-      @sek = sek
+      _sek = sek.not_nil!
+      if _sek.is_a?(OpenApi::Validatable)
+        _sek.validate
+      end
+      @sek = _sek
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -226,7 +402,11 @@ module Stripe
       if sgd.nil?
         return @sgd = nil
       end
-      @sgd = sgd
+      _sgd = sgd.not_nil!
+      if _sgd.is_a?(OpenApi::Validatable)
+        _sgd.validate
+      end
+      @sgd = _sgd
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -235,13 +415,11 @@ module Stripe
       if usd.nil?
         return @usd = nil
       end
-      @usd = usd
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _usd = usd.not_nil!
+      if _usd.is_a?(OpenApi::Validatable)
+        _usd.validate
+      end
+      @usd = _usd
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class AuthorizationControlsParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -46,22 +47,39 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ALLOWED_CATEGORIES.error_message) unless ENUM_VALIDATOR_FOR_ALLOWED_CATEGORIES.all_valid?(@allowed_categories)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BLOCKED_CATEGORIES.error_message) unless ENUM_VALIDATOR_FOR_BLOCKED_CATEGORIES.all_valid?(@blocked_categories)
-      # Container spending_limits array has values of Stripe::SpendingLimitsParam
+      if _spending_limits = @spending_limits
+        if _spending_limits.is_a?(Array)
+          _spending_limits.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("spending_limits"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_ALLOWED_CATEGORIES.all_valid?(@allowed_categories)
       return false unless ENUM_VALIDATOR_FOR_BLOCKED_CATEGORIES.all_valid?(@blocked_categories)
+      if _spending_limits = @spending_limits
+        if _spending_limits.is_a?(Array)
+          _spending_limits.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
 
       true
     end
@@ -74,7 +92,7 @@ module Stripe
       end
       _allowed_categories = allowed_categories.not_nil!
       ENUM_VALIDATOR_FOR_ALLOWED_CATEGORIES.all_valid!(_allowed_categories)
-      @allowed_categories = allowed_categories
+      @allowed_categories = _allowed_categories
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,7 +103,7 @@ module Stripe
       end
       _blocked_categories = blocked_categories.not_nil!
       ENUM_VALIDATOR_FOR_BLOCKED_CATEGORIES.all_valid!(_blocked_categories)
-      @blocked_categories = blocked_categories
+      @blocked_categories = _blocked_categories
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -94,13 +112,15 @@ module Stripe
       if spending_limits.nil?
         return @spending_limits = nil
       end
-      @spending_limits = spending_limits
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _spending_limits = spending_limits.not_nil!
+      if _spending_limits.is_a?(Array)
+        _spending_limits.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @spending_limits = _spending_limits
     end
 
     # Generates #hash and #== methods from all fields

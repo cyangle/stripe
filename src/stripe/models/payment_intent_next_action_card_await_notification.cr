@@ -16,6 +16,7 @@ module Stripe
   class PaymentIntentNextActionCardAwaitNotification
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -46,7 +47,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -54,7 +55,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -64,7 +65,8 @@ module Stripe
       if charge_attempt_at.nil?
         return @charge_attempt_at = nil
       end
-      @charge_attempt_at = charge_attempt_at
+      _charge_attempt_at = charge_attempt_at.not_nil!
+      @charge_attempt_at = _charge_attempt_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -73,13 +75,8 @@ module Stripe
       if customer_approval_required.nil?
         return @customer_approval_required = nil
       end
-      @customer_approval_required = customer_approval_required
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _customer_approval_required = customer_approval_required.not_nil!
+      @customer_approval_required = _customer_approval_required
     end
 
     # Generates #hash and #== methods from all fields

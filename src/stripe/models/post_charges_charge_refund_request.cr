@@ -15,6 +15,7 @@ module Stripe
   class PostChargesChargeRefundRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -64,9 +65,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
+
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
       if _payment_intent = @payment_intent
         if _payment_intent.to_s.size > 5000
           invalid_properties.push("invalid value for \"payment_intent\", the character length must be smaller than or equal to 5000.")
@@ -80,7 +86,12 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
+      end
       if _payment_intent = @payment_intent
         return false if _payment_intent.to_s.size > 5000
       end
@@ -95,7 +106,8 @@ module Stripe
       if amount.nil?
         return @amount = nil
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -104,7 +116,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,7 +126,8 @@ module Stripe
       if instructions_email.nil?
         return @instructions_email = nil
       end
-      @instructions_email = instructions_email
+      _instructions_email = instructions_email.not_nil!
+      @instructions_email = _instructions_email
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -122,7 +136,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,7 +154,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"payment_intent\", the character length must be smaller than or equal to 5000.")
       end
 
-      @payment_intent = payment_intent
+      @payment_intent = _payment_intent
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -147,7 +165,7 @@ module Stripe
       end
       _reason = reason.not_nil!
       ENUM_VALIDATOR_FOR_REASON.valid!(_reason)
-      @reason = reason
+      @reason = _reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -156,7 +174,8 @@ module Stripe
       if refund_application_fee.nil?
         return @refund_application_fee = nil
       end
-      @refund_application_fee = refund_application_fee
+      _refund_application_fee = refund_application_fee.not_nil!
+      @refund_application_fee = _refund_application_fee
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -165,13 +184,8 @@ module Stripe
       if reverse_transfer.nil?
         return @reverse_transfer = nil
       end
-      @reverse_transfer = reverse_transfer
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _reverse_transfer = reverse_transfer.not_nil!
+      @reverse_transfer = _reverse_transfer
     end
 
     # Generates #hash and #== methods from all fields

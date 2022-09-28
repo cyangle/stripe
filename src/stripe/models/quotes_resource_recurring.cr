@@ -16,6 +16,7 @@ module Stripe
   class QuotesResourceRecurring
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -56,27 +57,41 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount_subtotal\" is required and cannot be null") if @amount_subtotal.nil?
+
       invalid_properties.push("\"amount_total\" is required and cannot be null") if @amount_total.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
       invalid_properties.push("\"interval_count\" is required and cannot be null") if @interval_count.nil?
+
       invalid_properties.push("\"total_details\" is required and cannot be null") if @total_details.nil?
-      # This is a model total_details : Stripe::QuotesResourceTotalDetails?
+      if _total_details = @total_details
+        if _total_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_total_details.list_invalid_properties_for("total_details"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount_subtotal.nil?
+
       return false if @amount_total.nil?
+
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
       return false if @interval_count.nil?
+
       return false if @total_details.nil?
+      if _total_details = @total_details
+        if _total_details.is_a?(OpenApi::Validatable)
+          return false unless _total_details.valid?
+        end
+      end
 
       true
     end
@@ -87,7 +102,8 @@ module Stripe
       if amount_subtotal.nil?
         raise ArgumentError.new("\"amount_subtotal\" is required and cannot be null")
       end
-      @amount_subtotal = amount_subtotal
+      _amount_subtotal = amount_subtotal.not_nil!
+      @amount_subtotal = _amount_subtotal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -96,7 +112,8 @@ module Stripe
       if amount_total.nil?
         raise ArgumentError.new("\"amount_total\" is required and cannot be null")
       end
-      @amount_total = amount_total
+      _amount_total = amount_total.not_nil!
+      @amount_total = _amount_total
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,7 +124,7 @@ module Stripe
       end
       _interval = interval.not_nil!
       ENUM_VALIDATOR_FOR_INTERVAL.valid!(_interval)
-      @interval = interval
+      @interval = _interval
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -116,7 +133,8 @@ module Stripe
       if interval_count.nil?
         raise ArgumentError.new("\"interval_count\" is required and cannot be null")
       end
-      @interval_count = interval_count
+      _interval_count = interval_count.not_nil!
+      @interval_count = _interval_count
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -125,13 +143,11 @@ module Stripe
       if total_details.nil?
         raise ArgumentError.new("\"total_details\" is required and cannot be null")
       end
-      @total_details = total_details
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _total_details = total_details.not_nil!
+      if _total_details.is_a?(OpenApi::Validatable)
+        _total_details.validate
+      end
+      @total_details = _total_details
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class ReportingReportType
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -83,10 +84,12 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"data_available_end\" is required and cannot be null") if @data_available_end.nil?
+
       invalid_properties.push("\"data_available_start\" is required and cannot be null") if @data_available_start.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -94,6 +97,7 @@ module Stripe
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
+
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
         if _name.to_s.size > 5000
@@ -103,6 +107,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"updated\" is required and cannot be null") if @updated.nil?
+
       invalid_properties.push("\"version\" is required and cannot be null") if @version.nil?
 
       invalid_properties
@@ -110,20 +115,24 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @data_available_end.nil?
+
       return false if @data_available_start.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false if @name.nil?
       if _name = @name
         return false if _name.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @updated.nil?
+
       return false if @version.nil?
 
       true
@@ -135,7 +144,8 @@ module Stripe
       if data_available_end.nil?
         raise ArgumentError.new("\"data_available_end\" is required and cannot be null")
       end
-      @data_available_end = data_available_end
+      _data_available_end = data_available_end.not_nil!
+      @data_available_end = _data_available_end
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -144,7 +154,8 @@ module Stripe
       if data_available_start.nil?
         raise ArgumentError.new("\"data_available_start\" is required and cannot be null")
       end
-      @data_available_start = data_available_start
+      _data_available_start = data_available_start.not_nil!
+      @data_available_start = _data_available_start
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -158,7 +169,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -167,7 +178,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -181,7 +193,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -192,7 +204,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -201,7 +213,8 @@ module Stripe
       if updated.nil?
         raise ArgumentError.new("\"updated\" is required and cannot be null")
       end
-      @updated = updated
+      _updated = updated.not_nil!
+      @updated = _updated
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -210,7 +223,8 @@ module Stripe
       if version.nil?
         raise ArgumentError.new("\"version\" is required and cannot be null")
       end
-      @version = version
+      _version = version.not_nil!
+      @version = _version
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -219,13 +233,8 @@ module Stripe
       if default_columns.nil?
         return @default_columns = nil
       end
-      @default_columns = default_columns
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _default_columns = default_columns.not_nil!
+      @default_columns = _default_columns
     end
 
     # Generates #hash and #== methods from all fields

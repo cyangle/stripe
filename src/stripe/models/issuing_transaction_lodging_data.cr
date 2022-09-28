@@ -16,6 +16,7 @@ module Stripe
   class IssuingTransactionLodgingData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -46,7 +47,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -54,7 +55,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -64,7 +65,8 @@ module Stripe
       if check_in_at.nil?
         return @check_in_at = nil
       end
-      @check_in_at = check_in_at
+      _check_in_at = check_in_at.not_nil!
+      @check_in_at = _check_in_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -73,13 +75,8 @@ module Stripe
       if nights.nil?
         return @nights = nil
       end
-      @nights = nights
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _nights = nights.not_nil!
+      @nights = _nights
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class LineItemParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -53,24 +54,44 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model adjustable_quantity : Stripe::AdjustableQuantityParams?
+      if _adjustable_quantity = @adjustable_quantity
+        if _adjustable_quantity.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_adjustable_quantity.list_invalid_properties_for("adjustable_quantity"))
+        end
+      end
+
       if _price = @price
         if _price.to_s.size > 5000
           invalid_properties.push("invalid value for \"price\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model price_data : Stripe::PriceDataWithProductData?
+      if _price_data = @price_data
+        if _price_data.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_price_data.list_invalid_properties_for("price_data"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _adjustable_quantity = @adjustable_quantity
+        if _adjustable_quantity.is_a?(OpenApi::Validatable)
+          return false unless _adjustable_quantity.valid?
+        end
+      end
+
       if _price = @price
         return false if _price.to_s.size > 5000
+      end
+      if _price_data = @price_data
+        if _price_data.is_a?(OpenApi::Validatable)
+          return false unless _price_data.valid?
+        end
       end
 
       true
@@ -82,7 +103,11 @@ module Stripe
       if adjustable_quantity.nil?
         return @adjustable_quantity = nil
       end
-      @adjustable_quantity = adjustable_quantity
+      _adjustable_quantity = adjustable_quantity.not_nil!
+      if _adjustable_quantity.is_a?(OpenApi::Validatable)
+        _adjustable_quantity.validate
+      end
+      @adjustable_quantity = _adjustable_quantity
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -91,7 +116,8 @@ module Stripe
       if dynamic_tax_rates.nil?
         return @dynamic_tax_rates = nil
       end
-      @dynamic_tax_rates = dynamic_tax_rates
+      _dynamic_tax_rates = dynamic_tax_rates.not_nil!
+      @dynamic_tax_rates = _dynamic_tax_rates
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,7 +131,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"price\", the character length must be smaller than or equal to 5000.")
       end
 
-      @price = price
+      @price = _price
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -114,7 +140,11 @@ module Stripe
       if price_data.nil?
         return @price_data = nil
       end
-      @price_data = price_data
+      _price_data = price_data.not_nil!
+      if _price_data.is_a?(OpenApi::Validatable)
+        _price_data.validate
+      end
+      @price_data = _price_data
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -123,7 +153,8 @@ module Stripe
       if quantity.nil?
         return @quantity = nil
       end
-      @quantity = quantity
+      _quantity = quantity.not_nil!
+      @quantity = _quantity
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,13 +163,8 @@ module Stripe
       if tax_rates.nil?
         return @tax_rates = nil
       end
-      @tax_rates = tax_rates
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tax_rates = tax_rates.not_nil!
+      @tax_rates = _tax_rates
     end
 
     # Generates #hash and #== methods from all fields

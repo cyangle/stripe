@@ -16,6 +16,7 @@ module Stripe
   class RefundNextActionDisplayDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -39,10 +40,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"email_sent\" is required and cannot be null") if @email_sent.nil?
-      # This is a model email_sent : Stripe::EmailSent?
+      if _email_sent = @email_sent
+        if _email_sent.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_email_sent.list_invalid_properties_for("email_sent"))
+        end
+      end
       invalid_properties.push("\"expires_at\" is required and cannot be null") if @expires_at.nil?
 
       invalid_properties
@@ -50,8 +55,13 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @email_sent.nil?
+      if _email_sent = @email_sent
+        if _email_sent.is_a?(OpenApi::Validatable)
+          return false unless _email_sent.valid?
+        end
+      end
       return false if @expires_at.nil?
 
       true
@@ -63,7 +73,11 @@ module Stripe
       if email_sent.nil?
         raise ArgumentError.new("\"email_sent\" is required and cannot be null")
       end
-      @email_sent = email_sent
+      _email_sent = email_sent.not_nil!
+      if _email_sent.is_a?(OpenApi::Validatable)
+        _email_sent.validate
+      end
+      @email_sent = _email_sent
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,13 +86,8 @@ module Stripe
       if expires_at.nil?
         raise ArgumentError.new("\"expires_at\" is required and cannot be null")
       end
-      @expires_at = expires_at
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _expires_at = expires_at.not_nil!
+      @expires_at = _expires_at
     end
 
     # Generates #hash and #== methods from all fields

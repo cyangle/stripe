@@ -16,6 +16,7 @@ module Stripe
   class SubscriptionDataParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -62,24 +63,53 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _description = @description
         if _description.to_s.size > 500
           invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 500.")
         end
       end
-      # Container items array has values of Stripe::SubscriptionDataItemParam
-      # This is a model transfer_data : Stripe::TransferDataSpecs2?
+      if _items = @items
+        if _items.is_a?(Array)
+          _items.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("items"))
+            end
+          end
+        end
+      end
+
+      if _transfer_data = @transfer_data
+        if _transfer_data.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _description = @description
         return false if _description.to_s.size > 500
+      end
+      if _items = @items
+        if _items.is_a?(Array)
+          _items.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
+
+      if _transfer_data = @transfer_data
+        if _transfer_data.is_a?(OpenApi::Validatable)
+          return false unless _transfer_data.valid?
+        end
       end
 
       true
@@ -91,7 +121,8 @@ module Stripe
       if application_fee_percent.nil?
         return @application_fee_percent = nil
       end
-      @application_fee_percent = application_fee_percent
+      _application_fee_percent = application_fee_percent.not_nil!
+      @application_fee_percent = _application_fee_percent
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -100,7 +131,8 @@ module Stripe
       if default_tax_rates.nil?
         return @default_tax_rates = nil
       end
-      @default_tax_rates = default_tax_rates
+      _default_tax_rates = default_tax_rates.not_nil!
+      @default_tax_rates = _default_tax_rates
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -114,7 +146,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 500.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -123,7 +155,15 @@ module Stripe
       if items.nil?
         return @items = nil
       end
-      @items = items
+      _items = items.not_nil!
+      if _items.is_a?(Array)
+        _items.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @items = _items
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +172,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -141,7 +182,11 @@ module Stripe
       if transfer_data.nil?
         return @transfer_data = nil
       end
-      @transfer_data = transfer_data
+      _transfer_data = transfer_data.not_nil!
+      if _transfer_data.is_a?(OpenApi::Validatable)
+        _transfer_data.validate
+      end
+      @transfer_data = _transfer_data
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -150,7 +195,8 @@ module Stripe
       if trial_end.nil?
         return @trial_end = nil
       end
-      @trial_end = trial_end
+      _trial_end = trial_end.not_nil!
+      @trial_end = _trial_end
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -159,13 +205,8 @@ module Stripe
       if trial_period_days.nil?
         return @trial_period_days = nil
       end
-      @trial_period_days = trial_period_days
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _trial_period_days = trial_period_days.not_nil!
+      @trial_period_days = _trial_period_days
     end
 
     # Generates #hash and #== methods from all fields

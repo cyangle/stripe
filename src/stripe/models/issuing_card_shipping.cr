@@ -16,6 +16,7 @@ module Stripe
   class IssuingCardShipping
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -123,10 +124,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
-      # This is a model address : Stripe::Address?
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_address.list_invalid_properties_for("address"))
+        end
+      end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
         if _name.to_s.size > 5000
@@ -139,7 +144,12 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CARRIER.error_message) unless ENUM_VALIDATOR_FOR_CARRIER.valid?(@carrier)
-      # This is a model customs : Stripe::IssuingCardShippingCustoms1?
+      if _customs = @customs
+        if _customs.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_customs.list_invalid_properties_for("customs"))
+        end
+      end
+
       if _phone_number = @phone_number
         if _phone_number.to_s.size > 5000
           invalid_properties.push("invalid value for \"phone_number\", the character length must be smaller than or equal to 5000.")
@@ -163,8 +173,13 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @address.nil?
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          return false unless _address.valid?
+        end
+      end
       return false if @name.nil?
       if _name = @name
         return false if _name.to_s.size > 5000
@@ -172,9 +187,16 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_SERVICE.valid?(@service, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       return false unless ENUM_VALIDATOR_FOR_CARRIER.valid?(@carrier)
+      if _customs = @customs
+        if _customs.is_a?(OpenApi::Validatable)
+          return false unless _customs.valid?
+        end
+      end
+
       if _phone_number = @phone_number
         return false if _phone_number.to_s.size > 5000
       end
+
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
       if _tracking_number = @tracking_number
         return false if _tracking_number.to_s.size > 5000
@@ -192,7 +214,11 @@ module Stripe
       if address.nil?
         raise ArgumentError.new("\"address\" is required and cannot be null")
       end
-      @address = address
+      _address = address.not_nil!
+      if _address.is_a?(OpenApi::Validatable)
+        _address.validate
+      end
+      @address = _address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -206,7 +232,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -217,7 +243,7 @@ module Stripe
       end
       _service = service.not_nil!
       ENUM_VALIDATOR_FOR_SERVICE.valid!(_service)
-      @service = service
+      @service = _service
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -228,7 +254,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -239,7 +265,7 @@ module Stripe
       end
       _carrier = carrier.not_nil!
       ENUM_VALIDATOR_FOR_CARRIER.valid!(_carrier)
-      @carrier = carrier
+      @carrier = _carrier
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -248,7 +274,11 @@ module Stripe
       if customs.nil?
         return @customs = nil
       end
-      @customs = customs
+      _customs = customs.not_nil!
+      if _customs.is_a?(OpenApi::Validatable)
+        _customs.validate
+      end
+      @customs = _customs
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -257,7 +287,8 @@ module Stripe
       if eta.nil?
         return @eta = nil
       end
-      @eta = eta
+      _eta = eta.not_nil!
+      @eta = _eta
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -271,7 +302,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"phone_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @phone_number = phone_number
+      @phone_number = _phone_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -280,7 +311,8 @@ module Stripe
       if require_signature.nil?
         return @require_signature = nil
       end
-      @require_signature = require_signature
+      _require_signature = require_signature.not_nil!
+      @require_signature = _require_signature
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -291,7 +323,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -305,7 +337,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"tracking_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @tracking_number = tracking_number
+      @tracking_number = _tracking_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -319,13 +351,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"tracking_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @tracking_url = tracking_url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @tracking_url = _tracking_url
     end
 
     # Generates #hash and #== methods from all fields

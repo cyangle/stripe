@@ -16,6 +16,7 @@ module Stripe
   class SetupIntentNextAction
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -51,7 +52,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
@@ -59,18 +60,38 @@ module Stripe
           invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model redirect_to_url : Stripe::SetupIntentNextActionRedirectToUrl?
-      # This is a model verify_with_microdeposits : Stripe::SetupIntentNextActionVerifyWithMicrodeposits?
+      if _redirect_to_url = @redirect_to_url
+        if _redirect_to_url.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_redirect_to_url.list_invalid_properties_for("redirect_to_url"))
+        end
+      end
+
+      if _verify_with_microdeposits = @verify_with_microdeposits
+        if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_verify_with_microdeposits.list_invalid_properties_for("verify_with_microdeposits"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @_type.nil?
       if __type = @_type
         return false if __type.to_s.size > 5000
+      end
+      if _redirect_to_url = @redirect_to_url
+        if _redirect_to_url.is_a?(OpenApi::Validatable)
+          return false unless _redirect_to_url.valid?
+        end
+      end
+
+      if _verify_with_microdeposits = @verify_with_microdeposits
+        if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
+          return false unless _verify_with_microdeposits.valid?
+        end
       end
 
       true
@@ -87,7 +108,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -96,7 +117,11 @@ module Stripe
       if redirect_to_url.nil?
         return @redirect_to_url = nil
       end
-      @redirect_to_url = redirect_to_url
+      _redirect_to_url = redirect_to_url.not_nil!
+      if _redirect_to_url.is_a?(OpenApi::Validatable)
+        _redirect_to_url.validate
+      end
+      @redirect_to_url = _redirect_to_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,7 +130,8 @@ module Stripe
       if use_stripe_sdk.nil?
         return @use_stripe_sdk = nil
       end
-      @use_stripe_sdk = use_stripe_sdk
+      _use_stripe_sdk = use_stripe_sdk.not_nil!
+      @use_stripe_sdk = _use_stripe_sdk
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -114,13 +140,11 @@ module Stripe
       if verify_with_microdeposits.nil?
         return @verify_with_microdeposits = nil
       end
-      @verify_with_microdeposits = verify_with_microdeposits
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _verify_with_microdeposits = verify_with_microdeposits.not_nil!
+      if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
+        _verify_with_microdeposits.validate
+      end
+      @verify_with_microdeposits = _verify_with_microdeposits
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class PaymentIntentNextActionAlipayHandleRedirect
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -62,7 +63,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _native_data = @native_data
         if _native_data.to_s.size > 5000
@@ -90,7 +91,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _native_data = @native_data
         return false if _native_data.to_s.size > 5000
       end
@@ -118,7 +119,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"native_data\", the character length must be smaller than or equal to 5000.")
       end
 
-      @native_data = native_data
+      @native_data = _native_data
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +133,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"native_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @native_url = native_url
+      @native_url = _native_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -146,7 +147,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @return_url = return_url
+      @return_url = _return_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -160,13 +161,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @url = url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @url = _url
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class PaymentIntentNextActionPixDisplayQrCode
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -55,13 +56,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _data = @data
         if _data.to_s.size > 5000
           invalid_properties.push("invalid value for \"data\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _hosted_instructions_url = @hosted_instructions_url
         if _hosted_instructions_url.to_s.size > 5000
           invalid_properties.push("invalid value for \"hosted_instructions_url\", the character length must be smaller than or equal to 5000.")
@@ -83,10 +85,11 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _data = @data
         return false if _data.to_s.size > 5000
       end
+
       if _hosted_instructions_url = @hosted_instructions_url
         return false if _hosted_instructions_url.to_s.size > 5000
       end
@@ -111,7 +114,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"data\", the character length must be smaller than or equal to 5000.")
       end
 
-      @data = data
+      @data = _data
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -120,7 +123,8 @@ module Stripe
       if expires_at.nil?
         return @expires_at = nil
       end
-      @expires_at = expires_at
+      _expires_at = expires_at.not_nil!
+      @expires_at = _expires_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -134,7 +138,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"hosted_instructions_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @hosted_instructions_url = hosted_instructions_url
+      @hosted_instructions_url = _hosted_instructions_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -148,7 +152,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"image_url_png\", the character length must be smaller than or equal to 5000.")
       end
 
-      @image_url_png = image_url_png
+      @image_url_png = _image_url_png
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -162,13 +166,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"image_url_svg\", the character length must be smaller than or equal to 5000.")
       end
 
-      @image_url_svg = image_url_svg
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @image_url_svg = _image_url_svg
     end
 
     # Generates #hash and #== methods from all fields

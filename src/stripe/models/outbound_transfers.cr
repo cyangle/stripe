@@ -15,6 +15,7 @@ module Stripe
   class OutboundTransfers
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,17 +38,36 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model ach : Stripe::Access?
-      # This is a model us_domestic_wire : Stripe::Access?
+      if _ach = @ach
+        if _ach.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_ach.list_invalid_properties_for("ach"))
+        end
+      end
+      if _us_domestic_wire = @us_domestic_wire
+        if _us_domestic_wire.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_us_domestic_wire.list_invalid_properties_for("us_domestic_wire"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _ach = @ach
+        if _ach.is_a?(OpenApi::Validatable)
+          return false unless _ach.valid?
+        end
+      end
+      if _us_domestic_wire = @us_domestic_wire
+        if _us_domestic_wire.is_a?(OpenApi::Validatable)
+          return false unless _us_domestic_wire.valid?
+        end
+      end
+
       true
     end
 
@@ -57,7 +77,11 @@ module Stripe
       if ach.nil?
         return @ach = nil
       end
-      @ach = ach
+      _ach = ach.not_nil!
+      if _ach.is_a?(OpenApi::Validatable)
+        _ach.validate
+      end
+      @ach = _ach
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -66,13 +90,11 @@ module Stripe
       if us_domestic_wire.nil?
         return @us_domestic_wire = nil
       end
-      @us_domestic_wire = us_domestic_wire
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _us_domestic_wire = us_domestic_wire.not_nil!
+      if _us_domestic_wire.is_a?(OpenApi::Validatable)
+        _us_domestic_wire.validate
+      end
+      @us_domestic_wire = _us_domestic_wire
     end
 
     # Generates #hash and #== methods from all fields

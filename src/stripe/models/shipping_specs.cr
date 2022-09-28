@@ -16,6 +16,7 @@ module Stripe
   class ShippingSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -65,17 +66,25 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
-      # This is a model address : Stripe::RequiredAddress?
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_address.list_invalid_properties_for("address"))
+        end
+      end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
         if _name.to_s.size > 5000
           invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model customs : Stripe::CustomsParam?
+      if _customs = @customs
+        if _customs.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_customs.list_invalid_properties_for("customs"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SERVICE.error_message) unless ENUM_VALIDATOR_FOR_SERVICE.valid?(@service)
 
@@ -86,12 +95,23 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @address.nil?
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          return false unless _address.valid?
+        end
+      end
       return false if @name.nil?
       if _name = @name
         return false if _name.to_s.size > 5000
       end
+      if _customs = @customs
+        if _customs.is_a?(OpenApi::Validatable)
+          return false unless _customs.valid?
+        end
+      end
+
       return false unless ENUM_VALIDATOR_FOR_SERVICE.valid?(@service)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
@@ -104,7 +124,11 @@ module Stripe
       if address.nil?
         raise ArgumentError.new("\"address\" is required and cannot be null")
       end
-      @address = address
+      _address = address.not_nil!
+      if _address.is_a?(OpenApi::Validatable)
+        _address.validate
+      end
+      @address = _address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -118,7 +142,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,7 +151,11 @@ module Stripe
       if customs.nil?
         return @customs = nil
       end
-      @customs = customs
+      _customs = customs.not_nil!
+      if _customs.is_a?(OpenApi::Validatable)
+        _customs.validate
+      end
+      @customs = _customs
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,7 +164,8 @@ module Stripe
       if phone_number.nil?
         return @phone_number = nil
       end
-      @phone_number = phone_number
+      _phone_number = phone_number.not_nil!
+      @phone_number = _phone_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -145,7 +174,8 @@ module Stripe
       if require_signature.nil?
         return @require_signature = nil
       end
-      @require_signature = require_signature
+      _require_signature = require_signature.not_nil!
+      @require_signature = _require_signature
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -156,7 +186,7 @@ module Stripe
       end
       _service = service.not_nil!
       ENUM_VALIDATOR_FOR_SERVICE.valid!(_service)
-      @service = service
+      @service = _service
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -167,13 +197,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @_type = __type
     end
 
     # Generates #hash and #== methods from all fields

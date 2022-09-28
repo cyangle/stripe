@@ -15,6 +15,7 @@ module Stripe
   class MandateOfflineAcceptanceParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -33,7 +34,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"contact_email\" is required and cannot be null") if @contact_email.nil?
 
@@ -42,7 +43,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @contact_email.nil?
 
       true
@@ -54,13 +55,8 @@ module Stripe
       if contact_email.nil?
         raise ArgumentError.new("\"contact_email\" is required and cannot be null")
       end
-      @contact_email = contact_email
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _contact_email = contact_email.not_nil!
+      @contact_email = _contact_email
     end
 
     # Generates #hash and #== methods from all fields

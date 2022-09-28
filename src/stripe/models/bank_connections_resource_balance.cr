@@ -16,6 +16,7 @@ module Stripe
   class BankConnectionsResourceBalance
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -58,24 +59,45 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"as_of\" is required and cannot be null") if @as_of.nil?
+
       invalid_properties.push("\"current\" is required and cannot be null") if @current.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      # This is a model cash : Stripe::BankConnectionsResourceBalanceApiResourceCashBalance?
-      # This is a model credit : Stripe::BankConnectionsResourceBalanceApiResourceCreditBalance?
+      if _cash = @cash
+        if _cash.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_cash.list_invalid_properties_for("cash"))
+        end
+      end
+      if _credit = @credit
+        if _credit.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_credit.list_invalid_properties_for("credit"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @as_of.nil?
+
       return false if @current.nil?
+
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if _cash = @cash
+        if _cash.is_a?(OpenApi::Validatable)
+          return false unless _cash.valid?
+        end
+      end
+      if _credit = @credit
+        if _credit.is_a?(OpenApi::Validatable)
+          return false unless _credit.valid?
+        end
+      end
 
       true
     end
@@ -86,7 +108,8 @@ module Stripe
       if as_of.nil?
         raise ArgumentError.new("\"as_of\" is required and cannot be null")
       end
-      @as_of = as_of
+      _as_of = as_of.not_nil!
+      @as_of = _as_of
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -95,7 +118,8 @@ module Stripe
       if current.nil?
         raise ArgumentError.new("\"current\" is required and cannot be null")
       end
-      @current = current
+      _current = current.not_nil!
+      @current = _current
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -106,7 +130,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -115,7 +139,11 @@ module Stripe
       if cash.nil?
         return @cash = nil
       end
-      @cash = cash
+      _cash = cash.not_nil!
+      if _cash.is_a?(OpenApi::Validatable)
+        _cash.validate
+      end
+      @cash = _cash
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -124,13 +152,11 @@ module Stripe
       if credit.nil?
         return @credit = nil
       end
-      @credit = credit
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _credit = credit.not_nil!
+      if _credit.is_a?(OpenApi::Validatable)
+        _credit.validate
+      end
+      @credit = _credit
     end
 
     # Generates #hash and #== methods from all fields

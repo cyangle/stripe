@@ -16,6 +16,7 @@ module Stripe
   class FinancialConnectionsSession
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -82,10 +83,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"accounts\" is required and cannot be null") if @accounts.nil?
-      # This is a model accounts : Stripe::BankConnectionsResourceLinkedAccountList1?
+      if _accounts = @accounts
+        if _accounts.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_accounts.list_invalid_properties_for("accounts"))
+        end
+      end
       invalid_properties.push("\"client_secret\" is required and cannot be null") if @client_secret.nil?
       if _client_secret = @client_secret
         if _client_secret.to_s.size > 5000
@@ -103,8 +108,16 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PERMISSIONS.error_message) unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions, false)
-      # This is a model account_holder : Stripe::FinancialConnectionsSessionAccountHolder?
-      # This is a model filters : Stripe::BankConnectionsResourceLinkAccountSessionFilters?
+      if _account_holder = @account_holder
+        if _account_holder.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder"))
+        end
+      end
+      if _filters = @filters
+        if _filters.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_filters.list_invalid_properties_for("filters"))
+        end
+      end
       if _return_url = @return_url
         if _return_url.to_s.size > 5000
           invalid_properties.push("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
@@ -116,8 +129,13 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @accounts.nil?
+      if _accounts = @accounts
+        if _accounts.is_a?(OpenApi::Validatable)
+          return false unless _accounts.valid?
+        end
+      end
       return false if @client_secret.nil?
       if _client_secret = @client_secret
         return false if _client_secret.to_s.size > 5000
@@ -127,8 +145,19 @@ module Stripe
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions, false)
+      if _account_holder = @account_holder
+        if _account_holder.is_a?(OpenApi::Validatable)
+          return false unless _account_holder.valid?
+        end
+      end
+      if _filters = @filters
+        if _filters.is_a?(OpenApi::Validatable)
+          return false unless _filters.valid?
+        end
+      end
       if _return_url = @return_url
         return false if _return_url.to_s.size > 5000
       end
@@ -142,7 +171,11 @@ module Stripe
       if accounts.nil?
         raise ArgumentError.new("\"accounts\" is required and cannot be null")
       end
-      @accounts = accounts
+      _accounts = accounts.not_nil!
+      if _accounts.is_a?(OpenApi::Validatable)
+        _accounts.validate
+      end
+      @accounts = _accounts
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -156,7 +189,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
       end
 
-      @client_secret = client_secret
+      @client_secret = _client_secret
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -170,7 +203,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -179,7 +212,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -190,7 +224,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -201,7 +235,7 @@ module Stripe
       end
       _permissions = permissions.not_nil!
       ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid!(_permissions)
-      @permissions = permissions
+      @permissions = _permissions
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -210,7 +244,11 @@ module Stripe
       if account_holder.nil?
         return @account_holder = nil
       end
-      @account_holder = account_holder
+      _account_holder = account_holder.not_nil!
+      if _account_holder.is_a?(OpenApi::Validatable)
+        _account_holder.validate
+      end
+      @account_holder = _account_holder
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -219,7 +257,11 @@ module Stripe
       if filters.nil?
         return @filters = nil
       end
-      @filters = filters
+      _filters = filters.not_nil!
+      if _filters.is_a?(OpenApi::Validatable)
+        _filters.validate
+      end
+      @filters = _filters
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -233,13 +275,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @return_url = return_url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @return_url = _return_url
     end
 
     # Generates #hash and #== methods from all fields

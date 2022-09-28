@@ -15,6 +15,7 @@ module Stripe
   class CardPaymentsSettingsSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -45,25 +46,52 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model decline_on : Stripe::DeclineChargeOnSpecs?
+      if _decline_on = @decline_on
+        if _decline_on.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_decline_on.list_invalid_properties_for("decline_on"))
+        end
+      end
       if _statement_descriptor_prefix = @statement_descriptor_prefix
         if _statement_descriptor_prefix.to_s.size > 10
           invalid_properties.push("invalid value for \"statement_descriptor_prefix\", the character length must be smaller than or equal to 10.")
         end
       end
-      # This is a model statement_descriptor_prefix_kana : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKana?
-      # This is a model statement_descriptor_prefix_kanji : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKana?
+      if _statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana
+        if _statement_descriptor_prefix_kana.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_statement_descriptor_prefix_kana.list_invalid_properties_for("statement_descriptor_prefix_kana"))
+        end
+      end
+      if _statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji
+        if _statement_descriptor_prefix_kanji.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_statement_descriptor_prefix_kanji.list_invalid_properties_for("statement_descriptor_prefix_kanji"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _decline_on = @decline_on
+        if _decline_on.is_a?(OpenApi::Validatable)
+          return false unless _decline_on.valid?
+        end
+      end
       if _statement_descriptor_prefix = @statement_descriptor_prefix
         return false if _statement_descriptor_prefix.to_s.size > 10
+      end
+      if _statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana
+        if _statement_descriptor_prefix_kana.is_a?(OpenApi::Validatable)
+          return false unless _statement_descriptor_prefix_kana.valid?
+        end
+      end
+      if _statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji
+        if _statement_descriptor_prefix_kanji.is_a?(OpenApi::Validatable)
+          return false unless _statement_descriptor_prefix_kanji.valid?
+        end
       end
 
       true
@@ -75,7 +103,11 @@ module Stripe
       if decline_on.nil?
         return @decline_on = nil
       end
-      @decline_on = decline_on
+      _decline_on = decline_on.not_nil!
+      if _decline_on.is_a?(OpenApi::Validatable)
+        _decline_on.validate
+      end
+      @decline_on = _decline_on
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -89,7 +121,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"statement_descriptor_prefix\", the character length must be smaller than or equal to 10.")
       end
 
-      @statement_descriptor_prefix = statement_descriptor_prefix
+      @statement_descriptor_prefix = _statement_descriptor_prefix
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -98,7 +130,11 @@ module Stripe
       if statement_descriptor_prefix_kana.nil?
         return @statement_descriptor_prefix_kana = nil
       end
-      @statement_descriptor_prefix_kana = statement_descriptor_prefix_kana
+      _statement_descriptor_prefix_kana = statement_descriptor_prefix_kana.not_nil!
+      if _statement_descriptor_prefix_kana.is_a?(OpenApi::Validatable)
+        _statement_descriptor_prefix_kana.validate
+      end
+      @statement_descriptor_prefix_kana = _statement_descriptor_prefix_kana
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,13 +143,11 @@ module Stripe
       if statement_descriptor_prefix_kanji.nil?
         return @statement_descriptor_prefix_kanji = nil
       end
-      @statement_descriptor_prefix_kanji = statement_descriptor_prefix_kanji
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _statement_descriptor_prefix_kanji = statement_descriptor_prefix_kanji.not_nil!
+      if _statement_descriptor_prefix_kanji.is_a?(OpenApi::Validatable)
+        _statement_descriptor_prefix_kanji.validate
+      end
+      @statement_descriptor_prefix_kanji = _statement_descriptor_prefix_kanji
     end
 
     # Generates #hash and #== methods from all fields

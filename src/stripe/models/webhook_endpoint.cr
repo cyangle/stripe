@@ -16,6 +16,7 @@ module Stripe
   class WebhookEndpoint
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -104,10 +105,12 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"enabled_events\" is required and cannot be null") if @enabled_events.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -115,6 +118,7 @@ module Stripe
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
+
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
@@ -156,15 +160,19 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @created.nil?
+
       return false if @enabled_events.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false if @metadata.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @status.nil?
       if _status = @status
@@ -196,7 +204,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -205,7 +214,8 @@ module Stripe
       if enabled_events.nil?
         raise ArgumentError.new("\"enabled_events\" is required and cannot be null")
       end
-      @enabled_events = enabled_events
+      _enabled_events = enabled_events.not_nil!
+      @enabled_events = _enabled_events
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -219,7 +229,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -228,7 +238,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -237,7 +248,8 @@ module Stripe
       if metadata.nil?
         raise ArgumentError.new("\"metadata\" is required and cannot be null")
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -248,7 +260,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -262,7 +274,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -276,7 +288,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @url = url
+      @url = _url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -290,7 +302,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
       end
 
-      @api_version = api_version
+      @api_version = _api_version
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -304,7 +316,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"application\", the character length must be smaller than or equal to 5000.")
       end
 
-      @application = application
+      @application = _application
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -318,7 +330,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -332,13 +344,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"secret\", the character length must be smaller than or equal to 5000.")
       end
 
-      @secret = secret
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @secret = _secret
     end
 
     # Generates #hash and #== methods from all fields

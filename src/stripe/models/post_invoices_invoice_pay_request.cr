@@ -15,6 +15,7 @@ module Stripe
   class PostInvoicesInvoicePayRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -64,13 +65,15 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _mandate = @mandate
         if _mandate.to_s.size > 5000
           invalid_properties.push("invalid value for \"mandate\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _payment_method = @payment_method
         if _payment_method.to_s.size > 5000
           invalid_properties.push("invalid value for \"payment_method\", the character length must be smaller than or equal to 5000.")
@@ -87,10 +90,11 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _mandate = @mandate
         return false if _mandate.to_s.size > 5000
       end
+
       if _payment_method = @payment_method
         return false if _payment_method.to_s.size > 5000
       end
@@ -107,7 +111,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -116,7 +121,8 @@ module Stripe
       if forgive.nil?
         return @forgive = nil
       end
-      @forgive = forgive
+      _forgive = forgive.not_nil!
+      @forgive = _forgive
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -130,7 +136,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"mandate\", the character length must be smaller than or equal to 5000.")
       end
 
-      @mandate = mandate
+      @mandate = _mandate
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -139,7 +145,8 @@ module Stripe
       if off_session.nil?
         return @off_session = nil
       end
-      @off_session = off_session
+      _off_session = off_session.not_nil!
+      @off_session = _off_session
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -148,7 +155,8 @@ module Stripe
       if paid_out_of_band.nil?
         return @paid_out_of_band = nil
       end
-      @paid_out_of_band = paid_out_of_band
+      _paid_out_of_band = paid_out_of_band.not_nil!
+      @paid_out_of_band = _paid_out_of_band
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -162,7 +170,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"payment_method\", the character length must be smaller than or equal to 5000.")
       end
 
-      @payment_method = payment_method
+      @payment_method = _payment_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -176,13 +184,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"source\", the character length must be smaller than or equal to 5000.")
       end
 
-      @source = source
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @source = _source
     end
 
     # Generates #hash and #== methods from all fields

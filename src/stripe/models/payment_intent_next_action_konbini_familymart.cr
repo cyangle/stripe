@@ -16,6 +16,7 @@ module Stripe
   class PaymentIntentNextActionKonbiniFamilymart
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -43,7 +44,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"payment_code\" is required and cannot be null") if @payment_code.nil?
       if _payment_code = @payment_code
@@ -62,7 +63,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @payment_code.nil?
       if _payment_code = @payment_code
         return false if _payment_code.to_s.size > 5000
@@ -85,7 +86,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"payment_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @payment_code = payment_code
+      @payment_code = _payment_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -99,13 +100,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"confirmation_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @confirmation_number = confirmation_number
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @confirmation_number = _confirmation_number
     end
 
     # Generates #hash and #== methods from all fields

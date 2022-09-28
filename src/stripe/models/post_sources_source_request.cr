@@ -15,6 +15,7 @@ module Stripe
   class PostSourcesSourceRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -55,19 +56,57 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model mandate : Stripe::MandateParams?
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
-      # This is a model owner : Stripe::Owner1?
-      # This is a model source_order : Stripe::OrderParams?
+
+      if _mandate = @mandate
+        if _mandate.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_mandate.list_invalid_properties_for("mandate"))
+        end
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
+      if _owner = @owner
+        if _owner.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_owner.list_invalid_properties_for("owner"))
+        end
+      end
+      if _source_order = @source_order
+        if _source_order.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_source_order.list_invalid_properties_for("source_order"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _mandate = @mandate
+        if _mandate.is_a?(OpenApi::Validatable)
+          return false unless _mandate.valid?
+        end
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
+      end
+      if _owner = @owner
+        if _owner.is_a?(OpenApi::Validatable)
+          return false unless _owner.valid?
+        end
+      end
+      if _source_order = @source_order
+        if _source_order.is_a?(OpenApi::Validatable)
+          return false unless _source_order.valid?
+        end
+      end
+
       true
     end
 
@@ -77,7 +116,8 @@ module Stripe
       if amount.nil?
         return @amount = nil
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -86,7 +126,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -95,7 +136,11 @@ module Stripe
       if mandate.nil?
         return @mandate = nil
       end
-      @mandate = mandate
+      _mandate = mandate.not_nil!
+      if _mandate.is_a?(OpenApi::Validatable)
+        _mandate.validate
+      end
+      @mandate = _mandate
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -104,7 +149,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,7 +162,11 @@ module Stripe
       if owner.nil?
         return @owner = nil
       end
-      @owner = owner
+      _owner = owner.not_nil!
+      if _owner.is_a?(OpenApi::Validatable)
+        _owner.validate
+      end
+      @owner = _owner
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -122,13 +175,11 @@ module Stripe
       if source_order.nil?
         return @source_order = nil
       end
-      @source_order = source_order
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _source_order = source_order.not_nil!
+      if _source_order.is_a?(OpenApi::Validatable)
+        _source_order.validate
+      end
+      @source_order = _source_order
     end
 
     # Generates #hash and #== methods from all fields

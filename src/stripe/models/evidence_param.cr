@@ -16,6 +16,7 @@ module Stripe
   class EvidenceParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -64,25 +65,88 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model canceled : Stripe::EvidenceParamCanceled?
-      # This is a model duplicate : Stripe::EvidenceParamDuplicate?
-      # This is a model fraudulent : Stripe::EvidenceParamFraudulent?
-      # This is a model merchandise_not_as_described : Stripe::EvidenceParamMerchandiseNotAsDescribed?
-      # This is a model not_received : Stripe::EvidenceParamNotReceived?
-      # This is a model other : Stripe::EvidenceParamOther?
+      if _canceled = @canceled
+        if _canceled.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_canceled.list_invalid_properties_for("canceled"))
+        end
+      end
+      if _duplicate = @duplicate
+        if _duplicate.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_duplicate.list_invalid_properties_for("duplicate"))
+        end
+      end
+      if _fraudulent = @fraudulent
+        if _fraudulent.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_fraudulent.list_invalid_properties_for("fraudulent"))
+        end
+      end
+      if _merchandise_not_as_described = @merchandise_not_as_described
+        if _merchandise_not_as_described.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_merchandise_not_as_described.list_invalid_properties_for("merchandise_not_as_described"))
+        end
+      end
+      if _not_received = @not_received
+        if _not_received.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_not_received.list_invalid_properties_for("not_received"))
+        end
+      end
+      if _other = @other
+        if _other.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_other.list_invalid_properties_for("other"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REASON.error_message) unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
-      # This is a model service_not_as_described : Stripe::EvidenceParamServiceNotAsDescribed?
+      if _service_not_as_described = @service_not_as_described
+        if _service_not_as_described.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_service_not_as_described.list_invalid_properties_for("service_not_as_described"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _canceled = @canceled
+        if _canceled.is_a?(OpenApi::Validatable)
+          return false unless _canceled.valid?
+        end
+      end
+      if _duplicate = @duplicate
+        if _duplicate.is_a?(OpenApi::Validatable)
+          return false unless _duplicate.valid?
+        end
+      end
+      if _fraudulent = @fraudulent
+        if _fraudulent.is_a?(OpenApi::Validatable)
+          return false unless _fraudulent.valid?
+        end
+      end
+      if _merchandise_not_as_described = @merchandise_not_as_described
+        if _merchandise_not_as_described.is_a?(OpenApi::Validatable)
+          return false unless _merchandise_not_as_described.valid?
+        end
+      end
+      if _not_received = @not_received
+        if _not_received.is_a?(OpenApi::Validatable)
+          return false unless _not_received.valid?
+        end
+      end
+      if _other = @other
+        if _other.is_a?(OpenApi::Validatable)
+          return false unless _other.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
+      if _service_not_as_described = @service_not_as_described
+        if _service_not_as_described.is_a?(OpenApi::Validatable)
+          return false unless _service_not_as_described.valid?
+        end
+      end
 
       true
     end
@@ -93,7 +157,11 @@ module Stripe
       if canceled.nil?
         return @canceled = nil
       end
-      @canceled = canceled
+      _canceled = canceled.not_nil!
+      if _canceled.is_a?(OpenApi::Validatable)
+        _canceled.validate
+      end
+      @canceled = _canceled
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -102,7 +170,11 @@ module Stripe
       if duplicate.nil?
         return @duplicate = nil
       end
-      @duplicate = duplicate
+      _duplicate = duplicate.not_nil!
+      if _duplicate.is_a?(OpenApi::Validatable)
+        _duplicate.validate
+      end
+      @duplicate = _duplicate
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -111,7 +183,11 @@ module Stripe
       if fraudulent.nil?
         return @fraudulent = nil
       end
-      @fraudulent = fraudulent
+      _fraudulent = fraudulent.not_nil!
+      if _fraudulent.is_a?(OpenApi::Validatable)
+        _fraudulent.validate
+      end
+      @fraudulent = _fraudulent
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -120,7 +196,11 @@ module Stripe
       if merchandise_not_as_described.nil?
         return @merchandise_not_as_described = nil
       end
-      @merchandise_not_as_described = merchandise_not_as_described
+      _merchandise_not_as_described = merchandise_not_as_described.not_nil!
+      if _merchandise_not_as_described.is_a?(OpenApi::Validatable)
+        _merchandise_not_as_described.validate
+      end
+      @merchandise_not_as_described = _merchandise_not_as_described
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -129,7 +209,11 @@ module Stripe
       if not_received.nil?
         return @not_received = nil
       end
-      @not_received = not_received
+      _not_received = not_received.not_nil!
+      if _not_received.is_a?(OpenApi::Validatable)
+        _not_received.validate
+      end
+      @not_received = _not_received
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -138,7 +222,11 @@ module Stripe
       if other.nil?
         return @other = nil
       end
-      @other = other
+      _other = other.not_nil!
+      if _other.is_a?(OpenApi::Validatable)
+        _other.validate
+      end
+      @other = _other
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -149,7 +237,7 @@ module Stripe
       end
       _reason = reason.not_nil!
       ENUM_VALIDATOR_FOR_REASON.valid!(_reason)
-      @reason = reason
+      @reason = _reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -158,13 +246,11 @@ module Stripe
       if service_not_as_described.nil?
         return @service_not_as_described = nil
       end
-      @service_not_as_described = service_not_as_described
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _service_not_as_described = service_not_as_described.not_nil!
+      if _service_not_as_described.is_a?(OpenApi::Validatable)
+        _service_not_as_described.validate
+      end
+      @service_not_as_described = _service_not_as_described
     end
 
     # Generates #hash and #== methods from all fields

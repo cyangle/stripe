@@ -16,6 +16,7 @@ module Stripe
   class SettingsSpecsUpdate
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -54,21 +55,76 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model branding : Stripe::BrandingSettingsSpecs?
-      # This is a model card_issuing : Stripe::CardIssuingSettingsSpecs?
-      # This is a model card_payments : Stripe::CardPaymentsSettingsSpecs?
-      # This is a model payments : Stripe::PaymentsSettingsSpecs?
-      # This is a model payouts : Stripe::PayoutSettingsSpecs?
-      # This is a model treasury : Stripe::TreasurySettingsSpecs?
+      if _branding = @branding
+        if _branding.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_branding.list_invalid_properties_for("branding"))
+        end
+      end
+      if _card_issuing = @card_issuing
+        if _card_issuing.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_card_issuing.list_invalid_properties_for("card_issuing"))
+        end
+      end
+      if _card_payments = @card_payments
+        if _card_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_card_payments.list_invalid_properties_for("card_payments"))
+        end
+      end
+      if _payments = @payments
+        if _payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payments.list_invalid_properties_for("payments"))
+        end
+      end
+      if _payouts = @payouts
+        if _payouts.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payouts.list_invalid_properties_for("payouts"))
+        end
+      end
+      if _treasury = @treasury
+        if _treasury.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_treasury.list_invalid_properties_for("treasury"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _branding = @branding
+        if _branding.is_a?(OpenApi::Validatable)
+          return false unless _branding.valid?
+        end
+      end
+      if _card_issuing = @card_issuing
+        if _card_issuing.is_a?(OpenApi::Validatable)
+          return false unless _card_issuing.valid?
+        end
+      end
+      if _card_payments = @card_payments
+        if _card_payments.is_a?(OpenApi::Validatable)
+          return false unless _card_payments.valid?
+        end
+      end
+      if _payments = @payments
+        if _payments.is_a?(OpenApi::Validatable)
+          return false unless _payments.valid?
+        end
+      end
+      if _payouts = @payouts
+        if _payouts.is_a?(OpenApi::Validatable)
+          return false unless _payouts.valid?
+        end
+      end
+      if _treasury = @treasury
+        if _treasury.is_a?(OpenApi::Validatable)
+          return false unless _treasury.valid?
+        end
+      end
+
       true
     end
 
@@ -78,7 +134,11 @@ module Stripe
       if branding.nil?
         return @branding = nil
       end
-      @branding = branding
+      _branding = branding.not_nil!
+      if _branding.is_a?(OpenApi::Validatable)
+        _branding.validate
+      end
+      @branding = _branding
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -87,7 +147,11 @@ module Stripe
       if card_issuing.nil?
         return @card_issuing = nil
       end
-      @card_issuing = card_issuing
+      _card_issuing = card_issuing.not_nil!
+      if _card_issuing.is_a?(OpenApi::Validatable)
+        _card_issuing.validate
+      end
+      @card_issuing = _card_issuing
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -96,7 +160,11 @@ module Stripe
       if card_payments.nil?
         return @card_payments = nil
       end
-      @card_payments = card_payments
+      _card_payments = card_payments.not_nil!
+      if _card_payments.is_a?(OpenApi::Validatable)
+        _card_payments.validate
+      end
+      @card_payments = _card_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,7 +173,11 @@ module Stripe
       if payments.nil?
         return @payments = nil
       end
-      @payments = payments
+      _payments = payments.not_nil!
+      if _payments.is_a?(OpenApi::Validatable)
+        _payments.validate
+      end
+      @payments = _payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -114,7 +186,11 @@ module Stripe
       if payouts.nil?
         return @payouts = nil
       end
-      @payouts = payouts
+      _payouts = payouts.not_nil!
+      if _payouts.is_a?(OpenApi::Validatable)
+        _payouts.validate
+      end
+      @payouts = _payouts
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -123,13 +199,11 @@ module Stripe
       if treasury.nil?
         return @treasury = nil
       end
-      @treasury = treasury
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _treasury = treasury.not_nil!
+      if _treasury.is_a?(OpenApi::Validatable)
+        _treasury.validate
+      end
+      @treasury = _treasury
     end
 
     # Generates #hash and #== methods from all fields

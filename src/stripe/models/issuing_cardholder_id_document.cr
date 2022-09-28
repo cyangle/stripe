@@ -16,6 +16,7 @@ module Stripe
   class IssuingCardholderIdDocument
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -44,17 +45,36 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model back : Stripe::IssuingCardholderIdDocumentBack?
-      # This is a model front : Stripe::IssuingCardholderIdDocumentFront?
+      if _back = @back
+        if _back.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_back.list_invalid_properties_for("back"))
+        end
+      end
+      if _front = @front
+        if _front.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_front.list_invalid_properties_for("front"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _back = @back
+        if _back.is_a?(OpenApi::Validatable)
+          return false unless _back.valid?
+        end
+      end
+      if _front = @front
+        if _front.is_a?(OpenApi::Validatable)
+          return false unless _front.valid?
+        end
+      end
+
       true
     end
 
@@ -64,7 +84,11 @@ module Stripe
       if back.nil?
         return @back = nil
       end
-      @back = back
+      _back = back.not_nil!
+      if _back.is_a?(OpenApi::Validatable)
+        _back.validate
+      end
+      @back = _back
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -73,13 +97,11 @@ module Stripe
       if front.nil?
         return @front = nil
       end
-      @front = front
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _front = front.not_nil!
+      if _front.is_a?(OpenApi::Validatable)
+        _front.validate
+      end
+      @front = _front
     end
 
     # Generates #hash and #== methods from all fields

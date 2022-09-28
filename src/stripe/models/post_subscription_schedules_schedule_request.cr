@@ -15,6 +15,7 @@ module Stripe
   class PostSubscriptionSchedulesScheduleRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -61,13 +62,30 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model default_settings : Stripe::DefaultSettingsParams?
+      if _default_settings = @default_settings
+        if _default_settings.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_default_settings.list_invalid_properties_for("default_settings"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_END_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior)
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
-      # Container phases array has values of Stripe::PhaseConfigurationParams1
+
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
+      if _phases = @phases
+        if _phases.is_a?(Array)
+          _phases.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("phases"))
+            end
+          end
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
 
@@ -76,8 +94,28 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _default_settings = @default_settings
+        if _default_settings.is_a?(OpenApi::Validatable)
+          return false unless _default_settings.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior)
+
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
+      end
+      if _phases = @phases
+        if _phases.is_a?(Array)
+          _phases.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
 
       true
@@ -89,7 +127,11 @@ module Stripe
       if default_settings.nil?
         return @default_settings = nil
       end
-      @default_settings = default_settings
+      _default_settings = default_settings.not_nil!
+      if _default_settings.is_a?(OpenApi::Validatable)
+        _default_settings.validate
+      end
+      @default_settings = _default_settings
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -100,7 +142,7 @@ module Stripe
       end
       _end_behavior = end_behavior.not_nil!
       ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid!(_end_behavior)
-      @end_behavior = end_behavior
+      @end_behavior = _end_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -109,7 +151,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -118,7 +161,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,7 +174,15 @@ module Stripe
       if phases.nil?
         return @phases = nil
       end
-      @phases = phases
+      _phases = phases.not_nil!
+      if _phases.is_a?(Array)
+        _phases.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @phases = _phases
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -138,13 +193,7 @@ module Stripe
       end
       _proration_behavior = proration_behavior.not_nil!
       ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(_proration_behavior)
-      @proration_behavior = proration_behavior
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @proration_behavior = _proration_behavior
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class TaxRate
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -125,10 +126,12 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"active\" is required and cannot be null") if @active.nil?
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"display_name\" is required and cannot be null") if @display_name.nil?
       if _display_name = @display_name
         if _display_name.to_s.size > 5000
@@ -142,10 +145,12 @@ module Stripe
         end
       end
       invalid_properties.push("\"inclusive\" is required and cannot be null") if @inclusive.nil?
+
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"percentage\" is required and cannot be null") if @percentage.nil?
+
       if _country = @country
         if _country.to_s.size > 5000
           invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
@@ -161,6 +166,7 @@ module Stripe
           invalid_properties.push("invalid value for \"jurisdiction\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _state = @state
         if _state.to_s.size > 5000
           invalid_properties.push("invalid value for \"state\", the character length must be smaller than or equal to 5000.")
@@ -174,9 +180,11 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @active.nil?
+
       return false if @created.nil?
+
       return false if @display_name.nil?
       if _display_name = @display_name
         return false if _display_name.to_s.size > 5000
@@ -186,9 +194,12 @@ module Stripe
         return false if _id.to_s.size > 5000
       end
       return false if @inclusive.nil?
+
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @percentage.nil?
+
       if _country = @country
         return false if _country.to_s.size > 5000
       end
@@ -198,6 +209,7 @@ module Stripe
       if _jurisdiction = @jurisdiction
         return false if _jurisdiction.to_s.size > 5000
       end
+
       if _state = @state
         return false if _state.to_s.size > 5000
       end
@@ -212,7 +224,8 @@ module Stripe
       if active.nil?
         raise ArgumentError.new("\"active\" is required and cannot be null")
       end
-      @active = active
+      _active = active.not_nil!
+      @active = _active
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -221,7 +234,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -235,7 +249,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @display_name = display_name
+      @display_name = _display_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -249,7 +263,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -258,7 +272,8 @@ module Stripe
       if inclusive.nil?
         raise ArgumentError.new("\"inclusive\" is required and cannot be null")
       end
-      @inclusive = inclusive
+      _inclusive = inclusive.not_nil!
+      @inclusive = _inclusive
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -267,7 +282,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -278,7 +294,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -287,7 +303,8 @@ module Stripe
       if percentage.nil?
         raise ArgumentError.new("\"percentage\" is required and cannot be null")
       end
-      @percentage = percentage
+      _percentage = percentage.not_nil!
+      @percentage = _percentage
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -301,7 +318,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @country = country
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -315,7 +332,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -329,7 +346,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"jurisdiction\", the character length must be smaller than or equal to 5000.")
       end
 
-      @jurisdiction = jurisdiction
+      @jurisdiction = _jurisdiction
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -338,7 +355,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -352,7 +370,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"state\", the character length must be smaller than or equal to 5000.")
       end
 
-      @state = state
+      @state = _state
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -363,13 +381,7 @@ module Stripe
       end
       _tax_type = tax_type.not_nil!
       ENUM_VALIDATOR_FOR_TAX_TYPE.valid!(_tax_type)
-      @tax_type = tax_type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @tax_type = _tax_type
     end
 
     # Generates #hash and #== methods from all fields

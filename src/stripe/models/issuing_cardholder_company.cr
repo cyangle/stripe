@@ -16,6 +16,7 @@ module Stripe
   class IssuingCardholderCompany
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -35,7 +36,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"tax_id_provided\" is required and cannot be null") if @tax_id_provided.nil?
 
@@ -44,7 +45,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @tax_id_provided.nil?
 
       true
@@ -56,13 +57,8 @@ module Stripe
       if tax_id_provided.nil?
         raise ArgumentError.new("\"tax_id_provided\" is required and cannot be null")
       end
-      @tax_id_provided = tax_id_provided
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tax_id_provided = tax_id_provided.not_nil!
+      @tax_id_provided = _tax_id_provided
     end
 
     # Generates #hash and #== methods from all fields

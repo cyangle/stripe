@@ -16,6 +16,7 @@ module Stripe
   class BalanceDetail
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -35,18 +36,35 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"available\" is required and cannot be null") if @available.nil?
-      # Container available array has values of Stripe::BalanceAmount
+      if _available = @available
+        if _available.is_a?(Array)
+          _available.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("available"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @available.nil?
+      if _available = @available
+        if _available.is_a?(Array)
+          _available.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
 
       true
     end
@@ -57,13 +75,15 @@ module Stripe
       if available.nil?
         raise ArgumentError.new("\"available\" is required and cannot be null")
       end
-      @available = available
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _available = available.not_nil!
+      if _available.is_a?(Array)
+        _available.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @available = _available
     end
 
     # Generates #hash and #== methods from all fields

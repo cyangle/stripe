@@ -16,6 +16,7 @@ module Stripe
   class Mandate
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -85,10 +86,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"customer_acceptance\" is required and cannot be null") if @customer_acceptance.nil?
-      # This is a model customer_acceptance : Stripe::CustomerAcceptance?
+      if _customer_acceptance = @customer_acceptance
+        if _customer_acceptance.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_customer_acceptance.list_invalid_properties_for("customer_acceptance"))
+        end
+      end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -99,32 +104,67 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"payment_method\" is required and cannot be null") if @payment_method.nil?
-      # This is a model payment_method : Stripe::MandatePaymentMethod?
+      if _payment_method = @payment_method
+        if _payment_method.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_method.list_invalid_properties_for("payment_method"))
+        end
+      end
       invalid_properties.push("\"payment_method_details\" is required and cannot be null") if @payment_method_details.nil?
-      # This is a model payment_method_details : Stripe::MandatePaymentMethodDetails?
+      if _payment_method_details = @payment_method_details
+        if _payment_method_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_method_details.list_invalid_properties_for("payment_method_details"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      # This is a model single_use : Stripe::MandateSingleUse?
+
+      if _single_use = @single_use
+        if _single_use.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_single_use.list_invalid_properties_for("single_use"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @customer_acceptance.nil?
+      if _customer_acceptance = @customer_acceptance
+        if _customer_acceptance.is_a?(OpenApi::Validatable)
+          return false unless _customer_acceptance.valid?
+        end
+      end
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @payment_method.nil?
+      if _payment_method = @payment_method
+        if _payment_method.is_a?(OpenApi::Validatable)
+          return false unless _payment_method.valid?
+        end
+      end
       return false if @payment_method_details.nil?
+      if _payment_method_details = @payment_method_details
+        if _payment_method_details.is_a?(OpenApi::Validatable)
+          return false unless _payment_method_details.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      if _single_use = @single_use
+        if _single_use.is_a?(OpenApi::Validatable)
+          return false unless _single_use.valid?
+        end
+      end
 
       true
     end
@@ -135,7 +175,11 @@ module Stripe
       if customer_acceptance.nil?
         raise ArgumentError.new("\"customer_acceptance\" is required and cannot be null")
       end
-      @customer_acceptance = customer_acceptance
+      _customer_acceptance = customer_acceptance.not_nil!
+      if _customer_acceptance.is_a?(OpenApi::Validatable)
+        _customer_acceptance.validate
+      end
+      @customer_acceptance = _customer_acceptance
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -149,7 +193,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -158,7 +202,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -169,7 +214,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -178,7 +223,11 @@ module Stripe
       if payment_method.nil?
         raise ArgumentError.new("\"payment_method\" is required and cannot be null")
       end
-      @payment_method = payment_method
+      _payment_method = payment_method.not_nil!
+      if _payment_method.is_a?(OpenApi::Validatable)
+        _payment_method.validate
+      end
+      @payment_method = _payment_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -187,7 +236,11 @@ module Stripe
       if payment_method_details.nil?
         raise ArgumentError.new("\"payment_method_details\" is required and cannot be null")
       end
-      @payment_method_details = payment_method_details
+      _payment_method_details = payment_method_details.not_nil!
+      if _payment_method_details.is_a?(OpenApi::Validatable)
+        _payment_method_details.validate
+      end
+      @payment_method_details = _payment_method_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -198,7 +251,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -209,7 +262,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -218,7 +271,8 @@ module Stripe
       if multi_use.nil?
         return @multi_use = nil
       end
-      @multi_use = multi_use
+      _multi_use = multi_use.not_nil!
+      @multi_use = _multi_use
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -227,13 +281,11 @@ module Stripe
       if single_use.nil?
         return @single_use = nil
       end
-      @single_use = single_use
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _single_use = single_use.not_nil!
+      if _single_use.is_a?(OpenApi::Validatable)
+        _single_use.validate
+      end
+      @single_use = _single_use
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class PostFinancialConnectionsSessionsRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -57,13 +58,22 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"account_holder\" is required and cannot be null") if @account_holder.nil?
-      # This is a model account_holder : Stripe::AccountholderParams1?
+      if _account_holder = @account_holder
+        if _account_holder.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PERMISSIONS.error_message) unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions, false)
-      # This is a model filters : Stripe::FiltersParams?
+
+      if _filters = @filters
+        if _filters.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_filters.list_invalid_properties_for("filters"))
+        end
+      end
       if _return_url = @return_url
         if _return_url.to_s.size > 5000
           invalid_properties.push("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
@@ -75,9 +85,20 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @account_holder.nil?
+      if _account_holder = @account_holder
+        if _account_holder.is_a?(OpenApi::Validatable)
+          return false unless _account_holder.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions, false)
+
+      if _filters = @filters
+        if _filters.is_a?(OpenApi::Validatable)
+          return false unless _filters.valid?
+        end
+      end
       if _return_url = @return_url
         return false if _return_url.to_s.size > 5000
       end
@@ -91,7 +112,11 @@ module Stripe
       if account_holder.nil?
         raise ArgumentError.new("\"account_holder\" is required and cannot be null")
       end
-      @account_holder = account_holder
+      _account_holder = account_holder.not_nil!
+      if _account_holder.is_a?(OpenApi::Validatable)
+        _account_holder.validate
+      end
+      @account_holder = _account_holder
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -102,7 +127,7 @@ module Stripe
       end
       _permissions = permissions.not_nil!
       ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid!(_permissions)
-      @permissions = permissions
+      @permissions = _permissions
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -111,7 +136,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -120,7 +146,11 @@ module Stripe
       if filters.nil?
         return @filters = nil
       end
-      @filters = filters
+      _filters = filters.not_nil!
+      if _filters.is_a?(OpenApi::Validatable)
+        _filters.validate
+      end
+      @filters = _filters
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -134,13 +164,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @return_url = return_url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @return_url = _return_url
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class SourceOrderItem
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -75,8 +76,9 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _currency = @currency
         if _currency.to_s.size > 5000
           invalid_properties.push("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
@@ -92,6 +94,7 @@ module Stripe
           invalid_properties.push("invalid value for \"parent\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if __type = @_type
         if __type.to_s.size > 5000
           invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
@@ -103,7 +106,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _currency = @currency
         return false if _currency.to_s.size > 5000
       end
@@ -113,6 +116,7 @@ module Stripe
       if _parent = @parent
         return false if _parent.to_s.size > 5000
       end
+
       if __type = @_type
         return false if __type.to_s.size > 5000
       end
@@ -126,7 +130,8 @@ module Stripe
       if amount.nil?
         return @amount = nil
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -140,7 +145,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
       end
 
-      @currency = currency
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -154,7 +159,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -168,7 +173,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"parent\", the character length must be smaller than or equal to 5000.")
       end
 
-      @parent = parent
+      @parent = _parent
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -177,7 +182,8 @@ module Stripe
       if quantity.nil?
         return @quantity = nil
       end
-      @quantity = quantity
+      _quantity = quantity.not_nil!
+      @quantity = _quantity
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -191,13 +197,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      @_type = _type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @_type = __type
     end
 
     # Generates #hash and #== methods from all fields

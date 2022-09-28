@@ -16,6 +16,7 @@ module Stripe
   class OrdersV2ResourceShippingDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -53,9 +54,13 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model address : Stripe::OrdersV2ResourceShippingDetailsAddress?
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_address.list_invalid_properties_for("address"))
+        end
+      end
       if _name = @name
         if _name.to_s.size > 5000
           invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
@@ -72,7 +77,12 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          return false unless _address.valid?
+        end
+      end
       if _name = @name
         return false if _name.to_s.size > 5000
       end
@@ -89,7 +99,11 @@ module Stripe
       if address.nil?
         return @address = nil
       end
-      @address = address
+      _address = address.not_nil!
+      if _address.is_a?(OpenApi::Validatable)
+        _address.validate
+      end
+      @address = _address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -103,7 +117,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -117,13 +131,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
       end
 
-      @phone = phone
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @phone = _phone
     end
 
     # Generates #hash and #== methods from all fields

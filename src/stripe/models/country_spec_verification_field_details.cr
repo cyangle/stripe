@@ -16,6 +16,7 @@ module Stripe
   class CountrySpecVerificationFieldDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -40,9 +41,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"additional\" is required and cannot be null") if @additional.nil?
+
       invalid_properties.push("\"minimum\" is required and cannot be null") if @minimum.nil?
 
       invalid_properties
@@ -50,8 +52,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @additional.nil?
+
       return false if @minimum.nil?
 
       true
@@ -63,7 +66,8 @@ module Stripe
       if additional.nil?
         raise ArgumentError.new("\"additional\" is required and cannot be null")
       end
-      @additional = additional
+      _additional = additional.not_nil!
+      @additional = _additional
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,13 +76,8 @@ module Stripe
       if minimum.nil?
         raise ArgumentError.new("\"minimum\" is required and cannot be null")
       end
-      @minimum = minimum
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _minimum = minimum.not_nil!
+      @minimum = _minimum
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class PaymentMethodOptionsParam19
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,7 +38,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -45,7 +46,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -55,7 +56,8 @@ module Stripe
       if request_extended_authorization.nil?
         return @request_extended_authorization = nil
       end
-      @request_extended_authorization = request_extended_authorization
+      _request_extended_authorization = request_extended_authorization.not_nil!
+      @request_extended_authorization = _request_extended_authorization
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -64,13 +66,8 @@ module Stripe
       if request_incremental_authorization_support.nil?
         return @request_incremental_authorization_support = nil
       end
-      @request_incremental_authorization_support = request_incremental_authorization_support
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _request_incremental_authorization_support = request_incremental_authorization_support.not_nil!
+      @request_incremental_authorization_support = _request_incremental_authorization_support
     end
 
     # Generates #hash and #== methods from all fields

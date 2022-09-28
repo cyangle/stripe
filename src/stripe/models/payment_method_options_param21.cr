@@ -15,6 +15,7 @@ module Stripe
   class PaymentMethodOptionsParam21
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,7 +38,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -45,7 +46,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -55,7 +56,8 @@ module Stripe
       if expires_after_seconds.nil?
         return @expires_after_seconds = nil
       end
-      @expires_after_seconds = expires_after_seconds
+      _expires_after_seconds = expires_after_seconds.not_nil!
+      @expires_after_seconds = _expires_after_seconds
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -64,13 +66,8 @@ module Stripe
       if expires_at.nil?
         return @expires_at = nil
       end
-      @expires_at = expires_at
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _expires_at = expires_at.not_nil!
+      @expires_at = _expires_at
     end
 
     # Generates #hash and #== methods from all fields

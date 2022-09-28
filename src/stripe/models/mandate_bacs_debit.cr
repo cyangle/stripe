@@ -16,6 +16,7 @@ module Stripe
   class MandateBacsDebit
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -47,7 +48,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK_STATUS.error_message) unless ENUM_VALIDATOR_FOR_NETWORK_STATUS.valid?(@network_status, false)
@@ -69,7 +70,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_NETWORK_STATUS.valid?(@network_status, false)
       return false if @reference.nil?
       if _reference = @reference
@@ -91,7 +92,7 @@ module Stripe
       end
       _network_status = network_status.not_nil!
       ENUM_VALIDATOR_FOR_NETWORK_STATUS.valid!(_network_status)
-      @network_status = network_status
+      @network_status = _network_status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,7 +106,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
       end
 
-      @reference = reference
+      @reference = _reference
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -119,13 +120,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @url = url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @url = _url
     end
 
     # Generates #hash and #== methods from all fields

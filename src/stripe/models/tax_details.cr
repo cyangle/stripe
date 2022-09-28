@@ -16,6 +16,7 @@ module Stripe
   class TaxDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -40,19 +41,36 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_EXEMPT.error_message) unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
-      # Container tax_ids array has values of Stripe::DataParams
+      if _tax_ids = @tax_ids
+        if _tax_ids.is_a?(Array)
+          _tax_ids.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("tax_ids"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
+      if _tax_ids = @tax_ids
+        if _tax_ids.is_a?(Array)
+          _tax_ids.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
 
       true
     end
@@ -65,7 +83,7 @@ module Stripe
       end
       _tax_exempt = tax_exempt.not_nil!
       ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid!(_tax_exempt)
-      @tax_exempt = tax_exempt
+      @tax_exempt = _tax_exempt
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -74,13 +92,15 @@ module Stripe
       if tax_ids.nil?
         return @tax_ids = nil
       end
-      @tax_ids = tax_ids
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tax_ids = tax_ids.not_nil!
+      if _tax_ids.is_a?(Array)
+        _tax_ids.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @tax_ids = _tax_ids
     end
 
     # Generates #hash and #== methods from all fields

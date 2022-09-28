@@ -16,6 +16,7 @@ module Stripe
   class AccountDeclineChargeOn
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -40,9 +41,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"avs_failure\" is required and cannot be null") if @avs_failure.nil?
+
       invalid_properties.push("\"cvc_failure\" is required and cannot be null") if @cvc_failure.nil?
 
       invalid_properties
@@ -50,8 +52,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @avs_failure.nil?
+
       return false if @cvc_failure.nil?
 
       true
@@ -63,7 +66,8 @@ module Stripe
       if avs_failure.nil?
         raise ArgumentError.new("\"avs_failure\" is required and cannot be null")
       end
-      @avs_failure = avs_failure
+      _avs_failure = avs_failure.not_nil!
+      @avs_failure = _avs_failure
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,13 +76,8 @@ module Stripe
       if cvc_failure.nil?
         raise ArgumentError.new("\"cvc_failure\" is required and cannot be null")
       end
-      @cvc_failure = cvc_failure
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _cvc_failure = cvc_failure.not_nil!
+      @cvc_failure = _cvc_failure
     end
 
     # Generates #hash and #== methods from all fields

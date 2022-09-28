@@ -16,6 +16,7 @@ module Stripe
   class File
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -109,9 +110,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -123,12 +125,17 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PURPOSE.error_message) unless ENUM_VALIDATOR_FOR_PURPOSE.valid?(@purpose, false)
       invalid_properties.push("\"size\" is required and cannot be null") if @size.nil?
+
       if _filename = @filename
         if _filename.to_s.size > 5000
           invalid_properties.push("invalid value for \"filename\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model links : Stripe::FileFileLinkList1?
+      if _links = @links
+        if _links.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_links.list_invalid_properties_for("links"))
+        end
+      end
       if _title = @title
         if _title.to_s.size > 5000
           invalid_properties.push("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
@@ -150,8 +157,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @created.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
@@ -159,8 +167,14 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_PURPOSE.valid?(@purpose, false)
       return false if @size.nil?
+
       if _filename = @filename
         return false if _filename.to_s.size > 5000
+      end
+      if _links = @links
+        if _links.is_a?(OpenApi::Validatable)
+          return false unless _links.valid?
+        end
       end
       if _title = @title
         return false if _title.to_s.size > 5000
@@ -181,7 +195,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -195,7 +210,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -206,7 +221,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -217,7 +232,7 @@ module Stripe
       end
       _purpose = purpose.not_nil!
       ENUM_VALIDATOR_FOR_PURPOSE.valid!(_purpose)
-      @purpose = purpose
+      @purpose = _purpose
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -226,7 +241,8 @@ module Stripe
       if size.nil?
         raise ArgumentError.new("\"size\" is required and cannot be null")
       end
-      @size = size
+      _size = size.not_nil!
+      @size = _size
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -235,7 +251,8 @@ module Stripe
       if expires_at.nil?
         return @expires_at = nil
       end
-      @expires_at = expires_at
+      _expires_at = expires_at.not_nil!
+      @expires_at = _expires_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -249,7 +266,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"filename\", the character length must be smaller than or equal to 5000.")
       end
 
-      @filename = filename
+      @filename = _filename
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -258,7 +275,11 @@ module Stripe
       if links.nil?
         return @links = nil
       end
-      @links = links
+      _links = links.not_nil!
+      if _links.is_a?(OpenApi::Validatable)
+        _links.validate
+      end
+      @links = _links
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -272,7 +293,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
       end
 
-      @title = title
+      @title = _title
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -286,7 +307,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -300,13 +321,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @url = url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @url = _url
     end
 
     # Generates #hash and #== methods from all fields

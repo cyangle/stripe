@@ -16,6 +16,7 @@ module Stripe
   class MandateParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -54,10 +55,18 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model acceptance : Stripe::MandateAcceptanceParams?
-      # This is a model amount : Stripe::UpdateParams1ApplicationFeeAmount?
+      if _acceptance = @acceptance
+        if _acceptance.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_acceptance.list_invalid_properties_for("acceptance"))
+        end
+      end
+      if _amount = @amount
+        if _amount.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_amount.list_invalid_properties_for("amount"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
 
@@ -68,7 +77,18 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _acceptance = @acceptance
+        if _acceptance.is_a?(OpenApi::Validatable)
+          return false unless _acceptance.valid?
+        end
+      end
+      if _amount = @amount
+        if _amount.is_a?(OpenApi::Validatable)
+          return false unless _amount.valid?
+        end
+      end
+
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
       return false unless ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD.valid?(@notification_method)
 
@@ -81,7 +101,11 @@ module Stripe
       if acceptance.nil?
         return @acceptance = nil
       end
-      @acceptance = acceptance
+      _acceptance = acceptance.not_nil!
+      if _acceptance.is_a?(OpenApi::Validatable)
+        _acceptance.validate
+      end
+      @acceptance = _acceptance
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -90,7 +114,11 @@ module Stripe
       if amount.nil?
         return @amount = nil
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      if _amount.is_a?(OpenApi::Validatable)
+        _amount.validate
+      end
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -99,7 +127,8 @@ module Stripe
       if currency.nil?
         return @currency = nil
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -110,7 +139,7 @@ module Stripe
       end
       _interval = interval.not_nil!
       ENUM_VALIDATOR_FOR_INTERVAL.valid!(_interval)
-      @interval = interval
+      @interval = _interval
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -121,13 +150,7 @@ module Stripe
       end
       _notification_method = notification_method.not_nil!
       ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD.valid!(_notification_method)
-      @notification_method = notification_method
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @notification_method = _notification_method
     end
 
     # Generates #hash and #== methods from all fields

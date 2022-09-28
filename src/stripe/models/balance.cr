@@ -16,6 +16,7 @@ module Stripe
   class Balance
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -69,29 +70,107 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"available\" is required and cannot be null") if @available.nil?
-      # Container available array has values of Stripe::BalanceAmount
+      if _available = @available
+        if _available.is_a?(Array)
+          _available.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("available"))
+            end
+          end
+        end
+      end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"pending\" is required and cannot be null") if @pending.nil?
-      # Container pending array has values of Stripe::BalanceAmount
-      # Container connect_reserved array has values of Stripe::BalanceAmount
-      # Container instant_available array has values of Stripe::BalanceAmount
-      # This is a model issuing : Stripe::BalanceDetail?
+      if _pending = @pending
+        if _pending.is_a?(Array)
+          _pending.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("pending"))
+            end
+          end
+        end
+      end
+      if _connect_reserved = @connect_reserved
+        if _connect_reserved.is_a?(Array)
+          _connect_reserved.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("connect_reserved"))
+            end
+          end
+        end
+      end
+      if _instant_available = @instant_available
+        if _instant_available.is_a?(Array)
+          _instant_available.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("instant_available"))
+            end
+          end
+        end
+      end
+      if _issuing = @issuing
+        if _issuing.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_issuing.list_invalid_properties_for("issuing"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @available.nil?
+      if _available = @available
+        if _available.is_a?(Array)
+          _available.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @pending.nil?
+      if _pending = @pending
+        if _pending.is_a?(Array)
+          _pending.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
+      if _connect_reserved = @connect_reserved
+        if _connect_reserved.is_a?(Array)
+          _connect_reserved.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
+      if _instant_available = @instant_available
+        if _instant_available.is_a?(Array)
+          _instant_available.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
+      if _issuing = @issuing
+        if _issuing.is_a?(OpenApi::Validatable)
+          return false unless _issuing.valid?
+        end
+      end
 
       true
     end
@@ -102,7 +181,15 @@ module Stripe
       if available.nil?
         raise ArgumentError.new("\"available\" is required and cannot be null")
       end
-      @available = available
+      _available = available.not_nil!
+      if _available.is_a?(Array)
+        _available.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @available = _available
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -111,7 +198,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -122,7 +210,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -131,7 +219,15 @@ module Stripe
       if pending.nil?
         raise ArgumentError.new("\"pending\" is required and cannot be null")
       end
-      @pending = pending
+      _pending = pending.not_nil!
+      if _pending.is_a?(Array)
+        _pending.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @pending = _pending
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -140,7 +236,15 @@ module Stripe
       if connect_reserved.nil?
         return @connect_reserved = nil
       end
-      @connect_reserved = connect_reserved
+      _connect_reserved = connect_reserved.not_nil!
+      if _connect_reserved.is_a?(Array)
+        _connect_reserved.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @connect_reserved = _connect_reserved
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -149,7 +253,15 @@ module Stripe
       if instant_available.nil?
         return @instant_available = nil
       end
-      @instant_available = instant_available
+      _instant_available = instant_available.not_nil!
+      if _instant_available.is_a?(Array)
+        _instant_available.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @instant_available = _instant_available
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -158,13 +270,11 @@ module Stripe
       if issuing.nil?
         return @issuing = nil
       end
-      @issuing = issuing
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _issuing = issuing.not_nil!
+      if _issuing.is_a?(OpenApi::Validatable)
+        _issuing.validate
+      end
+      @issuing = _issuing
     end
 
     # Generates #hash and #== methods from all fields

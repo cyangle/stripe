@@ -15,6 +15,7 @@ module Stripe
   class PostChargesRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -122,9 +123,15 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model card : Stripe::PostChargesRequestCard?
+
+      if _card = @card
+        if _card.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_card.list_invalid_properties_for("card"))
+        end
+      end
+
       if _customer = @customer
         if _customer.to_s.size > 500
           invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 500.")
@@ -135,15 +142,33 @@ module Stripe
           invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
         end
       end
-      # This is a model destination : Stripe::PostChargesRequestDestination?
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
+      if _destination = @destination
+        if _destination.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_destination.list_invalid_properties_for("destination"))
+        end
+      end
+
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
       if _on_behalf_of = @on_behalf_of
         if _on_behalf_of.to_s.size > 5000
           invalid_properties.push("invalid value for \"on_behalf_of\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model radar_options : Stripe::RadarOptions?
-      # This is a model shipping : Stripe::OptionalFieldsShipping?
+      if _radar_options = @radar_options
+        if _radar_options.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_radar_options.list_invalid_properties_for("radar_options"))
+        end
+      end
+
+      if _shipping = @shipping
+        if _shipping.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_shipping.list_invalid_properties_for("shipping"))
+        end
+      end
       if _source = @source
         if _source.to_s.size > 5000
           invalid_properties.push("invalid value for \"source\", the character length must be smaller than or equal to 5000.")
@@ -159,22 +184,54 @@ module Stripe
           invalid_properties.push("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 22.")
         end
       end
-      # This is a model transfer_data : Stripe::TransferDataSpecs?
+      if _transfer_data = @transfer_data
+        if _transfer_data.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _card = @card
+        if _card.is_a?(OpenApi::Validatable)
+          return false unless _card.valid?
+        end
+      end
+
       if _customer = @customer
         return false if _customer.to_s.size > 500
       end
       if _description = @description
         return false if _description.to_s.size > 40000
       end
+      if _destination = @destination
+        if _destination.is_a?(OpenApi::Validatable)
+          return false unless _destination.valid?
+        end
+      end
+
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
+      end
       if _on_behalf_of = @on_behalf_of
         return false if _on_behalf_of.to_s.size > 5000
+      end
+      if _radar_options = @radar_options
+        if _radar_options.is_a?(OpenApi::Validatable)
+          return false unless _radar_options.valid?
+        end
+      end
+
+      if _shipping = @shipping
+        if _shipping.is_a?(OpenApi::Validatable)
+          return false unless _shipping.valid?
+        end
       end
       if _source = @source
         return false if _source.to_s.size > 5000
@@ -184,6 +241,11 @@ module Stripe
       end
       if _statement_descriptor_suffix = @statement_descriptor_suffix
         return false if _statement_descriptor_suffix.to_s.size > 22
+      end
+      if _transfer_data = @transfer_data
+        if _transfer_data.is_a?(OpenApi::Validatable)
+          return false unless _transfer_data.valid?
+        end
       end
 
       true
@@ -195,7 +257,8 @@ module Stripe
       if amount.nil?
         return @amount = nil
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -204,7 +267,8 @@ module Stripe
       if application_fee.nil?
         return @application_fee = nil
       end
-      @application_fee = application_fee
+      _application_fee = application_fee.not_nil!
+      @application_fee = _application_fee
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -213,7 +277,8 @@ module Stripe
       if application_fee_amount.nil?
         return @application_fee_amount = nil
       end
-      @application_fee_amount = application_fee_amount
+      _application_fee_amount = application_fee_amount.not_nil!
+      @application_fee_amount = _application_fee_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -222,7 +287,8 @@ module Stripe
       if capture.nil?
         return @capture = nil
       end
-      @capture = capture
+      _capture = capture.not_nil!
+      @capture = _capture
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -231,7 +297,11 @@ module Stripe
       if card.nil?
         return @card = nil
       end
-      @card = card
+      _card = card.not_nil!
+      if _card.is_a?(OpenApi::Validatable)
+        _card.validate
+      end
+      @card = _card
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -240,7 +310,8 @@ module Stripe
       if currency.nil?
         return @currency = nil
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -254,7 +325,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 500.")
       end
 
-      @customer = customer
+      @customer = _customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -268,7 +339,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -277,7 +348,11 @@ module Stripe
       if destination.nil?
         return @destination = nil
       end
-      @destination = destination
+      _destination = destination.not_nil!
+      if _destination.is_a?(OpenApi::Validatable)
+        _destination.validate
+      end
+      @destination = _destination
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -286,7 +361,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -295,7 +371,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -309,7 +389,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"on_behalf_of\", the character length must be smaller than or equal to 5000.")
       end
 
-      @on_behalf_of = on_behalf_of
+      @on_behalf_of = _on_behalf_of
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -318,7 +398,11 @@ module Stripe
       if radar_options.nil?
         return @radar_options = nil
       end
-      @radar_options = radar_options
+      _radar_options = radar_options.not_nil!
+      if _radar_options.is_a?(OpenApi::Validatable)
+        _radar_options.validate
+      end
+      @radar_options = _radar_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -327,7 +411,8 @@ module Stripe
       if receipt_email.nil?
         return @receipt_email = nil
       end
-      @receipt_email = receipt_email
+      _receipt_email = receipt_email.not_nil!
+      @receipt_email = _receipt_email
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -336,7 +421,11 @@ module Stripe
       if shipping.nil?
         return @shipping = nil
       end
-      @shipping = shipping
+      _shipping = shipping.not_nil!
+      if _shipping.is_a?(OpenApi::Validatable)
+        _shipping.validate
+      end
+      @shipping = _shipping
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -350,7 +439,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"source\", the character length must be smaller than or equal to 5000.")
       end
 
-      @source = source
+      @source = _source
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -364,7 +453,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
       end
 
-      @statement_descriptor = statement_descriptor
+      @statement_descriptor = _statement_descriptor
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -378,7 +467,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 22.")
       end
 
-      @statement_descriptor_suffix = statement_descriptor_suffix
+      @statement_descriptor_suffix = _statement_descriptor_suffix
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -387,7 +476,11 @@ module Stripe
       if transfer_data.nil?
         return @transfer_data = nil
       end
-      @transfer_data = transfer_data
+      _transfer_data = transfer_data.not_nil!
+      if _transfer_data.is_a?(OpenApi::Validatable)
+        _transfer_data.validate
+      end
+      @transfer_data = _transfer_data
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -396,13 +489,8 @@ module Stripe
       if transfer_group.nil?
         return @transfer_group = nil
       end
-      @transfer_group = transfer_group
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _transfer_group = transfer_group.not_nil!
+      @transfer_group = _transfer_group
     end
 
     # Generates #hash and #== methods from all fields

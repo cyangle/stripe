@@ -16,6 +16,7 @@ module Stripe
   class RadarReviewResourceSession
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -62,7 +63,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _browser = @browser
         if _browser.to_s.size > 5000
@@ -90,7 +91,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _browser = @browser
         return false if _browser.to_s.size > 5000
       end
@@ -118,7 +119,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"browser\", the character length must be smaller than or equal to 5000.")
       end
 
-      @browser = browser
+      @browser = _browser
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +133,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"device\", the character length must be smaller than or equal to 5000.")
       end
 
-      @device = device
+      @device = _device
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -146,7 +147,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"platform\", the character length must be smaller than or equal to 5000.")
       end
 
-      @platform = platform
+      @platform = _platform
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -160,13 +161,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"version\", the character length must be smaller than or equal to 5000.")
       end
 
-      @version = version
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @version = _version
     end
 
     # Generates #hash and #== methods from all fields

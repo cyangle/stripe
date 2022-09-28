@@ -16,6 +16,7 @@ module Stripe
   class IssuingAuthorizationPendingRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -65,26 +66,45 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       invalid_properties.push("\"is_amount_controllable\" is required and cannot be null") if @is_amount_controllable.nil?
+
       invalid_properties.push("\"merchant_amount\" is required and cannot be null") if @merchant_amount.nil?
+
       invalid_properties.push("\"merchant_currency\" is required and cannot be null") if @merchant_currency.nil?
-      # This is a model amount_details : Stripe::IssuingAuthorizationAmountDetails1?
+
+      if _amount_details = @amount_details
+        if _amount_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_amount_details.list_invalid_properties_for("amount_details"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount.nil?
+
       return false if @currency.nil?
+
       return false if @is_amount_controllable.nil?
+
       return false if @merchant_amount.nil?
+
       return false if @merchant_currency.nil?
+
+      if _amount_details = @amount_details
+        if _amount_details.is_a?(OpenApi::Validatable)
+          return false unless _amount_details.valid?
+        end
+      end
 
       true
     end
@@ -95,7 +115,8 @@ module Stripe
       if amount.nil?
         raise ArgumentError.new("\"amount\" is required and cannot be null")
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -104,7 +125,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,7 +135,8 @@ module Stripe
       if is_amount_controllable.nil?
         raise ArgumentError.new("\"is_amount_controllable\" is required and cannot be null")
       end
-      @is_amount_controllable = is_amount_controllable
+      _is_amount_controllable = is_amount_controllable.not_nil!
+      @is_amount_controllable = _is_amount_controllable
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -122,7 +145,8 @@ module Stripe
       if merchant_amount.nil?
         raise ArgumentError.new("\"merchant_amount\" is required and cannot be null")
       end
-      @merchant_amount = merchant_amount
+      _merchant_amount = merchant_amount.not_nil!
+      @merchant_amount = _merchant_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -131,7 +155,8 @@ module Stripe
       if merchant_currency.nil?
         raise ArgumentError.new("\"merchant_currency\" is required and cannot be null")
       end
-      @merchant_currency = merchant_currency
+      _merchant_currency = merchant_currency.not_nil!
+      @merchant_currency = _merchant_currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -140,13 +165,11 @@ module Stripe
       if amount_details.nil?
         return @amount_details = nil
       end
-      @amount_details = amount_details
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _amount_details = amount_details.not_nil!
+      if _amount_details.is_a?(OpenApi::Validatable)
+        _amount_details.validate
+      end
+      @amount_details = _amount_details
     end
 
     # Generates #hash and #== methods from all fields

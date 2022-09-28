@@ -16,6 +16,7 @@ module Stripe
   class FundingInstructionsBankTransferSpeiRecord
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -45,7 +46,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"bank_code\" is required and cannot be null") if @bank_code.nil?
       if _bank_code = @bank_code
@@ -71,7 +72,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @bank_code.nil?
       if _bank_code = @bank_code
         return false if _bank_code.to_s.size > 5000
@@ -99,7 +100,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @bank_code = bank_code
+      @bank_code = _bank_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,7 +114,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @bank_name = bank_name
+      @bank_name = _bank_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,13 +128,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"clabe\", the character length must be smaller than or equal to 5000.")
       end
 
-      @clabe = clabe
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @clabe = _clabe
     end
 
     # Generates #hash and #== methods from all fields

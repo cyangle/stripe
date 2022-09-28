@@ -16,6 +16,7 @@ module Stripe
   class SourceMandateNotificationSepaDebitData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -45,7 +46,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _creditor_identifier = @creditor_identifier
         if _creditor_identifier.to_s.size > 5000
@@ -68,7 +69,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _creditor_identifier = @creditor_identifier
         return false if _creditor_identifier.to_s.size > 5000
       end
@@ -93,7 +94,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"creditor_identifier\", the character length must be smaller than or equal to 5000.")
       end
 
-      @creditor_identifier = creditor_identifier
+      @creditor_identifier = _creditor_identifier
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,7 +108,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
 
-      @last4 = last4
+      @last4 = _last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -121,13 +122,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"mandate_reference\", the character length must be smaller than or equal to 5000.")
       end
 
-      @mandate_reference = mandate_reference
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @mandate_reference = _mandate_reference
     end
 
     # Generates #hash and #== methods from all fields

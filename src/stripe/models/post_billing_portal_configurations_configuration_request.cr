@@ -15,6 +15,7 @@ module Stripe
   class PostBillingPortalConfigurationsConfigurationRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -59,20 +60,69 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model business_profile : Stripe::BusinessProfileUpdateParam?
-      # This is a model default_return_url : Stripe::PostBillingPortalConfigurationsRequestDefaultReturnUrl?
-      # This is a model features : Stripe::FeaturesUpdatingParam?
-      # This is a model login_page : Stripe::LoginPageUpdateParam?
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
+
+      if _business_profile = @business_profile
+        if _business_profile.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile"))
+        end
+      end
+      if _default_return_url = @default_return_url
+        if _default_return_url.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_default_return_url.list_invalid_properties_for("default_return_url"))
+        end
+      end
+
+      if _features = @features
+        if _features.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_features.list_invalid_properties_for("features"))
+        end
+      end
+      if _login_page = @login_page
+        if _login_page.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_login_page.list_invalid_properties_for("login_page"))
+        end
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _business_profile = @business_profile
+        if _business_profile.is_a?(OpenApi::Validatable)
+          return false unless _business_profile.valid?
+        end
+      end
+      if _default_return_url = @default_return_url
+        if _default_return_url.is_a?(OpenApi::Validatable)
+          return false unless _default_return_url.valid?
+        end
+      end
+
+      if _features = @features
+        if _features.is_a?(OpenApi::Validatable)
+          return false unless _features.valid?
+        end
+      end
+      if _login_page = @login_page
+        if _login_page.is_a?(OpenApi::Validatable)
+          return false unless _login_page.valid?
+        end
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
+      end
+
       true
     end
 
@@ -82,7 +132,8 @@ module Stripe
       if active.nil?
         return @active = nil
       end
-      @active = active
+      _active = active.not_nil!
+      @active = _active
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -91,7 +142,11 @@ module Stripe
       if business_profile.nil?
         return @business_profile = nil
       end
-      @business_profile = business_profile
+      _business_profile = business_profile.not_nil!
+      if _business_profile.is_a?(OpenApi::Validatable)
+        _business_profile.validate
+      end
+      @business_profile = _business_profile
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -100,7 +155,11 @@ module Stripe
       if default_return_url.nil?
         return @default_return_url = nil
       end
-      @default_return_url = default_return_url
+      _default_return_url = default_return_url.not_nil!
+      if _default_return_url.is_a?(OpenApi::Validatable)
+        _default_return_url.validate
+      end
+      @default_return_url = _default_return_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -109,7 +168,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -118,7 +178,11 @@ module Stripe
       if features.nil?
         return @features = nil
       end
-      @features = features
+      _features = features.not_nil!
+      if _features.is_a?(OpenApi::Validatable)
+        _features.validate
+      end
+      @features = _features
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,7 +191,11 @@ module Stripe
       if login_page.nil?
         return @login_page = nil
       end
-      @login_page = login_page
+      _login_page = login_page.not_nil!
+      if _login_page.is_a?(OpenApi::Validatable)
+        _login_page.validate
+      end
+      @login_page = _login_page
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,13 +204,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Generates #hash and #== methods from all fields

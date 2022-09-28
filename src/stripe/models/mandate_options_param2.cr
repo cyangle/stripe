@@ -15,6 +15,7 @@ module Stripe
   class MandateOptionsParam2
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -43,7 +44,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_AMOUNT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid?(@amount_type)
@@ -58,7 +59,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid?(@amount_type)
       if _description = @description
         return false if _description.to_s.size > 200
@@ -73,7 +74,8 @@ module Stripe
       if amount.nil?
         return @amount = nil
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -84,7 +86,7 @@ module Stripe
       end
       _amount_type = amount_type.not_nil!
       ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid!(_amount_type)
-      @amount_type = amount_type
+      @amount_type = _amount_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -98,13 +100,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 200.")
       end
 
-      @description = description
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @description = _description
     end
 
     # Generates #hash and #== methods from all fields

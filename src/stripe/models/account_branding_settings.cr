@@ -16,6 +16,7 @@ module Stripe
   class AccountBrandingSettings
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -60,10 +61,18 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model icon : Stripe::AccountBrandingSettingsIcon?
-      # This is a model logo : Stripe::AccountBrandingSettingsLogo?
+      if _icon = @icon
+        if _icon.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_icon.list_invalid_properties_for("icon"))
+        end
+      end
+      if _logo = @logo
+        if _logo.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_logo.list_invalid_properties_for("logo"))
+        end
+      end
       if _primary_color = @primary_color
         if _primary_color.to_s.size > 5000
           invalid_properties.push("invalid value for \"primary_color\", the character length must be smaller than or equal to 5000.")
@@ -80,7 +89,17 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _icon = @icon
+        if _icon.is_a?(OpenApi::Validatable)
+          return false unless _icon.valid?
+        end
+      end
+      if _logo = @logo
+        if _logo.is_a?(OpenApi::Validatable)
+          return false unless _logo.valid?
+        end
+      end
       if _primary_color = @primary_color
         return false if _primary_color.to_s.size > 5000
       end
@@ -97,7 +116,11 @@ module Stripe
       if icon.nil?
         return @icon = nil
       end
-      @icon = icon
+      _icon = icon.not_nil!
+      if _icon.is_a?(OpenApi::Validatable)
+        _icon.validate
+      end
+      @icon = _icon
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -106,7 +129,11 @@ module Stripe
       if logo.nil?
         return @logo = nil
       end
-      @logo = logo
+      _logo = logo.not_nil!
+      if _logo.is_a?(OpenApi::Validatable)
+        _logo.validate
+      end
+      @logo = _logo
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -120,7 +147,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"primary_color\", the character length must be smaller than or equal to 5000.")
       end
 
-      @primary_color = primary_color
+      @primary_color = _primary_color
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -134,13 +161,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"secondary_color\", the character length must be smaller than or equal to 5000.")
       end
 
-      @secondary_color = secondary_color
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @secondary_color = _secondary_color
     end
 
     # Generates #hash and #== methods from all fields

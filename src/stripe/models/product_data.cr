@@ -15,6 +15,7 @@ module Stripe
   class ProductData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -52,7 +53,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
@@ -65,6 +66,7 @@ module Stripe
           invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
         end
       end
+
       if _tax_code = @tax_code
         if _tax_code.to_s.size > 5000
           invalid_properties.push("invalid value for \"tax_code\", the character length must be smaller than or equal to 5000.")
@@ -76,7 +78,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @name.nil?
       if _name = @name
         return false if _name.to_s.size > 5000
@@ -84,6 +86,7 @@ module Stripe
       if _description = @description
         return false if _description.to_s.size > 40000
       end
+
       if _tax_code = @tax_code
         return false if _tax_code.to_s.size > 5000
       end
@@ -102,7 +105,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -116,7 +119,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -125,7 +128,8 @@ module Stripe
       if images.nil?
         return @images = nil
       end
-      @images = images
+      _images = images.not_nil!
+      @images = _images
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -134,7 +138,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -148,13 +153,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"tax_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @tax_code = tax_code
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @tax_code = _tax_code
     end
 
     # Generates #hash and #== methods from all fields

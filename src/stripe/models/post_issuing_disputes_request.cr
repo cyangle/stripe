@@ -15,6 +15,7 @@ module Stripe
   class PostIssuingDisputesRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -57,24 +58,45 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model evidence : Stripe::EvidenceParam?
+
+      if _evidence = @evidence
+        if _evidence.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_evidence.list_invalid_properties_for("evidence"))
+        end
+      end
+
       if _transaction = @transaction
         if _transaction.to_s.size > 5000
           invalid_properties.push("invalid value for \"transaction\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model treasury : Stripe::TreasuryParam?
+      if _treasury = @treasury
+        if _treasury.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_treasury.list_invalid_properties_for("treasury"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _evidence = @evidence
+        if _evidence.is_a?(OpenApi::Validatable)
+          return false unless _evidence.valid?
+        end
+      end
+
       if _transaction = @transaction
         return false if _transaction.to_s.size > 5000
+      end
+      if _treasury = @treasury
+        if _treasury.is_a?(OpenApi::Validatable)
+          return false unless _treasury.valid?
+        end
       end
 
       true
@@ -86,7 +108,8 @@ module Stripe
       if amount.nil?
         return @amount = nil
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -95,7 +118,11 @@ module Stripe
       if evidence.nil?
         return @evidence = nil
       end
-      @evidence = evidence
+      _evidence = evidence.not_nil!
+      if _evidence.is_a?(OpenApi::Validatable)
+        _evidence.validate
+      end
+      @evidence = _evidence
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -104,7 +131,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,7 +141,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,7 +156,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"transaction\", the character length must be smaller than or equal to 5000.")
       end
 
-      @transaction = transaction
+      @transaction = _transaction
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,13 +165,11 @@ module Stripe
       if treasury.nil?
         return @treasury = nil
       end
-      @treasury = treasury
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _treasury = treasury.not_nil!
+      if _treasury.is_a?(OpenApi::Validatable)
+        _treasury.validate
+      end
+      @treasury = _treasury
     end
 
     # Generates #hash and #== methods from all fields

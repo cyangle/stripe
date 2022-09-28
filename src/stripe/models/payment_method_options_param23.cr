@@ -15,6 +15,7 @@ module Stripe
   class PaymentMethodOptionsParam23
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -35,7 +36,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
@@ -45,7 +46,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
 
       true
@@ -59,13 +60,7 @@ module Stripe
       end
       _network = network.not_nil!
       ENUM_VALIDATOR_FOR_NETWORK.valid!(_network)
-      @network = network
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @network = _network
     end
 
     # Generates #hash and #== methods from all fields

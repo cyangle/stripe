@@ -15,6 +15,7 @@ module Stripe
   class TransferScheduleSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -49,9 +50,13 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model delay_days : Stripe::TransferScheduleSpecsDelayDays?
+      if _delay_days = @delay_days
+        if _delay_days.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_delay_days.list_invalid_properties_for("delay_days"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
 
@@ -62,8 +67,14 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _delay_days = @delay_days
+        if _delay_days.is_a?(OpenApi::Validatable)
+          return false unless _delay_days.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
+
       return false unless ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR.valid?(@weekly_anchor)
 
       true
@@ -75,7 +86,11 @@ module Stripe
       if delay_days.nil?
         return @delay_days = nil
       end
-      @delay_days = delay_days
+      _delay_days = delay_days.not_nil!
+      if _delay_days.is_a?(OpenApi::Validatable)
+        _delay_days.validate
+      end
+      @delay_days = _delay_days
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -86,7 +101,7 @@ module Stripe
       end
       _interval = interval.not_nil!
       ENUM_VALIDATOR_FOR_INTERVAL.valid!(_interval)
-      @interval = interval
+      @interval = _interval
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -95,7 +110,8 @@ module Stripe
       if monthly_anchor.nil?
         return @monthly_anchor = nil
       end
-      @monthly_anchor = monthly_anchor
+      _monthly_anchor = monthly_anchor.not_nil!
+      @monthly_anchor = _monthly_anchor
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -106,13 +122,7 @@ module Stripe
       end
       _weekly_anchor = weekly_anchor.not_nil!
       ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR.valid!(_weekly_anchor)
-      @weekly_anchor = weekly_anchor
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @weekly_anchor = _weekly_anchor
     end
 
     # Generates #hash and #== methods from all fields

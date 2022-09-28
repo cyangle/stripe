@@ -15,6 +15,7 @@ module Stripe
   class PostReportingReportRunsRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -46,18 +47,29 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"report_type\" is required and cannot be null") if @report_type.nil?
-      # This is a model parameters : Stripe::RunParameterSpecs?
+
+      if _parameters = @parameters
+        if _parameters.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_parameters.list_invalid_properties_for("parameters"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @report_type.nil?
+
+      if _parameters = @parameters
+        if _parameters.is_a?(OpenApi::Validatable)
+          return false unless _parameters.valid?
+        end
+      end
 
       true
     end
@@ -68,7 +80,8 @@ module Stripe
       if report_type.nil?
         raise ArgumentError.new("\"report_type\" is required and cannot be null")
       end
-      @report_type = report_type
+      _report_type = report_type.not_nil!
+      @report_type = _report_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -77,7 +90,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -86,13 +100,11 @@ module Stripe
       if parameters.nil?
         return @parameters = nil
       end
-      @parameters = parameters
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _parameters = parameters.not_nil!
+      if _parameters.is_a?(OpenApi::Validatable)
+        _parameters.validate
+      end
+      @parameters = _parameters
     end
 
     # Generates #hash and #== methods from all fields

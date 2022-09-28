@@ -16,6 +16,7 @@ module Stripe
   class CapabilitiesParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -162,48 +163,346 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model acss_debit_payments : Stripe::CapabilityParam?
-      # This is a model affirm_payments : Stripe::CapabilityParam?
-      # This is a model afterpay_clearpay_payments : Stripe::CapabilityParam?
-      # This is a model au_becs_debit_payments : Stripe::CapabilityParam?
-      # This is a model bacs_debit_payments : Stripe::CapabilityParam?
-      # This is a model bancontact_payments : Stripe::CapabilityParam?
-      # This is a model bank_transfer_payments : Stripe::CapabilityParam?
-      # This is a model blik_payments : Stripe::CapabilityParam?
-      # This is a model boleto_payments : Stripe::CapabilityParam?
-      # This is a model card_issuing : Stripe::CapabilityParam?
-      # This is a model card_payments : Stripe::CapabilityParam?
-      # This is a model cartes_bancaires_payments : Stripe::CapabilityParam?
-      # This is a model eps_payments : Stripe::CapabilityParam?
-      # This is a model fpx_payments : Stripe::CapabilityParam?
-      # This is a model giropay_payments : Stripe::CapabilityParam?
-      # This is a model grabpay_payments : Stripe::CapabilityParam?
-      # This is a model ideal_payments : Stripe::CapabilityParam?
-      # This is a model jcb_payments : Stripe::CapabilityParam?
-      # This is a model klarna_payments : Stripe::CapabilityParam?
-      # This is a model konbini_payments : Stripe::CapabilityParam?
-      # This is a model legacy_payments : Stripe::CapabilityParam?
-      # This is a model link_payments : Stripe::CapabilityParam?
-      # This is a model oxxo_payments : Stripe::CapabilityParam?
-      # This is a model p24_payments : Stripe::CapabilityParam?
-      # This is a model paynow_payments : Stripe::CapabilityParam?
-      # This is a model promptpay_payments : Stripe::CapabilityParam?
-      # This is a model sepa_debit_payments : Stripe::CapabilityParam?
-      # This is a model sofort_payments : Stripe::CapabilityParam?
-      # This is a model tax_reporting_us_1099_k : Stripe::CapabilityParam?
-      # This is a model tax_reporting_us_1099_misc : Stripe::CapabilityParam?
-      # This is a model transfers : Stripe::CapabilityParam?
-      # This is a model treasury : Stripe::CapabilityParam?
-      # This is a model us_bank_account_ach_payments : Stripe::CapabilityParam?
+      if _acss_debit_payments = @acss_debit_payments
+        if _acss_debit_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_acss_debit_payments.list_invalid_properties_for("acss_debit_payments"))
+        end
+      end
+      if _affirm_payments = @affirm_payments
+        if _affirm_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_affirm_payments.list_invalid_properties_for("affirm_payments"))
+        end
+      end
+      if _afterpay_clearpay_payments = @afterpay_clearpay_payments
+        if _afterpay_clearpay_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_afterpay_clearpay_payments.list_invalid_properties_for("afterpay_clearpay_payments"))
+        end
+      end
+      if _au_becs_debit_payments = @au_becs_debit_payments
+        if _au_becs_debit_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_au_becs_debit_payments.list_invalid_properties_for("au_becs_debit_payments"))
+        end
+      end
+      if _bacs_debit_payments = @bacs_debit_payments
+        if _bacs_debit_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bacs_debit_payments.list_invalid_properties_for("bacs_debit_payments"))
+        end
+      end
+      if _bancontact_payments = @bancontact_payments
+        if _bancontact_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bancontact_payments.list_invalid_properties_for("bancontact_payments"))
+        end
+      end
+      if _bank_transfer_payments = @bank_transfer_payments
+        if _bank_transfer_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bank_transfer_payments.list_invalid_properties_for("bank_transfer_payments"))
+        end
+      end
+      if _blik_payments = @blik_payments
+        if _blik_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_blik_payments.list_invalid_properties_for("blik_payments"))
+        end
+      end
+      if _boleto_payments = @boleto_payments
+        if _boleto_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_boleto_payments.list_invalid_properties_for("boleto_payments"))
+        end
+      end
+      if _card_issuing = @card_issuing
+        if _card_issuing.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_card_issuing.list_invalid_properties_for("card_issuing"))
+        end
+      end
+      if _card_payments = @card_payments
+        if _card_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_card_payments.list_invalid_properties_for("card_payments"))
+        end
+      end
+      if _cartes_bancaires_payments = @cartes_bancaires_payments
+        if _cartes_bancaires_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_cartes_bancaires_payments.list_invalid_properties_for("cartes_bancaires_payments"))
+        end
+      end
+      if _eps_payments = @eps_payments
+        if _eps_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_eps_payments.list_invalid_properties_for("eps_payments"))
+        end
+      end
+      if _fpx_payments = @fpx_payments
+        if _fpx_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_fpx_payments.list_invalid_properties_for("fpx_payments"))
+        end
+      end
+      if _giropay_payments = @giropay_payments
+        if _giropay_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_giropay_payments.list_invalid_properties_for("giropay_payments"))
+        end
+      end
+      if _grabpay_payments = @grabpay_payments
+        if _grabpay_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_grabpay_payments.list_invalid_properties_for("grabpay_payments"))
+        end
+      end
+      if _ideal_payments = @ideal_payments
+        if _ideal_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_ideal_payments.list_invalid_properties_for("ideal_payments"))
+        end
+      end
+      if _jcb_payments = @jcb_payments
+        if _jcb_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_jcb_payments.list_invalid_properties_for("jcb_payments"))
+        end
+      end
+      if _klarna_payments = @klarna_payments
+        if _klarna_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_klarna_payments.list_invalid_properties_for("klarna_payments"))
+        end
+      end
+      if _konbini_payments = @konbini_payments
+        if _konbini_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_konbini_payments.list_invalid_properties_for("konbini_payments"))
+        end
+      end
+      if _legacy_payments = @legacy_payments
+        if _legacy_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_legacy_payments.list_invalid_properties_for("legacy_payments"))
+        end
+      end
+      if _link_payments = @link_payments
+        if _link_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_link_payments.list_invalid_properties_for("link_payments"))
+        end
+      end
+      if _oxxo_payments = @oxxo_payments
+        if _oxxo_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_oxxo_payments.list_invalid_properties_for("oxxo_payments"))
+        end
+      end
+      if _p24_payments = @p24_payments
+        if _p24_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_p24_payments.list_invalid_properties_for("p24_payments"))
+        end
+      end
+      if _paynow_payments = @paynow_payments
+        if _paynow_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_paynow_payments.list_invalid_properties_for("paynow_payments"))
+        end
+      end
+      if _promptpay_payments = @promptpay_payments
+        if _promptpay_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_promptpay_payments.list_invalid_properties_for("promptpay_payments"))
+        end
+      end
+      if _sepa_debit_payments = @sepa_debit_payments
+        if _sepa_debit_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_sepa_debit_payments.list_invalid_properties_for("sepa_debit_payments"))
+        end
+      end
+      if _sofort_payments = @sofort_payments
+        if _sofort_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_sofort_payments.list_invalid_properties_for("sofort_payments"))
+        end
+      end
+      if _tax_reporting_us_1099_k = @tax_reporting_us_1099_k
+        if _tax_reporting_us_1099_k.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_tax_reporting_us_1099_k.list_invalid_properties_for("tax_reporting_us_1099_k"))
+        end
+      end
+      if _tax_reporting_us_1099_misc = @tax_reporting_us_1099_misc
+        if _tax_reporting_us_1099_misc.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_tax_reporting_us_1099_misc.list_invalid_properties_for("tax_reporting_us_1099_misc"))
+        end
+      end
+      if _transfers = @transfers
+        if _transfers.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_transfers.list_invalid_properties_for("transfers"))
+        end
+      end
+      if _treasury = @treasury
+        if _treasury.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_treasury.list_invalid_properties_for("treasury"))
+        end
+      end
+      if _us_bank_account_ach_payments = @us_bank_account_ach_payments
+        if _us_bank_account_ach_payments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_us_bank_account_ach_payments.list_invalid_properties_for("us_bank_account_ach_payments"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _acss_debit_payments = @acss_debit_payments
+        if _acss_debit_payments.is_a?(OpenApi::Validatable)
+          return false unless _acss_debit_payments.valid?
+        end
+      end
+      if _affirm_payments = @affirm_payments
+        if _affirm_payments.is_a?(OpenApi::Validatable)
+          return false unless _affirm_payments.valid?
+        end
+      end
+      if _afterpay_clearpay_payments = @afterpay_clearpay_payments
+        if _afterpay_clearpay_payments.is_a?(OpenApi::Validatable)
+          return false unless _afterpay_clearpay_payments.valid?
+        end
+      end
+      if _au_becs_debit_payments = @au_becs_debit_payments
+        if _au_becs_debit_payments.is_a?(OpenApi::Validatable)
+          return false unless _au_becs_debit_payments.valid?
+        end
+      end
+      if _bacs_debit_payments = @bacs_debit_payments
+        if _bacs_debit_payments.is_a?(OpenApi::Validatable)
+          return false unless _bacs_debit_payments.valid?
+        end
+      end
+      if _bancontact_payments = @bancontact_payments
+        if _bancontact_payments.is_a?(OpenApi::Validatable)
+          return false unless _bancontact_payments.valid?
+        end
+      end
+      if _bank_transfer_payments = @bank_transfer_payments
+        if _bank_transfer_payments.is_a?(OpenApi::Validatable)
+          return false unless _bank_transfer_payments.valid?
+        end
+      end
+      if _blik_payments = @blik_payments
+        if _blik_payments.is_a?(OpenApi::Validatable)
+          return false unless _blik_payments.valid?
+        end
+      end
+      if _boleto_payments = @boleto_payments
+        if _boleto_payments.is_a?(OpenApi::Validatable)
+          return false unless _boleto_payments.valid?
+        end
+      end
+      if _card_issuing = @card_issuing
+        if _card_issuing.is_a?(OpenApi::Validatable)
+          return false unless _card_issuing.valid?
+        end
+      end
+      if _card_payments = @card_payments
+        if _card_payments.is_a?(OpenApi::Validatable)
+          return false unless _card_payments.valid?
+        end
+      end
+      if _cartes_bancaires_payments = @cartes_bancaires_payments
+        if _cartes_bancaires_payments.is_a?(OpenApi::Validatable)
+          return false unless _cartes_bancaires_payments.valid?
+        end
+      end
+      if _eps_payments = @eps_payments
+        if _eps_payments.is_a?(OpenApi::Validatable)
+          return false unless _eps_payments.valid?
+        end
+      end
+      if _fpx_payments = @fpx_payments
+        if _fpx_payments.is_a?(OpenApi::Validatable)
+          return false unless _fpx_payments.valid?
+        end
+      end
+      if _giropay_payments = @giropay_payments
+        if _giropay_payments.is_a?(OpenApi::Validatable)
+          return false unless _giropay_payments.valid?
+        end
+      end
+      if _grabpay_payments = @grabpay_payments
+        if _grabpay_payments.is_a?(OpenApi::Validatable)
+          return false unless _grabpay_payments.valid?
+        end
+      end
+      if _ideal_payments = @ideal_payments
+        if _ideal_payments.is_a?(OpenApi::Validatable)
+          return false unless _ideal_payments.valid?
+        end
+      end
+      if _jcb_payments = @jcb_payments
+        if _jcb_payments.is_a?(OpenApi::Validatable)
+          return false unless _jcb_payments.valid?
+        end
+      end
+      if _klarna_payments = @klarna_payments
+        if _klarna_payments.is_a?(OpenApi::Validatable)
+          return false unless _klarna_payments.valid?
+        end
+      end
+      if _konbini_payments = @konbini_payments
+        if _konbini_payments.is_a?(OpenApi::Validatable)
+          return false unless _konbini_payments.valid?
+        end
+      end
+      if _legacy_payments = @legacy_payments
+        if _legacy_payments.is_a?(OpenApi::Validatable)
+          return false unless _legacy_payments.valid?
+        end
+      end
+      if _link_payments = @link_payments
+        if _link_payments.is_a?(OpenApi::Validatable)
+          return false unless _link_payments.valid?
+        end
+      end
+      if _oxxo_payments = @oxxo_payments
+        if _oxxo_payments.is_a?(OpenApi::Validatable)
+          return false unless _oxxo_payments.valid?
+        end
+      end
+      if _p24_payments = @p24_payments
+        if _p24_payments.is_a?(OpenApi::Validatable)
+          return false unless _p24_payments.valid?
+        end
+      end
+      if _paynow_payments = @paynow_payments
+        if _paynow_payments.is_a?(OpenApi::Validatable)
+          return false unless _paynow_payments.valid?
+        end
+      end
+      if _promptpay_payments = @promptpay_payments
+        if _promptpay_payments.is_a?(OpenApi::Validatable)
+          return false unless _promptpay_payments.valid?
+        end
+      end
+      if _sepa_debit_payments = @sepa_debit_payments
+        if _sepa_debit_payments.is_a?(OpenApi::Validatable)
+          return false unless _sepa_debit_payments.valid?
+        end
+      end
+      if _sofort_payments = @sofort_payments
+        if _sofort_payments.is_a?(OpenApi::Validatable)
+          return false unless _sofort_payments.valid?
+        end
+      end
+      if _tax_reporting_us_1099_k = @tax_reporting_us_1099_k
+        if _tax_reporting_us_1099_k.is_a?(OpenApi::Validatable)
+          return false unless _tax_reporting_us_1099_k.valid?
+        end
+      end
+      if _tax_reporting_us_1099_misc = @tax_reporting_us_1099_misc
+        if _tax_reporting_us_1099_misc.is_a?(OpenApi::Validatable)
+          return false unless _tax_reporting_us_1099_misc.valid?
+        end
+      end
+      if _transfers = @transfers
+        if _transfers.is_a?(OpenApi::Validatable)
+          return false unless _transfers.valid?
+        end
+      end
+      if _treasury = @treasury
+        if _treasury.is_a?(OpenApi::Validatable)
+          return false unless _treasury.valid?
+        end
+      end
+      if _us_bank_account_ach_payments = @us_bank_account_ach_payments
+        if _us_bank_account_ach_payments.is_a?(OpenApi::Validatable)
+          return false unless _us_bank_account_ach_payments.valid?
+        end
+      end
+
       true
     end
 
@@ -213,7 +512,11 @@ module Stripe
       if acss_debit_payments.nil?
         return @acss_debit_payments = nil
       end
-      @acss_debit_payments = acss_debit_payments
+      _acss_debit_payments = acss_debit_payments.not_nil!
+      if _acss_debit_payments.is_a?(OpenApi::Validatable)
+        _acss_debit_payments.validate
+      end
+      @acss_debit_payments = _acss_debit_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -222,7 +525,11 @@ module Stripe
       if affirm_payments.nil?
         return @affirm_payments = nil
       end
-      @affirm_payments = affirm_payments
+      _affirm_payments = affirm_payments.not_nil!
+      if _affirm_payments.is_a?(OpenApi::Validatable)
+        _affirm_payments.validate
+      end
+      @affirm_payments = _affirm_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -231,7 +538,11 @@ module Stripe
       if afterpay_clearpay_payments.nil?
         return @afterpay_clearpay_payments = nil
       end
-      @afterpay_clearpay_payments = afterpay_clearpay_payments
+      _afterpay_clearpay_payments = afterpay_clearpay_payments.not_nil!
+      if _afterpay_clearpay_payments.is_a?(OpenApi::Validatable)
+        _afterpay_clearpay_payments.validate
+      end
+      @afterpay_clearpay_payments = _afterpay_clearpay_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -240,7 +551,11 @@ module Stripe
       if au_becs_debit_payments.nil?
         return @au_becs_debit_payments = nil
       end
-      @au_becs_debit_payments = au_becs_debit_payments
+      _au_becs_debit_payments = au_becs_debit_payments.not_nil!
+      if _au_becs_debit_payments.is_a?(OpenApi::Validatable)
+        _au_becs_debit_payments.validate
+      end
+      @au_becs_debit_payments = _au_becs_debit_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -249,7 +564,11 @@ module Stripe
       if bacs_debit_payments.nil?
         return @bacs_debit_payments = nil
       end
-      @bacs_debit_payments = bacs_debit_payments
+      _bacs_debit_payments = bacs_debit_payments.not_nil!
+      if _bacs_debit_payments.is_a?(OpenApi::Validatable)
+        _bacs_debit_payments.validate
+      end
+      @bacs_debit_payments = _bacs_debit_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -258,7 +577,11 @@ module Stripe
       if bancontact_payments.nil?
         return @bancontact_payments = nil
       end
-      @bancontact_payments = bancontact_payments
+      _bancontact_payments = bancontact_payments.not_nil!
+      if _bancontact_payments.is_a?(OpenApi::Validatable)
+        _bancontact_payments.validate
+      end
+      @bancontact_payments = _bancontact_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -267,7 +590,11 @@ module Stripe
       if bank_transfer_payments.nil?
         return @bank_transfer_payments = nil
       end
-      @bank_transfer_payments = bank_transfer_payments
+      _bank_transfer_payments = bank_transfer_payments.not_nil!
+      if _bank_transfer_payments.is_a?(OpenApi::Validatable)
+        _bank_transfer_payments.validate
+      end
+      @bank_transfer_payments = _bank_transfer_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -276,7 +603,11 @@ module Stripe
       if blik_payments.nil?
         return @blik_payments = nil
       end
-      @blik_payments = blik_payments
+      _blik_payments = blik_payments.not_nil!
+      if _blik_payments.is_a?(OpenApi::Validatable)
+        _blik_payments.validate
+      end
+      @blik_payments = _blik_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -285,7 +616,11 @@ module Stripe
       if boleto_payments.nil?
         return @boleto_payments = nil
       end
-      @boleto_payments = boleto_payments
+      _boleto_payments = boleto_payments.not_nil!
+      if _boleto_payments.is_a?(OpenApi::Validatable)
+        _boleto_payments.validate
+      end
+      @boleto_payments = _boleto_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -294,7 +629,11 @@ module Stripe
       if card_issuing.nil?
         return @card_issuing = nil
       end
-      @card_issuing = card_issuing
+      _card_issuing = card_issuing.not_nil!
+      if _card_issuing.is_a?(OpenApi::Validatable)
+        _card_issuing.validate
+      end
+      @card_issuing = _card_issuing
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -303,7 +642,11 @@ module Stripe
       if card_payments.nil?
         return @card_payments = nil
       end
-      @card_payments = card_payments
+      _card_payments = card_payments.not_nil!
+      if _card_payments.is_a?(OpenApi::Validatable)
+        _card_payments.validate
+      end
+      @card_payments = _card_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -312,7 +655,11 @@ module Stripe
       if cartes_bancaires_payments.nil?
         return @cartes_bancaires_payments = nil
       end
-      @cartes_bancaires_payments = cartes_bancaires_payments
+      _cartes_bancaires_payments = cartes_bancaires_payments.not_nil!
+      if _cartes_bancaires_payments.is_a?(OpenApi::Validatable)
+        _cartes_bancaires_payments.validate
+      end
+      @cartes_bancaires_payments = _cartes_bancaires_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -321,7 +668,11 @@ module Stripe
       if eps_payments.nil?
         return @eps_payments = nil
       end
-      @eps_payments = eps_payments
+      _eps_payments = eps_payments.not_nil!
+      if _eps_payments.is_a?(OpenApi::Validatable)
+        _eps_payments.validate
+      end
+      @eps_payments = _eps_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -330,7 +681,11 @@ module Stripe
       if fpx_payments.nil?
         return @fpx_payments = nil
       end
-      @fpx_payments = fpx_payments
+      _fpx_payments = fpx_payments.not_nil!
+      if _fpx_payments.is_a?(OpenApi::Validatable)
+        _fpx_payments.validate
+      end
+      @fpx_payments = _fpx_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -339,7 +694,11 @@ module Stripe
       if giropay_payments.nil?
         return @giropay_payments = nil
       end
-      @giropay_payments = giropay_payments
+      _giropay_payments = giropay_payments.not_nil!
+      if _giropay_payments.is_a?(OpenApi::Validatable)
+        _giropay_payments.validate
+      end
+      @giropay_payments = _giropay_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -348,7 +707,11 @@ module Stripe
       if grabpay_payments.nil?
         return @grabpay_payments = nil
       end
-      @grabpay_payments = grabpay_payments
+      _grabpay_payments = grabpay_payments.not_nil!
+      if _grabpay_payments.is_a?(OpenApi::Validatable)
+        _grabpay_payments.validate
+      end
+      @grabpay_payments = _grabpay_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -357,7 +720,11 @@ module Stripe
       if ideal_payments.nil?
         return @ideal_payments = nil
       end
-      @ideal_payments = ideal_payments
+      _ideal_payments = ideal_payments.not_nil!
+      if _ideal_payments.is_a?(OpenApi::Validatable)
+        _ideal_payments.validate
+      end
+      @ideal_payments = _ideal_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -366,7 +733,11 @@ module Stripe
       if jcb_payments.nil?
         return @jcb_payments = nil
       end
-      @jcb_payments = jcb_payments
+      _jcb_payments = jcb_payments.not_nil!
+      if _jcb_payments.is_a?(OpenApi::Validatable)
+        _jcb_payments.validate
+      end
+      @jcb_payments = _jcb_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -375,7 +746,11 @@ module Stripe
       if klarna_payments.nil?
         return @klarna_payments = nil
       end
-      @klarna_payments = klarna_payments
+      _klarna_payments = klarna_payments.not_nil!
+      if _klarna_payments.is_a?(OpenApi::Validatable)
+        _klarna_payments.validate
+      end
+      @klarna_payments = _klarna_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -384,7 +759,11 @@ module Stripe
       if konbini_payments.nil?
         return @konbini_payments = nil
       end
-      @konbini_payments = konbini_payments
+      _konbini_payments = konbini_payments.not_nil!
+      if _konbini_payments.is_a?(OpenApi::Validatable)
+        _konbini_payments.validate
+      end
+      @konbini_payments = _konbini_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -393,7 +772,11 @@ module Stripe
       if legacy_payments.nil?
         return @legacy_payments = nil
       end
-      @legacy_payments = legacy_payments
+      _legacy_payments = legacy_payments.not_nil!
+      if _legacy_payments.is_a?(OpenApi::Validatable)
+        _legacy_payments.validate
+      end
+      @legacy_payments = _legacy_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -402,7 +785,11 @@ module Stripe
       if link_payments.nil?
         return @link_payments = nil
       end
-      @link_payments = link_payments
+      _link_payments = link_payments.not_nil!
+      if _link_payments.is_a?(OpenApi::Validatable)
+        _link_payments.validate
+      end
+      @link_payments = _link_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -411,7 +798,11 @@ module Stripe
       if oxxo_payments.nil?
         return @oxxo_payments = nil
       end
-      @oxxo_payments = oxxo_payments
+      _oxxo_payments = oxxo_payments.not_nil!
+      if _oxxo_payments.is_a?(OpenApi::Validatable)
+        _oxxo_payments.validate
+      end
+      @oxxo_payments = _oxxo_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -420,7 +811,11 @@ module Stripe
       if p24_payments.nil?
         return @p24_payments = nil
       end
-      @p24_payments = p24_payments
+      _p24_payments = p24_payments.not_nil!
+      if _p24_payments.is_a?(OpenApi::Validatable)
+        _p24_payments.validate
+      end
+      @p24_payments = _p24_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -429,7 +824,11 @@ module Stripe
       if paynow_payments.nil?
         return @paynow_payments = nil
       end
-      @paynow_payments = paynow_payments
+      _paynow_payments = paynow_payments.not_nil!
+      if _paynow_payments.is_a?(OpenApi::Validatable)
+        _paynow_payments.validate
+      end
+      @paynow_payments = _paynow_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -438,7 +837,11 @@ module Stripe
       if promptpay_payments.nil?
         return @promptpay_payments = nil
       end
-      @promptpay_payments = promptpay_payments
+      _promptpay_payments = promptpay_payments.not_nil!
+      if _promptpay_payments.is_a?(OpenApi::Validatable)
+        _promptpay_payments.validate
+      end
+      @promptpay_payments = _promptpay_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -447,7 +850,11 @@ module Stripe
       if sepa_debit_payments.nil?
         return @sepa_debit_payments = nil
       end
-      @sepa_debit_payments = sepa_debit_payments
+      _sepa_debit_payments = sepa_debit_payments.not_nil!
+      if _sepa_debit_payments.is_a?(OpenApi::Validatable)
+        _sepa_debit_payments.validate
+      end
+      @sepa_debit_payments = _sepa_debit_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -456,7 +863,11 @@ module Stripe
       if sofort_payments.nil?
         return @sofort_payments = nil
       end
-      @sofort_payments = sofort_payments
+      _sofort_payments = sofort_payments.not_nil!
+      if _sofort_payments.is_a?(OpenApi::Validatable)
+        _sofort_payments.validate
+      end
+      @sofort_payments = _sofort_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -465,7 +876,11 @@ module Stripe
       if tax_reporting_us_1099_k.nil?
         return @tax_reporting_us_1099_k = nil
       end
-      @tax_reporting_us_1099_k = tax_reporting_us_1099_k
+      _tax_reporting_us_1099_k = tax_reporting_us_1099_k.not_nil!
+      if _tax_reporting_us_1099_k.is_a?(OpenApi::Validatable)
+        _tax_reporting_us_1099_k.validate
+      end
+      @tax_reporting_us_1099_k = _tax_reporting_us_1099_k
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -474,7 +889,11 @@ module Stripe
       if tax_reporting_us_1099_misc.nil?
         return @tax_reporting_us_1099_misc = nil
       end
-      @tax_reporting_us_1099_misc = tax_reporting_us_1099_misc
+      _tax_reporting_us_1099_misc = tax_reporting_us_1099_misc.not_nil!
+      if _tax_reporting_us_1099_misc.is_a?(OpenApi::Validatable)
+        _tax_reporting_us_1099_misc.validate
+      end
+      @tax_reporting_us_1099_misc = _tax_reporting_us_1099_misc
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -483,7 +902,11 @@ module Stripe
       if transfers.nil?
         return @transfers = nil
       end
-      @transfers = transfers
+      _transfers = transfers.not_nil!
+      if _transfers.is_a?(OpenApi::Validatable)
+        _transfers.validate
+      end
+      @transfers = _transfers
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -492,7 +915,11 @@ module Stripe
       if treasury.nil?
         return @treasury = nil
       end
-      @treasury = treasury
+      _treasury = treasury.not_nil!
+      if _treasury.is_a?(OpenApi::Validatable)
+        _treasury.validate
+      end
+      @treasury = _treasury
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -501,13 +928,11 @@ module Stripe
       if us_bank_account_ach_payments.nil?
         return @us_bank_account_ach_payments = nil
       end
-      @us_bank_account_ach_payments = us_bank_account_ach_payments
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _us_bank_account_ach_payments = us_bank_account_ach_payments.not_nil!
+      if _us_bank_account_ach_payments.is_a?(OpenApi::Validatable)
+        _us_bank_account_ach_payments.validate
+      end
+      @us_bank_account_ach_payments = _us_bank_account_ach_payments
     end
 
     # Generates #hash and #== methods from all fields

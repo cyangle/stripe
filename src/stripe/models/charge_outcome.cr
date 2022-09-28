@@ -16,6 +16,7 @@ module Stripe
   class ChargeOutcome
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -76,7 +77,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
@@ -99,7 +100,12 @@ module Stripe
           invalid_properties.push("invalid value for \"risk_level\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model rule : Stripe::ChargeOutcomeRule?
+
+      if _rule = @rule
+        if _rule.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_rule.list_invalid_properties_for("rule"))
+        end
+      end
       if _seller_message = @seller_message
         if _seller_message.to_s.size > 5000
           invalid_properties.push("invalid value for \"seller_message\", the character length must be smaller than or equal to 5000.")
@@ -111,7 +117,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @_type.nil?
       if __type = @_type
         return false if __type.to_s.size > 5000
@@ -124,6 +130,12 @@ module Stripe
       end
       if _risk_level = @risk_level
         return false if _risk_level.to_s.size > 5000
+      end
+
+      if _rule = @rule
+        if _rule.is_a?(OpenApi::Validatable)
+          return false unless _rule.valid?
+        end
       end
       if _seller_message = @seller_message
         return false if _seller_message.to_s.size > 5000
@@ -143,7 +155,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -157,7 +169,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"network_status\", the character length must be smaller than or equal to 5000.")
       end
 
-      @network_status = network_status
+      @network_status = _network_status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -171,7 +183,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
       end
 
-      @reason = reason
+      @reason = _reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -185,7 +197,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"risk_level\", the character length must be smaller than or equal to 5000.")
       end
 
-      @risk_level = risk_level
+      @risk_level = _risk_level
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -194,7 +206,8 @@ module Stripe
       if risk_score.nil?
         return @risk_score = nil
       end
-      @risk_score = risk_score
+      _risk_score = risk_score.not_nil!
+      @risk_score = _risk_score
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -203,7 +216,11 @@ module Stripe
       if rule.nil?
         return @rule = nil
       end
-      @rule = rule
+      _rule = rule.not_nil!
+      if _rule.is_a?(OpenApi::Validatable)
+        _rule.validate
+      end
+      @rule = _rule
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -217,13 +234,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"seller_message\", the character length must be smaller than or equal to 5000.")
       end
 
-      @seller_message = seller_message
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @seller_message = _seller_message
     end
 
     # Generates #hash and #== methods from all fields

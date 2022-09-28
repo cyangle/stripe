@@ -16,6 +16,7 @@ module Stripe
   class FinancialConnectionsAccount
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -149,11 +150,12 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CATEGORY.error_message) unless ENUM_VALIDATOR_FOR_CATEGORY.valid?(@category, false)
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -175,9 +177,21 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUBCATEGORY.error_message) unless ENUM_VALIDATOR_FOR_SUBCATEGORY.valid?(@subcategory, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.all_valid?(@supported_payment_method_types, false)
-      # This is a model account_holder : Stripe::FinancialConnectionsAccountAccountHolder?
-      # This is a model balance : Stripe::FinancialConnectionsAccountBalance?
-      # This is a model balance_refresh : Stripe::FinancialConnectionsAccountBalanceRefresh?
+      if _account_holder = @account_holder
+        if _account_holder.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder"))
+        end
+      end
+      if _balance = @balance
+        if _balance.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_balance.list_invalid_properties_for("balance"))
+        end
+      end
+      if _balance_refresh = @balance_refresh
+        if _balance_refresh.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_balance_refresh.list_invalid_properties_for("balance_refresh"))
+        end
+      end
       if _display_name = @display_name
         if _display_name.to_s.size > 5000
           invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
@@ -188,8 +202,16 @@ module Stripe
           invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model ownership : Stripe::FinancialConnectionsAccountOwnership2?
-      # This is a model ownership_refresh : Stripe::FinancialConnectionsAccountOwnershipRefresh?
+      if _ownership = @ownership
+        if _ownership.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_ownership.list_invalid_properties_for("ownership"))
+        end
+      end
+      if _ownership_refresh = @ownership_refresh
+        if _ownership_refresh.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_ownership_refresh.list_invalid_properties_for("ownership_refresh"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PERMISSIONS.error_message) unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
 
@@ -198,9 +220,10 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_CATEGORY.valid?(@category, false)
       return false if @created.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
@@ -210,15 +233,41 @@ module Stripe
         return false if _institution_name.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false unless ENUM_VALIDATOR_FOR_SUBCATEGORY.valid?(@subcategory, false)
       return false unless ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.all_valid?(@supported_payment_method_types, false)
+      if _account_holder = @account_holder
+        if _account_holder.is_a?(OpenApi::Validatable)
+          return false unless _account_holder.valid?
+        end
+      end
+      if _balance = @balance
+        if _balance.is_a?(OpenApi::Validatable)
+          return false unless _balance.valid?
+        end
+      end
+      if _balance_refresh = @balance_refresh
+        if _balance_refresh.is_a?(OpenApi::Validatable)
+          return false unless _balance_refresh.valid?
+        end
+      end
       if _display_name = @display_name
         return false if _display_name.to_s.size > 5000
       end
       if _last4 = @last4
         return false if _last4.to_s.size > 5000
+      end
+      if _ownership = @ownership
+        if _ownership.is_a?(OpenApi::Validatable)
+          return false unless _ownership.valid?
+        end
+      end
+      if _ownership_refresh = @ownership_refresh
+        if _ownership_refresh.is_a?(OpenApi::Validatable)
+          return false unless _ownership_refresh.valid?
+        end
       end
       return false unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
 
@@ -233,7 +282,7 @@ module Stripe
       end
       _category = category.not_nil!
       ENUM_VALIDATOR_FOR_CATEGORY.valid!(_category)
-      @category = category
+      @category = _category
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -242,7 +291,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -256,7 +306,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -270,7 +320,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"institution_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @institution_name = institution_name
+      @institution_name = _institution_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -279,7 +329,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -290,7 +341,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -301,7 +352,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -312,7 +363,7 @@ module Stripe
       end
       _subcategory = subcategory.not_nil!
       ENUM_VALIDATOR_FOR_SUBCATEGORY.valid!(_subcategory)
-      @subcategory = subcategory
+      @subcategory = _subcategory
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -323,7 +374,7 @@ module Stripe
       end
       _supported_payment_method_types = supported_payment_method_types.not_nil!
       ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.all_valid!(_supported_payment_method_types)
-      @supported_payment_method_types = supported_payment_method_types
+      @supported_payment_method_types = _supported_payment_method_types
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -332,7 +383,11 @@ module Stripe
       if account_holder.nil?
         return @account_holder = nil
       end
-      @account_holder = account_holder
+      _account_holder = account_holder.not_nil!
+      if _account_holder.is_a?(OpenApi::Validatable)
+        _account_holder.validate
+      end
+      @account_holder = _account_holder
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -341,7 +396,11 @@ module Stripe
       if balance.nil?
         return @balance = nil
       end
-      @balance = balance
+      _balance = balance.not_nil!
+      if _balance.is_a?(OpenApi::Validatable)
+        _balance.validate
+      end
+      @balance = _balance
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -350,7 +409,11 @@ module Stripe
       if balance_refresh.nil?
         return @balance_refresh = nil
       end
-      @balance_refresh = balance_refresh
+      _balance_refresh = balance_refresh.not_nil!
+      if _balance_refresh.is_a?(OpenApi::Validatable)
+        _balance_refresh.validate
+      end
+      @balance_refresh = _balance_refresh
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -364,7 +427,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @display_name = display_name
+      @display_name = _display_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -378,7 +441,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
 
-      @last4 = last4
+      @last4 = _last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -387,7 +450,11 @@ module Stripe
       if ownership.nil?
         return @ownership = nil
       end
-      @ownership = ownership
+      _ownership = ownership.not_nil!
+      if _ownership.is_a?(OpenApi::Validatable)
+        _ownership.validate
+      end
+      @ownership = _ownership
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -396,7 +463,11 @@ module Stripe
       if ownership_refresh.nil?
         return @ownership_refresh = nil
       end
-      @ownership_refresh = ownership_refresh
+      _ownership_refresh = ownership_refresh.not_nil!
+      if _ownership_refresh.is_a?(OpenApi::Validatable)
+        _ownership_refresh.validate
+      end
+      @ownership_refresh = _ownership_refresh
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -407,13 +478,7 @@ module Stripe
       end
       _permissions = permissions.not_nil!
       ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid!(_permissions)
-      @permissions = permissions
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @permissions = _permissions
     end
 
     # Generates #hash and #== methods from all fields

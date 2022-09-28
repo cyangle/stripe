@@ -15,6 +15,7 @@ module Stripe
   class PauseCollectionParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -42,7 +43,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_BEHAVIOR.valid?(@behavior, false)
@@ -52,7 +53,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_BEHAVIOR.valid?(@behavior, false)
 
       true
@@ -66,7 +67,7 @@ module Stripe
       end
       _behavior = behavior.not_nil!
       ENUM_VALIDATOR_FOR_BEHAVIOR.valid!(_behavior)
-      @behavior = behavior
+      @behavior = _behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -75,13 +76,8 @@ module Stripe
       if resumes_at.nil?
         return @resumes_at = nil
       end
-      @resumes_at = resumes_at
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _resumes_at = resumes_at.not_nil!
+      @resumes_at = _resumes_at
     end
 
     # Generates #hash and #== methods from all fields

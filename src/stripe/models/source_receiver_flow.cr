@@ -16,6 +16,7 @@ module Stripe
   class SourceReceiverFlow
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -66,11 +67,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount_charged\" is required and cannot be null") if @amount_charged.nil?
+
       invalid_properties.push("\"amount_received\" is required and cannot be null") if @amount_received.nil?
+
       invalid_properties.push("\"amount_returned\" is required and cannot be null") if @amount_returned.nil?
+
       invalid_properties.push("\"refund_attributes_method\" is required and cannot be null") if @refund_attributes_method.nil?
       if _refund_attributes_method = @refund_attributes_method
         if _refund_attributes_method.to_s.size > 5000
@@ -94,10 +98,13 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount_charged.nil?
+
       return false if @amount_received.nil?
+
       return false if @amount_returned.nil?
+
       return false if @refund_attributes_method.nil?
       if _refund_attributes_method = @refund_attributes_method
         return false if _refund_attributes_method.to_s.size > 5000
@@ -119,7 +126,8 @@ module Stripe
       if amount_charged.nil?
         raise ArgumentError.new("\"amount_charged\" is required and cannot be null")
       end
-      @amount_charged = amount_charged
+      _amount_charged = amount_charged.not_nil!
+      @amount_charged = _amount_charged
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -128,7 +136,8 @@ module Stripe
       if amount_received.nil?
         raise ArgumentError.new("\"amount_received\" is required and cannot be null")
       end
-      @amount_received = amount_received
+      _amount_received = amount_received.not_nil!
+      @amount_received = _amount_received
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -137,7 +146,8 @@ module Stripe
       if amount_returned.nil?
         raise ArgumentError.new("\"amount_returned\" is required and cannot be null")
       end
-      @amount_returned = amount_returned
+      _amount_returned = amount_returned.not_nil!
+      @amount_returned = _amount_returned
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -151,7 +161,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"refund_attributes_method\", the character length must be smaller than or equal to 5000.")
       end
 
-      @refund_attributes_method = refund_attributes_method
+      @refund_attributes_method = _refund_attributes_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -165,7 +175,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"refund_attributes_status\", the character length must be smaller than or equal to 5000.")
       end
 
-      @refund_attributes_status = refund_attributes_status
+      @refund_attributes_status = _refund_attributes_status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -179,13 +189,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address = address
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @address = _address
     end
 
     # Generates #hash and #== methods from all fields

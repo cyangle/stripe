@@ -16,6 +16,7 @@ module Stripe
   class CustomerTax
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -55,7 +56,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_AUTOMATIC_TAX.error_message) unless ENUM_VALIDATOR_FOR_AUTOMATIC_TAX.valid?(@automatic_tax, false)
@@ -64,17 +65,26 @@ module Stripe
           invalid_properties.push("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model location : Stripe::CustomerTaxLocation1?
+      if _location = @location
+        if _location.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_location.list_invalid_properties_for("location"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_AUTOMATIC_TAX.valid?(@automatic_tax, false)
       if _ip_address = @ip_address
         return false if _ip_address.to_s.size > 5000
+      end
+      if _location = @location
+        if _location.is_a?(OpenApi::Validatable)
+          return false unless _location.valid?
+        end
       end
 
       true
@@ -88,7 +98,7 @@ module Stripe
       end
       _automatic_tax = automatic_tax.not_nil!
       ENUM_VALIDATOR_FOR_AUTOMATIC_TAX.valid!(_automatic_tax)
-      @automatic_tax = automatic_tax
+      @automatic_tax = _automatic_tax
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -102,7 +112,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
       end
 
-      @ip_address = ip_address
+      @ip_address = _ip_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -111,13 +121,11 @@ module Stripe
       if location.nil?
         return @location = nil
       end
-      @location = location
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _location = location.not_nil!
+      if _location.is_a?(OpenApi::Validatable)
+        _location.validate
+      end
+      @location = _location
     end
 
     # Generates #hash and #== methods from all fields

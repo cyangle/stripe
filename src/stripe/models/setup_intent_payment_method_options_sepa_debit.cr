@@ -16,6 +16,7 @@ module Stripe
   class SetupIntentPaymentMethodOptionsSepaDebit
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -35,7 +36,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -43,7 +44,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -53,13 +54,8 @@ module Stripe
       if mandate_options.nil?
         return @mandate_options = nil
       end
-      @mandate_options = mandate_options
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _mandate_options = mandate_options.not_nil!
+      @mandate_options = _mandate_options
     end
 
     # Generates #hash and #== methods from all fields

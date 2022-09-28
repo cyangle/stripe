@@ -16,6 +16,7 @@ module Stripe
   class AccountPayoutSettings
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -50,11 +51,16 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"debit_negative_balances\" is required and cannot be null") if @debit_negative_balances.nil?
+
       invalid_properties.push("\"schedule\" is required and cannot be null") if @schedule.nil?
-      # This is a model schedule : Stripe::TransferSchedule?
+      if _schedule = @schedule
+        if _schedule.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_schedule.list_invalid_properties_for("schedule"))
+        end
+      end
       if _statement_descriptor = @statement_descriptor
         if _statement_descriptor.to_s.size > 5000
           invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
@@ -66,9 +72,15 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @debit_negative_balances.nil?
+
       return false if @schedule.nil?
+      if _schedule = @schedule
+        if _schedule.is_a?(OpenApi::Validatable)
+          return false unless _schedule.valid?
+        end
+      end
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 5000
       end
@@ -82,7 +94,8 @@ module Stripe
       if debit_negative_balances.nil?
         raise ArgumentError.new("\"debit_negative_balances\" is required and cannot be null")
       end
-      @debit_negative_balances = debit_negative_balances
+      _debit_negative_balances = debit_negative_balances.not_nil!
+      @debit_negative_balances = _debit_negative_balances
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -91,7 +104,11 @@ module Stripe
       if schedule.nil?
         raise ArgumentError.new("\"schedule\" is required and cannot be null")
       end
-      @schedule = schedule
+      _schedule = schedule.not_nil!
+      if _schedule.is_a?(OpenApi::Validatable)
+        _schedule.validate
+      end
+      @schedule = _schedule
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,13 +122,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
       end
 
-      @statement_descriptor = statement_descriptor
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @statement_descriptor = _statement_descriptor
     end
 
     # Generates #hash and #== methods from all fields

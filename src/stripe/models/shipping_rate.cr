@@ -16,6 +16,7 @@ module Stripe
   class ShippingRate
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -108,10 +109,12 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"active\" is required and cannot be null") if @active.nil?
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -119,42 +122,74 @@ module Stripe
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
+
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      # This is a model delivery_estimate : Stripe::ShippingRateDeliveryEstimate1?
+      if _delivery_estimate = @delivery_estimate
+        if _delivery_estimate.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_delivery_estimate.list_invalid_properties_for("delivery_estimate"))
+        end
+      end
       if _display_name = @display_name
         if _display_name.to_s.size > 5000
           invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model fixed_amount : Stripe::ShippingRateFixedAmount?
+      if _fixed_amount = @fixed_amount
+        if _fixed_amount.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_fixed_amount.list_invalid_properties_for("fixed_amount"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
-      # This is a model tax_code : Stripe::ShippingRateTaxCode?
+      if _tax_code = @tax_code
+        if _tax_code.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_tax_code.list_invalid_properties_for("tax_code"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @active.nil?
+
       return false if @created.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false if @metadata.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if _delivery_estimate = @delivery_estimate
+        if _delivery_estimate.is_a?(OpenApi::Validatable)
+          return false unless _delivery_estimate.valid?
+        end
+      end
       if _display_name = @display_name
         return false if _display_name.to_s.size > 5000
       end
+      if _fixed_amount = @fixed_amount
+        if _fixed_amount.is_a?(OpenApi::Validatable)
+          return false unless _fixed_amount.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
+      if _tax_code = @tax_code
+        if _tax_code.is_a?(OpenApi::Validatable)
+          return false unless _tax_code.valid?
+        end
+      end
 
       true
     end
@@ -165,7 +200,8 @@ module Stripe
       if active.nil?
         raise ArgumentError.new("\"active\" is required and cannot be null")
       end
-      @active = active
+      _active = active.not_nil!
+      @active = _active
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -174,7 +210,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -188,7 +225,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -197,7 +234,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -206,7 +244,8 @@ module Stripe
       if metadata.nil?
         raise ArgumentError.new("\"metadata\" is required and cannot be null")
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -217,7 +256,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -228,7 +267,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -237,7 +276,11 @@ module Stripe
       if delivery_estimate.nil?
         return @delivery_estimate = nil
       end
-      @delivery_estimate = delivery_estimate
+      _delivery_estimate = delivery_estimate.not_nil!
+      if _delivery_estimate.is_a?(OpenApi::Validatable)
+        _delivery_estimate.validate
+      end
+      @delivery_estimate = _delivery_estimate
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -251,7 +294,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @display_name = display_name
+      @display_name = _display_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -260,7 +303,11 @@ module Stripe
       if fixed_amount.nil?
         return @fixed_amount = nil
       end
-      @fixed_amount = fixed_amount
+      _fixed_amount = fixed_amount.not_nil!
+      if _fixed_amount.is_a?(OpenApi::Validatable)
+        _fixed_amount.validate
+      end
+      @fixed_amount = _fixed_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -271,7 +318,7 @@ module Stripe
       end
       _tax_behavior = tax_behavior.not_nil!
       ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid!(_tax_behavior)
-      @tax_behavior = tax_behavior
+      @tax_behavior = _tax_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -280,13 +327,11 @@ module Stripe
       if tax_code.nil?
         return @tax_code = nil
       end
-      @tax_code = tax_code
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tax_code = tax_code.not_nil!
+      if _tax_code.is_a?(OpenApi::Validatable)
+        _tax_code.validate
+      end
+      @tax_code = _tax_code
     end
 
     # Generates #hash and #== methods from all fields

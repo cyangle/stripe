@@ -15,6 +15,7 @@ module Stripe
   class PostTaxRatesTaxRateRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -75,8 +76,9 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _country = @country
         if _country.to_s.size > 5000
           invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
@@ -92,12 +94,17 @@ module Stripe
           invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 50.")
         end
       end
+
       if _jurisdiction = @jurisdiction
         if _jurisdiction.to_s.size > 50
           invalid_properties.push("invalid value for \"jurisdiction\", the character length must be smaller than or equal to 50.")
         end
       end
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
       if _state = @state
         if _state.to_s.size > 2
           invalid_properties.push("invalid value for \"state\", the character length must be smaller than or equal to 2.")
@@ -111,7 +118,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _country = @country
         return false if _country.to_s.size > 5000
       end
@@ -121,8 +128,14 @@ module Stripe
       if _display_name = @display_name
         return false if _display_name.to_s.size > 50
       end
+
       if _jurisdiction = @jurisdiction
         return false if _jurisdiction.to_s.size > 50
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
       end
       if _state = @state
         return false if _state.to_s.size > 2
@@ -138,7 +151,8 @@ module Stripe
       if active.nil?
         return @active = nil
       end
-      @active = active
+      _active = active.not_nil!
+      @active = _active
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -152,7 +166,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @country = country
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -166,7 +180,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -180,7 +194,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 50.")
       end
 
-      @display_name = display_name
+      @display_name = _display_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -189,7 +203,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -203,7 +218,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"jurisdiction\", the character length must be smaller than or equal to 50.")
       end
 
-      @jurisdiction = jurisdiction
+      @jurisdiction = _jurisdiction
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -212,7 +227,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -226,7 +245,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"state\", the character length must be smaller than or equal to 2.")
       end
 
-      @state = state
+      @state = _state
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -237,13 +256,7 @@ module Stripe
       end
       _tax_type = tax_type.not_nil!
       ENUM_VALIDATOR_FOR_TAX_TYPE.valid!(_tax_type)
-      @tax_type = tax_type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @tax_type = _tax_type
     end
 
     # Generates #hash and #== methods from all fields

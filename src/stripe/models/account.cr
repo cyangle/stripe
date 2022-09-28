@@ -16,6 +16,7 @@ module Stripe
   class Account
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -151,7 +152,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
@@ -161,33 +162,77 @@ module Stripe
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      # This is a model business_profile : Stripe::AccountBusinessProfile1?
+      if _business_profile = @business_profile
+        if _business_profile.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BUSINESS_TYPE.error_message) unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
-      # This is a model capabilities : Stripe::AccountCapabilities?
-      # This is a model company : Stripe::LegalEntityCompany?
-      # This is a model controller : Stripe::AccountUnificationAccountController?
+      if _capabilities = @capabilities
+        if _capabilities.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_capabilities.list_invalid_properties_for("capabilities"))
+        end
+      end
+
+      if _company = @company
+        if _company.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_company.list_invalid_properties_for("company"))
+        end
+      end
+      if _controller = @controller
+        if _controller.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_controller.list_invalid_properties_for("controller"))
+        end
+      end
       if _country = @country
         if _country.to_s.size > 5000
           invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _default_currency = @default_currency
         if _default_currency.to_s.size > 5000
           invalid_properties.push("invalid value for \"default_currency\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _email = @email
         if _email.to_s.size > 5000
           invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model external_accounts : Stripe::ExternalAccountList1?
-      # This is a model future_requirements : Stripe::AccountFutureRequirements?
-      # This is a model individual : Stripe::Person?
-      # This is a model requirements : Stripe::AccountRequirements?
-      # This is a model settings : Stripe::AccountSettings1?
-      # This is a model tos_acceptance : Stripe::AccountTosAcceptance?
+      if _external_accounts = @external_accounts
+        if _external_accounts.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_external_accounts.list_invalid_properties_for("external_accounts"))
+        end
+      end
+      if _future_requirements = @future_requirements
+        if _future_requirements.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_future_requirements.list_invalid_properties_for("future_requirements"))
+        end
+      end
+      if _individual = @individual
+        if _individual.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_individual.list_invalid_properties_for("individual"))
+        end
+      end
+
+      if _requirements = @requirements
+        if _requirements.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_requirements.list_invalid_properties_for("requirements"))
+        end
+      end
+      if _settings = @settings
+        if _settings.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_settings.list_invalid_properties_for("settings"))
+        end
+      end
+      if _tos_acceptance = @tos_acceptance
+        if _tos_acceptance.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_tos_acceptance.list_invalid_properties_for("tos_acceptance"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
@@ -196,21 +241,75 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _business_profile = @business_profile
+        if _business_profile.is_a?(OpenApi::Validatable)
+          return false unless _business_profile.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
+      if _capabilities = @capabilities
+        if _capabilities.is_a?(OpenApi::Validatable)
+          return false unless _capabilities.valid?
+        end
+      end
+
+      if _company = @company
+        if _company.is_a?(OpenApi::Validatable)
+          return false unless _company.valid?
+        end
+      end
+      if _controller = @controller
+        if _controller.is_a?(OpenApi::Validatable)
+          return false unless _controller.valid?
+        end
+      end
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
       if _default_currency = @default_currency
         return false if _default_currency.to_s.size > 5000
       end
+
       if _email = @email
         return false if _email.to_s.size > 5000
+      end
+      if _external_accounts = @external_accounts
+        if _external_accounts.is_a?(OpenApi::Validatable)
+          return false unless _external_accounts.valid?
+        end
+      end
+      if _future_requirements = @future_requirements
+        if _future_requirements.is_a?(OpenApi::Validatable)
+          return false unless _future_requirements.valid?
+        end
+      end
+      if _individual = @individual
+        if _individual.is_a?(OpenApi::Validatable)
+          return false unless _individual.valid?
+        end
+      end
+
+      if _requirements = @requirements
+        if _requirements.is_a?(OpenApi::Validatable)
+          return false unless _requirements.valid?
+        end
+      end
+      if _settings = @settings
+        if _settings.is_a?(OpenApi::Validatable)
+          return false unless _settings.valid?
+        end
+      end
+      if _tos_acceptance = @tos_acceptance
+        if _tos_acceptance.is_a?(OpenApi::Validatable)
+          return false unless _tos_acceptance.valid?
+        end
       end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
@@ -228,7 +327,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -239,7 +338,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -248,7 +347,11 @@ module Stripe
       if business_profile.nil?
         return @business_profile = nil
       end
-      @business_profile = business_profile
+      _business_profile = business_profile.not_nil!
+      if _business_profile.is_a?(OpenApi::Validatable)
+        _business_profile.validate
+      end
+      @business_profile = _business_profile
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -259,7 +362,7 @@ module Stripe
       end
       _business_type = business_type.not_nil!
       ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid!(_business_type)
-      @business_type = business_type
+      @business_type = _business_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -268,7 +371,11 @@ module Stripe
       if capabilities.nil?
         return @capabilities = nil
       end
-      @capabilities = capabilities
+      _capabilities = capabilities.not_nil!
+      if _capabilities.is_a?(OpenApi::Validatable)
+        _capabilities.validate
+      end
+      @capabilities = _capabilities
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -277,7 +384,8 @@ module Stripe
       if charges_enabled.nil?
         return @charges_enabled = nil
       end
-      @charges_enabled = charges_enabled
+      _charges_enabled = charges_enabled.not_nil!
+      @charges_enabled = _charges_enabled
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -286,7 +394,11 @@ module Stripe
       if company.nil?
         return @company = nil
       end
-      @company = company
+      _company = company.not_nil!
+      if _company.is_a?(OpenApi::Validatable)
+        _company.validate
+      end
+      @company = _company
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -295,7 +407,11 @@ module Stripe
       if controller.nil?
         return @controller = nil
       end
-      @controller = controller
+      _controller = controller.not_nil!
+      if _controller.is_a?(OpenApi::Validatable)
+        _controller.validate
+      end
+      @controller = _controller
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -309,7 +425,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @country = country
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -318,7 +434,8 @@ module Stripe
       if created.nil?
         return @created = nil
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -332,7 +449,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"default_currency\", the character length must be smaller than or equal to 5000.")
       end
 
-      @default_currency = default_currency
+      @default_currency = _default_currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -341,7 +458,8 @@ module Stripe
       if details_submitted.nil?
         return @details_submitted = nil
       end
-      @details_submitted = details_submitted
+      _details_submitted = details_submitted.not_nil!
+      @details_submitted = _details_submitted
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -355,7 +473,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
 
-      @email = email
+      @email = _email
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -364,7 +482,11 @@ module Stripe
       if external_accounts.nil?
         return @external_accounts = nil
       end
-      @external_accounts = external_accounts
+      _external_accounts = external_accounts.not_nil!
+      if _external_accounts.is_a?(OpenApi::Validatable)
+        _external_accounts.validate
+      end
+      @external_accounts = _external_accounts
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -373,7 +495,11 @@ module Stripe
       if future_requirements.nil?
         return @future_requirements = nil
       end
-      @future_requirements = future_requirements
+      _future_requirements = future_requirements.not_nil!
+      if _future_requirements.is_a?(OpenApi::Validatable)
+        _future_requirements.validate
+      end
+      @future_requirements = _future_requirements
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -382,7 +508,11 @@ module Stripe
       if individual.nil?
         return @individual = nil
       end
-      @individual = individual
+      _individual = individual.not_nil!
+      if _individual.is_a?(OpenApi::Validatable)
+        _individual.validate
+      end
+      @individual = _individual
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -391,7 +521,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -400,7 +531,8 @@ module Stripe
       if payouts_enabled.nil?
         return @payouts_enabled = nil
       end
-      @payouts_enabled = payouts_enabled
+      _payouts_enabled = payouts_enabled.not_nil!
+      @payouts_enabled = _payouts_enabled
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -409,7 +541,11 @@ module Stripe
       if requirements.nil?
         return @requirements = nil
       end
-      @requirements = requirements
+      _requirements = requirements.not_nil!
+      if _requirements.is_a?(OpenApi::Validatable)
+        _requirements.validate
+      end
+      @requirements = _requirements
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -418,7 +554,11 @@ module Stripe
       if settings.nil?
         return @settings = nil
       end
-      @settings = settings
+      _settings = settings.not_nil!
+      if _settings.is_a?(OpenApi::Validatable)
+        _settings.validate
+      end
+      @settings = _settings
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -427,7 +567,11 @@ module Stripe
       if tos_acceptance.nil?
         return @tos_acceptance = nil
       end
-      @tos_acceptance = tos_acceptance
+      _tos_acceptance = tos_acceptance.not_nil!
+      if _tos_acceptance.is_a?(OpenApi::Validatable)
+        _tos_acceptance.validate
+      end
+      @tos_acceptance = _tos_acceptance
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -438,13 +582,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @_type = __type
     end
 
     # Generates #hash and #== methods from all fields

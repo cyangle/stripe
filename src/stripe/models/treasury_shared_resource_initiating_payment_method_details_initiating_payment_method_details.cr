@@ -16,6 +16,7 @@ module Stripe
   class TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -64,33 +65,60 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"billing_details\" is required and cannot be null") if @billing_details.nil?
-      # This is a model billing_details : Stripe::TreasurySharedResourceBillingDetails?
+      if _billing_details = @billing_details
+        if _billing_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BALANCE.error_message) unless ENUM_VALIDATOR_FOR_BALANCE.valid?(@balance)
-      # This is a model financial_account : Stripe::ReceivedPaymentMethodDetailsFinancialAccount?
+      if _financial_account = @financial_account
+        if _financial_account.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_financial_account.list_invalid_properties_for("financial_account"))
+        end
+      end
       if _issuing_card = @issuing_card
         if _issuing_card.to_s.size > 5000
           invalid_properties.push("invalid value for \"issuing_card\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model us_bank_account : Stripe::TreasurySharedResourceInitiatingPaymentMethodDetailsUsBankAccount?
+      if _us_bank_account = @us_bank_account
+        if _us_bank_account.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @billing_details.nil?
+      if _billing_details = @billing_details
+        if _billing_details.is_a?(OpenApi::Validatable)
+          return false unless _billing_details.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       return false unless ENUM_VALIDATOR_FOR_BALANCE.valid?(@balance)
+      if _financial_account = @financial_account
+        if _financial_account.is_a?(OpenApi::Validatable)
+          return false unless _financial_account.valid?
+        end
+      end
       if _issuing_card = @issuing_card
         return false if _issuing_card.to_s.size > 5000
+      end
+      if _us_bank_account = @us_bank_account
+        if _us_bank_account.is_a?(OpenApi::Validatable)
+          return false unless _us_bank_account.valid?
+        end
       end
 
       true
@@ -102,7 +130,11 @@ module Stripe
       if billing_details.nil?
         raise ArgumentError.new("\"billing_details\" is required and cannot be null")
       end
-      @billing_details = billing_details
+      _billing_details = billing_details.not_nil!
+      if _billing_details.is_a?(OpenApi::Validatable)
+        _billing_details.validate
+      end
+      @billing_details = _billing_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,7 +145,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -124,7 +156,7 @@ module Stripe
       end
       _balance = balance.not_nil!
       ENUM_VALIDATOR_FOR_BALANCE.valid!(_balance)
-      @balance = balance
+      @balance = _balance
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -133,7 +165,11 @@ module Stripe
       if financial_account.nil?
         return @financial_account = nil
       end
-      @financial_account = financial_account
+      _financial_account = financial_account.not_nil!
+      if _financial_account.is_a?(OpenApi::Validatable)
+        _financial_account.validate
+      end
+      @financial_account = _financial_account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -147,7 +183,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"issuing_card\", the character length must be smaller than or equal to 5000.")
       end
 
-      @issuing_card = issuing_card
+      @issuing_card = _issuing_card
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -156,13 +192,11 @@ module Stripe
       if us_bank_account.nil?
         return @us_bank_account = nil
       end
-      @us_bank_account = us_bank_account
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _us_bank_account = us_bank_account.not_nil!
+      if _us_bank_account.is_a?(OpenApi::Validatable)
+        _us_bank_account.validate
+      end
+      @us_bank_account = _us_bank_account
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class BusinessProfileUpdateParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -42,24 +43,42 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _headline = @headline
         if _headline.to_s.size > 60
           invalid_properties.push("invalid value for \"headline\", the character length must be smaller than or equal to 60.")
         end
       end
-      # This is a model privacy_policy_url : Stripe::BusinessProfileSpecsSupportUrl?
-      # This is a model terms_of_service_url : Stripe::BusinessProfileSpecsSupportUrl?
+      if _privacy_policy_url = @privacy_policy_url
+        if _privacy_policy_url.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_privacy_policy_url.list_invalid_properties_for("privacy_policy_url"))
+        end
+      end
+      if _terms_of_service_url = @terms_of_service_url
+        if _terms_of_service_url.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_terms_of_service_url.list_invalid_properties_for("terms_of_service_url"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _headline = @headline
         return false if _headline.to_s.size > 60
+      end
+      if _privacy_policy_url = @privacy_policy_url
+        if _privacy_policy_url.is_a?(OpenApi::Validatable)
+          return false unless _privacy_policy_url.valid?
+        end
+      end
+      if _terms_of_service_url = @terms_of_service_url
+        if _terms_of_service_url.is_a?(OpenApi::Validatable)
+          return false unless _terms_of_service_url.valid?
+        end
       end
 
       true
@@ -76,7 +95,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"headline\", the character length must be smaller than or equal to 60.")
       end
 
-      @headline = headline
+      @headline = _headline
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,7 +104,11 @@ module Stripe
       if privacy_policy_url.nil?
         return @privacy_policy_url = nil
       end
-      @privacy_policy_url = privacy_policy_url
+      _privacy_policy_url = privacy_policy_url.not_nil!
+      if _privacy_policy_url.is_a?(OpenApi::Validatable)
+        _privacy_policy_url.validate
+      end
+      @privacy_policy_url = _privacy_policy_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -94,13 +117,11 @@ module Stripe
       if terms_of_service_url.nil?
         return @terms_of_service_url = nil
       end
-      @terms_of_service_url = terms_of_service_url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _terms_of_service_url = terms_of_service_url.not_nil!
+      if _terms_of_service_url.is_a?(OpenApi::Validatable)
+        _terms_of_service_url.validate
+      end
+      @terms_of_service_url = _terms_of_service_url
     end
 
     # Generates #hash and #== methods from all fields

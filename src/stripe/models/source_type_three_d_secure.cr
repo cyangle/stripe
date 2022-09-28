@@ -15,6 +15,7 @@ module Stripe
   class SourceTypeThreeDSecure
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -142,7 +143,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -150,7 +151,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -160,7 +161,8 @@ module Stripe
       if address_line1_check.nil?
         return @address_line1_check = nil
       end
-      @address_line1_check = address_line1_check
+      _address_line1_check = address_line1_check.not_nil!
+      @address_line1_check = _address_line1_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -169,7 +171,8 @@ module Stripe
       if address_zip_check.nil?
         return @address_zip_check = nil
       end
-      @address_zip_check = address_zip_check
+      _address_zip_check = address_zip_check.not_nil!
+      @address_zip_check = _address_zip_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -178,7 +181,8 @@ module Stripe
       if authenticated.nil?
         return @authenticated = nil
       end
-      @authenticated = authenticated
+      _authenticated = authenticated.not_nil!
+      @authenticated = _authenticated
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -187,7 +191,8 @@ module Stripe
       if brand.nil?
         return @brand = nil
       end
-      @brand = brand
+      _brand = brand.not_nil!
+      @brand = _brand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -196,7 +201,8 @@ module Stripe
       if card.nil?
         return @card = nil
       end
-      @card = card
+      _card = card.not_nil!
+      @card = _card
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -205,7 +211,8 @@ module Stripe
       if country.nil?
         return @country = nil
       end
-      @country = country
+      _country = country.not_nil!
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -214,7 +221,8 @@ module Stripe
       if customer.nil?
         return @customer = nil
       end
-      @customer = customer
+      _customer = customer.not_nil!
+      @customer = _customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -223,7 +231,8 @@ module Stripe
       if cvc_check.nil?
         return @cvc_check = nil
       end
-      @cvc_check = cvc_check
+      _cvc_check = cvc_check.not_nil!
+      @cvc_check = _cvc_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -232,7 +241,8 @@ module Stripe
       if dynamic_last4.nil?
         return @dynamic_last4 = nil
       end
-      @dynamic_last4 = dynamic_last4
+      _dynamic_last4 = dynamic_last4.not_nil!
+      @dynamic_last4 = _dynamic_last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -241,7 +251,8 @@ module Stripe
       if exp_month.nil?
         return @exp_month = nil
       end
-      @exp_month = exp_month
+      _exp_month = exp_month.not_nil!
+      @exp_month = _exp_month
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -250,7 +261,8 @@ module Stripe
       if exp_year.nil?
         return @exp_year = nil
       end
-      @exp_year = exp_year
+      _exp_year = exp_year.not_nil!
+      @exp_year = _exp_year
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -259,7 +271,8 @@ module Stripe
       if fingerprint.nil?
         return @fingerprint = nil
       end
-      @fingerprint = fingerprint
+      _fingerprint = fingerprint.not_nil!
+      @fingerprint = _fingerprint
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -268,7 +281,8 @@ module Stripe
       if funding.nil?
         return @funding = nil
       end
-      @funding = funding
+      _funding = funding.not_nil!
+      @funding = _funding
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -277,7 +291,8 @@ module Stripe
       if last4.nil?
         return @last4 = nil
       end
-      @last4 = last4
+      _last4 = last4.not_nil!
+      @last4 = _last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -286,7 +301,8 @@ module Stripe
       if name.nil?
         return @name = nil
       end
-      @name = name
+      _name = name.not_nil!
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -295,7 +311,8 @@ module Stripe
       if three_d_secure.nil?
         return @three_d_secure = nil
       end
-      @three_d_secure = three_d_secure
+      _three_d_secure = three_d_secure.not_nil!
+      @three_d_secure = _three_d_secure
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -304,13 +321,8 @@ module Stripe
       if tokenization_method.nil?
         return @tokenization_method = nil
       end
-      @tokenization_method = tokenization_method
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tokenization_method = tokenization_method.not_nil!
+      @tokenization_method = _tokenization_method
     end
 
     # Generates #hash and #== methods from all fields

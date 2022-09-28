@@ -16,6 +16,7 @@ module Stripe
   class TreasuryTransaction
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -119,13 +120,20 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+
       invalid_properties.push("\"balance_impact\" is required and cannot be null") if @balance_impact.nil?
-      # This is a model balance_impact : Stripe::TreasuryTransactionsResourceBalanceImpact?
+      if _balance_impact = @balance_impact
+        if _balance_impact.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_balance_impact.list_invalid_properties_for("balance_impact"))
+        end
+      end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       invalid_properties.push("\"description\" is required and cannot be null") if @description.nil?
       if _description = @description
         if _description.to_s.size > 5000
@@ -152,25 +160,45 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       invalid_properties.push("\"status_transitions\" is required and cannot be null") if @status_transitions.nil?
-      # This is a model status_transitions : Stripe::TreasuryTransactionsResourceAbstractTransactionResourceStatusTransitions?
-      # This is a model entries : Stripe::TreasuryTransactionsResourceTransactionEntryList1?
+      if _status_transitions = @status_transitions
+        if _status_transitions.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_status_transitions.list_invalid_properties_for("status_transitions"))
+        end
+      end
+      if _entries = @entries
+        if _entries.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_entries.list_invalid_properties_for("entries"))
+        end
+      end
       if _flow = @flow
         if _flow.to_s.size > 5000
           invalid_properties.push("invalid value for \"flow\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model flow_details : Stripe::TreasuryTransactionFlowDetails?
+      if _flow_details = @flow_details
+        if _flow_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_flow_details.list_invalid_properties_for("flow_details"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount.nil?
+
       return false if @balance_impact.nil?
+      if _balance_impact = @balance_impact
+        if _balance_impact.is_a?(OpenApi::Validatable)
+          return false unless _balance_impact.valid?
+        end
+      end
       return false if @created.nil?
+
       return false if @currency.nil?
+
       return false if @description.nil?
       if _description = @description
         return false if _description.to_s.size > 5000
@@ -185,11 +213,27 @@ module Stripe
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false if @status_transitions.nil?
+      if _status_transitions = @status_transitions
+        if _status_transitions.is_a?(OpenApi::Validatable)
+          return false unless _status_transitions.valid?
+        end
+      end
+      if _entries = @entries
+        if _entries.is_a?(OpenApi::Validatable)
+          return false unless _entries.valid?
+        end
+      end
       if _flow = @flow
         return false if _flow.to_s.size > 5000
+      end
+      if _flow_details = @flow_details
+        if _flow_details.is_a?(OpenApi::Validatable)
+          return false unless _flow_details.valid?
+        end
       end
 
       true
@@ -201,7 +245,8 @@ module Stripe
       if amount.nil?
         raise ArgumentError.new("\"amount\" is required and cannot be null")
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -210,7 +255,11 @@ module Stripe
       if balance_impact.nil?
         raise ArgumentError.new("\"balance_impact\" is required and cannot be null")
       end
-      @balance_impact = balance_impact
+      _balance_impact = balance_impact.not_nil!
+      if _balance_impact.is_a?(OpenApi::Validatable)
+        _balance_impact.validate
+      end
+      @balance_impact = _balance_impact
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -219,7 +268,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -228,7 +278,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -242,7 +293,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -256,7 +307,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
       end
 
-      @financial_account = financial_account
+      @financial_account = _financial_account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -267,7 +318,7 @@ module Stripe
       end
       _flow_type = flow_type.not_nil!
       ENUM_VALIDATOR_FOR_FLOW_TYPE.valid!(_flow_type)
-      @flow_type = flow_type
+      @flow_type = _flow_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -281,7 +332,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -290,7 +341,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -301,7 +353,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -312,7 +364,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -321,7 +373,11 @@ module Stripe
       if status_transitions.nil?
         raise ArgumentError.new("\"status_transitions\" is required and cannot be null")
       end
-      @status_transitions = status_transitions
+      _status_transitions = status_transitions.not_nil!
+      if _status_transitions.is_a?(OpenApi::Validatable)
+        _status_transitions.validate
+      end
+      @status_transitions = _status_transitions
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -330,7 +386,11 @@ module Stripe
       if entries.nil?
         return @entries = nil
       end
-      @entries = entries
+      _entries = entries.not_nil!
+      if _entries.is_a?(OpenApi::Validatable)
+        _entries.validate
+      end
+      @entries = _entries
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -344,7 +404,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"flow\", the character length must be smaller than or equal to 5000.")
       end
 
-      @flow = flow
+      @flow = _flow
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -353,13 +413,11 @@ module Stripe
       if flow_details.nil?
         return @flow_details = nil
       end
-      @flow_details = flow_details
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _flow_details = flow_details.not_nil!
+      if _flow_details.is_a?(OpenApi::Validatable)
+        _flow_details.validate
+      end
+      @flow_details = _flow_details
     end
 
     # Generates #hash and #== methods from all fields

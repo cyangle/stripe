@@ -16,6 +16,7 @@ module Stripe
   class PaymentIntentNextActionKonbini
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -50,11 +51,16 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"expires_at\" is required and cannot be null") if @expires_at.nil?
+
       invalid_properties.push("\"stores\" is required and cannot be null") if @stores.nil?
-      # This is a model stores : Stripe::PaymentIntentNextActionKonbiniStores?
+      if _stores = @stores
+        if _stores.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_stores.list_invalid_properties_for("stores"))
+        end
+      end
       if _hosted_voucher_url = @hosted_voucher_url
         if _hosted_voucher_url.to_s.size > 5000
           invalid_properties.push("invalid value for \"hosted_voucher_url\", the character length must be smaller than or equal to 5000.")
@@ -66,9 +72,15 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @expires_at.nil?
+
       return false if @stores.nil?
+      if _stores = @stores
+        if _stores.is_a?(OpenApi::Validatable)
+          return false unless _stores.valid?
+        end
+      end
       if _hosted_voucher_url = @hosted_voucher_url
         return false if _hosted_voucher_url.to_s.size > 5000
       end
@@ -82,7 +94,8 @@ module Stripe
       if expires_at.nil?
         raise ArgumentError.new("\"expires_at\" is required and cannot be null")
       end
-      @expires_at = expires_at
+      _expires_at = expires_at.not_nil!
+      @expires_at = _expires_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -91,7 +104,11 @@ module Stripe
       if stores.nil?
         raise ArgumentError.new("\"stores\" is required and cannot be null")
       end
-      @stores = stores
+      _stores = stores.not_nil!
+      if _stores.is_a?(OpenApi::Validatable)
+        _stores.validate
+      end
+      @stores = _stores
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,13 +122,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"hosted_voucher_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @hosted_voucher_url = hosted_voucher_url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @hosted_voucher_url = _hosted_voucher_url
     end
 
     # Generates #hash and #== methods from all fields

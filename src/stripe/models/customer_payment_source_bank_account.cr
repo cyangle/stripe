@@ -15,6 +15,7 @@ module Stripe
   class CustomerPaymentSourceBankAccount
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -64,7 +65,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"account_number\" is required and cannot be null") if @account_number.nil?
       if _account_number = @account_number
@@ -98,7 +99,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @account_number.nil?
       if _account_number = @account_number
         return false if _account_number.to_s.size > 5000
@@ -111,6 +112,7 @@ module Stripe
         return false if _account_holder_name.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid?(@account_holder_type)
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object)
       if _routing_number = @routing_number
         return false if _routing_number.to_s.size > 5000
@@ -130,7 +132,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @account_number = account_number
+      @account_number = _account_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -144,7 +146,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @country = country
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -158,7 +160,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @account_holder_name = account_holder_name
+      @account_holder_name = _account_holder_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -169,7 +171,7 @@ module Stripe
       end
       _account_holder_type = account_holder_type.not_nil!
       ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid!(_account_holder_type)
-      @account_holder_type = account_holder_type
+      @account_holder_type = _account_holder_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -178,7 +180,8 @@ module Stripe
       if currency.nil?
         return @currency = nil
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -189,7 +192,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -203,13 +206,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @routing_number = routing_number
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @routing_number = _routing_number
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class SourceTypeAuBecsDebit
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -50,7 +51,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -58,7 +59,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -68,7 +69,8 @@ module Stripe
       if bsb_number.nil?
         return @bsb_number = nil
       end
-      @bsb_number = bsb_number
+      _bsb_number = bsb_number.not_nil!
+      @bsb_number = _bsb_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -77,7 +79,8 @@ module Stripe
       if fingerprint.nil?
         return @fingerprint = nil
       end
-      @fingerprint = fingerprint
+      _fingerprint = fingerprint.not_nil!
+      @fingerprint = _fingerprint
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -86,13 +89,8 @@ module Stripe
       if last4.nil?
         return @last4 = nil
       end
-      @last4 = last4
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _last4 = last4.not_nil!
+      @last4 = _last4
     end
 
     # Generates #hash and #== methods from all fields

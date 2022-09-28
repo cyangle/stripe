@@ -16,6 +16,7 @@ module Stripe
   class CustomUnitAmount
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -54,7 +55,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -62,7 +63,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -72,7 +73,8 @@ module Stripe
       if maximum.nil?
         return @maximum = nil
       end
-      @maximum = maximum
+      _maximum = maximum.not_nil!
+      @maximum = _maximum
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -81,7 +83,8 @@ module Stripe
       if minimum.nil?
         return @minimum = nil
       end
-      @minimum = minimum
+      _minimum = minimum.not_nil!
+      @minimum = _minimum
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -90,13 +93,8 @@ module Stripe
       if preset.nil?
         return @preset = nil
       end
-      @preset = preset
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _preset = preset.not_nil!
+      @preset = _preset
     end
 
     # Generates #hash and #== methods from all fields

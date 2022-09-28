@@ -16,6 +16,7 @@ module Stripe
   class TreasuryOutboundPaymentsResourceOutboundPaymentResourceStatusTransitions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -62,7 +63,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -70,7 +71,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -80,7 +81,8 @@ module Stripe
       if canceled_at.nil?
         return @canceled_at = nil
       end
-      @canceled_at = canceled_at
+      _canceled_at = canceled_at.not_nil!
+      @canceled_at = _canceled_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -89,7 +91,8 @@ module Stripe
       if failed_at.nil?
         return @failed_at = nil
       end
-      @failed_at = failed_at
+      _failed_at = failed_at.not_nil!
+      @failed_at = _failed_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -98,7 +101,8 @@ module Stripe
       if posted_at.nil?
         return @posted_at = nil
       end
-      @posted_at = posted_at
+      _posted_at = posted_at.not_nil!
+      @posted_at = _posted_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,13 +111,8 @@ module Stripe
       if returned_at.nil?
         return @returned_at = nil
       end
-      @returned_at = returned_at
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _returned_at = returned_at.not_nil!
+      @returned_at = _returned_at
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class SourceTransaction
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -102,11 +103,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -130,26 +134,50 @@ module Stripe
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      # This is a model ach_credit_transfer : Stripe::SourceTransactionAchCreditTransferData?
-      # This is a model chf_credit_transfer : Stripe::SourceTransactionChfCreditTransferData?
-      # This is a model gbp_credit_transfer : Stripe::SourceTransactionGbpCreditTransferData?
-      # This is a model paper_check : Stripe::SourceTransactionPaperCheckData?
-      # This is a model sepa_credit_transfer : Stripe::SourceTransactionSepaCreditTransferData?
+      if _ach_credit_transfer = @ach_credit_transfer
+        if _ach_credit_transfer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_ach_credit_transfer.list_invalid_properties_for("ach_credit_transfer"))
+        end
+      end
+      if _chf_credit_transfer = @chf_credit_transfer
+        if _chf_credit_transfer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_chf_credit_transfer.list_invalid_properties_for("chf_credit_transfer"))
+        end
+      end
+      if _gbp_credit_transfer = @gbp_credit_transfer
+        if _gbp_credit_transfer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_gbp_credit_transfer.list_invalid_properties_for("gbp_credit_transfer"))
+        end
+      end
+      if _paper_check = @paper_check
+        if _paper_check.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_paper_check.list_invalid_properties_for("paper_check"))
+        end
+      end
+      if _sepa_credit_transfer = @sepa_credit_transfer
+        if _sepa_credit_transfer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_sepa_credit_transfer.list_invalid_properties_for("sepa_credit_transfer"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount.nil?
+
       return false if @created.nil?
+
       return false if @currency.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @source.nil?
       if _source = @source
@@ -160,6 +188,31 @@ module Stripe
         return false if _status.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if _ach_credit_transfer = @ach_credit_transfer
+        if _ach_credit_transfer.is_a?(OpenApi::Validatable)
+          return false unless _ach_credit_transfer.valid?
+        end
+      end
+      if _chf_credit_transfer = @chf_credit_transfer
+        if _chf_credit_transfer.is_a?(OpenApi::Validatable)
+          return false unless _chf_credit_transfer.valid?
+        end
+      end
+      if _gbp_credit_transfer = @gbp_credit_transfer
+        if _gbp_credit_transfer.is_a?(OpenApi::Validatable)
+          return false unless _gbp_credit_transfer.valid?
+        end
+      end
+      if _paper_check = @paper_check
+        if _paper_check.is_a?(OpenApi::Validatable)
+          return false unless _paper_check.valid?
+        end
+      end
+      if _sepa_credit_transfer = @sepa_credit_transfer
+        if _sepa_credit_transfer.is_a?(OpenApi::Validatable)
+          return false unless _sepa_credit_transfer.valid?
+        end
+      end
 
       true
     end
@@ -170,7 +223,8 @@ module Stripe
       if amount.nil?
         raise ArgumentError.new("\"amount\" is required and cannot be null")
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -179,7 +233,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -188,7 +243,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -202,7 +258,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -211,7 +267,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -222,7 +279,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -236,7 +293,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"source\", the character length must be smaller than or equal to 5000.")
       end
 
-      @source = source
+      @source = _source
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -250,7 +307,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -261,7 +318,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -270,7 +327,11 @@ module Stripe
       if ach_credit_transfer.nil?
         return @ach_credit_transfer = nil
       end
-      @ach_credit_transfer = ach_credit_transfer
+      _ach_credit_transfer = ach_credit_transfer.not_nil!
+      if _ach_credit_transfer.is_a?(OpenApi::Validatable)
+        _ach_credit_transfer.validate
+      end
+      @ach_credit_transfer = _ach_credit_transfer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -279,7 +340,11 @@ module Stripe
       if chf_credit_transfer.nil?
         return @chf_credit_transfer = nil
       end
-      @chf_credit_transfer = chf_credit_transfer
+      _chf_credit_transfer = chf_credit_transfer.not_nil!
+      if _chf_credit_transfer.is_a?(OpenApi::Validatable)
+        _chf_credit_transfer.validate
+      end
+      @chf_credit_transfer = _chf_credit_transfer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -288,7 +353,11 @@ module Stripe
       if gbp_credit_transfer.nil?
         return @gbp_credit_transfer = nil
       end
-      @gbp_credit_transfer = gbp_credit_transfer
+      _gbp_credit_transfer = gbp_credit_transfer.not_nil!
+      if _gbp_credit_transfer.is_a?(OpenApi::Validatable)
+        _gbp_credit_transfer.validate
+      end
+      @gbp_credit_transfer = _gbp_credit_transfer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -297,7 +366,11 @@ module Stripe
       if paper_check.nil?
         return @paper_check = nil
       end
-      @paper_check = paper_check
+      _paper_check = paper_check.not_nil!
+      if _paper_check.is_a?(OpenApi::Validatable)
+        _paper_check.validate
+      end
+      @paper_check = _paper_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -306,13 +379,11 @@ module Stripe
       if sepa_credit_transfer.nil?
         return @sepa_credit_transfer = nil
       end
-      @sepa_credit_transfer = sepa_credit_transfer
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _sepa_credit_transfer = sepa_credit_transfer.not_nil!
+      if _sepa_credit_transfer.is_a?(OpenApi::Validatable)
+        _sepa_credit_transfer.validate
+      end
+      @sepa_credit_transfer = _sepa_credit_transfer
     end
 
     # Generates #hash and #== methods from all fields

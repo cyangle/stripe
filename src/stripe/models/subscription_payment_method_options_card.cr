@@ -16,6 +16,7 @@ module Stripe
   class SubscriptionPaymentMethodOptionsCard
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -54,9 +55,13 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model mandate_options : Stripe::InvoiceMandateOptionsCard?
+      if _mandate_options = @mandate_options
+        if _mandate_options.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
 
@@ -67,7 +72,12 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _mandate_options = @mandate_options
+        if _mandate_options.is_a?(OpenApi::Validatable)
+          return false unless _mandate_options.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
       return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
 
@@ -80,7 +90,11 @@ module Stripe
       if mandate_options.nil?
         return @mandate_options = nil
       end
-      @mandate_options = mandate_options
+      _mandate_options = mandate_options.not_nil!
+      if _mandate_options.is_a?(OpenApi::Validatable)
+        _mandate_options.validate
+      end
+      @mandate_options = _mandate_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -91,7 +105,7 @@ module Stripe
       end
       _network = network.not_nil!
       ENUM_VALIDATOR_FOR_NETWORK.valid!(_network)
-      @network = network
+      @network = _network
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -102,13 +116,7 @@ module Stripe
       end
       _request_three_d_secure = request_three_d_secure.not_nil!
       ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid!(_request_three_d_secure)
-      @request_three_d_secure = request_three_d_secure
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @request_three_d_secure = _request_three_d_secure
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class PostSetupIntentsIntentConfirmRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -61,33 +62,62 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _client_secret = @client_secret
         if _client_secret.to_s.size > 5000
           invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData?
+
+      if _mandate_data = @mandate_data
+        if _mandate_data.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_mandate_data.list_invalid_properties_for("mandate_data"))
+        end
+      end
       if _payment_method = @payment_method
         if _payment_method.to_s.size > 5000
           invalid_properties.push("invalid value for \"payment_method\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model payment_method_data : Stripe::PaymentMethodDataParams1?
-      # This is a model payment_method_options : Stripe::PaymentMethodOptionsParam22?
+      if _payment_method_data = @payment_method_data
+        if _payment_method_data.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_method_data.list_invalid_properties_for("payment_method_data"))
+        end
+      end
+      if _payment_method_options = @payment_method_options
+        if _payment_method_options.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _client_secret = @client_secret
         return false if _client_secret.to_s.size > 5000
       end
+
+      if _mandate_data = @mandate_data
+        if _mandate_data.is_a?(OpenApi::Validatable)
+          return false unless _mandate_data.valid?
+        end
+      end
       if _payment_method = @payment_method
         return false if _payment_method.to_s.size > 5000
+      end
+      if _payment_method_data = @payment_method_data
+        if _payment_method_data.is_a?(OpenApi::Validatable)
+          return false unless _payment_method_data.valid?
+        end
+      end
+      if _payment_method_options = @payment_method_options
+        if _payment_method_options.is_a?(OpenApi::Validatable)
+          return false unless _payment_method_options.valid?
+        end
       end
 
       true
@@ -104,7 +134,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
       end
 
-      @client_secret = client_secret
+      @client_secret = _client_secret
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,7 +143,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -122,7 +153,11 @@ module Stripe
       if mandate_data.nil?
         return @mandate_data = nil
       end
-      @mandate_data = mandate_data
+      _mandate_data = mandate_data.not_nil!
+      if _mandate_data.is_a?(OpenApi::Validatable)
+        _mandate_data.validate
+      end
+      @mandate_data = _mandate_data
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,7 +171,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"payment_method\", the character length must be smaller than or equal to 5000.")
       end
 
-      @payment_method = payment_method
+      @payment_method = _payment_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -145,7 +180,11 @@ module Stripe
       if payment_method_data.nil?
         return @payment_method_data = nil
       end
-      @payment_method_data = payment_method_data
+      _payment_method_data = payment_method_data.not_nil!
+      if _payment_method_data.is_a?(OpenApi::Validatable)
+        _payment_method_data.validate
+      end
+      @payment_method_data = _payment_method_data
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -154,7 +193,11 @@ module Stripe
       if payment_method_options.nil?
         return @payment_method_options = nil
       end
-      @payment_method_options = payment_method_options
+      _payment_method_options = payment_method_options.not_nil!
+      if _payment_method_options.is_a?(OpenApi::Validatable)
+        _payment_method_options.validate
+      end
+      @payment_method_options = _payment_method_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -163,13 +206,8 @@ module Stripe
       if return_url.nil?
         return @return_url = nil
       end
-      @return_url = return_url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _return_url = return_url.not_nil!
+      @return_url = _return_url
     end
 
     # Generates #hash and #== methods from all fields

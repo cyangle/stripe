@@ -16,6 +16,7 @@ module Stripe
   class CustomerUpdateParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -48,7 +49,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ADDRESS.error_message) unless ENUM_VALIDATOR_FOR_ADDRESS.valid?(@address)
@@ -62,7 +63,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_ADDRESS.valid?(@address)
       return false unless ENUM_VALIDATOR_FOR_NAME.valid?(@name)
       return false unless ENUM_VALIDATOR_FOR_SHIPPING.valid?(@shipping)
@@ -78,7 +79,7 @@ module Stripe
       end
       _address = address.not_nil!
       ENUM_VALIDATOR_FOR_ADDRESS.valid!(_address)
-      @address = address
+      @address = _address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -89,7 +90,7 @@ module Stripe
       end
       _name = name.not_nil!
       ENUM_VALIDATOR_FOR_NAME.valid!(_name)
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -100,13 +101,7 @@ module Stripe
       end
       _shipping = shipping.not_nil!
       ENUM_VALIDATOR_FOR_SHIPPING.valid!(_shipping)
-      @shipping = shipping
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @shipping = _shipping
     end
 
     # Generates #hash and #== methods from all fields

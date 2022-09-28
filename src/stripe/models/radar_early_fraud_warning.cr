@@ -16,6 +16,7 @@ module Stripe
   class RadarEarlyFraudWarning
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -73,12 +74,18 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"actionable\" is required and cannot be null") if @actionable.nil?
+
       invalid_properties.push("\"charge\" is required and cannot be null") if @charge.nil?
-      # This is a model charge : Stripe::RadarEarlyFraudWarningCharge?
+      if _charge = @charge
+        if _charge.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_charge.list_invalid_properties_for("charge"))
+        end
+      end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"fraud_type\" is required and cannot be null") if @fraud_type.nil?
       if _fraud_type = @fraud_type
         if _fraud_type.to_s.size > 5000
@@ -94,17 +101,28 @@ module Stripe
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      # This is a model payment_intent : Stripe::RadarEarlyFraudWarningPaymentIntent?
+      if _payment_intent = @payment_intent
+        if _payment_intent.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @actionable.nil?
+
       return false if @charge.nil?
+      if _charge = @charge
+        if _charge.is_a?(OpenApi::Validatable)
+          return false unless _charge.valid?
+        end
+      end
       return false if @created.nil?
+
       return false if @fraud_type.nil?
       if _fraud_type = @fraud_type
         return false if _fraud_type.to_s.size > 5000
@@ -114,7 +132,13 @@ module Stripe
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _payment_intent = @payment_intent
+        if _payment_intent.is_a?(OpenApi::Validatable)
+          return false unless _payment_intent.valid?
+        end
+      end
 
       true
     end
@@ -125,7 +149,8 @@ module Stripe
       if actionable.nil?
         raise ArgumentError.new("\"actionable\" is required and cannot be null")
       end
-      @actionable = actionable
+      _actionable = actionable.not_nil!
+      @actionable = _actionable
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -134,7 +159,11 @@ module Stripe
       if charge.nil?
         raise ArgumentError.new("\"charge\" is required and cannot be null")
       end
-      @charge = charge
+      _charge = charge.not_nil!
+      if _charge.is_a?(OpenApi::Validatable)
+        _charge.validate
+      end
+      @charge = _charge
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -143,7 +172,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -157,7 +187,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"fraud_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      @fraud_type = fraud_type
+      @fraud_type = _fraud_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -171,7 +201,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -180,7 +210,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -191,7 +222,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -200,13 +231,11 @@ module Stripe
       if payment_intent.nil?
         return @payment_intent = nil
       end
-      @payment_intent = payment_intent
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _payment_intent = payment_intent.not_nil!
+      if _payment_intent.is_a?(OpenApi::Validatable)
+        _payment_intent.validate
+      end
+      @payment_intent = _payment_intent
     end
 
     # Generates #hash and #== methods from all fields

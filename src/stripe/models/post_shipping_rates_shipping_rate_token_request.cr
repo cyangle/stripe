@@ -15,6 +15,7 @@ module Stripe
   class PostShippingRatesShippingRateTokenRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -54,10 +55,19 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model fixed_amount : Stripe::FixedAmountUpdate?
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
+
+      if _fixed_amount = @fixed_amount
+        if _fixed_amount.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_fixed_amount.list_invalid_properties_for("fixed_amount"))
+        end
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
 
@@ -66,7 +76,17 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _fixed_amount = @fixed_amount
+        if _fixed_amount.is_a?(OpenApi::Validatable)
+          return false unless _fixed_amount.valid?
+        end
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
 
       true
@@ -78,7 +98,8 @@ module Stripe
       if active.nil?
         return @active = nil
       end
-      @active = active
+      _active = active.not_nil!
+      @active = _active
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -87,7 +108,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -96,7 +118,11 @@ module Stripe
       if fixed_amount.nil?
         return @fixed_amount = nil
       end
-      @fixed_amount = fixed_amount
+      _fixed_amount = fixed_amount.not_nil!
+      if _fixed_amount.is_a?(OpenApi::Validatable)
+        _fixed_amount.validate
+      end
+      @fixed_amount = _fixed_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,7 +131,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -116,13 +146,7 @@ module Stripe
       end
       _tax_behavior = tax_behavior.not_nil!
       ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid!(_tax_behavior)
-      @tax_behavior = tax_behavior
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @tax_behavior = _tax_behavior
     end
 
     # Generates #hash and #== methods from all fields

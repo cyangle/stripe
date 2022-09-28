@@ -16,6 +16,7 @@ module Stripe
   class IssuingCardWallets
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -49,12 +50,20 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"apple_pay\" is required and cannot be null") if @apple_pay.nil?
-      # This is a model apple_pay : Stripe::IssuingCardApplePay?
+      if _apple_pay = @apple_pay
+        if _apple_pay.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_apple_pay.list_invalid_properties_for("apple_pay"))
+        end
+      end
       invalid_properties.push("\"google_pay\" is required and cannot be null") if @google_pay.nil?
-      # This is a model google_pay : Stripe::IssuingCardGooglePay?
+      if _google_pay = @google_pay
+        if _google_pay.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_google_pay.list_invalid_properties_for("google_pay"))
+        end
+      end
       if _primary_account_identifier = @primary_account_identifier
         if _primary_account_identifier.to_s.size > 5000
           invalid_properties.push("invalid value for \"primary_account_identifier\", the character length must be smaller than or equal to 5000.")
@@ -66,9 +75,19 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @apple_pay.nil?
+      if _apple_pay = @apple_pay
+        if _apple_pay.is_a?(OpenApi::Validatable)
+          return false unless _apple_pay.valid?
+        end
+      end
       return false if @google_pay.nil?
+      if _google_pay = @google_pay
+        if _google_pay.is_a?(OpenApi::Validatable)
+          return false unless _google_pay.valid?
+        end
+      end
       if _primary_account_identifier = @primary_account_identifier
         return false if _primary_account_identifier.to_s.size > 5000
       end
@@ -82,7 +101,11 @@ module Stripe
       if apple_pay.nil?
         raise ArgumentError.new("\"apple_pay\" is required and cannot be null")
       end
-      @apple_pay = apple_pay
+      _apple_pay = apple_pay.not_nil!
+      if _apple_pay.is_a?(OpenApi::Validatable)
+        _apple_pay.validate
+      end
+      @apple_pay = _apple_pay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -91,7 +114,11 @@ module Stripe
       if google_pay.nil?
         raise ArgumentError.new("\"google_pay\" is required and cannot be null")
       end
-      @google_pay = google_pay
+      _google_pay = google_pay.not_nil!
+      if _google_pay.is_a?(OpenApi::Validatable)
+        _google_pay.validate
+      end
+      @google_pay = _google_pay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,13 +132,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"primary_account_identifier\", the character length must be smaller than or equal to 5000.")
       end
 
-      @primary_account_identifier = primary_account_identifier
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @primary_account_identifier = _primary_account_identifier
     end
 
     # Generates #hash and #== methods from all fields

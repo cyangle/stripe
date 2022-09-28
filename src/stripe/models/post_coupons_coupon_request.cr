@@ -15,6 +15,7 @@ module Stripe
   class PostCouponsCouponRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -48,10 +49,23 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # Container currency_options map has values of Stripe::PostCouponsRequestCurrencyOptionsValue
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
+      if _currency_options = @currency_options
+        if _currency_options.is_a?(Hash)
+          _currency_options.each do |_key, value|
+            if value.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(value.list_invalid_properties_for("currency_options"))
+            end
+          end
+        end
+      end
+
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
       if _name = @name
         if _name.to_s.size > 40
           invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 40.")
@@ -63,7 +77,22 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _currency_options = @currency_options
+        if _currency_options.is_a?(Hash)
+          _currency_options.each do |_key, value|
+            if value.is_a?(OpenApi::Validatable)
+              return false unless value.valid?
+            end
+          end
+        end
+      end
+
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
+      end
       if _name = @name
         return false if _name.to_s.size > 40
       end
@@ -77,7 +106,15 @@ module Stripe
       if currency_options.nil?
         return @currency_options = nil
       end
-      @currency_options = currency_options
+      _currency_options = currency_options.not_nil!
+      if _currency_options.is_a?(Hash)
+        _currency_options.each do |_key, value|
+          if value.is_a?(OpenApi::Validatable)
+            value.validate
+          end
+        end
+      end
+      @currency_options = _currency_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -86,7 +123,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -95,7 +133,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -109,13 +151,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 40.")
       end
 
-      @name = name
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @name = _name
     end
 
     # Generates #hash and #== methods from all fields

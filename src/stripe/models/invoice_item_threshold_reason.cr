@@ -16,6 +16,7 @@ module Stripe
   class InvoiceItemThresholdReason
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -40,9 +41,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"line_item_ids\" is required and cannot be null") if @line_item_ids.nil?
+
       invalid_properties.push("\"usage_gte\" is required and cannot be null") if @usage_gte.nil?
 
       invalid_properties
@@ -50,8 +52,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @line_item_ids.nil?
+
       return false if @usage_gte.nil?
 
       true
@@ -63,7 +66,8 @@ module Stripe
       if line_item_ids.nil?
         raise ArgumentError.new("\"line_item_ids\" is required and cannot be null")
       end
-      @line_item_ids = line_item_ids
+      _line_item_ids = line_item_ids.not_nil!
+      @line_item_ids = _line_item_ids
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,13 +76,8 @@ module Stripe
       if usage_gte.nil?
         raise ArgumentError.new("\"usage_gte\" is required and cannot be null")
       end
-      @usage_gte = usage_gte
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _usage_gte = usage_gte.not_nil!
+      @usage_gte = _usage_gte
     end
 
     # Generates #hash and #== methods from all fields

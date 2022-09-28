@@ -16,6 +16,7 @@ module Stripe
   class LegalEntityPersonVerification
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -65,7 +66,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
       if _status = @status
@@ -73,7 +74,11 @@ module Stripe
           invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model additional_document : Stripe::LegalEntityPersonVerificationAdditionalDocument?
+      if _additional_document = @additional_document
+        if _additional_document.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_additional_document.list_invalid_properties_for("additional_document"))
+        end
+      end
       if _details = @details
         if _details.to_s.size > 5000
           invalid_properties.push("invalid value for \"details\", the character length must be smaller than or equal to 5000.")
@@ -84,23 +89,37 @@ module Stripe
           invalid_properties.push("invalid value for \"details_code\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model document : Stripe::LegalEntityPersonVerificationDocument?
+      if _document = @document
+        if _document.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_document.list_invalid_properties_for("document"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @status.nil?
       if _status = @status
         return false if _status.to_s.size > 5000
+      end
+      if _additional_document = @additional_document
+        if _additional_document.is_a?(OpenApi::Validatable)
+          return false unless _additional_document.valid?
+        end
       end
       if _details = @details
         return false if _details.to_s.size > 5000
       end
       if _details_code = @details_code
         return false if _details_code.to_s.size > 5000
+      end
+      if _document = @document
+        if _document.is_a?(OpenApi::Validatable)
+          return false unless _document.valid?
+        end
       end
 
       true
@@ -117,7 +136,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -126,7 +145,11 @@ module Stripe
       if additional_document.nil?
         return @additional_document = nil
       end
-      @additional_document = additional_document
+      _additional_document = additional_document.not_nil!
+      if _additional_document.is_a?(OpenApi::Validatable)
+        _additional_document.validate
+      end
+      @additional_document = _additional_document
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -140,7 +163,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"details\", the character length must be smaller than or equal to 5000.")
       end
 
-      @details = details
+      @details = _details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -154,7 +177,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"details_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @details_code = details_code
+      @details_code = _details_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -163,13 +186,11 @@ module Stripe
       if document.nil?
         return @document = nil
       end
-      @document = document
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _document = document.not_nil!
+      if _document.is_a?(OpenApi::Validatable)
+        _document.validate
+      end
+      @document = _document
     end
 
     # Generates #hash and #== methods from all fields

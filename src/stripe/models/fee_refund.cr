@@ -16,6 +16,7 @@ module Stripe
   class FeeRefund
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -79,13 +80,20 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       invalid_properties.push("\"fee\" is required and cannot be null") if @fee.nil?
-      # This is a model fee : Stripe::FeeRefundFee?
+      if _fee = @fee
+        if _fee.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_fee.list_invalid_properties_for("fee"))
+        end
+      end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -94,23 +102,40 @@ module Stripe
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      # This is a model balance_transaction : Stripe::FeeRefundBalanceTransaction?
+      if _balance_transaction = @balance_transaction
+        if _balance_transaction.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount.nil?
+
       return false if @created.nil?
+
       return false if @currency.nil?
+
       return false if @fee.nil?
+      if _fee = @fee
+        if _fee.is_a?(OpenApi::Validatable)
+          return false unless _fee.valid?
+        end
+      end
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _balance_transaction = @balance_transaction
+        if _balance_transaction.is_a?(OpenApi::Validatable)
+          return false unless _balance_transaction.valid?
+        end
+      end
 
       true
     end
@@ -121,7 +146,8 @@ module Stripe
       if amount.nil?
         raise ArgumentError.new("\"amount\" is required and cannot be null")
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -130,7 +156,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -139,7 +166,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -148,7 +176,11 @@ module Stripe
       if fee.nil?
         raise ArgumentError.new("\"fee\" is required and cannot be null")
       end
-      @fee = fee
+      _fee = fee.not_nil!
+      if _fee.is_a?(OpenApi::Validatable)
+        _fee.validate
+      end
+      @fee = _fee
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -162,7 +194,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -173,7 +205,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -182,7 +214,11 @@ module Stripe
       if balance_transaction.nil?
         return @balance_transaction = nil
       end
-      @balance_transaction = balance_transaction
+      _balance_transaction = balance_transaction.not_nil!
+      if _balance_transaction.is_a?(OpenApi::Validatable)
+        _balance_transaction.validate
+      end
+      @balance_transaction = _balance_transaction
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -191,13 +227,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Generates #hash and #== methods from all fields

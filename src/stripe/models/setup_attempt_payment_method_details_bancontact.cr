@@ -16,6 +16,7 @@ module Stripe
   class SetupAttemptPaymentMethodDetailsBancontact
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -94,7 +95,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _bank_code = @bank_code
         if _bank_code.to_s.size > 5000
@@ -111,8 +112,16 @@ module Stripe
           invalid_properties.push("invalid value for \"bic\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model generated_sepa_debit : Stripe::SetupAttemptPaymentMethodDetailsBancontactGeneratedSepaDebit?
-      # This is a model generated_sepa_debit_mandate : Stripe::SetupAttemptPaymentMethodDetailsBancontactGeneratedSepaDebitMandate?
+      if _generated_sepa_debit = @generated_sepa_debit
+        if _generated_sepa_debit.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_generated_sepa_debit.list_invalid_properties_for("generated_sepa_debit"))
+        end
+      end
+      if _generated_sepa_debit_mandate = @generated_sepa_debit_mandate
+        if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_generated_sepa_debit_mandate.list_invalid_properties_for("generated_sepa_debit_mandate"))
+        end
+      end
       if _iban_last4 = @iban_last4
         if _iban_last4.to_s.size > 5000
           invalid_properties.push("invalid value for \"iban_last4\", the character length must be smaller than or equal to 5000.")
@@ -131,7 +140,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _bank_code = @bank_code
         return false if _bank_code.to_s.size > 5000
       end
@@ -140,6 +149,16 @@ module Stripe
       end
       if _bic = @bic
         return false if _bic.to_s.size > 5000
+      end
+      if _generated_sepa_debit = @generated_sepa_debit
+        if _generated_sepa_debit.is_a?(OpenApi::Validatable)
+          return false unless _generated_sepa_debit.valid?
+        end
+      end
+      if _generated_sepa_debit_mandate = @generated_sepa_debit_mandate
+        if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
+          return false unless _generated_sepa_debit_mandate.valid?
+        end
       end
       if _iban_last4 = @iban_last4
         return false if _iban_last4.to_s.size > 5000
@@ -163,7 +182,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @bank_code = bank_code
+      @bank_code = _bank_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -177,7 +196,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @bank_name = bank_name
+      @bank_name = _bank_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -191,7 +210,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"bic\", the character length must be smaller than or equal to 5000.")
       end
 
-      @bic = bic
+      @bic = _bic
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -200,7 +219,11 @@ module Stripe
       if generated_sepa_debit.nil?
         return @generated_sepa_debit = nil
       end
-      @generated_sepa_debit = generated_sepa_debit
+      _generated_sepa_debit = generated_sepa_debit.not_nil!
+      if _generated_sepa_debit.is_a?(OpenApi::Validatable)
+        _generated_sepa_debit.validate
+      end
+      @generated_sepa_debit = _generated_sepa_debit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -209,7 +232,11 @@ module Stripe
       if generated_sepa_debit_mandate.nil?
         return @generated_sepa_debit_mandate = nil
       end
-      @generated_sepa_debit_mandate = generated_sepa_debit_mandate
+      _generated_sepa_debit_mandate = generated_sepa_debit_mandate.not_nil!
+      if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
+        _generated_sepa_debit_mandate.validate
+      end
+      @generated_sepa_debit_mandate = _generated_sepa_debit_mandate
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -223,7 +250,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"iban_last4\", the character length must be smaller than or equal to 5000.")
       end
 
-      @iban_last4 = iban_last4
+      @iban_last4 = _iban_last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -234,7 +261,7 @@ module Stripe
       end
       _preferred_language = preferred_language.not_nil!
       ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE.valid!(_preferred_language)
-      @preferred_language = preferred_language
+      @preferred_language = _preferred_language
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -248,13 +275,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @verified_name = verified_name
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @verified_name = _verified_name
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class TaxParam1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -33,16 +34,26 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model ip_address : Stripe::BusinessProfileSpecsSupportUrl?
+      if _ip_address = @ip_address
+        if _ip_address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_ip_address.list_invalid_properties_for("ip_address"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _ip_address = @ip_address
+        if _ip_address.is_a?(OpenApi::Validatable)
+          return false unless _ip_address.valid?
+        end
+      end
+
       true
     end
 
@@ -52,13 +63,11 @@ module Stripe
       if ip_address.nil?
         return @ip_address = nil
       end
-      @ip_address = ip_address
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _ip_address = ip_address.not_nil!
+      if _ip_address.is_a?(OpenApi::Validatable)
+        _ip_address.validate
+      end
+      @ip_address = _ip_address
     end
 
     # Generates #hash and #== methods from all fields

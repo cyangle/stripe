@@ -15,6 +15,7 @@ module Stripe
   class PostCustomersCustomerBankAccountsIdRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -99,7 +100,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _account_holder_name = @account_holder_name
         if _account_holder_name.to_s.size > 5000
@@ -148,20 +149,29 @@ module Stripe
           invalid_properties.push("invalid value for \"exp_year\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
+
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
       if _name = @name
         if _name.to_s.size > 5000
           invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model owner : Stripe::Owner?
+      if _owner = @owner
+        if _owner.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_owner.list_invalid_properties_for("owner"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _account_holder_name = @account_holder_name
         return false if _account_holder_name.to_s.size > 5000
       end
@@ -190,8 +200,19 @@ module Stripe
       if _exp_year = @exp_year
         return false if _exp_year.to_s.size > 5000
       end
+
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
+      end
       if _name = @name
         return false if _name.to_s.size > 5000
+      end
+      if _owner = @owner
+        if _owner.is_a?(OpenApi::Validatable)
+          return false unless _owner.valid?
+        end
       end
 
       true
@@ -208,7 +229,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @account_holder_name = account_holder_name
+      @account_holder_name = _account_holder_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -219,7 +240,7 @@ module Stripe
       end
       _account_holder_type = account_holder_type.not_nil!
       ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid!(_account_holder_type)
-      @account_holder_type = account_holder_type
+      @account_holder_type = _account_holder_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -233,7 +254,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_city = address_city
+      @address_city = _address_city
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -247,7 +268,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_country = address_country
+      @address_country = _address_country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -261,7 +282,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_line1 = address_line1
+      @address_line1 = _address_line1
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -275,7 +296,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_line2 = address_line2
+      @address_line2 = _address_line2
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -289,7 +310,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_state = address_state
+      @address_state = _address_state
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -303,7 +324,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_zip = address_zip
+      @address_zip = _address_zip
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -317,7 +338,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"exp_month\", the character length must be smaller than or equal to 5000.")
       end
 
-      @exp_month = exp_month
+      @exp_month = _exp_month
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -331,7 +352,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"exp_year\", the character length must be smaller than or equal to 5000.")
       end
 
-      @exp_year = exp_year
+      @exp_year = _exp_year
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -340,7 +361,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -349,7 +371,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -363,7 +389,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -372,13 +398,11 @@ module Stripe
       if owner.nil?
         return @owner = nil
       end
-      @owner = owner
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _owner = owner.not_nil!
+      if _owner.is_a?(OpenApi::Validatable)
+        _owner.validate
+      end
+      @owner = _owner
     end
 
     # Generates #hash and #== methods from all fields

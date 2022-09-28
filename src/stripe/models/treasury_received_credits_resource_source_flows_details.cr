@@ -16,6 +16,7 @@ module Stripe
   class TreasuryReceivedCreditsResourceSourceFlowsDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -52,21 +53,48 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      # This is a model credit_reversal : Stripe::TreasuryCreditReversal?
-      # This is a model outbound_payment : Stripe::TreasuryOutboundPayment?
-      # This is a model payout : Stripe::Payout?
+      if _credit_reversal = @credit_reversal
+        if _credit_reversal.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_credit_reversal.list_invalid_properties_for("credit_reversal"))
+        end
+      end
+      if _outbound_payment = @outbound_payment
+        if _outbound_payment.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_outbound_payment.list_invalid_properties_for("outbound_payment"))
+        end
+      end
+      if _payout = @payout
+        if _payout.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payout.list_invalid_properties_for("payout"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if _credit_reversal = @credit_reversal
+        if _credit_reversal.is_a?(OpenApi::Validatable)
+          return false unless _credit_reversal.valid?
+        end
+      end
+      if _outbound_payment = @outbound_payment
+        if _outbound_payment.is_a?(OpenApi::Validatable)
+          return false unless _outbound_payment.valid?
+        end
+      end
+      if _payout = @payout
+        if _payout.is_a?(OpenApi::Validatable)
+          return false unless _payout.valid?
+        end
+      end
 
       true
     end
@@ -79,7 +107,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -88,7 +116,11 @@ module Stripe
       if credit_reversal.nil?
         return @credit_reversal = nil
       end
-      @credit_reversal = credit_reversal
+      _credit_reversal = credit_reversal.not_nil!
+      if _credit_reversal.is_a?(OpenApi::Validatable)
+        _credit_reversal.validate
+      end
+      @credit_reversal = _credit_reversal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -97,7 +129,11 @@ module Stripe
       if outbound_payment.nil?
         return @outbound_payment = nil
       end
-      @outbound_payment = outbound_payment
+      _outbound_payment = outbound_payment.not_nil!
+      if _outbound_payment.is_a?(OpenApi::Validatable)
+        _outbound_payment.validate
+      end
+      @outbound_payment = _outbound_payment
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -106,13 +142,11 @@ module Stripe
       if payout.nil?
         return @payout = nil
       end
-      @payout = payout
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _payout = payout.not_nil!
+      if _payout.is_a?(OpenApi::Validatable)
+        _payout.validate
+      end
+      @payout = _payout
     end
 
     # Generates #hash and #== methods from all fields

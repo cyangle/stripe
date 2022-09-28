@@ -16,6 +16,7 @@ module Stripe
   class TerminalConfiguration
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -70,7 +71,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
@@ -81,22 +82,52 @@ module Stripe
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      # This is a model bbpos_wisepos_e : Stripe::TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig?
-      # This is a model tipping : Stripe::TerminalConfigurationConfigurationResourceTipping?
-      # This is a model verifone_p400 : Stripe::TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig?
+      if _bbpos_wisepos_e = @bbpos_wisepos_e
+        if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bbpos_wisepos_e.list_invalid_properties_for("bbpos_wisepos_e"))
+        end
+      end
+
+      if _tipping = @tipping
+        if _tipping.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_tipping.list_invalid_properties_for("tipping"))
+        end
+      end
+      if _verifone_p400 = @verifone_p400
+        if _verifone_p400.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_verifone_p400.list_invalid_properties_for("verifone_p400"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _bbpos_wisepos_e = @bbpos_wisepos_e
+        if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
+          return false unless _bbpos_wisepos_e.valid?
+        end
+      end
+
+      if _tipping = @tipping
+        if _tipping.is_a?(OpenApi::Validatable)
+          return false unless _tipping.valid?
+        end
+      end
+      if _verifone_p400 = @verifone_p400
+        if _verifone_p400.is_a?(OpenApi::Validatable)
+          return false unless _verifone_p400.valid?
+        end
+      end
 
       true
     end
@@ -112,7 +143,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -121,7 +152,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +164,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -141,7 +173,11 @@ module Stripe
       if bbpos_wisepos_e.nil?
         return @bbpos_wisepos_e = nil
       end
-      @bbpos_wisepos_e = bbpos_wisepos_e
+      _bbpos_wisepos_e = bbpos_wisepos_e.not_nil!
+      if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
+        _bbpos_wisepos_e.validate
+      end
+      @bbpos_wisepos_e = _bbpos_wisepos_e
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -150,7 +186,8 @@ module Stripe
       if is_account_default.nil?
         return @is_account_default = nil
       end
-      @is_account_default = is_account_default
+      _is_account_default = is_account_default.not_nil!
+      @is_account_default = _is_account_default
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -159,7 +196,11 @@ module Stripe
       if tipping.nil?
         return @tipping = nil
       end
-      @tipping = tipping
+      _tipping = tipping.not_nil!
+      if _tipping.is_a?(OpenApi::Validatable)
+        _tipping.validate
+      end
+      @tipping = _tipping
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -168,13 +209,11 @@ module Stripe
       if verifone_p400.nil?
         return @verifone_p400 = nil
       end
-      @verifone_p400 = verifone_p400
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _verifone_p400 = verifone_p400.not_nil!
+      if _verifone_p400.is_a?(OpenApi::Validatable)
+        _verifone_p400.validate
+      end
+      @verifone_p400 = _verifone_p400
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class InvoicesStatusTransitions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -62,7 +63,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -70,7 +71,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -80,7 +81,8 @@ module Stripe
       if finalized_at.nil?
         return @finalized_at = nil
       end
-      @finalized_at = finalized_at
+      _finalized_at = finalized_at.not_nil!
+      @finalized_at = _finalized_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -89,7 +91,8 @@ module Stripe
       if marked_uncollectible_at.nil?
         return @marked_uncollectible_at = nil
       end
-      @marked_uncollectible_at = marked_uncollectible_at
+      _marked_uncollectible_at = marked_uncollectible_at.not_nil!
+      @marked_uncollectible_at = _marked_uncollectible_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -98,7 +101,8 @@ module Stripe
       if paid_at.nil?
         return @paid_at = nil
       end
-      @paid_at = paid_at
+      _paid_at = paid_at.not_nil!
+      @paid_at = _paid_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,13 +111,8 @@ module Stripe
       if voided_at.nil?
         return @voided_at = nil
       end
-      @voided_at = voided_at
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _voided_at = voided_at.not_nil!
+      @voided_at = _voided_at
     end
 
     # Generates #hash and #== methods from all fields

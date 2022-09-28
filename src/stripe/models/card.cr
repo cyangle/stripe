@@ -16,6 +16,7 @@ module Stripe
   class Card
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -238,7 +239,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"brand\" is required and cannot be null") if @brand.nil?
       if _brand = @brand
@@ -247,7 +248,9 @@ module Stripe
         end
       end
       invalid_properties.push("\"exp_month\" is required and cannot be null") if @exp_month.nil?
+
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
+
       invalid_properties.push("\"funding\" is required and cannot be null") if @funding.nil?
       if _funding = @funding
         if _funding.to_s.size > 5000
@@ -268,7 +271,11 @@ module Stripe
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      # This is a model account : Stripe::CardAccount?
+      if _account = @account
+        if _account.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_account.list_invalid_properties_for("account"))
+        end
+      end
       if _address_city = @address_city
         if _address_city.to_s.size > 5000
           invalid_properties.push("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
@@ -316,12 +323,18 @@ module Stripe
           invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model customer : Stripe::CardCustomer?
+
+      if _customer = @customer
+        if _customer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_customer.list_invalid_properties_for("customer"))
+        end
+      end
       if _cvc_check = @cvc_check
         if _cvc_check.to_s.size > 5000
           invalid_properties.push("invalid value for \"cvc_check\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _dynamic_last4 = @dynamic_last4
         if _dynamic_last4.to_s.size > 5000
           invalid_properties.push("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
@@ -332,6 +345,7 @@ module Stripe
           invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _name = @name
         if _name.to_s.size > 5000
           invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
@@ -353,13 +367,15 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @brand.nil?
       if _brand = @brand
         return false if _brand.to_s.size > 5000
       end
       return false if @exp_month.nil?
+
       return false if @exp_year.nil?
+
       return false if @funding.nil?
       if _funding = @funding
         return false if _funding.to_s.size > 5000
@@ -373,6 +389,11 @@ module Stripe
         return false if _last4.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _account = @account
+        if _account.is_a?(OpenApi::Validatable)
+          return false unless _account.valid?
+        end
+      end
       if _address_city = @address_city
         return false if _address_city.to_s.size > 5000
       end
@@ -401,15 +422,23 @@ module Stripe
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
+      if _customer = @customer
+        if _customer.is_a?(OpenApi::Validatable)
+          return false unless _customer.valid?
+        end
+      end
       if _cvc_check = @cvc_check
         return false if _cvc_check.to_s.size > 5000
       end
+
       if _dynamic_last4 = @dynamic_last4
         return false if _dynamic_last4.to_s.size > 5000
       end
       if _fingerprint = @fingerprint
         return false if _fingerprint.to_s.size > 5000
       end
+
       if _name = @name
         return false if _name.to_s.size > 5000
       end
@@ -434,7 +463,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
       end
 
-      @brand = brand
+      @brand = _brand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -443,7 +472,8 @@ module Stripe
       if exp_month.nil?
         raise ArgumentError.new("\"exp_month\" is required and cannot be null")
       end
-      @exp_month = exp_month
+      _exp_month = exp_month.not_nil!
+      @exp_month = _exp_month
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -452,7 +482,8 @@ module Stripe
       if exp_year.nil?
         raise ArgumentError.new("\"exp_year\" is required and cannot be null")
       end
-      @exp_year = exp_year
+      _exp_year = exp_year.not_nil!
+      @exp_year = _exp_year
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -466,7 +497,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"funding\", the character length must be smaller than or equal to 5000.")
       end
 
-      @funding = funding
+      @funding = _funding
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -480,7 +511,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -494,7 +525,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
 
-      @last4 = last4
+      @last4 = _last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -505,7 +536,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -514,7 +545,11 @@ module Stripe
       if account.nil?
         return @account = nil
       end
-      @account = account
+      _account = account.not_nil!
+      if _account.is_a?(OpenApi::Validatable)
+        _account.validate
+      end
+      @account = _account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -528,7 +563,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_city = address_city
+      @address_city = _address_city
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -542,7 +577,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_country = address_country
+      @address_country = _address_country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -556,7 +591,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_line1 = address_line1
+      @address_line1 = _address_line1
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -570,7 +605,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_line1_check\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_line1_check = address_line1_check
+      @address_line1_check = _address_line1_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -584,7 +619,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_line2 = address_line2
+      @address_line2 = _address_line2
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -598,7 +633,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_state = address_state
+      @address_state = _address_state
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -612,7 +647,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_zip = address_zip
+      @address_zip = _address_zip
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -626,7 +661,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_zip_check\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_zip_check = address_zip_check
+      @address_zip_check = _address_zip_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -637,7 +672,7 @@ module Stripe
       end
       _available_payout_methods = available_payout_methods.not_nil!
       ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid!(_available_payout_methods)
-      @available_payout_methods = available_payout_methods
+      @available_payout_methods = _available_payout_methods
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -651,7 +686,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @country = country
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -660,7 +695,8 @@ module Stripe
       if currency.nil?
         return @currency = nil
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -669,7 +705,11 @@ module Stripe
       if customer.nil?
         return @customer = nil
       end
-      @customer = customer
+      _customer = customer.not_nil!
+      if _customer.is_a?(OpenApi::Validatable)
+        _customer.validate
+      end
+      @customer = _customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -683,7 +723,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"cvc_check\", the character length must be smaller than or equal to 5000.")
       end
 
-      @cvc_check = cvc_check
+      @cvc_check = _cvc_check
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -692,7 +732,8 @@ module Stripe
       if default_for_currency.nil?
         return @default_for_currency = nil
       end
-      @default_for_currency = default_for_currency
+      _default_for_currency = default_for_currency.not_nil!
+      @default_for_currency = _default_for_currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -706,7 +747,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
       end
 
-      @dynamic_last4 = dynamic_last4
+      @dynamic_last4 = _dynamic_last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -720,7 +761,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
-      @fingerprint = fingerprint
+      @fingerprint = _fingerprint
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -729,7 +770,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -743,7 +785,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -757,7 +799,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -771,13 +813,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"tokenization_method\", the character length must be smaller than or equal to 5000.")
       end
 
-      @tokenization_method = tokenization_method
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @tokenization_method = _tokenization_method
     end
 
     # Generates #hash and #== methods from all fields

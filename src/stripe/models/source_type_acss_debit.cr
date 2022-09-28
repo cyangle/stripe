@@ -15,6 +15,7 @@ module Stripe
   class SourceTypeAcssDebit
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -99,7 +100,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -107,7 +108,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -117,7 +118,8 @@ module Stripe
       if bank_address_city.nil?
         return @bank_address_city = nil
       end
-      @bank_address_city = bank_address_city
+      _bank_address_city = bank_address_city.not_nil!
+      @bank_address_city = _bank_address_city
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -126,7 +128,8 @@ module Stripe
       if bank_address_line_1.nil?
         return @bank_address_line_1 = nil
       end
-      @bank_address_line_1 = bank_address_line_1
+      _bank_address_line_1 = bank_address_line_1.not_nil!
+      @bank_address_line_1 = _bank_address_line_1
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -135,7 +138,8 @@ module Stripe
       if bank_address_line_2.nil?
         return @bank_address_line_2 = nil
       end
-      @bank_address_line_2 = bank_address_line_2
+      _bank_address_line_2 = bank_address_line_2.not_nil!
+      @bank_address_line_2 = _bank_address_line_2
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -144,7 +148,8 @@ module Stripe
       if bank_address_postal_code.nil?
         return @bank_address_postal_code = nil
       end
-      @bank_address_postal_code = bank_address_postal_code
+      _bank_address_postal_code = bank_address_postal_code.not_nil!
+      @bank_address_postal_code = _bank_address_postal_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -153,7 +158,8 @@ module Stripe
       if bank_name.nil?
         return @bank_name = nil
       end
-      @bank_name = bank_name
+      _bank_name = bank_name.not_nil!
+      @bank_name = _bank_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -162,7 +168,8 @@ module Stripe
       if category.nil?
         return @category = nil
       end
-      @category = category
+      _category = category.not_nil!
+      @category = _category
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -171,7 +178,8 @@ module Stripe
       if country.nil?
         return @country = nil
       end
-      @country = country
+      _country = country.not_nil!
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -180,7 +188,8 @@ module Stripe
       if fingerprint.nil?
         return @fingerprint = nil
       end
-      @fingerprint = fingerprint
+      _fingerprint = fingerprint.not_nil!
+      @fingerprint = _fingerprint
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -189,7 +198,8 @@ module Stripe
       if last4.nil?
         return @last4 = nil
       end
-      @last4 = last4
+      _last4 = last4.not_nil!
+      @last4 = _last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -198,13 +208,8 @@ module Stripe
       if routing_number.nil?
         return @routing_number = nil
       end
-      @routing_number = routing_number
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _routing_number = routing_number.not_nil!
+      @routing_number = _routing_number
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class TreasuryOutboundPaymentsResourceReturnedStatus
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -41,21 +42,30 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
       invalid_properties.push("\"transaction\" is required and cannot be null") if @transaction.nil?
-      # This is a model transaction : Stripe::TreasuryOutboundPaymentTransaction?
+      if _transaction = @transaction
+        if _transaction.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_transaction.list_invalid_properties_for("transaction"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
       return false if @transaction.nil?
+      if _transaction = @transaction
+        if _transaction.is_a?(OpenApi::Validatable)
+          return false unless _transaction.valid?
+        end
+      end
 
       true
     end
@@ -68,7 +78,7 @@ module Stripe
       end
       _code = code.not_nil!
       ENUM_VALIDATOR_FOR_CODE.valid!(_code)
-      @code = code
+      @code = _code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -77,13 +87,11 @@ module Stripe
       if transaction.nil?
         raise ArgumentError.new("\"transaction\" is required and cannot be null")
       end
-      @transaction = transaction
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _transaction = transaction.not_nil!
+      if _transaction.is_a?(OpenApi::Validatable)
+        _transaction.validate
+      end
+      @transaction = _transaction
     end
 
     # Generates #hash and #== methods from all fields

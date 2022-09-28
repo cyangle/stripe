@@ -16,6 +16,7 @@ module Stripe
   class InvoicesLineItemsCreditedItems
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -40,7 +41,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
       if _invoice = @invoice
@@ -55,7 +56,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @invoice.nil?
       if _invoice = @invoice
         return false if _invoice.to_s.size > 5000
@@ -76,7 +77,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
       end
 
-      @invoice = invoice
+      @invoice = _invoice
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,13 +86,8 @@ module Stripe
       if invoice_line_items.nil?
         raise ArgumentError.new("\"invoice_line_items\" is required and cannot be null")
       end
-      @invoice_line_items = invoice_line_items
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _invoice_line_items = invoice_line_items.not_nil!
+      @invoice_line_items = _invoice_line_items
     end
 
     # Generates #hash and #== methods from all fields

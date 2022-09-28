@@ -16,6 +16,7 @@ module Stripe
   class PromotionCodesResourceRestrictions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -59,10 +60,20 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"first_time_transaction\" is required and cannot be null") if @first_time_transaction.nil?
-      # Container currency_options map has values of Stripe::PromotionCodeCurrencyOption
+
+      if _currency_options = @currency_options
+        if _currency_options.is_a?(Hash)
+          _currency_options.each do |_key, value|
+            if value.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(value.list_invalid_properties_for("currency_options"))
+            end
+          end
+        end
+      end
+
       if _minimum_amount_currency = @minimum_amount_currency
         if _minimum_amount_currency.to_s.size > 5000
           invalid_properties.push("invalid value for \"minimum_amount_currency\", the character length must be smaller than or equal to 5000.")
@@ -74,8 +85,19 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @first_time_transaction.nil?
+
+      if _currency_options = @currency_options
+        if _currency_options.is_a?(Hash)
+          _currency_options.each do |_key, value|
+            if value.is_a?(OpenApi::Validatable)
+              return false unless value.valid?
+            end
+          end
+        end
+      end
+
       if _minimum_amount_currency = @minimum_amount_currency
         return false if _minimum_amount_currency.to_s.size > 5000
       end
@@ -89,7 +111,8 @@ module Stripe
       if first_time_transaction.nil?
         raise ArgumentError.new("\"first_time_transaction\" is required and cannot be null")
       end
-      @first_time_transaction = first_time_transaction
+      _first_time_transaction = first_time_transaction.not_nil!
+      @first_time_transaction = _first_time_transaction
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -98,7 +121,15 @@ module Stripe
       if currency_options.nil?
         return @currency_options = nil
       end
-      @currency_options = currency_options
+      _currency_options = currency_options.not_nil!
+      if _currency_options.is_a?(Hash)
+        _currency_options.each do |_key, value|
+          if value.is_a?(OpenApi::Validatable)
+            value.validate
+          end
+        end
+      end
+      @currency_options = _currency_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,7 +138,8 @@ module Stripe
       if minimum_amount.nil?
         return @minimum_amount = nil
       end
-      @minimum_amount = minimum_amount
+      _minimum_amount = minimum_amount.not_nil!
+      @minimum_amount = _minimum_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -121,13 +153,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"minimum_amount_currency\", the character length must be smaller than or equal to 5000.")
       end
 
-      @minimum_amount_currency = minimum_amount_currency
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @minimum_amount_currency = _minimum_amount_currency
     end
 
     # Generates #hash and #== methods from all fields

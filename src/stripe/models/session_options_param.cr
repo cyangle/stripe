@@ -16,6 +16,7 @@ module Stripe
   class SessionOptionsParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -34,16 +35,26 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model document : Stripe::SessionOptionsParamDocument?
+      if _document = @document
+        if _document.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_document.list_invalid_properties_for("document"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _document = @document
+        if _document.is_a?(OpenApi::Validatable)
+          return false unless _document.valid?
+        end
+      end
+
       true
     end
 
@@ -53,13 +64,11 @@ module Stripe
       if document.nil?
         return @document = nil
       end
-      @document = document
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _document = document.not_nil!
+      if _document.is_a?(OpenApi::Validatable)
+        _document.validate
+      end
+      @document = _document
     end
 
     # Generates #hash and #== methods from all fields

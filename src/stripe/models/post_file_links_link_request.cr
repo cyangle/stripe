@@ -15,6 +15,7 @@ module Stripe
   class PostFileLinksLinkRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -42,17 +43,37 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model expires_at : Stripe::PostFileLinksLinkRequestExpiresAt?
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
+
+      if _expires_at = @expires_at
+        if _expires_at.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_expires_at.list_invalid_properties_for("expires_at"))
+        end
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _expires_at = @expires_at
+        if _expires_at.is_a?(OpenApi::Validatable)
+          return false unless _expires_at.valid?
+        end
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
+      end
+
       true
     end
 
@@ -62,7 +83,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -71,7 +93,11 @@ module Stripe
       if expires_at.nil?
         return @expires_at = nil
       end
-      @expires_at = expires_at
+      _expires_at = expires_at.not_nil!
+      if _expires_at.is_a?(OpenApi::Validatable)
+        _expires_at.validate
+      end
+      @expires_at = _expires_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -80,13 +106,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Generates #hash and #== methods from all fields

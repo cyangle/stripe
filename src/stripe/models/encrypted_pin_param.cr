@@ -16,6 +16,7 @@ module Stripe
   class EncryptedPinParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -34,7 +35,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _encrypted_number = @encrypted_number
         if _encrypted_number.to_s.size > 5000
@@ -47,7 +48,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _encrypted_number = @encrypted_number
         return false if _encrypted_number.to_s.size > 5000
       end
@@ -66,13 +67,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"encrypted_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @encrypted_number = encrypted_number
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @encrypted_number = _encrypted_number
     end
 
     # Generates #hash and #== methods from all fields

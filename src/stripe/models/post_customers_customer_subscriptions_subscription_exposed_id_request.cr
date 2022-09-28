@@ -15,6 +15,7 @@ module Stripe
   class PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -162,14 +163,35 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # Container add_invoice_items array has values of Stripe::AddInvoiceItemEntry
-      # This is a model automatic_tax : Stripe::AutomaticTaxConfig?
+      if _add_invoice_items = @add_invoice_items
+        if _add_invoice_items.is_a?(Array)
+          _add_invoice_items.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("add_invoice_items"))
+            end
+          end
+        end
+      end
+
+      if _automatic_tax = @automatic_tax
+        if _automatic_tax.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.error_message) unless ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid?(@billing_cycle_anchor)
-      # This is a model billing_thresholds : Stripe::PostCustomersCustomerSubscriptionsRequestBillingThresholds?
-      # This is a model cancel_at : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestCancelAt?
+      if _billing_thresholds = @billing_thresholds
+        if _billing_thresholds.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds"))
+        end
+      end
+      if _cancel_at = @cancel_at
+        if _cancel_at.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_cancel_at.list_invalid_properties_for("cancel_at"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECTION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
       if _coupon = @coupon
@@ -177,6 +199,7 @@ module Stripe
           invalid_properties.push("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _default_payment_method = @default_payment_method
         if _default_payment_method.to_s.size > 5000
           invalid_properties.push("invalid value for \"default_payment_method\", the character length must be smaller than or equal to 5000.")
@@ -187,14 +210,44 @@ module Stripe
           invalid_properties.push("invalid value for \"default_source\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model default_tax_rates : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestDefaultTaxRates?
-      # Container items array has values of Stripe::SubscriptionItemUpdateParams
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
-      # This is a model pause_collection : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestPauseCollection?
+      if _default_tax_rates = @default_tax_rates
+        if _default_tax_rates.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_default_tax_rates.list_invalid_properties_for("default_tax_rates"))
+        end
+      end
+
+      if _items = @items
+        if _items.is_a?(Array)
+          _items.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("items"))
+            end
+          end
+        end
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
+
+      if _pause_collection = @pause_collection
+        if _pause_collection.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_pause_collection.list_invalid_properties_for("pause_collection"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.valid?(@payment_behavior)
-      # This is a model payment_settings : Stripe::PaymentSettings?
-      # This is a model pending_invoice_item_interval : Stripe::PostCustomersCustomerSubscriptionsRequestPendingInvoiceItemInterval?
+      if _payment_settings = @payment_settings
+        if _payment_settings.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_settings.list_invalid_properties_for("payment_settings"))
+        end
+      end
+      if _pending_invoice_item_interval = @pending_invoice_item_interval
+        if _pending_invoice_item_interval.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_pending_invoice_item_interval.list_invalid_properties_for("pending_invoice_item_interval"))
+        end
+      end
       if _promotion_code = @promotion_code
         if _promotion_code.to_s.size > 5000
           invalid_properties.push("invalid value for \"promotion_code\", the character length must be smaller than or equal to 5000.")
@@ -202,31 +255,114 @@ module Stripe
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
-      # This is a model transfer_data : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTransferData?
-      # This is a model trial_end : Stripe::PostCustomersCustomerSubscriptionsSubscriptionExposedIdRequestTrialEnd?
+
+      if _transfer_data = @transfer_data
+        if _transfer_data.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data"))
+        end
+      end
+      if _trial_end = @trial_end
+        if _trial_end.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_trial_end.list_invalid_properties_for("trial_end"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _add_invoice_items = @add_invoice_items
+        if _add_invoice_items.is_a?(Array)
+          _add_invoice_items.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
+
+      if _automatic_tax = @automatic_tax
+        if _automatic_tax.is_a?(OpenApi::Validatable)
+          return false unless _automatic_tax.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid?(@billing_cycle_anchor)
+      if _billing_thresholds = @billing_thresholds
+        if _billing_thresholds.is_a?(OpenApi::Validatable)
+          return false unless _billing_thresholds.valid?
+        end
+      end
+      if _cancel_at = @cancel_at
+        if _cancel_at.is_a?(OpenApi::Validatable)
+          return false unless _cancel_at.valid?
+        end
+      end
+
       return false unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
       if _coupon = @coupon
         return false if _coupon.to_s.size > 5000
       end
+
       if _default_payment_method = @default_payment_method
         return false if _default_payment_method.to_s.size > 5000
       end
       if _default_source = @default_source
         return false if _default_source.to_s.size > 5000
       end
+      if _default_tax_rates = @default_tax_rates
+        if _default_tax_rates.is_a?(OpenApi::Validatable)
+          return false unless _default_tax_rates.valid?
+        end
+      end
+
+      if _items = @items
+        if _items.is_a?(Array)
+          _items.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
+      end
+
+      if _pause_collection = @pause_collection
+        if _pause_collection.is_a?(OpenApi::Validatable)
+          return false unless _pause_collection.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.valid?(@payment_behavior)
+      if _payment_settings = @payment_settings
+        if _payment_settings.is_a?(OpenApi::Validatable)
+          return false unless _payment_settings.valid?
+        end
+      end
+      if _pending_invoice_item_interval = @pending_invoice_item_interval
+        if _pending_invoice_item_interval.is_a?(OpenApi::Validatable)
+          return false unless _pending_invoice_item_interval.valid?
+        end
+      end
       if _promotion_code = @promotion_code
         return false if _promotion_code.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+
+      if _transfer_data = @transfer_data
+        if _transfer_data.is_a?(OpenApi::Validatable)
+          return false unless _transfer_data.valid?
+        end
+      end
+      if _trial_end = @trial_end
+        if _trial_end.is_a?(OpenApi::Validatable)
+          return false unless _trial_end.valid?
+        end
+      end
 
       true
     end
@@ -237,7 +373,15 @@ module Stripe
       if add_invoice_items.nil?
         return @add_invoice_items = nil
       end
-      @add_invoice_items = add_invoice_items
+      _add_invoice_items = add_invoice_items.not_nil!
+      if _add_invoice_items.is_a?(Array)
+        _add_invoice_items.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @add_invoice_items = _add_invoice_items
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -246,7 +390,8 @@ module Stripe
       if application_fee_percent.nil?
         return @application_fee_percent = nil
       end
-      @application_fee_percent = application_fee_percent
+      _application_fee_percent = application_fee_percent.not_nil!
+      @application_fee_percent = _application_fee_percent
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -255,7 +400,11 @@ module Stripe
       if automatic_tax.nil?
         return @automatic_tax = nil
       end
-      @automatic_tax = automatic_tax
+      _automatic_tax = automatic_tax.not_nil!
+      if _automatic_tax.is_a?(OpenApi::Validatable)
+        _automatic_tax.validate
+      end
+      @automatic_tax = _automatic_tax
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -266,7 +415,7 @@ module Stripe
       end
       _billing_cycle_anchor = billing_cycle_anchor.not_nil!
       ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid!(_billing_cycle_anchor)
-      @billing_cycle_anchor = billing_cycle_anchor
+      @billing_cycle_anchor = _billing_cycle_anchor
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -275,7 +424,11 @@ module Stripe
       if billing_thresholds.nil?
         return @billing_thresholds = nil
       end
-      @billing_thresholds = billing_thresholds
+      _billing_thresholds = billing_thresholds.not_nil!
+      if _billing_thresholds.is_a?(OpenApi::Validatable)
+        _billing_thresholds.validate
+      end
+      @billing_thresholds = _billing_thresholds
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -284,7 +437,11 @@ module Stripe
       if cancel_at.nil?
         return @cancel_at = nil
       end
-      @cancel_at = cancel_at
+      _cancel_at = cancel_at.not_nil!
+      if _cancel_at.is_a?(OpenApi::Validatable)
+        _cancel_at.validate
+      end
+      @cancel_at = _cancel_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -293,7 +450,8 @@ module Stripe
       if cancel_at_period_end.nil?
         return @cancel_at_period_end = nil
       end
-      @cancel_at_period_end = cancel_at_period_end
+      _cancel_at_period_end = cancel_at_period_end.not_nil!
+      @cancel_at_period_end = _cancel_at_period_end
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -304,7 +462,7 @@ module Stripe
       end
       _collection_method = collection_method.not_nil!
       ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(_collection_method)
-      @collection_method = collection_method
+      @collection_method = _collection_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -318,7 +476,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
       end
 
-      @coupon = coupon
+      @coupon = _coupon
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -327,7 +485,8 @@ module Stripe
       if days_until_due.nil?
         return @days_until_due = nil
       end
-      @days_until_due = days_until_due
+      _days_until_due = days_until_due.not_nil!
+      @days_until_due = _days_until_due
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -341,7 +500,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"default_payment_method\", the character length must be smaller than or equal to 5000.")
       end
 
-      @default_payment_method = default_payment_method
+      @default_payment_method = _default_payment_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -355,7 +514,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"default_source\", the character length must be smaller than or equal to 5000.")
       end
 
-      @default_source = default_source
+      @default_source = _default_source
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -364,7 +523,11 @@ module Stripe
       if default_tax_rates.nil?
         return @default_tax_rates = nil
       end
-      @default_tax_rates = default_tax_rates
+      _default_tax_rates = default_tax_rates.not_nil!
+      if _default_tax_rates.is_a?(OpenApi::Validatable)
+        _default_tax_rates.validate
+      end
+      @default_tax_rates = _default_tax_rates
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -373,7 +536,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -382,7 +546,15 @@ module Stripe
       if items.nil?
         return @items = nil
       end
-      @items = items
+      _items = items.not_nil!
+      if _items.is_a?(Array)
+        _items.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @items = _items
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -391,7 +563,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -400,7 +576,8 @@ module Stripe
       if off_session.nil?
         return @off_session = nil
       end
-      @off_session = off_session
+      _off_session = off_session.not_nil!
+      @off_session = _off_session
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -409,7 +586,11 @@ module Stripe
       if pause_collection.nil?
         return @pause_collection = nil
       end
-      @pause_collection = pause_collection
+      _pause_collection = pause_collection.not_nil!
+      if _pause_collection.is_a?(OpenApi::Validatable)
+        _pause_collection.validate
+      end
+      @pause_collection = _pause_collection
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -420,7 +601,7 @@ module Stripe
       end
       _payment_behavior = payment_behavior.not_nil!
       ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.valid!(_payment_behavior)
-      @payment_behavior = payment_behavior
+      @payment_behavior = _payment_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -429,7 +610,11 @@ module Stripe
       if payment_settings.nil?
         return @payment_settings = nil
       end
-      @payment_settings = payment_settings
+      _payment_settings = payment_settings.not_nil!
+      if _payment_settings.is_a?(OpenApi::Validatable)
+        _payment_settings.validate
+      end
+      @payment_settings = _payment_settings
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -438,7 +623,11 @@ module Stripe
       if pending_invoice_item_interval.nil?
         return @pending_invoice_item_interval = nil
       end
-      @pending_invoice_item_interval = pending_invoice_item_interval
+      _pending_invoice_item_interval = pending_invoice_item_interval.not_nil!
+      if _pending_invoice_item_interval.is_a?(OpenApi::Validatable)
+        _pending_invoice_item_interval.validate
+      end
+      @pending_invoice_item_interval = _pending_invoice_item_interval
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -452,7 +641,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"promotion_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @promotion_code = promotion_code
+      @promotion_code = _promotion_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -463,7 +652,7 @@ module Stripe
       end
       _proration_behavior = proration_behavior.not_nil!
       ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(_proration_behavior)
-      @proration_behavior = proration_behavior
+      @proration_behavior = _proration_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -472,7 +661,8 @@ module Stripe
       if proration_date.nil?
         return @proration_date = nil
       end
-      @proration_date = proration_date
+      _proration_date = proration_date.not_nil!
+      @proration_date = _proration_date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -481,7 +671,11 @@ module Stripe
       if transfer_data.nil?
         return @transfer_data = nil
       end
-      @transfer_data = transfer_data
+      _transfer_data = transfer_data.not_nil!
+      if _transfer_data.is_a?(OpenApi::Validatable)
+        _transfer_data.validate
+      end
+      @transfer_data = _transfer_data
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -490,7 +684,11 @@ module Stripe
       if trial_end.nil?
         return @trial_end = nil
       end
-      @trial_end = trial_end
+      _trial_end = trial_end.not_nil!
+      if _trial_end.is_a?(OpenApi::Validatable)
+        _trial_end.validate
+      end
+      @trial_end = _trial_end
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -499,13 +697,8 @@ module Stripe
       if trial_from_plan.nil?
         return @trial_from_plan = nil
       end
-      @trial_from_plan = trial_from_plan
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _trial_from_plan = trial_from_plan.not_nil!
+      @trial_from_plan = _trial_from_plan
     end
 
     # Generates #hash and #== methods from all fields

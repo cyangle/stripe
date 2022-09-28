@@ -16,6 +16,7 @@ module Stripe
   class MandateAcssDebit
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -62,7 +63,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE.valid?(@payment_schedule, false)
@@ -81,7 +82,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE.valid?(@payment_schedule, false)
       return false unless ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.valid?(@transaction_type, false)
       return false unless ENUM_VALIDATOR_FOR_DEFAULT_FOR.all_valid?(@default_for)
@@ -100,7 +101,7 @@ module Stripe
       end
       _payment_schedule = payment_schedule.not_nil!
       ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE.valid!(_payment_schedule)
-      @payment_schedule = payment_schedule
+      @payment_schedule = _payment_schedule
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -111,7 +112,7 @@ module Stripe
       end
       _transaction_type = transaction_type.not_nil!
       ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.valid!(_transaction_type)
-      @transaction_type = transaction_type
+      @transaction_type = _transaction_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -122,7 +123,7 @@ module Stripe
       end
       _default_for = default_for.not_nil!
       ENUM_VALIDATOR_FOR_DEFAULT_FOR.all_valid!(_default_for)
-      @default_for = default_for
+      @default_for = _default_for
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,13 +137,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"interval_description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @interval_description = interval_description
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @interval_description = _interval_description
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class PaymentPagesCheckoutSessionShippingAddressCollection
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -37,7 +38,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ALLOWED_COUNTRIES.error_message) unless ENUM_VALIDATOR_FOR_ALLOWED_COUNTRIES.all_valid?(@allowed_countries, false)
@@ -47,7 +48,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_ALLOWED_COUNTRIES.all_valid?(@allowed_countries, false)
 
       true
@@ -61,13 +62,7 @@ module Stripe
       end
       _allowed_countries = allowed_countries.not_nil!
       ENUM_VALIDATOR_FOR_ALLOWED_COUNTRIES.all_valid!(_allowed_countries)
-      @allowed_countries = allowed_countries
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @allowed_countries = _allowed_countries
     end
 
     # Generates #hash and #== methods from all fields

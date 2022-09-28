@@ -15,6 +15,7 @@ module Stripe
   class PostPricesPriceRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -69,15 +70,25 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model currency_options : Stripe::PostPricesPriceRequestCurrencyOptions?
+
+      if _currency_options = @currency_options
+        if _currency_options.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_currency_options.list_invalid_properties_for("currency_options"))
+        end
+      end
+
       if _lookup_key = @lookup_key
         if _lookup_key.to_s.size > 200
           invalid_properties.push("invalid value for \"lookup_key\", the character length must be smaller than or equal to 200.")
         end
       end
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
       if _nickname = @nickname
         if _nickname.to_s.size > 5000
           invalid_properties.push("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
@@ -91,9 +102,20 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _currency_options = @currency_options
+        if _currency_options.is_a?(OpenApi::Validatable)
+          return false unless _currency_options.valid?
+        end
+      end
+
       if _lookup_key = @lookup_key
         return false if _lookup_key.to_s.size > 200
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
       end
       if _nickname = @nickname
         return false if _nickname.to_s.size > 5000
@@ -109,7 +131,8 @@ module Stripe
       if active.nil?
         return @active = nil
       end
-      @active = active
+      _active = active.not_nil!
+      @active = _active
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -118,7 +141,11 @@ module Stripe
       if currency_options.nil?
         return @currency_options = nil
       end
-      @currency_options = currency_options
+      _currency_options = currency_options.not_nil!
+      if _currency_options.is_a?(OpenApi::Validatable)
+        _currency_options.validate
+      end
+      @currency_options = _currency_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,7 +154,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -141,7 +169,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"lookup_key\", the character length must be smaller than or equal to 200.")
       end
 
-      @lookup_key = lookup_key
+      @lookup_key = _lookup_key
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -150,7 +178,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -164,7 +196,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
       end
 
-      @nickname = nickname
+      @nickname = _nickname
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -175,7 +207,7 @@ module Stripe
       end
       _tax_behavior = tax_behavior.not_nil!
       ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid!(_tax_behavior)
-      @tax_behavior = tax_behavior
+      @tax_behavior = _tax_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -184,13 +216,8 @@ module Stripe
       if transfer_lookup_key.nil?
         return @transfer_lookup_key = nil
       end
-      @transfer_lookup_key = transfer_lookup_key
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _transfer_lookup_key = transfer_lookup_key.not_nil!
+      @transfer_lookup_key = _transfer_lookup_key
     end
 
     # Generates #hash and #== methods from all fields

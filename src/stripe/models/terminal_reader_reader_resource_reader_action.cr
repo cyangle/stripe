@@ -16,6 +16,7 @@ module Stripe
   class TerminalReaderReaderResourceReaderAction
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -75,7 +76,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
@@ -91,16 +92,28 @@ module Stripe
           invalid_properties.push("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model process_payment_intent : Stripe::TerminalReaderReaderResourceProcessPaymentIntentAction?
-      # This is a model process_setup_intent : Stripe::TerminalReaderReaderResourceProcessSetupIntentAction?
-      # This is a model set_reader_display : Stripe::TerminalReaderReaderResourceSetReaderDisplayAction?
+      if _process_payment_intent = @process_payment_intent
+        if _process_payment_intent.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_process_payment_intent.list_invalid_properties_for("process_payment_intent"))
+        end
+      end
+      if _process_setup_intent = @process_setup_intent
+        if _process_setup_intent.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_process_setup_intent.list_invalid_properties_for("process_setup_intent"))
+        end
+      end
+      if _set_reader_display = @set_reader_display
+        if _set_reader_display.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_set_reader_display.list_invalid_properties_for("set_reader_display"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _failure_code = @failure_code
@@ -108,6 +121,21 @@ module Stripe
       end
       if _failure_message = @failure_message
         return false if _failure_message.to_s.size > 5000
+      end
+      if _process_payment_intent = @process_payment_intent
+        if _process_payment_intent.is_a?(OpenApi::Validatable)
+          return false unless _process_payment_intent.valid?
+        end
+      end
+      if _process_setup_intent = @process_setup_intent
+        if _process_setup_intent.is_a?(OpenApi::Validatable)
+          return false unless _process_setup_intent.valid?
+        end
+      end
+      if _set_reader_display = @set_reader_display
+        if _set_reader_display.is_a?(OpenApi::Validatable)
+          return false unless _set_reader_display.valid?
+        end
       end
 
       true
@@ -121,7 +149,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +160,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -146,7 +174,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @failure_code = failure_code
+      @failure_code = _failure_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -160,7 +188,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
       end
 
-      @failure_message = failure_message
+      @failure_message = _failure_message
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -169,7 +197,11 @@ module Stripe
       if process_payment_intent.nil?
         return @process_payment_intent = nil
       end
-      @process_payment_intent = process_payment_intent
+      _process_payment_intent = process_payment_intent.not_nil!
+      if _process_payment_intent.is_a?(OpenApi::Validatable)
+        _process_payment_intent.validate
+      end
+      @process_payment_intent = _process_payment_intent
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -178,7 +210,11 @@ module Stripe
       if process_setup_intent.nil?
         return @process_setup_intent = nil
       end
-      @process_setup_intent = process_setup_intent
+      _process_setup_intent = process_setup_intent.not_nil!
+      if _process_setup_intent.is_a?(OpenApi::Validatable)
+        _process_setup_intent.validate
+      end
+      @process_setup_intent = _process_setup_intent
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -187,13 +223,11 @@ module Stripe
       if set_reader_display.nil?
         return @set_reader_display = nil
       end
-      @set_reader_display = set_reader_display
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _set_reader_display = set_reader_display.not_nil!
+      if _set_reader_display.is_a?(OpenApi::Validatable)
+        _set_reader_display.validate
+      end
+      @set_reader_display = _set_reader_display
     end
 
     # Generates #hash and #== methods from all fields

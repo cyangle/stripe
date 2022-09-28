@@ -16,6 +16,7 @@ module Stripe
   class QuotesResourceQuoteList
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -51,10 +52,18 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"data\" is required and cannot be null") if @data.nil?
-      # Container data array has values of Stripe::Quote
+      if _data = @data
+        if _data.is_a?(Array)
+          _data.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("data"))
+            end
+          end
+        end
+      end
       invalid_properties.push("\"has_more\" is required and cannot be null") if @has_more.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
@@ -75,9 +84,19 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @data.nil?
+      if _data = @data
+        if _data.is_a?(Array)
+          _data.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       return false if @has_more.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @url.nil?
       if _url = @url
@@ -94,7 +113,15 @@ module Stripe
       if data.nil?
         raise ArgumentError.new("\"data\" is required and cannot be null")
       end
-      @data = data
+      _data = data.not_nil!
+      if _data.is_a?(Array)
+        _data.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @data = _data
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -103,7 +130,8 @@ module Stripe
       if has_more.nil?
         raise ArgumentError.new("\"has_more\" is required and cannot be null")
       end
-      @has_more = has_more
+      _has_more = has_more.not_nil!
+      @has_more = _has_more
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -114,7 +142,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -133,13 +161,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"url\", must conform to the pattern #{pattern}.")
       end
 
-      @url = url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @url = _url
     end
 
     # Generates #hash and #== methods from all fields

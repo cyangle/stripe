@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodCardWallet
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -76,27 +77,51 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       if _dynamic_last4 = @dynamic_last4
         if _dynamic_last4.to_s.size > 5000
           invalid_properties.push("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model masterpass : Stripe::PaymentMethodCardWalletMasterpass?
-      # This is a model visa_checkout : Stripe::PaymentMethodCardWalletVisaCheckout?
+
+      if _masterpass = @masterpass
+        if _masterpass.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_masterpass.list_invalid_properties_for("masterpass"))
+        end
+      end
+
+      if _visa_checkout = @visa_checkout
+        if _visa_checkout.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_visa_checkout.list_invalid_properties_for("visa_checkout"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       if _dynamic_last4 = @dynamic_last4
         return false if _dynamic_last4.to_s.size > 5000
+      end
+
+      if _masterpass = @masterpass
+        if _masterpass.is_a?(OpenApi::Validatable)
+          return false unless _masterpass.valid?
+        end
+      end
+
+      if _visa_checkout = @visa_checkout
+        if _visa_checkout.is_a?(OpenApi::Validatable)
+          return false unless _visa_checkout.valid?
+        end
       end
 
       true
@@ -110,7 +135,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -119,7 +144,8 @@ module Stripe
       if amex_express_checkout.nil?
         return @amex_express_checkout = nil
       end
-      @amex_express_checkout = amex_express_checkout
+      _amex_express_checkout = amex_express_checkout.not_nil!
+      @amex_express_checkout = _amex_express_checkout
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -128,7 +154,8 @@ module Stripe
       if apple_pay.nil?
         return @apple_pay = nil
       end
-      @apple_pay = apple_pay
+      _apple_pay = apple_pay.not_nil!
+      @apple_pay = _apple_pay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -142,7 +169,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
       end
 
-      @dynamic_last4 = dynamic_last4
+      @dynamic_last4 = _dynamic_last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -151,7 +178,8 @@ module Stripe
       if google_pay.nil?
         return @google_pay = nil
       end
-      @google_pay = google_pay
+      _google_pay = google_pay.not_nil!
+      @google_pay = _google_pay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -160,7 +188,11 @@ module Stripe
       if masterpass.nil?
         return @masterpass = nil
       end
-      @masterpass = masterpass
+      _masterpass = masterpass.not_nil!
+      if _masterpass.is_a?(OpenApi::Validatable)
+        _masterpass.validate
+      end
+      @masterpass = _masterpass
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -169,7 +201,8 @@ module Stripe
       if samsung_pay.nil?
         return @samsung_pay = nil
       end
-      @samsung_pay = samsung_pay
+      _samsung_pay = samsung_pay.not_nil!
+      @samsung_pay = _samsung_pay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -178,13 +211,11 @@ module Stripe
       if visa_checkout.nil?
         return @visa_checkout = nil
       end
-      @visa_checkout = visa_checkout
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _visa_checkout = visa_checkout.not_nil!
+      if _visa_checkout.is_a?(OpenApi::Validatable)
+        _visa_checkout.validate
+      end
+      @visa_checkout = _visa_checkout
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class CustomerUpdateUpdatingParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,16 +38,26 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model allowed_updates : Stripe::CustomerUpdateCreationParamAllowedUpdates?
+      if _allowed_updates = @allowed_updates
+        if _allowed_updates.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_allowed_updates.list_invalid_properties_for("allowed_updates"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _allowed_updates = @allowed_updates
+        if _allowed_updates.is_a?(OpenApi::Validatable)
+          return false unless _allowed_updates.valid?
+        end
+      end
+
       true
     end
 
@@ -56,7 +67,11 @@ module Stripe
       if allowed_updates.nil?
         return @allowed_updates = nil
       end
-      @allowed_updates = allowed_updates
+      _allowed_updates = allowed_updates.not_nil!
+      if _allowed_updates.is_a?(OpenApi::Validatable)
+        _allowed_updates.validate
+      end
+      @allowed_updates = _allowed_updates
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -65,13 +80,8 @@ module Stripe
       if enabled.nil?
         return @enabled = nil
       end
-      @enabled = enabled
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _enabled = enabled.not_nil!
+      @enabled = _enabled
     end
 
     # Generates #hash and #== methods from all fields

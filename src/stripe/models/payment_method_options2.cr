@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodOptions2
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -34,16 +35,26 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model us_bank_account : Stripe::PaymentMethodOptions2UsBankAccount?
+      if _us_bank_account = @us_bank_account
+        if _us_bank_account.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _us_bank_account = @us_bank_account
+        if _us_bank_account.is_a?(OpenApi::Validatable)
+          return false unless _us_bank_account.valid?
+        end
+      end
+
       true
     end
 
@@ -53,13 +64,11 @@ module Stripe
       if us_bank_account.nil?
         return @us_bank_account = nil
       end
-      @us_bank_account = us_bank_account
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _us_bank_account = us_bank_account.not_nil!
+      if _us_bank_account.is_a?(OpenApi::Validatable)
+        _us_bank_account.validate
+      end
+      @us_bank_account = _us_bank_account
     end
 
     # Generates #hash and #== methods from all fields

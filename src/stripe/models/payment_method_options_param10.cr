@@ -15,6 +15,7 @@ module Stripe
   class PaymentMethodOptionsParam10
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -48,7 +49,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CLIENT.error_message) unless ENUM_VALIDATOR_FOR_CLIENT.valid?(@client, false)
@@ -65,7 +66,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_CLIENT.valid?(@client, false)
       if _app_id = @app_id
         return false if _app_id.to_s.size > 5000
@@ -83,7 +84,7 @@ module Stripe
       end
       _client = client.not_nil!
       ENUM_VALIDATOR_FOR_CLIENT.valid!(_client)
-      @client = client
+      @client = _client
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -97,7 +98,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"app_id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @app_id = app_id
+      @app_id = _app_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -108,13 +109,7 @@ module Stripe
       end
       _setup_future_usage = setup_future_usage.not_nil!
       ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(_setup_future_usage)
-      @setup_future_usage = setup_future_usage
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @setup_future_usage = _setup_future_usage
     end
 
     # Generates #hash and #== methods from all fields

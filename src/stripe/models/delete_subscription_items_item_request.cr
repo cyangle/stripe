@@ -15,6 +15,7 @@ module Stripe
   class DeleteSubscriptionItemsItemRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -46,7 +47,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
@@ -56,7 +57,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
 
       true
@@ -68,7 +69,8 @@ module Stripe
       if clear_usage.nil?
         return @clear_usage = nil
       end
-      @clear_usage = clear_usage
+      _clear_usage = clear_usage.not_nil!
+      @clear_usage = _clear_usage
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -79,7 +81,7 @@ module Stripe
       end
       _proration_behavior = proration_behavior.not_nil!
       ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(_proration_behavior)
-      @proration_behavior = proration_behavior
+      @proration_behavior = _proration_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -88,13 +90,8 @@ module Stripe
       if proration_date.nil?
         return @proration_date = nil
       end
-      @proration_date = proration_date
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _proration_date = proration_date.not_nil!
+      @proration_date = _proration_date
     end
 
     # Generates #hash and #== methods from all fields

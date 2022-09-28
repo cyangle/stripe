@@ -15,6 +15,7 @@ module Stripe
   class PostIssuingCardholdersCardholderRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -72,12 +73,30 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model billing : Stripe::BillingSpecs?
-      # This is a model company : Stripe::CompanyParam?
-      # This is a model individual : Stripe::IndividualParam?
-      # This is a model spending_controls : Stripe::AuthorizationControlsParamV2?
+      if _billing = @billing
+        if _billing.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_billing.list_invalid_properties_for("billing"))
+        end
+      end
+      if _company = @company
+        if _company.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_company.list_invalid_properties_for("company"))
+        end
+      end
+
+      if _individual = @individual
+        if _individual.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_individual.list_invalid_properties_for("individual"))
+        end
+      end
+
+      if _spending_controls = @spending_controls
+        if _spending_controls.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
@@ -86,7 +105,29 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _billing = @billing
+        if _billing.is_a?(OpenApi::Validatable)
+          return false unless _billing.valid?
+        end
+      end
+      if _company = @company
+        if _company.is_a?(OpenApi::Validatable)
+          return false unless _company.valid?
+        end
+      end
+
+      if _individual = @individual
+        if _individual.is_a?(OpenApi::Validatable)
+          return false unless _individual.valid?
+        end
+      end
+
+      if _spending_controls = @spending_controls
+        if _spending_controls.is_a?(OpenApi::Validatable)
+          return false unless _spending_controls.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
       true
@@ -98,7 +139,11 @@ module Stripe
       if billing.nil?
         return @billing = nil
       end
-      @billing = billing
+      _billing = billing.not_nil!
+      if _billing.is_a?(OpenApi::Validatable)
+        _billing.validate
+      end
+      @billing = _billing
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,7 +152,11 @@ module Stripe
       if company.nil?
         return @company = nil
       end
-      @company = company
+      _company = company.not_nil!
+      if _company.is_a?(OpenApi::Validatable)
+        _company.validate
+      end
+      @company = _company
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -116,7 +165,8 @@ module Stripe
       if email.nil?
         return @email = nil
       end
-      @email = email
+      _email = email.not_nil!
+      @email = _email
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -125,7 +175,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -134,7 +185,11 @@ module Stripe
       if individual.nil?
         return @individual = nil
       end
-      @individual = individual
+      _individual = individual.not_nil!
+      if _individual.is_a?(OpenApi::Validatable)
+        _individual.validate
+      end
+      @individual = _individual
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -143,7 +198,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -152,7 +208,8 @@ module Stripe
       if phone_number.nil?
         return @phone_number = nil
       end
-      @phone_number = phone_number
+      _phone_number = phone_number.not_nil!
+      @phone_number = _phone_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -161,7 +218,11 @@ module Stripe
       if spending_controls.nil?
         return @spending_controls = nil
       end
-      @spending_controls = spending_controls
+      _spending_controls = spending_controls.not_nil!
+      if _spending_controls.is_a?(OpenApi::Validatable)
+        _spending_controls.validate
+      end
+      @spending_controls = _spending_controls
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -172,13 +233,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @status = _status
     end
 
     # Generates #hash and #== methods from all fields

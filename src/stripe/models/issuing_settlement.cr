@@ -16,6 +16,7 @@ module Stripe
   class IssuingSettlement
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -114,7 +115,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"bin\" is required and cannot be null") if @bin.nil?
       if _bin = @bin
@@ -123,8 +124,11 @@ module Stripe
         end
       end
       invalid_properties.push("\"clearing_date\" is required and cannot be null") if @clearing_date.nil?
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -132,12 +136,16 @@ module Stripe
         end
       end
       invalid_properties.push("\"interchange_fees\" is required and cannot be null") if @interchange_fees.nil?
+
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
+
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
+
       invalid_properties.push("\"net_total\" is required and cannot be null") if @net_total.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network, false)
       invalid_properties.push("\"network_fees\" is required and cannot be null") if @network_fees.nil?
+
       invalid_properties.push("\"network_settlement_identifier\" is required and cannot be null") if @network_settlement_identifier.nil?
       if _network_settlement_identifier = @network_settlement_identifier
         if _network_settlement_identifier.to_s.size > 5000
@@ -153,6 +161,7 @@ module Stripe
         end
       end
       invalid_properties.push("\"transaction_count\" is required and cannot be null") if @transaction_count.nil?
+
       invalid_properties.push("\"transaction_volume\" is required and cannot be null") if @transaction_volume.nil?
 
       invalid_properties
@@ -160,24 +169,32 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @bin.nil?
       if _bin = @bin
         return false if _bin.to_s.size > 5000
       end
       return false if @clearing_date.nil?
+
       return false if @created.nil?
+
       return false if @currency.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @interchange_fees.nil?
+
       return false if @livemode.nil?
+
       return false if @metadata.nil?
+
       return false if @net_total.nil?
+
       return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network, false)
       return false if @network_fees.nil?
+
       return false if @network_settlement_identifier.nil?
       if _network_settlement_identifier = @network_settlement_identifier
         return false if _network_settlement_identifier.to_s.size > 5000
@@ -188,6 +205,7 @@ module Stripe
         return false if _settlement_service.to_s.size > 5000
       end
       return false if @transaction_count.nil?
+
       return false if @transaction_volume.nil?
 
       true
@@ -204,7 +222,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"bin\", the character length must be smaller than or equal to 5000.")
       end
 
-      @bin = bin
+      @bin = _bin
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -213,7 +231,8 @@ module Stripe
       if clearing_date.nil?
         raise ArgumentError.new("\"clearing_date\" is required and cannot be null")
       end
-      @clearing_date = clearing_date
+      _clearing_date = clearing_date.not_nil!
+      @clearing_date = _clearing_date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -222,7 +241,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -231,7 +251,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -245,7 +266,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -254,7 +275,8 @@ module Stripe
       if interchange_fees.nil?
         raise ArgumentError.new("\"interchange_fees\" is required and cannot be null")
       end
-      @interchange_fees = interchange_fees
+      _interchange_fees = interchange_fees.not_nil!
+      @interchange_fees = _interchange_fees
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -263,7 +285,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -272,7 +295,8 @@ module Stripe
       if metadata.nil?
         raise ArgumentError.new("\"metadata\" is required and cannot be null")
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -281,7 +305,8 @@ module Stripe
       if net_total.nil?
         raise ArgumentError.new("\"net_total\" is required and cannot be null")
       end
-      @net_total = net_total
+      _net_total = net_total.not_nil!
+      @net_total = _net_total
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -292,7 +317,7 @@ module Stripe
       end
       _network = network.not_nil!
       ENUM_VALIDATOR_FOR_NETWORK.valid!(_network)
-      @network = network
+      @network = _network
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -301,7 +326,8 @@ module Stripe
       if network_fees.nil?
         raise ArgumentError.new("\"network_fees\" is required and cannot be null")
       end
-      @network_fees = network_fees
+      _network_fees = network_fees.not_nil!
+      @network_fees = _network_fees
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -315,7 +341,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"network_settlement_identifier\", the character length must be smaller than or equal to 5000.")
       end
 
-      @network_settlement_identifier = network_settlement_identifier
+      @network_settlement_identifier = _network_settlement_identifier
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -326,7 +352,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -340,7 +366,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"settlement_service\", the character length must be smaller than or equal to 5000.")
       end
 
-      @settlement_service = settlement_service
+      @settlement_service = _settlement_service
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -349,7 +375,8 @@ module Stripe
       if transaction_count.nil?
         raise ArgumentError.new("\"transaction_count\" is required and cannot be null")
       end
-      @transaction_count = transaction_count
+      _transaction_count = transaction_count.not_nil!
+      @transaction_count = _transaction_count
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -358,13 +385,8 @@ module Stripe
       if transaction_volume.nil?
         raise ArgumentError.new("\"transaction_volume\" is required and cannot be null")
       end
-      @transaction_volume = transaction_volume
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _transaction_volume = transaction_volume.not_nil!
+      @transaction_volume = _transaction_volume
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class TreasuryTransactionsResourceBalanceImpact
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -45,10 +46,12 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"cash\" is required and cannot be null") if @cash.nil?
+
       invalid_properties.push("\"inbound_pending\" is required and cannot be null") if @inbound_pending.nil?
+
       invalid_properties.push("\"outbound_pending\" is required and cannot be null") if @outbound_pending.nil?
 
       invalid_properties
@@ -56,9 +59,11 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @cash.nil?
+
       return false if @inbound_pending.nil?
+
       return false if @outbound_pending.nil?
 
       true
@@ -70,7 +75,8 @@ module Stripe
       if cash.nil?
         raise ArgumentError.new("\"cash\" is required and cannot be null")
       end
-      @cash = cash
+      _cash = cash.not_nil!
+      @cash = _cash
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -79,7 +85,8 @@ module Stripe
       if inbound_pending.nil?
         raise ArgumentError.new("\"inbound_pending\" is required and cannot be null")
       end
-      @inbound_pending = inbound_pending
+      _inbound_pending = inbound_pending.not_nil!
+      @inbound_pending = _inbound_pending
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -88,13 +95,8 @@ module Stripe
       if outbound_pending.nil?
         raise ArgumentError.new("\"outbound_pending\" is required and cannot be null")
       end
-      @outbound_pending = outbound_pending
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _outbound_pending = outbound_pending.not_nil!
+      @outbound_pending = _outbound_pending
     end
 
     # Generates #hash and #== methods from all fields

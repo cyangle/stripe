@@ -16,6 +16,7 @@ module Stripe
   class SetupAttemptPaymentMethodDetailsCard
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,16 +38,26 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model three_d_secure : Stripe::SetupAttemptPaymentMethodDetailsCardThreeDSecure?
+      if _three_d_secure = @three_d_secure
+        if _three_d_secure.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_three_d_secure.list_invalid_properties_for("three_d_secure"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _three_d_secure = @three_d_secure
+        if _three_d_secure.is_a?(OpenApi::Validatable)
+          return false unless _three_d_secure.valid?
+        end
+      end
+
       true
     end
 
@@ -56,13 +67,11 @@ module Stripe
       if three_d_secure.nil?
         return @three_d_secure = nil
       end
-      @three_d_secure = three_d_secure
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _three_d_secure = three_d_secure.not_nil!
+      if _three_d_secure.is_a?(OpenApi::Validatable)
+        _three_d_secure.validate
+      end
+      @three_d_secure = _three_d_secure
     end
 
     # Generates #hash and #== methods from all fields

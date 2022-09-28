@@ -16,6 +16,7 @@ module Stripe
   class GelatoSessionDocumentOptions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -52,7 +53,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ALLOWED_TYPES.error_message) unless ENUM_VALIDATOR_FOR_ALLOWED_TYPES.all_valid?(@allowed_types)
@@ -62,7 +63,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_ALLOWED_TYPES.all_valid?(@allowed_types)
 
       true
@@ -76,7 +77,7 @@ module Stripe
       end
       _allowed_types = allowed_types.not_nil!
       ENUM_VALIDATOR_FOR_ALLOWED_TYPES.all_valid!(_allowed_types)
-      @allowed_types = allowed_types
+      @allowed_types = _allowed_types
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,7 +86,8 @@ module Stripe
       if require_id_number.nil?
         return @require_id_number = nil
       end
-      @require_id_number = require_id_number
+      _require_id_number = require_id_number.not_nil!
+      @require_id_number = _require_id_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -94,7 +96,8 @@ module Stripe
       if require_live_capture.nil?
         return @require_live_capture = nil
       end
-      @require_live_capture = require_live_capture
+      _require_live_capture = require_live_capture.not_nil!
+      @require_live_capture = _require_live_capture
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -103,13 +106,8 @@ module Stripe
       if require_matching_selfie.nil?
         return @require_matching_selfie = nil
       end
-      @require_matching_selfie = require_matching_selfie
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _require_matching_selfie = require_matching_selfie.not_nil!
+      @require_matching_selfie = _require_matching_selfie
     end
 
     # Generates #hash and #== methods from all fields

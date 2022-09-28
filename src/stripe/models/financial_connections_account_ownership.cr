@@ -16,6 +16,7 @@ module Stripe
   class FinancialConnectionsAccountOwnership
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -51,9 +52,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -63,21 +65,31 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"owners\" is required and cannot be null") if @owners.nil?
-      # This is a model owners : Stripe::BankConnectionsResourceOwnerList1?
+      if _owners = @owners
+        if _owners.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_owners.list_invalid_properties_for("owners"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @created.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @owners.nil?
+      if _owners = @owners
+        if _owners.is_a?(OpenApi::Validatable)
+          return false unless _owners.valid?
+        end
+      end
 
       true
     end
@@ -88,7 +100,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -102,7 +115,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,7 +126,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -122,13 +135,11 @@ module Stripe
       if owners.nil?
         raise ArgumentError.new("\"owners\" is required and cannot be null")
       end
-      @owners = owners
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _owners = owners.not_nil!
+      if _owners.is_a?(OpenApi::Validatable)
+        _owners.validate
+      end
+      @owners = _owners
     end
 
     # Generates #hash and #== methods from all fields

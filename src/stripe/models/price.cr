@@ -16,6 +16,7 @@ module Stripe
   class Price
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -171,13 +172,15 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"active\" is required and cannot be null") if @active.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_SCHEME.error_message) unless ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid?(@billing_scheme, false)
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -185,15 +188,32 @@ module Stripe
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
+
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
-      # This is a model product : Stripe::PriceProduct?
+      if _product = @product
+        if _product.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_product.list_invalid_properties_for("product"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      # Container currency_options map has values of Stripe::CurrencyOption
-      # This is a model custom_unit_amount : Stripe::CurrencyOptionCustomUnitAmount?
+      if _currency_options = @currency_options
+        if _currency_options.is_a?(Hash)
+          _currency_options.each do |_key, value|
+            if value.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(value.list_invalid_properties_for("currency_options"))
+            end
+          end
+        end
+      end
+      if _custom_unit_amount = @custom_unit_amount
+        if _custom_unit_amount.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_custom_unit_amount.list_invalid_properties_for("custom_unit_amount"))
+        end
+      end
       if _lookup_key = @lookup_key
         if _lookup_key.to_s.size > 5000
           invalid_properties.push("invalid value for \"lookup_key\", the character length must be smaller than or equal to 5000.")
@@ -204,41 +224,100 @@ module Stripe
           invalid_properties.push("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model recurring : Stripe::PriceRecurring?
+      if _recurring = @recurring
+        if _recurring.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_recurring.list_invalid_properties_for("recurring"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
-      # Container tiers array has values of Stripe::PriceTier
+      if _tiers = @tiers
+        if _tiers.is_a?(Array)
+          _tiers.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("tiers"))
+            end
+          end
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TIERS_MODE.error_message) unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
-      # This is a model transform_quantity : Stripe::PriceTransformQuantity?
+      if _transform_quantity = @transform_quantity
+        if _transform_quantity.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_transform_quantity.list_invalid_properties_for("transform_quantity"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @active.nil?
+
       return false unless ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid?(@billing_scheme, false)
       return false if @created.nil?
+
       return false if @currency.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false if @metadata.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @product.nil?
+      if _product = @product
+        if _product.is_a?(OpenApi::Validatable)
+          return false unless _product.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if _currency_options = @currency_options
+        if _currency_options.is_a?(Hash)
+          _currency_options.each do |_key, value|
+            if value.is_a?(OpenApi::Validatable)
+              return false unless value.valid?
+            end
+          end
+        end
+      end
+      if _custom_unit_amount = @custom_unit_amount
+        if _custom_unit_amount.is_a?(OpenApi::Validatable)
+          return false unless _custom_unit_amount.valid?
+        end
+      end
       if _lookup_key = @lookup_key
         return false if _lookup_key.to_s.size > 5000
       end
       if _nickname = @nickname
         return false if _nickname.to_s.size > 5000
       end
+      if _recurring = @recurring
+        if _recurring.is_a?(OpenApi::Validatable)
+          return false unless _recurring.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
+      if _tiers = @tiers
+        if _tiers.is_a?(Array)
+          _tiers.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
+      if _transform_quantity = @transform_quantity
+        if _transform_quantity.is_a?(OpenApi::Validatable)
+          return false unless _transform_quantity.valid?
+        end
+      end
 
       true
     end
@@ -249,7 +328,8 @@ module Stripe
       if active.nil?
         raise ArgumentError.new("\"active\" is required and cannot be null")
       end
-      @active = active
+      _active = active.not_nil!
+      @active = _active
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -260,7 +340,7 @@ module Stripe
       end
       _billing_scheme = billing_scheme.not_nil!
       ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid!(_billing_scheme)
-      @billing_scheme = billing_scheme
+      @billing_scheme = _billing_scheme
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -269,7 +349,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -278,7 +359,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -292,7 +374,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -301,7 +383,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -310,7 +393,8 @@ module Stripe
       if metadata.nil?
         raise ArgumentError.new("\"metadata\" is required and cannot be null")
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -321,7 +405,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -330,7 +414,11 @@ module Stripe
       if product.nil?
         raise ArgumentError.new("\"product\" is required and cannot be null")
       end
-      @product = product
+      _product = product.not_nil!
+      if _product.is_a?(OpenApi::Validatable)
+        _product.validate
+      end
+      @product = _product
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -341,7 +429,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -350,7 +438,15 @@ module Stripe
       if currency_options.nil?
         return @currency_options = nil
       end
-      @currency_options = currency_options
+      _currency_options = currency_options.not_nil!
+      if _currency_options.is_a?(Hash)
+        _currency_options.each do |_key, value|
+          if value.is_a?(OpenApi::Validatable)
+            value.validate
+          end
+        end
+      end
+      @currency_options = _currency_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -359,7 +455,11 @@ module Stripe
       if custom_unit_amount.nil?
         return @custom_unit_amount = nil
       end
-      @custom_unit_amount = custom_unit_amount
+      _custom_unit_amount = custom_unit_amount.not_nil!
+      if _custom_unit_amount.is_a?(OpenApi::Validatable)
+        _custom_unit_amount.validate
+      end
+      @custom_unit_amount = _custom_unit_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -373,7 +473,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"lookup_key\", the character length must be smaller than or equal to 5000.")
       end
 
-      @lookup_key = lookup_key
+      @lookup_key = _lookup_key
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -387,7 +487,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
       end
 
-      @nickname = nickname
+      @nickname = _nickname
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -396,7 +496,11 @@ module Stripe
       if recurring.nil?
         return @recurring = nil
       end
-      @recurring = recurring
+      _recurring = recurring.not_nil!
+      if _recurring.is_a?(OpenApi::Validatable)
+        _recurring.validate
+      end
+      @recurring = _recurring
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -407,7 +511,7 @@ module Stripe
       end
       _tax_behavior = tax_behavior.not_nil!
       ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid!(_tax_behavior)
-      @tax_behavior = tax_behavior
+      @tax_behavior = _tax_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -416,7 +520,15 @@ module Stripe
       if tiers.nil?
         return @tiers = nil
       end
-      @tiers = tiers
+      _tiers = tiers.not_nil!
+      if _tiers.is_a?(Array)
+        _tiers.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @tiers = _tiers
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -427,7 +539,7 @@ module Stripe
       end
       _tiers_mode = tiers_mode.not_nil!
       ENUM_VALIDATOR_FOR_TIERS_MODE.valid!(_tiers_mode)
-      @tiers_mode = tiers_mode
+      @tiers_mode = _tiers_mode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -436,7 +548,11 @@ module Stripe
       if transform_quantity.nil?
         return @transform_quantity = nil
       end
-      @transform_quantity = transform_quantity
+      _transform_quantity = transform_quantity.not_nil!
+      if _transform_quantity.is_a?(OpenApi::Validatable)
+        _transform_quantity.validate
+      end
+      @transform_quantity = _transform_quantity
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -445,7 +561,8 @@ module Stripe
       if unit_amount.nil?
         return @unit_amount = nil
       end
-      @unit_amount = unit_amount
+      _unit_amount = unit_amount.not_nil!
+      @unit_amount = _unit_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -454,13 +571,8 @@ module Stripe
       if unit_amount_decimal.nil?
         return @unit_amount_decimal = nil
       end
-      @unit_amount_decimal = unit_amount_decimal
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _unit_amount_decimal = unit_amount_decimal.not_nil!
+      @unit_amount_decimal = _unit_amount_decimal
     end
 
     # Generates #hash and #== methods from all fields

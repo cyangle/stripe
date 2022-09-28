@@ -16,6 +16,7 @@ module Stripe
   class LineItemsTaxAmount
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -39,20 +40,31 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+
       invalid_properties.push("\"rate\" is required and cannot be null") if @rate.nil?
-      # This is a model rate : Stripe::TaxRate?
+      if _rate = @rate
+        if _rate.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_rate.list_invalid_properties_for("rate"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount.nil?
+
       return false if @rate.nil?
+      if _rate = @rate
+        if _rate.is_a?(OpenApi::Validatable)
+          return false unless _rate.valid?
+        end
+      end
 
       true
     end
@@ -63,7 +75,8 @@ module Stripe
       if amount.nil?
         raise ArgumentError.new("\"amount\" is required and cannot be null")
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,13 +85,11 @@ module Stripe
       if rate.nil?
         raise ArgumentError.new("\"rate\" is required and cannot be null")
       end
-      @rate = rate
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _rate = rate.not_nil!
+      if _rate.is_a?(OpenApi::Validatable)
+        _rate.validate
+      end
+      @rate = _rate
     end
 
     # Generates #hash and #== methods from all fields

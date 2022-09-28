@@ -16,6 +16,7 @@ module Stripe
   class RestrictionsParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -46,16 +47,34 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # Container currency_options map has values of Stripe::RestrictionsParamsCurrencyOptionsValue
+      if _currency_options = @currency_options
+        if _currency_options.is_a?(Hash)
+          _currency_options.each do |_key, value|
+            if value.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(value.list_invalid_properties_for("currency_options"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _currency_options = @currency_options
+        if _currency_options.is_a?(Hash)
+          _currency_options.each do |_key, value|
+            if value.is_a?(OpenApi::Validatable)
+              return false unless value.valid?
+            end
+          end
+        end
+      end
+
       true
     end
 
@@ -65,7 +84,15 @@ module Stripe
       if currency_options.nil?
         return @currency_options = nil
       end
-      @currency_options = currency_options
+      _currency_options = currency_options.not_nil!
+      if _currency_options.is_a?(Hash)
+        _currency_options.each do |_key, value|
+          if value.is_a?(OpenApi::Validatable)
+            value.validate
+          end
+        end
+      end
+      @currency_options = _currency_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -74,7 +101,8 @@ module Stripe
       if first_time_transaction.nil?
         return @first_time_transaction = nil
       end
-      @first_time_transaction = first_time_transaction
+      _first_time_transaction = first_time_transaction.not_nil!
+      @first_time_transaction = _first_time_transaction
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -83,7 +111,8 @@ module Stripe
       if minimum_amount.nil?
         return @minimum_amount = nil
       end
-      @minimum_amount = minimum_amount
+      _minimum_amount = minimum_amount.not_nil!
+      @minimum_amount = _minimum_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -92,13 +121,8 @@ module Stripe
       if minimum_amount_currency.nil?
         return @minimum_amount_currency = nil
       end
-      @minimum_amount_currency = minimum_amount_currency
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _minimum_amount_currency = minimum_amount_currency.not_nil!
+      @minimum_amount_currency = _minimum_amount_currency
     end
 
     # Generates #hash and #== methods from all fields

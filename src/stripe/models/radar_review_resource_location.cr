@@ -16,6 +16,7 @@ module Stripe
   class RadarReviewResourceLocation
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -70,7 +71,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _city = @city
         if _city.to_s.size > 5000
@@ -82,6 +83,7 @@ module Stripe
           invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _region = @region
         if _region.to_s.size > 5000
           invalid_properties.push("invalid value for \"region\", the character length must be smaller than or equal to 5000.")
@@ -93,13 +95,14 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _city = @city
         return false if _city.to_s.size > 5000
       end
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
       if _region = @region
         return false if _region.to_s.size > 5000
       end
@@ -118,7 +121,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"city\", the character length must be smaller than or equal to 5000.")
       end
 
-      @city = city
+      @city = _city
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +135,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @country = country
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -141,7 +144,8 @@ module Stripe
       if latitude.nil?
         return @latitude = nil
       end
-      @latitude = latitude
+      _latitude = latitude.not_nil!
+      @latitude = _latitude
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -150,7 +154,8 @@ module Stripe
       if longitude.nil?
         return @longitude = nil
       end
-      @longitude = longitude
+      _longitude = longitude.not_nil!
+      @longitude = _longitude
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -164,13 +169,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"region\", the character length must be smaller than or equal to 5000.")
       end
 
-      @region = region
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @region = _region
     end
 
     # Generates #hash and #== methods from all fields

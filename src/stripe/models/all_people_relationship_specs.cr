@@ -15,6 +15,7 @@ module Stripe
   class AllPeopleRelationshipSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -45,7 +46,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -53,7 +54,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -63,7 +64,8 @@ module Stripe
       if director.nil?
         return @director = nil
       end
-      @director = director
+      _director = director.not_nil!
+      @director = _director
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,7 +74,8 @@ module Stripe
       if executive.nil?
         return @executive = nil
       end
-      @executive = executive
+      _executive = executive.not_nil!
+      @executive = _executive
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -81,7 +84,8 @@ module Stripe
       if owner.nil?
         return @owner = nil
       end
-      @owner = owner
+      _owner = owner.not_nil!
+      @owner = _owner
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -90,13 +94,8 @@ module Stripe
       if representative.nil?
         return @representative = nil
       end
-      @representative = representative
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _representative = representative.not_nil!
+      @representative = _representative
     end
 
     # Generates #hash and #== methods from all fields

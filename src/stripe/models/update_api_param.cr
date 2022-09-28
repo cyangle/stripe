@@ -16,6 +16,7 @@ module Stripe
   class UpdateApiParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -38,7 +39,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -46,7 +47,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -56,7 +57,8 @@ module Stripe
       if exp_month.nil?
         return @exp_month = nil
       end
-      @exp_month = exp_month
+      _exp_month = exp_month.not_nil!
+      @exp_month = _exp_month
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -65,13 +67,8 @@ module Stripe
       if exp_year.nil?
         return @exp_year = nil
       end
-      @exp_year = exp_year
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _exp_year = exp_year.not_nil!
+      @exp_year = _exp_year
     end
 
     # Generates #hash and #== methods from all fields

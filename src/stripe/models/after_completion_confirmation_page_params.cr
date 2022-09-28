@@ -15,6 +15,7 @@ module Stripe
   class AfterCompletionConfirmationPageParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -33,7 +34,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _custom_message = @custom_message
         if _custom_message.to_s.size > 500
@@ -46,7 +47,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _custom_message = @custom_message
         return false if _custom_message.to_s.size > 500
       end
@@ -65,13 +66,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"custom_message\", the character length must be smaller than or equal to 500.")
       end
 
-      @custom_message = custom_message
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @custom_message = _custom_message
     end
 
     # Generates #hash and #== methods from all fields

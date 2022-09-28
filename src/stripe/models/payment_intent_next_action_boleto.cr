@@ -16,6 +16,7 @@ module Stripe
   class PaymentIntentNextActionBoleto
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -62,8 +63,9 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _hosted_voucher_url = @hosted_voucher_url
         if _hosted_voucher_url.to_s.size > 5000
           invalid_properties.push("invalid value for \"hosted_voucher_url\", the character length must be smaller than or equal to 5000.")
@@ -85,7 +87,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _hosted_voucher_url = @hosted_voucher_url
         return false if _hosted_voucher_url.to_s.size > 5000
       end
@@ -105,7 +107,8 @@ module Stripe
       if expires_at.nil?
         return @expires_at = nil
       end
-      @expires_at = expires_at
+      _expires_at = expires_at.not_nil!
+      @expires_at = _expires_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -119,7 +122,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"hosted_voucher_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @hosted_voucher_url = hosted_voucher_url
+      @hosted_voucher_url = _hosted_voucher_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -133,7 +136,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @number = number
+      @number = _number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -147,13 +150,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"pdf\", the character length must be smaller than or equal to 5000.")
       end
 
-      @pdf = pdf
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @pdf = _pdf
     end
 
     # Generates #hash and #== methods from all fields

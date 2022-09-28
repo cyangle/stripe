@@ -15,6 +15,7 @@ module Stripe
   class StatusTransitionTimestampSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -33,16 +34,26 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model posted_at : Stripe::GetAccountsCreatedParameter?
+      if _posted_at = @posted_at
+        if _posted_at.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_posted_at.list_invalid_properties_for("posted_at"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _posted_at = @posted_at
+        if _posted_at.is_a?(OpenApi::Validatable)
+          return false unless _posted_at.valid?
+        end
+      end
+
       true
     end
 
@@ -52,13 +63,11 @@ module Stripe
       if posted_at.nil?
         return @posted_at = nil
       end
-      @posted_at = posted_at
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _posted_at = posted_at.not_nil!
+      if _posted_at.is_a?(OpenApi::Validatable)
+        _posted_at.validate
+      end
+      @posted_at = _posted_at
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class Error
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -34,18 +35,27 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"error\" is required and cannot be null") if @error.nil?
-      # This is a model error : Stripe::ApiErrors?
+      if _error = @error
+        if _error.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_error.list_invalid_properties_for("error"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @error.nil?
+      if _error = @error
+        if _error.is_a?(OpenApi::Validatable)
+          return false unless _error.valid?
+        end
+      end
 
       true
     end
@@ -56,13 +66,11 @@ module Stripe
       if error.nil?
         raise ArgumentError.new("\"error\" is required and cannot be null")
       end
-      @error = error
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _error = error.not_nil!
+      if _error.is_a?(OpenApi::Validatable)
+        _error.validate
+      end
+      @error = _error
     end
 
     # Generates #hash and #== methods from all fields

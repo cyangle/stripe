@@ -16,6 +16,7 @@ module Stripe
   class PaymentFlowsPrivatePaymentMethodsAlipayDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -51,7 +52,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _buyer_id = @buyer_id
         if _buyer_id.to_s.size > 5000
@@ -74,7 +75,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _buyer_id = @buyer_id
         return false if _buyer_id.to_s.size > 5000
       end
@@ -99,7 +100,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"buyer_id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @buyer_id = buyer_id
+      @buyer_id = _buyer_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,7 +114,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
-      @fingerprint = fingerprint
+      @fingerprint = _fingerprint
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,13 +128,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"transaction_id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @transaction_id = transaction_id
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @transaction_id = _transaction_id
     end
 
     # Generates #hash and #== methods from all fields

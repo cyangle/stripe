@@ -16,6 +16,7 @@ module Stripe
   class IssuingTransactionFlightDataLeg
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -78,7 +79,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _arrival_airport_code = @arrival_airport_code
         if _arrival_airport_code.to_s.size > 5000
@@ -111,7 +112,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _arrival_airport_code = @arrival_airport_code
         return false if _arrival_airport_code.to_s.size > 5000
       end
@@ -142,7 +143,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"arrival_airport_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @arrival_airport_code = arrival_airport_code
+      @arrival_airport_code = _arrival_airport_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -156,7 +157,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"carrier\", the character length must be smaller than or equal to 5000.")
       end
 
-      @carrier = carrier
+      @carrier = _carrier
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -170,7 +171,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"departure_airport_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @departure_airport_code = departure_airport_code
+      @departure_airport_code = _departure_airport_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -184,7 +185,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"flight_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @flight_number = flight_number
+      @flight_number = _flight_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -198,7 +199,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"service_class\", the character length must be smaller than or equal to 5000.")
       end
 
-      @service_class = service_class
+      @service_class = _service_class
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -207,13 +208,8 @@ module Stripe
       if stopover_allowed.nil?
         return @stopover_allowed = nil
       end
-      @stopover_allowed = stopover_allowed
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _stopover_allowed = stopover_allowed.not_nil!
+      @stopover_allowed = _stopover_allowed
     end
 
     # Generates #hash and #== methods from all fields

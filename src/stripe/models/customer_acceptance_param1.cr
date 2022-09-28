@@ -15,6 +15,7 @@ module Stripe
   class CustomerAcceptanceParam1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -39,10 +40,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"online\" is required and cannot be null") if @online.nil?
-      # This is a model online : Stripe::OnlineParam1?
+      if _online = @online
+        if _online.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_online.list_invalid_properties_for("online"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
@@ -51,8 +56,13 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @online.nil?
+      if _online = @online
+        if _online.is_a?(OpenApi::Validatable)
+          return false unless _online.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       true
@@ -64,7 +74,11 @@ module Stripe
       if online.nil?
         raise ArgumentError.new("\"online\" is required and cannot be null")
       end
-      @online = online
+      _online = online.not_nil!
+      if _online.is_a?(OpenApi::Validatable)
+        _online.validate
+      end
+      @online = _online
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -75,13 +89,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @_type = __type
     end
 
     # Generates #hash and #== methods from all fields

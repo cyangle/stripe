@@ -16,6 +16,7 @@ module Stripe
   class TerminalReaderReaderResourceCart
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -56,11 +57,20 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       invalid_properties.push("\"line_items\" is required and cannot be null") if @line_items.nil?
-      # Container line_items array has values of Stripe::TerminalReaderReaderResourceLineItem
+      if _line_items = @line_items
+        if _line_items.is_a?(Array)
+          _line_items.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("line_items"))
+            end
+          end
+        end
+      end
       invalid_properties.push("\"total\" is required and cannot be null") if @total.nil?
 
       invalid_properties
@@ -68,9 +78,19 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @currency.nil?
+
       return false if @line_items.nil?
+      if _line_items = @line_items
+        if _line_items.is_a?(Array)
+          _line_items.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       return false if @total.nil?
 
       true
@@ -82,7 +102,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -91,7 +112,15 @@ module Stripe
       if line_items.nil?
         raise ArgumentError.new("\"line_items\" is required and cannot be null")
       end
-      @line_items = line_items
+      _line_items = line_items.not_nil!
+      if _line_items.is_a?(Array)
+        _line_items.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @line_items = _line_items
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -100,7 +129,8 @@ module Stripe
       if total.nil?
         raise ArgumentError.new("\"total\" is required and cannot be null")
       end
-      @total = total
+      _total = total.not_nil!
+      @total = _total
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -109,13 +139,8 @@ module Stripe
       if tax.nil?
         return @tax = nil
       end
-      @tax = tax
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tax = tax.not_nil!
+      @tax = _tax
     end
 
     # Generates #hash and #== methods from all fields

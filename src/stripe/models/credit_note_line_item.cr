@@ -16,6 +16,7 @@ module Stripe
   class CreditNoteLineItem
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -135,12 +136,22 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+
       invalid_properties.push("\"discount_amount\" is required and cannot be null") if @discount_amount.nil?
+
       invalid_properties.push("\"discount_amounts\" is required and cannot be null") if @discount_amounts.nil?
-      # Container discount_amounts array has values of Stripe::DiscountsResourceDiscountAmount
+      if _discount_amounts = @discount_amounts
+        if _discount_amounts.is_a?(Array)
+          _discount_amounts.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("discount_amounts"))
+            end
+          end
+        end
+      end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -151,11 +162,28 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"tax_amounts\" is required and cannot be null") if @tax_amounts.nil?
-      # Container tax_amounts array has values of Stripe::CreditNoteTaxAmount
+      if _tax_amounts = @tax_amounts
+        if _tax_amounts.is_a?(Array)
+          _tax_amounts.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("tax_amounts"))
+            end
+          end
+        end
+      end
       invalid_properties.push("\"tax_rates\" is required and cannot be null") if @tax_rates.nil?
-      # Container tax_rates array has values of Stripe::TaxRate
+      if _tax_rates = @tax_rates
+        if _tax_rates.is_a?(Array)
+          _tax_rates.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("tax_rates"))
+            end
+          end
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       if _description = @description
         if _description.to_s.size > 5000
           invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
@@ -172,19 +200,50 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount.nil?
+
       return false if @discount_amount.nil?
+
       return false if @discount_amounts.nil?
+      if _discount_amounts = @discount_amounts
+        if _discount_amounts.is_a?(Array)
+          _discount_amounts.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @tax_amounts.nil?
+      if _tax_amounts = @tax_amounts
+        if _tax_amounts.is_a?(Array)
+          _tax_amounts.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       return false if @tax_rates.nil?
+      if _tax_rates = @tax_rates
+        if _tax_rates.is_a?(Array)
+          _tax_rates.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       if _description = @description
         return false if _description.to_s.size > 5000
       end
@@ -201,7 +260,8 @@ module Stripe
       if amount.nil?
         raise ArgumentError.new("\"amount\" is required and cannot be null")
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -210,7 +270,8 @@ module Stripe
       if discount_amount.nil?
         raise ArgumentError.new("\"discount_amount\" is required and cannot be null")
       end
-      @discount_amount = discount_amount
+      _discount_amount = discount_amount.not_nil!
+      @discount_amount = _discount_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -219,7 +280,15 @@ module Stripe
       if discount_amounts.nil?
         raise ArgumentError.new("\"discount_amounts\" is required and cannot be null")
       end
-      @discount_amounts = discount_amounts
+      _discount_amounts = discount_amounts.not_nil!
+      if _discount_amounts.is_a?(Array)
+        _discount_amounts.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @discount_amounts = _discount_amounts
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -233,7 +302,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -242,7 +311,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -253,7 +323,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -262,7 +332,15 @@ module Stripe
       if tax_amounts.nil?
         raise ArgumentError.new("\"tax_amounts\" is required and cannot be null")
       end
-      @tax_amounts = tax_amounts
+      _tax_amounts = tax_amounts.not_nil!
+      if _tax_amounts.is_a?(Array)
+        _tax_amounts.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @tax_amounts = _tax_amounts
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -271,7 +349,15 @@ module Stripe
       if tax_rates.nil?
         raise ArgumentError.new("\"tax_rates\" is required and cannot be null")
       end
-      @tax_rates = tax_rates
+      _tax_rates = tax_rates.not_nil!
+      if _tax_rates.is_a?(Array)
+        _tax_rates.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @tax_rates = _tax_rates
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -282,7 +368,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -291,7 +377,8 @@ module Stripe
       if amount_excluding_tax.nil?
         return @amount_excluding_tax = nil
       end
-      @amount_excluding_tax = amount_excluding_tax
+      _amount_excluding_tax = amount_excluding_tax.not_nil!
+      @amount_excluding_tax = _amount_excluding_tax
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -305,7 +392,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -319,7 +406,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"invoice_line_item\", the character length must be smaller than or equal to 5000.")
       end
 
-      @invoice_line_item = invoice_line_item
+      @invoice_line_item = _invoice_line_item
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -328,7 +415,8 @@ module Stripe
       if quantity.nil?
         return @quantity = nil
       end
-      @quantity = quantity
+      _quantity = quantity.not_nil!
+      @quantity = _quantity
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -337,7 +425,8 @@ module Stripe
       if unit_amount.nil?
         return @unit_amount = nil
       end
-      @unit_amount = unit_amount
+      _unit_amount = unit_amount.not_nil!
+      @unit_amount = _unit_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -346,7 +435,8 @@ module Stripe
       if unit_amount_decimal.nil?
         return @unit_amount_decimal = nil
       end
-      @unit_amount_decimal = unit_amount_decimal
+      _unit_amount_decimal = unit_amount_decimal.not_nil!
+      @unit_amount_decimal = _unit_amount_decimal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -355,13 +445,8 @@ module Stripe
       if unit_amount_excluding_tax.nil?
         return @unit_amount_excluding_tax = nil
       end
-      @unit_amount_excluding_tax = unit_amount_excluding_tax
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _unit_amount_excluding_tax = unit_amount_excluding_tax.not_nil!
+      @unit_amount_excluding_tax = _unit_amount_excluding_tax
     end
 
     # Generates #hash and #== methods from all fields

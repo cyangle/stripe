@@ -15,6 +15,7 @@ module Stripe
   class DeleteSubscriptionsSubscriptionExposedIdRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -44,7 +45,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -52,7 +53,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -62,7 +63,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -71,7 +73,8 @@ module Stripe
       if invoice_now.nil?
         return @invoice_now = nil
       end
-      @invoice_now = invoice_now
+      _invoice_now = invoice_now.not_nil!
+      @invoice_now = _invoice_now
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -80,13 +83,8 @@ module Stripe
       if prorate.nil?
         return @prorate = nil
       end
-      @prorate = prorate
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _prorate = prorate.not_nil!
+      @prorate = _prorate
     end
 
     # Generates #hash and #== methods from all fields

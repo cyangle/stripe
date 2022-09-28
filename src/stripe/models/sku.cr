@@ -16,6 +16,7 @@ module Stripe
   class Sku
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -108,12 +109,16 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"active\" is required and cannot be null") if @active.nil?
+
       invalid_properties.push("\"attributes\" is required and cannot be null") if @attributes.nil?
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -121,45 +126,83 @@ module Stripe
         end
       end
       invalid_properties.push("\"inventory\" is required and cannot be null") if @inventory.nil?
-      # This is a model inventory : Stripe::SkuInventory?
+      if _inventory = @inventory
+        if _inventory.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_inventory.list_invalid_properties_for("inventory"))
+        end
+      end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
+
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
+
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
-      # This is a model product : Stripe::SkuProduct?
+      if _product = @product
+        if _product.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_product.list_invalid_properties_for("product"))
+        end
+      end
       invalid_properties.push("\"updated\" is required and cannot be null") if @updated.nil?
+
       if _image = @image
         if _image.to_s.size > 2048
           invalid_properties.push("invalid value for \"image\", the character length must be smaller than or equal to 2048.")
         end
       end
-      # This is a model package_dimensions : Stripe::SkuPackageDimensions?
+      if _package_dimensions = @package_dimensions
+        if _package_dimensions.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @active.nil?
+
       return false if @attributes.nil?
+
       return false if @created.nil?
+
       return false if @currency.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @inventory.nil?
+      if _inventory = @inventory
+        if _inventory.is_a?(OpenApi::Validatable)
+          return false unless _inventory.valid?
+        end
+      end
       return false if @livemode.nil?
+
       return false if @metadata.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @price.nil?
+
       return false if @product.nil?
+      if _product = @product
+        if _product.is_a?(OpenApi::Validatable)
+          return false unless _product.valid?
+        end
+      end
       return false if @updated.nil?
+
       if _image = @image
         return false if _image.to_s.size > 2048
+      end
+      if _package_dimensions = @package_dimensions
+        if _package_dimensions.is_a?(OpenApi::Validatable)
+          return false unless _package_dimensions.valid?
+        end
       end
 
       true
@@ -171,7 +214,8 @@ module Stripe
       if active.nil?
         raise ArgumentError.new("\"active\" is required and cannot be null")
       end
-      @active = active
+      _active = active.not_nil!
+      @active = _active
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -180,7 +224,8 @@ module Stripe
       if attributes.nil?
         raise ArgumentError.new("\"attributes\" is required and cannot be null")
       end
-      @attributes = attributes
+      _attributes = attributes.not_nil!
+      @attributes = _attributes
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -189,7 +234,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -198,7 +244,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -212,7 +259,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -221,7 +268,11 @@ module Stripe
       if inventory.nil?
         raise ArgumentError.new("\"inventory\" is required and cannot be null")
       end
-      @inventory = inventory
+      _inventory = inventory.not_nil!
+      if _inventory.is_a?(OpenApi::Validatable)
+        _inventory.validate
+      end
+      @inventory = _inventory
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -230,7 +281,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -239,7 +291,8 @@ module Stripe
       if metadata.nil?
         raise ArgumentError.new("\"metadata\" is required and cannot be null")
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -250,7 +303,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -259,7 +312,8 @@ module Stripe
       if price.nil?
         raise ArgumentError.new("\"price\" is required and cannot be null")
       end
-      @price = price
+      _price = price.not_nil!
+      @price = _price
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -268,7 +322,11 @@ module Stripe
       if product.nil?
         raise ArgumentError.new("\"product\" is required and cannot be null")
       end
-      @product = product
+      _product = product.not_nil!
+      if _product.is_a?(OpenApi::Validatable)
+        _product.validate
+      end
+      @product = _product
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -277,7 +335,8 @@ module Stripe
       if updated.nil?
         raise ArgumentError.new("\"updated\" is required and cannot be null")
       end
-      @updated = updated
+      _updated = updated.not_nil!
+      @updated = _updated
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -291,7 +350,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"image\", the character length must be smaller than or equal to 2048.")
       end
 
-      @image = image
+      @image = _image
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -300,13 +359,11 @@ module Stripe
       if package_dimensions.nil?
         return @package_dimensions = nil
       end
-      @package_dimensions = package_dimensions
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _package_dimensions = package_dimensions.not_nil!
+      if _package_dimensions.is_a?(OpenApi::Validatable)
+        _package_dimensions.validate
+      end
+      @package_dimensions = _package_dimensions
     end
 
     # Generates #hash and #== methods from all fields

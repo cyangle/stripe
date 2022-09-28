@@ -16,6 +16,7 @@ module Stripe
   class ConnectJsAccountTokenSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -48,20 +49,38 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BUSINESS_TYPE.error_message) unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
-      # This is a model company : Stripe::ConnectJsAccountTokenCompanySpecs?
-      # This is a model individual : Stripe::IndividualSpecs1?
+      if _company = @company
+        if _company.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_company.list_invalid_properties_for("company"))
+        end
+      end
+      if _individual = @individual
+        if _individual.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_individual.list_invalid_properties_for("individual"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
+      if _company = @company
+        if _company.is_a?(OpenApi::Validatable)
+          return false unless _company.valid?
+        end
+      end
+      if _individual = @individual
+        if _individual.is_a?(OpenApi::Validatable)
+          return false unless _individual.valid?
+        end
+      end
 
       true
     end
@@ -74,7 +93,7 @@ module Stripe
       end
       _business_type = business_type.not_nil!
       ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid!(_business_type)
-      @business_type = business_type
+      @business_type = _business_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -83,7 +102,11 @@ module Stripe
       if company.nil?
         return @company = nil
       end
-      @company = company
+      _company = company.not_nil!
+      if _company.is_a?(OpenApi::Validatable)
+        _company.validate
+      end
+      @company = _company
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -92,7 +115,11 @@ module Stripe
       if individual.nil?
         return @individual = nil
       end
-      @individual = individual
+      _individual = individual.not_nil!
+      if _individual.is_a?(OpenApi::Validatable)
+        _individual.validate
+      end
+      @individual = _individual
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -101,13 +128,8 @@ module Stripe
       if tos_shown_and_accepted.nil?
         return @tos_shown_and_accepted = nil
       end
-      @tos_shown_and_accepted = tos_shown_and_accepted
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tos_shown_and_accepted = tos_shown_and_accepted.not_nil!
+      @tos_shown_and_accepted = _tos_shown_and_accepted
     end
 
     # Generates #hash and #== methods from all fields

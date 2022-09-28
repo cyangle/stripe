@@ -15,6 +15,7 @@ module Stripe
   class SetupIntentPaymentMethodOptionsParam4
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -43,10 +44,18 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model financial_connections : Stripe::LinkedAccountOptionsParam1?
-      # This is a model networks : Stripe::NetworksOptionsParam?
+      if _financial_connections = @financial_connections
+        if _financial_connections.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_financial_connections.list_invalid_properties_for("financial_connections"))
+        end
+      end
+      if _networks = @networks
+        if _networks.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_networks.list_invalid_properties_for("networks"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
 
@@ -55,7 +64,17 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _financial_connections = @financial_connections
+        if _financial_connections.is_a?(OpenApi::Validatable)
+          return false unless _financial_connections.valid?
+        end
+      end
+      if _networks = @networks
+        if _networks.is_a?(OpenApi::Validatable)
+          return false unless _networks.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
 
       true
@@ -67,7 +86,11 @@ module Stripe
       if financial_connections.nil?
         return @financial_connections = nil
       end
-      @financial_connections = financial_connections
+      _financial_connections = financial_connections.not_nil!
+      if _financial_connections.is_a?(OpenApi::Validatable)
+        _financial_connections.validate
+      end
+      @financial_connections = _financial_connections
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -76,7 +99,11 @@ module Stripe
       if networks.nil?
         return @networks = nil
       end
-      @networks = networks
+      _networks = networks.not_nil!
+      if _networks.is_a?(OpenApi::Validatable)
+        _networks.validate
+      end
+      @networks = _networks
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -87,13 +114,7 @@ module Stripe
       end
       _verification_method = verification_method.not_nil!
       ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid!(_verification_method)
-      @verification_method = verification_method
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @verification_method = _verification_method
     end
 
     # Generates #hash and #== methods from all fields

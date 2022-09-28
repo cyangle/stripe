@@ -16,6 +16,7 @@ module Stripe
   class CardGeneratedFromPaymentMethodDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -42,7 +43,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
@@ -50,17 +51,26 @@ module Stripe
           invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model card_present : Stripe::PaymentMethodDetailsCardPresent?
+      if _card_present = @card_present
+        if _card_present.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_card_present.list_invalid_properties_for("card_present"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @_type.nil?
       if __type = @_type
         return false if __type.to_s.size > 5000
+      end
+      if _card_present = @card_present
+        if _card_present.is_a?(OpenApi::Validatable)
+          return false unless _card_present.valid?
+        end
       end
 
       true
@@ -77,7 +87,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -86,13 +96,11 @@ module Stripe
       if card_present.nil?
         return @card_present2 = nil
       end
-      @card_present2 = card_present
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _card_present = card_present.not_nil!
+      if _card_present.is_a?(OpenApi::Validatable)
+        _card_present.validate
+      end
+      @card_present2 = _card_present
     end
 
     # Generates #hash and #== methods from all fields

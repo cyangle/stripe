@@ -16,6 +16,7 @@ module Stripe
   class TreasuryReceivedDebitsResourceLinkedFlows
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -62,7 +63,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _debit_reversal = @debit_reversal
         if _debit_reversal.to_s.size > 5000
@@ -90,7 +91,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _debit_reversal = @debit_reversal
         return false if _debit_reversal.to_s.size > 5000
       end
@@ -118,7 +119,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"debit_reversal\", the character length must be smaller than or equal to 5000.")
       end
 
-      @debit_reversal = debit_reversal
+      @debit_reversal = _debit_reversal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +133,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"inbound_transfer\", the character length must be smaller than or equal to 5000.")
       end
 
-      @inbound_transfer = inbound_transfer
+      @inbound_transfer = _inbound_transfer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -146,7 +147,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
       end
 
-      @issuing_authorization = issuing_authorization
+      @issuing_authorization = _issuing_authorization
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -160,13 +161,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
       end
 
-      @issuing_transaction = issuing_transaction
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @issuing_transaction = _issuing_transaction
     end
 
     # Generates #hash and #== methods from all fields

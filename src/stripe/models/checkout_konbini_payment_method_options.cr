@@ -16,6 +16,7 @@ module Stripe
   class CheckoutKonbiniPaymentMethodOptions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -45,7 +46,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
@@ -55,7 +56,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
 
       true
@@ -67,7 +68,8 @@ module Stripe
       if expires_after_days.nil?
         return @expires_after_days = nil
       end
-      @expires_after_days = expires_after_days
+      _expires_after_days = expires_after_days.not_nil!
+      @expires_after_days = _expires_after_days
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -78,13 +80,7 @@ module Stripe
       end
       _setup_future_usage = setup_future_usage.not_nil!
       ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(_setup_future_usage)
-      @setup_future_usage = setup_future_usage
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @setup_future_usage = _setup_future_usage
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class CardIssuingSettingsSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -33,16 +34,26 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model tos_acceptance : Stripe::SettingsTermsOfServiceSpecs?
+      if _tos_acceptance = @tos_acceptance
+        if _tos_acceptance.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_tos_acceptance.list_invalid_properties_for("tos_acceptance"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _tos_acceptance = @tos_acceptance
+        if _tos_acceptance.is_a?(OpenApi::Validatable)
+          return false unless _tos_acceptance.valid?
+        end
+      end
+
       true
     end
 
@@ -52,13 +63,11 @@ module Stripe
       if tos_acceptance.nil?
         return @tos_acceptance = nil
       end
-      @tos_acceptance = tos_acceptance
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tos_acceptance = tos_acceptance.not_nil!
+      if _tos_acceptance.is_a?(OpenApi::Validatable)
+        _tos_acceptance.validate
+      end
+      @tos_acceptance = _tos_acceptance
     end
 
     # Generates #hash and #== methods from all fields

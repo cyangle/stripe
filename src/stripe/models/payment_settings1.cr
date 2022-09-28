@@ -16,6 +16,7 @@ module Stripe
   class PaymentSettings1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -42,24 +43,42 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _default_mandate = @default_mandate
         if _default_mandate.to_s.size > 5000
           invalid_properties.push("invalid value for \"default_mandate\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model payment_method_options : Stripe::PaymentMethodOptions1?
-      # This is a model payment_method_types : Stripe::PaymentSettingsPaymentMethodTypes?
+      if _payment_method_options = @payment_method_options
+        if _payment_method_options.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options"))
+        end
+      end
+      if _payment_method_types = @payment_method_types
+        if _payment_method_types.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_method_types.list_invalid_properties_for("payment_method_types"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _default_mandate = @default_mandate
         return false if _default_mandate.to_s.size > 5000
+      end
+      if _payment_method_options = @payment_method_options
+        if _payment_method_options.is_a?(OpenApi::Validatable)
+          return false unless _payment_method_options.valid?
+        end
+      end
+      if _payment_method_types = @payment_method_types
+        if _payment_method_types.is_a?(OpenApi::Validatable)
+          return false unless _payment_method_types.valid?
+        end
       end
 
       true
@@ -76,7 +95,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"default_mandate\", the character length must be smaller than or equal to 5000.")
       end
 
-      @default_mandate = default_mandate
+      @default_mandate = _default_mandate
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,7 +104,11 @@ module Stripe
       if payment_method_options.nil?
         return @payment_method_options = nil
       end
-      @payment_method_options = payment_method_options
+      _payment_method_options = payment_method_options.not_nil!
+      if _payment_method_options.is_a?(OpenApi::Validatable)
+        _payment_method_options.validate
+      end
+      @payment_method_options = _payment_method_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -94,13 +117,11 @@ module Stripe
       if payment_method_types.nil?
         return @payment_method_types = nil
       end
-      @payment_method_types = payment_method_types
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _payment_method_types = payment_method_types.not_nil!
+      if _payment_method_types.is_a?(OpenApi::Validatable)
+        _payment_method_types.validate
+      end
+      @payment_method_types = _payment_method_types
     end
 
     # Generates #hash and #== methods from all fields

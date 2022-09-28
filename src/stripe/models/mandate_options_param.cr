@@ -15,6 +15,7 @@ module Stripe
   class MandateOptionsParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -55,9 +56,13 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model custom_mandate_url : Stripe::BusinessProfileSpecsSupportUrl?
+      if _custom_mandate_url = @custom_mandate_url
+        if _custom_mandate_url.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_custom_mandate_url.list_invalid_properties_for("custom_mandate_url"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_DEFAULT_FOR.error_message) unless ENUM_VALIDATOR_FOR_DEFAULT_FOR.all_valid?(@default_for)
       if _interval_description = @interval_description
@@ -75,7 +80,12 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _custom_mandate_url = @custom_mandate_url
+        if _custom_mandate_url.is_a?(OpenApi::Validatable)
+          return false unless _custom_mandate_url.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_DEFAULT_FOR.all_valid?(@default_for)
       if _interval_description = @interval_description
         return false if _interval_description.to_s.size > 500
@@ -92,7 +102,11 @@ module Stripe
       if custom_mandate_url.nil?
         return @custom_mandate_url = nil
       end
-      @custom_mandate_url = custom_mandate_url
+      _custom_mandate_url = custom_mandate_url.not_nil!
+      if _custom_mandate_url.is_a?(OpenApi::Validatable)
+        _custom_mandate_url.validate
+      end
+      @custom_mandate_url = _custom_mandate_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -103,7 +117,7 @@ module Stripe
       end
       _default_for = default_for.not_nil!
       ENUM_VALIDATOR_FOR_DEFAULT_FOR.all_valid!(_default_for)
-      @default_for = default_for
+      @default_for = _default_for
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -117,7 +131,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"interval_description\", the character length must be smaller than or equal to 500.")
       end
 
-      @interval_description = interval_description
+      @interval_description = _interval_description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -128,7 +142,7 @@ module Stripe
       end
       _payment_schedule = payment_schedule.not_nil!
       ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE.valid!(_payment_schedule)
-      @payment_schedule = payment_schedule
+      @payment_schedule = _payment_schedule
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -139,13 +153,7 @@ module Stripe
       end
       _transaction_type = transaction_type.not_nil!
       ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.valid!(_transaction_type)
-      @transaction_type = transaction_type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @transaction_type = _transaction_type
     end
 
     # Generates #hash and #== methods from all fields

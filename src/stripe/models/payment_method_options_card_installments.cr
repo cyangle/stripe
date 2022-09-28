@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodOptionsCardInstallments
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -53,19 +54,47 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
-      # Container available_plans array has values of Stripe::PaymentMethodDetailsCardInstallmentsPlan
-      # This is a model plan : Stripe::PaymentMethodOptionsCardInstallmentsPlan?
+
+      if _available_plans = @available_plans
+        if _available_plans.is_a?(Array)
+          _available_plans.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("available_plans"))
+            end
+          end
+        end
+      end
+      if _plan = @plan
+        if _plan.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_plan.list_invalid_properties_for("plan"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @enabled.nil?
+
+      if _available_plans = @available_plans
+        if _available_plans.is_a?(Array)
+          _available_plans.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
+      if _plan = @plan
+        if _plan.is_a?(OpenApi::Validatable)
+          return false unless _plan.valid?
+        end
+      end
 
       true
     end
@@ -76,7 +105,8 @@ module Stripe
       if enabled.nil?
         raise ArgumentError.new("\"enabled\" is required and cannot be null")
       end
-      @enabled = enabled
+      _enabled = enabled.not_nil!
+      @enabled = _enabled
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,7 +115,15 @@ module Stripe
       if available_plans.nil?
         return @available_plans = nil
       end
-      @available_plans = available_plans
+      _available_plans = available_plans.not_nil!
+      if _available_plans.is_a?(Array)
+        _available_plans.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @available_plans = _available_plans
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -94,13 +132,11 @@ module Stripe
       if plan.nil?
         return @plan = nil
       end
-      @plan = plan
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _plan = plan.not_nil!
+      if _plan.is_a?(OpenApi::Validatable)
+        _plan.validate
+      end
+      @plan = _plan
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class EmailSent
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -40,9 +41,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"email_sent_at\" is required and cannot be null") if @email_sent_at.nil?
+
       invalid_properties.push("\"email_sent_to\" is required and cannot be null") if @email_sent_to.nil?
       if _email_sent_to = @email_sent_to
         if _email_sent_to.to_s.size > 5000
@@ -55,8 +57,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @email_sent_at.nil?
+
       return false if @email_sent_to.nil?
       if _email_sent_to = @email_sent_to
         return false if _email_sent_to.to_s.size > 5000
@@ -71,7 +74,8 @@ module Stripe
       if email_sent_at.nil?
         raise ArgumentError.new("\"email_sent_at\" is required and cannot be null")
       end
-      @email_sent_at = email_sent_at
+      _email_sent_at = email_sent_at.not_nil!
+      @email_sent_at = _email_sent_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,13 +89,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"email_sent_to\", the character length must be smaller than or equal to 5000.")
       end
 
-      @email_sent_to = email_sent_to
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @email_sent_to = _email_sent_to
     end
 
     # Generates #hash and #== methods from all fields

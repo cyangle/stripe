@@ -16,6 +16,7 @@ module Stripe
   class PriceTier
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -70,7 +71,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -78,7 +79,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -88,7 +89,8 @@ module Stripe
       if flat_amount.nil?
         return @flat_amount = nil
       end
-      @flat_amount = flat_amount
+      _flat_amount = flat_amount.not_nil!
+      @flat_amount = _flat_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -97,7 +99,8 @@ module Stripe
       if flat_amount_decimal.nil?
         return @flat_amount_decimal = nil
       end
-      @flat_amount_decimal = flat_amount_decimal
+      _flat_amount_decimal = flat_amount_decimal.not_nil!
+      @flat_amount_decimal = _flat_amount_decimal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -106,7 +109,8 @@ module Stripe
       if unit_amount.nil?
         return @unit_amount = nil
       end
-      @unit_amount = unit_amount
+      _unit_amount = unit_amount.not_nil!
+      @unit_amount = _unit_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -115,7 +119,8 @@ module Stripe
       if unit_amount_decimal.nil?
         return @unit_amount_decimal = nil
       end
-      @unit_amount_decimal = unit_amount_decimal
+      _unit_amount_decimal = unit_amount_decimal.not_nil!
+      @unit_amount_decimal = _unit_amount_decimal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -124,13 +129,8 @@ module Stripe
       if up_to.nil?
         return @up_to = nil
       end
-      @up_to = up_to
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _up_to = up_to.not_nil!
+      @up_to = _up_to
     end
 
     # Generates #hash and #== methods from all fields

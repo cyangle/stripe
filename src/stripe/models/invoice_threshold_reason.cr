@@ -16,6 +16,7 @@ module Stripe
   class InvoiceThresholdReason
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -46,18 +47,35 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"item_reasons\" is required and cannot be null") if @item_reasons.nil?
-      # Container item_reasons array has values of Stripe::InvoiceItemThresholdReason
+      if _item_reasons = @item_reasons
+        if _item_reasons.is_a?(Array)
+          _item_reasons.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("item_reasons"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @item_reasons.nil?
+      if _item_reasons = @item_reasons
+        if _item_reasons.is_a?(Array)
+          _item_reasons.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
 
       true
     end
@@ -68,7 +86,15 @@ module Stripe
       if item_reasons.nil?
         raise ArgumentError.new("\"item_reasons\" is required and cannot be null")
       end
-      @item_reasons = item_reasons
+      _item_reasons = item_reasons.not_nil!
+      if _item_reasons.is_a?(Array)
+        _item_reasons.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @item_reasons = _item_reasons
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -77,13 +103,8 @@ module Stripe
       if amount_gte.nil?
         return @amount_gte = nil
       end
-      @amount_gte = amount_gte
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _amount_gte = amount_gte.not_nil!
+      @amount_gte = _amount_gte
     end
 
     # Generates #hash and #== methods from all fields

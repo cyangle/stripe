@@ -16,6 +16,7 @@ module Stripe
   class FundingInstructionsBankTransferFinancialAddress
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -63,25 +64,61 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      # This is a model iban : Stripe::FundingInstructionsBankTransferIbanRecord?
-      # This is a model sort_code : Stripe::FundingInstructionsBankTransferSortCodeRecord?
-      # This is a model spei : Stripe::FundingInstructionsBankTransferSpeiRecord?
+      if _iban = @iban
+        if _iban.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_iban.list_invalid_properties_for("iban"))
+        end
+      end
+      if _sort_code = @sort_code
+        if _sort_code.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_sort_code.list_invalid_properties_for("sort_code"))
+        end
+      end
+      if _spei = @spei
+        if _spei.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_spei.list_invalid_properties_for("spei"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
-      # This is a model zengin : Stripe::FundingInstructionsBankTransferZenginRecord?
+      if _zengin = @zengin
+        if _zengin.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_zengin.list_invalid_properties_for("zengin"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if _iban = @iban
+        if _iban.is_a?(OpenApi::Validatable)
+          return false unless _iban.valid?
+        end
+      end
+      if _sort_code = @sort_code
+        if _sort_code.is_a?(OpenApi::Validatable)
+          return false unless _sort_code.valid?
+        end
+      end
+      if _spei = @spei
+        if _spei.is_a?(OpenApi::Validatable)
+          return false unless _spei.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
+      if _zengin = @zengin
+        if _zengin.is_a?(OpenApi::Validatable)
+          return false unless _zengin.valid?
+        end
+      end
 
       true
     end
@@ -94,7 +131,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -103,7 +140,11 @@ module Stripe
       if iban.nil?
         return @iban = nil
       end
-      @iban = iban
+      _iban = iban.not_nil!
+      if _iban.is_a?(OpenApi::Validatable)
+        _iban.validate
+      end
+      @iban = _iban
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -112,7 +153,11 @@ module Stripe
       if sort_code.nil?
         return @sort_code = nil
       end
-      @sort_code = sort_code
+      _sort_code = sort_code.not_nil!
+      if _sort_code.is_a?(OpenApi::Validatable)
+        _sort_code.validate
+      end
+      @sort_code = _sort_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -121,7 +166,11 @@ module Stripe
       if spei.nil?
         return @spei = nil
       end
-      @spei = spei
+      _spei = spei.not_nil!
+      if _spei.is_a?(OpenApi::Validatable)
+        _spei.validate
+      end
+      @spei = _spei
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +181,7 @@ module Stripe
       end
       _supported_networks = supported_networks.not_nil!
       ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid!(_supported_networks)
-      @supported_networks = supported_networks
+      @supported_networks = _supported_networks
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -141,13 +190,11 @@ module Stripe
       if zengin.nil?
         return @zengin = nil
       end
-      @zengin = zengin
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _zengin = zengin.not_nil!
+      if _zengin.is_a?(OpenApi::Validatable)
+        _zengin.validate
+      end
+      @zengin = _zengin
     end
 
     # Generates #hash and #== methods from all fields

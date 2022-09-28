@@ -16,6 +16,7 @@ module Stripe
   class GelatoSelfieReport
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -63,7 +64,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
@@ -72,7 +73,11 @@ module Stripe
           invalid_properties.push("invalid value for \"document\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model error : Stripe::GelatoSelfieReportError1?
+      if _error = @error
+        if _error.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_error.list_invalid_properties_for("error"))
+        end
+      end
       if _selfie = @selfie
         if _selfie.to_s.size > 5000
           invalid_properties.push("invalid value for \"selfie\", the character length must be smaller than or equal to 5000.")
@@ -84,10 +89,15 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       if _document = @document
         return false if _document.to_s.size > 5000
+      end
+      if _error = @error
+        if _error.is_a?(OpenApi::Validatable)
+          return false unless _error.valid?
+        end
       end
       if _selfie = @selfie
         return false if _selfie.to_s.size > 5000
@@ -104,7 +114,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -118,7 +128,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"document\", the character length must be smaller than or equal to 5000.")
       end
 
-      @document = document
+      @document = _document
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,7 +137,11 @@ module Stripe
       if error.nil?
         return @error = nil
       end
-      @error = error
+      _error = error.not_nil!
+      if _error.is_a?(OpenApi::Validatable)
+        _error.validate
+      end
+      @error = _error
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -141,13 +155,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"selfie\", the character length must be smaller than or equal to 5000.")
       end
 
-      @selfie = selfie
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @selfie = _selfie
     end
 
     # Generates #hash and #== methods from all fields

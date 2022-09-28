@@ -16,6 +16,7 @@ module Stripe
   class ScheduledQueryRun
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -91,10 +92,12 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"data_load_time\" is required and cannot be null") if @data_load_time.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -105,6 +108,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"result_available_until\" is required and cannot be null") if @result_available_until.nil?
+
       invalid_properties.push("\"sql\" is required and cannot be null") if @sql.nil?
       if _sql = @sql
         if _sql.to_s.size > 100000
@@ -123,24 +127,36 @@ module Stripe
           invalid_properties.push("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model error : Stripe::SigmaScheduledQueryRunError?
-      # This is a model file : Stripe::ScheduledQueryRunFile?
+      if _error = @error
+        if _error.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_error.list_invalid_properties_for("error"))
+        end
+      end
+      if _file = @file
+        if _file.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_file.list_invalid_properties_for("file"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @created.nil?
+
       return false if @data_load_time.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @result_available_until.nil?
+
       return false if @sql.nil?
       if _sql = @sql
         return false if _sql.to_s.size > 100000
@@ -153,6 +169,16 @@ module Stripe
       if _title = @title
         return false if _title.to_s.size > 5000
       end
+      if _error = @error
+        if _error.is_a?(OpenApi::Validatable)
+          return false unless _error.valid?
+        end
+      end
+      if _file = @file
+        if _file.is_a?(OpenApi::Validatable)
+          return false unless _file.valid?
+        end
+      end
 
       true
     end
@@ -163,7 +189,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -172,7 +199,8 @@ module Stripe
       if data_load_time.nil?
         raise ArgumentError.new("\"data_load_time\" is required and cannot be null")
       end
-      @data_load_time = data_load_time
+      _data_load_time = data_load_time.not_nil!
+      @data_load_time = _data_load_time
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -186,7 +214,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -195,7 +223,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -206,7 +235,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -215,7 +244,8 @@ module Stripe
       if result_available_until.nil?
         raise ArgumentError.new("\"result_available_until\" is required and cannot be null")
       end
-      @result_available_until = result_available_until
+      _result_available_until = result_available_until.not_nil!
+      @result_available_until = _result_available_until
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -229,7 +259,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"sql\", the character length must be smaller than or equal to 100000.")
       end
 
-      @sql = sql
+      @sql = _sql
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -243,7 +273,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -257,7 +287,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
       end
 
-      @title = title
+      @title = _title
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -266,7 +296,11 @@ module Stripe
       if error.nil?
         return @error = nil
       end
-      @error = error
+      _error = error.not_nil!
+      if _error.is_a?(OpenApi::Validatable)
+        _error.validate
+      end
+      @error = _error
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -275,13 +309,11 @@ module Stripe
       if file.nil?
         return @file = nil
       end
-      @file = file
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _file = file.not_nil!
+      if _file.is_a?(OpenApi::Validatable)
+        _file.validate
+      end
+      @file = _file
     end
 
     # Generates #hash and #== methods from all fields

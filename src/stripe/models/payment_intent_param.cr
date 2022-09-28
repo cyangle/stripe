@@ -15,6 +15,7 @@ module Stripe
   class PaymentIntentParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -73,7 +74,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
@@ -82,30 +83,66 @@ module Stripe
           invalid_properties.push("invalid value for \"cvc_token\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model installments : Stripe::InstallmentsParam1?
-      # This is a model mandate_options : Stripe::MandateOptionsParam3?
+      if _installments = @installments
+        if _installments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_installments.list_invalid_properties_for("installments"))
+        end
+      end
+      if _mandate_options = @mandate_options
+        if _mandate_options.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.error_message) unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
-      # This is a model statement_descriptor_suffix_kana : Stripe::PaymentIntentParamStatementDescriptorSuffixKana?
-      # This is a model statement_descriptor_suffix_kanji : Stripe::PaymentIntentParamStatementDescriptorSuffixKanji?
+      if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
+        if _statement_descriptor_suffix_kana.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_statement_descriptor_suffix_kana.list_invalid_properties_for("statement_descriptor_suffix_kana"))
+        end
+      end
+      if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
+        if _statement_descriptor_suffix_kanji.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_statement_descriptor_suffix_kanji.list_invalid_properties_for("statement_descriptor_suffix_kanji"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
       if _cvc_token = @cvc_token
         return false if _cvc_token.to_s.size > 5000
       end
+      if _installments = @installments
+        if _installments.is_a?(OpenApi::Validatable)
+          return false unless _installments.valid?
+        end
+      end
+      if _mandate_options = @mandate_options
+        if _mandate_options.is_a?(OpenApi::Validatable)
+          return false unless _mandate_options.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
       return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+      if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
+        if _statement_descriptor_suffix_kana.is_a?(OpenApi::Validatable)
+          return false unless _statement_descriptor_suffix_kana.valid?
+        end
+      end
+      if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
+        if _statement_descriptor_suffix_kanji.is_a?(OpenApi::Validatable)
+          return false unless _statement_descriptor_suffix_kanji.valid?
+        end
+      end
 
       true
     end
@@ -118,7 +155,7 @@ module Stripe
       end
       _capture_method = capture_method.not_nil!
       ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid!(_capture_method)
-      @capture_method = capture_method
+      @capture_method = _capture_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +169,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"cvc_token\", the character length must be smaller than or equal to 5000.")
       end
 
-      @cvc_token = cvc_token
+      @cvc_token = _cvc_token
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -141,7 +178,11 @@ module Stripe
       if installments.nil?
         return @installments = nil
       end
-      @installments = installments
+      _installments = installments.not_nil!
+      if _installments.is_a?(OpenApi::Validatable)
+        _installments.validate
+      end
+      @installments = _installments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -150,7 +191,11 @@ module Stripe
       if mandate_options.nil?
         return @mandate_options = nil
       end
-      @mandate_options = mandate_options
+      _mandate_options = mandate_options.not_nil!
+      if _mandate_options.is_a?(OpenApi::Validatable)
+        _mandate_options.validate
+      end
+      @mandate_options = _mandate_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -161,7 +206,7 @@ module Stripe
       end
       _network = network.not_nil!
       ENUM_VALIDATOR_FOR_NETWORK.valid!(_network)
-      @network = network
+      @network = _network
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -172,7 +217,7 @@ module Stripe
       end
       _request_three_d_secure = request_three_d_secure.not_nil!
       ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid!(_request_three_d_secure)
-      @request_three_d_secure = request_three_d_secure
+      @request_three_d_secure = _request_three_d_secure
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -183,7 +228,7 @@ module Stripe
       end
       _setup_future_usage = setup_future_usage.not_nil!
       ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(_setup_future_usage)
-      @setup_future_usage = setup_future_usage
+      @setup_future_usage = _setup_future_usage
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -192,7 +237,11 @@ module Stripe
       if statement_descriptor_suffix_kana.nil?
         return @statement_descriptor_suffix_kana = nil
       end
-      @statement_descriptor_suffix_kana = statement_descriptor_suffix_kana
+      _statement_descriptor_suffix_kana = statement_descriptor_suffix_kana.not_nil!
+      if _statement_descriptor_suffix_kana.is_a?(OpenApi::Validatable)
+        _statement_descriptor_suffix_kana.validate
+      end
+      @statement_descriptor_suffix_kana = _statement_descriptor_suffix_kana
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -201,13 +250,11 @@ module Stripe
       if statement_descriptor_suffix_kanji.nil?
         return @statement_descriptor_suffix_kanji = nil
       end
-      @statement_descriptor_suffix_kanji = statement_descriptor_suffix_kanji
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _statement_descriptor_suffix_kanji = statement_descriptor_suffix_kanji.not_nil!
+      if _statement_descriptor_suffix_kanji.is_a?(OpenApi::Validatable)
+        _statement_descriptor_suffix_kanji.validate
+      end
+      @statement_descriptor_suffix_kanji = _statement_descriptor_suffix_kanji
     end
 
     # Generates #hash and #== methods from all fields

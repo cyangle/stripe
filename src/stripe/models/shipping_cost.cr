@@ -15,6 +15,7 @@ module Stripe
   class ShippingCost
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,23 +38,32 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _shipping_rate = @shipping_rate
         if _shipping_rate.to_s.size > 5000
           invalid_properties.push("invalid value for \"shipping_rate\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model shipping_rate_data : Stripe::MethodParams?
+      if _shipping_rate_data = @shipping_rate_data
+        if _shipping_rate_data.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_shipping_rate_data.list_invalid_properties_for("shipping_rate_data"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _shipping_rate = @shipping_rate
         return false if _shipping_rate.to_s.size > 5000
+      end
+      if _shipping_rate_data = @shipping_rate_data
+        if _shipping_rate_data.is_a?(OpenApi::Validatable)
+          return false unless _shipping_rate_data.valid?
+        end
       end
 
       true
@@ -70,7 +80,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"shipping_rate\", the character length must be smaller than or equal to 5000.")
       end
 
-      @shipping_rate = shipping_rate
+      @shipping_rate = _shipping_rate
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -79,13 +89,11 @@ module Stripe
       if shipping_rate_data.nil?
         return @shipping_rate_data = nil
       end
-      @shipping_rate_data = shipping_rate_data
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _shipping_rate_data = shipping_rate_data.not_nil!
+      if _shipping_rate_data.is_a?(OpenApi::Validatable)
+        _shipping_rate_data.validate
+      end
+      @shipping_rate_data = _shipping_rate_data
     end
 
     # Generates #hash and #== methods from all fields

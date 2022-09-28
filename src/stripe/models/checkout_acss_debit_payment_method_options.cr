@@ -16,6 +16,7 @@ module Stripe
   class CheckoutAcssDebitPaymentMethodOptions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -55,11 +56,15 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CURRENCY.error_message) unless ENUM_VALIDATOR_FOR_CURRENCY.valid?(@currency)
-      # This is a model mandate_options : Stripe::CheckoutAcssDebitMandateOptions?
+      if _mandate_options = @mandate_options
+        if _mandate_options.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
 
@@ -70,8 +75,13 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_CURRENCY.valid?(@currency)
+      if _mandate_options = @mandate_options
+        if _mandate_options.is_a?(OpenApi::Validatable)
+          return false unless _mandate_options.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
       return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
 
@@ -86,7 +96,7 @@ module Stripe
       end
       _currency = currency.not_nil!
       ENUM_VALIDATOR_FOR_CURRENCY.valid!(_currency)
-      @currency = currency
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -95,7 +105,11 @@ module Stripe
       if mandate_options.nil?
         return @mandate_options = nil
       end
-      @mandate_options = mandate_options
+      _mandate_options = mandate_options.not_nil!
+      if _mandate_options.is_a?(OpenApi::Validatable)
+        _mandate_options.validate
+      end
+      @mandate_options = _mandate_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -106,7 +120,7 @@ module Stripe
       end
       _setup_future_usage = setup_future_usage.not_nil!
       ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(_setup_future_usage)
-      @setup_future_usage = setup_future_usage
+      @setup_future_usage = _setup_future_usage
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -117,13 +131,7 @@ module Stripe
       end
       _verification_method = verification_method.not_nil!
       ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid!(_verification_method)
-      @verification_method = verification_method
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @verification_method = _verification_method
     end
 
     # Generates #hash and #== methods from all fields

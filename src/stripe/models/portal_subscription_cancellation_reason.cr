@@ -16,6 +16,7 @@ module Stripe
   class PortalSubscriptionCancellationReason
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -42,7 +43,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
@@ -53,8 +54,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @enabled.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OPTIONS.all_valid?(@options, false)
 
       true
@@ -66,7 +68,8 @@ module Stripe
       if enabled.nil?
         raise ArgumentError.new("\"enabled\" is required and cannot be null")
       end
-      @enabled = enabled
+      _enabled = enabled.not_nil!
+      @enabled = _enabled
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -77,13 +80,7 @@ module Stripe
       end
       _options = options.not_nil!
       ENUM_VALIDATOR_FOR_OPTIONS.all_valid!(_options)
-      @options = options
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @options = _options
     end
 
     # Generates #hash and #== methods from all fields

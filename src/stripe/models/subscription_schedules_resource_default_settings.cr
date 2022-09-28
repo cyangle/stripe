@@ -16,6 +16,7 @@ module Stripe
   class SubscriptionSchedulesResourceDefaultSettings
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -98,33 +99,80 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.error_message) unless ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid?(@billing_cycle_anchor, false)
-      # This is a model automatic_tax : Stripe::SubscriptionSchedulesResourceDefaultSettingsAutomaticTax?
-      # This is a model billing_thresholds : Stripe::SubscriptionBillingThresholds1?
+
+      if _automatic_tax = @automatic_tax
+        if _automatic_tax.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax"))
+        end
+      end
+      if _billing_thresholds = @billing_thresholds
+        if _billing_thresholds.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECTION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
-      # This is a model default_payment_method : Stripe::SubscriptionSchedulesResourceDefaultSettingsDefaultPaymentMethod?
+      if _default_payment_method = @default_payment_method
+        if _default_payment_method.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_default_payment_method.list_invalid_properties_for("default_payment_method"))
+        end
+      end
       if _description = @description
         if _description.to_s.size > 5000
           invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model invoice_settings : Stripe::SubscriptionSchedulesResourceDefaultSettingsInvoiceSettings?
-      # This is a model transfer_data : Stripe::SubscriptionSchedulePhaseConfigurationTransferData?
+      if _invoice_settings = @invoice_settings
+        if _invoice_settings.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_invoice_settings.list_invalid_properties_for("invoice_settings"))
+        end
+      end
+      if _transfer_data = @transfer_data
+        if _transfer_data.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid?(@billing_cycle_anchor, false)
+
+      if _automatic_tax = @automatic_tax
+        if _automatic_tax.is_a?(OpenApi::Validatable)
+          return false unless _automatic_tax.valid?
+        end
+      end
+      if _billing_thresholds = @billing_thresholds
+        if _billing_thresholds.is_a?(OpenApi::Validatable)
+          return false unless _billing_thresholds.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
+      if _default_payment_method = @default_payment_method
+        if _default_payment_method.is_a?(OpenApi::Validatable)
+          return false unless _default_payment_method.valid?
+        end
+      end
       if _description = @description
         return false if _description.to_s.size > 5000
+      end
+      if _invoice_settings = @invoice_settings
+        if _invoice_settings.is_a?(OpenApi::Validatable)
+          return false unless _invoice_settings.valid?
+        end
+      end
+      if _transfer_data = @transfer_data
+        if _transfer_data.is_a?(OpenApi::Validatable)
+          return false unless _transfer_data.valid?
+        end
       end
 
       true
@@ -138,7 +186,7 @@ module Stripe
       end
       _billing_cycle_anchor = billing_cycle_anchor.not_nil!
       ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid!(_billing_cycle_anchor)
-      @billing_cycle_anchor = billing_cycle_anchor
+      @billing_cycle_anchor = _billing_cycle_anchor
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -147,7 +195,8 @@ module Stripe
       if application_fee_percent.nil?
         return @application_fee_percent = nil
       end
-      @application_fee_percent = application_fee_percent
+      _application_fee_percent = application_fee_percent.not_nil!
+      @application_fee_percent = _application_fee_percent
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -156,7 +205,11 @@ module Stripe
       if automatic_tax.nil?
         return @automatic_tax = nil
       end
-      @automatic_tax = automatic_tax
+      _automatic_tax = automatic_tax.not_nil!
+      if _automatic_tax.is_a?(OpenApi::Validatable)
+        _automatic_tax.validate
+      end
+      @automatic_tax = _automatic_tax
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -165,7 +218,11 @@ module Stripe
       if billing_thresholds.nil?
         return @billing_thresholds = nil
       end
-      @billing_thresholds = billing_thresholds
+      _billing_thresholds = billing_thresholds.not_nil!
+      if _billing_thresholds.is_a?(OpenApi::Validatable)
+        _billing_thresholds.validate
+      end
+      @billing_thresholds = _billing_thresholds
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -176,7 +233,7 @@ module Stripe
       end
       _collection_method = collection_method.not_nil!
       ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(_collection_method)
-      @collection_method = collection_method
+      @collection_method = _collection_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -185,7 +242,11 @@ module Stripe
       if default_payment_method.nil?
         return @default_payment_method = nil
       end
-      @default_payment_method = default_payment_method
+      _default_payment_method = default_payment_method.not_nil!
+      if _default_payment_method.is_a?(OpenApi::Validatable)
+        _default_payment_method.validate
+      end
+      @default_payment_method = _default_payment_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -199,7 +260,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -208,7 +269,11 @@ module Stripe
       if invoice_settings.nil?
         return @invoice_settings = nil
       end
-      @invoice_settings = invoice_settings
+      _invoice_settings = invoice_settings.not_nil!
+      if _invoice_settings.is_a?(OpenApi::Validatable)
+        _invoice_settings.validate
+      end
+      @invoice_settings = _invoice_settings
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -217,13 +282,11 @@ module Stripe
       if transfer_data.nil?
         return @transfer_data = nil
       end
-      @transfer_data = transfer_data
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _transfer_data = transfer_data.not_nil!
+      if _transfer_data.is_a?(OpenApi::Validatable)
+        _transfer_data.validate
+      end
+      @transfer_data = _transfer_data
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class PostEphemeralKeysRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -44,13 +45,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _customer = @customer
         if _customer.to_s.size > 5000
           invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _issuing_card = @issuing_card
         if _issuing_card.to_s.size > 5000
           invalid_properties.push("invalid value for \"issuing_card\", the character length must be smaller than or equal to 5000.")
@@ -62,10 +64,11 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
+
       if _issuing_card = @issuing_card
         return false if _issuing_card.to_s.size > 5000
       end
@@ -84,7 +87,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
 
-      @customer = customer
+      @customer = _customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -93,7 +96,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,13 +111,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"issuing_card\", the character length must be smaller than or equal to 5000.")
       end
 
-      @issuing_card = issuing_card
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @issuing_card = _issuing_card
     end
 
     # Generates #hash and #== methods from all fields

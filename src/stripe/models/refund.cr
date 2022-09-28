@@ -16,6 +16,7 @@ module Stripe
   class Refund
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -152,11 +153,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -165,14 +169,26 @@ module Stripe
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      # This is a model balance_transaction : Stripe::FeeRefundBalanceTransaction?
-      # This is a model charge : Stripe::RefundCharge?
+      if _balance_transaction = @balance_transaction
+        if _balance_transaction.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction"))
+        end
+      end
+      if _charge = @charge
+        if _charge.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_charge.list_invalid_properties_for("charge"))
+        end
+      end
       if _description = @description
         if _description.to_s.size > 5000
           invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model failure_balance_transaction : Stripe::RefundFailureBalanceTransaction?
+      if _failure_balance_transaction = @failure_balance_transaction
+        if _failure_balance_transaction.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_failure_balance_transaction.list_invalid_properties_for("failure_balance_transaction"))
+        end
+      end
       if _failure_reason = @failure_reason
         if _failure_reason.to_s.size > 5000
           invalid_properties.push("invalid value for \"failure_reason\", the character length must be smaller than or equal to 5000.")
@@ -183,8 +199,17 @@ module Stripe
           invalid_properties.push("invalid value for \"instructions_email\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model next_action : Stripe::RefundNextAction?
-      # This is a model payment_intent : Stripe::RefundPaymentIntent?
+
+      if _next_action = @next_action
+        if _next_action.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_next_action.list_invalid_properties_for("next_action"))
+        end
+      end
+      if _payment_intent = @payment_intent
+        if _payment_intent.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REASON.error_message) unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
       if _receipt_number = @receipt_number
@@ -192,30 +217,56 @@ module Stripe
           invalid_properties.push("invalid value for \"receipt_number\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model source_transfer_reversal : Stripe::RefundSourceTransferReversal?
+      if _source_transfer_reversal = @source_transfer_reversal
+        if _source_transfer_reversal.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_source_transfer_reversal.list_invalid_properties_for("source_transfer_reversal"))
+        end
+      end
       if _status = @status
         if _status.to_s.size > 5000
           invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model transfer_reversal : Stripe::RefundTransferReversal?
+      if _transfer_reversal = @transfer_reversal
+        if _transfer_reversal.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_transfer_reversal.list_invalid_properties_for("transfer_reversal"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount.nil?
+
       return false if @created.nil?
+
       return false if @currency.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _balance_transaction = @balance_transaction
+        if _balance_transaction.is_a?(OpenApi::Validatable)
+          return false unless _balance_transaction.valid?
+        end
+      end
+      if _charge = @charge
+        if _charge.is_a?(OpenApi::Validatable)
+          return false unless _charge.valid?
+        end
+      end
       if _description = @description
         return false if _description.to_s.size > 5000
+      end
+      if _failure_balance_transaction = @failure_balance_transaction
+        if _failure_balance_transaction.is_a?(OpenApi::Validatable)
+          return false unless _failure_balance_transaction.valid?
+        end
       end
       if _failure_reason = @failure_reason
         return false if _failure_reason.to_s.size > 5000
@@ -223,12 +274,33 @@ module Stripe
       if _instructions_email = @instructions_email
         return false if _instructions_email.to_s.size > 5000
       end
+
+      if _next_action = @next_action
+        if _next_action.is_a?(OpenApi::Validatable)
+          return false unless _next_action.valid?
+        end
+      end
+      if _payment_intent = @payment_intent
+        if _payment_intent.is_a?(OpenApi::Validatable)
+          return false unless _payment_intent.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
       if _receipt_number = @receipt_number
         return false if _receipt_number.to_s.size > 5000
       end
+      if _source_transfer_reversal = @source_transfer_reversal
+        if _source_transfer_reversal.is_a?(OpenApi::Validatable)
+          return false unless _source_transfer_reversal.valid?
+        end
+      end
       if _status = @status
         return false if _status.to_s.size > 5000
+      end
+      if _transfer_reversal = @transfer_reversal
+        if _transfer_reversal.is_a?(OpenApi::Validatable)
+          return false unless _transfer_reversal.valid?
+        end
       end
 
       true
@@ -240,7 +312,8 @@ module Stripe
       if amount.nil?
         raise ArgumentError.new("\"amount\" is required and cannot be null")
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -249,7 +322,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -258,7 +332,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -272,7 +347,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -283,7 +358,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -292,7 +367,11 @@ module Stripe
       if balance_transaction.nil?
         return @balance_transaction = nil
       end
-      @balance_transaction = balance_transaction
+      _balance_transaction = balance_transaction.not_nil!
+      if _balance_transaction.is_a?(OpenApi::Validatable)
+        _balance_transaction.validate
+      end
+      @balance_transaction = _balance_transaction
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -301,7 +380,11 @@ module Stripe
       if charge.nil?
         return @charge = nil
       end
-      @charge = charge
+      _charge = charge.not_nil!
+      if _charge.is_a?(OpenApi::Validatable)
+        _charge.validate
+      end
+      @charge = _charge
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -315,7 +398,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -324,7 +407,11 @@ module Stripe
       if failure_balance_transaction.nil?
         return @failure_balance_transaction = nil
       end
-      @failure_balance_transaction = failure_balance_transaction
+      _failure_balance_transaction = failure_balance_transaction.not_nil!
+      if _failure_balance_transaction.is_a?(OpenApi::Validatable)
+        _failure_balance_transaction.validate
+      end
+      @failure_balance_transaction = _failure_balance_transaction
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -338,7 +425,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"failure_reason\", the character length must be smaller than or equal to 5000.")
       end
 
-      @failure_reason = failure_reason
+      @failure_reason = _failure_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -352,7 +439,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"instructions_email\", the character length must be smaller than or equal to 5000.")
       end
 
-      @instructions_email = instructions_email
+      @instructions_email = _instructions_email
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -361,7 +448,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -370,7 +458,11 @@ module Stripe
       if next_action.nil?
         return @next_action = nil
       end
-      @next_action = next_action
+      _next_action = next_action.not_nil!
+      if _next_action.is_a?(OpenApi::Validatable)
+        _next_action.validate
+      end
+      @next_action = _next_action
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -379,7 +471,11 @@ module Stripe
       if payment_intent.nil?
         return @payment_intent = nil
       end
-      @payment_intent = payment_intent
+      _payment_intent = payment_intent.not_nil!
+      if _payment_intent.is_a?(OpenApi::Validatable)
+        _payment_intent.validate
+      end
+      @payment_intent = _payment_intent
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -390,7 +486,7 @@ module Stripe
       end
       _reason = reason.not_nil!
       ENUM_VALIDATOR_FOR_REASON.valid!(_reason)
-      @reason = reason
+      @reason = _reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -404,7 +500,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"receipt_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @receipt_number = receipt_number
+      @receipt_number = _receipt_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -413,7 +509,11 @@ module Stripe
       if source_transfer_reversal.nil?
         return @source_transfer_reversal = nil
       end
-      @source_transfer_reversal = source_transfer_reversal
+      _source_transfer_reversal = source_transfer_reversal.not_nil!
+      if _source_transfer_reversal.is_a?(OpenApi::Validatable)
+        _source_transfer_reversal.validate
+      end
+      @source_transfer_reversal = _source_transfer_reversal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -427,7 +527,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -436,13 +536,11 @@ module Stripe
       if transfer_reversal.nil?
         return @transfer_reversal = nil
       end
-      @transfer_reversal = transfer_reversal
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _transfer_reversal = transfer_reversal.not_nil!
+      if _transfer_reversal.is_a?(OpenApi::Validatable)
+        _transfer_reversal.validate
+      end
+      @transfer_reversal = _transfer_reversal
     end
 
     # Generates #hash and #== methods from all fields

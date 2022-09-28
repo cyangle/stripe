@@ -16,6 +16,7 @@ module Stripe
   class Param11
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -38,7 +39,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _account_number = @account_number
         if _account_number.to_s.size > 5000
@@ -56,7 +57,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _account_number = @account_number
         return false if _account_number.to_s.size > 5000
       end
@@ -78,7 +79,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @account_number = account_number
+      @account_number = _account_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -92,13 +93,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"sort_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @sort_code = sort_code
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @sort_code = _sort_code
     end
 
     # Generates #hash and #== methods from all fields

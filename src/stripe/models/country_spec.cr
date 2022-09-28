@@ -16,6 +16,7 @@ module Stripe
   class CountrySpec
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -71,7 +72,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"default_currency\" is required and cannot be null") if @default_currency.nil?
       if _default_currency = @default_currency
@@ -88,18 +89,26 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"supported_bank_account_currencies\" is required and cannot be null") if @supported_bank_account_currencies.nil?
+
       invalid_properties.push("\"supported_payment_currencies\" is required and cannot be null") if @supported_payment_currencies.nil?
+
       invalid_properties.push("\"supported_payment_methods\" is required and cannot be null") if @supported_payment_methods.nil?
+
       invalid_properties.push("\"supported_transfer_countries\" is required and cannot be null") if @supported_transfer_countries.nil?
+
       invalid_properties.push("\"verification_fields\" is required and cannot be null") if @verification_fields.nil?
-      # This is a model verification_fields : Stripe::CountrySpecVerificationFields?
+      if _verification_fields = @verification_fields
+        if _verification_fields.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_verification_fields.list_invalid_properties_for("verification_fields"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @default_currency.nil?
       if _default_currency = @default_currency
         return false if _default_currency.to_s.size > 5000
@@ -110,10 +119,19 @@ module Stripe
       end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @supported_bank_account_currencies.nil?
+
       return false if @supported_payment_currencies.nil?
+
       return false if @supported_payment_methods.nil?
+
       return false if @supported_transfer_countries.nil?
+
       return false if @verification_fields.nil?
+      if _verification_fields = @verification_fields
+        if _verification_fields.is_a?(OpenApi::Validatable)
+          return false unless _verification_fields.valid?
+        end
+      end
 
       true
     end
@@ -129,7 +147,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"default_currency\", the character length must be smaller than or equal to 5000.")
       end
 
-      @default_currency = default_currency
+      @default_currency = _default_currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -143,7 +161,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -154,7 +172,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -163,7 +181,8 @@ module Stripe
       if supported_bank_account_currencies.nil?
         raise ArgumentError.new("\"supported_bank_account_currencies\" is required and cannot be null")
       end
-      @supported_bank_account_currencies = supported_bank_account_currencies
+      _supported_bank_account_currencies = supported_bank_account_currencies.not_nil!
+      @supported_bank_account_currencies = _supported_bank_account_currencies
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -172,7 +191,8 @@ module Stripe
       if supported_payment_currencies.nil?
         raise ArgumentError.new("\"supported_payment_currencies\" is required and cannot be null")
       end
-      @supported_payment_currencies = supported_payment_currencies
+      _supported_payment_currencies = supported_payment_currencies.not_nil!
+      @supported_payment_currencies = _supported_payment_currencies
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -181,7 +201,8 @@ module Stripe
       if supported_payment_methods.nil?
         raise ArgumentError.new("\"supported_payment_methods\" is required and cannot be null")
       end
-      @supported_payment_methods = supported_payment_methods
+      _supported_payment_methods = supported_payment_methods.not_nil!
+      @supported_payment_methods = _supported_payment_methods
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -190,7 +211,8 @@ module Stripe
       if supported_transfer_countries.nil?
         raise ArgumentError.new("\"supported_transfer_countries\" is required and cannot be null")
       end
-      @supported_transfer_countries = supported_transfer_countries
+      _supported_transfer_countries = supported_transfer_countries.not_nil!
+      @supported_transfer_countries = _supported_transfer_countries
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -199,13 +221,11 @@ module Stripe
       if verification_fields.nil?
         raise ArgumentError.new("\"verification_fields\" is required and cannot be null")
       end
-      @verification_fields = verification_fields
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _verification_fields = verification_fields.not_nil!
+      if _verification_fields.is_a?(OpenApi::Validatable)
+        _verification_fields.validate
+      end
+      @verification_fields = _verification_fields
     end
 
     # Generates #hash and #== methods from all fields

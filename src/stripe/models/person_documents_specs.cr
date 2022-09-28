@@ -16,6 +16,7 @@ module Stripe
   class PersonDocumentsSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -42,18 +43,46 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model company_authorization : Stripe::DocumentsParam?
-      # This is a model passport : Stripe::DocumentsParam?
-      # This is a model visa : Stripe::DocumentsParam?
+      if _company_authorization = @company_authorization
+        if _company_authorization.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_company_authorization.list_invalid_properties_for("company_authorization"))
+        end
+      end
+      if _passport = @passport
+        if _passport.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_passport.list_invalid_properties_for("passport"))
+        end
+      end
+      if _visa = @visa
+        if _visa.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_visa.list_invalid_properties_for("visa"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _company_authorization = @company_authorization
+        if _company_authorization.is_a?(OpenApi::Validatable)
+          return false unless _company_authorization.valid?
+        end
+      end
+      if _passport = @passport
+        if _passport.is_a?(OpenApi::Validatable)
+          return false unless _passport.valid?
+        end
+      end
+      if _visa = @visa
+        if _visa.is_a?(OpenApi::Validatable)
+          return false unless _visa.valid?
+        end
+      end
+
       true
     end
 
@@ -63,7 +92,11 @@ module Stripe
       if company_authorization.nil?
         return @company_authorization = nil
       end
-      @company_authorization = company_authorization
+      _company_authorization = company_authorization.not_nil!
+      if _company_authorization.is_a?(OpenApi::Validatable)
+        _company_authorization.validate
+      end
+      @company_authorization = _company_authorization
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,7 +105,11 @@ module Stripe
       if passport.nil?
         return @passport = nil
       end
-      @passport = passport
+      _passport = passport.not_nil!
+      if _passport.is_a?(OpenApi::Validatable)
+        _passport.validate
+      end
+      @passport = _passport
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -81,13 +118,11 @@ module Stripe
       if visa.nil?
         return @visa = nil
       end
-      @visa = visa
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _visa = visa.not_nil!
+      if _visa.is_a?(OpenApi::Validatable)
+        _visa.validate
+      end
+      @visa = _visa
     end
 
     # Generates #hash and #== methods from all fields

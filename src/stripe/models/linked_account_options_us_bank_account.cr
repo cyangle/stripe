@@ -16,6 +16,7 @@ module Stripe
   class LinkedAccountOptionsUsBankAccount
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -42,7 +43,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PERMISSIONS.error_message) unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
@@ -57,7 +58,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
       if _return_url = @return_url
         return false if _return_url.to_s.size > 5000
@@ -74,7 +75,7 @@ module Stripe
       end
       _permissions = permissions.not_nil!
       ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid!(_permissions)
-      @permissions = permissions
+      @permissions = _permissions
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -88,13 +89,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @return_url = return_url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @return_url = _return_url
     end
 
     # Generates #hash and #== methods from all fields

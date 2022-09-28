@@ -16,6 +16,7 @@ module Stripe
   class TerminalReader
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -110,7 +111,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_DEVICE_TYPE.error_message) unless ENUM_VALIDATOR_FOR_DEVICE_TYPE.valid?(@device_type, false)
@@ -127,6 +128,7 @@ module Stripe
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
+
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
@@ -136,7 +138,11 @@ module Stripe
           invalid_properties.push("invalid value for \"serial_number\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model action : Stripe::TerminalReaderAction?
+      if _action = @action
+        if _action.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_action.list_invalid_properties_for("action"))
+        end
+      end
       if _device_sw_version = @device_sw_version
         if _device_sw_version.to_s.size > 5000
           invalid_properties.push("invalid value for \"device_sw_version\", the character length must be smaller than or equal to 5000.")
@@ -147,7 +153,11 @@ module Stripe
           invalid_properties.push("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model location : Stripe::TerminalReaderLocation?
+      if _location = @location
+        if _location.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_location.list_invalid_properties_for("location"))
+        end
+      end
       if _status = @status
         if _status.to_s.size > 5000
           invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
@@ -159,7 +169,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_DEVICE_TYPE.valid?(@device_type, false)
       return false if @id.nil?
       if _id = @id
@@ -170,17 +180,29 @@ module Stripe
         return false if _label.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false if @metadata.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @serial_number.nil?
       if _serial_number = @serial_number
         return false if _serial_number.to_s.size > 5000
+      end
+      if _action = @action
+        if _action.is_a?(OpenApi::Validatable)
+          return false unless _action.valid?
+        end
       end
       if _device_sw_version = @device_sw_version
         return false if _device_sw_version.to_s.size > 5000
       end
       if _ip_address = @ip_address
         return false if _ip_address.to_s.size > 5000
+      end
+      if _location = @location
+        if _location.is_a?(OpenApi::Validatable)
+          return false unless _location.valid?
+        end
       end
       if _status = @status
         return false if _status.to_s.size > 5000
@@ -197,7 +219,7 @@ module Stripe
       end
       _device_type = device_type.not_nil!
       ENUM_VALIDATOR_FOR_DEVICE_TYPE.valid!(_device_type)
-      @device_type = device_type
+      @device_type = _device_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -211,7 +233,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -225,7 +247,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"label\", the character length must be smaller than or equal to 5000.")
       end
 
-      @label = label
+      @label = _label
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -234,7 +256,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -243,7 +266,8 @@ module Stripe
       if metadata.nil?
         raise ArgumentError.new("\"metadata\" is required and cannot be null")
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -254,7 +278,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -268,7 +292,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"serial_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @serial_number = serial_number
+      @serial_number = _serial_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -277,7 +301,11 @@ module Stripe
       if action.nil?
         return @action = nil
       end
-      @action = action
+      _action = action.not_nil!
+      if _action.is_a?(OpenApi::Validatable)
+        _action.validate
+      end
+      @action = _action
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -291,7 +319,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"device_sw_version\", the character length must be smaller than or equal to 5000.")
       end
 
-      @device_sw_version = device_sw_version
+      @device_sw_version = _device_sw_version
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -305,7 +333,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
       end
 
-      @ip_address = ip_address
+      @ip_address = _ip_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -314,7 +342,11 @@ module Stripe
       if location.nil?
         return @location = nil
       end
-      @location = location
+      _location = location.not_nil!
+      if _location.is_a?(OpenApi::Validatable)
+        _location.validate
+      end
+      @location = _location
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -328,13 +360,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
-      @status = status
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @status = _status
     end
 
     # Generates #hash and #== methods from all fields

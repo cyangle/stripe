@@ -16,6 +16,7 @@ module Stripe
   class SubscriptionsResourcePendingUpdate
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -70,18 +71,37 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"expires_at\" is required and cannot be null") if @expires_at.nil?
-      # Container subscription_items array has values of Stripe::SubscriptionItem
+
+      if _subscription_items = @subscription_items
+        if _subscription_items.is_a?(Array)
+          _subscription_items.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("subscription_items"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @expires_at.nil?
+
+      if _subscription_items = @subscription_items
+        if _subscription_items.is_a?(Array)
+          _subscription_items.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
 
       true
     end
@@ -92,7 +112,8 @@ module Stripe
       if expires_at.nil?
         raise ArgumentError.new("\"expires_at\" is required and cannot be null")
       end
-      @expires_at = expires_at
+      _expires_at = expires_at.not_nil!
+      @expires_at = _expires_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -101,7 +122,8 @@ module Stripe
       if billing_cycle_anchor.nil?
         return @billing_cycle_anchor = nil
       end
-      @billing_cycle_anchor = billing_cycle_anchor
+      _billing_cycle_anchor = billing_cycle_anchor.not_nil!
+      @billing_cycle_anchor = _billing_cycle_anchor
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -110,7 +132,15 @@ module Stripe
       if subscription_items.nil?
         return @subscription_items = nil
       end
-      @subscription_items = subscription_items
+      _subscription_items = subscription_items.not_nil!
+      if _subscription_items.is_a?(Array)
+        _subscription_items.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @subscription_items = _subscription_items
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -119,7 +149,8 @@ module Stripe
       if trial_end.nil?
         return @trial_end = nil
       end
-      @trial_end = trial_end
+      _trial_end = trial_end.not_nil!
+      @trial_end = _trial_end
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -128,13 +159,8 @@ module Stripe
       if trial_from_plan.nil?
         return @trial_from_plan = nil
       end
-      @trial_from_plan = trial_from_plan
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _trial_from_plan = trial_from_plan.not_nil!
+      @trial_from_plan = _trial_from_plan
     end
 
     # Generates #hash and #== methods from all fields

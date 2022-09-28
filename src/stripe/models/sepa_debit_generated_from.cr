@@ -16,6 +16,7 @@ module Stripe
   class SepaDebitGeneratedFrom
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -44,17 +45,36 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model charge : Stripe::SepaDebitGeneratedFromCharge?
-      # This is a model setup_attempt : Stripe::PaymentMethodCardGeneratedCardSetupAttempt?
+      if _charge = @charge
+        if _charge.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_charge.list_invalid_properties_for("charge"))
+        end
+      end
+      if _setup_attempt = @setup_attempt
+        if _setup_attempt.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_setup_attempt.list_invalid_properties_for("setup_attempt"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _charge = @charge
+        if _charge.is_a?(OpenApi::Validatable)
+          return false unless _charge.valid?
+        end
+      end
+      if _setup_attempt = @setup_attempt
+        if _setup_attempt.is_a?(OpenApi::Validatable)
+          return false unless _setup_attempt.valid?
+        end
+      end
+
       true
     end
 
@@ -64,7 +84,11 @@ module Stripe
       if charge.nil?
         return @charge = nil
       end
-      @charge = charge
+      _charge = charge.not_nil!
+      if _charge.is_a?(OpenApi::Validatable)
+        _charge.validate
+      end
+      @charge = _charge
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -73,13 +97,11 @@ module Stripe
       if setup_attempt.nil?
         return @setup_attempt = nil
       end
-      @setup_attempt = setup_attempt
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _setup_attempt = setup_attempt.not_nil!
+      if _setup_attempt.is_a?(OpenApi::Validatable)
+        _setup_attempt.validate
+      end
+      @setup_attempt = _setup_attempt
     end
 
     # Generates #hash and #== methods from all fields

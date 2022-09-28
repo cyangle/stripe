@@ -16,6 +16,7 @@ module Stripe
   class AccountSepaDebitPaymentsSettings
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -35,7 +36,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _creditor_id = @creditor_id
         if _creditor_id.to_s.size > 5000
@@ -48,7 +49,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _creditor_id = @creditor_id
         return false if _creditor_id.to_s.size > 5000
       end
@@ -67,13 +68,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"creditor_id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @creditor_id = creditor_id
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @creditor_id = _creditor_id
     end
 
     # Generates #hash and #== methods from all fields

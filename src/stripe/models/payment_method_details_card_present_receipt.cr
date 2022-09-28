@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodDetailsCardPresentReceipt
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -101,7 +102,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid?(@account_type)
@@ -151,7 +152,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid?(@account_type)
       if _application_cryptogram = @application_cryptogram
         return false if _application_cryptogram.to_s.size > 5000
@@ -189,7 +190,7 @@ module Stripe
       end
       _account_type = account_type.not_nil!
       ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid!(_account_type)
-      @account_type = account_type
+      @account_type = _account_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -203,7 +204,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"application_cryptogram\", the character length must be smaller than or equal to 5000.")
       end
 
-      @application_cryptogram = application_cryptogram
+      @application_cryptogram = _application_cryptogram
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -217,7 +218,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"application_preferred_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @application_preferred_name = application_preferred_name
+      @application_preferred_name = _application_preferred_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -231,7 +232,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"authorization_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @authorization_code = authorization_code
+      @authorization_code = _authorization_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -245,7 +246,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"authorization_response_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @authorization_response_code = authorization_response_code
+      @authorization_response_code = _authorization_response_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -259,7 +260,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"cardholder_verification_method\", the character length must be smaller than or equal to 5000.")
       end
 
-      @cardholder_verification_method = cardholder_verification_method
+      @cardholder_verification_method = _cardholder_verification_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -273,7 +274,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"dedicated_file_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @dedicated_file_name = dedicated_file_name
+      @dedicated_file_name = _dedicated_file_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -287,7 +288,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"terminal_verification_results\", the character length must be smaller than or equal to 5000.")
       end
 
-      @terminal_verification_results = terminal_verification_results
+      @terminal_verification_results = _terminal_verification_results
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -301,13 +302,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"transaction_status_information\", the character length must be smaller than or equal to 5000.")
       end
 
-      @transaction_status_information = transaction_status_information
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @transaction_status_information = _transaction_status_information
     end
 
     # Generates #hash and #== methods from all fields

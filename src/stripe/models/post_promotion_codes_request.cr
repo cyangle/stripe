@@ -15,6 +15,7 @@ module Stripe
   class PostPromotionCodesRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -76,7 +77,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"coupon\" is required and cannot be null") if @coupon.nil?
       if _coupon = @coupon
@@ -84,6 +85,7 @@ module Stripe
           invalid_properties.push("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _code = @code
         if _code.to_s.size > 500
           invalid_properties.push("invalid value for \"code\", the character length must be smaller than or equal to 500.")
@@ -94,23 +96,35 @@ module Stripe
           invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model restrictions : Stripe::RestrictionsParams?
+
+      if _restrictions = @restrictions
+        if _restrictions.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_restrictions.list_invalid_properties_for("restrictions"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @coupon.nil?
       if _coupon = @coupon
         return false if _coupon.to_s.size > 5000
       end
+
       if _code = @code
         return false if _code.to_s.size > 500
       end
       if _customer = @customer
         return false if _customer.to_s.size > 5000
+      end
+
+      if _restrictions = @restrictions
+        if _restrictions.is_a?(OpenApi::Validatable)
+          return false unless _restrictions.valid?
+        end
       end
 
       true
@@ -127,7 +141,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
       end
 
-      @coupon = coupon
+      @coupon = _coupon
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,7 +150,8 @@ module Stripe
       if active.nil?
         return @active = nil
       end
-      @active = active
+      _active = active.not_nil!
+      @active = _active
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -150,7 +165,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"code\", the character length must be smaller than or equal to 500.")
       end
 
-      @code = code
+      @code = _code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -164,7 +179,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
 
-      @customer = customer
+      @customer = _customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -173,7 +188,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -182,7 +198,8 @@ module Stripe
       if expires_at.nil?
         return @expires_at = nil
       end
-      @expires_at = expires_at
+      _expires_at = expires_at.not_nil!
+      @expires_at = _expires_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -191,7 +208,8 @@ module Stripe
       if max_redemptions.nil?
         return @max_redemptions = nil
       end
-      @max_redemptions = max_redemptions
+      _max_redemptions = max_redemptions.not_nil!
+      @max_redemptions = _max_redemptions
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -200,7 +218,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -209,13 +228,11 @@ module Stripe
       if restrictions.nil?
         return @restrictions = nil
       end
-      @restrictions = restrictions
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _restrictions = restrictions.not_nil!
+      if _restrictions.is_a?(OpenApi::Validatable)
+        _restrictions.validate
+      end
+      @restrictions = _restrictions
     end
 
     # Generates #hash and #== methods from all fields

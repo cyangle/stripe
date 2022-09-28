@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodDetailsGiropay
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -62,7 +63,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _bank_code = @bank_code
         if _bank_code.to_s.size > 5000
@@ -90,7 +91,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _bank_code = @bank_code
         return false if _bank_code.to_s.size > 5000
       end
@@ -118,7 +119,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @bank_code = bank_code
+      @bank_code = _bank_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +133,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @bank_name = bank_name
+      @bank_name = _bank_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -146,7 +147,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"bic\", the character length must be smaller than or equal to 5000.")
       end
 
-      @bic = bic
+      @bic = _bic
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -160,13 +161,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @verified_name = verified_name
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @verified_name = _verified_name
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class DocumentsSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -58,22 +59,86 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model bank_account_ownership_verification : Stripe::DocumentsParam?
-      # This is a model company_license : Stripe::DocumentsParam?
-      # This is a model company_memorandum_of_association : Stripe::DocumentsParam?
-      # This is a model company_ministerial_decree : Stripe::DocumentsParam?
-      # This is a model company_registration_verification : Stripe::DocumentsParam?
-      # This is a model company_tax_id_verification : Stripe::DocumentsParam?
-      # This is a model proof_of_registration : Stripe::DocumentsParam?
+      if _bank_account_ownership_verification = @bank_account_ownership_verification
+        if _bank_account_ownership_verification.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bank_account_ownership_verification.list_invalid_properties_for("bank_account_ownership_verification"))
+        end
+      end
+      if _company_license = @company_license
+        if _company_license.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_company_license.list_invalid_properties_for("company_license"))
+        end
+      end
+      if _company_memorandum_of_association = @company_memorandum_of_association
+        if _company_memorandum_of_association.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_company_memorandum_of_association.list_invalid_properties_for("company_memorandum_of_association"))
+        end
+      end
+      if _company_ministerial_decree = @company_ministerial_decree
+        if _company_ministerial_decree.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_company_ministerial_decree.list_invalid_properties_for("company_ministerial_decree"))
+        end
+      end
+      if _company_registration_verification = @company_registration_verification
+        if _company_registration_verification.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_company_registration_verification.list_invalid_properties_for("company_registration_verification"))
+        end
+      end
+      if _company_tax_id_verification = @company_tax_id_verification
+        if _company_tax_id_verification.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_company_tax_id_verification.list_invalid_properties_for("company_tax_id_verification"))
+        end
+      end
+      if _proof_of_registration = @proof_of_registration
+        if _proof_of_registration.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_proof_of_registration.list_invalid_properties_for("proof_of_registration"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _bank_account_ownership_verification = @bank_account_ownership_verification
+        if _bank_account_ownership_verification.is_a?(OpenApi::Validatable)
+          return false unless _bank_account_ownership_verification.valid?
+        end
+      end
+      if _company_license = @company_license
+        if _company_license.is_a?(OpenApi::Validatable)
+          return false unless _company_license.valid?
+        end
+      end
+      if _company_memorandum_of_association = @company_memorandum_of_association
+        if _company_memorandum_of_association.is_a?(OpenApi::Validatable)
+          return false unless _company_memorandum_of_association.valid?
+        end
+      end
+      if _company_ministerial_decree = @company_ministerial_decree
+        if _company_ministerial_decree.is_a?(OpenApi::Validatable)
+          return false unless _company_ministerial_decree.valid?
+        end
+      end
+      if _company_registration_verification = @company_registration_verification
+        if _company_registration_verification.is_a?(OpenApi::Validatable)
+          return false unless _company_registration_verification.valid?
+        end
+      end
+      if _company_tax_id_verification = @company_tax_id_verification
+        if _company_tax_id_verification.is_a?(OpenApi::Validatable)
+          return false unless _company_tax_id_verification.valid?
+        end
+      end
+      if _proof_of_registration = @proof_of_registration
+        if _proof_of_registration.is_a?(OpenApi::Validatable)
+          return false unless _proof_of_registration.valid?
+        end
+      end
+
       true
     end
 
@@ -83,7 +148,11 @@ module Stripe
       if bank_account_ownership_verification.nil?
         return @bank_account_ownership_verification = nil
       end
-      @bank_account_ownership_verification = bank_account_ownership_verification
+      _bank_account_ownership_verification = bank_account_ownership_verification.not_nil!
+      if _bank_account_ownership_verification.is_a?(OpenApi::Validatable)
+        _bank_account_ownership_verification.validate
+      end
+      @bank_account_ownership_verification = _bank_account_ownership_verification
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -92,7 +161,11 @@ module Stripe
       if company_license.nil?
         return @company_license = nil
       end
-      @company_license = company_license
+      _company_license = company_license.not_nil!
+      if _company_license.is_a?(OpenApi::Validatable)
+        _company_license.validate
+      end
+      @company_license = _company_license
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -101,7 +174,11 @@ module Stripe
       if company_memorandum_of_association.nil?
         return @company_memorandum_of_association = nil
       end
-      @company_memorandum_of_association = company_memorandum_of_association
+      _company_memorandum_of_association = company_memorandum_of_association.not_nil!
+      if _company_memorandum_of_association.is_a?(OpenApi::Validatable)
+        _company_memorandum_of_association.validate
+      end
+      @company_memorandum_of_association = _company_memorandum_of_association
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -110,7 +187,11 @@ module Stripe
       if company_ministerial_decree.nil?
         return @company_ministerial_decree = nil
       end
-      @company_ministerial_decree = company_ministerial_decree
+      _company_ministerial_decree = company_ministerial_decree.not_nil!
+      if _company_ministerial_decree.is_a?(OpenApi::Validatable)
+        _company_ministerial_decree.validate
+      end
+      @company_ministerial_decree = _company_ministerial_decree
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -119,7 +200,11 @@ module Stripe
       if company_registration_verification.nil?
         return @company_registration_verification = nil
       end
-      @company_registration_verification = company_registration_verification
+      _company_registration_verification = company_registration_verification.not_nil!
+      if _company_registration_verification.is_a?(OpenApi::Validatable)
+        _company_registration_verification.validate
+      end
+      @company_registration_verification = _company_registration_verification
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -128,7 +213,11 @@ module Stripe
       if company_tax_id_verification.nil?
         return @company_tax_id_verification = nil
       end
-      @company_tax_id_verification = company_tax_id_verification
+      _company_tax_id_verification = company_tax_id_verification.not_nil!
+      if _company_tax_id_verification.is_a?(OpenApi::Validatable)
+        _company_tax_id_verification.validate
+      end
+      @company_tax_id_verification = _company_tax_id_verification
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -137,13 +226,11 @@ module Stripe
       if proof_of_registration.nil?
         return @proof_of_registration = nil
       end
-      @proof_of_registration = proof_of_registration
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _proof_of_registration = proof_of_registration.not_nil!
+      if _proof_of_registration.is_a?(OpenApi::Validatable)
+        _proof_of_registration.validate
+      end
+      @proof_of_registration = _proof_of_registration
     end
 
     # Generates #hash and #== methods from all fields

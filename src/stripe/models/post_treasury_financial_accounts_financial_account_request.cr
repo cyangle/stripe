@@ -15,6 +15,7 @@ module Stripe
   class PostTreasuryFinancialAccountsFinancialAccountRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -47,17 +48,39 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model features : Stripe::FeatureAccess1?
-      # This is a model platform_restrictions : Stripe::PlatformRestrictions?
+
+      if _features = @features
+        if _features.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_features.list_invalid_properties_for("features"))
+        end
+      end
+
+      if _platform_restrictions = @platform_restrictions
+        if _platform_restrictions.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_platform_restrictions.list_invalid_properties_for("platform_restrictions"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _features = @features
+        if _features.is_a?(OpenApi::Validatable)
+          return false unless _features.valid?
+        end
+      end
+
+      if _platform_restrictions = @platform_restrictions
+        if _platform_restrictions.is_a?(OpenApi::Validatable)
+          return false unless _platform_restrictions.valid?
+        end
+      end
+
       true
     end
 
@@ -67,7 +90,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -76,7 +100,11 @@ module Stripe
       if features.nil?
         return @features = nil
       end
-      @features = features
+      _features = features.not_nil!
+      if _features.is_a?(OpenApi::Validatable)
+        _features.validate
+      end
+      @features = _features
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,7 +113,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -94,13 +123,11 @@ module Stripe
       if platform_restrictions.nil?
         return @platform_restrictions = nil
       end
-      @platform_restrictions = platform_restrictions
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _platform_restrictions = platform_restrictions.not_nil!
+      if _platform_restrictions.is_a?(OpenApi::Validatable)
+        _platform_restrictions.validate
+      end
+      @platform_restrictions = _platform_restrictions
     end
 
     # Generates #hash and #== methods from all fields

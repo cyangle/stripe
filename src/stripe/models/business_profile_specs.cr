@@ -16,6 +16,7 @@ module Stripe
   class BusinessProfileSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -62,7 +63,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _mcc = @mcc
         if _mcc.to_s.size > 4
@@ -79,13 +80,22 @@ module Stripe
           invalid_properties.push("invalid value for \"product_description\", the character length must be smaller than or equal to 40000.")
         end
       end
-      # This is a model support_address : Stripe::AddressSpecs?
+      if _support_address = @support_address
+        if _support_address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_support_address.list_invalid_properties_for("support_address"))
+        end
+      end
+
       if _support_phone = @support_phone
         if _support_phone.to_s.size > 5000
           invalid_properties.push("invalid value for \"support_phone\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model support_url : Stripe::BusinessProfileSpecsSupportUrl?
+      if _support_url = @support_url
+        if _support_url.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_support_url.list_invalid_properties_for("support_url"))
+        end
+      end
       if _url = @url
         if _url.to_s.size > 5000
           invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
@@ -97,7 +107,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _mcc = @mcc
         return false if _mcc.to_s.size > 4
       end
@@ -107,8 +117,19 @@ module Stripe
       if _product_description = @product_description
         return false if _product_description.to_s.size > 40000
       end
+      if _support_address = @support_address
+        if _support_address.is_a?(OpenApi::Validatable)
+          return false unless _support_address.valid?
+        end
+      end
+
       if _support_phone = @support_phone
         return false if _support_phone.to_s.size > 5000
+      end
+      if _support_url = @support_url
+        if _support_url.is_a?(OpenApi::Validatable)
+          return false unless _support_url.valid?
+        end
       end
       if _url = @url
         return false if _url.to_s.size > 5000
@@ -128,7 +149,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"mcc\", the character length must be smaller than or equal to 4.")
       end
 
-      @mcc = mcc
+      @mcc = _mcc
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -142,7 +163,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -156,7 +177,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 40000.")
       end
 
-      @product_description = product_description
+      @product_description = _product_description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -165,7 +186,11 @@ module Stripe
       if support_address.nil?
         return @support_address = nil
       end
-      @support_address = support_address
+      _support_address = support_address.not_nil!
+      if _support_address.is_a?(OpenApi::Validatable)
+        _support_address.validate
+      end
+      @support_address = _support_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -174,7 +199,8 @@ module Stripe
       if support_email.nil?
         return @support_email = nil
       end
-      @support_email = support_email
+      _support_email = support_email.not_nil!
+      @support_email = _support_email
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -188,7 +214,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"support_phone\", the character length must be smaller than or equal to 5000.")
       end
 
-      @support_phone = support_phone
+      @support_phone = _support_phone
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -197,7 +223,11 @@ module Stripe
       if support_url.nil?
         return @support_url = nil
       end
-      @support_url = support_url
+      _support_url = support_url.not_nil!
+      if _support_url.is_a?(OpenApi::Validatable)
+        _support_url.validate
+      end
+      @support_url = _support_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -211,13 +241,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @url = url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @url = _url
     end
 
     # Generates #hash and #== methods from all fields

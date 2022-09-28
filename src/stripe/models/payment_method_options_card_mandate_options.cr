@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodOptionsCardMandateOptions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -96,7 +97,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
@@ -110,6 +111,7 @@ module Stripe
         end
       end
       invalid_properties.push("\"start_date\" is required and cannot be null") if @start_date.nil?
+
       if _description = @description
         if _description.to_s.size > 200
           invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 200.")
@@ -123,8 +125,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount.nil?
+
       return false unless ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid?(@amount_type, false)
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
       return false if @reference.nil?
@@ -132,9 +135,11 @@ module Stripe
         return false if _reference.to_s.size > 80
       end
       return false if @start_date.nil?
+
       if _description = @description
         return false if _description.to_s.size > 200
       end
+
       return false unless ENUM_VALIDATOR_FOR_SUPPORTED_TYPES.all_valid?(@supported_types)
 
       true
@@ -146,7 +151,8 @@ module Stripe
       if amount.nil?
         raise ArgumentError.new("\"amount\" is required and cannot be null")
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -157,7 +163,7 @@ module Stripe
       end
       _amount_type = amount_type.not_nil!
       ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid!(_amount_type)
-      @amount_type = amount_type
+      @amount_type = _amount_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -168,7 +174,7 @@ module Stripe
       end
       _interval = interval.not_nil!
       ENUM_VALIDATOR_FOR_INTERVAL.valid!(_interval)
-      @interval = interval
+      @interval = _interval
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -182,7 +188,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 80.")
       end
 
-      @reference = reference
+      @reference = _reference
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -191,7 +197,8 @@ module Stripe
       if start_date.nil?
         raise ArgumentError.new("\"start_date\" is required and cannot be null")
       end
-      @start_date = start_date
+      _start_date = start_date.not_nil!
+      @start_date = _start_date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -205,7 +212,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 200.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -214,7 +221,8 @@ module Stripe
       if end_date.nil?
         return @end_date = nil
       end
-      @end_date = end_date
+      _end_date = end_date.not_nil!
+      @end_date = _end_date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -223,7 +231,8 @@ module Stripe
       if interval_count.nil?
         return @interval_count = nil
       end
-      @interval_count = interval_count
+      _interval_count = interval_count.not_nil!
+      @interval_count = _interval_count
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -234,13 +243,7 @@ module Stripe
       end
       _supported_types = supported_types.not_nil!
       ENUM_VALIDATOR_FOR_SUPPORTED_TYPES.all_valid!(_supported_types)
-      @supported_types = supported_types
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @supported_types = _supported_types
     end
 
     # Generates #hash and #== methods from all fields

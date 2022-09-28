@@ -16,6 +16,7 @@ module Stripe
   class Person
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -223,7 +224,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
       if _account = @account
@@ -232,6 +233,7 @@ module Stripe
         end
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -240,10 +242,26 @@ module Stripe
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      # This is a model address : Stripe::Address?
-      # This is a model address_kana : Stripe::PersonAddressKana?
-      # This is a model address_kanji : Stripe::PersonAddressKana?
-      # This is a model dob : Stripe::LegalEntityDob?
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_address.list_invalid_properties_for("address"))
+        end
+      end
+      if _address_kana = @address_kana
+        if _address_kana.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_address_kana.list_invalid_properties_for("address_kana"))
+        end
+      end
+      if _address_kanji = @address_kanji
+        if _address_kanji.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_address_kanji.list_invalid_properties_for("address_kanji"))
+        end
+      end
+      if _dob = @dob
+        if _dob.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_dob.list_invalid_properties_for("dob"))
+        end
+      end
       if _email = @email
         if _email.to_s.size > 5000
           invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
@@ -264,7 +282,13 @@ module Stripe
           invalid_properties.push("invalid value for \"first_name_kanji\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model future_requirements : Stripe::PersonFutureRequirements1?
+
+      if _future_requirements = @future_requirements
+        if _future_requirements.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_future_requirements.list_invalid_properties_for("future_requirements"))
+        end
+      end
+
       if _last_name = @last_name
         if _last_name.to_s.size > 5000
           invalid_properties.push("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
@@ -285,6 +309,7 @@ module Stripe
           invalid_properties.push("invalid value for \"maiden_name\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _nationality = @nationality
         if _nationality.to_s.size > 5000
           invalid_properties.push("invalid value for \"nationality\", the character length must be smaller than or equal to 5000.")
@@ -297,27 +322,65 @@ module Stripe
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.error_message) unless ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.valid?(@political_exposure)
-      # This is a model registered_address : Stripe::Address?
-      # This is a model relationship : Stripe::PersonRelationship?
-      # This is a model requirements : Stripe::PersonRequirements1?
-      # This is a model verification : Stripe::LegalEntityPersonVerification?
+      if _registered_address = @registered_address
+        if _registered_address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_registered_address.list_invalid_properties_for("registered_address"))
+        end
+      end
+      if _relationship = @relationship
+        if _relationship.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_relationship.list_invalid_properties_for("relationship"))
+        end
+      end
+      if _requirements = @requirements
+        if _requirements.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_requirements.list_invalid_properties_for("requirements"))
+        end
+      end
+
+      if _verification = @verification
+        if _verification.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_verification.list_invalid_properties_for("verification"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @account.nil?
       if _account = @account
         return false if _account.to_s.size > 5000
       end
       return false if @created.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          return false unless _address.valid?
+        end
+      end
+      if _address_kana = @address_kana
+        if _address_kana.is_a?(OpenApi::Validatable)
+          return false unless _address_kana.valid?
+        end
+      end
+      if _address_kanji = @address_kanji
+        if _address_kanji.is_a?(OpenApi::Validatable)
+          return false unless _address_kanji.valid?
+        end
+      end
+      if _dob = @dob
+        if _dob.is_a?(OpenApi::Validatable)
+          return false unless _dob.valid?
+        end
+      end
       if _email = @email
         return false if _email.to_s.size > 5000
       end
@@ -330,6 +393,13 @@ module Stripe
       if _first_name_kanji = @first_name_kanji
         return false if _first_name_kanji.to_s.size > 5000
       end
+
+      if _future_requirements = @future_requirements
+        if _future_requirements.is_a?(OpenApi::Validatable)
+          return false unless _future_requirements.valid?
+        end
+      end
+
       if _last_name = @last_name
         return false if _last_name.to_s.size > 5000
       end
@@ -342,6 +412,7 @@ module Stripe
       if _maiden_name = @maiden_name
         return false if _maiden_name.to_s.size > 5000
       end
+
       if _nationality = @nationality
         return false if _nationality.to_s.size > 5000
       end
@@ -349,6 +420,27 @@ module Stripe
         return false if _phone.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.valid?(@political_exposure)
+      if _registered_address = @registered_address
+        if _registered_address.is_a?(OpenApi::Validatable)
+          return false unless _registered_address.valid?
+        end
+      end
+      if _relationship = @relationship
+        if _relationship.is_a?(OpenApi::Validatable)
+          return false unless _relationship.valid?
+        end
+      end
+      if _requirements = @requirements
+        if _requirements.is_a?(OpenApi::Validatable)
+          return false unless _requirements.valid?
+        end
+      end
+
+      if _verification = @verification
+        if _verification.is_a?(OpenApi::Validatable)
+          return false unless _verification.valid?
+        end
+      end
 
       true
     end
@@ -364,7 +456,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
       end
 
-      @account = account
+      @account = _account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -373,7 +465,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -387,7 +480,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -398,7 +491,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -407,7 +500,11 @@ module Stripe
       if address.nil?
         return @address = nil
       end
-      @address = address
+      _address = address.not_nil!
+      if _address.is_a?(OpenApi::Validatable)
+        _address.validate
+      end
+      @address = _address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -416,7 +513,11 @@ module Stripe
       if address_kana.nil?
         return @address_kana = nil
       end
-      @address_kana = address_kana
+      _address_kana = address_kana.not_nil!
+      if _address_kana.is_a?(OpenApi::Validatable)
+        _address_kana.validate
+      end
+      @address_kana = _address_kana
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -425,7 +526,11 @@ module Stripe
       if address_kanji.nil?
         return @address_kanji = nil
       end
-      @address_kanji = address_kanji
+      _address_kanji = address_kanji.not_nil!
+      if _address_kanji.is_a?(OpenApi::Validatable)
+        _address_kanji.validate
+      end
+      @address_kanji = _address_kanji
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -434,7 +539,11 @@ module Stripe
       if dob.nil?
         return @dob = nil
       end
-      @dob = dob
+      _dob = dob.not_nil!
+      if _dob.is_a?(OpenApi::Validatable)
+        _dob.validate
+      end
+      @dob = _dob
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -448,7 +557,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
 
-      @email = email
+      @email = _email
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -462,7 +571,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @first_name = first_name
+      @first_name = _first_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -476,7 +585,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"first_name_kana\", the character length must be smaller than or equal to 5000.")
       end
 
-      @first_name_kana = first_name_kana
+      @first_name_kana = _first_name_kana
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -490,7 +599,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"first_name_kanji\", the character length must be smaller than or equal to 5000.")
       end
 
-      @first_name_kanji = first_name_kanji
+      @first_name_kanji = _first_name_kanji
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -499,7 +608,8 @@ module Stripe
       if full_name_aliases.nil?
         return @full_name_aliases = nil
       end
-      @full_name_aliases = full_name_aliases
+      _full_name_aliases = full_name_aliases.not_nil!
+      @full_name_aliases = _full_name_aliases
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -508,7 +618,11 @@ module Stripe
       if future_requirements.nil?
         return @future_requirements = nil
       end
-      @future_requirements = future_requirements
+      _future_requirements = future_requirements.not_nil!
+      if _future_requirements.is_a?(OpenApi::Validatable)
+        _future_requirements.validate
+      end
+      @future_requirements = _future_requirements
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -517,7 +631,8 @@ module Stripe
       if gender.nil?
         return @gender = nil
       end
-      @gender = gender
+      _gender = gender.not_nil!
+      @gender = _gender
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -526,7 +641,8 @@ module Stripe
       if id_number_provided.nil?
         return @id_number_provided = nil
       end
-      @id_number_provided = id_number_provided
+      _id_number_provided = id_number_provided.not_nil!
+      @id_number_provided = _id_number_provided
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -535,7 +651,8 @@ module Stripe
       if id_number_secondary_provided.nil?
         return @id_number_secondary_provided = nil
       end
-      @id_number_secondary_provided = id_number_secondary_provided
+      _id_number_secondary_provided = id_number_secondary_provided.not_nil!
+      @id_number_secondary_provided = _id_number_secondary_provided
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -549,7 +666,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @last_name = last_name
+      @last_name = _last_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -563,7 +680,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"last_name_kana\", the character length must be smaller than or equal to 5000.")
       end
 
-      @last_name_kana = last_name_kana
+      @last_name_kana = _last_name_kana
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -577,7 +694,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"last_name_kanji\", the character length must be smaller than or equal to 5000.")
       end
 
-      @last_name_kanji = last_name_kanji
+      @last_name_kanji = _last_name_kanji
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -591,7 +708,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"maiden_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @maiden_name = maiden_name
+      @maiden_name = _maiden_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -600,7 +717,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -614,7 +732,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"nationality\", the character length must be smaller than or equal to 5000.")
       end
 
-      @nationality = nationality
+      @nationality = _nationality
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -628,7 +746,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
       end
 
-      @phone = phone
+      @phone = _phone
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -639,7 +757,7 @@ module Stripe
       end
       _political_exposure = political_exposure.not_nil!
       ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.valid!(_political_exposure)
-      @political_exposure = political_exposure
+      @political_exposure = _political_exposure
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -648,7 +766,11 @@ module Stripe
       if registered_address.nil?
         return @registered_address = nil
       end
-      @registered_address = registered_address
+      _registered_address = registered_address.not_nil!
+      if _registered_address.is_a?(OpenApi::Validatable)
+        _registered_address.validate
+      end
+      @registered_address = _registered_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -657,7 +779,11 @@ module Stripe
       if relationship.nil?
         return @relationship = nil
       end
-      @relationship = relationship
+      _relationship = relationship.not_nil!
+      if _relationship.is_a?(OpenApi::Validatable)
+        _relationship.validate
+      end
+      @relationship = _relationship
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -666,7 +792,11 @@ module Stripe
       if requirements.nil?
         return @requirements = nil
       end
-      @requirements = requirements
+      _requirements = requirements.not_nil!
+      if _requirements.is_a?(OpenApi::Validatable)
+        _requirements.validate
+      end
+      @requirements = _requirements
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -675,7 +805,8 @@ module Stripe
       if ssn_last_4_provided.nil?
         return @ssn_last_4_provided = nil
       end
-      @ssn_last_4_provided = ssn_last_4_provided
+      _ssn_last_4_provided = ssn_last_4_provided.not_nil!
+      @ssn_last_4_provided = _ssn_last_4_provided
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -684,13 +815,11 @@ module Stripe
       if verification.nil?
         return @verification = nil
       end
-      @verification = verification
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _verification = verification.not_nil!
+      if _verification.is_a?(OpenApi::Validatable)
+        _verification.validate
+      end
+      @verification = _verification
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class QuotesResourceComputed
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -44,19 +45,37 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"upfront\" is required and cannot be null") if @upfront.nil?
-      # This is a model upfront : Stripe::QuotesResourceUpfront?
-      # This is a model recurring : Stripe::QuotesResourceComputedRecurring?
+      if _upfront = @upfront
+        if _upfront.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_upfront.list_invalid_properties_for("upfront"))
+        end
+      end
+      if _recurring = @recurring
+        if _recurring.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_recurring.list_invalid_properties_for("recurring"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @upfront.nil?
+      if _upfront = @upfront
+        if _upfront.is_a?(OpenApi::Validatable)
+          return false unless _upfront.valid?
+        end
+      end
+      if _recurring = @recurring
+        if _recurring.is_a?(OpenApi::Validatable)
+          return false unless _recurring.valid?
+        end
+      end
 
       true
     end
@@ -67,7 +86,11 @@ module Stripe
       if upfront.nil?
         raise ArgumentError.new("\"upfront\" is required and cannot be null")
       end
-      @upfront = upfront
+      _upfront = upfront.not_nil!
+      if _upfront.is_a?(OpenApi::Validatable)
+        _upfront.validate
+      end
+      @upfront = _upfront
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -76,13 +99,11 @@ module Stripe
       if recurring.nil?
         return @recurring = nil
       end
-      @recurring = recurring
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _recurring = recurring.not_nil!
+      if _recurring.is_a?(OpenApi::Validatable)
+        _recurring.validate
+      end
+      @recurring = _recurring
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodOptionsKonbini
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -69,13 +70,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _confirmation_number = @confirmation_number
         if _confirmation_number.to_s.size > 5000
           invalid_properties.push("invalid value for \"confirmation_number\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _product_description = @product_description
         if _product_description.to_s.size > 5000
           invalid_properties.push("invalid value for \"product_description\", the character length must be smaller than or equal to 5000.")
@@ -89,10 +91,11 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _confirmation_number = @confirmation_number
         return false if _confirmation_number.to_s.size > 5000
       end
+
       if _product_description = @product_description
         return false if _product_description.to_s.size > 5000
       end
@@ -112,7 +115,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"confirmation_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @confirmation_number = confirmation_number
+      @confirmation_number = _confirmation_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -121,7 +124,8 @@ module Stripe
       if expires_after_days.nil?
         return @expires_after_days = nil
       end
-      @expires_after_days = expires_after_days
+      _expires_after_days = expires_after_days.not_nil!
+      @expires_after_days = _expires_after_days
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -130,7 +134,8 @@ module Stripe
       if expires_at.nil?
         return @expires_at = nil
       end
-      @expires_at = expires_at
+      _expires_at = expires_at.not_nil!
+      @expires_at = _expires_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -144,7 +149,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @product_description = product_description
+      @product_description = _product_description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -155,13 +160,7 @@ module Stripe
       end
       _setup_future_usage = setup_future_usage.not_nil!
       ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(_setup_future_usage)
-      @setup_future_usage = setup_future_usage
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @setup_future_usage = _setup_future_usage
     end
 
     # Generates #hash and #== methods from all fields

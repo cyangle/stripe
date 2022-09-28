@@ -16,6 +16,7 @@ module Stripe
   class InlineProductParams1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -61,7 +62,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
@@ -69,11 +70,13 @@ module Stripe
           invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _id = @id
         if _id.to_s.size > 5000
           invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _statement_descriptor = @statement_descriptor
         if _statement_descriptor.to_s.size > 22
           invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
@@ -95,14 +98,16 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @name.nil?
       if _name = @name
         return false if _name.to_s.size > 5000
       end
+
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 22
       end
@@ -127,7 +132,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,7 +141,8 @@ module Stripe
       if active.nil?
         return @active = nil
       end
-      @active = active
+      _active = active.not_nil!
+      @active = _active
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -150,7 +156,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -159,7 +165,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -173,7 +180,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
       end
 
-      @statement_descriptor = statement_descriptor
+      @statement_descriptor = _statement_descriptor
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -187,7 +194,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"tax_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @tax_code = tax_code
+      @tax_code = _tax_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -201,13 +208,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"unit_label\", the character length must be smaller than or equal to 12.")
       end
 
-      @unit_label = unit_label
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @unit_label = _unit_label
     end
 
     # Generates #hash and #== methods from all fields

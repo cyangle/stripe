@@ -15,6 +15,7 @@ module Stripe
   class Other
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -47,9 +48,13 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model additional_documentation : Stripe::BusinessProfileSpecsSupportUrl?
+      if _additional_documentation = @additional_documentation
+        if _additional_documentation.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation"))
+        end
+      end
       if _explanation = @explanation
         if _explanation.to_s.size > 1500
           invalid_properties.push("invalid value for \"explanation\", the character length must be smaller than or equal to 1500.")
@@ -68,7 +73,12 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _additional_documentation = @additional_documentation
+        if _additional_documentation.is_a?(OpenApi::Validatable)
+          return false unless _additional_documentation.valid?
+        end
+      end
       if _explanation = @explanation
         return false if _explanation.to_s.size > 1500
       end
@@ -86,7 +96,11 @@ module Stripe
       if additional_documentation.nil?
         return @additional_documentation = nil
       end
-      @additional_documentation = additional_documentation
+      _additional_documentation = additional_documentation.not_nil!
+      if _additional_documentation.is_a?(OpenApi::Validatable)
+        _additional_documentation.validate
+      end
+      @additional_documentation = _additional_documentation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -100,7 +114,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 1500.")
       end
 
-      @explanation = explanation
+      @explanation = _explanation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -114,7 +128,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 1500.")
       end
 
-      @product_description = product_description
+      @product_description = _product_description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -125,13 +139,7 @@ module Stripe
       end
       _product_type = product_type.not_nil!
       ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid!(_product_type)
-      @product_type = product_type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @product_type = _product_type
     end
 
     # Generates #hash and #== methods from all fields

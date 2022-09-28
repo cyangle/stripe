@@ -16,6 +16,7 @@ module Stripe
   class RedirectParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -34,7 +35,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"return_url\" is required and cannot be null") if @return_url.nil?
 
@@ -43,7 +44,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @return_url.nil?
 
       true
@@ -55,13 +56,8 @@ module Stripe
       if return_url.nil?
         raise ArgumentError.new("\"return_url\" is required and cannot be null")
       end
-      @return_url = return_url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _return_url = return_url.not_nil!
+      @return_url = _return_url
     end
 
     # Generates #hash and #== methods from all fields

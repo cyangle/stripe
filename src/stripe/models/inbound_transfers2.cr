@@ -16,6 +16,7 @@ module Stripe
   class InboundTransfers2
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -34,16 +35,26 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model ach : Stripe::Access?
+      if _ach = @ach
+        if _ach.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_ach.list_invalid_properties_for("ach"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _ach = @ach
+        if _ach.is_a?(OpenApi::Validatable)
+          return false unless _ach.valid?
+        end
+      end
+
       true
     end
 
@@ -53,13 +64,11 @@ module Stripe
       if ach.nil?
         return @ach = nil
       end
-      @ach = ach
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _ach = ach.not_nil!
+      if _ach.is_a?(OpenApi::Validatable)
+        _ach.validate
+      end
+      @ach = _ach
     end
 
     # Generates #hash and #== methods from all fields

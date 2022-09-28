@@ -15,6 +15,7 @@ module Stripe
   class Canceled
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -73,17 +74,33 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model additional_documentation : Stripe::BusinessProfileSpecsSupportUrl?
-      # This is a model canceled_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?
-      # This is a model cancellation_policy_provided : Stripe::CanceledCancellationPolicyProvided?
+      if _additional_documentation = @additional_documentation
+        if _additional_documentation.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation"))
+        end
+      end
+      if _canceled_at = @canceled_at
+        if _canceled_at.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_canceled_at.list_invalid_properties_for("canceled_at"))
+        end
+      end
+      if _cancellation_policy_provided = @cancellation_policy_provided
+        if _cancellation_policy_provided.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_cancellation_policy_provided.list_invalid_properties_for("cancellation_policy_provided"))
+        end
+      end
       if _cancellation_reason = @cancellation_reason
         if _cancellation_reason.to_s.size > 1500
           invalid_properties.push("invalid value for \"cancellation_reason\", the character length must be smaller than or equal to 1500.")
         end
       end
-      # This is a model expected_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?
+      if _expected_at = @expected_at
+        if _expected_at.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_expected_at.list_invalid_properties_for("expected_at"))
+        end
+      end
       if _explanation = @explanation
         if _explanation.to_s.size > 1500
           invalid_properties.push("invalid value for \"explanation\", the character length must be smaller than or equal to 1500.")
@@ -98,16 +115,40 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_PRODUCT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid?(@product_type)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_RETURN_STATUS.error_message) unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
-      # This is a model returned_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?
+      if _returned_at = @returned_at
+        if _returned_at.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_returned_at.list_invalid_properties_for("returned_at"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _additional_documentation = @additional_documentation
+        if _additional_documentation.is_a?(OpenApi::Validatable)
+          return false unless _additional_documentation.valid?
+        end
+      end
+      if _canceled_at = @canceled_at
+        if _canceled_at.is_a?(OpenApi::Validatable)
+          return false unless _canceled_at.valid?
+        end
+      end
+      if _cancellation_policy_provided = @cancellation_policy_provided
+        if _cancellation_policy_provided.is_a?(OpenApi::Validatable)
+          return false unless _cancellation_policy_provided.valid?
+        end
+      end
       if _cancellation_reason = @cancellation_reason
         return false if _cancellation_reason.to_s.size > 1500
+      end
+      if _expected_at = @expected_at
+        if _expected_at.is_a?(OpenApi::Validatable)
+          return false unless _expected_at.valid?
+        end
       end
       if _explanation = @explanation
         return false if _explanation.to_s.size > 1500
@@ -117,6 +158,11 @@ module Stripe
       end
       return false unless ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid?(@product_type)
       return false unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
+      if _returned_at = @returned_at
+        if _returned_at.is_a?(OpenApi::Validatable)
+          return false unless _returned_at.valid?
+        end
+      end
 
       true
     end
@@ -127,7 +173,11 @@ module Stripe
       if additional_documentation.nil?
         return @additional_documentation = nil
       end
-      @additional_documentation = additional_documentation
+      _additional_documentation = additional_documentation.not_nil!
+      if _additional_documentation.is_a?(OpenApi::Validatable)
+        _additional_documentation.validate
+      end
+      @additional_documentation = _additional_documentation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,7 +186,11 @@ module Stripe
       if canceled_at.nil?
         return @canceled_at = nil
       end
-      @canceled_at = canceled_at
+      _canceled_at = canceled_at.not_nil!
+      if _canceled_at.is_a?(OpenApi::Validatable)
+        _canceled_at.validate
+      end
+      @canceled_at = _canceled_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -145,7 +199,11 @@ module Stripe
       if cancellation_policy_provided.nil?
         return @cancellation_policy_provided = nil
       end
-      @cancellation_policy_provided = cancellation_policy_provided
+      _cancellation_policy_provided = cancellation_policy_provided.not_nil!
+      if _cancellation_policy_provided.is_a?(OpenApi::Validatable)
+        _cancellation_policy_provided.validate
+      end
+      @cancellation_policy_provided = _cancellation_policy_provided
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -159,7 +217,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"cancellation_reason\", the character length must be smaller than or equal to 1500.")
       end
 
-      @cancellation_reason = cancellation_reason
+      @cancellation_reason = _cancellation_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -168,7 +226,11 @@ module Stripe
       if expected_at.nil?
         return @expected_at = nil
       end
-      @expected_at = expected_at
+      _expected_at = expected_at.not_nil!
+      if _expected_at.is_a?(OpenApi::Validatable)
+        _expected_at.validate
+      end
+      @expected_at = _expected_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -182,7 +244,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 1500.")
       end
 
-      @explanation = explanation
+      @explanation = _explanation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -196,7 +258,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 1500.")
       end
 
-      @product_description = product_description
+      @product_description = _product_description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -207,7 +269,7 @@ module Stripe
       end
       _product_type = product_type.not_nil!
       ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid!(_product_type)
-      @product_type = product_type
+      @product_type = _product_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -218,7 +280,7 @@ module Stripe
       end
       _return_status = return_status.not_nil!
       ENUM_VALIDATOR_FOR_RETURN_STATUS.valid!(_return_status)
-      @return_status = return_status
+      @return_status = _return_status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -227,13 +289,11 @@ module Stripe
       if returned_at.nil?
         return @returned_at = nil
       end
-      @returned_at = returned_at
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _returned_at = returned_at.not_nil!
+      if _returned_at.is_a?(OpenApi::Validatable)
+        _returned_at.validate
+      end
+      @returned_at = _returned_at
     end
 
     # Generates #hash and #== methods from all fields

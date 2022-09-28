@@ -15,6 +15,7 @@ module Stripe
   class PostBillingPortalSessionsRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -64,7 +65,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
       if _customer = @customer
@@ -85,7 +86,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @customer.nil?
       if _customer = @customer
         return false if _customer.to_s.size > 5000
@@ -93,6 +94,7 @@ module Stripe
       if _configuration = @configuration
         return false if _configuration.to_s.size > 5000
       end
+
       return false unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
 
       true
@@ -109,7 +111,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
 
-      @customer = customer
+      @customer = _customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -123,7 +125,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"configuration\", the character length must be smaller than or equal to 5000.")
       end
 
-      @configuration = configuration
+      @configuration = _configuration
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +134,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -143,7 +146,7 @@ module Stripe
       end
       _locale = locale.not_nil!
       ENUM_VALIDATOR_FOR_LOCALE.valid!(_locale)
-      @locale = locale
+      @locale = _locale
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -152,7 +155,8 @@ module Stripe
       if on_behalf_of.nil?
         return @on_behalf_of = nil
       end
-      @on_behalf_of = on_behalf_of
+      _on_behalf_of = on_behalf_of.not_nil!
+      @on_behalf_of = _on_behalf_of
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -161,13 +165,8 @@ module Stripe
       if return_url.nil?
         return @return_url = nil
       end
-      @return_url = return_url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _return_url = return_url.not_nil!
+      @return_url = _return_url
     end
 
     # Generates #hash and #== methods from all fields

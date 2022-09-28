@@ -16,6 +16,7 @@ module Stripe
   class OrdersV2ResourceTotalDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -55,20 +56,33 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount_discount\" is required and cannot be null") if @amount_discount.nil?
+
       invalid_properties.push("\"amount_tax\" is required and cannot be null") if @amount_tax.nil?
-      # This is a model breakdown : Stripe::OrdersV2ResourceTotalDetailsApiResourceBreakdown?
+
+      if _breakdown = @breakdown
+        if _breakdown.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_breakdown.list_invalid_properties_for("breakdown"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount_discount.nil?
+
       return false if @amount_tax.nil?
+
+      if _breakdown = @breakdown
+        if _breakdown.is_a?(OpenApi::Validatable)
+          return false unless _breakdown.valid?
+        end
+      end
 
       true
     end
@@ -79,7 +93,8 @@ module Stripe
       if amount_discount.nil?
         raise ArgumentError.new("\"amount_discount\" is required and cannot be null")
       end
-      @amount_discount = amount_discount
+      _amount_discount = amount_discount.not_nil!
+      @amount_discount = _amount_discount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -88,7 +103,8 @@ module Stripe
       if amount_tax.nil?
         raise ArgumentError.new("\"amount_tax\" is required and cannot be null")
       end
-      @amount_tax = amount_tax
+      _amount_tax = amount_tax.not_nil!
+      @amount_tax = _amount_tax
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -97,7 +113,8 @@ module Stripe
       if amount_shipping.nil?
         return @amount_shipping = nil
       end
-      @amount_shipping = amount_shipping
+      _amount_shipping = amount_shipping.not_nil!
+      @amount_shipping = _amount_shipping
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -106,13 +123,11 @@ module Stripe
       if breakdown.nil?
         return @breakdown = nil
       end
-      @breakdown = breakdown
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _breakdown = breakdown.not_nil!
+      if _breakdown.is_a?(OpenApi::Validatable)
+        _breakdown.validate
+      end
+      @breakdown = _breakdown
     end
 
     # Generates #hash and #== methods from all fields

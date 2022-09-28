@@ -16,6 +16,7 @@ module Stripe
   class OrdersV2ResourcePayment
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -54,10 +55,18 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model payment_intent : Stripe::OrdersV2ResourcePaymentPaymentIntent?
-      # This is a model settings : Stripe::OrdersV2ResourcePaymentSettings1?
+      if _payment_intent = @payment_intent
+        if _payment_intent.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent"))
+        end
+      end
+      if _settings = @settings
+        if _settings.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_settings.list_invalid_properties_for("settings"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
@@ -66,7 +75,17 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _payment_intent = @payment_intent
+        if _payment_intent.is_a?(OpenApi::Validatable)
+          return false unless _payment_intent.valid?
+        end
+      end
+      if _settings = @settings
+        if _settings.is_a?(OpenApi::Validatable)
+          return false unless _settings.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
       true
@@ -78,7 +97,11 @@ module Stripe
       if payment_intent.nil?
         return @payment_intent = nil
       end
-      @payment_intent = payment_intent
+      _payment_intent = payment_intent.not_nil!
+      if _payment_intent.is_a?(OpenApi::Validatable)
+        _payment_intent.validate
+      end
+      @payment_intent = _payment_intent
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -87,7 +110,11 @@ module Stripe
       if settings.nil?
         return @settings = nil
       end
-      @settings = settings
+      _settings = settings.not_nil!
+      if _settings.is_a?(OpenApi::Validatable)
+        _settings.validate
+      end
+      @settings = _settings
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -98,13 +125,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @status = _status
     end
 
     # Generates #hash and #== methods from all fields

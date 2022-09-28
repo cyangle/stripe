@@ -16,6 +16,7 @@ module Stripe
   class UsageRecordSummary
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -72,7 +73,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
@@ -84,7 +85,11 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"period\" is required and cannot be null") if @period.nil?
-      # This is a model period : Stripe::Period?
+      if _period = @period
+        if _period.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_period.list_invalid_properties_for("period"))
+        end
+      end
       invalid_properties.push("\"subscription_item\" is required and cannot be null") if @subscription_item.nil?
       if _subscription_item = @subscription_item
         if _subscription_item.to_s.size > 5000
@@ -92,6 +97,7 @@ module Stripe
         end
       end
       invalid_properties.push("\"total_usage\" is required and cannot be null") if @total_usage.nil?
+
       if _invoice = @invoice
         if _invoice.to_s.size > 5000
           invalid_properties.push("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
@@ -103,19 +109,26 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @period.nil?
+      if _period = @period
+        if _period.is_a?(OpenApi::Validatable)
+          return false unless _period.valid?
+        end
+      end
       return false if @subscription_item.nil?
       if _subscription_item = @subscription_item
         return false if _subscription_item.to_s.size > 5000
       end
       return false if @total_usage.nil?
+
       if _invoice = @invoice
         return false if _invoice.to_s.size > 5000
       end
@@ -134,7 +147,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -143,7 +156,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -154,7 +168,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -163,7 +177,11 @@ module Stripe
       if period.nil?
         raise ArgumentError.new("\"period\" is required and cannot be null")
       end
-      @period = period
+      _period = period.not_nil!
+      if _period.is_a?(OpenApi::Validatable)
+        _period.validate
+      end
+      @period = _period
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -177,7 +195,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"subscription_item\", the character length must be smaller than or equal to 5000.")
       end
 
-      @subscription_item = subscription_item
+      @subscription_item = _subscription_item
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -186,7 +204,8 @@ module Stripe
       if total_usage.nil?
         raise ArgumentError.new("\"total_usage\" is required and cannot be null")
       end
-      @total_usage = total_usage
+      _total_usage = total_usage.not_nil!
+      @total_usage = _total_usage
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -200,13 +219,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
       end
 
-      @invoice = invoice
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @invoice = _invoice
     end
 
     # Generates #hash and #== methods from all fields

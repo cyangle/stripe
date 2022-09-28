@@ -16,6 +16,7 @@ module Stripe
   class PaymentIntentNextAction
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -99,7 +100,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
@@ -107,30 +108,158 @@ module Stripe
           invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model alipay_handle_redirect : Stripe::PaymentIntentNextActionAlipayHandleRedirect?
-      # This is a model boleto_display_details : Stripe::PaymentIntentNextActionBoleto?
-      # This is a model card_await_notification : Stripe::PaymentIntentNextActionCardAwaitNotification?
-      # This is a model display_bank_transfer_instructions : Stripe::PaymentIntentNextActionDisplayBankTransferInstructions?
-      # This is a model konbini_display_details : Stripe::PaymentIntentNextActionKonbini?
-      # This is a model oxxo_display_details : Stripe::PaymentIntentNextActionDisplayOxxoDetails?
-      # This is a model paynow_display_qr_code : Stripe::PaymentIntentNextActionPaynowDisplayQrCode?
-      # This is a model pix_display_qr_code : Stripe::PaymentIntentNextActionPixDisplayQrCode?
-      # This is a model promptpay_display_qr_code : Stripe::PaymentIntentNextActionPromptpayDisplayQrCode?
-      # This is a model redirect_to_url : Stripe::PaymentIntentNextActionRedirectToUrl?
-      # This is a model verify_with_microdeposits : Stripe::PaymentIntentNextActionVerifyWithMicrodeposits?
-      # This is a model wechat_pay_display_qr_code : Stripe::PaymentIntentNextActionWechatPayDisplayQrCode?
-      # This is a model wechat_pay_redirect_to_android_app : Stripe::PaymentIntentNextActionWechatPayRedirectToAndroidApp?
-      # This is a model wechat_pay_redirect_to_ios_app : Stripe::PaymentIntentNextActionWechatPayRedirectToIosApp?
+      if _alipay_handle_redirect = @alipay_handle_redirect
+        if _alipay_handle_redirect.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_alipay_handle_redirect.list_invalid_properties_for("alipay_handle_redirect"))
+        end
+      end
+      if _boleto_display_details = @boleto_display_details
+        if _boleto_display_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_boleto_display_details.list_invalid_properties_for("boleto_display_details"))
+        end
+      end
+      if _card_await_notification = @card_await_notification
+        if _card_await_notification.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_card_await_notification.list_invalid_properties_for("card_await_notification"))
+        end
+      end
+      if _display_bank_transfer_instructions = @display_bank_transfer_instructions
+        if _display_bank_transfer_instructions.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_display_bank_transfer_instructions.list_invalid_properties_for("display_bank_transfer_instructions"))
+        end
+      end
+      if _konbini_display_details = @konbini_display_details
+        if _konbini_display_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_konbini_display_details.list_invalid_properties_for("konbini_display_details"))
+        end
+      end
+      if _oxxo_display_details = @oxxo_display_details
+        if _oxxo_display_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_oxxo_display_details.list_invalid_properties_for("oxxo_display_details"))
+        end
+      end
+      if _paynow_display_qr_code = @paynow_display_qr_code
+        if _paynow_display_qr_code.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_paynow_display_qr_code.list_invalid_properties_for("paynow_display_qr_code"))
+        end
+      end
+      if _pix_display_qr_code = @pix_display_qr_code
+        if _pix_display_qr_code.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_pix_display_qr_code.list_invalid_properties_for("pix_display_qr_code"))
+        end
+      end
+      if _promptpay_display_qr_code = @promptpay_display_qr_code
+        if _promptpay_display_qr_code.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_promptpay_display_qr_code.list_invalid_properties_for("promptpay_display_qr_code"))
+        end
+      end
+      if _redirect_to_url = @redirect_to_url
+        if _redirect_to_url.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_redirect_to_url.list_invalid_properties_for("redirect_to_url"))
+        end
+      end
+
+      if _verify_with_microdeposits = @verify_with_microdeposits
+        if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_verify_with_microdeposits.list_invalid_properties_for("verify_with_microdeposits"))
+        end
+      end
+      if _wechat_pay_display_qr_code = @wechat_pay_display_qr_code
+        if _wechat_pay_display_qr_code.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_wechat_pay_display_qr_code.list_invalid_properties_for("wechat_pay_display_qr_code"))
+        end
+      end
+      if _wechat_pay_redirect_to_android_app = @wechat_pay_redirect_to_android_app
+        if _wechat_pay_redirect_to_android_app.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_wechat_pay_redirect_to_android_app.list_invalid_properties_for("wechat_pay_redirect_to_android_app"))
+        end
+      end
+      if _wechat_pay_redirect_to_ios_app = @wechat_pay_redirect_to_ios_app
+        if _wechat_pay_redirect_to_ios_app.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_wechat_pay_redirect_to_ios_app.list_invalid_properties_for("wechat_pay_redirect_to_ios_app"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @_type.nil?
       if __type = @_type
         return false if __type.to_s.size > 5000
+      end
+      if _alipay_handle_redirect = @alipay_handle_redirect
+        if _alipay_handle_redirect.is_a?(OpenApi::Validatable)
+          return false unless _alipay_handle_redirect.valid?
+        end
+      end
+      if _boleto_display_details = @boleto_display_details
+        if _boleto_display_details.is_a?(OpenApi::Validatable)
+          return false unless _boleto_display_details.valid?
+        end
+      end
+      if _card_await_notification = @card_await_notification
+        if _card_await_notification.is_a?(OpenApi::Validatable)
+          return false unless _card_await_notification.valid?
+        end
+      end
+      if _display_bank_transfer_instructions = @display_bank_transfer_instructions
+        if _display_bank_transfer_instructions.is_a?(OpenApi::Validatable)
+          return false unless _display_bank_transfer_instructions.valid?
+        end
+      end
+      if _konbini_display_details = @konbini_display_details
+        if _konbini_display_details.is_a?(OpenApi::Validatable)
+          return false unless _konbini_display_details.valid?
+        end
+      end
+      if _oxxo_display_details = @oxxo_display_details
+        if _oxxo_display_details.is_a?(OpenApi::Validatable)
+          return false unless _oxxo_display_details.valid?
+        end
+      end
+      if _paynow_display_qr_code = @paynow_display_qr_code
+        if _paynow_display_qr_code.is_a?(OpenApi::Validatable)
+          return false unless _paynow_display_qr_code.valid?
+        end
+      end
+      if _pix_display_qr_code = @pix_display_qr_code
+        if _pix_display_qr_code.is_a?(OpenApi::Validatable)
+          return false unless _pix_display_qr_code.valid?
+        end
+      end
+      if _promptpay_display_qr_code = @promptpay_display_qr_code
+        if _promptpay_display_qr_code.is_a?(OpenApi::Validatable)
+          return false unless _promptpay_display_qr_code.valid?
+        end
+      end
+      if _redirect_to_url = @redirect_to_url
+        if _redirect_to_url.is_a?(OpenApi::Validatable)
+          return false unless _redirect_to_url.valid?
+        end
+      end
+
+      if _verify_with_microdeposits = @verify_with_microdeposits
+        if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
+          return false unless _verify_with_microdeposits.valid?
+        end
+      end
+      if _wechat_pay_display_qr_code = @wechat_pay_display_qr_code
+        if _wechat_pay_display_qr_code.is_a?(OpenApi::Validatable)
+          return false unless _wechat_pay_display_qr_code.valid?
+        end
+      end
+      if _wechat_pay_redirect_to_android_app = @wechat_pay_redirect_to_android_app
+        if _wechat_pay_redirect_to_android_app.is_a?(OpenApi::Validatable)
+          return false unless _wechat_pay_redirect_to_android_app.valid?
+        end
+      end
+      if _wechat_pay_redirect_to_ios_app = @wechat_pay_redirect_to_ios_app
+        if _wechat_pay_redirect_to_ios_app.is_a?(OpenApi::Validatable)
+          return false unless _wechat_pay_redirect_to_ios_app.valid?
+        end
       end
 
       true
@@ -147,7 +276,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -156,7 +285,11 @@ module Stripe
       if alipay_handle_redirect.nil?
         return @alipay_handle_redirect = nil
       end
-      @alipay_handle_redirect = alipay_handle_redirect
+      _alipay_handle_redirect = alipay_handle_redirect.not_nil!
+      if _alipay_handle_redirect.is_a?(OpenApi::Validatable)
+        _alipay_handle_redirect.validate
+      end
+      @alipay_handle_redirect = _alipay_handle_redirect
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -165,7 +298,11 @@ module Stripe
       if boleto_display_details.nil?
         return @boleto_display_details = nil
       end
-      @boleto_display_details = boleto_display_details
+      _boleto_display_details = boleto_display_details.not_nil!
+      if _boleto_display_details.is_a?(OpenApi::Validatable)
+        _boleto_display_details.validate
+      end
+      @boleto_display_details = _boleto_display_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -174,7 +311,11 @@ module Stripe
       if card_await_notification.nil?
         return @card_await_notification = nil
       end
-      @card_await_notification = card_await_notification
+      _card_await_notification = card_await_notification.not_nil!
+      if _card_await_notification.is_a?(OpenApi::Validatable)
+        _card_await_notification.validate
+      end
+      @card_await_notification = _card_await_notification
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -183,7 +324,11 @@ module Stripe
       if display_bank_transfer_instructions.nil?
         return @display_bank_transfer_instructions = nil
       end
-      @display_bank_transfer_instructions = display_bank_transfer_instructions
+      _display_bank_transfer_instructions = display_bank_transfer_instructions.not_nil!
+      if _display_bank_transfer_instructions.is_a?(OpenApi::Validatable)
+        _display_bank_transfer_instructions.validate
+      end
+      @display_bank_transfer_instructions = _display_bank_transfer_instructions
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -192,7 +337,11 @@ module Stripe
       if konbini_display_details.nil?
         return @konbini_display_details = nil
       end
-      @konbini_display_details = konbini_display_details
+      _konbini_display_details = konbini_display_details.not_nil!
+      if _konbini_display_details.is_a?(OpenApi::Validatable)
+        _konbini_display_details.validate
+      end
+      @konbini_display_details = _konbini_display_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -201,7 +350,11 @@ module Stripe
       if oxxo_display_details.nil?
         return @oxxo_display_details = nil
       end
-      @oxxo_display_details = oxxo_display_details
+      _oxxo_display_details = oxxo_display_details.not_nil!
+      if _oxxo_display_details.is_a?(OpenApi::Validatable)
+        _oxxo_display_details.validate
+      end
+      @oxxo_display_details = _oxxo_display_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -210,7 +363,11 @@ module Stripe
       if paynow_display_qr_code.nil?
         return @paynow_display_qr_code = nil
       end
-      @paynow_display_qr_code = paynow_display_qr_code
+      _paynow_display_qr_code = paynow_display_qr_code.not_nil!
+      if _paynow_display_qr_code.is_a?(OpenApi::Validatable)
+        _paynow_display_qr_code.validate
+      end
+      @paynow_display_qr_code = _paynow_display_qr_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -219,7 +376,11 @@ module Stripe
       if pix_display_qr_code.nil?
         return @pix_display_qr_code = nil
       end
-      @pix_display_qr_code = pix_display_qr_code
+      _pix_display_qr_code = pix_display_qr_code.not_nil!
+      if _pix_display_qr_code.is_a?(OpenApi::Validatable)
+        _pix_display_qr_code.validate
+      end
+      @pix_display_qr_code = _pix_display_qr_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -228,7 +389,11 @@ module Stripe
       if promptpay_display_qr_code.nil?
         return @promptpay_display_qr_code = nil
       end
-      @promptpay_display_qr_code = promptpay_display_qr_code
+      _promptpay_display_qr_code = promptpay_display_qr_code.not_nil!
+      if _promptpay_display_qr_code.is_a?(OpenApi::Validatable)
+        _promptpay_display_qr_code.validate
+      end
+      @promptpay_display_qr_code = _promptpay_display_qr_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -237,7 +402,11 @@ module Stripe
       if redirect_to_url.nil?
         return @redirect_to_url = nil
       end
-      @redirect_to_url = redirect_to_url
+      _redirect_to_url = redirect_to_url.not_nil!
+      if _redirect_to_url.is_a?(OpenApi::Validatable)
+        _redirect_to_url.validate
+      end
+      @redirect_to_url = _redirect_to_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -246,7 +415,8 @@ module Stripe
       if use_stripe_sdk.nil?
         return @use_stripe_sdk = nil
       end
-      @use_stripe_sdk = use_stripe_sdk
+      _use_stripe_sdk = use_stripe_sdk.not_nil!
+      @use_stripe_sdk = _use_stripe_sdk
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -255,7 +425,11 @@ module Stripe
       if verify_with_microdeposits.nil?
         return @verify_with_microdeposits = nil
       end
-      @verify_with_microdeposits = verify_with_microdeposits
+      _verify_with_microdeposits = verify_with_microdeposits.not_nil!
+      if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
+        _verify_with_microdeposits.validate
+      end
+      @verify_with_microdeposits = _verify_with_microdeposits
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -264,7 +438,11 @@ module Stripe
       if wechat_pay_display_qr_code.nil?
         return @wechat_pay_display_qr_code = nil
       end
-      @wechat_pay_display_qr_code = wechat_pay_display_qr_code
+      _wechat_pay_display_qr_code = wechat_pay_display_qr_code.not_nil!
+      if _wechat_pay_display_qr_code.is_a?(OpenApi::Validatable)
+        _wechat_pay_display_qr_code.validate
+      end
+      @wechat_pay_display_qr_code = _wechat_pay_display_qr_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -273,7 +451,11 @@ module Stripe
       if wechat_pay_redirect_to_android_app.nil?
         return @wechat_pay_redirect_to_android_app = nil
       end
-      @wechat_pay_redirect_to_android_app = wechat_pay_redirect_to_android_app
+      _wechat_pay_redirect_to_android_app = wechat_pay_redirect_to_android_app.not_nil!
+      if _wechat_pay_redirect_to_android_app.is_a?(OpenApi::Validatable)
+        _wechat_pay_redirect_to_android_app.validate
+      end
+      @wechat_pay_redirect_to_android_app = _wechat_pay_redirect_to_android_app
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -282,13 +464,11 @@ module Stripe
       if wechat_pay_redirect_to_ios_app.nil?
         return @wechat_pay_redirect_to_ios_app = nil
       end
-      @wechat_pay_redirect_to_ios_app = wechat_pay_redirect_to_ios_app
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _wechat_pay_redirect_to_ios_app = wechat_pay_redirect_to_ios_app.not_nil!
+      if _wechat_pay_redirect_to_ios_app.is_a?(OpenApi::Validatable)
+        _wechat_pay_redirect_to_ios_app.validate
+      end
+      @wechat_pay_redirect_to_ios_app = _wechat_pay_redirect_to_ios_app
     end
 
     # Generates #hash and #== methods from all fields

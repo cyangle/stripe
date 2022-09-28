@@ -16,6 +16,7 @@ module Stripe
   class FromQuoteParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -41,7 +42,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"quote\" is required and cannot be null") if @quote.nil?
       if _quote = @quote
@@ -55,7 +56,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @quote.nil?
       if _quote = @quote
         return false if _quote.to_s.size > 5000
@@ -75,7 +76,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"quote\", the character length must be smaller than or equal to 5000.")
       end
 
-      @quote = quote
+      @quote = _quote
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -84,13 +85,8 @@ module Stripe
       if is_revision.nil?
         return @is_revision = nil
       end
-      @is_revision = is_revision
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _is_revision = is_revision.not_nil!
+      @is_revision = _is_revision
     end
 
     # Generates #hash and #== methods from all fields

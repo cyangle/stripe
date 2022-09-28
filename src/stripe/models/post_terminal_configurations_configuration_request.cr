@@ -15,6 +15,7 @@ module Stripe
   class PostTerminalConfigurationsConfigurationRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -46,18 +47,48 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model bbpos_wisepos_e : Stripe::PostTerminalConfigurationsConfigurationRequestBbposWiseposE?
-      # This is a model tipping : Stripe::PostTerminalConfigurationsRequestTipping?
-      # This is a model verifone_p400 : Stripe::PostTerminalConfigurationsConfigurationRequestVerifoneP400?
+      if _bbpos_wisepos_e = @bbpos_wisepos_e
+        if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bbpos_wisepos_e.list_invalid_properties_for("bbpos_wisepos_e"))
+        end
+      end
+
+      if _tipping = @tipping
+        if _tipping.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_tipping.list_invalid_properties_for("tipping"))
+        end
+      end
+      if _verifone_p400 = @verifone_p400
+        if _verifone_p400.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_verifone_p400.list_invalid_properties_for("verifone_p400"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _bbpos_wisepos_e = @bbpos_wisepos_e
+        if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
+          return false unless _bbpos_wisepos_e.valid?
+        end
+      end
+
+      if _tipping = @tipping
+        if _tipping.is_a?(OpenApi::Validatable)
+          return false unless _tipping.valid?
+        end
+      end
+      if _verifone_p400 = @verifone_p400
+        if _verifone_p400.is_a?(OpenApi::Validatable)
+          return false unless _verifone_p400.valid?
+        end
+      end
+
       true
     end
 
@@ -67,7 +98,11 @@ module Stripe
       if bbpos_wisepos_e.nil?
         return @bbpos_wisepos_e = nil
       end
-      @bbpos_wisepos_e = bbpos_wisepos_e
+      _bbpos_wisepos_e = bbpos_wisepos_e.not_nil!
+      if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
+        _bbpos_wisepos_e.validate
+      end
+      @bbpos_wisepos_e = _bbpos_wisepos_e
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -76,7 +111,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,7 +121,11 @@ module Stripe
       if tipping.nil?
         return @tipping = nil
       end
-      @tipping = tipping
+      _tipping = tipping.not_nil!
+      if _tipping.is_a?(OpenApi::Validatable)
+        _tipping.validate
+      end
+      @tipping = _tipping
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -94,13 +134,11 @@ module Stripe
       if verifone_p400.nil?
         return @verifone_p400 = nil
       end
-      @verifone_p400 = verifone_p400
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _verifone_p400 = verifone_p400.not_nil!
+      if _verifone_p400.is_a?(OpenApi::Validatable)
+        _verifone_p400.validate
+      end
+      @verifone_p400 = _verifone_p400
     end
 
     # Generates #hash and #== methods from all fields

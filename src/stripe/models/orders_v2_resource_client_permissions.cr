@@ -16,6 +16,7 @@ module Stripe
   class OrdersV2ResourceClientPermissions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -60,7 +61,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_DETAILS.error_message) unless ENUM_VALIDATOR_FOR_BILLING_DETAILS.valid?(@billing_details)
@@ -74,7 +75,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_BILLING_DETAILS.valid?(@billing_details)
       return false unless ENUM_VALIDATOR_FOR_PROMOTION_CODES.valid?(@promotion_codes)
       return false unless ENUM_VALIDATOR_FOR_SHIPPING_DETAILS.valid?(@shipping_details)
@@ -90,7 +91,7 @@ module Stripe
       end
       _billing_details = billing_details.not_nil!
       ENUM_VALIDATOR_FOR_BILLING_DETAILS.valid!(_billing_details)
-      @billing_details = billing_details
+      @billing_details = _billing_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -101,7 +102,7 @@ module Stripe
       end
       _promotion_codes = promotion_codes.not_nil!
       ENUM_VALIDATOR_FOR_PROMOTION_CODES.valid!(_promotion_codes)
-      @promotion_codes = promotion_codes
+      @promotion_codes = _promotion_codes
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -112,13 +113,7 @@ module Stripe
       end
       _shipping_details = shipping_details.not_nil!
       ENUM_VALIDATOR_FOR_SHIPPING_DETAILS.valid!(_shipping_details)
-      @shipping_details = shipping_details
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @shipping_details = _shipping_details
     end
 
     # Generates #hash and #== methods from all fields

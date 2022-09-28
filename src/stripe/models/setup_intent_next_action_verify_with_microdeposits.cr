@@ -16,6 +16,7 @@ module Stripe
   class SetupIntentNextActionVerifyWithMicrodeposits
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -53,9 +54,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"arrival_date\" is required and cannot be null") if @arrival_date.nil?
+
       invalid_properties.push("\"hosted_verification_url\" is required and cannot be null") if @hosted_verification_url.nil?
       if _hosted_verification_url = @hosted_verification_url
         if _hosted_verification_url.to_s.size > 5000
@@ -70,8 +72,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @arrival_date.nil?
+
       return false if @hosted_verification_url.nil?
       if _hosted_verification_url = @hosted_verification_url
         return false if _hosted_verification_url.to_s.size > 5000
@@ -87,7 +90,8 @@ module Stripe
       if arrival_date.nil?
         raise ArgumentError.new("\"arrival_date\" is required and cannot be null")
       end
-      @arrival_date = arrival_date
+      _arrival_date = arrival_date.not_nil!
+      @arrival_date = _arrival_date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -101,7 +105,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"hosted_verification_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @hosted_verification_url = hosted_verification_url
+      @hosted_verification_url = _hosted_verification_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -112,13 +116,7 @@ module Stripe
       end
       _microdeposit_type = microdeposit_type.not_nil!
       ENUM_VALIDATOR_FOR_MICRODEPOSIT_TYPE.valid!(_microdeposit_type)
-      @microdeposit_type = microdeposit_type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @microdeposit_type = _microdeposit_type
     end
 
     # Generates #hash and #== methods from all fields

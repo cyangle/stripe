@@ -16,6 +16,7 @@ module Stripe
   class AccountCardPaymentsSettings
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -58,9 +59,13 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model decline_on : Stripe::AccountDeclineChargeOn?
+      if _decline_on = @decline_on
+        if _decline_on.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_decline_on.list_invalid_properties_for("decline_on"))
+        end
+      end
       if _statement_descriptor_prefix = @statement_descriptor_prefix
         if _statement_descriptor_prefix.to_s.size > 5000
           invalid_properties.push("invalid value for \"statement_descriptor_prefix\", the character length must be smaller than or equal to 5000.")
@@ -82,7 +87,12 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _decline_on = @decline_on
+        if _decline_on.is_a?(OpenApi::Validatable)
+          return false unless _decline_on.valid?
+        end
+      end
       if _statement_descriptor_prefix = @statement_descriptor_prefix
         return false if _statement_descriptor_prefix.to_s.size > 5000
       end
@@ -102,7 +112,11 @@ module Stripe
       if decline_on.nil?
         return @decline_on = nil
       end
-      @decline_on = decline_on
+      _decline_on = decline_on.not_nil!
+      if _decline_on.is_a?(OpenApi::Validatable)
+        _decline_on.validate
+      end
+      @decline_on = _decline_on
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -116,7 +130,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"statement_descriptor_prefix\", the character length must be smaller than or equal to 5000.")
       end
 
-      @statement_descriptor_prefix = statement_descriptor_prefix
+      @statement_descriptor_prefix = _statement_descriptor_prefix
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -130,7 +144,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"statement_descriptor_prefix_kana\", the character length must be smaller than or equal to 5000.")
       end
 
-      @statement_descriptor_prefix_kana = statement_descriptor_prefix_kana
+      @statement_descriptor_prefix_kana = _statement_descriptor_prefix_kana
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -144,13 +158,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"statement_descriptor_prefix_kanji\", the character length must be smaller than or equal to 5000.")
       end
 
-      @statement_descriptor_prefix_kanji = statement_descriptor_prefix_kanji
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @statement_descriptor_prefix_kanji = _statement_descriptor_prefix_kanji
     end
 
     # Generates #hash and #== methods from all fields

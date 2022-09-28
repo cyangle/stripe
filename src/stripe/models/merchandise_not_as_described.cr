@@ -15,6 +15,7 @@ module Stripe
   class MerchandiseNotAsDescribed
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -55,15 +56,23 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model additional_documentation : Stripe::BusinessProfileSpecsSupportUrl?
+      if _additional_documentation = @additional_documentation
+        if _additional_documentation.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation"))
+        end
+      end
       if _explanation = @explanation
         if _explanation.to_s.size > 1500
           invalid_properties.push("invalid value for \"explanation\", the character length must be smaller than or equal to 1500.")
         end
       end
-      # This is a model received_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?
+      if _received_at = @received_at
+        if _received_at.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_received_at.list_invalid_properties_for("received_at"))
+        end
+      end
       if _return_description = @return_description
         if _return_description.to_s.size > 1500
           invalid_properties.push("invalid value for \"return_description\", the character length must be smaller than or equal to 1500.")
@@ -71,21 +80,40 @@ module Stripe
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_RETURN_STATUS.error_message) unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
-      # This is a model returned_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?
+      if _returned_at = @returned_at
+        if _returned_at.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_returned_at.list_invalid_properties_for("returned_at"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _additional_documentation = @additional_documentation
+        if _additional_documentation.is_a?(OpenApi::Validatable)
+          return false unless _additional_documentation.valid?
+        end
+      end
       if _explanation = @explanation
         return false if _explanation.to_s.size > 1500
+      end
+      if _received_at = @received_at
+        if _received_at.is_a?(OpenApi::Validatable)
+          return false unless _received_at.valid?
+        end
       end
       if _return_description = @return_description
         return false if _return_description.to_s.size > 1500
       end
       return false unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
+      if _returned_at = @returned_at
+        if _returned_at.is_a?(OpenApi::Validatable)
+          return false unless _returned_at.valid?
+        end
+      end
 
       true
     end
@@ -96,7 +124,11 @@ module Stripe
       if additional_documentation.nil?
         return @additional_documentation = nil
       end
-      @additional_documentation = additional_documentation
+      _additional_documentation = additional_documentation.not_nil!
+      if _additional_documentation.is_a?(OpenApi::Validatable)
+        _additional_documentation.validate
+      end
+      @additional_documentation = _additional_documentation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -110,7 +142,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 1500.")
       end
 
-      @explanation = explanation
+      @explanation = _explanation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -119,7 +151,11 @@ module Stripe
       if received_at.nil?
         return @received_at = nil
       end
-      @received_at = received_at
+      _received_at = received_at.not_nil!
+      if _received_at.is_a?(OpenApi::Validatable)
+        _received_at.validate
+      end
+      @received_at = _received_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -133,7 +169,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"return_description\", the character length must be smaller than or equal to 1500.")
       end
 
-      @return_description = return_description
+      @return_description = _return_description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -144,7 +180,7 @@ module Stripe
       end
       _return_status = return_status.not_nil!
       ENUM_VALIDATOR_FOR_RETURN_STATUS.valid!(_return_status)
-      @return_status = return_status
+      @return_status = _return_status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -153,13 +189,11 @@ module Stripe
       if returned_at.nil?
         return @returned_at = nil
       end
-      @returned_at = returned_at
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _returned_at = returned_at.not_nil!
+      if _returned_at.is_a?(OpenApi::Validatable)
+        _returned_at.validate
+      end
+      @returned_at = _returned_at
     end
 
     # Generates #hash and #== methods from all fields

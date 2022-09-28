@@ -16,6 +16,7 @@ module Stripe
   class SubscriptionDataUpdateParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -42,24 +43,42 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _description = @description
         if _description.to_s.size > 500
           invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 500.")
         end
       end
-      # This is a model effective_date : Stripe::SubscriptionDataCreateParamsEffectiveDate?
-      # This is a model trial_period_days : Stripe::UpdateParams1ApplicationFeeAmount?
+      if _effective_date = @effective_date
+        if _effective_date.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_effective_date.list_invalid_properties_for("effective_date"))
+        end
+      end
+      if _trial_period_days = @trial_period_days
+        if _trial_period_days.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_trial_period_days.list_invalid_properties_for("trial_period_days"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _description = @description
         return false if _description.to_s.size > 500
+      end
+      if _effective_date = @effective_date
+        if _effective_date.is_a?(OpenApi::Validatable)
+          return false unless _effective_date.valid?
+        end
+      end
+      if _trial_period_days = @trial_period_days
+        if _trial_period_days.is_a?(OpenApi::Validatable)
+          return false unless _trial_period_days.valid?
+        end
       end
 
       true
@@ -76,7 +95,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 500.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,7 +104,11 @@ module Stripe
       if effective_date.nil?
         return @effective_date = nil
       end
-      @effective_date = effective_date
+      _effective_date = effective_date.not_nil!
+      if _effective_date.is_a?(OpenApi::Validatable)
+        _effective_date.validate
+      end
+      @effective_date = _effective_date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -94,13 +117,11 @@ module Stripe
       if trial_period_days.nil?
         return @trial_period_days = nil
       end
-      @trial_period_days = trial_period_days
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _trial_period_days = trial_period_days.not_nil!
+      if _trial_period_days.is_a?(OpenApi::Validatable)
+        _trial_period_days.validate
+      end
+      @trial_period_days = _trial_period_days
     end
 
     # Generates #hash and #== methods from all fields

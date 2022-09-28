@@ -16,6 +16,7 @@ module Stripe
   class SetupAttempt
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -120,9 +121,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -133,11 +135,23 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"payment_method\" is required and cannot be null") if @payment_method.nil?
-      # This is a model payment_method : Stripe::SetupAttemptPaymentMethod?
+      if _payment_method = @payment_method
+        if _payment_method.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_method.list_invalid_properties_for("payment_method"))
+        end
+      end
       invalid_properties.push("\"payment_method_details\" is required and cannot be null") if @payment_method_details.nil?
-      # This is a model payment_method_details : Stripe::SetupAttemptPaymentMethodDetails?
+      if _payment_method_details = @payment_method_details
+        if _payment_method_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_method_details.list_invalid_properties_for("payment_method_details"))
+        end
+      end
       invalid_properties.push("\"setup_intent\" is required and cannot be null") if @setup_intent.nil?
-      # This is a model setup_intent : Stripe::SetupAttemptSetupIntent?
+      if _setup_intent = @setup_intent
+        if _setup_intent.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_setup_intent.list_invalid_properties_for("setup_intent"))
+        end
+      end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
       if _status = @status
         if _status.to_s.size > 5000
@@ -150,29 +164,63 @@ module Stripe
           invalid_properties.push("invalid value for \"usage\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model application : Stripe::SetupAttemptApplication?
-      # This is a model customer : Stripe::SetupAttemptCustomer?
+      if _application = @application
+        if _application.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_application.list_invalid_properties_for("application"))
+        end
+      end
+
+      if _customer = @customer
+        if _customer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_customer.list_invalid_properties_for("customer"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.error_message) unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
-      # This is a model on_behalf_of : Stripe::SetupAttemptOnBehalfOf?
-      # This is a model setup_error : Stripe::SetupAttemptSetupError?
+      if _on_behalf_of = @on_behalf_of
+        if _on_behalf_of.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_on_behalf_of.list_invalid_properties_for("on_behalf_of"))
+        end
+      end
+      if _setup_error = @setup_error
+        if _setup_error.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_setup_error.list_invalid_properties_for("setup_error"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @created.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @payment_method.nil?
+      if _payment_method = @payment_method
+        if _payment_method.is_a?(OpenApi::Validatable)
+          return false unless _payment_method.valid?
+        end
+      end
       return false if @payment_method_details.nil?
+      if _payment_method_details = @payment_method_details
+        if _payment_method_details.is_a?(OpenApi::Validatable)
+          return false unless _payment_method_details.valid?
+        end
+      end
       return false if @setup_intent.nil?
+      if _setup_intent = @setup_intent
+        if _setup_intent.is_a?(OpenApi::Validatable)
+          return false unless _setup_intent.valid?
+        end
+      end
       return false if @status.nil?
       if _status = @status
         return false if _status.to_s.size > 5000
@@ -181,7 +229,28 @@ module Stripe
       if _usage = @usage
         return false if _usage.to_s.size > 5000
       end
+      if _application = @application
+        if _application.is_a?(OpenApi::Validatable)
+          return false unless _application.valid?
+        end
+      end
+
+      if _customer = @customer
+        if _customer.is_a?(OpenApi::Validatable)
+          return false unless _customer.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
+      if _on_behalf_of = @on_behalf_of
+        if _on_behalf_of.is_a?(OpenApi::Validatable)
+          return false unless _on_behalf_of.valid?
+        end
+      end
+      if _setup_error = @setup_error
+        if _setup_error.is_a?(OpenApi::Validatable)
+          return false unless _setup_error.valid?
+        end
+      end
 
       true
     end
@@ -192,7 +261,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -206,7 +276,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -215,7 +285,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -226,7 +297,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -235,7 +306,11 @@ module Stripe
       if payment_method.nil?
         raise ArgumentError.new("\"payment_method\" is required and cannot be null")
       end
-      @payment_method = payment_method
+      _payment_method = payment_method.not_nil!
+      if _payment_method.is_a?(OpenApi::Validatable)
+        _payment_method.validate
+      end
+      @payment_method = _payment_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -244,7 +319,11 @@ module Stripe
       if payment_method_details.nil?
         raise ArgumentError.new("\"payment_method_details\" is required and cannot be null")
       end
-      @payment_method_details = payment_method_details
+      _payment_method_details = payment_method_details.not_nil!
+      if _payment_method_details.is_a?(OpenApi::Validatable)
+        _payment_method_details.validate
+      end
+      @payment_method_details = _payment_method_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -253,7 +332,11 @@ module Stripe
       if setup_intent.nil?
         raise ArgumentError.new("\"setup_intent\" is required and cannot be null")
       end
-      @setup_intent = setup_intent
+      _setup_intent = setup_intent.not_nil!
+      if _setup_intent.is_a?(OpenApi::Validatable)
+        _setup_intent.validate
+      end
+      @setup_intent = _setup_intent
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -267,7 +350,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -281,7 +364,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"usage\", the character length must be smaller than or equal to 5000.")
       end
 
-      @usage = usage
+      @usage = _usage
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -290,7 +373,11 @@ module Stripe
       if application.nil?
         return @application = nil
       end
-      @application = application
+      _application = application.not_nil!
+      if _application.is_a?(OpenApi::Validatable)
+        _application.validate
+      end
+      @application = _application
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -299,7 +386,8 @@ module Stripe
       if attach_to_self.nil?
         return @attach_to_self = nil
       end
-      @attach_to_self = attach_to_self
+      _attach_to_self = attach_to_self.not_nil!
+      @attach_to_self = _attach_to_self
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -308,7 +396,11 @@ module Stripe
       if customer.nil?
         return @customer = nil
       end
-      @customer = customer
+      _customer = customer.not_nil!
+      if _customer.is_a?(OpenApi::Validatable)
+        _customer.validate
+      end
+      @customer = _customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -319,7 +411,7 @@ module Stripe
       end
       _flow_directions = flow_directions.not_nil!
       ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid!(_flow_directions)
-      @flow_directions = flow_directions
+      @flow_directions = _flow_directions
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -328,7 +420,11 @@ module Stripe
       if on_behalf_of.nil?
         return @on_behalf_of = nil
       end
-      @on_behalf_of = on_behalf_of
+      _on_behalf_of = on_behalf_of.not_nil!
+      if _on_behalf_of.is_a?(OpenApi::Validatable)
+        _on_behalf_of.validate
+      end
+      @on_behalf_of = _on_behalf_of
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -337,13 +433,11 @@ module Stripe
       if setup_error.nil?
         return @setup_error = nil
       end
-      @setup_error = setup_error
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _setup_error = setup_error.not_nil!
+      if _setup_error.is_a?(OpenApi::Validatable)
+        _setup_error.validate
+      end
+      @setup_error = _setup_error
     end
 
     # Generates #hash and #== methods from all fields

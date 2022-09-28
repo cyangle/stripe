@@ -15,6 +15,7 @@ module Stripe
   class PostChargesChargeCaptureRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -73,8 +74,9 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _statement_descriptor = @statement_descriptor
         if _statement_descriptor.to_s.size > 22
           invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
@@ -85,19 +87,28 @@ module Stripe
           invalid_properties.push("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 22.")
         end
       end
-      # This is a model transfer_data : Stripe::TransferDataSpecs1?
+      if _transfer_data = @transfer_data
+        if _transfer_data.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 22
       end
       if _statement_descriptor_suffix = @statement_descriptor_suffix
         return false if _statement_descriptor_suffix.to_s.size > 22
+      end
+      if _transfer_data = @transfer_data
+        if _transfer_data.is_a?(OpenApi::Validatable)
+          return false unless _transfer_data.valid?
+        end
       end
 
       true
@@ -109,7 +120,8 @@ module Stripe
       if amount.nil?
         return @amount = nil
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -118,7 +130,8 @@ module Stripe
       if application_fee.nil?
         return @application_fee = nil
       end
-      @application_fee = application_fee
+      _application_fee = application_fee.not_nil!
+      @application_fee = _application_fee
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,7 +140,8 @@ module Stripe
       if application_fee_amount.nil?
         return @application_fee_amount = nil
       end
-      @application_fee_amount = application_fee_amount
+      _application_fee_amount = application_fee_amount.not_nil!
+      @application_fee_amount = _application_fee_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,7 +150,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -145,7 +160,8 @@ module Stripe
       if receipt_email.nil?
         return @receipt_email = nil
       end
-      @receipt_email = receipt_email
+      _receipt_email = receipt_email.not_nil!
+      @receipt_email = _receipt_email
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -159,7 +175,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
       end
 
-      @statement_descriptor = statement_descriptor
+      @statement_descriptor = _statement_descriptor
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -173,7 +189,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 22.")
       end
 
-      @statement_descriptor_suffix = statement_descriptor_suffix
+      @statement_descriptor_suffix = _statement_descriptor_suffix
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -182,7 +198,11 @@ module Stripe
       if transfer_data.nil?
         return @transfer_data = nil
       end
-      @transfer_data = transfer_data
+      _transfer_data = transfer_data.not_nil!
+      if _transfer_data.is_a?(OpenApi::Validatable)
+        _transfer_data.validate
+      end
+      @transfer_data = _transfer_data
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -191,13 +211,8 @@ module Stripe
       if transfer_group.nil?
         return @transfer_group = nil
       end
-      @transfer_group = transfer_group
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _transfer_group = transfer_group.not_nil!
+      @transfer_group = _transfer_group
     end
 
     # Generates #hash and #== methods from all fields

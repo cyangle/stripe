@@ -15,6 +15,7 @@ module Stripe
   class DateOfBirthSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -41,10 +42,12 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"day\" is required and cannot be null") if @day.nil?
+
       invalid_properties.push("\"month\" is required and cannot be null") if @month.nil?
+
       invalid_properties.push("\"year\" is required and cannot be null") if @year.nil?
 
       invalid_properties
@@ -52,9 +55,11 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @day.nil?
+
       return false if @month.nil?
+
       return false if @year.nil?
 
       true
@@ -66,7 +71,8 @@ module Stripe
       if day.nil?
         raise ArgumentError.new("\"day\" is required and cannot be null")
       end
-      @day = day
+      _day = day.not_nil!
+      @day = _day
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -75,7 +81,8 @@ module Stripe
       if month.nil?
         raise ArgumentError.new("\"month\" is required and cannot be null")
       end
-      @month = month
+      _month = month.not_nil!
+      @month = _month
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -84,13 +91,8 @@ module Stripe
       if year.nil?
         raise ArgumentError.new("\"year\" is required and cannot be null")
       end
-      @year = year
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _year = year.not_nil!
+      @year = _year
     end
 
     # Generates #hash and #== methods from all fields

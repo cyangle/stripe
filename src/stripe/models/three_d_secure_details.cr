@@ -16,6 +16,7 @@ module Stripe
   class ThreeDSecureDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -70,7 +71,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW.error_message) unless ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW.valid?(@authentication_flow)
@@ -86,7 +87,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW.valid?(@authentication_flow)
       return false unless ENUM_VALIDATOR_FOR_RESULT.valid?(@result)
       return false unless ENUM_VALIDATOR_FOR_RESULT_REASON.valid?(@result_reason)
@@ -103,7 +104,7 @@ module Stripe
       end
       _authentication_flow = authentication_flow.not_nil!
       ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW.valid!(_authentication_flow)
-      @authentication_flow = authentication_flow
+      @authentication_flow = _authentication_flow
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -114,7 +115,7 @@ module Stripe
       end
       _result = result.not_nil!
       ENUM_VALIDATOR_FOR_RESULT.valid!(_result)
-      @result = result
+      @result = _result
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -125,7 +126,7 @@ module Stripe
       end
       _result_reason = result_reason.not_nil!
       ENUM_VALIDATOR_FOR_RESULT_REASON.valid!(_result_reason)
-      @result_reason = result_reason
+      @result_reason = _result_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,13 +137,7 @@ module Stripe
       end
       _version = version.not_nil!
       ENUM_VALIDATOR_FOR_VERSION.valid!(_version)
-      @version = version
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @version = _version
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class SubscriptionSchedule
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -150,13 +151,22 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
-      # This is a model customer : Stripe::SubscriptionScheduleCustomer?
+      if _customer = @customer
+        if _customer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_customer.list_invalid_properties_for("customer"))
+        end
+      end
       invalid_properties.push("\"default_settings\" is required and cannot be null") if @default_settings.nil?
-      # This is a model default_settings : Stripe::SubscriptionSchedulesResourceDefaultSettings?
+      if _default_settings = @default_settings
+        if _default_settings.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_default_settings.list_invalid_properties_for("default_settings"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_END_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior, false)
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
@@ -169,39 +179,108 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"phases\" is required and cannot be null") if @phases.nil?
-      # Container phases array has values of Stripe::SubscriptionSchedulePhaseConfiguration
+      if _phases = @phases
+        if _phases.is_a?(Array)
+          _phases.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("phases"))
+            end
+          end
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      # This is a model application : Stripe::SubscriptionScheduleApplication?
-      # This is a model current_phase : Stripe::SubscriptionScheduleCurrentPhase1?
+      if _application = @application
+        if _application.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_application.list_invalid_properties_for("application"))
+        end
+      end
+
+      if _current_phase = @current_phase
+        if _current_phase.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_current_phase.list_invalid_properties_for("current_phase"))
+        end
+      end
+
       if _released_subscription = @released_subscription
         if _released_subscription.to_s.size > 5000
           invalid_properties.push("invalid value for \"released_subscription\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model subscription : Stripe::SubscriptionScheduleSubscription?
-      # This is a model test_clock : Stripe::SubscriptionScheduleTestClock?
+      if _subscription = @subscription
+        if _subscription.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_subscription.list_invalid_properties_for("subscription"))
+        end
+      end
+      if _test_clock = @test_clock
+        if _test_clock.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_test_clock.list_invalid_properties_for("test_clock"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @created.nil?
+
       return false if @customer.nil?
+      if _customer = @customer
+        if _customer.is_a?(OpenApi::Validatable)
+          return false unless _customer.valid?
+        end
+      end
       return false if @default_settings.nil?
+      if _default_settings = @default_settings
+        if _default_settings.is_a?(OpenApi::Validatable)
+          return false unless _default_settings.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior, false)
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @phases.nil?
+      if _phases = @phases
+        if _phases.is_a?(Array)
+          _phases.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      if _application = @application
+        if _application.is_a?(OpenApi::Validatable)
+          return false unless _application.valid?
+        end
+      end
+
+      if _current_phase = @current_phase
+        if _current_phase.is_a?(OpenApi::Validatable)
+          return false unless _current_phase.valid?
+        end
+      end
+
       if _released_subscription = @released_subscription
         return false if _released_subscription.to_s.size > 5000
+      end
+      if _subscription = @subscription
+        if _subscription.is_a?(OpenApi::Validatable)
+          return false unless _subscription.valid?
+        end
+      end
+      if _test_clock = @test_clock
+        if _test_clock.is_a?(OpenApi::Validatable)
+          return false unless _test_clock.valid?
+        end
       end
 
       true
@@ -213,7 +292,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -222,7 +302,11 @@ module Stripe
       if customer.nil?
         raise ArgumentError.new("\"customer\" is required and cannot be null")
       end
-      @customer = customer
+      _customer = customer.not_nil!
+      if _customer.is_a?(OpenApi::Validatable)
+        _customer.validate
+      end
+      @customer = _customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -231,7 +315,11 @@ module Stripe
       if default_settings.nil?
         raise ArgumentError.new("\"default_settings\" is required and cannot be null")
       end
-      @default_settings = default_settings
+      _default_settings = default_settings.not_nil!
+      if _default_settings.is_a?(OpenApi::Validatable)
+        _default_settings.validate
+      end
+      @default_settings = _default_settings
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -242,7 +330,7 @@ module Stripe
       end
       _end_behavior = end_behavior.not_nil!
       ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid!(_end_behavior)
-      @end_behavior = end_behavior
+      @end_behavior = _end_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -256,7 +344,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -265,7 +353,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -276,7 +365,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -285,7 +374,15 @@ module Stripe
       if phases.nil?
         raise ArgumentError.new("\"phases\" is required and cannot be null")
       end
-      @phases = phases
+      _phases = phases.not_nil!
+      if _phases.is_a?(Array)
+        _phases.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @phases = _phases
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -296,7 +393,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -305,7 +402,11 @@ module Stripe
       if application.nil?
         return @application = nil
       end
-      @application = application
+      _application = application.not_nil!
+      if _application.is_a?(OpenApi::Validatable)
+        _application.validate
+      end
+      @application = _application
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -314,7 +415,8 @@ module Stripe
       if canceled_at.nil?
         return @canceled_at = nil
       end
-      @canceled_at = canceled_at
+      _canceled_at = canceled_at.not_nil!
+      @canceled_at = _canceled_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -323,7 +425,8 @@ module Stripe
       if completed_at.nil?
         return @completed_at = nil
       end
-      @completed_at = completed_at
+      _completed_at = completed_at.not_nil!
+      @completed_at = _completed_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -332,7 +435,11 @@ module Stripe
       if current_phase.nil?
         return @current_phase = nil
       end
-      @current_phase = current_phase
+      _current_phase = current_phase.not_nil!
+      if _current_phase.is_a?(OpenApi::Validatable)
+        _current_phase.validate
+      end
+      @current_phase = _current_phase
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -341,7 +448,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -350,7 +458,8 @@ module Stripe
       if released_at.nil?
         return @released_at = nil
       end
-      @released_at = released_at
+      _released_at = released_at.not_nil!
+      @released_at = _released_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -364,7 +473,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"released_subscription\", the character length must be smaller than or equal to 5000.")
       end
 
-      @released_subscription = released_subscription
+      @released_subscription = _released_subscription
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -373,7 +482,11 @@ module Stripe
       if subscription.nil?
         return @subscription = nil
       end
-      @subscription = subscription
+      _subscription = subscription.not_nil!
+      if _subscription.is_a?(OpenApi::Validatable)
+        _subscription.validate
+      end
+      @subscription = _subscription
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -382,13 +495,11 @@ module Stripe
       if test_clock.nil?
         return @test_clock = nil
       end
-      @test_clock = test_clock
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _test_clock = test_clock.not_nil!
+      if _test_clock.is_a?(OpenApi::Validatable)
+        _test_clock.validate
+      end
+      @test_clock = _test_clock
     end
 
     # Generates #hash and #== methods from all fields

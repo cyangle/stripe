@@ -16,6 +16,7 @@ module Stripe
   class GelatoVerifiedOutputs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -78,10 +79,18 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model address : Stripe::GelatoVerifiedOutputsAddress?
-      # This is a model dob : Stripe::GelatoVerifiedOutputsDob?
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_address.list_invalid_properties_for("address"))
+        end
+      end
+      if _dob = @dob
+        if _dob.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_dob.list_invalid_properties_for("dob"))
+        end
+      end
       if _first_name = @first_name
         if _first_name.to_s.size > 5000
           invalid_properties.push("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
@@ -105,7 +114,17 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          return false unless _address.valid?
+        end
+      end
+      if _dob = @dob
+        if _dob.is_a?(OpenApi::Validatable)
+          return false unless _dob.valid?
+        end
+      end
       if _first_name = @first_name
         return false if _first_name.to_s.size > 5000
       end
@@ -126,7 +145,11 @@ module Stripe
       if address.nil?
         return @address = nil
       end
-      @address = address
+      _address = address.not_nil!
+      if _address.is_a?(OpenApi::Validatable)
+        _address.validate
+      end
+      @address = _address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -135,7 +158,11 @@ module Stripe
       if dob.nil?
         return @dob = nil
       end
-      @dob = dob
+      _dob = dob.not_nil!
+      if _dob.is_a?(OpenApi::Validatable)
+        _dob.validate
+      end
+      @dob = _dob
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -149,7 +176,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @first_name = first_name
+      @first_name = _first_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -163,7 +190,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id_number = id_number
+      @id_number = _id_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -174,7 +201,7 @@ module Stripe
       end
       _id_number_type = id_number_type.not_nil!
       ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid!(_id_number_type)
-      @id_number_type = id_number_type
+      @id_number_type = _id_number_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -188,13 +215,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @last_name = last_name
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @last_name = _last_name
     end
 
     # Generates #hash and #== methods from all fields

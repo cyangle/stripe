@@ -15,6 +15,7 @@ module Stripe
   class CreditCardSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -80,7 +81,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"exp_month\" is required and cannot be null") if @exp_month.nil?
       if _exp_month = @exp_month
@@ -151,7 +152,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @exp_month.nil?
       if _exp_month = @exp_month
         return false if _exp_month.to_s.size > 5000
@@ -206,7 +207,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"exp_month\", the character length must be smaller than or equal to 5000.")
       end
 
-      @exp_month = exp_month
+      @exp_month = _exp_month
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -220,7 +221,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"exp_year\", the character length must be smaller than or equal to 5000.")
       end
 
-      @exp_year = exp_year
+      @exp_year = _exp_year
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -234,7 +235,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @number = number
+      @number = _number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -248,7 +249,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_city = address_city
+      @address_city = _address_city
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -262,7 +263,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_country = address_country
+      @address_country = _address_country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -276,7 +277,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_line1 = address_line1
+      @address_line1 = _address_line1
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -290,7 +291,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_line2 = address_line2
+      @address_line2 = _address_line2
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -304,7 +305,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_state = address_state
+      @address_state = _address_state
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -318,7 +319,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
       end
 
-      @address_zip = address_zip
+      @address_zip = _address_zip
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -332,7 +333,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
       end
 
-      @currency = currency
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -346,7 +347,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"cvc\", the character length must be smaller than or equal to 5000.")
       end
 
-      @cvc = cvc
+      @cvc = _cvc
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -360,13 +361,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @name = _name
     end
 
     # Generates #hash and #== methods from all fields

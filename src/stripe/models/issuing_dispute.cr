@@ -16,6 +16,7 @@ module Stripe
   class IssuingDispute
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -100,13 +101,20 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       invalid_properties.push("\"evidence\" is required and cannot be null") if @evidence.nil?
-      # This is a model evidence : Stripe::IssuingDisputeEvidence?
+      if _evidence = @evidence
+        if _evidence.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_evidence.list_invalid_properties_for("evidence"))
+        end
+      end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -114,35 +122,81 @@ module Stripe
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
+
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       invalid_properties.push("\"transaction\" is required and cannot be null") if @transaction.nil?
-      # This is a model transaction : Stripe::IssuingDisputeTransaction?
-      # Container balance_transactions array has values of Stripe::BalanceTransaction
-      # This is a model treasury : Stripe::IssuingDisputeTreasury1?
+      if _transaction = @transaction
+        if _transaction.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_transaction.list_invalid_properties_for("transaction"))
+        end
+      end
+      if _balance_transactions = @balance_transactions
+        if _balance_transactions.is_a?(Array)
+          _balance_transactions.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("balance_transactions"))
+            end
+          end
+        end
+      end
+      if _treasury = @treasury
+        if _treasury.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_treasury.list_invalid_properties_for("treasury"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount.nil?
+
       return false if @created.nil?
+
       return false if @currency.nil?
+
       return false if @evidence.nil?
+      if _evidence = @evidence
+        if _evidence.is_a?(OpenApi::Validatable)
+          return false unless _evidence.valid?
+        end
+      end
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false if @metadata.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false if @transaction.nil?
+      if _transaction = @transaction
+        if _transaction.is_a?(OpenApi::Validatable)
+          return false unless _transaction.valid?
+        end
+      end
+      if _balance_transactions = @balance_transactions
+        if _balance_transactions.is_a?(Array)
+          _balance_transactions.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
+      if _treasury = @treasury
+        if _treasury.is_a?(OpenApi::Validatable)
+          return false unless _treasury.valid?
+        end
+      end
 
       true
     end
@@ -153,7 +207,8 @@ module Stripe
       if amount.nil?
         raise ArgumentError.new("\"amount\" is required and cannot be null")
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -162,7 +217,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -171,7 +227,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -180,7 +237,11 @@ module Stripe
       if evidence.nil?
         raise ArgumentError.new("\"evidence\" is required and cannot be null")
       end
-      @evidence = evidence
+      _evidence = evidence.not_nil!
+      if _evidence.is_a?(OpenApi::Validatable)
+        _evidence.validate
+      end
+      @evidence = _evidence
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -194,7 +255,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -203,7 +264,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -212,7 +274,8 @@ module Stripe
       if metadata.nil?
         raise ArgumentError.new("\"metadata\" is required and cannot be null")
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -223,7 +286,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -234,7 +297,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -243,7 +306,11 @@ module Stripe
       if transaction.nil?
         raise ArgumentError.new("\"transaction\" is required and cannot be null")
       end
-      @transaction = transaction
+      _transaction = transaction.not_nil!
+      if _transaction.is_a?(OpenApi::Validatable)
+        _transaction.validate
+      end
+      @transaction = _transaction
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -252,7 +319,15 @@ module Stripe
       if balance_transactions.nil?
         return @balance_transactions = nil
       end
-      @balance_transactions = balance_transactions
+      _balance_transactions = balance_transactions.not_nil!
+      if _balance_transactions.is_a?(Array)
+        _balance_transactions.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @balance_transactions = _balance_transactions
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -261,13 +336,11 @@ module Stripe
       if treasury.nil?
         return @treasury = nil
       end
-      @treasury = treasury
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _treasury = treasury.not_nil!
+      if _treasury.is_a?(OpenApi::Validatable)
+        _treasury.validate
+      end
+      @treasury = _treasury
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class PostSubscriptionSchedulesRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -68,37 +69,83 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _customer = @customer
         if _customer.to_s.size > 5000
           invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model default_settings : Stripe::DefaultSettingsParams?
+      if _default_settings = @default_settings
+        if _default_settings.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_default_settings.list_invalid_properties_for("default_settings"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_END_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior)
+
       if _from_subscription = @from_subscription
         if _from_subscription.to_s.size > 5000
           invalid_properties.push("invalid value for \"from_subscription\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
-      # Container phases array has values of Stripe::PhaseConfigurationParams
-      # This is a model start_date : Stripe::PostSubscriptionSchedulesRequestStartDate?
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
+      if _phases = @phases
+        if _phases.is_a?(Array)
+          _phases.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("phases"))
+            end
+          end
+        end
+      end
+      if _start_date = @start_date
+        if _start_date.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_start_date.list_invalid_properties_for("start_date"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
+      if _default_settings = @default_settings
+        if _default_settings.is_a?(OpenApi::Validatable)
+          return false unless _default_settings.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior)
+
       if _from_subscription = @from_subscription
         return false if _from_subscription.to_s.size > 5000
+      end
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
+      end
+      if _phases = @phases
+        if _phases.is_a?(Array)
+          _phases.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
+      if _start_date = @start_date
+        if _start_date.is_a?(OpenApi::Validatable)
+          return false unless _start_date.valid?
+        end
       end
 
       true
@@ -115,7 +162,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
 
-      @customer = customer
+      @customer = _customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -124,7 +171,11 @@ module Stripe
       if default_settings.nil?
         return @default_settings = nil
       end
-      @default_settings = default_settings
+      _default_settings = default_settings.not_nil!
+      if _default_settings.is_a?(OpenApi::Validatable)
+        _default_settings.validate
+      end
+      @default_settings = _default_settings
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -135,7 +186,7 @@ module Stripe
       end
       _end_behavior = end_behavior.not_nil!
       ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid!(_end_behavior)
-      @end_behavior = end_behavior
+      @end_behavior = _end_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -144,7 +195,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -158,7 +210,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"from_subscription\", the character length must be smaller than or equal to 5000.")
       end
 
-      @from_subscription = from_subscription
+      @from_subscription = _from_subscription
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -167,7 +219,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -176,7 +232,15 @@ module Stripe
       if phases.nil?
         return @phases = nil
       end
-      @phases = phases
+      _phases = phases.not_nil!
+      if _phases.is_a?(Array)
+        _phases.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @phases = _phases
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -185,13 +249,11 @@ module Stripe
       if start_date.nil?
         return @start_date = nil
       end
-      @start_date = start_date
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _start_date = start_date.not_nil!
+      if _start_date.is_a?(OpenApi::Validatable)
+        _start_date.validate
+      end
+      @start_date = _start_date
     end
 
     # Generates #hash and #== methods from all fields

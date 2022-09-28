@@ -15,6 +15,7 @@ module Stripe
   class CustomerUpdateCreationParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -40,18 +41,29 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
-      # This is a model allowed_updates : Stripe::CustomerUpdateCreationParamAllowedUpdates?
+
+      if _allowed_updates = @allowed_updates
+        if _allowed_updates.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_allowed_updates.list_invalid_properties_for("allowed_updates"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @enabled.nil?
+
+      if _allowed_updates = @allowed_updates
+        if _allowed_updates.is_a?(OpenApi::Validatable)
+          return false unless _allowed_updates.valid?
+        end
+      end
 
       true
     end
@@ -62,7 +74,8 @@ module Stripe
       if enabled.nil?
         raise ArgumentError.new("\"enabled\" is required and cannot be null")
       end
-      @enabled = enabled
+      _enabled = enabled.not_nil!
+      @enabled = _enabled
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -71,13 +84,11 @@ module Stripe
       if allowed_updates.nil?
         return @allowed_updates = nil
       end
-      @allowed_updates = allowed_updates
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _allowed_updates = allowed_updates.not_nil!
+      if _allowed_updates.is_a?(OpenApi::Validatable)
+        _allowed_updates.validate
+      end
+      @allowed_updates = _allowed_updates
     end
 
     # Generates #hash and #== methods from all fields

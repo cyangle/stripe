@@ -15,6 +15,7 @@ module Stripe
   class SubscriptionDataItemParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -44,7 +45,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"plan\" is required and cannot be null") if @plan.nil?
       if _plan = @plan
@@ -58,7 +59,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @plan.nil?
       if _plan = @plan
         return false if _plan.to_s.size > 5000
@@ -78,7 +79,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"plan\", the character length must be smaller than or equal to 5000.")
       end
 
-      @plan = plan
+      @plan = _plan
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -87,7 +88,8 @@ module Stripe
       if quantity.nil?
         return @quantity = nil
       end
-      @quantity = quantity
+      _quantity = quantity.not_nil!
+      @quantity = _quantity
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -96,13 +98,8 @@ module Stripe
       if tax_rates.nil?
         return @tax_rates = nil
       end
-      @tax_rates = tax_rates
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tax_rates = tax_rates.not_nil!
+      @tax_rates = _tax_rates
     end
 
     # Generates #hash and #== methods from all fields

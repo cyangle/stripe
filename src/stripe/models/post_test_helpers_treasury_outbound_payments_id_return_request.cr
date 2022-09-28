@@ -15,6 +15,7 @@ module Stripe
   class PostTestHelpersTreasuryOutboundPaymentsIdReturnRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -38,16 +39,27 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model returned_details : Stripe::ReturnedDetailsParams?
+
+      if _returned_details = @returned_details
+        if _returned_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_returned_details.list_invalid_properties_for("returned_details"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _returned_details = @returned_details
+        if _returned_details.is_a?(OpenApi::Validatable)
+          return false unless _returned_details.valid?
+        end
+      end
+
       true
     end
 
@@ -57,7 +69,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -66,13 +79,11 @@ module Stripe
       if returned_details.nil?
         return @returned_details = nil
       end
-      @returned_details = returned_details
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _returned_details = returned_details.not_nil!
+      if _returned_details.is_a?(OpenApi::Validatable)
+        _returned_details.validate
+      end
+      @returned_details = _returned_details
     end
 
     # Generates #hash and #== methods from all fields

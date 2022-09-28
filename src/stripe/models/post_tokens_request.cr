@@ -15,6 +15,7 @@ module Stripe
   class PostTokensRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -63,28 +64,84 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model account : Stripe::ConnectJsAccountTokenSpecs?
-      # This is a model bank_account : Stripe::TokenCreateBankAccount?
-      # This is a model card : Stripe::PostTokensRequestCard?
+      if _account = @account
+        if _account.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_account.list_invalid_properties_for("account"))
+        end
+      end
+      if _bank_account = @bank_account
+        if _bank_account.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bank_account.list_invalid_properties_for("bank_account"))
+        end
+      end
+      if _card = @card
+        if _card.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_card.list_invalid_properties_for("card"))
+        end
+      end
       if _customer = @customer
         if _customer.to_s.size > 5000
           invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model cvc_update : Stripe::CvcParams?
-      # This is a model person : Stripe::PersonTokenSpecs?
-      # This is a model pii : Stripe::PiiTokenSpecs?
+      if _cvc_update = @cvc_update
+        if _cvc_update.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_cvc_update.list_invalid_properties_for("cvc_update"))
+        end
+      end
+
+      if _person = @person
+        if _person.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_person.list_invalid_properties_for("person"))
+        end
+      end
+      if _pii = @pii
+        if _pii.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_pii.list_invalid_properties_for("pii"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _account = @account
+        if _account.is_a?(OpenApi::Validatable)
+          return false unless _account.valid?
+        end
+      end
+      if _bank_account = @bank_account
+        if _bank_account.is_a?(OpenApi::Validatable)
+          return false unless _bank_account.valid?
+        end
+      end
+      if _card = @card
+        if _card.is_a?(OpenApi::Validatable)
+          return false unless _card.valid?
+        end
+      end
       if _customer = @customer
         return false if _customer.to_s.size > 5000
+      end
+      if _cvc_update = @cvc_update
+        if _cvc_update.is_a?(OpenApi::Validatable)
+          return false unless _cvc_update.valid?
+        end
+      end
+
+      if _person = @person
+        if _person.is_a?(OpenApi::Validatable)
+          return false unless _person.valid?
+        end
+      end
+      if _pii = @pii
+        if _pii.is_a?(OpenApi::Validatable)
+          return false unless _pii.valid?
+        end
       end
 
       true
@@ -96,7 +153,11 @@ module Stripe
       if account.nil?
         return @account = nil
       end
-      @account = account
+      _account = account.not_nil!
+      if _account.is_a?(OpenApi::Validatable)
+        _account.validate
+      end
+      @account = _account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,7 +166,11 @@ module Stripe
       if bank_account.nil?
         return @bank_account = nil
       end
-      @bank_account = bank_account
+      _bank_account = bank_account.not_nil!
+      if _bank_account.is_a?(OpenApi::Validatable)
+        _bank_account.validate
+      end
+      @bank_account = _bank_account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -114,7 +179,11 @@ module Stripe
       if card.nil?
         return @card = nil
       end
-      @card = card
+      _card = card.not_nil!
+      if _card.is_a?(OpenApi::Validatable)
+        _card.validate
+      end
+      @card = _card
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -128,7 +197,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
       end
 
-      @customer = customer
+      @customer = _customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -137,7 +206,11 @@ module Stripe
       if cvc_update.nil?
         return @cvc_update = nil
       end
-      @cvc_update = cvc_update
+      _cvc_update = cvc_update.not_nil!
+      if _cvc_update.is_a?(OpenApi::Validatable)
+        _cvc_update.validate
+      end
+      @cvc_update = _cvc_update
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -146,7 +219,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -155,7 +229,11 @@ module Stripe
       if person.nil?
         return @person = nil
       end
-      @person = person
+      _person = person.not_nil!
+      if _person.is_a?(OpenApi::Validatable)
+        _person.validate
+      end
+      @person = _person
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -164,13 +242,11 @@ module Stripe
       if pii.nil?
         return @pii = nil
       end
-      @pii = pii
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _pii = pii.not_nil!
+      if _pii.is_a?(OpenApi::Validatable)
+        _pii.validate
+      end
+      @pii = _pii
     end
 
     # Generates #hash and #== methods from all fields

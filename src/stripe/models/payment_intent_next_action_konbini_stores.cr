@@ -16,6 +16,7 @@ module Stripe
   class PaymentIntentNextActionKonbiniStores
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -58,19 +59,56 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model familymart : Stripe::PaymentIntentNextActionKonbiniStoresFamilymart?
-      # This is a model lawson : Stripe::PaymentIntentNextActionKonbiniStoresLawson?
-      # This is a model ministop : Stripe::PaymentIntentNextActionKonbiniStoresMinistop?
-      # This is a model seicomart : Stripe::PaymentIntentNextActionKonbiniStoresSeicomart?
+      if _familymart = @familymart
+        if _familymart.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_familymart.list_invalid_properties_for("familymart"))
+        end
+      end
+      if _lawson = @lawson
+        if _lawson.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_lawson.list_invalid_properties_for("lawson"))
+        end
+      end
+      if _ministop = @ministop
+        if _ministop.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_ministop.list_invalid_properties_for("ministop"))
+        end
+      end
+      if _seicomart = @seicomart
+        if _seicomart.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_seicomart.list_invalid_properties_for("seicomart"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _familymart = @familymart
+        if _familymart.is_a?(OpenApi::Validatable)
+          return false unless _familymart.valid?
+        end
+      end
+      if _lawson = @lawson
+        if _lawson.is_a?(OpenApi::Validatable)
+          return false unless _lawson.valid?
+        end
+      end
+      if _ministop = @ministop
+        if _ministop.is_a?(OpenApi::Validatable)
+          return false unless _ministop.valid?
+        end
+      end
+      if _seicomart = @seicomart
+        if _seicomart.is_a?(OpenApi::Validatable)
+          return false unless _seicomart.valid?
+        end
+      end
+
       true
     end
 
@@ -80,7 +118,11 @@ module Stripe
       if familymart.nil?
         return @familymart = nil
       end
-      @familymart = familymart
+      _familymart = familymart.not_nil!
+      if _familymart.is_a?(OpenApi::Validatable)
+        _familymart.validate
+      end
+      @familymart = _familymart
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -89,7 +131,11 @@ module Stripe
       if lawson.nil?
         return @lawson = nil
       end
-      @lawson = lawson
+      _lawson = lawson.not_nil!
+      if _lawson.is_a?(OpenApi::Validatable)
+        _lawson.validate
+      end
+      @lawson = _lawson
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -98,7 +144,11 @@ module Stripe
       if ministop.nil?
         return @ministop = nil
       end
-      @ministop = ministop
+      _ministop = ministop.not_nil!
+      if _ministop.is_a?(OpenApi::Validatable)
+        _ministop.validate
+      end
+      @ministop = _ministop
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,13 +157,11 @@ module Stripe
       if seicomart.nil?
         return @seicomart = nil
       end
-      @seicomart = seicomart
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _seicomart = seicomart.not_nil!
+      if _seicomart.is_a?(OpenApi::Validatable)
+        _seicomart.validate
+      end
+      @seicomart = _seicomart
     end
 
     # Generates #hash and #== methods from all fields

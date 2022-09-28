@@ -16,6 +16,7 @@ module Stripe
   class CustomerBalanceResourceCashBalanceTransactionResourceFundedTransaction
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -34,18 +35,27 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"bank_transfer\" is required and cannot be null") if @bank_transfer.nil?
-      # This is a model bank_transfer : Stripe::CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransfer?
+      if _bank_transfer = @bank_transfer
+        if _bank_transfer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bank_transfer.list_invalid_properties_for("bank_transfer"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @bank_transfer.nil?
+      if _bank_transfer = @bank_transfer
+        if _bank_transfer.is_a?(OpenApi::Validatable)
+          return false unless _bank_transfer.valid?
+        end
+      end
 
       true
     end
@@ -56,13 +66,11 @@ module Stripe
       if bank_transfer.nil?
         raise ArgumentError.new("\"bank_transfer\" is required and cannot be null")
       end
-      @bank_transfer = bank_transfer
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _bank_transfer = bank_transfer.not_nil!
+      if _bank_transfer.is_a?(OpenApi::Validatable)
+        _bank_transfer.validate
+      end
+      @bank_transfer = _bank_transfer
     end
 
     # Generates #hash and #== methods from all fields

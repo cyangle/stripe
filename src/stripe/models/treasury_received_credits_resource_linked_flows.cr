@@ -16,6 +16,7 @@ module Stripe
   class TreasuryReceivedCreditsResourceLinkedFlows
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -77,7 +78,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _credit_reversal = @credit_reversal
         if _credit_reversal.to_s.size > 5000
@@ -99,7 +100,11 @@ module Stripe
           invalid_properties.push("invalid value for \"source_flow\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model source_flow_details : Stripe::TreasuryReceivedCreditsResourceLinkedFlowsSourceFlowDetails?
+      if _source_flow_details = @source_flow_details
+        if _source_flow_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_source_flow_details.list_invalid_properties_for("source_flow_details"))
+        end
+      end
       if _source_flow_type = @source_flow_type
         if _source_flow_type.to_s.size > 5000
           invalid_properties.push("invalid value for \"source_flow_type\", the character length must be smaller than or equal to 5000.")
@@ -111,7 +116,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _credit_reversal = @credit_reversal
         return false if _credit_reversal.to_s.size > 5000
       end
@@ -123,6 +128,11 @@ module Stripe
       end
       if _source_flow = @source_flow
         return false if _source_flow.to_s.size > 5000
+      end
+      if _source_flow_details = @source_flow_details
+        if _source_flow_details.is_a?(OpenApi::Validatable)
+          return false unless _source_flow_details.valid?
+        end
       end
       if _source_flow_type = @source_flow_type
         return false if _source_flow_type.to_s.size > 5000
@@ -142,7 +152,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"credit_reversal\", the character length must be smaller than or equal to 5000.")
       end
 
-      @credit_reversal = credit_reversal
+      @credit_reversal = _credit_reversal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -156,7 +166,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
       end
 
-      @issuing_authorization = issuing_authorization
+      @issuing_authorization = _issuing_authorization
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -170,7 +180,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
       end
 
-      @issuing_transaction = issuing_transaction
+      @issuing_transaction = _issuing_transaction
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -184,7 +194,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"source_flow\", the character length must be smaller than or equal to 5000.")
       end
 
-      @source_flow = source_flow
+      @source_flow = _source_flow
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -193,7 +203,11 @@ module Stripe
       if source_flow_details.nil?
         return @source_flow_details = nil
       end
-      @source_flow_details = source_flow_details
+      _source_flow_details = source_flow_details.not_nil!
+      if _source_flow_details.is_a?(OpenApi::Validatable)
+        _source_flow_details.validate
+      end
+      @source_flow_details = _source_flow_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -207,13 +221,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"source_flow_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      @source_flow_type = source_flow_type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @source_flow_type = _source_flow_type
     end
 
     # Generates #hash and #== methods from all fields

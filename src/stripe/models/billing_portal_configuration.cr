@@ -16,6 +16,7 @@ module Stripe
   class BillingPortalConfiguration
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -105,14 +106,24 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"active\" is required and cannot be null") if @active.nil?
+
       invalid_properties.push("\"business_profile\" is required and cannot be null") if @business_profile.nil?
-      # This is a model business_profile : Stripe::PortalBusinessProfile?
+      if _business_profile = @business_profile
+        if _business_profile.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile"))
+        end
+      end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"features\" is required and cannot be null") if @features.nil?
-      # This is a model features : Stripe::PortalFeatures?
+      if _features = @features
+        if _features.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_features.list_invalid_properties_for("features"))
+        end
+      end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -120,13 +131,24 @@ module Stripe
         end
       end
       invalid_properties.push("\"is_default\" is required and cannot be null") if @is_default.nil?
+
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
+
       invalid_properties.push("\"login_page\" is required and cannot be null") if @login_page.nil?
-      # This is a model login_page : Stripe::PortalLoginPage?
+      if _login_page = @login_page
+        if _login_page.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_login_page.list_invalid_properties_for("login_page"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"updated\" is required and cannot be null") if @updated.nil?
-      # This is a model application : Stripe::BillingPortalConfigurationApplication?
+
+      if _application = @application
+        if _application.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_application.list_invalid_properties_for("application"))
+        end
+      end
       if _default_return_url = @default_return_url
         if _default_return_url.to_s.size > 5000
           invalid_properties.push("invalid value for \"default_return_url\", the character length must be smaller than or equal to 5000.")
@@ -138,20 +160,45 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @active.nil?
+
       return false if @business_profile.nil?
+      if _business_profile = @business_profile
+        if _business_profile.is_a?(OpenApi::Validatable)
+          return false unless _business_profile.valid?
+        end
+      end
       return false if @created.nil?
+
       return false if @features.nil?
+      if _features = @features
+        if _features.is_a?(OpenApi::Validatable)
+          return false unless _features.valid?
+        end
+      end
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @is_default.nil?
+
       return false if @livemode.nil?
+
       return false if @login_page.nil?
+      if _login_page = @login_page
+        if _login_page.is_a?(OpenApi::Validatable)
+          return false unless _login_page.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @updated.nil?
+
+      if _application = @application
+        if _application.is_a?(OpenApi::Validatable)
+          return false unless _application.valid?
+        end
+      end
       if _default_return_url = @default_return_url
         return false if _default_return_url.to_s.size > 5000
       end
@@ -165,7 +212,8 @@ module Stripe
       if active.nil?
         raise ArgumentError.new("\"active\" is required and cannot be null")
       end
-      @active = active
+      _active = active.not_nil!
+      @active = _active
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -174,7 +222,11 @@ module Stripe
       if business_profile.nil?
         raise ArgumentError.new("\"business_profile\" is required and cannot be null")
       end
-      @business_profile = business_profile
+      _business_profile = business_profile.not_nil!
+      if _business_profile.is_a?(OpenApi::Validatable)
+        _business_profile.validate
+      end
+      @business_profile = _business_profile
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -183,7 +235,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -192,7 +245,11 @@ module Stripe
       if features.nil?
         raise ArgumentError.new("\"features\" is required and cannot be null")
       end
-      @features = features
+      _features = features.not_nil!
+      if _features.is_a?(OpenApi::Validatable)
+        _features.validate
+      end
+      @features = _features
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -206,7 +263,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -215,7 +272,8 @@ module Stripe
       if is_default.nil?
         raise ArgumentError.new("\"is_default\" is required and cannot be null")
       end
-      @is_default = is_default
+      _is_default = is_default.not_nil!
+      @is_default = _is_default
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -224,7 +282,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -233,7 +292,11 @@ module Stripe
       if login_page.nil?
         raise ArgumentError.new("\"login_page\" is required and cannot be null")
       end
-      @login_page = login_page
+      _login_page = login_page.not_nil!
+      if _login_page.is_a?(OpenApi::Validatable)
+        _login_page.validate
+      end
+      @login_page = _login_page
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -244,7 +307,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -253,7 +316,8 @@ module Stripe
       if updated.nil?
         raise ArgumentError.new("\"updated\" is required and cannot be null")
       end
-      @updated = updated
+      _updated = updated.not_nil!
+      @updated = _updated
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -262,7 +326,11 @@ module Stripe
       if application.nil?
         return @application = nil
       end
-      @application = application
+      _application = application.not_nil!
+      if _application.is_a?(OpenApi::Validatable)
+        _application.validate
+      end
+      @application = _application
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -276,7 +344,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"default_return_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @default_return_url = default_return_url
+      @default_return_url = _default_return_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -285,13 +353,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Generates #hash and #== methods from all fields

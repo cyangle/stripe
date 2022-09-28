@@ -16,6 +16,7 @@ module Stripe
   class SetupAttemptPaymentMethodDetailsCardPresent
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,16 +38,26 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model generated_card : Stripe::SetupAttemptPaymentMethodDetailsCardPresentGeneratedCard?
+      if _generated_card = @generated_card
+        if _generated_card.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_generated_card.list_invalid_properties_for("generated_card"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _generated_card = @generated_card
+        if _generated_card.is_a?(OpenApi::Validatable)
+          return false unless _generated_card.valid?
+        end
+      end
+
       true
     end
 
@@ -56,13 +67,11 @@ module Stripe
       if generated_card.nil?
         return @generated_card = nil
       end
-      @generated_card = generated_card
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _generated_card = generated_card.not_nil!
+      if _generated_card.is_a?(OpenApi::Validatable)
+        _generated_card.validate
+      end
+      @generated_card = _generated_card
     end
 
     # Generates #hash and #== methods from all fields

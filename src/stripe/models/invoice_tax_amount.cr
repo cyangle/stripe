@@ -16,6 +16,7 @@ module Stripe
   class InvoiceTaxAmount
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -44,22 +45,35 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+
       invalid_properties.push("\"inclusive\" is required and cannot be null") if @inclusive.nil?
+
       invalid_properties.push("\"tax_rate\" is required and cannot be null") if @tax_rate.nil?
-      # This is a model tax_rate : Stripe::CreditNoteTaxAmountTaxRate?
+      if _tax_rate = @tax_rate
+        if _tax_rate.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_tax_rate.list_invalid_properties_for("tax_rate"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount.nil?
+
       return false if @inclusive.nil?
+
       return false if @tax_rate.nil?
+      if _tax_rate = @tax_rate
+        if _tax_rate.is_a?(OpenApi::Validatable)
+          return false unless _tax_rate.valid?
+        end
+      end
 
       true
     end
@@ -70,7 +84,8 @@ module Stripe
       if amount.nil?
         raise ArgumentError.new("\"amount\" is required and cannot be null")
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -79,7 +94,8 @@ module Stripe
       if inclusive.nil?
         raise ArgumentError.new("\"inclusive\" is required and cannot be null")
       end
-      @inclusive = inclusive
+      _inclusive = inclusive.not_nil!
+      @inclusive = _inclusive
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -88,13 +104,11 @@ module Stripe
       if tax_rate.nil?
         raise ArgumentError.new("\"tax_rate\" is required and cannot be null")
       end
-      @tax_rate = tax_rate
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tax_rate = tax_rate.not_nil!
+      if _tax_rate.is_a?(OpenApi::Validatable)
+        _tax_rate.validate
+      end
+      @tax_rate = _tax_rate
     end
 
     # Generates #hash and #== methods from all fields

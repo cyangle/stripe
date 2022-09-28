@@ -15,6 +15,7 @@ module Stripe
   class MandateAcceptanceParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -64,12 +65,21 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      # This is a model offline : Stripe::MandateOfflineAcceptanceParams?
-      # This is a model online : Stripe::MandateOnlineAcceptanceParams?
+
+      if _offline = @offline
+        if _offline.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_offline.list_invalid_properties_for("offline"))
+        end
+      end
+      if _online = @online
+        if _online.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_online.list_invalid_properties_for("online"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
       if _user_agent = @user_agent
@@ -83,8 +93,19 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
+      if _offline = @offline
+        if _offline.is_a?(OpenApi::Validatable)
+          return false unless _offline.valid?
+        end
+      end
+      if _online = @online
+        if _online.is_a?(OpenApi::Validatable)
+          return false unless _online.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
       if _user_agent = @user_agent
         return false if _user_agent.to_s.size > 5000
@@ -101,7 +122,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -110,7 +131,8 @@ module Stripe
       if date.nil?
         return @date = nil
       end
-      @date = date
+      _date = date.not_nil!
+      @date = _date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -119,7 +141,8 @@ module Stripe
       if ip.nil?
         return @ip = nil
       end
-      @ip = ip
+      _ip = ip.not_nil!
+      @ip = _ip
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -128,7 +151,11 @@ module Stripe
       if offline.nil?
         return @offline = nil
       end
-      @offline = offline
+      _offline = offline.not_nil!
+      if _offline.is_a?(OpenApi::Validatable)
+        _offline.validate
+      end
+      @offline = _offline
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -137,7 +164,11 @@ module Stripe
       if online.nil?
         return @online = nil
       end
-      @online = online
+      _online = online.not_nil!
+      if _online.is_a?(OpenApi::Validatable)
+        _online.validate
+      end
+      @online = _online
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -148,7 +179,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -162,13 +193,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"user_agent\", the character length must be smaller than or equal to 5000.")
       end
 
-      @user_agent = user_agent
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @user_agent = _user_agent
     end
 
     # Generates #hash and #== methods from all fields

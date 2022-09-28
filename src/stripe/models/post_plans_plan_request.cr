@@ -15,6 +15,7 @@ module Stripe
   class PostPlansPlanRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -58,9 +59,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model metadata : Stripe::PostAccountRequestMetadata?
+
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
+        end
+      end
       if _nickname = @nickname
         if _nickname.to_s.size > 5000
           invalid_properties.push("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
@@ -77,7 +83,12 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _metadata = @metadata
+        if _metadata.is_a?(OpenApi::Validatable)
+          return false unless _metadata.valid?
+        end
+      end
       if _nickname = @nickname
         return false if _nickname.to_s.size > 5000
       end
@@ -94,7 +105,8 @@ module Stripe
       if active.nil?
         return @active = nil
       end
-      @active = active
+      _active = active.not_nil!
+      @active = _active
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -103,7 +115,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -112,7 +125,11 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      if _metadata.is_a?(OpenApi::Validatable)
+        _metadata.validate
+      end
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -126,7 +143,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
       end
 
-      @nickname = nickname
+      @nickname = _nickname
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -140,7 +157,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"product\", the character length must be smaller than or equal to 5000.")
       end
 
-      @product = product
+      @product = _product
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -149,13 +166,8 @@ module Stripe
       if trial_period_days.nil?
         return @trial_period_days = nil
       end
-      @trial_period_days = trial_period_days
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _trial_period_days = trial_period_days.not_nil!
+      @trial_period_days = _trial_period_days
     end
 
     # Generates #hash and #== methods from all fields

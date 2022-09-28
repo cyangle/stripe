@@ -16,6 +16,7 @@ module Stripe
   class DisputeEvidenceParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -138,7 +139,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _access_activity_log = @access_activity_log
         if _access_activity_log.to_s.size > 20000
@@ -150,6 +151,7 @@ module Stripe
           invalid_properties.push("invalid value for \"billing_address\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _cancellation_policy_disclosure = @cancellation_policy_disclosure
         if _cancellation_policy_disclosure.to_s.size > 20000
           invalid_properties.push("invalid value for \"cancellation_policy_disclosure\", the character length must be smaller than or equal to 20000.")
@@ -160,6 +162,7 @@ module Stripe
           invalid_properties.push("invalid value for \"cancellation_rebuttal\", the character length must be smaller than or equal to 20000.")
         end
       end
+
       if _customer_email_address = @customer_email_address
         if _customer_email_address.to_s.size > 5000
           invalid_properties.push("invalid value for \"customer_email_address\", the character length must be smaller than or equal to 5000.")
@@ -175,6 +178,7 @@ module Stripe
           invalid_properties.push("invalid value for \"customer_purchase_ip\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _duplicate_charge_explanation = @duplicate_charge_explanation
         if _duplicate_charge_explanation.to_s.size > 20000
           invalid_properties.push("invalid value for \"duplicate_charge_explanation\", the character length must be smaller than or equal to 20000.")
@@ -190,6 +194,7 @@ module Stripe
           invalid_properties.push("invalid value for \"product_description\", the character length must be smaller than or equal to 20000.")
         end
       end
+
       if _refund_policy_disclosure = @refund_policy_disclosure
         if _refund_policy_disclosure.to_s.size > 20000
           invalid_properties.push("invalid value for \"refund_policy_disclosure\", the character length must be smaller than or equal to 20000.")
@@ -205,6 +210,7 @@ module Stripe
           invalid_properties.push("invalid value for \"service_date\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _shipping_address = @shipping_address
         if _shipping_address.to_s.size > 5000
           invalid_properties.push("invalid value for \"shipping_address\", the character length must be smaller than or equal to 5000.")
@@ -220,11 +226,13 @@ module Stripe
           invalid_properties.push("invalid value for \"shipping_date\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _shipping_tracking_number = @shipping_tracking_number
         if _shipping_tracking_number.to_s.size > 5000
           invalid_properties.push("invalid value for \"shipping_tracking_number\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _uncategorized_text = @uncategorized_text
         if _uncategorized_text.to_s.size > 20000
           invalid_properties.push("invalid value for \"uncategorized_text\", the character length must be smaller than or equal to 20000.")
@@ -236,19 +244,21 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _access_activity_log = @access_activity_log
         return false if _access_activity_log.to_s.size > 20000
       end
       if _billing_address = @billing_address
         return false if _billing_address.to_s.size > 5000
       end
+
       if _cancellation_policy_disclosure = @cancellation_policy_disclosure
         return false if _cancellation_policy_disclosure.to_s.size > 20000
       end
       if _cancellation_rebuttal = @cancellation_rebuttal
         return false if _cancellation_rebuttal.to_s.size > 20000
       end
+
       if _customer_email_address = @customer_email_address
         return false if _customer_email_address.to_s.size > 5000
       end
@@ -258,6 +268,7 @@ module Stripe
       if _customer_purchase_ip = @customer_purchase_ip
         return false if _customer_purchase_ip.to_s.size > 5000
       end
+
       if _duplicate_charge_explanation = @duplicate_charge_explanation
         return false if _duplicate_charge_explanation.to_s.size > 20000
       end
@@ -267,6 +278,7 @@ module Stripe
       if _product_description = @product_description
         return false if _product_description.to_s.size > 20000
       end
+
       if _refund_policy_disclosure = @refund_policy_disclosure
         return false if _refund_policy_disclosure.to_s.size > 20000
       end
@@ -276,6 +288,7 @@ module Stripe
       if _service_date = @service_date
         return false if _service_date.to_s.size > 5000
       end
+
       if _shipping_address = @shipping_address
         return false if _shipping_address.to_s.size > 5000
       end
@@ -285,9 +298,11 @@ module Stripe
       if _shipping_date = @shipping_date
         return false if _shipping_date.to_s.size > 5000
       end
+
       if _shipping_tracking_number = @shipping_tracking_number
         return false if _shipping_tracking_number.to_s.size > 5000
       end
+
       if _uncategorized_text = @uncategorized_text
         return false if _uncategorized_text.to_s.size > 20000
       end
@@ -306,7 +321,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"access_activity_log\", the character length must be smaller than or equal to 20000.")
       end
 
-      @access_activity_log = access_activity_log
+      @access_activity_log = _access_activity_log
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -320,7 +335,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"billing_address\", the character length must be smaller than or equal to 5000.")
       end
 
-      @billing_address = billing_address
+      @billing_address = _billing_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -329,7 +344,8 @@ module Stripe
       if cancellation_policy.nil?
         return @cancellation_policy = nil
       end
-      @cancellation_policy = cancellation_policy
+      _cancellation_policy = cancellation_policy.not_nil!
+      @cancellation_policy = _cancellation_policy
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -343,7 +359,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"cancellation_policy_disclosure\", the character length must be smaller than or equal to 20000.")
       end
 
-      @cancellation_policy_disclosure = cancellation_policy_disclosure
+      @cancellation_policy_disclosure = _cancellation_policy_disclosure
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -357,7 +373,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"cancellation_rebuttal\", the character length must be smaller than or equal to 20000.")
       end
 
-      @cancellation_rebuttal = cancellation_rebuttal
+      @cancellation_rebuttal = _cancellation_rebuttal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -366,7 +382,8 @@ module Stripe
       if customer_communication.nil?
         return @customer_communication = nil
       end
-      @customer_communication = customer_communication
+      _customer_communication = customer_communication.not_nil!
+      @customer_communication = _customer_communication
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -380,7 +397,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"customer_email_address\", the character length must be smaller than or equal to 5000.")
       end
 
-      @customer_email_address = customer_email_address
+      @customer_email_address = _customer_email_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -394,7 +411,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"customer_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @customer_name = customer_name
+      @customer_name = _customer_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -408,7 +425,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"customer_purchase_ip\", the character length must be smaller than or equal to 5000.")
       end
 
-      @customer_purchase_ip = customer_purchase_ip
+      @customer_purchase_ip = _customer_purchase_ip
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -417,7 +434,8 @@ module Stripe
       if customer_signature.nil?
         return @customer_signature = nil
       end
-      @customer_signature = customer_signature
+      _customer_signature = customer_signature.not_nil!
+      @customer_signature = _customer_signature
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -426,7 +444,8 @@ module Stripe
       if duplicate_charge_documentation.nil?
         return @duplicate_charge_documentation = nil
       end
-      @duplicate_charge_documentation = duplicate_charge_documentation
+      _duplicate_charge_documentation = duplicate_charge_documentation.not_nil!
+      @duplicate_charge_documentation = _duplicate_charge_documentation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -440,7 +459,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"duplicate_charge_explanation\", the character length must be smaller than or equal to 20000.")
       end
 
-      @duplicate_charge_explanation = duplicate_charge_explanation
+      @duplicate_charge_explanation = _duplicate_charge_explanation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -454,7 +473,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"duplicate_charge_id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @duplicate_charge_id = duplicate_charge_id
+      @duplicate_charge_id = _duplicate_charge_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -468,7 +487,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 20000.")
       end
 
-      @product_description = product_description
+      @product_description = _product_description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -477,7 +496,8 @@ module Stripe
       if receipt.nil?
         return @receipt = nil
       end
-      @receipt = receipt
+      _receipt = receipt.not_nil!
+      @receipt = _receipt
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -486,7 +506,8 @@ module Stripe
       if refund_policy.nil?
         return @refund_policy = nil
       end
-      @refund_policy = refund_policy
+      _refund_policy = refund_policy.not_nil!
+      @refund_policy = _refund_policy
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -500,7 +521,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"refund_policy_disclosure\", the character length must be smaller than or equal to 20000.")
       end
 
-      @refund_policy_disclosure = refund_policy_disclosure
+      @refund_policy_disclosure = _refund_policy_disclosure
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -514,7 +535,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"refund_refusal_explanation\", the character length must be smaller than or equal to 20000.")
       end
 
-      @refund_refusal_explanation = refund_refusal_explanation
+      @refund_refusal_explanation = _refund_refusal_explanation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -528,7 +549,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"service_date\", the character length must be smaller than or equal to 5000.")
       end
 
-      @service_date = service_date
+      @service_date = _service_date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -537,7 +558,8 @@ module Stripe
       if service_documentation.nil?
         return @service_documentation = nil
       end
-      @service_documentation = service_documentation
+      _service_documentation = service_documentation.not_nil!
+      @service_documentation = _service_documentation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -551,7 +573,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"shipping_address\", the character length must be smaller than or equal to 5000.")
       end
 
-      @shipping_address = shipping_address
+      @shipping_address = _shipping_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -565,7 +587,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"shipping_carrier\", the character length must be smaller than or equal to 5000.")
       end
 
-      @shipping_carrier = shipping_carrier
+      @shipping_carrier = _shipping_carrier
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -579,7 +601,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"shipping_date\", the character length must be smaller than or equal to 5000.")
       end
 
-      @shipping_date = shipping_date
+      @shipping_date = _shipping_date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -588,7 +610,8 @@ module Stripe
       if shipping_documentation.nil?
         return @shipping_documentation = nil
       end
-      @shipping_documentation = shipping_documentation
+      _shipping_documentation = shipping_documentation.not_nil!
+      @shipping_documentation = _shipping_documentation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -602,7 +625,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"shipping_tracking_number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @shipping_tracking_number = shipping_tracking_number
+      @shipping_tracking_number = _shipping_tracking_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -611,7 +634,8 @@ module Stripe
       if uncategorized_file.nil?
         return @uncategorized_file = nil
       end
-      @uncategorized_file = uncategorized_file
+      _uncategorized_file = uncategorized_file.not_nil!
+      @uncategorized_file = _uncategorized_file
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -625,13 +649,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"uncategorized_text\", the character length must be smaller than or equal to 20000.")
       end
 
-      @uncategorized_text = uncategorized_text
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @uncategorized_text = _uncategorized_text
     end
 
     # Generates #hash and #== methods from all fields

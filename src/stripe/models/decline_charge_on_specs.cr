@@ -15,6 +15,7 @@ module Stripe
   class DeclineChargeOnSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,7 +38,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -45,7 +46,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -55,7 +56,8 @@ module Stripe
       if avs_failure.nil?
         return @avs_failure = nil
       end
-      @avs_failure = avs_failure
+      _avs_failure = avs_failure.not_nil!
+      @avs_failure = _avs_failure
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -64,13 +66,8 @@ module Stripe
       if cvc_failure.nil?
         return @cvc_failure = nil
       end
-      @cvc_failure = cvc_failure
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _cvc_failure = cvc_failure.not_nil!
+      @cvc_failure = _cvc_failure
     end
 
     # Generates #hash and #== methods from all fields

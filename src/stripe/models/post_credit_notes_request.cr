@@ -15,6 +15,7 @@ module Stripe
   class PostCreditNotesRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -89,7 +90,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
       if _invoice = @invoice
@@ -97,7 +98,16 @@ module Stripe
           invalid_properties.push("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # Container lines array has values of Stripe::CreditNoteLineItemParams
+
+      if _lines = @lines
+        if _lines.is_a?(Array)
+          _lines.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("lines"))
+            end
+          end
+        end
+      end
       if _memo = @memo
         if _memo.to_s.size > 5000
           invalid_properties.push("invalid value for \"memo\", the character length must be smaller than or equal to 5000.")
@@ -111,14 +121,25 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @invoice.nil?
       if _invoice = @invoice
         return false if _invoice.to_s.size > 5000
       end
+
+      if _lines = @lines
+        if _lines.is_a?(Array)
+          _lines.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       if _memo = @memo
         return false if _memo.to_s.size > 5000
       end
+
       return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
 
       true
@@ -135,7 +156,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
       end
 
-      @invoice = invoice
+      @invoice = _invoice
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -144,7 +165,8 @@ module Stripe
       if amount.nil?
         return @amount = nil
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -153,7 +175,8 @@ module Stripe
       if credit_amount.nil?
         return @credit_amount = nil
       end
-      @credit_amount = credit_amount
+      _credit_amount = credit_amount.not_nil!
+      @credit_amount = _credit_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -162,7 +185,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -171,7 +195,15 @@ module Stripe
       if lines.nil?
         return @lines = nil
       end
-      @lines = lines
+      _lines = lines.not_nil!
+      if _lines.is_a?(Array)
+        _lines.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @lines = _lines
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -185,7 +217,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"memo\", the character length must be smaller than or equal to 5000.")
       end
 
-      @memo = memo
+      @memo = _memo
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -194,7 +226,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -203,7 +236,8 @@ module Stripe
       if out_of_band_amount.nil?
         return @out_of_band_amount = nil
       end
-      @out_of_band_amount = out_of_band_amount
+      _out_of_band_amount = out_of_band_amount.not_nil!
+      @out_of_band_amount = _out_of_band_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -214,7 +248,7 @@ module Stripe
       end
       _reason = reason.not_nil!
       ENUM_VALIDATOR_FOR_REASON.valid!(_reason)
-      @reason = reason
+      @reason = _reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -223,7 +257,8 @@ module Stripe
       if refund.nil?
         return @refund = nil
       end
-      @refund = refund
+      _refund = refund.not_nil!
+      @refund = _refund
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -232,13 +267,8 @@ module Stripe
       if refund_amount.nil?
         return @refund_amount = nil
       end
-      @refund_amount = refund_amount
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _refund_amount = refund_amount.not_nil!
+      @refund_amount = _refund_amount
     end
 
     # Generates #hash and #== methods from all fields

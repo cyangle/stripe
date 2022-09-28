@@ -16,6 +16,7 @@ module Stripe
   class SubscriptionItem
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -84,9 +85,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -97,33 +99,72 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
-      # This is a model price : Stripe::Price?
+      if _price = @price
+        if _price.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_price.list_invalid_properties_for("price"))
+        end
+      end
       invalid_properties.push("\"subscription\" is required and cannot be null") if @subscription.nil?
       if _subscription = @subscription
         if _subscription.to_s.size > 5000
           invalid_properties.push("invalid value for \"subscription\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model billing_thresholds : Stripe::SubscriptionItemBillingThresholds1?
-      # Container tax_rates array has values of Stripe::TaxRate
+      if _billing_thresholds = @billing_thresholds
+        if _billing_thresholds.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds"))
+        end
+      end
+
+      if _tax_rates = @tax_rates
+        if _tax_rates.is_a?(Array)
+          _tax_rates.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("tax_rates"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @created.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @metadata.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @price.nil?
+      if _price = @price
+        if _price.is_a?(OpenApi::Validatable)
+          return false unless _price.valid?
+        end
+      end
       return false if @subscription.nil?
       if _subscription = @subscription
         return false if _subscription.to_s.size > 5000
+      end
+      if _billing_thresholds = @billing_thresholds
+        if _billing_thresholds.is_a?(OpenApi::Validatable)
+          return false unless _billing_thresholds.valid?
+        end
+      end
+
+      if _tax_rates = @tax_rates
+        if _tax_rates.is_a?(Array)
+          _tax_rates.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
       end
 
       true
@@ -135,7 +176,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -149,7 +191,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -158,7 +200,8 @@ module Stripe
       if metadata.nil?
         raise ArgumentError.new("\"metadata\" is required and cannot be null")
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -169,7 +212,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -178,7 +221,11 @@ module Stripe
       if price.nil?
         raise ArgumentError.new("\"price\" is required and cannot be null")
       end
-      @price = price
+      _price = price.not_nil!
+      if _price.is_a?(OpenApi::Validatable)
+        _price.validate
+      end
+      @price = _price
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -192,7 +239,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"subscription\", the character length must be smaller than or equal to 5000.")
       end
 
-      @subscription = subscription
+      @subscription = _subscription
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -201,7 +248,11 @@ module Stripe
       if billing_thresholds.nil?
         return @billing_thresholds = nil
       end
-      @billing_thresholds = billing_thresholds
+      _billing_thresholds = billing_thresholds.not_nil!
+      if _billing_thresholds.is_a?(OpenApi::Validatable)
+        _billing_thresholds.validate
+      end
+      @billing_thresholds = _billing_thresholds
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -210,7 +261,8 @@ module Stripe
       if quantity.nil?
         return @quantity = nil
       end
-      @quantity = quantity
+      _quantity = quantity.not_nil!
+      @quantity = _quantity
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -219,13 +271,15 @@ module Stripe
       if tax_rates.nil?
         return @tax_rates = nil
       end
-      @tax_rates = tax_rates
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tax_rates = tax_rates.not_nil!
+      if _tax_rates.is_a?(Array)
+        _tax_rates.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @tax_rates = _tax_rates
     end
 
     # Generates #hash and #== methods from all fields

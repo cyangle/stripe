@@ -16,6 +16,7 @@ module Stripe
   class SourceCodeVerificationFlow
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -40,9 +41,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"attempts_remaining\" is required and cannot be null") if @attempts_remaining.nil?
+
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
       if _status = @status
         if _status.to_s.size > 5000
@@ -55,8 +57,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @attempts_remaining.nil?
+
       return false if @status.nil?
       if _status = @status
         return false if _status.to_s.size > 5000
@@ -71,7 +74,8 @@ module Stripe
       if attempts_remaining.nil?
         raise ArgumentError.new("\"attempts_remaining\" is required and cannot be null")
       end
-      @attempts_remaining = attempts_remaining
+      _attempts_remaining = attempts_remaining.not_nil!
+      @attempts_remaining = _attempts_remaining
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,13 +89,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
-      @status = status
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @status = _status
     end
 
     # Generates #hash and #== methods from all fields

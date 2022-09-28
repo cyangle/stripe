@@ -15,6 +15,7 @@ module Stripe
   class SourceTypeWechat
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -44,7 +45,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -52,7 +53,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -62,7 +63,8 @@ module Stripe
       if prepay_id.nil?
         return @prepay_id = nil
       end
-      @prepay_id = prepay_id
+      _prepay_id = prepay_id.not_nil!
+      @prepay_id = _prepay_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -71,7 +73,8 @@ module Stripe
       if qr_code_url.nil?
         return @qr_code_url = nil
       end
-      @qr_code_url = qr_code_url
+      _qr_code_url = qr_code_url.not_nil!
+      @qr_code_url = _qr_code_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -80,13 +83,8 @@ module Stripe
       if statement_descriptor.nil?
         return @statement_descriptor = nil
       end
-      @statement_descriptor = statement_descriptor
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _statement_descriptor = statement_descriptor.not_nil!
+      @statement_descriptor = _statement_descriptor
     end
 
     # Generates #hash and #== methods from all fields

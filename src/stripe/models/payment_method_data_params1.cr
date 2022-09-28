@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodDataParams1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -163,32 +164,174 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      # This is a model acss_debit : Stripe::PaymentMethodParam?
-      # This is a model au_becs_debit : Stripe::Param?
-      # This is a model bacs_debit : Stripe::Param1?
-      # This is a model billing_details : Stripe::BillingDetailsInnerParams?
-      # This is a model boleto : Stripe::Param2?
-      # This is a model eps : Stripe::Param3?
-      # This is a model fpx : Stripe::Param4?
-      # This is a model ideal : Stripe::Param5?
-      # This is a model klarna : Stripe::Param6?
-      # This is a model p24 : Stripe::Param7?
-      # This is a model radar_options : Stripe::RadarOptions1?
-      # This is a model sepa_debit : Stripe::Param8?
-      # This is a model sofort : Stripe::Param9?
-      # This is a model us_bank_account : Stripe::PaymentMethodParam1?
+      if _acss_debit = @acss_debit
+        if _acss_debit.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit"))
+        end
+      end
+
+      if _au_becs_debit = @au_becs_debit
+        if _au_becs_debit.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_au_becs_debit.list_invalid_properties_for("au_becs_debit"))
+        end
+      end
+      if _bacs_debit = @bacs_debit
+        if _bacs_debit.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bacs_debit.list_invalid_properties_for("bacs_debit"))
+        end
+      end
+
+      if _billing_details = @billing_details
+        if _billing_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details"))
+        end
+      end
+
+      if _boleto = @boleto
+        if _boleto.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_boleto.list_invalid_properties_for("boleto"))
+        end
+      end
+
+      if _eps = @eps
+        if _eps.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_eps.list_invalid_properties_for("eps"))
+        end
+      end
+      if _fpx = @fpx
+        if _fpx.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_fpx.list_invalid_properties_for("fpx"))
+        end
+      end
+
+      if _ideal = @ideal
+        if _ideal.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_ideal.list_invalid_properties_for("ideal"))
+        end
+      end
+
+      if _klarna = @klarna
+        if _klarna.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_klarna.list_invalid_properties_for("klarna"))
+        end
+      end
+
+      if _p24 = @p24
+        if _p24.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_p24.list_invalid_properties_for("p24"))
+        end
+      end
+
+      if _radar_options = @radar_options
+        if _radar_options.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_radar_options.list_invalid_properties_for("radar_options"))
+        end
+      end
+      if _sepa_debit = @sepa_debit
+        if _sepa_debit.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit"))
+        end
+      end
+      if _sofort = @sofort
+        if _sofort.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_sofort.list_invalid_properties_for("sofort"))
+        end
+      end
+      if _us_bank_account = @us_bank_account
+        if _us_bank_account.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if _acss_debit = @acss_debit
+        if _acss_debit.is_a?(OpenApi::Validatable)
+          return false unless _acss_debit.valid?
+        end
+      end
+
+      if _au_becs_debit = @au_becs_debit
+        if _au_becs_debit.is_a?(OpenApi::Validatable)
+          return false unless _au_becs_debit.valid?
+        end
+      end
+      if _bacs_debit = @bacs_debit
+        if _bacs_debit.is_a?(OpenApi::Validatable)
+          return false unless _bacs_debit.valid?
+        end
+      end
+
+      if _billing_details = @billing_details
+        if _billing_details.is_a?(OpenApi::Validatable)
+          return false unless _billing_details.valid?
+        end
+      end
+
+      if _boleto = @boleto
+        if _boleto.is_a?(OpenApi::Validatable)
+          return false unless _boleto.valid?
+        end
+      end
+
+      if _eps = @eps
+        if _eps.is_a?(OpenApi::Validatable)
+          return false unless _eps.valid?
+        end
+      end
+      if _fpx = @fpx
+        if _fpx.is_a?(OpenApi::Validatable)
+          return false unless _fpx.valid?
+        end
+      end
+
+      if _ideal = @ideal
+        if _ideal.is_a?(OpenApi::Validatable)
+          return false unless _ideal.valid?
+        end
+      end
+
+      if _klarna = @klarna
+        if _klarna.is_a?(OpenApi::Validatable)
+          return false unless _klarna.valid?
+        end
+      end
+
+      if _p24 = @p24
+        if _p24.is_a?(OpenApi::Validatable)
+          return false unless _p24.valid?
+        end
+      end
+
+      if _radar_options = @radar_options
+        if _radar_options.is_a?(OpenApi::Validatable)
+          return false unless _radar_options.valid?
+        end
+      end
+      if _sepa_debit = @sepa_debit
+        if _sepa_debit.is_a?(OpenApi::Validatable)
+          return false unless _sepa_debit.valid?
+        end
+      end
+      if _sofort = @sofort
+        if _sofort.is_a?(OpenApi::Validatable)
+          return false unless _sofort.valid?
+        end
+      end
+      if _us_bank_account = @us_bank_account
+        if _us_bank_account.is_a?(OpenApi::Validatable)
+          return false unless _us_bank_account.valid?
+        end
+      end
 
       true
     end
@@ -201,7 +344,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -210,7 +353,11 @@ module Stripe
       if acss_debit.nil?
         return @acss_debit = nil
       end
-      @acss_debit = acss_debit
+      _acss_debit = acss_debit.not_nil!
+      if _acss_debit.is_a?(OpenApi::Validatable)
+        _acss_debit.validate
+      end
+      @acss_debit = _acss_debit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -219,7 +366,8 @@ module Stripe
       if affirm.nil?
         return @affirm = nil
       end
-      @affirm = affirm
+      _affirm = affirm.not_nil!
+      @affirm = _affirm
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -228,7 +376,8 @@ module Stripe
       if afterpay_clearpay.nil?
         return @afterpay_clearpay = nil
       end
-      @afterpay_clearpay = afterpay_clearpay
+      _afterpay_clearpay = afterpay_clearpay.not_nil!
+      @afterpay_clearpay = _afterpay_clearpay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -237,7 +386,8 @@ module Stripe
       if alipay.nil?
         return @alipay = nil
       end
-      @alipay = alipay
+      _alipay = alipay.not_nil!
+      @alipay = _alipay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -246,7 +396,11 @@ module Stripe
       if au_becs_debit.nil?
         return @au_becs_debit = nil
       end
-      @au_becs_debit = au_becs_debit
+      _au_becs_debit = au_becs_debit.not_nil!
+      if _au_becs_debit.is_a?(OpenApi::Validatable)
+        _au_becs_debit.validate
+      end
+      @au_becs_debit = _au_becs_debit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -255,7 +409,11 @@ module Stripe
       if bacs_debit.nil?
         return @bacs_debit = nil
       end
-      @bacs_debit = bacs_debit
+      _bacs_debit = bacs_debit.not_nil!
+      if _bacs_debit.is_a?(OpenApi::Validatable)
+        _bacs_debit.validate
+      end
+      @bacs_debit = _bacs_debit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -264,7 +422,8 @@ module Stripe
       if bancontact.nil?
         return @bancontact = nil
       end
-      @bancontact = bancontact
+      _bancontact = bancontact.not_nil!
+      @bancontact = _bancontact
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -273,7 +432,11 @@ module Stripe
       if billing_details.nil?
         return @billing_details = nil
       end
-      @billing_details = billing_details
+      _billing_details = billing_details.not_nil!
+      if _billing_details.is_a?(OpenApi::Validatable)
+        _billing_details.validate
+      end
+      @billing_details = _billing_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -282,7 +445,8 @@ module Stripe
       if blik.nil?
         return @blik = nil
       end
-      @blik = blik
+      _blik = blik.not_nil!
+      @blik = _blik
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -291,7 +455,11 @@ module Stripe
       if boleto.nil?
         return @boleto = nil
       end
-      @boleto = boleto
+      _boleto = boleto.not_nil!
+      if _boleto.is_a?(OpenApi::Validatable)
+        _boleto.validate
+      end
+      @boleto = _boleto
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -300,7 +468,8 @@ module Stripe
       if customer_balance.nil?
         return @customer_balance = nil
       end
-      @customer_balance = customer_balance
+      _customer_balance = customer_balance.not_nil!
+      @customer_balance = _customer_balance
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -309,7 +478,11 @@ module Stripe
       if eps.nil?
         return @eps = nil
       end
-      @eps = eps
+      _eps = eps.not_nil!
+      if _eps.is_a?(OpenApi::Validatable)
+        _eps.validate
+      end
+      @eps = _eps
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -318,7 +491,11 @@ module Stripe
       if fpx.nil?
         return @fpx = nil
       end
-      @fpx = fpx
+      _fpx = fpx.not_nil!
+      if _fpx.is_a?(OpenApi::Validatable)
+        _fpx.validate
+      end
+      @fpx = _fpx
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -327,7 +504,8 @@ module Stripe
       if giropay.nil?
         return @giropay = nil
       end
-      @giropay = giropay
+      _giropay = giropay.not_nil!
+      @giropay = _giropay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -336,7 +514,8 @@ module Stripe
       if grabpay.nil?
         return @grabpay = nil
       end
-      @grabpay = grabpay
+      _grabpay = grabpay.not_nil!
+      @grabpay = _grabpay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -345,7 +524,11 @@ module Stripe
       if ideal.nil?
         return @ideal = nil
       end
-      @ideal = ideal
+      _ideal = ideal.not_nil!
+      if _ideal.is_a?(OpenApi::Validatable)
+        _ideal.validate
+      end
+      @ideal = _ideal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -354,7 +537,8 @@ module Stripe
       if interac_present.nil?
         return @interac_present = nil
       end
-      @interac_present = interac_present
+      _interac_present = interac_present.not_nil!
+      @interac_present = _interac_present
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -363,7 +547,11 @@ module Stripe
       if klarna.nil?
         return @klarna = nil
       end
-      @klarna = klarna
+      _klarna = klarna.not_nil!
+      if _klarna.is_a?(OpenApi::Validatable)
+        _klarna.validate
+      end
+      @klarna = _klarna
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -372,7 +560,8 @@ module Stripe
       if konbini.nil?
         return @konbini = nil
       end
-      @konbini = konbini
+      _konbini = konbini.not_nil!
+      @konbini = _konbini
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -381,7 +570,8 @@ module Stripe
       if link.nil?
         return @link = nil
       end
-      @link = link
+      _link = link.not_nil!
+      @link = _link
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -390,7 +580,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -399,7 +590,8 @@ module Stripe
       if oxxo.nil?
         return @oxxo = nil
       end
-      @oxxo = oxxo
+      _oxxo = oxxo.not_nil!
+      @oxxo = _oxxo
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -408,7 +600,11 @@ module Stripe
       if p24.nil?
         return @p24 = nil
       end
-      @p24 = p24
+      _p24 = p24.not_nil!
+      if _p24.is_a?(OpenApi::Validatable)
+        _p24.validate
+      end
+      @p24 = _p24
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -417,7 +613,8 @@ module Stripe
       if paynow.nil?
         return @paynow = nil
       end
-      @paynow = paynow
+      _paynow = paynow.not_nil!
+      @paynow = _paynow
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -426,7 +623,8 @@ module Stripe
       if pix.nil?
         return @pix = nil
       end
-      @pix = pix
+      _pix = pix.not_nil!
+      @pix = _pix
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -435,7 +633,8 @@ module Stripe
       if promptpay.nil?
         return @promptpay = nil
       end
-      @promptpay = promptpay
+      _promptpay = promptpay.not_nil!
+      @promptpay = _promptpay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -444,7 +643,11 @@ module Stripe
       if radar_options.nil?
         return @radar_options = nil
       end
-      @radar_options = radar_options
+      _radar_options = radar_options.not_nil!
+      if _radar_options.is_a?(OpenApi::Validatable)
+        _radar_options.validate
+      end
+      @radar_options = _radar_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -453,7 +656,11 @@ module Stripe
       if sepa_debit.nil?
         return @sepa_debit = nil
       end
-      @sepa_debit = sepa_debit
+      _sepa_debit = sepa_debit.not_nil!
+      if _sepa_debit.is_a?(OpenApi::Validatable)
+        _sepa_debit.validate
+      end
+      @sepa_debit = _sepa_debit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -462,7 +669,11 @@ module Stripe
       if sofort.nil?
         return @sofort = nil
       end
-      @sofort = sofort
+      _sofort = sofort.not_nil!
+      if _sofort.is_a?(OpenApi::Validatable)
+        _sofort.validate
+      end
+      @sofort = _sofort
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -471,7 +682,11 @@ module Stripe
       if us_bank_account.nil?
         return @us_bank_account = nil
       end
-      @us_bank_account = us_bank_account
+      _us_bank_account = us_bank_account.not_nil!
+      if _us_bank_account.is_a?(OpenApi::Validatable)
+        _us_bank_account.validate
+      end
+      @us_bank_account = _us_bank_account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -480,13 +695,8 @@ module Stripe
       if wechat_pay.nil?
         return @wechat_pay = nil
       end
-      @wechat_pay = wechat_pay
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _wechat_pay = wechat_pay.not_nil!
+      @wechat_pay = _wechat_pay
     end
 
     # Generates #hash and #== methods from all fields

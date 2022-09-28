@@ -16,6 +16,7 @@ module Stripe
   class EndUserDetailsParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -41,7 +42,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"present\" is required and cannot be null") if @present.nil?
 
@@ -50,7 +51,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @present.nil?
 
       true
@@ -62,7 +63,8 @@ module Stripe
       if present.nil?
         raise ArgumentError.new("\"present\" is required and cannot be null")
       end
-      @present = present
+      _present = present.not_nil!
+      @present = _present
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -71,13 +73,8 @@ module Stripe
       if ip_address.nil?
         return @ip_address = nil
       end
-      @ip_address = ip_address
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _ip_address = ip_address.not_nil!
+      @ip_address = _ip_address
     end
 
     # Generates #hash and #== methods from all fields

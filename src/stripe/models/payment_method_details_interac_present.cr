@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodDetailsInteracPresent
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -140,10 +141,12 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"exp_month\" is required and cannot be null") if @exp_month.nil?
+
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
+
       if _brand = @brand
         if _brand.to_s.size > 5000
           invalid_properties.push("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
@@ -191,16 +194,22 @@ module Stripe
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_READ_METHOD.error_message) unless ENUM_VALIDATOR_FOR_READ_METHOD.valid?(@read_method)
-      # This is a model receipt : Stripe::PaymentMethodDetailsInteracPresentReceipt1?
+      if _receipt = @receipt
+        if _receipt.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_receipt.list_invalid_properties_for("receipt"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @exp_month.nil?
+
       return false if @exp_year.nil?
+
       if _brand = @brand
         return false if _brand.to_s.size > 5000
       end
@@ -228,7 +237,13 @@ module Stripe
       if _network = @network
         return false if _network.to_s.size > 5000
       end
+
       return false unless ENUM_VALIDATOR_FOR_READ_METHOD.valid?(@read_method)
+      if _receipt = @receipt
+        if _receipt.is_a?(OpenApi::Validatable)
+          return false unless _receipt.valid?
+        end
+      end
 
       true
     end
@@ -239,7 +254,8 @@ module Stripe
       if exp_month.nil?
         raise ArgumentError.new("\"exp_month\" is required and cannot be null")
       end
-      @exp_month = exp_month
+      _exp_month = exp_month.not_nil!
+      @exp_month = _exp_month
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -248,7 +264,8 @@ module Stripe
       if exp_year.nil?
         raise ArgumentError.new("\"exp_year\" is required and cannot be null")
       end
-      @exp_year = exp_year
+      _exp_year = exp_year.not_nil!
+      @exp_year = _exp_year
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -262,7 +279,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
       end
 
-      @brand = brand
+      @brand = _brand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -276,7 +293,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"cardholder_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @cardholder_name = cardholder_name
+      @cardholder_name = _cardholder_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -290,7 +307,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @country = country
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -304,7 +321,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"emv_auth_data\", the character length must be smaller than or equal to 5000.")
       end
 
-      @emv_auth_data = emv_auth_data
+      @emv_auth_data = _emv_auth_data
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -318,7 +335,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
-      @fingerprint = fingerprint
+      @fingerprint = _fingerprint
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -332,7 +349,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"funding\", the character length must be smaller than or equal to 5000.")
       end
 
-      @funding = funding
+      @funding = _funding
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -346,7 +363,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"generated_card\", the character length must be smaller than or equal to 5000.")
       end
 
-      @generated_card = generated_card
+      @generated_card = _generated_card
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -360,7 +377,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
 
-      @last4 = last4
+      @last4 = _last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -374,7 +391,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"network\", the character length must be smaller than or equal to 5000.")
       end
 
-      @network = network
+      @network = _network
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -383,7 +400,8 @@ module Stripe
       if preferred_locales.nil?
         return @preferred_locales = nil
       end
-      @preferred_locales = preferred_locales
+      _preferred_locales = preferred_locales.not_nil!
+      @preferred_locales = _preferred_locales
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -394,7 +412,7 @@ module Stripe
       end
       _read_method = read_method.not_nil!
       ENUM_VALIDATOR_FOR_READ_METHOD.valid!(_read_method)
-      @read_method = read_method
+      @read_method = _read_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -403,13 +421,11 @@ module Stripe
       if receipt.nil?
         return @receipt = nil
       end
-      @receipt = receipt
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _receipt = receipt.not_nil!
+      if _receipt.is_a?(OpenApi::Validatable)
+        _receipt.validate
+      end
+      @receipt = _receipt
     end
 
     # Generates #hash and #== methods from all fields

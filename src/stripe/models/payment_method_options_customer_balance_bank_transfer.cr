@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodOptionsCustomerBalanceBankTransfer
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -51,9 +52,13 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model eu_bank_transfer : Stripe::PaymentMethodOptionsCustomerBalanceEuBankAccount?
+      if _eu_bank_transfer = @eu_bank_transfer
+        if _eu_bank_transfer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_eu_bank_transfer.list_invalid_properties_for("eu_bank_transfer"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.error_message) unless ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.all_valid?(@requested_address_types)
 
@@ -64,7 +69,12 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _eu_bank_transfer = @eu_bank_transfer
+        if _eu_bank_transfer.is_a?(OpenApi::Validatable)
+          return false unless _eu_bank_transfer.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.all_valid?(@requested_address_types)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
@@ -77,7 +87,11 @@ module Stripe
       if eu_bank_transfer.nil?
         return @eu_bank_transfer = nil
       end
-      @eu_bank_transfer = eu_bank_transfer
+      _eu_bank_transfer = eu_bank_transfer.not_nil!
+      if _eu_bank_transfer.is_a?(OpenApi::Validatable)
+        _eu_bank_transfer.validate
+      end
+      @eu_bank_transfer = _eu_bank_transfer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -88,7 +102,7 @@ module Stripe
       end
       _requested_address_types = requested_address_types.not_nil!
       ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.all_valid!(_requested_address_types)
-      @requested_address_types = requested_address_types
+      @requested_address_types = _requested_address_types
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -99,13 +113,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @_type = __type
     end
 
     # Generates #hash and #== methods from all fields

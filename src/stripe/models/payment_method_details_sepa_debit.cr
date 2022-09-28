@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodDetailsSepaDebit
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -78,7 +79,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _bank_code = @bank_code
         if _bank_code.to_s.size > 5000
@@ -116,7 +117,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _bank_code = @bank_code
         return false if _bank_code.to_s.size > 5000
       end
@@ -150,7 +151,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @bank_code = bank_code
+      @bank_code = _bank_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -164,7 +165,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"branch_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @branch_code = branch_code
+      @branch_code = _branch_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -178,7 +179,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @country = country
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -192,7 +193,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
       end
 
-      @fingerprint = fingerprint
+      @fingerprint = _fingerprint
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -206,7 +207,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
       end
 
-      @last4 = last4
+      @last4 = _last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -220,13 +221,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"mandate\", the character length must be smaller than or equal to 5000.")
       end
 
-      @mandate = mandate
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @mandate = _mandate
     end
 
     # Generates #hash and #== methods from all fields

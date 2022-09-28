@@ -15,6 +15,7 @@ module Stripe
   class InstallmentsParam1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,16 +38,27 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model plan : Stripe::InstallmentsParam1Plan?
+
+      if _plan = @plan
+        if _plan.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_plan.list_invalid_properties_for("plan"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _plan = @plan
+        if _plan.is_a?(OpenApi::Validatable)
+          return false unless _plan.valid?
+        end
+      end
+
       true
     end
 
@@ -56,7 +68,8 @@ module Stripe
       if enabled.nil?
         return @enabled = nil
       end
-      @enabled = enabled
+      _enabled = enabled.not_nil!
+      @enabled = _enabled
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -65,13 +78,11 @@ module Stripe
       if plan.nil?
         return @plan = nil
       end
-      @plan = plan
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _plan = plan.not_nil!
+      if _plan.is_a?(OpenApi::Validatable)
+        _plan.validate
+      end
+      @plan = _plan
     end
 
     # Generates #hash and #== methods from all fields

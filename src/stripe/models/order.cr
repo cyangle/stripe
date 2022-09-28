@@ -16,6 +16,7 @@ module Stripe
   class Order
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -179,12 +180,16 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount_subtotal\" is required and cannot be null") if @amount_subtotal.nil?
+
       invalid_properties.push("\"amount_total\" is required and cannot be null") if @amount_total.nil?
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -195,64 +200,187 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"payment\" is required and cannot be null") if @payment.nil?
-      # This is a model payment : Stripe::OrdersV2ResourcePayment?
+      if _payment = @payment
+        if _payment.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment.list_invalid_properties_for("payment"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       invalid_properties.push("\"total_details\" is required and cannot be null") if @total_details.nil?
-      # This is a model total_details : Stripe::OrdersV2ResourceTotalDetails?
-      # This is a model application : Stripe::OrderApplication?
-      # This is a model automatic_tax : Stripe::OrdersV2ResourceAutomaticTax?
-      # This is a model billing_details : Stripe::OrderBillingDetails?
-      # This is a model client_permissions : Stripe::OrderClientPermissions?
+      if _total_details = @total_details
+        if _total_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_total_details.list_invalid_properties_for("total_details"))
+        end
+      end
+      if _application = @application
+        if _application.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_application.list_invalid_properties_for("application"))
+        end
+      end
+      if _automatic_tax = @automatic_tax
+        if _automatic_tax.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax"))
+        end
+      end
+      if _billing_details = @billing_details
+        if _billing_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details"))
+        end
+      end
+      if _client_permissions = @client_permissions
+        if _client_permissions.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_client_permissions.list_invalid_properties_for("client_permissions"))
+        end
+      end
       if _client_secret = @client_secret
         if _client_secret.to_s.size > 5000
           invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model customer : Stripe::OrderCustomer?
+      if _customer = @customer
+        if _customer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_customer.list_invalid_properties_for("customer"))
+        end
+      end
       if _description = @description
         if _description.to_s.size > 5000
           invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # Container discounts array has values of Stripe::InvoiceitemDiscountsInner
+      if _discounts = @discounts
+        if _discounts.is_a?(Array)
+          _discounts.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("discounts"))
+            end
+          end
+        end
+      end
       if _ip_address = @ip_address
         if _ip_address.to_s.size > 5000
           invalid_properties.push("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model line_items : Stripe::OrdersV2ResourceLineItemList1?
-      # This is a model shipping_cost : Stripe::OrderShippingCost?
-      # This is a model shipping_details : Stripe::OrderShippingDetails?
-      # This is a model tax_details : Stripe::OrdersV2ResourceTaxDetails?
+      if _line_items = @line_items
+        if _line_items.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_line_items.list_invalid_properties_for("line_items"))
+        end
+      end
+
+      if _shipping_cost = @shipping_cost
+        if _shipping_cost.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_shipping_cost.list_invalid_properties_for("shipping_cost"))
+        end
+      end
+      if _shipping_details = @shipping_details
+        if _shipping_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_shipping_details.list_invalid_properties_for("shipping_details"))
+        end
+      end
+      if _tax_details = @tax_details
+        if _tax_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_tax_details.list_invalid_properties_for("tax_details"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount_subtotal.nil?
+
       return false if @amount_total.nil?
+
       return false if @created.nil?
+
       return false if @currency.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @payment.nil?
+      if _payment = @payment
+        if _payment.is_a?(OpenApi::Validatable)
+          return false unless _payment.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false if @total_details.nil?
+      if _total_details = @total_details
+        if _total_details.is_a?(OpenApi::Validatable)
+          return false unless _total_details.valid?
+        end
+      end
+      if _application = @application
+        if _application.is_a?(OpenApi::Validatable)
+          return false unless _application.valid?
+        end
+      end
+      if _automatic_tax = @automatic_tax
+        if _automatic_tax.is_a?(OpenApi::Validatable)
+          return false unless _automatic_tax.valid?
+        end
+      end
+      if _billing_details = @billing_details
+        if _billing_details.is_a?(OpenApi::Validatable)
+          return false unless _billing_details.valid?
+        end
+      end
+      if _client_permissions = @client_permissions
+        if _client_permissions.is_a?(OpenApi::Validatable)
+          return false unless _client_permissions.valid?
+        end
+      end
       if _client_secret = @client_secret
         return false if _client_secret.to_s.size > 5000
+      end
+      if _customer = @customer
+        if _customer.is_a?(OpenApi::Validatable)
+          return false unless _customer.valid?
+        end
       end
       if _description = @description
         return false if _description.to_s.size > 5000
       end
+      if _discounts = @discounts
+        if _discounts.is_a?(Array)
+          _discounts.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       if _ip_address = @ip_address
         return false if _ip_address.to_s.size > 5000
+      end
+      if _line_items = @line_items
+        if _line_items.is_a?(OpenApi::Validatable)
+          return false unless _line_items.valid?
+        end
+      end
+
+      if _shipping_cost = @shipping_cost
+        if _shipping_cost.is_a?(OpenApi::Validatable)
+          return false unless _shipping_cost.valid?
+        end
+      end
+      if _shipping_details = @shipping_details
+        if _shipping_details.is_a?(OpenApi::Validatable)
+          return false unless _shipping_details.valid?
+        end
+      end
+      if _tax_details = @tax_details
+        if _tax_details.is_a?(OpenApi::Validatable)
+          return false unless _tax_details.valid?
+        end
       end
 
       true
@@ -264,7 +392,8 @@ module Stripe
       if amount_subtotal.nil?
         raise ArgumentError.new("\"amount_subtotal\" is required and cannot be null")
       end
-      @amount_subtotal = amount_subtotal
+      _amount_subtotal = amount_subtotal.not_nil!
+      @amount_subtotal = _amount_subtotal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -273,7 +402,8 @@ module Stripe
       if amount_total.nil?
         raise ArgumentError.new("\"amount_total\" is required and cannot be null")
       end
-      @amount_total = amount_total
+      _amount_total = amount_total.not_nil!
+      @amount_total = _amount_total
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -282,7 +412,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -291,7 +422,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -305,7 +437,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -314,7 +446,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -325,7 +458,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -334,7 +467,11 @@ module Stripe
       if payment.nil?
         raise ArgumentError.new("\"payment\" is required and cannot be null")
       end
-      @payment = payment
+      _payment = payment.not_nil!
+      if _payment.is_a?(OpenApi::Validatable)
+        _payment.validate
+      end
+      @payment = _payment
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -345,7 +482,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -354,7 +491,11 @@ module Stripe
       if total_details.nil?
         raise ArgumentError.new("\"total_details\" is required and cannot be null")
       end
-      @total_details = total_details
+      _total_details = total_details.not_nil!
+      if _total_details.is_a?(OpenApi::Validatable)
+        _total_details.validate
+      end
+      @total_details = _total_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -363,7 +504,11 @@ module Stripe
       if application.nil?
         return @application = nil
       end
-      @application = application
+      _application = application.not_nil!
+      if _application.is_a?(OpenApi::Validatable)
+        _application.validate
+      end
+      @application = _application
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -372,7 +517,11 @@ module Stripe
       if automatic_tax.nil?
         return @automatic_tax = nil
       end
-      @automatic_tax = automatic_tax
+      _automatic_tax = automatic_tax.not_nil!
+      if _automatic_tax.is_a?(OpenApi::Validatable)
+        _automatic_tax.validate
+      end
+      @automatic_tax = _automatic_tax
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -381,7 +530,11 @@ module Stripe
       if billing_details.nil?
         return @billing_details = nil
       end
-      @billing_details = billing_details
+      _billing_details = billing_details.not_nil!
+      if _billing_details.is_a?(OpenApi::Validatable)
+        _billing_details.validate
+      end
+      @billing_details = _billing_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -390,7 +543,11 @@ module Stripe
       if client_permissions.nil?
         return @client_permissions = nil
       end
-      @client_permissions = client_permissions
+      _client_permissions = client_permissions.not_nil!
+      if _client_permissions.is_a?(OpenApi::Validatable)
+        _client_permissions.validate
+      end
+      @client_permissions = _client_permissions
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -404,7 +561,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
       end
 
-      @client_secret = client_secret
+      @client_secret = _client_secret
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -413,7 +570,11 @@ module Stripe
       if customer.nil?
         return @customer = nil
       end
-      @customer = customer
+      _customer = customer.not_nil!
+      if _customer.is_a?(OpenApi::Validatable)
+        _customer.validate
+      end
+      @customer = _customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -427,7 +588,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -436,7 +597,15 @@ module Stripe
       if discounts.nil?
         return @discounts = nil
       end
-      @discounts = discounts
+      _discounts = discounts.not_nil!
+      if _discounts.is_a?(Array)
+        _discounts.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @discounts = _discounts
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -450,7 +619,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
       end
 
-      @ip_address = ip_address
+      @ip_address = _ip_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -459,7 +628,11 @@ module Stripe
       if line_items.nil?
         return @line_items = nil
       end
-      @line_items = line_items
+      _line_items = line_items.not_nil!
+      if _line_items.is_a?(OpenApi::Validatable)
+        _line_items.validate
+      end
+      @line_items = _line_items
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -468,7 +641,8 @@ module Stripe
       if metadata.nil?
         return @metadata = nil
       end
-      @metadata = metadata
+      _metadata = metadata.not_nil!
+      @metadata = _metadata
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -477,7 +651,11 @@ module Stripe
       if shipping_cost.nil?
         return @shipping_cost = nil
       end
-      @shipping_cost = shipping_cost
+      _shipping_cost = shipping_cost.not_nil!
+      if _shipping_cost.is_a?(OpenApi::Validatable)
+        _shipping_cost.validate
+      end
+      @shipping_cost = _shipping_cost
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -486,7 +664,11 @@ module Stripe
       if shipping_details.nil?
         return @shipping_details = nil
       end
-      @shipping_details = shipping_details
+      _shipping_details = shipping_details.not_nil!
+      if _shipping_details.is_a?(OpenApi::Validatable)
+        _shipping_details.validate
+      end
+      @shipping_details = _shipping_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -495,13 +677,11 @@ module Stripe
       if tax_details.nil?
         return @tax_details = nil
       end
-      @tax_details = tax_details
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tax_details = tax_details.not_nil!
+      if _tax_details.is_a?(OpenApi::Validatable)
+        _tax_details.validate
+      end
+      @tax_details = _tax_details
     end
 
     # Generates #hash and #== methods from all fields

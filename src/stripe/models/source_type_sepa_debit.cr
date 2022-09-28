@@ -15,6 +15,7 @@ module Stripe
   class SourceTypeSepaDebit
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -78,7 +79,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -86,7 +87,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -96,7 +97,8 @@ module Stripe
       if bank_code.nil?
         return @bank_code = nil
       end
-      @bank_code = bank_code
+      _bank_code = bank_code.not_nil!
+      @bank_code = _bank_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,7 +107,8 @@ module Stripe
       if branch_code.nil?
         return @branch_code = nil
       end
-      @branch_code = branch_code
+      _branch_code = branch_code.not_nil!
+      @branch_code = _branch_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -114,7 +117,8 @@ module Stripe
       if country.nil?
         return @country = nil
       end
-      @country = country
+      _country = country.not_nil!
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -123,7 +127,8 @@ module Stripe
       if fingerprint.nil?
         return @fingerprint = nil
       end
-      @fingerprint = fingerprint
+      _fingerprint = fingerprint.not_nil!
+      @fingerprint = _fingerprint
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +137,8 @@ module Stripe
       if last4.nil?
         return @last4 = nil
       end
-      @last4 = last4
+      _last4 = last4.not_nil!
+      @last4 = _last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -141,7 +147,8 @@ module Stripe
       if mandate_reference.nil?
         return @mandate_reference = nil
       end
-      @mandate_reference = mandate_reference
+      _mandate_reference = mandate_reference.not_nil!
+      @mandate_reference = _mandate_reference
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -150,13 +157,8 @@ module Stripe
       if mandate_url.nil?
         return @mandate_url = nil
       end
-      @mandate_url = mandate_url
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _mandate_url = mandate_url.not_nil!
+      @mandate_url = _mandate_url
     end
 
     # Generates #hash and #== methods from all fields

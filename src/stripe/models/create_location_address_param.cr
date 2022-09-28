@@ -16,6 +16,7 @@ module Stripe
   class CreateLocationAddressParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -57,7 +58,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
       if _country = @country
@@ -96,7 +97,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @country.nil?
       if _country = @country
         return false if _country.to_s.size > 5000
@@ -131,7 +132,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @country = country
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -145,7 +146,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"city\", the character length must be smaller than or equal to 5000.")
       end
 
-      @city = city
+      @city = _city
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -159,7 +160,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"line1\", the character length must be smaller than or equal to 5000.")
       end
 
-      @line1 = line1
+      @line1 = _line1
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -173,7 +174,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"line2\", the character length must be smaller than or equal to 5000.")
       end
 
-      @line2 = line2
+      @line2 = _line2
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -187,7 +188,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"postal_code\", the character length must be smaller than or equal to 5000.")
       end
 
-      @postal_code = postal_code
+      @postal_code = _postal_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -201,13 +202,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"state\", the character length must be smaller than or equal to 5000.")
       end
 
-      @state = state
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @state = _state
     end
 
     # Generates #hash and #== methods from all fields

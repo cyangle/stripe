@@ -16,6 +16,7 @@ module Stripe
   class InvoicesFromInvoice
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -39,7 +40,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"action\" is required and cannot be null") if @action.nil?
       if _action = @action
@@ -48,19 +49,28 @@ module Stripe
         end
       end
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
-      # This is a model invoice : Stripe::InvoicesFromInvoiceInvoice?
+      if _invoice = @invoice
+        if _invoice.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_invoice.list_invalid_properties_for("invoice"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @action.nil?
       if _action = @action
         return false if _action.to_s.size > 5000
       end
       return false if @invoice.nil?
+      if _invoice = @invoice
+        if _invoice.is_a?(OpenApi::Validatable)
+          return false unless _invoice.valid?
+        end
+      end
 
       true
     end
@@ -76,7 +86,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"action\", the character length must be smaller than or equal to 5000.")
       end
 
-      @action = action
+      @action = _action
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -85,13 +95,11 @@ module Stripe
       if invoice.nil?
         raise ArgumentError.new("\"invoice\" is required and cannot be null")
       end
-      @invoice = invoice
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _invoice = invoice.not_nil!
+      if _invoice.is_a?(OpenApi::Validatable)
+        _invoice.validate
+      end
+      @invoice = _invoice
     end
 
     # Generates #hash and #== methods from all fields

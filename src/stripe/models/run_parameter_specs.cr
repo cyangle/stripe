@@ -16,6 +16,7 @@ module Stripe
   class RunParameterSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -66,7 +67,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REPORTING_CATEGORY.error_message) unless ENUM_VALIDATOR_FOR_REPORTING_CATEGORY.valid?(@reporting_category)
@@ -78,7 +79,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_REPORTING_CATEGORY.valid?(@reporting_category)
       return false unless ENUM_VALIDATOR_FOR_TIMEZONE.valid?(@timezone)
 
@@ -91,7 +92,8 @@ module Stripe
       if columns.nil?
         return @columns = nil
       end
-      @columns = columns
+      _columns = columns.not_nil!
+      @columns = _columns
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -100,7 +102,8 @@ module Stripe
       if connected_account.nil?
         return @connected_account = nil
       end
-      @connected_account = connected_account
+      _connected_account = connected_account.not_nil!
+      @connected_account = _connected_account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -109,7 +112,8 @@ module Stripe
       if currency.nil?
         return @currency = nil
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -118,7 +122,8 @@ module Stripe
       if interval_end.nil?
         return @interval_end = nil
       end
-      @interval_end = interval_end
+      _interval_end = interval_end.not_nil!
+      @interval_end = _interval_end
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,7 +132,8 @@ module Stripe
       if interval_start.nil?
         return @interval_start = nil
       end
-      @interval_start = interval_start
+      _interval_start = interval_start.not_nil!
+      @interval_start = _interval_start
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -136,7 +142,8 @@ module Stripe
       if payout.nil?
         return @payout = nil
       end
-      @payout = payout
+      _payout = payout.not_nil!
+      @payout = _payout
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -147,7 +154,7 @@ module Stripe
       end
       _reporting_category = reporting_category.not_nil!
       ENUM_VALIDATOR_FOR_REPORTING_CATEGORY.valid!(_reporting_category)
-      @reporting_category = reporting_category
+      @reporting_category = _reporting_category
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -158,13 +165,7 @@ module Stripe
       end
       _timezone = timezone.not_nil!
       ENUM_VALIDATOR_FOR_TIMEZONE.valid!(_timezone)
-      @timezone = timezone
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @timezone = _timezone
     end
 
     # Generates #hash and #== methods from all fields

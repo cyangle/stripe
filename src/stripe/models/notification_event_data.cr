@@ -16,6 +16,7 @@ module Stripe
   class NotificationEventData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -43,7 +44,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
@@ -52,7 +53,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @object.nil?
 
       true
@@ -64,7 +65,8 @@ module Stripe
       if object.nil?
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
-      @object = object
+      _object = object.not_nil!
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -73,13 +75,8 @@ module Stripe
       if previous_attributes.nil?
         return @previous_attributes = nil
       end
-      @previous_attributes = previous_attributes
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _previous_attributes = previous_attributes.not_nil!
+      @previous_attributes = _previous_attributes
     end
 
     # Generates #hash and #== methods from all fields

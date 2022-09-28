@@ -16,6 +16,7 @@ module Stripe
   class SubscriptionScheduleCurrentPhase
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -40,9 +41,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"end_date\" is required and cannot be null") if @end_date.nil?
+
       invalid_properties.push("\"start_date\" is required and cannot be null") if @start_date.nil?
 
       invalid_properties
@@ -50,8 +52,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @end_date.nil?
+
       return false if @start_date.nil?
 
       true
@@ -63,7 +66,8 @@ module Stripe
       if end_date.nil?
         raise ArgumentError.new("\"end_date\" is required and cannot be null")
       end
-      @end_date = end_date
+      _end_date = end_date.not_nil!
+      @end_date = _end_date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,13 +76,8 @@ module Stripe
       if start_date.nil?
         raise ArgumentError.new("\"start_date\" is required and cannot be null")
       end
-      @start_date = start_date
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _start_date = start_date.not_nil!
+      @start_date = _start_date
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class IssuingTransactionPurchaseDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -67,12 +68,32 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model flight : Stripe::IssuingTransactionPurchaseDetailsFlight?
-      # This is a model fuel : Stripe::IssuingTransactionPurchaseDetailsFuel?
-      # This is a model lodging : Stripe::IssuingTransactionPurchaseDetailsLodging?
-      # Container receipt array has values of Stripe::IssuingTransactionReceiptData
+      if _flight = @flight
+        if _flight.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_flight.list_invalid_properties_for("flight"))
+        end
+      end
+      if _fuel = @fuel
+        if _fuel.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_fuel.list_invalid_properties_for("fuel"))
+        end
+      end
+      if _lodging = @lodging
+        if _lodging.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_lodging.list_invalid_properties_for("lodging"))
+        end
+      end
+      if _receipt = @receipt
+        if _receipt.is_a?(Array)
+          _receipt.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("receipt"))
+            end
+          end
+        end
+      end
       if _reference = @reference
         if _reference.to_s.size > 5000
           invalid_properties.push("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
@@ -84,7 +105,31 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _flight = @flight
+        if _flight.is_a?(OpenApi::Validatable)
+          return false unless _flight.valid?
+        end
+      end
+      if _fuel = @fuel
+        if _fuel.is_a?(OpenApi::Validatable)
+          return false unless _fuel.valid?
+        end
+      end
+      if _lodging = @lodging
+        if _lodging.is_a?(OpenApi::Validatable)
+          return false unless _lodging.valid?
+        end
+      end
+      if _receipt = @receipt
+        if _receipt.is_a?(Array)
+          _receipt.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
       if _reference = @reference
         return false if _reference.to_s.size > 5000
       end
@@ -98,7 +143,11 @@ module Stripe
       if flight.nil?
         return @flight = nil
       end
-      @flight = flight
+      _flight = flight.not_nil!
+      if _flight.is_a?(OpenApi::Validatable)
+        _flight.validate
+      end
+      @flight = _flight
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,7 +156,11 @@ module Stripe
       if fuel.nil?
         return @fuel = nil
       end
-      @fuel = fuel
+      _fuel = fuel.not_nil!
+      if _fuel.is_a?(OpenApi::Validatable)
+        _fuel.validate
+      end
+      @fuel = _fuel
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -116,7 +169,11 @@ module Stripe
       if lodging.nil?
         return @lodging = nil
       end
-      @lodging = lodging
+      _lodging = lodging.not_nil!
+      if _lodging.is_a?(OpenApi::Validatable)
+        _lodging.validate
+      end
+      @lodging = _lodging
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -125,7 +182,15 @@ module Stripe
       if receipt.nil?
         return @receipt = nil
       end
-      @receipt = receipt
+      _receipt = receipt.not_nil!
+      if _receipt.is_a?(Array)
+        _receipt.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @receipt = _receipt
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -139,13 +204,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
       end
 
-      @reference = reference
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @reference = _reference
     end
 
     # Generates #hash and #== methods from all fields

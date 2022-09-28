@@ -16,6 +16,7 @@ module Stripe
   class TaxIdVerification
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -56,7 +57,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
@@ -76,7 +77,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       if _verified_address = @verified_address
         return false if _verified_address.to_s.size > 5000
@@ -96,7 +97,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -110,7 +111,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"verified_address\", the character length must be smaller than or equal to 5000.")
       end
 
-      @verified_address = verified_address
+      @verified_address = _verified_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -124,13 +125,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @verified_name = verified_name
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @verified_name = _verified_name
     end
 
     # Generates #hash and #== methods from all fields

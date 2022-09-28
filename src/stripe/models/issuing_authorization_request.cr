@@ -16,6 +16,7 @@ module Stripe
   class IssuingAuthorizationRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -77,11 +78,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+
       invalid_properties.push("\"approved\" is required and cannot be null") if @approved.nil?
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
       if _currency = @currency
         if _currency.to_s.size > 5000
@@ -89,6 +93,7 @@ module Stripe
         end
       end
       invalid_properties.push("\"merchant_amount\" is required and cannot be null") if @merchant_amount.nil?
+
       invalid_properties.push("\"merchant_currency\" is required and cannot be null") if @merchant_currency.nil?
       if _merchant_currency = @merchant_currency
         if _merchant_currency.to_s.size > 5000
@@ -97,27 +102,40 @@ module Stripe
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REASON.error_message) unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason, false)
-      # This is a model amount_details : Stripe::IssuingAuthorizationAmountDetails1?
+      if _amount_details = @amount_details
+        if _amount_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_amount_details.list_invalid_properties_for("amount_details"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount.nil?
+
       return false if @approved.nil?
+
       return false if @created.nil?
+
       return false if @currency.nil?
       if _currency = @currency
         return false if _currency.to_s.size > 5000
       end
       return false if @merchant_amount.nil?
+
       return false if @merchant_currency.nil?
       if _merchant_currency = @merchant_currency
         return false if _merchant_currency.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason, false)
+      if _amount_details = @amount_details
+        if _amount_details.is_a?(OpenApi::Validatable)
+          return false unless _amount_details.valid?
+        end
+      end
 
       true
     end
@@ -128,7 +146,8 @@ module Stripe
       if amount.nil?
         raise ArgumentError.new("\"amount\" is required and cannot be null")
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -137,7 +156,8 @@ module Stripe
       if approved.nil?
         raise ArgumentError.new("\"approved\" is required and cannot be null")
       end
-      @approved = approved
+      _approved = approved.not_nil!
+      @approved = _approved
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -146,7 +166,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -160,7 +181,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
       end
 
-      @currency = currency
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -169,7 +190,8 @@ module Stripe
       if merchant_amount.nil?
         raise ArgumentError.new("\"merchant_amount\" is required and cannot be null")
       end
-      @merchant_amount = merchant_amount
+      _merchant_amount = merchant_amount.not_nil!
+      @merchant_amount = _merchant_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -183,7 +205,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"merchant_currency\", the character length must be smaller than or equal to 5000.")
       end
 
-      @merchant_currency = merchant_currency
+      @merchant_currency = _merchant_currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -194,7 +216,7 @@ module Stripe
       end
       _reason = reason.not_nil!
       ENUM_VALIDATOR_FOR_REASON.valid!(_reason)
-      @reason = reason
+      @reason = _reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -203,13 +225,11 @@ module Stripe
       if amount_details.nil?
         return @amount_details = nil
       end
-      @amount_details = amount_details
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _amount_details = amount_details.not_nil!
+      if _amount_details.is_a?(OpenApi::Validatable)
+        _amount_details.validate
+      end
+      @amount_details = _amount_details
     end
 
     # Generates #hash and #== methods from all fields

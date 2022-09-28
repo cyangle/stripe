@@ -15,6 +15,7 @@ module Stripe
   class OnlineParam1
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -37,8 +38,9 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _user_agent = @user_agent
         if _user_agent.to_s.size > 5000
           invalid_properties.push("invalid value for \"user_agent\", the character length must be smaller than or equal to 5000.")
@@ -50,7 +52,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _user_agent = @user_agent
         return false if _user_agent.to_s.size > 5000
       end
@@ -64,7 +66,8 @@ module Stripe
       if ip_address.nil?
         return @ip_address = nil
       end
-      @ip_address = ip_address
+      _ip_address = ip_address.not_nil!
+      @ip_address = _ip_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -78,13 +81,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"user_agent\", the character length must be smaller than or equal to 5000.")
       end
 
-      @user_agent = user_agent
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @user_agent = _user_agent
     end
 
     # Generates #hash and #== methods from all fields

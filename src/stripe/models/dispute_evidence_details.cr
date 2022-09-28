@@ -16,6 +16,7 @@ module Stripe
   class DisputeEvidenceDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -56,10 +57,12 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"has_evidence\" is required and cannot be null") if @has_evidence.nil?
+
       invalid_properties.push("\"past_due\" is required and cannot be null") if @past_due.nil?
+
       invalid_properties.push("\"submission_count\" is required and cannot be null") if @submission_count.nil?
 
       invalid_properties
@@ -67,9 +70,11 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @has_evidence.nil?
+
       return false if @past_due.nil?
+
       return false if @submission_count.nil?
 
       true
@@ -81,7 +86,8 @@ module Stripe
       if has_evidence.nil?
         raise ArgumentError.new("\"has_evidence\" is required and cannot be null")
       end
-      @has_evidence = has_evidence
+      _has_evidence = has_evidence.not_nil!
+      @has_evidence = _has_evidence
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -90,7 +96,8 @@ module Stripe
       if past_due.nil?
         raise ArgumentError.new("\"past_due\" is required and cannot be null")
       end
-      @past_due = past_due
+      _past_due = past_due.not_nil!
+      @past_due = _past_due
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -99,7 +106,8 @@ module Stripe
       if submission_count.nil?
         raise ArgumentError.new("\"submission_count\" is required and cannot be null")
       end
-      @submission_count = submission_count
+      _submission_count = submission_count.not_nil!
+      @submission_count = _submission_count
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -108,13 +116,8 @@ module Stripe
       if due_by.nil?
         return @due_by = nil
       end
-      @due_by = due_by
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _due_by = due_by.not_nil!
+      @due_by = _due_by
     end
 
     # Generates #hash and #== methods from all fields

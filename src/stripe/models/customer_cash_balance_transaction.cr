@@ -16,6 +16,7 @@ module Stripe
   class CustomerCashBalanceTransaction
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -97,9 +98,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
       if _currency = @currency
         if _currency.to_s.size > 5000
@@ -107,8 +109,13 @@ module Stripe
         end
       end
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
-      # This is a model customer : Stripe::CustomerCashBalanceTransactionCustomer?
+      if _customer = @customer
+        if _customer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_customer.list_invalid_properties_for("customer"))
+        end
+      end
       invalid_properties.push("\"ending_balance\" is required and cannot be null") if @ending_balance.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -116,37 +123,83 @@ module Stripe
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
+
       invalid_properties.push("\"net_amount\" is required and cannot be null") if @net_amount.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      # This is a model applied_to_payment : Stripe::CustomerBalanceResourceCashBalanceTransactionResourceAppliedToPaymentTransaction?
-      # This is a model funded : Stripe::CustomerBalanceResourceCashBalanceTransactionResourceFundedTransaction?
-      # This is a model refunded_from_payment : Stripe::CustomerBalanceResourceCashBalanceTransactionResourceRefundedFromPaymentTransaction?
-      # This is a model unapplied_from_payment : Stripe::CustomerBalanceResourceCashBalanceTransactionResourceUnappliedFromPaymentTransaction?
+      if _applied_to_payment = @applied_to_payment
+        if _applied_to_payment.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_applied_to_payment.list_invalid_properties_for("applied_to_payment"))
+        end
+      end
+      if _funded = @funded
+        if _funded.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_funded.list_invalid_properties_for("funded"))
+        end
+      end
+      if _refunded_from_payment = @refunded_from_payment
+        if _refunded_from_payment.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_refunded_from_payment.list_invalid_properties_for("refunded_from_payment"))
+        end
+      end
+      if _unapplied_from_payment = @unapplied_from_payment
+        if _unapplied_from_payment.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_unapplied_from_payment.list_invalid_properties_for("unapplied_from_payment"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @created.nil?
+
       return false if @currency.nil?
       if _currency = @currency
         return false if _currency.to_s.size > 5000
       end
       return false if @customer.nil?
+      if _customer = @customer
+        if _customer.is_a?(OpenApi::Validatable)
+          return false unless _customer.valid?
+        end
+      end
       return false if @ending_balance.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false if @net_amount.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if _applied_to_payment = @applied_to_payment
+        if _applied_to_payment.is_a?(OpenApi::Validatable)
+          return false unless _applied_to_payment.valid?
+        end
+      end
+      if _funded = @funded
+        if _funded.is_a?(OpenApi::Validatable)
+          return false unless _funded.valid?
+        end
+      end
+      if _refunded_from_payment = @refunded_from_payment
+        if _refunded_from_payment.is_a?(OpenApi::Validatable)
+          return false unless _refunded_from_payment.valid?
+        end
+      end
+      if _unapplied_from_payment = @unapplied_from_payment
+        if _unapplied_from_payment.is_a?(OpenApi::Validatable)
+          return false unless _unapplied_from_payment.valid?
+        end
+      end
 
       true
     end
@@ -157,7 +210,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -171,7 +225,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
       end
 
-      @currency = currency
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -180,7 +234,11 @@ module Stripe
       if customer.nil?
         raise ArgumentError.new("\"customer\" is required and cannot be null")
       end
-      @customer = customer
+      _customer = customer.not_nil!
+      if _customer.is_a?(OpenApi::Validatable)
+        _customer.validate
+      end
+      @customer = _customer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -189,7 +247,8 @@ module Stripe
       if ending_balance.nil?
         raise ArgumentError.new("\"ending_balance\" is required and cannot be null")
       end
-      @ending_balance = ending_balance
+      _ending_balance = ending_balance.not_nil!
+      @ending_balance = _ending_balance
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -203,7 +262,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -212,7 +271,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -221,7 +281,8 @@ module Stripe
       if net_amount.nil?
         raise ArgumentError.new("\"net_amount\" is required and cannot be null")
       end
-      @net_amount = net_amount
+      _net_amount = net_amount.not_nil!
+      @net_amount = _net_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -232,7 +293,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -243,7 +304,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -252,7 +313,11 @@ module Stripe
       if applied_to_payment.nil?
         return @applied_to_payment = nil
       end
-      @applied_to_payment = applied_to_payment
+      _applied_to_payment = applied_to_payment.not_nil!
+      if _applied_to_payment.is_a?(OpenApi::Validatable)
+        _applied_to_payment.validate
+      end
+      @applied_to_payment = _applied_to_payment
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -261,7 +326,11 @@ module Stripe
       if funded.nil?
         return @funded = nil
       end
-      @funded = funded
+      _funded = funded.not_nil!
+      if _funded.is_a?(OpenApi::Validatable)
+        _funded.validate
+      end
+      @funded = _funded
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -270,7 +339,11 @@ module Stripe
       if refunded_from_payment.nil?
         return @refunded_from_payment = nil
       end
-      @refunded_from_payment = refunded_from_payment
+      _refunded_from_payment = refunded_from_payment.not_nil!
+      if _refunded_from_payment.is_a?(OpenApi::Validatable)
+        _refunded_from_payment.validate
+      end
+      @refunded_from_payment = _refunded_from_payment
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -279,13 +352,11 @@ module Stripe
       if unapplied_from_payment.nil?
         return @unapplied_from_payment = nil
       end
-      @unapplied_from_payment = unapplied_from_payment
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _unapplied_from_payment = unapplied_from_payment.not_nil!
+      if _unapplied_from_payment.is_a?(OpenApi::Validatable)
+        _unapplied_from_payment.validate
+      end
+      @unapplied_from_payment = _unapplied_from_payment
     end
 
     # Generates #hash and #== methods from all fields

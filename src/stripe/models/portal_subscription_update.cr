@@ -16,6 +16,7 @@ module Stripe
   class PortalSubscriptionUpdate
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -60,24 +61,42 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_DEFAULT_ALLOWED_UPDATES.error_message) unless ENUM_VALIDATOR_FOR_DEFAULT_ALLOWED_UPDATES.all_valid?(@default_allowed_updates, false)
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior, false)
-      # Container products array has values of Stripe::PortalSubscriptionUpdateProduct
+      if _products = @products
+        if _products.is_a?(Array)
+          _products.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("products"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_DEFAULT_ALLOWED_UPDATES.all_valid?(@default_allowed_updates, false)
       return false if @enabled.nil?
+
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior, false)
+      if _products = @products
+        if _products.is_a?(Array)
+          _products.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
 
       true
     end
@@ -90,7 +109,7 @@ module Stripe
       end
       _default_allowed_updates = default_allowed_updates.not_nil!
       ENUM_VALIDATOR_FOR_DEFAULT_ALLOWED_UPDATES.all_valid!(_default_allowed_updates)
-      @default_allowed_updates = default_allowed_updates
+      @default_allowed_updates = _default_allowed_updates
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -99,7 +118,8 @@ module Stripe
       if enabled.nil?
         raise ArgumentError.new("\"enabled\" is required and cannot be null")
       end
-      @enabled = enabled
+      _enabled = enabled.not_nil!
+      @enabled = _enabled
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -110,7 +130,7 @@ module Stripe
       end
       _proration_behavior = proration_behavior.not_nil!
       ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(_proration_behavior)
-      @proration_behavior = proration_behavior
+      @proration_behavior = _proration_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -119,13 +139,15 @@ module Stripe
       if products.nil?
         return @products = nil
       end
-      @products = products
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _products = products.not_nil!
+      if _products.is_a?(Array)
+        _products.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @products = _products
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class SubscriptionCancelCreationParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -52,10 +53,15 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
-      # This is a model cancellation_reason : Stripe::SubscriptionCancellationReasonCreationParam?
+
+      if _cancellation_reason = @cancellation_reason
+        if _cancellation_reason.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_cancellation_reason.list_invalid_properties_for("cancellation_reason"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_MODE.error_message) unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode)
 
@@ -66,8 +72,14 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @enabled.nil?
+
+      if _cancellation_reason = @cancellation_reason
+        if _cancellation_reason.is_a?(OpenApi::Validatable)
+          return false unless _cancellation_reason.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode)
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
 
@@ -80,7 +92,8 @@ module Stripe
       if enabled.nil?
         raise ArgumentError.new("\"enabled\" is required and cannot be null")
       end
-      @enabled = enabled
+      _enabled = enabled.not_nil!
+      @enabled = _enabled
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -89,7 +102,11 @@ module Stripe
       if cancellation_reason.nil?
         return @cancellation_reason = nil
       end
-      @cancellation_reason = cancellation_reason
+      _cancellation_reason = cancellation_reason.not_nil!
+      if _cancellation_reason.is_a?(OpenApi::Validatable)
+        _cancellation_reason.validate
+      end
+      @cancellation_reason = _cancellation_reason
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -100,7 +117,7 @@ module Stripe
       end
       _mode = mode.not_nil!
       ENUM_VALIDATOR_FOR_MODE.valid!(_mode)
-      @mode = mode
+      @mode = _mode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -111,13 +128,7 @@ module Stripe
       end
       _proration_behavior = proration_behavior.not_nil!
       ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(_proration_behavior)
-      @proration_behavior = proration_behavior
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @proration_behavior = _proration_behavior
     end
 
     # Generates #hash and #== methods from all fields

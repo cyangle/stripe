@@ -16,6 +16,7 @@ module Stripe
   class Capability
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -77,10 +78,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
-      # This is a model account : Stripe::CapabilityAccount?
+      if _account = @account
+        if _account.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_account.list_invalid_properties_for("account"))
+        end
+      end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -92,23 +97,49 @@ module Stripe
       invalid_properties.push("\"requested\" is required and cannot be null") if @requested.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      # This is a model future_requirements : Stripe::AccountCapabilityFutureRequirements?
-      # This is a model requirements : Stripe::AccountCapabilityRequirements?
+      if _future_requirements = @future_requirements
+        if _future_requirements.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_future_requirements.list_invalid_properties_for("future_requirements"))
+        end
+      end
+
+      if _requirements = @requirements
+        if _requirements.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_requirements.list_invalid_properties_for("requirements"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @account.nil?
+      if _account = @account
+        if _account.is_a?(OpenApi::Validatable)
+          return false unless _account.valid?
+        end
+      end
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @requested.nil?
+
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      if _future_requirements = @future_requirements
+        if _future_requirements.is_a?(OpenApi::Validatable)
+          return false unless _future_requirements.valid?
+        end
+      end
+
+      if _requirements = @requirements
+        if _requirements.is_a?(OpenApi::Validatable)
+          return false unless _requirements.valid?
+        end
+      end
 
       true
     end
@@ -119,7 +150,11 @@ module Stripe
       if account.nil?
         raise ArgumentError.new("\"account\" is required and cannot be null")
       end
-      @account = account
+      _account = account.not_nil!
+      if _account.is_a?(OpenApi::Validatable)
+        _account.validate
+      end
+      @account = _account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -133,7 +168,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -144,7 +179,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -153,7 +188,8 @@ module Stripe
       if requested.nil?
         raise ArgumentError.new("\"requested\" is required and cannot be null")
       end
-      @requested = requested
+      _requested = requested.not_nil!
+      @requested = _requested
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -164,7 +200,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -173,7 +209,11 @@ module Stripe
       if future_requirements.nil?
         return @future_requirements = nil
       end
-      @future_requirements = future_requirements
+      _future_requirements = future_requirements.not_nil!
+      if _future_requirements.is_a?(OpenApi::Validatable)
+        _future_requirements.validate
+      end
+      @future_requirements = _future_requirements
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -182,7 +222,8 @@ module Stripe
       if requested_at.nil?
         return @requested_at = nil
       end
-      @requested_at = requested_at
+      _requested_at = requested_at.not_nil!
+      @requested_at = _requested_at
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -191,13 +232,11 @@ module Stripe
       if requirements.nil?
         return @requirements = nil
       end
-      @requirements = requirements
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _requirements = requirements.not_nil!
+      if _requirements.is_a?(OpenApi::Validatable)
+        _requirements.validate
+      end
+      @requirements = _requirements
     end
 
     # Generates #hash and #== methods from all fields

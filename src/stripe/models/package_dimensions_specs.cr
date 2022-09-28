@@ -15,6 +15,7 @@ module Stripe
   class PackageDimensionsSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -45,11 +46,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"height\" is required and cannot be null") if @height.nil?
+
       invalid_properties.push("\"length\" is required and cannot be null") if @length.nil?
+
       invalid_properties.push("\"weight\" is required and cannot be null") if @weight.nil?
+
       invalid_properties.push("\"width\" is required and cannot be null") if @width.nil?
 
       invalid_properties
@@ -57,10 +61,13 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @height.nil?
+
       return false if @length.nil?
+
       return false if @weight.nil?
+
       return false if @width.nil?
 
       true
@@ -72,7 +79,8 @@ module Stripe
       if height.nil?
         raise ArgumentError.new("\"height\" is required and cannot be null")
       end
-      @height = height
+      _height = height.not_nil!
+      @height = _height
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -81,7 +89,8 @@ module Stripe
       if length.nil?
         raise ArgumentError.new("\"length\" is required and cannot be null")
       end
-      @length = length
+      _length = length.not_nil!
+      @length = _length
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -90,7 +99,8 @@ module Stripe
       if weight.nil?
         raise ArgumentError.new("\"weight\" is required and cannot be null")
       end
-      @weight = weight
+      _weight = weight.not_nil!
+      @weight = _weight
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -99,13 +109,8 @@ module Stripe
       if width.nil?
         raise ArgumentError.new("\"width\" is required and cannot be null")
       end
-      @width = width
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _width = width.not_nil!
+      @width = _width
     end
 
     # Generates #hash and #== methods from all fields

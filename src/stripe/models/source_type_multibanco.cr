@@ -15,6 +15,7 @@ module Stripe
   class SourceTypeMultibanco
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -99,7 +100,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -107,7 +108,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -117,7 +118,8 @@ module Stripe
       if entity.nil?
         return @entity = nil
       end
-      @entity = entity
+      _entity = entity.not_nil!
+      @entity = _entity
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -126,7 +128,8 @@ module Stripe
       if reference.nil?
         return @reference = nil
       end
-      @reference = reference
+      _reference = reference.not_nil!
+      @reference = _reference
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -135,7 +138,8 @@ module Stripe
       if refund_account_holder_address_city.nil?
         return @refund_account_holder_address_city = nil
       end
-      @refund_account_holder_address_city = refund_account_holder_address_city
+      _refund_account_holder_address_city = refund_account_holder_address_city.not_nil!
+      @refund_account_holder_address_city = _refund_account_holder_address_city
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -144,7 +148,8 @@ module Stripe
       if refund_account_holder_address_country.nil?
         return @refund_account_holder_address_country = nil
       end
-      @refund_account_holder_address_country = refund_account_holder_address_country
+      _refund_account_holder_address_country = refund_account_holder_address_country.not_nil!
+      @refund_account_holder_address_country = _refund_account_holder_address_country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -153,7 +158,8 @@ module Stripe
       if refund_account_holder_address_line1.nil?
         return @refund_account_holder_address_line1 = nil
       end
-      @refund_account_holder_address_line1 = refund_account_holder_address_line1
+      _refund_account_holder_address_line1 = refund_account_holder_address_line1.not_nil!
+      @refund_account_holder_address_line1 = _refund_account_holder_address_line1
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -162,7 +168,8 @@ module Stripe
       if refund_account_holder_address_line2.nil?
         return @refund_account_holder_address_line2 = nil
       end
-      @refund_account_holder_address_line2 = refund_account_holder_address_line2
+      _refund_account_holder_address_line2 = refund_account_holder_address_line2.not_nil!
+      @refund_account_holder_address_line2 = _refund_account_holder_address_line2
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -171,7 +178,8 @@ module Stripe
       if refund_account_holder_address_postal_code.nil?
         return @refund_account_holder_address_postal_code = nil
       end
-      @refund_account_holder_address_postal_code = refund_account_holder_address_postal_code
+      _refund_account_holder_address_postal_code = refund_account_holder_address_postal_code.not_nil!
+      @refund_account_holder_address_postal_code = _refund_account_holder_address_postal_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -180,7 +188,8 @@ module Stripe
       if refund_account_holder_address_state.nil?
         return @refund_account_holder_address_state = nil
       end
-      @refund_account_holder_address_state = refund_account_holder_address_state
+      _refund_account_holder_address_state = refund_account_holder_address_state.not_nil!
+      @refund_account_holder_address_state = _refund_account_holder_address_state
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -189,7 +198,8 @@ module Stripe
       if refund_account_holder_name.nil?
         return @refund_account_holder_name = nil
       end
-      @refund_account_holder_name = refund_account_holder_name
+      _refund_account_holder_name = refund_account_holder_name.not_nil!
+      @refund_account_holder_name = _refund_account_holder_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -198,13 +208,8 @@ module Stripe
       if refund_iban.nil?
         return @refund_iban = nil
       end
-      @refund_iban = refund_iban
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _refund_iban = refund_iban.not_nil!
+      @refund_iban = _refund_iban
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class TreasuryReceivedCredit
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -132,11 +133,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       invalid_properties.push("\"description\" is required and cannot be null") if @description.nil?
       if _description = @description
         if _description.to_s.size > 5000
@@ -150,9 +154,17 @@ module Stripe
         end
       end
       invalid_properties.push("\"initiating_payment_method_details\" is required and cannot be null") if @initiating_payment_method_details.nil?
-      # This is a model initiating_payment_method_details : Stripe::TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetails?
+      if _initiating_payment_method_details = @initiating_payment_method_details
+        if _initiating_payment_method_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_initiating_payment_method_details.list_invalid_properties_for("initiating_payment_method_details"))
+        end
+      end
       invalid_properties.push("\"linked_flows\" is required and cannot be null") if @linked_flows.nil?
-      # This is a model linked_flows : Stripe::TreasuryReceivedCreditsResourceLinkedFlows?
+      if _linked_flows = @linked_flows
+        if _linked_flows.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_linked_flows.list_invalid_properties_for("linked_flows"))
+        end
+      end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network, false)
@@ -172,18 +184,29 @@ module Stripe
           invalid_properties.push("invalid value for \"hosted_regulatory_receipt_url\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model reversal_details : Stripe::TreasuryReceivedCreditReversalDetails?
-      # This is a model transaction : Stripe::TreasuryCreditReversalTransaction?
+      if _reversal_details = @reversal_details
+        if _reversal_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_reversal_details.list_invalid_properties_for("reversal_details"))
+        end
+      end
+      if _transaction = @transaction
+        if _transaction.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_transaction.list_invalid_properties_for("transaction"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @amount.nil?
+
       return false if @created.nil?
+
       return false if @currency.nil?
+
       return false if @description.nil?
       if _description = @description
         return false if _description.to_s.size > 5000
@@ -193,8 +216,19 @@ module Stripe
         return false if _id.to_s.size > 5000
       end
       return false if @initiating_payment_method_details.nil?
+      if _initiating_payment_method_details = @initiating_payment_method_details
+        if _initiating_payment_method_details.is_a?(OpenApi::Validatable)
+          return false unless _initiating_payment_method_details.valid?
+        end
+      end
       return false if @linked_flows.nil?
+      if _linked_flows = @linked_flows
+        if _linked_flows.is_a?(OpenApi::Validatable)
+          return false unless _linked_flows.valid?
+        end
+      end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network, false)
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
@@ -204,6 +238,16 @@ module Stripe
       end
       if _hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url
         return false if _hosted_regulatory_receipt_url.to_s.size > 5000
+      end
+      if _reversal_details = @reversal_details
+        if _reversal_details.is_a?(OpenApi::Validatable)
+          return false unless _reversal_details.valid?
+        end
+      end
+      if _transaction = @transaction
+        if _transaction.is_a?(OpenApi::Validatable)
+          return false unless _transaction.valid?
+        end
       end
 
       true
@@ -215,7 +259,8 @@ module Stripe
       if amount.nil?
         raise ArgumentError.new("\"amount\" is required and cannot be null")
       end
-      @amount = amount
+      _amount = amount.not_nil!
+      @amount = _amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -224,7 +269,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -233,7 +279,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -247,7 +294,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -261,7 +308,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -270,7 +317,11 @@ module Stripe
       if initiating_payment_method_details.nil?
         raise ArgumentError.new("\"initiating_payment_method_details\" is required and cannot be null")
       end
-      @initiating_payment_method_details = initiating_payment_method_details
+      _initiating_payment_method_details = initiating_payment_method_details.not_nil!
+      if _initiating_payment_method_details.is_a?(OpenApi::Validatable)
+        _initiating_payment_method_details.validate
+      end
+      @initiating_payment_method_details = _initiating_payment_method_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -279,7 +330,11 @@ module Stripe
       if linked_flows.nil?
         raise ArgumentError.new("\"linked_flows\" is required and cannot be null")
       end
-      @linked_flows = linked_flows
+      _linked_flows = linked_flows.not_nil!
+      if _linked_flows.is_a?(OpenApi::Validatable)
+        _linked_flows.validate
+      end
+      @linked_flows = _linked_flows
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -288,7 +343,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -299,7 +355,7 @@ module Stripe
       end
       _network = network.not_nil!
       ENUM_VALIDATOR_FOR_NETWORK.valid!(_network)
-      @network = network
+      @network = _network
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -310,7 +366,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -321,7 +377,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -332,7 +388,7 @@ module Stripe
       end
       _failure_code = failure_code.not_nil!
       ENUM_VALIDATOR_FOR_FAILURE_CODE.valid!(_failure_code)
-      @failure_code = failure_code
+      @failure_code = _failure_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -346,7 +402,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
       end
 
-      @financial_account = financial_account
+      @financial_account = _financial_account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -360,7 +416,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"hosted_regulatory_receipt_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @hosted_regulatory_receipt_url = hosted_regulatory_receipt_url
+      @hosted_regulatory_receipt_url = _hosted_regulatory_receipt_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -369,7 +425,11 @@ module Stripe
       if reversal_details.nil?
         return @reversal_details = nil
       end
-      @reversal_details = reversal_details
+      _reversal_details = reversal_details.not_nil!
+      if _reversal_details.is_a?(OpenApi::Validatable)
+        _reversal_details.validate
+      end
+      @reversal_details = _reversal_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -378,13 +438,11 @@ module Stripe
       if transaction.nil?
         return @transaction = nil
       end
-      @transaction = transaction
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _transaction = transaction.not_nil!
+      if _transaction.is_a?(OpenApi::Validatable)
+        _transaction.validate
+      end
+      @transaction = _transaction
     end
 
     # Generates #hash and #== methods from all fields

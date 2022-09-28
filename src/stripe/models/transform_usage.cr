@@ -16,6 +16,7 @@ module Stripe
   class TransformUsage
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -42,7 +43,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"divide_by\" is required and cannot be null") if @divide_by.nil?
 
@@ -53,8 +54,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @divide_by.nil?
+
       return false unless ENUM_VALIDATOR_FOR_ROUND.valid?(@round, false)
 
       true
@@ -66,7 +68,8 @@ module Stripe
       if divide_by.nil?
         raise ArgumentError.new("\"divide_by\" is required and cannot be null")
       end
-      @divide_by = divide_by
+      _divide_by = divide_by.not_nil!
+      @divide_by = _divide_by
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -77,13 +80,7 @@ module Stripe
       end
       _round = round.not_nil!
       ENUM_VALIDATOR_FOR_ROUND.valid!(_round)
-      @round = round
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @round = _round
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class PriceDataWithOptionalProduct
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -51,8 +52,9 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _product = @product
         if _product.to_s.size > 5000
           invalid_properties.push("invalid value for \"product\", the character length must be smaller than or equal to 5000.")
@@ -66,7 +68,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _product = @product
         return false if _product.to_s.size > 5000
       end
@@ -81,7 +83,8 @@ module Stripe
       if currency.nil?
         return @currency = nil
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -95,7 +98,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"product\", the character length must be smaller than or equal to 5000.")
       end
 
-      @product = product
+      @product = _product
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -106,7 +109,7 @@ module Stripe
       end
       _tax_behavior = tax_behavior.not_nil!
       ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid!(_tax_behavior)
-      @tax_behavior = tax_behavior
+      @tax_behavior = _tax_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -115,7 +118,8 @@ module Stripe
       if unit_amount.nil?
         return @unit_amount = nil
       end
-      @unit_amount = unit_amount
+      _unit_amount = unit_amount.not_nil!
+      @unit_amount = _unit_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -124,13 +128,8 @@ module Stripe
       if unit_amount_decimal.nil?
         return @unit_amount_decimal = nil
       end
-      @unit_amount_decimal = unit_amount_decimal
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _unit_amount_decimal = unit_amount_decimal.not_nil!
+      @unit_amount_decimal = _unit_amount_decimal
     end
 
     # Generates #hash and #== methods from all fields

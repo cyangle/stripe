@@ -16,6 +16,7 @@ module Stripe
   class SetupIntentPaymentMethodOptionsMandateOptionsBlik
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -52,9 +53,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model off_session : Stripe::MandateOptionsOffSessionDetailsBlik?
+
+      if _off_session = @off_session
+        if _off_session.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_off_session.list_invalid_properties_for("off_session"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
@@ -63,7 +69,12 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _off_session = @off_session
+        if _off_session.is_a?(OpenApi::Validatable)
+          return false unless _off_session.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
       true
@@ -75,7 +86,8 @@ module Stripe
       if expires_after.nil?
         return @expires_after = nil
       end
-      @expires_after = expires_after
+      _expires_after = expires_after.not_nil!
+      @expires_after = _expires_after
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -84,7 +96,11 @@ module Stripe
       if off_session.nil?
         return @off_session = nil
       end
-      @off_session = off_session
+      _off_session = off_session.not_nil!
+      if _off_session.is_a?(OpenApi::Validatable)
+        _off_session.validate
+      end
+      @off_session = _off_session
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -95,13 +111,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @_type = __type
     end
 
     # Generates #hash and #== methods from all fields

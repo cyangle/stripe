@@ -16,6 +16,7 @@ module Stripe
   class IssuingTransactionFuelData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -56,7 +57,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
@@ -77,7 +78,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @_type.nil?
       if __type = @_type
         return false if __type.to_s.size > 5000
@@ -102,7 +103,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
       end
 
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -116,7 +117,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"unit\", the character length must be smaller than or equal to 5000.")
       end
 
-      @unit = unit
+      @unit = _unit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -125,7 +126,8 @@ module Stripe
       if unit_cost_decimal.nil?
         raise ArgumentError.new("\"unit_cost_decimal\" is required and cannot be null")
       end
-      @unit_cost_decimal = unit_cost_decimal
+      _unit_cost_decimal = unit_cost_decimal.not_nil!
+      @unit_cost_decimal = _unit_cost_decimal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -134,13 +136,8 @@ module Stripe
       if volume_decimal.nil?
         return @volume_decimal = nil
       end
-      @volume_decimal = volume_decimal
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _volume_decimal = volume_decimal.not_nil!
+      @volume_decimal = _volume_decimal
     end
 
     # Generates #hash and #== methods from all fields

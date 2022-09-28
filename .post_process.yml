@@ -22,6 +22,11 @@ tasks:
         name: "card_present_present"
         pattern: 'card_present_present'
         new_value: 'card_present2_present'
+      -
+        name: "Remove empty if blocks"
+        pattern: '^\s+if _[^\s]+ = [^\s]+$\n^\s+end$'
+        new_value: ''
+        multi_line: true
   - name: 'Update all'
     file_glob: './src/stripe/**/*.cr'
     changes:

@@ -16,6 +16,7 @@ module Stripe
   class FinancialReportingFinanceReportRunRunParameters
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -70,13 +71,15 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _connected_account = @connected_account
         if _connected_account.to_s.size > 5000
           invalid_properties.push("invalid value for \"connected_account\", the character length must be smaller than or equal to 5000.")
         end
       end
+
       if _payout = @payout
         if _payout.to_s.size > 5000
           invalid_properties.push("invalid value for \"payout\", the character length must be smaller than or equal to 5000.")
@@ -98,10 +101,11 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _connected_account = @connected_account
         return false if _connected_account.to_s.size > 5000
       end
+
       if _payout = @payout
         return false if _payout.to_s.size > 5000
       end
@@ -121,7 +125,8 @@ module Stripe
       if columns.nil?
         return @columns = nil
       end
-      @columns = columns
+      _columns = columns.not_nil!
+      @columns = _columns
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -135,7 +140,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"connected_account\", the character length must be smaller than or equal to 5000.")
       end
 
-      @connected_account = connected_account
+      @connected_account = _connected_account
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -144,7 +149,8 @@ module Stripe
       if currency.nil?
         return @currency = nil
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -153,7 +159,8 @@ module Stripe
       if interval_end.nil?
         return @interval_end = nil
       end
-      @interval_end = interval_end
+      _interval_end = interval_end.not_nil!
+      @interval_end = _interval_end
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -162,7 +169,8 @@ module Stripe
       if interval_start.nil?
         return @interval_start = nil
       end
-      @interval_start = interval_start
+      _interval_start = interval_start.not_nil!
+      @interval_start = _interval_start
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -176,7 +184,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"payout\", the character length must be smaller than or equal to 5000.")
       end
 
-      @payout = payout
+      @payout = _payout
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -190,7 +198,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"reporting_category\", the character length must be smaller than or equal to 5000.")
       end
 
-      @reporting_category = reporting_category
+      @reporting_category = _reporting_category
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -204,13 +212,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"timezone\", the character length must be smaller than or equal to 5000.")
       end
 
-      @timezone = timezone
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @timezone = _timezone
     end
 
     # Generates #hash and #== methods from all fields

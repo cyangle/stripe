@@ -16,6 +16,7 @@ module Stripe
   class GelatoDocumentReport
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -125,20 +126,41 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      # This is a model address : Stripe::GelatoDocumentReportAddress?
-      # This is a model dob : Stripe::GelatoDocumentReportDob?
-      # This is a model error : Stripe::GelatoDocumentReportError1?
-      # This is a model expiration_date : Stripe::GelatoDocumentReportExpirationDate?
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_address.list_invalid_properties_for("address"))
+        end
+      end
+      if _dob = @dob
+        if _dob.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_dob.list_invalid_properties_for("dob"))
+        end
+      end
+      if _error = @error
+        if _error.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_error.list_invalid_properties_for("error"))
+        end
+      end
+      if _expiration_date = @expiration_date
+        if _expiration_date.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_expiration_date.list_invalid_properties_for("expiration_date"))
+        end
+      end
+
       if _first_name = @first_name
         if _first_name.to_s.size > 5000
           invalid_properties.push("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model issued_date : Stripe::GelatoDocumentReportIssuedDate?
+      if _issued_date = @issued_date
+        if _issued_date.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_issued_date.list_invalid_properties_for("issued_date"))
+        end
+      end
       if _issuing_country = @issuing_country
         if _issuing_country.to_s.size > 5000
           invalid_properties.push("invalid value for \"issuing_country\", the character length must be smaller than or equal to 5000.")
@@ -162,10 +184,36 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          return false unless _address.valid?
+        end
+      end
+      if _dob = @dob
+        if _dob.is_a?(OpenApi::Validatable)
+          return false unless _dob.valid?
+        end
+      end
+      if _error = @error
+        if _error.is_a?(OpenApi::Validatable)
+          return false unless _error.valid?
+        end
+      end
+      if _expiration_date = @expiration_date
+        if _expiration_date.is_a?(OpenApi::Validatable)
+          return false unless _expiration_date.valid?
+        end
+      end
+
       if _first_name = @first_name
         return false if _first_name.to_s.size > 5000
+      end
+      if _issued_date = @issued_date
+        if _issued_date.is_a?(OpenApi::Validatable)
+          return false unless _issued_date.valid?
+        end
       end
       if _issuing_country = @issuing_country
         return false if _issuing_country.to_s.size > 5000
@@ -189,7 +237,7 @@ module Stripe
       end
       _status = status.not_nil!
       ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -198,7 +246,11 @@ module Stripe
       if address.nil?
         return @address = nil
       end
-      @address = address
+      _address = address.not_nil!
+      if _address.is_a?(OpenApi::Validatable)
+        _address.validate
+      end
+      @address = _address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -207,7 +259,11 @@ module Stripe
       if dob.nil?
         return @dob = nil
       end
-      @dob = dob
+      _dob = dob.not_nil!
+      if _dob.is_a?(OpenApi::Validatable)
+        _dob.validate
+      end
+      @dob = _dob
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -216,7 +272,11 @@ module Stripe
       if error.nil?
         return @error = nil
       end
-      @error = error
+      _error = error.not_nil!
+      if _error.is_a?(OpenApi::Validatable)
+        _error.validate
+      end
+      @error = _error
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -225,7 +285,11 @@ module Stripe
       if expiration_date.nil?
         return @expiration_date = nil
       end
-      @expiration_date = expiration_date
+      _expiration_date = expiration_date.not_nil!
+      if _expiration_date.is_a?(OpenApi::Validatable)
+        _expiration_date.validate
+      end
+      @expiration_date = _expiration_date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -234,7 +298,8 @@ module Stripe
       if files.nil?
         return @files = nil
       end
-      @files = files
+      _files = files.not_nil!
+      @files = _files
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -248,7 +313,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @first_name = first_name
+      @first_name = _first_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -257,7 +322,11 @@ module Stripe
       if issued_date.nil?
         return @issued_date = nil
       end
-      @issued_date = issued_date
+      _issued_date = issued_date.not_nil!
+      if _issued_date.is_a?(OpenApi::Validatable)
+        _issued_date.validate
+      end
+      @issued_date = _issued_date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -271,7 +340,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"issuing_country\", the character length must be smaller than or equal to 5000.")
       end
 
-      @issuing_country = issuing_country
+      @issuing_country = _issuing_country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -285,7 +354,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @last_name = last_name
+      @last_name = _last_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -299,7 +368,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
       end
 
-      @number = number
+      @number = _number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -310,13 +379,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @_type = __type
     end
 
     # Generates #hash and #== methods from all fields

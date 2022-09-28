@@ -15,6 +15,7 @@ module Stripe
   class PostSubscriptionItemsSubscriptionItemUsageRecordsRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -53,21 +54,33 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"quantity\" is required and cannot be null") if @quantity.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ACTION.error_message) unless ENUM_VALIDATOR_FOR_ACTION.valid?(@action)
-      # This is a model timestamp : Stripe::PostSubscriptionItemsSubscriptionItemUsageRecordsRequestTimestamp?
+
+      if _timestamp = @timestamp
+        if _timestamp.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_timestamp.list_invalid_properties_for("timestamp"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @quantity.nil?
+
       return false unless ENUM_VALIDATOR_FOR_ACTION.valid?(@action)
+
+      if _timestamp = @timestamp
+        if _timestamp.is_a?(OpenApi::Validatable)
+          return false unless _timestamp.valid?
+        end
+      end
 
       true
     end
@@ -78,7 +91,8 @@ module Stripe
       if quantity.nil?
         raise ArgumentError.new("\"quantity\" is required and cannot be null")
       end
-      @quantity = quantity
+      _quantity = quantity.not_nil!
+      @quantity = _quantity
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -89,7 +103,7 @@ module Stripe
       end
       _action = action.not_nil!
       ENUM_VALIDATOR_FOR_ACTION.valid!(_action)
-      @action = action
+      @action = _action
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -98,7 +112,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,13 +122,11 @@ module Stripe
       if timestamp.nil?
         return @timestamp = nil
       end
-      @timestamp = timestamp
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _timestamp = timestamp.not_nil!
+      if _timestamp.is_a?(OpenApi::Validatable)
+        _timestamp.validate
+      end
+      @timestamp = _timestamp
     end
 
     # Generates #hash and #== methods from all fields

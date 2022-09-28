@@ -16,6 +16,7 @@ module Stripe
   class AfterCompletionParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -47,20 +48,38 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      # This is a model hosted_confirmation : Stripe::AfterCompletionConfirmationPageParams?
-      # This is a model redirect : Stripe::AfterCompletionRedirectParams?
+      if _hosted_confirmation = @hosted_confirmation
+        if _hosted_confirmation.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_hosted_confirmation.list_invalid_properties_for("hosted_confirmation"))
+        end
+      end
+      if _redirect = @redirect
+        if _redirect.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_redirect.list_invalid_properties_for("redirect"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if _hosted_confirmation = @hosted_confirmation
+        if _hosted_confirmation.is_a?(OpenApi::Validatable)
+          return false unless _hosted_confirmation.valid?
+        end
+      end
+      if _redirect = @redirect
+        if _redirect.is_a?(OpenApi::Validatable)
+          return false unless _redirect.valid?
+        end
+      end
 
       true
     end
@@ -73,7 +92,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -82,7 +101,11 @@ module Stripe
       if hosted_confirmation.nil?
         return @hosted_confirmation = nil
       end
-      @hosted_confirmation = hosted_confirmation
+      _hosted_confirmation = hosted_confirmation.not_nil!
+      if _hosted_confirmation.is_a?(OpenApi::Validatable)
+        _hosted_confirmation.validate
+      end
+      @hosted_confirmation = _hosted_confirmation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -91,13 +114,11 @@ module Stripe
       if redirect.nil?
         return @redirect = nil
       end
-      @redirect = redirect
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _redirect = redirect.not_nil!
+      if _redirect.is_a?(OpenApi::Validatable)
+        _redirect.validate
+      end
+      @redirect = _redirect
     end
 
     # Generates #hash and #== methods from all fields

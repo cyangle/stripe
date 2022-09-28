@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodDetailsCardInstallmentsPlan
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -58,7 +59,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
@@ -70,8 +71,9 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
 
       true
@@ -85,7 +87,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -94,7 +96,8 @@ module Stripe
       if count.nil?
         return @count = nil
       end
-      @count = count
+      _count = count.not_nil!
+      @count = _count
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -105,13 +108,7 @@ module Stripe
       end
       _interval = interval.not_nil!
       ENUM_VALIDATOR_FOR_INTERVAL.valid!(_interval)
-      @interval = interval
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @interval = _interval
     end
 
     # Generates #hash and #== methods from all fields

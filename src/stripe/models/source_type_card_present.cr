@@ -15,6 +15,7 @@ module Stripe
   class SourceTypeCardPresent
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -160,7 +161,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -168,7 +169,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -178,7 +179,8 @@ module Stripe
       if application_cryptogram.nil?
         return @application_cryptogram = nil
       end
-      @application_cryptogram = application_cryptogram
+      _application_cryptogram = application_cryptogram.not_nil!
+      @application_cryptogram = _application_cryptogram
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -187,7 +189,8 @@ module Stripe
       if application_preferred_name.nil?
         return @application_preferred_name = nil
       end
-      @application_preferred_name = application_preferred_name
+      _application_preferred_name = application_preferred_name.not_nil!
+      @application_preferred_name = _application_preferred_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -196,7 +199,8 @@ module Stripe
       if authorization_code.nil?
         return @authorization_code = nil
       end
-      @authorization_code = authorization_code
+      _authorization_code = authorization_code.not_nil!
+      @authorization_code = _authorization_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -205,7 +209,8 @@ module Stripe
       if authorization_response_code.nil?
         return @authorization_response_code = nil
       end
-      @authorization_response_code = authorization_response_code
+      _authorization_response_code = authorization_response_code.not_nil!
+      @authorization_response_code = _authorization_response_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -214,7 +219,8 @@ module Stripe
       if brand.nil?
         return @brand = nil
       end
-      @brand = brand
+      _brand = brand.not_nil!
+      @brand = _brand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -223,7 +229,8 @@ module Stripe
       if country.nil?
         return @country = nil
       end
-      @country = country
+      _country = country.not_nil!
+      @country = _country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -232,7 +239,8 @@ module Stripe
       if cvm_type.nil?
         return @cvm_type = nil
       end
-      @cvm_type = cvm_type
+      _cvm_type = cvm_type.not_nil!
+      @cvm_type = _cvm_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -241,7 +249,8 @@ module Stripe
       if data_type.nil?
         return @data_type = nil
       end
-      @data_type = data_type
+      _data_type = data_type.not_nil!
+      @data_type = _data_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -250,7 +259,8 @@ module Stripe
       if dedicated_file_name.nil?
         return @dedicated_file_name = nil
       end
-      @dedicated_file_name = dedicated_file_name
+      _dedicated_file_name = dedicated_file_name.not_nil!
+      @dedicated_file_name = _dedicated_file_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -259,7 +269,8 @@ module Stripe
       if emv_auth_data.nil?
         return @emv_auth_data = nil
       end
-      @emv_auth_data = emv_auth_data
+      _emv_auth_data = emv_auth_data.not_nil!
+      @emv_auth_data = _emv_auth_data
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -268,7 +279,8 @@ module Stripe
       if evidence_customer_signature.nil?
         return @evidence_customer_signature = nil
       end
-      @evidence_customer_signature = evidence_customer_signature
+      _evidence_customer_signature = evidence_customer_signature.not_nil!
+      @evidence_customer_signature = _evidence_customer_signature
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -277,7 +289,8 @@ module Stripe
       if evidence_transaction_certificate.nil?
         return @evidence_transaction_certificate = nil
       end
-      @evidence_transaction_certificate = evidence_transaction_certificate
+      _evidence_transaction_certificate = evidence_transaction_certificate.not_nil!
+      @evidence_transaction_certificate = _evidence_transaction_certificate
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -286,7 +299,8 @@ module Stripe
       if exp_month.nil?
         return @exp_month = nil
       end
-      @exp_month = exp_month
+      _exp_month = exp_month.not_nil!
+      @exp_month = _exp_month
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -295,7 +309,8 @@ module Stripe
       if exp_year.nil?
         return @exp_year = nil
       end
-      @exp_year = exp_year
+      _exp_year = exp_year.not_nil!
+      @exp_year = _exp_year
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -304,7 +319,8 @@ module Stripe
       if fingerprint.nil?
         return @fingerprint = nil
       end
-      @fingerprint = fingerprint
+      _fingerprint = fingerprint.not_nil!
+      @fingerprint = _fingerprint
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -313,7 +329,8 @@ module Stripe
       if funding.nil?
         return @funding = nil
       end
-      @funding = funding
+      _funding = funding.not_nil!
+      @funding = _funding
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -322,7 +339,8 @@ module Stripe
       if last4.nil?
         return @last4 = nil
       end
-      @last4 = last4
+      _last4 = last4.not_nil!
+      @last4 = _last4
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -331,7 +349,8 @@ module Stripe
       if pos_device_id.nil?
         return @pos_device_id = nil
       end
-      @pos_device_id = pos_device_id
+      _pos_device_id = pos_device_id.not_nil!
+      @pos_device_id = _pos_device_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -340,7 +359,8 @@ module Stripe
       if pos_entry_mode.nil?
         return @pos_entry_mode = nil
       end
-      @pos_entry_mode = pos_entry_mode
+      _pos_entry_mode = pos_entry_mode.not_nil!
+      @pos_entry_mode = _pos_entry_mode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -349,7 +369,8 @@ module Stripe
       if read_method.nil?
         return @read_method = nil
       end
-      @read_method = read_method
+      _read_method = read_method.not_nil!
+      @read_method = _read_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -358,7 +379,8 @@ module Stripe
       if reader.nil?
         return @reader = nil
       end
-      @reader = reader
+      _reader = reader.not_nil!
+      @reader = _reader
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -367,7 +389,8 @@ module Stripe
       if terminal_verification_results.nil?
         return @terminal_verification_results = nil
       end
-      @terminal_verification_results = terminal_verification_results
+      _terminal_verification_results = terminal_verification_results.not_nil!
+      @terminal_verification_results = _terminal_verification_results
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -376,13 +399,8 @@ module Stripe
       if transaction_status_information.nil?
         return @transaction_status_information = nil
       end
-      @transaction_status_information = transaction_status_information
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _transaction_status_information = transaction_status_information.not_nil!
+      @transaction_status_information = _transaction_status_information
     end
 
     # Generates #hash and #== methods from all fields

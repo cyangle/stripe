@@ -15,6 +15,7 @@ module Stripe
   class SourceTypeKlarna
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -136,7 +137,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -144,7 +145,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -154,7 +155,8 @@ module Stripe
       if background_image_url.nil?
         return @background_image_url = nil
       end
-      @background_image_url = background_image_url
+      _background_image_url = background_image_url.not_nil!
+      @background_image_url = _background_image_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -163,7 +165,8 @@ module Stripe
       if client_token.nil?
         return @client_token = nil
       end
-      @client_token = client_token
+      _client_token = client_token.not_nil!
+      @client_token = _client_token
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -172,7 +175,8 @@ module Stripe
       if first_name.nil?
         return @first_name = nil
       end
-      @first_name = first_name
+      _first_name = first_name.not_nil!
+      @first_name = _first_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -181,7 +185,8 @@ module Stripe
       if last_name.nil?
         return @last_name = nil
       end
-      @last_name = last_name
+      _last_name = last_name.not_nil!
+      @last_name = _last_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -190,7 +195,8 @@ module Stripe
       if locale.nil?
         return @locale = nil
       end
-      @locale = locale
+      _locale = locale.not_nil!
+      @locale = _locale
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -199,7 +205,8 @@ module Stripe
       if logo_url.nil?
         return @logo_url = nil
       end
-      @logo_url = logo_url
+      _logo_url = logo_url.not_nil!
+      @logo_url = _logo_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -208,7 +215,8 @@ module Stripe
       if page_title.nil?
         return @page_title = nil
       end
-      @page_title = page_title
+      _page_title = page_title.not_nil!
+      @page_title = _page_title
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -217,7 +225,8 @@ module Stripe
       if pay_later_asset_urls_descriptive.nil?
         return @pay_later_asset_urls_descriptive = nil
       end
-      @pay_later_asset_urls_descriptive = pay_later_asset_urls_descriptive
+      _pay_later_asset_urls_descriptive = pay_later_asset_urls_descriptive.not_nil!
+      @pay_later_asset_urls_descriptive = _pay_later_asset_urls_descriptive
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -226,7 +235,8 @@ module Stripe
       if pay_later_asset_urls_standard.nil?
         return @pay_later_asset_urls_standard = nil
       end
-      @pay_later_asset_urls_standard = pay_later_asset_urls_standard
+      _pay_later_asset_urls_standard = pay_later_asset_urls_standard.not_nil!
+      @pay_later_asset_urls_standard = _pay_later_asset_urls_standard
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -235,7 +245,8 @@ module Stripe
       if pay_later_name.nil?
         return @pay_later_name = nil
       end
-      @pay_later_name = pay_later_name
+      _pay_later_name = pay_later_name.not_nil!
+      @pay_later_name = _pay_later_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -244,7 +255,8 @@ module Stripe
       if pay_later_redirect_url.nil?
         return @pay_later_redirect_url = nil
       end
-      @pay_later_redirect_url = pay_later_redirect_url
+      _pay_later_redirect_url = pay_later_redirect_url.not_nil!
+      @pay_later_redirect_url = _pay_later_redirect_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -253,7 +265,8 @@ module Stripe
       if pay_now_asset_urls_descriptive.nil?
         return @pay_now_asset_urls_descriptive = nil
       end
-      @pay_now_asset_urls_descriptive = pay_now_asset_urls_descriptive
+      _pay_now_asset_urls_descriptive = pay_now_asset_urls_descriptive.not_nil!
+      @pay_now_asset_urls_descriptive = _pay_now_asset_urls_descriptive
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -262,7 +275,8 @@ module Stripe
       if pay_now_asset_urls_standard.nil?
         return @pay_now_asset_urls_standard = nil
       end
-      @pay_now_asset_urls_standard = pay_now_asset_urls_standard
+      _pay_now_asset_urls_standard = pay_now_asset_urls_standard.not_nil!
+      @pay_now_asset_urls_standard = _pay_now_asset_urls_standard
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -271,7 +285,8 @@ module Stripe
       if pay_now_name.nil?
         return @pay_now_name = nil
       end
-      @pay_now_name = pay_now_name
+      _pay_now_name = pay_now_name.not_nil!
+      @pay_now_name = _pay_now_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -280,7 +295,8 @@ module Stripe
       if pay_now_redirect_url.nil?
         return @pay_now_redirect_url = nil
       end
-      @pay_now_redirect_url = pay_now_redirect_url
+      _pay_now_redirect_url = pay_now_redirect_url.not_nil!
+      @pay_now_redirect_url = _pay_now_redirect_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -289,7 +305,8 @@ module Stripe
       if pay_over_time_asset_urls_descriptive.nil?
         return @pay_over_time_asset_urls_descriptive = nil
       end
-      @pay_over_time_asset_urls_descriptive = pay_over_time_asset_urls_descriptive
+      _pay_over_time_asset_urls_descriptive = pay_over_time_asset_urls_descriptive.not_nil!
+      @pay_over_time_asset_urls_descriptive = _pay_over_time_asset_urls_descriptive
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -298,7 +315,8 @@ module Stripe
       if pay_over_time_asset_urls_standard.nil?
         return @pay_over_time_asset_urls_standard = nil
       end
-      @pay_over_time_asset_urls_standard = pay_over_time_asset_urls_standard
+      _pay_over_time_asset_urls_standard = pay_over_time_asset_urls_standard.not_nil!
+      @pay_over_time_asset_urls_standard = _pay_over_time_asset_urls_standard
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -307,7 +325,8 @@ module Stripe
       if pay_over_time_name.nil?
         return @pay_over_time_name = nil
       end
-      @pay_over_time_name = pay_over_time_name
+      _pay_over_time_name = pay_over_time_name.not_nil!
+      @pay_over_time_name = _pay_over_time_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -316,7 +335,8 @@ module Stripe
       if pay_over_time_redirect_url.nil?
         return @pay_over_time_redirect_url = nil
       end
-      @pay_over_time_redirect_url = pay_over_time_redirect_url
+      _pay_over_time_redirect_url = pay_over_time_redirect_url.not_nil!
+      @pay_over_time_redirect_url = _pay_over_time_redirect_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -325,7 +345,8 @@ module Stripe
       if payment_method_categories.nil?
         return @payment_method_categories = nil
       end
-      @payment_method_categories = payment_method_categories
+      _payment_method_categories = payment_method_categories.not_nil!
+      @payment_method_categories = _payment_method_categories
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -334,7 +355,8 @@ module Stripe
       if purchase_country.nil?
         return @purchase_country = nil
       end
-      @purchase_country = purchase_country
+      _purchase_country = purchase_country.not_nil!
+      @purchase_country = _purchase_country
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -343,7 +365,8 @@ module Stripe
       if purchase_type.nil?
         return @purchase_type = nil
       end
-      @purchase_type = purchase_type
+      _purchase_type = purchase_type.not_nil!
+      @purchase_type = _purchase_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -352,7 +375,8 @@ module Stripe
       if redirect_url.nil?
         return @redirect_url = nil
       end
-      @redirect_url = redirect_url
+      _redirect_url = redirect_url.not_nil!
+      @redirect_url = _redirect_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -361,7 +385,8 @@ module Stripe
       if shipping_delay.nil?
         return @shipping_delay = nil
       end
-      @shipping_delay = shipping_delay
+      _shipping_delay = shipping_delay.not_nil!
+      @shipping_delay = _shipping_delay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -370,7 +395,8 @@ module Stripe
       if shipping_first_name.nil?
         return @shipping_first_name = nil
       end
-      @shipping_first_name = shipping_first_name
+      _shipping_first_name = shipping_first_name.not_nil!
+      @shipping_first_name = _shipping_first_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -379,13 +405,8 @@ module Stripe
       if shipping_last_name.nil?
         return @shipping_last_name = nil
       end
-      @shipping_last_name = shipping_last_name
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _shipping_last_name = shipping_last_name.not_nil!
+      @shipping_last_name = _shipping_last_name
     end
 
     # Generates #hash and #== methods from all fields

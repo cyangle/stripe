@@ -16,6 +16,7 @@ module Stripe
   class AccountCapabilities
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -261,7 +262,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS.valid?(@acss_debit_payments)
@@ -335,7 +336,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS.valid?(@acss_debit_payments)
       return false unless ENUM_VALIDATOR_FOR_AFFIRM_PAYMENTS.valid?(@affirm_payments)
       return false unless ENUM_VALIDATOR_FOR_AFTERPAY_CLEARPAY_PAYMENTS.valid?(@afterpay_clearpay_payments)
@@ -381,7 +382,7 @@ module Stripe
       end
       _acss_debit_payments = acss_debit_payments.not_nil!
       ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS.valid!(_acss_debit_payments)
-      @acss_debit_payments = acss_debit_payments
+      @acss_debit_payments = _acss_debit_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -392,7 +393,7 @@ module Stripe
       end
       _affirm_payments = affirm_payments.not_nil!
       ENUM_VALIDATOR_FOR_AFFIRM_PAYMENTS.valid!(_affirm_payments)
-      @affirm_payments = affirm_payments
+      @affirm_payments = _affirm_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -403,7 +404,7 @@ module Stripe
       end
       _afterpay_clearpay_payments = afterpay_clearpay_payments.not_nil!
       ENUM_VALIDATOR_FOR_AFTERPAY_CLEARPAY_PAYMENTS.valid!(_afterpay_clearpay_payments)
-      @afterpay_clearpay_payments = afterpay_clearpay_payments
+      @afterpay_clearpay_payments = _afterpay_clearpay_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -414,7 +415,7 @@ module Stripe
       end
       _au_becs_debit_payments = au_becs_debit_payments.not_nil!
       ENUM_VALIDATOR_FOR_AU_BECS_DEBIT_PAYMENTS.valid!(_au_becs_debit_payments)
-      @au_becs_debit_payments = au_becs_debit_payments
+      @au_becs_debit_payments = _au_becs_debit_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -425,7 +426,7 @@ module Stripe
       end
       _bacs_debit_payments = bacs_debit_payments.not_nil!
       ENUM_VALIDATOR_FOR_BACS_DEBIT_PAYMENTS.valid!(_bacs_debit_payments)
-      @bacs_debit_payments = bacs_debit_payments
+      @bacs_debit_payments = _bacs_debit_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -436,7 +437,7 @@ module Stripe
       end
       _bancontact_payments = bancontact_payments.not_nil!
       ENUM_VALIDATOR_FOR_BANCONTACT_PAYMENTS.valid!(_bancontact_payments)
-      @bancontact_payments = bancontact_payments
+      @bancontact_payments = _bancontact_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -447,7 +448,7 @@ module Stripe
       end
       _bank_transfer_payments = bank_transfer_payments.not_nil!
       ENUM_VALIDATOR_FOR_BANK_TRANSFER_PAYMENTS.valid!(_bank_transfer_payments)
-      @bank_transfer_payments = bank_transfer_payments
+      @bank_transfer_payments = _bank_transfer_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -458,7 +459,7 @@ module Stripe
       end
       _blik_payments = blik_payments.not_nil!
       ENUM_VALIDATOR_FOR_BLIK_PAYMENTS.valid!(_blik_payments)
-      @blik_payments = blik_payments
+      @blik_payments = _blik_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -469,7 +470,7 @@ module Stripe
       end
       _boleto_payments = boleto_payments.not_nil!
       ENUM_VALIDATOR_FOR_BOLETO_PAYMENTS.valid!(_boleto_payments)
-      @boleto_payments = boleto_payments
+      @boleto_payments = _boleto_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -480,7 +481,7 @@ module Stripe
       end
       _card_issuing = card_issuing.not_nil!
       ENUM_VALIDATOR_FOR_CARD_ISSUING.valid!(_card_issuing)
-      @card_issuing = card_issuing
+      @card_issuing = _card_issuing
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -491,7 +492,7 @@ module Stripe
       end
       _card_payments = card_payments.not_nil!
       ENUM_VALIDATOR_FOR_CARD_PAYMENTS.valid!(_card_payments)
-      @card_payments = card_payments
+      @card_payments = _card_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -502,7 +503,7 @@ module Stripe
       end
       _cartes_bancaires_payments = cartes_bancaires_payments.not_nil!
       ENUM_VALIDATOR_FOR_CARTES_BANCAIRES_PAYMENTS.valid!(_cartes_bancaires_payments)
-      @cartes_bancaires_payments = cartes_bancaires_payments
+      @cartes_bancaires_payments = _cartes_bancaires_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -513,7 +514,7 @@ module Stripe
       end
       _eps_payments = eps_payments.not_nil!
       ENUM_VALIDATOR_FOR_EPS_PAYMENTS.valid!(_eps_payments)
-      @eps_payments = eps_payments
+      @eps_payments = _eps_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -524,7 +525,7 @@ module Stripe
       end
       _fpx_payments = fpx_payments.not_nil!
       ENUM_VALIDATOR_FOR_FPX_PAYMENTS.valid!(_fpx_payments)
-      @fpx_payments = fpx_payments
+      @fpx_payments = _fpx_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -535,7 +536,7 @@ module Stripe
       end
       _giropay_payments = giropay_payments.not_nil!
       ENUM_VALIDATOR_FOR_GIROPAY_PAYMENTS.valid!(_giropay_payments)
-      @giropay_payments = giropay_payments
+      @giropay_payments = _giropay_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -546,7 +547,7 @@ module Stripe
       end
       _grabpay_payments = grabpay_payments.not_nil!
       ENUM_VALIDATOR_FOR_GRABPAY_PAYMENTS.valid!(_grabpay_payments)
-      @grabpay_payments = grabpay_payments
+      @grabpay_payments = _grabpay_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -557,7 +558,7 @@ module Stripe
       end
       _ideal_payments = ideal_payments.not_nil!
       ENUM_VALIDATOR_FOR_IDEAL_PAYMENTS.valid!(_ideal_payments)
-      @ideal_payments = ideal_payments
+      @ideal_payments = _ideal_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -568,7 +569,7 @@ module Stripe
       end
       _jcb_payments = jcb_payments.not_nil!
       ENUM_VALIDATOR_FOR_JCB_PAYMENTS.valid!(_jcb_payments)
-      @jcb_payments = jcb_payments
+      @jcb_payments = _jcb_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -579,7 +580,7 @@ module Stripe
       end
       _klarna_payments = klarna_payments.not_nil!
       ENUM_VALIDATOR_FOR_KLARNA_PAYMENTS.valid!(_klarna_payments)
-      @klarna_payments = klarna_payments
+      @klarna_payments = _klarna_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -590,7 +591,7 @@ module Stripe
       end
       _konbini_payments = konbini_payments.not_nil!
       ENUM_VALIDATOR_FOR_KONBINI_PAYMENTS.valid!(_konbini_payments)
-      @konbini_payments = konbini_payments
+      @konbini_payments = _konbini_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -601,7 +602,7 @@ module Stripe
       end
       _legacy_payments = legacy_payments.not_nil!
       ENUM_VALIDATOR_FOR_LEGACY_PAYMENTS.valid!(_legacy_payments)
-      @legacy_payments = legacy_payments
+      @legacy_payments = _legacy_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -612,7 +613,7 @@ module Stripe
       end
       _link_payments = link_payments.not_nil!
       ENUM_VALIDATOR_FOR_LINK_PAYMENTS.valid!(_link_payments)
-      @link_payments = link_payments
+      @link_payments = _link_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -623,7 +624,7 @@ module Stripe
       end
       _oxxo_payments = oxxo_payments.not_nil!
       ENUM_VALIDATOR_FOR_OXXO_PAYMENTS.valid!(_oxxo_payments)
-      @oxxo_payments = oxxo_payments
+      @oxxo_payments = _oxxo_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -634,7 +635,7 @@ module Stripe
       end
       _p24_payments = p24_payments.not_nil!
       ENUM_VALIDATOR_FOR_P24_PAYMENTS.valid!(_p24_payments)
-      @p24_payments = p24_payments
+      @p24_payments = _p24_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -645,7 +646,7 @@ module Stripe
       end
       _paynow_payments = paynow_payments.not_nil!
       ENUM_VALIDATOR_FOR_PAYNOW_PAYMENTS.valid!(_paynow_payments)
-      @paynow_payments = paynow_payments
+      @paynow_payments = _paynow_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -656,7 +657,7 @@ module Stripe
       end
       _promptpay_payments = promptpay_payments.not_nil!
       ENUM_VALIDATOR_FOR_PROMPTPAY_PAYMENTS.valid!(_promptpay_payments)
-      @promptpay_payments = promptpay_payments
+      @promptpay_payments = _promptpay_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -667,7 +668,7 @@ module Stripe
       end
       _sepa_debit_payments = sepa_debit_payments.not_nil!
       ENUM_VALIDATOR_FOR_SEPA_DEBIT_PAYMENTS.valid!(_sepa_debit_payments)
-      @sepa_debit_payments = sepa_debit_payments
+      @sepa_debit_payments = _sepa_debit_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -678,7 +679,7 @@ module Stripe
       end
       _sofort_payments = sofort_payments.not_nil!
       ENUM_VALIDATOR_FOR_SOFORT_PAYMENTS.valid!(_sofort_payments)
-      @sofort_payments = sofort_payments
+      @sofort_payments = _sofort_payments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -689,7 +690,7 @@ module Stripe
       end
       _tax_reporting_us_1099_k = tax_reporting_us_1099_k.not_nil!
       ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_K.valid!(_tax_reporting_us_1099_k)
-      @tax_reporting_us_1099_k = tax_reporting_us_1099_k
+      @tax_reporting_us_1099_k = _tax_reporting_us_1099_k
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -700,7 +701,7 @@ module Stripe
       end
       _tax_reporting_us_1099_misc = tax_reporting_us_1099_misc.not_nil!
       ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_MISC.valid!(_tax_reporting_us_1099_misc)
-      @tax_reporting_us_1099_misc = tax_reporting_us_1099_misc
+      @tax_reporting_us_1099_misc = _tax_reporting_us_1099_misc
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -711,7 +712,7 @@ module Stripe
       end
       _transfers = transfers.not_nil!
       ENUM_VALIDATOR_FOR_TRANSFERS.valid!(_transfers)
-      @transfers = transfers
+      @transfers = _transfers
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -722,7 +723,7 @@ module Stripe
       end
       _treasury = treasury.not_nil!
       ENUM_VALIDATOR_FOR_TREASURY.valid!(_treasury)
-      @treasury = treasury
+      @treasury = _treasury
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -733,13 +734,7 @@ module Stripe
       end
       _us_bank_account_ach_payments = us_bank_account_ach_payments.not_nil!
       ENUM_VALIDATOR_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS.valid!(_us_bank_account_ach_payments)
-      @us_bank_account_ach_payments = us_bank_account_ach_payments
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @us_bank_account_ach_payments = _us_bank_account_ach_payments
     end
 
     # Generates #hash and #== methods from all fields

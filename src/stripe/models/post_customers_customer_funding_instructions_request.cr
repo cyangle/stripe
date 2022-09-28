@@ -15,6 +15,7 @@ module Stripe
   class PostCustomersCustomerFundingInstructionsRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -53,10 +54,14 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"bank_transfer\" is required and cannot be null") if @bank_transfer.nil?
-      # This is a model bank_transfer : Stripe::BankTransferParams?
+      if _bank_transfer = @bank_transfer
+        if _bank_transfer.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bank_transfer.list_invalid_properties_for("bank_transfer"))
+        end
+      end
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_FUNDING_TYPE.error_message) unless ENUM_VALIDATOR_FOR_FUNDING_TYPE.valid?(@funding_type, false)
@@ -66,9 +71,15 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @bank_transfer.nil?
+      if _bank_transfer = @bank_transfer
+        if _bank_transfer.is_a?(OpenApi::Validatable)
+          return false unless _bank_transfer.valid?
+        end
+      end
       return false if @currency.nil?
+
       return false unless ENUM_VALIDATOR_FOR_FUNDING_TYPE.valid?(@funding_type, false)
 
       true
@@ -80,7 +91,11 @@ module Stripe
       if bank_transfer.nil?
         raise ArgumentError.new("\"bank_transfer\" is required and cannot be null")
       end
-      @bank_transfer = bank_transfer
+      _bank_transfer = bank_transfer.not_nil!
+      if _bank_transfer.is_a?(OpenApi::Validatable)
+        _bank_transfer.validate
+      end
+      @bank_transfer = _bank_transfer
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -89,7 +104,8 @@ module Stripe
       if currency.nil?
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
-      @currency = currency
+      _currency = currency.not_nil!
+      @currency = _currency
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -100,7 +116,7 @@ module Stripe
       end
       _funding_type = funding_type.not_nil!
       ENUM_VALIDATOR_FOR_FUNDING_TYPE.valid!(_funding_type)
-      @funding_type = funding_type
+      @funding_type = _funding_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -109,13 +125,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Generates #hash and #== methods from all fields

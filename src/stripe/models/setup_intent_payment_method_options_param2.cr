@@ -15,6 +15,7 @@ module Stripe
   class SetupIntentPaymentMethodOptionsParam2
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -33,7 +34,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _persistent_token = @persistent_token
         if _persistent_token.to_s.size > 5000
@@ -46,7 +47,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _persistent_token = @persistent_token
         return false if _persistent_token.to_s.size > 5000
       end
@@ -65,13 +66,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"persistent_token\", the character length must be smaller than or equal to 5000.")
       end
 
-      @persistent_token = persistent_token
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @persistent_token = _persistent_token
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class IdentityVerificationReport
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -86,9 +87,10 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
         if _id.to_s.size > 5000
@@ -99,12 +101,28 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"options\" is required and cannot be null") if @options.nil?
-      # This is a model options : Stripe::GelatoVerificationReportOptions?
+      if _options = @options
+        if _options.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_options.list_invalid_properties_for("options"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      # This is a model document : Stripe::GelatoDocumentReport?
-      # This is a model id_number : Stripe::GelatoIdNumberReport?
-      # This is a model selfie : Stripe::GelatoSelfieReport?
+      if _document = @document
+        if _document.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_document.list_invalid_properties_for("document"))
+        end
+      end
+      if _id_number = @id_number
+        if _id_number.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_id_number.list_invalid_properties_for("id_number"))
+        end
+      end
+      if _selfie = @selfie
+        if _selfie.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_selfie.list_invalid_properties_for("selfie"))
+        end
+      end
       if _verification_session = @verification_session
         if _verification_session.to_s.size > 5000
           invalid_properties.push("invalid value for \"verification_session\", the character length must be smaller than or equal to 5000.")
@@ -116,16 +134,38 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @created.nil?
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       return false if @livemode.nil?
+
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @options.nil?
+      if _options = @options
+        if _options.is_a?(OpenApi::Validatable)
+          return false unless _options.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if _document = @document
+        if _document.is_a?(OpenApi::Validatable)
+          return false unless _document.valid?
+        end
+      end
+      if _id_number = @id_number
+        if _id_number.is_a?(OpenApi::Validatable)
+          return false unless _id_number.valid?
+        end
+      end
+      if _selfie = @selfie
+        if _selfie.is_a?(OpenApi::Validatable)
+          return false unless _selfie.valid?
+        end
+      end
       if _verification_session = @verification_session
         return false if _verification_session.to_s.size > 5000
       end
@@ -139,7 +179,8 @@ module Stripe
       if created.nil?
         raise ArgumentError.new("\"created\" is required and cannot be null")
       end
-      @created = created
+      _created = created.not_nil!
+      @created = _created
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -153,7 +194,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -162,7 +203,8 @@ module Stripe
       if livemode.nil?
         raise ArgumentError.new("\"livemode\" is required and cannot be null")
       end
-      @livemode = livemode
+      _livemode = livemode.not_nil!
+      @livemode = _livemode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -173,7 +215,7 @@ module Stripe
       end
       _object = object.not_nil!
       ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
-      @object = object
+      @object = _object
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -182,7 +224,11 @@ module Stripe
       if options.nil?
         raise ArgumentError.new("\"options\" is required and cannot be null")
       end
-      @options = options
+      _options = options.not_nil!
+      if _options.is_a?(OpenApi::Validatable)
+        _options.validate
+      end
+      @options = _options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -193,7 +239,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -202,7 +248,11 @@ module Stripe
       if document.nil?
         return @document = nil
       end
-      @document = document
+      _document = document.not_nil!
+      if _document.is_a?(OpenApi::Validatable)
+        _document.validate
+      end
+      @document = _document
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -211,7 +261,11 @@ module Stripe
       if id_number.nil?
         return @id_number = nil
       end
-      @id_number = id_number
+      _id_number = id_number.not_nil!
+      if _id_number.is_a?(OpenApi::Validatable)
+        _id_number.validate
+      end
+      @id_number = _id_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -220,7 +274,11 @@ module Stripe
       if selfie.nil?
         return @selfie = nil
       end
-      @selfie = selfie
+      _selfie = selfie.not_nil!
+      if _selfie.is_a?(OpenApi::Validatable)
+        _selfie.validate
+      end
+      @selfie = _selfie
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -234,13 +292,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"verification_session\", the character length must be smaller than or equal to 5000.")
       end
 
-      @verification_session = verification_session
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @verification_session = _verification_session
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class PaymentIntentNextActionWechatPayRedirectToAndroidApp
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -65,7 +66,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"app_id\" is required and cannot be null") if @app_id.nil?
       if _app_id = @app_id
@@ -115,7 +116,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @app_id.nil?
       if _app_id = @app_id
         return false if _app_id.to_s.size > 5000
@@ -159,7 +160,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"app_id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @app_id = app_id
+      @app_id = _app_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -173,7 +174,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"nonce_str\", the character length must be smaller than or equal to 5000.")
       end
 
-      @nonce_str = nonce_str
+      @nonce_str = _nonce_str
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -187,7 +188,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"package\", the character length must be smaller than or equal to 5000.")
       end
 
-      @package = package
+      @package = _package
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -201,7 +202,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"partner_id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @partner_id = partner_id
+      @partner_id = _partner_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -215,7 +216,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"prepay_id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @prepay_id = prepay_id
+      @prepay_id = _prepay_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -229,7 +230,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"sign\", the character length must be smaller than or equal to 5000.")
       end
 
-      @sign = sign
+      @sign = _sign
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -243,13 +244,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"timestamp\", the character length must be smaller than or equal to 5000.")
       end
 
-      @timestamp = timestamp
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @timestamp = _timestamp
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class PaymentPagesCheckoutSessionCustomerDetails
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -79,9 +80,13 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model address : Stripe::PaymentPagesCheckoutSessionCustomerDetailsAddress?
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_address.list_invalid_properties_for("address"))
+        end
+      end
       if _email = @email
         if _email.to_s.size > 5000
           invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
@@ -99,14 +104,27 @@ module Stripe
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_EXEMPT.error_message) unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
-      # Container tax_ids array has values of Stripe::PaymentPagesCheckoutSessionTaxId
+      if _tax_ids = @tax_ids
+        if _tax_ids.is_a?(Array)
+          _tax_ids.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("tax_ids"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _address = @address
+        if _address.is_a?(OpenApi::Validatable)
+          return false unless _address.valid?
+        end
+      end
       if _email = @email
         return false if _email.to_s.size > 5000
       end
@@ -117,6 +135,15 @@ module Stripe
         return false if _phone.to_s.size > 5000
       end
       return false unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
+      if _tax_ids = @tax_ids
+        if _tax_ids.is_a?(Array)
+          _tax_ids.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
 
       true
     end
@@ -127,7 +154,11 @@ module Stripe
       if address.nil?
         return @address = nil
       end
-      @address = address
+      _address = address.not_nil!
+      if _address.is_a?(OpenApi::Validatable)
+        _address.validate
+      end
+      @address = _address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -141,7 +172,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
 
-      @email = email
+      @email = _email
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -155,7 +186,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -169,7 +200,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
       end
 
-      @phone = phone
+      @phone = _phone
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -180,7 +211,7 @@ module Stripe
       end
       _tax_exempt = tax_exempt.not_nil!
       ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid!(_tax_exempt)
-      @tax_exempt = tax_exempt
+      @tax_exempt = _tax_exempt
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -189,13 +220,15 @@ module Stripe
       if tax_ids.nil?
         return @tax_ids = nil
       end
-      @tax_ids = tax_ids
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _tax_ids = tax_ids.not_nil!
+      if _tax_ids.is_a?(Array)
+        _tax_ids.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @tax_ids = _tax_ids
     end
 
     # Generates #hash and #== methods from all fields

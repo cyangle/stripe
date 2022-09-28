@@ -16,6 +16,7 @@ module Stripe
   class TreasuryFinancialAccountsResourceFinancialAddress
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -51,11 +52,15 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      # This is a model aba : Stripe::TreasuryFinancialAccountsResourceAbaRecord?
+      if _aba = @aba
+        if _aba.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_aba.list_invalid_properties_for("aba"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
 
@@ -64,8 +69,13 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if _aba = @aba
+        if _aba.is_a?(OpenApi::Validatable)
+          return false unless _aba.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
 
       true
@@ -79,7 +89,7 @@ module Stripe
       end
       __type = _type.not_nil!
       ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
-      @_type = _type
+      @_type = __type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -88,7 +98,11 @@ module Stripe
       if aba.nil?
         return @aba = nil
       end
-      @aba = aba
+      _aba = aba.not_nil!
+      if _aba.is_a?(OpenApi::Validatable)
+        _aba.validate
+      end
+      @aba = _aba
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -99,13 +113,7 @@ module Stripe
       end
       _supported_networks = supported_networks.not_nil!
       ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid!(_supported_networks)
-      @supported_networks = supported_networks
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @supported_networks = _supported_networks
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class TosAcceptanceSpecs
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -46,8 +47,9 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _service_agreement = @service_agreement
         if _service_agreement.to_s.size > 5000
           invalid_properties.push("invalid value for \"service_agreement\", the character length must be smaller than or equal to 5000.")
@@ -64,7 +66,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _service_agreement = @service_agreement
         return false if _service_agreement.to_s.size > 5000
       end
@@ -81,7 +83,8 @@ module Stripe
       if date.nil?
         return @date = nil
       end
-      @date = date
+      _date = date.not_nil!
+      @date = _date
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -90,7 +93,8 @@ module Stripe
       if ip.nil?
         return @ip = nil
       end
-      @ip = ip
+      _ip = ip.not_nil!
+      @ip = _ip
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -104,7 +108,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"service_agreement\", the character length must be smaller than or equal to 5000.")
       end
 
-      @service_agreement = service_agreement
+      @service_agreement = _service_agreement
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -118,13 +122,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"user_agent\", the character length must be smaller than or equal to 5000.")
       end
 
-      @user_agent = user_agent
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @user_agent = _user_agent
     end
 
     # Generates #hash and #== methods from all fields

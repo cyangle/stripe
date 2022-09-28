@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodCardGeneratedCard
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -52,24 +53,42 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _charge = @charge
         if _charge.to_s.size > 5000
           invalid_properties.push("invalid value for \"charge\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model payment_method_details : Stripe::PaymentMethodCardGeneratedCardPaymentMethodDetails?
-      # This is a model setup_attempt : Stripe::PaymentMethodCardGeneratedCardSetupAttempt?
+      if _payment_method_details = @payment_method_details
+        if _payment_method_details.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_method_details.list_invalid_properties_for("payment_method_details"))
+        end
+      end
+      if _setup_attempt = @setup_attempt
+        if _setup_attempt.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_setup_attempt.list_invalid_properties_for("setup_attempt"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _charge = @charge
         return false if _charge.to_s.size > 5000
+      end
+      if _payment_method_details = @payment_method_details
+        if _payment_method_details.is_a?(OpenApi::Validatable)
+          return false unless _payment_method_details.valid?
+        end
+      end
+      if _setup_attempt = @setup_attempt
+        if _setup_attempt.is_a?(OpenApi::Validatable)
+          return false unless _setup_attempt.valid?
+        end
       end
 
       true
@@ -86,7 +105,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"charge\", the character length must be smaller than or equal to 5000.")
       end
 
-      @charge = charge
+      @charge = _charge
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -95,7 +114,11 @@ module Stripe
       if payment_method_details.nil?
         return @payment_method_details = nil
       end
-      @payment_method_details = payment_method_details
+      _payment_method_details = payment_method_details.not_nil!
+      if _payment_method_details.is_a?(OpenApi::Validatable)
+        _payment_method_details.validate
+      end
+      @payment_method_details = _payment_method_details
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -104,13 +127,11 @@ module Stripe
       if setup_attempt.nil?
         return @setup_attempt = nil
       end
-      @setup_attempt = setup_attempt
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _setup_attempt = setup_attempt.not_nil!
+      if _setup_attempt.is_a?(OpenApi::Validatable)
+        _setup_attempt.validate
+      end
+      @setup_attempt = _setup_attempt
     end
 
     # Generates #hash and #== methods from all fields

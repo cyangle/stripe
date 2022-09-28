@@ -16,6 +16,7 @@ module Stripe
   class IssuingTransactionReceiptData
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -62,7 +63,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _description = @description
         if _description.to_s.size > 5000
@@ -75,7 +76,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       if _description = @description
         return false if _description.to_s.size > 5000
       end
@@ -94,7 +95,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
       end
 
-      @description = description
+      @description = _description
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -103,7 +104,8 @@ module Stripe
       if quantity.nil?
         return @quantity = nil
       end
-      @quantity = quantity
+      _quantity = quantity.not_nil!
+      @quantity = _quantity
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -112,7 +114,8 @@ module Stripe
       if total.nil?
         return @total = nil
       end
-      @total = total
+      _total = total.not_nil!
+      @total = _total
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -121,13 +124,8 @@ module Stripe
       if unit_cost.nil?
         return @unit_cost = nil
       end
-      @unit_cost = unit_cost
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _unit_cost = unit_cost.not_nil!
+      @unit_cost = _unit_cost
     end
 
     # Generates #hash and #== methods from all fields

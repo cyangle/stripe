@@ -16,6 +16,7 @@ module Stripe
   class OrdersV2ResourcePaymentMethodOptions
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -90,30 +91,166 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model acss_debit : Stripe::PaymentIntentPaymentMethodOptionsAcssDebit?
-      # This is a model afterpay_clearpay : Stripe::OrdersPaymentMethodOptionsAfterpayClearpay?
-      # This is a model alipay : Stripe::PaymentMethodOptionsAlipay?
-      # This is a model bancontact : Stripe::PaymentMethodOptionsBancontact?
-      # This is a model card : Stripe::OrdersV2ResourceCardPaymentMethodOptions?
-      # This is a model customer_balance : Stripe::PaymentMethodOptionsCustomerBalance?
-      # This is a model ideal : Stripe::PaymentMethodOptionsIdeal?
-      # This is a model klarna : Stripe::PaymentMethodOptionsKlarna?
-      # This is a model link : Stripe::PaymentIntentPaymentMethodOptionsLink?
-      # This is a model oxxo : Stripe::PaymentMethodOptionsOxxo?
-      # This is a model p24 : Stripe::PaymentMethodOptionsP24?
-      # This is a model paypal : Stripe::PaymentMethodOptionsPaypal?
-      # This is a model sepa_debit : Stripe::PaymentIntentPaymentMethodOptionsSepaDebit?
-      # This is a model sofort : Stripe::PaymentMethodOptionsSofort?
-      # This is a model wechat_pay : Stripe::PaymentMethodOptionsWechatPay?
+      if _acss_debit = @acss_debit
+        if _acss_debit.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit"))
+        end
+      end
+      if _afterpay_clearpay = @afterpay_clearpay
+        if _afterpay_clearpay.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_afterpay_clearpay.list_invalid_properties_for("afterpay_clearpay"))
+        end
+      end
+      if _alipay = @alipay
+        if _alipay.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_alipay.list_invalid_properties_for("alipay"))
+        end
+      end
+      if _bancontact = @bancontact
+        if _bancontact.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_bancontact.list_invalid_properties_for("bancontact"))
+        end
+      end
+      if _card = @card
+        if _card.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_card.list_invalid_properties_for("card"))
+        end
+      end
+      if _customer_balance = @customer_balance
+        if _customer_balance.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_customer_balance.list_invalid_properties_for("customer_balance"))
+        end
+      end
+      if _ideal = @ideal
+        if _ideal.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_ideal.list_invalid_properties_for("ideal"))
+        end
+      end
+      if _klarna = @klarna
+        if _klarna.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_klarna.list_invalid_properties_for("klarna"))
+        end
+      end
+      if _link = @link
+        if _link.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_link.list_invalid_properties_for("link"))
+        end
+      end
+      if _oxxo = @oxxo
+        if _oxxo.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_oxxo.list_invalid_properties_for("oxxo"))
+        end
+      end
+      if _p24 = @p24
+        if _p24.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_p24.list_invalid_properties_for("p24"))
+        end
+      end
+      if _paypal = @paypal
+        if _paypal.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_paypal.list_invalid_properties_for("paypal"))
+        end
+      end
+      if _sepa_debit = @sepa_debit
+        if _sepa_debit.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit"))
+        end
+      end
+      if _sofort = @sofort
+        if _sofort.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_sofort.list_invalid_properties_for("sofort"))
+        end
+      end
+      if _wechat_pay = @wechat_pay
+        if _wechat_pay.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_wechat_pay.list_invalid_properties_for("wechat_pay"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _acss_debit = @acss_debit
+        if _acss_debit.is_a?(OpenApi::Validatable)
+          return false unless _acss_debit.valid?
+        end
+      end
+      if _afterpay_clearpay = @afterpay_clearpay
+        if _afterpay_clearpay.is_a?(OpenApi::Validatable)
+          return false unless _afterpay_clearpay.valid?
+        end
+      end
+      if _alipay = @alipay
+        if _alipay.is_a?(OpenApi::Validatable)
+          return false unless _alipay.valid?
+        end
+      end
+      if _bancontact = @bancontact
+        if _bancontact.is_a?(OpenApi::Validatable)
+          return false unless _bancontact.valid?
+        end
+      end
+      if _card = @card
+        if _card.is_a?(OpenApi::Validatable)
+          return false unless _card.valid?
+        end
+      end
+      if _customer_balance = @customer_balance
+        if _customer_balance.is_a?(OpenApi::Validatable)
+          return false unless _customer_balance.valid?
+        end
+      end
+      if _ideal = @ideal
+        if _ideal.is_a?(OpenApi::Validatable)
+          return false unless _ideal.valid?
+        end
+      end
+      if _klarna = @klarna
+        if _klarna.is_a?(OpenApi::Validatable)
+          return false unless _klarna.valid?
+        end
+      end
+      if _link = @link
+        if _link.is_a?(OpenApi::Validatable)
+          return false unless _link.valid?
+        end
+      end
+      if _oxxo = @oxxo
+        if _oxxo.is_a?(OpenApi::Validatable)
+          return false unless _oxxo.valid?
+        end
+      end
+      if _p24 = @p24
+        if _p24.is_a?(OpenApi::Validatable)
+          return false unless _p24.valid?
+        end
+      end
+      if _paypal = @paypal
+        if _paypal.is_a?(OpenApi::Validatable)
+          return false unless _paypal.valid?
+        end
+      end
+      if _sepa_debit = @sepa_debit
+        if _sepa_debit.is_a?(OpenApi::Validatable)
+          return false unless _sepa_debit.valid?
+        end
+      end
+      if _sofort = @sofort
+        if _sofort.is_a?(OpenApi::Validatable)
+          return false unless _sofort.valid?
+        end
+      end
+      if _wechat_pay = @wechat_pay
+        if _wechat_pay.is_a?(OpenApi::Validatable)
+          return false unless _wechat_pay.valid?
+        end
+      end
+
       true
     end
 
@@ -123,7 +260,11 @@ module Stripe
       if acss_debit.nil?
         return @acss_debit = nil
       end
-      @acss_debit = acss_debit
+      _acss_debit = acss_debit.not_nil!
+      if _acss_debit.is_a?(OpenApi::Validatable)
+        _acss_debit.validate
+      end
+      @acss_debit = _acss_debit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +273,11 @@ module Stripe
       if afterpay_clearpay.nil?
         return @afterpay_clearpay = nil
       end
-      @afterpay_clearpay = afterpay_clearpay
+      _afterpay_clearpay = afterpay_clearpay.not_nil!
+      if _afterpay_clearpay.is_a?(OpenApi::Validatable)
+        _afterpay_clearpay.validate
+      end
+      @afterpay_clearpay = _afterpay_clearpay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -141,7 +286,11 @@ module Stripe
       if alipay.nil?
         return @alipay = nil
       end
-      @alipay = alipay
+      _alipay = alipay.not_nil!
+      if _alipay.is_a?(OpenApi::Validatable)
+        _alipay.validate
+      end
+      @alipay = _alipay
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -150,7 +299,11 @@ module Stripe
       if bancontact.nil?
         return @bancontact = nil
       end
-      @bancontact = bancontact
+      _bancontact = bancontact.not_nil!
+      if _bancontact.is_a?(OpenApi::Validatable)
+        _bancontact.validate
+      end
+      @bancontact = _bancontact
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -159,7 +312,11 @@ module Stripe
       if card.nil?
         return @card = nil
       end
-      @card = card
+      _card = card.not_nil!
+      if _card.is_a?(OpenApi::Validatable)
+        _card.validate
+      end
+      @card = _card
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -168,7 +325,11 @@ module Stripe
       if customer_balance.nil?
         return @customer_balance = nil
       end
-      @customer_balance = customer_balance
+      _customer_balance = customer_balance.not_nil!
+      if _customer_balance.is_a?(OpenApi::Validatable)
+        _customer_balance.validate
+      end
+      @customer_balance = _customer_balance
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -177,7 +338,11 @@ module Stripe
       if ideal.nil?
         return @ideal = nil
       end
-      @ideal = ideal
+      _ideal = ideal.not_nil!
+      if _ideal.is_a?(OpenApi::Validatable)
+        _ideal.validate
+      end
+      @ideal = _ideal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -186,7 +351,11 @@ module Stripe
       if klarna.nil?
         return @klarna = nil
       end
-      @klarna = klarna
+      _klarna = klarna.not_nil!
+      if _klarna.is_a?(OpenApi::Validatable)
+        _klarna.validate
+      end
+      @klarna = _klarna
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -195,7 +364,11 @@ module Stripe
       if link.nil?
         return @link = nil
       end
-      @link = link
+      _link = link.not_nil!
+      if _link.is_a?(OpenApi::Validatable)
+        _link.validate
+      end
+      @link = _link
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -204,7 +377,11 @@ module Stripe
       if oxxo.nil?
         return @oxxo = nil
       end
-      @oxxo = oxxo
+      _oxxo = oxxo.not_nil!
+      if _oxxo.is_a?(OpenApi::Validatable)
+        _oxxo.validate
+      end
+      @oxxo = _oxxo
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -213,7 +390,11 @@ module Stripe
       if p24.nil?
         return @p24 = nil
       end
-      @p24 = p24
+      _p24 = p24.not_nil!
+      if _p24.is_a?(OpenApi::Validatable)
+        _p24.validate
+      end
+      @p24 = _p24
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -222,7 +403,11 @@ module Stripe
       if paypal.nil?
         return @paypal = nil
       end
-      @paypal = paypal
+      _paypal = paypal.not_nil!
+      if _paypal.is_a?(OpenApi::Validatable)
+        _paypal.validate
+      end
+      @paypal = _paypal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -231,7 +416,11 @@ module Stripe
       if sepa_debit.nil?
         return @sepa_debit = nil
       end
-      @sepa_debit = sepa_debit
+      _sepa_debit = sepa_debit.not_nil!
+      if _sepa_debit.is_a?(OpenApi::Validatable)
+        _sepa_debit.validate
+      end
+      @sepa_debit = _sepa_debit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -240,7 +429,11 @@ module Stripe
       if sofort.nil?
         return @sofort = nil
       end
-      @sofort = sofort
+      _sofort = sofort.not_nil!
+      if _sofort.is_a?(OpenApi::Validatable)
+        _sofort.validate
+      end
+      @sofort = _sofort
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -249,13 +442,11 @@ module Stripe
       if wechat_pay.nil?
         return @wechat_pay = nil
       end
-      @wechat_pay = wechat_pay
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _wechat_pay = wechat_pay.not_nil!
+      if _wechat_pay.is_a?(OpenApi::Validatable)
+        _wechat_pay.validate
+      end
+      @wechat_pay = _wechat_pay
     end
 
     # Generates #hash and #== methods from all fields

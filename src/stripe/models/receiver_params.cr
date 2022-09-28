@@ -16,6 +16,7 @@ module Stripe
   class ReceiverParams
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -36,7 +37,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REFUND_ATTRIBUTES_METHOD.error_message) unless ENUM_VALIDATOR_FOR_REFUND_ATTRIBUTES_METHOD.valid?(@refund_attributes_method)
@@ -46,7 +47,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_REFUND_ATTRIBUTES_METHOD.valid?(@refund_attributes_method)
 
       true
@@ -60,13 +61,7 @@ module Stripe
       end
       _refund_attributes_method = refund_attributes_method.not_nil!
       ENUM_VALIDATOR_FOR_REFUND_ATTRIBUTES_METHOD.valid!(_refund_attributes_method)
-      @refund_attributes_method = refund_attributes_method
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @refund_attributes_method = _refund_attributes_method
     end
 
     # Generates #hash and #== methods from all fields

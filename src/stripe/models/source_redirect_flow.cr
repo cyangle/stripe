@@ -16,6 +16,7 @@ module Stripe
   class SourceRedirectFlow
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -56,7 +57,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"return_url\" is required and cannot be null") if @return_url.nil?
       if _return_url = @return_url
@@ -87,7 +88,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @return_url.nil?
       if _return_url = @return_url
         return false if _return_url.to_s.size > 5000
@@ -118,7 +119,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
       end
 
-      @return_url = return_url
+      @return_url = _return_url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -132,7 +133,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
       end
 
-      @status = status
+      @status = _status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -146,7 +147,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 2048.")
       end
 
-      @url = url
+      @url = _url
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -160,13 +161,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"failure_reason\", the character length must be smaller than or equal to 5000.")
       end
 
-      @failure_reason = failure_reason
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @failure_reason = _failure_reason
     end
 
     # Generates #hash and #== methods from all fields

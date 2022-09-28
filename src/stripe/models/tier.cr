@@ -15,6 +15,7 @@ module Stripe
   class Tier
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -52,18 +53,27 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"up_to\" is required and cannot be null") if @up_to.nil?
-      # This is a model up_to : Stripe::TierUpTo?
+      if _up_to = @up_to
+        if _up_to.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_up_to.list_invalid_properties_for("up_to"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @up_to.nil?
+      if _up_to = @up_to
+        if _up_to.is_a?(OpenApi::Validatable)
+          return false unless _up_to.valid?
+        end
+      end
 
       true
     end
@@ -74,7 +84,11 @@ module Stripe
       if up_to.nil?
         raise ArgumentError.new("\"up_to\" is required and cannot be null")
       end
-      @up_to = up_to
+      _up_to = up_to.not_nil!
+      if _up_to.is_a?(OpenApi::Validatable)
+        _up_to.validate
+      end
+      @up_to = _up_to
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -83,7 +97,8 @@ module Stripe
       if flat_amount.nil?
         return @flat_amount = nil
       end
-      @flat_amount = flat_amount
+      _flat_amount = flat_amount.not_nil!
+      @flat_amount = _flat_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -92,7 +107,8 @@ module Stripe
       if flat_amount_decimal.nil?
         return @flat_amount_decimal = nil
       end
-      @flat_amount_decimal = flat_amount_decimal
+      _flat_amount_decimal = flat_amount_decimal.not_nil!
+      @flat_amount_decimal = _flat_amount_decimal
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -101,7 +117,8 @@ module Stripe
       if unit_amount.nil?
         return @unit_amount = nil
       end
-      @unit_amount = unit_amount
+      _unit_amount = unit_amount.not_nil!
+      @unit_amount = _unit_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -110,13 +127,8 @@ module Stripe
       if unit_amount_decimal.nil?
         return @unit_amount_decimal = nil
       end
-      @unit_amount_decimal = unit_amount_decimal
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _unit_amount_decimal = unit_amount_decimal.not_nil!
+      @unit_amount_decimal = _unit_amount_decimal
     end
 
     # Generates #hash and #== methods from all fields

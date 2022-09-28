@@ -15,6 +15,7 @@ module Stripe
   class PostTestHelpersTestClocksTestClockAdvanceRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -42,7 +43,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"frozen_time\" is required and cannot be null") if @frozen_time.nil?
 
@@ -51,7 +52,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @frozen_time.nil?
 
       true
@@ -63,7 +64,8 @@ module Stripe
       if frozen_time.nil?
         raise ArgumentError.new("\"frozen_time\" is required and cannot be null")
       end
-      @frozen_time = frozen_time
+      _frozen_time = frozen_time.not_nil!
+      @frozen_time = _frozen_time
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,13 +74,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Generates #hash and #== methods from all fields

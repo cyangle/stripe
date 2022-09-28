@@ -16,6 +16,7 @@ module Stripe
   class QuotesResourceFromQuote
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -39,20 +40,31 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"is_revision\" is required and cannot be null") if @is_revision.nil?
+
       invalid_properties.push("\"quote\" is required and cannot be null") if @quote.nil?
-      # This is a model quote : Stripe::QuotesResourceFromQuoteQuote?
+      if _quote = @quote
+        if _quote.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_quote.list_invalid_properties_for("quote"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @is_revision.nil?
+
       return false if @quote.nil?
+      if _quote = @quote
+        if _quote.is_a?(OpenApi::Validatable)
+          return false unless _quote.valid?
+        end
+      end
 
       true
     end
@@ -63,7 +75,8 @@ module Stripe
       if is_revision.nil?
         raise ArgumentError.new("\"is_revision\" is required and cannot be null")
       end
-      @is_revision = is_revision
+      _is_revision = is_revision.not_nil!
+      @is_revision = _is_revision
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -72,13 +85,11 @@ module Stripe
       if quote.nil?
         raise ArgumentError.new("\"quote\" is required and cannot be null")
       end
-      @quote = quote
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _quote = quote.not_nil!
+      if _quote.is_a?(OpenApi::Validatable)
+        _quote.validate
+      end
+      @quote = _quote
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class SourceTypeAchCreditTransfer
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -85,7 +86,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties
@@ -93,7 +94,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       true
     end
 
@@ -103,7 +104,8 @@ module Stripe
       if account_number.nil?
         return @account_number = nil
       end
-      @account_number = account_number
+      _account_number = account_number.not_nil!
+      @account_number = _account_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -112,7 +114,8 @@ module Stripe
       if bank_name.nil?
         return @bank_name = nil
       end
-      @bank_name = bank_name
+      _bank_name = bank_name.not_nil!
+      @bank_name = _bank_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -121,7 +124,8 @@ module Stripe
       if fingerprint.nil?
         return @fingerprint = nil
       end
-      @fingerprint = fingerprint
+      _fingerprint = fingerprint.not_nil!
+      @fingerprint = _fingerprint
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -130,7 +134,8 @@ module Stripe
       if refund_account_holder_name.nil?
         return @refund_account_holder_name = nil
       end
-      @refund_account_holder_name = refund_account_holder_name
+      _refund_account_holder_name = refund_account_holder_name.not_nil!
+      @refund_account_holder_name = _refund_account_holder_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -139,7 +144,8 @@ module Stripe
       if refund_account_holder_type.nil?
         return @refund_account_holder_type = nil
       end
-      @refund_account_holder_type = refund_account_holder_type
+      _refund_account_holder_type = refund_account_holder_type.not_nil!
+      @refund_account_holder_type = _refund_account_holder_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -148,7 +154,8 @@ module Stripe
       if refund_routing_number.nil?
         return @refund_routing_number = nil
       end
-      @refund_routing_number = refund_routing_number
+      _refund_routing_number = refund_routing_number.not_nil!
+      @refund_routing_number = _refund_routing_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -157,7 +164,8 @@ module Stripe
       if routing_number.nil?
         return @routing_number = nil
       end
-      @routing_number = routing_number
+      _routing_number = routing_number.not_nil!
+      @routing_number = _routing_number
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -166,13 +174,8 @@ module Stripe
       if swift_code.nil?
         return @swift_code = nil
       end
-      @swift_code = swift_code
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _swift_code = swift_code.not_nil!
+      @swift_code = _swift_code
     end
 
     # Generates #hash and #== methods from all fields

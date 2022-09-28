@@ -16,6 +16,7 @@ module Stripe
   class PaymentIntentTypeSpecificPaymentMethodOptionsClient
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -55,11 +56,15 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
-      # This is a model installments : Stripe::PaymentFlowsInstallmentOptions?
+      if _installments = @installments
+        if _installments.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_installments.list_invalid_properties_for("installments"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
 
@@ -70,8 +75,13 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
+      if _installments = @installments
+        if _installments.is_a?(OpenApi::Validatable)
+          return false unless _installments.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
       return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
 
@@ -86,7 +96,7 @@ module Stripe
       end
       _capture_method = capture_method.not_nil!
       ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid!(_capture_method)
-      @capture_method = capture_method
+      @capture_method = _capture_method
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -95,7 +105,11 @@ module Stripe
       if installments.nil?
         return @installments = nil
       end
-      @installments = installments
+      _installments = installments.not_nil!
+      if _installments.is_a?(OpenApi::Validatable)
+        _installments.validate
+      end
+      @installments = _installments
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -106,7 +120,7 @@ module Stripe
       end
       _setup_future_usage = setup_future_usage.not_nil!
       ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(_setup_future_usage)
-      @setup_future_usage = setup_future_usage
+      @setup_future_usage = _setup_future_usage
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -117,13 +131,7 @@ module Stripe
       end
       _verification_method = verification_method.not_nil!
       ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid!(_verification_method)
-      @verification_method = verification_method
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @verification_method = _verification_method
     end
 
     # Generates #hash and #== methods from all fields

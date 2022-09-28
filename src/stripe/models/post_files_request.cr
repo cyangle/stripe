@@ -15,6 +15,7 @@ module Stripe
   class PostFilesRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -53,21 +54,33 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"file\" is required and cannot be null") if @file.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PURPOSE.error_message) unless ENUM_VALIDATOR_FOR_PURPOSE.valid?(@purpose, false)
-      # This is a model file_link_data : Stripe::FileLinkCreationParams?
+
+      if _file_link_data = @file_link_data
+        if _file_link_data.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_file_link_data.list_invalid_properties_for("file_link_data"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @file.nil?
+
       return false unless ENUM_VALIDATOR_FOR_PURPOSE.valid?(@purpose, false)
+
+      if _file_link_data = @file_link_data
+        if _file_link_data.is_a?(OpenApi::Validatable)
+          return false unless _file_link_data.valid?
+        end
+      end
 
       true
     end
@@ -78,7 +91,8 @@ module Stripe
       if file.nil?
         raise ArgumentError.new("\"file\" is required and cannot be null")
       end
-      @file = file
+      _file = file.not_nil!
+      @file = _file
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -89,7 +103,7 @@ module Stripe
       end
       _purpose = purpose.not_nil!
       ENUM_VALIDATOR_FOR_PURPOSE.valid!(_purpose)
-      @purpose = purpose
+      @purpose = _purpose
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -98,7 +112,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -107,13 +122,11 @@ module Stripe
       if file_link_data.nil?
         return @file_link_data = nil
       end
-      @file_link_data = file_link_data
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _file_link_data = file_link_data.not_nil!
+      if _file_link_data.is_a?(OpenApi::Validatable)
+        _file_link_data.validate
+      end
+      @file_link_data = _file_link_data
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class Rule
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -45,7 +46,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"action\" is required and cannot be null") if @action.nil?
       if _action = @action
@@ -71,7 +72,7 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @action.nil?
       if _action = @action
         return false if _action.to_s.size > 5000
@@ -99,7 +100,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"action\", the character length must be smaller than or equal to 5000.")
       end
 
-      @action = action
+      @action = _action
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,7 +114,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
       end
 
-      @id = id
+      @id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -127,13 +128,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"predicate\", the character length must be smaller than or equal to 5000.")
       end
 
-      @predicate = predicate
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @predicate = _predicate
     end
 
     # Generates #hash and #== methods from all fields

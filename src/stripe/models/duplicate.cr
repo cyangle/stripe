@@ -15,6 +15,7 @@ module Stripe
   class Duplicate
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -53,12 +54,28 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model additional_documentation : Stripe::BusinessProfileSpecsSupportUrl?
-      # This is a model card_statement : Stripe::BusinessProfileSpecsSupportUrl?
-      # This is a model cash_receipt : Stripe::BusinessProfileSpecsSupportUrl?
-      # This is a model check_image : Stripe::BusinessProfileSpecsSupportUrl?
+      if _additional_documentation = @additional_documentation
+        if _additional_documentation.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation"))
+        end
+      end
+      if _card_statement = @card_statement
+        if _card_statement.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_card_statement.list_invalid_properties_for("card_statement"))
+        end
+      end
+      if _cash_receipt = @cash_receipt
+        if _cash_receipt.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_cash_receipt.list_invalid_properties_for("cash_receipt"))
+        end
+      end
+      if _check_image = @check_image
+        if _check_image.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_check_image.list_invalid_properties_for("check_image"))
+        end
+      end
       if _explanation = @explanation
         if _explanation.to_s.size > 1500
           invalid_properties.push("invalid value for \"explanation\", the character length must be smaller than or equal to 1500.")
@@ -75,7 +92,27 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _additional_documentation = @additional_documentation
+        if _additional_documentation.is_a?(OpenApi::Validatable)
+          return false unless _additional_documentation.valid?
+        end
+      end
+      if _card_statement = @card_statement
+        if _card_statement.is_a?(OpenApi::Validatable)
+          return false unless _card_statement.valid?
+        end
+      end
+      if _cash_receipt = @cash_receipt
+        if _cash_receipt.is_a?(OpenApi::Validatable)
+          return false unless _cash_receipt.valid?
+        end
+      end
+      if _check_image = @check_image
+        if _check_image.is_a?(OpenApi::Validatable)
+          return false unless _check_image.valid?
+        end
+      end
       if _explanation = @explanation
         return false if _explanation.to_s.size > 1500
       end
@@ -92,7 +129,11 @@ module Stripe
       if additional_documentation.nil?
         return @additional_documentation = nil
       end
-      @additional_documentation = additional_documentation
+      _additional_documentation = additional_documentation.not_nil!
+      if _additional_documentation.is_a?(OpenApi::Validatable)
+        _additional_documentation.validate
+      end
+      @additional_documentation = _additional_documentation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -101,7 +142,11 @@ module Stripe
       if card_statement.nil?
         return @card_statement = nil
       end
-      @card_statement = card_statement
+      _card_statement = card_statement.not_nil!
+      if _card_statement.is_a?(OpenApi::Validatable)
+        _card_statement.validate
+      end
+      @card_statement = _card_statement
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -110,7 +155,11 @@ module Stripe
       if cash_receipt.nil?
         return @cash_receipt = nil
       end
-      @cash_receipt = cash_receipt
+      _cash_receipt = cash_receipt.not_nil!
+      if _cash_receipt.is_a?(OpenApi::Validatable)
+        _cash_receipt.validate
+      end
+      @cash_receipt = _cash_receipt
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -119,7 +168,11 @@ module Stripe
       if check_image.nil?
         return @check_image = nil
       end
-      @check_image = check_image
+      _check_image = check_image.not_nil!
+      if _check_image.is_a?(OpenApi::Validatable)
+        _check_image.validate
+      end
+      @check_image = _check_image
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -133,7 +186,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 1500.")
       end
 
-      @explanation = explanation
+      @explanation = _explanation
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -147,13 +200,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"original_transaction\", the character length must be smaller than or equal to 5000.")
       end
 
-      @original_transaction = original_transaction
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @original_transaction = _original_transaction
     end
 
     # Generates #hash and #== methods from all fields

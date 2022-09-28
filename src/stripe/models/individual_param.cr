@@ -16,6 +16,7 @@ module Stripe
   class IndividualParam
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -49,21 +50,43 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"first_name\" is required and cannot be null") if @first_name.nil?
+
       invalid_properties.push("\"last_name\" is required and cannot be null") if @last_name.nil?
-      # This is a model dob : Stripe::DateOfBirthSpecs?
-      # This is a model verification : Stripe::PersonVerificationParam?
+
+      if _dob = @dob
+        if _dob.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_dob.list_invalid_properties_for("dob"))
+        end
+      end
+      if _verification = @verification
+        if _verification.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_verification.list_invalid_properties_for("verification"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @first_name.nil?
+
       return false if @last_name.nil?
+
+      if _dob = @dob
+        if _dob.is_a?(OpenApi::Validatable)
+          return false unless _dob.valid?
+        end
+      end
+      if _verification = @verification
+        if _verification.is_a?(OpenApi::Validatable)
+          return false unless _verification.valid?
+        end
+      end
 
       true
     end
@@ -74,7 +97,8 @@ module Stripe
       if first_name.nil?
         raise ArgumentError.new("\"first_name\" is required and cannot be null")
       end
-      @first_name = first_name
+      _first_name = first_name.not_nil!
+      @first_name = _first_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -83,7 +107,8 @@ module Stripe
       if last_name.nil?
         raise ArgumentError.new("\"last_name\" is required and cannot be null")
       end
-      @last_name = last_name
+      _last_name = last_name.not_nil!
+      @last_name = _last_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -92,7 +117,11 @@ module Stripe
       if dob.nil?
         return @dob = nil
       end
-      @dob = dob
+      _dob = dob.not_nil!
+      if _dob.is_a?(OpenApi::Validatable)
+        _dob.validate
+      end
+      @dob = _dob
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -101,13 +130,11 @@ module Stripe
       if verification.nil?
         return @verification = nil
       end
-      @verification = verification
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _verification = verification.not_nil!
+      if _verification.is_a?(OpenApi::Validatable)
+        _verification.validate
+      end
+      @verification = _verification
     end
 
     # Generates #hash and #== methods from all fields

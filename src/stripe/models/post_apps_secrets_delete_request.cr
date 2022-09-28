@@ -15,6 +15,7 @@ module Stripe
   class PostAppsSecretsDeleteRequest
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Required properties
@@ -46,7 +47,7 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
@@ -55,19 +56,28 @@ module Stripe
         end
       end
       invalid_properties.push("\"scope\" is required and cannot be null") if @scope.nil?
-      # This is a model scope : Stripe::ScopeParam1?
+      if _scope = @scope
+        if _scope.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_scope.list_invalid_properties_for("scope"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
       return false if @name.nil?
       if _name = @name
         return false if _name.to_s.size > 5000
       end
       return false if @scope.nil?
+      if _scope = @scope
+        if _scope.is_a?(OpenApi::Validatable)
+          return false unless _scope.valid?
+        end
+      end
 
       true
     end
@@ -83,7 +93,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -92,7 +102,11 @@ module Stripe
       if scope.nil?
         raise ArgumentError.new("\"scope\" is required and cannot be null")
       end
-      @scope = scope
+      _scope = scope.not_nil!
+      if _scope.is_a?(OpenApi::Validatable)
+        _scope.validate
+      end
+      @scope = _scope
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -101,13 +115,8 @@ module Stripe
       if expand.nil?
         return @expand = nil
       end
-      @expand = expand
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _expand = expand.not_nil!
+      @expand = _expand
     end
 
     # Generates #hash and #== methods from all fields

@@ -15,6 +15,7 @@ module Stripe
   class PostPricesRequestCurrencyOptionsValue
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -51,20 +52,46 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model custom_unit_amount : Stripe::CustomUnitAmount1?
+      if _custom_unit_amount = @custom_unit_amount
+        if _custom_unit_amount.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_custom_unit_amount.list_invalid_properties_for("custom_unit_amount"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
-      # Container tiers array has values of Stripe::Tier
+      if _tiers = @tiers
+        if _tiers.is_a?(Array)
+          _tiers.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              invalid_properties.concat(item.list_invalid_properties_for("tiers"))
+            end
+          end
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _custom_unit_amount = @custom_unit_amount
+        if _custom_unit_amount.is_a?(OpenApi::Validatable)
+          return false unless _custom_unit_amount.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
+      if _tiers = @tiers
+        if _tiers.is_a?(Array)
+          _tiers.each do |item|
+            if item.is_a?(OpenApi::Validatable)
+              return false unless item.valid?
+            end
+          end
+        end
+      end
 
       true
     end
@@ -75,7 +102,11 @@ module Stripe
       if custom_unit_amount.nil?
         return @custom_unit_amount = nil
       end
-      @custom_unit_amount = custom_unit_amount
+      _custom_unit_amount = custom_unit_amount.not_nil!
+      if _custom_unit_amount.is_a?(OpenApi::Validatable)
+        _custom_unit_amount.validate
+      end
+      @custom_unit_amount = _custom_unit_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -86,7 +117,7 @@ module Stripe
       end
       _tax_behavior = tax_behavior.not_nil!
       ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid!(_tax_behavior)
-      @tax_behavior = tax_behavior
+      @tax_behavior = _tax_behavior
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -95,7 +126,15 @@ module Stripe
       if tiers.nil?
         return @tiers = nil
       end
-      @tiers = tiers
+      _tiers = tiers.not_nil!
+      if _tiers.is_a?(Array)
+        _tiers.each do |item|
+          if item.is_a?(OpenApi::Validatable)
+            item.validate
+          end
+        end
+      end
+      @tiers = _tiers
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -104,7 +143,8 @@ module Stripe
       if unit_amount.nil?
         return @unit_amount = nil
       end
-      @unit_amount = unit_amount
+      _unit_amount = unit_amount.not_nil!
+      @unit_amount = _unit_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -113,13 +153,8 @@ module Stripe
       if unit_amount_decimal.nil?
         return @unit_amount_decimal = nil
       end
-      @unit_amount_decimal = unit_amount_decimal
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _unit_amount_decimal = unit_amount_decimal.not_nil!
+      @unit_amount_decimal = _unit_amount_decimal
     end
 
     # Generates #hash and #== methods from all fields

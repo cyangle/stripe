@@ -16,6 +16,7 @@ module Stripe
   class PaymentSettings
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -44,10 +45,18 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model payment_method_options : Stripe::PaymentMethodOptions?
-      # This is a model payment_method_types : Stripe::PaymentSettingsPaymentMethodTypes?
+      if _payment_method_options = @payment_method_options
+        if _payment_method_options.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options"))
+        end
+      end
+      if _payment_method_types = @payment_method_types
+        if _payment_method_types.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_payment_method_types.list_invalid_properties_for("payment_method_types"))
+        end
+      end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD.error_message) unless ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD.valid?(@save_default_payment_method)
 
@@ -56,7 +65,17 @@ module Stripe
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _payment_method_options = @payment_method_options
+        if _payment_method_options.is_a?(OpenApi::Validatable)
+          return false unless _payment_method_options.valid?
+        end
+      end
+      if _payment_method_types = @payment_method_types
+        if _payment_method_types.is_a?(OpenApi::Validatable)
+          return false unless _payment_method_types.valid?
+        end
+      end
       return false unless ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD.valid?(@save_default_payment_method)
 
       true
@@ -68,7 +87,11 @@ module Stripe
       if payment_method_options.nil?
         return @payment_method_options = nil
       end
-      @payment_method_options = payment_method_options
+      _payment_method_options = payment_method_options.not_nil!
+      if _payment_method_options.is_a?(OpenApi::Validatable)
+        _payment_method_options.validate
+      end
+      @payment_method_options = _payment_method_options
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -77,7 +100,11 @@ module Stripe
       if payment_method_types.nil?
         return @payment_method_types = nil
       end
-      @payment_method_types = payment_method_types
+      _payment_method_types = payment_method_types.not_nil!
+      if _payment_method_types.is_a?(OpenApi::Validatable)
+        _payment_method_types.validate
+      end
+      @payment_method_types = _payment_method_types
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -88,13 +115,7 @@ module Stripe
       end
       _save_default_payment_method = save_default_payment_method.not_nil!
       ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD.valid!(_save_default_payment_method)
-      @save_default_payment_method = save_default_payment_method
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      @save_default_payment_method = _save_default_payment_method
     end
 
     # Generates #hash and #== methods from all fields

@@ -16,6 +16,7 @@ module Stripe
   class PaymentMethodDetailsCardWalletMasterpass
     include JSON::Serializable
     include JSON::Serializable::Unmapped
+    include OpenApi::Validatable
     include OpenApi::Json
 
     # Optional properties
@@ -60,9 +61,13 @@ module Stripe
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
-    def list_invalid_properties
+    def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
-      # This is a model billing_address : Stripe::PaymentMethodCardWalletMasterpassBillingAddress?
+      if _billing_address = @billing_address
+        if _billing_address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_billing_address.list_invalid_properties_for("billing_address"))
+        end
+      end
       if _email = @email
         if _email.to_s.size > 5000
           invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
@@ -73,19 +78,33 @@ module Stripe
           invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
         end
       end
-      # This is a model shipping_address : Stripe::PaymentMethodCardWalletMasterpassShippingAddress?
+      if _shipping_address = @shipping_address
+        if _shipping_address.is_a?(OpenApi::Validatable)
+          invalid_properties.concat(_shipping_address.list_invalid_properties_for("shipping_address"))
+        end
+      end
 
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
-    def valid?
+    def valid? : Bool
+      if _billing_address = @billing_address
+        if _billing_address.is_a?(OpenApi::Validatable)
+          return false unless _billing_address.valid?
+        end
+      end
       if _email = @email
         return false if _email.to_s.size > 5000
       end
       if _name = @name
         return false if _name.to_s.size > 5000
+      end
+      if _shipping_address = @shipping_address
+        if _shipping_address.is_a?(OpenApi::Validatable)
+          return false unless _shipping_address.valid?
+        end
       end
 
       true
@@ -97,7 +116,11 @@ module Stripe
       if billing_address.nil?
         return @billing_address = nil
       end
-      @billing_address = billing_address
+      _billing_address = billing_address.not_nil!
+      if _billing_address.is_a?(OpenApi::Validatable)
+        _billing_address.validate
+      end
+      @billing_address = _billing_address
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -111,7 +134,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
       end
 
-      @email = email
+      @email = _email
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -125,7 +148,7 @@ module Stripe
         raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
       end
 
-      @name = name
+      @name = _name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -134,13 +157,11 @@ module Stripe
       if shipping_address.nil?
         return @shipping_address = nil
       end
-      @shipping_address = shipping_address
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
+      _shipping_address = shipping_address.not_nil!
+      if _shipping_address.is_a?(OpenApi::Validatable)
+        _shipping_address.validate
+      end
+      @shipping_address = _shipping_address
     end
 
     # Generates #hash and #== methods from all fields
