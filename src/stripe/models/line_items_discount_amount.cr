@@ -46,9 +46,7 @@ module Stripe
 
       invalid_properties.push("\"discount\" is required and cannot be null") if @discount.nil?
       if _discount = @discount
-        if _discount.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_discount.list_invalid_properties_for("discount"))
-        end
+        invalid_properties.concat(_discount.list_invalid_properties_for("discount")) if _discount.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -61,9 +59,7 @@ module Stripe
 
       return false if @discount.nil?
       if _discount = @discount
-        if _discount.is_a?(OpenApi::Validatable)
-          return false unless _discount.valid?
-        end
+        return false if _discount.is_a?(OpenApi::Validatable) && !_discount.valid?
       end
 
       true
@@ -86,9 +82,7 @@ module Stripe
         raise ArgumentError.new("\"discount\" is required and cannot be null")
       end
       _discount = discount.not_nil!
-      if _discount.is_a?(OpenApi::Validatable)
-        _discount.validate
-      end
+      _discount.validate if _discount.is_a?(OpenApi::Validatable)
       @discount = _discount
     end
 

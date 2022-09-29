@@ -67,24 +67,16 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _description = @description
-        if _description.to_s.size > 500
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 500.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 500)
+          invalid_properties.push(max_length_error)
         end
       end
       if _items = @items
-        if _items.is_a?(Array)
-          _items.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("items"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "items", array: _items)) if _items.is_a?(Array)
       end
 
       if _transfer_data = @transfer_data
-        if _transfer_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data"))
-        end
+        invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -97,19 +89,11 @@ module Stripe
         return false if _description.to_s.size > 500
       end
       if _items = @items
-        if _items.is_a?(Array)
-          _items.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _items)
       end
 
       if _transfer_data = @transfer_data
-        if _transfer_data.is_a?(OpenApi::Validatable)
-          return false unless _transfer_data.valid?
-        end
+        return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 
       true
@@ -142,8 +126,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 500
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 500.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 500)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -156,13 +140,7 @@ module Stripe
         return @items = nil
       end
       _items = items.not_nil!
-      if _items.is_a?(Array)
-        _items.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _items) if _items.is_a?(Array)
       @items = _items
     end
 
@@ -183,9 +161,7 @@ module Stripe
         return @transfer_data = nil
       end
       _transfer_data = transfer_data.not_nil!
-      if _transfer_data.is_a?(OpenApi::Validatable)
-        _transfer_data.validate
-      end
+      _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
       @transfer_data = _transfer_data
     end
 

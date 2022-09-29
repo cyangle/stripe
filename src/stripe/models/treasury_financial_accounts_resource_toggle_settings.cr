@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["active", "pending", "restricted"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["active", "pending", "restricted"])
 
     # Additional details; includes at least one entry when the status is not `active`.
     @[JSON::Field(key: "status_details", type: Array(Stripe::TreasuryFinancialAccountsResourceTogglesSettingStatusDetails)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -55,13 +55,7 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       invalid_properties.push("\"status_details\" is required and cannot be null") if @status_details.nil?
       if _status_details = @status_details
-        if _status_details.is_a?(Array)
-          _status_details.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("status_details"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "status_details", array: _status_details)) if _status_details.is_a?(Array)
       end
 
       invalid_properties
@@ -75,13 +69,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false if @status_details.nil?
       if _status_details = @status_details
-        if _status_details.is_a?(Array)
-          _status_details.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _status_details.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _status_details)
       end
 
       true
@@ -115,13 +103,7 @@ module Stripe
         raise ArgumentError.new("\"status_details\" is required and cannot be null")
       end
       _status_details = status_details.not_nil!
-      if _status_details.is_a?(Array)
-        _status_details.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _status_details) if _status_details.is_a?(Array)
       @status_details = _status_details
     end
 

@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? code_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_CODE = EnumValidator.new("code", "String", ["abandoned", "consent_declined", "country_not_supported", "device_not_supported", "document_expired", "document_type_not_supported", "document_unverified_other", "id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other", "selfie_document_missing_photo", "selfie_face_mismatch", "selfie_manipulated", "selfie_unverified_other", "under_supported_age"])
+    ENUM_VALIDATOR_FOR_CODE = OpenApi::EnumValidator.new("code", "String", ["abandoned", "consent_declined", "country_not_supported", "device_not_supported", "document_expired", "document_type_not_supported", "document_unverified_other", "id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other", "selfie_document_missing_photo", "selfie_face_mismatch", "selfie_manipulated", "selfie_unverified_other", "under_supported_age"])
 
     # A message that explains the reason for verification or user-session failure.
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: reason.nil? && !reason_present?)]
@@ -54,8 +54,8 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code)
       if _reason = @reason
-        if _reason.to_s.size > 5000
-          invalid_properties.push("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -91,8 +91,8 @@ module Stripe
         return @reason = nil
       end
       _reason = reason.not_nil!
-      if _reason.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @reason = _reason

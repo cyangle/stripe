@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? disabled_reason_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_DISABLED_REASON = EnumValidator.new("disabled_reason", "String", ["listed", "rejected.listed", "under_review"])
+    ENUM_VALIDATOR_FOR_DISABLED_REASON = OpenApi::EnumValidator.new("disabled_reason", "String", ["listed", "rejected.listed", "under_review"])
 
     # Array of fields that need to be collected in order to verify and re-enable the cardholder.
     @[JSON::Field(key: "past_due", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: past_due.nil? && !past_due_present?)]
@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? past_due_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PAST_DUE = EnumValidator.new("past_due", "Array(String)", ["company.tax_id", "individual.dob.day", "individual.dob.month", "individual.dob.year", "individual.first_name", "individual.last_name", "individual.verification.document"])
+    ENUM_VALIDATOR_FOR_PAST_DUE = OpenApi::EnumValidator.new("past_due", "Array(String)", ["company.tax_id", "individual.dob.day", "individual.dob.month", "individual.dob.year", "individual.first_name", "individual.last_name", "individual.verification.document"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

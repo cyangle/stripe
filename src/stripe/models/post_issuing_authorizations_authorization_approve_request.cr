@@ -48,9 +48,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -60,9 +58,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
       true
@@ -95,9 +91,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 

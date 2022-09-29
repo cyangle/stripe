@@ -56,20 +56,16 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
-        if __type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _redirect_to_url = @redirect_to_url
-        if _redirect_to_url.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_redirect_to_url.list_invalid_properties_for("redirect_to_url"))
-        end
+        invalid_properties.concat(_redirect_to_url.list_invalid_properties_for("redirect_to_url")) if _redirect_to_url.is_a?(OpenApi::Validatable)
       end
 
       if _verify_with_microdeposits = @verify_with_microdeposits
-        if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_verify_with_microdeposits.list_invalid_properties_for("verify_with_microdeposits"))
-        end
+        invalid_properties.concat(_verify_with_microdeposits.list_invalid_properties_for("verify_with_microdeposits")) if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -83,15 +79,11 @@ module Stripe
         return false if __type.to_s.size > 5000
       end
       if _redirect_to_url = @redirect_to_url
-        if _redirect_to_url.is_a?(OpenApi::Validatable)
-          return false unless _redirect_to_url.valid?
-        end
+        return false if _redirect_to_url.is_a?(OpenApi::Validatable) && !_redirect_to_url.valid?
       end
 
       if _verify_with_microdeposits = @verify_with_microdeposits
-        if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
-          return false unless _verify_with_microdeposits.valid?
-        end
+        return false if _verify_with_microdeposits.is_a?(OpenApi::Validatable) && !_verify_with_microdeposits.valid?
       end
 
       true
@@ -104,8 +96,8 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if __type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_type = __type
@@ -118,9 +110,7 @@ module Stripe
         return @redirect_to_url = nil
       end
       _redirect_to_url = redirect_to_url.not_nil!
-      if _redirect_to_url.is_a?(OpenApi::Validatable)
-        _redirect_to_url.validate
-      end
+      _redirect_to_url.validate if _redirect_to_url.is_a?(OpenApi::Validatable)
       @redirect_to_url = _redirect_to_url
     end
 
@@ -141,9 +131,7 @@ module Stripe
         return @verify_with_microdeposits = nil
       end
       _verify_with_microdeposits = verify_with_microdeposits.not_nil!
-      if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
-        _verify_with_microdeposits.validate
-      end
+      _verify_with_microdeposits.validate if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
       @verify_with_microdeposits = _verify_with_microdeposits
     end
 

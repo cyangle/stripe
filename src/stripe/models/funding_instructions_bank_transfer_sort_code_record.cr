@@ -50,20 +50,20 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"account_holder_name\" is required and cannot be null") if @account_holder_name.nil?
       if _account_holder_name = @account_holder_name
-        if _account_holder_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"account_number\" is required and cannot be null") if @account_number.nil?
       if _account_number = @account_number
-        if _account_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"sort_code\" is required and cannot be null") if @sort_code.nil?
       if _sort_code = @sort_code
-        if _sort_code.to_s.size > 5000
-          invalid_properties.push("invalid value for \"sort_code\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -96,8 +96,8 @@ module Stripe
         raise ArgumentError.new("\"account_holder_name\" is required and cannot be null")
       end
       _account_holder_name = account_holder_name.not_nil!
-      if _account_holder_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account_holder_name = _account_holder_name
@@ -110,8 +110,8 @@ module Stripe
         raise ArgumentError.new("\"account_number\" is required and cannot be null")
       end
       _account_number = account_number.not_nil!
-      if _account_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account_number = _account_number
@@ -124,8 +124,8 @@ module Stripe
         raise ArgumentError.new("\"sort_code\" is required and cannot be null")
       end
       _sort_code = sort_code.not_nil!
-      if _sort_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"sort_code\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @sort_code = _sort_code

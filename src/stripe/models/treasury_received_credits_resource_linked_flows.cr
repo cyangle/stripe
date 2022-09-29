@@ -81,33 +81,31 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _credit_reversal = @credit_reversal
-        if _credit_reversal.to_s.size > 5000
-          invalid_properties.push("invalid value for \"credit_reversal\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("credit_reversal", _credit_reversal.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _issuing_authorization = @issuing_authorization
-        if _issuing_authorization.to_s.size > 5000
-          invalid_properties.push("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_authorization", _issuing_authorization.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _issuing_transaction = @issuing_transaction
-        if _issuing_transaction.to_s.size > 5000
-          invalid_properties.push("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_transaction", _issuing_transaction.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _source_flow = @source_flow
-        if _source_flow.to_s.size > 5000
-          invalid_properties.push("invalid value for \"source_flow\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_flow", _source_flow.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _source_flow_details = @source_flow_details
-        if _source_flow_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_source_flow_details.list_invalid_properties_for("source_flow_details"))
-        end
+        invalid_properties.concat(_source_flow_details.list_invalid_properties_for("source_flow_details")) if _source_flow_details.is_a?(OpenApi::Validatable)
       end
       if _source_flow_type = @source_flow_type
-        if _source_flow_type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"source_flow_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_flow_type", _source_flow_type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -130,9 +128,7 @@ module Stripe
         return false if _source_flow.to_s.size > 5000
       end
       if _source_flow_details = @source_flow_details
-        if _source_flow_details.is_a?(OpenApi::Validatable)
-          return false unless _source_flow_details.valid?
-        end
+        return false if _source_flow_details.is_a?(OpenApi::Validatable) && !_source_flow_details.valid?
       end
       if _source_flow_type = @source_flow_type
         return false if _source_flow_type.to_s.size > 5000
@@ -148,8 +144,8 @@ module Stripe
         return @credit_reversal = nil
       end
       _credit_reversal = credit_reversal.not_nil!
-      if _credit_reversal.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"credit_reversal\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("credit_reversal", _credit_reversal.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @credit_reversal = _credit_reversal
@@ -162,8 +158,8 @@ module Stripe
         return @issuing_authorization = nil
       end
       _issuing_authorization = issuing_authorization.not_nil!
-      if _issuing_authorization.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"issuing_authorization\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_authorization", _issuing_authorization.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @issuing_authorization = _issuing_authorization
@@ -176,8 +172,8 @@ module Stripe
         return @issuing_transaction = nil
       end
       _issuing_transaction = issuing_transaction.not_nil!
-      if _issuing_transaction.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"issuing_transaction\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_transaction", _issuing_transaction.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @issuing_transaction = _issuing_transaction
@@ -190,8 +186,8 @@ module Stripe
         return @source_flow = nil
       end
       _source_flow = source_flow.not_nil!
-      if _source_flow.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"source_flow\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_flow", _source_flow.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @source_flow = _source_flow
@@ -204,9 +200,7 @@ module Stripe
         return @source_flow_details = nil
       end
       _source_flow_details = source_flow_details.not_nil!
-      if _source_flow_details.is_a?(OpenApi::Validatable)
-        _source_flow_details.validate
-      end
+      _source_flow_details.validate if _source_flow_details.is_a?(OpenApi::Validatable)
       @source_flow_details = _source_flow_details
     end
 
@@ -217,8 +211,8 @@ module Stripe
         return @source_flow_type = nil
       end
       _source_flow_type = source_flow_type.not_nil!
-      if _source_flow_type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"source_flow_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_flow_type", _source_flow_type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @source_flow_type = _source_flow_type

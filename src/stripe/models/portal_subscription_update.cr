@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "default_allowed_updates", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter default_allowed_updates : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_DEFAULT_ALLOWED_UPDATES = EnumValidator.new("default_allowed_updates", "Array(String)", ["price", "promotion_code", "quantity"])
+    ENUM_VALIDATOR_FOR_DEFAULT_ALLOWED_UPDATES = OpenApi::EnumValidator.new("default_allowed_updates", "Array(String)", ["price", "promotion_code", "quantity"])
 
     # Whether the feature is enabled.
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
+    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = OpenApi::EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
 
     # Optional properties
 
@@ -69,13 +69,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior, false)
       if _products = @products
-        if _products.is_a?(Array)
-          _products.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("products"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "products", array: _products)) if _products.is_a?(Array)
       end
 
       invalid_properties
@@ -89,13 +83,7 @@ module Stripe
 
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior, false)
       if _products = @products
-        if _products.is_a?(Array)
-          _products.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _products.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _products)
       end
 
       true
@@ -140,13 +128,7 @@ module Stripe
         return @products = nil
       end
       _products = products.not_nil!
-      if _products.is_a?(Array)
-        _products.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _products) if _products.is_a?(Array)
       @products = _products
     end
 

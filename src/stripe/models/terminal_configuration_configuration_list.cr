@@ -32,11 +32,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["list"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["list"])
 
     # The URL where this list can be accessed.
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter url : String? = nil
+
+    PATTERN_FOR_URL = /^\/v1\/terminal\/configurations/
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -56,26 +58,19 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"data\" is required and cannot be null") if @data.nil?
       if _data = @data
-        if _data.is_a?(Array)
-          _data.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("data"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "data", array: _data)) if _data.is_a?(Array)
       end
       invalid_properties.push("\"has_more\" is required and cannot be null") if @has_more.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
       if _url = @url
-        if _url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
 
-        pattern = /^\/v1\/terminal\/configurations/
-        if _url !~ pattern
-          invalid_properties.push("invalid value for \"url\", must conform to the pattern #{pattern}.")
+        if pattern_error = OpenApi::PrimitiveValidator.pattern_error("url", _url, PATTERN_FOR_URL)
+          invalid_properties.push(pattern_error)
         end
       end
 
@@ -87,13 +82,7 @@ module Stripe
     def valid? : Bool
       return false if @data.nil?
       if _data = @data
-        if _data.is_a?(Array)
-          _data.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _data.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _data)
       end
       return false if @has_more.nil?
 
@@ -101,7 +90,7 @@ module Stripe
       return false if @url.nil?
       if _url = @url
         return false if _url.to_s.size > 5000
-        return false if _url !~ /^\/v1\/terminal\/configurations/
+        return false if _url !~ PATTERN_FOR_URL
       end
 
       true
@@ -114,13 +103,7 @@ module Stripe
         raise ArgumentError.new("\"data\" is required and cannot be null")
       end
       _data = data.not_nil!
-      if _data.is_a?(Array)
-        _data.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _data) if _data.is_a?(Array)
       @data = _data
     end
 
@@ -152,13 +135,12 @@ module Stripe
         raise ArgumentError.new("\"url\" is required and cannot be null")
       end
       _url = url.not_nil!
-      if _url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
-      pattern = /^\/v1\/terminal\/configurations/
-      if _url !~ pattern
-        raise ArgumentError.new("invalid value for \"url\", must conform to the pattern #{pattern}.")
+      if pattern_error = OpenApi::PrimitiveValidator.pattern_error("url", _url, PATTERN_FOR_URL)
+        raise ArgumentError.new(pattern_error)
       end
 
       @url = _url

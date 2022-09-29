@@ -58,34 +58,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _branding = @branding
-        if _branding.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_branding.list_invalid_properties_for("branding"))
-        end
+        invalid_properties.concat(_branding.list_invalid_properties_for("branding")) if _branding.is_a?(OpenApi::Validatable)
       end
       if _card_issuing = @card_issuing
-        if _card_issuing.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card_issuing.list_invalid_properties_for("card_issuing"))
-        end
+        invalid_properties.concat(_card_issuing.list_invalid_properties_for("card_issuing")) if _card_issuing.is_a?(OpenApi::Validatable)
       end
       if _card_payments = @card_payments
-        if _card_payments.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card_payments.list_invalid_properties_for("card_payments"))
-        end
+        invalid_properties.concat(_card_payments.list_invalid_properties_for("card_payments")) if _card_payments.is_a?(OpenApi::Validatable)
       end
       if _payments = @payments
-        if _payments.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payments.list_invalid_properties_for("payments"))
-        end
+        invalid_properties.concat(_payments.list_invalid_properties_for("payments")) if _payments.is_a?(OpenApi::Validatable)
       end
       if _payouts = @payouts
-        if _payouts.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payouts.list_invalid_properties_for("payouts"))
-        end
+        invalid_properties.concat(_payouts.list_invalid_properties_for("payouts")) if _payouts.is_a?(OpenApi::Validatable)
       end
       if _treasury = @treasury
-        if _treasury.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_treasury.list_invalid_properties_for("treasury"))
-        end
+        invalid_properties.concat(_treasury.list_invalid_properties_for("treasury")) if _treasury.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -95,34 +83,22 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _branding = @branding
-        if _branding.is_a?(OpenApi::Validatable)
-          return false unless _branding.valid?
-        end
+        return false if _branding.is_a?(OpenApi::Validatable) && !_branding.valid?
       end
       if _card_issuing = @card_issuing
-        if _card_issuing.is_a?(OpenApi::Validatable)
-          return false unless _card_issuing.valid?
-        end
+        return false if _card_issuing.is_a?(OpenApi::Validatable) && !_card_issuing.valid?
       end
       if _card_payments = @card_payments
-        if _card_payments.is_a?(OpenApi::Validatable)
-          return false unless _card_payments.valid?
-        end
+        return false if _card_payments.is_a?(OpenApi::Validatable) && !_card_payments.valid?
       end
       if _payments = @payments
-        if _payments.is_a?(OpenApi::Validatable)
-          return false unless _payments.valid?
-        end
+        return false if _payments.is_a?(OpenApi::Validatable) && !_payments.valid?
       end
       if _payouts = @payouts
-        if _payouts.is_a?(OpenApi::Validatable)
-          return false unless _payouts.valid?
-        end
+        return false if _payouts.is_a?(OpenApi::Validatable) && !_payouts.valid?
       end
       if _treasury = @treasury
-        if _treasury.is_a?(OpenApi::Validatable)
-          return false unless _treasury.valid?
-        end
+        return false if _treasury.is_a?(OpenApi::Validatable) && !_treasury.valid?
       end
 
       true
@@ -135,9 +111,7 @@ module Stripe
         return @branding = nil
       end
       _branding = branding.not_nil!
-      if _branding.is_a?(OpenApi::Validatable)
-        _branding.validate
-      end
+      _branding.validate if _branding.is_a?(OpenApi::Validatable)
       @branding = _branding
     end
 
@@ -148,9 +122,7 @@ module Stripe
         return @card_issuing = nil
       end
       _card_issuing = card_issuing.not_nil!
-      if _card_issuing.is_a?(OpenApi::Validatable)
-        _card_issuing.validate
-      end
+      _card_issuing.validate if _card_issuing.is_a?(OpenApi::Validatable)
       @card_issuing = _card_issuing
     end
 
@@ -161,9 +133,7 @@ module Stripe
         return @card_payments = nil
       end
       _card_payments = card_payments.not_nil!
-      if _card_payments.is_a?(OpenApi::Validatable)
-        _card_payments.validate
-      end
+      _card_payments.validate if _card_payments.is_a?(OpenApi::Validatable)
       @card_payments = _card_payments
     end
 
@@ -174,9 +144,7 @@ module Stripe
         return @payments = nil
       end
       _payments = payments.not_nil!
-      if _payments.is_a?(OpenApi::Validatable)
-        _payments.validate
-      end
+      _payments.validate if _payments.is_a?(OpenApi::Validatable)
       @payments = _payments
     end
 
@@ -187,9 +155,7 @@ module Stripe
         return @payouts = nil
       end
       _payouts = payouts.not_nil!
-      if _payouts.is_a?(OpenApi::Validatable)
-        _payouts.validate
-      end
+      _payouts.validate if _payouts.is_a?(OpenApi::Validatable)
       @payouts = _payouts
     end
 
@@ -200,9 +166,7 @@ module Stripe
         return @treasury = nil
       end
       _treasury = treasury.not_nil!
-      if _treasury.is_a?(OpenApi::Validatable)
-        _treasury.validate
-      end
+      _treasury.validate if _treasury.is_a?(OpenApi::Validatable)
       @treasury = _treasury
     end
 

@@ -49,8 +49,8 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _memo = @memo
-        if _memo.to_s.size > 5000
-          invalid_properties.push("invalid value for \"memo\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("memo", _memo.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -84,8 +84,8 @@ module Stripe
         return @memo = nil
       end
       _memo = memo.not_nil!
-      if _memo.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"memo\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("memo", _memo.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @memo = _memo

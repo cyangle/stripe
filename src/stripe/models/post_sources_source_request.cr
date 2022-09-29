@@ -60,24 +60,16 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _mandate = @mandate
-        if _mandate.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_mandate.list_invalid_properties_for("mandate"))
-        end
+        invalid_properties.concat(_mandate.list_invalid_properties_for("mandate")) if _mandate.is_a?(OpenApi::Validatable)
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _owner = @owner
-        if _owner.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_owner.list_invalid_properties_for("owner"))
-        end
+        invalid_properties.concat(_owner.list_invalid_properties_for("owner")) if _owner.is_a?(OpenApi::Validatable)
       end
       if _source_order = @source_order
-        if _source_order.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_source_order.list_invalid_properties_for("source_order"))
-        end
+        invalid_properties.concat(_source_order.list_invalid_properties_for("source_order")) if _source_order.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -87,24 +79,16 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _mandate = @mandate
-        if _mandate.is_a?(OpenApi::Validatable)
-          return false unless _mandate.valid?
-        end
+        return false if _mandate.is_a?(OpenApi::Validatable) && !_mandate.valid?
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
       if _owner = @owner
-        if _owner.is_a?(OpenApi::Validatable)
-          return false unless _owner.valid?
-        end
+        return false if _owner.is_a?(OpenApi::Validatable) && !_owner.valid?
       end
       if _source_order = @source_order
-        if _source_order.is_a?(OpenApi::Validatable)
-          return false unless _source_order.valid?
-        end
+        return false if _source_order.is_a?(OpenApi::Validatable) && !_source_order.valid?
       end
 
       true
@@ -137,9 +121,7 @@ module Stripe
         return @mandate = nil
       end
       _mandate = mandate.not_nil!
-      if _mandate.is_a?(OpenApi::Validatable)
-        _mandate.validate
-      end
+      _mandate.validate if _mandate.is_a?(OpenApi::Validatable)
       @mandate = _mandate
     end
 
@@ -150,9 +132,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 
@@ -163,9 +143,7 @@ module Stripe
         return @owner = nil
       end
       _owner = owner.not_nil!
-      if _owner.is_a?(OpenApi::Validatable)
-        _owner.validate
-      end
+      _owner.validate if _owner.is_a?(OpenApi::Validatable)
       @owner = _owner
     end
 
@@ -176,9 +154,7 @@ module Stripe
         return @source_order = nil
       end
       _source_order = source_order.not_nil!
-      if _source_order.is_a?(OpenApi::Validatable)
-        _source_order.validate
-      end
+      _source_order.validate if _source_order.is_a?(OpenApi::Validatable)
       @source_order = _source_order
     end
 

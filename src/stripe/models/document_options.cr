@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "allowed_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter allowed_types : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_ALLOWED_TYPES = EnumValidator.new("allowed_types", "Array(String)", ["driving_license", "id_card", "passport"])
+    ENUM_VALIDATOR_FOR_ALLOWED_TYPES = OpenApi::EnumValidator.new("allowed_types", "Array(String)", ["driving_license", "id_card", "passport"])
 
     @[JSON::Field(key: "require_id_number", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter require_id_number : Bool? = nil

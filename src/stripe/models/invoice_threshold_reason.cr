@@ -51,13 +51,7 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"item_reasons\" is required and cannot be null") if @item_reasons.nil?
       if _item_reasons = @item_reasons
-        if _item_reasons.is_a?(Array)
-          _item_reasons.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("item_reasons"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "item_reasons", array: _item_reasons)) if _item_reasons.is_a?(Array)
       end
 
       invalid_properties
@@ -68,13 +62,7 @@ module Stripe
     def valid? : Bool
       return false if @item_reasons.nil?
       if _item_reasons = @item_reasons
-        if _item_reasons.is_a?(Array)
-          _item_reasons.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _item_reasons.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _item_reasons)
       end
 
       true
@@ -87,13 +75,7 @@ module Stripe
         raise ArgumentError.new("\"item_reasons\" is required and cannot be null")
       end
       _item_reasons = item_reasons.not_nil!
-      if _item_reasons.is_a?(Array)
-        _item_reasons.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _item_reasons) if _item_reasons.is_a?(Array)
       @item_reasons = _item_reasons
     end
 

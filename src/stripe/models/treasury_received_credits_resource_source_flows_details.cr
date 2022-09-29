@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["credit_reversal", "other", "outbound_payment", "payout"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["credit_reversal", "other", "outbound_payment", "payout"])
 
     # Optional properties
 
@@ -58,19 +58,13 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _credit_reversal = @credit_reversal
-        if _credit_reversal.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_credit_reversal.list_invalid_properties_for("credit_reversal"))
-        end
+        invalid_properties.concat(_credit_reversal.list_invalid_properties_for("credit_reversal")) if _credit_reversal.is_a?(OpenApi::Validatable)
       end
       if _outbound_payment = @outbound_payment
-        if _outbound_payment.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_outbound_payment.list_invalid_properties_for("outbound_payment"))
-        end
+        invalid_properties.concat(_outbound_payment.list_invalid_properties_for("outbound_payment")) if _outbound_payment.is_a?(OpenApi::Validatable)
       end
       if _payout = @payout
-        if _payout.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payout.list_invalid_properties_for("payout"))
-        end
+        invalid_properties.concat(_payout.list_invalid_properties_for("payout")) if _payout.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -81,19 +75,13 @@ module Stripe
     def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _credit_reversal = @credit_reversal
-        if _credit_reversal.is_a?(OpenApi::Validatable)
-          return false unless _credit_reversal.valid?
-        end
+        return false if _credit_reversal.is_a?(OpenApi::Validatable) && !_credit_reversal.valid?
       end
       if _outbound_payment = @outbound_payment
-        if _outbound_payment.is_a?(OpenApi::Validatable)
-          return false unless _outbound_payment.valid?
-        end
+        return false if _outbound_payment.is_a?(OpenApi::Validatable) && !_outbound_payment.valid?
       end
       if _payout = @payout
-        if _payout.is_a?(OpenApi::Validatable)
-          return false unless _payout.valid?
-        end
+        return false if _payout.is_a?(OpenApi::Validatable) && !_payout.valid?
       end
 
       true
@@ -117,9 +105,7 @@ module Stripe
         return @credit_reversal = nil
       end
       _credit_reversal = credit_reversal.not_nil!
-      if _credit_reversal.is_a?(OpenApi::Validatable)
-        _credit_reversal.validate
-      end
+      _credit_reversal.validate if _credit_reversal.is_a?(OpenApi::Validatable)
       @credit_reversal = _credit_reversal
     end
 
@@ -130,9 +116,7 @@ module Stripe
         return @outbound_payment = nil
       end
       _outbound_payment = outbound_payment.not_nil!
-      if _outbound_payment.is_a?(OpenApi::Validatable)
-        _outbound_payment.validate
-      end
+      _outbound_payment.validate if _outbound_payment.is_a?(OpenApi::Validatable)
       @outbound_payment = _outbound_payment
     end
 
@@ -143,9 +127,7 @@ module Stripe
         return @payout = nil
       end
       _payout = payout.not_nil!
-      if _payout.is_a?(OpenApi::Validatable)
-        _payout.validate
-      end
+      _payout.validate if _payout.is_a?(OpenApi::Validatable)
       @payout = _payout
     end
 

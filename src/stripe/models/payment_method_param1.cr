@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "account_holder_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_holder_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE = EnumValidator.new("account_holder_type", "String", ["company", "individual"])
+    ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE = OpenApi::EnumValidator.new("account_holder_type", "String", ["company", "individual"])
 
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_number : String? = nil
@@ -31,7 +31,7 @@ module Stripe
     @[JSON::Field(key: "account_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_ACCOUNT_TYPE = EnumValidator.new("account_type", "String", ["checking", "savings"])
+    ENUM_VALIDATOR_FOR_ACCOUNT_TYPE = OpenApi::EnumValidator.new("account_type", "String", ["checking", "savings"])
 
     @[JSON::Field(key: "financial_connections_account", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter financial_connections_account : String? = nil
@@ -59,20 +59,20 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid?(@account_holder_type)
       if _account_number = @account_number
-        if _account_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid?(@account_type)
       if _financial_connections_account = @financial_connections_account
-        if _financial_connections_account.to_s.size > 5000
-          invalid_properties.push("invalid value for \"financial_connections_account\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_connections_account", _financial_connections_account.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _routing_number = @routing_number
-        if _routing_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -115,8 +115,8 @@ module Stripe
         return @account_number = nil
       end
       _account_number = account_number.not_nil!
-      if _account_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account_number = _account_number
@@ -140,8 +140,8 @@ module Stripe
         return @financial_connections_account = nil
       end
       _financial_connections_account = financial_connections_account.not_nil!
-      if _financial_connections_account.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"financial_connections_account\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_connections_account", _financial_connections_account.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @financial_connections_account = _financial_connections_account
@@ -154,8 +154,8 @@ module Stripe
         return @routing_number = nil
       end
       _routing_number = routing_number.not_nil!
-      if _routing_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @routing_number = _routing_number

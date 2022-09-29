@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transaction_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_TRANSACTION_TYPE = EnumValidator.new("transaction_type", "String", ["business", "personal"])
+    ENUM_VALIDATOR_FOR_TRANSACTION_TYPE = OpenApi::EnumValidator.new("transaction_type", "String", ["business", "personal"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

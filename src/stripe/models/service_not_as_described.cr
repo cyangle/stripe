@@ -53,29 +53,23 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _additional_documentation = @additional_documentation
-        if _additional_documentation.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation"))
-        end
+        invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
       if _canceled_at = @canceled_at
-        if _canceled_at.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_canceled_at.list_invalid_properties_for("canceled_at"))
-        end
+        invalid_properties.concat(_canceled_at.list_invalid_properties_for("canceled_at")) if _canceled_at.is_a?(OpenApi::Validatable)
       end
       if _cancellation_reason = @cancellation_reason
-        if _cancellation_reason.to_s.size > 1500
-          invalid_properties.push("invalid value for \"cancellation_reason\", the character length must be smaller than or equal to 1500.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_reason", _cancellation_reason.to_s.size, 1500)
+          invalid_properties.push(max_length_error)
         end
       end
       if _explanation = @explanation
-        if _explanation.to_s.size > 1500
-          invalid_properties.push("invalid value for \"explanation\", the character length must be smaller than or equal to 1500.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 1500)
+          invalid_properties.push(max_length_error)
         end
       end
       if _received_at = @received_at
-        if _received_at.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_received_at.list_invalid_properties_for("received_at"))
-        end
+        invalid_properties.concat(_received_at.list_invalid_properties_for("received_at")) if _received_at.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -85,14 +79,10 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _additional_documentation = @additional_documentation
-        if _additional_documentation.is_a?(OpenApi::Validatable)
-          return false unless _additional_documentation.valid?
-        end
+        return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
       if _canceled_at = @canceled_at
-        if _canceled_at.is_a?(OpenApi::Validatable)
-          return false unless _canceled_at.valid?
-        end
+        return false if _canceled_at.is_a?(OpenApi::Validatable) && !_canceled_at.valid?
       end
       if _cancellation_reason = @cancellation_reason
         return false if _cancellation_reason.to_s.size > 1500
@@ -101,9 +91,7 @@ module Stripe
         return false if _explanation.to_s.size > 1500
       end
       if _received_at = @received_at
-        if _received_at.is_a?(OpenApi::Validatable)
-          return false unless _received_at.valid?
-        end
+        return false if _received_at.is_a?(OpenApi::Validatable) && !_received_at.valid?
       end
 
       true
@@ -116,9 +104,7 @@ module Stripe
         return @additional_documentation = nil
       end
       _additional_documentation = additional_documentation.not_nil!
-      if _additional_documentation.is_a?(OpenApi::Validatable)
-        _additional_documentation.validate
-      end
+      _additional_documentation.validate if _additional_documentation.is_a?(OpenApi::Validatable)
       @additional_documentation = _additional_documentation
     end
 
@@ -129,9 +115,7 @@ module Stripe
         return @canceled_at = nil
       end
       _canceled_at = canceled_at.not_nil!
-      if _canceled_at.is_a?(OpenApi::Validatable)
-        _canceled_at.validate
-      end
+      _canceled_at.validate if _canceled_at.is_a?(OpenApi::Validatable)
       @canceled_at = _canceled_at
     end
 
@@ -142,8 +126,8 @@ module Stripe
         return @cancellation_reason = nil
       end
       _cancellation_reason = cancellation_reason.not_nil!
-      if _cancellation_reason.to_s.size > 1500
-        raise ArgumentError.new("invalid value for \"cancellation_reason\", the character length must be smaller than or equal to 1500.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_reason", _cancellation_reason.to_s.size, 1500)
+        raise ArgumentError.new(max_length_error)
       end
 
       @cancellation_reason = _cancellation_reason
@@ -156,8 +140,8 @@ module Stripe
         return @explanation = nil
       end
       _explanation = explanation.not_nil!
-      if _explanation.to_s.size > 1500
-        raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 1500.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 1500)
+        raise ArgumentError.new(max_length_error)
       end
 
       @explanation = _explanation
@@ -170,9 +154,7 @@ module Stripe
         return @received_at = nil
       end
       _received_at = received_at.not_nil!
-      if _received_at.is_a?(OpenApi::Validatable)
-        _received_at.validate
-      end
+      _received_at.validate if _received_at.is_a?(OpenApi::Validatable)
       @received_at = _received_at
     end
 

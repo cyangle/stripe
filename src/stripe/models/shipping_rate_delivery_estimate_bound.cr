@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "unit", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter unit : String? = nil
 
-    ENUM_VALIDATOR_FOR_UNIT = EnumValidator.new("unit", "String", ["business_day", "day", "hour", "month", "week"])
+    ENUM_VALIDATOR_FOR_UNIT = OpenApi::EnumValidator.new("unit", "String", ["business_day", "day", "hour", "month", "week"])
 
     # Must be greater than 0.
     @[JSON::Field(key: "value", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]

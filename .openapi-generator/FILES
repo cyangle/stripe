@@ -1999,4 +1999,7 @@ src/stripe/models/verification_specs.cr
 src/stripe/models/verifone_p400.cr
 src/stripe/models/verifone_p4001.cr
 src/stripe/models/webhook_endpoint.cr
+src/validators/array_validator.cr
 src/validators/enum_validator.cr
+src/validators/hash_validator.cr
+src/validators/primitive_validator.cr

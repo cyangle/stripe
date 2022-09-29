@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["none"])
+    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["none"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -55,23 +55,19 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _confirmation_number = @confirmation_number
-        if _confirmation_number.to_s.size > 11
-          invalid_properties.push("invalid value for \"confirmation_number\", the character length must be smaller than or equal to 11.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, 11)
+          invalid_properties.push(max_length_error)
         end
       end
       if _expires_after_days = @expires_after_days
-        if _expires_after_days.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_expires_after_days.list_invalid_properties_for("expires_after_days"))
-        end
+        invalid_properties.concat(_expires_after_days.list_invalid_properties_for("expires_after_days")) if _expires_after_days.is_a?(OpenApi::Validatable)
       end
       if _expires_at = @expires_at
-        if _expires_at.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_expires_at.list_invalid_properties_for("expires_at"))
-        end
+        invalid_properties.concat(_expires_at.list_invalid_properties_for("expires_at")) if _expires_at.is_a?(OpenApi::Validatable)
       end
       if _product_description = @product_description
-        if _product_description.to_s.size > 22
-          invalid_properties.push("invalid value for \"product_description\", the character length must be smaller than or equal to 22.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 22)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -87,14 +83,10 @@ module Stripe
         return false if _confirmation_number.to_s.size > 11
       end
       if _expires_after_days = @expires_after_days
-        if _expires_after_days.is_a?(OpenApi::Validatable)
-          return false unless _expires_after_days.valid?
-        end
+        return false if _expires_after_days.is_a?(OpenApi::Validatable) && !_expires_after_days.valid?
       end
       if _expires_at = @expires_at
-        if _expires_at.is_a?(OpenApi::Validatable)
-          return false unless _expires_at.valid?
-        end
+        return false if _expires_at.is_a?(OpenApi::Validatable) && !_expires_at.valid?
       end
       if _product_description = @product_description
         return false if _product_description.to_s.size > 22
@@ -111,8 +103,8 @@ module Stripe
         return @confirmation_number = nil
       end
       _confirmation_number = confirmation_number.not_nil!
-      if _confirmation_number.to_s.size > 11
-        raise ArgumentError.new("invalid value for \"confirmation_number\", the character length must be smaller than or equal to 11.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, 11)
+        raise ArgumentError.new(max_length_error)
       end
 
       @confirmation_number = _confirmation_number
@@ -125,9 +117,7 @@ module Stripe
         return @expires_after_days = nil
       end
       _expires_after_days = expires_after_days.not_nil!
-      if _expires_after_days.is_a?(OpenApi::Validatable)
-        _expires_after_days.validate
-      end
+      _expires_after_days.validate if _expires_after_days.is_a?(OpenApi::Validatable)
       @expires_after_days = _expires_after_days
     end
 
@@ -138,9 +128,7 @@ module Stripe
         return @expires_at = nil
       end
       _expires_at = expires_at.not_nil!
-      if _expires_at.is_a?(OpenApi::Validatable)
-        _expires_at.validate
-      end
+      _expires_at.validate if _expires_at.is_a?(OpenApi::Validatable)
       @expires_at = _expires_at
     end
 
@@ -151,8 +139,8 @@ module Stripe
         return @product_description = nil
       end
       _product_description = product_description.not_nil!
-      if _product_description.to_s.size > 22
-        raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 22.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 22)
+        raise ArgumentError.new(max_length_error)
       end
 
       @product_description = _product_description

@@ -50,13 +50,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _payment_method_category = @payment_method_category
-        if _payment_method_category.to_s.size > 5000
-          invalid_properties.push("invalid value for \"payment_method_category\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method_category", _payment_method_category.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _preferred_locale = @preferred_locale
-        if _preferred_locale.to_s.size > 5000
-          invalid_properties.push("invalid value for \"preferred_locale\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -83,8 +83,8 @@ module Stripe
         return @payment_method_category = nil
       end
       _payment_method_category = payment_method_category.not_nil!
-      if _payment_method_category.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"payment_method_category\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method_category", _payment_method_category.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @payment_method_category = _payment_method_category
@@ -97,8 +97,8 @@ module Stripe
         return @preferred_locale = nil
       end
       _preferred_locale = preferred_locale.not_nil!
-      if _preferred_locale.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"preferred_locale\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @preferred_locale = _preferred_locale

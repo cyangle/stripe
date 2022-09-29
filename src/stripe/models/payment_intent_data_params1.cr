@@ -24,12 +24,12 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = EnumValidator.new("capture_method", "String", ["automatic", "manual"])
+    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = OpenApi::EnumValidator.new("capture_method", "String", ["automatic", "manual"])
 
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["off_session", "on_session"])
+    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["off_session", "on_session"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

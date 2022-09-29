@@ -54,7 +54,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["billing_portal.configuration"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["billing_portal.configuration"])
 
     # Time at which the object was last updated. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "updated", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -112,22 +112,18 @@ module Stripe
 
       invalid_properties.push("\"business_profile\" is required and cannot be null") if @business_profile.nil?
       if _business_profile = @business_profile
-        if _business_profile.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile"))
-        end
+        invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile")) if _business_profile.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"features\" is required and cannot be null") if @features.nil?
       if _features = @features
-        if _features.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_features.list_invalid_properties_for("features"))
-        end
+        invalid_properties.concat(_features.list_invalid_properties_for("features")) if _features.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"is_default\" is required and cannot be null") if @is_default.nil?
@@ -136,22 +132,18 @@ module Stripe
 
       invalid_properties.push("\"login_page\" is required and cannot be null") if @login_page.nil?
       if _login_page = @login_page
-        if _login_page.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_login_page.list_invalid_properties_for("login_page"))
-        end
+        invalid_properties.concat(_login_page.list_invalid_properties_for("login_page")) if _login_page.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"updated\" is required and cannot be null") if @updated.nil?
 
       if _application = @application
-        if _application.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_application.list_invalid_properties_for("application"))
-        end
+        invalid_properties.concat(_application.list_invalid_properties_for("application")) if _application.is_a?(OpenApi::Validatable)
       end
       if _default_return_url = @default_return_url
-        if _default_return_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"default_return_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_return_url", _default_return_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -165,17 +157,13 @@ module Stripe
 
       return false if @business_profile.nil?
       if _business_profile = @business_profile
-        if _business_profile.is_a?(OpenApi::Validatable)
-          return false unless _business_profile.valid?
-        end
+        return false if _business_profile.is_a?(OpenApi::Validatable) && !_business_profile.valid?
       end
       return false if @created.nil?
 
       return false if @features.nil?
       if _features = @features
-        if _features.is_a?(OpenApi::Validatable)
-          return false unless _features.valid?
-        end
+        return false if _features.is_a?(OpenApi::Validatable) && !_features.valid?
       end
       return false if @id.nil?
       if _id = @id
@@ -187,17 +175,13 @@ module Stripe
 
       return false if @login_page.nil?
       if _login_page = @login_page
-        if _login_page.is_a?(OpenApi::Validatable)
-          return false unless _login_page.valid?
-        end
+        return false if _login_page.is_a?(OpenApi::Validatable) && !_login_page.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @updated.nil?
 
       if _application = @application
-        if _application.is_a?(OpenApi::Validatable)
-          return false unless _application.valid?
-        end
+        return false if _application.is_a?(OpenApi::Validatable) && !_application.valid?
       end
       if _default_return_url = @default_return_url
         return false if _default_return_url.to_s.size > 5000
@@ -223,9 +207,7 @@ module Stripe
         raise ArgumentError.new("\"business_profile\" is required and cannot be null")
       end
       _business_profile = business_profile.not_nil!
-      if _business_profile.is_a?(OpenApi::Validatable)
-        _business_profile.validate
-      end
+      _business_profile.validate if _business_profile.is_a?(OpenApi::Validatable)
       @business_profile = _business_profile
     end
 
@@ -246,9 +228,7 @@ module Stripe
         raise ArgumentError.new("\"features\" is required and cannot be null")
       end
       _features = features.not_nil!
-      if _features.is_a?(OpenApi::Validatable)
-        _features.validate
-      end
+      _features.validate if _features.is_a?(OpenApi::Validatable)
       @features = _features
     end
 
@@ -259,8 +239,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -293,9 +273,7 @@ module Stripe
         raise ArgumentError.new("\"login_page\" is required and cannot be null")
       end
       _login_page = login_page.not_nil!
-      if _login_page.is_a?(OpenApi::Validatable)
-        _login_page.validate
-      end
+      _login_page.validate if _login_page.is_a?(OpenApi::Validatable)
       @login_page = _login_page
     end
 
@@ -327,9 +305,7 @@ module Stripe
         return @application = nil
       end
       _application = application.not_nil!
-      if _application.is_a?(OpenApi::Validatable)
-        _application.validate
-      end
+      _application.validate if _application.is_a?(OpenApi::Validatable)
       @application = _application
     end
 
@@ -340,8 +316,8 @@ module Stripe
         return @default_return_url = nil
       end
       _default_return_url = default_return_url.not_nil!
-      if _default_return_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"default_return_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_return_url", _default_return_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @default_return_url = _default_return_url

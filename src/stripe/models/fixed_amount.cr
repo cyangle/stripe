@@ -52,13 +52,7 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       if _currency_options = @currency_options
-        if _currency_options.is_a?(Hash)
-          _currency_options.each do |_key, value|
-            if value.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(value.list_invalid_properties_for("currency_options"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "currency_options", hash: _currency_options)) if _currency_options.is_a?(Hash)
       end
 
       invalid_properties
@@ -72,13 +66,7 @@ module Stripe
       return false if @currency.nil?
 
       if _currency_options = @currency_options
-        if _currency_options.is_a?(Hash)
-          _currency_options.each do |_key, value|
-            if value.is_a?(OpenApi::Validatable)
-              return false unless value.valid?
-            end
-          end
-        end
+        return false if _currency_options.is_a?(Hash) && !OpenApi::HashValidator.valid?(hash: _currency_options)
       end
 
       true
@@ -111,13 +99,7 @@ module Stripe
         return @currency_options = nil
       end
       _currency_options = currency_options.not_nil!
-      if _currency_options.is_a?(Hash)
-        _currency_options.each do |_key, value|
-          if value.is_a?(OpenApi::Validatable)
-            value.validate
-          end
-        end
-      end
+      OpenApi::HashValidator.validate(hash: _currency_options) if _currency_options.is_a?(Hash)
       @currency_options = _currency_options
     end
 

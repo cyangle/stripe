@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "purpose", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter purpose : String? = nil
 
-    ENUM_VALIDATOR_FOR_PURPOSE = EnumValidator.new("purpose", "String", ["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "identity_document", "pci_document", "tax_document_user_upload", "terminal_reader_splashscreen"])
+    ENUM_VALIDATOR_FOR_PURPOSE = OpenApi::EnumValidator.new("purpose", "String", ["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "identity_document", "pci_document", "tax_document_user_upload", "terminal_reader_splashscreen"])
 
     # Optional properties
 
@@ -61,9 +61,7 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_PURPOSE.error_message) unless ENUM_VALIDATOR_FOR_PURPOSE.valid?(@purpose, false)
 
       if _file_link_data = @file_link_data
-        if _file_link_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_file_link_data.list_invalid_properties_for("file_link_data"))
-        end
+        invalid_properties.concat(_file_link_data.list_invalid_properties_for("file_link_data")) if _file_link_data.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -77,9 +75,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_PURPOSE.valid?(@purpose, false)
 
       if _file_link_data = @file_link_data
-        if _file_link_data.is_a?(OpenApi::Validatable)
-          return false unless _file_link_data.valid?
-        end
+        return false if _file_link_data.is_a?(OpenApi::Validatable) && !_file_link_data.valid?
       end
 
       true
@@ -123,9 +119,7 @@ module Stripe
         return @file_link_data = nil
       end
       _file_link_data = file_link_data.not_nil!
-      if _file_link_data.is_a?(OpenApi::Validatable)
-        _file_link_data.validate
-      end
+      _file_link_data.validate if _file_link_data.is_a?(OpenApi::Validatable)
       @file_link_data = _file_link_data
     end
 

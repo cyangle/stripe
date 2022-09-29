@@ -44,9 +44,7 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"email_sent\" is required and cannot be null") if @email_sent.nil?
       if _email_sent = @email_sent
-        if _email_sent.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_email_sent.list_invalid_properties_for("email_sent"))
-        end
+        invalid_properties.concat(_email_sent.list_invalid_properties_for("email_sent")) if _email_sent.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"expires_at\" is required and cannot be null") if @expires_at.nil?
 
@@ -58,9 +56,7 @@ module Stripe
     def valid? : Bool
       return false if @email_sent.nil?
       if _email_sent = @email_sent
-        if _email_sent.is_a?(OpenApi::Validatable)
-          return false unless _email_sent.valid?
-        end
+        return false if _email_sent.is_a?(OpenApi::Validatable) && !_email_sent.valid?
       end
       return false if @expires_at.nil?
 
@@ -74,9 +70,7 @@ module Stripe
         raise ArgumentError.new("\"email_sent\" is required and cannot be null")
       end
       _email_sent = email_sent.not_nil!
-      if _email_sent.is_a?(OpenApi::Validatable)
-        _email_sent.validate
-      end
+      _email_sent.validate if _email_sent.is_a?(OpenApi::Validatable)
       @email_sent = _email_sent
     end
 

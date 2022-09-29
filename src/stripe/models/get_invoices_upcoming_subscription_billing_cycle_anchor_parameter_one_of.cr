@@ -17,7 +17,7 @@ module Stripe
 
     property data : String
 
-    ENUM_VALIDATOR = EnumValidator.new("GetInvoicesUpcoming_subscription_billing_cycle_anchor_parameter_oneOf", "String", ["now", "unchanged"])
+    ENUM_VALIDATOR = OpenApi::EnumValidator.new("GetInvoicesUpcoming_subscription_billing_cycle_anchor_parameter_oneOf", "String", ["now", "unchanged"])
 
     delegate to_json_object_key, to: @data
     delegate error_message, to: ENUM_VALIDATOR

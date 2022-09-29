@@ -53,7 +53,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["item"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["item"])
 
     # Optional properties
 
@@ -119,46 +119,30 @@ module Stripe
 
       invalid_properties.push("\"description\" is required and cannot be null") if @description.nil?
       if _description = @description
-        if _description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       if _discounts = @discounts
-        if _discounts.is_a?(Array)
-          _discounts.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("discounts"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "discounts", array: _discounts)) if _discounts.is_a?(Array)
       end
       if _price = @price
-        if _price.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_price.list_invalid_properties_for("price"))
-        end
+        invalid_properties.concat(_price.list_invalid_properties_for("price")) if _price.is_a?(OpenApi::Validatable)
       end
       if _product = @product
-        if _product.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_product.list_invalid_properties_for("product"))
-        end
+        invalid_properties.concat(_product.list_invalid_properties_for("product")) if _product.is_a?(OpenApi::Validatable)
       end
 
       if _taxes = @taxes
-        if _taxes.is_a?(Array)
-          _taxes.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("taxes"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "taxes", array: _taxes)) if _taxes.is_a?(Array)
       end
 
       invalid_properties
@@ -187,33 +171,17 @@ module Stripe
       end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       if _discounts = @discounts
-        if _discounts.is_a?(Array)
-          _discounts.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _discounts.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _discounts)
       end
       if _price = @price
-        if _price.is_a?(OpenApi::Validatable)
-          return false unless _price.valid?
-        end
+        return false if _price.is_a?(OpenApi::Validatable) && !_price.valid?
       end
       if _product = @product
-        if _product.is_a?(OpenApi::Validatable)
-          return false unless _product.valid?
-        end
+        return false if _product.is_a?(OpenApi::Validatable) && !_product.valid?
       end
 
       if _taxes = @taxes
-        if _taxes.is_a?(Array)
-          _taxes.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _taxes.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _taxes)
       end
 
       true
@@ -276,8 +244,8 @@ module Stripe
         raise ArgumentError.new("\"description\" is required and cannot be null")
       end
       _description = description.not_nil!
-      if _description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -290,8 +258,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -315,13 +283,7 @@ module Stripe
         return @discounts = nil
       end
       _discounts = discounts.not_nil!
-      if _discounts.is_a?(Array)
-        _discounts.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _discounts) if _discounts.is_a?(Array)
       @discounts = _discounts
     end
 
@@ -332,9 +294,7 @@ module Stripe
         return @price = nil
       end
       _price = price.not_nil!
-      if _price.is_a?(OpenApi::Validatable)
-        _price.validate
-      end
+      _price.validate if _price.is_a?(OpenApi::Validatable)
       @price = _price
     end
 
@@ -345,9 +305,7 @@ module Stripe
         return @product = nil
       end
       _product = product.not_nil!
-      if _product.is_a?(OpenApi::Validatable)
-        _product.validate
-      end
+      _product.validate if _product.is_a?(OpenApi::Validatable)
       @product = _product
     end
 
@@ -368,13 +326,7 @@ module Stripe
         return @taxes = nil
       end
       _taxes = taxes.not_nil!
-      if _taxes.is_a?(Array)
-        _taxes.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _taxes) if _taxes.is_a?(Array)
       @taxes = _taxes
     end
 

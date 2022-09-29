@@ -59,28 +59,28 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _reference = @reference
-        if _reference.to_s.size > 5000
-          invalid_properties.push("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _sender_address_country = @sender_address_country
-        if _sender_address_country.to_s.size > 5000
-          invalid_properties.push("invalid value for \"sender_address_country\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_address_country", _sender_address_country.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _sender_address_line1 = @sender_address_line1
-        if _sender_address_line1.to_s.size > 5000
-          invalid_properties.push("invalid value for \"sender_address_line1\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_address_line1", _sender_address_line1.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _sender_iban = @sender_iban
-        if _sender_iban.to_s.size > 5000
-          invalid_properties.push("invalid value for \"sender_iban\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_iban", _sender_iban.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _sender_name = @sender_name
-        if _sender_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"sender_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_name", _sender_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -116,8 +116,8 @@ module Stripe
         return @reference = nil
       end
       _reference = reference.not_nil!
-      if _reference.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @reference = _reference
@@ -130,8 +130,8 @@ module Stripe
         return @sender_address_country = nil
       end
       _sender_address_country = sender_address_country.not_nil!
-      if _sender_address_country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"sender_address_country\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_address_country", _sender_address_country.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @sender_address_country = _sender_address_country
@@ -144,8 +144,8 @@ module Stripe
         return @sender_address_line1 = nil
       end
       _sender_address_line1 = sender_address_line1.not_nil!
-      if _sender_address_line1.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"sender_address_line1\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_address_line1", _sender_address_line1.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @sender_address_line1 = _sender_address_line1
@@ -158,8 +158,8 @@ module Stripe
         return @sender_iban = nil
       end
       _sender_iban = sender_iban.not_nil!
-      if _sender_iban.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"sender_iban\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_iban", _sender_iban.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @sender_iban = _sender_iban
@@ -172,8 +172,8 @@ module Stripe
         return @sender_name = nil
       end
       _sender_name = sender_name.not_nil!
-      if _sender_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"sender_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_name", _sender_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @sender_name = _sender_name

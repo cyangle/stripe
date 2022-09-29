@@ -50,13 +50,13 @@ module Stripe
     @[JSON::Field(key: "method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter method : String? = nil
 
-    ENUM_VALIDATOR_FOR_METHOD = EnumValidator.new("method", "String", ["instant", "standard"])
+    ENUM_VALIDATOR_FOR_METHOD = OpenApi::EnumValidator.new("method", "String", ["instant", "standard"])
 
     # The balance type of your Stripe balance to draw this payout from. Balances for different payment sources are kept separately. You can find the amounts with the balances API. One of `bank_account`, `card`, or `fpx`.
     @[JSON::Field(key: "source_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter source_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_SOURCE_TYPE = EnumValidator.new("source_type", "String", ["bank_account", "card", "fpx"])
+    ENUM_VALIDATOR_FOR_SOURCE_TYPE = OpenApi::EnumValidator.new("source_type", "String", ["bank_account", "card", "fpx"])
 
     # A string to be displayed on the recipient's bank or card statement. This may be at most 22 characters. Attempting to use a `statement_descriptor` longer than 22 characters will return an error. Note: Most banks will truncate this information and/or display it inconsistently. Some may not display it at all.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -89,8 +89,8 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       if _description = @description
-        if _description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -98,8 +98,8 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SOURCE_TYPE.error_message) unless ENUM_VALIDATOR_FOR_SOURCE_TYPE.valid?(@source_type)
       if _statement_descriptor = @statement_descriptor
-        if _statement_descriptor.to_s.size > 22
-          invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -153,8 +153,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -219,8 +219,8 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if _statement_descriptor.to_s.size > 22
-        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor = _statement_descriptor

@@ -31,7 +31,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["card_present"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["card_present"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -49,9 +49,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _card_present = @card_present
-        if _card_present.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card_present.list_invalid_properties_for("card_present"))
-        end
+        invalid_properties.concat(_card_present.list_invalid_properties_for("card_present")) if _card_present.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
@@ -63,9 +61,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _card_present = @card_present
-        if _card_present.is_a?(OpenApi::Validatable)
-          return false unless _card_present.valid?
-        end
+        return false if _card_present.is_a?(OpenApi::Validatable) && !_card_present.valid?
       end
 
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
@@ -80,9 +76,7 @@ module Stripe
         return @card_present2 = nil
       end
       _card_present = card_present.not_nil!
-      if _card_present.is_a?(OpenApi::Validatable)
-        _card_present.validate
-      end
+      _card_present.validate if _card_present.is_a?(OpenApi::Validatable)
       @card_present2 = _card_present
     end
 

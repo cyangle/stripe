@@ -58,15 +58,13 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _description = @description
-        if _description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -80,9 +78,7 @@ module Stripe
       end
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
       true
@@ -105,8 +101,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -129,9 +125,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 

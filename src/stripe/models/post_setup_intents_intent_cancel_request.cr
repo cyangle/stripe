@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cancellation_reason : String? = nil
 
-    ENUM_VALIDATOR_FOR_CANCELLATION_REASON = EnumValidator.new("cancellation_reason", "String", ["abandoned", "duplicate", "requested_by_customer"])
+    ENUM_VALIDATOR_FOR_CANCELLATION_REASON = OpenApi::EnumValidator.new("cancellation_reason", "String", ["abandoned", "duplicate", "requested_by_customer"])
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]

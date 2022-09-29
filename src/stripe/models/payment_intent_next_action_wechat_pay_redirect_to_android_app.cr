@@ -70,44 +70,44 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"app_id\" is required and cannot be null") if @app_id.nil?
       if _app_id = @app_id
-        if _app_id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"app_id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"nonce_str\" is required and cannot be null") if @nonce_str.nil?
       if _nonce_str = @nonce_str
-        if _nonce_str.to_s.size > 5000
-          invalid_properties.push("invalid value for \"nonce_str\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nonce_str", _nonce_str.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"package\" is required and cannot be null") if @package.nil?
       if _package = @package
-        if _package.to_s.size > 5000
-          invalid_properties.push("invalid value for \"package\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("package", _package.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"partner_id\" is required and cannot be null") if @partner_id.nil?
       if _partner_id = @partner_id
-        if _partner_id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"partner_id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("partner_id", _partner_id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"prepay_id\" is required and cannot be null") if @prepay_id.nil?
       if _prepay_id = @prepay_id
-        if _prepay_id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"prepay_id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("prepay_id", _prepay_id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"sign\" is required and cannot be null") if @sign.nil?
       if _sign = @sign
-        if _sign.to_s.size > 5000
-          invalid_properties.push("invalid value for \"sign\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sign", _sign.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"timestamp\" is required and cannot be null") if @timestamp.nil?
       if _timestamp = @timestamp
-        if _timestamp.to_s.size > 5000
-          invalid_properties.push("invalid value for \"timestamp\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timestamp", _timestamp.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -156,8 +156,8 @@ module Stripe
         raise ArgumentError.new("\"app_id\" is required and cannot be null")
       end
       _app_id = app_id.not_nil!
-      if _app_id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"app_id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @app_id = _app_id
@@ -170,8 +170,8 @@ module Stripe
         raise ArgumentError.new("\"nonce_str\" is required and cannot be null")
       end
       _nonce_str = nonce_str.not_nil!
-      if _nonce_str.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"nonce_str\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nonce_str", _nonce_str.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @nonce_str = _nonce_str
@@ -184,8 +184,8 @@ module Stripe
         raise ArgumentError.new("\"package\" is required and cannot be null")
       end
       _package = package.not_nil!
-      if _package.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"package\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("package", _package.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @package = _package
@@ -198,8 +198,8 @@ module Stripe
         raise ArgumentError.new("\"partner_id\" is required and cannot be null")
       end
       _partner_id = partner_id.not_nil!
-      if _partner_id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"partner_id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("partner_id", _partner_id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @partner_id = _partner_id
@@ -212,8 +212,8 @@ module Stripe
         raise ArgumentError.new("\"prepay_id\" is required and cannot be null")
       end
       _prepay_id = prepay_id.not_nil!
-      if _prepay_id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"prepay_id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("prepay_id", _prepay_id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @prepay_id = _prepay_id
@@ -226,8 +226,8 @@ module Stripe
         raise ArgumentError.new("\"sign\" is required and cannot be null")
       end
       _sign = sign.not_nil!
-      if _sign.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"sign\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sign", _sign.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @sign = _sign
@@ -240,8 +240,8 @@ module Stripe
         raise ArgumentError.new("\"timestamp\" is required and cannot be null")
       end
       _timestamp = timestamp.not_nil!
-      if _timestamp.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"timestamp\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timestamp", _timestamp.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @timestamp = _timestamp

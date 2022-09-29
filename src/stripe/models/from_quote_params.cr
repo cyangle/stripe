@@ -46,8 +46,8 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"quote\" is required and cannot be null") if @quote.nil?
       if _quote = @quote
-        if _quote.to_s.size > 5000
-          invalid_properties.push("invalid value for \"quote\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("quote", _quote.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -72,8 +72,8 @@ module Stripe
         raise ArgumentError.new("\"quote\" is required and cannot be null")
       end
       _quote = quote.not_nil!
-      if _quote.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"quote\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("quote", _quote.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @quote = _quote

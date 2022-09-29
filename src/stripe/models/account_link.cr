@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["account_link"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["account_link"])
 
     # The URL for the account link.
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -62,8 +62,8 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
       if _url = @url
-        if _url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -124,8 +124,8 @@ module Stripe
         raise ArgumentError.new("\"url\" is required and cannot be null")
       end
       _url = url.not_nil!
-      if _url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @url = _url

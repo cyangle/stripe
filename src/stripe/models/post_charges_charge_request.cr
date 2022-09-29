@@ -70,35 +70,29 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _customer = @customer
-        if _customer.to_s.size > 5000
-          invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _description = @description
-        if _description.to_s.size > 40000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 40000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _fraud_details = @fraud_details
-        if _fraud_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_fraud_details.list_invalid_properties_for("fraud_details"))
-        end
+        invalid_properties.concat(_fraud_details.list_invalid_properties_for("fraud_details")) if _fraud_details.is_a?(OpenApi::Validatable)
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _receipt_email = @receipt_email
-        if _receipt_email.to_s.size > 5000
-          invalid_properties.push("invalid value for \"receipt_email\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("receipt_email", _receipt_email.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _shipping = @shipping
-        if _shipping.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_shipping.list_invalid_properties_for("shipping"))
-        end
+        invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -115,22 +109,16 @@ module Stripe
       end
 
       if _fraud_details = @fraud_details
-        if _fraud_details.is_a?(OpenApi::Validatable)
-          return false unless _fraud_details.valid?
-        end
+        return false if _fraud_details.is_a?(OpenApi::Validatable) && !_fraud_details.valid?
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
       if _receipt_email = @receipt_email
         return false if _receipt_email.to_s.size > 5000
       end
       if _shipping = @shipping
-        if _shipping.is_a?(OpenApi::Validatable)
-          return false unless _shipping.valid?
-        end
+        return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
 
       true
@@ -143,8 +131,8 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if _customer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @customer = _customer
@@ -157,8 +145,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 40000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 40000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -181,9 +169,7 @@ module Stripe
         return @fraud_details = nil
       end
       _fraud_details = fraud_details.not_nil!
-      if _fraud_details.is_a?(OpenApi::Validatable)
-        _fraud_details.validate
-      end
+      _fraud_details.validate if _fraud_details.is_a?(OpenApi::Validatable)
       @fraud_details = _fraud_details
     end
 
@@ -194,9 +180,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 
@@ -207,8 +191,8 @@ module Stripe
         return @receipt_email = nil
       end
       _receipt_email = receipt_email.not_nil!
-      if _receipt_email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"receipt_email\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("receipt_email", _receipt_email.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @receipt_email = _receipt_email
@@ -221,9 +205,7 @@ module Stripe
         return @shipping = nil
       end
       _shipping = shipping.not_nil!
-      if _shipping.is_a?(OpenApi::Validatable)
-        _shipping.validate
-      end
+      _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
       @shipping = _shipping
     end
 

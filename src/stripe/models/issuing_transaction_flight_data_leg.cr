@@ -82,28 +82,28 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _arrival_airport_code = @arrival_airport_code
-        if _arrival_airport_code.to_s.size > 5000
-          invalid_properties.push("invalid value for \"arrival_airport_code\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("arrival_airport_code", _arrival_airport_code.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _carrier = @carrier
-        if _carrier.to_s.size > 5000
-          invalid_properties.push("invalid value for \"carrier\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("carrier", _carrier.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _departure_airport_code = @departure_airport_code
-        if _departure_airport_code.to_s.size > 5000
-          invalid_properties.push("invalid value for \"departure_airport_code\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("departure_airport_code", _departure_airport_code.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _flight_number = @flight_number
-        if _flight_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"flight_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flight_number", _flight_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _service_class = @service_class
-        if _service_class.to_s.size > 5000
-          invalid_properties.push("invalid value for \"service_class\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("service_class", _service_class.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -139,8 +139,8 @@ module Stripe
         return @arrival_airport_code = nil
       end
       _arrival_airport_code = arrival_airport_code.not_nil!
-      if _arrival_airport_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"arrival_airport_code\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("arrival_airport_code", _arrival_airport_code.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @arrival_airport_code = _arrival_airport_code
@@ -153,8 +153,8 @@ module Stripe
         return @carrier = nil
       end
       _carrier = carrier.not_nil!
-      if _carrier.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"carrier\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("carrier", _carrier.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @carrier = _carrier
@@ -167,8 +167,8 @@ module Stripe
         return @departure_airport_code = nil
       end
       _departure_airport_code = departure_airport_code.not_nil!
-      if _departure_airport_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"departure_airport_code\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("departure_airport_code", _departure_airport_code.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @departure_airport_code = _departure_airport_code
@@ -181,8 +181,8 @@ module Stripe
         return @flight_number = nil
       end
       _flight_number = flight_number.not_nil!
-      if _flight_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"flight_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flight_number", _flight_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @flight_number = _flight_number
@@ -195,8 +195,8 @@ module Stripe
         return @service_class = nil
       end
       _service_class = service_class.not_nil!
-      if _service_class.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"service_class\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("service_class", _service_class.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @service_class = _service_class

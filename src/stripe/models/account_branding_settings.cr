@@ -64,23 +64,19 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _icon = @icon
-        if _icon.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_icon.list_invalid_properties_for("icon"))
-        end
+        invalid_properties.concat(_icon.list_invalid_properties_for("icon")) if _icon.is_a?(OpenApi::Validatable)
       end
       if _logo = @logo
-        if _logo.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_logo.list_invalid_properties_for("logo"))
-        end
+        invalid_properties.concat(_logo.list_invalid_properties_for("logo")) if _logo.is_a?(OpenApi::Validatable)
       end
       if _primary_color = @primary_color
-        if _primary_color.to_s.size > 5000
-          invalid_properties.push("invalid value for \"primary_color\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("primary_color", _primary_color.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _secondary_color = @secondary_color
-        if _secondary_color.to_s.size > 5000
-          invalid_properties.push("invalid value for \"secondary_color\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secondary_color", _secondary_color.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -91,14 +87,10 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _icon = @icon
-        if _icon.is_a?(OpenApi::Validatable)
-          return false unless _icon.valid?
-        end
+        return false if _icon.is_a?(OpenApi::Validatable) && !_icon.valid?
       end
       if _logo = @logo
-        if _logo.is_a?(OpenApi::Validatable)
-          return false unless _logo.valid?
-        end
+        return false if _logo.is_a?(OpenApi::Validatable) && !_logo.valid?
       end
       if _primary_color = @primary_color
         return false if _primary_color.to_s.size > 5000
@@ -117,9 +109,7 @@ module Stripe
         return @icon = nil
       end
       _icon = icon.not_nil!
-      if _icon.is_a?(OpenApi::Validatable)
-        _icon.validate
-      end
+      _icon.validate if _icon.is_a?(OpenApi::Validatable)
       @icon = _icon
     end
 
@@ -130,9 +120,7 @@ module Stripe
         return @logo = nil
       end
       _logo = logo.not_nil!
-      if _logo.is_a?(OpenApi::Validatable)
-        _logo.validate
-      end
+      _logo.validate if _logo.is_a?(OpenApi::Validatable)
       @logo = _logo
     end
 
@@ -143,8 +131,8 @@ module Stripe
         return @primary_color = nil
       end
       _primary_color = primary_color.not_nil!
-      if _primary_color.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"primary_color\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("primary_color", _primary_color.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @primary_color = _primary_color
@@ -157,8 +145,8 @@ module Stripe
         return @secondary_color = nil
       end
       _secondary_color = secondary_color.not_nil!
-      if _secondary_color.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"secondary_color\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secondary_color", _secondary_color.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @secondary_color = _secondary_color

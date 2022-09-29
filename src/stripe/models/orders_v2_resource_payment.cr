@@ -40,7 +40,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["canceled", "complete", "not_required", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["canceled", "complete", "not_required", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -58,14 +58,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _payment_intent = @payment_intent
-        if _payment_intent.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent"))
-        end
+        invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
       if _settings = @settings
-        if _settings.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_settings.list_invalid_properties_for("settings"))
-        end
+        invalid_properties.concat(_settings.list_invalid_properties_for("settings")) if _settings.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
@@ -77,14 +73,10 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _payment_intent = @payment_intent
-        if _payment_intent.is_a?(OpenApi::Validatable)
-          return false unless _payment_intent.valid?
-        end
+        return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
       if _settings = @settings
-        if _settings.is_a?(OpenApi::Validatable)
-          return false unless _settings.valid?
-        end
+        return false if _settings.is_a?(OpenApi::Validatable) && !_settings.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
@@ -98,9 +90,7 @@ module Stripe
         return @payment_intent = nil
       end
       _payment_intent = payment_intent.not_nil!
-      if _payment_intent.is_a?(OpenApi::Validatable)
-        _payment_intent.validate
-      end
+      _payment_intent.validate if _payment_intent.is_a?(OpenApi::Validatable)
       @payment_intent = _payment_intent
     end
 
@@ -111,9 +101,7 @@ module Stripe
         return @settings = nil
       end
       _settings = settings.not_nil!
-      if _settings.is_a?(OpenApi::Validatable)
-        _settings.validate
-      end
+      _settings.validate if _settings.is_a?(OpenApi::Validatable)
       @settings = _settings
     end
 

@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["custom_line_item", "invoice_line_item"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["custom_line_item", "invoice_line_item"])
 
     # Optional properties
 
@@ -73,20 +73,18 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       if _description = @description
-        if _description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _invoice_line_item = @invoice_line_item
-        if _invoice_line_item.to_s.size > 5000
-          invalid_properties.push("invalid value for \"invoice_line_item\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_line_item", _invoice_line_item.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _tax_rates = @tax_rates
-        if _tax_rates.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_tax_rates.list_invalid_properties_for("tax_rates"))
-        end
+        invalid_properties.concat(_tax_rates.list_invalid_properties_for("tax_rates")) if _tax_rates.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -105,9 +103,7 @@ module Stripe
       end
 
       if _tax_rates = @tax_rates
-        if _tax_rates.is_a?(OpenApi::Validatable)
-          return false unless _tax_rates.valid?
-        end
+        return false if _tax_rates.is_a?(OpenApi::Validatable) && !_tax_rates.valid?
       end
 
       true
@@ -141,8 +137,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -155,8 +151,8 @@ module Stripe
         return @invoice_line_item = nil
       end
       _invoice_line_item = invoice_line_item.not_nil!
-      if _invoice_line_item.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"invoice_line_item\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_line_item", _invoice_line_item.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @invoice_line_item = _invoice_line_item
@@ -179,9 +175,7 @@ module Stripe
         return @tax_rates = nil
       end
       _tax_rates = tax_rates.not_nil!
-      if _tax_rates.is_a?(OpenApi::Validatable)
-        _tax_rates.validate
-      end
+      _tax_rates.validate if _tax_rates.is_a?(OpenApi::Validatable)
       @tax_rates = _tax_rates
     end
 

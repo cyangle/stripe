@@ -29,12 +29,12 @@ module Stripe
     @[JSON::Field(key: "mode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mode : String? = nil
 
-    ENUM_VALIDATOR_FOR_MODE = EnumValidator.new("mode", "String", ["at_period_end", "immediately"])
+    ENUM_VALIDATOR_FOR_MODE = OpenApi::EnumValidator.new("mode", "String", ["at_period_end", "immediately"])
 
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
+    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = OpenApi::EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,9 +53,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _cancellation_reason = @cancellation_reason
-        if _cancellation_reason.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_cancellation_reason.list_invalid_properties_for("cancellation_reason"))
-        end
+        invalid_properties.concat(_cancellation_reason.list_invalid_properties_for("cancellation_reason")) if _cancellation_reason.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_MODE.error_message) unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode)
@@ -69,9 +67,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _cancellation_reason = @cancellation_reason
-        if _cancellation_reason.is_a?(OpenApi::Validatable)
-          return false unless _cancellation_reason.valid?
-        end
+        return false if _cancellation_reason.is_a?(OpenApi::Validatable) && !_cancellation_reason.valid?
       end
 
       return false unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode)
@@ -87,9 +83,7 @@ module Stripe
         return @cancellation_reason = nil
       end
       _cancellation_reason = cancellation_reason.not_nil!
-      if _cancellation_reason.is_a?(OpenApi::Validatable)
-        _cancellation_reason.validate
-      end
+      _cancellation_reason.validate if _cancellation_reason.is_a?(OpenApi::Validatable)
       @cancellation_reason = _cancellation_reason
     end
 

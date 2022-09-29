@@ -77,7 +77,7 @@ module Stripe
     @[JSON::Field(key: "political_exposure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter political_exposure : String? = nil
 
-    ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE = EnumValidator.new("political_exposure", "String", ["existing", "none"])
+    ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE = OpenApi::EnumValidator.new("political_exposure", "String", ["existing", "none"])
 
     @[JSON::Field(key: "registered_address", type: Stripe::AddressSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter registered_address : Stripe::AddressSpecs? = nil
@@ -123,98 +123,82 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _address = @address
-        if _address.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_address.list_invalid_properties_for("address"))
-        end
+        invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       if _address_kana = @address_kana
-        if _address_kana.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_address_kana.list_invalid_properties_for("address_kana"))
-        end
+        invalid_properties.concat(_address_kana.list_invalid_properties_for("address_kana")) if _address_kana.is_a?(OpenApi::Validatable)
       end
       if _address_kanji = @address_kanji
-        if _address_kanji.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_address_kanji.list_invalid_properties_for("address_kanji"))
-        end
+        invalid_properties.concat(_address_kanji.list_invalid_properties_for("address_kanji")) if _address_kanji.is_a?(OpenApi::Validatable)
       end
       if _dob = @dob
-        if _dob.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_dob.list_invalid_properties_for("dob"))
-        end
+        invalid_properties.concat(_dob.list_invalid_properties_for("dob")) if _dob.is_a?(OpenApi::Validatable)
       end
 
       if _first_name = @first_name
-        if _first_name.to_s.size > 100
-          invalid_properties.push("invalid value for \"first_name\", the character length must be smaller than or equal to 100.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 100)
+          invalid_properties.push(max_length_error)
         end
       end
       if _first_name_kana = @first_name_kana
-        if _first_name_kana.to_s.size > 5000
-          invalid_properties.push("invalid value for \"first_name_kana\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name_kana", _first_name_kana.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _first_name_kanji = @first_name_kanji
-        if _first_name_kanji.to_s.size > 5000
-          invalid_properties.push("invalid value for \"first_name_kanji\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name_kanji", _first_name_kanji.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _full_name_aliases = @full_name_aliases
-        if _full_name_aliases.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_full_name_aliases.list_invalid_properties_for("full_name_aliases"))
-        end
+        invalid_properties.concat(_full_name_aliases.list_invalid_properties_for("full_name_aliases")) if _full_name_aliases.is_a?(OpenApi::Validatable)
       end
 
       if _id_number = @id_number
-        if _id_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number", _id_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _id_number_secondary = @id_number_secondary
-        if _id_number_secondary.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id_number_secondary\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number_secondary", _id_number_secondary.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _last_name = @last_name
-        if _last_name.to_s.size > 100
-          invalid_properties.push("invalid value for \"last_name\", the character length must be smaller than or equal to 100.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 100)
+          invalid_properties.push(max_length_error)
         end
       end
       if _last_name_kana = @last_name_kana
-        if _last_name_kana.to_s.size > 5000
-          invalid_properties.push("invalid value for \"last_name_kana\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name_kana", _last_name_kana.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _last_name_kanji = @last_name_kanji
-        if _last_name_kanji.to_s.size > 5000
-          invalid_properties.push("invalid value for \"last_name_kanji\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name_kanji", _last_name_kanji.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _maiden_name = @maiden_name
-        if _maiden_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"maiden_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("maiden_name", _maiden_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.error_message) unless ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.valid?(@political_exposure)
       if _registered_address = @registered_address
-        if _registered_address.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_registered_address.list_invalid_properties_for("registered_address"))
-        end
+        invalid_properties.concat(_registered_address.list_invalid_properties_for("registered_address")) if _registered_address.is_a?(OpenApi::Validatable)
       end
       if _ssn_last_4 = @ssn_last_4
-        if _ssn_last_4.to_s.size > 5000
-          invalid_properties.push("invalid value for \"ssn_last_4\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ssn_last_4", _ssn_last_4.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _verification = @verification
-        if _verification.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_verification.list_invalid_properties_for("verification"))
-        end
+        invalid_properties.concat(_verification.list_invalid_properties_for("verification")) if _verification.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -224,24 +208,16 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _address = @address
-        if _address.is_a?(OpenApi::Validatable)
-          return false unless _address.valid?
-        end
+        return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
       if _address_kana = @address_kana
-        if _address_kana.is_a?(OpenApi::Validatable)
-          return false unless _address_kana.valid?
-        end
+        return false if _address_kana.is_a?(OpenApi::Validatable) && !_address_kana.valid?
       end
       if _address_kanji = @address_kanji
-        if _address_kanji.is_a?(OpenApi::Validatable)
-          return false unless _address_kanji.valid?
-        end
+        return false if _address_kanji.is_a?(OpenApi::Validatable) && !_address_kanji.valid?
       end
       if _dob = @dob
-        if _dob.is_a?(OpenApi::Validatable)
-          return false unless _dob.valid?
-        end
+        return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
 
       if _first_name = @first_name
@@ -254,9 +230,7 @@ module Stripe
         return false if _first_name_kanji.to_s.size > 5000
       end
       if _full_name_aliases = @full_name_aliases
-        if _full_name_aliases.is_a?(OpenApi::Validatable)
-          return false unless _full_name_aliases.valid?
-        end
+        return false if _full_name_aliases.is_a?(OpenApi::Validatable) && !_full_name_aliases.valid?
       end
 
       if _id_number = @id_number
@@ -278,24 +252,18 @@ module Stripe
         return false if _maiden_name.to_s.size > 5000
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
       return false unless ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.valid?(@political_exposure)
       if _registered_address = @registered_address
-        if _registered_address.is_a?(OpenApi::Validatable)
-          return false unless _registered_address.valid?
-        end
+        return false if _registered_address.is_a?(OpenApi::Validatable) && !_registered_address.valid?
       end
       if _ssn_last_4 = @ssn_last_4
         return false if _ssn_last_4.to_s.size > 5000
       end
       if _verification = @verification
-        if _verification.is_a?(OpenApi::Validatable)
-          return false unless _verification.valid?
-        end
+        return false if _verification.is_a?(OpenApi::Validatable) && !_verification.valid?
       end
 
       true
@@ -308,9 +276,7 @@ module Stripe
         return @address = nil
       end
       _address = address.not_nil!
-      if _address.is_a?(OpenApi::Validatable)
-        _address.validate
-      end
+      _address.validate if _address.is_a?(OpenApi::Validatable)
       @address = _address
     end
 
@@ -321,9 +287,7 @@ module Stripe
         return @address_kana = nil
       end
       _address_kana = address_kana.not_nil!
-      if _address_kana.is_a?(OpenApi::Validatable)
-        _address_kana.validate
-      end
+      _address_kana.validate if _address_kana.is_a?(OpenApi::Validatable)
       @address_kana = _address_kana
     end
 
@@ -334,9 +298,7 @@ module Stripe
         return @address_kanji = nil
       end
       _address_kanji = address_kanji.not_nil!
-      if _address_kanji.is_a?(OpenApi::Validatable)
-        _address_kanji.validate
-      end
+      _address_kanji.validate if _address_kanji.is_a?(OpenApi::Validatable)
       @address_kanji = _address_kanji
     end
 
@@ -347,9 +309,7 @@ module Stripe
         return @dob = nil
       end
       _dob = dob.not_nil!
-      if _dob.is_a?(OpenApi::Validatable)
-        _dob.validate
-      end
+      _dob.validate if _dob.is_a?(OpenApi::Validatable)
       @dob = _dob
     end
 
@@ -370,8 +330,8 @@ module Stripe
         return @first_name = nil
       end
       _first_name = first_name.not_nil!
-      if _first_name.to_s.size > 100
-        raise ArgumentError.new("invalid value for \"first_name\", the character length must be smaller than or equal to 100.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 100)
+        raise ArgumentError.new(max_length_error)
       end
 
       @first_name = _first_name
@@ -384,8 +344,8 @@ module Stripe
         return @first_name_kana = nil
       end
       _first_name_kana = first_name_kana.not_nil!
-      if _first_name_kana.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"first_name_kana\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name_kana", _first_name_kana.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @first_name_kana = _first_name_kana
@@ -398,8 +358,8 @@ module Stripe
         return @first_name_kanji = nil
       end
       _first_name_kanji = first_name_kanji.not_nil!
-      if _first_name_kanji.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"first_name_kanji\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name_kanji", _first_name_kanji.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @first_name_kanji = _first_name_kanji
@@ -412,9 +372,7 @@ module Stripe
         return @full_name_aliases = nil
       end
       _full_name_aliases = full_name_aliases.not_nil!
-      if _full_name_aliases.is_a?(OpenApi::Validatable)
-        _full_name_aliases.validate
-      end
+      _full_name_aliases.validate if _full_name_aliases.is_a?(OpenApi::Validatable)
       @full_name_aliases = _full_name_aliases
     end
 
@@ -435,8 +393,8 @@ module Stripe
         return @id_number = nil
       end
       _id_number = id_number.not_nil!
-      if _id_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number", _id_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id_number = _id_number
@@ -449,8 +407,8 @@ module Stripe
         return @id_number_secondary = nil
       end
       _id_number_secondary = id_number_secondary.not_nil!
-      if _id_number_secondary.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id_number_secondary\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number_secondary", _id_number_secondary.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id_number_secondary = _id_number_secondary
@@ -463,8 +421,8 @@ module Stripe
         return @last_name = nil
       end
       _last_name = last_name.not_nil!
-      if _last_name.to_s.size > 100
-        raise ArgumentError.new("invalid value for \"last_name\", the character length must be smaller than or equal to 100.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 100)
+        raise ArgumentError.new(max_length_error)
       end
 
       @last_name = _last_name
@@ -477,8 +435,8 @@ module Stripe
         return @last_name_kana = nil
       end
       _last_name_kana = last_name_kana.not_nil!
-      if _last_name_kana.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last_name_kana\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name_kana", _last_name_kana.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @last_name_kana = _last_name_kana
@@ -491,8 +449,8 @@ module Stripe
         return @last_name_kanji = nil
       end
       _last_name_kanji = last_name_kanji.not_nil!
-      if _last_name_kanji.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last_name_kanji\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name_kanji", _last_name_kanji.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @last_name_kanji = _last_name_kanji
@@ -505,8 +463,8 @@ module Stripe
         return @maiden_name = nil
       end
       _maiden_name = maiden_name.not_nil!
-      if _maiden_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"maiden_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("maiden_name", _maiden_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @maiden_name = _maiden_name
@@ -519,9 +477,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 
@@ -553,9 +509,7 @@ module Stripe
         return @registered_address = nil
       end
       _registered_address = registered_address.not_nil!
-      if _registered_address.is_a?(OpenApi::Validatable)
-        _registered_address.validate
-      end
+      _registered_address.validate if _registered_address.is_a?(OpenApi::Validatable)
       @registered_address = _registered_address
     end
 
@@ -566,8 +520,8 @@ module Stripe
         return @ssn_last_4 = nil
       end
       _ssn_last_4 = ssn_last_4.not_nil!
-      if _ssn_last_4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"ssn_last_4\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ssn_last_4", _ssn_last_4.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @ssn_last_4 = _ssn_last_4
@@ -580,9 +534,7 @@ module Stripe
         return @verification = nil
       end
       _verification = verification.not_nil!
-      if _verification.is_a?(OpenApi::Validatable)
-        _verification.validate
-      end
+      _verification.validate if _verification.is_a?(OpenApi::Validatable)
       @verification = _verification
     end
 

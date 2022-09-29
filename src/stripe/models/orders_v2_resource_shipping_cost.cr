@@ -70,18 +70,10 @@ module Stripe
       invalid_properties.push("\"amount_total\" is required and cannot be null") if @amount_total.nil?
 
       if _shipping_rate = @shipping_rate
-        if _shipping_rate.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_shipping_rate.list_invalid_properties_for("shipping_rate"))
-        end
+        invalid_properties.concat(_shipping_rate.list_invalid_properties_for("shipping_rate")) if _shipping_rate.is_a?(OpenApi::Validatable)
       end
       if _taxes = @taxes
-        if _taxes.is_a?(Array)
-          _taxes.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("taxes"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "taxes", array: _taxes)) if _taxes.is_a?(Array)
       end
 
       invalid_properties
@@ -97,18 +89,10 @@ module Stripe
       return false if @amount_total.nil?
 
       if _shipping_rate = @shipping_rate
-        if _shipping_rate.is_a?(OpenApi::Validatable)
-          return false unless _shipping_rate.valid?
-        end
+        return false if _shipping_rate.is_a?(OpenApi::Validatable) && !_shipping_rate.valid?
       end
       if _taxes = @taxes
-        if _taxes.is_a?(Array)
-          _taxes.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _taxes.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _taxes)
       end
 
       true
@@ -151,9 +135,7 @@ module Stripe
         return @shipping_rate = nil
       end
       _shipping_rate = shipping_rate.not_nil!
-      if _shipping_rate.is_a?(OpenApi::Validatable)
-        _shipping_rate.validate
-      end
+      _shipping_rate.validate if _shipping_rate.is_a?(OpenApi::Validatable)
       @shipping_rate = _shipping_rate
     end
 
@@ -164,13 +146,7 @@ module Stripe
         return @taxes = nil
       end
       _taxes = taxes.not_nil!
-      if _taxes.is_a?(Array)
-        _taxes.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _taxes) if _taxes.is_a?(Array)
       @taxes = _taxes
     end
 

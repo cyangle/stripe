@@ -73,46 +73,38 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
-        if _name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _description = @description
-        if _description.to_s.size > 40000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 40000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _images = @images
-        if _images.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_images.list_invalid_properties_for("images"))
-        end
+        invalid_properties.concat(_images.list_invalid_properties_for("images")) if _images.is_a?(OpenApi::Validatable)
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _package_dimensions = @package_dimensions
-        if _package_dimensions.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions"))
-        end
+        invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions")) if _package_dimensions.is_a?(OpenApi::Validatable)
       end
 
       if _tax_code = @tax_code
-        if _tax_code.to_s.size > 5000
-          invalid_properties.push("invalid value for \"tax_code\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_code", _tax_code.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _url = @url
-        if _url.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_url.list_invalid_properties_for("url"))
-        end
+        invalid_properties.concat(_url.list_invalid_properties_for("url")) if _url.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -133,28 +125,20 @@ module Stripe
         return false if _description.to_s.size > 40000
       end
       if _images = @images
-        if _images.is_a?(OpenApi::Validatable)
-          return false unless _images.valid?
-        end
+        return false if _images.is_a?(OpenApi::Validatable) && !_images.valid?
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
       if _package_dimensions = @package_dimensions
-        if _package_dimensions.is_a?(OpenApi::Validatable)
-          return false unless _package_dimensions.valid?
-        end
+        return false if _package_dimensions.is_a?(OpenApi::Validatable) && !_package_dimensions.valid?
       end
 
       if _tax_code = @tax_code
         return false if _tax_code.to_s.size > 5000
       end
       if _url = @url
-        if _url.is_a?(OpenApi::Validatable)
-          return false unless _url.valid?
-        end
+        return false if _url.is_a?(OpenApi::Validatable) && !_url.valid?
       end
 
       true
@@ -167,8 +151,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -181,8 +165,8 @@ module Stripe
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if _name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name
@@ -195,8 +179,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 40000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 40000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -209,9 +193,7 @@ module Stripe
         return @images = nil
       end
       _images = images.not_nil!
-      if _images.is_a?(OpenApi::Validatable)
-        _images.validate
-      end
+      _images.validate if _images.is_a?(OpenApi::Validatable)
       @images = _images
     end
 
@@ -222,9 +204,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 
@@ -235,9 +215,7 @@ module Stripe
         return @package_dimensions = nil
       end
       _package_dimensions = package_dimensions.not_nil!
-      if _package_dimensions.is_a?(OpenApi::Validatable)
-        _package_dimensions.validate
-      end
+      _package_dimensions.validate if _package_dimensions.is_a?(OpenApi::Validatable)
       @package_dimensions = _package_dimensions
     end
 
@@ -258,8 +236,8 @@ module Stripe
         return @tax_code = nil
       end
       _tax_code = tax_code.not_nil!
-      if _tax_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"tax_code\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_code", _tax_code.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @tax_code = _tax_code
@@ -272,9 +250,7 @@ module Stripe
         return @url = nil
       end
       _url = url.not_nil!
-      if _url.is_a?(OpenApi::Validatable)
-        _url.validate
-      end
+      _url.validate if _url.is_a?(OpenApi::Validatable)
       @url = _url
     end
 

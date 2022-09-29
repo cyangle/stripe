@@ -41,9 +41,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _three_d_secure = @three_d_secure
-        if _three_d_secure.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_three_d_secure.list_invalid_properties_for("three_d_secure"))
-        end
+        invalid_properties.concat(_three_d_secure.list_invalid_properties_for("three_d_secure")) if _three_d_secure.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -53,9 +51,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _three_d_secure = @three_d_secure
-        if _three_d_secure.is_a?(OpenApi::Validatable)
-          return false unless _three_d_secure.valid?
-        end
+        return false if _three_d_secure.is_a?(OpenApi::Validatable) && !_three_d_secure.valid?
       end
 
       true
@@ -68,9 +64,7 @@ module Stripe
         return @three_d_secure = nil
       end
       _three_d_secure = three_d_secure.not_nil!
-      if _three_d_secure.is_a?(OpenApi::Validatable)
-        _three_d_secure.validate
-      end
+      _three_d_secure.validate if _three_d_secure.is_a?(OpenApi::Validatable)
       @three_d_secure = _three_d_secure
     end
 

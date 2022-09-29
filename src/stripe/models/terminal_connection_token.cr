@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["terminal.connection_token"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["terminal.connection_token"])
 
     # Your application should pass this token to the Stripe Terminal SDK.
     @[JSON::Field(key: "secret", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -57,13 +57,13 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"secret\" is required and cannot be null") if @secret.nil?
       if _secret = @secret
-        if _secret.to_s.size > 5000
-          invalid_properties.push("invalid value for \"secret\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secret", _secret.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _location = @location
-        if _location.to_s.size > 5000
-          invalid_properties.push("invalid value for \"location\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("location", _location.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -103,8 +103,8 @@ module Stripe
         raise ArgumentError.new("\"secret\" is required and cannot be null")
       end
       _secret = secret.not_nil!
-      if _secret.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"secret\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secret", _secret.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @secret = _secret
@@ -117,8 +117,8 @@ module Stripe
         return @location = nil
       end
       _location = location.not_nil!
-      if _location.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"location\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("location", _location.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @location = _location

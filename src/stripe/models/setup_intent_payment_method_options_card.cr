@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? network_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_NETWORK = EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
+    ENUM_VALIDATOR_FOR_NETWORK = OpenApi::EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
 
     # We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: request_three_d_secure.nil? && !request_three_d_secure_present?)]
@@ -43,7 +43,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? request_three_d_secure_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = EnumValidator.new("request_three_d_secure", "String", ["any", "automatic", "challenge_only"])
+    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = OpenApi::EnumValidator.new("request_three_d_secure", "String", ["any", "automatic", "challenge_only"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -61,9 +61,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _mandate_options = @mandate_options
-        if _mandate_options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options"))
-        end
+        invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
@@ -77,9 +75,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _mandate_options = @mandate_options
-        if _mandate_options.is_a?(OpenApi::Validatable)
-          return false unless _mandate_options.valid?
-        end
+        return false if _mandate_options.is_a?(OpenApi::Validatable) && !_mandate_options.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
       return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
@@ -94,9 +90,7 @@ module Stripe
         return @mandate_options = nil
       end
       _mandate_options = mandate_options.not_nil!
-      if _mandate_options.is_a?(OpenApi::Validatable)
-        _mandate_options.validate
-      end
+      _mandate_options.validate if _mandate_options.is_a?(OpenApi::Validatable)
       @mandate_options = _mandate_options
     end
 

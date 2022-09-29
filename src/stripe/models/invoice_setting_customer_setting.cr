@@ -64,28 +64,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _custom_fields = @custom_fields
-        if _custom_fields.is_a?(Array)
-          _custom_fields.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("custom_fields"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "custom_fields", array: _custom_fields)) if _custom_fields.is_a?(Array)
       end
       if _default_payment_method = @default_payment_method
-        if _default_payment_method.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_default_payment_method.list_invalid_properties_for("default_payment_method"))
-        end
+        invalid_properties.concat(_default_payment_method.list_invalid_properties_for("default_payment_method")) if _default_payment_method.is_a?(OpenApi::Validatable)
       end
       if _footer = @footer
-        if _footer.to_s.size > 5000
-          invalid_properties.push("invalid value for \"footer\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _rendering_options = @rendering_options
-        if _rendering_options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_rendering_options.list_invalid_properties_for("rendering_options"))
-        end
+        invalid_properties.concat(_rendering_options.list_invalid_properties_for("rendering_options")) if _rendering_options.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -95,26 +85,16 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _custom_fields = @custom_fields
-        if _custom_fields.is_a?(Array)
-          _custom_fields.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _custom_fields.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _custom_fields)
       end
       if _default_payment_method = @default_payment_method
-        if _default_payment_method.is_a?(OpenApi::Validatable)
-          return false unless _default_payment_method.valid?
-        end
+        return false if _default_payment_method.is_a?(OpenApi::Validatable) && !_default_payment_method.valid?
       end
       if _footer = @footer
         return false if _footer.to_s.size > 5000
       end
       if _rendering_options = @rendering_options
-        if _rendering_options.is_a?(OpenApi::Validatable)
-          return false unless _rendering_options.valid?
-        end
+        return false if _rendering_options.is_a?(OpenApi::Validatable) && !_rendering_options.valid?
       end
 
       true
@@ -127,13 +107,7 @@ module Stripe
         return @custom_fields = nil
       end
       _custom_fields = custom_fields.not_nil!
-      if _custom_fields.is_a?(Array)
-        _custom_fields.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _custom_fields) if _custom_fields.is_a?(Array)
       @custom_fields = _custom_fields
     end
 
@@ -144,9 +118,7 @@ module Stripe
         return @default_payment_method = nil
       end
       _default_payment_method = default_payment_method.not_nil!
-      if _default_payment_method.is_a?(OpenApi::Validatable)
-        _default_payment_method.validate
-      end
+      _default_payment_method.validate if _default_payment_method.is_a?(OpenApi::Validatable)
       @default_payment_method = _default_payment_method
     end
 
@@ -157,8 +129,8 @@ module Stripe
         return @footer = nil
       end
       _footer = footer.not_nil!
-      if _footer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"footer\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @footer = _footer
@@ -171,9 +143,7 @@ module Stripe
         return @rendering_options = nil
       end
       _rendering_options = rendering_options.not_nil!
-      if _rendering_options.is_a?(OpenApi::Validatable)
-        _rendering_options.validate
-      end
+      _rendering_options.validate if _rendering_options.is_a?(OpenApi::Validatable)
       @rendering_options = _rendering_options
     end
 

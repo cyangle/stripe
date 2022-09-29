@@ -60,14 +60,14 @@ module Stripe
 
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
       if _interval = @interval
-        if _interval.to_s.size > 5000
-          invalid_properties.push("invalid value for \"interval\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval", _interval.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _weekly_anchor = @weekly_anchor
-        if _weekly_anchor.to_s.size > 5000
-          invalid_properties.push("invalid value for \"weekly_anchor\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("weekly_anchor", _weekly_anchor.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -108,8 +108,8 @@ module Stripe
         raise ArgumentError.new("\"interval\" is required and cannot be null")
       end
       _interval = interval.not_nil!
-      if _interval.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"interval\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval", _interval.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @interval = _interval
@@ -132,8 +132,8 @@ module Stripe
         return @weekly_anchor = nil
       end
       _weekly_anchor = weekly_anchor.not_nil!
-      if _weekly_anchor.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"weekly_anchor\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("weekly_anchor", _weekly_anchor.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @weekly_anchor = _weekly_anchor

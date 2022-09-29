@@ -32,13 +32,13 @@ module Stripe
     @[JSON::Field(key: "service", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter service : String? = nil
 
-    ENUM_VALIDATOR_FOR_SERVICE = EnumValidator.new("service", "String", ["express", "priority", "standard"])
+    ENUM_VALIDATOR_FOR_SERVICE = OpenApi::EnumValidator.new("service", "String", ["express", "priority", "standard"])
 
     # Packaging options.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["bulk", "individual"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["bulk", "individual"])
 
     # Optional properties
 
@@ -49,7 +49,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? carrier_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_CARRIER = EnumValidator.new("carrier", "String", ["dhl", "fedex", "royal_mail", "usps"])
+    ENUM_VALIDATOR_FOR_CARRIER = OpenApi::EnumValidator.new("carrier", "String", ["dhl", "fedex", "royal_mail", "usps"])
 
     @[JSON::Field(key: "customs", type: Stripe::IssuingCardShippingCustoms1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: customs.nil? && !customs_present?)]
     getter customs : Stripe::IssuingCardShippingCustoms1? = nil
@@ -85,7 +85,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["canceled", "delivered", "failure", "pending", "returned", "shipped"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["canceled", "delivered", "failure", "pending", "returned", "shipped"])
 
     # A tracking number for a card shipment.
     @[JSON::Field(key: "tracking_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tracking_number.nil? && !tracking_number_present?)]
@@ -128,14 +128,12 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
       if _address = @address
-        if _address.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_address.list_invalid_properties_for("address"))
-        end
+        invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
-        if _name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -145,26 +143,24 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CARRIER.error_message) unless ENUM_VALIDATOR_FOR_CARRIER.valid?(@carrier)
       if _customs = @customs
-        if _customs.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_customs.list_invalid_properties_for("customs"))
-        end
+        invalid_properties.concat(_customs.list_invalid_properties_for("customs")) if _customs.is_a?(OpenApi::Validatable)
       end
 
       if _phone_number = @phone_number
-        if _phone_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"phone_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone_number", _phone_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
       if _tracking_number = @tracking_number
-        if _tracking_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"tracking_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tracking_number", _tracking_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _tracking_url = @tracking_url
-        if _tracking_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"tracking_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tracking_url", _tracking_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -176,9 +172,7 @@ module Stripe
     def valid? : Bool
       return false if @address.nil?
       if _address = @address
-        if _address.is_a?(OpenApi::Validatable)
-          return false unless _address.valid?
-        end
+        return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
       return false if @name.nil?
       if _name = @name
@@ -188,9 +182,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       return false unless ENUM_VALIDATOR_FOR_CARRIER.valid?(@carrier)
       if _customs = @customs
-        if _customs.is_a?(OpenApi::Validatable)
-          return false unless _customs.valid?
-        end
+        return false if _customs.is_a?(OpenApi::Validatable) && !_customs.valid?
       end
 
       if _phone_number = @phone_number
@@ -215,9 +207,7 @@ module Stripe
         raise ArgumentError.new("\"address\" is required and cannot be null")
       end
       _address = address.not_nil!
-      if _address.is_a?(OpenApi::Validatable)
-        _address.validate
-      end
+      _address.validate if _address.is_a?(OpenApi::Validatable)
       @address = _address
     end
 
@@ -228,8 +218,8 @@ module Stripe
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if _name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name
@@ -275,9 +265,7 @@ module Stripe
         return @customs = nil
       end
       _customs = customs.not_nil!
-      if _customs.is_a?(OpenApi::Validatable)
-        _customs.validate
-      end
+      _customs.validate if _customs.is_a?(OpenApi::Validatable)
       @customs = _customs
     end
 
@@ -298,8 +286,8 @@ module Stripe
         return @phone_number = nil
       end
       _phone_number = phone_number.not_nil!
-      if _phone_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"phone_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone_number", _phone_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @phone_number = _phone_number
@@ -333,8 +321,8 @@ module Stripe
         return @tracking_number = nil
       end
       _tracking_number = tracking_number.not_nil!
-      if _tracking_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"tracking_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tracking_number", _tracking_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @tracking_number = _tracking_number
@@ -347,8 +335,8 @@ module Stripe
         return @tracking_url = nil
       end
       _tracking_url = tracking_url.not_nil!
-      if _tracking_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"tracking_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tracking_url", _tracking_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @tracking_url = _tracking_url

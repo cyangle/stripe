@@ -53,7 +53,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["transfer"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["transfer"])
 
     @[JSON::Field(key: "reversals", type: Stripe::TransferReversalList1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reversals : Stripe::TransferReversalList1? = nil
@@ -143,8 +143,8 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -154,45 +154,35 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"reversals\" is required and cannot be null") if @reversals.nil?
       if _reversals = @reversals
-        if _reversals.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_reversals.list_invalid_properties_for("reversals"))
-        end
+        invalid_properties.concat(_reversals.list_invalid_properties_for("reversals")) if _reversals.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"reversed\" is required and cannot be null") if @reversed.nil?
 
       if _balance_transaction = @balance_transaction
-        if _balance_transaction.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction"))
-        end
+        invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
       if _description = @description
-        if _description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _destination = @destination
-        if _destination.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_destination.list_invalid_properties_for("destination"))
-        end
+        invalid_properties.concat(_destination.list_invalid_properties_for("destination")) if _destination.is_a?(OpenApi::Validatable)
       end
       if _destination_payment = @destination_payment
-        if _destination_payment.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_destination_payment.list_invalid_properties_for("destination_payment"))
-        end
+        invalid_properties.concat(_destination_payment.list_invalid_properties_for("destination_payment")) if _destination_payment.is_a?(OpenApi::Validatable)
       end
       if _source_transaction = @source_transaction
-        if _source_transaction.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_source_transaction.list_invalid_properties_for("source_transaction"))
-        end
+        invalid_properties.concat(_source_transaction.list_invalid_properties_for("source_transaction")) if _source_transaction.is_a?(OpenApi::Validatable)
       end
       if _source_type = @source_type
-        if _source_type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"source_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_type", _source_type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _transfer_group = @transfer_group
-        if _transfer_group.to_s.size > 5000
-          invalid_properties.push("invalid value for \"transfer_group\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transfer_group", _transfer_group.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -221,34 +211,24 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @reversals.nil?
       if _reversals = @reversals
-        if _reversals.is_a?(OpenApi::Validatable)
-          return false unless _reversals.valid?
-        end
+        return false if _reversals.is_a?(OpenApi::Validatable) && !_reversals.valid?
       end
       return false if @reversed.nil?
 
       if _balance_transaction = @balance_transaction
-        if _balance_transaction.is_a?(OpenApi::Validatable)
-          return false unless _balance_transaction.valid?
-        end
+        return false if _balance_transaction.is_a?(OpenApi::Validatable) && !_balance_transaction.valid?
       end
       if _description = @description
         return false if _description.to_s.size > 5000
       end
       if _destination = @destination
-        if _destination.is_a?(OpenApi::Validatable)
-          return false unless _destination.valid?
-        end
+        return false if _destination.is_a?(OpenApi::Validatable) && !_destination.valid?
       end
       if _destination_payment = @destination_payment
-        if _destination_payment.is_a?(OpenApi::Validatable)
-          return false unless _destination_payment.valid?
-        end
+        return false if _destination_payment.is_a?(OpenApi::Validatable) && !_destination_payment.valid?
       end
       if _source_transaction = @source_transaction
-        if _source_transaction.is_a?(OpenApi::Validatable)
-          return false unless _source_transaction.valid?
-        end
+        return false if _source_transaction.is_a?(OpenApi::Validatable) && !_source_transaction.valid?
       end
       if _source_type = @source_type
         return false if _source_type.to_s.size > 5000
@@ -307,8 +287,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -352,9 +332,7 @@ module Stripe
         raise ArgumentError.new("\"reversals\" is required and cannot be null")
       end
       _reversals = reversals.not_nil!
-      if _reversals.is_a?(OpenApi::Validatable)
-        _reversals.validate
-      end
+      _reversals.validate if _reversals.is_a?(OpenApi::Validatable)
       @reversals = _reversals
     end
 
@@ -375,9 +353,7 @@ module Stripe
         return @balance_transaction = nil
       end
       _balance_transaction = balance_transaction.not_nil!
-      if _balance_transaction.is_a?(OpenApi::Validatable)
-        _balance_transaction.validate
-      end
+      _balance_transaction.validate if _balance_transaction.is_a?(OpenApi::Validatable)
       @balance_transaction = _balance_transaction
     end
 
@@ -388,8 +364,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -402,9 +378,7 @@ module Stripe
         return @destination = nil
       end
       _destination = destination.not_nil!
-      if _destination.is_a?(OpenApi::Validatable)
-        _destination.validate
-      end
+      _destination.validate if _destination.is_a?(OpenApi::Validatable)
       @destination = _destination
     end
 
@@ -415,9 +389,7 @@ module Stripe
         return @destination_payment = nil
       end
       _destination_payment = destination_payment.not_nil!
-      if _destination_payment.is_a?(OpenApi::Validatable)
-        _destination_payment.validate
-      end
+      _destination_payment.validate if _destination_payment.is_a?(OpenApi::Validatable)
       @destination_payment = _destination_payment
     end
 
@@ -428,9 +400,7 @@ module Stripe
         return @source_transaction = nil
       end
       _source_transaction = source_transaction.not_nil!
-      if _source_transaction.is_a?(OpenApi::Validatable)
-        _source_transaction.validate
-      end
+      _source_transaction.validate if _source_transaction.is_a?(OpenApi::Validatable)
       @source_transaction = _source_transaction
     end
 
@@ -441,8 +411,8 @@ module Stripe
         return @source_type = nil
       end
       _source_type = source_type.not_nil!
-      if _source_type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"source_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_type", _source_type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @source_type = _source_type
@@ -455,8 +425,8 @@ module Stripe
         return @transfer_group = nil
       end
       _transfer_group = transfer_group.not_nil!
-      if _transfer_group.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"transfer_group\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transfer_group", _transfer_group.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @transfer_group = _transfer_group

@@ -61,7 +61,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["card"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["card"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -95,49 +95,49 @@ module Stripe
 
       invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
       if _number = @number
-        if _number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _address_city = @address_city
-        if _address_city.to_s.size > 5000
-          invalid_properties.push("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_city", _address_city.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _address_country = @address_country
-        if _address_country.to_s.size > 5000
-          invalid_properties.push("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_country", _address_country.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _address_line1 = @address_line1
-        if _address_line1.to_s.size > 5000
-          invalid_properties.push("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1", _address_line1.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _address_line2 = @address_line2
-        if _address_line2.to_s.size > 5000
-          invalid_properties.push("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line2", _address_line2.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _address_state = @address_state
-        if _address_state.to_s.size > 5000
-          invalid_properties.push("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_state", _address_state.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _address_zip = @address_zip
-        if _address_zip.to_s.size > 5000
-          invalid_properties.push("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_zip", _address_zip.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _cvc = @cvc
-        if _cvc.to_s.size > 5000
-          invalid_properties.push("invalid value for \"cvc\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _name = @name
-        if _name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -214,8 +214,8 @@ module Stripe
         raise ArgumentError.new("\"number\" is required and cannot be null")
       end
       _number = number.not_nil!
-      if _number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @number = _number
@@ -228,8 +228,8 @@ module Stripe
         return @address_city = nil
       end
       _address_city = address_city.not_nil!
-      if _address_city.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_city\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_city", _address_city.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @address_city = _address_city
@@ -242,8 +242,8 @@ module Stripe
         return @address_country = nil
       end
       _address_country = address_country.not_nil!
-      if _address_country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_country\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_country", _address_country.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @address_country = _address_country
@@ -256,8 +256,8 @@ module Stripe
         return @address_line1 = nil
       end
       _address_line1 = address_line1.not_nil!
-      if _address_line1.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_line1\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1", _address_line1.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @address_line1 = _address_line1
@@ -270,8 +270,8 @@ module Stripe
         return @address_line2 = nil
       end
       _address_line2 = address_line2.not_nil!
-      if _address_line2.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_line2\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line2", _address_line2.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @address_line2 = _address_line2
@@ -284,8 +284,8 @@ module Stripe
         return @address_state = nil
       end
       _address_state = address_state.not_nil!
-      if _address_state.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_state\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_state", _address_state.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @address_state = _address_state
@@ -298,8 +298,8 @@ module Stripe
         return @address_zip = nil
       end
       _address_zip = address_zip.not_nil!
-      if _address_zip.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address_zip\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_zip", _address_zip.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @address_zip = _address_zip
@@ -312,8 +312,8 @@ module Stripe
         return @cvc = nil
       end
       _cvc = cvc.not_nil!
-      if _cvc.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"cvc\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @cvc = _cvc
@@ -336,8 +336,8 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if _name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name

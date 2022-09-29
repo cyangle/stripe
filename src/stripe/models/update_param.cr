@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "account_holder_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_holder_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE = EnumValidator.new("account_holder_type", "String", ["company", "individual"])
+    ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE = OpenApi::EnumValidator.new("account_holder_type", "String", ["company", "individual"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

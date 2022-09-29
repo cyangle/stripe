@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? restricted_reason_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_RESTRICTED_REASON = EnumValidator.new("restricted_reason", "String", ["already_reversed", "deadline_passed", "network_restricted", "other", "source_flow_restricted"])
+    ENUM_VALIDATOR_FOR_RESTRICTED_REASON = OpenApi::EnumValidator.new("restricted_reason", "String", ["already_reversed", "deadline_passed", "network_restricted", "other", "source_flow_restricted"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

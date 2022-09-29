@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["failed", "pending", "succeeded"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["failed", "pending", "succeeded"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

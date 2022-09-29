@@ -26,7 +26,7 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter interval : String? = nil
 
-    ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["daily", "manual", "monthly", "weekly"])
+    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["daily", "manual", "monthly", "weekly"])
 
     @[JSON::Field(key: "monthly_anchor", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter monthly_anchor : Int64? = nil
@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "weekly_anchor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter weekly_anchor : String? = nil
 
-    ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR = EnumValidator.new("weekly_anchor", "String", ["friday", "monday", "saturday", "sunday", "thursday", "tuesday", "wednesday"])
+    ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR = OpenApi::EnumValidator.new("weekly_anchor", "String", ["friday", "monday", "saturday", "sunday", "thursday", "tuesday", "wednesday"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,9 +53,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _delay_days = @delay_days
-        if _delay_days.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_delay_days.list_invalid_properties_for("delay_days"))
-        end
+        invalid_properties.concat(_delay_days.list_invalid_properties_for("delay_days")) if _delay_days.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
@@ -69,9 +67,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _delay_days = @delay_days
-        if _delay_days.is_a?(OpenApi::Validatable)
-          return false unless _delay_days.valid?
-        end
+        return false if _delay_days.is_a?(OpenApi::Validatable) && !_delay_days.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
 
@@ -87,9 +83,7 @@ module Stripe
         return @delay_days = nil
       end
       _delay_days = delay_days.not_nil!
-      if _delay_days.is_a?(OpenApi::Validatable)
-        _delay_days.validate
-      end
+      _delay_days.validate if _delay_days.is_a?(OpenApi::Validatable)
       @delay_days = _delay_days
     end
 

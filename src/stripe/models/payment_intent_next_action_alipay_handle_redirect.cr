@@ -66,23 +66,23 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _native_data = @native_data
-        if _native_data.to_s.size > 5000
-          invalid_properties.push("invalid value for \"native_data\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_data", _native_data.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _native_url = @native_url
-        if _native_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"native_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_url", _native_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _return_url = @return_url
-        if _return_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _url = @url
-        if _url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -115,8 +115,8 @@ module Stripe
         return @native_data = nil
       end
       _native_data = native_data.not_nil!
-      if _native_data.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"native_data\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_data", _native_data.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @native_data = _native_data
@@ -129,8 +129,8 @@ module Stripe
         return @native_url = nil
       end
       _native_url = native_url.not_nil!
-      if _native_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"native_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_url", _native_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @native_url = _native_url
@@ -143,8 +143,8 @@ module Stripe
         return @return_url = nil
       end
       _return_url = return_url.not_nil!
-      if _return_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @return_url = _return_url
@@ -157,8 +157,8 @@ module Stripe
         return @url = nil
       end
       _url = url.not_nil!
-      if _url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @url = _url

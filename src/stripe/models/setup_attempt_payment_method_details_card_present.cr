@@ -41,9 +41,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _generated_card = @generated_card
-        if _generated_card.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_generated_card.list_invalid_properties_for("generated_card"))
-        end
+        invalid_properties.concat(_generated_card.list_invalid_properties_for("generated_card")) if _generated_card.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -53,9 +51,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _generated_card = @generated_card
-        if _generated_card.is_a?(OpenApi::Validatable)
-          return false unless _generated_card.valid?
-        end
+        return false if _generated_card.is_a?(OpenApi::Validatable) && !_generated_card.valid?
       end
 
       true
@@ -68,9 +64,7 @@ module Stripe
         return @generated_card = nil
       end
       _generated_card = generated_card.not_nil!
-      if _generated_card.is_a?(OpenApi::Validatable)
-        _generated_card.validate
-      end
+      _generated_card.validate if _generated_card.is_a?(OpenApi::Validatable)
       @generated_card = _generated_card
     end
 

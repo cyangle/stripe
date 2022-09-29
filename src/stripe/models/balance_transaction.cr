@@ -57,7 +57,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["balance_transaction"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["balance_transaction"])
 
     # [Learn more](https://stripe.com/docs/reports/reporting-categories) about how reporting categories can help you understand balance transactions from an accounting perspective.
     @[JSON::Field(key: "reporting_category", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -71,7 +71,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["adjustment", "advance", "advance_funding", "anticipation_repayment", "application_fee", "application_fee_refund", "charge", "connect_collection_transfer", "contribution", "issuing_authorization_hold", "issuing_authorization_release", "issuing_dispute", "issuing_transaction", "payment", "payment_failure_refund", "payment_refund", "payout", "payout_cancel", "payout_failure", "refund", "refund_failure", "reserve_transaction", "reserved_funds", "stripe_fee", "stripe_fx_fee", "tax_fee", "topup", "topup_reversal", "transfer", "transfer_cancel", "transfer_failure", "transfer_refund"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["adjustment", "advance", "advance_funding", "anticipation_repayment", "application_fee", "application_fee_refund", "charge", "connect_collection_transfer", "contribution", "issuing_authorization_hold", "issuing_authorization_release", "issuing_dispute", "issuing_transaction", "payment", "payment_failure_refund", "payment_refund", "payout", "payout_cancel", "payout_failure", "refund", "refund_failure", "reserve_transaction", "reserved_funds", "stripe_fee", "stripe_fx_fee", "tax_fee", "topup", "topup_reversal", "transfer", "transfer_cancel", "transfer_failure", "transfer_refund"])
 
     # Optional properties
 
@@ -135,18 +135,12 @@ module Stripe
 
       invalid_properties.push("\"fee_details\" is required and cannot be null") if @fee_details.nil?
       if _fee_details = @fee_details
-        if _fee_details.is_a?(Array)
-          _fee_details.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("fee_details"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "fee_details", array: _fee_details)) if _fee_details.is_a?(Array)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"net\" is required and cannot be null") if @net.nil?
@@ -154,28 +148,26 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"reporting_category\" is required and cannot be null") if @reporting_category.nil?
       if _reporting_category = @reporting_category
-        if _reporting_category.to_s.size > 5000
-          invalid_properties.push("invalid value for \"reporting_category\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reporting_category", _reporting_category.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
       if _status = @status
-        if _status.to_s.size > 5000
-          invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _description = @description
-        if _description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _source = @source
-        if _source.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_source.list_invalid_properties_for("source"))
-        end
+        invalid_properties.concat(_source.list_invalid_properties_for("source")) if _source.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -196,13 +188,7 @@ module Stripe
 
       return false if @fee_details.nil?
       if _fee_details = @fee_details
-        if _fee_details.is_a?(Array)
-          _fee_details.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _fee_details.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _fee_details)
       end
       return false if @id.nil?
       if _id = @id
@@ -225,9 +211,7 @@ module Stripe
       end
 
       if _source = @source
-        if _source.is_a?(OpenApi::Validatable)
-          return false unless _source.valid?
-        end
+        return false if _source.is_a?(OpenApi::Validatable) && !_source.valid?
       end
 
       true
@@ -290,13 +274,7 @@ module Stripe
         raise ArgumentError.new("\"fee_details\" is required and cannot be null")
       end
       _fee_details = fee_details.not_nil!
-      if _fee_details.is_a?(Array)
-        _fee_details.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _fee_details) if _fee_details.is_a?(Array)
       @fee_details = _fee_details
     end
 
@@ -307,8 +285,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -342,8 +320,8 @@ module Stripe
         raise ArgumentError.new("\"reporting_category\" is required and cannot be null")
       end
       _reporting_category = reporting_category.not_nil!
-      if _reporting_category.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"reporting_category\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reporting_category", _reporting_category.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @reporting_category = _reporting_category
@@ -356,8 +334,8 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if _status.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @status = _status
@@ -381,8 +359,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -405,9 +383,7 @@ module Stripe
         return @source = nil
       end
       _source = source.not_nil!
-      if _source.is_a?(OpenApi::Validatable)
-        _source.validate
-      end
+      _source.validate if _source.is_a?(OpenApi::Validatable)
       @source = _source
     end
 

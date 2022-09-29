@@ -63,23 +63,23 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _bsb_number = @bsb_number
-        if _bsb_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"bsb_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bsb_number", _bsb_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _fingerprint = @fingerprint
-        if _fingerprint.to_s.size > 5000
-          invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _last4 = @last4
-        if _last4.to_s.size > 5000
-          invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _mandate = @mandate
-        if _mandate.to_s.size > 5000
-          invalid_properties.push("invalid value for \"mandate\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -112,8 +112,8 @@ module Stripe
         return @bsb_number = nil
       end
       _bsb_number = bsb_number.not_nil!
-      if _bsb_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"bsb_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bsb_number", _bsb_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @bsb_number = _bsb_number
@@ -126,8 +126,8 @@ module Stripe
         return @fingerprint = nil
       end
       _fingerprint = fingerprint.not_nil!
-      if _fingerprint.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @fingerprint = _fingerprint
@@ -140,8 +140,8 @@ module Stripe
         return @last4 = nil
       end
       _last4 = last4.not_nil!
-      if _last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @last4 = _last4
@@ -154,8 +154,8 @@ module Stripe
         return @mandate = nil
       end
       _mandate = mandate.not_nil!
-      if _mandate.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"mandate\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @mandate = _mandate

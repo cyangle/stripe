@@ -46,19 +46,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _company_authorization = @company_authorization
-        if _company_authorization.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_company_authorization.list_invalid_properties_for("company_authorization"))
-        end
+        invalid_properties.concat(_company_authorization.list_invalid_properties_for("company_authorization")) if _company_authorization.is_a?(OpenApi::Validatable)
       end
       if _passport = @passport
-        if _passport.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_passport.list_invalid_properties_for("passport"))
-        end
+        invalid_properties.concat(_passport.list_invalid_properties_for("passport")) if _passport.is_a?(OpenApi::Validatable)
       end
       if _visa = @visa
-        if _visa.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_visa.list_invalid_properties_for("visa"))
-        end
+        invalid_properties.concat(_visa.list_invalid_properties_for("visa")) if _visa.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -68,19 +62,13 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _company_authorization = @company_authorization
-        if _company_authorization.is_a?(OpenApi::Validatable)
-          return false unless _company_authorization.valid?
-        end
+        return false if _company_authorization.is_a?(OpenApi::Validatable) && !_company_authorization.valid?
       end
       if _passport = @passport
-        if _passport.is_a?(OpenApi::Validatable)
-          return false unless _passport.valid?
-        end
+        return false if _passport.is_a?(OpenApi::Validatable) && !_passport.valid?
       end
       if _visa = @visa
-        if _visa.is_a?(OpenApi::Validatable)
-          return false unless _visa.valid?
-        end
+        return false if _visa.is_a?(OpenApi::Validatable) && !_visa.valid?
       end
 
       true
@@ -93,9 +81,7 @@ module Stripe
         return @company_authorization = nil
       end
       _company_authorization = company_authorization.not_nil!
-      if _company_authorization.is_a?(OpenApi::Validatable)
-        _company_authorization.validate
-      end
+      _company_authorization.validate if _company_authorization.is_a?(OpenApi::Validatable)
       @company_authorization = _company_authorization
     end
 
@@ -106,9 +92,7 @@ module Stripe
         return @passport = nil
       end
       _passport = passport.not_nil!
-      if _passport.is_a?(OpenApi::Validatable)
-        _passport.validate
-      end
+      _passport.validate if _passport.is_a?(OpenApi::Validatable)
       @passport = _passport
     end
 
@@ -119,9 +103,7 @@ module Stripe
         return @visa = nil
       end
       _visa = visa.not_nil!
-      if _visa.is_a?(OpenApi::Validatable)
-        _visa.validate
-      end
+      _visa.validate if _visa.is_a?(OpenApi::Validatable)
       @visa = _visa
     end
 

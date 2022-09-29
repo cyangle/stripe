@@ -54,8 +54,8 @@ module Stripe
 
       invalid_properties.push("\"setup_intent\" is required and cannot be null") if @setup_intent.nil?
       if _setup_intent = @setup_intent
-        if _setup_intent.to_s.size > 5000
-          invalid_properties.push("invalid value for \"setup_intent\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("setup_intent", _setup_intent.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -92,8 +92,8 @@ module Stripe
         raise ArgumentError.new("\"setup_intent\" is required and cannot be null")
       end
       _setup_intent = setup_intent.not_nil!
-      if _setup_intent.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"setup_intent\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("setup_intent", _setup_intent.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @setup_intent = _setup_intent

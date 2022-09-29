@@ -26,7 +26,7 @@ module Stripe
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
+    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = OpenApi::EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
 
     @[JSON::Field(key: "tiers", type: Array(Stripe::Tier)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tiers : Array(Stripe::Tier)? = nil
@@ -55,20 +55,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _custom_unit_amount = @custom_unit_amount
-        if _custom_unit_amount.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_custom_unit_amount.list_invalid_properties_for("custom_unit_amount"))
-        end
+        invalid_properties.concat(_custom_unit_amount.list_invalid_properties_for("custom_unit_amount")) if _custom_unit_amount.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
       if _tiers = @tiers
-        if _tiers.is_a?(Array)
-          _tiers.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("tiers"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tiers", array: _tiers)) if _tiers.is_a?(Array)
       end
 
       invalid_properties
@@ -78,19 +70,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _custom_unit_amount = @custom_unit_amount
-        if _custom_unit_amount.is_a?(OpenApi::Validatable)
-          return false unless _custom_unit_amount.valid?
-        end
+        return false if _custom_unit_amount.is_a?(OpenApi::Validatable) && !_custom_unit_amount.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
       if _tiers = @tiers
-        if _tiers.is_a?(Array)
-          _tiers.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _tiers.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tiers)
       end
 
       true
@@ -103,9 +87,7 @@ module Stripe
         return @custom_unit_amount = nil
       end
       _custom_unit_amount = custom_unit_amount.not_nil!
-      if _custom_unit_amount.is_a?(OpenApi::Validatable)
-        _custom_unit_amount.validate
-      end
+      _custom_unit_amount.validate if _custom_unit_amount.is_a?(OpenApi::Validatable)
       @custom_unit_amount = _custom_unit_amount
     end
 
@@ -127,13 +109,7 @@ module Stripe
         return @tiers = nil
       end
       _tiers = tiers.not_nil!
-      if _tiers.is_a?(Array)
-        _tiers.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _tiers) if _tiers.is_a?(Array)
       @tiers = _tiers
     end
 

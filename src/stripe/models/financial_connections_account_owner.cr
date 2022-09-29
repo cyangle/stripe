@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["financial_connections.account_owner"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["financial_connections.account_owner"])
 
     # The ownership object that this owner belongs to.
     @[JSON::Field(key: "ownership", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -92,37 +92,37 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
-        if _name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"ownership\" is required and cannot be null") if @ownership.nil?
       if _ownership = @ownership
-        if _ownership.to_s.size > 5000
-          invalid_properties.push("invalid value for \"ownership\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ownership", _ownership.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _email = @email
-        if _email.to_s.size > 5000
-          invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _phone = @phone
-        if _phone.to_s.size > 5000
-          invalid_properties.push("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _raw_address = @raw_address
-        if _raw_address.to_s.size > 5000
-          invalid_properties.push("invalid value for \"raw_address\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("raw_address", _raw_address.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -165,8 +165,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -179,8 +179,8 @@ module Stripe
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if _name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name
@@ -204,8 +204,8 @@ module Stripe
         raise ArgumentError.new("\"ownership\" is required and cannot be null")
       end
       _ownership = ownership.not_nil!
-      if _ownership.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"ownership\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ownership", _ownership.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @ownership = _ownership
@@ -218,8 +218,8 @@ module Stripe
         return @email = nil
       end
       _email = email.not_nil!
-      if _email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @email = _email
@@ -232,8 +232,8 @@ module Stripe
         return @phone = nil
       end
       _phone = phone.not_nil!
-      if _phone.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @phone = _phone
@@ -246,8 +246,8 @@ module Stripe
         return @raw_address = nil
       end
       _raw_address = raw_address.not_nil!
-      if _raw_address.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"raw_address\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("raw_address", _raw_address.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @raw_address = _raw_address

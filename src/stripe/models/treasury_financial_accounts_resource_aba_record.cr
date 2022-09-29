@@ -66,31 +66,31 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"account_holder_name\" is required and cannot be null") if @account_holder_name.nil?
       if _account_holder_name = @account_holder_name
-        if _account_holder_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"account_number_last4\" is required and cannot be null") if @account_number_last4.nil?
       if _account_number_last4 = @account_number_last4
-        if _account_number_last4.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account_number_last4\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number_last4", _account_number_last4.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"bank_name\" is required and cannot be null") if @bank_name.nil?
       if _bank_name = @bank_name
-        if _bank_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"routing_number\" is required and cannot be null") if @routing_number.nil?
       if _routing_number = @routing_number
-        if _routing_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _account_number = @account_number
-        if _account_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -130,8 +130,8 @@ module Stripe
         raise ArgumentError.new("\"account_holder_name\" is required and cannot be null")
       end
       _account_holder_name = account_holder_name.not_nil!
-      if _account_holder_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account_holder_name = _account_holder_name
@@ -144,8 +144,8 @@ module Stripe
         raise ArgumentError.new("\"account_number_last4\" is required and cannot be null")
       end
       _account_number_last4 = account_number_last4.not_nil!
-      if _account_number_last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_number_last4\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number_last4", _account_number_last4.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account_number_last4 = _account_number_last4
@@ -158,8 +158,8 @@ module Stripe
         raise ArgumentError.new("\"bank_name\" is required and cannot be null")
       end
       _bank_name = bank_name.not_nil!
-      if _bank_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @bank_name = _bank_name
@@ -172,8 +172,8 @@ module Stripe
         raise ArgumentError.new("\"routing_number\" is required and cannot be null")
       end
       _routing_number = routing_number.not_nil!
-      if _routing_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @routing_number = _routing_number
@@ -186,8 +186,8 @@ module Stripe
         return @account_number = nil
       end
       _account_number = account_number.not_nil!
-      if _account_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account_number = _account_number

@@ -142,7 +142,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "link", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
 
     @[JSON::Field(key: "us_bank_account", type: Stripe::PaymentMethodParam3?, default: nil, required: false, nullable: false, emit_null: false)]
     getter us_bank_account : Stripe::PaymentMethodParam3? = nil
@@ -200,100 +200,70 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _acss_debit = @acss_debit
-        if _acss_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit"))
-        end
+        invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
 
       if _au_becs_debit = @au_becs_debit
-        if _au_becs_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_au_becs_debit.list_invalid_properties_for("au_becs_debit"))
-        end
+        invalid_properties.concat(_au_becs_debit.list_invalid_properties_for("au_becs_debit")) if _au_becs_debit.is_a?(OpenApi::Validatable)
       end
       if _bacs_debit = @bacs_debit
-        if _bacs_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_bacs_debit.list_invalid_properties_for("bacs_debit"))
-        end
+        invalid_properties.concat(_bacs_debit.list_invalid_properties_for("bacs_debit")) if _bacs_debit.is_a?(OpenApi::Validatable)
       end
 
       if _billing_details = @billing_details
-        if _billing_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details"))
-        end
+        invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details")) if _billing_details.is_a?(OpenApi::Validatable)
       end
 
       if _boleto = @boleto
-        if _boleto.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_boleto.list_invalid_properties_for("boleto"))
-        end
+        invalid_properties.concat(_boleto.list_invalid_properties_for("boleto")) if _boleto.is_a?(OpenApi::Validatable)
       end
       if _card = @card
-        if _card.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card.list_invalid_properties_for("card"))
-        end
+        invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
       if _customer = @customer
-        if _customer.to_s.size > 5000
-          invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _eps = @eps
-        if _eps.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_eps.list_invalid_properties_for("eps"))
-        end
+        invalid_properties.concat(_eps.list_invalid_properties_for("eps")) if _eps.is_a?(OpenApi::Validatable)
       end
 
       if _fpx = @fpx
-        if _fpx.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_fpx.list_invalid_properties_for("fpx"))
-        end
+        invalid_properties.concat(_fpx.list_invalid_properties_for("fpx")) if _fpx.is_a?(OpenApi::Validatable)
       end
 
       if _ideal = @ideal
-        if _ideal.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_ideal.list_invalid_properties_for("ideal"))
-        end
+        invalid_properties.concat(_ideal.list_invalid_properties_for("ideal")) if _ideal.is_a?(OpenApi::Validatable)
       end
 
       if _klarna = @klarna
-        if _klarna.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_klarna.list_invalid_properties_for("klarna"))
-        end
+        invalid_properties.concat(_klarna.list_invalid_properties_for("klarna")) if _klarna.is_a?(OpenApi::Validatable)
       end
 
       if _p24 = @p24
-        if _p24.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_p24.list_invalid_properties_for("p24"))
-        end
+        invalid_properties.concat(_p24.list_invalid_properties_for("p24")) if _p24.is_a?(OpenApi::Validatable)
       end
       if _payment_method = @payment_method
-        if _payment_method.to_s.size > 5000
-          invalid_properties.push("invalid value for \"payment_method\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _radar_options = @radar_options
-        if _radar_options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_radar_options.list_invalid_properties_for("radar_options"))
-        end
+        invalid_properties.concat(_radar_options.list_invalid_properties_for("radar_options")) if _radar_options.is_a?(OpenApi::Validatable)
       end
       if _sepa_debit = @sepa_debit
-        if _sepa_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit"))
-        end
+        invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit")) if _sepa_debit.is_a?(OpenApi::Validatable)
       end
       if _sofort = @sofort
-        if _sofort.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_sofort.list_invalid_properties_for("sofort"))
-        end
+        invalid_properties.concat(_sofort.list_invalid_properties_for("sofort")) if _sofort.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
       if _us_bank_account = @us_bank_account
-        if _us_bank_account.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account"))
-        end
+        invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -303,95 +273,65 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _acss_debit = @acss_debit
-        if _acss_debit.is_a?(OpenApi::Validatable)
-          return false unless _acss_debit.valid?
-        end
+        return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
 
       if _au_becs_debit = @au_becs_debit
-        if _au_becs_debit.is_a?(OpenApi::Validatable)
-          return false unless _au_becs_debit.valid?
-        end
+        return false if _au_becs_debit.is_a?(OpenApi::Validatable) && !_au_becs_debit.valid?
       end
       if _bacs_debit = @bacs_debit
-        if _bacs_debit.is_a?(OpenApi::Validatable)
-          return false unless _bacs_debit.valid?
-        end
+        return false if _bacs_debit.is_a?(OpenApi::Validatable) && !_bacs_debit.valid?
       end
 
       if _billing_details = @billing_details
-        if _billing_details.is_a?(OpenApi::Validatable)
-          return false unless _billing_details.valid?
-        end
+        return false if _billing_details.is_a?(OpenApi::Validatable) && !_billing_details.valid?
       end
 
       if _boleto = @boleto
-        if _boleto.is_a?(OpenApi::Validatable)
-          return false unless _boleto.valid?
-        end
+        return false if _boleto.is_a?(OpenApi::Validatable) && !_boleto.valid?
       end
       if _card = @card
-        if _card.is_a?(OpenApi::Validatable)
-          return false unless _card.valid?
-        end
+        return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
 
       if _eps = @eps
-        if _eps.is_a?(OpenApi::Validatable)
-          return false unless _eps.valid?
-        end
+        return false if _eps.is_a?(OpenApi::Validatable) && !_eps.valid?
       end
 
       if _fpx = @fpx
-        if _fpx.is_a?(OpenApi::Validatable)
-          return false unless _fpx.valid?
-        end
+        return false if _fpx.is_a?(OpenApi::Validatable) && !_fpx.valid?
       end
 
       if _ideal = @ideal
-        if _ideal.is_a?(OpenApi::Validatable)
-          return false unless _ideal.valid?
-        end
+        return false if _ideal.is_a?(OpenApi::Validatable) && !_ideal.valid?
       end
 
       if _klarna = @klarna
-        if _klarna.is_a?(OpenApi::Validatable)
-          return false unless _klarna.valid?
-        end
+        return false if _klarna.is_a?(OpenApi::Validatable) && !_klarna.valid?
       end
 
       if _p24 = @p24
-        if _p24.is_a?(OpenApi::Validatable)
-          return false unless _p24.valid?
-        end
+        return false if _p24.is_a?(OpenApi::Validatable) && !_p24.valid?
       end
       if _payment_method = @payment_method
         return false if _payment_method.to_s.size > 5000
       end
 
       if _radar_options = @radar_options
-        if _radar_options.is_a?(OpenApi::Validatable)
-          return false unless _radar_options.valid?
-        end
+        return false if _radar_options.is_a?(OpenApi::Validatable) && !_radar_options.valid?
       end
       if _sepa_debit = @sepa_debit
-        if _sepa_debit.is_a?(OpenApi::Validatable)
-          return false unless _sepa_debit.valid?
-        end
+        return false if _sepa_debit.is_a?(OpenApi::Validatable) && !_sepa_debit.valid?
       end
       if _sofort = @sofort
-        if _sofort.is_a?(OpenApi::Validatable)
-          return false unless _sofort.valid?
-        end
+        return false if _sofort.is_a?(OpenApi::Validatable) && !_sofort.valid?
       end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
       if _us_bank_account = @us_bank_account
-        if _us_bank_account.is_a?(OpenApi::Validatable)
-          return false unless _us_bank_account.valid?
-        end
+        return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
 
       true
@@ -404,9 +344,7 @@ module Stripe
         return @acss_debit = nil
       end
       _acss_debit = acss_debit.not_nil!
-      if _acss_debit.is_a?(OpenApi::Validatable)
-        _acss_debit.validate
-      end
+      _acss_debit.validate if _acss_debit.is_a?(OpenApi::Validatable)
       @acss_debit = _acss_debit
     end
 
@@ -447,9 +385,7 @@ module Stripe
         return @au_becs_debit = nil
       end
       _au_becs_debit = au_becs_debit.not_nil!
-      if _au_becs_debit.is_a?(OpenApi::Validatable)
-        _au_becs_debit.validate
-      end
+      _au_becs_debit.validate if _au_becs_debit.is_a?(OpenApi::Validatable)
       @au_becs_debit = _au_becs_debit
     end
 
@@ -460,9 +396,7 @@ module Stripe
         return @bacs_debit = nil
       end
       _bacs_debit = bacs_debit.not_nil!
-      if _bacs_debit.is_a?(OpenApi::Validatable)
-        _bacs_debit.validate
-      end
+      _bacs_debit.validate if _bacs_debit.is_a?(OpenApi::Validatable)
       @bacs_debit = _bacs_debit
     end
 
@@ -483,9 +417,7 @@ module Stripe
         return @billing_details = nil
       end
       _billing_details = billing_details.not_nil!
-      if _billing_details.is_a?(OpenApi::Validatable)
-        _billing_details.validate
-      end
+      _billing_details.validate if _billing_details.is_a?(OpenApi::Validatable)
       @billing_details = _billing_details
     end
 
@@ -506,9 +438,7 @@ module Stripe
         return @boleto = nil
       end
       _boleto = boleto.not_nil!
-      if _boleto.is_a?(OpenApi::Validatable)
-        _boleto.validate
-      end
+      _boleto.validate if _boleto.is_a?(OpenApi::Validatable)
       @boleto = _boleto
     end
 
@@ -519,9 +449,7 @@ module Stripe
         return @card = nil
       end
       _card = card.not_nil!
-      if _card.is_a?(OpenApi::Validatable)
-        _card.validate
-      end
+      _card.validate if _card.is_a?(OpenApi::Validatable)
       @card = _card
     end
 
@@ -532,8 +460,8 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if _customer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @customer = _customer
@@ -556,9 +484,7 @@ module Stripe
         return @eps = nil
       end
       _eps = eps.not_nil!
-      if _eps.is_a?(OpenApi::Validatable)
-        _eps.validate
-      end
+      _eps.validate if _eps.is_a?(OpenApi::Validatable)
       @eps = _eps
     end
 
@@ -579,9 +505,7 @@ module Stripe
         return @fpx = nil
       end
       _fpx = fpx.not_nil!
-      if _fpx.is_a?(OpenApi::Validatable)
-        _fpx.validate
-      end
+      _fpx.validate if _fpx.is_a?(OpenApi::Validatable)
       @fpx = _fpx
     end
 
@@ -612,9 +536,7 @@ module Stripe
         return @ideal = nil
       end
       _ideal = ideal.not_nil!
-      if _ideal.is_a?(OpenApi::Validatable)
-        _ideal.validate
-      end
+      _ideal.validate if _ideal.is_a?(OpenApi::Validatable)
       @ideal = _ideal
     end
 
@@ -635,9 +557,7 @@ module Stripe
         return @klarna = nil
       end
       _klarna = klarna.not_nil!
-      if _klarna.is_a?(OpenApi::Validatable)
-        _klarna.validate
-      end
+      _klarna.validate if _klarna.is_a?(OpenApi::Validatable)
       @klarna = _klarna
     end
 
@@ -688,9 +608,7 @@ module Stripe
         return @p24 = nil
       end
       _p24 = p24.not_nil!
-      if _p24.is_a?(OpenApi::Validatable)
-        _p24.validate
-      end
+      _p24.validate if _p24.is_a?(OpenApi::Validatable)
       @p24 = _p24
     end
 
@@ -701,8 +619,8 @@ module Stripe
         return @payment_method = nil
       end
       _payment_method = payment_method.not_nil!
-      if _payment_method.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"payment_method\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @payment_method = _payment_method
@@ -745,9 +663,7 @@ module Stripe
         return @radar_options = nil
       end
       _radar_options = radar_options.not_nil!
-      if _radar_options.is_a?(OpenApi::Validatable)
-        _radar_options.validate
-      end
+      _radar_options.validate if _radar_options.is_a?(OpenApi::Validatable)
       @radar_options = _radar_options
     end
 
@@ -758,9 +674,7 @@ module Stripe
         return @sepa_debit = nil
       end
       _sepa_debit = sepa_debit.not_nil!
-      if _sepa_debit.is_a?(OpenApi::Validatable)
-        _sepa_debit.validate
-      end
+      _sepa_debit.validate if _sepa_debit.is_a?(OpenApi::Validatable)
       @sepa_debit = _sepa_debit
     end
 
@@ -771,9 +685,7 @@ module Stripe
         return @sofort = nil
       end
       _sofort = sofort.not_nil!
-      if _sofort.is_a?(OpenApi::Validatable)
-        _sofort.validate
-      end
+      _sofort.validate if _sofort.is_a?(OpenApi::Validatable)
       @sofort = _sofort
     end
 
@@ -795,9 +707,7 @@ module Stripe
         return @us_bank_account = nil
       end
       _us_bank_account = us_bank_account.not_nil!
-      if _us_bank_account.is_a?(OpenApi::Validatable)
-        _us_bank_account.validate
-      end
+      _us_bank_account.validate if _us_bank_account.is_a?(OpenApi::Validatable)
       @us_bank_account = _us_bank_account
     end
 

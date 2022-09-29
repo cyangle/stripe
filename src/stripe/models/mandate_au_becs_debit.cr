@@ -40,8 +40,8 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
       if _url = @url
-        if _url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -66,8 +66,8 @@ module Stripe
         raise ArgumentError.new("\"url\" is required and cannot be null")
       end
       _url = url.not_nil!
-      if _url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @url = _url

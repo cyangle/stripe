@@ -47,9 +47,7 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"destination\" is required and cannot be null") if @destination.nil?
       if _destination = @destination
-        if _destination.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_destination.list_invalid_properties_for("destination"))
-        end
+        invalid_properties.concat(_destination.list_invalid_properties_for("destination")) if _destination.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -60,9 +58,7 @@ module Stripe
     def valid? : Bool
       return false if @destination.nil?
       if _destination = @destination
-        if _destination.is_a?(OpenApi::Validatable)
-          return false unless _destination.valid?
-        end
+        return false if _destination.is_a?(OpenApi::Validatable) && !_destination.valid?
       end
 
       true
@@ -75,9 +71,7 @@ module Stripe
         raise ArgumentError.new("\"destination\" is required and cannot be null")
       end
       _destination = destination.not_nil!
-      if _destination.is_a?(OpenApi::Validatable)
-        _destination.validate
-      end
+      _destination.validate if _destination.is_a?(OpenApi::Validatable)
       @destination = _destination
     end
 

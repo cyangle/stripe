@@ -62,25 +62,21 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"first_name\" is required and cannot be null") if @first_name.nil?
       if _first_name = @first_name
-        if _first_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last_name\" is required and cannot be null") if @last_name.nil?
       if _last_name = @last_name
-        if _last_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _dob = @dob
-        if _dob.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_dob.list_invalid_properties_for("dob"))
-        end
+        invalid_properties.concat(_dob.list_invalid_properties_for("dob")) if _dob.is_a?(OpenApi::Validatable)
       end
       if _verification = @verification
-        if _verification.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_verification.list_invalid_properties_for("verification"))
-        end
+        invalid_properties.concat(_verification.list_invalid_properties_for("verification")) if _verification.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -98,14 +94,10 @@ module Stripe
         return false if _last_name.to_s.size > 5000
       end
       if _dob = @dob
-        if _dob.is_a?(OpenApi::Validatable)
-          return false unless _dob.valid?
-        end
+        return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
       if _verification = @verification
-        if _verification.is_a?(OpenApi::Validatable)
-          return false unless _verification.valid?
-        end
+        return false if _verification.is_a?(OpenApi::Validatable) && !_verification.valid?
       end
 
       true
@@ -118,8 +110,8 @@ module Stripe
         raise ArgumentError.new("\"first_name\" is required and cannot be null")
       end
       _first_name = first_name.not_nil!
-      if _first_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @first_name = _first_name
@@ -132,8 +124,8 @@ module Stripe
         raise ArgumentError.new("\"last_name\" is required and cannot be null")
       end
       _last_name = last_name.not_nil!
-      if _last_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @last_name = _last_name
@@ -146,9 +138,7 @@ module Stripe
         return @dob = nil
       end
       _dob = dob.not_nil!
-      if _dob.is_a?(OpenApi::Validatable)
-        _dob.validate
-      end
+      _dob.validate if _dob.is_a?(OpenApi::Validatable)
       @dob = _dob
     end
 
@@ -159,9 +149,7 @@ module Stripe
         return @verification = nil
       end
       _verification = verification.not_nil!
-      if _verification.is_a?(OpenApi::Validatable)
-        _verification.validate
-      end
+      _verification.validate if _verification.is_a?(OpenApi::Validatable)
       @verification = _verification
     end
 

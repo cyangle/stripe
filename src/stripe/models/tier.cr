@@ -57,9 +57,7 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"up_to\" is required and cannot be null") if @up_to.nil?
       if _up_to = @up_to
-        if _up_to.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_up_to.list_invalid_properties_for("up_to"))
-        end
+        invalid_properties.concat(_up_to.list_invalid_properties_for("up_to")) if _up_to.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -70,9 +68,7 @@ module Stripe
     def valid? : Bool
       return false if @up_to.nil?
       if _up_to = @up_to
-        if _up_to.is_a?(OpenApi::Validatable)
-          return false unless _up_to.valid?
-        end
+        return false if _up_to.is_a?(OpenApi::Validatable) && !_up_to.valid?
       end
 
       true
@@ -85,9 +81,7 @@ module Stripe
         raise ArgumentError.new("\"up_to\" is required and cannot be null")
       end
       _up_to = up_to.not_nil!
-      if _up_to.is_a?(OpenApi::Validatable)
-        _up_to.validate
-      end
+      _up_to.validate if _up_to.is_a?(OpenApi::Validatable)
       @up_to = _up_to
     end
 

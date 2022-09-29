@@ -49,13 +49,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["topup"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["topup"])
 
     # The status of the top-up is either `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["canceled", "failed", "pending", "reversed", "succeeded"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["canceled", "failed", "pending", "reversed", "succeeded"])
 
     # Optional properties
 
@@ -148,14 +148,14 @@ module Stripe
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
       if _currency = @currency
-        if _currency.to_s.size > 5000
-          invalid_properties.push("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -166,39 +166,35 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       if _balance_transaction = @balance_transaction
-        if _balance_transaction.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction"))
-        end
+        invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
       if _description = @description
-        if _description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _failure_code = @failure_code
-        if _failure_code.to_s.size > 5000
-          invalid_properties.push("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_code", _failure_code.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _failure_message = @failure_message
-        if _failure_message.to_s.size > 5000
-          invalid_properties.push("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_message", _failure_message.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _source = @source
-        if _source.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_source.list_invalid_properties_for("source"))
-        end
+        invalid_properties.concat(_source.list_invalid_properties_for("source")) if _source.is_a?(OpenApi::Validatable)
       end
       if _statement_descriptor = @statement_descriptor
-        if _statement_descriptor.to_s.size > 5000
-          invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _transfer_group = @transfer_group
-        if _transfer_group.to_s.size > 5000
-          invalid_properties.push("invalid value for \"transfer_group\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transfer_group", _transfer_group.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -227,9 +223,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       if _balance_transaction = @balance_transaction
-        if _balance_transaction.is_a?(OpenApi::Validatable)
-          return false unless _balance_transaction.valid?
-        end
+        return false if _balance_transaction.is_a?(OpenApi::Validatable) && !_balance_transaction.valid?
       end
       if _description = @description
         return false if _description.to_s.size > 5000
@@ -242,9 +236,7 @@ module Stripe
         return false if _failure_message.to_s.size > 5000
       end
       if _source = @source
-        if _source.is_a?(OpenApi::Validatable)
-          return false unless _source.valid?
-        end
+        return false if _source.is_a?(OpenApi::Validatable) && !_source.valid?
       end
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 5000
@@ -283,8 +275,8 @@ module Stripe
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
       _currency = currency.not_nil!
-      if _currency.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @currency = _currency
@@ -297,8 +289,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -353,9 +345,7 @@ module Stripe
         return @balance_transaction = nil
       end
       _balance_transaction = balance_transaction.not_nil!
-      if _balance_transaction.is_a?(OpenApi::Validatable)
-        _balance_transaction.validate
-      end
+      _balance_transaction.validate if _balance_transaction.is_a?(OpenApi::Validatable)
       @balance_transaction = _balance_transaction
     end
 
@@ -366,8 +356,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -390,8 +380,8 @@ module Stripe
         return @failure_code = nil
       end
       _failure_code = failure_code.not_nil!
-      if _failure_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_code", _failure_code.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @failure_code = _failure_code
@@ -404,8 +394,8 @@ module Stripe
         return @failure_message = nil
       end
       _failure_message = failure_message.not_nil!
-      if _failure_message.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_message", _failure_message.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @failure_message = _failure_message
@@ -418,9 +408,7 @@ module Stripe
         return @source = nil
       end
       _source = source.not_nil!
-      if _source.is_a?(OpenApi::Validatable)
-        _source.validate
-      end
+      _source.validate if _source.is_a?(OpenApi::Validatable)
       @source = _source
     end
 
@@ -431,8 +419,8 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if _statement_descriptor.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor = _statement_descriptor
@@ -445,8 +433,8 @@ module Stripe
         return @transfer_group = nil
       end
       _transfer_group = transfer_group.not_nil!
-      if _transfer_group.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"transfer_group\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transfer_group", _transfer_group.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @transfer_group = _transfer_group

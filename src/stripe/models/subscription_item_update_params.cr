@@ -69,36 +69,28 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _billing_thresholds = @billing_thresholds
-        if _billing_thresholds.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds"))
-        end
+        invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
 
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _price = @price
-        if _price.to_s.size > 5000
-          invalid_properties.push("invalid value for \"price\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _price_data = @price_data
-        if _price_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_price_data.list_invalid_properties_for("price_data"))
-        end
+        invalid_properties.concat(_price_data.list_invalid_properties_for("price_data")) if _price_data.is_a?(OpenApi::Validatable)
       end
 
       if _tax_rates = @tax_rates
-        if _tax_rates.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_tax_rates.list_invalid_properties_for("tax_rates"))
-        end
+        invalid_properties.concat(_tax_rates.list_invalid_properties_for("tax_rates")) if _tax_rates.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -108,32 +100,24 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _billing_thresholds = @billing_thresholds
-        if _billing_thresholds.is_a?(OpenApi::Validatable)
-          return false unless _billing_thresholds.valid?
-        end
+        return false if _billing_thresholds.is_a?(OpenApi::Validatable) && !_billing_thresholds.valid?
       end
 
       if _id = @id
         return false if _id.to_s.size > 5000
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
       if _price = @price
         return false if _price.to_s.size > 5000
       end
       if _price_data = @price_data
-        if _price_data.is_a?(OpenApi::Validatable)
-          return false unless _price_data.valid?
-        end
+        return false if _price_data.is_a?(OpenApi::Validatable) && !_price_data.valid?
       end
 
       if _tax_rates = @tax_rates
-        if _tax_rates.is_a?(OpenApi::Validatable)
-          return false unless _tax_rates.valid?
-        end
+        return false if _tax_rates.is_a?(OpenApi::Validatable) && !_tax_rates.valid?
       end
 
       true
@@ -146,9 +130,7 @@ module Stripe
         return @billing_thresholds = nil
       end
       _billing_thresholds = billing_thresholds.not_nil!
-      if _billing_thresholds.is_a?(OpenApi::Validatable)
-        _billing_thresholds.validate
-      end
+      _billing_thresholds.validate if _billing_thresholds.is_a?(OpenApi::Validatable)
       @billing_thresholds = _billing_thresholds
     end
 
@@ -179,8 +161,8 @@ module Stripe
         return @id = nil
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -193,9 +175,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 
@@ -206,8 +186,8 @@ module Stripe
         return @price = nil
       end
       _price = price.not_nil!
-      if _price.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"price\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @price = _price
@@ -220,9 +200,7 @@ module Stripe
         return @price_data = nil
       end
       _price_data = price_data.not_nil!
-      if _price_data.is_a?(OpenApi::Validatable)
-        _price_data.validate
-      end
+      _price_data.validate if _price_data.is_a?(OpenApi::Validatable)
       @price_data = _price_data
     end
 
@@ -243,9 +221,7 @@ module Stripe
         return @tax_rates = nil
       end
       _tax_rates = tax_rates.not_nil!
-      if _tax_rates.is_a?(OpenApi::Validatable)
-        _tax_rates.validate
-      end
+      _tax_rates.validate if _tax_rates.is_a?(OpenApi::Validatable)
       @tax_rates = _tax_rates
     end
 

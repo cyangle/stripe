@@ -58,34 +58,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _acss_debit = @acss_debit
-        if _acss_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit"))
-        end
+        invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
       if _blik = @blik
-        if _blik.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_blik.list_invalid_properties_for("blik"))
-        end
+        invalid_properties.concat(_blik.list_invalid_properties_for("blik")) if _blik.is_a?(OpenApi::Validatable)
       end
       if _card = @card
-        if _card.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card.list_invalid_properties_for("card"))
-        end
+        invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
       if _link = @link
-        if _link.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_link.list_invalid_properties_for("link"))
-        end
+        invalid_properties.concat(_link.list_invalid_properties_for("link")) if _link.is_a?(OpenApi::Validatable)
       end
       if _sepa_debit = @sepa_debit
-        if _sepa_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit"))
-        end
+        invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit")) if _sepa_debit.is_a?(OpenApi::Validatable)
       end
       if _us_bank_account = @us_bank_account
-        if _us_bank_account.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account"))
-        end
+        invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -95,34 +83,22 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _acss_debit = @acss_debit
-        if _acss_debit.is_a?(OpenApi::Validatable)
-          return false unless _acss_debit.valid?
-        end
+        return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
       if _blik = @blik
-        if _blik.is_a?(OpenApi::Validatable)
-          return false unless _blik.valid?
-        end
+        return false if _blik.is_a?(OpenApi::Validatable) && !_blik.valid?
       end
       if _card = @card
-        if _card.is_a?(OpenApi::Validatable)
-          return false unless _card.valid?
-        end
+        return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
       if _link = @link
-        if _link.is_a?(OpenApi::Validatable)
-          return false unless _link.valid?
-        end
+        return false if _link.is_a?(OpenApi::Validatable) && !_link.valid?
       end
       if _sepa_debit = @sepa_debit
-        if _sepa_debit.is_a?(OpenApi::Validatable)
-          return false unless _sepa_debit.valid?
-        end
+        return false if _sepa_debit.is_a?(OpenApi::Validatable) && !_sepa_debit.valid?
       end
       if _us_bank_account = @us_bank_account
-        if _us_bank_account.is_a?(OpenApi::Validatable)
-          return false unless _us_bank_account.valid?
-        end
+        return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
 
       true
@@ -135,9 +111,7 @@ module Stripe
         return @acss_debit = nil
       end
       _acss_debit = acss_debit.not_nil!
-      if _acss_debit.is_a?(OpenApi::Validatable)
-        _acss_debit.validate
-      end
+      _acss_debit.validate if _acss_debit.is_a?(OpenApi::Validatable)
       @acss_debit = _acss_debit
     end
 
@@ -148,9 +122,7 @@ module Stripe
         return @blik = nil
       end
       _blik = blik.not_nil!
-      if _blik.is_a?(OpenApi::Validatable)
-        _blik.validate
-      end
+      _blik.validate if _blik.is_a?(OpenApi::Validatable)
       @blik = _blik
     end
 
@@ -161,9 +133,7 @@ module Stripe
         return @card = nil
       end
       _card = card.not_nil!
-      if _card.is_a?(OpenApi::Validatable)
-        _card.validate
-      end
+      _card.validate if _card.is_a?(OpenApi::Validatable)
       @card = _card
     end
 
@@ -174,9 +144,7 @@ module Stripe
         return @link = nil
       end
       _link = link.not_nil!
-      if _link.is_a?(OpenApi::Validatable)
-        _link.validate
-      end
+      _link.validate if _link.is_a?(OpenApi::Validatable)
       @link = _link
     end
 
@@ -187,9 +155,7 @@ module Stripe
         return @sepa_debit = nil
       end
       _sepa_debit = sepa_debit.not_nil!
-      if _sepa_debit.is_a?(OpenApi::Validatable)
-        _sepa_debit.validate
-      end
+      _sepa_debit.validate if _sepa_debit.is_a?(OpenApi::Validatable)
       @sepa_debit = _sepa_debit
     end
 
@@ -200,9 +166,7 @@ module Stripe
         return @us_bank_account = nil
       end
       _us_bank_account = us_bank_account.not_nil!
-      if _us_bank_account.is_a?(OpenApi::Validatable)
-        _us_bank_account.validate
-      end
+      _us_bank_account.validate if _us_bank_account.is_a?(OpenApi::Validatable)
       @us_bank_account = _us_bank_account
     end
 

@@ -42,14 +42,14 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"account_number\" is required and cannot be null") if @account_number.nil?
       if _account_number = @account_number
-        if _account_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"bsb_number\" is required and cannot be null") if @bsb_number.nil?
       if _bsb_number = @bsb_number
-        if _bsb_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"bsb_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bsb_number", _bsb_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -78,8 +78,8 @@ module Stripe
         raise ArgumentError.new("\"account_number\" is required and cannot be null")
       end
       _account_number = account_number.not_nil!
-      if _account_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account_number = _account_number
@@ -92,8 +92,8 @@ module Stripe
         raise ArgumentError.new("\"bsb_number\" is required and cannot be null")
       end
       _bsb_number = bsb_number.not_nil!
-      if _bsb_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"bsb_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bsb_number", _bsb_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @bsb_number = _bsb_number

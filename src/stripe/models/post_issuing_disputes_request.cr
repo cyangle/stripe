@@ -62,20 +62,16 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _evidence = @evidence
-        if _evidence.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_evidence.list_invalid_properties_for("evidence"))
-        end
+        invalid_properties.concat(_evidence.list_invalid_properties_for("evidence")) if _evidence.is_a?(OpenApi::Validatable)
       end
 
       if _transaction = @transaction
-        if _transaction.to_s.size > 5000
-          invalid_properties.push("invalid value for \"transaction\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction", _transaction.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _treasury = @treasury
-        if _treasury.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_treasury.list_invalid_properties_for("treasury"))
-        end
+        invalid_properties.concat(_treasury.list_invalid_properties_for("treasury")) if _treasury.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -85,18 +81,14 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _evidence = @evidence
-        if _evidence.is_a?(OpenApi::Validatable)
-          return false unless _evidence.valid?
-        end
+        return false if _evidence.is_a?(OpenApi::Validatable) && !_evidence.valid?
       end
 
       if _transaction = @transaction
         return false if _transaction.to_s.size > 5000
       end
       if _treasury = @treasury
-        if _treasury.is_a?(OpenApi::Validatable)
-          return false unless _treasury.valid?
-        end
+        return false if _treasury.is_a?(OpenApi::Validatable) && !_treasury.valid?
       end
 
       true
@@ -119,9 +111,7 @@ module Stripe
         return @evidence = nil
       end
       _evidence = evidence.not_nil!
-      if _evidence.is_a?(OpenApi::Validatable)
-        _evidence.validate
-      end
+      _evidence.validate if _evidence.is_a?(OpenApi::Validatable)
       @evidence = _evidence
     end
 
@@ -152,8 +142,8 @@ module Stripe
         return @transaction = nil
       end
       _transaction = transaction.not_nil!
-      if _transaction.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"transaction\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction", _transaction.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @transaction = _transaction
@@ -166,9 +156,7 @@ module Stripe
         return @treasury = nil
       end
       _treasury = treasury.not_nil!
-      if _treasury.is_a?(OpenApi::Validatable)
-        _treasury.validate
-      end
+      _treasury.validate if _treasury.is_a?(OpenApi::Validatable)
       @treasury = _treasury
     end
 

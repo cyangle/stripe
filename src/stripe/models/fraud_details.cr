@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "user_report", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter user_report : String? = nil
 
-    ENUM_VALIDATOR_FOR_USER_REPORT = EnumValidator.new("user_report", "String", ["", "fraudulent", "safe"])
+    ENUM_VALIDATOR_FOR_USER_REPORT = OpenApi::EnumValidator.new("user_report", "String", ["", "fraudulent", "safe"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

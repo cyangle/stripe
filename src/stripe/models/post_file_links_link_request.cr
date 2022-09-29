@@ -47,14 +47,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _expires_at = @expires_at
-        if _expires_at.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_expires_at.list_invalid_properties_for("expires_at"))
-        end
+        invalid_properties.concat(_expires_at.list_invalid_properties_for("expires_at")) if _expires_at.is_a?(OpenApi::Validatable)
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -64,14 +60,10 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _expires_at = @expires_at
-        if _expires_at.is_a?(OpenApi::Validatable)
-          return false unless _expires_at.valid?
-        end
+        return false if _expires_at.is_a?(OpenApi::Validatable) && !_expires_at.valid?
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
       true
@@ -94,9 +86,7 @@ module Stripe
         return @expires_at = nil
       end
       _expires_at = expires_at.not_nil!
-      if _expires_at.is_a?(OpenApi::Validatable)
-        _expires_at.validate
-      end
+      _expires_at.validate if _expires_at.is_a?(OpenApi::Validatable)
       @expires_at = _expires_at
     end
 
@@ -107,9 +97,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 

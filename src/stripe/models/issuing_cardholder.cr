@@ -48,7 +48,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["issuing.cardholder"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["issuing.cardholder"])
 
     @[JSON::Field(key: "requirements", type: Stripe::IssuingCardholderRequirements?, default: nil, required: true, nullable: false, emit_null: false)]
     getter requirements : Stripe::IssuingCardholderRequirements? = nil
@@ -57,13 +57,13 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["active", "blocked", "inactive"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["active", "blocked", "inactive"])
 
     # One of `individual` or `company`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["company", "individual"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["company", "individual"])
 
     # Optional properties
 
@@ -129,16 +129,14 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"billing\" is required and cannot be null") if @billing.nil?
       if _billing = @billing
-        if _billing.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_billing.list_invalid_properties_for("billing"))
-        end
+        invalid_properties.concat(_billing.list_invalid_properties_for("billing")) if _billing.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -147,46 +145,38 @@ module Stripe
 
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
-        if _name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"requirements\" is required and cannot be null") if @requirements.nil?
       if _requirements = @requirements
-        if _requirements.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_requirements.list_invalid_properties_for("requirements"))
-        end
+        invalid_properties.concat(_requirements.list_invalid_properties_for("requirements")) if _requirements.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _company = @company
-        if _company.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_company.list_invalid_properties_for("company"))
-        end
+        invalid_properties.concat(_company.list_invalid_properties_for("company")) if _company.is_a?(OpenApi::Validatable)
       end
       if _email = @email
-        if _email.to_s.size > 5000
-          invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _individual = @individual
-        if _individual.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_individual.list_invalid_properties_for("individual"))
-        end
+        invalid_properties.concat(_individual.list_invalid_properties_for("individual")) if _individual.is_a?(OpenApi::Validatable)
       end
       if _phone_number = @phone_number
-        if _phone_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"phone_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone_number", _phone_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _spending_controls = @spending_controls
-        if _spending_controls.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls"))
-        end
+        invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -197,9 +187,7 @@ module Stripe
     def valid? : Bool
       return false if @billing.nil?
       if _billing = @billing
-        if _billing.is_a?(OpenApi::Validatable)
-          return false unless _billing.valid?
-        end
+        return false if _billing.is_a?(OpenApi::Validatable) && !_billing.valid?
       end
       return false if @created.nil?
 
@@ -218,32 +206,24 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @requirements.nil?
       if _requirements = @requirements
-        if _requirements.is_a?(OpenApi::Validatable)
-          return false unless _requirements.valid?
-        end
+        return false if _requirements.is_a?(OpenApi::Validatable) && !_requirements.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _company = @company
-        if _company.is_a?(OpenApi::Validatable)
-          return false unless _company.valid?
-        end
+        return false if _company.is_a?(OpenApi::Validatable) && !_company.valid?
       end
       if _email = @email
         return false if _email.to_s.size > 5000
       end
       if _individual = @individual
-        if _individual.is_a?(OpenApi::Validatable)
-          return false unless _individual.valid?
-        end
+        return false if _individual.is_a?(OpenApi::Validatable) && !_individual.valid?
       end
       if _phone_number = @phone_number
         return false if _phone_number.to_s.size > 5000
       end
       if _spending_controls = @spending_controls
-        if _spending_controls.is_a?(OpenApi::Validatable)
-          return false unless _spending_controls.valid?
-        end
+        return false if _spending_controls.is_a?(OpenApi::Validatable) && !_spending_controls.valid?
       end
 
       true
@@ -256,9 +236,7 @@ module Stripe
         raise ArgumentError.new("\"billing\" is required and cannot be null")
       end
       _billing = billing.not_nil!
-      if _billing.is_a?(OpenApi::Validatable)
-        _billing.validate
-      end
+      _billing.validate if _billing.is_a?(OpenApi::Validatable)
       @billing = _billing
     end
 
@@ -279,8 +257,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -313,8 +291,8 @@ module Stripe
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if _name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name
@@ -338,9 +316,7 @@ module Stripe
         raise ArgumentError.new("\"requirements\" is required and cannot be null")
       end
       _requirements = requirements.not_nil!
-      if _requirements.is_a?(OpenApi::Validatable)
-        _requirements.validate
-      end
+      _requirements.validate if _requirements.is_a?(OpenApi::Validatable)
       @requirements = _requirements
     end
 
@@ -373,9 +349,7 @@ module Stripe
         return @company = nil
       end
       _company = company.not_nil!
-      if _company.is_a?(OpenApi::Validatable)
-        _company.validate
-      end
+      _company.validate if _company.is_a?(OpenApi::Validatable)
       @company = _company
     end
 
@@ -386,8 +360,8 @@ module Stripe
         return @email = nil
       end
       _email = email.not_nil!
-      if _email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @email = _email
@@ -400,9 +374,7 @@ module Stripe
         return @individual = nil
       end
       _individual = individual.not_nil!
-      if _individual.is_a?(OpenApi::Validatable)
-        _individual.validate
-      end
+      _individual.validate if _individual.is_a?(OpenApi::Validatable)
       @individual = _individual
     end
 
@@ -413,8 +385,8 @@ module Stripe
         return @phone_number = nil
       end
       _phone_number = phone_number.not_nil!
-      if _phone_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"phone_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone_number", _phone_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @phone_number = _phone_number
@@ -427,9 +399,7 @@ module Stripe
         return @spending_controls = nil
       end
       _spending_controls = spending_controls.not_nil!
-      if _spending_controls.is_a?(OpenApi::Validatable)
-        _spending_controls.validate
-      end
+      _spending_controls.validate if _spending_controls.is_a?(OpenApi::Validatable)
       @spending_controls = _spending_controls
     end
 

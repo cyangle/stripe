@@ -39,8 +39,8 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _creditor_id = @creditor_id
-        if _creditor_id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"creditor_id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("creditor_id", _creditor_id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -64,8 +64,8 @@ module Stripe
         return @creditor_id = nil
       end
       _creditor_id = creditor_id.not_nil!
-      if _creditor_id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"creditor_id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("creditor_id", _creditor_id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @creditor_id = _creditor_id

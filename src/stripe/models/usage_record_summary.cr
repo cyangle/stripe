@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["usage_record_summary"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["usage_record_summary"])
 
     @[JSON::Field(key: "period", type: Stripe::Period?, default: nil, required: true, nullable: false, emit_null: false)]
     getter period : Stripe::Period? = nil
@@ -77,8 +77,8 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -86,21 +86,19 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"period\" is required and cannot be null") if @period.nil?
       if _period = @period
-        if _period.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_period.list_invalid_properties_for("period"))
-        end
+        invalid_properties.concat(_period.list_invalid_properties_for("period")) if _period.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"subscription_item\" is required and cannot be null") if @subscription_item.nil?
       if _subscription_item = @subscription_item
-        if _subscription_item.to_s.size > 5000
-          invalid_properties.push("invalid value for \"subscription_item\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription_item", _subscription_item.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"total_usage\" is required and cannot be null") if @total_usage.nil?
 
       if _invoice = @invoice
-        if _invoice.to_s.size > 5000
-          invalid_properties.push("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -119,9 +117,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @period.nil?
       if _period = @period
-        if _period.is_a?(OpenApi::Validatable)
-          return false unless _period.valid?
-        end
+        return false if _period.is_a?(OpenApi::Validatable) && !_period.valid?
       end
       return false if @subscription_item.nil?
       if _subscription_item = @subscription_item
@@ -143,8 +139,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -178,9 +174,7 @@ module Stripe
         raise ArgumentError.new("\"period\" is required and cannot be null")
       end
       _period = period.not_nil!
-      if _period.is_a?(OpenApi::Validatable)
-        _period.validate
-      end
+      _period.validate if _period.is_a?(OpenApi::Validatable)
       @period = _period
     end
 
@@ -191,8 +185,8 @@ module Stripe
         raise ArgumentError.new("\"subscription_item\" is required and cannot be null")
       end
       _subscription_item = subscription_item.not_nil!
-      if _subscription_item.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"subscription_item\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription_item", _subscription_item.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @subscription_item = _subscription_item
@@ -215,8 +209,8 @@ module Stripe
         return @invoice = nil
       end
       _invoice = invoice.not_nil!
-      if _invoice.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @invoice = _invoice

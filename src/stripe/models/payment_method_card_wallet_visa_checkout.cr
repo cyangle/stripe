@@ -64,24 +64,20 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _billing_address = @billing_address
-        if _billing_address.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_billing_address.list_invalid_properties_for("billing_address"))
-        end
+        invalid_properties.concat(_billing_address.list_invalid_properties_for("billing_address")) if _billing_address.is_a?(OpenApi::Validatable)
       end
       if _email = @email
-        if _email.to_s.size > 5000
-          invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _name = @name
-        if _name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _shipping_address = @shipping_address
-        if _shipping_address.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_shipping_address.list_invalid_properties_for("shipping_address"))
-        end
+        invalid_properties.concat(_shipping_address.list_invalid_properties_for("shipping_address")) if _shipping_address.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -91,9 +87,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _billing_address = @billing_address
-        if _billing_address.is_a?(OpenApi::Validatable)
-          return false unless _billing_address.valid?
-        end
+        return false if _billing_address.is_a?(OpenApi::Validatable) && !_billing_address.valid?
       end
       if _email = @email
         return false if _email.to_s.size > 5000
@@ -102,9 +96,7 @@ module Stripe
         return false if _name.to_s.size > 5000
       end
       if _shipping_address = @shipping_address
-        if _shipping_address.is_a?(OpenApi::Validatable)
-          return false unless _shipping_address.valid?
-        end
+        return false if _shipping_address.is_a?(OpenApi::Validatable) && !_shipping_address.valid?
       end
 
       true
@@ -117,9 +109,7 @@ module Stripe
         return @billing_address = nil
       end
       _billing_address = billing_address.not_nil!
-      if _billing_address.is_a?(OpenApi::Validatable)
-        _billing_address.validate
-      end
+      _billing_address.validate if _billing_address.is_a?(OpenApi::Validatable)
       @billing_address = _billing_address
     end
 
@@ -130,8 +120,8 @@ module Stripe
         return @email = nil
       end
       _email = email.not_nil!
-      if _email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @email = _email
@@ -144,8 +134,8 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if _name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name
@@ -158,9 +148,7 @@ module Stripe
         return @shipping_address = nil
       end
       _shipping_address = shipping_address.not_nil!
-      if _shipping_address.is_a?(OpenApi::Validatable)
-        _shipping_address.validate
-      end
+      _shipping_address.validate if _shipping_address.is_a?(OpenApi::Validatable)
       @shipping_address = _shipping_address
     end
 

@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "authorization_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter authorization_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_AUTHORIZATION_METHOD = EnumValidator.new("authorization_method", "String", ["chip", "contactless", "keyed_in", "online", "swipe"])
+    ENUM_VALIDATOR_FOR_AUTHORIZATION_METHOD = OpenApi::EnumValidator.new("authorization_method", "String", ["chip", "contactless", "keyed_in", "online", "swipe"])
 
     # List of balance transactions associated with this authorization.
     @[JSON::Field(key: "balance_transactions", type: Array(Stripe::BalanceTransaction)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -77,7 +77,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["issuing.authorization"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["issuing.authorization"])
 
     # History of every time `pending_request` was approved/denied, either by you directly or by Stripe (e.g. based on your `spending_controls`). If the merchant changes the authorization by performing an [incremental authorization](https://stripe.com/docs/issuing/purchases/authorizations), you can look at this field to see the previous requests for the authorization.
     @[JSON::Field(key: "request_history", type: Array(Stripe::IssuingAuthorizationRequest)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -87,7 +87,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["closed", "pending", "reversed"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["closed", "pending", "reversed"])
 
     # List of [transactions](https://stripe.com/docs/api/issuing/transactions) associated with this authorization.
     @[JSON::Field(key: "transactions", type: Array(Stripe::IssuingTransaction)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -172,19 +172,11 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_AUTHORIZATION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_AUTHORIZATION_METHOD.valid?(@authorization_method, false)
       invalid_properties.push("\"balance_transactions\" is required and cannot be null") if @balance_transactions.nil?
       if _balance_transactions = @balance_transactions
-        if _balance_transactions.is_a?(Array)
-          _balance_transactions.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("balance_transactions"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "balance_transactions", array: _balance_transactions)) if _balance_transactions.is_a?(Array)
       end
       invalid_properties.push("\"card\" is required and cannot be null") if @card.nil?
       if _card = @card
-        if _card.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card.list_invalid_properties_for("card"))
-        end
+        invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
@@ -192,8 +184,8 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -204,64 +196,40 @@ module Stripe
 
       invalid_properties.push("\"merchant_data\" is required and cannot be null") if @merchant_data.nil?
       if _merchant_data = @merchant_data
-        if _merchant_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_merchant_data.list_invalid_properties_for("merchant_data"))
-        end
+        invalid_properties.concat(_merchant_data.list_invalid_properties_for("merchant_data")) if _merchant_data.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"request_history\" is required and cannot be null") if @request_history.nil?
       if _request_history = @request_history
-        if _request_history.is_a?(Array)
-          _request_history.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("request_history"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "request_history", array: _request_history)) if _request_history.is_a?(Array)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       invalid_properties.push("\"transactions\" is required and cannot be null") if @transactions.nil?
       if _transactions = @transactions
-        if _transactions.is_a?(Array)
-          _transactions.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("transactions"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "transactions", array: _transactions)) if _transactions.is_a?(Array)
       end
       invalid_properties.push("\"verification_data\" is required and cannot be null") if @verification_data.nil?
       if _verification_data = @verification_data
-        if _verification_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_verification_data.list_invalid_properties_for("verification_data"))
-        end
+        invalid_properties.concat(_verification_data.list_invalid_properties_for("verification_data")) if _verification_data.is_a?(OpenApi::Validatable)
       end
       if _amount_details = @amount_details
-        if _amount_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_amount_details.list_invalid_properties_for("amount_details"))
-        end
+        invalid_properties.concat(_amount_details.list_invalid_properties_for("amount_details")) if _amount_details.is_a?(OpenApi::Validatable)
       end
       if _cardholder = @cardholder
-        if _cardholder.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_cardholder.list_invalid_properties_for("cardholder"))
-        end
+        invalid_properties.concat(_cardholder.list_invalid_properties_for("cardholder")) if _cardholder.is_a?(OpenApi::Validatable)
       end
       if _pending_request = @pending_request
-        if _pending_request.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_pending_request.list_invalid_properties_for("pending_request"))
-        end
+        invalid_properties.concat(_pending_request.list_invalid_properties_for("pending_request")) if _pending_request.is_a?(OpenApi::Validatable)
       end
       if _treasury = @treasury
-        if _treasury.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_treasury.list_invalid_properties_for("treasury"))
-        end
+        invalid_properties.concat(_treasury.list_invalid_properties_for("treasury")) if _treasury.is_a?(OpenApi::Validatable)
       end
       if _wallet = @wallet
-        if _wallet.to_s.size > 5000
-          invalid_properties.push("invalid value for \"wallet\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("wallet", _wallet.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -278,19 +246,11 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_AUTHORIZATION_METHOD.valid?(@authorization_method, false)
       return false if @balance_transactions.nil?
       if _balance_transactions = @balance_transactions
-        if _balance_transactions.is_a?(Array)
-          _balance_transactions.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _balance_transactions.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _balance_transactions)
       end
       return false if @card.nil?
       if _card = @card
-        if _card.is_a?(OpenApi::Validatable)
-          return false unless _card.valid?
-        end
+        return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
       return false if @created.nil?
 
@@ -308,59 +268,35 @@ module Stripe
 
       return false if @merchant_data.nil?
       if _merchant_data = @merchant_data
-        if _merchant_data.is_a?(OpenApi::Validatable)
-          return false unless _merchant_data.valid?
-        end
+        return false if _merchant_data.is_a?(OpenApi::Validatable) && !_merchant_data.valid?
       end
       return false if @metadata.nil?
 
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @request_history.nil?
       if _request_history = @request_history
-        if _request_history.is_a?(Array)
-          _request_history.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _request_history.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _request_history)
       end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false if @transactions.nil?
       if _transactions = @transactions
-        if _transactions.is_a?(Array)
-          _transactions.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _transactions.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _transactions)
       end
       return false if @verification_data.nil?
       if _verification_data = @verification_data
-        if _verification_data.is_a?(OpenApi::Validatable)
-          return false unless _verification_data.valid?
-        end
+        return false if _verification_data.is_a?(OpenApi::Validatable) && !_verification_data.valid?
       end
       if _amount_details = @amount_details
-        if _amount_details.is_a?(OpenApi::Validatable)
-          return false unless _amount_details.valid?
-        end
+        return false if _amount_details.is_a?(OpenApi::Validatable) && !_amount_details.valid?
       end
       if _cardholder = @cardholder
-        if _cardholder.is_a?(OpenApi::Validatable)
-          return false unless _cardholder.valid?
-        end
+        return false if _cardholder.is_a?(OpenApi::Validatable) && !_cardholder.valid?
       end
       if _pending_request = @pending_request
-        if _pending_request.is_a?(OpenApi::Validatable)
-          return false unless _pending_request.valid?
-        end
+        return false if _pending_request.is_a?(OpenApi::Validatable) && !_pending_request.valid?
       end
       if _treasury = @treasury
-        if _treasury.is_a?(OpenApi::Validatable)
-          return false unless _treasury.valid?
-        end
+        return false if _treasury.is_a?(OpenApi::Validatable) && !_treasury.valid?
       end
       if _wallet = @wallet
         return false if _wallet.to_s.size > 5000
@@ -407,13 +343,7 @@ module Stripe
         raise ArgumentError.new("\"balance_transactions\" is required and cannot be null")
       end
       _balance_transactions = balance_transactions.not_nil!
-      if _balance_transactions.is_a?(Array)
-        _balance_transactions.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _balance_transactions) if _balance_transactions.is_a?(Array)
       @balance_transactions = _balance_transactions
     end
 
@@ -424,9 +354,7 @@ module Stripe
         raise ArgumentError.new("\"card\" is required and cannot be null")
       end
       _card = card.not_nil!
-      if _card.is_a?(OpenApi::Validatable)
-        _card.validate
-      end
+      _card.validate if _card.is_a?(OpenApi::Validatable)
       @card = _card
     end
 
@@ -457,8 +385,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -501,9 +429,7 @@ module Stripe
         raise ArgumentError.new("\"merchant_data\" is required and cannot be null")
       end
       _merchant_data = merchant_data.not_nil!
-      if _merchant_data.is_a?(OpenApi::Validatable)
-        _merchant_data.validate
-      end
+      _merchant_data.validate if _merchant_data.is_a?(OpenApi::Validatable)
       @merchant_data = _merchant_data
     end
 
@@ -535,13 +461,7 @@ module Stripe
         raise ArgumentError.new("\"request_history\" is required and cannot be null")
       end
       _request_history = request_history.not_nil!
-      if _request_history.is_a?(Array)
-        _request_history.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _request_history) if _request_history.is_a?(Array)
       @request_history = _request_history
     end
 
@@ -563,13 +483,7 @@ module Stripe
         raise ArgumentError.new("\"transactions\" is required and cannot be null")
       end
       _transactions = transactions.not_nil!
-      if _transactions.is_a?(Array)
-        _transactions.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _transactions) if _transactions.is_a?(Array)
       @transactions = _transactions
     end
 
@@ -580,9 +494,7 @@ module Stripe
         raise ArgumentError.new("\"verification_data\" is required and cannot be null")
       end
       _verification_data = verification_data.not_nil!
-      if _verification_data.is_a?(OpenApi::Validatable)
-        _verification_data.validate
-      end
+      _verification_data.validate if _verification_data.is_a?(OpenApi::Validatable)
       @verification_data = _verification_data
     end
 
@@ -593,9 +505,7 @@ module Stripe
         return @amount_details = nil
       end
       _amount_details = amount_details.not_nil!
-      if _amount_details.is_a?(OpenApi::Validatable)
-        _amount_details.validate
-      end
+      _amount_details.validate if _amount_details.is_a?(OpenApi::Validatable)
       @amount_details = _amount_details
     end
 
@@ -606,9 +516,7 @@ module Stripe
         return @cardholder = nil
       end
       _cardholder = cardholder.not_nil!
-      if _cardholder.is_a?(OpenApi::Validatable)
-        _cardholder.validate
-      end
+      _cardholder.validate if _cardholder.is_a?(OpenApi::Validatable)
       @cardholder = _cardholder
     end
 
@@ -619,9 +527,7 @@ module Stripe
         return @pending_request = nil
       end
       _pending_request = pending_request.not_nil!
-      if _pending_request.is_a?(OpenApi::Validatable)
-        _pending_request.validate
-      end
+      _pending_request.validate if _pending_request.is_a?(OpenApi::Validatable)
       @pending_request = _pending_request
     end
 
@@ -632,9 +538,7 @@ module Stripe
         return @treasury = nil
       end
       _treasury = treasury.not_nil!
-      if _treasury.is_a?(OpenApi::Validatable)
-        _treasury.validate
-      end
+      _treasury.validate if _treasury.is_a?(OpenApi::Validatable)
       @treasury = _treasury
     end
 
@@ -645,8 +549,8 @@ module Stripe
         return @wallet = nil
       end
       _wallet = wallet.not_nil!
-      if _wallet.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"wallet\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("wallet", _wallet.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @wallet = _wallet

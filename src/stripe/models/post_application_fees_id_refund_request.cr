@@ -47,8 +47,8 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _directive = @directive
-        if _directive.to_s.size > 5000
-          invalid_properties.push("invalid value for \"directive\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("directive", _directive.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -82,8 +82,8 @@ module Stripe
         return @directive = nil
       end
       _directive = directive.not_nil!
-      if _directive.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"directive\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("directive", _directive.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @directive = _directive

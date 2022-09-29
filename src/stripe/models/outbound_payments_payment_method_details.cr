@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["financial_account", "us_bank_account"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["financial_account", "us_bank_account"])
 
     # Optional properties
 
@@ -57,21 +57,15 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"billing_details\" is required and cannot be null") if @billing_details.nil?
       if _billing_details = @billing_details
-        if _billing_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details"))
-        end
+        invalid_properties.concat(_billing_details.list_invalid_properties_for("billing_details")) if _billing_details.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _financial_account = @financial_account
-        if _financial_account.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_financial_account.list_invalid_properties_for("financial_account"))
-        end
+        invalid_properties.concat(_financial_account.list_invalid_properties_for("financial_account")) if _financial_account.is_a?(OpenApi::Validatable)
       end
       if _us_bank_account = @us_bank_account
-        if _us_bank_account.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account"))
-        end
+        invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -82,20 +76,14 @@ module Stripe
     def valid? : Bool
       return false if @billing_details.nil?
       if _billing_details = @billing_details
-        if _billing_details.is_a?(OpenApi::Validatable)
-          return false unless _billing_details.valid?
-        end
+        return false if _billing_details.is_a?(OpenApi::Validatable) && !_billing_details.valid?
       end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _financial_account = @financial_account
-        if _financial_account.is_a?(OpenApi::Validatable)
-          return false unless _financial_account.valid?
-        end
+        return false if _financial_account.is_a?(OpenApi::Validatable) && !_financial_account.valid?
       end
       if _us_bank_account = @us_bank_account
-        if _us_bank_account.is_a?(OpenApi::Validatable)
-          return false unless _us_bank_account.valid?
-        end
+        return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
 
       true
@@ -108,9 +96,7 @@ module Stripe
         raise ArgumentError.new("\"billing_details\" is required and cannot be null")
       end
       _billing_details = billing_details.not_nil!
-      if _billing_details.is_a?(OpenApi::Validatable)
-        _billing_details.validate
-      end
+      _billing_details.validate if _billing_details.is_a?(OpenApi::Validatable)
       @billing_details = _billing_details
     end
 
@@ -132,9 +118,7 @@ module Stripe
         return @financial_account = nil
       end
       _financial_account = financial_account.not_nil!
-      if _financial_account.is_a?(OpenApi::Validatable)
-        _financial_account.validate
-      end
+      _financial_account.validate if _financial_account.is_a?(OpenApi::Validatable)
       @financial_account = _financial_account
     end
 
@@ -145,9 +129,7 @@ module Stripe
         return @us_bank_account = nil
       end
       _us_bank_account = us_bank_account.not_nil!
-      if _us_bank_account.is_a?(OpenApi::Validatable)
-        _us_bank_account.validate
-      end
+      _us_bank_account.validate if _us_bank_account.is_a?(OpenApi::Validatable)
       @us_bank_account = _us_bank_account
     end
 

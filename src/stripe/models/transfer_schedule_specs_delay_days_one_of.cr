@@ -17,7 +17,7 @@ module Stripe
 
     property data : String
 
-    ENUM_VALIDATOR = EnumValidator.new("transfer_schedule_specs_delay_days_oneOf", "String", ["minimum"])
+    ENUM_VALIDATOR = OpenApi::EnumValidator.new("transfer_schedule_specs_delay_days_oneOf", "String", ["minimum"])
 
     delegate to_json_object_key, to: @data
     delegate error_message, to: ENUM_VALIDATOR

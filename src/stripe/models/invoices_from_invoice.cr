@@ -44,15 +44,13 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"action\" is required and cannot be null") if @action.nil?
       if _action = @action
-        if _action.to_s.size > 5000
-          invalid_properties.push("invalid value for \"action\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("action", _action.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
       if _invoice = @invoice
-        if _invoice.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_invoice.list_invalid_properties_for("invoice"))
-        end
+        invalid_properties.concat(_invoice.list_invalid_properties_for("invoice")) if _invoice.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -67,9 +65,7 @@ module Stripe
       end
       return false if @invoice.nil?
       if _invoice = @invoice
-        if _invoice.is_a?(OpenApi::Validatable)
-          return false unless _invoice.valid?
-        end
+        return false if _invoice.is_a?(OpenApi::Validatable) && !_invoice.valid?
       end
 
       true
@@ -82,8 +78,8 @@ module Stripe
         raise ArgumentError.new("\"action\" is required and cannot be null")
       end
       _action = action.not_nil!
-      if _action.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"action\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("action", _action.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @action = _action
@@ -96,9 +92,7 @@ module Stripe
         raise ArgumentError.new("\"invoice\" is required and cannot be null")
       end
       _invoice = invoice.not_nil!
-      if _invoice.is_a?(OpenApi::Validatable)
-        _invoice.validate
-      end
+      _invoice.validate if _invoice.is_a?(OpenApi::Validatable)
       @invoice = _invoice
     end
 

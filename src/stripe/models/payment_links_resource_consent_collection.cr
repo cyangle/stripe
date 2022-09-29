@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? promotions_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PROMOTIONS = EnumValidator.new("promotions", "String", ["auto", "none"])
+    ENUM_VALIDATOR_FOR_PROMOTIONS = OpenApi::EnumValidator.new("promotions", "String", ["auto", "none"])
 
     # If set to `required`, it requires cutomers to accept the terms of service before being able to pay. If set to `none`, customers won't be shown a checkbox to accept the terms of service.
     @[JSON::Field(key: "terms_of_service", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: terms_of_service.nil? && !terms_of_service_present?)]
@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? terms_of_service_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_TERMS_OF_SERVICE = EnumValidator.new("terms_of_service", "String", ["none", "required"])
+    ENUM_VALIDATOR_FOR_TERMS_OF_SERVICE = OpenApi::EnumValidator.new("terms_of_service", "String", ["none", "required"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
 
-    ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
+    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
 
     # Optional properties
 

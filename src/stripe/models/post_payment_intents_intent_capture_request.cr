@@ -63,19 +63,17 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _statement_descriptor = @statement_descriptor
-        if _statement_descriptor.to_s.size > 22
-          invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+          invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_suffix = @statement_descriptor_suffix
-        if _statement_descriptor_suffix.to_s.size > 22
-          invalid_properties.push("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 22.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix", _statement_descriptor_suffix.to_s.size, 22)
+          invalid_properties.push(max_length_error)
         end
       end
       if _transfer_data = @transfer_data
-        if _transfer_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data"))
-        end
+        invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -91,9 +89,7 @@ module Stripe
         return false if _statement_descriptor_suffix.to_s.size > 22
       end
       if _transfer_data = @transfer_data
-        if _transfer_data.is_a?(OpenApi::Validatable)
-          return false unless _transfer_data.valid?
-        end
+        return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 
       true
@@ -136,8 +132,8 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if _statement_descriptor.to_s.size > 22
-        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor = _statement_descriptor
@@ -150,8 +146,8 @@ module Stripe
         return @statement_descriptor_suffix = nil
       end
       _statement_descriptor_suffix = statement_descriptor_suffix.not_nil!
-      if _statement_descriptor_suffix.to_s.size > 22
-        raise ArgumentError.new("invalid value for \"statement_descriptor_suffix\", the character length must be smaller than or equal to 22.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix", _statement_descriptor_suffix.to_s.size, 22)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor_suffix = _statement_descriptor_suffix
@@ -164,9 +160,7 @@ module Stripe
         return @transfer_data = nil
       end
       _transfer_data = transfer_data.not_nil!
-      if _transfer_data.is_a?(OpenApi::Validatable)
-        _transfer_data.validate
-      end
+      _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
       @transfer_data = _transfer_data
     end
 

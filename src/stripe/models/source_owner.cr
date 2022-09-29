@@ -96,43 +96,39 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _address = @address
-        if _address.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_address.list_invalid_properties_for("address"))
-        end
+        invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       if _email = @email
-        if _email.to_s.size > 5000
-          invalid_properties.push("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _name = @name
-        if _name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _phone = @phone
-        if _phone.to_s.size > 5000
-          invalid_properties.push("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _verified_address = @verified_address
-        if _verified_address.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_verified_address.list_invalid_properties_for("verified_address"))
-        end
+        invalid_properties.concat(_verified_address.list_invalid_properties_for("verified_address")) if _verified_address.is_a?(OpenApi::Validatable)
       end
       if _verified_email = @verified_email
-        if _verified_email.to_s.size > 5000
-          invalid_properties.push("invalid value for \"verified_email\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_email", _verified_email.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _verified_name = @verified_name
-        if _verified_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _verified_phone = @verified_phone
-        if _verified_phone.to_s.size > 5000
-          invalid_properties.push("invalid value for \"verified_phone\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_phone", _verified_phone.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -143,9 +139,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _address = @address
-        if _address.is_a?(OpenApi::Validatable)
-          return false unless _address.valid?
-        end
+        return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
       if _email = @email
         return false if _email.to_s.size > 5000
@@ -157,9 +151,7 @@ module Stripe
         return false if _phone.to_s.size > 5000
       end
       if _verified_address = @verified_address
-        if _verified_address.is_a?(OpenApi::Validatable)
-          return false unless _verified_address.valid?
-        end
+        return false if _verified_address.is_a?(OpenApi::Validatable) && !_verified_address.valid?
       end
       if _verified_email = @verified_email
         return false if _verified_email.to_s.size > 5000
@@ -181,9 +173,7 @@ module Stripe
         return @address = nil
       end
       _address = address.not_nil!
-      if _address.is_a?(OpenApi::Validatable)
-        _address.validate
-      end
+      _address.validate if _address.is_a?(OpenApi::Validatable)
       @address = _address
     end
 
@@ -194,8 +184,8 @@ module Stripe
         return @email = nil
       end
       _email = email.not_nil!
-      if _email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"email\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @email = _email
@@ -208,8 +198,8 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if _name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name
@@ -222,8 +212,8 @@ module Stripe
         return @phone = nil
       end
       _phone = phone.not_nil!
-      if _phone.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"phone\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @phone = _phone
@@ -236,9 +226,7 @@ module Stripe
         return @verified_address = nil
       end
       _verified_address = verified_address.not_nil!
-      if _verified_address.is_a?(OpenApi::Validatable)
-        _verified_address.validate
-      end
+      _verified_address.validate if _verified_address.is_a?(OpenApi::Validatable)
       @verified_address = _verified_address
     end
 
@@ -249,8 +237,8 @@ module Stripe
         return @verified_email = nil
       end
       _verified_email = verified_email.not_nil!
-      if _verified_email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"verified_email\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_email", _verified_email.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @verified_email = _verified_email
@@ -263,8 +251,8 @@ module Stripe
         return @verified_name = nil
       end
       _verified_name = verified_name.not_nil!
-      if _verified_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @verified_name = _verified_name
@@ -277,8 +265,8 @@ module Stripe
         return @verified_phone = nil
       end
       _verified_phone = verified_phone.not_nil!
-      if _verified_phone.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"verified_phone\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_phone", _verified_phone.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @verified_phone = _verified_phone

@@ -81,34 +81,32 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
-        if __type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _network_status = @network_status
-        if _network_status.to_s.size > 5000
-          invalid_properties.push("invalid value for \"network_status\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_status", _network_status.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _reason = @reason
-        if _reason.to_s.size > 5000
-          invalid_properties.push("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _risk_level = @risk_level
-        if _risk_level.to_s.size > 5000
-          invalid_properties.push("invalid value for \"risk_level\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("risk_level", _risk_level.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _rule = @rule
-        if _rule.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_rule.list_invalid_properties_for("rule"))
-        end
+        invalid_properties.concat(_rule.list_invalid_properties_for("rule")) if _rule.is_a?(OpenApi::Validatable)
       end
       if _seller_message = @seller_message
-        if _seller_message.to_s.size > 5000
-          invalid_properties.push("invalid value for \"seller_message\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("seller_message", _seller_message.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -133,9 +131,7 @@ module Stripe
       end
 
       if _rule = @rule
-        if _rule.is_a?(OpenApi::Validatable)
-          return false unless _rule.valid?
-        end
+        return false if _rule.is_a?(OpenApi::Validatable) && !_rule.valid?
       end
       if _seller_message = @seller_message
         return false if _seller_message.to_s.size > 5000
@@ -151,8 +147,8 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if __type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_type = __type
@@ -165,8 +161,8 @@ module Stripe
         return @network_status = nil
       end
       _network_status = network_status.not_nil!
-      if _network_status.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"network_status\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_status", _network_status.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @network_status = _network_status
@@ -179,8 +175,8 @@ module Stripe
         return @reason = nil
       end
       _reason = reason.not_nil!
-      if _reason.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @reason = _reason
@@ -193,8 +189,8 @@ module Stripe
         return @risk_level = nil
       end
       _risk_level = risk_level.not_nil!
-      if _risk_level.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"risk_level\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("risk_level", _risk_level.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @risk_level = _risk_level
@@ -217,9 +213,7 @@ module Stripe
         return @rule = nil
       end
       _rule = rule.not_nil!
-      if _rule.is_a?(OpenApi::Validatable)
-        _rule.validate
-      end
+      _rule.validate if _rule.is_a?(OpenApi::Validatable)
       @rule = _rule
     end
 
@@ -230,8 +224,8 @@ module Stripe
         return @seller_message = nil
       end
       _seller_message = seller_message.not_nil!
-      if _seller_message.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"seller_message\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("seller_message", _seller_message.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @seller_message = _seller_message

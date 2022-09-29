@@ -92,29 +92,25 @@ module Stripe
 
       invalid_properties.push("\"inventory\" is required and cannot be null") if @inventory.nil?
       if _inventory = @inventory
-        if _inventory.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_inventory.list_invalid_properties_for("inventory"))
-        end
+        invalid_properties.concat(_inventory.list_invalid_properties_for("inventory")) if _inventory.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
 
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
       if _product = @product
-        if _product.to_s.size > 5000
-          invalid_properties.push("invalid value for \"product\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _image = @image
-        if _image.to_s.size > 5000
-          invalid_properties.push("invalid value for \"image\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image", _image.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _package_dimensions = @package_dimensions
-        if _package_dimensions.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions"))
-        end
+        invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions")) if _package_dimensions.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -127,9 +123,7 @@ module Stripe
 
       return false if @inventory.nil?
       if _inventory = @inventory
-        if _inventory.is_a?(OpenApi::Validatable)
-          return false unless _inventory.valid?
-        end
+        return false if _inventory.is_a?(OpenApi::Validatable) && !_inventory.valid?
       end
       return false if @price.nil?
 
@@ -143,9 +137,7 @@ module Stripe
       end
 
       if _package_dimensions = @package_dimensions
-        if _package_dimensions.is_a?(OpenApi::Validatable)
-          return false unless _package_dimensions.valid?
-        end
+        return false if _package_dimensions.is_a?(OpenApi::Validatable) && !_package_dimensions.valid?
       end
 
       true
@@ -168,9 +160,7 @@ module Stripe
         raise ArgumentError.new("\"inventory\" is required and cannot be null")
       end
       _inventory = inventory.not_nil!
-      if _inventory.is_a?(OpenApi::Validatable)
-        _inventory.validate
-      end
+      _inventory.validate if _inventory.is_a?(OpenApi::Validatable)
       @inventory = _inventory
     end
 
@@ -191,8 +181,8 @@ module Stripe
         raise ArgumentError.new("\"product\" is required and cannot be null")
       end
       _product = product.not_nil!
-      if _product.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"product\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @product = _product
@@ -245,8 +235,8 @@ module Stripe
         return @image = nil
       end
       _image = image.not_nil!
-      if _image.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"image\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image", _image.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @image = _image
@@ -269,9 +259,7 @@ module Stripe
         return @package_dimensions = nil
       end
       _package_dimensions = package_dimensions.not_nil!
-      if _package_dimensions.is_a?(OpenApi::Validatable)
-        _package_dimensions.validate
-      end
+      _package_dimensions.validate if _package_dimensions.is_a?(OpenApi::Validatable)
       @package_dimensions = _package_dimensions
     end
 

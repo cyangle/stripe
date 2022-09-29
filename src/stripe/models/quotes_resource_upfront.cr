@@ -60,14 +60,10 @@ module Stripe
 
       invalid_properties.push("\"total_details\" is required and cannot be null") if @total_details.nil?
       if _total_details = @total_details
-        if _total_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_total_details.list_invalid_properties_for("total_details"))
-        end
+        invalid_properties.concat(_total_details.list_invalid_properties_for("total_details")) if _total_details.is_a?(OpenApi::Validatable)
       end
       if _line_items = @line_items
-        if _line_items.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_line_items.list_invalid_properties_for("line_items"))
-        end
+        invalid_properties.concat(_line_items.list_invalid_properties_for("line_items")) if _line_items.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -82,14 +78,10 @@ module Stripe
 
       return false if @total_details.nil?
       if _total_details = @total_details
-        if _total_details.is_a?(OpenApi::Validatable)
-          return false unless _total_details.valid?
-        end
+        return false if _total_details.is_a?(OpenApi::Validatable) && !_total_details.valid?
       end
       if _line_items = @line_items
-        if _line_items.is_a?(OpenApi::Validatable)
-          return false unless _line_items.valid?
-        end
+        return false if _line_items.is_a?(OpenApi::Validatable) && !_line_items.valid?
       end
 
       true
@@ -122,9 +114,7 @@ module Stripe
         raise ArgumentError.new("\"total_details\" is required and cannot be null")
       end
       _total_details = total_details.not_nil!
-      if _total_details.is_a?(OpenApi::Validatable)
-        _total_details.validate
-      end
+      _total_details.validate if _total_details.is_a?(OpenApi::Validatable)
       @total_details = _total_details
     end
 
@@ -135,9 +125,7 @@ module Stripe
         return @line_items = nil
       end
       _line_items = line_items.not_nil!
-      if _line_items.is_a?(OpenApi::Validatable)
-        _line_items.validate
-      end
+      _line_items.validate if _line_items.is_a?(OpenApi::Validatable)
       @line_items = _line_items
     end
 

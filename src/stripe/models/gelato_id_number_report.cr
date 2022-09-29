@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["unverified", "verified"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["unverified", "verified"])
 
     # Optional properties
 
@@ -62,7 +62,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? id_number_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE = EnumValidator.new("id_number_type", "String", ["br_cpf", "sg_nric", "us_ssn"])
+    ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE = OpenApi::EnumValidator.new("id_number_type", "String", ["br_cpf", "sg_nric", "us_ssn"])
 
     # Last name.
     @[JSON::Field(key: "last_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: last_name.nil? && !last_name_present?)]
@@ -94,30 +94,26 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       if _dob = @dob
-        if _dob.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_dob.list_invalid_properties_for("dob"))
-        end
+        invalid_properties.concat(_dob.list_invalid_properties_for("dob")) if _dob.is_a?(OpenApi::Validatable)
       end
       if _error = @error
-        if _error.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_error.list_invalid_properties_for("error"))
-        end
+        invalid_properties.concat(_error.list_invalid_properties_for("error")) if _error.is_a?(OpenApi::Validatable)
       end
       if _first_name = @first_name
-        if _first_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _id_number = @id_number
-        if _id_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number", _id_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid?(@id_number_type)
       if _last_name = @last_name
-        if _last_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -129,14 +125,10 @@ module Stripe
     def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       if _dob = @dob
-        if _dob.is_a?(OpenApi::Validatable)
-          return false unless _dob.valid?
-        end
+        return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
       if _error = @error
-        if _error.is_a?(OpenApi::Validatable)
-          return false unless _error.valid?
-        end
+        return false if _error.is_a?(OpenApi::Validatable) && !_error.valid?
       end
       if _first_name = @first_name
         return false if _first_name.to_s.size > 5000
@@ -170,9 +162,7 @@ module Stripe
         return @dob = nil
       end
       _dob = dob.not_nil!
-      if _dob.is_a?(OpenApi::Validatable)
-        _dob.validate
-      end
+      _dob.validate if _dob.is_a?(OpenApi::Validatable)
       @dob = _dob
     end
 
@@ -183,9 +173,7 @@ module Stripe
         return @error = nil
       end
       _error = error.not_nil!
-      if _error.is_a?(OpenApi::Validatable)
-        _error.validate
-      end
+      _error.validate if _error.is_a?(OpenApi::Validatable)
       @error = _error
     end
 
@@ -196,8 +184,8 @@ module Stripe
         return @first_name = nil
       end
       _first_name = first_name.not_nil!
-      if _first_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"first_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @first_name = _first_name
@@ -210,8 +198,8 @@ module Stripe
         return @id_number = nil
       end
       _id_number = id_number.not_nil!
-      if _id_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number", _id_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id_number = _id_number
@@ -235,8 +223,8 @@ module Stripe
         return @last_name = nil
       end
       _last_name = last_name.not_nil!
-      if _last_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @last_name = _last_name

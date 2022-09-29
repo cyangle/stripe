@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "allowed_updates", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter allowed_updates : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_ALLOWED_UPDATES = EnumValidator.new("allowed_updates", "Array(String)", ["address", "email", "phone", "shipping", "tax_id"])
+    ENUM_VALIDATOR_FOR_ALLOWED_UPDATES = OpenApi::EnumValidator.new("allowed_updates", "Array(String)", ["address", "email", "phone", "shipping", "tax_id"])
 
     # Whether the feature is enabled.
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]

@@ -63,9 +63,7 @@ module Stripe
       invalid_properties.push("\"amount_tax\" is required and cannot be null") if @amount_tax.nil?
 
       if _breakdown = @breakdown
-        if _breakdown.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_breakdown.list_invalid_properties_for("breakdown"))
-        end
+        invalid_properties.concat(_breakdown.list_invalid_properties_for("breakdown")) if _breakdown.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -79,9 +77,7 @@ module Stripe
       return false if @amount_tax.nil?
 
       if _breakdown = @breakdown
-        if _breakdown.is_a?(OpenApi::Validatable)
-          return false unless _breakdown.valid?
-        end
+        return false if _breakdown.is_a?(OpenApi::Validatable) && !_breakdown.valid?
       end
 
       true
@@ -124,9 +120,7 @@ module Stripe
         return @breakdown = nil
       end
       _breakdown = breakdown.not_nil!
-      if _breakdown.is_a?(OpenApi::Validatable)
-        _breakdown.validate
-      end
+      _breakdown.validate if _breakdown.is_a?(OpenApi::Validatable)
       @breakdown = _breakdown
     end
 

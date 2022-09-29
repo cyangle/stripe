@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["aba"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["aba"])
 
     # Optional properties
 
@@ -36,7 +36,7 @@ module Stripe
     @[JSON::Field(key: "supported_networks", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter supported_networks : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS = EnumValidator.new("supported_networks", "Array(String)", ["ach", "us_domestic_wire"])
+    ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS = OpenApi::EnumValidator.new("supported_networks", "Array(String)", ["ach", "us_domestic_wire"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -57,9 +57,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _aba = @aba
-        if _aba.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_aba.list_invalid_properties_for("aba"))
-        end
+        invalid_properties.concat(_aba.list_invalid_properties_for("aba")) if _aba.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
@@ -72,9 +70,7 @@ module Stripe
     def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _aba = @aba
-        if _aba.is_a?(OpenApi::Validatable)
-          return false unless _aba.valid?
-        end
+        return false if _aba.is_a?(OpenApi::Validatable) && !_aba.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
 
@@ -99,9 +95,7 @@ module Stripe
         return @aba = nil
       end
       _aba = aba.not_nil!
-      if _aba.is_a?(OpenApi::Validatable)
-        _aba.validate
-      end
+      _aba.validate if _aba.is_a?(OpenApi::Validatable)
       @aba = _aba
     end
 

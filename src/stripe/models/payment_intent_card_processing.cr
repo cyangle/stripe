@@ -38,9 +38,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _customer_notification = @customer_notification
-        if _customer_notification.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_customer_notification.list_invalid_properties_for("customer_notification"))
-        end
+        invalid_properties.concat(_customer_notification.list_invalid_properties_for("customer_notification")) if _customer_notification.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -50,9 +48,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _customer_notification = @customer_notification
-        if _customer_notification.is_a?(OpenApi::Validatable)
-          return false unless _customer_notification.valid?
-        end
+        return false if _customer_notification.is_a?(OpenApi::Validatable) && !_customer_notification.valid?
       end
 
       true
@@ -65,9 +61,7 @@ module Stripe
         return @customer_notification = nil
       end
       _customer_notification = customer_notification.not_nil!
-      if _customer_notification.is_a?(OpenApi::Validatable)
-        _customer_notification.validate
-      end
+      _customer_notification.validate if _customer_notification.is_a?(OpenApi::Validatable)
       @customer_notification = _customer_notification
     end
 

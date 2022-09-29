@@ -76,7 +76,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? product_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PRODUCT_TYPE = EnumValidator.new("product_type", "String", ["merchandise", "service"])
+    ENUM_VALIDATOR_FOR_PRODUCT_TYPE = OpenApi::EnumValidator.new("product_type", "String", ["merchandise", "service"])
 
     # Result of cardholder's attempt to return the product.
     @[JSON::Field(key: "return_status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: return_status.nil? && !return_status_present?)]
@@ -85,7 +85,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? return_status_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_RETURN_STATUS = EnumValidator.new("return_status", "String", ["merchant_rejected", "successful"])
+    ENUM_VALIDATOR_FOR_RETURN_STATUS = OpenApi::EnumValidator.new("return_status", "String", ["merchant_rejected", "successful"])
 
     # Date when the product was returned or attempted to be returned.
     @[JSON::Field(key: "returned_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: returned_at.nil? && !returned_at_present?)]
@@ -117,25 +117,23 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _additional_documentation = @additional_documentation
-        if _additional_documentation.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation"))
-        end
+        invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
 
       if _cancellation_reason = @cancellation_reason
-        if _cancellation_reason.to_s.size > 5000
-          invalid_properties.push("invalid value for \"cancellation_reason\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_reason", _cancellation_reason.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _explanation = @explanation
-        if _explanation.to_s.size > 5000
-          invalid_properties.push("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _product_description = @product_description
-        if _product_description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"product_description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -150,9 +148,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _additional_documentation = @additional_documentation
-        if _additional_documentation.is_a?(OpenApi::Validatable)
-          return false unless _additional_documentation.valid?
-        end
+        return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
 
       if _cancellation_reason = @cancellation_reason
@@ -178,9 +174,7 @@ module Stripe
         return @additional_documentation = nil
       end
       _additional_documentation = additional_documentation.not_nil!
-      if _additional_documentation.is_a?(OpenApi::Validatable)
-        _additional_documentation.validate
-      end
+      _additional_documentation.validate if _additional_documentation.is_a?(OpenApi::Validatable)
       @additional_documentation = _additional_documentation
     end
 
@@ -211,8 +205,8 @@ module Stripe
         return @cancellation_reason = nil
       end
       _cancellation_reason = cancellation_reason.not_nil!
-      if _cancellation_reason.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"cancellation_reason\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_reason", _cancellation_reason.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @cancellation_reason = _cancellation_reason
@@ -235,8 +229,8 @@ module Stripe
         return @explanation = nil
       end
       _explanation = explanation.not_nil!
-      if _explanation.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @explanation = _explanation
@@ -249,8 +243,8 @@ module Stripe
         return @product_description = nil
       end
       _product_description = product_description.not_nil!
-      if _product_description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @product_description = _product_description

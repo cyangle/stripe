@@ -46,9 +46,7 @@ module Stripe
 
       invalid_properties.push("\"shipping_rate\" is required and cannot be null") if @shipping_rate.nil?
       if _shipping_rate = @shipping_rate
-        if _shipping_rate.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_shipping_rate.list_invalid_properties_for("shipping_rate"))
-        end
+        invalid_properties.concat(_shipping_rate.list_invalid_properties_for("shipping_rate")) if _shipping_rate.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -61,9 +59,7 @@ module Stripe
 
       return false if @shipping_rate.nil?
       if _shipping_rate = @shipping_rate
-        if _shipping_rate.is_a?(OpenApi::Validatable)
-          return false unless _shipping_rate.valid?
-        end
+        return false if _shipping_rate.is_a?(OpenApi::Validatable) && !_shipping_rate.valid?
       end
 
       true
@@ -86,9 +82,7 @@ module Stripe
         raise ArgumentError.new("\"shipping_rate\" is required and cannot be null")
       end
       _shipping_rate = shipping_rate.not_nil!
-      if _shipping_rate.is_a?(OpenApi::Validatable)
-        _shipping_rate.validate
-      end
+      _shipping_rate.validate if _shipping_rate.is_a?(OpenApi::Validatable)
       @shipping_rate = _shipping_rate
     end
 

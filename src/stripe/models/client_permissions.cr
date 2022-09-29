@@ -24,17 +24,17 @@ module Stripe
     @[JSON::Field(key: "billing_details", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_details : String? = nil
 
-    ENUM_VALIDATOR_FOR_BILLING_DETAILS = EnumValidator.new("billing_details", "String", ["allow", "disallow"])
+    ENUM_VALIDATOR_FOR_BILLING_DETAILS = OpenApi::EnumValidator.new("billing_details", "String", ["allow", "disallow"])
 
     @[JSON::Field(key: "promotion_codes", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter promotion_codes : String? = nil
 
-    ENUM_VALIDATOR_FOR_PROMOTION_CODES = EnumValidator.new("promotion_codes", "String", ["allow", "disallow"])
+    ENUM_VALIDATOR_FOR_PROMOTION_CODES = OpenApi::EnumValidator.new("promotion_codes", "String", ["allow", "disallow"])
 
     @[JSON::Field(key: "shipping_details", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping_details : String? = nil
 
-    ENUM_VALIDATOR_FOR_SHIPPING_DETAILS = EnumValidator.new("shipping_details", "String", ["allow", "disallow"])
+    ENUM_VALIDATOR_FOR_SHIPPING_DETAILS = OpenApi::EnumValidator.new("shipping_details", "String", ["allow", "disallow"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

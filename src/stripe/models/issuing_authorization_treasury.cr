@@ -59,8 +59,8 @@ module Stripe
       invalid_properties.push("\"received_debits\" is required and cannot be null") if @received_debits.nil?
 
       if _transaction = @transaction
-        if _transaction.to_s.size > 5000
-          invalid_properties.push("invalid value for \"transaction\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction", _transaction.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -108,8 +108,8 @@ module Stripe
         return @transaction = nil
       end
       _transaction = transaction.not_nil!
-      if _transaction.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"transaction\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction", _transaction.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @transaction = _transaction

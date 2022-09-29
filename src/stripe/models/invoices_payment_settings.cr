@@ -41,7 +41,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_method_types_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES = EnumValidator.new("payment_method_types", "Array(String)", ["ach_credit_transfer", "ach_debit", "acss_debit", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "customer_balance", "fpx", "giropay", "grabpay", "ideal", "konbini", "link", "paynow", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
+    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES = OpenApi::EnumValidator.new("payment_method_types", "Array(String)", ["ach_credit_transfer", "ach_debit", "acss_debit", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "customer_balance", "fpx", "giropay", "grabpay", "ideal", "konbini", "link", "paynow", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -59,14 +59,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _default_mandate = @default_mandate
-        if _default_mandate.to_s.size > 5000
-          invalid_properties.push("invalid value for \"default_mandate\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_mandate", _default_mandate.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _payment_method_options = @payment_method_options
-        if _payment_method_options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options"))
-        end
+        invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
@@ -81,9 +79,7 @@ module Stripe
         return false if _default_mandate.to_s.size > 5000
       end
       if _payment_method_options = @payment_method_options
-        if _payment_method_options.is_a?(OpenApi::Validatable)
-          return false unless _payment_method_options.valid?
-        end
+        return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
 
@@ -97,8 +93,8 @@ module Stripe
         return @default_mandate = nil
       end
       _default_mandate = default_mandate.not_nil!
-      if _default_mandate.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"default_mandate\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_mandate", _default_mandate.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @default_mandate = _default_mandate
@@ -111,9 +107,7 @@ module Stripe
         return @payment_method_options = nil
       end
       _payment_method_options = payment_method_options.not_nil!
-      if _payment_method_options.is_a?(OpenApi::Validatable)
-        _payment_method_options.validate
-      end
+      _payment_method_options.validate if _payment_method_options.is_a?(OpenApi::Validatable)
       @payment_method_options = _payment_method_options
     end
 

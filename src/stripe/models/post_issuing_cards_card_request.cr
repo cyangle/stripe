@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cancellation_reason : String? = nil
 
-    ENUM_VALIDATOR_FOR_CANCELLATION_REASON = EnumValidator.new("cancellation_reason", "String", ["lost", "stolen"])
+    ENUM_VALIDATOR_FOR_CANCELLATION_REASON = OpenApi::EnumValidator.new("cancellation_reason", "String", ["lost", "stolen"])
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -43,7 +43,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["active", "canceled", "inactive"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["active", "canceled", "inactive"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -67,19 +67,13 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_CANCELLATION_REASON.error_message) unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _pin = @pin
-        if _pin.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_pin.list_invalid_properties_for("pin"))
-        end
+        invalid_properties.concat(_pin.list_invalid_properties_for("pin")) if _pin.is_a?(OpenApi::Validatable)
       end
       if _spending_controls = @spending_controls
-        if _spending_controls.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls"))
-        end
+        invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
@@ -93,19 +87,13 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
       if _pin = @pin
-        if _pin.is_a?(OpenApi::Validatable)
-          return false unless _pin.valid?
-        end
+        return false if _pin.is_a?(OpenApi::Validatable) && !_pin.valid?
       end
       if _spending_controls = @spending_controls
-        if _spending_controls.is_a?(OpenApi::Validatable)
-          return false unless _spending_controls.valid?
-        end
+        return false if _spending_controls.is_a?(OpenApi::Validatable) && !_spending_controls.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
@@ -140,9 +128,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 
@@ -153,9 +139,7 @@ module Stripe
         return @pin = nil
       end
       _pin = pin.not_nil!
-      if _pin.is_a?(OpenApi::Validatable)
-        _pin.validate
-      end
+      _pin.validate if _pin.is_a?(OpenApi::Validatable)
       @pin = _pin
     end
 
@@ -166,9 +150,7 @@ module Stripe
         return @spending_controls = nil
       end
       _spending_controls = spending_controls.not_nil!
-      if _spending_controls.is_a?(OpenApi::Validatable)
-        _spending_controls.validate
-      end
+      _spending_controls.validate if _spending_controls.is_a?(OpenApi::Validatable)
       @spending_controls = _spending_controls
     end
 

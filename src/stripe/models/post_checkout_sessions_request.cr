@@ -44,7 +44,7 @@ module Stripe
     @[JSON::Field(key: "billing_address_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_address_collection : String? = nil
 
-    ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION = EnumValidator.new("billing_address_collection", "String", ["auto", "required"])
+    ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION = OpenApi::EnumValidator.new("billing_address_collection", "String", ["auto", "required"])
 
     # A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or similar, and can be used to reconcile the session with your internal systems.
     @[JSON::Field(key: "client_reference_id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -65,7 +65,7 @@ module Stripe
     @[JSON::Field(key: "customer_creation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer_creation : String? = nil
 
-    ENUM_VALIDATOR_FOR_CUSTOMER_CREATION = EnumValidator.new("customer_creation", "String", ["always", "if_required"])
+    ENUM_VALIDATOR_FOR_CUSTOMER_CREATION = OpenApi::EnumValidator.new("customer_creation", "String", ["always", "if_required"])
 
     # If provided, this value will be used when the Customer object is created. If not provided, customers will be asked to enter their email address. Use this parameter to prefill customer data if you already have an email on file. To access information about the customer once a session is complete, use the `customer` field.
     @[JSON::Field(key: "customer_email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -94,7 +94,7 @@ module Stripe
     @[JSON::Field(key: "locale", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter locale : String? = nil
 
-    ENUM_VALIDATOR_FOR_LOCALE = EnumValidator.new("locale", "String", ["auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"])
+    ENUM_VALIDATOR_FOR_LOCALE = OpenApi::EnumValidator.new("locale", "String", ["auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"])
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -104,7 +104,7 @@ module Stripe
     @[JSON::Field(key: "mode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mode : String? = nil
 
-    ENUM_VALIDATOR_FOR_MODE = EnumValidator.new("mode", "String", ["payment", "setup", "subscription"])
+    ENUM_VALIDATOR_FOR_MODE = OpenApi::EnumValidator.new("mode", "String", ["payment", "setup", "subscription"])
 
     @[JSON::Field(key: "payment_intent_data", type: Stripe::PaymentIntentDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_intent_data : Stripe::PaymentIntentDataParams? = nil
@@ -113,7 +113,7 @@ module Stripe
     @[JSON::Field(key: "payment_method_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_collection : String? = nil
 
-    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_COLLECTION = EnumValidator.new("payment_method_collection", "String", ["always", "if_required"])
+    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_COLLECTION = OpenApi::EnumValidator.new("payment_method_collection", "String", ["always", "if_required"])
 
     @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_options : Stripe::PaymentMethodOptionsParam? = nil
@@ -122,7 +122,7 @@ module Stripe
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_types : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES = EnumValidator.new("payment_method_types", "Array(String)", ["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
+    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES = OpenApi::EnumValidator.new("payment_method_types", "Array(String)", ["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
 
     @[JSON::Field(key: "phone_number_collection", type: Stripe::PhoneNumberCollectionParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil
@@ -141,7 +141,7 @@ module Stripe
     @[JSON::Field(key: "submit_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter submit_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_SUBMIT_TYPE = EnumValidator.new("submit_type", "String", ["auto", "book", "donate", "pay"])
+    ENUM_VALIDATOR_FOR_SUBMIT_TYPE = OpenApi::EnumValidator.new("submit_type", "String", ["auto", "book", "donate", "pay"])
 
     @[JSON::Field(key: "subscription_data", type: Stripe::SubscriptionDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter subscription_data : Stripe::SubscriptionDataParams? = nil
@@ -195,125 +195,85 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"cancel_url\" is required and cannot be null") if @cancel_url.nil?
       if _cancel_url = @cancel_url
-        if _cancel_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"cancel_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancel_url", _cancel_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"success_url\" is required and cannot be null") if @success_url.nil?
       if _success_url = @success_url
-        if _success_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"success_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("success_url", _success_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _after_expiration = @after_expiration
-        if _after_expiration.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_after_expiration.list_invalid_properties_for("after_expiration"))
-        end
+        invalid_properties.concat(_after_expiration.list_invalid_properties_for("after_expiration")) if _after_expiration.is_a?(OpenApi::Validatable)
       end
 
       if _automatic_tax = @automatic_tax
-        if _automatic_tax.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax"))
-        end
+        invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.error_message) unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
       if _client_reference_id = @client_reference_id
-        if _client_reference_id.to_s.size > 200
-          invalid_properties.push("invalid value for \"client_reference_id\", the character length must be smaller than or equal to 200.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_reference_id", _client_reference_id.to_s.size, 200)
+          invalid_properties.push(max_length_error)
         end
       end
       if _consent_collection = @consent_collection
-        if _consent_collection.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_consent_collection.list_invalid_properties_for("consent_collection"))
-        end
+        invalid_properties.concat(_consent_collection.list_invalid_properties_for("consent_collection")) if _consent_collection.is_a?(OpenApi::Validatable)
       end
 
       if _customer = @customer
-        if _customer.to_s.size > 5000
-          invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.error_message) unless ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid?(@customer_creation)
 
       if _customer_update = @customer_update
-        if _customer_update.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_customer_update.list_invalid_properties_for("customer_update"))
-        end
+        invalid_properties.concat(_customer_update.list_invalid_properties_for("customer_update")) if _customer_update.is_a?(OpenApi::Validatable)
       end
       if _discounts = @discounts
-        if _discounts.is_a?(Array)
-          _discounts.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("discounts"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "discounts", array: _discounts)) if _discounts.is_a?(Array)
       end
 
       if _line_items = @line_items
-        if _line_items.is_a?(Array)
-          _line_items.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("line_items"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "line_items", array: _line_items)) if _line_items.is_a?(Array)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_LOCALE.error_message) unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_MODE.error_message) unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode)
       if _payment_intent_data = @payment_intent_data
-        if _payment_intent_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_intent_data.list_invalid_properties_for("payment_intent_data"))
-        end
+        invalid_properties.concat(_payment_intent_data.list_invalid_properties_for("payment_intent_data")) if _payment_intent_data.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_METHOD_COLLECTION.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_COLLECTION.valid?(@payment_method_collection)
       if _payment_method_options = @payment_method_options
-        if _payment_method_options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options"))
-        end
+        invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
       if _phone_number_collection = @phone_number_collection
-        if _phone_number_collection.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_phone_number_collection.list_invalid_properties_for("phone_number_collection"))
-        end
+        invalid_properties.concat(_phone_number_collection.list_invalid_properties_for("phone_number_collection")) if _phone_number_collection.is_a?(OpenApi::Validatable)
       end
       if _setup_intent_data = @setup_intent_data
-        if _setup_intent_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_setup_intent_data.list_invalid_properties_for("setup_intent_data"))
-        end
+        invalid_properties.concat(_setup_intent_data.list_invalid_properties_for("setup_intent_data")) if _setup_intent_data.is_a?(OpenApi::Validatable)
       end
       if _shipping_address_collection = @shipping_address_collection
-        if _shipping_address_collection.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_shipping_address_collection.list_invalid_properties_for("shipping_address_collection"))
-        end
+        invalid_properties.concat(_shipping_address_collection.list_invalid_properties_for("shipping_address_collection")) if _shipping_address_collection.is_a?(OpenApi::Validatable)
       end
       if _shipping_options = @shipping_options
-        if _shipping_options.is_a?(Array)
-          _shipping_options.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("shipping_options"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "shipping_options", array: _shipping_options)) if _shipping_options.is_a?(Array)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUBMIT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid?(@submit_type)
       if _subscription_data = @subscription_data
-        if _subscription_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_subscription_data.list_invalid_properties_for("subscription_data"))
-        end
+        invalid_properties.concat(_subscription_data.list_invalid_properties_for("subscription_data")) if _subscription_data.is_a?(OpenApi::Validatable)
       end
       if _tax_id_collection = @tax_id_collection
-        if _tax_id_collection.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_tax_id_collection.list_invalid_properties_for("tax_id_collection"))
-        end
+        invalid_properties.concat(_tax_id_collection.list_invalid_properties_for("tax_id_collection")) if _tax_id_collection.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -331,24 +291,18 @@ module Stripe
         return false if _success_url.to_s.size > 5000
       end
       if _after_expiration = @after_expiration
-        if _after_expiration.is_a?(OpenApi::Validatable)
-          return false unless _after_expiration.valid?
-        end
+        return false if _after_expiration.is_a?(OpenApi::Validatable) && !_after_expiration.valid?
       end
 
       if _automatic_tax = @automatic_tax
-        if _automatic_tax.is_a?(OpenApi::Validatable)
-          return false unless _automatic_tax.valid?
-        end
+        return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
       if _client_reference_id = @client_reference_id
         return false if _client_reference_id.to_s.size > 200
       end
       if _consent_collection = @consent_collection
-        if _consent_collection.is_a?(OpenApi::Validatable)
-          return false unless _consent_collection.valid?
-        end
+        return false if _consent_collection.is_a?(OpenApi::Validatable) && !_consent_collection.valid?
       end
 
       if _customer = @customer
@@ -357,78 +311,44 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid?(@customer_creation)
 
       if _customer_update = @customer_update
-        if _customer_update.is_a?(OpenApi::Validatable)
-          return false unless _customer_update.valid?
-        end
+        return false if _customer_update.is_a?(OpenApi::Validatable) && !_customer_update.valid?
       end
       if _discounts = @discounts
-        if _discounts.is_a?(Array)
-          _discounts.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _discounts.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _discounts)
       end
 
       if _line_items = @line_items
-        if _line_items.is_a?(Array)
-          _line_items.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _line_items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _line_items)
       end
       return false unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
 
       return false unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode)
       if _payment_intent_data = @payment_intent_data
-        if _payment_intent_data.is_a?(OpenApi::Validatable)
-          return false unless _payment_intent_data.valid?
-        end
+        return false if _payment_intent_data.is_a?(OpenApi::Validatable) && !_payment_intent_data.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_COLLECTION.valid?(@payment_method_collection)
       if _payment_method_options = @payment_method_options
-        if _payment_method_options.is_a?(OpenApi::Validatable)
-          return false unless _payment_method_options.valid?
-        end
+        return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
       if _phone_number_collection = @phone_number_collection
-        if _phone_number_collection.is_a?(OpenApi::Validatable)
-          return false unless _phone_number_collection.valid?
-        end
+        return false if _phone_number_collection.is_a?(OpenApi::Validatable) && !_phone_number_collection.valid?
       end
       if _setup_intent_data = @setup_intent_data
-        if _setup_intent_data.is_a?(OpenApi::Validatable)
-          return false unless _setup_intent_data.valid?
-        end
+        return false if _setup_intent_data.is_a?(OpenApi::Validatable) && !_setup_intent_data.valid?
       end
       if _shipping_address_collection = @shipping_address_collection
-        if _shipping_address_collection.is_a?(OpenApi::Validatable)
-          return false unless _shipping_address_collection.valid?
-        end
+        return false if _shipping_address_collection.is_a?(OpenApi::Validatable) && !_shipping_address_collection.valid?
       end
       if _shipping_options = @shipping_options
-        if _shipping_options.is_a?(Array)
-          _shipping_options.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _shipping_options.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _shipping_options)
       end
       return false unless ENUM_VALIDATOR_FOR_SUBMIT_TYPE.valid?(@submit_type)
       if _subscription_data = @subscription_data
-        if _subscription_data.is_a?(OpenApi::Validatable)
-          return false unless _subscription_data.valid?
-        end
+        return false if _subscription_data.is_a?(OpenApi::Validatable) && !_subscription_data.valid?
       end
       if _tax_id_collection = @tax_id_collection
-        if _tax_id_collection.is_a?(OpenApi::Validatable)
-          return false unless _tax_id_collection.valid?
-        end
+        return false if _tax_id_collection.is_a?(OpenApi::Validatable) && !_tax_id_collection.valid?
       end
 
       true
@@ -441,8 +361,8 @@ module Stripe
         raise ArgumentError.new("\"cancel_url\" is required and cannot be null")
       end
       _cancel_url = cancel_url.not_nil!
-      if _cancel_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"cancel_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancel_url", _cancel_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @cancel_url = _cancel_url
@@ -455,8 +375,8 @@ module Stripe
         raise ArgumentError.new("\"success_url\" is required and cannot be null")
       end
       _success_url = success_url.not_nil!
-      if _success_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"success_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("success_url", _success_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @success_url = _success_url
@@ -469,9 +389,7 @@ module Stripe
         return @after_expiration = nil
       end
       _after_expiration = after_expiration.not_nil!
-      if _after_expiration.is_a?(OpenApi::Validatable)
-        _after_expiration.validate
-      end
+      _after_expiration.validate if _after_expiration.is_a?(OpenApi::Validatable)
       @after_expiration = _after_expiration
     end
 
@@ -492,9 +410,7 @@ module Stripe
         return @automatic_tax = nil
       end
       _automatic_tax = automatic_tax.not_nil!
-      if _automatic_tax.is_a?(OpenApi::Validatable)
-        _automatic_tax.validate
-      end
+      _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
       @automatic_tax = _automatic_tax
     end
 
@@ -516,8 +432,8 @@ module Stripe
         return @client_reference_id = nil
       end
       _client_reference_id = client_reference_id.not_nil!
-      if _client_reference_id.to_s.size > 200
-        raise ArgumentError.new("invalid value for \"client_reference_id\", the character length must be smaller than or equal to 200.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_reference_id", _client_reference_id.to_s.size, 200)
+        raise ArgumentError.new(max_length_error)
       end
 
       @client_reference_id = _client_reference_id
@@ -530,9 +446,7 @@ module Stripe
         return @consent_collection = nil
       end
       _consent_collection = consent_collection.not_nil!
-      if _consent_collection.is_a?(OpenApi::Validatable)
-        _consent_collection.validate
-      end
+      _consent_collection.validate if _consent_collection.is_a?(OpenApi::Validatable)
       @consent_collection = _consent_collection
     end
 
@@ -553,8 +467,8 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if _customer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @customer = _customer
@@ -588,9 +502,7 @@ module Stripe
         return @customer_update = nil
       end
       _customer_update = customer_update.not_nil!
-      if _customer_update.is_a?(OpenApi::Validatable)
-        _customer_update.validate
-      end
+      _customer_update.validate if _customer_update.is_a?(OpenApi::Validatable)
       @customer_update = _customer_update
     end
 
@@ -601,13 +513,7 @@ module Stripe
         return @discounts = nil
       end
       _discounts = discounts.not_nil!
-      if _discounts.is_a?(Array)
-        _discounts.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _discounts) if _discounts.is_a?(Array)
       @discounts = _discounts
     end
 
@@ -638,13 +544,7 @@ module Stripe
         return @line_items = nil
       end
       _line_items = line_items.not_nil!
-      if _line_items.is_a?(Array)
-        _line_items.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _line_items) if _line_items.is_a?(Array)
       @line_items = _line_items
     end
 
@@ -687,9 +587,7 @@ module Stripe
         return @payment_intent_data = nil
       end
       _payment_intent_data = payment_intent_data.not_nil!
-      if _payment_intent_data.is_a?(OpenApi::Validatable)
-        _payment_intent_data.validate
-      end
+      _payment_intent_data.validate if _payment_intent_data.is_a?(OpenApi::Validatable)
       @payment_intent_data = _payment_intent_data
     end
 
@@ -711,9 +609,7 @@ module Stripe
         return @payment_method_options = nil
       end
       _payment_method_options = payment_method_options.not_nil!
-      if _payment_method_options.is_a?(OpenApi::Validatable)
-        _payment_method_options.validate
-      end
+      _payment_method_options.validate if _payment_method_options.is_a?(OpenApi::Validatable)
       @payment_method_options = _payment_method_options
     end
 
@@ -735,9 +631,7 @@ module Stripe
         return @phone_number_collection = nil
       end
       _phone_number_collection = phone_number_collection.not_nil!
-      if _phone_number_collection.is_a?(OpenApi::Validatable)
-        _phone_number_collection.validate
-      end
+      _phone_number_collection.validate if _phone_number_collection.is_a?(OpenApi::Validatable)
       @phone_number_collection = _phone_number_collection
     end
 
@@ -748,9 +642,7 @@ module Stripe
         return @setup_intent_data = nil
       end
       _setup_intent_data = setup_intent_data.not_nil!
-      if _setup_intent_data.is_a?(OpenApi::Validatable)
-        _setup_intent_data.validate
-      end
+      _setup_intent_data.validate if _setup_intent_data.is_a?(OpenApi::Validatable)
       @setup_intent_data = _setup_intent_data
     end
 
@@ -761,9 +653,7 @@ module Stripe
         return @shipping_address_collection = nil
       end
       _shipping_address_collection = shipping_address_collection.not_nil!
-      if _shipping_address_collection.is_a?(OpenApi::Validatable)
-        _shipping_address_collection.validate
-      end
+      _shipping_address_collection.validate if _shipping_address_collection.is_a?(OpenApi::Validatable)
       @shipping_address_collection = _shipping_address_collection
     end
 
@@ -774,13 +664,7 @@ module Stripe
         return @shipping_options = nil
       end
       _shipping_options = shipping_options.not_nil!
-      if _shipping_options.is_a?(Array)
-        _shipping_options.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _shipping_options) if _shipping_options.is_a?(Array)
       @shipping_options = _shipping_options
     end
 
@@ -802,9 +686,7 @@ module Stripe
         return @subscription_data = nil
       end
       _subscription_data = subscription_data.not_nil!
-      if _subscription_data.is_a?(OpenApi::Validatable)
-        _subscription_data.validate
-      end
+      _subscription_data.validate if _subscription_data.is_a?(OpenApi::Validatable)
       @subscription_data = _subscription_data
     end
 
@@ -815,9 +697,7 @@ module Stripe
         return @tax_id_collection = nil
       end
       _tax_id_collection = tax_id_collection.not_nil!
-      if _tax_id_collection.is_a?(OpenApi::Validatable)
-        _tax_id_collection.validate
-      end
+      _tax_id_collection.validate if _tax_id_collection.is_a?(OpenApi::Validatable)
       @tax_id_collection = _tax_id_collection
     end
 

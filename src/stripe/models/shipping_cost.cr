@@ -41,14 +41,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _shipping_rate = @shipping_rate
-        if _shipping_rate.to_s.size > 5000
-          invalid_properties.push("invalid value for \"shipping_rate\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_rate", _shipping_rate.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _shipping_rate_data = @shipping_rate_data
-        if _shipping_rate_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_shipping_rate_data.list_invalid_properties_for("shipping_rate_data"))
-        end
+        invalid_properties.concat(_shipping_rate_data.list_invalid_properties_for("shipping_rate_data")) if _shipping_rate_data.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -61,9 +59,7 @@ module Stripe
         return false if _shipping_rate.to_s.size > 5000
       end
       if _shipping_rate_data = @shipping_rate_data
-        if _shipping_rate_data.is_a?(OpenApi::Validatable)
-          return false unless _shipping_rate_data.valid?
-        end
+        return false if _shipping_rate_data.is_a?(OpenApi::Validatable) && !_shipping_rate_data.valid?
       end
 
       true
@@ -76,8 +72,8 @@ module Stripe
         return @shipping_rate = nil
       end
       _shipping_rate = shipping_rate.not_nil!
-      if _shipping_rate.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"shipping_rate\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_rate", _shipping_rate.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @shipping_rate = _shipping_rate
@@ -90,9 +86,7 @@ module Stripe
         return @shipping_rate_data = nil
       end
       _shipping_rate_data = shipping_rate_data.not_nil!
-      if _shipping_rate_data.is_a?(OpenApi::Validatable)
-        _shipping_rate_data.validate
-      end
+      _shipping_rate_data.validate if _shipping_rate_data.is_a?(OpenApi::Validatable)
       @shipping_rate_data = _shipping_rate_data
     end
 

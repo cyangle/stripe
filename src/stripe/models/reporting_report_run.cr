@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["reporting.report_run"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["reporting.report_run"])
 
     @[JSON::Field(key: "parameters", type: Stripe::FinancialReportingFinanceReportRunRunParameters?, default: nil, required: true, nullable: false, emit_null: false)]
     getter parameters : Stripe::FinancialReportingFinanceReportRunRunParameters? = nil
@@ -99,8 +99,8 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -108,31 +108,27 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"parameters\" is required and cannot be null") if @parameters.nil?
       if _parameters = @parameters
-        if _parameters.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_parameters.list_invalid_properties_for("parameters"))
-        end
+        invalid_properties.concat(_parameters.list_invalid_properties_for("parameters")) if _parameters.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"report_type\" is required and cannot be null") if @report_type.nil?
       if _report_type = @report_type
-        if _report_type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"report_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("report_type", _report_type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
       if _status = @status
-        if _status.to_s.size > 5000
-          invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _error = @error
-        if _error.to_s.size > 5000
-          invalid_properties.push("invalid value for \"error\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("error", _error.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _result = @result
-        if _result.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_result.list_invalid_properties_for("result"))
-        end
+        invalid_properties.concat(_result.list_invalid_properties_for("result")) if _result.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -152,9 +148,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @parameters.nil?
       if _parameters = @parameters
-        if _parameters.is_a?(OpenApi::Validatable)
-          return false unless _parameters.valid?
-        end
+        return false if _parameters.is_a?(OpenApi::Validatable) && !_parameters.valid?
       end
       return false if @report_type.nil?
       if _report_type = @report_type
@@ -168,9 +162,7 @@ module Stripe
         return false if _error.to_s.size > 5000
       end
       if _result = @result
-        if _result.is_a?(OpenApi::Validatable)
-          return false unless _result.valid?
-        end
+        return false if _result.is_a?(OpenApi::Validatable) && !_result.valid?
       end
 
       true
@@ -193,8 +185,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -228,9 +220,7 @@ module Stripe
         raise ArgumentError.new("\"parameters\" is required and cannot be null")
       end
       _parameters = parameters.not_nil!
-      if _parameters.is_a?(OpenApi::Validatable)
-        _parameters.validate
-      end
+      _parameters.validate if _parameters.is_a?(OpenApi::Validatable)
       @parameters = _parameters
     end
 
@@ -241,8 +231,8 @@ module Stripe
         raise ArgumentError.new("\"report_type\" is required and cannot be null")
       end
       _report_type = report_type.not_nil!
-      if _report_type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"report_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("report_type", _report_type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @report_type = _report_type
@@ -255,8 +245,8 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if _status.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @status = _status
@@ -269,8 +259,8 @@ module Stripe
         return @error = nil
       end
       _error = error.not_nil!
-      if _error.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"error\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("error", _error.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @error = _error
@@ -283,9 +273,7 @@ module Stripe
         return @result = nil
       end
       _result = result.not_nil!
-      if _result.is_a?(OpenApi::Validatable)
-        _result.validate
-      end
+      _result.validate if _result.is_a?(OpenApi::Validatable)
       @result = _result
     end
 

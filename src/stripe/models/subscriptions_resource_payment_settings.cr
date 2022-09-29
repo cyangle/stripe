@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_method_types_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES = EnumValidator.new("payment_method_types", "Array(String)", ["ach_credit_transfer", "ach_debit", "acss_debit", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "customer_balance", "fpx", "giropay", "grabpay", "ideal", "konbini", "link", "paynow", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
+    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES = OpenApi::EnumValidator.new("payment_method_types", "Array(String)", ["ach_credit_transfer", "ach_debit", "acss_debit", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "customer_balance", "fpx", "giropay", "grabpay", "ideal", "konbini", "link", "paynow", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"])
 
     # Either `off`, or `on_subscription`. With `on_subscription` Stripe updates `subscription.default_payment_method` when a subscription payment succeeds.
     @[JSON::Field(key: "save_default_payment_method", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: save_default_payment_method.nil? && !save_default_payment_method_present?)]
@@ -43,7 +43,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? save_default_payment_method_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD = EnumValidator.new("save_default_payment_method", "String", ["off", "on_subscription"])
+    ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD = OpenApi::EnumValidator.new("save_default_payment_method", "String", ["off", "on_subscription"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -61,9 +61,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _payment_method_options = @payment_method_options
-        if _payment_method_options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options"))
-        end
+        invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
@@ -77,9 +75,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _payment_method_options = @payment_method_options
-        if _payment_method_options.is_a?(OpenApi::Validatable)
-          return false unless _payment_method_options.valid?
-        end
+        return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_TYPES.all_valid?(@payment_method_types)
       return false unless ENUM_VALIDATOR_FOR_SAVE_DEFAULT_PAYMENT_METHOD.valid?(@save_default_payment_method)
@@ -94,9 +90,7 @@ module Stripe
         return @payment_method_options = nil
       end
       _payment_method_options = payment_method_options.not_nil!
-      if _payment_method_options.is_a?(OpenApi::Validatable)
-        _payment_method_options.validate
-      end
+      _payment_method_options.validate if _payment_method_options.is_a?(OpenApi::Validatable)
       @payment_method_options = _payment_method_options
     end
 

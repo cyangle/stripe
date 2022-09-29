@@ -48,7 +48,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["radar.early_fraud_warning"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["radar.early_fraud_warning"])
 
     # Optional properties
 
@@ -80,31 +80,27 @@ module Stripe
 
       invalid_properties.push("\"charge\" is required and cannot be null") if @charge.nil?
       if _charge = @charge
-        if _charge.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_charge.list_invalid_properties_for("charge"))
-        end
+        invalid_properties.concat(_charge.list_invalid_properties_for("charge")) if _charge.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"fraud_type\" is required and cannot be null") if @fraud_type.nil?
       if _fraud_type = @fraud_type
-        if _fraud_type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"fraud_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fraud_type", _fraud_type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       if _payment_intent = @payment_intent
-        if _payment_intent.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent"))
-        end
+        invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -117,9 +113,7 @@ module Stripe
 
       return false if @charge.nil?
       if _charge = @charge
-        if _charge.is_a?(OpenApi::Validatable)
-          return false unless _charge.valid?
-        end
+        return false if _charge.is_a?(OpenApi::Validatable) && !_charge.valid?
       end
       return false if @created.nil?
 
@@ -135,9 +129,7 @@ module Stripe
 
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       if _payment_intent = @payment_intent
-        if _payment_intent.is_a?(OpenApi::Validatable)
-          return false unless _payment_intent.valid?
-        end
+        return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
 
       true
@@ -160,9 +152,7 @@ module Stripe
         raise ArgumentError.new("\"charge\" is required and cannot be null")
       end
       _charge = charge.not_nil!
-      if _charge.is_a?(OpenApi::Validatable)
-        _charge.validate
-      end
+      _charge.validate if _charge.is_a?(OpenApi::Validatable)
       @charge = _charge
     end
 
@@ -183,8 +173,8 @@ module Stripe
         raise ArgumentError.new("\"fraud_type\" is required and cannot be null")
       end
       _fraud_type = fraud_type.not_nil!
-      if _fraud_type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"fraud_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fraud_type", _fraud_type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @fraud_type = _fraud_type
@@ -197,8 +187,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -232,9 +222,7 @@ module Stripe
         return @payment_intent = nil
       end
       _payment_intent = payment_intent.not_nil!
-      if _payment_intent.is_a?(OpenApi::Validatable)
-        _payment_intent.validate
-      end
+      _payment_intent.validate if _payment_intent.is_a?(OpenApi::Validatable)
       @payment_intent = _payment_intent
     end
 

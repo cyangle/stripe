@@ -49,14 +49,10 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"upfront\" is required and cannot be null") if @upfront.nil?
       if _upfront = @upfront
-        if _upfront.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_upfront.list_invalid_properties_for("upfront"))
-        end
+        invalid_properties.concat(_upfront.list_invalid_properties_for("upfront")) if _upfront.is_a?(OpenApi::Validatable)
       end
       if _recurring = @recurring
-        if _recurring.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_recurring.list_invalid_properties_for("recurring"))
-        end
+        invalid_properties.concat(_recurring.list_invalid_properties_for("recurring")) if _recurring.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -67,14 +63,10 @@ module Stripe
     def valid? : Bool
       return false if @upfront.nil?
       if _upfront = @upfront
-        if _upfront.is_a?(OpenApi::Validatable)
-          return false unless _upfront.valid?
-        end
+        return false if _upfront.is_a?(OpenApi::Validatable) && !_upfront.valid?
       end
       if _recurring = @recurring
-        if _recurring.is_a?(OpenApi::Validatable)
-          return false unless _recurring.valid?
-        end
+        return false if _recurring.is_a?(OpenApi::Validatable) && !_recurring.valid?
       end
 
       true
@@ -87,9 +79,7 @@ module Stripe
         raise ArgumentError.new("\"upfront\" is required and cannot be null")
       end
       _upfront = upfront.not_nil!
-      if _upfront.is_a?(OpenApi::Validatable)
-        _upfront.validate
-      end
+      _upfront.validate if _upfront.is_a?(OpenApi::Validatable)
       @upfront = _upfront
     end
 
@@ -100,9 +90,7 @@ module Stripe
         return @recurring = nil
       end
       _recurring = recurring.not_nil!
-      if _recurring.is_a?(OpenApi::Validatable)
-        _recurring.validate
-      end
+      _recurring.validate if _recurring.is_a?(OpenApi::Validatable)
       @recurring = _recurring
     end
 

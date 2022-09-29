@@ -37,9 +37,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _tos_acceptance = @tos_acceptance
-        if _tos_acceptance.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_tos_acceptance.list_invalid_properties_for("tos_acceptance"))
-        end
+        invalid_properties.concat(_tos_acceptance.list_invalid_properties_for("tos_acceptance")) if _tos_acceptance.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -49,9 +47,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _tos_acceptance = @tos_acceptance
-        if _tos_acceptance.is_a?(OpenApi::Validatable)
-          return false unless _tos_acceptance.valid?
-        end
+        return false if _tos_acceptance.is_a?(OpenApi::Validatable) && !_tos_acceptance.valid?
       end
 
       true
@@ -64,9 +60,7 @@ module Stripe
         return @tos_acceptance = nil
       end
       _tos_acceptance = tos_acceptance.not_nil!
-      if _tos_acceptance.is_a?(OpenApi::Validatable)
-        _tos_acceptance.validate
-      end
+      _tos_acceptance.validate if _tos_acceptance.is_a?(OpenApi::Validatable)
       @tos_acceptance = _tos_acceptance
     end
 

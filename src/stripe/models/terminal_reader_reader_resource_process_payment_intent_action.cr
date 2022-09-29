@@ -46,14 +46,10 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"payment_intent\" is required and cannot be null") if @payment_intent.nil?
       if _payment_intent = @payment_intent
-        if _payment_intent.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent"))
-        end
+        invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
       if _process_config = @process_config
-        if _process_config.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_process_config.list_invalid_properties_for("process_config"))
-        end
+        invalid_properties.concat(_process_config.list_invalid_properties_for("process_config")) if _process_config.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -64,14 +60,10 @@ module Stripe
     def valid? : Bool
       return false if @payment_intent.nil?
       if _payment_intent = @payment_intent
-        if _payment_intent.is_a?(OpenApi::Validatable)
-          return false unless _payment_intent.valid?
-        end
+        return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
       if _process_config = @process_config
-        if _process_config.is_a?(OpenApi::Validatable)
-          return false unless _process_config.valid?
-        end
+        return false if _process_config.is_a?(OpenApi::Validatable) && !_process_config.valid?
       end
 
       true
@@ -84,9 +76,7 @@ module Stripe
         raise ArgumentError.new("\"payment_intent\" is required and cannot be null")
       end
       _payment_intent = payment_intent.not_nil!
-      if _payment_intent.is_a?(OpenApi::Validatable)
-        _payment_intent.validate
-      end
+      _payment_intent.validate if _payment_intent.is_a?(OpenApi::Validatable)
       @payment_intent = _payment_intent
     end
 
@@ -97,9 +87,7 @@ module Stripe
         return @process_config = nil
       end
       _process_config = process_config.not_nil!
-      if _process_config.is_a?(OpenApi::Validatable)
-        _process_config.validate
-      end
+      _process_config.validate if _process_config.is_a?(OpenApi::Validatable)
       @process_config = _process_config
     end
 

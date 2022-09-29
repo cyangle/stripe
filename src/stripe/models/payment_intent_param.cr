@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = EnumValidator.new("capture_method", "String", ["", "manual"])
+    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = OpenApi::EnumValidator.new("capture_method", "String", ["", "manual"])
 
     @[JSON::Field(key: "cvc_token", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cvc_token : String? = nil
@@ -37,17 +37,17 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter network : String? = nil
 
-    ENUM_VALIDATOR_FOR_NETWORK = EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
+    ENUM_VALIDATOR_FOR_NETWORK = OpenApi::EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
 
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter request_three_d_secure : String? = nil
 
-    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = EnumValidator.new("request_three_d_secure", "String", ["any", "automatic"])
+    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = OpenApi::EnumValidator.new("request_three_d_secure", "String", ["any", "automatic"])
 
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["", "none", "off_session", "on_session"])
+    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["", "none", "off_session", "on_session"])
 
     @[JSON::Field(key: "statement_descriptor_suffix_kana", type: Stripe::PaymentIntentParamStatementDescriptorSuffixKana?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor_suffix_kana : Stripe::PaymentIntentParamStatementDescriptorSuffixKana? = nil
@@ -79,19 +79,15 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
       if _cvc_token = @cvc_token
-        if _cvc_token.to_s.size > 5000
-          invalid_properties.push("invalid value for \"cvc_token\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_token", _cvc_token.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _installments = @installments
-        if _installments.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_installments.list_invalid_properties_for("installments"))
-        end
+        invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
       if _mandate_options = @mandate_options
-        if _mandate_options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options"))
-        end
+        invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
@@ -100,14 +96,10 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
-        if _statement_descriptor_suffix_kana.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_statement_descriptor_suffix_kana.list_invalid_properties_for("statement_descriptor_suffix_kana"))
-        end
+        invalid_properties.concat(_statement_descriptor_suffix_kana.list_invalid_properties_for("statement_descriptor_suffix_kana")) if _statement_descriptor_suffix_kana.is_a?(OpenApi::Validatable)
       end
       if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
-        if _statement_descriptor_suffix_kanji.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_statement_descriptor_suffix_kanji.list_invalid_properties_for("statement_descriptor_suffix_kanji"))
-        end
+        invalid_properties.concat(_statement_descriptor_suffix_kanji.list_invalid_properties_for("statement_descriptor_suffix_kanji")) if _statement_descriptor_suffix_kanji.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -121,27 +113,19 @@ module Stripe
         return false if _cvc_token.to_s.size > 5000
       end
       if _installments = @installments
-        if _installments.is_a?(OpenApi::Validatable)
-          return false unless _installments.valid?
-        end
+        return false if _installments.is_a?(OpenApi::Validatable) && !_installments.valid?
       end
       if _mandate_options = @mandate_options
-        if _mandate_options.is_a?(OpenApi::Validatable)
-          return false unless _mandate_options.valid?
-        end
+        return false if _mandate_options.is_a?(OpenApi::Validatable) && !_mandate_options.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
       return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
-        if _statement_descriptor_suffix_kana.is_a?(OpenApi::Validatable)
-          return false unless _statement_descriptor_suffix_kana.valid?
-        end
+        return false if _statement_descriptor_suffix_kana.is_a?(OpenApi::Validatable) && !_statement_descriptor_suffix_kana.valid?
       end
       if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
-        if _statement_descriptor_suffix_kanji.is_a?(OpenApi::Validatable)
-          return false unless _statement_descriptor_suffix_kanji.valid?
-        end
+        return false if _statement_descriptor_suffix_kanji.is_a?(OpenApi::Validatable) && !_statement_descriptor_suffix_kanji.valid?
       end
 
       true
@@ -165,8 +149,8 @@ module Stripe
         return @cvc_token = nil
       end
       _cvc_token = cvc_token.not_nil!
-      if _cvc_token.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"cvc_token\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_token", _cvc_token.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @cvc_token = _cvc_token
@@ -179,9 +163,7 @@ module Stripe
         return @installments = nil
       end
       _installments = installments.not_nil!
-      if _installments.is_a?(OpenApi::Validatable)
-        _installments.validate
-      end
+      _installments.validate if _installments.is_a?(OpenApi::Validatable)
       @installments = _installments
     end
 
@@ -192,9 +174,7 @@ module Stripe
         return @mandate_options = nil
       end
       _mandate_options = mandate_options.not_nil!
-      if _mandate_options.is_a?(OpenApi::Validatable)
-        _mandate_options.validate
-      end
+      _mandate_options.validate if _mandate_options.is_a?(OpenApi::Validatable)
       @mandate_options = _mandate_options
     end
 
@@ -238,9 +218,7 @@ module Stripe
         return @statement_descriptor_suffix_kana = nil
       end
       _statement_descriptor_suffix_kana = statement_descriptor_suffix_kana.not_nil!
-      if _statement_descriptor_suffix_kana.is_a?(OpenApi::Validatable)
-        _statement_descriptor_suffix_kana.validate
-      end
+      _statement_descriptor_suffix_kana.validate if _statement_descriptor_suffix_kana.is_a?(OpenApi::Validatable)
       @statement_descriptor_suffix_kana = _statement_descriptor_suffix_kana
     end
 
@@ -251,9 +229,7 @@ module Stripe
         return @statement_descriptor_suffix_kanji = nil
       end
       _statement_descriptor_suffix_kanji = statement_descriptor_suffix_kanji.not_nil!
-      if _statement_descriptor_suffix_kanji.is_a?(OpenApi::Validatable)
-        _statement_descriptor_suffix_kanji.validate
-      end
+      _statement_descriptor_suffix_kanji.validate if _statement_descriptor_suffix_kanji.is_a?(OpenApi::Validatable)
       @statement_descriptor_suffix_kanji = _statement_descriptor_suffix_kanji
     end
 

@@ -42,8 +42,8 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _amount_tax_display = @amount_tax_display
-        if _amount_tax_display.to_s.size > 5000
-          invalid_properties.push("invalid value for \"amount_tax_display\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("amount_tax_display", _amount_tax_display.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -67,8 +67,8 @@ module Stripe
         return @amount_tax_display = nil
       end
       _amount_tax_display = amount_tax_display.not_nil!
-      if _amount_tax_display.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"amount_tax_display\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("amount_tax_display", _amount_tax_display.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @amount_tax_display = _amount_tax_display

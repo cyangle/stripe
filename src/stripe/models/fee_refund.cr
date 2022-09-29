@@ -44,7 +44,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["fee_refund"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["fee_refund"])
 
     # Optional properties
 
@@ -90,22 +90,18 @@ module Stripe
 
       invalid_properties.push("\"fee\" is required and cannot be null") if @fee.nil?
       if _fee = @fee
-        if _fee.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_fee.list_invalid_properties_for("fee"))
-        end
+        invalid_properties.concat(_fee.list_invalid_properties_for("fee")) if _fee.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       if _balance_transaction = @balance_transaction
-        if _balance_transaction.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction"))
-        end
+        invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -122,9 +118,7 @@ module Stripe
 
       return false if @fee.nil?
       if _fee = @fee
-        if _fee.is_a?(OpenApi::Validatable)
-          return false unless _fee.valid?
-        end
+        return false if _fee.is_a?(OpenApi::Validatable) && !_fee.valid?
       end
       return false if @id.nil?
       if _id = @id
@@ -132,9 +126,7 @@ module Stripe
       end
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       if _balance_transaction = @balance_transaction
-        if _balance_transaction.is_a?(OpenApi::Validatable)
-          return false unless _balance_transaction.valid?
-        end
+        return false if _balance_transaction.is_a?(OpenApi::Validatable) && !_balance_transaction.valid?
       end
 
       true
@@ -177,9 +169,7 @@ module Stripe
         raise ArgumentError.new("\"fee\" is required and cannot be null")
       end
       _fee = fee.not_nil!
-      if _fee.is_a?(OpenApi::Validatable)
-        _fee.validate
-      end
+      _fee.validate if _fee.is_a?(OpenApi::Validatable)
       @fee = _fee
     end
 
@@ -190,8 +180,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -215,9 +205,7 @@ module Stripe
         return @balance_transaction = nil
       end
       _balance_transaction = balance_transaction.not_nil!
-      if _balance_transaction.is_a?(OpenApi::Validatable)
-        _balance_transaction.validate
-      end
+      _balance_transaction.validate if _balance_transaction.is_a?(OpenApi::Validatable)
       @balance_transaction = _balance_transaction
     end
 

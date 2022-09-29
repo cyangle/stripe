@@ -37,8 +37,8 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _custom_message = @custom_message
-        if _custom_message.to_s.size > 500
-          invalid_properties.push("invalid value for \"custom_message\", the character length must be smaller than or equal to 500.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("custom_message", _custom_message.to_s.size, 500)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -62,8 +62,8 @@ module Stripe
         return @custom_message = nil
       end
       _custom_message = custom_message.not_nil!
-      if _custom_message.to_s.size > 500
-        raise ArgumentError.new("invalid value for \"custom_message\", the character length must be smaller than or equal to 500.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("custom_message", _custom_message.to_s.size, 500)
+        raise ArgumentError.new(max_length_error)
       end
 
       @custom_message = _custom_message

@@ -39,9 +39,7 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"document\" is required and cannot be null") if @document.nil?
       if _document = @document
-        if _document.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_document.list_invalid_properties_for("document"))
-        end
+        invalid_properties.concat(_document.list_invalid_properties_for("document")) if _document.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -52,9 +50,7 @@ module Stripe
     def valid? : Bool
       return false if @document.nil?
       if _document = @document
-        if _document.is_a?(OpenApi::Validatable)
-          return false unless _document.valid?
-        end
+        return false if _document.is_a?(OpenApi::Validatable) && !_document.valid?
       end
 
       true
@@ -67,9 +63,7 @@ module Stripe
         raise ArgumentError.new("\"document\" is required and cannot be null")
       end
       _document = document.not_nil!
-      if _document.is_a?(OpenApi::Validatable)
-        _document.validate
-      end
+      _document.validate if _document.is_a?(OpenApi::Validatable)
       @document = _document
     end
 

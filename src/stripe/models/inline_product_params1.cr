@@ -66,30 +66,30 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
-        if _name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _statement_descriptor = @statement_descriptor
-        if _statement_descriptor.to_s.size > 22
-          invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+          invalid_properties.push(max_length_error)
         end
       end
       if _tax_code = @tax_code
-        if _tax_code.to_s.size > 5000
-          invalid_properties.push("invalid value for \"tax_code\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_code", _tax_code.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _unit_label = @unit_label
-        if _unit_label.to_s.size > 12
-          invalid_properties.push("invalid value for \"unit_label\", the character length must be smaller than or equal to 12.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit_label", _unit_label.to_s.size, 12)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -128,8 +128,8 @@ module Stripe
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if _name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name
@@ -152,8 +152,8 @@ module Stripe
         return @id = nil
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -176,8 +176,8 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if _statement_descriptor.to_s.size > 22
-        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor = _statement_descriptor
@@ -190,8 +190,8 @@ module Stripe
         return @tax_code = nil
       end
       _tax_code = tax_code.not_nil!
-      if _tax_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"tax_code\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_code", _tax_code.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @tax_code = _tax_code
@@ -204,8 +204,8 @@ module Stripe
         return @unit_label = nil
       end
       _unit_label = unit_label.not_nil!
-      if _unit_label.to_s.size > 12
-        raise ArgumentError.new("invalid value for \"unit_label\", the character length must be smaller than or equal to 12.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit_label", _unit_label.to_s.size, 12)
+        raise ArgumentError.new(max_length_error)
       end
 
       @unit_label = _unit_label

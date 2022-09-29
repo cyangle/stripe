@@ -44,8 +44,8 @@ module Stripe
 
       invalid_properties.push("\"user_agent\" is required and cannot be null") if @user_agent.nil?
       if _user_agent = @user_agent
-        if _user_agent.to_s.size > 5000
-          invalid_properties.push("invalid value for \"user_agent\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_agent", _user_agent.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -82,8 +82,8 @@ module Stripe
         raise ArgumentError.new("\"user_agent\" is required and cannot be null")
       end
       _user_agent = user_agent.not_nil!
-      if _user_agent.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"user_agent\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_agent", _user_agent.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @user_agent = _user_agent

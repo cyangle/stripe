@@ -39,9 +39,7 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
       if _address = @address
-        if _address.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_address.list_invalid_properties_for("address"))
-        end
+        invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -52,9 +50,7 @@ module Stripe
     def valid? : Bool
       return false if @address.nil?
       if _address = @address
-        if _address.is_a?(OpenApi::Validatable)
-          return false unless _address.valid?
-        end
+        return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
 
       true
@@ -67,9 +63,7 @@ module Stripe
         raise ArgumentError.new("\"address\" is required and cannot be null")
       end
       _address = address.not_nil!
-      if _address.is_a?(OpenApi::Validatable)
-        _address.validate
-      end
+      _address.validate if _address.is_a?(OpenApi::Validatable)
       @address = _address
     end
 

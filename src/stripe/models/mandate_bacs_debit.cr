@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "network_status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network_status : String? = nil
 
-    ENUM_VALIDATOR_FOR_NETWORK_STATUS = EnumValidator.new("network_status", "String", ["accepted", "pending", "refused", "revoked"])
+    ENUM_VALIDATOR_FOR_NETWORK_STATUS = OpenApi::EnumValidator.new("network_status", "String", ["accepted", "pending", "refused", "revoked"])
 
     # The unique reference identifying the mandate on the Bacs network.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -54,14 +54,14 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK_STATUS.error_message) unless ENUM_VALIDATOR_FOR_NETWORK_STATUS.valid?(@network_status, false)
       invalid_properties.push("\"reference\" is required and cannot be null") if @reference.nil?
       if _reference = @reference
-        if _reference.to_s.size > 5000
-          invalid_properties.push("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
       if _url = @url
-        if _url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -102,8 +102,8 @@ module Stripe
         raise ArgumentError.new("\"reference\" is required and cannot be null")
       end
       _reference = reference.not_nil!
-      if _reference.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @reference = _reference
@@ -116,8 +116,8 @@ module Stripe
         raise ArgumentError.new("\"url\" is required and cannot be null")
       end
       _url = url.not_nil!
-      if _url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @url = _url

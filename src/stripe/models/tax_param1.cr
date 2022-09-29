@@ -37,9 +37,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _ip_address = @ip_address
-        if _ip_address.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_ip_address.list_invalid_properties_for("ip_address"))
-        end
+        invalid_properties.concat(_ip_address.list_invalid_properties_for("ip_address")) if _ip_address.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -49,9 +47,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _ip_address = @ip_address
-        if _ip_address.is_a?(OpenApi::Validatable)
-          return false unless _ip_address.valid?
-        end
+        return false if _ip_address.is_a?(OpenApi::Validatable) && !_ip_address.valid?
       end
 
       true
@@ -64,9 +60,7 @@ module Stripe
         return @ip_address = nil
       end
       _ip_address = ip_address.not_nil!
-      if _ip_address.is_a?(OpenApi::Validatable)
-        _ip_address.validate
-      end
+      _ip_address.validate if _ip_address.is_a?(OpenApi::Validatable)
       @ip_address = _ip_address
     end
 

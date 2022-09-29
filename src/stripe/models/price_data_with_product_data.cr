@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
+    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = OpenApi::EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
 
     @[JSON::Field(key: "unit_amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter unit_amount : Int64? = nil
@@ -68,19 +68,15 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       if _product = @product
-        if _product.to_s.size > 5000
-          invalid_properties.push("invalid value for \"product\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _product_data = @product_data
-        if _product_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_product_data.list_invalid_properties_for("product_data"))
-        end
+        invalid_properties.concat(_product_data.list_invalid_properties_for("product_data")) if _product_data.is_a?(OpenApi::Validatable)
       end
       if _recurring = @recurring
-        if _recurring.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_recurring.list_invalid_properties_for("recurring"))
-        end
+        invalid_properties.concat(_recurring.list_invalid_properties_for("recurring")) if _recurring.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
@@ -97,14 +93,10 @@ module Stripe
         return false if _product.to_s.size > 5000
       end
       if _product_data = @product_data
-        if _product_data.is_a?(OpenApi::Validatable)
-          return false unless _product_data.valid?
-        end
+        return false if _product_data.is_a?(OpenApi::Validatable) && !_product_data.valid?
       end
       if _recurring = @recurring
-        if _recurring.is_a?(OpenApi::Validatable)
-          return false unless _recurring.valid?
-        end
+        return false if _recurring.is_a?(OpenApi::Validatable) && !_recurring.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
 
@@ -128,8 +120,8 @@ module Stripe
         return @product = nil
       end
       _product = product.not_nil!
-      if _product.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"product\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @product = _product
@@ -142,9 +134,7 @@ module Stripe
         return @product_data = nil
       end
       _product_data = product_data.not_nil!
-      if _product_data.is_a?(OpenApi::Validatable)
-        _product_data.validate
-      end
+      _product_data.validate if _product_data.is_a?(OpenApi::Validatable)
       @product_data = _product_data
     end
 
@@ -155,9 +145,7 @@ module Stripe
         return @recurring = nil
       end
       _recurring = recurring.not_nil!
-      if _recurring.is_a?(OpenApi::Validatable)
-        _recurring.validate
-      end
+      _recurring.validate if _recurring.is_a?(OpenApi::Validatable)
       @recurring = _recurring
     end
 

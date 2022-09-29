@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer"])
 
     # Optional properties
 
@@ -84,22 +84,16 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       if _financial_addresses = @financial_addresses
-        if _financial_addresses.is_a?(Array)
-          _financial_addresses.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("financial_addresses"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "financial_addresses", array: _financial_addresses)) if _financial_addresses.is_a?(Array)
       end
       if _hosted_instructions_url = @hosted_instructions_url
-        if _hosted_instructions_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"hosted_instructions_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_instructions_url", _hosted_instructions_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _reference = @reference
-        if _reference.to_s.size > 5000
-          invalid_properties.push("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -112,13 +106,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       if _financial_addresses = @financial_addresses
-        if _financial_addresses.is_a?(Array)
-          _financial_addresses.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _financial_addresses.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _financial_addresses)
       end
       if _hosted_instructions_url = @hosted_instructions_url
         return false if _hosted_instructions_url.to_s.size > 5000
@@ -168,13 +156,7 @@ module Stripe
         return @financial_addresses = nil
       end
       _financial_addresses = financial_addresses.not_nil!
-      if _financial_addresses.is_a?(Array)
-        _financial_addresses.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _financial_addresses) if _financial_addresses.is_a?(Array)
       @financial_addresses = _financial_addresses
     end
 
@@ -185,8 +167,8 @@ module Stripe
         return @hosted_instructions_url = nil
       end
       _hosted_instructions_url = hosted_instructions_url.not_nil!
-      if _hosted_instructions_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"hosted_instructions_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_instructions_url", _hosted_instructions_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @hosted_instructions_url = _hosted_instructions_url
@@ -199,8 +181,8 @@ module Stripe
         return @reference = nil
       end
       _reference = reference.not_nil!
-      if _reference.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @reference = _reference

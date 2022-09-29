@@ -46,19 +46,15 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _description = @description
-        if _description.to_s.size > 500
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 500.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 500)
+          invalid_properties.push(max_length_error)
         end
       end
       if _effective_date = @effective_date
-        if _effective_date.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_effective_date.list_invalid_properties_for("effective_date"))
-        end
+        invalid_properties.concat(_effective_date.list_invalid_properties_for("effective_date")) if _effective_date.is_a?(OpenApi::Validatable)
       end
       if _trial_period_days = @trial_period_days
-        if _trial_period_days.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_trial_period_days.list_invalid_properties_for("trial_period_days"))
-        end
+        invalid_properties.concat(_trial_period_days.list_invalid_properties_for("trial_period_days")) if _trial_period_days.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -71,14 +67,10 @@ module Stripe
         return false if _description.to_s.size > 500
       end
       if _effective_date = @effective_date
-        if _effective_date.is_a?(OpenApi::Validatable)
-          return false unless _effective_date.valid?
-        end
+        return false if _effective_date.is_a?(OpenApi::Validatable) && !_effective_date.valid?
       end
       if _trial_period_days = @trial_period_days
-        if _trial_period_days.is_a?(OpenApi::Validatable)
-          return false unless _trial_period_days.valid?
-        end
+        return false if _trial_period_days.is_a?(OpenApi::Validatable) && !_trial_period_days.valid?
       end
 
       true
@@ -91,8 +83,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 500
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 500.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 500)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -105,9 +97,7 @@ module Stripe
         return @effective_date = nil
       end
       _effective_date = effective_date.not_nil!
-      if _effective_date.is_a?(OpenApi::Validatable)
-        _effective_date.validate
-      end
+      _effective_date.validate if _effective_date.is_a?(OpenApi::Validatable)
       @effective_date = _effective_date
     end
 
@@ -118,9 +108,7 @@ module Stripe
         return @trial_period_days = nil
       end
       _trial_period_days = trial_period_days.not_nil!
-      if _trial_period_days.is_a?(OpenApi::Validatable)
-        _trial_period_days.validate
-      end
+      _trial_period_days.validate if _trial_period_days.is_a?(OpenApi::Validatable)
       @trial_period_days = _trial_period_days
     end
 

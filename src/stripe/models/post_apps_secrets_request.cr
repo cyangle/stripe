@@ -61,21 +61,19 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
-        if _name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"payload\" is required and cannot be null") if @payload.nil?
       if _payload = @payload
-        if _payload.to_s.size > 5000
-          invalid_properties.push("invalid value for \"payload\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payload", _payload.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"scope\" is required and cannot be null") if @scope.nil?
       if _scope = @scope
-        if _scope.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_scope.list_invalid_properties_for("scope"))
-        end
+        invalid_properties.concat(_scope.list_invalid_properties_for("scope")) if _scope.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -94,9 +92,7 @@ module Stripe
       end
       return false if @scope.nil?
       if _scope = @scope
-        if _scope.is_a?(OpenApi::Validatable)
-          return false unless _scope.valid?
-        end
+        return false if _scope.is_a?(OpenApi::Validatable) && !_scope.valid?
       end
 
       true
@@ -109,8 +105,8 @@ module Stripe
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if _name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name
@@ -123,8 +119,8 @@ module Stripe
         raise ArgumentError.new("\"payload\" is required and cannot be null")
       end
       _payload = payload.not_nil!
-      if _payload.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"payload\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payload", _payload.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @payload = _payload
@@ -137,9 +133,7 @@ module Stripe
         raise ArgumentError.new("\"scope\" is required and cannot be null")
       end
       _scope = scope.not_nil!
-      if _scope.is_a?(OpenApi::Validatable)
-        _scope.validate
-      end
+      _scope.validate if _scope.is_a?(OpenApi::Validatable)
       @scope = _scope
     end
 

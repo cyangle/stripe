@@ -77,19 +77,19 @@ module Stripe
 
       invalid_properties.push("\"refund_attributes_method\" is required and cannot be null") if @refund_attributes_method.nil?
       if _refund_attributes_method = @refund_attributes_method
-        if _refund_attributes_method.to_s.size > 5000
-          invalid_properties.push("invalid value for \"refund_attributes_method\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_attributes_method", _refund_attributes_method.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"refund_attributes_status\" is required and cannot be null") if @refund_attributes_status.nil?
       if _refund_attributes_status = @refund_attributes_status
-        if _refund_attributes_status.to_s.size > 5000
-          invalid_properties.push("invalid value for \"refund_attributes_status\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_attributes_status", _refund_attributes_status.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _address = @address
-        if _address.to_s.size > 5000
-          invalid_properties.push("invalid value for \"address\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address", _address.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -157,8 +157,8 @@ module Stripe
         raise ArgumentError.new("\"refund_attributes_method\" is required and cannot be null")
       end
       _refund_attributes_method = refund_attributes_method.not_nil!
-      if _refund_attributes_method.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"refund_attributes_method\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_attributes_method", _refund_attributes_method.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @refund_attributes_method = _refund_attributes_method
@@ -171,8 +171,8 @@ module Stripe
         raise ArgumentError.new("\"refund_attributes_status\" is required and cannot be null")
       end
       _refund_attributes_status = refund_attributes_status.not_nil!
-      if _refund_attributes_status.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"refund_attributes_status\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_attributes_status", _refund_attributes_status.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @refund_attributes_status = _refund_attributes_status
@@ -185,8 +185,8 @@ module Stripe
         return @address = nil
       end
       _address = address.not_nil!
-      if _address.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"address\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address", _address.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @address = _address

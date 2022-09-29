@@ -142,100 +142,100 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _access_activity_log = @access_activity_log
-        if _access_activity_log.to_s.size > 20000
-          invalid_properties.push("invalid value for \"access_activity_log\", the character length must be smaller than or equal to 20000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("access_activity_log", _access_activity_log.to_s.size, 20000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _billing_address = @billing_address
-        if _billing_address.to_s.size > 5000
-          invalid_properties.push("invalid value for \"billing_address\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("billing_address", _billing_address.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _cancellation_policy_disclosure = @cancellation_policy_disclosure
-        if _cancellation_policy_disclosure.to_s.size > 20000
-          invalid_properties.push("invalid value for \"cancellation_policy_disclosure\", the character length must be smaller than or equal to 20000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_policy_disclosure", _cancellation_policy_disclosure.to_s.size, 20000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _cancellation_rebuttal = @cancellation_rebuttal
-        if _cancellation_rebuttal.to_s.size > 20000
-          invalid_properties.push("invalid value for \"cancellation_rebuttal\", the character length must be smaller than or equal to 20000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_rebuttal", _cancellation_rebuttal.to_s.size, 20000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _customer_email_address = @customer_email_address
-        if _customer_email_address.to_s.size > 5000
-          invalid_properties.push("invalid value for \"customer_email_address\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_email_address", _customer_email_address.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _customer_name = @customer_name
-        if _customer_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"customer_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_name", _customer_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _customer_purchase_ip = @customer_purchase_ip
-        if _customer_purchase_ip.to_s.size > 5000
-          invalid_properties.push("invalid value for \"customer_purchase_ip\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_purchase_ip", _customer_purchase_ip.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _duplicate_charge_explanation = @duplicate_charge_explanation
-        if _duplicate_charge_explanation.to_s.size > 20000
-          invalid_properties.push("invalid value for \"duplicate_charge_explanation\", the character length must be smaller than or equal to 20000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("duplicate_charge_explanation", _duplicate_charge_explanation.to_s.size, 20000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _duplicate_charge_id = @duplicate_charge_id
-        if _duplicate_charge_id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"duplicate_charge_id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("duplicate_charge_id", _duplicate_charge_id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _product_description = @product_description
-        if _product_description.to_s.size > 20000
-          invalid_properties.push("invalid value for \"product_description\", the character length must be smaller than or equal to 20000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 20000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _refund_policy_disclosure = @refund_policy_disclosure
-        if _refund_policy_disclosure.to_s.size > 20000
-          invalid_properties.push("invalid value for \"refund_policy_disclosure\", the character length must be smaller than or equal to 20000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_policy_disclosure", _refund_policy_disclosure.to_s.size, 20000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _refund_refusal_explanation = @refund_refusal_explanation
-        if _refund_refusal_explanation.to_s.size > 20000
-          invalid_properties.push("invalid value for \"refund_refusal_explanation\", the character length must be smaller than or equal to 20000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_refusal_explanation", _refund_refusal_explanation.to_s.size, 20000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _service_date = @service_date
-        if _service_date.to_s.size > 5000
-          invalid_properties.push("invalid value for \"service_date\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("service_date", _service_date.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _shipping_address = @shipping_address
-        if _shipping_address.to_s.size > 5000
-          invalid_properties.push("invalid value for \"shipping_address\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_address", _shipping_address.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _shipping_carrier = @shipping_carrier
-        if _shipping_carrier.to_s.size > 5000
-          invalid_properties.push("invalid value for \"shipping_carrier\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_carrier", _shipping_carrier.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _shipping_date = @shipping_date
-        if _shipping_date.to_s.size > 5000
-          invalid_properties.push("invalid value for \"shipping_date\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_date", _shipping_date.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _shipping_tracking_number = @shipping_tracking_number
-        if _shipping_tracking_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"shipping_tracking_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_tracking_number", _shipping_tracking_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _uncategorized_text = @uncategorized_text
-        if _uncategorized_text.to_s.size > 20000
-          invalid_properties.push("invalid value for \"uncategorized_text\", the character length must be smaller than or equal to 20000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("uncategorized_text", _uncategorized_text.to_s.size, 20000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -317,8 +317,8 @@ module Stripe
         return @access_activity_log = nil
       end
       _access_activity_log = access_activity_log.not_nil!
-      if _access_activity_log.to_s.size > 20000
-        raise ArgumentError.new("invalid value for \"access_activity_log\", the character length must be smaller than or equal to 20000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("access_activity_log", _access_activity_log.to_s.size, 20000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @access_activity_log = _access_activity_log
@@ -331,8 +331,8 @@ module Stripe
         return @billing_address = nil
       end
       _billing_address = billing_address.not_nil!
-      if _billing_address.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"billing_address\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("billing_address", _billing_address.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @billing_address = _billing_address
@@ -355,8 +355,8 @@ module Stripe
         return @cancellation_policy_disclosure = nil
       end
       _cancellation_policy_disclosure = cancellation_policy_disclosure.not_nil!
-      if _cancellation_policy_disclosure.to_s.size > 20000
-        raise ArgumentError.new("invalid value for \"cancellation_policy_disclosure\", the character length must be smaller than or equal to 20000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_policy_disclosure", _cancellation_policy_disclosure.to_s.size, 20000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @cancellation_policy_disclosure = _cancellation_policy_disclosure
@@ -369,8 +369,8 @@ module Stripe
         return @cancellation_rebuttal = nil
       end
       _cancellation_rebuttal = cancellation_rebuttal.not_nil!
-      if _cancellation_rebuttal.to_s.size > 20000
-        raise ArgumentError.new("invalid value for \"cancellation_rebuttal\", the character length must be smaller than or equal to 20000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_rebuttal", _cancellation_rebuttal.to_s.size, 20000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @cancellation_rebuttal = _cancellation_rebuttal
@@ -393,8 +393,8 @@ module Stripe
         return @customer_email_address = nil
       end
       _customer_email_address = customer_email_address.not_nil!
-      if _customer_email_address.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer_email_address\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_email_address", _customer_email_address.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @customer_email_address = _customer_email_address
@@ -407,8 +407,8 @@ module Stripe
         return @customer_name = nil
       end
       _customer_name = customer_name.not_nil!
-      if _customer_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_name", _customer_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @customer_name = _customer_name
@@ -421,8 +421,8 @@ module Stripe
         return @customer_purchase_ip = nil
       end
       _customer_purchase_ip = customer_purchase_ip.not_nil!
-      if _customer_purchase_ip.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer_purchase_ip\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_purchase_ip", _customer_purchase_ip.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @customer_purchase_ip = _customer_purchase_ip
@@ -455,8 +455,8 @@ module Stripe
         return @duplicate_charge_explanation = nil
       end
       _duplicate_charge_explanation = duplicate_charge_explanation.not_nil!
-      if _duplicate_charge_explanation.to_s.size > 20000
-        raise ArgumentError.new("invalid value for \"duplicate_charge_explanation\", the character length must be smaller than or equal to 20000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("duplicate_charge_explanation", _duplicate_charge_explanation.to_s.size, 20000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @duplicate_charge_explanation = _duplicate_charge_explanation
@@ -469,8 +469,8 @@ module Stripe
         return @duplicate_charge_id = nil
       end
       _duplicate_charge_id = duplicate_charge_id.not_nil!
-      if _duplicate_charge_id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"duplicate_charge_id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("duplicate_charge_id", _duplicate_charge_id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @duplicate_charge_id = _duplicate_charge_id
@@ -483,8 +483,8 @@ module Stripe
         return @product_description = nil
       end
       _product_description = product_description.not_nil!
-      if _product_description.to_s.size > 20000
-        raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 20000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 20000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @product_description = _product_description
@@ -517,8 +517,8 @@ module Stripe
         return @refund_policy_disclosure = nil
       end
       _refund_policy_disclosure = refund_policy_disclosure.not_nil!
-      if _refund_policy_disclosure.to_s.size > 20000
-        raise ArgumentError.new("invalid value for \"refund_policy_disclosure\", the character length must be smaller than or equal to 20000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_policy_disclosure", _refund_policy_disclosure.to_s.size, 20000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @refund_policy_disclosure = _refund_policy_disclosure
@@ -531,8 +531,8 @@ module Stripe
         return @refund_refusal_explanation = nil
       end
       _refund_refusal_explanation = refund_refusal_explanation.not_nil!
-      if _refund_refusal_explanation.to_s.size > 20000
-        raise ArgumentError.new("invalid value for \"refund_refusal_explanation\", the character length must be smaller than or equal to 20000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_refusal_explanation", _refund_refusal_explanation.to_s.size, 20000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @refund_refusal_explanation = _refund_refusal_explanation
@@ -545,8 +545,8 @@ module Stripe
         return @service_date = nil
       end
       _service_date = service_date.not_nil!
-      if _service_date.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"service_date\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("service_date", _service_date.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @service_date = _service_date
@@ -569,8 +569,8 @@ module Stripe
         return @shipping_address = nil
       end
       _shipping_address = shipping_address.not_nil!
-      if _shipping_address.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"shipping_address\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_address", _shipping_address.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @shipping_address = _shipping_address
@@ -583,8 +583,8 @@ module Stripe
         return @shipping_carrier = nil
       end
       _shipping_carrier = shipping_carrier.not_nil!
-      if _shipping_carrier.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"shipping_carrier\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_carrier", _shipping_carrier.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @shipping_carrier = _shipping_carrier
@@ -597,8 +597,8 @@ module Stripe
         return @shipping_date = nil
       end
       _shipping_date = shipping_date.not_nil!
-      if _shipping_date.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"shipping_date\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_date", _shipping_date.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @shipping_date = _shipping_date
@@ -621,8 +621,8 @@ module Stripe
         return @shipping_tracking_number = nil
       end
       _shipping_tracking_number = shipping_tracking_number.not_nil!
-      if _shipping_tracking_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"shipping_tracking_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_tracking_number", _shipping_tracking_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @shipping_tracking_number = _shipping_tracking_number
@@ -645,8 +645,8 @@ module Stripe
         return @uncategorized_text = nil
       end
       _uncategorized_text = uncategorized_text.not_nil!
-      if _uncategorized_text.to_s.size > 20000
-        raise ArgumentError.new("invalid value for \"uncategorized_text\", the character length must be smaller than or equal to 20000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("uncategorized_text", _uncategorized_text.to_s.size, 20000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @uncategorized_text = _uncategorized_text

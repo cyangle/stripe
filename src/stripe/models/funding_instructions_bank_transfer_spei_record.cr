@@ -50,20 +50,20 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"bank_code\" is required and cannot be null") if @bank_code.nil?
       if _bank_code = @bank_code
-        if _bank_code.to_s.size > 5000
-          invalid_properties.push("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"bank_name\" is required and cannot be null") if @bank_name.nil?
       if _bank_name = @bank_name
-        if _bank_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"clabe\" is required and cannot be null") if @clabe.nil?
       if _clabe = @clabe
-        if _clabe.to_s.size > 5000
-          invalid_properties.push("invalid value for \"clabe\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("clabe", _clabe.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -96,8 +96,8 @@ module Stripe
         raise ArgumentError.new("\"bank_code\" is required and cannot be null")
       end
       _bank_code = bank_code.not_nil!
-      if _bank_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"bank_code\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @bank_code = _bank_code
@@ -110,8 +110,8 @@ module Stripe
         raise ArgumentError.new("\"bank_name\" is required and cannot be null")
       end
       _bank_name = bank_name.not_nil!
-      if _bank_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @bank_name = _bank_name
@@ -124,8 +124,8 @@ module Stripe
         raise ArgumentError.new("\"clabe\" is required and cannot be null")
       end
       _clabe = clabe.not_nil!
-      if _clabe.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"clabe\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("clabe", _clabe.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @clabe = _clabe

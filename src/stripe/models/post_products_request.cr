@@ -105,48 +105,44 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
-        if _name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _default_price_data = @default_price_data
-        if _default_price_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_default_price_data.list_invalid_properties_for("default_price_data"))
-        end
+        invalid_properties.concat(_default_price_data.list_invalid_properties_for("default_price_data")) if _default_price_data.is_a?(OpenApi::Validatable)
       end
       if _description = @description
-        if _description.to_s.size > 40000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 40000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _package_dimensions = @package_dimensions
-        if _package_dimensions.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions"))
-        end
+        invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions")) if _package_dimensions.is_a?(OpenApi::Validatable)
       end
 
       if _statement_descriptor = @statement_descriptor
-        if _statement_descriptor.to_s.size > 22
-          invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _unit_label = @unit_label
-        if _unit_label.to_s.size > 12
-          invalid_properties.push("invalid value for \"unit_label\", the character length must be smaller than or equal to 12.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit_label", _unit_label.to_s.size, 12)
+          invalid_properties.push(max_length_error)
         end
       end
       if _url = @url
-        if _url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -162,9 +158,7 @@ module Stripe
       end
 
       if _default_price_data = @default_price_data
-        if _default_price_data.is_a?(OpenApi::Validatable)
-          return false unless _default_price_data.valid?
-        end
+        return false if _default_price_data.is_a?(OpenApi::Validatable) && !_default_price_data.valid?
       end
       if _description = @description
         return false if _description.to_s.size > 40000
@@ -175,9 +169,7 @@ module Stripe
       end
 
       if _package_dimensions = @package_dimensions
-        if _package_dimensions.is_a?(OpenApi::Validatable)
-          return false unless _package_dimensions.valid?
-        end
+        return false if _package_dimensions.is_a?(OpenApi::Validatable) && !_package_dimensions.valid?
       end
 
       if _statement_descriptor = @statement_descriptor
@@ -201,8 +193,8 @@ module Stripe
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if _name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name
@@ -225,9 +217,7 @@ module Stripe
         return @default_price_data = nil
       end
       _default_price_data = default_price_data.not_nil!
-      if _default_price_data.is_a?(OpenApi::Validatable)
-        _default_price_data.validate
-      end
+      _default_price_data.validate if _default_price_data.is_a?(OpenApi::Validatable)
       @default_price_data = _default_price_data
     end
 
@@ -238,8 +228,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 40000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 40000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 40000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -262,8 +252,8 @@ module Stripe
         return @id = nil
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -296,9 +286,7 @@ module Stripe
         return @package_dimensions = nil
       end
       _package_dimensions = package_dimensions.not_nil!
-      if _package_dimensions.is_a?(OpenApi::Validatable)
-        _package_dimensions.validate
-      end
+      _package_dimensions.validate if _package_dimensions.is_a?(OpenApi::Validatable)
       @package_dimensions = _package_dimensions
     end
 
@@ -319,8 +307,8 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if _statement_descriptor.to_s.size > 22
-        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor = _statement_descriptor
@@ -343,8 +331,8 @@ module Stripe
         return @unit_label = nil
       end
       _unit_label = unit_label.not_nil!
-      if _unit_label.to_s.size > 12
-        raise ArgumentError.new("invalid value for \"unit_label\", the character length must be smaller than or equal to 12.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit_label", _unit_label.to_s.size, 12)
+        raise ArgumentError.new(max_length_error)
       end
 
       @unit_label = _unit_label
@@ -357,8 +345,8 @@ module Stripe
         return @url = nil
       end
       _url = url.not_nil!
-      if _url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @url = _url

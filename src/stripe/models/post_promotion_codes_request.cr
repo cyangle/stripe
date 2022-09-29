@@ -81,26 +81,24 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"coupon\" is required and cannot be null") if @coupon.nil?
       if _coupon = @coupon
-        if _coupon.to_s.size > 5000
-          invalid_properties.push("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _code = @code
-        if _code.to_s.size > 500
-          invalid_properties.push("invalid value for \"code\", the character length must be smaller than or equal to 500.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("code", _code.to_s.size, 500)
+          invalid_properties.push(max_length_error)
         end
       end
       if _customer = @customer
-        if _customer.to_s.size > 5000
-          invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _restrictions = @restrictions
-        if _restrictions.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_restrictions.list_invalid_properties_for("restrictions"))
-        end
+        invalid_properties.concat(_restrictions.list_invalid_properties_for("restrictions")) if _restrictions.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -122,9 +120,7 @@ module Stripe
       end
 
       if _restrictions = @restrictions
-        if _restrictions.is_a?(OpenApi::Validatable)
-          return false unless _restrictions.valid?
-        end
+        return false if _restrictions.is_a?(OpenApi::Validatable) && !_restrictions.valid?
       end
 
       true
@@ -137,8 +133,8 @@ module Stripe
         raise ArgumentError.new("\"coupon\" is required and cannot be null")
       end
       _coupon = coupon.not_nil!
-      if _coupon.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @coupon = _coupon
@@ -161,8 +157,8 @@ module Stripe
         return @code = nil
       end
       _code = code.not_nil!
-      if _code.to_s.size > 500
-        raise ArgumentError.new("invalid value for \"code\", the character length must be smaller than or equal to 500.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("code", _code.to_s.size, 500)
+        raise ArgumentError.new(max_length_error)
       end
 
       @code = _code
@@ -175,8 +171,8 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if _customer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @customer = _customer
@@ -229,9 +225,7 @@ module Stripe
         return @restrictions = nil
       end
       _restrictions = restrictions.not_nil!
-      if _restrictions.is_a?(OpenApi::Validatable)
-        _restrictions.validate
-      end
+      _restrictions.validate if _restrictions.is_a?(OpenApi::Validatable)
       @restrictions = _restrictions
     end
 

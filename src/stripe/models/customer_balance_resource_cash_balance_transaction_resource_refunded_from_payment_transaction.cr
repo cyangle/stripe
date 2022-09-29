@@ -39,9 +39,7 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"refund\" is required and cannot be null") if @refund.nil?
       if _refund = @refund
-        if _refund.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_refund.list_invalid_properties_for("refund"))
-        end
+        invalid_properties.concat(_refund.list_invalid_properties_for("refund")) if _refund.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -52,9 +50,7 @@ module Stripe
     def valid? : Bool
       return false if @refund.nil?
       if _refund = @refund
-        if _refund.is_a?(OpenApi::Validatable)
-          return false unless _refund.valid?
-        end
+        return false if _refund.is_a?(OpenApi::Validatable) && !_refund.valid?
       end
 
       true
@@ -67,9 +63,7 @@ module Stripe
         raise ArgumentError.new("\"refund\" is required and cannot be null")
       end
       _refund = refund.not_nil!
-      if _refund.is_a?(OpenApi::Validatable)
-        _refund.validate
-      end
+      _refund.validate if _refund.is_a?(OpenApi::Validatable)
       @refund = _refund
     end
 

@@ -40,7 +40,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["event"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["event"])
 
     # Number of webhooks that have yet to be successfully delivered (i.e., to return a 20x response) to the URLs you've specified.
     @[JSON::Field(key: "pending_webhooks", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -96,14 +96,12 @@ module Stripe
 
       invalid_properties.push("\"data\" is required and cannot be null") if @data.nil?
       if _data = @data
-        if _data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_data.list_invalid_properties_for("data"))
-        end
+        invalid_properties.concat(_data.list_invalid_properties_for("data")) if _data.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -113,24 +111,22 @@ module Stripe
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
-        if __type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _account = @account
-        if _account.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _api_version = @api_version
-        if _api_version.to_s.size > 5000
-          invalid_properties.push("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("api_version", _api_version.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _request = @request
-        if _request.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_request.list_invalid_properties_for("request"))
-        end
+        invalid_properties.concat(_request.list_invalid_properties_for("request")) if _request.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -143,9 +139,7 @@ module Stripe
 
       return false if @data.nil?
       if _data = @data
-        if _data.is_a?(OpenApi::Validatable)
-          return false unless _data.valid?
-        end
+        return false if _data.is_a?(OpenApi::Validatable) && !_data.valid?
       end
       return false if @id.nil?
       if _id = @id
@@ -167,9 +161,7 @@ module Stripe
         return false if _api_version.to_s.size > 5000
       end
       if _request = @request
-        if _request.is_a?(OpenApi::Validatable)
-          return false unless _request.valid?
-        end
+        return false if _request.is_a?(OpenApi::Validatable) && !_request.valid?
       end
 
       true
@@ -192,9 +184,7 @@ module Stripe
         raise ArgumentError.new("\"data\" is required and cannot be null")
       end
       _data = data.not_nil!
-      if _data.is_a?(OpenApi::Validatable)
-        _data.validate
-      end
+      _data.validate if _data.is_a?(OpenApi::Validatable)
       @data = _data
     end
 
@@ -205,8 +195,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -250,8 +240,8 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if __type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_type = __type
@@ -264,8 +254,8 @@ module Stripe
         return @account = nil
       end
       _account = account.not_nil!
-      if _account.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account = _account
@@ -278,8 +268,8 @@ module Stripe
         return @api_version = nil
       end
       _api_version = api_version.not_nil!
-      if _api_version.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"api_version\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("api_version", _api_version.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @api_version = _api_version
@@ -292,9 +282,7 @@ module Stripe
         return @request = nil
       end
       _request = request.not_nil!
-      if _request.is_a?(OpenApi::Validatable)
-        _request.validate
-      end
+      _request.validate if _request.is_a?(OpenApi::Validatable)
       @request = _request
     end
 

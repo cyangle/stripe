@@ -53,13 +53,13 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
 
-    ENUM_VALIDATOR_FOR_NETWORK = EnumValidator.new("network", "String", ["ach", "stripe"])
+    ENUM_VALIDATOR_FOR_NETWORK = OpenApi::EnumValidator.new("network", "String", ["ach", "stripe"])
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["treasury.credit_reversal"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["treasury.credit_reversal"])
 
     # The ReceivedCredit being reversed.
     @[JSON::Field(key: "received_credit", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -69,7 +69,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["canceled", "posted", "processing"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["canceled", "posted", "processing"])
 
     @[JSON::Field(key: "status_transitions", type: Stripe::TreasuryReceivedCreditsResourceStatusTransitions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_transitions : Stripe::TreasuryReceivedCreditsResourceStatusTransitions? = nil
@@ -124,14 +124,14 @@ module Stripe
 
       invalid_properties.push("\"financial_account\" is required and cannot be null") if @financial_account.nil?
       if _financial_account = @financial_account
-        if _financial_account.to_s.size > 5000
-          invalid_properties.push("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -143,27 +143,23 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"received_credit\" is required and cannot be null") if @received_credit.nil?
       if _received_credit = @received_credit
-        if _received_credit.to_s.size > 5000
-          invalid_properties.push("invalid value for \"received_credit\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_credit", _received_credit.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       invalid_properties.push("\"status_transitions\" is required and cannot be null") if @status_transitions.nil?
       if _status_transitions = @status_transitions
-        if _status_transitions.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_status_transitions.list_invalid_properties_for("status_transitions"))
-        end
+        invalid_properties.concat(_status_transitions.list_invalid_properties_for("status_transitions")) if _status_transitions.is_a?(OpenApi::Validatable)
       end
       if _hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url
-        if _hosted_regulatory_receipt_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"hosted_regulatory_receipt_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_regulatory_receipt_url", _hosted_regulatory_receipt_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _transaction = @transaction
-        if _transaction.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_transaction.list_invalid_properties_for("transaction"))
-        end
+        invalid_properties.concat(_transaction.list_invalid_properties_for("transaction")) if _transaction.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -199,17 +195,13 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false if @status_transitions.nil?
       if _status_transitions = @status_transitions
-        if _status_transitions.is_a?(OpenApi::Validatable)
-          return false unless _status_transitions.valid?
-        end
+        return false if _status_transitions.is_a?(OpenApi::Validatable) && !_status_transitions.valid?
       end
       if _hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url
         return false if _hosted_regulatory_receipt_url.to_s.size > 5000
       end
       if _transaction = @transaction
-        if _transaction.is_a?(OpenApi::Validatable)
-          return false unless _transaction.valid?
-        end
+        return false if _transaction.is_a?(OpenApi::Validatable) && !_transaction.valid?
       end
 
       true
@@ -252,8 +244,8 @@ module Stripe
         raise ArgumentError.new("\"financial_account\" is required and cannot be null")
       end
       _financial_account = financial_account.not_nil!
-      if _financial_account.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"financial_account\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @financial_account = _financial_account
@@ -266,8 +258,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -322,8 +314,8 @@ module Stripe
         raise ArgumentError.new("\"received_credit\" is required and cannot be null")
       end
       _received_credit = received_credit.not_nil!
-      if _received_credit.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"received_credit\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_credit", _received_credit.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @received_credit = _received_credit
@@ -347,9 +339,7 @@ module Stripe
         raise ArgumentError.new("\"status_transitions\" is required and cannot be null")
       end
       _status_transitions = status_transitions.not_nil!
-      if _status_transitions.is_a?(OpenApi::Validatable)
-        _status_transitions.validate
-      end
+      _status_transitions.validate if _status_transitions.is_a?(OpenApi::Validatable)
       @status_transitions = _status_transitions
     end
 
@@ -360,8 +350,8 @@ module Stripe
         return @hosted_regulatory_receipt_url = nil
       end
       _hosted_regulatory_receipt_url = hosted_regulatory_receipt_url.not_nil!
-      if _hosted_regulatory_receipt_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"hosted_regulatory_receipt_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_regulatory_receipt_url", _hosted_regulatory_receipt_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @hosted_regulatory_receipt_url = _hosted_regulatory_receipt_url
@@ -374,9 +364,7 @@ module Stripe
         return @transaction = nil
       end
       _transaction = transaction.not_nil!
-      if _transaction.is_a?(OpenApi::Validatable)
-        _transaction.validate
-      end
+      _transaction.validate if _transaction.is_a?(OpenApi::Validatable)
       @transaction = _transaction
     end
 

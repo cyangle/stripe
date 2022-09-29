@@ -55,7 +55,7 @@ module Stripe
     @[JSON::Field(key: "tax_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_TYPE = EnumValidator.new("tax_type", "String", ["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"])
+    ENUM_VALIDATOR_FOR_TAX_TYPE = OpenApi::EnumValidator.new("tax_type", "String", ["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -80,34 +80,32 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _country = @country
-        if _country.to_s.size > 5000
-          invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _description = @description
-        if _description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _display_name = @display_name
-        if _display_name.to_s.size > 50
-          invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 50.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 50)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _jurisdiction = @jurisdiction
-        if _jurisdiction.to_s.size > 50
-          invalid_properties.push("invalid value for \"jurisdiction\", the character length must be smaller than or equal to 50.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("jurisdiction", _jurisdiction.to_s.size, 50)
+          invalid_properties.push(max_length_error)
         end
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _state = @state
-        if _state.to_s.size > 2
-          invalid_properties.push("invalid value for \"state\", the character length must be smaller than or equal to 2.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, 2)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -133,9 +131,7 @@ module Stripe
         return false if _jurisdiction.to_s.size > 50
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
       if _state = @state
         return false if _state.to_s.size > 2
@@ -162,8 +158,8 @@ module Stripe
         return @country = nil
       end
       _country = country.not_nil!
-      if _country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @country = _country
@@ -176,8 +172,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -190,8 +186,8 @@ module Stripe
         return @display_name = nil
       end
       _display_name = display_name.not_nil!
-      if _display_name.to_s.size > 50
-        raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 50.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 50)
+        raise ArgumentError.new(max_length_error)
       end
 
       @display_name = _display_name
@@ -214,8 +210,8 @@ module Stripe
         return @jurisdiction = nil
       end
       _jurisdiction = jurisdiction.not_nil!
-      if _jurisdiction.to_s.size > 50
-        raise ArgumentError.new("invalid value for \"jurisdiction\", the character length must be smaller than or equal to 50.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("jurisdiction", _jurisdiction.to_s.size, 50)
+        raise ArgumentError.new(max_length_error)
       end
 
       @jurisdiction = _jurisdiction
@@ -228,9 +224,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 
@@ -241,8 +235,8 @@ module Stripe
         return @state = nil
       end
       _state = state.not_nil!
-      if _state.to_s.size > 2
-        raise ArgumentError.new("invalid value for \"state\", the character length must be smaller than or equal to 2.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, 2)
+        raise ArgumentError.new(max_length_error)
       end
 
       @state = _state

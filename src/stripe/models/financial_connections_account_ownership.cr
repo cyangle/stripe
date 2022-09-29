@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["financial_connections.account_ownership"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["financial_connections.account_ownership"])
 
     @[JSON::Field(key: "owners", type: Stripe::BankConnectionsResourceOwnerList1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter owners : Stripe::BankConnectionsResourceOwnerList1? = nil
@@ -58,17 +58,15 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"owners\" is required and cannot be null") if @owners.nil?
       if _owners = @owners
-        if _owners.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_owners.list_invalid_properties_for("owners"))
-        end
+        invalid_properties.concat(_owners.list_invalid_properties_for("owners")) if _owners.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -86,9 +84,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @owners.nil?
       if _owners = @owners
-        if _owners.is_a?(OpenApi::Validatable)
-          return false unless _owners.valid?
-        end
+        return false if _owners.is_a?(OpenApi::Validatable) && !_owners.valid?
       end
 
       true
@@ -111,8 +107,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -136,9 +132,7 @@ module Stripe
         raise ArgumentError.new("\"owners\" is required and cannot be null")
       end
       _owners = owners.not_nil!
-      if _owners.is_a?(OpenApi::Validatable)
-        _owners.validate
-      end
+      _owners.validate if _owners.is_a?(OpenApi::Validatable)
       @owners = _owners
     end
 

@@ -31,7 +31,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["company", "individual"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["company", "individual"])
 
     # Optional properties
 
@@ -64,7 +64,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["active", "inactive"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["active", "inactive"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -92,29 +92,21 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"billing\" is required and cannot be null") if @billing.nil?
       if _billing = @billing
-        if _billing.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_billing.list_invalid_properties_for("billing"))
-        end
+        invalid_properties.concat(_billing.list_invalid_properties_for("billing")) if _billing.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _company = @company
-        if _company.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_company.list_invalid_properties_for("company"))
-        end
+        invalid_properties.concat(_company.list_invalid_properties_for("company")) if _company.is_a?(OpenApi::Validatable)
       end
 
       if _individual = @individual
-        if _individual.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_individual.list_invalid_properties_for("individual"))
-        end
+        invalid_properties.concat(_individual.list_invalid_properties_for("individual")) if _individual.is_a?(OpenApi::Validatable)
       end
 
       if _spending_controls = @spending_controls
-        if _spending_controls.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls"))
-        end
+        invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
@@ -127,29 +119,21 @@ module Stripe
     def valid? : Bool
       return false if @billing.nil?
       if _billing = @billing
-        if _billing.is_a?(OpenApi::Validatable)
-          return false unless _billing.valid?
-        end
+        return false if _billing.is_a?(OpenApi::Validatable) && !_billing.valid?
       end
       return false if @name.nil?
 
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _company = @company
-        if _company.is_a?(OpenApi::Validatable)
-          return false unless _company.valid?
-        end
+        return false if _company.is_a?(OpenApi::Validatable) && !_company.valid?
       end
 
       if _individual = @individual
-        if _individual.is_a?(OpenApi::Validatable)
-          return false unless _individual.valid?
-        end
+        return false if _individual.is_a?(OpenApi::Validatable) && !_individual.valid?
       end
 
       if _spending_controls = @spending_controls
-        if _spending_controls.is_a?(OpenApi::Validatable)
-          return false unless _spending_controls.valid?
-        end
+        return false if _spending_controls.is_a?(OpenApi::Validatable) && !_spending_controls.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
@@ -163,9 +147,7 @@ module Stripe
         raise ArgumentError.new("\"billing\" is required and cannot be null")
       end
       _billing = billing.not_nil!
-      if _billing.is_a?(OpenApi::Validatable)
-        _billing.validate
-      end
+      _billing.validate if _billing.is_a?(OpenApi::Validatable)
       @billing = _billing
     end
 
@@ -197,9 +179,7 @@ module Stripe
         return @company = nil
       end
       _company = company.not_nil!
-      if _company.is_a?(OpenApi::Validatable)
-        _company.validate
-      end
+      _company.validate if _company.is_a?(OpenApi::Validatable)
       @company = _company
     end
 
@@ -230,9 +210,7 @@ module Stripe
         return @individual = nil
       end
       _individual = individual.not_nil!
-      if _individual.is_a?(OpenApi::Validatable)
-        _individual.validate
-      end
+      _individual.validate if _individual.is_a?(OpenApi::Validatable)
       @individual = _individual
     end
 
@@ -263,9 +241,7 @@ module Stripe
         return @spending_controls = nil
       end
       _spending_controls = spending_controls.not_nil!
-      if _spending_controls.is_a?(OpenApi::Validatable)
-        _spending_controls.validate
-      end
+      _spending_controls.validate if _spending_controls.is_a?(OpenApi::Validatable)
       @spending_controls = _spending_controls
     end
 

@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["pending", "unavailable", "unverified", "verified"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["pending", "unavailable", "unverified", "verified"])
 
     # Optional properties
 
@@ -62,13 +62,13 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       if _verified_address = @verified_address
-        if _verified_address.to_s.size > 5000
-          invalid_properties.push("invalid value for \"verified_address\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_address", _verified_address.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _verified_name = @verified_name
-        if _verified_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -107,8 +107,8 @@ module Stripe
         return @verified_address = nil
       end
       _verified_address = verified_address.not_nil!
-      if _verified_address.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"verified_address\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_address", _verified_address.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @verified_address = _verified_address
@@ -121,8 +121,8 @@ module Stripe
         return @verified_name = nil
       end
       _verified_name = verified_name.not_nil!
-      if _verified_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @verified_name = _verified_name

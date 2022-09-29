@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "round", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter round : String? = nil
 
-    ENUM_VALIDATOR_FOR_ROUND = EnumValidator.new("round", "String", ["down", "up"])
+    ENUM_VALIDATOR_FOR_ROUND = OpenApi::EnumValidator.new("round", "String", ["down", "up"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

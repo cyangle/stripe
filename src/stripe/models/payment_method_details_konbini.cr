@@ -41,9 +41,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _store = @store
-        if _store.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_store.list_invalid_properties_for("store"))
-        end
+        invalid_properties.concat(_store.list_invalid_properties_for("store")) if _store.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -53,9 +51,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _store = @store
-        if _store.is_a?(OpenApi::Validatable)
-          return false unless _store.valid?
-        end
+        return false if _store.is_a?(OpenApi::Validatable) && !_store.valid?
       end
 
       true
@@ -68,9 +64,7 @@ module Stripe
         return @store = nil
       end
       _store = store.not_nil!
-      if _store.is_a?(OpenApi::Validatable)
-        _store.validate
-      end
+      _store.validate if _store.is_a?(OpenApi::Validatable)
       @store = _store
     end
 

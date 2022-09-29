@@ -57,34 +57,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _acss_debit = @acss_debit
-        if _acss_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit"))
-        end
+        invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
       if _bancontact = @bancontact
-        if _bancontact.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_bancontact.list_invalid_properties_for("bancontact"))
-        end
+        invalid_properties.concat(_bancontact.list_invalid_properties_for("bancontact")) if _bancontact.is_a?(OpenApi::Validatable)
       end
       if _card = @card
-        if _card.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card.list_invalid_properties_for("card"))
-        end
+        invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
       if _customer_balance = @customer_balance
-        if _customer_balance.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_customer_balance.list_invalid_properties_for("customer_balance"))
-        end
+        invalid_properties.concat(_customer_balance.list_invalid_properties_for("customer_balance")) if _customer_balance.is_a?(OpenApi::Validatable)
       end
       if _konbini = @konbini
-        if _konbini.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_konbini.list_invalid_properties_for("konbini"))
-        end
+        invalid_properties.concat(_konbini.list_invalid_properties_for("konbini")) if _konbini.is_a?(OpenApi::Validatable)
       end
       if _us_bank_account = @us_bank_account
-        if _us_bank_account.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account"))
-        end
+        invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -94,34 +82,22 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _acss_debit = @acss_debit
-        if _acss_debit.is_a?(OpenApi::Validatable)
-          return false unless _acss_debit.valid?
-        end
+        return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
       if _bancontact = @bancontact
-        if _bancontact.is_a?(OpenApi::Validatable)
-          return false unless _bancontact.valid?
-        end
+        return false if _bancontact.is_a?(OpenApi::Validatable) && !_bancontact.valid?
       end
       if _card = @card
-        if _card.is_a?(OpenApi::Validatable)
-          return false unless _card.valid?
-        end
+        return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
       if _customer_balance = @customer_balance
-        if _customer_balance.is_a?(OpenApi::Validatable)
-          return false unless _customer_balance.valid?
-        end
+        return false if _customer_balance.is_a?(OpenApi::Validatable) && !_customer_balance.valid?
       end
       if _konbini = @konbini
-        if _konbini.is_a?(OpenApi::Validatable)
-          return false unless _konbini.valid?
-        end
+        return false if _konbini.is_a?(OpenApi::Validatable) && !_konbini.valid?
       end
       if _us_bank_account = @us_bank_account
-        if _us_bank_account.is_a?(OpenApi::Validatable)
-          return false unless _us_bank_account.valid?
-        end
+        return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
 
       true
@@ -134,9 +110,7 @@ module Stripe
         return @acss_debit = nil
       end
       _acss_debit = acss_debit.not_nil!
-      if _acss_debit.is_a?(OpenApi::Validatable)
-        _acss_debit.validate
-      end
+      _acss_debit.validate if _acss_debit.is_a?(OpenApi::Validatable)
       @acss_debit = _acss_debit
     end
 
@@ -147,9 +121,7 @@ module Stripe
         return @bancontact = nil
       end
       _bancontact = bancontact.not_nil!
-      if _bancontact.is_a?(OpenApi::Validatable)
-        _bancontact.validate
-      end
+      _bancontact.validate if _bancontact.is_a?(OpenApi::Validatable)
       @bancontact = _bancontact
     end
 
@@ -160,9 +132,7 @@ module Stripe
         return @card = nil
       end
       _card = card.not_nil!
-      if _card.is_a?(OpenApi::Validatable)
-        _card.validate
-      end
+      _card.validate if _card.is_a?(OpenApi::Validatable)
       @card = _card
     end
 
@@ -173,9 +143,7 @@ module Stripe
         return @customer_balance = nil
       end
       _customer_balance = customer_balance.not_nil!
-      if _customer_balance.is_a?(OpenApi::Validatable)
-        _customer_balance.validate
-      end
+      _customer_balance.validate if _customer_balance.is_a?(OpenApi::Validatable)
       @customer_balance = _customer_balance
     end
 
@@ -186,9 +154,7 @@ module Stripe
         return @konbini = nil
       end
       _konbini = konbini.not_nil!
-      if _konbini.is_a?(OpenApi::Validatable)
-        _konbini.validate
-      end
+      _konbini.validate if _konbini.is_a?(OpenApi::Validatable)
       @konbini = _konbini
     end
 
@@ -199,9 +165,7 @@ module Stripe
         return @us_bank_account = nil
       end
       _us_bank_account = us_bank_account.not_nil!
-      if _us_bank_account.is_a?(OpenApi::Validatable)
-        _us_bank_account.validate
-      end
+      _us_bank_account.validate if _us_bank_account.is_a?(OpenApi::Validatable)
       @us_bank_account = _us_bank_account
     end
 

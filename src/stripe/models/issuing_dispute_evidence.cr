@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reason : String? = nil
 
-    ENUM_VALIDATOR_FOR_REASON = EnumValidator.new("reason", "String", ["canceled", "duplicate", "fraudulent", "merchandise_not_as_described", "not_received", "other", "service_not_as_described"])
+    ENUM_VALIDATOR_FOR_REASON = OpenApi::EnumValidator.new("reason", "String", ["canceled", "duplicate", "fraudulent", "merchandise_not_as_described", "not_received", "other", "service_not_as_described"])
 
     # Optional properties
 
@@ -74,39 +74,25 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REASON.error_message) unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason, false)
       if _canceled = @canceled
-        if _canceled.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_canceled.list_invalid_properties_for("canceled"))
-        end
+        invalid_properties.concat(_canceled.list_invalid_properties_for("canceled")) if _canceled.is_a?(OpenApi::Validatable)
       end
       if _duplicate = @duplicate
-        if _duplicate.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_duplicate.list_invalid_properties_for("duplicate"))
-        end
+        invalid_properties.concat(_duplicate.list_invalid_properties_for("duplicate")) if _duplicate.is_a?(OpenApi::Validatable)
       end
       if _fraudulent = @fraudulent
-        if _fraudulent.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_fraudulent.list_invalid_properties_for("fraudulent"))
-        end
+        invalid_properties.concat(_fraudulent.list_invalid_properties_for("fraudulent")) if _fraudulent.is_a?(OpenApi::Validatable)
       end
       if _merchandise_not_as_described = @merchandise_not_as_described
-        if _merchandise_not_as_described.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_merchandise_not_as_described.list_invalid_properties_for("merchandise_not_as_described"))
-        end
+        invalid_properties.concat(_merchandise_not_as_described.list_invalid_properties_for("merchandise_not_as_described")) if _merchandise_not_as_described.is_a?(OpenApi::Validatable)
       end
       if _not_received = @not_received
-        if _not_received.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_not_received.list_invalid_properties_for("not_received"))
-        end
+        invalid_properties.concat(_not_received.list_invalid_properties_for("not_received")) if _not_received.is_a?(OpenApi::Validatable)
       end
       if _other = @other
-        if _other.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_other.list_invalid_properties_for("other"))
-        end
+        invalid_properties.concat(_other.list_invalid_properties_for("other")) if _other.is_a?(OpenApi::Validatable)
       end
       if _service_not_as_described = @service_not_as_described
-        if _service_not_as_described.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_service_not_as_described.list_invalid_properties_for("service_not_as_described"))
-        end
+        invalid_properties.concat(_service_not_as_described.list_invalid_properties_for("service_not_as_described")) if _service_not_as_described.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -117,39 +103,25 @@ module Stripe
     def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason, false)
       if _canceled = @canceled
-        if _canceled.is_a?(OpenApi::Validatable)
-          return false unless _canceled.valid?
-        end
+        return false if _canceled.is_a?(OpenApi::Validatable) && !_canceled.valid?
       end
       if _duplicate = @duplicate
-        if _duplicate.is_a?(OpenApi::Validatable)
-          return false unless _duplicate.valid?
-        end
+        return false if _duplicate.is_a?(OpenApi::Validatable) && !_duplicate.valid?
       end
       if _fraudulent = @fraudulent
-        if _fraudulent.is_a?(OpenApi::Validatable)
-          return false unless _fraudulent.valid?
-        end
+        return false if _fraudulent.is_a?(OpenApi::Validatable) && !_fraudulent.valid?
       end
       if _merchandise_not_as_described = @merchandise_not_as_described
-        if _merchandise_not_as_described.is_a?(OpenApi::Validatable)
-          return false unless _merchandise_not_as_described.valid?
-        end
+        return false if _merchandise_not_as_described.is_a?(OpenApi::Validatable) && !_merchandise_not_as_described.valid?
       end
       if _not_received = @not_received
-        if _not_received.is_a?(OpenApi::Validatable)
-          return false unless _not_received.valid?
-        end
+        return false if _not_received.is_a?(OpenApi::Validatable) && !_not_received.valid?
       end
       if _other = @other
-        if _other.is_a?(OpenApi::Validatable)
-          return false unless _other.valid?
-        end
+        return false if _other.is_a?(OpenApi::Validatable) && !_other.valid?
       end
       if _service_not_as_described = @service_not_as_described
-        if _service_not_as_described.is_a?(OpenApi::Validatable)
-          return false unless _service_not_as_described.valid?
-        end
+        return false if _service_not_as_described.is_a?(OpenApi::Validatable) && !_service_not_as_described.valid?
       end
 
       true
@@ -173,9 +145,7 @@ module Stripe
         return @canceled = nil
       end
       _canceled = canceled.not_nil!
-      if _canceled.is_a?(OpenApi::Validatable)
-        _canceled.validate
-      end
+      _canceled.validate if _canceled.is_a?(OpenApi::Validatable)
       @canceled = _canceled
     end
 
@@ -186,9 +156,7 @@ module Stripe
         return @duplicate = nil
       end
       _duplicate = duplicate.not_nil!
-      if _duplicate.is_a?(OpenApi::Validatable)
-        _duplicate.validate
-      end
+      _duplicate.validate if _duplicate.is_a?(OpenApi::Validatable)
       @duplicate = _duplicate
     end
 
@@ -199,9 +167,7 @@ module Stripe
         return @fraudulent = nil
       end
       _fraudulent = fraudulent.not_nil!
-      if _fraudulent.is_a?(OpenApi::Validatable)
-        _fraudulent.validate
-      end
+      _fraudulent.validate if _fraudulent.is_a?(OpenApi::Validatable)
       @fraudulent = _fraudulent
     end
 
@@ -212,9 +178,7 @@ module Stripe
         return @merchandise_not_as_described = nil
       end
       _merchandise_not_as_described = merchandise_not_as_described.not_nil!
-      if _merchandise_not_as_described.is_a?(OpenApi::Validatable)
-        _merchandise_not_as_described.validate
-      end
+      _merchandise_not_as_described.validate if _merchandise_not_as_described.is_a?(OpenApi::Validatable)
       @merchandise_not_as_described = _merchandise_not_as_described
     end
 
@@ -225,9 +189,7 @@ module Stripe
         return @not_received = nil
       end
       _not_received = not_received.not_nil!
-      if _not_received.is_a?(OpenApi::Validatable)
-        _not_received.validate
-      end
+      _not_received.validate if _not_received.is_a?(OpenApi::Validatable)
       @not_received = _not_received
     end
 
@@ -238,9 +200,7 @@ module Stripe
         return @other = nil
       end
       _other = other.not_nil!
-      if _other.is_a?(OpenApi::Validatable)
-        _other.validate
-      end
+      _other.validate if _other.is_a?(OpenApi::Validatable)
       @other = _other
     end
 
@@ -251,9 +211,7 @@ module Stripe
         return @service_not_as_described = nil
       end
       _service_not_as_described = service_not_as_described.not_nil!
-      if _service_not_as_described.is_a?(OpenApi::Validatable)
-        _service_not_as_described.validate
-      end
+      _service_not_as_described.validate if _service_not_as_described.is_a?(OpenApi::Validatable)
       @service_not_as_described = _service_not_as_described
     end
 

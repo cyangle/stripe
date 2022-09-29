@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? bank_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_BANK = EnumValidator.new("bank", "String", ["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"])
+    ENUM_VALIDATOR_FOR_BANK = OpenApi::EnumValidator.new("bank", "String", ["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"])
 
     # The Bank Identifier Code of the customer's bank.
     @[JSON::Field(key: "bic", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bic.nil? && !bic_present?)]
@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? bic_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_BIC = EnumValidator.new("bic", "String", ["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U"])
+    ENUM_VALIDATOR_FOR_BIC = OpenApi::EnumValidator.new("bic", "String", ["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U"])
 
     @[JSON::Field(key: "generated_sepa_debit", type: Stripe::SetupAttemptPaymentMethodDetailsBancontactGeneratedSepaDebit?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: generated_sepa_debit.nil? && !generated_sepa_debit_present?)]
     getter generated_sepa_debit : Stripe::SetupAttemptPaymentMethodDetailsBancontactGeneratedSepaDebit? = nil
@@ -88,23 +88,19 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BIC.error_message) unless ENUM_VALIDATOR_FOR_BIC.valid?(@bic)
       if _generated_sepa_debit = @generated_sepa_debit
-        if _generated_sepa_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_generated_sepa_debit.list_invalid_properties_for("generated_sepa_debit"))
-        end
+        invalid_properties.concat(_generated_sepa_debit.list_invalid_properties_for("generated_sepa_debit")) if _generated_sepa_debit.is_a?(OpenApi::Validatable)
       end
       if _generated_sepa_debit_mandate = @generated_sepa_debit_mandate
-        if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_generated_sepa_debit_mandate.list_invalid_properties_for("generated_sepa_debit_mandate"))
-        end
+        invalid_properties.concat(_generated_sepa_debit_mandate.list_invalid_properties_for("generated_sepa_debit_mandate")) if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
       end
       if _iban_last4 = @iban_last4
-        if _iban_last4.to_s.size > 5000
-          invalid_properties.push("invalid value for \"iban_last4\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _verified_name = @verified_name
-        if _verified_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -117,14 +113,10 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank)
       return false unless ENUM_VALIDATOR_FOR_BIC.valid?(@bic)
       if _generated_sepa_debit = @generated_sepa_debit
-        if _generated_sepa_debit.is_a?(OpenApi::Validatable)
-          return false unless _generated_sepa_debit.valid?
-        end
+        return false if _generated_sepa_debit.is_a?(OpenApi::Validatable) && !_generated_sepa_debit.valid?
       end
       if _generated_sepa_debit_mandate = @generated_sepa_debit_mandate
-        if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
-          return false unless _generated_sepa_debit_mandate.valid?
-        end
+        return false if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable) && !_generated_sepa_debit_mandate.valid?
       end
       if _iban_last4 = @iban_last4
         return false if _iban_last4.to_s.size > 5000
@@ -165,9 +157,7 @@ module Stripe
         return @generated_sepa_debit = nil
       end
       _generated_sepa_debit = generated_sepa_debit.not_nil!
-      if _generated_sepa_debit.is_a?(OpenApi::Validatable)
-        _generated_sepa_debit.validate
-      end
+      _generated_sepa_debit.validate if _generated_sepa_debit.is_a?(OpenApi::Validatable)
       @generated_sepa_debit = _generated_sepa_debit
     end
 
@@ -178,9 +168,7 @@ module Stripe
         return @generated_sepa_debit_mandate = nil
       end
       _generated_sepa_debit_mandate = generated_sepa_debit_mandate.not_nil!
-      if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
-        _generated_sepa_debit_mandate.validate
-      end
+      _generated_sepa_debit_mandate.validate if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
       @generated_sepa_debit_mandate = _generated_sepa_debit_mandate
     end
 
@@ -191,8 +179,8 @@ module Stripe
         return @iban_last4 = nil
       end
       _iban_last4 = iban_last4.not_nil!
-      if _iban_last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"iban_last4\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @iban_last4 = _iban_last4
@@ -205,8 +193,8 @@ module Stripe
         return @verified_name = nil
       end
       _verified_name = verified_name.not_nil!
-      if _verified_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @verified_name = _verified_name

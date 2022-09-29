@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "reasons", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reasons : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_REASONS = EnumValidator.new("reasons", "Array(String)", ["account_rejected", "closed_by_platform", "other"])
+    ENUM_VALIDATOR_FOR_REASONS = OpenApi::EnumValidator.new("reasons", "Array(String)", ["account_rejected", "closed_by_platform", "other"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

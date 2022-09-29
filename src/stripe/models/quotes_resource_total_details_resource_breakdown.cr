@@ -45,23 +45,11 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"discounts\" is required and cannot be null") if @discounts.nil?
       if _discounts = @discounts
-        if _discounts.is_a?(Array)
-          _discounts.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("discounts"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "discounts", array: _discounts)) if _discounts.is_a?(Array)
       end
       invalid_properties.push("\"taxes\" is required and cannot be null") if @taxes.nil?
       if _taxes = @taxes
-        if _taxes.is_a?(Array)
-          _taxes.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("taxes"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "taxes", array: _taxes)) if _taxes.is_a?(Array)
       end
 
       invalid_properties
@@ -72,23 +60,11 @@ module Stripe
     def valid? : Bool
       return false if @discounts.nil?
       if _discounts = @discounts
-        if _discounts.is_a?(Array)
-          _discounts.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _discounts.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _discounts)
       end
       return false if @taxes.nil?
       if _taxes = @taxes
-        if _taxes.is_a?(Array)
-          _taxes.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _taxes.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _taxes)
       end
 
       true
@@ -101,13 +77,7 @@ module Stripe
         raise ArgumentError.new("\"discounts\" is required and cannot be null")
       end
       _discounts = discounts.not_nil!
-      if _discounts.is_a?(Array)
-        _discounts.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _discounts) if _discounts.is_a?(Array)
       @discounts = _discounts
     end
 
@@ -118,13 +88,7 @@ module Stripe
         raise ArgumentError.new("\"taxes\" is required and cannot be null")
       end
       _taxes = taxes.not_nil!
-      if _taxes.is_a?(Array)
-        _taxes.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _taxes) if _taxes.is_a?(Array)
       @taxes = _taxes
     end
 

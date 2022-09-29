@@ -58,14 +58,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _percent_ownership = @percent_ownership
-        if _percent_ownership.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_percent_ownership.list_invalid_properties_for("percent_ownership"))
-        end
+        invalid_properties.concat(_percent_ownership.list_invalid_properties_for("percent_ownership")) if _percent_ownership.is_a?(OpenApi::Validatable)
       end
 
       if _title = @title
-        if _title.to_s.size > 5000
-          invalid_properties.push("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -76,9 +74,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _percent_ownership = @percent_ownership
-        if _percent_ownership.is_a?(OpenApi::Validatable)
-          return false unless _percent_ownership.valid?
-        end
+        return false if _percent_ownership.is_a?(OpenApi::Validatable) && !_percent_ownership.valid?
       end
 
       if _title = @title
@@ -125,9 +121,7 @@ module Stripe
         return @percent_ownership = nil
       end
       _percent_ownership = percent_ownership.not_nil!
-      if _percent_ownership.is_a?(OpenApi::Validatable)
-        _percent_ownership.validate
-      end
+      _percent_ownership.validate if _percent_ownership.is_a?(OpenApi::Validatable)
       @percent_ownership = _percent_ownership
     end
 
@@ -148,8 +142,8 @@ module Stripe
         return @title = nil
       end
       _title = title.not_nil!
-      if _title.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @title = _title

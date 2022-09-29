@@ -56,19 +56,15 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _charge = @charge
-        if _charge.to_s.size > 5000
-          invalid_properties.push("invalid value for \"charge\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _payment_method_details = @payment_method_details
-        if _payment_method_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_method_details.list_invalid_properties_for("payment_method_details"))
-        end
+        invalid_properties.concat(_payment_method_details.list_invalid_properties_for("payment_method_details")) if _payment_method_details.is_a?(OpenApi::Validatable)
       end
       if _setup_attempt = @setup_attempt
-        if _setup_attempt.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_setup_attempt.list_invalid_properties_for("setup_attempt"))
-        end
+        invalid_properties.concat(_setup_attempt.list_invalid_properties_for("setup_attempt")) if _setup_attempt.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -81,14 +77,10 @@ module Stripe
         return false if _charge.to_s.size > 5000
       end
       if _payment_method_details = @payment_method_details
-        if _payment_method_details.is_a?(OpenApi::Validatable)
-          return false unless _payment_method_details.valid?
-        end
+        return false if _payment_method_details.is_a?(OpenApi::Validatable) && !_payment_method_details.valid?
       end
       if _setup_attempt = @setup_attempt
-        if _setup_attempt.is_a?(OpenApi::Validatable)
-          return false unless _setup_attempt.valid?
-        end
+        return false if _setup_attempt.is_a?(OpenApi::Validatable) && !_setup_attempt.valid?
       end
 
       true
@@ -101,8 +93,8 @@ module Stripe
         return @charge = nil
       end
       _charge = charge.not_nil!
-      if _charge.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"charge\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @charge = _charge
@@ -115,9 +107,7 @@ module Stripe
         return @payment_method_details = nil
       end
       _payment_method_details = payment_method_details.not_nil!
-      if _payment_method_details.is_a?(OpenApi::Validatable)
-        _payment_method_details.validate
-      end
+      _payment_method_details.validate if _payment_method_details.is_a?(OpenApi::Validatable)
       @payment_method_details = _payment_method_details
     end
 
@@ -128,9 +118,7 @@ module Stripe
         return @setup_attempt = nil
       end
       _setup_attempt = setup_attempt.not_nil!
-      if _setup_attempt.is_a?(OpenApi::Validatable)
-        _setup_attempt.validate
-      end
+      _setup_attempt.validate if _setup_attempt.is_a?(OpenApi::Validatable)
       @setup_attempt = _setup_attempt
     end
 

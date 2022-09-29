@@ -60,26 +60,22 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
       if _address = @address
-        if _address.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_address.list_invalid_properties_for("address"))
-        end
+        invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"display_name\" is required and cannot be null") if @display_name.nil?
       if _display_name = @display_name
-        if _display_name.to_s.size > 1000
-          invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 1000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 1000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _configuration_overrides = @configuration_overrides
-        if _configuration_overrides.to_s.size > 1000
-          invalid_properties.push("invalid value for \"configuration_overrides\", the character length must be smaller than or equal to 1000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("configuration_overrides", _configuration_overrides.to_s.size, 1000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -90,9 +86,7 @@ module Stripe
     def valid? : Bool
       return false if @address.nil?
       if _address = @address
-        if _address.is_a?(OpenApi::Validatable)
-          return false unless _address.valid?
-        end
+        return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
       return false if @display_name.nil?
       if _display_name = @display_name
@@ -103,9 +97,7 @@ module Stripe
       end
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
       true
@@ -118,9 +110,7 @@ module Stripe
         raise ArgumentError.new("\"address\" is required and cannot be null")
       end
       _address = address.not_nil!
-      if _address.is_a?(OpenApi::Validatable)
-        _address.validate
-      end
+      _address.validate if _address.is_a?(OpenApi::Validatable)
       @address = _address
     end
 
@@ -131,8 +121,8 @@ module Stripe
         raise ArgumentError.new("\"display_name\" is required and cannot be null")
       end
       _display_name = display_name.not_nil!
-      if _display_name.to_s.size > 1000
-        raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 1000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 1000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @display_name = _display_name
@@ -145,8 +135,8 @@ module Stripe
         return @configuration_overrides = nil
       end
       _configuration_overrides = configuration_overrides.not_nil!
-      if _configuration_overrides.to_s.size > 1000
-        raise ArgumentError.new("invalid value for \"configuration_overrides\", the character length must be smaller than or equal to 1000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("configuration_overrides", _configuration_overrides.to_s.size, 1000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @configuration_overrides = _configuration_overrides
@@ -169,9 +159,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 

@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["identity.verification_report"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["identity.verification_report"])
 
     @[JSON::Field(key: "options", type: Stripe::GelatoVerificationReportOptions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter options : Stripe::GelatoVerificationReportOptions? = nil
@@ -46,7 +46,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["document", "id_number"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["document", "id_number"])
 
     # Optional properties
 
@@ -93,8 +93,8 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -102,30 +102,22 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"options\" is required and cannot be null") if @options.nil?
       if _options = @options
-        if _options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_options.list_invalid_properties_for("options"))
-        end
+        invalid_properties.concat(_options.list_invalid_properties_for("options")) if _options.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _document = @document
-        if _document.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_document.list_invalid_properties_for("document"))
-        end
+        invalid_properties.concat(_document.list_invalid_properties_for("document")) if _document.is_a?(OpenApi::Validatable)
       end
       if _id_number = @id_number
-        if _id_number.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_id_number.list_invalid_properties_for("id_number"))
-        end
+        invalid_properties.concat(_id_number.list_invalid_properties_for("id_number")) if _id_number.is_a?(OpenApi::Validatable)
       end
       if _selfie = @selfie
-        if _selfie.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_selfie.list_invalid_properties_for("selfie"))
-        end
+        invalid_properties.concat(_selfie.list_invalid_properties_for("selfie")) if _selfie.is_a?(OpenApi::Validatable)
       end
       if _verification_session = @verification_session
-        if _verification_session.to_s.size > 5000
-          invalid_properties.push("invalid value for \"verification_session\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verification_session", _verification_session.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -146,25 +138,17 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @options.nil?
       if _options = @options
-        if _options.is_a?(OpenApi::Validatable)
-          return false unless _options.valid?
-        end
+        return false if _options.is_a?(OpenApi::Validatable) && !_options.valid?
       end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _document = @document
-        if _document.is_a?(OpenApi::Validatable)
-          return false unless _document.valid?
-        end
+        return false if _document.is_a?(OpenApi::Validatable) && !_document.valid?
       end
       if _id_number = @id_number
-        if _id_number.is_a?(OpenApi::Validatable)
-          return false unless _id_number.valid?
-        end
+        return false if _id_number.is_a?(OpenApi::Validatable) && !_id_number.valid?
       end
       if _selfie = @selfie
-        if _selfie.is_a?(OpenApi::Validatable)
-          return false unless _selfie.valid?
-        end
+        return false if _selfie.is_a?(OpenApi::Validatable) && !_selfie.valid?
       end
       if _verification_session = @verification_session
         return false if _verification_session.to_s.size > 5000
@@ -190,8 +174,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -225,9 +209,7 @@ module Stripe
         raise ArgumentError.new("\"options\" is required and cannot be null")
       end
       _options = options.not_nil!
-      if _options.is_a?(OpenApi::Validatable)
-        _options.validate
-      end
+      _options.validate if _options.is_a?(OpenApi::Validatable)
       @options = _options
     end
 
@@ -249,9 +231,7 @@ module Stripe
         return @document = nil
       end
       _document = document.not_nil!
-      if _document.is_a?(OpenApi::Validatable)
-        _document.validate
-      end
+      _document.validate if _document.is_a?(OpenApi::Validatable)
       @document = _document
     end
 
@@ -262,9 +242,7 @@ module Stripe
         return @id_number = nil
       end
       _id_number = id_number.not_nil!
-      if _id_number.is_a?(OpenApi::Validatable)
-        _id_number.validate
-      end
+      _id_number.validate if _id_number.is_a?(OpenApi::Validatable)
       @id_number = _id_number
     end
 
@@ -275,9 +253,7 @@ module Stripe
         return @selfie = nil
       end
       _selfie = selfie.not_nil!
-      if _selfie.is_a?(OpenApi::Validatable)
-        _selfie.validate
-      end
+      _selfie.validate if _selfie.is_a?(OpenApi::Validatable)
       @selfie = _selfie
     end
 
@@ -288,8 +264,8 @@ module Stripe
         return @verification_session = nil
       end
       _verification_session = verification_session.not_nil!
-      if _verification_session.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"verification_session\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verification_session", _verification_session.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @verification_session = _verification_session

@@ -25,199 +25,199 @@ module Stripe
     @[JSON::Field(key: "acss_debit_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter acss_debit_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS = EnumValidator.new("acss_debit_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS = OpenApi::EnumValidator.new("acss_debit_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the Affirm capability of the account, or whether the account can directly process Affirm charges.
     @[JSON::Field(key: "affirm_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter affirm_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_AFFIRM_PAYMENTS = EnumValidator.new("affirm_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_AFFIRM_PAYMENTS = OpenApi::EnumValidator.new("affirm_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the Afterpay Clearpay capability of the account, or whether the account can directly process Afterpay Clearpay charges.
     @[JSON::Field(key: "afterpay_clearpay_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter afterpay_clearpay_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_AFTERPAY_CLEARPAY_PAYMENTS = EnumValidator.new("afterpay_clearpay_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_AFTERPAY_CLEARPAY_PAYMENTS = OpenApi::EnumValidator.new("afterpay_clearpay_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the BECS Direct Debit (AU) payments capability of the account, or whether the account can directly process BECS Direct Debit (AU) charges.
     @[JSON::Field(key: "au_becs_debit_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter au_becs_debit_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_AU_BECS_DEBIT_PAYMENTS = EnumValidator.new("au_becs_debit_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_AU_BECS_DEBIT_PAYMENTS = OpenApi::EnumValidator.new("au_becs_debit_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the Bacs Direct Debits payments capability of the account, or whether the account can directly process Bacs Direct Debits charges.
     @[JSON::Field(key: "bacs_debit_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bacs_debit_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_BACS_DEBIT_PAYMENTS = EnumValidator.new("bacs_debit_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_BACS_DEBIT_PAYMENTS = OpenApi::EnumValidator.new("bacs_debit_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the Bancontact payments capability of the account, or whether the account can directly process Bancontact charges.
     @[JSON::Field(key: "bancontact_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bancontact_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_BANCONTACT_PAYMENTS = EnumValidator.new("bancontact_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_BANCONTACT_PAYMENTS = OpenApi::EnumValidator.new("bancontact_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the customer_balance payments capability of the account, or whether the account can directly process customer_balance charges.
     @[JSON::Field(key: "bank_transfer_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bank_transfer_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_BANK_TRANSFER_PAYMENTS = EnumValidator.new("bank_transfer_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_BANK_TRANSFER_PAYMENTS = OpenApi::EnumValidator.new("bank_transfer_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the blik payments capability of the account, or whether the account can directly process blik charges.
     @[JSON::Field(key: "blik_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter blik_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_BLIK_PAYMENTS = EnumValidator.new("blik_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_BLIK_PAYMENTS = OpenApi::EnumValidator.new("blik_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the boleto payments capability of the account, or whether the account can directly process boleto charges.
     @[JSON::Field(key: "boleto_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter boleto_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_BOLETO_PAYMENTS = EnumValidator.new("boleto_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_BOLETO_PAYMENTS = OpenApi::EnumValidator.new("boleto_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the card issuing capability of the account, or whether you can use Issuing to distribute funds on cards
     @[JSON::Field(key: "card_issuing", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter card_issuing : String? = nil
 
-    ENUM_VALIDATOR_FOR_CARD_ISSUING = EnumValidator.new("card_issuing", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_CARD_ISSUING = OpenApi::EnumValidator.new("card_issuing", "String", ["active", "inactive", "pending"])
 
     # The status of the card payments capability of the account, or whether the account can directly process credit and debit card charges.
     @[JSON::Field(key: "card_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter card_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_CARD_PAYMENTS = EnumValidator.new("card_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_CARD_PAYMENTS = OpenApi::EnumValidator.new("card_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the Cartes Bancaires payments capability of the account, or whether the account can directly process Cartes Bancaires card charges in EUR currency.
     @[JSON::Field(key: "cartes_bancaires_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cartes_bancaires_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_CARTES_BANCAIRES_PAYMENTS = EnumValidator.new("cartes_bancaires_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_CARTES_BANCAIRES_PAYMENTS = OpenApi::EnumValidator.new("cartes_bancaires_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the EPS payments capability of the account, or whether the account can directly process EPS charges.
     @[JSON::Field(key: "eps_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter eps_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_EPS_PAYMENTS = EnumValidator.new("eps_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_EPS_PAYMENTS = OpenApi::EnumValidator.new("eps_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the FPX payments capability of the account, or whether the account can directly process FPX charges.
     @[JSON::Field(key: "fpx_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter fpx_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_FPX_PAYMENTS = EnumValidator.new("fpx_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_FPX_PAYMENTS = OpenApi::EnumValidator.new("fpx_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the giropay payments capability of the account, or whether the account can directly process giropay charges.
     @[JSON::Field(key: "giropay_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter giropay_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_GIROPAY_PAYMENTS = EnumValidator.new("giropay_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_GIROPAY_PAYMENTS = OpenApi::EnumValidator.new("giropay_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the GrabPay payments capability of the account, or whether the account can directly process GrabPay charges.
     @[JSON::Field(key: "grabpay_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter grabpay_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_GRABPAY_PAYMENTS = EnumValidator.new("grabpay_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_GRABPAY_PAYMENTS = OpenApi::EnumValidator.new("grabpay_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the iDEAL payments capability of the account, or whether the account can directly process iDEAL charges.
     @[JSON::Field(key: "ideal_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ideal_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_IDEAL_PAYMENTS = EnumValidator.new("ideal_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_IDEAL_PAYMENTS = OpenApi::EnumValidator.new("ideal_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the JCB payments capability of the account, or whether the account (Japan only) can directly process JCB credit card charges in JPY currency.
     @[JSON::Field(key: "jcb_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter jcb_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_JCB_PAYMENTS = EnumValidator.new("jcb_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_JCB_PAYMENTS = OpenApi::EnumValidator.new("jcb_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the Klarna payments capability of the account, or whether the account can directly process Klarna charges.
     @[JSON::Field(key: "klarna_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter klarna_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_KLARNA_PAYMENTS = EnumValidator.new("klarna_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_KLARNA_PAYMENTS = OpenApi::EnumValidator.new("klarna_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the konbini payments capability of the account, or whether the account can directly process konbini charges.
     @[JSON::Field(key: "konbini_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter konbini_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_KONBINI_PAYMENTS = EnumValidator.new("konbini_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_KONBINI_PAYMENTS = OpenApi::EnumValidator.new("konbini_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the legacy payments capability of the account.
     @[JSON::Field(key: "legacy_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter legacy_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_LEGACY_PAYMENTS = EnumValidator.new("legacy_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_LEGACY_PAYMENTS = OpenApi::EnumValidator.new("legacy_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the link_payments capability of the account, or whether the account can directly process Link charges.
     @[JSON::Field(key: "link_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter link_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_LINK_PAYMENTS = EnumValidator.new("link_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_LINK_PAYMENTS = OpenApi::EnumValidator.new("link_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the OXXO payments capability of the account, or whether the account can directly process OXXO charges.
     @[JSON::Field(key: "oxxo_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter oxxo_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_OXXO_PAYMENTS = EnumValidator.new("oxxo_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_OXXO_PAYMENTS = OpenApi::EnumValidator.new("oxxo_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the P24 payments capability of the account, or whether the account can directly process P24 charges.
     @[JSON::Field(key: "p24_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter p24_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_P24_PAYMENTS = EnumValidator.new("p24_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_P24_PAYMENTS = OpenApi::EnumValidator.new("p24_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the paynow payments capability of the account, or whether the account can directly process paynow charges.
     @[JSON::Field(key: "paynow_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter paynow_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_PAYNOW_PAYMENTS = EnumValidator.new("paynow_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_PAYNOW_PAYMENTS = OpenApi::EnumValidator.new("paynow_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the promptpay payments capability of the account, or whether the account can directly process promptpay charges.
     @[JSON::Field(key: "promptpay_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter promptpay_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_PROMPTPAY_PAYMENTS = EnumValidator.new("promptpay_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_PROMPTPAY_PAYMENTS = OpenApi::EnumValidator.new("promptpay_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the SEPA Direct Debits payments capability of the account, or whether the account can directly process SEPA Direct Debits charges.
     @[JSON::Field(key: "sepa_debit_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sepa_debit_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_SEPA_DEBIT_PAYMENTS = EnumValidator.new("sepa_debit_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_SEPA_DEBIT_PAYMENTS = OpenApi::EnumValidator.new("sepa_debit_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the Sofort payments capability of the account, or whether the account can directly process Sofort charges.
     @[JSON::Field(key: "sofort_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sofort_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_SOFORT_PAYMENTS = EnumValidator.new("sofort_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_SOFORT_PAYMENTS = OpenApi::EnumValidator.new("sofort_payments", "String", ["active", "inactive", "pending"])
 
     # The status of the tax reporting 1099-K (US) capability of the account.
     @[JSON::Field(key: "tax_reporting_us_1099_k", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_reporting_us_1099_k : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_K = EnumValidator.new("tax_reporting_us_1099_k", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_K = OpenApi::EnumValidator.new("tax_reporting_us_1099_k", "String", ["active", "inactive", "pending"])
 
     # The status of the tax reporting 1099-MISC (US) capability of the account.
     @[JSON::Field(key: "tax_reporting_us_1099_misc", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_reporting_us_1099_misc : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_MISC = EnumValidator.new("tax_reporting_us_1099_misc", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_MISC = OpenApi::EnumValidator.new("tax_reporting_us_1099_misc", "String", ["active", "inactive", "pending"])
 
     # The status of the transfers capability of the account, or whether your platform can transfer funds to the account.
     @[JSON::Field(key: "transfers", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transfers : String? = nil
 
-    ENUM_VALIDATOR_FOR_TRANSFERS = EnumValidator.new("transfers", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_TRANSFERS = OpenApi::EnumValidator.new("transfers", "String", ["active", "inactive", "pending"])
 
     # The status of the banking capability, or whether the account can have bank accounts.
     @[JSON::Field(key: "treasury", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter treasury : String? = nil
 
-    ENUM_VALIDATOR_FOR_TREASURY = EnumValidator.new("treasury", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_TREASURY = OpenApi::EnumValidator.new("treasury", "String", ["active", "inactive", "pending"])
 
     # The status of the US bank account ACH payments capability of the account, or whether the account can directly process US bank account charges.
     @[JSON::Field(key: "us_bank_account_ach_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter us_bank_account_ach_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS = EnumValidator.new("us_bank_account_ach_payments", "String", ["active", "inactive", "pending"])
+    ENUM_VALIDATOR_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS = OpenApi::EnumValidator.new("us_bank_account_ach_payments", "String", ["active", "inactive", "pending"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

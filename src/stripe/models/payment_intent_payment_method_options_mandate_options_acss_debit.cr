@@ -39,7 +39,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? payment_schedule_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE = EnumValidator.new("payment_schedule", "String", ["combined", "interval", "sporadic"])
+    ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE = OpenApi::EnumValidator.new("payment_schedule", "String", ["combined", "interval", "sporadic"])
 
     # Transaction type of the mandate.
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: transaction_type.nil? && !transaction_type_present?)]
@@ -48,7 +48,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? transaction_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_TRANSACTION_TYPE = EnumValidator.new("transaction_type", "String", ["business", "personal"])
+    ENUM_VALIDATOR_FOR_TRANSACTION_TYPE = OpenApi::EnumValidator.new("transaction_type", "String", ["business", "personal"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -67,13 +67,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _custom_mandate_url = @custom_mandate_url
-        if _custom_mandate_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"custom_mandate_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("custom_mandate_url", _custom_mandate_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _interval_description = @interval_description
-        if _interval_description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"interval_description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -106,8 +106,8 @@ module Stripe
         return @custom_mandate_url = nil
       end
       _custom_mandate_url = custom_mandate_url.not_nil!
-      if _custom_mandate_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"custom_mandate_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("custom_mandate_url", _custom_mandate_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @custom_mandate_url = _custom_mandate_url
@@ -120,8 +120,8 @@ module Stripe
         return @interval_description = nil
       end
       _interval_description = interval_description.not_nil!
-      if _interval_description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"interval_description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @interval_description = _interval_description

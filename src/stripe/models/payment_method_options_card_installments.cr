@@ -59,18 +59,10 @@ module Stripe
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
       if _available_plans = @available_plans
-        if _available_plans.is_a?(Array)
-          _available_plans.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("available_plans"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "available_plans", array: _available_plans)) if _available_plans.is_a?(Array)
       end
       if _plan = @plan
-        if _plan.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_plan.list_invalid_properties_for("plan"))
-        end
+        invalid_properties.concat(_plan.list_invalid_properties_for("plan")) if _plan.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -82,18 +74,10 @@ module Stripe
       return false if @enabled.nil?
 
       if _available_plans = @available_plans
-        if _available_plans.is_a?(Array)
-          _available_plans.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _available_plans.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _available_plans)
       end
       if _plan = @plan
-        if _plan.is_a?(OpenApi::Validatable)
-          return false unless _plan.valid?
-        end
+        return false if _plan.is_a?(OpenApi::Validatable) && !_plan.valid?
       end
 
       true
@@ -116,13 +100,7 @@ module Stripe
         return @available_plans = nil
       end
       _available_plans = available_plans.not_nil!
-      if _available_plans.is_a?(Array)
-        _available_plans.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _available_plans) if _available_plans.is_a?(Array)
       @available_plans = _available_plans
     end
 
@@ -133,9 +111,7 @@ module Stripe
         return @plan = nil
       end
       _plan = plan.not_nil!
-      if _plan.is_a?(OpenApi::Validatable)
-        _plan.validate
-      end
+      _plan.validate if _plan.is_a?(OpenApi::Validatable)
       @plan = _plan
     end
 

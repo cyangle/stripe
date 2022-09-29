@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
+    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = OpenApi::EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -55,17 +55,13 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"default_allowed_updates\" is required and cannot be null") if @default_allowed_updates.nil?
       if _default_allowed_updates = @default_allowed_updates
-        if _default_allowed_updates.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_default_allowed_updates.list_invalid_properties_for("default_allowed_updates"))
-        end
+        invalid_properties.concat(_default_allowed_updates.list_invalid_properties_for("default_allowed_updates")) if _default_allowed_updates.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
       invalid_properties.push("\"products\" is required and cannot be null") if @products.nil?
       if _products = @products
-        if _products.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_products.list_invalid_properties_for("products"))
-        end
+        invalid_properties.concat(_products.list_invalid_properties_for("products")) if _products.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
@@ -78,17 +74,13 @@ module Stripe
     def valid? : Bool
       return false if @default_allowed_updates.nil?
       if _default_allowed_updates = @default_allowed_updates
-        if _default_allowed_updates.is_a?(OpenApi::Validatable)
-          return false unless _default_allowed_updates.valid?
-        end
+        return false if _default_allowed_updates.is_a?(OpenApi::Validatable) && !_default_allowed_updates.valid?
       end
       return false if @enabled.nil?
 
       return false if @products.nil?
       if _products = @products
-        if _products.is_a?(OpenApi::Validatable)
-          return false unless _products.valid?
-        end
+        return false if _products.is_a?(OpenApi::Validatable) && !_products.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
 
@@ -102,9 +94,7 @@ module Stripe
         raise ArgumentError.new("\"default_allowed_updates\" is required and cannot be null")
       end
       _default_allowed_updates = default_allowed_updates.not_nil!
-      if _default_allowed_updates.is_a?(OpenApi::Validatable)
-        _default_allowed_updates.validate
-      end
+      _default_allowed_updates.validate if _default_allowed_updates.is_a?(OpenApi::Validatable)
       @default_allowed_updates = _default_allowed_updates
     end
 
@@ -125,9 +115,7 @@ module Stripe
         raise ArgumentError.new("\"products\" is required and cannot be null")
       end
       _products = products.not_nil!
-      if _products.is_a?(OpenApi::Validatable)
-        _products.validate
-      end
+      _products.validate if _products.is_a?(OpenApi::Validatable)
       @products = _products
     end
 

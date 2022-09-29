@@ -17,7 +17,7 @@ module Stripe
 
     property data : String
 
-    ENUM_VALIDATOR = EnumValidator.new("subscription_data_create_params_effective_date_oneOf", "String", ["current_period_end"])
+    ENUM_VALIDATOR = OpenApi::EnumValidator.new("subscription_data_create_params_effective_date_oneOf", "String", ["current_period_end"])
 
     delegate to_json_object_key, to: @data
     delegate error_message, to: ENUM_VALIDATOR

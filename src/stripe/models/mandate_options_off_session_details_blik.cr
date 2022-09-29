@@ -42,7 +42,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? interval_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
+    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
 
     # Frequency indicator of each recurring payment.
     @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: interval_count.nil? && !interval_count_present?)]
@@ -69,8 +69,8 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _currency = @currency
-        if _currency.to_s.size > 5000
-          invalid_properties.push("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -107,8 +107,8 @@ module Stripe
         return @currency = nil
       end
       _currency = currency.not_nil!
-      if _currency.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @currency = _currency

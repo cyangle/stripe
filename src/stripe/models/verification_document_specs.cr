@@ -41,13 +41,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _back = @back
-        if _back.to_s.size > 500
-          invalid_properties.push("invalid value for \"back\", the character length must be smaller than or equal to 500.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("back", _back.to_s.size, 500)
+          invalid_properties.push(max_length_error)
         end
       end
       if _front = @front
-        if _front.to_s.size > 500
-          invalid_properties.push("invalid value for \"front\", the character length must be smaller than or equal to 500.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("front", _front.to_s.size, 500)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -74,8 +74,8 @@ module Stripe
         return @back = nil
       end
       _back = back.not_nil!
-      if _back.to_s.size > 500
-        raise ArgumentError.new("invalid value for \"back\", the character length must be smaller than or equal to 500.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("back", _back.to_s.size, 500)
+        raise ArgumentError.new(max_length_error)
       end
 
       @back = _back
@@ -88,8 +88,8 @@ module Stripe
         return @front = nil
       end
       _front = front.not_nil!
-      if _front.to_s.size > 500
-        raise ArgumentError.new("invalid value for \"front\", the character length must be smaller than or equal to 500.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("front", _front.to_s.size, 500)
+        raise ArgumentError.new(max_length_error)
       end
 
       @front = _front

@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter code : String? = nil
 
-    ENUM_VALIDATOR_FOR_CODE = EnumValidator.new("code", "String", ["invalid_address_city_state_postal_code", "invalid_street_address", "invalid_tos_acceptance", "invalid_value_other", "verification_document_address_mismatch", "verification_document_address_missing", "verification_document_corrupt", "verification_document_country_not_supported", "verification_document_dob_mismatch", "verification_document_duplicate_type", "verification_document_expired", "verification_document_failed_copy", "verification_document_failed_greyscale", "verification_document_failed_other", "verification_document_failed_test_mode", "verification_document_fraudulent", "verification_document_id_number_mismatch", "verification_document_id_number_missing", "verification_document_incomplete", "verification_document_invalid", "verification_document_issue_or_expiry_date_missing", "verification_document_manipulated", "verification_document_missing_back", "verification_document_missing_front", "verification_document_name_mismatch", "verification_document_name_missing", "verification_document_nationality_mismatch", "verification_document_not_readable", "verification_document_not_signed", "verification_document_not_uploaded", "verification_document_photo_mismatch", "verification_document_too_large", "verification_document_type_not_supported", "verification_failed_address_match", "verification_failed_business_iec_number", "verification_failed_document_match", "verification_failed_id_number_match", "verification_failed_keyed_identity", "verification_failed_keyed_match", "verification_failed_name_match", "verification_failed_other", "verification_failed_tax_id_match", "verification_failed_tax_id_not_issued", "verification_missing_executives", "verification_missing_owners", "verification_requires_additional_memorandum_of_associations"])
+    ENUM_VALIDATOR_FOR_CODE = OpenApi::EnumValidator.new("code", "String", ["invalid_address_city_state_postal_code", "invalid_street_address", "invalid_tos_acceptance", "invalid_value_other", "verification_document_address_mismatch", "verification_document_address_missing", "verification_document_corrupt", "verification_document_country_not_supported", "verification_document_dob_mismatch", "verification_document_duplicate_type", "verification_document_expired", "verification_document_failed_copy", "verification_document_failed_greyscale", "verification_document_failed_other", "verification_document_failed_test_mode", "verification_document_fraudulent", "verification_document_id_number_mismatch", "verification_document_id_number_missing", "verification_document_incomplete", "verification_document_invalid", "verification_document_issue_or_expiry_date_missing", "verification_document_manipulated", "verification_document_missing_back", "verification_document_missing_front", "verification_document_name_mismatch", "verification_document_name_missing", "verification_document_nationality_mismatch", "verification_document_not_readable", "verification_document_not_signed", "verification_document_not_uploaded", "verification_document_photo_mismatch", "verification_document_too_large", "verification_document_type_not_supported", "verification_failed_address_match", "verification_failed_business_iec_number", "verification_failed_document_match", "verification_failed_id_number_match", "verification_failed_keyed_identity", "verification_failed_keyed_match", "verification_failed_name_match", "verification_failed_other", "verification_failed_tax_id_match", "verification_failed_tax_id_not_issued", "verification_missing_executives", "verification_missing_owners", "verification_requires_additional_memorandum_of_associations"])
 
     # An informative message that indicates the error type and provides additional details about the error.
     @[JSON::Field(key: "reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -54,14 +54,14 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
       invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
       if _reason = @reason
-        if _reason.to_s.size > 5000
-          invalid_properties.push("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"requirement\" is required and cannot be null") if @requirement.nil?
       if _requirement = @requirement
-        if _requirement.to_s.size > 5000
-          invalid_properties.push("invalid value for \"requirement\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("requirement", _requirement.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -102,8 +102,8 @@ module Stripe
         raise ArgumentError.new("\"reason\" is required and cannot be null")
       end
       _reason = reason.not_nil!
-      if _reason.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @reason = _reason
@@ -116,8 +116,8 @@ module Stripe
         raise ArgumentError.new("\"requirement\" is required and cannot be null")
       end
       _requirement = requirement.not_nil!
-      if _requirement.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"requirement\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("requirement", _requirement.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @requirement = _requirement

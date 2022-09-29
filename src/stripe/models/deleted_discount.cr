@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "deleted", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter deleted : Bool? = nil
 
-    ENUM_VALIDATOR_FOR_DELETED = EnumValidator.new("deleted", "Bool", ["true"])
+    ENUM_VALIDATOR_FOR_DELETED = OpenApi::EnumValidator.new("deleted", "Bool", ["true"])
 
     # The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["discount"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["discount"])
 
     # Date that the coupon was applied.
     @[JSON::Field(key: "start", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -112,16 +112,14 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"coupon\" is required and cannot be null") if @coupon.nil?
       if _coupon = @coupon
-        if _coupon.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_coupon.list_invalid_properties_for("coupon"))
-        end
+        invalid_properties.concat(_coupon.list_invalid_properties_for("coupon")) if _coupon.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_DELETED.error_message) unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -129,33 +127,29 @@ module Stripe
       invalid_properties.push("\"start\" is required and cannot be null") if @start.nil?
 
       if _checkout_session = @checkout_session
-        if _checkout_session.to_s.size > 5000
-          invalid_properties.push("invalid value for \"checkout_session\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("checkout_session", _checkout_session.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _customer = @customer
-        if _customer.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_customer.list_invalid_properties_for("customer"))
-        end
+        invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
       if _invoice = @invoice
-        if _invoice.to_s.size > 5000
-          invalid_properties.push("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _invoice_item = @invoice_item
-        if _invoice_item.to_s.size > 5000
-          invalid_properties.push("invalid value for \"invoice_item\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_item", _invoice_item.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _promotion_code = @promotion_code
-        if _promotion_code.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_promotion_code.list_invalid_properties_for("promotion_code"))
-        end
+        invalid_properties.concat(_promotion_code.list_invalid_properties_for("promotion_code")) if _promotion_code.is_a?(OpenApi::Validatable)
       end
       if _subscription = @subscription
-        if _subscription.to_s.size > 5000
-          invalid_properties.push("invalid value for \"subscription\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -167,9 +161,7 @@ module Stripe
     def valid? : Bool
       return false if @coupon.nil?
       if _coupon = @coupon
-        if _coupon.is_a?(OpenApi::Validatable)
-          return false unless _coupon.valid?
-        end
+        return false if _coupon.is_a?(OpenApi::Validatable) && !_coupon.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
       return false if @id.nil?
@@ -183,9 +175,7 @@ module Stripe
         return false if _checkout_session.to_s.size > 5000
       end
       if _customer = @customer
-        if _customer.is_a?(OpenApi::Validatable)
-          return false unless _customer.valid?
-        end
+        return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
       if _invoice = @invoice
         return false if _invoice.to_s.size > 5000
@@ -194,9 +184,7 @@ module Stripe
         return false if _invoice_item.to_s.size > 5000
       end
       if _promotion_code = @promotion_code
-        if _promotion_code.is_a?(OpenApi::Validatable)
-          return false unless _promotion_code.valid?
-        end
+        return false if _promotion_code.is_a?(OpenApi::Validatable) && !_promotion_code.valid?
       end
       if _subscription = @subscription
         return false if _subscription.to_s.size > 5000
@@ -212,9 +200,7 @@ module Stripe
         raise ArgumentError.new("\"coupon\" is required and cannot be null")
       end
       _coupon = coupon.not_nil!
-      if _coupon.is_a?(OpenApi::Validatable)
-        _coupon.validate
-      end
+      _coupon.validate if _coupon.is_a?(OpenApi::Validatable)
       @coupon = _coupon
     end
 
@@ -236,8 +222,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -271,8 +257,8 @@ module Stripe
         return @checkout_session = nil
       end
       _checkout_session = checkout_session.not_nil!
-      if _checkout_session.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"checkout_session\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("checkout_session", _checkout_session.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @checkout_session = _checkout_session
@@ -285,9 +271,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if _customer.is_a?(OpenApi::Validatable)
-        _customer.validate
-      end
+      _customer.validate if _customer.is_a?(OpenApi::Validatable)
       @customer = _customer
     end
 
@@ -298,8 +282,8 @@ module Stripe
         return @invoice = nil
       end
       _invoice = invoice.not_nil!
-      if _invoice.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @invoice = _invoice
@@ -312,8 +296,8 @@ module Stripe
         return @invoice_item = nil
       end
       _invoice_item = invoice_item.not_nil!
-      if _invoice_item.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"invoice_item\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_item", _invoice_item.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @invoice_item = _invoice_item
@@ -326,9 +310,7 @@ module Stripe
         return @promotion_code = nil
       end
       _promotion_code = promotion_code.not_nil!
-      if _promotion_code.is_a?(OpenApi::Validatable)
-        _promotion_code.validate
-      end
+      _promotion_code.validate if _promotion_code.is_a?(OpenApi::Validatable)
       @promotion_code = _promotion_code
     end
 
@@ -339,8 +321,8 @@ module Stripe
         return @subscription = nil
       end
       _subscription = subscription.not_nil!
-      if _subscription.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"subscription\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @subscription = _subscription

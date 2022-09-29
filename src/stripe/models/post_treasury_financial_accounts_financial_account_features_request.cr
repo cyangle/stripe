@@ -66,40 +66,26 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _card_issuing = @card_issuing
-        if _card_issuing.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card_issuing.list_invalid_properties_for("card_issuing"))
-        end
+        invalid_properties.concat(_card_issuing.list_invalid_properties_for("card_issuing")) if _card_issuing.is_a?(OpenApi::Validatable)
       end
       if _deposit_insurance = @deposit_insurance
-        if _deposit_insurance.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_deposit_insurance.list_invalid_properties_for("deposit_insurance"))
-        end
+        invalid_properties.concat(_deposit_insurance.list_invalid_properties_for("deposit_insurance")) if _deposit_insurance.is_a?(OpenApi::Validatable)
       end
 
       if _financial_addresses = @financial_addresses
-        if _financial_addresses.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_financial_addresses.list_invalid_properties_for("financial_addresses"))
-        end
+        invalid_properties.concat(_financial_addresses.list_invalid_properties_for("financial_addresses")) if _financial_addresses.is_a?(OpenApi::Validatable)
       end
       if _inbound_transfers = @inbound_transfers
-        if _inbound_transfers.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_inbound_transfers.list_invalid_properties_for("inbound_transfers"))
-        end
+        invalid_properties.concat(_inbound_transfers.list_invalid_properties_for("inbound_transfers")) if _inbound_transfers.is_a?(OpenApi::Validatable)
       end
       if _intra_stripe_flows = @intra_stripe_flows
-        if _intra_stripe_flows.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_intra_stripe_flows.list_invalid_properties_for("intra_stripe_flows"))
-        end
+        invalid_properties.concat(_intra_stripe_flows.list_invalid_properties_for("intra_stripe_flows")) if _intra_stripe_flows.is_a?(OpenApi::Validatable)
       end
       if _outbound_payments = @outbound_payments
-        if _outbound_payments.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_outbound_payments.list_invalid_properties_for("outbound_payments"))
-        end
+        invalid_properties.concat(_outbound_payments.list_invalid_properties_for("outbound_payments")) if _outbound_payments.is_a?(OpenApi::Validatable)
       end
       if _outbound_transfers = @outbound_transfers
-        if _outbound_transfers.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_outbound_transfers.list_invalid_properties_for("outbound_transfers"))
-        end
+        invalid_properties.concat(_outbound_transfers.list_invalid_properties_for("outbound_transfers")) if _outbound_transfers.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -109,40 +95,26 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _card_issuing = @card_issuing
-        if _card_issuing.is_a?(OpenApi::Validatable)
-          return false unless _card_issuing.valid?
-        end
+        return false if _card_issuing.is_a?(OpenApi::Validatable) && !_card_issuing.valid?
       end
       if _deposit_insurance = @deposit_insurance
-        if _deposit_insurance.is_a?(OpenApi::Validatable)
-          return false unless _deposit_insurance.valid?
-        end
+        return false if _deposit_insurance.is_a?(OpenApi::Validatable) && !_deposit_insurance.valid?
       end
 
       if _financial_addresses = @financial_addresses
-        if _financial_addresses.is_a?(OpenApi::Validatable)
-          return false unless _financial_addresses.valid?
-        end
+        return false if _financial_addresses.is_a?(OpenApi::Validatable) && !_financial_addresses.valid?
       end
       if _inbound_transfers = @inbound_transfers
-        if _inbound_transfers.is_a?(OpenApi::Validatable)
-          return false unless _inbound_transfers.valid?
-        end
+        return false if _inbound_transfers.is_a?(OpenApi::Validatable) && !_inbound_transfers.valid?
       end
       if _intra_stripe_flows = @intra_stripe_flows
-        if _intra_stripe_flows.is_a?(OpenApi::Validatable)
-          return false unless _intra_stripe_flows.valid?
-        end
+        return false if _intra_stripe_flows.is_a?(OpenApi::Validatable) && !_intra_stripe_flows.valid?
       end
       if _outbound_payments = @outbound_payments
-        if _outbound_payments.is_a?(OpenApi::Validatable)
-          return false unless _outbound_payments.valid?
-        end
+        return false if _outbound_payments.is_a?(OpenApi::Validatable) && !_outbound_payments.valid?
       end
       if _outbound_transfers = @outbound_transfers
-        if _outbound_transfers.is_a?(OpenApi::Validatable)
-          return false unless _outbound_transfers.valid?
-        end
+        return false if _outbound_transfers.is_a?(OpenApi::Validatable) && !_outbound_transfers.valid?
       end
 
       true
@@ -155,9 +127,7 @@ module Stripe
         return @card_issuing = nil
       end
       _card_issuing = card_issuing.not_nil!
-      if _card_issuing.is_a?(OpenApi::Validatable)
-        _card_issuing.validate
-      end
+      _card_issuing.validate if _card_issuing.is_a?(OpenApi::Validatable)
       @card_issuing = _card_issuing
     end
 
@@ -168,9 +138,7 @@ module Stripe
         return @deposit_insurance = nil
       end
       _deposit_insurance = deposit_insurance.not_nil!
-      if _deposit_insurance.is_a?(OpenApi::Validatable)
-        _deposit_insurance.validate
-      end
+      _deposit_insurance.validate if _deposit_insurance.is_a?(OpenApi::Validatable)
       @deposit_insurance = _deposit_insurance
     end
 
@@ -191,9 +159,7 @@ module Stripe
         return @financial_addresses = nil
       end
       _financial_addresses = financial_addresses.not_nil!
-      if _financial_addresses.is_a?(OpenApi::Validatable)
-        _financial_addresses.validate
-      end
+      _financial_addresses.validate if _financial_addresses.is_a?(OpenApi::Validatable)
       @financial_addresses = _financial_addresses
     end
 
@@ -204,9 +170,7 @@ module Stripe
         return @inbound_transfers = nil
       end
       _inbound_transfers = inbound_transfers.not_nil!
-      if _inbound_transfers.is_a?(OpenApi::Validatable)
-        _inbound_transfers.validate
-      end
+      _inbound_transfers.validate if _inbound_transfers.is_a?(OpenApi::Validatable)
       @inbound_transfers = _inbound_transfers
     end
 
@@ -217,9 +181,7 @@ module Stripe
         return @intra_stripe_flows = nil
       end
       _intra_stripe_flows = intra_stripe_flows.not_nil!
-      if _intra_stripe_flows.is_a?(OpenApi::Validatable)
-        _intra_stripe_flows.validate
-      end
+      _intra_stripe_flows.validate if _intra_stripe_flows.is_a?(OpenApi::Validatable)
       @intra_stripe_flows = _intra_stripe_flows
     end
 
@@ -230,9 +192,7 @@ module Stripe
         return @outbound_payments = nil
       end
       _outbound_payments = outbound_payments.not_nil!
-      if _outbound_payments.is_a?(OpenApi::Validatable)
-        _outbound_payments.validate
-      end
+      _outbound_payments.validate if _outbound_payments.is_a?(OpenApi::Validatable)
       @outbound_payments = _outbound_payments
     end
 
@@ -243,9 +203,7 @@ module Stripe
         return @outbound_transfers = nil
       end
       _outbound_transfers = outbound_transfers.not_nil!
-      if _outbound_transfers.is_a?(OpenApi::Validatable)
-        _outbound_transfers.validate
-      end
+      _outbound_transfers.validate if _outbound_transfers.is_a?(OpenApi::Validatable)
       @outbound_transfers = _outbound_transfers
     end
 

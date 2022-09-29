@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
 
-    ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
+    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
 
     # The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.
     @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -68,9 +68,7 @@ module Stripe
 
       invalid_properties.push("\"total_details\" is required and cannot be null") if @total_details.nil?
       if _total_details = @total_details
-        if _total_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_total_details.list_invalid_properties_for("total_details"))
-        end
+        invalid_properties.concat(_total_details.list_invalid_properties_for("total_details")) if _total_details.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -88,9 +86,7 @@ module Stripe
 
       return false if @total_details.nil?
       if _total_details = @total_details
-        if _total_details.is_a?(OpenApi::Validatable)
-          return false unless _total_details.valid?
-        end
+        return false if _total_details.is_a?(OpenApi::Validatable) && !_total_details.valid?
       end
 
       true
@@ -144,9 +140,7 @@ module Stripe
         raise ArgumentError.new("\"total_details\" is required and cannot be null")
       end
       _total_details = total_details.not_nil!
-      if _total_details.is_a?(OpenApi::Validatable)
-        _total_details.validate
-      end
+      _total_details.validate if _total_details.is_a?(OpenApi::Validatable)
       @total_details = _total_details
     end
 

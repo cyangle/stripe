@@ -27,7 +27,7 @@ module Stripe
     @[JSON::Field(key: "end_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter end_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_END_BEHAVIOR = EnumValidator.new("end_behavior", "String", ["cancel", "none", "release", "renew"])
+    ENUM_VALIDATOR_FOR_END_BEHAVIOR = OpenApi::EnumValidator.new("end_behavior", "String", ["cancel", "none", "release", "renew"])
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -44,7 +44,7 @@ module Stripe
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
+    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = OpenApi::EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -65,26 +65,16 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _default_settings = @default_settings
-        if _default_settings.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_default_settings.list_invalid_properties_for("default_settings"))
-        end
+        invalid_properties.concat(_default_settings.list_invalid_properties_for("default_settings")) if _default_settings.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_END_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior)
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _phases = @phases
-        if _phases.is_a?(Array)
-          _phases.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("phases"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "phases", array: _phases)) if _phases.is_a?(Array)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
@@ -96,25 +86,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _default_settings = @default_settings
-        if _default_settings.is_a?(OpenApi::Validatable)
-          return false unless _default_settings.valid?
-        end
+        return false if _default_settings.is_a?(OpenApi::Validatable) && !_default_settings.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior)
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
       if _phases = @phases
-        if _phases.is_a?(Array)
-          _phases.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _phases.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _phases)
       end
       return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
 
@@ -128,9 +108,7 @@ module Stripe
         return @default_settings = nil
       end
       _default_settings = default_settings.not_nil!
-      if _default_settings.is_a?(OpenApi::Validatable)
-        _default_settings.validate
-      end
+      _default_settings.validate if _default_settings.is_a?(OpenApi::Validatable)
       @default_settings = _default_settings
     end
 
@@ -162,9 +140,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 
@@ -175,13 +151,7 @@ module Stripe
         return @phases = nil
       end
       _phases = phases.not_nil!
-      if _phases.is_a?(Array)
-        _phases.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _phases) if _phases.is_a?(Array)
       @phases = _phases
     end
 

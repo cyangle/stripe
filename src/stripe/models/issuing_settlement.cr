@@ -61,7 +61,7 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
 
-    ENUM_VALIDATOR_FOR_NETWORK = EnumValidator.new("network", "String", ["visa"])
+    ENUM_VALIDATOR_FOR_NETWORK = OpenApi::EnumValidator.new("network", "String", ["visa"])
 
     # The total amount of fees owed to the network.
     @[JSON::Field(key: "network_fees", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -75,7 +75,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["issuing.settlement"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["issuing.settlement"])
 
     # One of `international` or `uk_national_net`.
     @[JSON::Field(key: "settlement_service", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -119,8 +119,8 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"bin\" is required and cannot be null") if @bin.nil?
       if _bin = @bin
-        if _bin.to_s.size > 5000
-          invalid_properties.push("invalid value for \"bin\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bin", _bin.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"clearing_date\" is required and cannot be null") if @clearing_date.nil?
@@ -131,8 +131,8 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"interchange_fees\" is required and cannot be null") if @interchange_fees.nil?
@@ -148,16 +148,16 @@ module Stripe
 
       invalid_properties.push("\"network_settlement_identifier\" is required and cannot be null") if @network_settlement_identifier.nil?
       if _network_settlement_identifier = @network_settlement_identifier
-        if _network_settlement_identifier.to_s.size > 5000
-          invalid_properties.push("invalid value for \"network_settlement_identifier\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_settlement_identifier", _network_settlement_identifier.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"settlement_service\" is required and cannot be null") if @settlement_service.nil?
       if _settlement_service = @settlement_service
-        if _settlement_service.to_s.size > 5000
-          invalid_properties.push("invalid value for \"settlement_service\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("settlement_service", _settlement_service.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"transaction_count\" is required and cannot be null") if @transaction_count.nil?
@@ -218,8 +218,8 @@ module Stripe
         raise ArgumentError.new("\"bin\" is required and cannot be null")
       end
       _bin = bin.not_nil!
-      if _bin.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"bin\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bin", _bin.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @bin = _bin
@@ -262,8 +262,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -337,8 +337,8 @@ module Stripe
         raise ArgumentError.new("\"network_settlement_identifier\" is required and cannot be null")
       end
       _network_settlement_identifier = network_settlement_identifier.not_nil!
-      if _network_settlement_identifier.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"network_settlement_identifier\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_settlement_identifier", _network_settlement_identifier.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @network_settlement_identifier = _network_settlement_identifier
@@ -362,8 +362,8 @@ module Stripe
         raise ArgumentError.new("\"settlement_service\" is required and cannot be null")
       end
       _settlement_service = settlement_service.not_nil!
-      if _settlement_service.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"settlement_service\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("settlement_service", _settlement_service.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @settlement_service = _settlement_service

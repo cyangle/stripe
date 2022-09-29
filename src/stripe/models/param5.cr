@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "bank", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bank : String? = nil
 
-    ENUM_VALIDATOR_FOR_BANK = EnumValidator.new("bank", "String", ["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"])
+    ENUM_VALIDATOR_FOR_BANK = OpenApi::EnumValidator.new("bank", "String", ["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

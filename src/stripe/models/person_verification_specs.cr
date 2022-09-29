@@ -41,14 +41,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _additional_document = @additional_document
-        if _additional_document.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_additional_document.list_invalid_properties_for("additional_document"))
-        end
+        invalid_properties.concat(_additional_document.list_invalid_properties_for("additional_document")) if _additional_document.is_a?(OpenApi::Validatable)
       end
       if _document = @document
-        if _document.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_document.list_invalid_properties_for("document"))
-        end
+        invalid_properties.concat(_document.list_invalid_properties_for("document")) if _document.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -58,14 +54,10 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _additional_document = @additional_document
-        if _additional_document.is_a?(OpenApi::Validatable)
-          return false unless _additional_document.valid?
-        end
+        return false if _additional_document.is_a?(OpenApi::Validatable) && !_additional_document.valid?
       end
       if _document = @document
-        if _document.is_a?(OpenApi::Validatable)
-          return false unless _document.valid?
-        end
+        return false if _document.is_a?(OpenApi::Validatable) && !_document.valid?
       end
 
       true
@@ -78,9 +70,7 @@ module Stripe
         return @additional_document = nil
       end
       _additional_document = additional_document.not_nil!
-      if _additional_document.is_a?(OpenApi::Validatable)
-        _additional_document.validate
-      end
+      _additional_document.validate if _additional_document.is_a?(OpenApi::Validatable)
       @additional_document = _additional_document
     end
 
@@ -91,9 +81,7 @@ module Stripe
         return @document = nil
       end
       _document = document.not_nil!
-      if _document.is_a?(OpenApi::Validatable)
-        _document.validate
-      end
+      _document.validate if _document.is_a?(OpenApi::Validatable)
       @document = _document
     end
 

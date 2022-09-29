@@ -32,13 +32,13 @@ module Stripe
     @[JSON::Field(key: "mode", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter mode : String? = nil
 
-    ENUM_VALIDATOR_FOR_MODE = EnumValidator.new("mode", "String", ["at_period_end", "immediately"])
+    ENUM_VALIDATOR_FOR_MODE = OpenApi::EnumValidator.new("mode", "String", ["at_period_end", "immediately"])
 
     # Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
+    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = OpenApi::EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -58,9 +58,7 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"cancellation_reason\" is required and cannot be null") if @cancellation_reason.nil?
       if _cancellation_reason = @cancellation_reason
-        if _cancellation_reason.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_cancellation_reason.list_invalid_properties_for("cancellation_reason"))
-        end
+        invalid_properties.concat(_cancellation_reason.list_invalid_properties_for("cancellation_reason")) if _cancellation_reason.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
@@ -76,9 +74,7 @@ module Stripe
     def valid? : Bool
       return false if @cancellation_reason.nil?
       if _cancellation_reason = @cancellation_reason
-        if _cancellation_reason.is_a?(OpenApi::Validatable)
-          return false unless _cancellation_reason.valid?
-        end
+        return false if _cancellation_reason.is_a?(OpenApi::Validatable) && !_cancellation_reason.valid?
       end
       return false if @enabled.nil?
 
@@ -95,9 +91,7 @@ module Stripe
         raise ArgumentError.new("\"cancellation_reason\" is required and cannot be null")
       end
       _cancellation_reason = cancellation_reason.not_nil!
-      if _cancellation_reason.is_a?(OpenApi::Validatable)
-        _cancellation_reason.validate
-      end
+      _cancellation_reason.validate if _cancellation_reason.is_a?(OpenApi::Validatable)
       @cancellation_reason = _cancellation_reason
     end
 

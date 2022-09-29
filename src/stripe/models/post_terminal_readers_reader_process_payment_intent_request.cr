@@ -51,15 +51,13 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"payment_intent\" is required and cannot be null") if @payment_intent.nil?
       if _payment_intent = @payment_intent
-        if _payment_intent.to_s.size > 5000
-          invalid_properties.push("invalid value for \"payment_intent\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _process_config = @process_config
-        if _process_config.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_process_config.list_invalid_properties_for("process_config"))
-        end
+        invalid_properties.concat(_process_config.list_invalid_properties_for("process_config")) if _process_config.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -74,9 +72,7 @@ module Stripe
       end
 
       if _process_config = @process_config
-        if _process_config.is_a?(OpenApi::Validatable)
-          return false unless _process_config.valid?
-        end
+        return false if _process_config.is_a?(OpenApi::Validatable) && !_process_config.valid?
       end
 
       true
@@ -89,8 +85,8 @@ module Stripe
         raise ArgumentError.new("\"payment_intent\" is required and cannot be null")
       end
       _payment_intent = payment_intent.not_nil!
-      if _payment_intent.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"payment_intent\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @payment_intent = _payment_intent
@@ -113,9 +109,7 @@ module Stripe
         return @process_config = nil
       end
       _process_config = process_config.not_nil!
-      if _process_config.is_a?(OpenApi::Validatable)
-        _process_config.validate
-      end
+      _process_config.validate if _process_config.is_a?(OpenApi::Validatable)
       @process_config = _process_config
     end
 

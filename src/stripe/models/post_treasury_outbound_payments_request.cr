@@ -99,39 +99,33 @@ module Stripe
       invalid_properties.push("\"financial_account\" is required and cannot be null") if @financial_account.nil?
 
       if _customer = @customer
-        if _customer.to_s.size > 5000
-          invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _description = @description
-        if _description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _destination_payment_method = @destination_payment_method
-        if _destination_payment_method.to_s.size > 5000
-          invalid_properties.push("invalid value for \"destination_payment_method\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("destination_payment_method", _destination_payment_method.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _destination_payment_method_data = @destination_payment_method_data
-        if _destination_payment_method_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_destination_payment_method_data.list_invalid_properties_for("destination_payment_method_data"))
-        end
+        invalid_properties.concat(_destination_payment_method_data.list_invalid_properties_for("destination_payment_method_data")) if _destination_payment_method_data.is_a?(OpenApi::Validatable)
       end
       if _destination_payment_method_options = @destination_payment_method_options
-        if _destination_payment_method_options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_destination_payment_method_options.list_invalid_properties_for("destination_payment_method_options"))
-        end
+        invalid_properties.concat(_destination_payment_method_options.list_invalid_properties_for("destination_payment_method_options")) if _destination_payment_method_options.is_a?(OpenApi::Validatable)
       end
       if _end_user_details = @end_user_details
-        if _end_user_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_end_user_details.list_invalid_properties_for("end_user_details"))
-        end
+        invalid_properties.concat(_end_user_details.list_invalid_properties_for("end_user_details")) if _end_user_details.is_a?(OpenApi::Validatable)
       end
 
       if _statement_descriptor = @statement_descriptor
-        if _statement_descriptor.to_s.size > 5000
-          invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -157,19 +151,13 @@ module Stripe
         return false if _destination_payment_method.to_s.size > 5000
       end
       if _destination_payment_method_data = @destination_payment_method_data
-        if _destination_payment_method_data.is_a?(OpenApi::Validatable)
-          return false unless _destination_payment_method_data.valid?
-        end
+        return false if _destination_payment_method_data.is_a?(OpenApi::Validatable) && !_destination_payment_method_data.valid?
       end
       if _destination_payment_method_options = @destination_payment_method_options
-        if _destination_payment_method_options.is_a?(OpenApi::Validatable)
-          return false unless _destination_payment_method_options.valid?
-        end
+        return false if _destination_payment_method_options.is_a?(OpenApi::Validatable) && !_destination_payment_method_options.valid?
       end
       if _end_user_details = @end_user_details
-        if _end_user_details.is_a?(OpenApi::Validatable)
-          return false unless _end_user_details.valid?
-        end
+        return false if _end_user_details.is_a?(OpenApi::Validatable) && !_end_user_details.valid?
       end
 
       if _statement_descriptor = @statement_descriptor
@@ -216,8 +204,8 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if _customer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @customer = _customer
@@ -230,8 +218,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -244,8 +232,8 @@ module Stripe
         return @destination_payment_method = nil
       end
       _destination_payment_method = destination_payment_method.not_nil!
-      if _destination_payment_method.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"destination_payment_method\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("destination_payment_method", _destination_payment_method.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @destination_payment_method = _destination_payment_method
@@ -258,9 +246,7 @@ module Stripe
         return @destination_payment_method_data = nil
       end
       _destination_payment_method_data = destination_payment_method_data.not_nil!
-      if _destination_payment_method_data.is_a?(OpenApi::Validatable)
-        _destination_payment_method_data.validate
-      end
+      _destination_payment_method_data.validate if _destination_payment_method_data.is_a?(OpenApi::Validatable)
       @destination_payment_method_data = _destination_payment_method_data
     end
 
@@ -271,9 +257,7 @@ module Stripe
         return @destination_payment_method_options = nil
       end
       _destination_payment_method_options = destination_payment_method_options.not_nil!
-      if _destination_payment_method_options.is_a?(OpenApi::Validatable)
-        _destination_payment_method_options.validate
-      end
+      _destination_payment_method_options.validate if _destination_payment_method_options.is_a?(OpenApi::Validatable)
       @destination_payment_method_options = _destination_payment_method_options
     end
 
@@ -284,9 +268,7 @@ module Stripe
         return @end_user_details = nil
       end
       _end_user_details = end_user_details.not_nil!
-      if _end_user_details.is_a?(OpenApi::Validatable)
-        _end_user_details.validate
-      end
+      _end_user_details.validate if _end_user_details.is_a?(OpenApi::Validatable)
       @end_user_details = _end_user_details
     end
 
@@ -317,8 +299,8 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if _statement_descriptor.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor = _statement_descriptor

@@ -31,7 +31,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? request_three_d_secure_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = EnumValidator.new("request_three_d_secure", "String", ["any", "automatic"])
+    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = OpenApi::EnumValidator.new("request_three_d_secure", "String", ["any", "automatic"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,9 +48,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _installments = @installments
-        if _installments.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_installments.list_invalid_properties_for("installments"))
-        end
+        invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.error_message) unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
@@ -62,9 +60,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _installments = @installments
-        if _installments.is_a?(OpenApi::Validatable)
-          return false unless _installments.valid?
-        end
+        return false if _installments.is_a?(OpenApi::Validatable) && !_installments.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
 
@@ -78,9 +74,7 @@ module Stripe
         return @installments = nil
       end
       _installments = installments.not_nil!
-      if _installments.is_a?(OpenApi::Validatable)
-        _installments.validate
-      end
+      _installments.validate if _installments.is_a?(OpenApi::Validatable)
       @installments = _installments
     end
 

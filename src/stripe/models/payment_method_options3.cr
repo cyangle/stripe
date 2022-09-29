@@ -38,9 +38,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _us_bank_account = @us_bank_account
-        if _us_bank_account.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account"))
-        end
+        invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -50,9 +48,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _us_bank_account = @us_bank_account
-        if _us_bank_account.is_a?(OpenApi::Validatable)
-          return false unless _us_bank_account.valid?
-        end
+        return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
 
       true
@@ -65,9 +61,7 @@ module Stripe
         return @us_bank_account = nil
       end
       _us_bank_account = us_bank_account.not_nil!
-      if _us_bank_account.is_a?(OpenApi::Validatable)
-        _us_bank_account.validate
-      end
+      _us_bank_account.validate if _us_bank_account.is_a?(OpenApi::Validatable)
       @us_bank_account = _us_bank_account
     end
 

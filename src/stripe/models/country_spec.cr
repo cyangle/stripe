@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["country_spec"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["country_spec"])
 
     # Currencies that can be accepted in the specific country (for transfers).
     @[JSON::Field(key: "supported_bank_account_currencies", type: Hash(String, Array(String))?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -76,14 +76,14 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"default_currency\" is required and cannot be null") if @default_currency.nil?
       if _default_currency = @default_currency
-        if _default_currency.to_s.size > 5000
-          invalid_properties.push("invalid value for \"default_currency\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_currency", _default_currency.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -98,9 +98,7 @@ module Stripe
 
       invalid_properties.push("\"verification_fields\" is required and cannot be null") if @verification_fields.nil?
       if _verification_fields = @verification_fields
-        if _verification_fields.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_verification_fields.list_invalid_properties_for("verification_fields"))
-        end
+        invalid_properties.concat(_verification_fields.list_invalid_properties_for("verification_fields")) if _verification_fields.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -128,9 +126,7 @@ module Stripe
 
       return false if @verification_fields.nil?
       if _verification_fields = @verification_fields
-        if _verification_fields.is_a?(OpenApi::Validatable)
-          return false unless _verification_fields.valid?
-        end
+        return false if _verification_fields.is_a?(OpenApi::Validatable) && !_verification_fields.valid?
       end
 
       true
@@ -143,8 +139,8 @@ module Stripe
         raise ArgumentError.new("\"default_currency\" is required and cannot be null")
       end
       _default_currency = default_currency.not_nil!
-      if _default_currency.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"default_currency\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_currency", _default_currency.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @default_currency = _default_currency
@@ -157,8 +153,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -222,9 +218,7 @@ module Stripe
         raise ArgumentError.new("\"verification_fields\" is required and cannot be null")
       end
       _verification_fields = verification_fields.not_nil!
-      if _verification_fields.is_a?(OpenApi::Validatable)
-        _verification_fields.validate
-      end
+      _verification_fields.validate if _verification_fields.is_a?(OpenApi::Validatable)
       @verification_fields = _verification_fields
     end
 

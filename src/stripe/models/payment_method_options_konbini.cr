@@ -53,7 +53,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["none"])
+    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["none"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -73,14 +73,14 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _confirmation_number = @confirmation_number
-        if _confirmation_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"confirmation_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _product_description = @product_description
-        if _product_description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"product_description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -111,8 +111,8 @@ module Stripe
         return @confirmation_number = nil
       end
       _confirmation_number = confirmation_number.not_nil!
-      if _confirmation_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"confirmation_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @confirmation_number = _confirmation_number
@@ -145,8 +145,8 @@ module Stripe
         return @product_description = nil
       end
       _product_description = product_description.not_nil!
-      if _product_description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @product_description = _product_description

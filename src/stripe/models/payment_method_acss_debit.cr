@@ -74,28 +74,28 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _bank_name = @bank_name
-        if _bank_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _fingerprint = @fingerprint
-        if _fingerprint.to_s.size > 5000
-          invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _institution_number = @institution_number
-        if _institution_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"institution_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_number", _institution_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _last4 = @last4
-        if _last4.to_s.size > 5000
-          invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _transit_number = @transit_number
-        if _transit_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"transit_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transit_number", _transit_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -131,8 +131,8 @@ module Stripe
         return @bank_name = nil
       end
       _bank_name = bank_name.not_nil!
-      if _bank_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @bank_name = _bank_name
@@ -145,8 +145,8 @@ module Stripe
         return @fingerprint = nil
       end
       _fingerprint = fingerprint.not_nil!
-      if _fingerprint.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @fingerprint = _fingerprint
@@ -159,8 +159,8 @@ module Stripe
         return @institution_number = nil
       end
       _institution_number = institution_number.not_nil!
-      if _institution_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"institution_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_number", _institution_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @institution_number = _institution_number
@@ -173,8 +173,8 @@ module Stripe
         return @last4 = nil
       end
       _last4 = last4.not_nil!
-      if _last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @last4 = _last4
@@ -187,8 +187,8 @@ module Stripe
         return @transit_number = nil
       end
       _transit_number = transit_number.not_nil!
-      if _transit_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"transit_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transit_number", _transit_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @transit_number = _transit_number

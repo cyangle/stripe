@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["account_onboarding", "account_update"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["account_onboarding", "account_update"])
 
     # Optional properties
 
@@ -36,7 +36,7 @@ module Stripe
     @[JSON::Field(key: "collect", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collect : String? = nil
 
-    ENUM_VALIDATOR_FOR_COLLECT = EnumValidator.new("collect", "String", ["currently_due", "eventually_due"])
+    ENUM_VALIDATOR_FOR_COLLECT = OpenApi::EnumValidator.new("collect", "String", ["currently_due", "eventually_due"])
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -71,8 +71,8 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
       if _account = @account
-        if _account.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -103,8 +103,8 @@ module Stripe
         raise ArgumentError.new("\"account\" is required and cannot be null")
       end
       _account = account.not_nil!
-      if _account.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account = _account

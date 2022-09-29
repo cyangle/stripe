@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "item_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter item_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_ITEM_TYPE = EnumValidator.new("item_type", "String", ["card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string"])
+    ENUM_VALIDATOR_FOR_ITEM_TYPE = OpenApi::EnumValidator.new("item_type", "String", ["card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string"])
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -64,14 +64,14 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"_alias\" is required and cannot be null") if @_alias.nil?
       if __alias = @_alias
-        if __alias.to_s.size > 100
-          invalid_properties.push("invalid value for \"_alias\", the character length must be smaller than or equal to 100.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_alias", __alias.to_s.size, 100)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
       if _name = @name
-        if _name.to_s.size > 100
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 100.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 100)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -104,8 +104,8 @@ module Stripe
         raise ArgumentError.new("\"_alias\" is required and cannot be null")
       end
       __alias = _alias.not_nil!
-      if __alias.to_s.size > 100
-        raise ArgumentError.new("invalid value for \"_alias\", the character length must be smaller than or equal to 100.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_alias", __alias.to_s.size, 100)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_alias = __alias
@@ -118,8 +118,8 @@ module Stripe
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if _name.to_s.size > 100
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 100.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 100)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name

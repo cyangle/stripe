@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "allowed_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter allowed_types : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_ALLOWED_TYPES = EnumValidator.new("allowed_types", "Array(String)", ["driving_license", "id_card", "passport"])
+    ENUM_VALIDATOR_FOR_ALLOWED_TYPES = OpenApi::EnumValidator.new("allowed_types", "Array(String)", ["driving_license", "id_card", "passport"])
 
     # Collect an ID number and perform an [ID number check](https://stripe.com/docs/identity/verification-checks?type=id-number) with the document’s extracted name and date of birth.
     @[JSON::Field(key: "require_id_number", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]

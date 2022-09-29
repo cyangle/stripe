@@ -59,24 +59,24 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _data = @data
-        if _data.to_s.size > 5000
-          invalid_properties.push("invalid value for \"data\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("data", _data.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _hosted_instructions_url = @hosted_instructions_url
-        if _hosted_instructions_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"hosted_instructions_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_instructions_url", _hosted_instructions_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _image_url_png = @image_url_png
-        if _image_url_png.to_s.size > 5000
-          invalid_properties.push("invalid value for \"image_url_png\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_png", _image_url_png.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _image_url_svg = @image_url_svg
-        if _image_url_svg.to_s.size > 5000
-          invalid_properties.push("invalid value for \"image_url_svg\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_svg", _image_url_svg.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -110,8 +110,8 @@ module Stripe
         return @data = nil
       end
       _data = data.not_nil!
-      if _data.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"data\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("data", _data.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @data = _data
@@ -134,8 +134,8 @@ module Stripe
         return @hosted_instructions_url = nil
       end
       _hosted_instructions_url = hosted_instructions_url.not_nil!
-      if _hosted_instructions_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"hosted_instructions_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_instructions_url", _hosted_instructions_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @hosted_instructions_url = _hosted_instructions_url
@@ -148,8 +148,8 @@ module Stripe
         return @image_url_png = nil
       end
       _image_url_png = image_url_png.not_nil!
-      if _image_url_png.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"image_url_png\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_png", _image_url_png.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @image_url_png = _image_url_png
@@ -162,8 +162,8 @@ module Stripe
         return @image_url_svg = nil
       end
       _image_url_svg = image_url_svg.not_nil!
-      if _image_url_svg.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"image_url_svg\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_svg", _image_url_svg.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @image_url_svg = _image_url_svg

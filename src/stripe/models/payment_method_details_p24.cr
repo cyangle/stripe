@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? bank_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_BANK = EnumValidator.new("bank", "String", ["alior_bank", "bank_millennium", "bank_nowy_bfg_sa", "bank_pekao_sa", "banki_spbdzielcze", "blik", "bnp_paribas", "boz", "citi_handlowy", "credit_agricole", "envelobank", "etransfer_pocztowy24", "getin_bank", "ideabank", "ing", "inteligo", "mbank_mtransfer", "nest_przelew", "noble_pay", "pbac_z_ipko", "plus_bank", "santander_przelew24", "tmobile_usbugi_bankowe", "toyota_bank", "volkswagen_bank"])
+    ENUM_VALIDATOR_FOR_BANK = OpenApi::EnumValidator.new("bank", "String", ["alior_bank", "bank_millennium", "bank_nowy_bfg_sa", "bank_pekao_sa", "banki_spbdzielcze", "blik", "bnp_paribas", "boz", "citi_handlowy", "credit_agricole", "envelobank", "etransfer_pocztowy24", "getin_bank", "ideabank", "ing", "inteligo", "mbank_mtransfer", "nest_przelew", "noble_pay", "pbac_z_ipko", "plus_bank", "santander_przelew24", "tmobile_usbugi_bankowe", "toyota_bank", "volkswagen_bank"])
 
     # Unique reference for this Przelewy24 payment.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: reference.nil? && !reference_present?)]
@@ -62,13 +62,13 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BANK.error_message) unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank)
       if _reference = @reference
-        if _reference.to_s.size > 5000
-          invalid_properties.push("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _verified_name = @verified_name
-        if _verified_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -107,8 +107,8 @@ module Stripe
         return @reference = nil
       end
       _reference = reference.not_nil!
-      if _reference.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @reference = _reference
@@ -121,8 +121,8 @@ module Stripe
         return @verified_name = nil
       end
       _verified_name = verified_name.not_nil!
-      if _verified_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"verified_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @verified_name = _verified_name

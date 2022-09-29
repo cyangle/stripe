@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? chain_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_CHAIN = EnumValidator.new("chain", "String", ["familymart", "lawson", "ministop", "seicomart"])
+    ENUM_VALIDATOR_FOR_CHAIN = OpenApi::EnumValidator.new("chain", "String", ["familymart", "lawson", "ministop", "seicomart"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

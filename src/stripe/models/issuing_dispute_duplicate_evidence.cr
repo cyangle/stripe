@@ -78,33 +78,25 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _additional_documentation = @additional_documentation
-        if _additional_documentation.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation"))
-        end
+        invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
       if _card_statement = @card_statement
-        if _card_statement.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card_statement.list_invalid_properties_for("card_statement"))
-        end
+        invalid_properties.concat(_card_statement.list_invalid_properties_for("card_statement")) if _card_statement.is_a?(OpenApi::Validatable)
       end
       if _cash_receipt = @cash_receipt
-        if _cash_receipt.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_cash_receipt.list_invalid_properties_for("cash_receipt"))
-        end
+        invalid_properties.concat(_cash_receipt.list_invalid_properties_for("cash_receipt")) if _cash_receipt.is_a?(OpenApi::Validatable)
       end
       if _check_image = @check_image
-        if _check_image.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_check_image.list_invalid_properties_for("check_image"))
-        end
+        invalid_properties.concat(_check_image.list_invalid_properties_for("check_image")) if _check_image.is_a?(OpenApi::Validatable)
       end
       if _explanation = @explanation
-        if _explanation.to_s.size > 5000
-          invalid_properties.push("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _original_transaction = @original_transaction
-        if _original_transaction.to_s.size > 5000
-          invalid_properties.push("invalid value for \"original_transaction\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("original_transaction", _original_transaction.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -115,24 +107,16 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _additional_documentation = @additional_documentation
-        if _additional_documentation.is_a?(OpenApi::Validatable)
-          return false unless _additional_documentation.valid?
-        end
+        return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
       if _card_statement = @card_statement
-        if _card_statement.is_a?(OpenApi::Validatable)
-          return false unless _card_statement.valid?
-        end
+        return false if _card_statement.is_a?(OpenApi::Validatable) && !_card_statement.valid?
       end
       if _cash_receipt = @cash_receipt
-        if _cash_receipt.is_a?(OpenApi::Validatable)
-          return false unless _cash_receipt.valid?
-        end
+        return false if _cash_receipt.is_a?(OpenApi::Validatable) && !_cash_receipt.valid?
       end
       if _check_image = @check_image
-        if _check_image.is_a?(OpenApi::Validatable)
-          return false unless _check_image.valid?
-        end
+        return false if _check_image.is_a?(OpenApi::Validatable) && !_check_image.valid?
       end
       if _explanation = @explanation
         return false if _explanation.to_s.size > 5000
@@ -151,9 +135,7 @@ module Stripe
         return @additional_documentation = nil
       end
       _additional_documentation = additional_documentation.not_nil!
-      if _additional_documentation.is_a?(OpenApi::Validatable)
-        _additional_documentation.validate
-      end
+      _additional_documentation.validate if _additional_documentation.is_a?(OpenApi::Validatable)
       @additional_documentation = _additional_documentation
     end
 
@@ -164,9 +146,7 @@ module Stripe
         return @card_statement = nil
       end
       _card_statement = card_statement.not_nil!
-      if _card_statement.is_a?(OpenApi::Validatable)
-        _card_statement.validate
-      end
+      _card_statement.validate if _card_statement.is_a?(OpenApi::Validatable)
       @card_statement = _card_statement
     end
 
@@ -177,9 +157,7 @@ module Stripe
         return @cash_receipt = nil
       end
       _cash_receipt = cash_receipt.not_nil!
-      if _cash_receipt.is_a?(OpenApi::Validatable)
-        _cash_receipt.validate
-      end
+      _cash_receipt.validate if _cash_receipt.is_a?(OpenApi::Validatable)
       @cash_receipt = _cash_receipt
     end
 
@@ -190,9 +168,7 @@ module Stripe
         return @check_image = nil
       end
       _check_image = check_image.not_nil!
-      if _check_image.is_a?(OpenApi::Validatable)
-        _check_image.validate
-      end
+      _check_image.validate if _check_image.is_a?(OpenApi::Validatable)
       @check_image = _check_image
     end
 
@@ -203,8 +179,8 @@ module Stripe
         return @explanation = nil
       end
       _explanation = explanation.not_nil!
-      if _explanation.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @explanation = _explanation
@@ -217,8 +193,8 @@ module Stripe
         return @original_transaction = nil
       end
       _original_transaction = original_transaction.not_nil!
-      if _original_transaction.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"original_transaction\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("original_transaction", _original_transaction.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @original_transaction = _original_transaction

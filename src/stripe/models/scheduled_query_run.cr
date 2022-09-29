@@ -41,7 +41,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["scheduled_query_run"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["scheduled_query_run"])
 
     # Time at which the result expires and is no longer available for download.
     @[JSON::Field(key: "result_available_until", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -100,8 +100,8 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -111,31 +111,27 @@ module Stripe
 
       invalid_properties.push("\"sql\" is required and cannot be null") if @sql.nil?
       if _sql = @sql
-        if _sql.to_s.size > 100000
-          invalid_properties.push("invalid value for \"sql\", the character length must be smaller than or equal to 100000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sql", _sql.to_s.size, 100000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
       if _status = @status
-        if _status.to_s.size > 5000
-          invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"title\" is required and cannot be null") if @title.nil?
       if _title = @title
-        if _title.to_s.size > 5000
-          invalid_properties.push("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _error = @error
-        if _error.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_error.list_invalid_properties_for("error"))
-        end
+        invalid_properties.concat(_error.list_invalid_properties_for("error")) if _error.is_a?(OpenApi::Validatable)
       end
       if _file = @file
-        if _file.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_file.list_invalid_properties_for("file"))
-        end
+        invalid_properties.concat(_file.list_invalid_properties_for("file")) if _file.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -170,14 +166,10 @@ module Stripe
         return false if _title.to_s.size > 5000
       end
       if _error = @error
-        if _error.is_a?(OpenApi::Validatable)
-          return false unless _error.valid?
-        end
+        return false if _error.is_a?(OpenApi::Validatable) && !_error.valid?
       end
       if _file = @file
-        if _file.is_a?(OpenApi::Validatable)
-          return false unless _file.valid?
-        end
+        return false if _file.is_a?(OpenApi::Validatable) && !_file.valid?
       end
 
       true
@@ -210,8 +202,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -255,8 +247,8 @@ module Stripe
         raise ArgumentError.new("\"sql\" is required and cannot be null")
       end
       _sql = sql.not_nil!
-      if _sql.to_s.size > 100000
-        raise ArgumentError.new("invalid value for \"sql\", the character length must be smaller than or equal to 100000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sql", _sql.to_s.size, 100000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @sql = _sql
@@ -269,8 +261,8 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if _status.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @status = _status
@@ -283,8 +275,8 @@ module Stripe
         raise ArgumentError.new("\"title\" is required and cannot be null")
       end
       _title = title.not_nil!
-      if _title.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @title = _title
@@ -297,9 +289,7 @@ module Stripe
         return @error = nil
       end
       _error = error.not_nil!
-      if _error.is_a?(OpenApi::Validatable)
-        _error.validate
-      end
+      _error.validate if _error.is_a?(OpenApi::Validatable)
       @error = _error
     end
 
@@ -310,9 +300,7 @@ module Stripe
         return @file = nil
       end
       _file = file.not_nil!
-      if _file.is_a?(OpenApi::Validatable)
-        _file.validate
-      end
+      _file.validate if _file.is_a?(OpenApi::Validatable)
       @file = _file
     end
 

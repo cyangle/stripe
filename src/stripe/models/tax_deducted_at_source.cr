@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["tax_deducted_at_source"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["tax_deducted_at_source"])
 
     # The end of the invoicing period. This TDS applies to Stripe fees collected during this invoicing period.
     @[JSON::Field(key: "period_end", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -62,8 +62,8 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -74,8 +74,8 @@ module Stripe
 
       invalid_properties.push("\"tax_deduction_account_number\" is required and cannot be null") if @tax_deduction_account_number.nil?
       if _tax_deduction_account_number = @tax_deduction_account_number
-        if _tax_deduction_account_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"tax_deduction_account_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_deduction_account_number", _tax_deduction_account_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -109,8 +109,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -154,8 +154,8 @@ module Stripe
         raise ArgumentError.new("\"tax_deduction_account_number\" is required and cannot be null")
       end
       _tax_deduction_account_number = tax_deduction_account_number.not_nil!
-      if _tax_deduction_account_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"tax_deduction_account_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_deduction_account_number", _tax_deduction_account_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @tax_deduction_account_number = _tax_deduction_account_number

@@ -58,18 +58,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _headline = @headline
-        if _headline.to_s.size > 5000
-          invalid_properties.push("invalid value for \"headline\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _privacy_policy_url = @privacy_policy_url
-        if _privacy_policy_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"privacy_policy_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("privacy_policy_url", _privacy_policy_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _terms_of_service_url = @terms_of_service_url
-        if _terms_of_service_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"terms_of_service_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("terms_of_service_url", _terms_of_service_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -99,8 +99,8 @@ module Stripe
         return @headline = nil
       end
       _headline = headline.not_nil!
-      if _headline.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"headline\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @headline = _headline
@@ -113,8 +113,8 @@ module Stripe
         return @privacy_policy_url = nil
       end
       _privacy_policy_url = privacy_policy_url.not_nil!
-      if _privacy_policy_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"privacy_policy_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("privacy_policy_url", _privacy_policy_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @privacy_policy_url = _privacy_policy_url
@@ -127,8 +127,8 @@ module Stripe
         return @terms_of_service_url = nil
       end
       _terms_of_service_url = terms_of_service_url.not_nil!
-      if _terms_of_service_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"terms_of_service_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("terms_of_service_url", _terms_of_service_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @terms_of_service_url = _terms_of_service_url

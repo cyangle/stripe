@@ -23,17 +23,17 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = EnumValidator.new("capture_method", "String", ["", "manual"])
+    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = OpenApi::EnumValidator.new("capture_method", "String", ["", "manual"])
 
     @[JSON::Field(key: "preferred_locale", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter preferred_locale : String? = nil
 
-    ENUM_VALIDATOR_FOR_PREFERRED_LOCALE = EnumValidator.new("preferred_locale", "String", ["da-DK", "de-AT", "de-CH", "de-DE", "en-AT", "en-AU", "en-BE", "en-CA", "en-CH", "en-DE", "en-DK", "en-ES", "en-FI", "en-FR", "en-GB", "en-IE", "en-IT", "en-NL", "en-NO", "en-NZ", "en-PL", "en-PT", "en-SE", "en-US", "es-ES", "es-US", "fi-FI", "fr-BE", "fr-CA", "fr-CH", "fr-FR", "it-CH", "it-IT", "nb-NO", "nl-BE", "nl-NL", "pl-PL", "pt-PT", "sv-FI", "sv-SE"])
+    ENUM_VALIDATOR_FOR_PREFERRED_LOCALE = OpenApi::EnumValidator.new("preferred_locale", "String", ["da-DK", "de-AT", "de-CH", "de-DE", "en-AT", "en-AU", "en-BE", "en-CA", "en-CH", "en-DE", "en-DK", "en-ES", "en-FI", "en-FR", "en-GB", "en-IE", "en-IT", "en-NL", "en-NO", "en-NZ", "en-PL", "en-PT", "en-SE", "en-US", "es-ES", "es-US", "fi-FI", "fr-BE", "fr-CA", "fr-CH", "fr-FR", "it-CH", "it-IT", "nb-NO", "nl-BE", "nl-NL", "pl-PL", "pt-PT", "sv-FI", "sv-SE"])
 
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["none"])
+    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["none"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

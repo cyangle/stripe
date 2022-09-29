@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter code : String? = nil
 
-    ENUM_VALIDATOR_FOR_CODE = EnumValidator.new("code", "String", ["activating", "capability_not_requested", "financial_account_closed", "rejected_other", "rejected_unsupported_business", "requirements_past_due", "requirements_pending_verification", "restricted_by_platform", "restricted_other"])
+    ENUM_VALIDATOR_FOR_CODE = OpenApi::EnumValidator.new("code", "String", ["activating", "capability_not_requested", "financial_account_closed", "rejected_other", "rejected_unsupported_business", "requirements_past_due", "requirements_pending_verification", "restricted_by_platform", "restricted_other"])
 
     # Optional properties
 
@@ -36,13 +36,13 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? resolution_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_RESOLUTION = EnumValidator.new("resolution", "String", ["contact_stripe", "provide_information", "remove_restriction"])
+    ENUM_VALIDATOR_FOR_RESOLUTION = OpenApi::EnumValidator.new("resolution", "String", ["contact_stripe", "provide_information", "remove_restriction"])
 
     # The `platform_restrictions` that are restricting this Feature.
     @[JSON::Field(key: "restriction", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter restriction : String? = nil
 
-    ENUM_VALIDATOR_FOR_RESTRICTION = EnumValidator.new("restriction", "String", ["inbound_flows", "outbound_flows"])
+    ENUM_VALIDATOR_FOR_RESTRICTION = OpenApi::EnumValidator.new("restriction", "String", ["inbound_flows", "outbound_flows"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

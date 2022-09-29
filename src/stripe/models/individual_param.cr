@@ -57,14 +57,10 @@ module Stripe
       invalid_properties.push("\"last_name\" is required and cannot be null") if @last_name.nil?
 
       if _dob = @dob
-        if _dob.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_dob.list_invalid_properties_for("dob"))
-        end
+        invalid_properties.concat(_dob.list_invalid_properties_for("dob")) if _dob.is_a?(OpenApi::Validatable)
       end
       if _verification = @verification
-        if _verification.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_verification.list_invalid_properties_for("verification"))
-        end
+        invalid_properties.concat(_verification.list_invalid_properties_for("verification")) if _verification.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -78,14 +74,10 @@ module Stripe
       return false if @last_name.nil?
 
       if _dob = @dob
-        if _dob.is_a?(OpenApi::Validatable)
-          return false unless _dob.valid?
-        end
+        return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
       if _verification = @verification
-        if _verification.is_a?(OpenApi::Validatable)
-          return false unless _verification.valid?
-        end
+        return false if _verification.is_a?(OpenApi::Validatable) && !_verification.valid?
       end
 
       true
@@ -118,9 +110,7 @@ module Stripe
         return @dob = nil
       end
       _dob = dob.not_nil!
-      if _dob.is_a?(OpenApi::Validatable)
-        _dob.validate
-      end
+      _dob.validate if _dob.is_a?(OpenApi::Validatable)
       @dob = _dob
     end
 
@@ -131,9 +121,7 @@ module Stripe
         return @verification = nil
       end
       _verification = verification.not_nil!
-      if _verification.is_a?(OpenApi::Validatable)
-        _verification.validate
-      end
+      _verification.validate if _verification.is_a?(OpenApi::Validatable)
       @verification = _verification
     end
 

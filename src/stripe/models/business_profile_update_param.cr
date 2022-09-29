@@ -46,19 +46,15 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _headline = @headline
-        if _headline.to_s.size > 60
-          invalid_properties.push("invalid value for \"headline\", the character length must be smaller than or equal to 60.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, 60)
+          invalid_properties.push(max_length_error)
         end
       end
       if _privacy_policy_url = @privacy_policy_url
-        if _privacy_policy_url.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_privacy_policy_url.list_invalid_properties_for("privacy_policy_url"))
-        end
+        invalid_properties.concat(_privacy_policy_url.list_invalid_properties_for("privacy_policy_url")) if _privacy_policy_url.is_a?(OpenApi::Validatable)
       end
       if _terms_of_service_url = @terms_of_service_url
-        if _terms_of_service_url.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_terms_of_service_url.list_invalid_properties_for("terms_of_service_url"))
-        end
+        invalid_properties.concat(_terms_of_service_url.list_invalid_properties_for("terms_of_service_url")) if _terms_of_service_url.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -71,14 +67,10 @@ module Stripe
         return false if _headline.to_s.size > 60
       end
       if _privacy_policy_url = @privacy_policy_url
-        if _privacy_policy_url.is_a?(OpenApi::Validatable)
-          return false unless _privacy_policy_url.valid?
-        end
+        return false if _privacy_policy_url.is_a?(OpenApi::Validatable) && !_privacy_policy_url.valid?
       end
       if _terms_of_service_url = @terms_of_service_url
-        if _terms_of_service_url.is_a?(OpenApi::Validatable)
-          return false unless _terms_of_service_url.valid?
-        end
+        return false if _terms_of_service_url.is_a?(OpenApi::Validatable) && !_terms_of_service_url.valid?
       end
 
       true
@@ -91,8 +83,8 @@ module Stripe
         return @headline = nil
       end
       _headline = headline.not_nil!
-      if _headline.to_s.size > 60
-        raise ArgumentError.new("invalid value for \"headline\", the character length must be smaller than or equal to 60.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, 60)
+        raise ArgumentError.new(max_length_error)
       end
 
       @headline = _headline
@@ -105,9 +97,7 @@ module Stripe
         return @privacy_policy_url = nil
       end
       _privacy_policy_url = privacy_policy_url.not_nil!
-      if _privacy_policy_url.is_a?(OpenApi::Validatable)
-        _privacy_policy_url.validate
-      end
+      _privacy_policy_url.validate if _privacy_policy_url.is_a?(OpenApi::Validatable)
       @privacy_policy_url = _privacy_policy_url
     end
 
@@ -118,9 +108,7 @@ module Stripe
         return @terms_of_service_url = nil
       end
       _terms_of_service_url = terms_of_service_url.not_nil!
-      if _terms_of_service_url.is_a?(OpenApi::Validatable)
-        _terms_of_service_url.validate
-      end
+      _terms_of_service_url.validate if _terms_of_service_url.is_a?(OpenApi::Validatable)
       @terms_of_service_url = _terms_of_service_url
     end
 

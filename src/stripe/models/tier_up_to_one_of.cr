@@ -17,7 +17,7 @@ module Stripe
 
     property data : String
 
-    ENUM_VALIDATOR = EnumValidator.new("tier_up_to_oneOf", "String", ["inf"])
+    ENUM_VALIDATOR = OpenApi::EnumValidator.new("tier_up_to_oneOf", "String", ["inf"])
 
     delegate to_json_object_key, to: @data
     delegate error_message, to: ENUM_VALIDATOR

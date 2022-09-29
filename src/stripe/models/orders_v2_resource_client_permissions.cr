@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? billing_details_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_BILLING_DETAILS = EnumValidator.new("billing_details", "String", ["allow", "disallow"])
+    ENUM_VALIDATOR_FOR_BILLING_DETAILS = OpenApi::EnumValidator.new("billing_details", "String", ["allow", "disallow"])
 
     # Allows or disallows promotion codes to be set on an Order with a publishable key and Order client_secret
     @[JSON::Field(key: "promotion_codes", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: promotion_codes.nil? && !promotion_codes_present?)]
@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? promotion_codes_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PROMOTION_CODES = EnumValidator.new("promotion_codes", "String", ["allow", "disallow"])
+    ENUM_VALIDATOR_FOR_PROMOTION_CODES = OpenApi::EnumValidator.new("promotion_codes", "String", ["allow", "disallow"])
 
     # Allows or disallows shipping details to be set on an Order with a publishable key and Order client_secret
     @[JSON::Field(key: "shipping_details", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: shipping_details.nil? && !shipping_details_present?)]
@@ -46,7 +46,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? shipping_details_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_SHIPPING_DETAILS = EnumValidator.new("shipping_details", "String", ["allow", "disallow"])
+    ENUM_VALIDATOR_FOR_SHIPPING_DETAILS = OpenApi::EnumValidator.new("shipping_details", "String", ["allow", "disallow"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

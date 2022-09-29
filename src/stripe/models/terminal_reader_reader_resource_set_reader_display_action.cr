@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["cart"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["cart"])
 
     # Optional properties
 
@@ -53,9 +53,7 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _cart = @cart
-        if _cart.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_cart.list_invalid_properties_for("cart"))
-        end
+        invalid_properties.concat(_cart.list_invalid_properties_for("cart")) if _cart.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -66,9 +64,7 @@ module Stripe
     def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _cart = @cart
-        if _cart.is_a?(OpenApi::Validatable)
-          return false unless _cart.valid?
-        end
+        return false if _cart.is_a?(OpenApi::Validatable) && !_cart.valid?
       end
 
       true
@@ -92,9 +88,7 @@ module Stripe
         return @cart = nil
       end
       _cart = cart.not_nil!
-      if _cart.is_a?(OpenApi::Validatable)
-        _cart.validate
-      end
+      _cart.validate if _cart.is_a?(OpenApi::Validatable)
       @cart = _cart
     end
 

@@ -42,14 +42,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _ach = @ach
-        if _ach.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_ach.list_invalid_properties_for("ach"))
-        end
+        invalid_properties.concat(_ach.list_invalid_properties_for("ach")) if _ach.is_a?(OpenApi::Validatable)
       end
       if _us_domestic_wire = @us_domestic_wire
-        if _us_domestic_wire.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_us_domestic_wire.list_invalid_properties_for("us_domestic_wire"))
-        end
+        invalid_properties.concat(_us_domestic_wire.list_invalid_properties_for("us_domestic_wire")) if _us_domestic_wire.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -59,14 +55,10 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _ach = @ach
-        if _ach.is_a?(OpenApi::Validatable)
-          return false unless _ach.valid?
-        end
+        return false if _ach.is_a?(OpenApi::Validatable) && !_ach.valid?
       end
       if _us_domestic_wire = @us_domestic_wire
-        if _us_domestic_wire.is_a?(OpenApi::Validatable)
-          return false unless _us_domestic_wire.valid?
-        end
+        return false if _us_domestic_wire.is_a?(OpenApi::Validatable) && !_us_domestic_wire.valid?
       end
 
       true
@@ -79,9 +71,7 @@ module Stripe
         return @ach = nil
       end
       _ach = ach.not_nil!
-      if _ach.is_a?(OpenApi::Validatable)
-        _ach.validate
-      end
+      _ach.validate if _ach.is_a?(OpenApi::Validatable)
       @ach = _ach
     end
 
@@ -92,9 +82,7 @@ module Stripe
         return @us_domestic_wire = nil
       end
       _us_domestic_wire = us_domestic_wire.not_nil!
-      if _us_domestic_wire.is_a?(OpenApi::Validatable)
-        _us_domestic_wire.validate
-      end
+      _us_domestic_wire.validate if _us_domestic_wire.is_a?(OpenApi::Validatable)
       @us_domestic_wire = _us_domestic_wire
     end
 

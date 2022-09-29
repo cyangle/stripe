@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["unverified", "verified"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["unverified", "verified"])
 
     # Optional properties
 
@@ -69,18 +69,16 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       if _document = @document
-        if _document.to_s.size > 5000
-          invalid_properties.push("invalid value for \"document\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("document", _document.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _error = @error
-        if _error.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_error.list_invalid_properties_for("error"))
-        end
+        invalid_properties.concat(_error.list_invalid_properties_for("error")) if _error.is_a?(OpenApi::Validatable)
       end
       if _selfie = @selfie
-        if _selfie.to_s.size > 5000
-          invalid_properties.push("invalid value for \"selfie\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("selfie", _selfie.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -95,9 +93,7 @@ module Stripe
         return false if _document.to_s.size > 5000
       end
       if _error = @error
-        if _error.is_a?(OpenApi::Validatable)
-          return false unless _error.valid?
-        end
+        return false if _error.is_a?(OpenApi::Validatable) && !_error.valid?
       end
       if _selfie = @selfie
         return false if _selfie.to_s.size > 5000
@@ -124,8 +120,8 @@ module Stripe
         return @document = nil
       end
       _document = document.not_nil!
-      if _document.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"document\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("document", _document.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @document = _document
@@ -138,9 +134,7 @@ module Stripe
         return @error = nil
       end
       _error = error.not_nil!
-      if _error.is_a?(OpenApi::Validatable)
-        _error.validate
-      end
+      _error.validate if _error.is_a?(OpenApi::Validatable)
       @error = _error
     end
 
@@ -151,8 +145,8 @@ module Stripe
         return @selfie = nil
       end
       _selfie = selfie.not_nil!
-      if _selfie.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"selfie\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("selfie", _selfie.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @selfie = _selfie

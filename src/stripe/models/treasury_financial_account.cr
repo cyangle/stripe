@@ -48,13 +48,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["treasury.financial_account"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["treasury.financial_account"])
 
     # The enum specifying what state the account is in.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["closed", "open"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["closed", "open"])
 
     @[JSON::Field(key: "status_details", type: Stripe::TreasuryFinancialAccountsResourceStatusDetails?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_details : Stripe::TreasuryFinancialAccountsResourceStatusDetails? = nil
@@ -69,7 +69,7 @@ module Stripe
     @[JSON::Field(key: "active_features", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter active_features : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_ACTIVE_FEATURES = EnumValidator.new("active_features", "Array(String)", ["card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture"])
+    ENUM_VALIDATOR_FOR_ACTIVE_FEATURES = OpenApi::EnumValidator.new("active_features", "Array(String)", ["card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture"])
 
     @[JSON::Field(key: "features", type: Stripe::TreasuryFinancialAccountFeatures?, default: nil, required: false, nullable: false, emit_null: false)]
     getter features : Stripe::TreasuryFinancialAccountFeatures? = nil
@@ -85,7 +85,7 @@ module Stripe
     @[JSON::Field(key: "pending_features", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter pending_features : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_PENDING_FEATURES = EnumValidator.new("pending_features", "Array(String)", ["card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture"])
+    ENUM_VALIDATOR_FOR_PENDING_FEATURES = OpenApi::EnumValidator.new("pending_features", "Array(String)", ["card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture"])
 
     @[JSON::Field(key: "platform_restrictions", type: Stripe::TreasuryFinancialAccountPlatformRestrictions?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: platform_restrictions.nil? && !platform_restrictions_present?)]
     getter platform_restrictions : Stripe::TreasuryFinancialAccountPlatformRestrictions? = nil
@@ -97,7 +97,7 @@ module Stripe
     @[JSON::Field(key: "restricted_features", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter restricted_features : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_RESTRICTED_FEATURES = EnumValidator.new("restricted_features", "Array(String)", ["card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture"])
+    ENUM_VALIDATOR_FOR_RESTRICTED_FEATURES = OpenApi::EnumValidator.new("restricted_features", "Array(String)", ["card_issuing", "deposit_insurance", "financial_addresses.aba", "inbound_transfers.ach", "intra_stripe_flows", "outbound_payments.ach", "outbound_payments.us_domestic_wire", "outbound_transfers.ach", "outbound_transfers.us_domestic_wire", "remote_deposit_capture"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -130,32 +130,24 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"balance\" is required and cannot be null") if @balance.nil?
       if _balance = @balance
-        if _balance.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_balance.list_invalid_properties_for("balance"))
-        end
+        invalid_properties.concat(_balance.list_invalid_properties_for("balance")) if _balance.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
       if _country = @country
-        if _country.to_s.size > 5000
-          invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"financial_addresses\" is required and cannot be null") if @financial_addresses.nil?
       if _financial_addresses = @financial_addresses
-        if _financial_addresses.is_a?(Array)
-          _financial_addresses.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("financial_addresses"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "financial_addresses", array: _financial_addresses)) if _financial_addresses.is_a?(Array)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -165,24 +157,18 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       invalid_properties.push("\"status_details\" is required and cannot be null") if @status_details.nil?
       if _status_details = @status_details
-        if _status_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_status_details.list_invalid_properties_for("status_details"))
-        end
+        invalid_properties.concat(_status_details.list_invalid_properties_for("status_details")) if _status_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"supported_currencies\" is required and cannot be null") if @supported_currencies.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_ACTIVE_FEATURES.error_message) unless ENUM_VALIDATOR_FOR_ACTIVE_FEATURES.all_valid?(@active_features)
       if _features = @features
-        if _features.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_features.list_invalid_properties_for("features"))
-        end
+        invalid_properties.concat(_features.list_invalid_properties_for("features")) if _features.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PENDING_FEATURES.error_message) unless ENUM_VALIDATOR_FOR_PENDING_FEATURES.all_valid?(@pending_features)
       if _platform_restrictions = @platform_restrictions
-        if _platform_restrictions.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_platform_restrictions.list_invalid_properties_for("platform_restrictions"))
-        end
+        invalid_properties.concat(_platform_restrictions.list_invalid_properties_for("platform_restrictions")) if _platform_restrictions.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_RESTRICTED_FEATURES.error_message) unless ENUM_VALIDATOR_FOR_RESTRICTED_FEATURES.all_valid?(@restricted_features)
@@ -195,9 +181,7 @@ module Stripe
     def valid? : Bool
       return false if @balance.nil?
       if _balance = @balance
-        if _balance.is_a?(OpenApi::Validatable)
-          return false unless _balance.valid?
-        end
+        return false if _balance.is_a?(OpenApi::Validatable) && !_balance.valid?
       end
       return false if @country.nil?
       if _country = @country
@@ -207,13 +191,7 @@ module Stripe
 
       return false if @financial_addresses.nil?
       if _financial_addresses = @financial_addresses
-        if _financial_addresses.is_a?(Array)
-          _financial_addresses.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _financial_addresses.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _financial_addresses)
       end
       return false if @id.nil?
       if _id = @id
@@ -225,24 +203,18 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false if @status_details.nil?
       if _status_details = @status_details
-        if _status_details.is_a?(OpenApi::Validatable)
-          return false unless _status_details.valid?
-        end
+        return false if _status_details.is_a?(OpenApi::Validatable) && !_status_details.valid?
       end
       return false if @supported_currencies.nil?
 
       return false unless ENUM_VALIDATOR_FOR_ACTIVE_FEATURES.all_valid?(@active_features)
       if _features = @features
-        if _features.is_a?(OpenApi::Validatable)
-          return false unless _features.valid?
-        end
+        return false if _features.is_a?(OpenApi::Validatable) && !_features.valid?
       end
 
       return false unless ENUM_VALIDATOR_FOR_PENDING_FEATURES.all_valid?(@pending_features)
       if _platform_restrictions = @platform_restrictions
-        if _platform_restrictions.is_a?(OpenApi::Validatable)
-          return false unless _platform_restrictions.valid?
-        end
+        return false if _platform_restrictions.is_a?(OpenApi::Validatable) && !_platform_restrictions.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_RESTRICTED_FEATURES.all_valid?(@restricted_features)
 
@@ -256,9 +228,7 @@ module Stripe
         raise ArgumentError.new("\"balance\" is required and cannot be null")
       end
       _balance = balance.not_nil!
-      if _balance.is_a?(OpenApi::Validatable)
-        _balance.validate
-      end
+      _balance.validate if _balance.is_a?(OpenApi::Validatable)
       @balance = _balance
     end
 
@@ -269,8 +239,8 @@ module Stripe
         raise ArgumentError.new("\"country\" is required and cannot be null")
       end
       _country = country.not_nil!
-      if _country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @country = _country
@@ -293,13 +263,7 @@ module Stripe
         raise ArgumentError.new("\"financial_addresses\" is required and cannot be null")
       end
       _financial_addresses = financial_addresses.not_nil!
-      if _financial_addresses.is_a?(Array)
-        _financial_addresses.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _financial_addresses) if _financial_addresses.is_a?(Array)
       @financial_addresses = _financial_addresses
     end
 
@@ -310,8 +274,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -356,9 +320,7 @@ module Stripe
         raise ArgumentError.new("\"status_details\" is required and cannot be null")
       end
       _status_details = status_details.not_nil!
-      if _status_details.is_a?(OpenApi::Validatable)
-        _status_details.validate
-      end
+      _status_details.validate if _status_details.is_a?(OpenApi::Validatable)
       @status_details = _status_details
     end
 
@@ -390,9 +352,7 @@ module Stripe
         return @features = nil
       end
       _features = features.not_nil!
-      if _features.is_a?(OpenApi::Validatable)
-        _features.validate
-      end
+      _features.validate if _features.is_a?(OpenApi::Validatable)
       @features = _features
     end
 
@@ -424,9 +384,7 @@ module Stripe
         return @platform_restrictions = nil
       end
       _platform_restrictions = platform_restrictions.not_nil!
-      if _platform_restrictions.is_a?(OpenApi::Validatable)
-        _platform_restrictions.validate
-      end
+      _platform_restrictions.validate if _platform_restrictions.is_a?(OpenApi::Validatable)
       @platform_restrictions = _platform_restrictions
     end
 

@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
+    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = OpenApi::EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
 
     @[JSON::Field(key: "unit_amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter unit_amount : Int64? = nil
@@ -65,18 +65,10 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       if _currency_options = @currency_options
-        if _currency_options.is_a?(Hash)
-          _currency_options.each do |_key, value|
-            if value.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(value.list_invalid_properties_for("currency_options"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "currency_options", hash: _currency_options)) if _currency_options.is_a?(Hash)
       end
       if _recurring = @recurring
-        if _recurring.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_recurring.list_invalid_properties_for("recurring"))
-        end
+        invalid_properties.concat(_recurring.list_invalid_properties_for("recurring")) if _recurring.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
@@ -90,18 +82,10 @@ module Stripe
       return false if @currency.nil?
 
       if _currency_options = @currency_options
-        if _currency_options.is_a?(Hash)
-          _currency_options.each do |_key, value|
-            if value.is_a?(OpenApi::Validatable)
-              return false unless value.valid?
-            end
-          end
-        end
+        return false if _currency_options.is_a?(Hash) && !OpenApi::HashValidator.valid?(hash: _currency_options)
       end
       if _recurring = @recurring
-        if _recurring.is_a?(OpenApi::Validatable)
-          return false unless _recurring.valid?
-        end
+        return false if _recurring.is_a?(OpenApi::Validatable) && !_recurring.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
 
@@ -125,13 +109,7 @@ module Stripe
         return @currency_options = nil
       end
       _currency_options = currency_options.not_nil!
-      if _currency_options.is_a?(Hash)
-        _currency_options.each do |_key, value|
-          if value.is_a?(OpenApi::Validatable)
-            value.validate
-          end
-        end
-      end
+      OpenApi::HashValidator.validate(hash: _currency_options) if _currency_options.is_a?(Hash)
       @currency_options = _currency_options
     end
 
@@ -142,9 +120,7 @@ module Stripe
         return @recurring = nil
       end
       _recurring = recurring.not_nil!
-      if _recurring.is_a?(OpenApi::Validatable)
-        _recurring.validate
-      end
+      _recurring.validate if _recurring.is_a?(OpenApi::Validatable)
       @recurring = _recurring
     end
 

@@ -50,13 +50,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _ip_address = @ip_address
-        if _ip_address.to_s.size > 5000
-          invalid_properties.push("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _user_agent = @user_agent
-        if _user_agent.to_s.size > 5000
-          invalid_properties.push("invalid value for \"user_agent\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_agent", _user_agent.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -83,8 +83,8 @@ module Stripe
         return @ip_address = nil
       end
       _ip_address = ip_address.not_nil!
-      if _ip_address.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"ip_address\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @ip_address = _ip_address
@@ -97,8 +97,8 @@ module Stripe
         return @user_agent = nil
       end
       _user_agent = user_agent.not_nil!
-      if _user_agent.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"user_agent\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_agent", _user_agent.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @user_agent = _user_agent

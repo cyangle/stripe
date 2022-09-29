@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["account", "customer"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["account", "customer"])
 
     # Optional properties
 
@@ -54,14 +54,10 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _account = @account
-        if _account.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_account.list_invalid_properties_for("account"))
-        end
+        invalid_properties.concat(_account.list_invalid_properties_for("account")) if _account.is_a?(OpenApi::Validatable)
       end
       if _customer = @customer
-        if _customer.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_customer.list_invalid_properties_for("customer"))
-        end
+        invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -72,14 +68,10 @@ module Stripe
     def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _account = @account
-        if _account.is_a?(OpenApi::Validatable)
-          return false unless _account.valid?
-        end
+        return false if _account.is_a?(OpenApi::Validatable) && !_account.valid?
       end
       if _customer = @customer
-        if _customer.is_a?(OpenApi::Validatable)
-          return false unless _customer.valid?
-        end
+        return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
 
       true
@@ -103,9 +95,7 @@ module Stripe
         return @account = nil
       end
       _account = account.not_nil!
-      if _account.is_a?(OpenApi::Validatable)
-        _account.validate
-      end
+      _account.validate if _account.is_a?(OpenApi::Validatable)
       @account = _account
     end
 
@@ -116,9 +106,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if _customer.is_a?(OpenApi::Validatable)
-        _customer.validate
-      end
+      _customer.validate if _customer.is_a?(OpenApi::Validatable)
       @customer = _customer
     end
 

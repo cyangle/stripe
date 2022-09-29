@@ -52,13 +52,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["customer_cash_balance_transaction"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["customer_cash_balance_transaction"])
 
     # The type of the cash balance transaction. One of `applied_to_payment`, `unapplied_from_payment`, `refunded_from_payment`, `funded`, `return_initiated`, or `return_canceled`. New types may be added in future. See [Customer Balance](https://stripe.com/docs/payments/customer-balance#types) to learn more about these types.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["applied_to_payment", "funded", "refunded_from_payment", "return_canceled", "return_initiated", "unapplied_from_payment"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["applied_to_payment", "funded", "refunded_from_payment", "return_canceled", "return_initiated", "unapplied_from_payment"])
 
     # Optional properties
 
@@ -104,22 +104,20 @@ module Stripe
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
       if _currency = @currency
-        if _currency.to_s.size > 5000
-          invalid_properties.push("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
       if _customer = @customer
-        if _customer.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_customer.list_invalid_properties_for("customer"))
-        end
+        invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"ending_balance\" is required and cannot be null") if @ending_balance.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -130,24 +128,16 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _applied_to_payment = @applied_to_payment
-        if _applied_to_payment.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_applied_to_payment.list_invalid_properties_for("applied_to_payment"))
-        end
+        invalid_properties.concat(_applied_to_payment.list_invalid_properties_for("applied_to_payment")) if _applied_to_payment.is_a?(OpenApi::Validatable)
       end
       if _funded = @funded
-        if _funded.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_funded.list_invalid_properties_for("funded"))
-        end
+        invalid_properties.concat(_funded.list_invalid_properties_for("funded")) if _funded.is_a?(OpenApi::Validatable)
       end
       if _refunded_from_payment = @refunded_from_payment
-        if _refunded_from_payment.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_refunded_from_payment.list_invalid_properties_for("refunded_from_payment"))
-        end
+        invalid_properties.concat(_refunded_from_payment.list_invalid_properties_for("refunded_from_payment")) if _refunded_from_payment.is_a?(OpenApi::Validatable)
       end
       if _unapplied_from_payment = @unapplied_from_payment
-        if _unapplied_from_payment.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_unapplied_from_payment.list_invalid_properties_for("unapplied_from_payment"))
-        end
+        invalid_properties.concat(_unapplied_from_payment.list_invalid_properties_for("unapplied_from_payment")) if _unapplied_from_payment.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -164,9 +154,7 @@ module Stripe
       end
       return false if @customer.nil?
       if _customer = @customer
-        if _customer.is_a?(OpenApi::Validatable)
-          return false unless _customer.valid?
-        end
+        return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
       return false if @ending_balance.nil?
 
@@ -181,24 +169,16 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _applied_to_payment = @applied_to_payment
-        if _applied_to_payment.is_a?(OpenApi::Validatable)
-          return false unless _applied_to_payment.valid?
-        end
+        return false if _applied_to_payment.is_a?(OpenApi::Validatable) && !_applied_to_payment.valid?
       end
       if _funded = @funded
-        if _funded.is_a?(OpenApi::Validatable)
-          return false unless _funded.valid?
-        end
+        return false if _funded.is_a?(OpenApi::Validatable) && !_funded.valid?
       end
       if _refunded_from_payment = @refunded_from_payment
-        if _refunded_from_payment.is_a?(OpenApi::Validatable)
-          return false unless _refunded_from_payment.valid?
-        end
+        return false if _refunded_from_payment.is_a?(OpenApi::Validatable) && !_refunded_from_payment.valid?
       end
       if _unapplied_from_payment = @unapplied_from_payment
-        if _unapplied_from_payment.is_a?(OpenApi::Validatable)
-          return false unless _unapplied_from_payment.valid?
-        end
+        return false if _unapplied_from_payment.is_a?(OpenApi::Validatable) && !_unapplied_from_payment.valid?
       end
 
       true
@@ -221,8 +201,8 @@ module Stripe
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
       _currency = currency.not_nil!
-      if _currency.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @currency = _currency
@@ -235,9 +215,7 @@ module Stripe
         raise ArgumentError.new("\"customer\" is required and cannot be null")
       end
       _customer = customer.not_nil!
-      if _customer.is_a?(OpenApi::Validatable)
-        _customer.validate
-      end
+      _customer.validate if _customer.is_a?(OpenApi::Validatable)
       @customer = _customer
     end
 
@@ -258,8 +236,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -314,9 +292,7 @@ module Stripe
         return @applied_to_payment = nil
       end
       _applied_to_payment = applied_to_payment.not_nil!
-      if _applied_to_payment.is_a?(OpenApi::Validatable)
-        _applied_to_payment.validate
-      end
+      _applied_to_payment.validate if _applied_to_payment.is_a?(OpenApi::Validatable)
       @applied_to_payment = _applied_to_payment
     end
 
@@ -327,9 +303,7 @@ module Stripe
         return @funded = nil
       end
       _funded = funded.not_nil!
-      if _funded.is_a?(OpenApi::Validatable)
-        _funded.validate
-      end
+      _funded.validate if _funded.is_a?(OpenApi::Validatable)
       @funded = _funded
     end
 
@@ -340,9 +314,7 @@ module Stripe
         return @refunded_from_payment = nil
       end
       _refunded_from_payment = refunded_from_payment.not_nil!
-      if _refunded_from_payment.is_a?(OpenApi::Validatable)
-        _refunded_from_payment.validate
-      end
+      _refunded_from_payment.validate if _refunded_from_payment.is_a?(OpenApi::Validatable)
       @refunded_from_payment = _refunded_from_payment
     end
 
@@ -353,9 +325,7 @@ module Stripe
         return @unapplied_from_payment = nil
       end
       _unapplied_from_payment = unapplied_from_payment.not_nil!
-      if _unapplied_from_payment.is_a?(OpenApi::Validatable)
-        _unapplied_from_payment.validate
-      end
+      _unapplied_from_payment.validate if _unapplied_from_payment.is_a?(OpenApi::Validatable)
       @unapplied_from_payment = _unapplied_from_payment
     end
 

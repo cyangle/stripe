@@ -40,13 +40,7 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"available\" is required and cannot be null") if @available.nil?
       if _available = @available
-        if _available.is_a?(Array)
-          _available.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("available"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "available", array: _available)) if _available.is_a?(Array)
       end
 
       invalid_properties
@@ -57,13 +51,7 @@ module Stripe
     def valid? : Bool
       return false if @available.nil?
       if _available = @available
-        if _available.is_a?(Array)
-          _available.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _available.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _available)
       end
 
       true
@@ -76,13 +64,7 @@ module Stripe
         raise ArgumentError.new("\"available\" is required and cannot be null")
       end
       _available = available.not_nil!
-      if _available.is_a?(Array)
-        _available.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _available) if _available.is_a?(Array)
       @available = _available
     end
 

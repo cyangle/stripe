@@ -64,24 +64,20 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _back = @back
-        if _back.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_back.list_invalid_properties_for("back"))
-        end
+        invalid_properties.concat(_back.list_invalid_properties_for("back")) if _back.is_a?(OpenApi::Validatable)
       end
       if _details = @details
-        if _details.to_s.size > 5000
-          invalid_properties.push("invalid value for \"details\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details", _details.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _details_code = @details_code
-        if _details_code.to_s.size > 5000
-          invalid_properties.push("invalid value for \"details_code\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details_code", _details_code.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _front = @front
-        if _front.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_front.list_invalid_properties_for("front"))
-        end
+        invalid_properties.concat(_front.list_invalid_properties_for("front")) if _front.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -91,9 +87,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _back = @back
-        if _back.is_a?(OpenApi::Validatable)
-          return false unless _back.valid?
-        end
+        return false if _back.is_a?(OpenApi::Validatable) && !_back.valid?
       end
       if _details = @details
         return false if _details.to_s.size > 5000
@@ -102,9 +96,7 @@ module Stripe
         return false if _details_code.to_s.size > 5000
       end
       if _front = @front
-        if _front.is_a?(OpenApi::Validatable)
-          return false unless _front.valid?
-        end
+        return false if _front.is_a?(OpenApi::Validatable) && !_front.valid?
       end
 
       true
@@ -117,9 +109,7 @@ module Stripe
         return @back = nil
       end
       _back = back.not_nil!
-      if _back.is_a?(OpenApi::Validatable)
-        _back.validate
-      end
+      _back.validate if _back.is_a?(OpenApi::Validatable)
       @back = _back
     end
 
@@ -130,8 +120,8 @@ module Stripe
         return @details = nil
       end
       _details = details.not_nil!
-      if _details.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"details\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details", _details.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @details = _details
@@ -144,8 +134,8 @@ module Stripe
         return @details_code = nil
       end
       _details_code = details_code.not_nil!
-      if _details_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"details_code\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details_code", _details_code.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @details_code = _details_code
@@ -158,9 +148,7 @@ module Stripe
         return @front = nil
       end
       _front = front.not_nil!
-      if _front.is_a?(OpenApi::Validatable)
-        _front.validate
-      end
+      _front.validate if _front.is_a?(OpenApi::Validatable)
       @front = _front
     end
 

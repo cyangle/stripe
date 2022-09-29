@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["amex_express_checkout", "apple_pay", "google_pay", "masterpass", "samsung_pay", "visa_checkout"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["amex_express_checkout", "apple_pay", "google_pay", "masterpass", "samsung_pay", "visa_checkout"])
 
     # Optional properties
 
@@ -83,21 +83,17 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       if _dynamic_last4 = @dynamic_last4
-        if _dynamic_last4.to_s.size > 5000
-          invalid_properties.push("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("dynamic_last4", _dynamic_last4.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _masterpass = @masterpass
-        if _masterpass.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_masterpass.list_invalid_properties_for("masterpass"))
-        end
+        invalid_properties.concat(_masterpass.list_invalid_properties_for("masterpass")) if _masterpass.is_a?(OpenApi::Validatable)
       end
 
       if _visa_checkout = @visa_checkout
-        if _visa_checkout.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_visa_checkout.list_invalid_properties_for("visa_checkout"))
-        end
+        invalid_properties.concat(_visa_checkout.list_invalid_properties_for("visa_checkout")) if _visa_checkout.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -113,15 +109,11 @@ module Stripe
       end
 
       if _masterpass = @masterpass
-        if _masterpass.is_a?(OpenApi::Validatable)
-          return false unless _masterpass.valid?
-        end
+        return false if _masterpass.is_a?(OpenApi::Validatable) && !_masterpass.valid?
       end
 
       if _visa_checkout = @visa_checkout
-        if _visa_checkout.is_a?(OpenApi::Validatable)
-          return false unless _visa_checkout.valid?
-        end
+        return false if _visa_checkout.is_a?(OpenApi::Validatable) && !_visa_checkout.valid?
       end
 
       true
@@ -165,8 +157,8 @@ module Stripe
         return @dynamic_last4 = nil
       end
       _dynamic_last4 = dynamic_last4.not_nil!
-      if _dynamic_last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"dynamic_last4\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("dynamic_last4", _dynamic_last4.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @dynamic_last4 = _dynamic_last4
@@ -189,9 +181,7 @@ module Stripe
         return @masterpass = nil
       end
       _masterpass = masterpass.not_nil!
-      if _masterpass.is_a?(OpenApi::Validatable)
-        _masterpass.validate
-      end
+      _masterpass.validate if _masterpass.is_a?(OpenApi::Validatable)
       @masterpass = _masterpass
     end
 
@@ -212,9 +202,7 @@ module Stripe
         return @visa_checkout = nil
       end
       _visa_checkout = visa_checkout.not_nil!
-      if _visa_checkout.is_a?(OpenApi::Validatable)
-        _visa_checkout.validate
-      end
+      _visa_checkout.validate if _visa_checkout.is_a?(OpenApi::Validatable)
       @visa_checkout = _visa_checkout
     end
 

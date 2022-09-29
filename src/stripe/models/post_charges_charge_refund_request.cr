@@ -39,7 +39,7 @@ module Stripe
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter reason : String? = nil
 
-    ENUM_VALIDATOR_FOR_REASON = EnumValidator.new("reason", "String", ["duplicate", "fraudulent", "requested_by_customer"])
+    ENUM_VALIDATOR_FOR_REASON = OpenApi::EnumValidator.new("reason", "String", ["duplicate", "fraudulent", "requested_by_customer"])
 
     @[JSON::Field(key: "refund_application_fee", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter refund_application_fee : Bool? = nil
@@ -69,13 +69,11 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _payment_intent = @payment_intent
-        if _payment_intent.to_s.size > 5000
-          invalid_properties.push("invalid value for \"payment_intent\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -88,9 +86,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
       if _payment_intent = @payment_intent
         return false if _payment_intent.to_s.size > 5000
@@ -137,9 +133,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 
@@ -150,8 +144,8 @@ module Stripe
         return @payment_intent = nil
       end
       _payment_intent = payment_intent.not_nil!
-      if _payment_intent.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"payment_intent\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @payment_intent = _payment_intent

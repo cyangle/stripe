@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "features", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter features : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_FEATURES = EnumValidator.new("features", "Array(String)", ["balance", "ownership"])
+    ENUM_VALIDATOR_FOR_FEATURES = OpenApi::EnumValidator.new("features", "Array(String)", ["balance", "ownership"])
 
     # Optional properties
 

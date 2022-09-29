@@ -42,8 +42,8 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _issuing_dispute = @issuing_dispute
-        if _issuing_dispute.to_s.size > 5000
-          invalid_properties.push("invalid value for \"issuing_dispute\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_dispute", _issuing_dispute.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -67,8 +67,8 @@ module Stripe
         return @issuing_dispute = nil
       end
       _issuing_dispute = issuing_dispute.not_nil!
-      if _issuing_dispute.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"issuing_dispute\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_dispute", _issuing_dispute.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @issuing_dispute = _issuing_dispute

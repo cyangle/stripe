@@ -46,9 +46,7 @@ module Stripe
 
       invalid_properties.push("\"quote\" is required and cannot be null") if @quote.nil?
       if _quote = @quote
-        if _quote.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_quote.list_invalid_properties_for("quote"))
-        end
+        invalid_properties.concat(_quote.list_invalid_properties_for("quote")) if _quote.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -61,9 +59,7 @@ module Stripe
 
       return false if @quote.nil?
       if _quote = @quote
-        if _quote.is_a?(OpenApi::Validatable)
-          return false unless _quote.valid?
-        end
+        return false if _quote.is_a?(OpenApi::Validatable) && !_quote.valid?
       end
 
       true
@@ -86,9 +82,7 @@ module Stripe
         raise ArgumentError.new("\"quote\" is required and cannot be null")
       end
       _quote = quote.not_nil!
-      if _quote.is_a?(OpenApi::Validatable)
-        _quote.validate
-      end
+      _quote.validate if _quote.is_a?(OpenApi::Validatable)
       @quote = _quote
     end
 

@@ -45,8 +45,8 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
       if _invoice = @invoice
-        if _invoice.to_s.size > 5000
-          invalid_properties.push("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"invoice_line_items\" is required and cannot be null") if @invoice_line_items.nil?
@@ -73,8 +73,8 @@ module Stripe
         raise ArgumentError.new("\"invoice\" is required and cannot be null")
       end
       _invoice = invoice.not_nil!
-      if _invoice.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @invoice = _invoice

@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["physical", "virtual"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["physical", "virtual"])
 
     # Optional properties
 
@@ -55,7 +55,7 @@ module Stripe
     @[JSON::Field(key: "replacement_reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter replacement_reason : String? = nil
 
-    ENUM_VALIDATOR_FOR_REPLACEMENT_REASON = EnumValidator.new("replacement_reason", "String", ["damaged", "expired", "lost", "stolen"])
+    ENUM_VALIDATOR_FOR_REPLACEMENT_REASON = OpenApi::EnumValidator.new("replacement_reason", "String", ["damaged", "expired", "lost", "stolen"])
 
     @[JSON::Field(key: "shipping", type: Stripe::ShippingSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping : Stripe::ShippingSpecs? = nil
@@ -67,7 +67,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["active", "inactive"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["active", "inactive"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -97,27 +97,23 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _cardholder = @cardholder
-        if _cardholder.to_s.size > 5000
-          invalid_properties.push("invalid value for \"cardholder\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder", _cardholder.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _replacement_for = @replacement_for
-        if _replacement_for.to_s.size > 5000
-          invalid_properties.push("invalid value for \"replacement_for\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("replacement_for", _replacement_for.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.error_message) unless ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.valid?(@replacement_reason)
       if _shipping = @shipping
-        if _shipping.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_shipping.list_invalid_properties_for("shipping"))
-        end
+        invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
       if _spending_controls = @spending_controls
-        if _spending_controls.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls"))
-        end
+        invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
@@ -140,14 +136,10 @@ module Stripe
       end
       return false unless ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.valid?(@replacement_reason)
       if _shipping = @shipping
-        if _shipping.is_a?(OpenApi::Validatable)
-          return false unless _shipping.valid?
-        end
+        return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
       if _spending_controls = @spending_controls
-        if _spending_controls.is_a?(OpenApi::Validatable)
-          return false unless _spending_controls.valid?
-        end
+        return false if _spending_controls.is_a?(OpenApi::Validatable) && !_spending_controls.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
 
@@ -182,8 +174,8 @@ module Stripe
         return @cardholder = nil
       end
       _cardholder = cardholder.not_nil!
-      if _cardholder.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"cardholder\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder", _cardholder.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @cardholder = _cardholder
@@ -226,8 +218,8 @@ module Stripe
         return @replacement_for = nil
       end
       _replacement_for = replacement_for.not_nil!
-      if _replacement_for.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"replacement_for\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("replacement_for", _replacement_for.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @replacement_for = _replacement_for
@@ -251,9 +243,7 @@ module Stripe
         return @shipping = nil
       end
       _shipping = shipping.not_nil!
-      if _shipping.is_a?(OpenApi::Validatable)
-        _shipping.validate
-      end
+      _shipping.validate if _shipping.is_a?(OpenApi::Validatable)
       @shipping = _shipping
     end
 
@@ -264,9 +254,7 @@ module Stripe
         return @spending_controls = nil
       end
       _spending_controls = spending_controls.not_nil!
-      if _spending_controls.is_a?(OpenApi::Validatable)
-        _spending_controls.validate
-      end
+      _spending_controls.validate if _spending_controls.is_a?(OpenApi::Validatable)
       @spending_controls = _spending_controls
     end
 

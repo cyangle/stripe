@@ -83,19 +83,19 @@ module Stripe
 
       invalid_properties.push("\"origin_payment_method\" is required and cannot be null") if @origin_payment_method.nil?
       if _origin_payment_method = @origin_payment_method
-        if _origin_payment_method.to_s.size > 5000
-          invalid_properties.push("invalid value for \"origin_payment_method\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("origin_payment_method", _origin_payment_method.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _description = @description
-        if _description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _statement_descriptor = @statement_descriptor
-        if _statement_descriptor.to_s.size > 10
-          invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 10.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 10)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -163,8 +163,8 @@ module Stripe
         raise ArgumentError.new("\"origin_payment_method\" is required and cannot be null")
       end
       _origin_payment_method = origin_payment_method.not_nil!
-      if _origin_payment_method.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"origin_payment_method\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("origin_payment_method", _origin_payment_method.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @origin_payment_method = _origin_payment_method
@@ -177,8 +177,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -211,8 +211,8 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if _statement_descriptor.to_s.size > 10
-        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 10.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 10)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor = _statement_descriptor

@@ -53,14 +53,14 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if __alias = @_alias
-        if __alias.to_s.size > 100
-          invalid_properties.push("invalid value for \"_alias\", the character length must be smaller than or equal to 100.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_alias", __alias.to_s.size, 100)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _name = @name
-        if _name.to_s.size > 100
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 100.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 100)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -88,8 +88,8 @@ module Stripe
         return @_alias = nil
       end
       __alias = _alias.not_nil!
-      if __alias.to_s.size > 100
-        raise ArgumentError.new("invalid value for \"_alias\", the character length must be smaller than or equal to 100.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_alias", __alias.to_s.size, 100)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_alias = __alias
@@ -122,8 +122,8 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if _name.to_s.size > 100
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 100.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 100)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name

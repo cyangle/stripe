@@ -79,9 +79,7 @@ module Stripe
       invalid_properties.push("\"merchant_currency\" is required and cannot be null") if @merchant_currency.nil?
 
       if _amount_details = @amount_details
-        if _amount_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_amount_details.list_invalid_properties_for("amount_details"))
-        end
+        invalid_properties.concat(_amount_details.list_invalid_properties_for("amount_details")) if _amount_details.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -101,9 +99,7 @@ module Stripe
       return false if @merchant_currency.nil?
 
       if _amount_details = @amount_details
-        if _amount_details.is_a?(OpenApi::Validatable)
-          return false unless _amount_details.valid?
-        end
+        return false if _amount_details.is_a?(OpenApi::Validatable) && !_amount_details.valid?
       end
 
       true
@@ -166,9 +162,7 @@ module Stripe
         return @amount_details = nil
       end
       _amount_details = amount_details.not_nil!
-      if _amount_details.is_a?(OpenApi::Validatable)
-        _amount_details.validate
-      end
+      _amount_details.validate if _amount_details.is_a?(OpenApi::Validatable)
       @amount_details = _amount_details
     end
 

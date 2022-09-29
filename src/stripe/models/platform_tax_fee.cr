@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["platform_tax_fee"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["platform_tax_fee"])
 
     # The payment object that caused this tax to be inflicted.
     @[JSON::Field(key: "source_transaction", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -62,28 +62,28 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
       if _account = @account
-        if _account.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"source_transaction\" is required and cannot be null") if @source_transaction.nil?
       if _source_transaction = @source_transaction
-        if _source_transaction.to_s.size > 5000
-          invalid_properties.push("invalid value for \"source_transaction\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_transaction", _source_transaction.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
-        if __type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -121,8 +121,8 @@ module Stripe
         raise ArgumentError.new("\"account\" is required and cannot be null")
       end
       _account = account.not_nil!
-      if _account.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account = _account
@@ -135,8 +135,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -160,8 +160,8 @@ module Stripe
         raise ArgumentError.new("\"source_transaction\" is required and cannot be null")
       end
       _source_transaction = source_transaction.not_nil!
-      if _source_transaction.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"source_transaction\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_transaction", _source_transaction.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @source_transaction = _source_transaction
@@ -174,8 +174,8 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if __type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_type = __type

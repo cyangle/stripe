@@ -49,18 +49,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _creditor_identifier = @creditor_identifier
-        if _creditor_identifier.to_s.size > 5000
-          invalid_properties.push("invalid value for \"creditor_identifier\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("creditor_identifier", _creditor_identifier.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _last4 = @last4
-        if _last4.to_s.size > 5000
-          invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _mandate_reference = @mandate_reference
-        if _mandate_reference.to_s.size > 5000
-          invalid_properties.push("invalid value for \"mandate_reference\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate_reference", _mandate_reference.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -90,8 +90,8 @@ module Stripe
         return @creditor_identifier = nil
       end
       _creditor_identifier = creditor_identifier.not_nil!
-      if _creditor_identifier.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"creditor_identifier\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("creditor_identifier", _creditor_identifier.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @creditor_identifier = _creditor_identifier
@@ -104,8 +104,8 @@ module Stripe
         return @last4 = nil
       end
       _last4 = last4.not_nil!
-      if _last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @last4 = _last4
@@ -118,8 +118,8 @@ module Stripe
         return @mandate_reference = nil
       end
       _mandate_reference = mandate_reference.not_nil!
-      if _mandate_reference.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"mandate_reference\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate_reference", _mandate_reference.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @mandate_reference = _mandate_reference

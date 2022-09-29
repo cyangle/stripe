@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["subscription_item"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["subscription_item"])
 
     @[JSON::Field(key: "price", type: Stripe::Price?, default: nil, required: true, nullable: false, emit_null: false)]
     getter price : Stripe::Price? = nil
@@ -91,8 +91,8 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
@@ -100,30 +100,20 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
       if _price = @price
-        if _price.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_price.list_invalid_properties_for("price"))
-        end
+        invalid_properties.concat(_price.list_invalid_properties_for("price")) if _price.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"subscription\" is required and cannot be null") if @subscription.nil?
       if _subscription = @subscription
-        if _subscription.to_s.size > 5000
-          invalid_properties.push("invalid value for \"subscription\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _billing_thresholds = @billing_thresholds
-        if _billing_thresholds.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds"))
-        end
+        invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
 
       if _tax_rates = @tax_rates
-        if _tax_rates.is_a?(Array)
-          _tax_rates.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("tax_rates"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tax_rates", array: _tax_rates)) if _tax_rates.is_a?(Array)
       end
 
       invalid_properties
@@ -143,28 +133,18 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @price.nil?
       if _price = @price
-        if _price.is_a?(OpenApi::Validatable)
-          return false unless _price.valid?
-        end
+        return false if _price.is_a?(OpenApi::Validatable) && !_price.valid?
       end
       return false if @subscription.nil?
       if _subscription = @subscription
         return false if _subscription.to_s.size > 5000
       end
       if _billing_thresholds = @billing_thresholds
-        if _billing_thresholds.is_a?(OpenApi::Validatable)
-          return false unless _billing_thresholds.valid?
-        end
+        return false if _billing_thresholds.is_a?(OpenApi::Validatable) && !_billing_thresholds.valid?
       end
 
       if _tax_rates = @tax_rates
-        if _tax_rates.is_a?(Array)
-          _tax_rates.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _tax_rates.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tax_rates)
       end
 
       true
@@ -187,8 +167,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -222,9 +202,7 @@ module Stripe
         raise ArgumentError.new("\"price\" is required and cannot be null")
       end
       _price = price.not_nil!
-      if _price.is_a?(OpenApi::Validatable)
-        _price.validate
-      end
+      _price.validate if _price.is_a?(OpenApi::Validatable)
       @price = _price
     end
 
@@ -235,8 +213,8 @@ module Stripe
         raise ArgumentError.new("\"subscription\" is required and cannot be null")
       end
       _subscription = subscription.not_nil!
-      if _subscription.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"subscription\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @subscription = _subscription
@@ -249,9 +227,7 @@ module Stripe
         return @billing_thresholds = nil
       end
       _billing_thresholds = billing_thresholds.not_nil!
-      if _billing_thresholds.is_a?(OpenApi::Validatable)
-        _billing_thresholds.validate
-      end
+      _billing_thresholds.validate if _billing_thresholds.is_a?(OpenApi::Validatable)
       @billing_thresholds = _billing_thresholds
     end
 
@@ -272,13 +248,7 @@ module Stripe
         return @tax_rates = nil
       end
       _tax_rates = tax_rates.not_nil!
-      if _tax_rates.is_a?(Array)
-        _tax_rates.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _tax_rates) if _tax_rates.is_a?(Array)
       @tax_rates = _tax_rates
     end
 

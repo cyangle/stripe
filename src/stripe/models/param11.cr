@@ -42,13 +42,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _account_number = @account_number
-        if _account_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _sort_code = @sort_code
-        if _sort_code.to_s.size > 5000
-          invalid_properties.push("invalid value for \"sort_code\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -75,8 +75,8 @@ module Stripe
         return @account_number = nil
       end
       _account_number = account_number.not_nil!
-      if _account_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account_number = _account_number
@@ -89,8 +89,8 @@ module Stripe
         return @sort_code = nil
       end
       _sort_code = sort_code.not_nil!
-      if _sort_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"sort_code\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @sort_code = _sort_code

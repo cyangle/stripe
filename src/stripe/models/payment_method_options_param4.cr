@@ -26,7 +26,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["off_session", "on_session"])
+    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["off_session", "on_session"])
 
     @[JSON::Field(key: "statement_descriptor_suffix_kana", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor_suffix_kana : String? = nil
@@ -51,20 +51,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _installments = @installments
-        if _installments.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_installments.list_invalid_properties_for("installments"))
-        end
+        invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
-        if _statement_descriptor_suffix_kana.to_s.size > 22
-          invalid_properties.push("invalid value for \"statement_descriptor_suffix_kana\", the character length must be smaller than or equal to 22.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, 22)
+          invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
-        if _statement_descriptor_suffix_kanji.to_s.size > 17
-          invalid_properties.push("invalid value for \"statement_descriptor_suffix_kanji\", the character length must be smaller than or equal to 17.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, 17)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -75,9 +73,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _installments = @installments
-        if _installments.is_a?(OpenApi::Validatable)
-          return false unless _installments.valid?
-        end
+        return false if _installments.is_a?(OpenApi::Validatable) && !_installments.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
@@ -97,9 +93,7 @@ module Stripe
         return @installments = nil
       end
       _installments = installments.not_nil!
-      if _installments.is_a?(OpenApi::Validatable)
-        _installments.validate
-      end
+      _installments.validate if _installments.is_a?(OpenApi::Validatable)
       @installments = _installments
     end
 
@@ -121,8 +115,8 @@ module Stripe
         return @statement_descriptor_suffix_kana = nil
       end
       _statement_descriptor_suffix_kana = statement_descriptor_suffix_kana.not_nil!
-      if _statement_descriptor_suffix_kana.to_s.size > 22
-        raise ArgumentError.new("invalid value for \"statement_descriptor_suffix_kana\", the character length must be smaller than or equal to 22.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, 22)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor_suffix_kana = _statement_descriptor_suffix_kana
@@ -135,8 +129,8 @@ module Stripe
         return @statement_descriptor_suffix_kanji = nil
       end
       _statement_descriptor_suffix_kanji = statement_descriptor_suffix_kanji.not_nil!
-      if _statement_descriptor_suffix_kanji.to_s.size > 17
-        raise ArgumentError.new("invalid value for \"statement_descriptor_suffix_kanji\", the character length must be smaller than or equal to 17.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, 17)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor_suffix_kanji = _statement_descriptor_suffix_kanji

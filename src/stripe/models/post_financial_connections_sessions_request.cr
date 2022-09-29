@@ -27,7 +27,7 @@ module Stripe
     @[JSON::Field(key: "permissions", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter permissions : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_PERMISSIONS = EnumValidator.new("permissions", "Array(String)", ["balances", "ownership", "payment_method", "transactions"])
+    ENUM_VALIDATOR_FOR_PERMISSIONS = OpenApi::EnumValidator.new("permissions", "Array(String)", ["balances", "ownership", "payment_method", "transactions"])
 
     # Optional properties
 
@@ -62,21 +62,17 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"account_holder\" is required and cannot be null") if @account_holder.nil?
       if _account_holder = @account_holder
-        if _account_holder.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder"))
-        end
+        invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder")) if _account_holder.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PERMISSIONS.error_message) unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions, false)
 
       if _filters = @filters
-        if _filters.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_filters.list_invalid_properties_for("filters"))
-        end
+        invalid_properties.concat(_filters.list_invalid_properties_for("filters")) if _filters.is_a?(OpenApi::Validatable)
       end
       if _return_url = @return_url
-        if _return_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -88,16 +84,12 @@ module Stripe
     def valid? : Bool
       return false if @account_holder.nil?
       if _account_holder = @account_holder
-        if _account_holder.is_a?(OpenApi::Validatable)
-          return false unless _account_holder.valid?
-        end
+        return false if _account_holder.is_a?(OpenApi::Validatable) && !_account_holder.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions, false)
 
       if _filters = @filters
-        if _filters.is_a?(OpenApi::Validatable)
-          return false unless _filters.valid?
-        end
+        return false if _filters.is_a?(OpenApi::Validatable) && !_filters.valid?
       end
       if _return_url = @return_url
         return false if _return_url.to_s.size > 5000
@@ -113,9 +105,7 @@ module Stripe
         raise ArgumentError.new("\"account_holder\" is required and cannot be null")
       end
       _account_holder = account_holder.not_nil!
-      if _account_holder.is_a?(OpenApi::Validatable)
-        _account_holder.validate
-      end
+      _account_holder.validate if _account_holder.is_a?(OpenApi::Validatable)
       @account_holder = _account_holder
     end
 
@@ -147,9 +137,7 @@ module Stripe
         return @filters = nil
       end
       _filters = filters.not_nil!
-      if _filters.is_a?(OpenApi::Validatable)
-        _filters.validate
-      end
+      _filters.validate if _filters.is_a?(OpenApi::Validatable)
       @filters = _filters
     end
 
@@ -160,8 +148,8 @@ module Stripe
         return @return_url = nil
       end
       _return_url = return_url.not_nil!
-      if _return_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @return_url = _return_url

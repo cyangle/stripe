@@ -58,18 +58,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _bic = @bic
-        if _bic.to_s.size > 5000
-          invalid_properties.push("invalid value for \"bic\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _iban_last4 = @iban_last4
-        if _iban_last4.to_s.size > 5000
-          invalid_properties.push("invalid value for \"iban_last4\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _sender_name = @sender_name
-        if _sender_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"sender_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_name", _sender_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -99,8 +99,8 @@ module Stripe
         return @bic = nil
       end
       _bic = bic.not_nil!
-      if _bic.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"bic\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @bic = _bic
@@ -113,8 +113,8 @@ module Stripe
         return @iban_last4 = nil
       end
       _iban_last4 = iban_last4.not_nil!
-      if _iban_last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"iban_last4\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @iban_last4 = _iban_last4
@@ -127,8 +127,8 @@ module Stripe
         return @sender_name = nil
       end
       _sender_name = sender_name.not_nil!
-      if _sender_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"sender_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_name", _sender_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @sender_name = _sender_name

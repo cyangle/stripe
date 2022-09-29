@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
+    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = OpenApi::EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -59,14 +59,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _fixed_amount = @fixed_amount
-        if _fixed_amount.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_fixed_amount.list_invalid_properties_for("fixed_amount"))
-        end
+        invalid_properties.concat(_fixed_amount.list_invalid_properties_for("fixed_amount")) if _fixed_amount.is_a?(OpenApi::Validatable)
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
@@ -78,14 +74,10 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _fixed_amount = @fixed_amount
-        if _fixed_amount.is_a?(OpenApi::Validatable)
-          return false unless _fixed_amount.valid?
-        end
+        return false if _fixed_amount.is_a?(OpenApi::Validatable) && !_fixed_amount.valid?
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
 
@@ -119,9 +111,7 @@ module Stripe
         return @fixed_amount = nil
       end
       _fixed_amount = fixed_amount.not_nil!
-      if _fixed_amount.is_a?(OpenApi::Validatable)
-        _fixed_amount.validate
-      end
+      _fixed_amount.validate if _fixed_amount.is_a?(OpenApi::Validatable)
       @fixed_amount = _fixed_amount
     end
 
@@ -132,9 +122,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 

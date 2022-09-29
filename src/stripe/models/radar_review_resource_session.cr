@@ -66,23 +66,23 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _browser = @browser
-        if _browser.to_s.size > 5000
-          invalid_properties.push("invalid value for \"browser\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("browser", _browser.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _device = @device
-        if _device.to_s.size > 5000
-          invalid_properties.push("invalid value for \"device\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("device", _device.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _platform = @platform
-        if _platform.to_s.size > 5000
-          invalid_properties.push("invalid value for \"platform\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("platform", _platform.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _version = @version
-        if _version.to_s.size > 5000
-          invalid_properties.push("invalid value for \"version\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("version", _version.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -115,8 +115,8 @@ module Stripe
         return @browser = nil
       end
       _browser = browser.not_nil!
-      if _browser.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"browser\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("browser", _browser.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @browser = _browser
@@ -129,8 +129,8 @@ module Stripe
         return @device = nil
       end
       _device = device.not_nil!
-      if _device.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"device\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("device", _device.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @device = _device
@@ -143,8 +143,8 @@ module Stripe
         return @platform = nil
       end
       _platform = platform.not_nil!
-      if _platform.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"platform\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("platform", _platform.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @platform = _platform
@@ -157,8 +157,8 @@ module Stripe
         return @version = nil
       end
       _version = version.not_nil!
-      if _version.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"version\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("version", _version.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @version = _version

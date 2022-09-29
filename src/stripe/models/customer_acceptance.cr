@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["offline", "online"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["offline", "online"])
 
     # Optional properties
 
@@ -64,9 +64,7 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       if _online = @online
-        if _online.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_online.list_invalid_properties_for("online"))
-        end
+        invalid_properties.concat(_online.list_invalid_properties_for("online")) if _online.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -78,9 +76,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
       if _online = @online
-        if _online.is_a?(OpenApi::Validatable)
-          return false unless _online.valid?
-        end
+        return false if _online.is_a?(OpenApi::Validatable) && !_online.valid?
       end
 
       true
@@ -124,9 +120,7 @@ module Stripe
         return @online = nil
       end
       _online = online.not_nil!
-      if _online.is_a?(OpenApi::Validatable)
-        _online.validate
-      end
+      _online.validate if _online.is_a?(OpenApi::Validatable)
       @online = _online
     end
 

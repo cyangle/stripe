@@ -50,13 +50,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _fingerprint = @fingerprint
-        if _fingerprint.to_s.size > 5000
-          invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _transaction_id = @transaction_id
-        if _transaction_id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"transaction_id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction_id", _transaction_id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -83,8 +83,8 @@ module Stripe
         return @fingerprint = nil
       end
       _fingerprint = fingerprint.not_nil!
-      if _fingerprint.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @fingerprint = _fingerprint
@@ -97,8 +97,8 @@ module Stripe
         return @transaction_id = nil
       end
       _transaction_id = transaction_id.not_nil!
-      if _transaction_id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"transaction_id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction_id", _transaction_id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @transaction_id = _transaction_id

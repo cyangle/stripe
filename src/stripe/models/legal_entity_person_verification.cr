@@ -70,29 +70,25 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
       if _status = @status
-        if _status.to_s.size > 5000
-          invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _additional_document = @additional_document
-        if _additional_document.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_additional_document.list_invalid_properties_for("additional_document"))
-        end
+        invalid_properties.concat(_additional_document.list_invalid_properties_for("additional_document")) if _additional_document.is_a?(OpenApi::Validatable)
       end
       if _details = @details
-        if _details.to_s.size > 5000
-          invalid_properties.push("invalid value for \"details\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details", _details.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _details_code = @details_code
-        if _details_code.to_s.size > 5000
-          invalid_properties.push("invalid value for \"details_code\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details_code", _details_code.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _document = @document
-        if _document.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_document.list_invalid_properties_for("document"))
-        end
+        invalid_properties.concat(_document.list_invalid_properties_for("document")) if _document.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -106,9 +102,7 @@ module Stripe
         return false if _status.to_s.size > 5000
       end
       if _additional_document = @additional_document
-        if _additional_document.is_a?(OpenApi::Validatable)
-          return false unless _additional_document.valid?
-        end
+        return false if _additional_document.is_a?(OpenApi::Validatable) && !_additional_document.valid?
       end
       if _details = @details
         return false if _details.to_s.size > 5000
@@ -117,9 +111,7 @@ module Stripe
         return false if _details_code.to_s.size > 5000
       end
       if _document = @document
-        if _document.is_a?(OpenApi::Validatable)
-          return false unless _document.valid?
-        end
+        return false if _document.is_a?(OpenApi::Validatable) && !_document.valid?
       end
 
       true
@@ -132,8 +124,8 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if _status.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @status = _status
@@ -146,9 +138,7 @@ module Stripe
         return @additional_document = nil
       end
       _additional_document = additional_document.not_nil!
-      if _additional_document.is_a?(OpenApi::Validatable)
-        _additional_document.validate
-      end
+      _additional_document.validate if _additional_document.is_a?(OpenApi::Validatable)
       @additional_document = _additional_document
     end
 
@@ -159,8 +149,8 @@ module Stripe
         return @details = nil
       end
       _details = details.not_nil!
-      if _details.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"details\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details", _details.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @details = _details
@@ -173,8 +163,8 @@ module Stripe
         return @details_code = nil
       end
       _details_code = details_code.not_nil!
-      if _details_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"details_code\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details_code", _details_code.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @details_code = _details_code
@@ -187,9 +177,7 @@ module Stripe
         return @document = nil
       end
       _document = document.not_nil!
-      if _document.is_a?(OpenApi::Validatable)
-        _document.validate
-      end
+      _document.validate if _document.is_a?(OpenApi::Validatable)
       @document = _document
     end
 

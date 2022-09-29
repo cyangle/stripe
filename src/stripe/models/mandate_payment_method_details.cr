@@ -78,35 +78,25 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
-        if __type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _acss_debit = @acss_debit
-        if _acss_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit"))
-        end
+        invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
       if _au_becs_debit = @au_becs_debit
-        if _au_becs_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_au_becs_debit.list_invalid_properties_for("au_becs_debit"))
-        end
+        invalid_properties.concat(_au_becs_debit.list_invalid_properties_for("au_becs_debit")) if _au_becs_debit.is_a?(OpenApi::Validatable)
       end
       if _bacs_debit = @bacs_debit
-        if _bacs_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_bacs_debit.list_invalid_properties_for("bacs_debit"))
-        end
+        invalid_properties.concat(_bacs_debit.list_invalid_properties_for("bacs_debit")) if _bacs_debit.is_a?(OpenApi::Validatable)
       end
       if _blik = @blik
-        if _blik.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_blik.list_invalid_properties_for("blik"))
-        end
+        invalid_properties.concat(_blik.list_invalid_properties_for("blik")) if _blik.is_a?(OpenApi::Validatable)
       end
 
       if _sepa_debit = @sepa_debit
-        if _sepa_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit"))
-        end
+        invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit")) if _sepa_debit.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -120,30 +110,20 @@ module Stripe
         return false if __type.to_s.size > 5000
       end
       if _acss_debit = @acss_debit
-        if _acss_debit.is_a?(OpenApi::Validatable)
-          return false unless _acss_debit.valid?
-        end
+        return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
       if _au_becs_debit = @au_becs_debit
-        if _au_becs_debit.is_a?(OpenApi::Validatable)
-          return false unless _au_becs_debit.valid?
-        end
+        return false if _au_becs_debit.is_a?(OpenApi::Validatable) && !_au_becs_debit.valid?
       end
       if _bacs_debit = @bacs_debit
-        if _bacs_debit.is_a?(OpenApi::Validatable)
-          return false unless _bacs_debit.valid?
-        end
+        return false if _bacs_debit.is_a?(OpenApi::Validatable) && !_bacs_debit.valid?
       end
       if _blik = @blik
-        if _blik.is_a?(OpenApi::Validatable)
-          return false unless _blik.valid?
-        end
+        return false if _blik.is_a?(OpenApi::Validatable) && !_blik.valid?
       end
 
       if _sepa_debit = @sepa_debit
-        if _sepa_debit.is_a?(OpenApi::Validatable)
-          return false unless _sepa_debit.valid?
-        end
+        return false if _sepa_debit.is_a?(OpenApi::Validatable) && !_sepa_debit.valid?
       end
 
       true
@@ -156,8 +136,8 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if __type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_type = __type
@@ -170,9 +150,7 @@ module Stripe
         return @acss_debit = nil
       end
       _acss_debit = acss_debit.not_nil!
-      if _acss_debit.is_a?(OpenApi::Validatable)
-        _acss_debit.validate
-      end
+      _acss_debit.validate if _acss_debit.is_a?(OpenApi::Validatable)
       @acss_debit = _acss_debit
     end
 
@@ -183,9 +161,7 @@ module Stripe
         return @au_becs_debit = nil
       end
       _au_becs_debit = au_becs_debit.not_nil!
-      if _au_becs_debit.is_a?(OpenApi::Validatable)
-        _au_becs_debit.validate
-      end
+      _au_becs_debit.validate if _au_becs_debit.is_a?(OpenApi::Validatable)
       @au_becs_debit = _au_becs_debit
     end
 
@@ -196,9 +172,7 @@ module Stripe
         return @bacs_debit = nil
       end
       _bacs_debit = bacs_debit.not_nil!
-      if _bacs_debit.is_a?(OpenApi::Validatable)
-        _bacs_debit.validate
-      end
+      _bacs_debit.validate if _bacs_debit.is_a?(OpenApi::Validatable)
       @bacs_debit = _bacs_debit
     end
 
@@ -209,9 +183,7 @@ module Stripe
         return @blik = nil
       end
       _blik = blik.not_nil!
-      if _blik.is_a?(OpenApi::Validatable)
-        _blik.validate
-      end
+      _blik.validate if _blik.is_a?(OpenApi::Validatable)
       @blik = _blik
     end
 
@@ -242,9 +214,7 @@ module Stripe
         return @sepa_debit = nil
       end
       _sepa_debit = sepa_debit.not_nil!
-      if _sepa_debit.is_a?(OpenApi::Validatable)
-        _sepa_debit.validate
-      end
+      _sepa_debit.validate if _sepa_debit.is_a?(OpenApi::Validatable)
       @sepa_debit = _sepa_debit
     end
 

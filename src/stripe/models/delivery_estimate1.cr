@@ -42,14 +42,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _maximum = @maximum
-        if _maximum.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_maximum.list_invalid_properties_for("maximum"))
-        end
+        invalid_properties.concat(_maximum.list_invalid_properties_for("maximum")) if _maximum.is_a?(OpenApi::Validatable)
       end
       if _minimum = @minimum
-        if _minimum.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_minimum.list_invalid_properties_for("minimum"))
-        end
+        invalid_properties.concat(_minimum.list_invalid_properties_for("minimum")) if _minimum.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -59,14 +55,10 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _maximum = @maximum
-        if _maximum.is_a?(OpenApi::Validatable)
-          return false unless _maximum.valid?
-        end
+        return false if _maximum.is_a?(OpenApi::Validatable) && !_maximum.valid?
       end
       if _minimum = @minimum
-        if _minimum.is_a?(OpenApi::Validatable)
-          return false unless _minimum.valid?
-        end
+        return false if _minimum.is_a?(OpenApi::Validatable) && !_minimum.valid?
       end
 
       true
@@ -79,9 +71,7 @@ module Stripe
         return @maximum = nil
       end
       _maximum = maximum.not_nil!
-      if _maximum.is_a?(OpenApi::Validatable)
-        _maximum.validate
-      end
+      _maximum.validate if _maximum.is_a?(OpenApi::Validatable)
       @maximum = _maximum
     end
 
@@ -92,9 +82,7 @@ module Stripe
         return @minimum = nil
       end
       _minimum = minimum.not_nil!
-      if _minimum.is_a?(OpenApi::Validatable)
-        _minimum.validate
-      end
+      _minimum.validate if _minimum.is_a?(OpenApi::Validatable)
       @minimum = _minimum
     end
 

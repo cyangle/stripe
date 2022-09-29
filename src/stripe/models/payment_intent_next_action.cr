@@ -104,80 +104,52 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
-        if __type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _alipay_handle_redirect = @alipay_handle_redirect
-        if _alipay_handle_redirect.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_alipay_handle_redirect.list_invalid_properties_for("alipay_handle_redirect"))
-        end
+        invalid_properties.concat(_alipay_handle_redirect.list_invalid_properties_for("alipay_handle_redirect")) if _alipay_handle_redirect.is_a?(OpenApi::Validatable)
       end
       if _boleto_display_details = @boleto_display_details
-        if _boleto_display_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_boleto_display_details.list_invalid_properties_for("boleto_display_details"))
-        end
+        invalid_properties.concat(_boleto_display_details.list_invalid_properties_for("boleto_display_details")) if _boleto_display_details.is_a?(OpenApi::Validatable)
       end
       if _card_await_notification = @card_await_notification
-        if _card_await_notification.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card_await_notification.list_invalid_properties_for("card_await_notification"))
-        end
+        invalid_properties.concat(_card_await_notification.list_invalid_properties_for("card_await_notification")) if _card_await_notification.is_a?(OpenApi::Validatable)
       end
       if _display_bank_transfer_instructions = @display_bank_transfer_instructions
-        if _display_bank_transfer_instructions.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_display_bank_transfer_instructions.list_invalid_properties_for("display_bank_transfer_instructions"))
-        end
+        invalid_properties.concat(_display_bank_transfer_instructions.list_invalid_properties_for("display_bank_transfer_instructions")) if _display_bank_transfer_instructions.is_a?(OpenApi::Validatable)
       end
       if _konbini_display_details = @konbini_display_details
-        if _konbini_display_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_konbini_display_details.list_invalid_properties_for("konbini_display_details"))
-        end
+        invalid_properties.concat(_konbini_display_details.list_invalid_properties_for("konbini_display_details")) if _konbini_display_details.is_a?(OpenApi::Validatable)
       end
       if _oxxo_display_details = @oxxo_display_details
-        if _oxxo_display_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_oxxo_display_details.list_invalid_properties_for("oxxo_display_details"))
-        end
+        invalid_properties.concat(_oxxo_display_details.list_invalid_properties_for("oxxo_display_details")) if _oxxo_display_details.is_a?(OpenApi::Validatable)
       end
       if _paynow_display_qr_code = @paynow_display_qr_code
-        if _paynow_display_qr_code.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_paynow_display_qr_code.list_invalid_properties_for("paynow_display_qr_code"))
-        end
+        invalid_properties.concat(_paynow_display_qr_code.list_invalid_properties_for("paynow_display_qr_code")) if _paynow_display_qr_code.is_a?(OpenApi::Validatable)
       end
       if _pix_display_qr_code = @pix_display_qr_code
-        if _pix_display_qr_code.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_pix_display_qr_code.list_invalid_properties_for("pix_display_qr_code"))
-        end
+        invalid_properties.concat(_pix_display_qr_code.list_invalid_properties_for("pix_display_qr_code")) if _pix_display_qr_code.is_a?(OpenApi::Validatable)
       end
       if _promptpay_display_qr_code = @promptpay_display_qr_code
-        if _promptpay_display_qr_code.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_promptpay_display_qr_code.list_invalid_properties_for("promptpay_display_qr_code"))
-        end
+        invalid_properties.concat(_promptpay_display_qr_code.list_invalid_properties_for("promptpay_display_qr_code")) if _promptpay_display_qr_code.is_a?(OpenApi::Validatable)
       end
       if _redirect_to_url = @redirect_to_url
-        if _redirect_to_url.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_redirect_to_url.list_invalid_properties_for("redirect_to_url"))
-        end
+        invalid_properties.concat(_redirect_to_url.list_invalid_properties_for("redirect_to_url")) if _redirect_to_url.is_a?(OpenApi::Validatable)
       end
 
       if _verify_with_microdeposits = @verify_with_microdeposits
-        if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_verify_with_microdeposits.list_invalid_properties_for("verify_with_microdeposits"))
-        end
+        invalid_properties.concat(_verify_with_microdeposits.list_invalid_properties_for("verify_with_microdeposits")) if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
       end
       if _wechat_pay_display_qr_code = @wechat_pay_display_qr_code
-        if _wechat_pay_display_qr_code.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_wechat_pay_display_qr_code.list_invalid_properties_for("wechat_pay_display_qr_code"))
-        end
+        invalid_properties.concat(_wechat_pay_display_qr_code.list_invalid_properties_for("wechat_pay_display_qr_code")) if _wechat_pay_display_qr_code.is_a?(OpenApi::Validatable)
       end
       if _wechat_pay_redirect_to_android_app = @wechat_pay_redirect_to_android_app
-        if _wechat_pay_redirect_to_android_app.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_wechat_pay_redirect_to_android_app.list_invalid_properties_for("wechat_pay_redirect_to_android_app"))
-        end
+        invalid_properties.concat(_wechat_pay_redirect_to_android_app.list_invalid_properties_for("wechat_pay_redirect_to_android_app")) if _wechat_pay_redirect_to_android_app.is_a?(OpenApi::Validatable)
       end
       if _wechat_pay_redirect_to_ios_app = @wechat_pay_redirect_to_ios_app
-        if _wechat_pay_redirect_to_ios_app.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_wechat_pay_redirect_to_ios_app.list_invalid_properties_for("wechat_pay_redirect_to_ios_app"))
-        end
+        invalid_properties.concat(_wechat_pay_redirect_to_ios_app.list_invalid_properties_for("wechat_pay_redirect_to_ios_app")) if _wechat_pay_redirect_to_ios_app.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -191,75 +163,47 @@ module Stripe
         return false if __type.to_s.size > 5000
       end
       if _alipay_handle_redirect = @alipay_handle_redirect
-        if _alipay_handle_redirect.is_a?(OpenApi::Validatable)
-          return false unless _alipay_handle_redirect.valid?
-        end
+        return false if _alipay_handle_redirect.is_a?(OpenApi::Validatable) && !_alipay_handle_redirect.valid?
       end
       if _boleto_display_details = @boleto_display_details
-        if _boleto_display_details.is_a?(OpenApi::Validatable)
-          return false unless _boleto_display_details.valid?
-        end
+        return false if _boleto_display_details.is_a?(OpenApi::Validatable) && !_boleto_display_details.valid?
       end
       if _card_await_notification = @card_await_notification
-        if _card_await_notification.is_a?(OpenApi::Validatable)
-          return false unless _card_await_notification.valid?
-        end
+        return false if _card_await_notification.is_a?(OpenApi::Validatable) && !_card_await_notification.valid?
       end
       if _display_bank_transfer_instructions = @display_bank_transfer_instructions
-        if _display_bank_transfer_instructions.is_a?(OpenApi::Validatable)
-          return false unless _display_bank_transfer_instructions.valid?
-        end
+        return false if _display_bank_transfer_instructions.is_a?(OpenApi::Validatable) && !_display_bank_transfer_instructions.valid?
       end
       if _konbini_display_details = @konbini_display_details
-        if _konbini_display_details.is_a?(OpenApi::Validatable)
-          return false unless _konbini_display_details.valid?
-        end
+        return false if _konbini_display_details.is_a?(OpenApi::Validatable) && !_konbini_display_details.valid?
       end
       if _oxxo_display_details = @oxxo_display_details
-        if _oxxo_display_details.is_a?(OpenApi::Validatable)
-          return false unless _oxxo_display_details.valid?
-        end
+        return false if _oxxo_display_details.is_a?(OpenApi::Validatable) && !_oxxo_display_details.valid?
       end
       if _paynow_display_qr_code = @paynow_display_qr_code
-        if _paynow_display_qr_code.is_a?(OpenApi::Validatable)
-          return false unless _paynow_display_qr_code.valid?
-        end
+        return false if _paynow_display_qr_code.is_a?(OpenApi::Validatable) && !_paynow_display_qr_code.valid?
       end
       if _pix_display_qr_code = @pix_display_qr_code
-        if _pix_display_qr_code.is_a?(OpenApi::Validatable)
-          return false unless _pix_display_qr_code.valid?
-        end
+        return false if _pix_display_qr_code.is_a?(OpenApi::Validatable) && !_pix_display_qr_code.valid?
       end
       if _promptpay_display_qr_code = @promptpay_display_qr_code
-        if _promptpay_display_qr_code.is_a?(OpenApi::Validatable)
-          return false unless _promptpay_display_qr_code.valid?
-        end
+        return false if _promptpay_display_qr_code.is_a?(OpenApi::Validatable) && !_promptpay_display_qr_code.valid?
       end
       if _redirect_to_url = @redirect_to_url
-        if _redirect_to_url.is_a?(OpenApi::Validatable)
-          return false unless _redirect_to_url.valid?
-        end
+        return false if _redirect_to_url.is_a?(OpenApi::Validatable) && !_redirect_to_url.valid?
       end
 
       if _verify_with_microdeposits = @verify_with_microdeposits
-        if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
-          return false unless _verify_with_microdeposits.valid?
-        end
+        return false if _verify_with_microdeposits.is_a?(OpenApi::Validatable) && !_verify_with_microdeposits.valid?
       end
       if _wechat_pay_display_qr_code = @wechat_pay_display_qr_code
-        if _wechat_pay_display_qr_code.is_a?(OpenApi::Validatable)
-          return false unless _wechat_pay_display_qr_code.valid?
-        end
+        return false if _wechat_pay_display_qr_code.is_a?(OpenApi::Validatable) && !_wechat_pay_display_qr_code.valid?
       end
       if _wechat_pay_redirect_to_android_app = @wechat_pay_redirect_to_android_app
-        if _wechat_pay_redirect_to_android_app.is_a?(OpenApi::Validatable)
-          return false unless _wechat_pay_redirect_to_android_app.valid?
-        end
+        return false if _wechat_pay_redirect_to_android_app.is_a?(OpenApi::Validatable) && !_wechat_pay_redirect_to_android_app.valid?
       end
       if _wechat_pay_redirect_to_ios_app = @wechat_pay_redirect_to_ios_app
-        if _wechat_pay_redirect_to_ios_app.is_a?(OpenApi::Validatable)
-          return false unless _wechat_pay_redirect_to_ios_app.valid?
-        end
+        return false if _wechat_pay_redirect_to_ios_app.is_a?(OpenApi::Validatable) && !_wechat_pay_redirect_to_ios_app.valid?
       end
 
       true
@@ -272,8 +216,8 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if __type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_type = __type
@@ -286,9 +230,7 @@ module Stripe
         return @alipay_handle_redirect = nil
       end
       _alipay_handle_redirect = alipay_handle_redirect.not_nil!
-      if _alipay_handle_redirect.is_a?(OpenApi::Validatable)
-        _alipay_handle_redirect.validate
-      end
+      _alipay_handle_redirect.validate if _alipay_handle_redirect.is_a?(OpenApi::Validatable)
       @alipay_handle_redirect = _alipay_handle_redirect
     end
 
@@ -299,9 +241,7 @@ module Stripe
         return @boleto_display_details = nil
       end
       _boleto_display_details = boleto_display_details.not_nil!
-      if _boleto_display_details.is_a?(OpenApi::Validatable)
-        _boleto_display_details.validate
-      end
+      _boleto_display_details.validate if _boleto_display_details.is_a?(OpenApi::Validatable)
       @boleto_display_details = _boleto_display_details
     end
 
@@ -312,9 +252,7 @@ module Stripe
         return @card_await_notification = nil
       end
       _card_await_notification = card_await_notification.not_nil!
-      if _card_await_notification.is_a?(OpenApi::Validatable)
-        _card_await_notification.validate
-      end
+      _card_await_notification.validate if _card_await_notification.is_a?(OpenApi::Validatable)
       @card_await_notification = _card_await_notification
     end
 
@@ -325,9 +263,7 @@ module Stripe
         return @display_bank_transfer_instructions = nil
       end
       _display_bank_transfer_instructions = display_bank_transfer_instructions.not_nil!
-      if _display_bank_transfer_instructions.is_a?(OpenApi::Validatable)
-        _display_bank_transfer_instructions.validate
-      end
+      _display_bank_transfer_instructions.validate if _display_bank_transfer_instructions.is_a?(OpenApi::Validatable)
       @display_bank_transfer_instructions = _display_bank_transfer_instructions
     end
 
@@ -338,9 +274,7 @@ module Stripe
         return @konbini_display_details = nil
       end
       _konbini_display_details = konbini_display_details.not_nil!
-      if _konbini_display_details.is_a?(OpenApi::Validatable)
-        _konbini_display_details.validate
-      end
+      _konbini_display_details.validate if _konbini_display_details.is_a?(OpenApi::Validatable)
       @konbini_display_details = _konbini_display_details
     end
 
@@ -351,9 +285,7 @@ module Stripe
         return @oxxo_display_details = nil
       end
       _oxxo_display_details = oxxo_display_details.not_nil!
-      if _oxxo_display_details.is_a?(OpenApi::Validatable)
-        _oxxo_display_details.validate
-      end
+      _oxxo_display_details.validate if _oxxo_display_details.is_a?(OpenApi::Validatable)
       @oxxo_display_details = _oxxo_display_details
     end
 
@@ -364,9 +296,7 @@ module Stripe
         return @paynow_display_qr_code = nil
       end
       _paynow_display_qr_code = paynow_display_qr_code.not_nil!
-      if _paynow_display_qr_code.is_a?(OpenApi::Validatable)
-        _paynow_display_qr_code.validate
-      end
+      _paynow_display_qr_code.validate if _paynow_display_qr_code.is_a?(OpenApi::Validatable)
       @paynow_display_qr_code = _paynow_display_qr_code
     end
 
@@ -377,9 +307,7 @@ module Stripe
         return @pix_display_qr_code = nil
       end
       _pix_display_qr_code = pix_display_qr_code.not_nil!
-      if _pix_display_qr_code.is_a?(OpenApi::Validatable)
-        _pix_display_qr_code.validate
-      end
+      _pix_display_qr_code.validate if _pix_display_qr_code.is_a?(OpenApi::Validatable)
       @pix_display_qr_code = _pix_display_qr_code
     end
 
@@ -390,9 +318,7 @@ module Stripe
         return @promptpay_display_qr_code = nil
       end
       _promptpay_display_qr_code = promptpay_display_qr_code.not_nil!
-      if _promptpay_display_qr_code.is_a?(OpenApi::Validatable)
-        _promptpay_display_qr_code.validate
-      end
+      _promptpay_display_qr_code.validate if _promptpay_display_qr_code.is_a?(OpenApi::Validatable)
       @promptpay_display_qr_code = _promptpay_display_qr_code
     end
 
@@ -403,9 +329,7 @@ module Stripe
         return @redirect_to_url = nil
       end
       _redirect_to_url = redirect_to_url.not_nil!
-      if _redirect_to_url.is_a?(OpenApi::Validatable)
-        _redirect_to_url.validate
-      end
+      _redirect_to_url.validate if _redirect_to_url.is_a?(OpenApi::Validatable)
       @redirect_to_url = _redirect_to_url
     end
 
@@ -426,9 +350,7 @@ module Stripe
         return @verify_with_microdeposits = nil
       end
       _verify_with_microdeposits = verify_with_microdeposits.not_nil!
-      if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
-        _verify_with_microdeposits.validate
-      end
+      _verify_with_microdeposits.validate if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
       @verify_with_microdeposits = _verify_with_microdeposits
     end
 
@@ -439,9 +361,7 @@ module Stripe
         return @wechat_pay_display_qr_code = nil
       end
       _wechat_pay_display_qr_code = wechat_pay_display_qr_code.not_nil!
-      if _wechat_pay_display_qr_code.is_a?(OpenApi::Validatable)
-        _wechat_pay_display_qr_code.validate
-      end
+      _wechat_pay_display_qr_code.validate if _wechat_pay_display_qr_code.is_a?(OpenApi::Validatable)
       @wechat_pay_display_qr_code = _wechat_pay_display_qr_code
     end
 
@@ -452,9 +372,7 @@ module Stripe
         return @wechat_pay_redirect_to_android_app = nil
       end
       _wechat_pay_redirect_to_android_app = wechat_pay_redirect_to_android_app.not_nil!
-      if _wechat_pay_redirect_to_android_app.is_a?(OpenApi::Validatable)
-        _wechat_pay_redirect_to_android_app.validate
-      end
+      _wechat_pay_redirect_to_android_app.validate if _wechat_pay_redirect_to_android_app.is_a?(OpenApi::Validatable)
       @wechat_pay_redirect_to_android_app = _wechat_pay_redirect_to_android_app
     end
 
@@ -465,9 +383,7 @@ module Stripe
         return @wechat_pay_redirect_to_ios_app = nil
       end
       _wechat_pay_redirect_to_ios_app = wechat_pay_redirect_to_ios_app.not_nil!
-      if _wechat_pay_redirect_to_ios_app.is_a?(OpenApi::Validatable)
-        _wechat_pay_redirect_to_ios_app.validate
-      end
+      _wechat_pay_redirect_to_ios_app.validate if _wechat_pay_redirect_to_ios_app.is_a?(OpenApi::Validatable)
       @wechat_pay_redirect_to_ios_app = _wechat_pay_redirect_to_ios_app
     end
 

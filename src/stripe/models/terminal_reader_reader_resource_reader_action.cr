@@ -25,13 +25,13 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["failed", "in_progress", "succeeded"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["failed", "in_progress", "succeeded"])
 
     # Type of action performed by the reader.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["process_payment_intent", "process_setup_intent", "set_reader_display"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["process_payment_intent", "process_setup_intent", "set_reader_display"])
 
     # Optional properties
 
@@ -83,29 +83,23 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _failure_code = @failure_code
-        if _failure_code.to_s.size > 5000
-          invalid_properties.push("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_code", _failure_code.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _failure_message = @failure_message
-        if _failure_message.to_s.size > 5000
-          invalid_properties.push("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_message", _failure_message.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _process_payment_intent = @process_payment_intent
-        if _process_payment_intent.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_process_payment_intent.list_invalid_properties_for("process_payment_intent"))
-        end
+        invalid_properties.concat(_process_payment_intent.list_invalid_properties_for("process_payment_intent")) if _process_payment_intent.is_a?(OpenApi::Validatable)
       end
       if _process_setup_intent = @process_setup_intent
-        if _process_setup_intent.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_process_setup_intent.list_invalid_properties_for("process_setup_intent"))
-        end
+        invalid_properties.concat(_process_setup_intent.list_invalid_properties_for("process_setup_intent")) if _process_setup_intent.is_a?(OpenApi::Validatable)
       end
       if _set_reader_display = @set_reader_display
-        if _set_reader_display.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_set_reader_display.list_invalid_properties_for("set_reader_display"))
-        end
+        invalid_properties.concat(_set_reader_display.list_invalid_properties_for("set_reader_display")) if _set_reader_display.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -123,19 +117,13 @@ module Stripe
         return false if _failure_message.to_s.size > 5000
       end
       if _process_payment_intent = @process_payment_intent
-        if _process_payment_intent.is_a?(OpenApi::Validatable)
-          return false unless _process_payment_intent.valid?
-        end
+        return false if _process_payment_intent.is_a?(OpenApi::Validatable) && !_process_payment_intent.valid?
       end
       if _process_setup_intent = @process_setup_intent
-        if _process_setup_intent.is_a?(OpenApi::Validatable)
-          return false unless _process_setup_intent.valid?
-        end
+        return false if _process_setup_intent.is_a?(OpenApi::Validatable) && !_process_setup_intent.valid?
       end
       if _set_reader_display = @set_reader_display
-        if _set_reader_display.is_a?(OpenApi::Validatable)
-          return false unless _set_reader_display.valid?
-        end
+        return false if _set_reader_display.is_a?(OpenApi::Validatable) && !_set_reader_display.valid?
       end
 
       true
@@ -170,8 +158,8 @@ module Stripe
         return @failure_code = nil
       end
       _failure_code = failure_code.not_nil!
-      if _failure_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"failure_code\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_code", _failure_code.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @failure_code = _failure_code
@@ -184,8 +172,8 @@ module Stripe
         return @failure_message = nil
       end
       _failure_message = failure_message.not_nil!
-      if _failure_message.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"failure_message\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_message", _failure_message.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @failure_message = _failure_message
@@ -198,9 +186,7 @@ module Stripe
         return @process_payment_intent = nil
       end
       _process_payment_intent = process_payment_intent.not_nil!
-      if _process_payment_intent.is_a?(OpenApi::Validatable)
-        _process_payment_intent.validate
-      end
+      _process_payment_intent.validate if _process_payment_intent.is_a?(OpenApi::Validatable)
       @process_payment_intent = _process_payment_intent
     end
 
@@ -211,9 +197,7 @@ module Stripe
         return @process_setup_intent = nil
       end
       _process_setup_intent = process_setup_intent.not_nil!
-      if _process_setup_intent.is_a?(OpenApi::Validatable)
-        _process_setup_intent.validate
-      end
+      _process_setup_intent.validate if _process_setup_intent.is_a?(OpenApi::Validatable)
       @process_setup_intent = _process_setup_intent
     end
 
@@ -224,9 +208,7 @@ module Stripe
         return @set_reader_display = nil
       end
       _set_reader_display = set_reader_display.not_nil!
-      if _set_reader_display.is_a?(OpenApi::Validatable)
-        _set_reader_display.validate
-      end
+      _set_reader_display.validate if _set_reader_display.is_a?(OpenApi::Validatable)
       @set_reader_display = _set_reader_display
     end
 

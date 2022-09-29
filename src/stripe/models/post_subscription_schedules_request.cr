@@ -31,7 +31,7 @@ module Stripe
     @[JSON::Field(key: "end_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter end_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_END_BEHAVIOR = EnumValidator.new("end_behavior", "String", ["cancel", "none", "release", "renew"])
+    ENUM_VALIDATOR_FOR_END_BEHAVIOR = OpenApi::EnumValidator.new("end_behavior", "String", ["cancel", "none", "release", "renew"])
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -72,41 +72,29 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _customer = @customer
-        if _customer.to_s.size > 5000
-          invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _default_settings = @default_settings
-        if _default_settings.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_default_settings.list_invalid_properties_for("default_settings"))
-        end
+        invalid_properties.concat(_default_settings.list_invalid_properties_for("default_settings")) if _default_settings.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_END_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior)
 
       if _from_subscription = @from_subscription
-        if _from_subscription.to_s.size > 5000
-          invalid_properties.push("invalid value for \"from_subscription\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("from_subscription", _from_subscription.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _phases = @phases
-        if _phases.is_a?(Array)
-          _phases.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("phases"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "phases", array: _phases)) if _phases.is_a?(Array)
       end
       if _start_date = @start_date
-        if _start_date.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_start_date.list_invalid_properties_for("start_date"))
-        end
+        invalid_properties.concat(_start_date.list_invalid_properties_for("start_date")) if _start_date.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -119,9 +107,7 @@ module Stripe
         return false if _customer.to_s.size > 5000
       end
       if _default_settings = @default_settings
-        if _default_settings.is_a?(OpenApi::Validatable)
-          return false unless _default_settings.valid?
-        end
+        return false if _default_settings.is_a?(OpenApi::Validatable) && !_default_settings.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior)
 
@@ -129,23 +115,13 @@ module Stripe
         return false if _from_subscription.to_s.size > 5000
       end
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
       if _phases = @phases
-        if _phases.is_a?(Array)
-          _phases.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _phases.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _phases)
       end
       if _start_date = @start_date
-        if _start_date.is_a?(OpenApi::Validatable)
-          return false unless _start_date.valid?
-        end
+        return false if _start_date.is_a?(OpenApi::Validatable) && !_start_date.valid?
       end
 
       true
@@ -158,8 +134,8 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if _customer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @customer = _customer
@@ -172,9 +148,7 @@ module Stripe
         return @default_settings = nil
       end
       _default_settings = default_settings.not_nil!
-      if _default_settings.is_a?(OpenApi::Validatable)
-        _default_settings.validate
-      end
+      _default_settings.validate if _default_settings.is_a?(OpenApi::Validatable)
       @default_settings = _default_settings
     end
 
@@ -206,8 +180,8 @@ module Stripe
         return @from_subscription = nil
       end
       _from_subscription = from_subscription.not_nil!
-      if _from_subscription.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"from_subscription\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("from_subscription", _from_subscription.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @from_subscription = _from_subscription
@@ -220,9 +194,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 
@@ -233,13 +205,7 @@ module Stripe
         return @phases = nil
       end
       _phases = phases.not_nil!
-      if _phases.is_a?(Array)
-        _phases.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _phases) if _phases.is_a?(Array)
       @phases = _phases
     end
 
@@ -250,9 +216,7 @@ module Stripe
         return @start_date = nil
       end
       _start_date = start_date.not_nil!
-      if _start_date.is_a?(OpenApi::Validatable)
-        _start_date.validate
-      end
+      _start_date.validate if _start_date.is_a?(OpenApi::Validatable)
       @start_date = _start_date
     end
 

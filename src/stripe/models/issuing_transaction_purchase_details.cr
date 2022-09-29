@@ -71,32 +71,20 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _flight = @flight
-        if _flight.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_flight.list_invalid_properties_for("flight"))
-        end
+        invalid_properties.concat(_flight.list_invalid_properties_for("flight")) if _flight.is_a?(OpenApi::Validatable)
       end
       if _fuel = @fuel
-        if _fuel.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_fuel.list_invalid_properties_for("fuel"))
-        end
+        invalid_properties.concat(_fuel.list_invalid_properties_for("fuel")) if _fuel.is_a?(OpenApi::Validatable)
       end
       if _lodging = @lodging
-        if _lodging.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_lodging.list_invalid_properties_for("lodging"))
-        end
+        invalid_properties.concat(_lodging.list_invalid_properties_for("lodging")) if _lodging.is_a?(OpenApi::Validatable)
       end
       if _receipt = @receipt
-        if _receipt.is_a?(Array)
-          _receipt.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("receipt"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "receipt", array: _receipt)) if _receipt.is_a?(Array)
       end
       if _reference = @reference
-        if _reference.to_s.size > 5000
-          invalid_properties.push("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -107,28 +95,16 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _flight = @flight
-        if _flight.is_a?(OpenApi::Validatable)
-          return false unless _flight.valid?
-        end
+        return false if _flight.is_a?(OpenApi::Validatable) && !_flight.valid?
       end
       if _fuel = @fuel
-        if _fuel.is_a?(OpenApi::Validatable)
-          return false unless _fuel.valid?
-        end
+        return false if _fuel.is_a?(OpenApi::Validatable) && !_fuel.valid?
       end
       if _lodging = @lodging
-        if _lodging.is_a?(OpenApi::Validatable)
-          return false unless _lodging.valid?
-        end
+        return false if _lodging.is_a?(OpenApi::Validatable) && !_lodging.valid?
       end
       if _receipt = @receipt
-        if _receipt.is_a?(Array)
-          _receipt.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _receipt.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _receipt)
       end
       if _reference = @reference
         return false if _reference.to_s.size > 5000
@@ -144,9 +120,7 @@ module Stripe
         return @flight = nil
       end
       _flight = flight.not_nil!
-      if _flight.is_a?(OpenApi::Validatable)
-        _flight.validate
-      end
+      _flight.validate if _flight.is_a?(OpenApi::Validatable)
       @flight = _flight
     end
 
@@ -157,9 +131,7 @@ module Stripe
         return @fuel = nil
       end
       _fuel = fuel.not_nil!
-      if _fuel.is_a?(OpenApi::Validatable)
-        _fuel.validate
-      end
+      _fuel.validate if _fuel.is_a?(OpenApi::Validatable)
       @fuel = _fuel
     end
 
@@ -170,9 +142,7 @@ module Stripe
         return @lodging = nil
       end
       _lodging = lodging.not_nil!
-      if _lodging.is_a?(OpenApi::Validatable)
-        _lodging.validate
-      end
+      _lodging.validate if _lodging.is_a?(OpenApi::Validatable)
       @lodging = _lodging
     end
 
@@ -183,13 +153,7 @@ module Stripe
         return @receipt = nil
       end
       _receipt = receipt.not_nil!
-      if _receipt.is_a?(Array)
-        _receipt.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _receipt) if _receipt.is_a?(Array)
       @receipt = _receipt
     end
 
@@ -200,8 +164,8 @@ module Stripe
         return @reference = nil
       end
       _reference = reference.not_nil!
-      if _reference.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"reference\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @reference = _reference

@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
 
-    ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
+    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
 
     # Optional properties
 
@@ -40,7 +40,7 @@ module Stripe
     @[JSON::Field(key: "aggregate_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter aggregate_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_AGGREGATE_USAGE = EnumValidator.new("aggregate_usage", "String", ["last_during_period", "last_ever", "max", "sum"])
+    ENUM_VALIDATOR_FOR_AGGREGATE_USAGE = OpenApi::EnumValidator.new("aggregate_usage", "String", ["last_during_period", "last_ever", "max", "sum"])
 
     # A positive integer in cents (or local equivalent) (or 0 for a free plan) representing how much to charge on a recurring basis.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -54,7 +54,7 @@ module Stripe
     @[JSON::Field(key: "billing_scheme", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_scheme : String? = nil
 
-    ENUM_VALIDATOR_FOR_BILLING_SCHEME = EnumValidator.new("billing_scheme", "String", ["per_unit", "tiered"])
+    ENUM_VALIDATOR_FOR_BILLING_SCHEME = OpenApi::EnumValidator.new("billing_scheme", "String", ["per_unit", "tiered"])
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -86,7 +86,7 @@ module Stripe
     @[JSON::Field(key: "tiers_mode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tiers_mode : String? = nil
 
-    ENUM_VALIDATOR_FOR_TIERS_MODE = EnumValidator.new("tiers_mode", "String", ["graduated", "volume"])
+    ENUM_VALIDATOR_FOR_TIERS_MODE = OpenApi::EnumValidator.new("tiers_mode", "String", ["graduated", "volume"])
 
     @[JSON::Field(key: "transform_usage", type: Stripe::TransformUsageParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transform_usage : Stripe::TransformUsageParam? = nil
@@ -99,7 +99,7 @@ module Stripe
     @[JSON::Field(key: "usage_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter usage_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_USAGE_TYPE = EnumValidator.new("usage_type", "String", ["licensed", "metered"])
+    ENUM_VALIDATOR_FOR_USAGE_TYPE = OpenApi::EnumValidator.new("usage_type", "String", ["licensed", "metered"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -141,41 +141,29 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_SCHEME.error_message) unless ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid?(@billing_scheme)
 
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _nickname = @nickname
-        if _nickname.to_s.size > 5000
-          invalid_properties.push("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _product = @product
-        if _product.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_product.list_invalid_properties_for("product"))
-        end
+        invalid_properties.concat(_product.list_invalid_properties_for("product")) if _product.is_a?(OpenApi::Validatable)
       end
       if _tiers = @tiers
-        if _tiers.is_a?(Array)
-          _tiers.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("tiers"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tiers", array: _tiers)) if _tiers.is_a?(Array)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TIERS_MODE.error_message) unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
       if _transform_usage = @transform_usage
-        if _transform_usage.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_transform_usage.list_invalid_properties_for("transform_usage"))
-        end
+        invalid_properties.concat(_transform_usage.list_invalid_properties_for("transform_usage")) if _transform_usage.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_USAGE_TYPE.error_message) unless ENUM_VALIDATOR_FOR_USAGE_TYPE.valid?(@usage_type)
@@ -199,32 +187,20 @@ module Stripe
       end
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
       if _nickname = @nickname
         return false if _nickname.to_s.size > 5000
       end
       if _product = @product
-        if _product.is_a?(OpenApi::Validatable)
-          return false unless _product.valid?
-        end
+        return false if _product.is_a?(OpenApi::Validatable) && !_product.valid?
       end
       if _tiers = @tiers
-        if _tiers.is_a?(Array)
-          _tiers.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _tiers.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tiers)
       end
       return false unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
       if _transform_usage = @transform_usage
-        if _transform_usage.is_a?(OpenApi::Validatable)
-          return false unless _transform_usage.valid?
-        end
+        return false if _transform_usage.is_a?(OpenApi::Validatable) && !_transform_usage.valid?
       end
 
       return false unless ENUM_VALIDATOR_FOR_USAGE_TYPE.valid?(@usage_type)
@@ -322,8 +298,8 @@ module Stripe
         return @id = nil
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -346,9 +322,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 
@@ -359,8 +333,8 @@ module Stripe
         return @nickname = nil
       end
       _nickname = nickname.not_nil!
-      if _nickname.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @nickname = _nickname
@@ -373,9 +347,7 @@ module Stripe
         return @product = nil
       end
       _product = product.not_nil!
-      if _product.is_a?(OpenApi::Validatable)
-        _product.validate
-      end
+      _product.validate if _product.is_a?(OpenApi::Validatable)
       @product = _product
     end
 
@@ -386,13 +358,7 @@ module Stripe
         return @tiers = nil
       end
       _tiers = tiers.not_nil!
-      if _tiers.is_a?(Array)
-        _tiers.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _tiers) if _tiers.is_a?(Array)
       @tiers = _tiers
     end
 
@@ -414,9 +380,7 @@ module Stripe
         return @transform_usage = nil
       end
       _transform_usage = transform_usage.not_nil!
-      if _transform_usage.is_a?(OpenApi::Validatable)
-        _transform_usage.validate
-      end
+      _transform_usage.validate if _transform_usage.is_a?(OpenApi::Validatable)
       @transform_usage = _transform_usage
     end
 

@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "return_status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter return_status : String? = nil
 
-    ENUM_VALIDATOR_FOR_RETURN_STATUS = EnumValidator.new("return_status", "String", ["", "merchant_rejected", "successful"])
+    ENUM_VALIDATOR_FOR_RETURN_STATUS = OpenApi::EnumValidator.new("return_status", "String", ["", "merchant_rejected", "successful"])
 
     @[JSON::Field(key: "returned_at", type: Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?, default: nil, required: false, nullable: false, emit_null: false)]
     getter returned_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil
@@ -59,31 +59,25 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _additional_documentation = @additional_documentation
-        if _additional_documentation.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation"))
-        end
+        invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
       if _explanation = @explanation
-        if _explanation.to_s.size > 1500
-          invalid_properties.push("invalid value for \"explanation\", the character length must be smaller than or equal to 1500.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 1500)
+          invalid_properties.push(max_length_error)
         end
       end
       if _received_at = @received_at
-        if _received_at.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_received_at.list_invalid_properties_for("received_at"))
-        end
+        invalid_properties.concat(_received_at.list_invalid_properties_for("received_at")) if _received_at.is_a?(OpenApi::Validatable)
       end
       if _return_description = @return_description
-        if _return_description.to_s.size > 1500
-          invalid_properties.push("invalid value for \"return_description\", the character length must be smaller than or equal to 1500.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_description", _return_description.to_s.size, 1500)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_RETURN_STATUS.error_message) unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
       if _returned_at = @returned_at
-        if _returned_at.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_returned_at.list_invalid_properties_for("returned_at"))
-        end
+        invalid_properties.concat(_returned_at.list_invalid_properties_for("returned_at")) if _returned_at.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -93,26 +87,20 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _additional_documentation = @additional_documentation
-        if _additional_documentation.is_a?(OpenApi::Validatable)
-          return false unless _additional_documentation.valid?
-        end
+        return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
       if _explanation = @explanation
         return false if _explanation.to_s.size > 1500
       end
       if _received_at = @received_at
-        if _received_at.is_a?(OpenApi::Validatable)
-          return false unless _received_at.valid?
-        end
+        return false if _received_at.is_a?(OpenApi::Validatable) && !_received_at.valid?
       end
       if _return_description = @return_description
         return false if _return_description.to_s.size > 1500
       end
       return false unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
       if _returned_at = @returned_at
-        if _returned_at.is_a?(OpenApi::Validatable)
-          return false unless _returned_at.valid?
-        end
+        return false if _returned_at.is_a?(OpenApi::Validatable) && !_returned_at.valid?
       end
 
       true
@@ -125,9 +113,7 @@ module Stripe
         return @additional_documentation = nil
       end
       _additional_documentation = additional_documentation.not_nil!
-      if _additional_documentation.is_a?(OpenApi::Validatable)
-        _additional_documentation.validate
-      end
+      _additional_documentation.validate if _additional_documentation.is_a?(OpenApi::Validatable)
       @additional_documentation = _additional_documentation
     end
 
@@ -138,8 +124,8 @@ module Stripe
         return @explanation = nil
       end
       _explanation = explanation.not_nil!
-      if _explanation.to_s.size > 1500
-        raise ArgumentError.new("invalid value for \"explanation\", the character length must be smaller than or equal to 1500.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 1500)
+        raise ArgumentError.new(max_length_error)
       end
 
       @explanation = _explanation
@@ -152,9 +138,7 @@ module Stripe
         return @received_at = nil
       end
       _received_at = received_at.not_nil!
-      if _received_at.is_a?(OpenApi::Validatable)
-        _received_at.validate
-      end
+      _received_at.validate if _received_at.is_a?(OpenApi::Validatable)
       @received_at = _received_at
     end
 
@@ -165,8 +149,8 @@ module Stripe
         return @return_description = nil
       end
       _return_description = return_description.not_nil!
-      if _return_description.to_s.size > 1500
-        raise ArgumentError.new("invalid value for \"return_description\", the character length must be smaller than or equal to 1500.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_description", _return_description.to_s.size, 1500)
+        raise ArgumentError.new(max_length_error)
       end
 
       @return_description = _return_description
@@ -190,9 +174,7 @@ module Stripe
         return @returned_at = nil
       end
       _returned_at = returned_at.not_nil!
-      if _returned_at.is_a?(OpenApi::Validatable)
-        _returned_at.validate
-      end
+      _returned_at.validate if _returned_at.is_a?(OpenApi::Validatable)
       @returned_at = _returned_at
     end
 

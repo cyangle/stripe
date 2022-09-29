@@ -61,15 +61,11 @@ module Stripe
       invalid_properties.push("\"supported_currencies\" is required and cannot be null") if @supported_currencies.nil?
 
       if _features = @features
-        if _features.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_features.list_invalid_properties_for("features"))
-        end
+        invalid_properties.concat(_features.list_invalid_properties_for("features")) if _features.is_a?(OpenApi::Validatable)
       end
 
       if _platform_restrictions = @platform_restrictions
-        if _platform_restrictions.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_platform_restrictions.list_invalid_properties_for("platform_restrictions"))
-        end
+        invalid_properties.concat(_platform_restrictions.list_invalid_properties_for("platform_restrictions")) if _platform_restrictions.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -81,15 +77,11 @@ module Stripe
       return false if @supported_currencies.nil?
 
       if _features = @features
-        if _features.is_a?(OpenApi::Validatable)
-          return false unless _features.valid?
-        end
+        return false if _features.is_a?(OpenApi::Validatable) && !_features.valid?
       end
 
       if _platform_restrictions = @platform_restrictions
-        if _platform_restrictions.is_a?(OpenApi::Validatable)
-          return false unless _platform_restrictions.valid?
-        end
+        return false if _platform_restrictions.is_a?(OpenApi::Validatable) && !_platform_restrictions.valid?
       end
 
       true
@@ -122,9 +114,7 @@ module Stripe
         return @features = nil
       end
       _features = features.not_nil!
-      if _features.is_a?(OpenApi::Validatable)
-        _features.validate
-      end
+      _features.validate if _features.is_a?(OpenApi::Validatable)
       @features = _features
     end
 
@@ -145,9 +135,7 @@ module Stripe
         return @platform_restrictions = nil
       end
       _platform_restrictions = platform_restrictions.not_nil!
-      if _platform_restrictions.is_a?(OpenApi::Validatable)
-        _platform_restrictions.validate
-      end
+      _platform_restrictions.validate if _platform_restrictions.is_a?(OpenApi::Validatable)
       @platform_restrictions = _platform_restrictions
     end
 

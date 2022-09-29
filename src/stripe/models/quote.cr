@@ -36,7 +36,7 @@ module Stripe
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_COLLECTION_METHOD = EnumValidator.new("collection_method", "String", ["charge_automatically", "send_invoice"])
+    ENUM_VALIDATOR_FOR_COLLECTION_METHOD = OpenApi::EnumValidator.new("collection_method", "String", ["charge_automatically", "send_invoice"])
 
     @[JSON::Field(key: "computed", type: Stripe::QuotesResourceComputed?, default: nil, required: true, nullable: false, emit_null: false)]
     getter computed : Stripe::QuotesResourceComputed? = nil
@@ -69,13 +69,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["quote"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["quote"])
 
     # The status of the quote.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["accepted", "canceled", "draft", "open"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["accepted", "canceled", "draft", "open"])
 
     @[JSON::Field(key: "status_transitions", type: Stripe::QuotesResourceStatusTransitions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_transitions : Stripe::QuotesResourceStatusTransitions? = nil
@@ -258,36 +258,26 @@ module Stripe
 
       invalid_properties.push("\"automatic_tax\" is required and cannot be null") if @automatic_tax.nil?
       if _automatic_tax = @automatic_tax
-        if _automatic_tax.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax"))
-        end
+        invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECTION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method, false)
       invalid_properties.push("\"computed\" is required and cannot be null") if @computed.nil?
       if _computed = @computed
-        if _computed.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_computed.list_invalid_properties_for("computed"))
-        end
+        invalid_properties.concat(_computed.list_invalid_properties_for("computed")) if _computed.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"discounts\" is required and cannot be null") if @discounts.nil?
       if _discounts = @discounts
-        if _discounts.is_a?(Array)
-          _discounts.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("discounts"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "discounts", array: _discounts)) if _discounts.is_a?(Array)
       end
       invalid_properties.push("\"expires_at\" is required and cannot be null") if @expires_at.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -299,111 +289,77 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       invalid_properties.push("\"status_transitions\" is required and cannot be null") if @status_transitions.nil?
       if _status_transitions = @status_transitions
-        if _status_transitions.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_status_transitions.list_invalid_properties_for("status_transitions"))
-        end
+        invalid_properties.concat(_status_transitions.list_invalid_properties_for("status_transitions")) if _status_transitions.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"subscription_data\" is required and cannot be null") if @subscription_data.nil?
       if _subscription_data = @subscription_data
-        if _subscription_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_subscription_data.list_invalid_properties_for("subscription_data"))
-        end
+        invalid_properties.concat(_subscription_data.list_invalid_properties_for("subscription_data")) if _subscription_data.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"total_details\" is required and cannot be null") if @total_details.nil?
       if _total_details = @total_details
-        if _total_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_total_details.list_invalid_properties_for("total_details"))
-        end
+        invalid_properties.concat(_total_details.list_invalid_properties_for("total_details")) if _total_details.is_a?(OpenApi::Validatable)
       end
       if _application = @application
-        if _application.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_application.list_invalid_properties_for("application"))
-        end
+        invalid_properties.concat(_application.list_invalid_properties_for("application")) if _application.is_a?(OpenApi::Validatable)
       end
 
       if _currency = @currency
-        if _currency.to_s.size > 5000
-          invalid_properties.push("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _customer = @customer
-        if _customer.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_customer.list_invalid_properties_for("customer"))
-        end
+        invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
       if _default_tax_rates = @default_tax_rates
-        if _default_tax_rates.is_a?(Array)
-          _default_tax_rates.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("default_tax_rates"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "default_tax_rates", array: _default_tax_rates)) if _default_tax_rates.is_a?(Array)
       end
       if _description = @description
-        if _description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _footer = @footer
-        if _footer.to_s.size > 5000
-          invalid_properties.push("invalid value for \"footer\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _from_quote = @from_quote
-        if _from_quote.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_from_quote.list_invalid_properties_for("from_quote"))
-        end
+        invalid_properties.concat(_from_quote.list_invalid_properties_for("from_quote")) if _from_quote.is_a?(OpenApi::Validatable)
       end
       if _header = @header
-        if _header.to_s.size > 5000
-          invalid_properties.push("invalid value for \"header\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("header", _header.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _invoice = @invoice
-        if _invoice.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_invoice.list_invalid_properties_for("invoice"))
-        end
+        invalid_properties.concat(_invoice.list_invalid_properties_for("invoice")) if _invoice.is_a?(OpenApi::Validatable)
       end
       if _invoice_settings = @invoice_settings
-        if _invoice_settings.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_invoice_settings.list_invalid_properties_for("invoice_settings"))
-        end
+        invalid_properties.concat(_invoice_settings.list_invalid_properties_for("invoice_settings")) if _invoice_settings.is_a?(OpenApi::Validatable)
       end
       if _line_items = @line_items
-        if _line_items.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_line_items.list_invalid_properties_for("line_items"))
-        end
+        invalid_properties.concat(_line_items.list_invalid_properties_for("line_items")) if _line_items.is_a?(OpenApi::Validatable)
       end
       if _number = @number
-        if _number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _on_behalf_of = @on_behalf_of
-        if _on_behalf_of.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_on_behalf_of.list_invalid_properties_for("on_behalf_of"))
-        end
+        invalid_properties.concat(_on_behalf_of.list_invalid_properties_for("on_behalf_of")) if _on_behalf_of.is_a?(OpenApi::Validatable)
       end
       if _subscription = @subscription
-        if _subscription.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_subscription.list_invalid_properties_for("subscription"))
-        end
+        invalid_properties.concat(_subscription.list_invalid_properties_for("subscription")) if _subscription.is_a?(OpenApi::Validatable)
       end
       if _subscription_schedule = @subscription_schedule
-        if _subscription_schedule.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_subscription_schedule.list_invalid_properties_for("subscription_schedule"))
-        end
+        invalid_properties.concat(_subscription_schedule.list_invalid_properties_for("subscription_schedule")) if _subscription_schedule.is_a?(OpenApi::Validatable)
       end
       if _test_clock = @test_clock
-        if _test_clock.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_test_clock.list_invalid_properties_for("test_clock"))
-        end
+        invalid_properties.concat(_test_clock.list_invalid_properties_for("test_clock")) if _test_clock.is_a?(OpenApi::Validatable)
       end
       if _transfer_data = @transfer_data
-        if _transfer_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data"))
-        end
+        invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -418,28 +374,18 @@ module Stripe
 
       return false if @automatic_tax.nil?
       if _automatic_tax = @automatic_tax
-        if _automatic_tax.is_a?(OpenApi::Validatable)
-          return false unless _automatic_tax.valid?
-        end
+        return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method, false)
       return false if @computed.nil?
       if _computed = @computed
-        if _computed.is_a?(OpenApi::Validatable)
-          return false unless _computed.valid?
-        end
+        return false if _computed.is_a?(OpenApi::Validatable) && !_computed.valid?
       end
       return false if @created.nil?
 
       return false if @discounts.nil?
       if _discounts = @discounts
-        if _discounts.is_a?(Array)
-          _discounts.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _discounts.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _discounts)
       end
       return false if @expires_at.nil?
 
@@ -455,44 +401,28 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
       return false if @status_transitions.nil?
       if _status_transitions = @status_transitions
-        if _status_transitions.is_a?(OpenApi::Validatable)
-          return false unless _status_transitions.valid?
-        end
+        return false if _status_transitions.is_a?(OpenApi::Validatable) && !_status_transitions.valid?
       end
       return false if @subscription_data.nil?
       if _subscription_data = @subscription_data
-        if _subscription_data.is_a?(OpenApi::Validatable)
-          return false unless _subscription_data.valid?
-        end
+        return false if _subscription_data.is_a?(OpenApi::Validatable) && !_subscription_data.valid?
       end
       return false if @total_details.nil?
       if _total_details = @total_details
-        if _total_details.is_a?(OpenApi::Validatable)
-          return false unless _total_details.valid?
-        end
+        return false if _total_details.is_a?(OpenApi::Validatable) && !_total_details.valid?
       end
       if _application = @application
-        if _application.is_a?(OpenApi::Validatable)
-          return false unless _application.valid?
-        end
+        return false if _application.is_a?(OpenApi::Validatable) && !_application.valid?
       end
 
       if _currency = @currency
         return false if _currency.to_s.size > 5000
       end
       if _customer = @customer
-        if _customer.is_a?(OpenApi::Validatable)
-          return false unless _customer.valid?
-        end
+        return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
       if _default_tax_rates = @default_tax_rates
-        if _default_tax_rates.is_a?(Array)
-          _default_tax_rates.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _default_tax_rates.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _default_tax_rates)
       end
       if _description = @description
         return false if _description.to_s.size > 5000
@@ -501,55 +431,37 @@ module Stripe
         return false if _footer.to_s.size > 5000
       end
       if _from_quote = @from_quote
-        if _from_quote.is_a?(OpenApi::Validatable)
-          return false unless _from_quote.valid?
-        end
+        return false if _from_quote.is_a?(OpenApi::Validatable) && !_from_quote.valid?
       end
       if _header = @header
         return false if _header.to_s.size > 5000
       end
       if _invoice = @invoice
-        if _invoice.is_a?(OpenApi::Validatable)
-          return false unless _invoice.valid?
-        end
+        return false if _invoice.is_a?(OpenApi::Validatable) && !_invoice.valid?
       end
       if _invoice_settings = @invoice_settings
-        if _invoice_settings.is_a?(OpenApi::Validatable)
-          return false unless _invoice_settings.valid?
-        end
+        return false if _invoice_settings.is_a?(OpenApi::Validatable) && !_invoice_settings.valid?
       end
       if _line_items = @line_items
-        if _line_items.is_a?(OpenApi::Validatable)
-          return false unless _line_items.valid?
-        end
+        return false if _line_items.is_a?(OpenApi::Validatable) && !_line_items.valid?
       end
       if _number = @number
         return false if _number.to_s.size > 5000
       end
       if _on_behalf_of = @on_behalf_of
-        if _on_behalf_of.is_a?(OpenApi::Validatable)
-          return false unless _on_behalf_of.valid?
-        end
+        return false if _on_behalf_of.is_a?(OpenApi::Validatable) && !_on_behalf_of.valid?
       end
       if _subscription = @subscription
-        if _subscription.is_a?(OpenApi::Validatable)
-          return false unless _subscription.valid?
-        end
+        return false if _subscription.is_a?(OpenApi::Validatable) && !_subscription.valid?
       end
       if _subscription_schedule = @subscription_schedule
-        if _subscription_schedule.is_a?(OpenApi::Validatable)
-          return false unless _subscription_schedule.valid?
-        end
+        return false if _subscription_schedule.is_a?(OpenApi::Validatable) && !_subscription_schedule.valid?
       end
       if _test_clock = @test_clock
-        if _test_clock.is_a?(OpenApi::Validatable)
-          return false unless _test_clock.valid?
-        end
+        return false if _test_clock.is_a?(OpenApi::Validatable) && !_test_clock.valid?
       end
       if _transfer_data = @transfer_data
-        if _transfer_data.is_a?(OpenApi::Validatable)
-          return false unless _transfer_data.valid?
-        end
+        return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
 
       true
@@ -582,9 +494,7 @@ module Stripe
         raise ArgumentError.new("\"automatic_tax\" is required and cannot be null")
       end
       _automatic_tax = automatic_tax.not_nil!
-      if _automatic_tax.is_a?(OpenApi::Validatable)
-        _automatic_tax.validate
-      end
+      _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
       @automatic_tax = _automatic_tax
     end
 
@@ -606,9 +516,7 @@ module Stripe
         raise ArgumentError.new("\"computed\" is required and cannot be null")
       end
       _computed = computed.not_nil!
-      if _computed.is_a?(OpenApi::Validatable)
-        _computed.validate
-      end
+      _computed.validate if _computed.is_a?(OpenApi::Validatable)
       @computed = _computed
     end
 
@@ -629,13 +537,7 @@ module Stripe
         raise ArgumentError.new("\"discounts\" is required and cannot be null")
       end
       _discounts = discounts.not_nil!
-      if _discounts.is_a?(Array)
-        _discounts.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _discounts) if _discounts.is_a?(Array)
       @discounts = _discounts
     end
 
@@ -656,8 +558,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -712,9 +614,7 @@ module Stripe
         raise ArgumentError.new("\"status_transitions\" is required and cannot be null")
       end
       _status_transitions = status_transitions.not_nil!
-      if _status_transitions.is_a?(OpenApi::Validatable)
-        _status_transitions.validate
-      end
+      _status_transitions.validate if _status_transitions.is_a?(OpenApi::Validatable)
       @status_transitions = _status_transitions
     end
 
@@ -725,9 +625,7 @@ module Stripe
         raise ArgumentError.new("\"subscription_data\" is required and cannot be null")
       end
       _subscription_data = subscription_data.not_nil!
-      if _subscription_data.is_a?(OpenApi::Validatable)
-        _subscription_data.validate
-      end
+      _subscription_data.validate if _subscription_data.is_a?(OpenApi::Validatable)
       @subscription_data = _subscription_data
     end
 
@@ -738,9 +636,7 @@ module Stripe
         raise ArgumentError.new("\"total_details\" is required and cannot be null")
       end
       _total_details = total_details.not_nil!
-      if _total_details.is_a?(OpenApi::Validatable)
-        _total_details.validate
-      end
+      _total_details.validate if _total_details.is_a?(OpenApi::Validatable)
       @total_details = _total_details
     end
 
@@ -751,9 +647,7 @@ module Stripe
         return @application = nil
       end
       _application = application.not_nil!
-      if _application.is_a?(OpenApi::Validatable)
-        _application.validate
-      end
+      _application.validate if _application.is_a?(OpenApi::Validatable)
       @application = _application
     end
 
@@ -784,8 +678,8 @@ module Stripe
         return @currency = nil
       end
       _currency = currency.not_nil!
-      if _currency.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"currency\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @currency = _currency
@@ -798,9 +692,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if _customer.is_a?(OpenApi::Validatable)
-        _customer.validate
-      end
+      _customer.validate if _customer.is_a?(OpenApi::Validatable)
       @customer = _customer
     end
 
@@ -811,13 +703,7 @@ module Stripe
         return @default_tax_rates = nil
       end
       _default_tax_rates = default_tax_rates.not_nil!
-      if _default_tax_rates.is_a?(Array)
-        _default_tax_rates.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _default_tax_rates) if _default_tax_rates.is_a?(Array)
       @default_tax_rates = _default_tax_rates
     end
 
@@ -828,8 +714,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -842,8 +728,8 @@ module Stripe
         return @footer = nil
       end
       _footer = footer.not_nil!
-      if _footer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"footer\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @footer = _footer
@@ -856,9 +742,7 @@ module Stripe
         return @from_quote = nil
       end
       _from_quote = from_quote.not_nil!
-      if _from_quote.is_a?(OpenApi::Validatable)
-        _from_quote.validate
-      end
+      _from_quote.validate if _from_quote.is_a?(OpenApi::Validatable)
       @from_quote = _from_quote
     end
 
@@ -869,8 +753,8 @@ module Stripe
         return @header = nil
       end
       _header = header.not_nil!
-      if _header.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"header\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("header", _header.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @header = _header
@@ -883,9 +767,7 @@ module Stripe
         return @invoice = nil
       end
       _invoice = invoice.not_nil!
-      if _invoice.is_a?(OpenApi::Validatable)
-        _invoice.validate
-      end
+      _invoice.validate if _invoice.is_a?(OpenApi::Validatable)
       @invoice = _invoice
     end
 
@@ -896,9 +778,7 @@ module Stripe
         return @invoice_settings = nil
       end
       _invoice_settings = invoice_settings.not_nil!
-      if _invoice_settings.is_a?(OpenApi::Validatable)
-        _invoice_settings.validate
-      end
+      _invoice_settings.validate if _invoice_settings.is_a?(OpenApi::Validatable)
       @invoice_settings = _invoice_settings
     end
 
@@ -909,9 +789,7 @@ module Stripe
         return @line_items = nil
       end
       _line_items = line_items.not_nil!
-      if _line_items.is_a?(OpenApi::Validatable)
-        _line_items.validate
-      end
+      _line_items.validate if _line_items.is_a?(OpenApi::Validatable)
       @line_items = _line_items
     end
 
@@ -922,8 +800,8 @@ module Stripe
         return @number = nil
       end
       _number = number.not_nil!
-      if _number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @number = _number
@@ -936,9 +814,7 @@ module Stripe
         return @on_behalf_of = nil
       end
       _on_behalf_of = on_behalf_of.not_nil!
-      if _on_behalf_of.is_a?(OpenApi::Validatable)
-        _on_behalf_of.validate
-      end
+      _on_behalf_of.validate if _on_behalf_of.is_a?(OpenApi::Validatable)
       @on_behalf_of = _on_behalf_of
     end
 
@@ -949,9 +825,7 @@ module Stripe
         return @subscription = nil
       end
       _subscription = subscription.not_nil!
-      if _subscription.is_a?(OpenApi::Validatable)
-        _subscription.validate
-      end
+      _subscription.validate if _subscription.is_a?(OpenApi::Validatable)
       @subscription = _subscription
     end
 
@@ -962,9 +836,7 @@ module Stripe
         return @subscription_schedule = nil
       end
       _subscription_schedule = subscription_schedule.not_nil!
-      if _subscription_schedule.is_a?(OpenApi::Validatable)
-        _subscription_schedule.validate
-      end
+      _subscription_schedule.validate if _subscription_schedule.is_a?(OpenApi::Validatable)
       @subscription_schedule = _subscription_schedule
     end
 
@@ -975,9 +847,7 @@ module Stripe
         return @test_clock = nil
       end
       _test_clock = test_clock.not_nil!
-      if _test_clock.is_a?(OpenApi::Validatable)
-        _test_clock.validate
-      end
+      _test_clock.validate if _test_clock.is_a?(OpenApi::Validatable)
       @test_clock = _test_clock
     end
 
@@ -988,9 +858,7 @@ module Stripe
         return @transfer_data = nil
       end
       _transfer_data = transfer_data.not_nil!
-      if _transfer_data.is_a?(OpenApi::Validatable)
-        _transfer_data.validate
-      end
+      _transfer_data.validate if _transfer_data.is_a?(OpenApi::Validatable)
       @transfer_data = _transfer_data
     end
 

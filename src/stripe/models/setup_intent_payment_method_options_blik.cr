@@ -38,9 +38,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _mandate_options = @mandate_options
-        if _mandate_options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options"))
-        end
+        invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -50,9 +48,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _mandate_options = @mandate_options
-        if _mandate_options.is_a?(OpenApi::Validatable)
-          return false unless _mandate_options.valid?
-        end
+        return false if _mandate_options.is_a?(OpenApi::Validatable) && !_mandate_options.valid?
       end
 
       true
@@ -65,9 +61,7 @@ module Stripe
         return @mandate_options = nil
       end
       _mandate_options = mandate_options.not_nil!
-      if _mandate_options.is_a?(OpenApi::Validatable)
-        _mandate_options.validate
-      end
+      _mandate_options.validate if _mandate_options.is_a?(OpenApi::Validatable)
       @mandate_options = _mandate_options
     end
 

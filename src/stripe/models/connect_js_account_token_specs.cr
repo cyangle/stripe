@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "business_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter business_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_BUSINESS_TYPE = EnumValidator.new("business_type", "String", ["company", "government_entity", "individual", "non_profit"])
+    ENUM_VALIDATOR_FOR_BUSINESS_TYPE = OpenApi::EnumValidator.new("business_type", "String", ["company", "government_entity", "individual", "non_profit"])
 
     @[JSON::Field(key: "company", type: Stripe::ConnectJsAccountTokenCompanySpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter company : Stripe::ConnectJsAccountTokenCompanySpecs? = nil
@@ -54,14 +54,10 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BUSINESS_TYPE.error_message) unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
       if _company = @company
-        if _company.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_company.list_invalid_properties_for("company"))
-        end
+        invalid_properties.concat(_company.list_invalid_properties_for("company")) if _company.is_a?(OpenApi::Validatable)
       end
       if _individual = @individual
-        if _individual.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_individual.list_invalid_properties_for("individual"))
-        end
+        invalid_properties.concat(_individual.list_invalid_properties_for("individual")) if _individual.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -72,14 +68,10 @@ module Stripe
     def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
       if _company = @company
-        if _company.is_a?(OpenApi::Validatable)
-          return false unless _company.valid?
-        end
+        return false if _company.is_a?(OpenApi::Validatable) && !_company.valid?
       end
       if _individual = @individual
-        if _individual.is_a?(OpenApi::Validatable)
-          return false unless _individual.valid?
-        end
+        return false if _individual.is_a?(OpenApi::Validatable) && !_individual.valid?
       end
 
       true
@@ -103,9 +95,7 @@ module Stripe
         return @company = nil
       end
       _company = company.not_nil!
-      if _company.is_a?(OpenApi::Validatable)
-        _company.validate
-      end
+      _company.validate if _company.is_a?(OpenApi::Validatable)
       @company = _company
     end
 
@@ -116,9 +106,7 @@ module Stripe
         return @individual = nil
       end
       _individual = individual.not_nil!
-      if _individual.is_a?(OpenApi::Validatable)
-        _individual.validate
-      end
+      _individual.validate if _individual.is_a?(OpenApi::Validatable)
       @individual = _individual
     end
 

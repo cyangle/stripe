@@ -59,39 +59,27 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"customer_update\" is required and cannot be null") if @customer_update.nil?
       if _customer_update = @customer_update
-        if _customer_update.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_customer_update.list_invalid_properties_for("customer_update"))
-        end
+        invalid_properties.concat(_customer_update.list_invalid_properties_for("customer_update")) if _customer_update.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"invoice_history\" is required and cannot be null") if @invoice_history.nil?
       if _invoice_history = @invoice_history
-        if _invoice_history.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_invoice_history.list_invalid_properties_for("invoice_history"))
-        end
+        invalid_properties.concat(_invoice_history.list_invalid_properties_for("invoice_history")) if _invoice_history.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"payment_method_update\" is required and cannot be null") if @payment_method_update.nil?
       if _payment_method_update = @payment_method_update
-        if _payment_method_update.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_method_update.list_invalid_properties_for("payment_method_update"))
-        end
+        invalid_properties.concat(_payment_method_update.list_invalid_properties_for("payment_method_update")) if _payment_method_update.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"subscription_cancel\" is required and cannot be null") if @subscription_cancel.nil?
       if _subscription_cancel = @subscription_cancel
-        if _subscription_cancel.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_subscription_cancel.list_invalid_properties_for("subscription_cancel"))
-        end
+        invalid_properties.concat(_subscription_cancel.list_invalid_properties_for("subscription_cancel")) if _subscription_cancel.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"subscription_pause\" is required and cannot be null") if @subscription_pause.nil?
       if _subscription_pause = @subscription_pause
-        if _subscription_pause.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_subscription_pause.list_invalid_properties_for("subscription_pause"))
-        end
+        invalid_properties.concat(_subscription_pause.list_invalid_properties_for("subscription_pause")) if _subscription_pause.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"subscription_update\" is required and cannot be null") if @subscription_update.nil?
       if _subscription_update = @subscription_update
-        if _subscription_update.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_subscription_update.list_invalid_properties_for("subscription_update"))
-        end
+        invalid_properties.concat(_subscription_update.list_invalid_properties_for("subscription_update")) if _subscription_update.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -102,39 +90,27 @@ module Stripe
     def valid? : Bool
       return false if @customer_update.nil?
       if _customer_update = @customer_update
-        if _customer_update.is_a?(OpenApi::Validatable)
-          return false unless _customer_update.valid?
-        end
+        return false if _customer_update.is_a?(OpenApi::Validatable) && !_customer_update.valid?
       end
       return false if @invoice_history.nil?
       if _invoice_history = @invoice_history
-        if _invoice_history.is_a?(OpenApi::Validatable)
-          return false unless _invoice_history.valid?
-        end
+        return false if _invoice_history.is_a?(OpenApi::Validatable) && !_invoice_history.valid?
       end
       return false if @payment_method_update.nil?
       if _payment_method_update = @payment_method_update
-        if _payment_method_update.is_a?(OpenApi::Validatable)
-          return false unless _payment_method_update.valid?
-        end
+        return false if _payment_method_update.is_a?(OpenApi::Validatable) && !_payment_method_update.valid?
       end
       return false if @subscription_cancel.nil?
       if _subscription_cancel = @subscription_cancel
-        if _subscription_cancel.is_a?(OpenApi::Validatable)
-          return false unless _subscription_cancel.valid?
-        end
+        return false if _subscription_cancel.is_a?(OpenApi::Validatable) && !_subscription_cancel.valid?
       end
       return false if @subscription_pause.nil?
       if _subscription_pause = @subscription_pause
-        if _subscription_pause.is_a?(OpenApi::Validatable)
-          return false unless _subscription_pause.valid?
-        end
+        return false if _subscription_pause.is_a?(OpenApi::Validatable) && !_subscription_pause.valid?
       end
       return false if @subscription_update.nil?
       if _subscription_update = @subscription_update
-        if _subscription_update.is_a?(OpenApi::Validatable)
-          return false unless _subscription_update.valid?
-        end
+        return false if _subscription_update.is_a?(OpenApi::Validatable) && !_subscription_update.valid?
       end
 
       true
@@ -147,9 +123,7 @@ module Stripe
         raise ArgumentError.new("\"customer_update\" is required and cannot be null")
       end
       _customer_update = customer_update.not_nil!
-      if _customer_update.is_a?(OpenApi::Validatable)
-        _customer_update.validate
-      end
+      _customer_update.validate if _customer_update.is_a?(OpenApi::Validatable)
       @customer_update = _customer_update
     end
 
@@ -160,9 +134,7 @@ module Stripe
         raise ArgumentError.new("\"invoice_history\" is required and cannot be null")
       end
       _invoice_history = invoice_history.not_nil!
-      if _invoice_history.is_a?(OpenApi::Validatable)
-        _invoice_history.validate
-      end
+      _invoice_history.validate if _invoice_history.is_a?(OpenApi::Validatable)
       @invoice_history = _invoice_history
     end
 
@@ -173,9 +145,7 @@ module Stripe
         raise ArgumentError.new("\"payment_method_update\" is required and cannot be null")
       end
       _payment_method_update = payment_method_update.not_nil!
-      if _payment_method_update.is_a?(OpenApi::Validatable)
-        _payment_method_update.validate
-      end
+      _payment_method_update.validate if _payment_method_update.is_a?(OpenApi::Validatable)
       @payment_method_update = _payment_method_update
     end
 
@@ -186,9 +156,7 @@ module Stripe
         raise ArgumentError.new("\"subscription_cancel\" is required and cannot be null")
       end
       _subscription_cancel = subscription_cancel.not_nil!
-      if _subscription_cancel.is_a?(OpenApi::Validatable)
-        _subscription_cancel.validate
-      end
+      _subscription_cancel.validate if _subscription_cancel.is_a?(OpenApi::Validatable)
       @subscription_cancel = _subscription_cancel
     end
 
@@ -199,9 +167,7 @@ module Stripe
         raise ArgumentError.new("\"subscription_pause\" is required and cannot be null")
       end
       _subscription_pause = subscription_pause.not_nil!
-      if _subscription_pause.is_a?(OpenApi::Validatable)
-        _subscription_pause.validate
-      end
+      _subscription_pause.validate if _subscription_pause.is_a?(OpenApi::Validatable)
       @subscription_pause = _subscription_pause
     end
 
@@ -212,9 +178,7 @@ module Stripe
         raise ArgumentError.new("\"subscription_update\" is required and cannot be null")
       end
       _subscription_update = subscription_update.not_nil!
-      if _subscription_update.is_a?(OpenApi::Validatable)
-        _subscription_update.validate
-      end
+      _subscription_update.validate if _subscription_update.is_a?(OpenApi::Validatable)
       @subscription_update = _subscription_update
     end
 

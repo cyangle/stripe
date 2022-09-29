@@ -75,23 +75,17 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _passenger_name = @passenger_name
-        if _passenger_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"passenger_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("passenger_name", _passenger_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _segments = @segments
-        if _segments.is_a?(Array)
-          _segments.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("segments"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "segments", array: _segments)) if _segments.is_a?(Array)
       end
       if _travel_agency = @travel_agency
-        if _travel_agency.to_s.size > 5000
-          invalid_properties.push("invalid value for \"travel_agency\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("travel_agency", _travel_agency.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -106,13 +100,7 @@ module Stripe
       end
 
       if _segments = @segments
-        if _segments.is_a?(Array)
-          _segments.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _segments.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _segments)
       end
       if _travel_agency = @travel_agency
         return false if _travel_agency.to_s.size > 5000
@@ -138,8 +126,8 @@ module Stripe
         return @passenger_name = nil
       end
       _passenger_name = passenger_name.not_nil!
-      if _passenger_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"passenger_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("passenger_name", _passenger_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @passenger_name = _passenger_name
@@ -162,13 +150,7 @@ module Stripe
         return @segments = nil
       end
       _segments = segments.not_nil!
-      if _segments.is_a?(Array)
-        _segments.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _segments) if _segments.is_a?(Array)
       @segments = _segments
     end
 
@@ -179,8 +161,8 @@ module Stripe
         return @travel_agency = nil
       end
       _travel_agency = travel_agency.not_nil!
-      if _travel_agency.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"travel_agency\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("travel_agency", _travel_agency.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @travel_agency = _travel_agency

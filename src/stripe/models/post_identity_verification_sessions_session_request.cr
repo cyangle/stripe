@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["document", "id_number"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["document", "id_number"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -55,9 +55,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _options = @options
-        if _options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_options.list_invalid_properties_for("options"))
-        end
+        invalid_properties.concat(_options.list_invalid_properties_for("options")) if _options.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
@@ -69,9 +67,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _options = @options
-        if _options.is_a?(OpenApi::Validatable)
-          return false unless _options.valid?
-        end
+        return false if _options.is_a?(OpenApi::Validatable) && !_options.valid?
       end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
 
@@ -105,9 +101,7 @@ module Stripe
         return @options = nil
       end
       _options = options.not_nil!
-      if _options.is_a?(OpenApi::Validatable)
-        _options.validate
-      end
+      _options.validate if _options.is_a?(OpenApi::Validatable)
       @options = _options
     end
 

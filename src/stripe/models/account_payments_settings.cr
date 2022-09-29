@@ -74,28 +74,28 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _statement_descriptor = @statement_descriptor
-        if _statement_descriptor.to_s.size > 5000
-          invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_kana = @statement_descriptor_kana
-        if _statement_descriptor_kana.to_s.size > 5000
-          invalid_properties.push("invalid value for \"statement_descriptor_kana\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_kana", _statement_descriptor_kana.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_kanji = @statement_descriptor_kanji
-        if _statement_descriptor_kanji.to_s.size > 5000
-          invalid_properties.push("invalid value for \"statement_descriptor_kanji\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_kanji", _statement_descriptor_kanji.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana
-        if _statement_descriptor_prefix_kana.to_s.size > 5000
-          invalid_properties.push("invalid value for \"statement_descriptor_prefix_kana\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix_kana", _statement_descriptor_prefix_kana.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji
-        if _statement_descriptor_prefix_kanji.to_s.size > 5000
-          invalid_properties.push("invalid value for \"statement_descriptor_prefix_kanji\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix_kanji", _statement_descriptor_prefix_kanji.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -131,8 +131,8 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if _statement_descriptor.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor = _statement_descriptor
@@ -145,8 +145,8 @@ module Stripe
         return @statement_descriptor_kana = nil
       end
       _statement_descriptor_kana = statement_descriptor_kana.not_nil!
-      if _statement_descriptor_kana.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"statement_descriptor_kana\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_kana", _statement_descriptor_kana.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor_kana = _statement_descriptor_kana
@@ -159,8 +159,8 @@ module Stripe
         return @statement_descriptor_kanji = nil
       end
       _statement_descriptor_kanji = statement_descriptor_kanji.not_nil!
-      if _statement_descriptor_kanji.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"statement_descriptor_kanji\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_kanji", _statement_descriptor_kanji.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor_kanji = _statement_descriptor_kanji
@@ -173,8 +173,8 @@ module Stripe
         return @statement_descriptor_prefix_kana = nil
       end
       _statement_descriptor_prefix_kana = statement_descriptor_prefix_kana.not_nil!
-      if _statement_descriptor_prefix_kana.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"statement_descriptor_prefix_kana\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix_kana", _statement_descriptor_prefix_kana.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor_prefix_kana = _statement_descriptor_prefix_kana
@@ -187,8 +187,8 @@ module Stripe
         return @statement_descriptor_prefix_kanji = nil
       end
       _statement_descriptor_prefix_kanji = statement_descriptor_prefix_kanji.not_nil!
-      if _statement_descriptor_prefix_kanji.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"statement_descriptor_prefix_kanji\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix_kanji", _statement_descriptor_prefix_kanji.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor_prefix_kanji = _statement_descriptor_prefix_kanji

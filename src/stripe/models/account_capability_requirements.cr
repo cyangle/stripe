@@ -89,13 +89,7 @@ module Stripe
 
       invalid_properties.push("\"errors\" is required and cannot be null") if @errors.nil?
       if _errors = @errors
-        if _errors.is_a?(Array)
-          _errors.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("errors"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "errors", array: _errors)) if _errors.is_a?(Array)
       end
       invalid_properties.push("\"eventually_due\" is required and cannot be null") if @eventually_due.nil?
 
@@ -104,18 +98,12 @@ module Stripe
       invalid_properties.push("\"pending_verification\" is required and cannot be null") if @pending_verification.nil?
 
       if _alternatives = @alternatives
-        if _alternatives.is_a?(Array)
-          _alternatives.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("alternatives"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "alternatives", array: _alternatives)) if _alternatives.is_a?(Array)
       end
 
       if _disabled_reason = @disabled_reason
-        if _disabled_reason.to_s.size > 5000
-          invalid_properties.push("invalid value for \"disabled_reason\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("disabled_reason", _disabled_reason.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -129,13 +117,7 @@ module Stripe
 
       return false if @errors.nil?
       if _errors = @errors
-        if _errors.is_a?(Array)
-          _errors.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _errors.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _errors)
       end
       return false if @eventually_due.nil?
 
@@ -144,13 +126,7 @@ module Stripe
       return false if @pending_verification.nil?
 
       if _alternatives = @alternatives
-        if _alternatives.is_a?(Array)
-          _alternatives.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _alternatives.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _alternatives)
       end
 
       if _disabled_reason = @disabled_reason
@@ -177,13 +153,7 @@ module Stripe
         raise ArgumentError.new("\"errors\" is required and cannot be null")
       end
       _errors = errors.not_nil!
-      if _errors.is_a?(Array)
-        _errors.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _errors) if _errors.is_a?(Array)
       @errors = _errors
     end
 
@@ -224,13 +194,7 @@ module Stripe
         return @alternatives = nil
       end
       _alternatives = alternatives.not_nil!
-      if _alternatives.is_a?(Array)
-        _alternatives.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _alternatives) if _alternatives.is_a?(Array)
       @alternatives = _alternatives
     end
 
@@ -251,8 +215,8 @@ module Stripe
         return @disabled_reason = nil
       end
       _disabled_reason = disabled_reason.not_nil!
-      if _disabled_reason.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"disabled_reason\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("disabled_reason", _disabled_reason.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @disabled_reason = _disabled_reason

@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "source", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter source : String? = nil
 
-    ENUM_VALIDATOR_FOR_SOURCE = EnumValidator.new("source", "String", ["billing_address", "ip_address", "payment_method", "shipping_destination"])
+    ENUM_VALIDATOR_FOR_SOURCE = OpenApi::EnumValidator.new("source", "String", ["billing_address", "ip_address", "payment_method", "shipping_destination"])
 
     # Optional properties
 
@@ -58,15 +58,15 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
       if _country = @country
-        if _country.to_s.size > 5000
-          invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SOURCE.error_message) unless ENUM_VALIDATOR_FOR_SOURCE.valid?(@source, false)
       if _state = @state
-        if _state.to_s.size > 5000
-          invalid_properties.push("invalid value for \"state\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -95,8 +95,8 @@ module Stripe
         raise ArgumentError.new("\"country\" is required and cannot be null")
       end
       _country = country.not_nil!
-      if _country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @country = _country
@@ -120,8 +120,8 @@ module Stripe
         return @state = nil
       end
       _state = state.not_nil!
-      if _state.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"state\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @state = _state

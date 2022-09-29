@@ -46,9 +46,7 @@ module Stripe
 
       invalid_properties.push("\"rate\" is required and cannot be null") if @rate.nil?
       if _rate = @rate
-        if _rate.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_rate.list_invalid_properties_for("rate"))
-        end
+        invalid_properties.concat(_rate.list_invalid_properties_for("rate")) if _rate.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -61,9 +59,7 @@ module Stripe
 
       return false if @rate.nil?
       if _rate = @rate
-        if _rate.is_a?(OpenApi::Validatable)
-          return false unless _rate.valid?
-        end
+        return false if _rate.is_a?(OpenApi::Validatable) && !_rate.valid?
       end
 
       true
@@ -86,9 +82,7 @@ module Stripe
         raise ArgumentError.new("\"rate\" is required and cannot be null")
       end
       _rate = rate.not_nil!
-      if _rate.is_a?(OpenApi::Validatable)
-        _rate.validate
-      end
+      _rate.validate if _rate.is_a?(OpenApi::Validatable)
       @rate = _rate
     end
 

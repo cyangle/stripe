@@ -50,20 +50,14 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _bbpos_wisepos_e = @bbpos_wisepos_e
-        if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_bbpos_wisepos_e.list_invalid_properties_for("bbpos_wisepos_e"))
-        end
+        invalid_properties.concat(_bbpos_wisepos_e.list_invalid_properties_for("bbpos_wisepos_e")) if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
       end
 
       if _tipping = @tipping
-        if _tipping.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_tipping.list_invalid_properties_for("tipping"))
-        end
+        invalid_properties.concat(_tipping.list_invalid_properties_for("tipping")) if _tipping.is_a?(OpenApi::Validatable)
       end
       if _verifone_p400 = @verifone_p400
-        if _verifone_p400.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_verifone_p400.list_invalid_properties_for("verifone_p400"))
-        end
+        invalid_properties.concat(_verifone_p400.list_invalid_properties_for("verifone_p400")) if _verifone_p400.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -73,20 +67,14 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _bbpos_wisepos_e = @bbpos_wisepos_e
-        if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
-          return false unless _bbpos_wisepos_e.valid?
-        end
+        return false if _bbpos_wisepos_e.is_a?(OpenApi::Validatable) && !_bbpos_wisepos_e.valid?
       end
 
       if _tipping = @tipping
-        if _tipping.is_a?(OpenApi::Validatable)
-          return false unless _tipping.valid?
-        end
+        return false if _tipping.is_a?(OpenApi::Validatable) && !_tipping.valid?
       end
       if _verifone_p400 = @verifone_p400
-        if _verifone_p400.is_a?(OpenApi::Validatable)
-          return false unless _verifone_p400.valid?
-        end
+        return false if _verifone_p400.is_a?(OpenApi::Validatable) && !_verifone_p400.valid?
       end
 
       true
@@ -99,9 +87,7 @@ module Stripe
         return @bbpos_wisepos_e = nil
       end
       _bbpos_wisepos_e = bbpos_wisepos_e.not_nil!
-      if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
-        _bbpos_wisepos_e.validate
-      end
+      _bbpos_wisepos_e.validate if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
       @bbpos_wisepos_e = _bbpos_wisepos_e
     end
 
@@ -122,9 +108,7 @@ module Stripe
         return @tipping = nil
       end
       _tipping = tipping.not_nil!
-      if _tipping.is_a?(OpenApi::Validatable)
-        _tipping.validate
-      end
+      _tipping.validate if _tipping.is_a?(OpenApi::Validatable)
       @tipping = _tipping
     end
 
@@ -135,9 +119,7 @@ module Stripe
         return @verifone_p400 = nil
       end
       _verifone_p400 = verifone_p400.not_nil!
-      if _verifone_p400.is_a?(OpenApi::Validatable)
-        _verifone_p400.validate
-      end
+      _verifone_p400.validate if _verifone_p400.is_a?(OpenApi::Validatable)
       @verifone_p400 = _verifone_p400
     end
 

@@ -62,24 +62,16 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _familymart = @familymart
-        if _familymart.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_familymart.list_invalid_properties_for("familymart"))
-        end
+        invalid_properties.concat(_familymart.list_invalid_properties_for("familymart")) if _familymart.is_a?(OpenApi::Validatable)
       end
       if _lawson = @lawson
-        if _lawson.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_lawson.list_invalid_properties_for("lawson"))
-        end
+        invalid_properties.concat(_lawson.list_invalid_properties_for("lawson")) if _lawson.is_a?(OpenApi::Validatable)
       end
       if _ministop = @ministop
-        if _ministop.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_ministop.list_invalid_properties_for("ministop"))
-        end
+        invalid_properties.concat(_ministop.list_invalid_properties_for("ministop")) if _ministop.is_a?(OpenApi::Validatable)
       end
       if _seicomart = @seicomart
-        if _seicomart.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_seicomart.list_invalid_properties_for("seicomart"))
-        end
+        invalid_properties.concat(_seicomart.list_invalid_properties_for("seicomart")) if _seicomart.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -89,24 +81,16 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _familymart = @familymart
-        if _familymart.is_a?(OpenApi::Validatable)
-          return false unless _familymart.valid?
-        end
+        return false if _familymart.is_a?(OpenApi::Validatable) && !_familymart.valid?
       end
       if _lawson = @lawson
-        if _lawson.is_a?(OpenApi::Validatable)
-          return false unless _lawson.valid?
-        end
+        return false if _lawson.is_a?(OpenApi::Validatable) && !_lawson.valid?
       end
       if _ministop = @ministop
-        if _ministop.is_a?(OpenApi::Validatable)
-          return false unless _ministop.valid?
-        end
+        return false if _ministop.is_a?(OpenApi::Validatable) && !_ministop.valid?
       end
       if _seicomart = @seicomart
-        if _seicomart.is_a?(OpenApi::Validatable)
-          return false unless _seicomart.valid?
-        end
+        return false if _seicomart.is_a?(OpenApi::Validatable) && !_seicomart.valid?
       end
 
       true
@@ -119,9 +103,7 @@ module Stripe
         return @familymart = nil
       end
       _familymart = familymart.not_nil!
-      if _familymart.is_a?(OpenApi::Validatable)
-        _familymart.validate
-      end
+      _familymart.validate if _familymart.is_a?(OpenApi::Validatable)
       @familymart = _familymart
     end
 
@@ -132,9 +114,7 @@ module Stripe
         return @lawson = nil
       end
       _lawson = lawson.not_nil!
-      if _lawson.is_a?(OpenApi::Validatable)
-        _lawson.validate
-      end
+      _lawson.validate if _lawson.is_a?(OpenApi::Validatable)
       @lawson = _lawson
     end
 
@@ -145,9 +125,7 @@ module Stripe
         return @ministop = nil
       end
       _ministop = ministop.not_nil!
-      if _ministop.is_a?(OpenApi::Validatable)
-        _ministop.validate
-      end
+      _ministop.validate if _ministop.is_a?(OpenApi::Validatable)
       @ministop = _ministop
     end
 
@@ -158,9 +136,7 @@ module Stripe
         return @seicomart = nil
       end
       _seicomart = seicomart.not_nil!
-      if _seicomart.is_a?(OpenApi::Validatable)
-        _seicomart.validate
-      end
+      _seicomart.validate if _seicomart.is_a?(OpenApi::Validatable)
       @seicomart = _seicomart
     end
 

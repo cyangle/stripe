@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? amount_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_AMOUNT_TYPE = EnumValidator.new("amount_type", "String", ["fixed", "maximum"])
+    ENUM_VALIDATOR_FOR_AMOUNT_TYPE = OpenApi::EnumValidator.new("amount_type", "String", ["fixed", "maximum"])
 
     # A description of the mandate or subscription that is meant to be displayed to the customer.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: description.nil? && !description_present?)]
@@ -62,8 +62,8 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_AMOUNT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid?(@amount_type)
       if _description = @description
-        if _description.to_s.size > 200
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 200.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 200)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -109,8 +109,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 200
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 200.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 200)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description

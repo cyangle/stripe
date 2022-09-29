@@ -17,7 +17,7 @@ module Stripe
 
     property data : String
 
-    ENUM_VALIDATOR = EnumValidator.new("PostPaymentIntents_request_off_session_oneOf", "String", ["one_off", "recurring"])
+    ENUM_VALIDATOR = OpenApi::EnumValidator.new("PostPaymentIntents_request_off_session_oneOf", "String", ["one_off", "recurring"])
 
     delegate to_json_object_key, to: @data
     delegate error_message, to: ENUM_VALIDATOR

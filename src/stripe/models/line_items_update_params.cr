@@ -49,14 +49,12 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _adjustable_quantity = @adjustable_quantity
-        if _adjustable_quantity.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_adjustable_quantity.list_invalid_properties_for("adjustable_quantity"))
-        end
+        invalid_properties.concat(_adjustable_quantity.list_invalid_properties_for("adjustable_quantity")) if _adjustable_quantity.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -70,9 +68,7 @@ module Stripe
         return false if _id.to_s.size > 5000
       end
       if _adjustable_quantity = @adjustable_quantity
-        if _adjustable_quantity.is_a?(OpenApi::Validatable)
-          return false unless _adjustable_quantity.valid?
-        end
+        return false if _adjustable_quantity.is_a?(OpenApi::Validatable) && !_adjustable_quantity.valid?
       end
 
       true
@@ -85,8 +81,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -99,9 +95,7 @@ module Stripe
         return @adjustable_quantity = nil
       end
       _adjustable_quantity = adjustable_quantity.not_nil!
-      if _adjustable_quantity.is_a?(OpenApi::Validatable)
-        _adjustable_quantity.validate
-      end
+      _adjustable_quantity.validate if _adjustable_quantity.is_a?(OpenApi::Validatable)
       @adjustable_quantity = _adjustable_quantity
     end
 

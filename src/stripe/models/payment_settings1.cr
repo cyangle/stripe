@@ -46,19 +46,15 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _default_mandate = @default_mandate
-        if _default_mandate.to_s.size > 5000
-          invalid_properties.push("invalid value for \"default_mandate\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_mandate", _default_mandate.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _payment_method_options = @payment_method_options
-        if _payment_method_options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options"))
-        end
+        invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
       if _payment_method_types = @payment_method_types
-        if _payment_method_types.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_method_types.list_invalid_properties_for("payment_method_types"))
-        end
+        invalid_properties.concat(_payment_method_types.list_invalid_properties_for("payment_method_types")) if _payment_method_types.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -71,14 +67,10 @@ module Stripe
         return false if _default_mandate.to_s.size > 5000
       end
       if _payment_method_options = @payment_method_options
-        if _payment_method_options.is_a?(OpenApi::Validatable)
-          return false unless _payment_method_options.valid?
-        end
+        return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
       if _payment_method_types = @payment_method_types
-        if _payment_method_types.is_a?(OpenApi::Validatable)
-          return false unless _payment_method_types.valid?
-        end
+        return false if _payment_method_types.is_a?(OpenApi::Validatable) && !_payment_method_types.valid?
       end
 
       true
@@ -91,8 +83,8 @@ module Stripe
         return @default_mandate = nil
       end
       _default_mandate = default_mandate.not_nil!
-      if _default_mandate.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"default_mandate\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_mandate", _default_mandate.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @default_mandate = _default_mandate
@@ -105,9 +97,7 @@ module Stripe
         return @payment_method_options = nil
       end
       _payment_method_options = payment_method_options.not_nil!
-      if _payment_method_options.is_a?(OpenApi::Validatable)
-        _payment_method_options.validate
-      end
+      _payment_method_options.validate if _payment_method_options.is_a?(OpenApi::Validatable)
       @payment_method_options = _payment_method_options
     end
 
@@ -118,9 +108,7 @@ module Stripe
         return @payment_method_types = nil
       end
       _payment_method_types = payment_method_types.not_nil!
-      if _payment_method_types.is_a?(OpenApi::Validatable)
-        _payment_method_types.validate
-      end
+      _payment_method_types.validate if _payment_method_types.is_a?(OpenApi::Validatable)
       @payment_method_types = _payment_method_types
     end
 

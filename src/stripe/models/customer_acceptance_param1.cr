@@ -26,7 +26,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["online"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["online"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -44,9 +44,7 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"online\" is required and cannot be null") if @online.nil?
       if _online = @online
-        if _online.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_online.list_invalid_properties_for("online"))
-        end
+        invalid_properties.concat(_online.list_invalid_properties_for("online")) if _online.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
@@ -59,9 +57,7 @@ module Stripe
     def valid? : Bool
       return false if @online.nil?
       if _online = @online
-        if _online.is_a?(OpenApi::Validatable)
-          return false unless _online.valid?
-        end
+        return false if _online.is_a?(OpenApi::Validatable) && !_online.valid?
       end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
 
@@ -75,9 +71,7 @@ module Stripe
         raise ArgumentError.new("\"online\" is required and cannot be null")
       end
       _online = online.not_nil!
-      if _online.is_a?(OpenApi::Validatable)
-        _online.validate
-      end
+      _online.validate if _online.is_a?(OpenApi::Validatable)
       @online = _online
     end
 

@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "billing_scheme", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter billing_scheme : String? = nil
 
-    ENUM_VALIDATOR_FOR_BILLING_SCHEME = EnumValidator.new("billing_scheme", "String", ["per_unit", "tiered"])
+    ENUM_VALIDATOR_FOR_BILLING_SCHEME = OpenApi::EnumValidator.new("billing_scheme", "String", ["per_unit", "tiered"])
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -55,7 +55,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["price"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["price"])
 
     @[JSON::Field(key: "product", type: Stripe::PriceProduct?, default: nil, required: true, nullable: false, emit_null: false)]
     getter product : Stripe::PriceProduct? = nil
@@ -64,7 +64,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["one_time", "recurring"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["one_time", "recurring"])
 
     # Optional properties
 
@@ -105,7 +105,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? tax_behavior_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
+    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = OpenApi::EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
 
     # Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.
     @[JSON::Field(key: "tiers", type: Array(Stripe::PriceTier)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -118,7 +118,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? tiers_mode_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_TIERS_MODE = EnumValidator.new("tiers_mode", "String", ["graduated", "volume"])
+    ENUM_VALIDATOR_FOR_TIERS_MODE = OpenApi::EnumValidator.new("tiers_mode", "String", ["graduated", "volume"])
 
     @[JSON::Field(key: "transform_quantity", type: Stripe::PriceTransformQuantity?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: transform_quantity.nil? && !transform_quantity_present?)]
     getter transform_quantity : Stripe::PriceTransformQuantity? = nil
@@ -183,8 +183,8 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -194,58 +194,38 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
       if _product = @product
-        if _product.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_product.list_invalid_properties_for("product"))
-        end
+        invalid_properties.concat(_product.list_invalid_properties_for("product")) if _product.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _currency_options = @currency_options
-        if _currency_options.is_a?(Hash)
-          _currency_options.each do |_key, value|
-            if value.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(value.list_invalid_properties_for("currency_options"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "currency_options", hash: _currency_options)) if _currency_options.is_a?(Hash)
       end
       if _custom_unit_amount = @custom_unit_amount
-        if _custom_unit_amount.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_custom_unit_amount.list_invalid_properties_for("custom_unit_amount"))
-        end
+        invalid_properties.concat(_custom_unit_amount.list_invalid_properties_for("custom_unit_amount")) if _custom_unit_amount.is_a?(OpenApi::Validatable)
       end
       if _lookup_key = @lookup_key
-        if _lookup_key.to_s.size > 5000
-          invalid_properties.push("invalid value for \"lookup_key\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("lookup_key", _lookup_key.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _nickname = @nickname
-        if _nickname.to_s.size > 5000
-          invalid_properties.push("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _recurring = @recurring
-        if _recurring.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_recurring.list_invalid_properties_for("recurring"))
-        end
+        invalid_properties.concat(_recurring.list_invalid_properties_for("recurring")) if _recurring.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
       if _tiers = @tiers
-        if _tiers.is_a?(Array)
-          _tiers.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("tiers"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tiers", array: _tiers)) if _tiers.is_a?(Array)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TIERS_MODE.error_message) unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
       if _transform_quantity = @transform_quantity
-        if _transform_quantity.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_transform_quantity.list_invalid_properties_for("transform_quantity"))
-        end
+        invalid_properties.concat(_transform_quantity.list_invalid_properties_for("transform_quantity")) if _transform_quantity.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -272,24 +252,14 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @product.nil?
       if _product = @product
-        if _product.is_a?(OpenApi::Validatable)
-          return false unless _product.valid?
-        end
+        return false if _product.is_a?(OpenApi::Validatable) && !_product.valid?
       end
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _currency_options = @currency_options
-        if _currency_options.is_a?(Hash)
-          _currency_options.each do |_key, value|
-            if value.is_a?(OpenApi::Validatable)
-              return false unless value.valid?
-            end
-          end
-        end
+        return false if _currency_options.is_a?(Hash) && !OpenApi::HashValidator.valid?(hash: _currency_options)
       end
       if _custom_unit_amount = @custom_unit_amount
-        if _custom_unit_amount.is_a?(OpenApi::Validatable)
-          return false unless _custom_unit_amount.valid?
-        end
+        return false if _custom_unit_amount.is_a?(OpenApi::Validatable) && !_custom_unit_amount.valid?
       end
       if _lookup_key = @lookup_key
         return false if _lookup_key.to_s.size > 5000
@@ -298,25 +268,15 @@ module Stripe
         return false if _nickname.to_s.size > 5000
       end
       if _recurring = @recurring
-        if _recurring.is_a?(OpenApi::Validatable)
-          return false unless _recurring.valid?
-        end
+        return false if _recurring.is_a?(OpenApi::Validatable) && !_recurring.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
       if _tiers = @tiers
-        if _tiers.is_a?(Array)
-          _tiers.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _tiers.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tiers)
       end
       return false unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
       if _transform_quantity = @transform_quantity
-        if _transform_quantity.is_a?(OpenApi::Validatable)
-          return false unless _transform_quantity.valid?
-        end
+        return false if _transform_quantity.is_a?(OpenApi::Validatable) && !_transform_quantity.valid?
       end
 
       true
@@ -370,8 +330,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -415,9 +375,7 @@ module Stripe
         raise ArgumentError.new("\"product\" is required and cannot be null")
       end
       _product = product.not_nil!
-      if _product.is_a?(OpenApi::Validatable)
-        _product.validate
-      end
+      _product.validate if _product.is_a?(OpenApi::Validatable)
       @product = _product
     end
 
@@ -439,13 +397,7 @@ module Stripe
         return @currency_options = nil
       end
       _currency_options = currency_options.not_nil!
-      if _currency_options.is_a?(Hash)
-        _currency_options.each do |_key, value|
-          if value.is_a?(OpenApi::Validatable)
-            value.validate
-          end
-        end
-      end
+      OpenApi::HashValidator.validate(hash: _currency_options) if _currency_options.is_a?(Hash)
       @currency_options = _currency_options
     end
 
@@ -456,9 +408,7 @@ module Stripe
         return @custom_unit_amount = nil
       end
       _custom_unit_amount = custom_unit_amount.not_nil!
-      if _custom_unit_amount.is_a?(OpenApi::Validatable)
-        _custom_unit_amount.validate
-      end
+      _custom_unit_amount.validate if _custom_unit_amount.is_a?(OpenApi::Validatable)
       @custom_unit_amount = _custom_unit_amount
     end
 
@@ -469,8 +419,8 @@ module Stripe
         return @lookup_key = nil
       end
       _lookup_key = lookup_key.not_nil!
-      if _lookup_key.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"lookup_key\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("lookup_key", _lookup_key.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @lookup_key = _lookup_key
@@ -483,8 +433,8 @@ module Stripe
         return @nickname = nil
       end
       _nickname = nickname.not_nil!
-      if _nickname.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"nickname\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @nickname = _nickname
@@ -497,9 +447,7 @@ module Stripe
         return @recurring = nil
       end
       _recurring = recurring.not_nil!
-      if _recurring.is_a?(OpenApi::Validatable)
-        _recurring.validate
-      end
+      _recurring.validate if _recurring.is_a?(OpenApi::Validatable)
       @recurring = _recurring
     end
 
@@ -521,13 +469,7 @@ module Stripe
         return @tiers = nil
       end
       _tiers = tiers.not_nil!
-      if _tiers.is_a?(Array)
-        _tiers.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _tiers) if _tiers.is_a?(Array)
       @tiers = _tiers
     end
 
@@ -549,9 +491,7 @@ module Stripe
         return @transform_quantity = nil
       end
       _transform_quantity = transform_quantity.not_nil!
-      if _transform_quantity.is_a?(OpenApi::Validatable)
-        _transform_quantity.validate
-      end
+      _transform_quantity.validate if _transform_quantity.is_a?(OpenApi::Validatable)
       @transform_quantity = _transform_quantity
     end
 

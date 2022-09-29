@@ -47,14 +47,12 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
-        if __type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _card_present = @card_present
-        if _card_present.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card_present.list_invalid_properties_for("card_present"))
-        end
+        invalid_properties.concat(_card_present.list_invalid_properties_for("card_present")) if _card_present.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -68,9 +66,7 @@ module Stripe
         return false if __type.to_s.size > 5000
       end
       if _card_present = @card_present
-        if _card_present.is_a?(OpenApi::Validatable)
-          return false unless _card_present.valid?
-        end
+        return false if _card_present.is_a?(OpenApi::Validatable) && !_card_present.valid?
       end
 
       true
@@ -83,8 +79,8 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if __type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_type = __type
@@ -97,9 +93,7 @@ module Stripe
         return @card_present2 = nil
       end
       _card_present = card_present.not_nil!
-      if _card_present.is_a?(OpenApi::Validatable)
-        _card_present.validate
-      end
+      _card_present.validate if _card_present.is_a?(OpenApi::Validatable)
       @card_present2 = _card_present
     end
 

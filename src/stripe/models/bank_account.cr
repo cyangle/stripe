@@ -41,7 +41,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["bank_account"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["bank_account"])
 
     # For bank accounts, possible values are `new`, `validated`, `verified`, `verification_failed`, or `errored`. A bank account that hasn't had any activity or validation performed is `new`. If Stripe can determine that the bank account exists, its status will be `validated`. Note that there often isn’t enough information to know (e.g., for smaller credit unions), and the validation is not always run. If customer bank account verification has succeeded, the bank account status will be `verified`. If the verification failed for any reason, such as microdeposit failure, the status will be `verification_failed`. If a transfer sent to this bank account fails, we'll set the status to `errored` and will not continue to send transfers until the bank details are updated.  For external accounts, possible values are `new` and `errored`. Validations aren't run against external accounts because they're only used for payouts. This means the other statuses don't apply. If a transfer fails, the status is set to `errored` and transfers are stopped until account details are updated.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -83,7 +83,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? available_payout_methods_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS = EnumValidator.new("available_payout_methods", "Array(String)", ["instant", "standard"])
+    ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS = OpenApi::EnumValidator.new("available_payout_methods", "Array(String)", ["instant", "standard"])
 
     # Name of the bank associated with the routing number (e.g., `WELLS FARGO`).
     @[JSON::Field(key: "bank_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_name.nil? && !bank_name_present?)]
@@ -158,74 +158,70 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
       if _country = @country
-        if _country.to_s.size > 5000
-          invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last4\" is required and cannot be null") if @last4.nil?
       if _last4 = @last4
-        if _last4.to_s.size > 5000
-          invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
       if _status = @status
-        if _status.to_s.size > 5000
-          invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _account = @account
-        if _account.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_account.list_invalid_properties_for("account"))
-        end
+        invalid_properties.concat(_account.list_invalid_properties_for("account")) if _account.is_a?(OpenApi::Validatable)
       end
       if _account_holder_name = @account_holder_name
-        if _account_holder_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _account_holder_type = @account_holder_type
-        if _account_holder_type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account_holder_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_type", _account_holder_type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _account_type = @account_type
-        if _account_type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"account_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_type", _account_type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.error_message) unless ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid?(@available_payout_methods)
       if _bank_name = @bank_name
-        if _bank_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _customer = @customer
-        if _customer.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_customer.list_invalid_properties_for("customer"))
-        end
+        invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
 
       if _fingerprint = @fingerprint
-        if _fingerprint.to_s.size > 5000
-          invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _routing_number = @routing_number
-        if _routing_number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -255,9 +251,7 @@ module Stripe
         return false if _status.to_s.size > 5000
       end
       if _account = @account
-        if _account.is_a?(OpenApi::Validatable)
-          return false unless _account.valid?
-        end
+        return false if _account.is_a?(OpenApi::Validatable) && !_account.valid?
       end
       if _account_holder_name = @account_holder_name
         return false if _account_holder_name.to_s.size > 5000
@@ -273,9 +267,7 @@ module Stripe
         return false if _bank_name.to_s.size > 5000
       end
       if _customer = @customer
-        if _customer.is_a?(OpenApi::Validatable)
-          return false unless _customer.valid?
-        end
+        return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
 
       if _fingerprint = @fingerprint
@@ -296,8 +288,8 @@ module Stripe
         raise ArgumentError.new("\"country\" is required and cannot be null")
       end
       _country = country.not_nil!
-      if _country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @country = _country
@@ -320,8 +312,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -334,8 +326,8 @@ module Stripe
         raise ArgumentError.new("\"last4\" is required and cannot be null")
       end
       _last4 = last4.not_nil!
-      if _last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @last4 = _last4
@@ -359,8 +351,8 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if _status.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @status = _status
@@ -373,9 +365,7 @@ module Stripe
         return @account = nil
       end
       _account = account.not_nil!
-      if _account.is_a?(OpenApi::Validatable)
-        _account.validate
-      end
+      _account.validate if _account.is_a?(OpenApi::Validatable)
       @account = _account
     end
 
@@ -386,8 +376,8 @@ module Stripe
         return @account_holder_name = nil
       end
       _account_holder_name = account_holder_name.not_nil!
-      if _account_holder_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_holder_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account_holder_name = _account_holder_name
@@ -400,8 +390,8 @@ module Stripe
         return @account_holder_type = nil
       end
       _account_holder_type = account_holder_type.not_nil!
-      if _account_holder_type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_holder_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_type", _account_holder_type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account_holder_type = _account_holder_type
@@ -414,8 +404,8 @@ module Stripe
         return @account_type = nil
       end
       _account_type = account_type.not_nil!
-      if _account_type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"account_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_type", _account_type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @account_type = _account_type
@@ -439,8 +429,8 @@ module Stripe
         return @bank_name = nil
       end
       _bank_name = bank_name.not_nil!
-      if _bank_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"bank_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @bank_name = _bank_name
@@ -453,9 +443,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if _customer.is_a?(OpenApi::Validatable)
-        _customer.validate
-      end
+      _customer.validate if _customer.is_a?(OpenApi::Validatable)
       @customer = _customer
     end
 
@@ -476,8 +464,8 @@ module Stripe
         return @fingerprint = nil
       end
       _fingerprint = fingerprint.not_nil!
-      if _fingerprint.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @fingerprint = _fingerprint
@@ -500,8 +488,8 @@ module Stripe
         return @routing_number = nil
       end
       _routing_number = routing_number.not_nil!
-      if _routing_number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"routing_number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @routing_number = _routing_number

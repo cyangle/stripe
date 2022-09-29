@@ -55,9 +55,7 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       if _source_types = @source_types
-        if _source_types.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_source_types.list_invalid_properties_for("source_types"))
-        end
+        invalid_properties.concat(_source_types.list_invalid_properties_for("source_types")) if _source_types.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -71,9 +69,7 @@ module Stripe
       return false if @currency.nil?
 
       if _source_types = @source_types
-        if _source_types.is_a?(OpenApi::Validatable)
-          return false unless _source_types.valid?
-        end
+        return false if _source_types.is_a?(OpenApi::Validatable) && !_source_types.valid?
       end
 
       true
@@ -106,9 +102,7 @@ module Stripe
         return @source_types = nil
       end
       _source_types = source_types.not_nil!
-      if _source_types.is_a?(OpenApi::Validatable)
-        _source_types.validate
-      end
+      _source_types.validate if _source_types.is_a?(OpenApi::Validatable)
       @source_types = _source_types
     end
 

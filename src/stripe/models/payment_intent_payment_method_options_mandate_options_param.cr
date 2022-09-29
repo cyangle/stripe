@@ -29,12 +29,12 @@ module Stripe
     @[JSON::Field(key: "payment_schedule", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_schedule : String? = nil
 
-    ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE = EnumValidator.new("payment_schedule", "String", ["combined", "interval", "sporadic"])
+    ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE = OpenApi::EnumValidator.new("payment_schedule", "String", ["combined", "interval", "sporadic"])
 
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transaction_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_TRANSACTION_TYPE = EnumValidator.new("transaction_type", "String", ["business", "personal"])
+    ENUM_VALIDATOR_FOR_TRANSACTION_TYPE = OpenApi::EnumValidator.new("transaction_type", "String", ["business", "personal"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,13 +53,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _custom_mandate_url = @custom_mandate_url
-        if _custom_mandate_url.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_custom_mandate_url.list_invalid_properties_for("custom_mandate_url"))
-        end
+        invalid_properties.concat(_custom_mandate_url.list_invalid_properties_for("custom_mandate_url")) if _custom_mandate_url.is_a?(OpenApi::Validatable)
       end
       if _interval_description = @interval_description
-        if _interval_description.to_s.size > 500
-          invalid_properties.push("invalid value for \"interval_description\", the character length must be smaller than or equal to 500.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, 500)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -74,9 +72,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _custom_mandate_url = @custom_mandate_url
-        if _custom_mandate_url.is_a?(OpenApi::Validatable)
-          return false unless _custom_mandate_url.valid?
-        end
+        return false if _custom_mandate_url.is_a?(OpenApi::Validatable) && !_custom_mandate_url.valid?
       end
       if _interval_description = @interval_description
         return false if _interval_description.to_s.size > 500
@@ -94,9 +90,7 @@ module Stripe
         return @custom_mandate_url = nil
       end
       _custom_mandate_url = custom_mandate_url.not_nil!
-      if _custom_mandate_url.is_a?(OpenApi::Validatable)
-        _custom_mandate_url.validate
-      end
+      _custom_mandate_url.validate if _custom_mandate_url.is_a?(OpenApi::Validatable)
       @custom_mandate_url = _custom_mandate_url
     end
 
@@ -107,8 +101,8 @@ module Stripe
         return @interval_description = nil
       end
       _interval_description = interval_description.not_nil!
-      if _interval_description.to_s.size > 500
-        raise ArgumentError.new("invalid value for \"interval_description\", the character length must be smaller than or equal to 500.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, 500)
+        raise ArgumentError.new(max_length_error)
       end
 
       @interval_description = _interval_description

@@ -53,9 +53,7 @@ module Stripe
 
       invalid_properties.push("\"tax_rate\" is required and cannot be null") if @tax_rate.nil?
       if _tax_rate = @tax_rate
-        if _tax_rate.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_tax_rate.list_invalid_properties_for("tax_rate"))
-        end
+        invalid_properties.concat(_tax_rate.list_invalid_properties_for("tax_rate")) if _tax_rate.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -70,9 +68,7 @@ module Stripe
 
       return false if @tax_rate.nil?
       if _tax_rate = @tax_rate
-        if _tax_rate.is_a?(OpenApi::Validatable)
-          return false unless _tax_rate.valid?
-        end
+        return false if _tax_rate.is_a?(OpenApi::Validatable) && !_tax_rate.valid?
       end
 
       true
@@ -105,9 +101,7 @@ module Stripe
         raise ArgumentError.new("\"tax_rate\" is required and cannot be null")
       end
       _tax_rate = tax_rate.not_nil!
-      if _tax_rate.is_a?(OpenApi::Validatable)
-        _tax_rate.validate
-      end
+      _tax_rate.validate if _tax_rate.is_a?(OpenApi::Validatable)
       @tax_rate = _tax_rate
     end
 

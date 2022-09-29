@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "source_flow_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter source_flow_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_SOURCE_FLOW_TYPE = EnumValidator.new("source_flow_type", "String", ["credit_reversal", "other", "outbound_payment", "payout"])
+    ENUM_VALIDATOR_FOR_SOURCE_FLOW_TYPE = OpenApi::EnumValidator.new("source_flow_type", "String", ["credit_reversal", "other", "outbound_payment", "payout"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

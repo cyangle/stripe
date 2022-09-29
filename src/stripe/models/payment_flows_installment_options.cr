@@ -47,9 +47,7 @@ module Stripe
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
       if _plan = @plan
-        if _plan.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_plan.list_invalid_properties_for("plan"))
-        end
+        invalid_properties.concat(_plan.list_invalid_properties_for("plan")) if _plan.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -61,9 +59,7 @@ module Stripe
       return false if @enabled.nil?
 
       if _plan = @plan
-        if _plan.is_a?(OpenApi::Validatable)
-          return false unless _plan.valid?
-        end
+        return false if _plan.is_a?(OpenApi::Validatable) && !_plan.valid?
       end
 
       true
@@ -86,9 +82,7 @@ module Stripe
         return @plan = nil
       end
       _plan = plan.not_nil!
-      if _plan.is_a?(OpenApi::Validatable)
-        _plan.validate
-      end
+      _plan.validate if _plan.is_a?(OpenApi::Validatable)
       @plan = _plan
     end
 

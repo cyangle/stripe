@@ -25,25 +25,25 @@ module Stripe
     @[JSON::Field(key: "address_line1_check", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter address_line1_check : String? = nil
 
-    ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK = EnumValidator.new("address_line1_check", "String", ["match", "mismatch", "not_provided"])
+    ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK = OpenApi::EnumValidator.new("address_line1_check", "String", ["match", "mismatch", "not_provided"])
 
     # Whether the cardholder provided a postal code and if it matched the cardholder’s `billing.address.postal_code`.
     @[JSON::Field(key: "address_postal_code_check", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter address_postal_code_check : String? = nil
 
-    ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK = EnumValidator.new("address_postal_code_check", "String", ["match", "mismatch", "not_provided"])
+    ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK = OpenApi::EnumValidator.new("address_postal_code_check", "String", ["match", "mismatch", "not_provided"])
 
     # Whether the cardholder provided a CVC and if it matched Stripe’s record.
     @[JSON::Field(key: "cvc_check", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter cvc_check : String? = nil
 
-    ENUM_VALIDATOR_FOR_CVC_CHECK = EnumValidator.new("cvc_check", "String", ["match", "mismatch", "not_provided"])
+    ENUM_VALIDATOR_FOR_CVC_CHECK = OpenApi::EnumValidator.new("cvc_check", "String", ["match", "mismatch", "not_provided"])
 
     # Whether the cardholder provided an expiry date and if it matched Stripe’s record.
     @[JSON::Field(key: "expiry_check", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter expiry_check : String? = nil
 
-    ENUM_VALIDATOR_FOR_EXPIRY_CHECK = EnumValidator.new("expiry_check", "String", ["match", "mismatch", "not_provided"])
+    ENUM_VALIDATOR_FOR_EXPIRY_CHECK = OpenApi::EnumValidator.new("expiry_check", "String", ["match", "mismatch", "not_provided"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

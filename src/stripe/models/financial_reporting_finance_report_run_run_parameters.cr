@@ -75,24 +75,24 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _connected_account = @connected_account
-        if _connected_account.to_s.size > 5000
-          invalid_properties.push("invalid value for \"connected_account\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("connected_account", _connected_account.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _payout = @payout
-        if _payout.to_s.size > 5000
-          invalid_properties.push("invalid value for \"payout\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payout", _payout.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _reporting_category = @reporting_category
-        if _reporting_category.to_s.size > 5000
-          invalid_properties.push("invalid value for \"reporting_category\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reporting_category", _reporting_category.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _timezone = @timezone
-        if _timezone.to_s.size > 5000
-          invalid_properties.push("invalid value for \"timezone\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timezone", _timezone.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -136,8 +136,8 @@ module Stripe
         return @connected_account = nil
       end
       _connected_account = connected_account.not_nil!
-      if _connected_account.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"connected_account\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("connected_account", _connected_account.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @connected_account = _connected_account
@@ -180,8 +180,8 @@ module Stripe
         return @payout = nil
       end
       _payout = payout.not_nil!
-      if _payout.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"payout\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payout", _payout.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @payout = _payout
@@ -194,8 +194,8 @@ module Stripe
         return @reporting_category = nil
       end
       _reporting_category = reporting_category.not_nil!
-      if _reporting_category.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"reporting_category\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reporting_category", _reporting_category.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @reporting_category = _reporting_category
@@ -208,8 +208,8 @@ module Stripe
         return @timezone = nil
       end
       _timezone = timezone.not_nil!
-      if _timezone.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"timezone\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timezone", _timezone.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @timezone = _timezone

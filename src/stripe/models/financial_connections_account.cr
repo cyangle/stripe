@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "category", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter category : String? = nil
 
-    ENUM_VALIDATOR_FOR_CATEGORY = EnumValidator.new("category", "String", ["cash", "credit", "investment", "other"])
+    ENUM_VALIDATOR_FOR_CATEGORY = OpenApi::EnumValidator.new("category", "String", ["cash", "credit", "investment", "other"])
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -47,25 +47,25 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["financial_connections.account"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["financial_connections.account"])
 
     # The status of the link to the account.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = EnumValidator.new("status", "String", ["active", "disconnected", "inactive"])
+    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["active", "disconnected", "inactive"])
 
     # If `category` is `cash`, one of:   - `checking`  - `savings`  - `other`  If `category` is `credit`, one of:   - `mortgage`  - `line_of_credit`  - `credit_card`  - `other`  If `category` is `investment` or `other`, this will be `other`.
     @[JSON::Field(key: "subcategory", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter subcategory : String? = nil
 
-    ENUM_VALIDATOR_FOR_SUBCATEGORY = EnumValidator.new("subcategory", "String", ["checking", "credit_card", "line_of_credit", "mortgage", "other", "savings"])
+    ENUM_VALIDATOR_FOR_SUBCATEGORY = OpenApi::EnumValidator.new("subcategory", "String", ["checking", "credit_card", "line_of_credit", "mortgage", "other", "savings"])
 
     # The [PaymentMethod type](https://stripe.com/docs/api/payment_methods/object#payment_method_object-type)(s) that can be created from this account.
     @[JSON::Field(key: "supported_payment_method_types", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter supported_payment_method_types : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES = EnumValidator.new("supported_payment_method_types", "Array(String)", ["link", "us_bank_account"])
+    ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES = OpenApi::EnumValidator.new("supported_payment_method_types", "Array(String)", ["link", "us_bank_account"])
 
     # Optional properties
 
@@ -120,7 +120,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? permissions_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_PERMISSIONS = EnumValidator.new("permissions", "Array(String)", ["balances", "ownership", "payment_method", "transactions"])
+    ENUM_VALIDATOR_FOR_PERMISSIONS = OpenApi::EnumValidator.new("permissions", "Array(String)", ["balances", "ownership", "payment_method", "transactions"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -158,14 +158,14 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"institution_name\" is required and cannot be null") if @institution_name.nil?
       if _institution_name = @institution_name
-        if _institution_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"institution_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_name", _institution_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -178,39 +178,29 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.all_valid?(@supported_payment_method_types, false)
       if _account_holder = @account_holder
-        if _account_holder.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder"))
-        end
+        invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder")) if _account_holder.is_a?(OpenApi::Validatable)
       end
       if _balance = @balance
-        if _balance.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_balance.list_invalid_properties_for("balance"))
-        end
+        invalid_properties.concat(_balance.list_invalid_properties_for("balance")) if _balance.is_a?(OpenApi::Validatable)
       end
       if _balance_refresh = @balance_refresh
-        if _balance_refresh.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_balance_refresh.list_invalid_properties_for("balance_refresh"))
-        end
+        invalid_properties.concat(_balance_refresh.list_invalid_properties_for("balance_refresh")) if _balance_refresh.is_a?(OpenApi::Validatable)
       end
       if _display_name = @display_name
-        if _display_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _last4 = @last4
-        if _last4.to_s.size > 5000
-          invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _ownership = @ownership
-        if _ownership.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_ownership.list_invalid_properties_for("ownership"))
-        end
+        invalid_properties.concat(_ownership.list_invalid_properties_for("ownership")) if _ownership.is_a?(OpenApi::Validatable)
       end
       if _ownership_refresh = @ownership_refresh
-        if _ownership_refresh.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_ownership_refresh.list_invalid_properties_for("ownership_refresh"))
-        end
+        invalid_properties.concat(_ownership_refresh.list_invalid_properties_for("ownership_refresh")) if _ownership_refresh.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PERMISSIONS.error_message) unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
@@ -239,19 +229,13 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_SUBCATEGORY.valid?(@subcategory, false)
       return false unless ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.all_valid?(@supported_payment_method_types, false)
       if _account_holder = @account_holder
-        if _account_holder.is_a?(OpenApi::Validatable)
-          return false unless _account_holder.valid?
-        end
+        return false if _account_holder.is_a?(OpenApi::Validatable) && !_account_holder.valid?
       end
       if _balance = @balance
-        if _balance.is_a?(OpenApi::Validatable)
-          return false unless _balance.valid?
-        end
+        return false if _balance.is_a?(OpenApi::Validatable) && !_balance.valid?
       end
       if _balance_refresh = @balance_refresh
-        if _balance_refresh.is_a?(OpenApi::Validatable)
-          return false unless _balance_refresh.valid?
-        end
+        return false if _balance_refresh.is_a?(OpenApi::Validatable) && !_balance_refresh.valid?
       end
       if _display_name = @display_name
         return false if _display_name.to_s.size > 5000
@@ -260,14 +244,10 @@ module Stripe
         return false if _last4.to_s.size > 5000
       end
       if _ownership = @ownership
-        if _ownership.is_a?(OpenApi::Validatable)
-          return false unless _ownership.valid?
-        end
+        return false if _ownership.is_a?(OpenApi::Validatable) && !_ownership.valid?
       end
       if _ownership_refresh = @ownership_refresh
-        if _ownership_refresh.is_a?(OpenApi::Validatable)
-          return false unless _ownership_refresh.valid?
-        end
+        return false if _ownership_refresh.is_a?(OpenApi::Validatable) && !_ownership_refresh.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
 
@@ -302,8 +282,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -316,8 +296,8 @@ module Stripe
         raise ArgumentError.new("\"institution_name\" is required and cannot be null")
       end
       _institution_name = institution_name.not_nil!
-      if _institution_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"institution_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_name", _institution_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @institution_name = _institution_name
@@ -384,9 +364,7 @@ module Stripe
         return @account_holder = nil
       end
       _account_holder = account_holder.not_nil!
-      if _account_holder.is_a?(OpenApi::Validatable)
-        _account_holder.validate
-      end
+      _account_holder.validate if _account_holder.is_a?(OpenApi::Validatable)
       @account_holder = _account_holder
     end
 
@@ -397,9 +375,7 @@ module Stripe
         return @balance = nil
       end
       _balance = balance.not_nil!
-      if _balance.is_a?(OpenApi::Validatable)
-        _balance.validate
-      end
+      _balance.validate if _balance.is_a?(OpenApi::Validatable)
       @balance = _balance
     end
 
@@ -410,9 +386,7 @@ module Stripe
         return @balance_refresh = nil
       end
       _balance_refresh = balance_refresh.not_nil!
-      if _balance_refresh.is_a?(OpenApi::Validatable)
-        _balance_refresh.validate
-      end
+      _balance_refresh.validate if _balance_refresh.is_a?(OpenApi::Validatable)
       @balance_refresh = _balance_refresh
     end
 
@@ -423,8 +397,8 @@ module Stripe
         return @display_name = nil
       end
       _display_name = display_name.not_nil!
-      if _display_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @display_name = _display_name
@@ -437,8 +411,8 @@ module Stripe
         return @last4 = nil
       end
       _last4 = last4.not_nil!
-      if _last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @last4 = _last4
@@ -451,9 +425,7 @@ module Stripe
         return @ownership = nil
       end
       _ownership = ownership.not_nil!
-      if _ownership.is_a?(OpenApi::Validatable)
-        _ownership.validate
-      end
+      _ownership.validate if _ownership.is_a?(OpenApi::Validatable)
       @ownership = _ownership
     end
 
@@ -464,9 +436,7 @@ module Stripe
         return @ownership_refresh = nil
       end
       _ownership_refresh = ownership_refresh.not_nil!
-      if _ownership_refresh.is_a?(OpenApi::Validatable)
-        _ownership_refresh.validate
-      end
+      _ownership_refresh.validate if _ownership_refresh.is_a?(OpenApi::Validatable)
       @ownership_refresh = _ownership_refresh
     end
 

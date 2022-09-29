@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["hosted_confirmation", "redirect"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["hosted_confirmation", "redirect"])
 
     # Optional properties
 
@@ -54,14 +54,10 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _hosted_confirmation = @hosted_confirmation
-        if _hosted_confirmation.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_hosted_confirmation.list_invalid_properties_for("hosted_confirmation"))
-        end
+        invalid_properties.concat(_hosted_confirmation.list_invalid_properties_for("hosted_confirmation")) if _hosted_confirmation.is_a?(OpenApi::Validatable)
       end
       if _redirect = @redirect
-        if _redirect.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_redirect.list_invalid_properties_for("redirect"))
-        end
+        invalid_properties.concat(_redirect.list_invalid_properties_for("redirect")) if _redirect.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -72,14 +68,10 @@ module Stripe
     def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _hosted_confirmation = @hosted_confirmation
-        if _hosted_confirmation.is_a?(OpenApi::Validatable)
-          return false unless _hosted_confirmation.valid?
-        end
+        return false if _hosted_confirmation.is_a?(OpenApi::Validatable) && !_hosted_confirmation.valid?
       end
       if _redirect = @redirect
-        if _redirect.is_a?(OpenApi::Validatable)
-          return false unless _redirect.valid?
-        end
+        return false if _redirect.is_a?(OpenApi::Validatable) && !_redirect.valid?
       end
 
       true
@@ -103,9 +95,7 @@ module Stripe
         return @hosted_confirmation = nil
       end
       _hosted_confirmation = hosted_confirmation.not_nil!
-      if _hosted_confirmation.is_a?(OpenApi::Validatable)
-        _hosted_confirmation.validate
-      end
+      _hosted_confirmation.validate if _hosted_confirmation.is_a?(OpenApi::Validatable)
       @hosted_confirmation = _hosted_confirmation
     end
 
@@ -116,9 +106,7 @@ module Stripe
         return @redirect = nil
       end
       _redirect = redirect.not_nil!
-      if _redirect.is_a?(OpenApi::Validatable)
-        _redirect.validate
-      end
+      _redirect.validate if _redirect.is_a?(OpenApi::Validatable)
       @redirect = _redirect
     end
 

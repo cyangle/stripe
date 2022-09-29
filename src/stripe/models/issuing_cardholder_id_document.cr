@@ -48,14 +48,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _back = @back
-        if _back.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_back.list_invalid_properties_for("back"))
-        end
+        invalid_properties.concat(_back.list_invalid_properties_for("back")) if _back.is_a?(OpenApi::Validatable)
       end
       if _front = @front
-        if _front.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_front.list_invalid_properties_for("front"))
-        end
+        invalid_properties.concat(_front.list_invalid_properties_for("front")) if _front.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -65,14 +61,10 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _back = @back
-        if _back.is_a?(OpenApi::Validatable)
-          return false unless _back.valid?
-        end
+        return false if _back.is_a?(OpenApi::Validatable) && !_back.valid?
       end
       if _front = @front
-        if _front.is_a?(OpenApi::Validatable)
-          return false unless _front.valid?
-        end
+        return false if _front.is_a?(OpenApi::Validatable) && !_front.valid?
       end
 
       true
@@ -85,9 +77,7 @@ module Stripe
         return @back = nil
       end
       _back = back.not_nil!
-      if _back.is_a?(OpenApi::Validatable)
-        _back.validate
-      end
+      _back.validate if _back.is_a?(OpenApi::Validatable)
       @back = _back
     end
 
@@ -98,9 +88,7 @@ module Stripe
         return @front = nil
       end
       _front = front.not_nil!
-      if _front.is_a?(OpenApi::Validatable)
-        _front.validate
-      end
+      _front.validate if _front.is_a?(OpenApi::Validatable)
       @front = _front
     end
 

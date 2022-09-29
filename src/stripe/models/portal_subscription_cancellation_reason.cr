@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "options", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter options : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_OPTIONS = EnumValidator.new("options", "Array(String)", ["customer_service", "low_quality", "missing_features", "other", "switched_service", "too_complex", "too_expensive", "unused"])
+    ENUM_VALIDATOR_FOR_OPTIONS = OpenApi::EnumValidator.new("options", "Array(String)", ["customer_service", "low_quality", "missing_features", "other", "switched_service", "too_complex", "too_expensive", "unused"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

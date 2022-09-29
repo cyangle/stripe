@@ -50,13 +50,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _idempotency_key = @idempotency_key
-        if _idempotency_key.to_s.size > 5000
-          invalid_properties.push("invalid value for \"idempotency_key\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("idempotency_key", _idempotency_key.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -83,8 +83,8 @@ module Stripe
         return @id = nil
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -97,8 +97,8 @@ module Stripe
         return @idempotency_key = nil
       end
       _idempotency_key = idempotency_key.not_nil!
-      if _idempotency_key.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"idempotency_key\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("idempotency_key", _idempotency_key.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @idempotency_key = _idempotency_key

@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter code : String? = nil
 
-    ENUM_VALIDATOR_FOR_CODE = EnumValidator.new("code", "String", ["account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "declined", "incorrect_account_holder_name", "invalid_account_number", "invalid_currency", "no_account", "other"])
+    ENUM_VALIDATOR_FOR_CODE = OpenApi::EnumValidator.new("code", "String", ["account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "declined", "incorrect_account_holder_name", "invalid_account_number", "invalid_currency", "no_account", "other"])
 
     @[JSON::Field(key: "transaction", type: Stripe::TreasuryOutboundPaymentTransaction?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transaction : Stripe::TreasuryOutboundPaymentTransaction? = nil
@@ -48,9 +48,7 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
       invalid_properties.push("\"transaction\" is required and cannot be null") if @transaction.nil?
       if _transaction = @transaction
-        if _transaction.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_transaction.list_invalid_properties_for("transaction"))
-        end
+        invalid_properties.concat(_transaction.list_invalid_properties_for("transaction")) if _transaction.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -62,9 +60,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
       return false if @transaction.nil?
       if _transaction = @transaction
-        if _transaction.is_a?(OpenApi::Validatable)
-          return false unless _transaction.valid?
-        end
+        return false if _transaction.is_a?(OpenApi::Validatable) && !_transaction.valid?
       end
 
       true
@@ -88,9 +84,7 @@ module Stripe
         raise ArgumentError.new("\"transaction\" is required and cannot be null")
       end
       _transaction = transaction.not_nil!
-      if _transaction.is_a?(OpenApi::Validatable)
-        _transaction.validate
-      end
+      _transaction.validate if _transaction.is_a?(OpenApi::Validatable)
       @transaction = _transaction
     end
 

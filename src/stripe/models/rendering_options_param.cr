@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "amount_tax_display", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter amount_tax_display : String? = nil
 
-    ENUM_VALIDATOR_FOR_AMOUNT_TAX_DISPLAY = EnumValidator.new("amount_tax_display", "String", ["", "exclude_tax", "include_inclusive_tax"])
+    ENUM_VALIDATOR_FOR_AMOUNT_TAX_DISPLAY = OpenApi::EnumValidator.new("amount_tax_display", "String", ["", "exclude_tax", "include_inclusive_tax"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

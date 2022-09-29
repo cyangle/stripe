@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "preferred_language", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter preferred_language : String? = nil
 
-    ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE = EnumValidator.new("preferred_language", "String", ["de", "en", "fr", "nl"])
+    ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE = OpenApi::EnumValidator.new("preferred_language", "String", ["de", "en", "fr", "nl"])
 
     # Optional properties
 
@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["none", "off_session"])
+    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["none", "off_session"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

@@ -97,43 +97,41 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _mcc = @mcc
-        if _mcc.to_s.size > 5000
-          invalid_properties.push("invalid value for \"mcc\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mcc", _mcc.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _name = @name
-        if _name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _product_description = @product_description
-        if _product_description.to_s.size > 40000
-          invalid_properties.push("invalid value for \"product_description\", the character length must be smaller than or equal to 40000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 40000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _support_address = @support_address
-        if _support_address.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_support_address.list_invalid_properties_for("support_address"))
-        end
+        invalid_properties.concat(_support_address.list_invalid_properties_for("support_address")) if _support_address.is_a?(OpenApi::Validatable)
       end
       if _support_email = @support_email
-        if _support_email.to_s.size > 5000
-          invalid_properties.push("invalid value for \"support_email\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("support_email", _support_email.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _support_phone = @support_phone
-        if _support_phone.to_s.size > 5000
-          invalid_properties.push("invalid value for \"support_phone\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("support_phone", _support_phone.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _support_url = @support_url
-        if _support_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"support_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("support_url", _support_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _url = @url
-        if _url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -153,9 +151,7 @@ module Stripe
         return false if _product_description.to_s.size > 40000
       end
       if _support_address = @support_address
-        if _support_address.is_a?(OpenApi::Validatable)
-          return false unless _support_address.valid?
-        end
+        return false if _support_address.is_a?(OpenApi::Validatable) && !_support_address.valid?
       end
       if _support_email = @support_email
         return false if _support_email.to_s.size > 5000
@@ -180,8 +176,8 @@ module Stripe
         return @mcc = nil
       end
       _mcc = mcc.not_nil!
-      if _mcc.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"mcc\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mcc", _mcc.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @mcc = _mcc
@@ -194,8 +190,8 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if _name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @name = _name
@@ -208,8 +204,8 @@ module Stripe
         return @product_description = nil
       end
       _product_description = product_description.not_nil!
-      if _product_description.to_s.size > 40000
-        raise ArgumentError.new("invalid value for \"product_description\", the character length must be smaller than or equal to 40000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 40000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @product_description = _product_description
@@ -222,9 +218,7 @@ module Stripe
         return @support_address = nil
       end
       _support_address = support_address.not_nil!
-      if _support_address.is_a?(OpenApi::Validatable)
-        _support_address.validate
-      end
+      _support_address.validate if _support_address.is_a?(OpenApi::Validatable)
       @support_address = _support_address
     end
 
@@ -235,8 +229,8 @@ module Stripe
         return @support_email = nil
       end
       _support_email = support_email.not_nil!
-      if _support_email.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"support_email\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("support_email", _support_email.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @support_email = _support_email
@@ -249,8 +243,8 @@ module Stripe
         return @support_phone = nil
       end
       _support_phone = support_phone.not_nil!
-      if _support_phone.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"support_phone\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("support_phone", _support_phone.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @support_phone = _support_phone
@@ -263,8 +257,8 @@ module Stripe
         return @support_url = nil
       end
       _support_url = support_url.not_nil!
-      if _support_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"support_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("support_url", _support_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @support_url = _support_url
@@ -277,8 +271,8 @@ module Stripe
         return @url = nil
       end
       _url = url.not_nil!
-      if _url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @url = _url

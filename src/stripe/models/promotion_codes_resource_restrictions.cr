@@ -65,18 +65,12 @@ module Stripe
       invalid_properties.push("\"first_time_transaction\" is required and cannot be null") if @first_time_transaction.nil?
 
       if _currency_options = @currency_options
-        if _currency_options.is_a?(Hash)
-          _currency_options.each do |_key, value|
-            if value.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(value.list_invalid_properties_for("currency_options"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "currency_options", hash: _currency_options)) if _currency_options.is_a?(Hash)
       end
 
       if _minimum_amount_currency = @minimum_amount_currency
-        if _minimum_amount_currency.to_s.size > 5000
-          invalid_properties.push("invalid value for \"minimum_amount_currency\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("minimum_amount_currency", _minimum_amount_currency.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -89,13 +83,7 @@ module Stripe
       return false if @first_time_transaction.nil?
 
       if _currency_options = @currency_options
-        if _currency_options.is_a?(Hash)
-          _currency_options.each do |_key, value|
-            if value.is_a?(OpenApi::Validatable)
-              return false unless value.valid?
-            end
-          end
-        end
+        return false if _currency_options.is_a?(Hash) && !OpenApi::HashValidator.valid?(hash: _currency_options)
       end
 
       if _minimum_amount_currency = @minimum_amount_currency
@@ -122,13 +110,7 @@ module Stripe
         return @currency_options = nil
       end
       _currency_options = currency_options.not_nil!
-      if _currency_options.is_a?(Hash)
-        _currency_options.each do |_key, value|
-          if value.is_a?(OpenApi::Validatable)
-            value.validate
-          end
-        end
-      end
+      OpenApi::HashValidator.validate(hash: _currency_options) if _currency_options.is_a?(Hash)
       @currency_options = _currency_options
     end
 
@@ -149,8 +131,8 @@ module Stripe
         return @minimum_amount_currency = nil
       end
       _minimum_amount_currency = minimum_amount_currency.not_nil!
-      if _minimum_amount_currency.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"minimum_amount_currency\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("minimum_amount_currency", _minimum_amount_currency.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @minimum_amount_currency = _minimum_amount_currency

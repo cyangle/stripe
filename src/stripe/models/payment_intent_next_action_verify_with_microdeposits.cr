@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? microdeposit_type_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_MICRODEPOSIT_TYPE = EnumValidator.new("microdeposit_type", "String", ["amounts", "descriptor_code"])
+    ENUM_VALIDATOR_FOR_MICRODEPOSIT_TYPE = OpenApi::EnumValidator.new("microdeposit_type", "String", ["amounts", "descriptor_code"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -60,8 +60,8 @@ module Stripe
 
       invalid_properties.push("\"hosted_verification_url\" is required and cannot be null") if @hosted_verification_url.nil?
       if _hosted_verification_url = @hosted_verification_url
-        if _hosted_verification_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"hosted_verification_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_verification_url", _hosted_verification_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -101,8 +101,8 @@ module Stripe
         raise ArgumentError.new("\"hosted_verification_url\" is required and cannot be null")
       end
       _hosted_verification_url = hosted_verification_url.not_nil!
-      if _hosted_verification_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"hosted_verification_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_verification_url", _hosted_verification_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @hosted_verification_url = _hosted_verification_url

@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["setup_attempt"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["setup_attempt"])
 
     @[JSON::Field(key: "payment_method", type: Stripe::SetupAttemptPaymentMethod?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_method : Stripe::SetupAttemptPaymentMethod? = nil
@@ -81,7 +81,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? flow_directions_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS = EnumValidator.new("flow_directions", "Array(String)", ["inbound", "outbound"])
+    ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS = OpenApi::EnumValidator.new("flow_directions", "Array(String)", ["inbound", "outbound"])
 
     @[JSON::Field(key: "on_behalf_of", type: Stripe::SetupAttemptOnBehalfOf?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
     getter on_behalf_of : Stripe::SetupAttemptOnBehalfOf? = nil
@@ -127,8 +127,8 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -136,56 +136,42 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"payment_method\" is required and cannot be null") if @payment_method.nil?
       if _payment_method = @payment_method
-        if _payment_method.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_method.list_invalid_properties_for("payment_method"))
-        end
+        invalid_properties.concat(_payment_method.list_invalid_properties_for("payment_method")) if _payment_method.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"payment_method_details\" is required and cannot be null") if @payment_method_details.nil?
       if _payment_method_details = @payment_method_details
-        if _payment_method_details.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_method_details.list_invalid_properties_for("payment_method_details"))
-        end
+        invalid_properties.concat(_payment_method_details.list_invalid_properties_for("payment_method_details")) if _payment_method_details.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"setup_intent\" is required and cannot be null") if @setup_intent.nil?
       if _setup_intent = @setup_intent
-        if _setup_intent.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_setup_intent.list_invalid_properties_for("setup_intent"))
-        end
+        invalid_properties.concat(_setup_intent.list_invalid_properties_for("setup_intent")) if _setup_intent.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
       if _status = @status
-        if _status.to_s.size > 5000
-          invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"usage\" is required and cannot be null") if @usage.nil?
       if _usage = @usage
-        if _usage.to_s.size > 5000
-          invalid_properties.push("invalid value for \"usage\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("usage", _usage.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _application = @application
-        if _application.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_application.list_invalid_properties_for("application"))
-        end
+        invalid_properties.concat(_application.list_invalid_properties_for("application")) if _application.is_a?(OpenApi::Validatable)
       end
 
       if _customer = @customer
-        if _customer.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_customer.list_invalid_properties_for("customer"))
-        end
+        invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.error_message) unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
       if _on_behalf_of = @on_behalf_of
-        if _on_behalf_of.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_on_behalf_of.list_invalid_properties_for("on_behalf_of"))
-        end
+        invalid_properties.concat(_on_behalf_of.list_invalid_properties_for("on_behalf_of")) if _on_behalf_of.is_a?(OpenApi::Validatable)
       end
       if _setup_error = @setup_error
-        if _setup_error.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_setup_error.list_invalid_properties_for("setup_error"))
-        end
+        invalid_properties.concat(_setup_error.list_invalid_properties_for("setup_error")) if _setup_error.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -205,21 +191,15 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @payment_method.nil?
       if _payment_method = @payment_method
-        if _payment_method.is_a?(OpenApi::Validatable)
-          return false unless _payment_method.valid?
-        end
+        return false if _payment_method.is_a?(OpenApi::Validatable) && !_payment_method.valid?
       end
       return false if @payment_method_details.nil?
       if _payment_method_details = @payment_method_details
-        if _payment_method_details.is_a?(OpenApi::Validatable)
-          return false unless _payment_method_details.valid?
-        end
+        return false if _payment_method_details.is_a?(OpenApi::Validatable) && !_payment_method_details.valid?
       end
       return false if @setup_intent.nil?
       if _setup_intent = @setup_intent
-        if _setup_intent.is_a?(OpenApi::Validatable)
-          return false unless _setup_intent.valid?
-        end
+        return false if _setup_intent.is_a?(OpenApi::Validatable) && !_setup_intent.valid?
       end
       return false if @status.nil?
       if _status = @status
@@ -230,26 +210,18 @@ module Stripe
         return false if _usage.to_s.size > 5000
       end
       if _application = @application
-        if _application.is_a?(OpenApi::Validatable)
-          return false unless _application.valid?
-        end
+        return false if _application.is_a?(OpenApi::Validatable) && !_application.valid?
       end
 
       if _customer = @customer
-        if _customer.is_a?(OpenApi::Validatable)
-          return false unless _customer.valid?
-        end
+        return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
       if _on_behalf_of = @on_behalf_of
-        if _on_behalf_of.is_a?(OpenApi::Validatable)
-          return false unless _on_behalf_of.valid?
-        end
+        return false if _on_behalf_of.is_a?(OpenApi::Validatable) && !_on_behalf_of.valid?
       end
       if _setup_error = @setup_error
-        if _setup_error.is_a?(OpenApi::Validatable)
-          return false unless _setup_error.valid?
-        end
+        return false if _setup_error.is_a?(OpenApi::Validatable) && !_setup_error.valid?
       end
 
       true
@@ -272,8 +244,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -307,9 +279,7 @@ module Stripe
         raise ArgumentError.new("\"payment_method\" is required and cannot be null")
       end
       _payment_method = payment_method.not_nil!
-      if _payment_method.is_a?(OpenApi::Validatable)
-        _payment_method.validate
-      end
+      _payment_method.validate if _payment_method.is_a?(OpenApi::Validatable)
       @payment_method = _payment_method
     end
 
@@ -320,9 +290,7 @@ module Stripe
         raise ArgumentError.new("\"payment_method_details\" is required and cannot be null")
       end
       _payment_method_details = payment_method_details.not_nil!
-      if _payment_method_details.is_a?(OpenApi::Validatable)
-        _payment_method_details.validate
-      end
+      _payment_method_details.validate if _payment_method_details.is_a?(OpenApi::Validatable)
       @payment_method_details = _payment_method_details
     end
 
@@ -333,9 +301,7 @@ module Stripe
         raise ArgumentError.new("\"setup_intent\" is required and cannot be null")
       end
       _setup_intent = setup_intent.not_nil!
-      if _setup_intent.is_a?(OpenApi::Validatable)
-        _setup_intent.validate
-      end
+      _setup_intent.validate if _setup_intent.is_a?(OpenApi::Validatable)
       @setup_intent = _setup_intent
     end
 
@@ -346,8 +312,8 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if _status.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @status = _status
@@ -360,8 +326,8 @@ module Stripe
         raise ArgumentError.new("\"usage\" is required and cannot be null")
       end
       _usage = usage.not_nil!
-      if _usage.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"usage\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("usage", _usage.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @usage = _usage
@@ -374,9 +340,7 @@ module Stripe
         return @application = nil
       end
       _application = application.not_nil!
-      if _application.is_a?(OpenApi::Validatable)
-        _application.validate
-      end
+      _application.validate if _application.is_a?(OpenApi::Validatable)
       @application = _application
     end
 
@@ -397,9 +361,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if _customer.is_a?(OpenApi::Validatable)
-        _customer.validate
-      end
+      _customer.validate if _customer.is_a?(OpenApi::Validatable)
       @customer = _customer
     end
 
@@ -421,9 +383,7 @@ module Stripe
         return @on_behalf_of = nil
       end
       _on_behalf_of = on_behalf_of.not_nil!
-      if _on_behalf_of.is_a?(OpenApi::Validatable)
-        _on_behalf_of.validate
-      end
+      _on_behalf_of.validate if _on_behalf_of.is_a?(OpenApi::Validatable)
       @on_behalf_of = _on_behalf_of
     end
 
@@ -434,9 +394,7 @@ module Stripe
         return @setup_error = nil
       end
       _setup_error = setup_error.not_nil!
-      if _setup_error.is_a?(OpenApi::Validatable)
-        _setup_error.validate
-      end
+      _setup_error.validate if _setup_error.is_a?(OpenApi::Validatable)
       @setup_error = _setup_error
     end
 

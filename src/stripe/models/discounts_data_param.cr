@@ -41,13 +41,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _coupon = @coupon
-        if _coupon.to_s.size > 5000
-          invalid_properties.push("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _discount = @discount
-        if _discount.to_s.size > 5000
-          invalid_properties.push("invalid value for \"discount\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("discount", _discount.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -74,8 +74,8 @@ module Stripe
         return @coupon = nil
       end
       _coupon = coupon.not_nil!
-      if _coupon.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"coupon\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @coupon = _coupon
@@ -88,8 +88,8 @@ module Stripe
         return @discount = nil
       end
       _discount = discount.not_nil!
-      if _discount.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"discount\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("discount", _discount.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @discount = _discount

@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = EnumValidator.new("capture_method", "String", ["manual"])
+    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = OpenApi::EnumValidator.new("capture_method", "String", ["manual"])
 
     @[JSON::Field(key: "installments", type: Stripe::PaymentIntentPaymentMethodOptionsCardInstallments?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: installments.nil? && !installments_present?)]
     getter installments : Stripe::PaymentIntentPaymentMethodOptionsCardInstallments? = nil
@@ -46,7 +46,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? network_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_NETWORK = EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
+    ENUM_VALIDATOR_FOR_NETWORK = OpenApi::EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
 
     # We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: request_three_d_secure.nil? && !request_three_d_secure_present?)]
@@ -55,13 +55,13 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? request_three_d_secure_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = EnumValidator.new("request_three_d_secure", "String", ["any", "automatic", "challenge_only"])
+    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = OpenApi::EnumValidator.new("request_three_d_secure", "String", ["any", "automatic", "challenge_only"])
 
     # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["none", "off_session", "on_session"])
+    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["none", "off_session", "on_session"])
 
     # Provides information about a card payment that customers see on their statements. Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters. On card statements, the *concatenation* of both prefix and suffix (including separators) will appear truncated to 22 characters.
     @[JSON::Field(key: "statement_descriptor_suffix_kana", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -94,14 +94,10 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
       if _installments = @installments
-        if _installments.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_installments.list_invalid_properties_for("installments"))
-        end
+        invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
       if _mandate_options = @mandate_options
-        if _mandate_options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options"))
-        end
+        invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
@@ -110,13 +106,13 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
-        if _statement_descriptor_suffix_kana.to_s.size > 5000
-          invalid_properties.push("invalid value for \"statement_descriptor_suffix_kana\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
-        if _statement_descriptor_suffix_kanji.to_s.size > 5000
-          invalid_properties.push("invalid value for \"statement_descriptor_suffix_kanji\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -128,14 +124,10 @@ module Stripe
     def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
       if _installments = @installments
-        if _installments.is_a?(OpenApi::Validatable)
-          return false unless _installments.valid?
-        end
+        return false if _installments.is_a?(OpenApi::Validatable) && !_installments.valid?
       end
       if _mandate_options = @mandate_options
-        if _mandate_options.is_a?(OpenApi::Validatable)
-          return false unless _mandate_options.valid?
-        end
+        return false if _mandate_options.is_a?(OpenApi::Validatable) && !_mandate_options.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
       return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
@@ -168,9 +160,7 @@ module Stripe
         return @installments = nil
       end
       _installments = installments.not_nil!
-      if _installments.is_a?(OpenApi::Validatable)
-        _installments.validate
-      end
+      _installments.validate if _installments.is_a?(OpenApi::Validatable)
       @installments = _installments
     end
 
@@ -181,9 +171,7 @@ module Stripe
         return @mandate_options = nil
       end
       _mandate_options = mandate_options.not_nil!
-      if _mandate_options.is_a?(OpenApi::Validatable)
-        _mandate_options.validate
-      end
+      _mandate_options.validate if _mandate_options.is_a?(OpenApi::Validatable)
       @mandate_options = _mandate_options
     end
 
@@ -227,8 +215,8 @@ module Stripe
         return @statement_descriptor_suffix_kana = nil
       end
       _statement_descriptor_suffix_kana = statement_descriptor_suffix_kana.not_nil!
-      if _statement_descriptor_suffix_kana.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"statement_descriptor_suffix_kana\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor_suffix_kana = _statement_descriptor_suffix_kana
@@ -241,8 +229,8 @@ module Stripe
         return @statement_descriptor_suffix_kanji = nil
       end
       _statement_descriptor_suffix_kanji = statement_descriptor_suffix_kanji.not_nil!
-      if _statement_descriptor_suffix_kanji.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"statement_descriptor_suffix_kanji\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor_suffix_kanji = _statement_descriptor_suffix_kanji

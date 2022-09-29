@@ -67,40 +67,28 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _account = @account
-        if _account.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_account.list_invalid_properties_for("account"))
-        end
+        invalid_properties.concat(_account.list_invalid_properties_for("account")) if _account.is_a?(OpenApi::Validatable)
       end
       if _bank_account = @bank_account
-        if _bank_account.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_bank_account.list_invalid_properties_for("bank_account"))
-        end
+        invalid_properties.concat(_bank_account.list_invalid_properties_for("bank_account")) if _bank_account.is_a?(OpenApi::Validatable)
       end
       if _card = @card
-        if _card.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card.list_invalid_properties_for("card"))
-        end
+        invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
       if _customer = @customer
-        if _customer.to_s.size > 5000
-          invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _cvc_update = @cvc_update
-        if _cvc_update.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_cvc_update.list_invalid_properties_for("cvc_update"))
-        end
+        invalid_properties.concat(_cvc_update.list_invalid_properties_for("cvc_update")) if _cvc_update.is_a?(OpenApi::Validatable)
       end
 
       if _person = @person
-        if _person.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_person.list_invalid_properties_for("person"))
-        end
+        invalid_properties.concat(_person.list_invalid_properties_for("person")) if _person.is_a?(OpenApi::Validatable)
       end
       if _pii = @pii
-        if _pii.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_pii.list_invalid_properties_for("pii"))
-        end
+        invalid_properties.concat(_pii.list_invalid_properties_for("pii")) if _pii.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -110,38 +98,26 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _account = @account
-        if _account.is_a?(OpenApi::Validatable)
-          return false unless _account.valid?
-        end
+        return false if _account.is_a?(OpenApi::Validatable) && !_account.valid?
       end
       if _bank_account = @bank_account
-        if _bank_account.is_a?(OpenApi::Validatable)
-          return false unless _bank_account.valid?
-        end
+        return false if _bank_account.is_a?(OpenApi::Validatable) && !_bank_account.valid?
       end
       if _card = @card
-        if _card.is_a?(OpenApi::Validatable)
-          return false unless _card.valid?
-        end
+        return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
       if _cvc_update = @cvc_update
-        if _cvc_update.is_a?(OpenApi::Validatable)
-          return false unless _cvc_update.valid?
-        end
+        return false if _cvc_update.is_a?(OpenApi::Validatable) && !_cvc_update.valid?
       end
 
       if _person = @person
-        if _person.is_a?(OpenApi::Validatable)
-          return false unless _person.valid?
-        end
+        return false if _person.is_a?(OpenApi::Validatable) && !_person.valid?
       end
       if _pii = @pii
-        if _pii.is_a?(OpenApi::Validatable)
-          return false unless _pii.valid?
-        end
+        return false if _pii.is_a?(OpenApi::Validatable) && !_pii.valid?
       end
 
       true
@@ -154,9 +130,7 @@ module Stripe
         return @account = nil
       end
       _account = account.not_nil!
-      if _account.is_a?(OpenApi::Validatable)
-        _account.validate
-      end
+      _account.validate if _account.is_a?(OpenApi::Validatable)
       @account = _account
     end
 
@@ -167,9 +141,7 @@ module Stripe
         return @bank_account = nil
       end
       _bank_account = bank_account.not_nil!
-      if _bank_account.is_a?(OpenApi::Validatable)
-        _bank_account.validate
-      end
+      _bank_account.validate if _bank_account.is_a?(OpenApi::Validatable)
       @bank_account = _bank_account
     end
 
@@ -180,9 +152,7 @@ module Stripe
         return @card = nil
       end
       _card = card.not_nil!
-      if _card.is_a?(OpenApi::Validatable)
-        _card.validate
-      end
+      _card.validate if _card.is_a?(OpenApi::Validatable)
       @card = _card
     end
 
@@ -193,8 +163,8 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if _customer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @customer = _customer
@@ -207,9 +177,7 @@ module Stripe
         return @cvc_update = nil
       end
       _cvc_update = cvc_update.not_nil!
-      if _cvc_update.is_a?(OpenApi::Validatable)
-        _cvc_update.validate
-      end
+      _cvc_update.validate if _cvc_update.is_a?(OpenApi::Validatable)
       @cvc_update = _cvc_update
     end
 
@@ -230,9 +198,7 @@ module Stripe
         return @person = nil
       end
       _person = person.not_nil!
-      if _person.is_a?(OpenApi::Validatable)
-        _person.validate
-      end
+      _person.validate if _person.is_a?(OpenApi::Validatable)
       @person = _person
     end
 
@@ -243,9 +209,7 @@ module Stripe
         return @pii = nil
       end
       _pii = pii.not_nil!
-      if _pii.is_a?(OpenApi::Validatable)
-        _pii.validate
-      end
+      _pii.validate if _pii.is_a?(OpenApi::Validatable)
       @pii = _pii
     end
 

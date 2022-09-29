@@ -38,9 +38,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _splashscreen = @splashscreen
-        if _splashscreen.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_splashscreen.list_invalid_properties_for("splashscreen"))
-        end
+        invalid_properties.concat(_splashscreen.list_invalid_properties_for("splashscreen")) if _splashscreen.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -50,9 +48,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _splashscreen = @splashscreen
-        if _splashscreen.is_a?(OpenApi::Validatable)
-          return false unless _splashscreen.valid?
-        end
+        return false if _splashscreen.is_a?(OpenApi::Validatable) && !_splashscreen.valid?
       end
 
       true
@@ -65,9 +61,7 @@ module Stripe
         return @splashscreen = nil
       end
       _splashscreen = splashscreen.not_nil!
-      if _splashscreen.is_a?(OpenApi::Validatable)
-        _splashscreen.validate
-      end
+      _splashscreen.validate if _splashscreen.is_a?(OpenApi::Validatable)
       @splashscreen = _splashscreen
     end
 

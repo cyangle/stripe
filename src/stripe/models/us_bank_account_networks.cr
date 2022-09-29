@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "supported", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter supported : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_SUPPORTED = EnumValidator.new("supported", "Array(String)", ["ach", "us_domestic_wire"])
+    ENUM_VALIDATOR_FOR_SUPPORTED = OpenApi::EnumValidator.new("supported", "Array(String)", ["ach", "us_domestic_wire"])
 
     # Optional properties
 
@@ -54,8 +54,8 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED.all_valid?(@supported, false)
       if _preferred = @preferred
-        if _preferred.to_s.size > 5000
-          invalid_properties.push("invalid value for \"preferred\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred", _preferred.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -91,8 +91,8 @@ module Stripe
         return @preferred = nil
       end
       _preferred = preferred.not_nil!
-      if _preferred.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"preferred\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred", _preferred.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @preferred = _preferred

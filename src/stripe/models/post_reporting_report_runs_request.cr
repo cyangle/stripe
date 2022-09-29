@@ -52,9 +52,7 @@ module Stripe
       invalid_properties.push("\"report_type\" is required and cannot be null") if @report_type.nil?
 
       if _parameters = @parameters
-        if _parameters.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_parameters.list_invalid_properties_for("parameters"))
-        end
+        invalid_properties.concat(_parameters.list_invalid_properties_for("parameters")) if _parameters.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -66,9 +64,7 @@ module Stripe
       return false if @report_type.nil?
 
       if _parameters = @parameters
-        if _parameters.is_a?(OpenApi::Validatable)
-          return false unless _parameters.valid?
-        end
+        return false if _parameters.is_a?(OpenApi::Validatable) && !_parameters.valid?
       end
 
       true
@@ -101,9 +97,7 @@ module Stripe
         return @parameters = nil
       end
       _parameters = parameters.not_nil!
-      if _parameters.is_a?(OpenApi::Validatable)
-        _parameters.validate
-      end
+      _parameters.validate if _parameters.is_a?(OpenApi::Validatable)
       @parameters = _parameters
     end
 

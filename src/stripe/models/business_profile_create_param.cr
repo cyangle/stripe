@@ -46,8 +46,8 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _headline = @headline
-        if _headline.to_s.size > 60
-          invalid_properties.push("invalid value for \"headline\", the character length must be smaller than or equal to 60.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, 60)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -71,8 +71,8 @@ module Stripe
         return @headline = nil
       end
       _headline = headline.not_nil!
-      if _headline.to_s.size > 60
-        raise ArgumentError.new("invalid value for \"headline\", the character length must be smaller than or equal to 60.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, 60)
+        raise ArgumentError.new(max_length_error)
       end
 
       @headline = _headline

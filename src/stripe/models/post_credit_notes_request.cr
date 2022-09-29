@@ -58,7 +58,7 @@ module Stripe
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter reason : String? = nil
 
-    ENUM_VALIDATOR_FOR_REASON = EnumValidator.new("reason", "String", ["duplicate", "fraudulent", "order_change", "product_unsatisfactory"])
+    ENUM_VALIDATOR_FOR_REASON = OpenApi::EnumValidator.new("reason", "String", ["duplicate", "fraudulent", "order_change", "product_unsatisfactory"])
 
     # ID of an existing refund to link this credit note to.
     @[JSON::Field(key: "refund", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -94,23 +94,17 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
       if _invoice = @invoice
-        if _invoice.to_s.size > 5000
-          invalid_properties.push("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _lines = @lines
-        if _lines.is_a?(Array)
-          _lines.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("lines"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "lines", array: _lines)) if _lines.is_a?(Array)
       end
       if _memo = @memo
-        if _memo.to_s.size > 5000
-          invalid_properties.push("invalid value for \"memo\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("memo", _memo.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -128,13 +122,7 @@ module Stripe
       end
 
       if _lines = @lines
-        if _lines.is_a?(Array)
-          _lines.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _lines.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _lines)
       end
       if _memo = @memo
         return false if _memo.to_s.size > 5000
@@ -152,8 +140,8 @@ module Stripe
         raise ArgumentError.new("\"invoice\" is required and cannot be null")
       end
       _invoice = invoice.not_nil!
-      if _invoice.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @invoice = _invoice
@@ -196,13 +184,7 @@ module Stripe
         return @lines = nil
       end
       _lines = lines.not_nil!
-      if _lines.is_a?(Array)
-        _lines.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _lines) if _lines.is_a?(Array)
       @lines = _lines
     end
 
@@ -213,8 +195,8 @@ module Stripe
         return @memo = nil
       end
       _memo = memo.not_nil!
-      if _memo.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"memo\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("memo", _memo.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @memo = _memo

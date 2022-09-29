@@ -43,9 +43,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _document = @document
-        if _document.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_document.list_invalid_properties_for("document"))
-        end
+        invalid_properties.concat(_document.list_invalid_properties_for("document")) if _document.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -55,9 +53,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _document = @document
-        if _document.is_a?(OpenApi::Validatable)
-          return false unless _document.valid?
-        end
+        return false if _document.is_a?(OpenApi::Validatable) && !_document.valid?
       end
 
       true
@@ -70,9 +66,7 @@ module Stripe
         return @document = nil
       end
       _document = document.not_nil!
-      if _document.is_a?(OpenApi::Validatable)
-        _document.validate
-      end
+      _document.validate if _document.is_a?(OpenApi::Validatable)
       @document = _document
     end
 

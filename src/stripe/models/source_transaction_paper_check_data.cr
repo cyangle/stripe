@@ -44,13 +44,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _available_at = @available_at
-        if _available_at.to_s.size > 5000
-          invalid_properties.push("invalid value for \"available_at\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("available_at", _available_at.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _invoices = @invoices
-        if _invoices.to_s.size > 5000
-          invalid_properties.push("invalid value for \"invoices\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoices", _invoices.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -77,8 +77,8 @@ module Stripe
         return @available_at = nil
       end
       _available_at = available_at.not_nil!
-      if _available_at.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"available_at\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("available_at", _available_at.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @available_at = _available_at
@@ -91,8 +91,8 @@ module Stripe
         return @invoices = nil
       end
       _invoices = invoices.not_nil!
-      if _invoices.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"invoices\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoices", _invoices.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @invoices = _invoices

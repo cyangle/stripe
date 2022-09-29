@@ -27,12 +27,12 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["bucket", "finite", "infinite"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["bucket", "finite", "infinite"])
 
     @[JSON::Field(key: "value", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter value : String? = nil
 
-    ENUM_VALIDATOR_FOR_VALUE = EnumValidator.new("value", "String", ["", "in_stock", "limited", "out_of_stock"])
+    ENUM_VALIDATOR_FOR_VALUE = OpenApi::EnumValidator.new("value", "String", ["", "in_stock", "limited", "out_of_stock"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

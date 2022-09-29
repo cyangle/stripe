@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? ineligible_reason_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_INELIGIBLE_REASON = EnumValidator.new("ineligible_reason", "String", ["missing_agreement", "missing_cardholder_contact", "unsupported_region"])
+    ENUM_VALIDATOR_FOR_INELIGIBLE_REASON = OpenApi::EnumValidator.new("ineligible_reason", "String", ["missing_agreement", "missing_cardholder_contact", "unsupported_region"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

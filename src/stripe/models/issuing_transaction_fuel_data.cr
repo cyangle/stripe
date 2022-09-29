@@ -61,14 +61,14 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
-        if __type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"unit\" is required and cannot be null") if @unit.nil?
       if _unit = @unit
-        if _unit.to_s.size > 5000
-          invalid_properties.push("invalid value for \"unit\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit", _unit.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"unit_cost_decimal\" is required and cannot be null") if @unit_cost_decimal.nil?
@@ -99,8 +99,8 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if __type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_type = __type
@@ -113,8 +113,8 @@ module Stripe
         raise ArgumentError.new("\"unit\" is required and cannot be null")
       end
       _unit = unit.not_nil!
-      if _unit.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"unit\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit", _unit.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @unit = _unit

@@ -33,13 +33,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["file"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["file"])
 
     # The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
     @[JSON::Field(key: "purpose", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter purpose : String? = nil
 
-    ENUM_VALIDATOR_FOR_PURPOSE = EnumValidator.new("purpose", "String", ["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload", "terminal_reader_splashscreen"])
+    ENUM_VALIDATOR_FOR_PURPOSE = OpenApi::EnumValidator.new("purpose", "String", ["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload", "terminal_reader_splashscreen"])
 
     # The size in bytes of the file object.
     @[JSON::Field(key: "size", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -116,8 +116,8 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -127,28 +127,26 @@ module Stripe
       invalid_properties.push("\"size\" is required and cannot be null") if @size.nil?
 
       if _filename = @filename
-        if _filename.to_s.size > 5000
-          invalid_properties.push("invalid value for \"filename\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("filename", _filename.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _links = @links
-        if _links.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_links.list_invalid_properties_for("links"))
-        end
+        invalid_properties.concat(_links.list_invalid_properties_for("links")) if _links.is_a?(OpenApi::Validatable)
       end
       if _title = @title
-        if _title.to_s.size > 5000
-          invalid_properties.push("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if __type = @_type
-        if __type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _url = @url
-        if _url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -172,9 +170,7 @@ module Stripe
         return false if _filename.to_s.size > 5000
       end
       if _links = @links
-        if _links.is_a?(OpenApi::Validatable)
-          return false unless _links.valid?
-        end
+        return false if _links.is_a?(OpenApi::Validatable) && !_links.valid?
       end
       if _title = @title
         return false if _title.to_s.size > 5000
@@ -206,8 +202,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -262,8 +258,8 @@ module Stripe
         return @filename = nil
       end
       _filename = filename.not_nil!
-      if _filename.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"filename\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("filename", _filename.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @filename = _filename
@@ -276,9 +272,7 @@ module Stripe
         return @links = nil
       end
       _links = links.not_nil!
-      if _links.is_a?(OpenApi::Validatable)
-        _links.validate
-      end
+      _links.validate if _links.is_a?(OpenApi::Validatable)
       @links = _links
     end
 
@@ -289,8 +283,8 @@ module Stripe
         return @title = nil
       end
       _title = title.not_nil!
-      if _title.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"title\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @title = _title
@@ -303,8 +297,8 @@ module Stripe
         return @_type = nil
       end
       __type = _type.not_nil!
-      if __type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_type = __type
@@ -317,8 +311,8 @@ module Stripe
         return @url = nil
       end
       _url = url.not_nil!
-      if _url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @url = _url

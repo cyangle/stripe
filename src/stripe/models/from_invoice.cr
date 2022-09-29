@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "action", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter action : String? = nil
 
-    ENUM_VALIDATOR_FOR_ACTION = EnumValidator.new("action", "String", ["revision"])
+    ENUM_VALIDATOR_FOR_ACTION = OpenApi::EnumValidator.new("action", "String", ["revision"])
 
     @[JSON::Field(key: "invoice", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter invoice : String? = nil
@@ -47,8 +47,8 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_ACTION.error_message) unless ENUM_VALIDATOR_FOR_ACTION.valid?(@action, false)
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
       if _invoice = @invoice
-        if _invoice.to_s.size > 5000
-          invalid_properties.push("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -85,8 +85,8 @@ module Stripe
         raise ArgumentError.new("\"invoice\" is required and cannot be null")
       end
       _invoice = invoice.not_nil!
-      if _invoice.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"invoice\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @invoice = _invoice

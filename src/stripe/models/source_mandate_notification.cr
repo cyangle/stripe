@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["source_mandate_notification"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["source_mandate_notification"])
 
     # The reason of the mandate notification. Valid reasons are `mandate_confirmed` or `debit_initiated`.
     @[JSON::Field(key: "reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -101,8 +101,8 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -110,43 +110,35 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
       if _reason = @reason
-        if _reason.to_s.size > 5000
-          invalid_properties.push("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"source\" is required and cannot be null") if @source.nil?
       if _source = @source
-        if _source.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_source.list_invalid_properties_for("source"))
-        end
+        invalid_properties.concat(_source.list_invalid_properties_for("source")) if _source.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
       if _status = @status
-        if _status.to_s.size > 5000
-          invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
-        if __type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _acss_debit = @acss_debit
-        if _acss_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit"))
-        end
+        invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
 
       if _bacs_debit = @bacs_debit
-        if _bacs_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_bacs_debit.list_invalid_properties_for("bacs_debit"))
-        end
+        invalid_properties.concat(_bacs_debit.list_invalid_properties_for("bacs_debit")) if _bacs_debit.is_a?(OpenApi::Validatable)
       end
       if _sepa_debit = @sepa_debit
-        if _sepa_debit.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit"))
-        end
+        invalid_properties.concat(_sepa_debit.list_invalid_properties_for("sepa_debit")) if _sepa_debit.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -170,9 +162,7 @@ module Stripe
       end
       return false if @source.nil?
       if _source = @source
-        if _source.is_a?(OpenApi::Validatable)
-          return false unless _source.valid?
-        end
+        return false if _source.is_a?(OpenApi::Validatable) && !_source.valid?
       end
       return false if @status.nil?
       if _status = @status
@@ -183,20 +173,14 @@ module Stripe
         return false if __type.to_s.size > 5000
       end
       if _acss_debit = @acss_debit
-        if _acss_debit.is_a?(OpenApi::Validatable)
-          return false unless _acss_debit.valid?
-        end
+        return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
 
       if _bacs_debit = @bacs_debit
-        if _bacs_debit.is_a?(OpenApi::Validatable)
-          return false unless _bacs_debit.valid?
-        end
+        return false if _bacs_debit.is_a?(OpenApi::Validatable) && !_bacs_debit.valid?
       end
       if _sepa_debit = @sepa_debit
-        if _sepa_debit.is_a?(OpenApi::Validatable)
-          return false unless _sepa_debit.valid?
-        end
+        return false if _sepa_debit.is_a?(OpenApi::Validatable) && !_sepa_debit.valid?
       end
 
       true
@@ -219,8 +203,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -254,8 +238,8 @@ module Stripe
         raise ArgumentError.new("\"reason\" is required and cannot be null")
       end
       _reason = reason.not_nil!
-      if _reason.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"reason\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @reason = _reason
@@ -268,9 +252,7 @@ module Stripe
         raise ArgumentError.new("\"source\" is required and cannot be null")
       end
       _source = source.not_nil!
-      if _source.is_a?(OpenApi::Validatable)
-        _source.validate
-      end
+      _source.validate if _source.is_a?(OpenApi::Validatable)
       @source = _source
     end
 
@@ -281,8 +263,8 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if _status.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @status = _status
@@ -295,8 +277,8 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if __type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_type = __type
@@ -309,9 +291,7 @@ module Stripe
         return @acss_debit = nil
       end
       _acss_debit = acss_debit.not_nil!
-      if _acss_debit.is_a?(OpenApi::Validatable)
-        _acss_debit.validate
-      end
+      _acss_debit.validate if _acss_debit.is_a?(OpenApi::Validatable)
       @acss_debit = _acss_debit
     end
 
@@ -332,9 +312,7 @@ module Stripe
         return @bacs_debit = nil
       end
       _bacs_debit = bacs_debit.not_nil!
-      if _bacs_debit.is_a?(OpenApi::Validatable)
-        _bacs_debit.validate
-      end
+      _bacs_debit.validate if _bacs_debit.is_a?(OpenApi::Validatable)
       @bacs_debit = _bacs_debit
     end
 
@@ -345,9 +323,7 @@ module Stripe
         return @sepa_debit = nil
       end
       _sepa_debit = sepa_debit.not_nil!
-      if _sepa_debit.is_a?(OpenApi::Validatable)
-        _sepa_debit.validate
-      end
+      _sepa_debit.validate if _sepa_debit.is_a?(OpenApi::Validatable)
       @sepa_debit = _sepa_debit
     end
 

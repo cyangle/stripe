@@ -24,14 +24,14 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
 
-    ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
+    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
 
     # Optional properties
 
     @[JSON::Field(key: "aggregate_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter aggregate_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_AGGREGATE_USAGE = EnumValidator.new("aggregate_usage", "String", ["last_during_period", "last_ever", "max", "sum"])
+    ENUM_VALIDATOR_FOR_AGGREGATE_USAGE = OpenApi::EnumValidator.new("aggregate_usage", "String", ["last_during_period", "last_ever", "max", "sum"])
 
     @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter interval_count : Int64? = nil
@@ -39,7 +39,7 @@ module Stripe
     @[JSON::Field(key: "usage_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter usage_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_USAGE_TYPE = EnumValidator.new("usage_type", "String", ["licensed", "metered"])
+    ENUM_VALIDATOR_FOR_USAGE_TYPE = OpenApi::EnumValidator.new("usage_type", "String", ["licensed", "metered"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

@@ -54,13 +54,13 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _client_secret = @client_secret
-        if _client_secret.to_s.size > 5000
-          invalid_properties.push("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _descriptor_code = @descriptor_code
-        if _descriptor_code.to_s.size > 5000
-          invalid_properties.push("invalid value for \"descriptor_code\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("descriptor_code", _descriptor_code.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -97,8 +97,8 @@ module Stripe
         return @client_secret = nil
       end
       _client_secret = client_secret.not_nil!
-      if _client_secret.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"client_secret\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @client_secret = _client_secret
@@ -111,8 +111,8 @@ module Stripe
         return @descriptor_code = nil
       end
       _descriptor_code = descriptor_code.not_nil!
-      if _descriptor_code.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"descriptor_code\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("descriptor_code", _descriptor_code.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @descriptor_code = _descriptor_code

@@ -61,25 +61,25 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"return_url\" is required and cannot be null") if @return_url.nil?
       if _return_url = @return_url
-        if _return_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
       if _status = @status
-        if _status.to_s.size > 5000
-          invalid_properties.push("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
       if _url = @url
-        if _url.to_s.size > 2048
-          invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 2048.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 2048)
+          invalid_properties.push(max_length_error)
         end
       end
       if _failure_reason = @failure_reason
-        if _failure_reason.to_s.size > 5000
-          invalid_properties.push("invalid value for \"failure_reason\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_reason", _failure_reason.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -115,8 +115,8 @@ module Stripe
         raise ArgumentError.new("\"return_url\" is required and cannot be null")
       end
       _return_url = return_url.not_nil!
-      if _return_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @return_url = _return_url
@@ -129,8 +129,8 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if _status.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"status\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @status = _status
@@ -143,8 +143,8 @@ module Stripe
         raise ArgumentError.new("\"url\" is required and cannot be null")
       end
       _url = url.not_nil!
-      if _url.to_s.size > 2048
-        raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 2048.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 2048)
+        raise ArgumentError.new(max_length_error)
       end
 
       @url = _url
@@ -157,8 +157,8 @@ module Stripe
         return @failure_reason = nil
       end
       _failure_reason = failure_reason.not_nil!
-      if _failure_reason.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"failure_reason\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_reason", _failure_reason.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @failure_reason = _failure_reason

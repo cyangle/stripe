@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "tax_exempt", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter tax_exempt : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_EXEMPT = EnumValidator.new("tax_exempt", "String", ["exempt", "none", "reverse"])
+    ENUM_VALIDATOR_FOR_TAX_EXEMPT = OpenApi::EnumValidator.new("tax_exempt", "String", ["exempt", "none", "reverse"])
 
     # The purchaser's tax IDs to be used in calculation of tax for this Order.
     @[JSON::Field(key: "tax_ids", type: Array(Stripe::OrdersV2ResourceTaxDetailsResourceTaxId)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -49,13 +49,7 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_EXEMPT.error_message) unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt, false)
       invalid_properties.push("\"tax_ids\" is required and cannot be null") if @tax_ids.nil?
       if _tax_ids = @tax_ids
-        if _tax_ids.is_a?(Array)
-          _tax_ids.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("tax_ids"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tax_ids", array: _tax_ids)) if _tax_ids.is_a?(Array)
       end
 
       invalid_properties
@@ -67,13 +61,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt, false)
       return false if @tax_ids.nil?
       if _tax_ids = @tax_ids
-        if _tax_ids.is_a?(Array)
-          _tax_ids.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _tax_ids.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tax_ids)
       end
 
       true
@@ -97,13 +85,7 @@ module Stripe
         raise ArgumentError.new("\"tax_ids\" is required and cannot be null")
       end
       _tax_ids = tax_ids.not_nil!
-      if _tax_ids.is_a?(Array)
-        _tax_ids.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _tax_ids) if _tax_ids.is_a?(Array)
       @tax_ids = _tax_ids
     end
 

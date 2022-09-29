@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["balance"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["balance"])
 
     # Funds that are not yet available in the balance, due to the 7-day rolling pay cycle. The pending balance for each currency, and for each payment type, can be found in the `source_types` property.
     @[JSON::Field(key: "pending", type: Array(Stripe::BalanceAmount)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -74,49 +74,23 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"available\" is required and cannot be null") if @available.nil?
       if _available = @available
-        if _available.is_a?(Array)
-          _available.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("available"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "available", array: _available)) if _available.is_a?(Array)
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"pending\" is required and cannot be null") if @pending.nil?
       if _pending = @pending
-        if _pending.is_a?(Array)
-          _pending.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("pending"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "pending", array: _pending)) if _pending.is_a?(Array)
       end
       if _connect_reserved = @connect_reserved
-        if _connect_reserved.is_a?(Array)
-          _connect_reserved.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("connect_reserved"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "connect_reserved", array: _connect_reserved)) if _connect_reserved.is_a?(Array)
       end
       if _instant_available = @instant_available
-        if _instant_available.is_a?(Array)
-          _instant_available.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("instant_available"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "instant_available", array: _instant_available)) if _instant_available.is_a?(Array)
       end
       if _issuing = @issuing
-        if _issuing.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_issuing.list_invalid_properties_for("issuing"))
-        end
+        invalid_properties.concat(_issuing.list_invalid_properties_for("issuing")) if _issuing.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -127,49 +101,23 @@ module Stripe
     def valid? : Bool
       return false if @available.nil?
       if _available = @available
-        if _available.is_a?(Array)
-          _available.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _available.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _available)
       end
       return false if @livemode.nil?
 
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @pending.nil?
       if _pending = @pending
-        if _pending.is_a?(Array)
-          _pending.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _pending.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _pending)
       end
       if _connect_reserved = @connect_reserved
-        if _connect_reserved.is_a?(Array)
-          _connect_reserved.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _connect_reserved.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _connect_reserved)
       end
       if _instant_available = @instant_available
-        if _instant_available.is_a?(Array)
-          _instant_available.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _instant_available.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _instant_available)
       end
       if _issuing = @issuing
-        if _issuing.is_a?(OpenApi::Validatable)
-          return false unless _issuing.valid?
-        end
+        return false if _issuing.is_a?(OpenApi::Validatable) && !_issuing.valid?
       end
 
       true
@@ -182,13 +130,7 @@ module Stripe
         raise ArgumentError.new("\"available\" is required and cannot be null")
       end
       _available = available.not_nil!
-      if _available.is_a?(Array)
-        _available.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _available) if _available.is_a?(Array)
       @available = _available
     end
 
@@ -220,13 +162,7 @@ module Stripe
         raise ArgumentError.new("\"pending\" is required and cannot be null")
       end
       _pending = pending.not_nil!
-      if _pending.is_a?(Array)
-        _pending.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _pending) if _pending.is_a?(Array)
       @pending = _pending
     end
 
@@ -237,13 +173,7 @@ module Stripe
         return @connect_reserved = nil
       end
       _connect_reserved = connect_reserved.not_nil!
-      if _connect_reserved.is_a?(Array)
-        _connect_reserved.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _connect_reserved) if _connect_reserved.is_a?(Array)
       @connect_reserved = _connect_reserved
     end
 
@@ -254,13 +184,7 @@ module Stripe
         return @instant_available = nil
       end
       _instant_available = instant_available.not_nil!
-      if _instant_available.is_a?(Array)
-        _instant_available.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _instant_available) if _instant_available.is_a?(Array)
       @instant_available = _instant_available
     end
 
@@ -271,9 +195,7 @@ module Stripe
         return @issuing = nil
       end
       _issuing = issuing.not_nil!
-      if _issuing.is_a?(OpenApi::Validatable)
-        _issuing.validate
-      end
+      _issuing.validate if _issuing.is_a?(OpenApi::Validatable)
       @issuing = _issuing
     end
 

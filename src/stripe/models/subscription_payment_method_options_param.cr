@@ -26,12 +26,12 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter network : String? = nil
 
-    ENUM_VALIDATOR_FOR_NETWORK = EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
+    ENUM_VALIDATOR_FOR_NETWORK = OpenApi::EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
 
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter request_three_d_secure : String? = nil
 
-    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = EnumValidator.new("request_three_d_secure", "String", ["any", "automatic"])
+    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = OpenApi::EnumValidator.new("request_three_d_secure", "String", ["any", "automatic"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -49,9 +49,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _mandate_options = @mandate_options
-        if _mandate_options.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options"))
-        end
+        invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
@@ -65,9 +63,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _mandate_options = @mandate_options
-        if _mandate_options.is_a?(OpenApi::Validatable)
-          return false unless _mandate_options.valid?
-        end
+        return false if _mandate_options.is_a?(OpenApi::Validatable) && !_mandate_options.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
       return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
@@ -82,9 +78,7 @@ module Stripe
         return @mandate_options = nil
       end
       _mandate_options = mandate_options.not_nil!
-      if _mandate_options.is_a?(OpenApi::Validatable)
-        _mandate_options.validate
-      end
+      _mandate_options.validate if _mandate_options.is_a?(OpenApi::Validatable)
       @mandate_options = _mandate_options
     end
 

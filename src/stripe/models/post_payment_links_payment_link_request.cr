@@ -38,13 +38,13 @@ module Stripe
     @[JSON::Field(key: "billing_address_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_address_collection : String? = nil
 
-    ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION = EnumValidator.new("billing_address_collection", "String", ["auto", "required"])
+    ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION = OpenApi::EnumValidator.new("billing_address_collection", "String", ["auto", "required"])
 
     # Configures whether [checkout sessions](https://stripe.com/docs/api/checkout/sessions) created by this payment link create a [Customer](https://stripe.com/docs/api/customers).
     @[JSON::Field(key: "customer_creation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer_creation : String? = nil
 
-    ENUM_VALIDATOR_FOR_CUSTOMER_CREATION = EnumValidator.new("customer_creation", "String", ["always", "if_required"])
+    ENUM_VALIDATOR_FOR_CUSTOMER_CREATION = OpenApi::EnumValidator.new("customer_creation", "String", ["always", "if_required"])
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -62,7 +62,7 @@ module Stripe
     @[JSON::Field(key: "payment_method_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_collection : String? = nil
 
-    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_COLLECTION = EnumValidator.new("payment_method_collection", "String", ["always", "if_required"])
+    ENUM_VALIDATOR_FOR_PAYMENT_METHOD_COLLECTION = OpenApi::EnumValidator.new("payment_method_collection", "String", ["always", "if_required"])
 
     @[JSON::Field(key: "payment_method_types", type: Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_types : Stripe::PostPaymentLinksPaymentLinkRequestPaymentMethodTypes? = nil
@@ -96,15 +96,11 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _after_completion = @after_completion
-        if _after_completion.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_after_completion.list_invalid_properties_for("after_completion"))
-        end
+        invalid_properties.concat(_after_completion.list_invalid_properties_for("after_completion")) if _after_completion.is_a?(OpenApi::Validatable)
       end
 
       if _automatic_tax = @automatic_tax
-        if _automatic_tax.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax"))
-        end
+        invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.error_message) unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
@@ -112,25 +108,15 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.error_message) unless ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid?(@customer_creation)
 
       if _line_items = @line_items
-        if _line_items.is_a?(Array)
-          _line_items.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              invalid_properties.concat(item.list_invalid_properties_for("line_items"))
-            end
-          end
-        end
+        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "line_items", array: _line_items)) if _line_items.is_a?(Array)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_METHOD_COLLECTION.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_COLLECTION.valid?(@payment_method_collection)
       if _payment_method_types = @payment_method_types
-        if _payment_method_types.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_payment_method_types.list_invalid_properties_for("payment_method_types"))
-        end
+        invalid_properties.concat(_payment_method_types.list_invalid_properties_for("payment_method_types")) if _payment_method_types.is_a?(OpenApi::Validatable)
       end
       if _shipping_address_collection = @shipping_address_collection
-        if _shipping_address_collection.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_shipping_address_collection.list_invalid_properties_for("shipping_address_collection"))
-        end
+        invalid_properties.concat(_shipping_address_collection.list_invalid_properties_for("shipping_address_collection")) if _shipping_address_collection.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -140,39 +126,25 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _after_completion = @after_completion
-        if _after_completion.is_a?(OpenApi::Validatable)
-          return false unless _after_completion.valid?
-        end
+        return false if _after_completion.is_a?(OpenApi::Validatable) && !_after_completion.valid?
       end
 
       if _automatic_tax = @automatic_tax
-        if _automatic_tax.is_a?(OpenApi::Validatable)
-          return false unless _automatic_tax.valid?
-        end
+        return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_BILLING_ADDRESS_COLLECTION.valid?(@billing_address_collection)
       return false unless ENUM_VALIDATOR_FOR_CUSTOMER_CREATION.valid?(@customer_creation)
 
       if _line_items = @line_items
-        if _line_items.is_a?(Array)
-          _line_items.each do |item|
-            if item.is_a?(OpenApi::Validatable)
-              return false unless item.valid?
-            end
-          end
-        end
+        return false if _line_items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _line_items)
       end
 
       return false unless ENUM_VALIDATOR_FOR_PAYMENT_METHOD_COLLECTION.valid?(@payment_method_collection)
       if _payment_method_types = @payment_method_types
-        if _payment_method_types.is_a?(OpenApi::Validatable)
-          return false unless _payment_method_types.valid?
-        end
+        return false if _payment_method_types.is_a?(OpenApi::Validatable) && !_payment_method_types.valid?
       end
       if _shipping_address_collection = @shipping_address_collection
-        if _shipping_address_collection.is_a?(OpenApi::Validatable)
-          return false unless _shipping_address_collection.valid?
-        end
+        return false if _shipping_address_collection.is_a?(OpenApi::Validatable) && !_shipping_address_collection.valid?
       end
 
       true
@@ -195,9 +167,7 @@ module Stripe
         return @after_completion = nil
       end
       _after_completion = after_completion.not_nil!
-      if _after_completion.is_a?(OpenApi::Validatable)
-        _after_completion.validate
-      end
+      _after_completion.validate if _after_completion.is_a?(OpenApi::Validatable)
       @after_completion = _after_completion
     end
 
@@ -218,9 +188,7 @@ module Stripe
         return @automatic_tax = nil
       end
       _automatic_tax = automatic_tax.not_nil!
-      if _automatic_tax.is_a?(OpenApi::Validatable)
-        _automatic_tax.validate
-      end
+      _automatic_tax.validate if _automatic_tax.is_a?(OpenApi::Validatable)
       @automatic_tax = _automatic_tax
     end
 
@@ -263,13 +231,7 @@ module Stripe
         return @line_items = nil
       end
       _line_items = line_items.not_nil!
-      if _line_items.is_a?(Array)
-        _line_items.each do |item|
-          if item.is_a?(OpenApi::Validatable)
-            item.validate
-          end
-        end
-      end
+      OpenApi::ArrayValidator.validate(array: _line_items) if _line_items.is_a?(Array)
       @line_items = _line_items
     end
 
@@ -301,9 +263,7 @@ module Stripe
         return @payment_method_types = nil
       end
       _payment_method_types = payment_method_types.not_nil!
-      if _payment_method_types.is_a?(OpenApi::Validatable)
-        _payment_method_types.validate
-      end
+      _payment_method_types.validate if _payment_method_types.is_a?(OpenApi::Validatable)
       @payment_method_types = _payment_method_types
     end
 
@@ -314,9 +274,7 @@ module Stripe
         return @shipping_address_collection = nil
       end
       _shipping_address_collection = shipping_address_collection.not_nil!
-      if _shipping_address_collection.is_a?(OpenApi::Validatable)
-        _shipping_address_collection.validate
-      end
+      _shipping_address_collection.validate if _shipping_address_collection.is_a?(OpenApi::Validatable)
       @shipping_address_collection = _shipping_address_collection
     end
 

@@ -46,13 +46,11 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _schedule = @schedule
-        if _schedule.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_schedule.list_invalid_properties_for("schedule"))
-        end
+        invalid_properties.concat(_schedule.list_invalid_properties_for("schedule")) if _schedule.is_a?(OpenApi::Validatable)
       end
       if _statement_descriptor = @statement_descriptor
-        if _statement_descriptor.to_s.size > 22
-          invalid_properties.push("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -63,9 +61,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _schedule = @schedule
-        if _schedule.is_a?(OpenApi::Validatable)
-          return false unless _schedule.valid?
-        end
+        return false if _schedule.is_a?(OpenApi::Validatable) && !_schedule.valid?
       end
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 22
@@ -91,9 +87,7 @@ module Stripe
         return @schedule = nil
       end
       _schedule = schedule.not_nil!
-      if _schedule.is_a?(OpenApi::Validatable)
-        _schedule.validate
-      end
+      _schedule.validate if _schedule.is_a?(OpenApi::Validatable)
       @schedule = _schedule
     end
 
@@ -104,8 +98,8 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if _statement_descriptor.to_s.size > 22
-        raise ArgumentError.new("invalid value for \"statement_descriptor\", the character length must be smaller than or equal to 22.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+        raise ArgumentError.new(max_length_error)
       end
 
       @statement_descriptor = _statement_descriptor

@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "requested", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter requested : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_REQUESTED = EnumValidator.new("requested", "Array(String)", ["ach", "us_domestic_wire"])
+    ENUM_VALIDATOR_FOR_REQUESTED = OpenApi::EnumValidator.new("requested", "Array(String)", ["ach", "us_domestic_wire"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash

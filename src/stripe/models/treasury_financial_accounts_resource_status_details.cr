@@ -41,9 +41,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _closed = @closed
-        if _closed.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_closed.list_invalid_properties_for("closed"))
-        end
+        invalid_properties.concat(_closed.list_invalid_properties_for("closed")) if _closed.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -53,9 +51,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _closed = @closed
-        if _closed.is_a?(OpenApi::Validatable)
-          return false unless _closed.valid?
-        end
+        return false if _closed.is_a?(OpenApi::Validatable) && !_closed.valid?
       end
 
       true
@@ -68,9 +64,7 @@ module Stripe
         return @closed = nil
       end
       _closed = closed.not_nil!
-      if _closed.is_a?(OpenApi::Validatable)
-        _closed.validate
-      end
+      _closed.validate if _closed.is_a?(OpenApi::Validatable)
       @closed = _closed
     end
 

@@ -59,13 +59,13 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _hosted_voucher_url = @hosted_voucher_url
-        if _hosted_voucher_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"hosted_voucher_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_voucher_url", _hosted_voucher_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _number = @number
-        if _number.to_s.size > 5000
-          invalid_properties.push("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -102,8 +102,8 @@ module Stripe
         return @hosted_voucher_url = nil
       end
       _hosted_voucher_url = hosted_voucher_url.not_nil!
-      if _hosted_voucher_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"hosted_voucher_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_voucher_url", _hosted_voucher_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @hosted_voucher_url = _hosted_voucher_url
@@ -116,8 +116,8 @@ module Stripe
         return @number = nil
       end
       _number = number.not_nil!
-      if _number.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"number\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @number = _number

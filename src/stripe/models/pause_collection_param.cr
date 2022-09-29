@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_BEHAVIOR = EnumValidator.new("behavior", "String", ["keep_as_draft", "mark_uncollectible", "void"])
+    ENUM_VALIDATOR_FOR_BEHAVIOR = OpenApi::EnumValidator.new("behavior", "String", ["keep_as_draft", "mark_uncollectible", "void"])
 
     # Optional properties
 

@@ -44,7 +44,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["billing_portal.session"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["billing_portal.session"])
 
     # The short-lived URL of the session that gives customers access to the customer portal.
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -59,7 +59,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? locale_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_LOCALE = EnumValidator.new("locale", "String", ["auto", "bg", "cs", "da", "de", "el", "en", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-SG", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"])
+    ENUM_VALIDATOR_FOR_LOCALE = OpenApi::EnumValidator.new("locale", "String", ["auto", "bg", "cs", "da", "de", "el", "en", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-SG", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"])
 
     # The account for which the session was created on behalf of. When specified, only subscriptions and invoices with this `on_behalf_of` account appear in the portal. For more information, see the [docs](https://stripe.com/docs/connect/charges-transfers#on-behalf-of). Use the [Accounts API](https://stripe.com/docs/api/accounts/object#account_object-settings-branding) to modify the `on_behalf_of` account's branding settings, which the portal displays.
     @[JSON::Field(key: "on_behalf_of", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: on_behalf_of.nil? && !on_behalf_of_present?)]
@@ -100,22 +100,20 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"configuration\" is required and cannot be null") if @configuration.nil?
       if _configuration = @configuration
-        if _configuration.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_configuration.list_invalid_properties_for("configuration"))
-        end
+        invalid_properties.concat(_configuration.list_invalid_properties_for("configuration")) if _configuration.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
       if _customer = @customer
-        if _customer.to_s.size > 5000
-          invalid_properties.push("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
@@ -123,20 +121,20 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
       if _url = @url
-        if _url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_LOCALE.error_message) unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
       if _on_behalf_of = @on_behalf_of
-        if _on_behalf_of.to_s.size > 5000
-          invalid_properties.push("invalid value for \"on_behalf_of\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("on_behalf_of", _on_behalf_of.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _return_url = @return_url
-        if _return_url.to_s.size > 5000
-          invalid_properties.push("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
@@ -148,9 +146,7 @@ module Stripe
     def valid? : Bool
       return false if @configuration.nil?
       if _configuration = @configuration
-        if _configuration.is_a?(OpenApi::Validatable)
-          return false unless _configuration.valid?
-        end
+        return false if _configuration.is_a?(OpenApi::Validatable) && !_configuration.valid?
       end
       return false if @created.nil?
 
@@ -187,9 +183,7 @@ module Stripe
         raise ArgumentError.new("\"configuration\" is required and cannot be null")
       end
       _configuration = configuration.not_nil!
-      if _configuration.is_a?(OpenApi::Validatable)
-        _configuration.validate
-      end
+      _configuration.validate if _configuration.is_a?(OpenApi::Validatable)
       @configuration = _configuration
     end
 
@@ -210,8 +204,8 @@ module Stripe
         raise ArgumentError.new("\"customer\" is required and cannot be null")
       end
       _customer = customer.not_nil!
-      if _customer.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"customer\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @customer = _customer
@@ -224,8 +218,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -259,8 +253,8 @@ module Stripe
         raise ArgumentError.new("\"url\" is required and cannot be null")
       end
       _url = url.not_nil!
-      if _url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @url = _url
@@ -284,8 +278,8 @@ module Stripe
         return @on_behalf_of = nil
       end
       _on_behalf_of = on_behalf_of.not_nil!
-      if _on_behalf_of.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"on_behalf_of\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("on_behalf_of", _on_behalf_of.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @on_behalf_of = _on_behalf_of
@@ -298,8 +292,8 @@ module Stripe
         return @return_url = nil
       end
       _return_url = return_url.not_nil!
-      if _return_url.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"return_url\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @return_url = _return_url

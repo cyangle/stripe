@@ -108,7 +108,7 @@ module Stripe
     @[JSON::Field(ignore: true)]
     property? read_method_present : Bool = false
 
-    ENUM_VALIDATOR_FOR_READ_METHOD = EnumValidator.new("read_method", "String", ["contact_emv", "contactless_emv", "contactless_magstripe_mode", "magnetic_stripe_fallback", "magnetic_stripe_track2"])
+    ENUM_VALIDATOR_FOR_READ_METHOD = OpenApi::EnumValidator.new("read_method", "String", ["contact_emv", "contactless_emv", "contactless_magstripe_mode", "magnetic_stripe_fallback", "magnetic_stripe_track2"])
 
     @[JSON::Field(key: "receipt", type: Stripe::PaymentMethodDetailsInteracPresentReceipt1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: receipt.nil? && !receipt_present?)]
     getter receipt : Stripe::PaymentMethodDetailsInteracPresentReceipt1? = nil
@@ -148,56 +148,54 @@ module Stripe
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
 
       if _brand = @brand
-        if _brand.to_s.size > 5000
-          invalid_properties.push("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _cardholder_name = @cardholder_name
-        if _cardholder_name.to_s.size > 5000
-          invalid_properties.push("invalid value for \"cardholder_name\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder_name", _cardholder_name.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _country = @country
-        if _country.to_s.size > 5000
-          invalid_properties.push("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _emv_auth_data = @emv_auth_data
-        if _emv_auth_data.to_s.size > 5000
-          invalid_properties.push("invalid value for \"emv_auth_data\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("emv_auth_data", _emv_auth_data.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _fingerprint = @fingerprint
-        if _fingerprint.to_s.size > 5000
-          invalid_properties.push("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _funding = @funding
-        if _funding.to_s.size > 5000
-          invalid_properties.push("invalid value for \"funding\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _generated_card = @generated_card
-        if _generated_card.to_s.size > 5000
-          invalid_properties.push("invalid value for \"generated_card\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("generated_card", _generated_card.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _last4 = @last4
-        if _last4.to_s.size > 5000
-          invalid_properties.push("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _network = @network
-        if _network.to_s.size > 5000
-          invalid_properties.push("invalid value for \"network\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network", _network.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_READ_METHOD.error_message) unless ENUM_VALIDATOR_FOR_READ_METHOD.valid?(@read_method)
       if _receipt = @receipt
-        if _receipt.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_receipt.list_invalid_properties_for("receipt"))
-        end
+        invalid_properties.concat(_receipt.list_invalid_properties_for("receipt")) if _receipt.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -240,9 +238,7 @@ module Stripe
 
       return false unless ENUM_VALIDATOR_FOR_READ_METHOD.valid?(@read_method)
       if _receipt = @receipt
-        if _receipt.is_a?(OpenApi::Validatable)
-          return false unless _receipt.valid?
-        end
+        return false if _receipt.is_a?(OpenApi::Validatable) && !_receipt.valid?
       end
 
       true
@@ -275,8 +271,8 @@ module Stripe
         return @brand = nil
       end
       _brand = brand.not_nil!
-      if _brand.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"brand\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @brand = _brand
@@ -289,8 +285,8 @@ module Stripe
         return @cardholder_name = nil
       end
       _cardholder_name = cardholder_name.not_nil!
-      if _cardholder_name.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"cardholder_name\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder_name", _cardholder_name.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @cardholder_name = _cardholder_name
@@ -303,8 +299,8 @@ module Stripe
         return @country = nil
       end
       _country = country.not_nil!
-      if _country.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"country\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @country = _country
@@ -317,8 +313,8 @@ module Stripe
         return @emv_auth_data = nil
       end
       _emv_auth_data = emv_auth_data.not_nil!
-      if _emv_auth_data.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"emv_auth_data\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("emv_auth_data", _emv_auth_data.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @emv_auth_data = _emv_auth_data
@@ -331,8 +327,8 @@ module Stripe
         return @fingerprint = nil
       end
       _fingerprint = fingerprint.not_nil!
-      if _fingerprint.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"fingerprint\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @fingerprint = _fingerprint
@@ -345,8 +341,8 @@ module Stripe
         return @funding = nil
       end
       _funding = funding.not_nil!
-      if _funding.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"funding\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @funding = _funding
@@ -359,8 +355,8 @@ module Stripe
         return @generated_card = nil
       end
       _generated_card = generated_card.not_nil!
-      if _generated_card.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"generated_card\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("generated_card", _generated_card.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @generated_card = _generated_card
@@ -373,8 +369,8 @@ module Stripe
         return @last4 = nil
       end
       _last4 = last4.not_nil!
-      if _last4.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"last4\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @last4 = _last4
@@ -387,8 +383,8 @@ module Stripe
         return @network = nil
       end
       _network = network.not_nil!
-      if _network.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"network\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network", _network.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @network = _network
@@ -422,9 +418,7 @@ module Stripe
         return @receipt = nil
       end
       _receipt = receipt.not_nil!
-      if _receipt.is_a?(OpenApi::Validatable)
-        _receipt.validate
-      end
+      _receipt.validate if _receipt.is_a?(OpenApi::Validatable)
       @receipt = _receipt
     end
 

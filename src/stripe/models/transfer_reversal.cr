@@ -41,7 +41,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["transfer_reversal"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["transfer_reversal"])
 
     @[JSON::Field(key: "transfer", type: Stripe::TransferReversalTransfer?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transfer : Stripe::TransferReversalTransfer? = nil
@@ -104,33 +104,25 @@ module Stripe
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       invalid_properties.push("\"transfer\" is required and cannot be null") if @transfer.nil?
       if _transfer = @transfer
-        if _transfer.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_transfer.list_invalid_properties_for("transfer"))
-        end
+        invalid_properties.concat(_transfer.list_invalid_properties_for("transfer")) if _transfer.is_a?(OpenApi::Validatable)
       end
       if _balance_transaction = @balance_transaction
-        if _balance_transaction.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction"))
-        end
+        invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
       if _destination_payment_refund = @destination_payment_refund
-        if _destination_payment_refund.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_destination_payment_refund.list_invalid_properties_for("destination_payment_refund"))
-        end
+        invalid_properties.concat(_destination_payment_refund.list_invalid_properties_for("destination_payment_refund")) if _destination_payment_refund.is_a?(OpenApi::Validatable)
       end
 
       if _source_refund = @source_refund
-        if _source_refund.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_source_refund.list_invalid_properties_for("source_refund"))
-        end
+        invalid_properties.concat(_source_refund.list_invalid_properties_for("source_refund")) if _source_refund.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -152,25 +144,17 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       return false if @transfer.nil?
       if _transfer = @transfer
-        if _transfer.is_a?(OpenApi::Validatable)
-          return false unless _transfer.valid?
-        end
+        return false if _transfer.is_a?(OpenApi::Validatable) && !_transfer.valid?
       end
       if _balance_transaction = @balance_transaction
-        if _balance_transaction.is_a?(OpenApi::Validatable)
-          return false unless _balance_transaction.valid?
-        end
+        return false if _balance_transaction.is_a?(OpenApi::Validatable) && !_balance_transaction.valid?
       end
       if _destination_payment_refund = @destination_payment_refund
-        if _destination_payment_refund.is_a?(OpenApi::Validatable)
-          return false unless _destination_payment_refund.valid?
-        end
+        return false if _destination_payment_refund.is_a?(OpenApi::Validatable) && !_destination_payment_refund.valid?
       end
 
       if _source_refund = @source_refund
-        if _source_refund.is_a?(OpenApi::Validatable)
-          return false unless _source_refund.valid?
-        end
+        return false if _source_refund.is_a?(OpenApi::Validatable) && !_source_refund.valid?
       end
 
       true
@@ -213,8 +197,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -238,9 +222,7 @@ module Stripe
         raise ArgumentError.new("\"transfer\" is required and cannot be null")
       end
       _transfer = transfer.not_nil!
-      if _transfer.is_a?(OpenApi::Validatable)
-        _transfer.validate
-      end
+      _transfer.validate if _transfer.is_a?(OpenApi::Validatable)
       @transfer = _transfer
     end
 
@@ -251,9 +233,7 @@ module Stripe
         return @balance_transaction = nil
       end
       _balance_transaction = balance_transaction.not_nil!
-      if _balance_transaction.is_a?(OpenApi::Validatable)
-        _balance_transaction.validate
-      end
+      _balance_transaction.validate if _balance_transaction.is_a?(OpenApi::Validatable)
       @balance_transaction = _balance_transaction
     end
 
@@ -264,9 +244,7 @@ module Stripe
         return @destination_payment_refund = nil
       end
       _destination_payment_refund = destination_payment_refund.not_nil!
-      if _destination_payment_refund.is_a?(OpenApi::Validatable)
-        _destination_payment_refund.validate
-      end
+      _destination_payment_refund.validate if _destination_payment_refund.is_a?(OpenApi::Validatable)
       @destination_payment_refund = _destination_payment_refund
     end
 
@@ -287,9 +265,7 @@ module Stripe
         return @source_refund = nil
       end
       _source_refund = source_refund.not_nil!
-      if _source_refund.is_a?(OpenApi::Validatable)
-        _source_refund.validate
-      end
+      _source_refund.validate if _source_refund.is_a?(OpenApi::Validatable)
       @source_refund = _source_refund
     end
 

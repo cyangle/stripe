@@ -39,9 +39,7 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"error\" is required and cannot be null") if @error.nil?
       if _error = @error
-        if _error.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_error.list_invalid_properties_for("error"))
-        end
+        invalid_properties.concat(_error.list_invalid_properties_for("error")) if _error.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -52,9 +50,7 @@ module Stripe
     def valid? : Bool
       return false if @error.nil?
       if _error = @error
-        if _error.is_a?(OpenApi::Validatable)
-          return false unless _error.valid?
-        end
+        return false if _error.is_a?(OpenApi::Validatable) && !_error.valid?
       end
 
       true
@@ -67,9 +63,7 @@ module Stripe
         raise ArgumentError.new("\"error\" is required and cannot be null")
       end
       _error = error.not_nil!
-      if _error.is_a?(OpenApi::Validatable)
-        _error.validate
-      end
+      _error.validate if _error.is_a?(OpenApi::Validatable)
       @error = _error
     end
 

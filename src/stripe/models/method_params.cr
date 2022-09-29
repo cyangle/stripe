@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
+    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = OpenApi::EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
 
     @[JSON::Field(key: "tax_code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_code : String? = nil
@@ -45,7 +45,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["fixed_amount"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["fixed_amount"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -69,19 +69,15 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"display_name\" is required and cannot be null") if @display_name.nil?
       if _display_name = @display_name
-        if _display_name.to_s.size > 100
-          invalid_properties.push("invalid value for \"display_name\", the character length must be smaller than or equal to 100.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 100)
+          invalid_properties.push(max_length_error)
         end
       end
       if _delivery_estimate = @delivery_estimate
-        if _delivery_estimate.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_delivery_estimate.list_invalid_properties_for("delivery_estimate"))
-        end
+        invalid_properties.concat(_delivery_estimate.list_invalid_properties_for("delivery_estimate")) if _delivery_estimate.is_a?(OpenApi::Validatable)
       end
       if _fixed_amount = @fixed_amount
-        if _fixed_amount.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_fixed_amount.list_invalid_properties_for("fixed_amount"))
-        end
+        invalid_properties.concat(_fixed_amount.list_invalid_properties_for("fixed_amount")) if _fixed_amount.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
@@ -99,14 +95,10 @@ module Stripe
         return false if _display_name.to_s.size > 100
       end
       if _delivery_estimate = @delivery_estimate
-        if _delivery_estimate.is_a?(OpenApi::Validatable)
-          return false unless _delivery_estimate.valid?
-        end
+        return false if _delivery_estimate.is_a?(OpenApi::Validatable) && !_delivery_estimate.valid?
       end
       if _fixed_amount = @fixed_amount
-        if _fixed_amount.is_a?(OpenApi::Validatable)
-          return false unless _fixed_amount.valid?
-        end
+        return false if _fixed_amount.is_a?(OpenApi::Validatable) && !_fixed_amount.valid?
       end
 
       return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
@@ -123,8 +115,8 @@ module Stripe
         raise ArgumentError.new("\"display_name\" is required and cannot be null")
       end
       _display_name = display_name.not_nil!
-      if _display_name.to_s.size > 100
-        raise ArgumentError.new("invalid value for \"display_name\", the character length must be smaller than or equal to 100.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 100)
+        raise ArgumentError.new(max_length_error)
       end
 
       @display_name = _display_name
@@ -137,9 +129,7 @@ module Stripe
         return @delivery_estimate = nil
       end
       _delivery_estimate = delivery_estimate.not_nil!
-      if _delivery_estimate.is_a?(OpenApi::Validatable)
-        _delivery_estimate.validate
-      end
+      _delivery_estimate.validate if _delivery_estimate.is_a?(OpenApi::Validatable)
       @delivery_estimate = _delivery_estimate
     end
 
@@ -150,9 +140,7 @@ module Stripe
         return @fixed_amount = nil
       end
       _fixed_amount = fixed_amount.not_nil!
-      if _fixed_amount.is_a?(OpenApi::Validatable)
-        _fixed_amount.validate
-      end
+      _fixed_amount.validate if _fixed_amount.is_a?(OpenApi::Validatable)
       @fixed_amount = _fixed_amount
     end
 

@@ -33,12 +33,12 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter interval : String? = nil
 
-    ENUM_VALIDATOR_FOR_INTERVAL = EnumValidator.new("interval", "String", ["one_time", "scheduled", "variable"])
+    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["one_time", "scheduled", "variable"])
 
     @[JSON::Field(key: "notification_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter notification_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD = EnumValidator.new("notification_method", "String", ["deprecated_none", "email", "manual", "none", "stripe_email"])
+    ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD = OpenApi::EnumValidator.new("notification_method", "String", ["deprecated_none", "email", "manual", "none", "stripe_email"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -58,14 +58,10 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _acceptance = @acceptance
-        if _acceptance.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_acceptance.list_invalid_properties_for("acceptance"))
-        end
+        invalid_properties.concat(_acceptance.list_invalid_properties_for("acceptance")) if _acceptance.is_a?(OpenApi::Validatable)
       end
       if _amount = @amount
-        if _amount.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_amount.list_invalid_properties_for("amount"))
-        end
+        invalid_properties.concat(_amount.list_invalid_properties_for("amount")) if _amount.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
@@ -79,14 +75,10 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _acceptance = @acceptance
-        if _acceptance.is_a?(OpenApi::Validatable)
-          return false unless _acceptance.valid?
-        end
+        return false if _acceptance.is_a?(OpenApi::Validatable) && !_acceptance.valid?
       end
       if _amount = @amount
-        if _amount.is_a?(OpenApi::Validatable)
-          return false unless _amount.valid?
-        end
+        return false if _amount.is_a?(OpenApi::Validatable) && !_amount.valid?
       end
 
       return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
@@ -102,9 +94,7 @@ module Stripe
         return @acceptance = nil
       end
       _acceptance = acceptance.not_nil!
-      if _acceptance.is_a?(OpenApi::Validatable)
-        _acceptance.validate
-      end
+      _acceptance.validate if _acceptance.is_a?(OpenApi::Validatable)
       @acceptance = _acceptance
     end
 
@@ -115,9 +105,7 @@ module Stripe
         return @amount = nil
       end
       _amount = amount.not_nil!
-      if _amount.is_a?(OpenApi::Validatable)
-        _amount.validate
-      end
+      _amount.validate if _amount.is_a?(OpenApi::Validatable)
       @amount = _amount
     end
 

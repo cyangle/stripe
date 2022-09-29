@@ -39,9 +39,7 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"customer_acceptance\" is required and cannot be null") if @customer_acceptance.nil?
       if _customer_acceptance = @customer_acceptance
-        if _customer_acceptance.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_customer_acceptance.list_invalid_properties_for("customer_acceptance"))
-        end
+        invalid_properties.concat(_customer_acceptance.list_invalid_properties_for("customer_acceptance")) if _customer_acceptance.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -52,9 +50,7 @@ module Stripe
     def valid? : Bool
       return false if @customer_acceptance.nil?
       if _customer_acceptance = @customer_acceptance
-        if _customer_acceptance.is_a?(OpenApi::Validatable)
-          return false unless _customer_acceptance.valid?
-        end
+        return false if _customer_acceptance.is_a?(OpenApi::Validatable) && !_customer_acceptance.valid?
       end
 
       true
@@ -67,9 +63,7 @@ module Stripe
         raise ArgumentError.new("\"customer_acceptance\" is required and cannot be null")
       end
       _customer_acceptance = customer_acceptance.not_nil!
-      if _customer_acceptance.is_a?(OpenApi::Validatable)
-        _customer_acceptance.validate
-      end
+      _customer_acceptance.validate if _customer_acceptance.is_a?(OpenApi::Validatable)
       @customer_acceptance = _customer_acceptance
     end
 

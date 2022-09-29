@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = EnumValidator.new("object", "String", ["terminal.configuration"])
+    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["terminal.configuration"])
 
     # Optional properties
 
@@ -75,28 +75,22 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
       if _id = @id
-        if _id.to_s.size > 5000
-          invalid_properties.push("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       if _bbpos_wisepos_e = @bbpos_wisepos_e
-        if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_bbpos_wisepos_e.list_invalid_properties_for("bbpos_wisepos_e"))
-        end
+        invalid_properties.concat(_bbpos_wisepos_e.list_invalid_properties_for("bbpos_wisepos_e")) if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
       end
 
       if _tipping = @tipping
-        if _tipping.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_tipping.list_invalid_properties_for("tipping"))
-        end
+        invalid_properties.concat(_tipping.list_invalid_properties_for("tipping")) if _tipping.is_a?(OpenApi::Validatable)
       end
       if _verifone_p400 = @verifone_p400
-        if _verifone_p400.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_verifone_p400.list_invalid_properties_for("verifone_p400"))
-        end
+        invalid_properties.concat(_verifone_p400.list_invalid_properties_for("verifone_p400")) if _verifone_p400.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -113,20 +107,14 @@ module Stripe
 
       return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
       if _bbpos_wisepos_e = @bbpos_wisepos_e
-        if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
-          return false unless _bbpos_wisepos_e.valid?
-        end
+        return false if _bbpos_wisepos_e.is_a?(OpenApi::Validatable) && !_bbpos_wisepos_e.valid?
       end
 
       if _tipping = @tipping
-        if _tipping.is_a?(OpenApi::Validatable)
-          return false unless _tipping.valid?
-        end
+        return false if _tipping.is_a?(OpenApi::Validatable) && !_tipping.valid?
       end
       if _verifone_p400 = @verifone_p400
-        if _verifone_p400.is_a?(OpenApi::Validatable)
-          return false unless _verifone_p400.valid?
-        end
+        return false if _verifone_p400.is_a?(OpenApi::Validatable) && !_verifone_p400.valid?
       end
 
       true
@@ -139,8 +127,8 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if _id.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"id\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @id = _id
@@ -174,9 +162,7 @@ module Stripe
         return @bbpos_wisepos_e = nil
       end
       _bbpos_wisepos_e = bbpos_wisepos_e.not_nil!
-      if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
-        _bbpos_wisepos_e.validate
-      end
+      _bbpos_wisepos_e.validate if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
       @bbpos_wisepos_e = _bbpos_wisepos_e
     end
 
@@ -197,9 +183,7 @@ module Stripe
         return @tipping = nil
       end
       _tipping = tipping.not_nil!
-      if _tipping.is_a?(OpenApi::Validatable)
-        _tipping.validate
-      end
+      _tipping.validate if _tipping.is_a?(OpenApi::Validatable)
       @tipping = _tipping
     end
 
@@ -210,9 +194,7 @@ module Stripe
         return @verifone_p400 = nil
       end
       _verifone_p400 = verifone_p400.not_nil!
-      if _verifone_p400.is_a?(OpenApi::Validatable)
-        _verifone_p400.validate
-      end
+      _verifone_p400.validate if _verifone_p400.is_a?(OpenApi::Validatable)
       @verifone_p400 = _verifone_p400
     end
 

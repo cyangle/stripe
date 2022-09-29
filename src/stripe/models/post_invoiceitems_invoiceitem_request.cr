@@ -94,42 +94,32 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _description = @description
-        if _description.to_s.size > 5000
-          invalid_properties.push("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _discounts = @discounts
-        if _discounts.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_discounts.list_invalid_properties_for("discounts"))
-        end
+        invalid_properties.concat(_discounts.list_invalid_properties_for("discounts")) if _discounts.is_a?(OpenApi::Validatable)
       end
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_metadata.list_invalid_properties_for("metadata"))
-        end
+        invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _period = @period
-        if _period.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_period.list_invalid_properties_for("period"))
-        end
+        invalid_properties.concat(_period.list_invalid_properties_for("period")) if _period.is_a?(OpenApi::Validatable)
       end
       if _price = @price
-        if _price.to_s.size > 5000
-          invalid_properties.push("invalid value for \"price\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
       if _price_data = @price_data
-        if _price_data.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_price_data.list_invalid_properties_for("price_data"))
-        end
+        invalid_properties.concat(_price_data.list_invalid_properties_for("price_data")) if _price_data.is_a?(OpenApi::Validatable)
       end
 
       if _tax_rates = @tax_rates
-        if _tax_rates.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_tax_rates.list_invalid_properties_for("tax_rates"))
-        end
+        invalid_properties.concat(_tax_rates.list_invalid_properties_for("tax_rates")) if _tax_rates.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -143,34 +133,24 @@ module Stripe
       end
 
       if _discounts = @discounts
-        if _discounts.is_a?(OpenApi::Validatable)
-          return false unless _discounts.valid?
-        end
+        return false if _discounts.is_a?(OpenApi::Validatable) && !_discounts.valid?
       end
 
       if _metadata = @metadata
-        if _metadata.is_a?(OpenApi::Validatable)
-          return false unless _metadata.valid?
-        end
+        return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
       if _period = @period
-        if _period.is_a?(OpenApi::Validatable)
-          return false unless _period.valid?
-        end
+        return false if _period.is_a?(OpenApi::Validatable) && !_period.valid?
       end
       if _price = @price
         return false if _price.to_s.size > 5000
       end
       if _price_data = @price_data
-        if _price_data.is_a?(OpenApi::Validatable)
-          return false unless _price_data.valid?
-        end
+        return false if _price_data.is_a?(OpenApi::Validatable) && !_price_data.valid?
       end
 
       if _tax_rates = @tax_rates
-        if _tax_rates.is_a?(OpenApi::Validatable)
-          return false unless _tax_rates.valid?
-        end
+        return false if _tax_rates.is_a?(OpenApi::Validatable) && !_tax_rates.valid?
       end
 
       true
@@ -193,8 +173,8 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if _description.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"description\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @description = _description
@@ -217,9 +197,7 @@ module Stripe
         return @discounts = nil
       end
       _discounts = discounts.not_nil!
-      if _discounts.is_a?(OpenApi::Validatable)
-        _discounts.validate
-      end
+      _discounts.validate if _discounts.is_a?(OpenApi::Validatable)
       @discounts = _discounts
     end
 
@@ -240,9 +218,7 @@ module Stripe
         return @metadata = nil
       end
       _metadata = metadata.not_nil!
-      if _metadata.is_a?(OpenApi::Validatable)
-        _metadata.validate
-      end
+      _metadata.validate if _metadata.is_a?(OpenApi::Validatable)
       @metadata = _metadata
     end
 
@@ -253,9 +229,7 @@ module Stripe
         return @period = nil
       end
       _period = period.not_nil!
-      if _period.is_a?(OpenApi::Validatable)
-        _period.validate
-      end
+      _period.validate if _period.is_a?(OpenApi::Validatable)
       @period = _period
     end
 
@@ -266,8 +240,8 @@ module Stripe
         return @price = nil
       end
       _price = price.not_nil!
-      if _price.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"price\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @price = _price
@@ -280,9 +254,7 @@ module Stripe
         return @price_data = nil
       end
       _price_data = price_data.not_nil!
-      if _price_data.is_a?(OpenApi::Validatable)
-        _price_data.validate
-      end
+      _price_data.validate if _price_data.is_a?(OpenApi::Validatable)
       @price_data = _price_data
     end
 
@@ -303,9 +275,7 @@ module Stripe
         return @tax_rates = nil
       end
       _tax_rates = tax_rates.not_nil!
-      if _tax_rates.is_a?(OpenApi::Validatable)
-        _tax_rates.validate
-      end
+      _tax_rates.validate if _tax_rates.is_a?(OpenApi::Validatable)
       @tax_rates = _tax_rates
     end
 

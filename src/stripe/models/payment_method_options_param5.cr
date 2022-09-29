@@ -26,12 +26,12 @@ module Stripe
     @[JSON::Field(key: "funding_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter funding_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_FUNDING_TYPE = EnumValidator.new("funding_type", "String", ["bank_transfer"])
+    ENUM_VALIDATOR_FOR_FUNDING_TYPE = OpenApi::EnumValidator.new("funding_type", "String", ["bank_transfer"])
 
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = EnumValidator.new("setup_future_usage", "String", ["none"])
+    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["none"])
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -49,9 +49,7 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
       if _bank_transfer = @bank_transfer
-        if _bank_transfer.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_bank_transfer.list_invalid_properties_for("bank_transfer"))
-        end
+        invalid_properties.concat(_bank_transfer.list_invalid_properties_for("bank_transfer")) if _bank_transfer.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_FUNDING_TYPE.error_message) unless ENUM_VALIDATOR_FOR_FUNDING_TYPE.valid?(@funding_type)
@@ -65,9 +63,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _bank_transfer = @bank_transfer
-        if _bank_transfer.is_a?(OpenApi::Validatable)
-          return false unless _bank_transfer.valid?
-        end
+        return false if _bank_transfer.is_a?(OpenApi::Validatable) && !_bank_transfer.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_FUNDING_TYPE.valid?(@funding_type)
       return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
@@ -82,9 +78,7 @@ module Stripe
         return @bank_transfer = nil
       end
       _bank_transfer = bank_transfer.not_nil!
-      if _bank_transfer.is_a?(OpenApi::Validatable)
-        _bank_transfer.validate
-      end
+      _bank_transfer.validate if _bank_transfer.is_a?(OpenApi::Validatable)
       @bank_transfer = _bank_transfer
     end
 

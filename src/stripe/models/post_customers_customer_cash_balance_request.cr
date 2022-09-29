@@ -43,9 +43,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _settings = @settings
-        if _settings.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_settings.list_invalid_properties_for("settings"))
-        end
+        invalid_properties.concat(_settings.list_invalid_properties_for("settings")) if _settings.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -55,9 +53,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _settings = @settings
-        if _settings.is_a?(OpenApi::Validatable)
-          return false unless _settings.valid?
-        end
+        return false if _settings.is_a?(OpenApi::Validatable) && !_settings.valid?
       end
 
       true
@@ -80,9 +76,7 @@ module Stripe
         return @settings = nil
       end
       _settings = settings.not_nil!
-      if _settings.is_a?(OpenApi::Validatable)
-        _settings.validate
-      end
+      _settings.validate if _settings.is_a?(OpenApi::Validatable)
       @settings = _settings
     end
 

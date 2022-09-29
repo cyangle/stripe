@@ -30,7 +30,7 @@ module Stripe
     @[JSON::Field(key: "action", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter action : String? = nil
 
-    ENUM_VALIDATOR_FOR_ACTION = EnumValidator.new("action", "String", ["increment", "set"])
+    ENUM_VALIDATOR_FOR_ACTION = OpenApi::EnumValidator.new("action", "String", ["increment", "set"])
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -61,9 +61,7 @@ module Stripe
       invalid_properties.push(ENUM_VALIDATOR_FOR_ACTION.error_message) unless ENUM_VALIDATOR_FOR_ACTION.valid?(@action)
 
       if _timestamp = @timestamp
-        if _timestamp.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_timestamp.list_invalid_properties_for("timestamp"))
-        end
+        invalid_properties.concat(_timestamp.list_invalid_properties_for("timestamp")) if _timestamp.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -77,9 +75,7 @@ module Stripe
       return false unless ENUM_VALIDATOR_FOR_ACTION.valid?(@action)
 
       if _timestamp = @timestamp
-        if _timestamp.is_a?(OpenApi::Validatable)
-          return false unless _timestamp.valid?
-        end
+        return false if _timestamp.is_a?(OpenApi::Validatable) && !_timestamp.valid?
       end
 
       true
@@ -123,9 +119,7 @@ module Stripe
         return @timestamp = nil
       end
       _timestamp = timestamp.not_nil!
-      if _timestamp.is_a?(OpenApi::Validatable)
-        _timestamp.validate
-      end
+      _timestamp.validate if _timestamp.is_a?(OpenApi::Validatable)
       @timestamp = _timestamp
     end
 

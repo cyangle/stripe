@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = EnumValidator.new("_type", "String", ["iban", "sort_code", "spei", "zengin"])
+    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["iban", "sort_code", "spei", "zengin"])
 
     # Optional properties
 
@@ -42,7 +42,7 @@ module Stripe
     @[JSON::Field(key: "supported_networks", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter supported_networks : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS = EnumValidator.new("supported_networks", "Array(String)", ["bacs", "fps", "sepa", "spei", "zengin"])
+    ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS = OpenApi::EnumValidator.new("supported_networks", "Array(String)", ["bacs", "fps", "sepa", "spei", "zengin"])
 
     @[JSON::Field(key: "zengin", type: Stripe::FundingInstructionsBankTransferZenginRecord?, default: nil, required: false, nullable: false, emit_null: false)]
     getter zengin : Stripe::FundingInstructionsBankTransferZenginRecord? = nil
@@ -69,26 +69,18 @@ module Stripe
 
       invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _iban = @iban
-        if _iban.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_iban.list_invalid_properties_for("iban"))
-        end
+        invalid_properties.concat(_iban.list_invalid_properties_for("iban")) if _iban.is_a?(OpenApi::Validatable)
       end
       if _sort_code = @sort_code
-        if _sort_code.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_sort_code.list_invalid_properties_for("sort_code"))
-        end
+        invalid_properties.concat(_sort_code.list_invalid_properties_for("sort_code")) if _sort_code.is_a?(OpenApi::Validatable)
       end
       if _spei = @spei
-        if _spei.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_spei.list_invalid_properties_for("spei"))
-        end
+        invalid_properties.concat(_spei.list_invalid_properties_for("spei")) if _spei.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
       if _zengin = @zengin
-        if _zengin.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_zengin.list_invalid_properties_for("zengin"))
-        end
+        invalid_properties.concat(_zengin.list_invalid_properties_for("zengin")) if _zengin.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -99,25 +91,17 @@ module Stripe
     def valid? : Bool
       return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
       if _iban = @iban
-        if _iban.is_a?(OpenApi::Validatable)
-          return false unless _iban.valid?
-        end
+        return false if _iban.is_a?(OpenApi::Validatable) && !_iban.valid?
       end
       if _sort_code = @sort_code
-        if _sort_code.is_a?(OpenApi::Validatable)
-          return false unless _sort_code.valid?
-        end
+        return false if _sort_code.is_a?(OpenApi::Validatable) && !_sort_code.valid?
       end
       if _spei = @spei
-        if _spei.is_a?(OpenApi::Validatable)
-          return false unless _spei.valid?
-        end
+        return false if _spei.is_a?(OpenApi::Validatable) && !_spei.valid?
       end
       return false unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
       if _zengin = @zengin
-        if _zengin.is_a?(OpenApi::Validatable)
-          return false unless _zengin.valid?
-        end
+        return false if _zengin.is_a?(OpenApi::Validatable) && !_zengin.valid?
       end
 
       true
@@ -141,9 +125,7 @@ module Stripe
         return @iban = nil
       end
       _iban = iban.not_nil!
-      if _iban.is_a?(OpenApi::Validatable)
-        _iban.validate
-      end
+      _iban.validate if _iban.is_a?(OpenApi::Validatable)
       @iban = _iban
     end
 
@@ -154,9 +136,7 @@ module Stripe
         return @sort_code = nil
       end
       _sort_code = sort_code.not_nil!
-      if _sort_code.is_a?(OpenApi::Validatable)
-        _sort_code.validate
-      end
+      _sort_code.validate if _sort_code.is_a?(OpenApi::Validatable)
       @sort_code = _sort_code
     end
 
@@ -167,9 +147,7 @@ module Stripe
         return @spei = nil
       end
       _spei = spei.not_nil!
-      if _spei.is_a?(OpenApi::Validatable)
-        _spei.validate
-      end
+      _spei.validate if _spei.is_a?(OpenApi::Validatable)
       @spei = _spei
     end
 
@@ -191,9 +169,7 @@ module Stripe
         return @zengin = nil
       end
       _zengin = zengin.not_nil!
-      if _zengin.is_a?(OpenApi::Validatable)
-        _zengin.validate
-      end
+      _zengin.validate if _zengin.is_a?(OpenApi::Validatable)
       @zengin = _zengin
     end
 

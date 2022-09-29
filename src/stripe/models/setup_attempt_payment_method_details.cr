@@ -103,37 +103,27 @@ module Stripe
       invalid_properties = Array(String).new
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
       if __type = @_type
-        if __type.to_s.size > 5000
-          invalid_properties.push("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+          invalid_properties.push(max_length_error)
         end
       end
 
       if _bancontact = @bancontact
-        if _bancontact.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_bancontact.list_invalid_properties_for("bancontact"))
-        end
+        invalid_properties.concat(_bancontact.list_invalid_properties_for("bancontact")) if _bancontact.is_a?(OpenApi::Validatable)
       end
 
       if _card = @card
-        if _card.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card.list_invalid_properties_for("card"))
-        end
+        invalid_properties.concat(_card.list_invalid_properties_for("card")) if _card.is_a?(OpenApi::Validatable)
       end
       if _card_present = @card_present
-        if _card_present.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_card_present.list_invalid_properties_for("card_present"))
-        end
+        invalid_properties.concat(_card_present.list_invalid_properties_for("card_present")) if _card_present.is_a?(OpenApi::Validatable)
       end
       if _ideal = @ideal
-        if _ideal.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_ideal.list_invalid_properties_for("ideal"))
-        end
+        invalid_properties.concat(_ideal.list_invalid_properties_for("ideal")) if _ideal.is_a?(OpenApi::Validatable)
       end
 
       if _sofort = @sofort
-        if _sofort.is_a?(OpenApi::Validatable)
-          invalid_properties.concat(_sofort.list_invalid_properties_for("sofort"))
-        end
+        invalid_properties.concat(_sofort.list_invalid_properties_for("sofort")) if _sofort.is_a?(OpenApi::Validatable)
       end
 
       invalid_properties
@@ -148,31 +138,21 @@ module Stripe
       end
 
       if _bancontact = @bancontact
-        if _bancontact.is_a?(OpenApi::Validatable)
-          return false unless _bancontact.valid?
-        end
+        return false if _bancontact.is_a?(OpenApi::Validatable) && !_bancontact.valid?
       end
 
       if _card = @card
-        if _card.is_a?(OpenApi::Validatable)
-          return false unless _card.valid?
-        end
+        return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
       if _card_present = @card_present
-        if _card_present.is_a?(OpenApi::Validatable)
-          return false unless _card_present.valid?
-        end
+        return false if _card_present.is_a?(OpenApi::Validatable) && !_card_present.valid?
       end
       if _ideal = @ideal
-        if _ideal.is_a?(OpenApi::Validatable)
-          return false unless _ideal.valid?
-        end
+        return false if _ideal.is_a?(OpenApi::Validatable) && !_ideal.valid?
       end
 
       if _sofort = @sofort
-        if _sofort.is_a?(OpenApi::Validatable)
-          return false unless _sofort.valid?
-        end
+        return false if _sofort.is_a?(OpenApi::Validatable) && !_sofort.valid?
       end
 
       true
@@ -185,8 +165,8 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if __type.to_s.size > 5000
-        raise ArgumentError.new("invalid value for \"_type\", the character length must be smaller than or equal to 5000.")
+      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        raise ArgumentError.new(max_length_error)
       end
 
       @_type = __type
@@ -229,9 +209,7 @@ module Stripe
         return @bancontact = nil
       end
       _bancontact = bancontact.not_nil!
-      if _bancontact.is_a?(OpenApi::Validatable)
-        _bancontact.validate
-      end
+      _bancontact.validate if _bancontact.is_a?(OpenApi::Validatable)
       @bancontact = _bancontact
     end
 
@@ -262,9 +240,7 @@ module Stripe
         return @card = nil
       end
       _card = card.not_nil!
-      if _card.is_a?(OpenApi::Validatable)
-        _card.validate
-      end
+      _card.validate if _card.is_a?(OpenApi::Validatable)
       @card = _card
     end
 
@@ -275,9 +251,7 @@ module Stripe
         return @card_present2 = nil
       end
       _card_present = card_present.not_nil!
-      if _card_present.is_a?(OpenApi::Validatable)
-        _card_present.validate
-      end
+      _card_present.validate if _card_present.is_a?(OpenApi::Validatable)
       @card_present2 = _card_present
     end
 
@@ -288,9 +262,7 @@ module Stripe
         return @ideal = nil
       end
       _ideal = ideal.not_nil!
-      if _ideal.is_a?(OpenApi::Validatable)
-        _ideal.validate
-      end
+      _ideal.validate if _ideal.is_a?(OpenApi::Validatable)
       @ideal = _ideal
     end
 
@@ -321,9 +293,7 @@ module Stripe
         return @sofort = nil
       end
       _sofort = sofort.not_nil!
-      if _sofort.is_a?(OpenApi::Validatable)
-        _sofort.validate
-      end
+      _sofort.validate if _sofort.is_a?(OpenApi::Validatable)
       @sofort = _sofort
     end
 
