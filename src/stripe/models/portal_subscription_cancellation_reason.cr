@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "options", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter options : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_OPTIONS = OpenApi::EnumValidator.new("options", "Array(String)", ["customer_service", "low_quality", "missing_features", "other", "switched_service", "too_complex", "too_expensive", "unused"])
+    VALID_VALUES_FOR_OPTIONS = StaticArray["customer_service", "low_quality", "missing_features", "other", "switched_service", "too_complex", "too_expensive", "unused"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -45,10 +45,14 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OPTIONS.error_message) unless ENUM_VALIDATOR_FOR_OPTIONS.all_valid?(@options, false)
+      invalid_properties.push("\"options\" is required and cannot be null") if @options.nil?
 
+      if _options = @options
+        invalid_properties.push(OpenApi::EnumValidator.error_message("options", VALID_VALUES_FOR_OPTIONS)) unless OpenApi::EnumValidator.valid?(_options, VALID_VALUES_FOR_OPTIONS)
+      end
       invalid_properties
     end
 
@@ -57,7 +61,10 @@ module Stripe
     def valid? : Bool
       return false if @enabled.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OPTIONS.all_valid?(@options, false)
+      return false if @options.nil?
+      if _options = @options
+        return false unless OpenApi::EnumValidator.valid?(_options, VALID_VALUES_FOR_OPTIONS)
+      end
 
       true
     end
@@ -79,7 +86,7 @@ module Stripe
         raise ArgumentError.new("\"options\" is required and cannot be null")
       end
       _options = options.not_nil!
-      ENUM_VALIDATOR_FOR_OPTIONS.all_valid!(_options)
+      OpenApi::EnumValidator.validate("options", _options, VALID_VALUES_FOR_OPTIONS)
       @options = _options
     end
 

@@ -58,7 +58,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["application_fee"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["application_fee"]
 
     # Whether the fee has been fully refunded. If the fee is only partially refunded, this attribute will still be false.
     @[JSON::Field(key: "refunded", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -108,7 +108,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
+
       if _account = @account
         invalid_properties.concat(_account.list_invalid_properties_for("account")) if _account.is_a?(OpenApi::Validatable)
       end
@@ -117,10 +119,12 @@ module Stripe
       invalid_properties.push("\"amount_refunded\" is required and cannot be null") if @amount_refunded.nil?
 
       invalid_properties.push("\"application\" is required and cannot be null") if @application.nil?
+
       if _application = @application
         invalid_properties.concat(_application.list_invalid_properties_for("application")) if _application.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"charge\" is required and cannot be null") if @charge.nil?
+
       if _charge = @charge
         invalid_properties.concat(_charge.list_invalid_properties_for("charge")) if _charge.is_a?(OpenApi::Validatable)
       end
@@ -129,6 +133,7 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -136,10 +141,15 @@ module Stripe
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"refunded\" is required and cannot be null") if @refunded.nil?
 
       invalid_properties.push("\"refunds\" is required and cannot be null") if @refunds.nil?
+
       if _refunds = @refunds
         invalid_properties.concat(_refunds.list_invalid_properties_for("refunds")) if _refunds.is_a?(OpenApi::Validatable)
       end
@@ -149,7 +159,6 @@ module Stripe
       if _originating_transaction = @originating_transaction
         invalid_properties.concat(_originating_transaction.list_invalid_properties_for("originating_transaction")) if _originating_transaction.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -160,6 +169,7 @@ module Stripe
       if _account = @account
         return false if _account.is_a?(OpenApi::Validatable) && !_account.valid?
       end
+
       return false if @amount.nil?
 
       return false if @amount_refunded.nil?
@@ -168,10 +178,12 @@ module Stripe
       if _application = @application
         return false if _application.is_a?(OpenApi::Validatable) && !_application.valid?
       end
+
       return false if @charge.nil?
       if _charge = @charge
         return false if _charge.is_a?(OpenApi::Validatable) && !_charge.valid?
       end
+
       return false if @created.nil?
 
       return false if @currency.nil?
@@ -180,18 +192,25 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @refunded.nil?
 
       return false if @refunds.nil?
       if _refunds = @refunds
         return false if _refunds.is_a?(OpenApi::Validatable) && !_refunds.valid?
       end
+
       if _balance_transaction = @balance_transaction
         return false if _balance_transaction.is_a?(OpenApi::Validatable) && !_balance_transaction.valid?
       end
+
       if _originating_transaction = @originating_transaction
         return false if _originating_transaction.is_a?(OpenApi::Validatable) && !_originating_transaction.valid?
       end
@@ -303,7 +322,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

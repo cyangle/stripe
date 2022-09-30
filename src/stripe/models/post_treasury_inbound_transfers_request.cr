@@ -75,6 +75,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
@@ -82,6 +83,7 @@ module Stripe
       invalid_properties.push("\"financial_account\" is required and cannot be null") if @financial_account.nil?
 
       invalid_properties.push("\"origin_payment_method\" is required and cannot be null") if @origin_payment_method.nil?
+
       if _origin_payment_method = @origin_payment_method
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("origin_payment_method", _origin_payment_method.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -98,7 +100,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -115,6 +116,7 @@ module Stripe
       if _origin_payment_method = @origin_payment_method
         return false if _origin_payment_method.to_s.size > 5000
       end
+
       if _description = @description
         return false if _description.to_s.size > 5000
       end

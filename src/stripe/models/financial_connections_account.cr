@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "category", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter category : String? = nil
 
-    ENUM_VALIDATOR_FOR_CATEGORY = OpenApi::EnumValidator.new("category", "String", ["cash", "credit", "investment", "other"])
+    VALID_VALUES_FOR_CATEGORY = StaticArray["cash", "credit", "investment", "other"]
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -47,25 +47,25 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["financial_connections.account"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["financial_connections.account"]
 
     # The status of the link to the account.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["active", "disconnected", "inactive"])
+    VALID_VALUES_FOR_STATUS = StaticArray["active", "disconnected", "inactive"]
 
     # If `category` is `cash`, one of:   - `checking`  - `savings`  - `other`  If `category` is `credit`, one of:   - `mortgage`  - `line_of_credit`  - `credit_card`  - `other`  If `category` is `investment` or `other`, this will be `other`.
     @[JSON::Field(key: "subcategory", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter subcategory : String? = nil
 
-    ENUM_VALIDATOR_FOR_SUBCATEGORY = OpenApi::EnumValidator.new("subcategory", "String", ["checking", "credit_card", "line_of_credit", "mortgage", "other", "savings"])
+    VALID_VALUES_FOR_SUBCATEGORY = StaticArray["checking", "credit_card", "line_of_credit", "mortgage", "other", "savings"]
 
     # The [PaymentMethod type](https://stripe.com/docs/api/payment_methods/object#payment_method_object-type)(s) that can be created from this account.
     @[JSON::Field(key: "supported_payment_method_types", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter supported_payment_method_types : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES = OpenApi::EnumValidator.new("supported_payment_method_types", "Array(String)", ["link", "us_bank_account"])
+    VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES = StaticArray["link", "us_bank_account"]
 
     # Optional properties
 
@@ -119,8 +119,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? permissions_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_PERMISSIONS = OpenApi::EnumValidator.new("permissions", "Array(String)", ["balances", "ownership", "payment_method", "transactions"])
+    VALID_VALUES_FOR_PERMISSIONS = StaticArray["balances", "ownership", "payment_method", "transactions"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -153,16 +152,22 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CATEGORY.error_message) unless ENUM_VALIDATOR_FOR_CATEGORY.valid?(@category, false)
+      invalid_properties.push("\"category\" is required and cannot be null") if @category.nil?
+
+      if _category = @category
+        invalid_properties.push(OpenApi::EnumValidator.error_message("category", VALID_VALUES_FOR_CATEGORY)) unless OpenApi::EnumValidator.valid?(_category, VALID_VALUES_FOR_CATEGORY)
+      end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"institution_name\" is required and cannot be null") if @institution_name.nil?
+
       if _institution_name = @institution_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_name", _institution_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -170,13 +175,26 @@ module Stripe
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SUBCATEGORY.error_message) unless ENUM_VALIDATOR_FOR_SUBCATEGORY.valid?(@subcategory, false)
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+      invalid_properties.push("\"subcategory\" is required and cannot be null") if @subcategory.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.all_valid?(@supported_payment_method_types, false)
+      if _subcategory = @subcategory
+        invalid_properties.push(OpenApi::EnumValidator.error_message("subcategory", VALID_VALUES_FOR_SUBCATEGORY)) unless OpenApi::EnumValidator.valid?(_subcategory, VALID_VALUES_FOR_SUBCATEGORY)
+      end
+      invalid_properties.push("\"supported_payment_method_types\" is required and cannot be null") if @supported_payment_method_types.nil?
+
+      if _supported_payment_method_types = @supported_payment_method_types
+        invalid_properties.push(OpenApi::EnumValidator.error_message("supported_payment_method_types", VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES)) unless OpenApi::EnumValidator.valid?(_supported_payment_method_types, VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES)
+      end
       if _account_holder = @account_holder
         invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder")) if _account_holder.is_a?(OpenApi::Validatable)
       end
@@ -202,54 +220,85 @@ module Stripe
       if _ownership_refresh = @ownership_refresh
         invalid_properties.concat(_ownership_refresh.list_invalid_properties_for("ownership_refresh")) if _ownership_refresh.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PERMISSIONS.error_message) unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
-
+      if _permissions = @permissions
+        invalid_properties.push(OpenApi::EnumValidator.error_message("permissions", VALID_VALUES_FOR_PERMISSIONS)) unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_CATEGORY.valid?(@category, false)
+      return false if @category.nil?
+      if _category = @category
+        return false unless OpenApi::EnumValidator.valid?(_category, VALID_VALUES_FOR_CATEGORY)
+      end
+
       return false if @created.nil?
 
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @institution_name.nil?
       if _institution_name = @institution_name
         return false if _institution_name.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      return false unless ENUM_VALIDATOR_FOR_SUBCATEGORY.valid?(@subcategory, false)
-      return false unless ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.all_valid?(@supported_payment_method_types, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
+      return false if @status.nil?
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+
+      return false if @subcategory.nil?
+      if _subcategory = @subcategory
+        return false unless OpenApi::EnumValidator.valid?(_subcategory, VALID_VALUES_FOR_SUBCATEGORY)
+      end
+
+      return false if @supported_payment_method_types.nil?
+      if _supported_payment_method_types = @supported_payment_method_types
+        return false unless OpenApi::EnumValidator.valid?(_supported_payment_method_types, VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES)
+      end
+
       if _account_holder = @account_holder
         return false if _account_holder.is_a?(OpenApi::Validatable) && !_account_holder.valid?
       end
+
       if _balance = @balance
         return false if _balance.is_a?(OpenApi::Validatable) && !_balance.valid?
       end
+
       if _balance_refresh = @balance_refresh
         return false if _balance_refresh.is_a?(OpenApi::Validatable) && !_balance_refresh.valid?
       end
+
       if _display_name = @display_name
         return false if _display_name.to_s.size > 5000
       end
+
       if _last4 = @last4
         return false if _last4.to_s.size > 5000
       end
+
       if _ownership = @ownership
         return false if _ownership.is_a?(OpenApi::Validatable) && !_ownership.valid?
       end
+
       if _ownership_refresh = @ownership_refresh
         return false if _ownership_refresh.is_a?(OpenApi::Validatable) && !_ownership_refresh.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
+
+      if _permissions = @permissions
+        return false unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
+      end
 
       true
     end
@@ -261,7 +310,7 @@ module Stripe
         raise ArgumentError.new("\"category\" is required and cannot be null")
       end
       _category = category.not_nil!
-      ENUM_VALIDATOR_FOR_CATEGORY.valid!(_category)
+      OpenApi::EnumValidator.validate("category", _category, VALID_VALUES_FOR_CATEGORY)
       @category = _category
     end
 
@@ -320,7 +369,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 
@@ -331,7 +380,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 
@@ -342,7 +391,7 @@ module Stripe
         raise ArgumentError.new("\"subcategory\" is required and cannot be null")
       end
       _subcategory = subcategory.not_nil!
-      ENUM_VALIDATOR_FOR_SUBCATEGORY.valid!(_subcategory)
+      OpenApi::EnumValidator.validate("subcategory", _subcategory, VALID_VALUES_FOR_SUBCATEGORY)
       @subcategory = _subcategory
     end
 
@@ -353,7 +402,7 @@ module Stripe
         raise ArgumentError.new("\"supported_payment_method_types\" is required and cannot be null")
       end
       _supported_payment_method_types = supported_payment_method_types.not_nil!
-      ENUM_VALIDATOR_FOR_SUPPORTED_PAYMENT_METHOD_TYPES.all_valid!(_supported_payment_method_types)
+      OpenApi::EnumValidator.validate("supported_payment_method_types", _supported_payment_method_types, VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES)
       @supported_payment_method_types = _supported_payment_method_types
     end
 
@@ -447,7 +496,7 @@ module Stripe
         return @permissions = nil
       end
       _permissions = permissions.not_nil!
-      ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid!(_permissions)
+      OpenApi::EnumValidator.validate("permissions", _permissions, VALID_VALUES_FOR_PERMISSIONS)
       @permissions = _permissions
     end
 

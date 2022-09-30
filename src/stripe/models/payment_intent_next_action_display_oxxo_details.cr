@@ -68,7 +68,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -78,6 +77,7 @@ module Stripe
       if _hosted_voucher_url = @hosted_voucher_url
         return false if _hosted_voucher_url.to_s.size > 5000
       end
+
       if _number = @number
         return false if _number.to_s.size > 5000
       end

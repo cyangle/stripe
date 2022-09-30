@@ -39,7 +39,7 @@ module Stripe
     @[JSON::Field(key: "duration", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter duration : String? = nil
 
-    ENUM_VALIDATOR_FOR_DURATION = OpenApi::EnumValidator.new("duration", "String", ["forever", "once", "repeating"])
+    VALID_VALUES_FOR_DURATION = StaticArray["forever", "once", "repeating"]
 
     # Required only if `duration` is `repeating`, in which case it must be a positive integer that specifies the number of months the discount will be in effect.
     @[JSON::Field(key: "duration_in_months", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -105,8 +105,9 @@ module Stripe
       if _currency_options = @currency_options
         invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "currency_options", hash: _currency_options)) if _currency_options.is_a?(Hash)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_DURATION.error_message) unless ENUM_VALIDATOR_FOR_DURATION.valid?(@duration)
+      if _duration = @duration
+        invalid_properties.push(OpenApi::EnumValidator.error_message("duration", VALID_VALUES_FOR_DURATION)) unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
+      end
 
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
@@ -136,7 +137,10 @@ module Stripe
       if _currency_options = @currency_options
         return false if _currency_options.is_a?(Hash) && !OpenApi::HashValidator.valid?(hash: _currency_options)
       end
-      return false unless ENUM_VALIDATOR_FOR_DURATION.valid?(@duration)
+
+      if _duration = @duration
+        return false unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
+      end
 
       if _id = @id
         return false if _id.to_s.size > 5000
@@ -145,6 +149,7 @@ module Stripe
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _name = @name
         return false if _name.to_s.size > 40
       end
@@ -201,7 +206,7 @@ module Stripe
         return @duration = nil
       end
       _duration = duration.not_nil!
-      ENUM_VALIDATOR_FOR_DURATION.valid!(_duration)
+      OpenApi::EnumValidator.validate("duration", _duration, VALID_VALUES_FOR_DURATION)
       @duration = _duration
     end
 

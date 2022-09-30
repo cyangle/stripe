@@ -44,7 +44,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["terminal.location"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["terminal.location"]
 
     # Optional properties
 
@@ -72,17 +72,21 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
+
       if _address = @address
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"display_name\" is required and cannot be null") if @display_name.nil?
+
       if _display_name = @display_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -92,13 +96,16 @@ module Stripe
 
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       if _configuration_overrides = @configuration_overrides
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("configuration_overrides", _configuration_overrides.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -109,19 +116,26 @@ module Stripe
       if _address = @address
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
+
       return false if @display_name.nil?
       if _display_name = @display_name
         return false if _display_name.to_s.size > 5000
       end
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
       return false if @metadata.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       if _configuration_overrides = @configuration_overrides
         return false if _configuration_overrides.to_s.size > 5000
       end
@@ -195,7 +209,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

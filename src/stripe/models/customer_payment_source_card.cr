@@ -61,7 +61,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["card"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["card"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -89,11 +89,13 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"exp_month\" is required and cannot be null") if @exp_month.nil?
 
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
 
       invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
+
       if _number = @number
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -140,9 +142,9 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object)
-
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties
     end
 
@@ -157,24 +159,31 @@ module Stripe
       if _number = @number
         return false if _number.to_s.size > 5000
       end
+
       if _address_city = @address_city
         return false if _address_city.to_s.size > 5000
       end
+
       if _address_country = @address_country
         return false if _address_country.to_s.size > 5000
       end
+
       if _address_line1 = @address_line1
         return false if _address_line1.to_s.size > 5000
       end
+
       if _address_line2 = @address_line2
         return false if _address_line2.to_s.size > 5000
       end
+
       if _address_state = @address_state
         return false if _address_state.to_s.size > 5000
       end
+
       if _address_zip = @address_zip
         return false if _address_zip.to_s.size > 5000
       end
+
       if _cvc = @cvc
         return false if _cvc.to_s.size > 5000
       end
@@ -182,7 +191,10 @@ module Stripe
       if _name = @name
         return false if _name.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object)
+
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
 
       true
     end
@@ -350,7 +362,7 @@ module Stripe
         return @object = nil
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

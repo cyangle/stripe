@@ -45,7 +45,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"setup_intent\" is required and cannot be null") if @setup_intent.nil?
+
       if _setup_intent = @setup_intent
         invalid_properties.concat(_setup_intent.list_invalid_properties_for("setup_intent")) if _setup_intent.is_a?(OpenApi::Validatable)
       end
@@ -54,7 +56,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -65,6 +66,7 @@ module Stripe
       if _setup_intent = @setup_intent
         return false if _setup_intent.is_a?(OpenApi::Validatable) && !_setup_intent.valid?
       end
+
       if _generated_card = @generated_card
         return false if _generated_card.to_s.size > 5000
       end

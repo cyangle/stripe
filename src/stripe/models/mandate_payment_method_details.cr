@@ -76,7 +76,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+
       if __type = @_type
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -109,15 +111,19 @@ module Stripe
       if __type = @_type
         return false if __type.to_s.size > 5000
       end
+
       if _acss_debit = @acss_debit
         return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
+
       if _au_becs_debit = @au_becs_debit
         return false if _au_becs_debit.is_a?(OpenApi::Validatable) && !_au_becs_debit.valid?
       end
+
       if _bacs_debit = @bacs_debit
         return false if _bacs_debit.is_a?(OpenApi::Validatable) && !_bacs_debit.valid?
       end
+
       if _blik = @blik
         return false if _blik.is_a?(OpenApi::Validatable) && !_blik.valid?
       end

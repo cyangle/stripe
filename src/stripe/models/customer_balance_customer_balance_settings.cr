@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "reconciliation_mode", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reconciliation_mode : String? = nil
 
-    ENUM_VALIDATOR_FOR_RECONCILIATION_MODE = OpenApi::EnumValidator.new("reconciliation_mode", "String", ["automatic", "manual"])
+    VALID_VALUES_FOR_RECONCILIATION_MODE = StaticArray["automatic", "manual"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -41,15 +41,21 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_RECONCILIATION_MODE.error_message) unless ENUM_VALIDATOR_FOR_RECONCILIATION_MODE.valid?(@reconciliation_mode, false)
+      invalid_properties.push("\"reconciliation_mode\" is required and cannot be null") if @reconciliation_mode.nil?
 
+      if _reconciliation_mode = @reconciliation_mode
+        invalid_properties.push(OpenApi::EnumValidator.error_message("reconciliation_mode", VALID_VALUES_FOR_RECONCILIATION_MODE)) unless OpenApi::EnumValidator.valid?(_reconciliation_mode, VALID_VALUES_FOR_RECONCILIATION_MODE)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_RECONCILIATION_MODE.valid?(@reconciliation_mode, false)
+      return false if @reconciliation_mode.nil?
+      if _reconciliation_mode = @reconciliation_mode
+        return false unless OpenApi::EnumValidator.valid?(_reconciliation_mode, VALID_VALUES_FOR_RECONCILIATION_MODE)
+      end
 
       true
     end
@@ -61,7 +67,7 @@ module Stripe
         raise ArgumentError.new("\"reconciliation_mode\" is required and cannot be null")
       end
       _reconciliation_mode = reconciliation_mode.not_nil!
-      ENUM_VALIDATOR_FOR_RECONCILIATION_MODE.valid!(_reconciliation_mode)
+      OpenApi::EnumValidator.validate("reconciliation_mode", _reconciliation_mode, VALID_VALUES_FOR_RECONCILIATION_MODE)
       @reconciliation_mode = _reconciliation_mode
     end
 

@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
 
-    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
+    VALID_VALUES_FOR_INTERVAL = StaticArray["day", "month", "week", "year"]
 
     # The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.
     @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -59,18 +59,23 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount_subtotal\" is required and cannot be null") if @amount_subtotal.nil?
 
       invalid_properties.push("\"amount_total\" is required and cannot be null") if @amount_total.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
+      invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
+
+      if _interval = @interval
+        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+      end
       invalid_properties.push("\"interval_count\" is required and cannot be null") if @interval_count.nil?
 
       invalid_properties.push("\"total_details\" is required and cannot be null") if @total_details.nil?
+
       if _total_details = @total_details
         invalid_properties.concat(_total_details.list_invalid_properties_for("total_details")) if _total_details.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -81,7 +86,11 @@ module Stripe
 
       return false if @amount_total.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
+      return false if @interval.nil?
+      if _interval = @interval
+        return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+      end
+
       return false if @interval_count.nil?
 
       return false if @total_details.nil?
@@ -119,7 +128,7 @@ module Stripe
         raise ArgumentError.new("\"interval\" is required and cannot be null")
       end
       _interval = interval.not_nil!
-      ENUM_VALIDATOR_FOR_INTERVAL.valid!(_interval)
+      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
       @interval = _interval
     end
 

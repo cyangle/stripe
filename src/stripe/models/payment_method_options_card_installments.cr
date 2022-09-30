@@ -56,6 +56,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
       if _available_plans = @available_plans
@@ -64,7 +65,6 @@ module Stripe
       if _plan = @plan
         invalid_properties.concat(_plan.list_invalid_properties_for("plan")) if _plan.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -76,6 +76,7 @@ module Stripe
       if _available_plans = @available_plans
         return false if _available_plans.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _available_plans)
       end
+
       if _plan = @plan
         return false if _plan.is_a?(OpenApi::Validatable) && !_plan.valid?
       end

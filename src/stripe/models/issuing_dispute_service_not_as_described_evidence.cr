@@ -72,6 +72,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _additional_documentation = @additional_documentation
         invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
@@ -100,6 +101,7 @@ module Stripe
       if _cancellation_reason = @cancellation_reason
         return false if _cancellation_reason.to_s.size > 5000
       end
+
       if _explanation = @explanation
         return false if _explanation.to_s.size > 5000
       end

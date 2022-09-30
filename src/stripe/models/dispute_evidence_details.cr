@@ -59,6 +59,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"has_evidence\" is required and cannot be null") if @has_evidence.nil?
 
       invalid_properties.push("\"past_due\" is required and cannot be null") if @past_due.nil?

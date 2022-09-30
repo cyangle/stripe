@@ -73,7 +73,6 @@ module Stripe
       if _treasury = @treasury
         invalid_properties.concat(_treasury.list_invalid_properties_for("treasury")) if _treasury.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -87,6 +86,7 @@ module Stripe
       if _transaction = @transaction
         return false if _transaction.to_s.size > 5000
       end
+
       if _treasury = @treasury
         return false if _treasury.is_a?(OpenApi::Validatable) && !_treasury.valid?
       end

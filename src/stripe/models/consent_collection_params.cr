@@ -24,12 +24,12 @@ module Stripe
     @[JSON::Field(key: "promotions", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter promotions : String? = nil
 
-    ENUM_VALIDATOR_FOR_PROMOTIONS = OpenApi::EnumValidator.new("promotions", "String", ["auto", "none"])
+    VALID_VALUES_FOR_PROMOTIONS = StaticArray["auto", "none"]
 
     @[JSON::Field(key: "terms_of_service", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter terms_of_service : String? = nil
 
-    ENUM_VALIDATOR_FOR_TERMS_OF_SERVICE = OpenApi::EnumValidator.new("terms_of_service", "String", ["none", "required"])
+    VALID_VALUES_FOR_TERMS_OF_SERVICE = StaticArray["none", "required"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -46,18 +46,25 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PROMOTIONS.error_message) unless ENUM_VALIDATOR_FOR_PROMOTIONS.valid?(@promotions)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TERMS_OF_SERVICE.error_message) unless ENUM_VALIDATOR_FOR_TERMS_OF_SERVICE.valid?(@terms_of_service)
-
+      if _promotions = @promotions
+        invalid_properties.push(OpenApi::EnumValidator.error_message("promotions", VALID_VALUES_FOR_PROMOTIONS)) unless OpenApi::EnumValidator.valid?(_promotions, VALID_VALUES_FOR_PROMOTIONS)
+      end
+      if _terms_of_service = @terms_of_service
+        invalid_properties.push(OpenApi::EnumValidator.error_message("terms_of_service", VALID_VALUES_FOR_TERMS_OF_SERVICE)) unless OpenApi::EnumValidator.valid?(_terms_of_service, VALID_VALUES_FOR_TERMS_OF_SERVICE)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_PROMOTIONS.valid?(@promotions)
-      return false unless ENUM_VALIDATOR_FOR_TERMS_OF_SERVICE.valid?(@terms_of_service)
+      if _promotions = @promotions
+        return false unless OpenApi::EnumValidator.valid?(_promotions, VALID_VALUES_FOR_PROMOTIONS)
+      end
+
+      if _terms_of_service = @terms_of_service
+        return false unless OpenApi::EnumValidator.valid?(_terms_of_service, VALID_VALUES_FOR_TERMS_OF_SERVICE)
+      end
 
       true
     end
@@ -69,7 +76,7 @@ module Stripe
         return @promotions = nil
       end
       _promotions = promotions.not_nil!
-      ENUM_VALIDATOR_FOR_PROMOTIONS.valid!(_promotions)
+      OpenApi::EnumValidator.validate("promotions", _promotions, VALID_VALUES_FOR_PROMOTIONS)
       @promotions = _promotions
     end
 
@@ -80,7 +87,7 @@ module Stripe
         return @terms_of_service = nil
       end
       _terms_of_service = terms_of_service.not_nil!
-      ENUM_VALIDATOR_FOR_TERMS_OF_SERVICE.valid!(_terms_of_service)
+      OpenApi::EnumValidator.validate("terms_of_service", _terms_of_service, VALID_VALUES_FOR_TERMS_OF_SERVICE)
       @terms_of_service = _terms_of_service
     end
 

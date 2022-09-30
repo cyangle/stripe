@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = OpenApi::EnumValidator.new("capture_method", "String", ["manual"])
+    VALID_VALUES_FOR_CAPTURE_METHOD = StaticArray["manual"]
 
     @[JSON::Field(key: "installments", type: Stripe::PaymentIntentPaymentMethodOptionsCardInstallments?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: installments.nil? && !installments_present?)]
     getter installments : Stripe::PaymentIntentPaymentMethodOptionsCardInstallments? = nil
@@ -45,8 +45,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? network_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_NETWORK = OpenApi::EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
+    VALID_VALUES_FOR_NETWORK = StaticArray["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"]
 
     # We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: request_three_d_secure.nil? && !request_three_d_secure_present?)]
@@ -54,14 +53,13 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? request_three_d_secure_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = OpenApi::EnumValidator.new("request_three_d_secure", "String", ["any", "automatic", "challenge_only"])
+    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE = StaticArray["any", "automatic", "challenge_only"]
 
     # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["none", "off_session", "on_session"])
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none", "off_session", "on_session"]
 
     # Provides information about a card payment that customers see on their statements. Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters. On card statements, the *concatenation* of both prefix and suffix (including separators) will appear truncated to 22 characters.
     @[JSON::Field(key: "statement_descriptor_suffix_kana", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -92,19 +90,24 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
+      if _capture_method = @capture_method
+        invalid_properties.push(OpenApi::EnumValidator.error_message("capture_method", VALID_VALUES_FOR_CAPTURE_METHOD)) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+      end
       if _installments = @installments
         invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
       if _mandate_options = @mandate_options
         invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.error_message) unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+      if _network = @network
+        invalid_properties.push(OpenApi::EnumValidator.error_message("network", VALID_VALUES_FOR_NETWORK)) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+      end
+      if _request_three_d_secure = @request_three_d_secure
+        invalid_properties.push(OpenApi::EnumValidator.error_message("request_three_d_secure", VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)) unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
+      end
+      if _setup_future_usage = @setup_future_usage
+        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+      end
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -115,26 +118,40 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
+      if _capture_method = @capture_method
+        return false unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+      end
+
       if _installments = @installments
         return false if _installments.is_a?(OpenApi::Validatable) && !_installments.valid?
       end
+
       if _mandate_options = @mandate_options
         return false if _mandate_options.is_a?(OpenApi::Validatable) && !_mandate_options.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
-      return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
-      return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+
+      if _network = @network
+        return false unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+      end
+
+      if _request_three_d_secure = @request_three_d_secure
+        return false unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
+      end
+
+      if _setup_future_usage = @setup_future_usage
+        return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+      end
+
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
         return false if _statement_descriptor_suffix_kana.to_s.size > 5000
       end
+
       if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
         return false if _statement_descriptor_suffix_kanji.to_s.size > 5000
       end
@@ -149,7 +166,7 @@ module Stripe
         return @capture_method = nil
       end
       _capture_method = capture_method.not_nil!
-      ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid!(_capture_method)
+      OpenApi::EnumValidator.validate("capture_method", _capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       @capture_method = _capture_method
     end
 
@@ -182,7 +199,7 @@ module Stripe
         return @network = nil
       end
       _network = network.not_nil!
-      ENUM_VALIDATOR_FOR_NETWORK.valid!(_network)
+      OpenApi::EnumValidator.validate("network", _network, VALID_VALUES_FOR_NETWORK)
       @network = _network
     end
 
@@ -193,7 +210,7 @@ module Stripe
         return @request_three_d_secure = nil
       end
       _request_three_d_secure = request_three_d_secure.not_nil!
-      ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid!(_request_three_d_secure)
+      OpenApi::EnumValidator.validate("request_three_d_secure", _request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
       @request_three_d_secure = _request_three_d_secure
     end
 
@@ -204,7 +221,7 @@ module Stripe
         return @setup_future_usage = nil
       end
       _setup_future_usage = setup_future_usage.not_nil!
-      ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(_setup_future_usage)
+      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       @setup_future_usage = _setup_future_usage
     end
 

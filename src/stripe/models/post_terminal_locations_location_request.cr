@@ -55,6 +55,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _address = @address
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
@@ -72,7 +73,6 @@ module Stripe
       if _metadata = @metadata
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -82,9 +82,11 @@ module Stripe
       if _address = @address
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
+
       if _configuration_overrides = @configuration_overrides
         return false if _configuration_overrides.to_s.size > 1000
       end
+
       if _display_name = @display_name
         return false if _display_name.to_s.size > 1000
       end

@@ -54,8 +54,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? tax_exempt_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_TAX_EXEMPT = OpenApi::EnumValidator.new("tax_exempt", "String", ["exempt", "none", "reverse"])
+    VALID_VALUES_FOR_TAX_EXEMPT = StaticArray["exempt", "none", "reverse"]
 
     # The customer’s tax IDs after a completed Checkout Session.
     @[JSON::Field(key: "tax_ids", type: Array(Stripe::PaymentPagesCheckoutSessionTaxId)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tax_ids.nil? && !tax_ids_present?)]
@@ -82,6 +81,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _address = @address
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
@@ -100,12 +100,12 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_EXEMPT.error_message) unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
+      if _tax_exempt = @tax_exempt
+        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_exempt", VALID_VALUES_FOR_TAX_EXEMPT)) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
+      end
       if _tax_ids = @tax_ids
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tax_ids", array: _tax_ids)) if _tax_ids.is_a?(Array)
       end
-
       invalid_properties
     end
 
@@ -115,16 +115,23 @@ module Stripe
       if _address = @address
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
+
       if _email = @email
         return false if _email.to_s.size > 5000
       end
+
       if _name = @name
         return false if _name.to_s.size > 5000
       end
+
       if _phone = @phone
         return false if _phone.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
+
+      if _tax_exempt = @tax_exempt
+        return false unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
+      end
+
       if _tax_ids = @tax_ids
         return false if _tax_ids.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tax_ids)
       end
@@ -192,7 +199,7 @@ module Stripe
         return @tax_exempt = nil
       end
       _tax_exempt = tax_exempt.not_nil!
-      ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid!(_tax_exempt)
+      OpenApi::EnumValidator.validate("tax_exempt", _tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       @tax_exempt = _tax_exempt
     end
 

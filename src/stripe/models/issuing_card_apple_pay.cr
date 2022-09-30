@@ -33,8 +33,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? ineligible_reason_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_INELIGIBLE_REASON = OpenApi::EnumValidator.new("ineligible_reason", "String", ["missing_agreement", "missing_cardholder_contact", "unsupported_region"])
+    VALID_VALUES_FOR_INELIGIBLE_REASON = StaticArray["missing_agreement", "missing_cardholder_contact", "unsupported_region"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -51,10 +50,12 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"eligible\" is required and cannot be null") if @eligible.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_INELIGIBLE_REASON.error_message) unless ENUM_VALIDATOR_FOR_INELIGIBLE_REASON.valid?(@ineligible_reason)
-
+      if _ineligible_reason = @ineligible_reason
+        invalid_properties.push(OpenApi::EnumValidator.error_message("ineligible_reason", VALID_VALUES_FOR_INELIGIBLE_REASON)) unless OpenApi::EnumValidator.valid?(_ineligible_reason, VALID_VALUES_FOR_INELIGIBLE_REASON)
+      end
       invalid_properties
     end
 
@@ -63,7 +64,9 @@ module Stripe
     def valid? : Bool
       return false if @eligible.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_INELIGIBLE_REASON.valid?(@ineligible_reason)
+      if _ineligible_reason = @ineligible_reason
+        return false unless OpenApi::EnumValidator.valid?(_ineligible_reason, VALID_VALUES_FOR_INELIGIBLE_REASON)
+      end
 
       true
     end
@@ -85,7 +88,7 @@ module Stripe
         return @ineligible_reason = nil
       end
       _ineligible_reason = ineligible_reason.not_nil!
-      ENUM_VALIDATOR_FOR_INELIGIBLE_REASON.valid!(_ineligible_reason)
+      OpenApi::EnumValidator.validate("ineligible_reason", _ineligible_reason, VALID_VALUES_FOR_INELIGIBLE_REASON)
       @ineligible_reason = _ineligible_reason
     end
 

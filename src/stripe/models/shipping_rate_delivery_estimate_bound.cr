@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "unit", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter unit : String? = nil
 
-    ENUM_VALIDATOR_FOR_UNIT = OpenApi::EnumValidator.new("unit", "String", ["business_day", "day", "hour", "month", "week"])
+    VALID_VALUES_FOR_UNIT = StaticArray["business_day", "day", "hour", "month", "week"]
 
     # Must be greater than 0.
     @[JSON::Field(key: "value", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -46,7 +46,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_UNIT.error_message) unless ENUM_VALIDATOR_FOR_UNIT.valid?(@unit, false)
+      invalid_properties.push("\"unit\" is required and cannot be null") if @unit.nil?
+
+      if _unit = @unit
+        invalid_properties.push(OpenApi::EnumValidator.error_message("unit", VALID_VALUES_FOR_UNIT)) unless OpenApi::EnumValidator.valid?(_unit, VALID_VALUES_FOR_UNIT)
+      end
       invalid_properties.push("\"value\" is required and cannot be null") if @value.nil?
 
       invalid_properties
@@ -55,7 +59,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_UNIT.valid?(@unit, false)
+      return false if @unit.nil?
+      if _unit = @unit
+        return false unless OpenApi::EnumValidator.valid?(_unit, VALID_VALUES_FOR_UNIT)
+      end
+
       return false if @value.nil?
 
       true
@@ -68,7 +76,7 @@ module Stripe
         raise ArgumentError.new("\"unit\" is required and cannot be null")
       end
       _unit = unit.not_nil!
-      ENUM_VALIDATOR_FOR_UNIT.valid!(_unit)
+      OpenApi::EnumValidator.validate("unit", _unit, VALID_VALUES_FOR_UNIT)
       @unit = _unit
     end
 

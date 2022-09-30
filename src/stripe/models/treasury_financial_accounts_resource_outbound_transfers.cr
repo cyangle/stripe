@@ -41,13 +41,13 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _ach = @ach
         invalid_properties.concat(_ach.list_invalid_properties_for("ach")) if _ach.is_a?(OpenApi::Validatable)
       end
       if _us_domestic_wire = @us_domestic_wire
         invalid_properties.concat(_us_domestic_wire.list_invalid_properties_for("us_domestic_wire")) if _us_domestic_wire.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -57,6 +57,7 @@ module Stripe
       if _ach = @ach
         return false if _ach.is_a?(OpenApi::Validatable) && !_ach.valid?
       end
+
       if _us_domestic_wire = @us_domestic_wire
         return false if _us_domestic_wire.is_a?(OpenApi::Validatable) && !_us_domestic_wire.valid?
       end

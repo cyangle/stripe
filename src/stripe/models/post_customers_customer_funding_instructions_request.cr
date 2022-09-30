@@ -31,7 +31,7 @@ module Stripe
     @[JSON::Field(key: "funding_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter funding_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_FUNDING_TYPE = OpenApi::EnumValidator.new("funding_type", "String", ["bank_transfer"])
+    VALID_VALUES_FOR_FUNDING_TYPE = StaticArray["bank_transfer"]
 
     # Optional properties
 
@@ -56,13 +56,19 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"bank_transfer\" is required and cannot be null") if @bank_transfer.nil?
+
       if _bank_transfer = @bank_transfer
         invalid_properties.concat(_bank_transfer.list_invalid_properties_for("bank_transfer")) if _bank_transfer.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_FUNDING_TYPE.error_message) unless ENUM_VALIDATOR_FOR_FUNDING_TYPE.valid?(@funding_type, false)
+      invalid_properties.push("\"funding_type\" is required and cannot be null") if @funding_type.nil?
+
+      if _funding_type = @funding_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("funding_type", VALID_VALUES_FOR_FUNDING_TYPE)) unless OpenApi::EnumValidator.valid?(_funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
+      end
 
       invalid_properties
     end
@@ -74,9 +80,13 @@ module Stripe
       if _bank_transfer = @bank_transfer
         return false if _bank_transfer.is_a?(OpenApi::Validatable) && !_bank_transfer.valid?
       end
+
       return false if @currency.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_FUNDING_TYPE.valid?(@funding_type, false)
+      return false if @funding_type.nil?
+      if _funding_type = @funding_type
+        return false unless OpenApi::EnumValidator.valid?(_funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
+      end
 
       true
     end
@@ -109,7 +119,7 @@ module Stripe
         raise ArgumentError.new("\"funding_type\" is required and cannot be null")
       end
       _funding_type = funding_type.not_nil!
-      ENUM_VALIDATOR_FOR_FUNDING_TYPE.valid!(_funding_type)
+      OpenApi::EnumValidator.validate("funding_type", _funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
       @funding_type = _funding_type
     end
 

@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["api_error", "card_error", "idempotency_error", "invalid_request_error"])
+    VALID_VALUES_FOR__TYPE = StaticArray["api_error", "card_error", "idempotency_error", "invalid_request_error"]
 
     # Optional properties
 
@@ -95,7 +95,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
       if _charge = @charge
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -143,44 +147,57 @@ module Stripe
       if _source = @source
         invalid_properties.concat(_source.list_invalid_properties_for("source")) if _source.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if @_type.nil?
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+
       if _charge = @charge
         return false if _charge.to_s.size > 5000
       end
+
       if _code = @code
         return false if _code.to_s.size > 5000
       end
+
       if _decline_code = @decline_code
         return false if _decline_code.to_s.size > 5000
       end
+
       if _doc_url = @doc_url
         return false if _doc_url.to_s.size > 5000
       end
+
       if _message = @message
         return false if _message.to_s.size > 40000
       end
+
       if _param = @param
         return false if _param.to_s.size > 5000
       end
+
       if _payment_intent = @payment_intent
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
+
       if _payment_method = @payment_method
         return false if _payment_method.is_a?(OpenApi::Validatable) && !_payment_method.valid?
       end
+
       if _payment_method_type = @payment_method_type
         return false if _payment_method_type.to_s.size > 5000
       end
+
       if _setup_intent = @setup_intent
         return false if _setup_intent.is_a?(OpenApi::Validatable) && !_setup_intent.valid?
       end
+
       if _source = @source
         return false if _source.is_a?(OpenApi::Validatable) && !_source.valid?
       end
@@ -195,7 +212,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 

@@ -191,9 +191,11 @@ module Stripe
       if _customer = @customer
         return false if _customer.to_s.size > 500
       end
+
       if _description = @description
         return false if _description.to_s.size > 40000
       end
+
       if _destination = @destination
         return false if _destination.is_a?(OpenApi::Validatable) && !_destination.valid?
       end
@@ -201,9 +203,11 @@ module Stripe
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _on_behalf_of = @on_behalf_of
         return false if _on_behalf_of.to_s.size > 5000
       end
+
       if _radar_options = @radar_options
         return false if _radar_options.is_a?(OpenApi::Validatable) && !_radar_options.valid?
       end
@@ -211,15 +215,19 @@ module Stripe
       if _shipping = @shipping
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
+
       if _source = @source
         return false if _source.to_s.size > 5000
       end
+
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 22
       end
+
       if _statement_descriptor_suffix = @statement_descriptor_suffix
         return false if _statement_descriptor_suffix.to_s.size > 22
       end
+
       if _transfer_data = @transfer_data
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end

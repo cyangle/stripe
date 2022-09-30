@@ -40,7 +40,7 @@ module Stripe
     @[JSON::Field(key: "flow_directions", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter flow_directions : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS = OpenApi::EnumValidator.new("flow_directions", "Array(String)", ["inbound", "outbound"])
+    VALID_VALUES_FOR_FLOW_DIRECTIONS = StaticArray["inbound", "outbound"]
 
     @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Stripe::PostAccountRequestMetadata? = nil
@@ -93,7 +93,9 @@ module Stripe
         end
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.error_message) unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
+      if _flow_directions = @flow_directions
+        invalid_properties.push(OpenApi::EnumValidator.error_message("flow_directions", VALID_VALUES_FOR_FLOW_DIRECTIONS)) unless OpenApi::EnumValidator.valid?(_flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
+      end
       if _metadata = @metadata
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
@@ -118,20 +120,27 @@ module Stripe
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
+
       if _description = @description
         return false if _description.to_s.size > 1000
       end
 
-      return false unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
+      if _flow_directions = @flow_directions
+        return false unless OpenApi::EnumValidator.valid?(_flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
+      end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _payment_method = @payment_method
         return false if _payment_method.to_s.size > 5000
       end
+
       if _payment_method_data = @payment_method_data
         return false if _payment_method_data.is_a?(OpenApi::Validatable) && !_payment_method_data.valid?
       end
+
       if _payment_method_options = @payment_method_options
         return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
@@ -194,7 +203,7 @@ module Stripe
         return @flow_directions = nil
       end
       _flow_directions = flow_directions.not_nil!
-      ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid!(_flow_directions)
+      OpenApi::EnumValidator.validate("flow_directions", _flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
       @flow_directions = _flow_directions
     end
 

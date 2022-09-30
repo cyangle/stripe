@@ -49,6 +49,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _ip_address = @ip_address
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -59,7 +60,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -69,6 +69,7 @@ module Stripe
       if _ip_address = @ip_address
         return false if _ip_address.to_s.size > 5000
       end
+
       if _user_agent = @user_agent
         return false if _user_agent.to_s.size > 5000
       end

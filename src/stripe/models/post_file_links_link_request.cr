@@ -52,7 +52,6 @@ module Stripe
       if _metadata = @metadata
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -62,6 +61,7 @@ module Stripe
       if _expires_at = @expires_at
         return false if _expires_at.is_a?(OpenApi::Validatable) && !_expires_at.valid?
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end

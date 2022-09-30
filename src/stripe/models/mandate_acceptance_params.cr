@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["accepted", "pending", "refused", "revoked"])
+    VALID_VALUES_FOR_STATUS = StaticArray["accepted", "pending", "refused", "revoked"]
 
     # Optional properties
 
@@ -42,7 +42,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["offline", "online"])
+    VALID_VALUES_FOR__TYPE = StaticArray["offline", "online"]
 
     @[JSON::Field(key: "user_agent", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter user_agent : String? = nil
@@ -68,7 +68,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
+
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
 
       if _offline = @offline
         invalid_properties.concat(_offline.list_invalid_properties_for("offline")) if _offline.is_a?(OpenApi::Validatable)
@@ -76,29 +80,37 @@ module Stripe
       if _online = @online
         invalid_properties.concat(_online.list_invalid_properties_for("online")) if _online.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
       if _user_agent = @user_agent
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_agent", _user_agent.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false if @status.nil?
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
 
       if _offline = @offline
         return false if _offline.is_a?(OpenApi::Validatable) && !_offline.valid?
       end
+
       if _online = @online
         return false if _online.is_a?(OpenApi::Validatable) && !_online.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+
       if _user_agent = @user_agent
         return false if _user_agent.to_s.size > 5000
       end
@@ -113,7 +125,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 
@@ -166,7 +178,7 @@ module Stripe
         return @_type = nil
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 

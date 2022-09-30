@@ -26,7 +26,7 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter interval : String? = nil
 
-    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["daily", "manual", "monthly", "weekly"])
+    VALID_VALUES_FOR_INTERVAL = StaticArray["daily", "manual", "monthly", "weekly"]
 
     @[JSON::Field(key: "monthly_anchor", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter monthly_anchor : Int64? = nil
@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "weekly_anchor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter weekly_anchor : String? = nil
 
-    ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR = OpenApi::EnumValidator.new("weekly_anchor", "String", ["friday", "monday", "saturday", "sunday", "thursday", "tuesday", "wednesday"])
+    VALID_VALUES_FOR_WEEKLY_ANCHOR = StaticArray["friday", "monday", "saturday", "sunday", "thursday", "tuesday", "wednesday"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,14 +52,17 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _delay_days = @delay_days
         invalid_properties.concat(_delay_days.list_invalid_properties_for("delay_days")) if _delay_days.is_a?(OpenApi::Validatable)
       end
+      if _interval = @interval
+        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+      end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR.error_message) unless ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR.valid?(@weekly_anchor)
-
+      if _weekly_anchor = @weekly_anchor
+        invalid_properties.push(OpenApi::EnumValidator.error_message("weekly_anchor", VALID_VALUES_FOR_WEEKLY_ANCHOR)) unless OpenApi::EnumValidator.valid?(_weekly_anchor, VALID_VALUES_FOR_WEEKLY_ANCHOR)
+      end
       invalid_properties
     end
 
@@ -69,9 +72,14 @@ module Stripe
       if _delay_days = @delay_days
         return false if _delay_days.is_a?(OpenApi::Validatable) && !_delay_days.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
 
-      return false unless ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR.valid?(@weekly_anchor)
+      if _interval = @interval
+        return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+      end
+
+      if _weekly_anchor = @weekly_anchor
+        return false unless OpenApi::EnumValidator.valid?(_weekly_anchor, VALID_VALUES_FOR_WEEKLY_ANCHOR)
+      end
 
       true
     end
@@ -94,7 +102,7 @@ module Stripe
         return @interval = nil
       end
       _interval = interval.not_nil!
-      ENUM_VALIDATOR_FOR_INTERVAL.valid!(_interval)
+      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
       @interval = _interval
     end
 
@@ -115,7 +123,7 @@ module Stripe
         return @weekly_anchor = nil
       end
       _weekly_anchor = weekly_anchor.not_nil!
-      ENUM_VALIDATOR_FOR_WEEKLY_ANCHOR.valid!(_weekly_anchor)
+      OpenApi::EnumValidator.validate("weekly_anchor", _weekly_anchor, VALID_VALUES_FOR_WEEKLY_ANCHOR)
       @weekly_anchor = _weekly_anchor
     end
 

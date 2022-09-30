@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "duration", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter duration : String? = nil
 
-    ENUM_VALIDATOR_FOR_DURATION = OpenApi::EnumValidator.new("duration", "String", ["forever", "once", "repeating"])
+    VALID_VALUES_FOR_DURATION = StaticArray["forever", "once", "repeating"]
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -43,7 +43,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["coupon"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["coupon"]
 
     # Number of times this coupon has been applied to a customer.
     @[JSON::Field(key: "times_redeemed", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -148,10 +148,16 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_DURATION.error_message) unless ENUM_VALIDATOR_FOR_DURATION.valid?(@duration, false)
+      invalid_properties.push("\"duration\" is required and cannot be null") if @duration.nil?
+
+      if _duration = @duration
+        invalid_properties.push(OpenApi::EnumValidator.error_message("duration", VALID_VALUES_FOR_DURATION)) unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
+      end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -159,7 +165,11 @@ module Stripe
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"times_redeemed\" is required and cannot be null") if @times_redeemed.nil?
 
       invalid_properties.push("\"valid\" is required and cannot be null") if @valid.nil?
@@ -186,14 +196,23 @@ module Stripe
     def valid? : Bool
       return false if @created.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_DURATION.valid?(@duration, false)
+      return false if @duration.nil?
+      if _duration = @duration
+        return false unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
+      end
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @times_redeemed.nil?
 
       return false if @valid.nil?
@@ -230,7 +249,7 @@ module Stripe
         raise ArgumentError.new("\"duration\" is required and cannot be null")
       end
       _duration = duration.not_nil!
-      ENUM_VALIDATOR_FOR_DURATION.valid!(_duration)
+      OpenApi::EnumValidator.validate("duration", _duration, VALID_VALUES_FOR_DURATION)
       @duration = _duration
     end
 
@@ -265,7 +284,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

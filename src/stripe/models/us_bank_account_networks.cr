@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "supported", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter supported : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_SUPPORTED = OpenApi::EnumValidator.new("supported", "Array(String)", ["ach", "us_domestic_wire"])
+    VALID_VALUES_FOR_SUPPORTED = StaticArray["ach", "us_domestic_wire"]
 
     # Optional properties
 
@@ -52,20 +52,27 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED.all_valid?(@supported, false)
+      invalid_properties.push("\"supported\" is required and cannot be null") if @supported.nil?
+
+      if _supported = @supported
+        invalid_properties.push(OpenApi::EnumValidator.error_message("supported", VALID_VALUES_FOR_SUPPORTED)) unless OpenApi::EnumValidator.valid?(_supported, VALID_VALUES_FOR_SUPPORTED)
+      end
       if _preferred = @preferred
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred", _preferred.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_SUPPORTED.all_valid?(@supported, false)
+      return false if @supported.nil?
+      if _supported = @supported
+        return false unless OpenApi::EnumValidator.valid?(_supported, VALID_VALUES_FOR_SUPPORTED)
+      end
+
       if _preferred = @preferred
         return false if _preferred.to_s.size > 5000
       end
@@ -80,7 +87,7 @@ module Stripe
         raise ArgumentError.new("\"supported\" is required and cannot be null")
       end
       _supported = supported.not_nil!
-      ENUM_VALIDATOR_FOR_SUPPORTED.all_valid!(_supported)
+      OpenApi::EnumValidator.validate("supported", _supported, VALID_VALUES_FOR_SUPPORTED)
       @supported = _supported
     end
 

@@ -157,6 +157,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _address = @address
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
@@ -251,7 +252,6 @@ module Stripe
       if _verification = @verification
         invalid_properties.concat(_verification.list_invalid_properties_for("verification")) if _verification.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -261,15 +261,19 @@ module Stripe
       if _address = @address
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
+
       if _address_kana = @address_kana
         return false if _address_kana.is_a?(OpenApi::Validatable) && !_address_kana.valid?
       end
+
       if _address_kanji = @address_kanji
         return false if _address_kanji.is_a?(OpenApi::Validatable) && !_address_kanji.valid?
       end
+
       if _dob = @dob
         return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
+
       if _documents = @documents
         return false if _documents.is_a?(OpenApi::Validatable) && !_documents.valid?
       end
@@ -277,12 +281,15 @@ module Stripe
       if _first_name = @first_name
         return false if _first_name.to_s.size > 5000
       end
+
       if _first_name_kana = @first_name_kana
         return false if _first_name_kana.to_s.size > 5000
       end
+
       if _first_name_kanji = @first_name_kanji
         return false if _first_name_kanji.to_s.size > 5000
       end
+
       if _full_name_aliases = @full_name_aliases
         return false if _full_name_aliases.is_a?(OpenApi::Validatable) && !_full_name_aliases.valid?
       end
@@ -290,27 +297,35 @@ module Stripe
       if _id_number = @id_number
         return false if _id_number.to_s.size > 5000
       end
+
       if _id_number_secondary = @id_number_secondary
         return false if _id_number_secondary.to_s.size > 5000
       end
+
       if _last_name = @last_name
         return false if _last_name.to_s.size > 5000
       end
+
       if _last_name_kana = @last_name_kana
         return false if _last_name_kana.to_s.size > 5000
       end
+
       if _last_name_kanji = @last_name_kanji
         return false if _last_name_kanji.to_s.size > 5000
       end
+
       if _maiden_name = @maiden_name
         return false if _maiden_name.to_s.size > 5000
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _nationality = @nationality
         return false if _nationality.to_s.size > 5000
       end
+
       if _person_token = @person_token
         return false if _person_token.to_s.size > 5000
       end
@@ -318,9 +333,11 @@ module Stripe
       if _political_exposure = @political_exposure
         return false if _political_exposure.to_s.size > 5000
       end
+
       if _registered_address = @registered_address
         return false if _registered_address.is_a?(OpenApi::Validatable) && !_registered_address.valid?
       end
+
       if _relationship = @relationship
         return false if _relationship.is_a?(OpenApi::Validatable) && !_relationship.valid?
       end

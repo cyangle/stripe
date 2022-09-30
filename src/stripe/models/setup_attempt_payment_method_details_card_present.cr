@@ -40,10 +40,10 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _generated_card = @generated_card
         invalid_properties.concat(_generated_card.list_invalid_properties_for("generated_card")) if _generated_card.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

@@ -72,19 +72,24 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"branding\" is required and cannot be null") if @branding.nil?
+
       if _branding = @branding
         invalid_properties.concat(_branding.list_invalid_properties_for("branding")) if _branding.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"card_payments\" is required and cannot be null") if @card_payments.nil?
+
       if _card_payments = @card_payments
         invalid_properties.concat(_card_payments.list_invalid_properties_for("card_payments")) if _card_payments.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"dashboard\" is required and cannot be null") if @dashboard.nil?
+
       if _dashboard = @dashboard
         invalid_properties.concat(_dashboard.list_invalid_properties_for("dashboard")) if _dashboard.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"payments\" is required and cannot be null") if @payments.nil?
+
       if _payments = @payments
         invalid_properties.concat(_payments.list_invalid_properties_for("payments")) if _payments.is_a?(OpenApi::Validatable)
       end
@@ -103,7 +108,6 @@ module Stripe
       if _treasury = @treasury
         invalid_properties.concat(_treasury.list_invalid_properties_for("treasury")) if _treasury.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -114,30 +118,38 @@ module Stripe
       if _branding = @branding
         return false if _branding.is_a?(OpenApi::Validatable) && !_branding.valid?
       end
+
       return false if @card_payments.nil?
       if _card_payments = @card_payments
         return false if _card_payments.is_a?(OpenApi::Validatable) && !_card_payments.valid?
       end
+
       return false if @dashboard.nil?
       if _dashboard = @dashboard
         return false if _dashboard.is_a?(OpenApi::Validatable) && !_dashboard.valid?
       end
+
       return false if @payments.nil?
       if _payments = @payments
         return false if _payments.is_a?(OpenApi::Validatable) && !_payments.valid?
       end
+
       if _bacs_debit_payments = @bacs_debit_payments
         return false if _bacs_debit_payments.is_a?(OpenApi::Validatable) && !_bacs_debit_payments.valid?
       end
+
       if _card_issuing = @card_issuing
         return false if _card_issuing.is_a?(OpenApi::Validatable) && !_card_issuing.valid?
       end
+
       if _payouts = @payouts
         return false if _payouts.is_a?(OpenApi::Validatable) && !_payouts.valid?
       end
+
       if _sepa_debit_payments = @sepa_debit_payments
         return false if _sepa_debit_payments.is_a?(OpenApi::Validatable) && !_sepa_debit_payments.valid?
       end
+
       if _treasury = @treasury
         return false if _treasury.is_a?(OpenApi::Validatable) && !_treasury.valid?
       end

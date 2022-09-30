@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "billing_scheme", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter billing_scheme : String? = nil
 
-    ENUM_VALIDATOR_FOR_BILLING_SCHEME = OpenApi::EnumValidator.new("billing_scheme", "String", ["per_unit", "tiered"])
+    VALID_VALUES_FOR_BILLING_SCHEME = StaticArray["per_unit", "tiered"]
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -47,7 +47,7 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
 
-    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
+    VALID_VALUES_FOR_INTERVAL = StaticArray["day", "month", "week", "year"]
 
     # The number of intervals (specified in the `interval` attribute) between subscription billings. For example, `interval=month` and `interval_count=3` bills every 3 months.
     @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -61,13 +61,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["plan"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["plan"]
 
     # Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.
     @[JSON::Field(key: "usage_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter usage_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_USAGE_TYPE = OpenApi::EnumValidator.new("usage_type", "String", ["licensed", "metered"])
+    VALID_VALUES_FOR_USAGE_TYPE = StaticArray["licensed", "metered"]
 
     # Optional properties
 
@@ -77,8 +77,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? aggregate_usage_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_AGGREGATE_USAGE = OpenApi::EnumValidator.new("aggregate_usage", "String", ["last_during_period", "last_ever", "max", "sum"])
+    VALID_VALUES_FOR_AGGREGATE_USAGE = StaticArray["last_during_period", "last_ever", "max", "sum"]
 
     # The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.
     @[JSON::Field(key: "amount", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount.nil? && !amount_present?)]
@@ -124,8 +123,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? tiers_mode_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_TIERS_MODE = OpenApi::EnumValidator.new("tiers_mode", "String", ["graduated", "volume"])
+    VALID_VALUES_FOR_TIERS_MODE = StaticArray["graduated", "volume"]
 
     @[JSON::Field(key: "transform_usage", type: Stripe::PlanTransformUsage?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: transform_usage.nil? && !transform_usage_present?)]
     getter transform_usage : Stripe::PlanTransformUsage? = nil
@@ -173,30 +171,47 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"active\" is required and cannot be null") if @active.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_SCHEME.error_message) unless ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid?(@billing_scheme, false)
+      invalid_properties.push("\"billing_scheme\" is required and cannot be null") if @billing_scheme.nil?
+
+      if _billing_scheme = @billing_scheme
+        invalid_properties.push(OpenApi::EnumValidator.error_message("billing_scheme", VALID_VALUES_FOR_BILLING_SCHEME)) unless OpenApi::EnumValidator.valid?(_billing_scheme, VALID_VALUES_FOR_BILLING_SCHEME)
+      end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
+      if _interval = @interval
+        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+      end
       invalid_properties.push("\"interval_count\" is required and cannot be null") if @interval_count.nil?
 
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_USAGE_TYPE.error_message) unless ENUM_VALIDATOR_FOR_USAGE_TYPE.valid?(@usage_type, false)
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+      invalid_properties.push("\"usage_type\" is required and cannot be null") if @usage_type.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid?(@aggregate_usage)
+      if _usage_type = @usage_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("usage_type", VALID_VALUES_FOR_USAGE_TYPE)) unless OpenApi::EnumValidator.valid?(_usage_type, VALID_VALUES_FOR_USAGE_TYPE)
+      end
+      if _aggregate_usage = @aggregate_usage
+        invalid_properties.push(OpenApi::EnumValidator.error_message("aggregate_usage", VALID_VALUES_FOR_AGGREGATE_USAGE)) unless OpenApi::EnumValidator.valid?(_aggregate_usage, VALID_VALUES_FOR_AGGREGATE_USAGE)
+      end
 
       if _nickname = @nickname
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, 5000)
@@ -209,8 +224,9 @@ module Stripe
       if _tiers = @tiers
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tiers", array: _tiers)) if _tiers.is_a?(Array)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TIERS_MODE.error_message) unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
+      if _tiers_mode = @tiers_mode
+        invalid_properties.push(OpenApi::EnumValidator.error_message("tiers_mode", VALID_VALUES_FOR_TIERS_MODE)) unless OpenApi::EnumValidator.valid?(_tiers_mode, VALID_VALUES_FOR_TIERS_MODE)
+      end
       if _transform_usage = @transform_usage
         invalid_properties.concat(_transform_usage.list_invalid_properties_for("transform_usage")) if _transform_usage.is_a?(OpenApi::Validatable)
       end
@@ -223,7 +239,11 @@ module Stripe
     def valid? : Bool
       return false if @active.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid?(@billing_scheme, false)
+      return false if @billing_scheme.nil?
+      if _billing_scheme = @billing_scheme
+        return false unless OpenApi::EnumValidator.valid?(_billing_scheme, VALID_VALUES_FOR_BILLING_SCHEME)
+      end
+
       return false if @created.nil?
 
       return false if @currency.nil?
@@ -232,25 +252,46 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
+
+      return false if @interval.nil?
+      if _interval = @interval
+        return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+      end
+
       return false if @interval_count.nil?
 
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false unless ENUM_VALIDATOR_FOR_USAGE_TYPE.valid?(@usage_type, false)
-      return false unless ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid?(@aggregate_usage)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
+      return false if @usage_type.nil?
+      if _usage_type = @usage_type
+        return false unless OpenApi::EnumValidator.valid?(_usage_type, VALID_VALUES_FOR_USAGE_TYPE)
+      end
+
+      if _aggregate_usage = @aggregate_usage
+        return false unless OpenApi::EnumValidator.valid?(_aggregate_usage, VALID_VALUES_FOR_AGGREGATE_USAGE)
+      end
 
       if _nickname = @nickname
         return false if _nickname.to_s.size > 5000
       end
+
       if _product = @product
         return false if _product.is_a?(OpenApi::Validatable) && !_product.valid?
       end
+
       if _tiers = @tiers
         return false if _tiers.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tiers)
       end
-      return false unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
+
+      if _tiers_mode = @tiers_mode
+        return false unless OpenApi::EnumValidator.valid?(_tiers_mode, VALID_VALUES_FOR_TIERS_MODE)
+      end
+
       if _transform_usage = @transform_usage
         return false if _transform_usage.is_a?(OpenApi::Validatable) && !_transform_usage.valid?
       end
@@ -275,7 +316,7 @@ module Stripe
         raise ArgumentError.new("\"billing_scheme\" is required and cannot be null")
       end
       _billing_scheme = billing_scheme.not_nil!
-      ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid!(_billing_scheme)
+      OpenApi::EnumValidator.validate("billing_scheme", _billing_scheme, VALID_VALUES_FOR_BILLING_SCHEME)
       @billing_scheme = _billing_scheme
     end
 
@@ -320,7 +361,7 @@ module Stripe
         raise ArgumentError.new("\"interval\" is required and cannot be null")
       end
       _interval = interval.not_nil!
-      ENUM_VALIDATOR_FOR_INTERVAL.valid!(_interval)
+      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
       @interval = _interval
     end
 
@@ -351,7 +392,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 
@@ -362,7 +403,7 @@ module Stripe
         raise ArgumentError.new("\"usage_type\" is required and cannot be null")
       end
       _usage_type = usage_type.not_nil!
-      ENUM_VALIDATOR_FOR_USAGE_TYPE.valid!(_usage_type)
+      OpenApi::EnumValidator.validate("usage_type", _usage_type, VALID_VALUES_FOR_USAGE_TYPE)
       @usage_type = _usage_type
     end
 
@@ -373,7 +414,7 @@ module Stripe
         return @aggregate_usage = nil
       end
       _aggregate_usage = aggregate_usage.not_nil!
-      ENUM_VALIDATOR_FOR_AGGREGATE_USAGE.valid!(_aggregate_usage)
+      OpenApi::EnumValidator.validate("aggregate_usage", _aggregate_usage, VALID_VALUES_FOR_AGGREGATE_USAGE)
       @aggregate_usage = _aggregate_usage
     end
 
@@ -450,7 +491,7 @@ module Stripe
         return @tiers_mode = nil
       end
       _tiers_mode = tiers_mode.not_nil!
-      ENUM_VALIDATOR_FOR_TIERS_MODE.valid!(_tiers_mode)
+      OpenApi::EnumValidator.validate("tiers_mode", _tiers_mode, VALID_VALUES_FOR_TIERS_MODE)
       @tiers_mode = _tiers_mode
     end
 

@@ -45,7 +45,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+
       if __type = @_type
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -54,7 +56,6 @@ module Stripe
       if _card_present = @card_present
         invalid_properties.concat(_card_present.list_invalid_properties_for("card_present")) if _card_present.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -65,6 +66,7 @@ module Stripe
       if __type = @_type
         return false if __type.to_s.size > 5000
       end
+
       if _card_present = @card_present
         return false if _card_present.is_a?(OpenApi::Validatable) && !_card_present.valid?
       end

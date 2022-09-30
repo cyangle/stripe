@@ -44,14 +44,15 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"payment_intent\" is required and cannot be null") if @payment_intent.nil?
+
       if _payment_intent = @payment_intent
         invalid_properties.concat(_payment_intent.list_invalid_properties_for("payment_intent")) if _payment_intent.is_a?(OpenApi::Validatable)
       end
       if _process_config = @process_config
         invalid_properties.concat(_process_config.list_invalid_properties_for("process_config")) if _process_config.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -62,6 +63,7 @@ module Stripe
       if _payment_intent = @payment_intent
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
+
       if _process_config = @process_config
         return false if _process_config.is_a?(OpenApi::Validatable) && !_process_config.valid?
       end

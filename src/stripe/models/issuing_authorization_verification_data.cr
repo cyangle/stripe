@@ -25,25 +25,25 @@ module Stripe
     @[JSON::Field(key: "address_line1_check", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter address_line1_check : String? = nil
 
-    ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK = OpenApi::EnumValidator.new("address_line1_check", "String", ["match", "mismatch", "not_provided"])
+    VALID_VALUES_FOR_ADDRESS_LINE1_CHECK = StaticArray["match", "mismatch", "not_provided"]
 
     # Whether the cardholder provided a postal code and if it matched the cardholder’s `billing.address.postal_code`.
     @[JSON::Field(key: "address_postal_code_check", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter address_postal_code_check : String? = nil
 
-    ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK = OpenApi::EnumValidator.new("address_postal_code_check", "String", ["match", "mismatch", "not_provided"])
+    VALID_VALUES_FOR_ADDRESS_POSTAL_CODE_CHECK = StaticArray["match", "mismatch", "not_provided"]
 
     # Whether the cardholder provided a CVC and if it matched Stripe’s record.
     @[JSON::Field(key: "cvc_check", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter cvc_check : String? = nil
 
-    ENUM_VALIDATOR_FOR_CVC_CHECK = OpenApi::EnumValidator.new("cvc_check", "String", ["match", "mismatch", "not_provided"])
+    VALID_VALUES_FOR_CVC_CHECK = StaticArray["match", "mismatch", "not_provided"]
 
     # Whether the cardholder provided an expiry date and if it matched Stripe’s record.
     @[JSON::Field(key: "expiry_check", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter expiry_check : String? = nil
 
-    ENUM_VALIDATOR_FOR_EXPIRY_CHECK = OpenApi::EnumValidator.new("expiry_check", "String", ["match", "mismatch", "not_provided"])
+    VALID_VALUES_FOR_EXPIRY_CHECK = StaticArray["match", "mismatch", "not_provided"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -62,24 +62,51 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK.error_message) unless ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK.valid?(@address_line1_check, false)
+      invalid_properties.push("\"address_line1_check\" is required and cannot be null") if @address_line1_check.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK.error_message) unless ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK.valid?(@address_postal_code_check, false)
+      if _address_line1_check = @address_line1_check
+        invalid_properties.push(OpenApi::EnumValidator.error_message("address_line1_check", VALID_VALUES_FOR_ADDRESS_LINE1_CHECK)) unless OpenApi::EnumValidator.valid?(_address_line1_check, VALID_VALUES_FOR_ADDRESS_LINE1_CHECK)
+      end
+      invalid_properties.push("\"address_postal_code_check\" is required and cannot be null") if @address_postal_code_check.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CVC_CHECK.error_message) unless ENUM_VALIDATOR_FOR_CVC_CHECK.valid?(@cvc_check, false)
+      if _address_postal_code_check = @address_postal_code_check
+        invalid_properties.push(OpenApi::EnumValidator.error_message("address_postal_code_check", VALID_VALUES_FOR_ADDRESS_POSTAL_CODE_CHECK)) unless OpenApi::EnumValidator.valid?(_address_postal_code_check, VALID_VALUES_FOR_ADDRESS_POSTAL_CODE_CHECK)
+      end
+      invalid_properties.push("\"cvc_check\" is required and cannot be null") if @cvc_check.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_EXPIRY_CHECK.error_message) unless ENUM_VALIDATOR_FOR_EXPIRY_CHECK.valid?(@expiry_check, false)
+      if _cvc_check = @cvc_check
+        invalid_properties.push(OpenApi::EnumValidator.error_message("cvc_check", VALID_VALUES_FOR_CVC_CHECK)) unless OpenApi::EnumValidator.valid?(_cvc_check, VALID_VALUES_FOR_CVC_CHECK)
+      end
+      invalid_properties.push("\"expiry_check\" is required and cannot be null") if @expiry_check.nil?
 
+      if _expiry_check = @expiry_check
+        invalid_properties.push(OpenApi::EnumValidator.error_message("expiry_check", VALID_VALUES_FOR_EXPIRY_CHECK)) unless OpenApi::EnumValidator.valid?(_expiry_check, VALID_VALUES_FOR_EXPIRY_CHECK)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK.valid?(@address_line1_check, false)
-      return false unless ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK.valid?(@address_postal_code_check, false)
-      return false unless ENUM_VALIDATOR_FOR_CVC_CHECK.valid?(@cvc_check, false)
-      return false unless ENUM_VALIDATOR_FOR_EXPIRY_CHECK.valid?(@expiry_check, false)
+      return false if @address_line1_check.nil?
+      if _address_line1_check = @address_line1_check
+        return false unless OpenApi::EnumValidator.valid?(_address_line1_check, VALID_VALUES_FOR_ADDRESS_LINE1_CHECK)
+      end
+
+      return false if @address_postal_code_check.nil?
+      if _address_postal_code_check = @address_postal_code_check
+        return false unless OpenApi::EnumValidator.valid?(_address_postal_code_check, VALID_VALUES_FOR_ADDRESS_POSTAL_CODE_CHECK)
+      end
+
+      return false if @cvc_check.nil?
+      if _cvc_check = @cvc_check
+        return false unless OpenApi::EnumValidator.valid?(_cvc_check, VALID_VALUES_FOR_CVC_CHECK)
+      end
+
+      return false if @expiry_check.nil?
+      if _expiry_check = @expiry_check
+        return false unless OpenApi::EnumValidator.valid?(_expiry_check, VALID_VALUES_FOR_EXPIRY_CHECK)
+      end
 
       true
     end
@@ -91,7 +118,7 @@ module Stripe
         raise ArgumentError.new("\"address_line1_check\" is required and cannot be null")
       end
       _address_line1_check = address_line1_check.not_nil!
-      ENUM_VALIDATOR_FOR_ADDRESS_LINE1_CHECK.valid!(_address_line1_check)
+      OpenApi::EnumValidator.validate("address_line1_check", _address_line1_check, VALID_VALUES_FOR_ADDRESS_LINE1_CHECK)
       @address_line1_check = _address_line1_check
     end
 
@@ -102,7 +129,7 @@ module Stripe
         raise ArgumentError.new("\"address_postal_code_check\" is required and cannot be null")
       end
       _address_postal_code_check = address_postal_code_check.not_nil!
-      ENUM_VALIDATOR_FOR_ADDRESS_POSTAL_CODE_CHECK.valid!(_address_postal_code_check)
+      OpenApi::EnumValidator.validate("address_postal_code_check", _address_postal_code_check, VALID_VALUES_FOR_ADDRESS_POSTAL_CODE_CHECK)
       @address_postal_code_check = _address_postal_code_check
     end
 
@@ -113,7 +140,7 @@ module Stripe
         raise ArgumentError.new("\"cvc_check\" is required and cannot be null")
       end
       _cvc_check = cvc_check.not_nil!
-      ENUM_VALIDATOR_FOR_CVC_CHECK.valid!(_cvc_check)
+      OpenApi::EnumValidator.validate("cvc_check", _cvc_check, VALID_VALUES_FOR_CVC_CHECK)
       @cvc_check = _cvc_check
     end
 
@@ -124,7 +151,7 @@ module Stripe
         raise ArgumentError.new("\"expiry_check\" is required and cannot be null")
       end
       _expiry_check = expiry_check.not_nil!
-      ENUM_VALIDATOR_FOR_EXPIRY_CHECK.valid!(_expiry_check)
+      OpenApi::EnumValidator.validate("expiry_check", _expiry_check, VALID_VALUES_FOR_EXPIRY_CHECK)
       @expiry_check = _expiry_check
     end
 

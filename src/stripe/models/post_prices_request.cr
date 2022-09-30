@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "billing_scheme", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_scheme : String? = nil
 
-    ENUM_VALIDATOR_FOR_BILLING_SCHEME = OpenApi::EnumValidator.new("billing_scheme", "String", ["per_unit", "tiered"])
+    VALID_VALUES_FOR_BILLING_SCHEME = StaticArray["per_unit", "tiered"]
 
     # Prices defined in each available currency option. Each key must be a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) and a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency_options", type: Hash(String, Stripe::PostPricesRequestCurrencyOptionsValue)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -73,7 +73,7 @@ module Stripe
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = OpenApi::EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
+    VALID_VALUES_FOR_TAX_BEHAVIOR = StaticArray["exclusive", "inclusive", "unspecified"]
 
     # Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.
     @[JSON::Field(key: "tiers", type: Array(Stripe::Tier)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -83,7 +83,7 @@ module Stripe
     @[JSON::Field(key: "tiers_mode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tiers_mode : String? = nil
 
-    ENUM_VALIDATOR_FOR_TIERS_MODE = OpenApi::EnumValidator.new("tiers_mode", "String", ["graduated", "volume"])
+    VALID_VALUES_FOR_TIERS_MODE = StaticArray["graduated", "volume"]
 
     # If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
     @[JSON::Field(key: "transfer_lookup_key", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -132,9 +132,12 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_SCHEME.error_message) unless ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid?(@billing_scheme)
+      if _billing_scheme = @billing_scheme
+        invalid_properties.push(OpenApi::EnumValidator.error_message("billing_scheme", VALID_VALUES_FOR_BILLING_SCHEME)) unless OpenApi::EnumValidator.valid?(_billing_scheme, VALID_VALUES_FOR_BILLING_SCHEME)
+      end
       if _currency_options = @currency_options
         invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "currency_options", hash: _currency_options)) if _currency_options.is_a?(Hash)
       end
@@ -164,13 +167,15 @@ module Stripe
       if _recurring = @recurring
         invalid_properties.concat(_recurring.list_invalid_properties_for("recurring")) if _recurring.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
+      if _tax_behavior = @tax_behavior
+        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_behavior", VALID_VALUES_FOR_TAX_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
+      end
       if _tiers = @tiers
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tiers", array: _tiers)) if _tiers.is_a?(Array)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TIERS_MODE.error_message) unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
+      if _tiers_mode = @tiers_mode
+        invalid_properties.push(OpenApi::EnumValidator.error_message("tiers_mode", VALID_VALUES_FOR_TIERS_MODE)) unless OpenApi::EnumValidator.valid?(_tiers_mode, VALID_VALUES_FOR_TIERS_MODE)
+      end
 
       if _transform_quantity = @transform_quantity
         invalid_properties.concat(_transform_quantity.list_invalid_properties_for("transform_quantity")) if _transform_quantity.is_a?(OpenApi::Validatable)
@@ -184,10 +189,14 @@ module Stripe
     def valid? : Bool
       return false if @currency.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid?(@billing_scheme)
+      if _billing_scheme = @billing_scheme
+        return false unless OpenApi::EnumValidator.valid?(_billing_scheme, VALID_VALUES_FOR_BILLING_SCHEME)
+      end
+
       if _currency_options = @currency_options
         return false if _currency_options.is_a?(Hash) && !OpenApi::HashValidator.valid?(hash: _currency_options)
       end
+
       if _custom_unit_amount = @custom_unit_amount
         return false if _custom_unit_amount.is_a?(OpenApi::Validatable) && !_custom_unit_amount.valid?
       end
@@ -199,20 +208,30 @@ module Stripe
       if _nickname = @nickname
         return false if _nickname.to_s.size > 5000
       end
+
       if _product = @product
         return false if _product.to_s.size > 5000
       end
+
       if _product_data = @product_data
         return false if _product_data.is_a?(OpenApi::Validatable) && !_product_data.valid?
       end
+
       if _recurring = @recurring
         return false if _recurring.is_a?(OpenApi::Validatable) && !_recurring.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
+
+      if _tax_behavior = @tax_behavior
+        return false unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
+      end
+
       if _tiers = @tiers
         return false if _tiers.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tiers)
       end
-      return false unless ENUM_VALIDATOR_FOR_TIERS_MODE.valid?(@tiers_mode)
+
+      if _tiers_mode = @tiers_mode
+        return false unless OpenApi::EnumValidator.valid?(_tiers_mode, VALID_VALUES_FOR_TIERS_MODE)
+      end
 
       if _transform_quantity = @transform_quantity
         return false if _transform_quantity.is_a?(OpenApi::Validatable) && !_transform_quantity.valid?
@@ -248,7 +267,7 @@ module Stripe
         return @billing_scheme = nil
       end
       _billing_scheme = billing_scheme.not_nil!
-      ENUM_VALIDATOR_FOR_BILLING_SCHEME.valid!(_billing_scheme)
+      OpenApi::EnumValidator.validate("billing_scheme", _billing_scheme, VALID_VALUES_FOR_BILLING_SCHEME)
       @billing_scheme = _billing_scheme
     end
 
@@ -365,7 +384,7 @@ module Stripe
         return @tax_behavior = nil
       end
       _tax_behavior = tax_behavior.not_nil!
-      ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid!(_tax_behavior)
+      OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       @tax_behavior = _tax_behavior
     end
 
@@ -387,7 +406,7 @@ module Stripe
         return @tiers_mode = nil
       end
       _tiers_mode = tiers_mode.not_nil!
-      ENUM_VALIDATOR_FOR_TIERS_MODE.valid!(_tiers_mode)
+      OpenApi::EnumValidator.validate("tiers_mode", _tiers_mode, VALID_VALUES_FOR_TIERS_MODE)
       @tiers_mode = _tiers_mode
     end
 

@@ -13,14 +13,16 @@ require "log"
 
 module Stripe
   class TierUpToOneOf
+    include OpenApi::Validatable
     include OpenApi::Json
 
     property data : String
 
-    ENUM_VALIDATOR = OpenApi::EnumValidator.new("tier_up_to_oneOf", "String", ["inf"])
+    ERROR_MESSAGE = %{invalid value for "tier_up_to_oneOf", must be one of ["inf"].}
+
+    VALID_VALUES = StaticArray["inf"]
 
     delegate to_json_object_key, to: @data
-    delegate error_message, to: ENUM_VALIDATOR
 
     def self.from_json(value : JSON::PullParser) : TierUpToOneOf
       new(value)
@@ -39,18 +41,28 @@ module Stripe
     end
 
     def self.new!(data : String)
-      new(data).tap(&.valid!)
+      new(data).tap(&.validate)
     end
 
     def initialize(@data : String)
     end
 
-    def valid?
-      ENUM_VALIDATOR.valid?(@data, false)
+    def error_message : String
+      ERROR_MESSAGE
     end
 
-    def valid!
-      ENUM_VALIDATOR.valid!(@data, false)
+    def list_invalid_properties : Array(String)
+      errors = Array(String).new
+      errors.push(error_message) unless valid?
+      errors
+    end
+
+    def valid? : Bool
+      OpenApi::EnumValidator.valid?(data, VALID_VALUES, false)
+    end
+
+    def validate : Nil
+      OpenApi::EnumValidator.validate("tier_up_to_oneOf", data, VALID_VALUES, false)
     end
 
     def to_json(json : JSON::Builder) : Nil

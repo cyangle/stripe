@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["none", "off_session", "on_session"])
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none", "off_session", "on_session"]
 
     # Provides information about a card payment that customers see on their statements. Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters. On card statements, the *concatenation* of both prefix and suffix (including separators) will appear truncated to 22 characters.
     @[JSON::Field(key: "statement_descriptor_suffix_kana", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -54,11 +54,13 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _installments = @installments
         invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+      if _setup_future_usage = @setup_future_usage
+        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+      end
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -69,7 +71,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -79,10 +80,15 @@ module Stripe
       if _installments = @installments
         return false if _installments.is_a?(OpenApi::Validatable) && !_installments.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+
+      if _setup_future_usage = @setup_future_usage
+        return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+      end
+
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
         return false if _statement_descriptor_suffix_kana.to_s.size > 5000
       end
+
       if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
         return false if _statement_descriptor_suffix_kanji.to_s.size > 5000
       end
@@ -108,7 +114,7 @@ module Stripe
         return @setup_future_usage = nil
       end
       _setup_future_usage = setup_future_usage.not_nil!
-      ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(_setup_future_usage)
+      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       @setup_future_usage = _setup_future_usage
     end
 

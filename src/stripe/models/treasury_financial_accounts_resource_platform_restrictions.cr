@@ -27,8 +27,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? inbound_flows_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_INBOUND_FLOWS = OpenApi::EnumValidator.new("inbound_flows", "String", ["restricted", "unrestricted"])
+    VALID_VALUES_FOR_INBOUND_FLOWS = StaticArray["restricted", "unrestricted"]
 
     # Restricts all outbound money movement.
     @[JSON::Field(key: "outbound_flows", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: outbound_flows.nil? && !outbound_flows_present?)]
@@ -36,8 +35,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? outbound_flows_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS = OpenApi::EnumValidator.new("outbound_flows", "String", ["restricted", "unrestricted"])
+    VALID_VALUES_FOR_OUTBOUND_FLOWS = StaticArray["restricted", "unrestricted"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,18 +52,25 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_INBOUND_FLOWS.error_message) unless ENUM_VALIDATOR_FOR_INBOUND_FLOWS.valid?(@inbound_flows)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS.error_message) unless ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS.valid?(@outbound_flows)
-
+      if _inbound_flows = @inbound_flows
+        invalid_properties.push(OpenApi::EnumValidator.error_message("inbound_flows", VALID_VALUES_FOR_INBOUND_FLOWS)) unless OpenApi::EnumValidator.valid?(_inbound_flows, VALID_VALUES_FOR_INBOUND_FLOWS)
+      end
+      if _outbound_flows = @outbound_flows
+        invalid_properties.push(OpenApi::EnumValidator.error_message("outbound_flows", VALID_VALUES_FOR_OUTBOUND_FLOWS)) unless OpenApi::EnumValidator.valid?(_outbound_flows, VALID_VALUES_FOR_OUTBOUND_FLOWS)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_INBOUND_FLOWS.valid?(@inbound_flows)
-      return false unless ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS.valid?(@outbound_flows)
+      if _inbound_flows = @inbound_flows
+        return false unless OpenApi::EnumValidator.valid?(_inbound_flows, VALID_VALUES_FOR_INBOUND_FLOWS)
+      end
+
+      if _outbound_flows = @outbound_flows
+        return false unless OpenApi::EnumValidator.valid?(_outbound_flows, VALID_VALUES_FOR_OUTBOUND_FLOWS)
+      end
 
       true
     end
@@ -77,7 +82,7 @@ module Stripe
         return @inbound_flows = nil
       end
       _inbound_flows = inbound_flows.not_nil!
-      ENUM_VALIDATOR_FOR_INBOUND_FLOWS.valid!(_inbound_flows)
+      OpenApi::EnumValidator.validate("inbound_flows", _inbound_flows, VALID_VALUES_FOR_INBOUND_FLOWS)
       @inbound_flows = _inbound_flows
     end
 
@@ -88,7 +93,7 @@ module Stripe
         return @outbound_flows = nil
       end
       _outbound_flows = outbound_flows.not_nil!
-      ENUM_VALIDATOR_FOR_OUTBOUND_FLOWS.valid!(_outbound_flows)
+      OpenApi::EnumValidator.validate("outbound_flows", _outbound_flows, VALID_VALUES_FOR_OUTBOUND_FLOWS)
       @outbound_flows = _outbound_flows
     end
 

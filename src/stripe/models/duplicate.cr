@@ -56,6 +56,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _additional_documentation = @additional_documentation
         invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
@@ -78,7 +79,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -88,18 +88,23 @@ module Stripe
       if _additional_documentation = @additional_documentation
         return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
+
       if _card_statement = @card_statement
         return false if _card_statement.is_a?(OpenApi::Validatable) && !_card_statement.valid?
       end
+
       if _cash_receipt = @cash_receipt
         return false if _cash_receipt.is_a?(OpenApi::Validatable) && !_cash_receipt.valid?
       end
+
       if _check_image = @check_image
         return false if _check_image.is_a?(OpenApi::Validatable) && !_check_image.valid?
       end
+
       if _explanation = @explanation
         return false if _explanation.to_s.size > 1500
       end
+
       if _original_transaction = @original_transaction
         return false if _original_transaction.to_s.size > 5000
       end

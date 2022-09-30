@@ -37,8 +37,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? _type_present : Bool = false
-
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["off_session", "on_session"])
+    VALID_VALUES_FOR__TYPE = StaticArray["off_session", "on_session"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -59,9 +58,9 @@ module Stripe
       if _off_session = @off_session
         invalid_properties.concat(_off_session.list_invalid_properties_for("off_session")) if _off_session.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
-
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
       invalid_properties
     end
 
@@ -71,7 +70,10 @@ module Stripe
       if _off_session = @off_session
         return false if _off_session.is_a?(OpenApi::Validatable) && !_off_session.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
 
       true
     end
@@ -104,7 +106,7 @@ module Stripe
         return @_type = nil
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 

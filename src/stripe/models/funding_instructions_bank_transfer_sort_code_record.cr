@@ -48,25 +48,28 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"account_holder_name\" is required and cannot be null") if @account_holder_name.nil?
+
       if _account_holder_name = @account_holder_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"account_number\" is required and cannot be null") if @account_number.nil?
+
       if _account_number = @account_number
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"sort_code\" is required and cannot be null") if @sort_code.nil?
+
       if _sort_code = @sort_code
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -77,10 +80,12 @@ module Stripe
       if _account_holder_name = @account_holder_name
         return false if _account_holder_name.to_s.size > 5000
       end
+
       return false if @account_number.nil?
       if _account_number = @account_number
         return false if _account_number.to_s.size > 5000
       end
+
       return false if @sort_code.nil?
       if _sort_code = @sort_code
         return false if _sort_code.to_s.size > 5000

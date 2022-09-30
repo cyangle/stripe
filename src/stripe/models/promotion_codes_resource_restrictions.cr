@@ -62,6 +62,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"first_time_transaction\" is required and cannot be null") if @first_time_transaction.nil?
 
       if _currency_options = @currency_options
@@ -73,7 +74,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 

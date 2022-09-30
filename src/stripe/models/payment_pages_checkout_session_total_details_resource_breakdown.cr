@@ -43,15 +43,17 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"discounts\" is required and cannot be null") if @discounts.nil?
+
       if _discounts = @discounts
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "discounts", array: _discounts)) if _discounts.is_a?(Array)
       end
       invalid_properties.push("\"taxes\" is required and cannot be null") if @taxes.nil?
+
       if _taxes = @taxes
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "taxes", array: _taxes)) if _taxes.is_a?(Array)
       end
-
       invalid_properties
     end
 
@@ -62,6 +64,7 @@ module Stripe
       if _discounts = @discounts
         return false if _discounts.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _discounts)
       end
+
       return false if @taxes.nil?
       if _taxes = @taxes
         return false if _taxes.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _taxes)

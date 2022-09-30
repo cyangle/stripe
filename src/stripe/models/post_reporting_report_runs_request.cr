@@ -49,12 +49,12 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"report_type\" is required and cannot be null") if @report_type.nil?
 
       if _parameters = @parameters
         invalid_properties.concat(_parameters.list_invalid_properties_for("parameters")) if _parameters.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

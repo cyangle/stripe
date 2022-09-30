@@ -141,6 +141,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _access_activity_log = @access_activity_log
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("access_activity_log", _access_activity_log.to_s.size, 20000)
           invalid_properties.push(max_length_error)
@@ -238,7 +239,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -248,6 +248,7 @@ module Stripe
       if _access_activity_log = @access_activity_log
         return false if _access_activity_log.to_s.size > 20000
       end
+
       if _billing_address = @billing_address
         return false if _billing_address.to_s.size > 5000
       end
@@ -255,6 +256,7 @@ module Stripe
       if _cancellation_policy_disclosure = @cancellation_policy_disclosure
         return false if _cancellation_policy_disclosure.to_s.size > 20000
       end
+
       if _cancellation_rebuttal = @cancellation_rebuttal
         return false if _cancellation_rebuttal.to_s.size > 20000
       end
@@ -262,9 +264,11 @@ module Stripe
       if _customer_email_address = @customer_email_address
         return false if _customer_email_address.to_s.size > 5000
       end
+
       if _customer_name = @customer_name
         return false if _customer_name.to_s.size > 5000
       end
+
       if _customer_purchase_ip = @customer_purchase_ip
         return false if _customer_purchase_ip.to_s.size > 5000
       end
@@ -272,9 +276,11 @@ module Stripe
       if _duplicate_charge_explanation = @duplicate_charge_explanation
         return false if _duplicate_charge_explanation.to_s.size > 20000
       end
+
       if _duplicate_charge_id = @duplicate_charge_id
         return false if _duplicate_charge_id.to_s.size > 5000
       end
+
       if _product_description = @product_description
         return false if _product_description.to_s.size > 20000
       end
@@ -282,9 +288,11 @@ module Stripe
       if _refund_policy_disclosure = @refund_policy_disclosure
         return false if _refund_policy_disclosure.to_s.size > 20000
       end
+
       if _refund_refusal_explanation = @refund_refusal_explanation
         return false if _refund_refusal_explanation.to_s.size > 20000
       end
+
       if _service_date = @service_date
         return false if _service_date.to_s.size > 5000
       end
@@ -292,9 +300,11 @@ module Stripe
       if _shipping_address = @shipping_address
         return false if _shipping_address.to_s.size > 5000
       end
+
       if _shipping_carrier = @shipping_carrier
         return false if _shipping_carrier.to_s.size > 5000
       end
+
       if _shipping_date = @shipping_date
         return false if _shipping_date.to_s.size > 5000
       end

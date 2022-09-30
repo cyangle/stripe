@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter code : String? = nil
 
-    ENUM_VALIDATOR_FOR_CODE = OpenApi::EnumValidator.new("code", "String", ["account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "declined", "incorrect_account_holder_name", "invalid_account_number", "invalid_currency", "no_account", "other"])
+    VALID_VALUES_FOR_CODE = StaticArray["account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "declined", "incorrect_account_holder_name", "invalid_account_number", "invalid_currency", "no_account", "other"]
 
     @[JSON::Field(key: "transaction", type: Stripe::TreasuryOutboundPaymentTransaction?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transaction : Stripe::TreasuryOutboundPaymentTransaction? = nil
@@ -45,19 +45,27 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
+      invalid_properties.push("\"code\" is required and cannot be null") if @code.nil?
+
+      if _code = @code
+        invalid_properties.push(OpenApi::EnumValidator.error_message("code", VALID_VALUES_FOR_CODE)) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
+      end
       invalid_properties.push("\"transaction\" is required and cannot be null") if @transaction.nil?
+
       if _transaction = @transaction
         invalid_properties.concat(_transaction.list_invalid_properties_for("transaction")) if _transaction.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
+      return false if @code.nil?
+      if _code = @code
+        return false unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
+      end
+
       return false if @transaction.nil?
       if _transaction = @transaction
         return false if _transaction.is_a?(OpenApi::Validatable) && !_transaction.valid?
@@ -73,7 +81,7 @@ module Stripe
         raise ArgumentError.new("\"code\" is required and cannot be null")
       end
       _code = code.not_nil!
-      ENUM_VALIDATOR_FOR_CODE.valid!(_code)
+      OpenApi::EnumValidator.validate("code", _code, VALID_VALUES_FOR_CODE)
       @code = _code
     end
 

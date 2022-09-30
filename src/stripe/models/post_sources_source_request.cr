@@ -71,7 +71,6 @@ module Stripe
       if _source_order = @source_order
         invalid_properties.concat(_source_order.list_invalid_properties_for("source_order")) if _source_order.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -81,12 +80,15 @@ module Stripe
       if _mandate = @mandate
         return false if _mandate.is_a?(OpenApi::Validatable) && !_mandate.valid?
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _owner = @owner
         return false if _owner.is_a?(OpenApi::Validatable) && !_owner.valid?
       end
+
       if _source_order = @source_order
         return false if _source_order.is_a?(OpenApi::Validatable) && !_source_order.valid?
       end

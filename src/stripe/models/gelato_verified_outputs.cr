@@ -53,8 +53,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? id_number_type_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE = OpenApi::EnumValidator.new("id_number_type", "String", ["br_cpf", "sg_nric", "us_ssn"])
+    VALID_VALUES_FOR_ID_NUMBER_TYPE = StaticArray["br_cpf", "sg_nric", "us_ssn"]
 
     # The user's verified last name.
     @[JSON::Field(key: "last_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: last_name.nil? && !last_name_present?)]
@@ -81,6 +80,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _address = @address
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
@@ -97,14 +97,14 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid?(@id_number_type)
+      if _id_number_type = @id_number_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("id_number_type", VALID_VALUES_FOR_ID_NUMBER_TYPE)) unless OpenApi::EnumValidator.valid?(_id_number_type, VALID_VALUES_FOR_ID_NUMBER_TYPE)
+      end
       if _last_name = @last_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -114,16 +114,23 @@ module Stripe
       if _address = @address
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
+
       if _dob = @dob
         return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
+
       if _first_name = @first_name
         return false if _first_name.to_s.size > 5000
       end
+
       if _id_number = @id_number
         return false if _id_number.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid?(@id_number_type)
+
+      if _id_number_type = @id_number_type
+        return false unless OpenApi::EnumValidator.valid?(_id_number_type, VALID_VALUES_FOR_ID_NUMBER_TYPE)
+      end
+
       if _last_name = @last_name
         return false if _last_name.to_s.size > 5000
       end
@@ -188,7 +195,7 @@ module Stripe
         return @id_number_type = nil
       end
       _id_number_type = id_number_type.not_nil!
-      ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid!(_id_number_type)
+      OpenApi::EnumValidator.validate("id_number_type", _id_number_type, VALID_VALUES_FOR_ID_NUMBER_TYPE)
       @id_number_type = _id_number_type
     end
 

@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "preferred_language", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter preferred_language : String? = nil
 
-    ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE = OpenApi::EnumValidator.new("preferred_language", "String", ["de", "en", "fr", "nl"])
+    VALID_VALUES_FOR_PREFERRED_LANGUAGE = StaticArray["de", "en", "fr", "nl"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -39,15 +39,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE.error_message) unless ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE.valid?(@preferred_language)
-
+      if _preferred_language = @preferred_language
+        invalid_properties.push(OpenApi::EnumValidator.error_message("preferred_language", VALID_VALUES_FOR_PREFERRED_LANGUAGE)) unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE.valid?(@preferred_language)
+      if _preferred_language = @preferred_language
+        return false unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
+      end
 
       true
     end
@@ -59,7 +62,7 @@ module Stripe
         return @preferred_language = nil
       end
       _preferred_language = preferred_language.not_nil!
-      ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE.valid!(_preferred_language)
+      OpenApi::EnumValidator.validate("preferred_language", _preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
       @preferred_language = _preferred_language
     end
 

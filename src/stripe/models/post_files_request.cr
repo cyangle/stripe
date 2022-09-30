@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "purpose", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter purpose : String? = nil
 
-    ENUM_VALIDATOR_FOR_PURPOSE = OpenApi::EnumValidator.new("purpose", "String", ["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "identity_document", "pci_document", "tax_document_user_upload", "terminal_reader_splashscreen"])
+    VALID_VALUES_FOR_PURPOSE = StaticArray["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "identity_document", "pci_document", "tax_document_user_upload", "terminal_reader_splashscreen"]
 
     # Optional properties
 
@@ -56,14 +56,18 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"file\" is required and cannot be null") if @file.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PURPOSE.error_message) unless ENUM_VALIDATOR_FOR_PURPOSE.valid?(@purpose, false)
+      invalid_properties.push("\"purpose\" is required and cannot be null") if @purpose.nil?
+
+      if _purpose = @purpose
+        invalid_properties.push(OpenApi::EnumValidator.error_message("purpose", VALID_VALUES_FOR_PURPOSE)) unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
+      end
 
       if _file_link_data = @file_link_data
         invalid_properties.concat(_file_link_data.list_invalid_properties_for("file_link_data")) if _file_link_data.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -72,7 +76,10 @@ module Stripe
     def valid? : Bool
       return false if @file.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_PURPOSE.valid?(@purpose, false)
+      return false if @purpose.nil?
+      if _purpose = @purpose
+        return false unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
+      end
 
       if _file_link_data = @file_link_data
         return false if _file_link_data.is_a?(OpenApi::Validatable) && !_file_link_data.valid?
@@ -98,7 +105,7 @@ module Stripe
         raise ArgumentError.new("\"purpose\" is required and cannot be null")
       end
       _purpose = purpose.not_nil!
-      ENUM_VALIDATOR_FOR_PURPOSE.valid!(_purpose)
+      OpenApi::EnumValidator.validate("purpose", _purpose, VALID_VALUES_FOR_PURPOSE)
       @purpose = _purpose
     end
 

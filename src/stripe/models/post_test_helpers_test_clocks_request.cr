@@ -50,6 +50,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"frozen_time\" is required and cannot be null") if @frozen_time.nil?
 
       if _name = @name
@@ -57,7 +58,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 

@@ -37,11 +37,12 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"refund\" is required and cannot be null") if @refund.nil?
+
       if _refund = @refund
         invalid_properties.concat(_refund.list_invalid_properties_for("refund")) if _refund.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

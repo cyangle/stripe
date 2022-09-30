@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "return_status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter return_status : String? = nil
 
-    ENUM_VALIDATOR_FOR_RETURN_STATUS = OpenApi::EnumValidator.new("return_status", "String", ["", "merchant_rejected", "successful"])
+    VALID_VALUES_FOR_RETURN_STATUS = StaticArray["", "merchant_rejected", "successful"]
 
     @[JSON::Field(key: "returned_at", type: Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter?, default: nil, required: false, nullable: false, emit_null: false)]
     getter returned_at : Stripe::GetInvoicesUpcomingSubscriptionCancelAtParameter? = nil
@@ -58,6 +58,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _additional_documentation = @additional_documentation
         invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
@@ -74,12 +75,12 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_RETURN_STATUS.error_message) unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
+      if _return_status = @return_status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("return_status", VALID_VALUES_FOR_RETURN_STATUS)) unless OpenApi::EnumValidator.valid?(_return_status, VALID_VALUES_FOR_RETURN_STATUS)
+      end
       if _returned_at = @returned_at
         invalid_properties.concat(_returned_at.list_invalid_properties_for("returned_at")) if _returned_at.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -89,16 +90,23 @@ module Stripe
       if _additional_documentation = @additional_documentation
         return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
+
       if _explanation = @explanation
         return false if _explanation.to_s.size > 1500
       end
+
       if _received_at = @received_at
         return false if _received_at.is_a?(OpenApi::Validatable) && !_received_at.valid?
       end
+
       if _return_description = @return_description
         return false if _return_description.to_s.size > 1500
       end
-      return false unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
+
+      if _return_status = @return_status
+        return false unless OpenApi::EnumValidator.valid?(_return_status, VALID_VALUES_FOR_RETURN_STATUS)
+      end
+
       if _returned_at = @returned_at
         return false if _returned_at.is_a?(OpenApi::Validatable) && !_returned_at.valid?
       end
@@ -163,7 +171,7 @@ module Stripe
         return @return_status = nil
       end
       _return_status = return_status.not_nil!
-      ENUM_VALIDATOR_FOR_RETURN_STATUS.valid!(_return_status)
+      OpenApi::EnumValidator.validate("return_status", _return_status, VALID_VALUES_FOR_RETURN_STATUS)
       @return_status = _return_status
     end
 

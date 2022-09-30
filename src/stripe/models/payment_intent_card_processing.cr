@@ -37,10 +37,10 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _customer_notification = @customer_notification
         invalid_properties.concat(_customer_notification.list_invalid_properties_for("customer_notification")) if _customer_notification.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

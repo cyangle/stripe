@@ -77,7 +77,7 @@ module Stripe
     @[JSON::Field(key: "political_exposure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter political_exposure : String? = nil
 
-    ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE = OpenApi::EnumValidator.new("political_exposure", "String", ["existing", "none"])
+    VALID_VALUES_FOR_POLITICAL_EXPOSURE = StaticArray["existing", "none"]
 
     @[JSON::Field(key: "registered_address", type: Stripe::AddressSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter registered_address : Stripe::AddressSpecs? = nil
@@ -122,6 +122,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _address = @address
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
@@ -188,7 +189,9 @@ module Stripe
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.error_message) unless ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.valid?(@political_exposure)
+      if _political_exposure = @political_exposure
+        invalid_properties.push(OpenApi::EnumValidator.error_message("political_exposure", VALID_VALUES_FOR_POLITICAL_EXPOSURE)) unless OpenApi::EnumValidator.valid?(_political_exposure, VALID_VALUES_FOR_POLITICAL_EXPOSURE)
+      end
       if _registered_address = @registered_address
         invalid_properties.concat(_registered_address.list_invalid_properties_for("registered_address")) if _registered_address.is_a?(OpenApi::Validatable)
       end
@@ -200,7 +203,6 @@ module Stripe
       if _verification = @verification
         invalid_properties.concat(_verification.list_invalid_properties_for("verification")) if _verification.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -210,12 +212,15 @@ module Stripe
       if _address = @address
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
+
       if _address_kana = @address_kana
         return false if _address_kana.is_a?(OpenApi::Validatable) && !_address_kana.valid?
       end
+
       if _address_kanji = @address_kanji
         return false if _address_kanji.is_a?(OpenApi::Validatable) && !_address_kanji.valid?
       end
+
       if _dob = @dob
         return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
@@ -223,12 +228,15 @@ module Stripe
       if _first_name = @first_name
         return false if _first_name.to_s.size > 100
       end
+
       if _first_name_kana = @first_name_kana
         return false if _first_name_kana.to_s.size > 5000
       end
+
       if _first_name_kanji = @first_name_kanji
         return false if _first_name_kanji.to_s.size > 5000
       end
+
       if _full_name_aliases = @full_name_aliases
         return false if _full_name_aliases.is_a?(OpenApi::Validatable) && !_full_name_aliases.valid?
       end
@@ -236,32 +244,43 @@ module Stripe
       if _id_number = @id_number
         return false if _id_number.to_s.size > 5000
       end
+
       if _id_number_secondary = @id_number_secondary
         return false if _id_number_secondary.to_s.size > 5000
       end
+
       if _last_name = @last_name
         return false if _last_name.to_s.size > 100
       end
+
       if _last_name_kana = @last_name_kana
         return false if _last_name_kana.to_s.size > 5000
       end
+
       if _last_name_kanji = @last_name_kanji
         return false if _last_name_kanji.to_s.size > 5000
       end
+
       if _maiden_name = @maiden_name
         return false if _maiden_name.to_s.size > 5000
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      return false unless ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.valid?(@political_exposure)
+      if _political_exposure = @political_exposure
+        return false unless OpenApi::EnumValidator.valid?(_political_exposure, VALID_VALUES_FOR_POLITICAL_EXPOSURE)
+      end
+
       if _registered_address = @registered_address
         return false if _registered_address.is_a?(OpenApi::Validatable) && !_registered_address.valid?
       end
+
       if _ssn_last_4 = @ssn_last_4
         return false if _ssn_last_4.to_s.size > 5000
       end
+
       if _verification = @verification
         return false if _verification.is_a?(OpenApi::Validatable) && !_verification.valid?
       end
@@ -498,7 +517,7 @@ module Stripe
         return @political_exposure = nil
       end
       _political_exposure = political_exposure.not_nil!
-      ENUM_VALIDATOR_FOR_POLITICAL_EXPOSURE.valid!(_political_exposure)
+      OpenApi::EnumValidator.validate("political_exposure", _political_exposure, VALID_VALUES_FOR_POLITICAL_EXPOSURE)
       @political_exposure = _political_exposure
     end
 

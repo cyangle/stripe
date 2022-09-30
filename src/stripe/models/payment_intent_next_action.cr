@@ -102,7 +102,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+
       if __type = @_type
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -151,7 +153,6 @@ module Stripe
       if _wechat_pay_redirect_to_ios_app = @wechat_pay_redirect_to_ios_app
         invalid_properties.concat(_wechat_pay_redirect_to_ios_app.list_invalid_properties_for("wechat_pay_redirect_to_ios_app")) if _wechat_pay_redirect_to_ios_app.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -162,33 +163,43 @@ module Stripe
       if __type = @_type
         return false if __type.to_s.size > 5000
       end
+
       if _alipay_handle_redirect = @alipay_handle_redirect
         return false if _alipay_handle_redirect.is_a?(OpenApi::Validatable) && !_alipay_handle_redirect.valid?
       end
+
       if _boleto_display_details = @boleto_display_details
         return false if _boleto_display_details.is_a?(OpenApi::Validatable) && !_boleto_display_details.valid?
       end
+
       if _card_await_notification = @card_await_notification
         return false if _card_await_notification.is_a?(OpenApi::Validatable) && !_card_await_notification.valid?
       end
+
       if _display_bank_transfer_instructions = @display_bank_transfer_instructions
         return false if _display_bank_transfer_instructions.is_a?(OpenApi::Validatable) && !_display_bank_transfer_instructions.valid?
       end
+
       if _konbini_display_details = @konbini_display_details
         return false if _konbini_display_details.is_a?(OpenApi::Validatable) && !_konbini_display_details.valid?
       end
+
       if _oxxo_display_details = @oxxo_display_details
         return false if _oxxo_display_details.is_a?(OpenApi::Validatable) && !_oxxo_display_details.valid?
       end
+
       if _paynow_display_qr_code = @paynow_display_qr_code
         return false if _paynow_display_qr_code.is_a?(OpenApi::Validatable) && !_paynow_display_qr_code.valid?
       end
+
       if _pix_display_qr_code = @pix_display_qr_code
         return false if _pix_display_qr_code.is_a?(OpenApi::Validatable) && !_pix_display_qr_code.valid?
       end
+
       if _promptpay_display_qr_code = @promptpay_display_qr_code
         return false if _promptpay_display_qr_code.is_a?(OpenApi::Validatable) && !_promptpay_display_qr_code.valid?
       end
+
       if _redirect_to_url = @redirect_to_url
         return false if _redirect_to_url.is_a?(OpenApi::Validatable) && !_redirect_to_url.valid?
       end
@@ -196,12 +207,15 @@ module Stripe
       if _verify_with_microdeposits = @verify_with_microdeposits
         return false if _verify_with_microdeposits.is_a?(OpenApi::Validatable) && !_verify_with_microdeposits.valid?
       end
+
       if _wechat_pay_display_qr_code = @wechat_pay_display_qr_code
         return false if _wechat_pay_display_qr_code.is_a?(OpenApi::Validatable) && !_wechat_pay_display_qr_code.valid?
       end
+
       if _wechat_pay_redirect_to_android_app = @wechat_pay_redirect_to_android_app
         return false if _wechat_pay_redirect_to_android_app.is_a?(OpenApi::Validatable) && !_wechat_pay_redirect_to_android_app.valid?
       end
+
       if _wechat_pay_redirect_to_ios_app = @wechat_pay_redirect_to_ios_app
         return false if _wechat_pay_redirect_to_ios_app.is_a?(OpenApi::Validatable) && !_wechat_pay_redirect_to_ios_app.valid?
       end

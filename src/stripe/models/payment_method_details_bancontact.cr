@@ -67,8 +67,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? preferred_language_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE = OpenApi::EnumValidator.new("preferred_language", "String", ["de", "en", "fr", "nl"])
+    VALID_VALUES_FOR_PREFERRED_LANGUAGE = StaticArray["de", "en", "fr", "nl"]
 
     # Owner's verified full name. Values are verified or provided by Bancontact directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     @[JSON::Field(key: "verified_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verified_name.nil? && !verified_name_present?)]
@@ -97,6 +96,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _bank_code = @bank_code
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -123,14 +123,14 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE.error_message) unless ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE.valid?(@preferred_language)
+      if _preferred_language = @preferred_language
+        invalid_properties.push(OpenApi::EnumValidator.error_message("preferred_language", VALID_VALUES_FOR_PREFERRED_LANGUAGE)) unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
+      end
       if _verified_name = @verified_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -140,22 +140,31 @@ module Stripe
       if _bank_code = @bank_code
         return false if _bank_code.to_s.size > 5000
       end
+
       if _bank_name = @bank_name
         return false if _bank_name.to_s.size > 5000
       end
+
       if _bic = @bic
         return false if _bic.to_s.size > 5000
       end
+
       if _generated_sepa_debit = @generated_sepa_debit
         return false if _generated_sepa_debit.is_a?(OpenApi::Validatable) && !_generated_sepa_debit.valid?
       end
+
       if _generated_sepa_debit_mandate = @generated_sepa_debit_mandate
         return false if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable) && !_generated_sepa_debit_mandate.valid?
       end
+
       if _iban_last4 = @iban_last4
         return false if _iban_last4.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE.valid?(@preferred_language)
+
+      if _preferred_language = @preferred_language
+        return false unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
+      end
+
       if _verified_name = @verified_name
         return false if _verified_name.to_s.size > 5000
       end
@@ -248,7 +257,7 @@ module Stripe
         return @preferred_language = nil
       end
       _preferred_language = preferred_language.not_nil!
-      ENUM_VALIDATOR_FOR_PREFERRED_LANGUAGE.valid!(_preferred_language)
+      OpenApi::EnumValidator.validate("preferred_language", _preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
       @preferred_language = _preferred_language
     end
 

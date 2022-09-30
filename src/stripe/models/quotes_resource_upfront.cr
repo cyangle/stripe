@@ -54,18 +54,19 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount_subtotal\" is required and cannot be null") if @amount_subtotal.nil?
 
       invalid_properties.push("\"amount_total\" is required and cannot be null") if @amount_total.nil?
 
       invalid_properties.push("\"total_details\" is required and cannot be null") if @total_details.nil?
+
       if _total_details = @total_details
         invalid_properties.concat(_total_details.list_invalid_properties_for("total_details")) if _total_details.is_a?(OpenApi::Validatable)
       end
       if _line_items = @line_items
         invalid_properties.concat(_line_items.list_invalid_properties_for("line_items")) if _line_items.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -80,6 +81,7 @@ module Stripe
       if _total_details = @total_details
         return false if _total_details.is_a?(OpenApi::Validatable) && !_total_details.valid?
       end
+
       if _line_items = @line_items
         return false if _line_items.is_a?(OpenApi::Validatable) && !_line_items.valid?
       end

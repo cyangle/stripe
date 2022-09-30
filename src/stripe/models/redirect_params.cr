@@ -37,6 +37,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"return_url\" is required and cannot be null") if @return_url.nil?
 
       invalid_properties

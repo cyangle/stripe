@@ -27,7 +27,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = OpenApi::EnumValidator.new("capture_method", "String", ["automatic", "manual"])
+    VALID_VALUES_FOR_CAPTURE_METHOD = StaticArray["automatic", "manual"]
 
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
@@ -44,7 +44,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["off_session", "on_session"])
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["off_session", "on_session"]
 
     @[JSON::Field(key: "shipping", type: Stripe::Shipping1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping : Stripe::Shipping1? = nil
@@ -86,14 +86,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
+      if _capture_method = @capture_method
+        invalid_properties.push(OpenApi::EnumValidator.error_message("capture_method", VALID_VALUES_FOR_CAPTURE_METHOD)) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+      end
       if _description = @description
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 1000)
           invalid_properties.push(max_length_error)
         end
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+      if _setup_future_usage = @setup_future_usage
+        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+      end
       if _shipping = @shipping
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
@@ -117,21 +121,30 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
+      if _capture_method = @capture_method
+        return false unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+      end
+
       if _description = @description
         return false if _description.to_s.size > 1000
       end
 
-      return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+      if _setup_future_usage = @setup_future_usage
+        return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+      end
+
       if _shipping = @shipping
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
+
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 22
       end
+
       if _statement_descriptor_suffix = @statement_descriptor_suffix
         return false if _statement_descriptor_suffix.to_s.size > 22
       end
+
       if _transfer_data = @transfer_data
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
@@ -156,7 +169,7 @@ module Stripe
         return @capture_method = nil
       end
       _capture_method = capture_method.not_nil!
-      ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid!(_capture_method)
+      OpenApi::EnumValidator.validate("capture_method", _capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       @capture_method = _capture_method
     end
 
@@ -211,7 +224,7 @@ module Stripe
         return @setup_future_usage = nil
       end
       _setup_future_usage = setup_future_usage.not_nil!
-      ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(_setup_future_usage)
+      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       @setup_future_usage = _setup_future_usage
     end
 

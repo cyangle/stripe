@@ -58,6 +58,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"supported_currencies\" is required and cannot be null") if @supported_currencies.nil?
 
       if _features = @features
@@ -67,7 +68,6 @@ module Stripe
       if _platform_restrictions = @platform_restrictions
         invalid_properties.concat(_platform_restrictions.list_invalid_properties_for("platform_restrictions")) if _platform_restrictions.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

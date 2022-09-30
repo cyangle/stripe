@@ -92,6 +92,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
@@ -128,7 +129,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -144,18 +144,23 @@ module Stripe
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
+
       if _description = @description
         return false if _description.to_s.size > 5000
       end
+
       if _destination_payment_method = @destination_payment_method
         return false if _destination_payment_method.to_s.size > 5000
       end
+
       if _destination_payment_method_data = @destination_payment_method_data
         return false if _destination_payment_method_data.is_a?(OpenApi::Validatable) && !_destination_payment_method_data.valid?
       end
+
       if _destination_payment_method_options = @destination_payment_method_options
         return false if _destination_payment_method_options.is_a?(OpenApi::Validatable) && !_destination_payment_method_options.valid?
       end
+
       if _end_user_details = @end_user_details
         return false if _end_user_details.is_a?(OpenApi::Validatable) && !_end_user_details.valid?
       end

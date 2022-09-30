@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["unverified", "verified"])
+    VALID_VALUES_FOR_STATUS = StaticArray["unverified", "verified"]
 
     # Optional properties
 
@@ -61,8 +61,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? id_number_type_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE = OpenApi::EnumValidator.new("id_number_type", "String", ["br_cpf", "sg_nric", "us_ssn"])
+    VALID_VALUES_FOR_ID_NUMBER_TYPE = StaticArray["br_cpf", "sg_nric", "us_ssn"]
 
     # Last name.
     @[JSON::Field(key: "last_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: last_name.nil? && !last_name_present?)]
@@ -92,7 +91,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
+
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
       if _dob = @dob
         invalid_properties.concat(_dob.list_invalid_properties_for("dob")) if _dob.is_a?(OpenApi::Validatable)
       end
@@ -109,34 +112,45 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid?(@id_number_type)
+      if _id_number_type = @id_number_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("id_number_type", VALID_VALUES_FOR_ID_NUMBER_TYPE)) unless OpenApi::EnumValidator.valid?(_id_number_type, VALID_VALUES_FOR_ID_NUMBER_TYPE)
+      end
       if _last_name = @last_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false if @status.nil?
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+
       if _dob = @dob
         return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
+
       if _error = @error
         return false if _error.is_a?(OpenApi::Validatable) && !_error.valid?
       end
+
       if _first_name = @first_name
         return false if _first_name.to_s.size > 5000
       end
+
       if _id_number = @id_number
         return false if _id_number.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid?(@id_number_type)
+
+      if _id_number_type = @id_number_type
+        return false unless OpenApi::EnumValidator.valid?(_id_number_type, VALID_VALUES_FOR_ID_NUMBER_TYPE)
+      end
+
       if _last_name = @last_name
         return false if _last_name.to_s.size > 5000
       end
@@ -151,7 +165,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 
@@ -212,7 +226,7 @@ module Stripe
         return @id_number_type = nil
       end
       _id_number_type = id_number_type.not_nil!
-      ENUM_VALIDATOR_FOR_ID_NUMBER_TYPE.valid!(_id_number_type)
+      OpenApi::EnumValidator.validate("id_number_type", _id_number_type, VALID_VALUES_FOR_ID_NUMBER_TYPE)
       @id_number_type = _id_number_type
     end
 

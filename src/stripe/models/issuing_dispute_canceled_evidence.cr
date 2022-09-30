@@ -75,8 +75,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? product_type_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_PRODUCT_TYPE = OpenApi::EnumValidator.new("product_type", "String", ["merchandise", "service"])
+    VALID_VALUES_FOR_PRODUCT_TYPE = StaticArray["merchandise", "service"]
 
     # Result of cardholder's attempt to return the product.
     @[JSON::Field(key: "return_status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: return_status.nil? && !return_status_present?)]
@@ -84,8 +83,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? return_status_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_RETURN_STATUS = OpenApi::EnumValidator.new("return_status", "String", ["merchant_rejected", "successful"])
+    VALID_VALUES_FOR_RETURN_STATUS = StaticArray["merchant_rejected", "successful"]
 
     # Date when the product was returned or attempted to be returned.
     @[JSON::Field(key: "returned_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: returned_at.nil? && !returned_at_present?)]
@@ -116,6 +114,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _additional_documentation = @additional_documentation
         invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
@@ -136,10 +135,12 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PRODUCT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid?(@product_type)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_RETURN_STATUS.error_message) unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
+      if _product_type = @product_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("product_type", VALID_VALUES_FOR_PRODUCT_TYPE)) unless OpenApi::EnumValidator.valid?(_product_type, VALID_VALUES_FOR_PRODUCT_TYPE)
+      end
+      if _return_status = @return_status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("return_status", VALID_VALUES_FOR_RETURN_STATUS)) unless OpenApi::EnumValidator.valid?(_return_status, VALID_VALUES_FOR_RETURN_STATUS)
+      end
 
       invalid_properties
     end
@@ -158,11 +159,18 @@ module Stripe
       if _explanation = @explanation
         return false if _explanation.to_s.size > 5000
       end
+
       if _product_description = @product_description
         return false if _product_description.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid?(@product_type)
-      return false unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
+
+      if _product_type = @product_type
+        return false unless OpenApi::EnumValidator.valid?(_product_type, VALID_VALUES_FOR_PRODUCT_TYPE)
+      end
+
+      if _return_status = @return_status
+        return false unless OpenApi::EnumValidator.valid?(_return_status, VALID_VALUES_FOR_RETURN_STATUS)
+      end
 
       true
     end
@@ -257,7 +265,7 @@ module Stripe
         return @product_type = nil
       end
       _product_type = product_type.not_nil!
-      ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid!(_product_type)
+      OpenApi::EnumValidator.validate("product_type", _product_type, VALID_VALUES_FOR_PRODUCT_TYPE)
       @product_type = _product_type
     end
 
@@ -268,7 +276,7 @@ module Stripe
         return @return_status = nil
       end
       _return_status = return_status.not_nil!
-      ENUM_VALIDATOR_FOR_RETURN_STATUS.valid!(_return_status)
+      OpenApi::EnumValidator.validate("return_status", _return_status, VALID_VALUES_FOR_RETURN_STATUS)
       @return_status = _return_status
     end
 

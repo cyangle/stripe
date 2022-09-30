@@ -30,7 +30,7 @@ module Stripe
     @[JSON::Field(key: "action", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter action : String? = nil
 
-    ENUM_VALIDATOR_FOR_ACTION = OpenApi::EnumValidator.new("action", "String", ["increment", "set"])
+    VALID_VALUES_FOR_ACTION = StaticArray["increment", "set"]
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -56,14 +56,16 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"quantity\" is required and cannot be null") if @quantity.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ACTION.error_message) unless ENUM_VALIDATOR_FOR_ACTION.valid?(@action)
+      if _action = @action
+        invalid_properties.push(OpenApi::EnumValidator.error_message("action", VALID_VALUES_FOR_ACTION)) unless OpenApi::EnumValidator.valid?(_action, VALID_VALUES_FOR_ACTION)
+      end
 
       if _timestamp = @timestamp
         invalid_properties.concat(_timestamp.list_invalid_properties_for("timestamp")) if _timestamp.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -72,7 +74,9 @@ module Stripe
     def valid? : Bool
       return false if @quantity.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_ACTION.valid?(@action)
+      if _action = @action
+        return false unless OpenApi::EnumValidator.valid?(_action, VALID_VALUES_FOR_ACTION)
+      end
 
       if _timestamp = @timestamp
         return false if _timestamp.is_a?(OpenApi::Validatable) && !_timestamp.valid?
@@ -98,7 +102,7 @@ module Stripe
         return @action = nil
       end
       _action = action.not_nil!
-      ENUM_VALIDATOR_FOR_ACTION.valid!(_action)
+      OpenApi::EnumValidator.validate("action", _action, VALID_VALUES_FOR_ACTION)
       @action = _action
     end
 

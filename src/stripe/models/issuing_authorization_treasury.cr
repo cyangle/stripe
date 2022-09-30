@@ -54,6 +54,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"received_credits\" is required and cannot be null") if @received_credits.nil?
 
       invalid_properties.push("\"received_debits\" is required and cannot be null") if @received_debits.nil?
@@ -63,7 +64,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 

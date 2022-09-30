@@ -53,9 +53,11 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"expires_at\" is required and cannot be null") if @expires_at.nil?
 
       invalid_properties.push("\"stores\" is required and cannot be null") if @stores.nil?
+
       if _stores = @stores
         invalid_properties.concat(_stores.list_invalid_properties_for("stores")) if _stores.is_a?(OpenApi::Validatable)
       end
@@ -64,7 +66,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -77,6 +78,7 @@ module Stripe
       if _stores = @stores
         return false if _stores.is_a?(OpenApi::Validatable) && !_stores.valid?
       end
+
       if _hosted_voucher_url = @hosted_voucher_url
         return false if _hosted_voucher_url.to_s.size > 5000
       end

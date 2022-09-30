@@ -31,7 +31,7 @@ module Stripe
     @[JSON::Field(key: "end_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter end_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_END_BEHAVIOR = OpenApi::EnumValidator.new("end_behavior", "String", ["cancel", "none", "release", "renew"])
+    VALID_VALUES_FOR_END_BEHAVIOR = StaticArray["cancel", "none", "release", "renew"]
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -71,6 +71,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _customer = @customer
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -79,8 +80,9 @@ module Stripe
       if _default_settings = @default_settings
         invalid_properties.concat(_default_settings.list_invalid_properties_for("default_settings")) if _default_settings.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_END_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior)
+      if _end_behavior = @end_behavior
+        invalid_properties.push(OpenApi::EnumValidator.error_message("end_behavior", VALID_VALUES_FOR_END_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
+      end
 
       if _from_subscription = @from_subscription
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("from_subscription", _from_subscription.to_s.size, 5000)
@@ -96,7 +98,6 @@ module Stripe
       if _start_date = @start_date
         invalid_properties.concat(_start_date.list_invalid_properties_for("start_date")) if _start_date.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -106,20 +107,27 @@ module Stripe
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
+
       if _default_settings = @default_settings
         return false if _default_settings.is_a?(OpenApi::Validatable) && !_default_settings.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior)
+
+      if _end_behavior = @end_behavior
+        return false unless OpenApi::EnumValidator.valid?(_end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
+      end
 
       if _from_subscription = @from_subscription
         return false if _from_subscription.to_s.size > 5000
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _phases = @phases
         return false if _phases.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _phases)
       end
+
       if _start_date = @start_date
         return false if _start_date.is_a?(OpenApi::Validatable) && !_start_date.valid?
       end
@@ -159,7 +167,7 @@ module Stripe
         return @end_behavior = nil
       end
       _end_behavior = end_behavior.not_nil!
-      ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid!(_end_behavior)
+      OpenApi::EnumValidator.validate("end_behavior", _end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
       @end_behavior = _end_behavior
     end
 

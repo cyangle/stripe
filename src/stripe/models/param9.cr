@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "country", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter country : String? = nil
 
-    ENUM_VALIDATOR_FOR_COUNTRY = OpenApi::EnumValidator.new("country", "String", ["AT", "BE", "DE", "ES", "IT", "NL"])
+    VALID_VALUES_FOR_COUNTRY = StaticArray["AT", "BE", "DE", "ES", "IT", "NL"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -39,15 +39,21 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_COUNTRY.error_message) unless ENUM_VALIDATOR_FOR_COUNTRY.valid?(@country, false)
+      invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
 
+      if _country = @country
+        invalid_properties.push(OpenApi::EnumValidator.error_message("country", VALID_VALUES_FOR_COUNTRY)) unless OpenApi::EnumValidator.valid?(_country, VALID_VALUES_FOR_COUNTRY)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_COUNTRY.valid?(@country, false)
+      return false if @country.nil?
+      if _country = @country
+        return false unless OpenApi::EnumValidator.valid?(_country, VALID_VALUES_FOR_COUNTRY)
+      end
 
       true
     end
@@ -59,7 +65,7 @@ module Stripe
         raise ArgumentError.new("\"country\" is required and cannot be null")
       end
       _country = country.not_nil!
-      ENUM_VALIDATOR_FOR_COUNTRY.valid!(_country)
+      OpenApi::EnumValidator.validate("country", _country, VALID_VALUES_FOR_COUNTRY)
       @country = _country
     end
 

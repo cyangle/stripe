@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_COLLECTION_METHOD = OpenApi::EnumValidator.new("collection_method", "String", ["charge_automatically", "send_invoice"])
+    VALID_VALUES_FOR_COLLECTION_METHOD = StaticArray["charge_automatically", "send_invoice"]
 
     @[JSON::Field(key: "custom_fields", type: Stripe::PostInvoicesInvoiceRequestCustomFields?, default: nil, required: false, nullable: false, emit_null: false)]
     getter custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil
@@ -129,6 +129,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _account_tax_ids = @account_tax_ids
         invalid_properties.concat(_account_tax_ids.list_invalid_properties_for("account_tax_ids")) if _account_tax_ids.is_a?(OpenApi::Validatable)
       end
@@ -136,8 +137,9 @@ module Stripe
       if _automatic_tax = @automatic_tax
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECTION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
+      if _collection_method = @collection_method
+        invalid_properties.push(OpenApi::EnumValidator.error_message("collection_method", VALID_VALUES_FOR_COLLECTION_METHOD)) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
+      end
       if _custom_fields = @custom_fields
         invalid_properties.concat(_custom_fields.list_invalid_properties_for("custom_fields")) if _custom_fields.is_a?(OpenApi::Validatable)
       end
@@ -189,7 +191,6 @@ module Stripe
       if _transfer_data = @transfer_data
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -203,7 +204,11 @@ module Stripe
       if _automatic_tax = @automatic_tax
         return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
+
+      if _collection_method = @collection_method
+        return false unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
+      end
+
       if _custom_fields = @custom_fields
         return false if _custom_fields.is_a?(OpenApi::Validatable) && !_custom_fields.valid?
       end
@@ -211,15 +216,19 @@ module Stripe
       if _default_payment_method = @default_payment_method
         return false if _default_payment_method.to_s.size > 5000
       end
+
       if _default_source = @default_source
         return false if _default_source.to_s.size > 5000
       end
+
       if _default_tax_rates = @default_tax_rates
         return false if _default_tax_rates.is_a?(OpenApi::Validatable) && !_default_tax_rates.valid?
       end
+
       if _description = @description
         return false if _description.to_s.size > 1500
       end
+
       if _discounts = @discounts
         return false if _discounts.is_a?(OpenApi::Validatable) && !_discounts.valid?
       end
@@ -227,21 +236,27 @@ module Stripe
       if _footer = @footer
         return false if _footer.to_s.size > 5000
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _on_behalf_of = @on_behalf_of
         return false if _on_behalf_of.is_a?(OpenApi::Validatable) && !_on_behalf_of.valid?
       end
+
       if _payment_settings = @payment_settings
         return false if _payment_settings.is_a?(OpenApi::Validatable) && !_payment_settings.valid?
       end
+
       if _rendering_options = @rendering_options
         return false if _rendering_options.is_a?(OpenApi::Validatable) && !_rendering_options.valid?
       end
+
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 22
       end
+
       if _transfer_data = @transfer_data
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
@@ -298,7 +313,7 @@ module Stripe
         return @collection_method = nil
       end
       _collection_method = collection_method.not_nil!
-      ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(_collection_method)
+      OpenApi::EnumValidator.validate("collection_method", _collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       @collection_method = _collection_method
     end
 

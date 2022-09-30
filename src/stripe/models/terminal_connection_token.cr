@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["terminal.connection_token"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["terminal.connection_token"]
 
     # Your application should pass this token to the Stripe Terminal SDK.
     @[JSON::Field(key: "secret", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -54,8 +54,13 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"secret\" is required and cannot be null") if @secret.nil?
+
       if _secret = @secret
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secret", _secret.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -66,18 +71,22 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @secret.nil?
       if _secret = @secret
         return false if _secret.to_s.size > 5000
       end
+
       if _location = @location
         return false if _location.to_s.size > 5000
       end
@@ -92,7 +101,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

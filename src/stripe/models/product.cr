@@ -53,7 +53,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["product"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["product"]
 
     # Time at which the object was last updated. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "updated", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -144,11 +144,13 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"active\" is required and cannot be null") if @active.nil?
 
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -161,13 +163,17 @@ module Stripe
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
+
       if _name = @name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"updated\" is required and cannot be null") if @updated.nil?
 
       if _default_price = @default_price
@@ -200,7 +206,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -215,6 +220,7 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @images.nil?
 
       return false if @livemode.nil?
@@ -225,15 +231,22 @@ module Stripe
       if _name = @name
         return false if _name.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @updated.nil?
 
       if _default_price = @default_price
         return false if _default_price.is_a?(OpenApi::Validatable) && !_default_price.valid?
       end
+
       if _description = @description
         return false if _description.to_s.size > 5000
       end
+
       if _package_dimensions = @package_dimensions
         return false if _package_dimensions.is_a?(OpenApi::Validatable) && !_package_dimensions.valid?
       end
@@ -241,12 +254,15 @@ module Stripe
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 5000
       end
+
       if _tax_code = @tax_code
         return false if _tax_code.is_a?(OpenApi::Validatable) && !_tax_code.valid?
       end
+
       if _unit_label = @unit_label
         return false if _unit_label.to_s.size > 5000
       end
+
       if _url = @url
         return false if _url.to_s.size > 2048
       end
@@ -339,7 +355,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

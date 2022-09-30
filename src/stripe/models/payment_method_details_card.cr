@@ -130,6 +130,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"exp_month\" is required and cannot be null") if @exp_month.nil?
 
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
@@ -181,7 +182,6 @@ module Stripe
       if _wallet = @wallet
         invalid_properties.concat(_wallet.list_invalid_properties_for("wallet")) if _wallet.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -195,33 +195,43 @@ module Stripe
       if _brand = @brand
         return false if _brand.to_s.size > 5000
       end
+
       if _checks = @checks
         return false if _checks.is_a?(OpenApi::Validatable) && !_checks.valid?
       end
+
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
       if _fingerprint = @fingerprint
         return false if _fingerprint.to_s.size > 5000
       end
+
       if _funding = @funding
         return false if _funding.to_s.size > 5000
       end
+
       if _installments = @installments
         return false if _installments.is_a?(OpenApi::Validatable) && !_installments.valid?
       end
+
       if _last4 = @last4
         return false if _last4.to_s.size > 5000
       end
+
       if _mandate = @mandate
         return false if _mandate.to_s.size > 5000
       end
+
       if _network = @network
         return false if _network.to_s.size > 5000
       end
+
       if _three_d_secure = @three_d_secure
         return false if _three_d_secure.is_a?(OpenApi::Validatable) && !_three_d_secure.valid?
       end
+
       if _wallet = @wallet
         return false if _wallet.is_a?(OpenApi::Validatable) && !_wallet.valid?
       end

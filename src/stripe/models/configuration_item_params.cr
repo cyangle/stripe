@@ -52,6 +52,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _billing_thresholds = @billing_thresholds
         invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
@@ -67,7 +68,6 @@ module Stripe
       if _tax_rates = @tax_rates
         invalid_properties.concat(_tax_rates.list_invalid_properties_for("tax_rates")) if _tax_rates.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -77,9 +77,11 @@ module Stripe
       if _billing_thresholds = @billing_thresholds
         return false if _billing_thresholds.is_a?(OpenApi::Validatable) && !_billing_thresholds.valid?
       end
+
       if _price = @price
         return false if _price.to_s.size > 5000
       end
+
       if _price_data = @price_data
         return false if _price_data.is_a?(OpenApi::Validatable) && !_price_data.valid?
       end

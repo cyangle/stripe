@@ -32,7 +32,7 @@ module Stripe
     @[JSON::Field(key: "product_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter product_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_PRODUCT_TYPE = OpenApi::EnumValidator.new("product_type", "String", ["", "merchandise", "service"])
+    VALID_VALUES_FOR_PRODUCT_TYPE = StaticArray["", "merchandise", "service"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -50,6 +50,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _additional_documentation = @additional_documentation
         invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
@@ -63,9 +64,9 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PRODUCT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid?(@product_type)
-
+      if _product_type = @product_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("product_type", VALID_VALUES_FOR_PRODUCT_TYPE)) unless OpenApi::EnumValidator.valid?(_product_type, VALID_VALUES_FOR_PRODUCT_TYPE)
+      end
       invalid_properties
     end
 
@@ -75,13 +76,18 @@ module Stripe
       if _additional_documentation = @additional_documentation
         return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
+
       if _explanation = @explanation
         return false if _explanation.to_s.size > 1500
       end
+
       if _product_description = @product_description
         return false if _product_description.to_s.size > 1500
       end
-      return false unless ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid?(@product_type)
+
+      if _product_type = @product_type
+        return false unless OpenApi::EnumValidator.valid?(_product_type, VALID_VALUES_FOR_PRODUCT_TYPE)
+      end
 
       true
     end
@@ -132,7 +138,7 @@ module Stripe
         return @product_type = nil
       end
       _product_type = product_type.not_nil!
-      ENUM_VALIDATOR_FOR_PRODUCT_TYPE.valid!(_product_type)
+      OpenApi::EnumValidator.validate("product_type", _product_type, VALID_VALUES_FOR_PRODUCT_TYPE)
       @product_type = _product_type
     end
 

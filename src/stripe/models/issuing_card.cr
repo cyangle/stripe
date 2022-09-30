@@ -64,7 +64,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["issuing.card"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["issuing.card"]
 
     @[JSON::Field(key: "spending_controls", type: Stripe::IssuingCardAuthorizationControls?, default: nil, required: true, nullable: false, emit_null: false)]
     getter spending_controls : Stripe::IssuingCardAuthorizationControls? = nil
@@ -73,13 +73,13 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["active", "canceled", "inactive"])
+    VALID_VALUES_FOR_STATUS = StaticArray["active", "canceled", "inactive"]
 
     # The type of the card.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["physical", "virtual"])
+    VALID_VALUES_FOR__TYPE = StaticArray["physical", "virtual"]
 
     # Optional properties
 
@@ -89,8 +89,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? cancellation_reason_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_CANCELLATION_REASON = OpenApi::EnumValidator.new("cancellation_reason", "String", ["design_rejected", "lost", "stolen"])
+    VALID_VALUES_FOR_CANCELLATION_REASON = StaticArray["design_rejected", "lost", "stolen"]
 
     # The card's CVC. For security reasons, this is only available for virtual cards, and will be omitted unless you explicitly request it with [the `expand` parameter](https://stripe.com/docs/api/expanding_objects). Additionally, it's only available via the [\"Retrieve a card\" endpoint](https://stripe.com/docs/api/issuing/cards/retrieve), not via \"List all cards\" or any other endpoint.
     @[JSON::Field(key: "cvc", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -125,8 +124,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? replacement_reason_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_REPLACEMENT_REASON = OpenApi::EnumValidator.new("replacement_reason", "String", ["damaged", "expired", "lost", "stolen"])
+    VALID_VALUES_FOR_REPLACEMENT_REASON = StaticArray["damaged", "expired", "lost", "stolen"]
 
     @[JSON::Field(key: "shipping", type: Stripe::IssuingCardShipping1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: shipping.nil? && !shipping_present?)]
     getter shipping : Stripe::IssuingCardShipping1? = nil
@@ -176,13 +174,16 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"brand\" is required and cannot be null") if @brand.nil?
+
       if _brand = @brand
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"cardholder\" is required and cannot be null") if @cardholder.nil?
+
       if _cardholder = @cardholder
         invalid_properties.concat(_cardholder.list_invalid_properties_for("cardholder")) if _cardholder.is_a?(OpenApi::Validatable)
       end
@@ -195,12 +196,14 @@ module Stripe
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last4\" is required and cannot be null") if @last4.nil?
+
       if _last4 = @last4
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -210,17 +213,29 @@ module Stripe
 
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"spending_controls\" is required and cannot be null") if @spending_controls.nil?
+
       if _spending_controls = @spending_controls
         invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
+      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CANCELLATION_REASON.error_message) unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+      if _cancellation_reason = @cancellation_reason
+        invalid_properties.push(OpenApi::EnumValidator.error_message("cancellation_reason", VALID_VALUES_FOR_CANCELLATION_REASON)) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
+      end
       if _cvc = @cvc
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -242,15 +257,15 @@ module Stripe
       if _replacement_for = @replacement_for
         invalid_properties.concat(_replacement_for.list_invalid_properties_for("replacement_for")) if _replacement_for.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.error_message) unless ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.valid?(@replacement_reason)
+      if _replacement_reason = @replacement_reason
+        invalid_properties.push(OpenApi::EnumValidator.error_message("replacement_reason", VALID_VALUES_FOR_REPLACEMENT_REASON)) unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
+      end
       if _shipping = @shipping
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
       if _wallets = @wallets
         invalid_properties.concat(_wallets.list_invalid_properties_for("wallets")) if _wallets.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -261,10 +276,12 @@ module Stripe
       if _brand = @brand
         return false if _brand.to_s.size > 5000
       end
+
       return false if @cardholder.nil?
       if _cardholder = @cardholder
         return false if _cardholder.is_a?(OpenApi::Validatable) && !_cardholder.valid?
       end
+
       return false if @created.nil?
 
       return false if @currency.nil?
@@ -277,41 +294,68 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @last4.nil?
       if _last4 = @last4
         return false if _last4.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
       return false if @metadata.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @spending_controls.nil?
       if _spending_controls = @spending_controls
         return false if _spending_controls.is_a?(OpenApi::Validatable) && !_spending_controls.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      return false unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
+
+      return false if @status.nil?
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+
+      return false if @_type.nil?
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+
+      if _cancellation_reason = @cancellation_reason
+        return false unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
+      end
+
       if _cvc = @cvc
         return false if _cvc.to_s.size > 5000
       end
+
       if _financial_account = @financial_account
         return false if _financial_account.to_s.size > 5000
       end
+
       if _number = @number
         return false if _number.to_s.size > 5000
       end
+
       if _replaced_by = @replaced_by
         return false if _replaced_by.is_a?(OpenApi::Validatable) && !_replaced_by.valid?
       end
+
       if _replacement_for = @replacement_for
         return false if _replacement_for.is_a?(OpenApi::Validatable) && !_replacement_for.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.valid?(@replacement_reason)
+
+      if _replacement_reason = @replacement_reason
+        return false unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
+      end
+
       if _shipping = @shipping
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
+
       if _wallets = @wallets
         return false if _wallets.is_a?(OpenApi::Validatable) && !_wallets.valid?
       end
@@ -439,7 +483,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 
@@ -461,7 +505,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 
@@ -472,7 +516,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 
@@ -483,7 +527,7 @@ module Stripe
         return @cancellation_reason = nil
       end
       _cancellation_reason = cancellation_reason.not_nil!
-      ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid!(_cancellation_reason)
+      OpenApi::EnumValidator.validate("cancellation_reason", _cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       @cancellation_reason = _cancellation_reason
     end
 
@@ -558,7 +602,7 @@ module Stripe
         return @replacement_reason = nil
       end
       _replacement_reason = replacement_reason.not_nil!
-      ENUM_VALIDATOR_FOR_REPLACEMENT_REASON.valid!(_replacement_reason)
+      OpenApi::EnumValidator.validate("replacement_reason", _replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
       @replacement_reason = _replacement_reason
     end
 

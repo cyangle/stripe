@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["country_spec"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["country_spec"]
 
     # Currencies that can be accepted in the specific country (for transfers).
     @[JSON::Field(key: "supported_bank_account_currencies", type: Hash(String, Array(String))?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -74,20 +74,26 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"default_currency\" is required and cannot be null") if @default_currency.nil?
+
       if _default_currency = @default_currency
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_currency", _default_currency.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"supported_bank_account_currencies\" is required and cannot be null") if @supported_bank_account_currencies.nil?
 
       invalid_properties.push("\"supported_payment_currencies\" is required and cannot be null") if @supported_payment_currencies.nil?
@@ -97,10 +103,10 @@ module Stripe
       invalid_properties.push("\"supported_transfer_countries\" is required and cannot be null") if @supported_transfer_countries.nil?
 
       invalid_properties.push("\"verification_fields\" is required and cannot be null") if @verification_fields.nil?
+
       if _verification_fields = @verification_fields
         invalid_properties.concat(_verification_fields.list_invalid_properties_for("verification_fields")) if _verification_fields.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -111,11 +117,17 @@ module Stripe
       if _default_currency = @default_currency
         return false if _default_currency.to_s.size > 5000
       end
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @supported_bank_account_currencies.nil?
 
       return false if @supported_payment_currencies.nil?
@@ -167,7 +179,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

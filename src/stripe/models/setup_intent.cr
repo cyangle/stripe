@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["setup_intent"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["setup_intent"]
 
     # The list of payment method types (e.g. card) that this SetupIntent is allowed to set up.
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -47,7 +47,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["canceled", "processing", "requires_action", "requires_confirmation", "requires_payment_method", "succeeded"])
+    VALID_VALUES_FOR_STATUS = StaticArray["canceled", "processing", "requires_action", "requires_confirmation", "requires_payment_method", "succeeded"]
 
     # Indicates how the payment method is intended to be used in the future.  Use `on_session` if you intend to only reuse the payment method when the customer is in your checkout flow. Use `off_session` if your customer may or may not be in your checkout flow. If not provided, this value defaults to `off_session`.
     @[JSON::Field(key: "usage", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -71,8 +71,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? cancellation_reason_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_CANCELLATION_REASON = OpenApi::EnumValidator.new("cancellation_reason", "String", ["abandoned", "duplicate", "requested_by_customer"])
+    VALID_VALUES_FOR_CANCELLATION_REASON = StaticArray["abandoned", "duplicate", "requested_by_customer"]
 
     # The client secret of this SetupIntent. Used for client-side retrieval using a publishable key.  The client secret can be used to complete payment setup from your frontend. It should not be stored, logged, or exposed to anyone other than the customer. Make sure that you have TLS enabled on any page that includes the client secret.
     @[JSON::Field(key: "client_secret", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: client_secret.nil? && !client_secret_present?)]
@@ -100,8 +99,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? flow_directions_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS = OpenApi::EnumValidator.new("flow_directions", "Array(String)", ["inbound", "outbound"])
+    VALID_VALUES_FOR_FLOW_DIRECTIONS = StaticArray["inbound", "outbound"]
 
     @[JSON::Field(key: "last_setup_error", type: Stripe::SetupIntentLastSetupError?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: last_setup_error.nil? && !last_setup_error_present?)]
     getter last_setup_error : Stripe::SetupIntentLastSetupError? = nil
@@ -194,9 +192,11 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -204,11 +204,20 @@ module Stripe
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"payment_method_types\" is required and cannot be null") if @payment_method_types.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
+
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
       invalid_properties.push("\"usage\" is required and cannot be null") if @usage.nil?
+
       if _usage = @usage
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("usage", _usage.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -218,7 +227,9 @@ module Stripe
         invalid_properties.concat(_application.list_invalid_properties_for("application")) if _application.is_a?(OpenApi::Validatable)
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CANCELLATION_REASON.error_message) unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
+      if _cancellation_reason = @cancellation_reason
+        invalid_properties.push(OpenApi::EnumValidator.error_message("cancellation_reason", VALID_VALUES_FOR_CANCELLATION_REASON)) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
+      end
       if _client_secret = @client_secret
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -232,8 +243,9 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.error_message) unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
+      if _flow_directions = @flow_directions
+        invalid_properties.push(OpenApi::EnumValidator.error_message("flow_directions", VALID_VALUES_FOR_FLOW_DIRECTIONS)) unless OpenApi::EnumValidator.valid?(_flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
+      end
       if _last_setup_error = @last_setup_error
         invalid_properties.concat(_last_setup_error.list_invalid_properties_for("last_setup_error")) if _last_setup_error.is_a?(OpenApi::Validatable)
       end
@@ -259,7 +271,6 @@ module Stripe
       if _single_use_mandate = @single_use_mandate
         invalid_properties.concat(_single_use_mandate.list_invalid_properties_for("single_use_mandate")) if _single_use_mandate.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -272,37 +283,58 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @payment_method_types.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      return false if @status.nil?
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+
       return false if @usage.nil?
       if _usage = @usage
         return false if _usage.to_s.size > 5000
       end
+
       if _application = @application
         return false if _application.is_a?(OpenApi::Validatable) && !_application.valid?
       end
 
-      return false unless ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid?(@cancellation_reason)
+      if _cancellation_reason = @cancellation_reason
+        return false unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
+      end
+
       if _client_secret = @client_secret
         return false if _client_secret.to_s.size > 5000
       end
+
       if _customer = @customer
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
+
       if _description = @description
         return false if _description.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
+
+      if _flow_directions = @flow_directions
+        return false unless OpenApi::EnumValidator.valid?(_flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
+      end
+
       if _last_setup_error = @last_setup_error
         return false if _last_setup_error.is_a?(OpenApi::Validatable) && !_last_setup_error.valid?
       end
+
       if _latest_attempt = @latest_attempt
         return false if _latest_attempt.is_a?(OpenApi::Validatable) && !_latest_attempt.valid?
       end
+
       if _mandate = @mandate
         return false if _mandate.is_a?(OpenApi::Validatable) && !_mandate.valid?
       end
@@ -310,15 +342,19 @@ module Stripe
       if _next_action = @next_action
         return false if _next_action.is_a?(OpenApi::Validatable) && !_next_action.valid?
       end
+
       if _on_behalf_of = @on_behalf_of
         return false if _on_behalf_of.is_a?(OpenApi::Validatable) && !_on_behalf_of.valid?
       end
+
       if _payment_method = @payment_method
         return false if _payment_method.is_a?(OpenApi::Validatable) && !_payment_method.valid?
       end
+
       if _payment_method_options = @payment_method_options
         return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
+
       if _single_use_mandate = @single_use_mandate
         return false if _single_use_mandate.is_a?(OpenApi::Validatable) && !_single_use_mandate.valid?
       end
@@ -367,7 +403,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 
@@ -388,7 +424,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 
@@ -434,7 +470,7 @@ module Stripe
         return @cancellation_reason = nil
       end
       _cancellation_reason = cancellation_reason.not_nil!
-      ENUM_VALIDATOR_FOR_CANCELLATION_REASON.valid!(_cancellation_reason)
+      OpenApi::EnumValidator.validate("cancellation_reason", _cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       @cancellation_reason = _cancellation_reason
     end
 
@@ -484,7 +520,7 @@ module Stripe
         return @flow_directions = nil
       end
       _flow_directions = flow_directions.not_nil!
-      ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid!(_flow_directions)
+      OpenApi::EnumValidator.validate("flow_directions", _flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
       @flow_directions = _flow_directions
     end
 

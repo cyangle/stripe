@@ -54,7 +54,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+
       if __type = @_type
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -67,7 +69,6 @@ module Stripe
       if _verify_with_microdeposits = @verify_with_microdeposits
         invalid_properties.concat(_verify_with_microdeposits.list_invalid_properties_for("verify_with_microdeposits")) if _verify_with_microdeposits.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -78,6 +79,7 @@ module Stripe
       if __type = @_type
         return false if __type.to_s.size > 5000
       end
+
       if _redirect_to_url = @redirect_to_url
         return false if _redirect_to_url.is_a?(OpenApi::Validatable) && !_redirect_to_url.valid?
       end

@@ -88,15 +88,18 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"inventory\" is required and cannot be null") if @inventory.nil?
+
       if _inventory = @inventory
         invalid_properties.concat(_inventory.list_invalid_properties_for("inventory")) if _inventory.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
 
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
+
       if _product = @product
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -112,7 +115,6 @@ module Stripe
       if _package_dimensions = @package_dimensions
         invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions")) if _package_dimensions.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -125,6 +127,7 @@ module Stripe
       if _inventory = @inventory
         return false if _inventory.is_a?(OpenApi::Validatable) && !_inventory.valid?
       end
+
       return false if @price.nil?
 
       return false if @product.nil?

@@ -41,12 +41,12 @@ module Stripe
     @[JSON::Field(key: "service", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter service : String? = nil
 
-    ENUM_VALIDATOR_FOR_SERVICE = OpenApi::EnumValidator.new("service", "String", ["express", "priority", "standard"])
+    VALID_VALUES_FOR_SERVICE = StaticArray["express", "priority", "standard"]
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["bulk", "individual"])
+    VALID_VALUES_FOR__TYPE = StaticArray["bulk", "individual"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -68,11 +68,14 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
+
       if _address = @address
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
+
       if _name = @name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -82,10 +85,12 @@ module Stripe
         invalid_properties.concat(_customs.list_invalid_properties_for("customs")) if _customs.is_a?(OpenApi::Validatable)
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SERVICE.error_message) unless ENUM_VALIDATOR_FOR_SERVICE.valid?(@service)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
-
+      if _service = @service
+        invalid_properties.push(OpenApi::EnumValidator.error_message("service", VALID_VALUES_FOR_SERVICE)) unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
+      end
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
       invalid_properties
     end
 
@@ -96,16 +101,23 @@ module Stripe
       if _address = @address
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
+
       return false if @name.nil?
       if _name = @name
         return false if _name.to_s.size > 5000
       end
+
       if _customs = @customs
         return false if _customs.is_a?(OpenApi::Validatable) && !_customs.valid?
       end
 
-      return false unless ENUM_VALIDATOR_FOR_SERVICE.valid?(@service)
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+      if _service = @service
+        return false unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
+      end
+
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
 
       true
     end
@@ -173,7 +185,7 @@ module Stripe
         return @service = nil
       end
       _service = service.not_nil!
-      ENUM_VALIDATOR_FOR_SERVICE.valid!(_service)
+      OpenApi::EnumValidator.validate("service", _service, VALID_VALUES_FOR_SERVICE)
       @service = _service
     end
 
@@ -184,7 +196,7 @@ module Stripe
         return @_type = nil
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 

@@ -27,8 +27,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? bank_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_BANK = OpenApi::EnumValidator.new("bank", "String", ["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"])
+    VALID_VALUES_FOR_BANK = StaticArray["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"]
 
     # The Bank Identifier Code of the customer's bank.
     @[JSON::Field(key: "bic", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bic.nil? && !bic_present?)]
@@ -36,8 +35,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? bic_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_BIC = OpenApi::EnumValidator.new("bic", "String", ["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U"])
+    VALID_VALUES_FOR_BIC = StaticArray["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U"]
 
     @[JSON::Field(key: "generated_sepa_debit", type: Stripe::SetupAttemptPaymentMethodDetailsBancontactGeneratedSepaDebit?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: generated_sepa_debit.nil? && !generated_sepa_debit_present?)]
     getter generated_sepa_debit : Stripe::SetupAttemptPaymentMethodDetailsBancontactGeneratedSepaDebit? = nil
@@ -84,9 +82,12 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BANK.error_message) unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BIC.error_message) unless ENUM_VALIDATOR_FOR_BIC.valid?(@bic)
+      if _bank = @bank
+        invalid_properties.push(OpenApi::EnumValidator.error_message("bank", VALID_VALUES_FOR_BANK)) unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
+      end
+      if _bic = @bic
+        invalid_properties.push(OpenApi::EnumValidator.error_message("bic", VALID_VALUES_FOR_BIC)) unless OpenApi::EnumValidator.valid?(_bic, VALID_VALUES_FOR_BIC)
+      end
       if _generated_sepa_debit = @generated_sepa_debit
         invalid_properties.concat(_generated_sepa_debit.list_invalid_properties_for("generated_sepa_debit")) if _generated_sepa_debit.is_a?(OpenApi::Validatable)
       end
@@ -103,24 +104,32 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank)
-      return false unless ENUM_VALIDATOR_FOR_BIC.valid?(@bic)
+      if _bank = @bank
+        return false unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
+      end
+
+      if _bic = @bic
+        return false unless OpenApi::EnumValidator.valid?(_bic, VALID_VALUES_FOR_BIC)
+      end
+
       if _generated_sepa_debit = @generated_sepa_debit
         return false if _generated_sepa_debit.is_a?(OpenApi::Validatable) && !_generated_sepa_debit.valid?
       end
+
       if _generated_sepa_debit_mandate = @generated_sepa_debit_mandate
         return false if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable) && !_generated_sepa_debit_mandate.valid?
       end
+
       if _iban_last4 = @iban_last4
         return false if _iban_last4.to_s.size > 5000
       end
+
       if _verified_name = @verified_name
         return false if _verified_name.to_s.size > 5000
       end
@@ -135,7 +144,7 @@ module Stripe
         return @bank = nil
       end
       _bank = bank.not_nil!
-      ENUM_VALIDATOR_FOR_BANK.valid!(_bank)
+      OpenApi::EnumValidator.validate("bank", _bank, VALID_VALUES_FOR_BANK)
       @bank = _bank
     end
 
@@ -146,7 +155,7 @@ module Stripe
         return @bic = nil
       end
       _bic = bic.not_nil!
-      ENUM_VALIDATOR_FOR_BIC.valid!(_bic)
+      OpenApi::EnumValidator.validate("bic", _bic, VALID_VALUES_FOR_BIC)
       @bic = _bic
     end
 

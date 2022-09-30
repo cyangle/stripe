@@ -40,7 +40,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["event"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["event"]
 
     # Number of webhooks that have yet to be successfully delivered (i.e., to return a 20x response) to the URLs you've specified.
     @[JSON::Field(key: "pending_webhooks", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -92,13 +92,16 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"data\" is required and cannot be null") if @data.nil?
+
       if _data = @data
         invalid_properties.concat(_data.list_invalid_properties_for("data")) if _data.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -106,10 +109,15 @@ module Stripe
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"pending_webhooks\" is required and cannot be null") if @pending_webhooks.nil?
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+
       if __type = @_type
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -128,7 +136,6 @@ module Stripe
       if _request = @request
         invalid_properties.concat(_request.list_invalid_properties_for("request")) if _request.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -141,25 +148,34 @@ module Stripe
       if _data = @data
         return false if _data.is_a?(OpenApi::Validatable) && !_data.valid?
       end
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @pending_webhooks.nil?
 
       return false if @_type.nil?
       if __type = @_type
         return false if __type.to_s.size > 5000
       end
+
       if _account = @account
         return false if _account.to_s.size > 5000
       end
+
       if _api_version = @api_version
         return false if _api_version.to_s.size > 5000
       end
+
       if _request = @request
         return false if _request.is_a?(OpenApi::Validatable) && !_request.valid?
       end
@@ -219,7 +235,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

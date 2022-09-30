@@ -55,6 +55,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _charge = @charge
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -66,7 +67,6 @@ module Stripe
       if _setup_attempt = @setup_attempt
         invalid_properties.concat(_setup_attempt.list_invalid_properties_for("setup_attempt")) if _setup_attempt.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -76,9 +76,11 @@ module Stripe
       if _charge = @charge
         return false if _charge.to_s.size > 5000
       end
+
       if _payment_method_details = @payment_method_details
         return false if _payment_method_details.is_a?(OpenApi::Validatable) && !_payment_method_details.valid?
       end
+
       if _setup_attempt = @setup_attempt
         return false if _setup_attempt.is_a?(OpenApi::Validatable) && !_setup_attempt.valid?
       end

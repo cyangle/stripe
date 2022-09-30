@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "allowed_updates", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter allowed_updates : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_ALLOWED_UPDATES = OpenApi::EnumValidator.new("allowed_updates", "Array(String)", ["address", "email", "phone", "shipping", "tax_id"])
+    VALID_VALUES_FOR_ALLOWED_UPDATES = StaticArray["address", "email", "phone", "shipping", "tax_id"]
 
     # Whether the feature is enabled.
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -46,7 +46,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ALLOWED_UPDATES.error_message) unless ENUM_VALIDATOR_FOR_ALLOWED_UPDATES.all_valid?(@allowed_updates, false)
+      invalid_properties.push("\"allowed_updates\" is required and cannot be null") if @allowed_updates.nil?
+
+      if _allowed_updates = @allowed_updates
+        invalid_properties.push(OpenApi::EnumValidator.error_message("allowed_updates", VALID_VALUES_FOR_ALLOWED_UPDATES)) unless OpenApi::EnumValidator.valid?(_allowed_updates, VALID_VALUES_FOR_ALLOWED_UPDATES)
+      end
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
       invalid_properties
@@ -55,7 +59,11 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_ALLOWED_UPDATES.all_valid?(@allowed_updates, false)
+      return false if @allowed_updates.nil?
+      if _allowed_updates = @allowed_updates
+        return false unless OpenApi::EnumValidator.valid?(_allowed_updates, VALID_VALUES_FOR_ALLOWED_UPDATES)
+      end
+
       return false if @enabled.nil?
 
       true
@@ -68,7 +76,7 @@ module Stripe
         raise ArgumentError.new("\"allowed_updates\" is required and cannot be null")
       end
       _allowed_updates = allowed_updates.not_nil!
-      ENUM_VALIDATOR_FOR_ALLOWED_UPDATES.all_valid!(_allowed_updates)
+      OpenApi::EnumValidator.validate("allowed_updates", _allowed_updates, VALID_VALUES_FOR_ALLOWED_UPDATES)
       @allowed_updates = _allowed_updates
     end
 

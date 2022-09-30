@@ -44,7 +44,7 @@ module Stripe
     @[JSON::Field(key: "flow_directions", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter flow_directions : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS = OpenApi::EnumValidator.new("flow_directions", "Array(String)", ["inbound", "outbound"])
+    VALID_VALUES_FOR_FLOW_DIRECTIONS = StaticArray["inbound", "outbound"]
 
     @[JSON::Field(key: "mandate_data", type: Stripe::SecretKeyParam2?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mandate_data : Stripe::SecretKeyParam2? = nil
@@ -82,7 +82,7 @@ module Stripe
     @[JSON::Field(key: "usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_USAGE = OpenApi::EnumValidator.new("usage", "String", ["off_session", "on_session"])
+    VALID_VALUES_FOR_USAGE = StaticArray["off_session", "on_session"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -124,7 +124,9 @@ module Stripe
         end
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.error_message) unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
+      if _flow_directions = @flow_directions
+        invalid_properties.push(OpenApi::EnumValidator.error_message("flow_directions", VALID_VALUES_FOR_FLOW_DIRECTIONS)) unless OpenApi::EnumValidator.valid?(_flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
+      end
       if _mandate_data = @mandate_data
         invalid_properties.concat(_mandate_data.list_invalid_properties_for("mandate_data")) if _mandate_data.is_a?(OpenApi::Validatable)
       end
@@ -144,9 +146,9 @@ module Stripe
       if _single_use = @single_use
         invalid_properties.concat(_single_use.list_invalid_properties_for("single_use")) if _single_use.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_USAGE.error_message) unless ENUM_VALIDATOR_FOR_USAGE.valid?(@usage)
-
+      if _usage = @usage
+        invalid_properties.push(OpenApi::EnumValidator.error_message("usage", VALID_VALUES_FOR_USAGE)) unless OpenApi::EnumValidator.valid?(_usage, VALID_VALUES_FOR_USAGE)
+      end
       invalid_properties
     end
 
@@ -156,11 +158,15 @@ module Stripe
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
+
       if _description = @description
         return false if _description.to_s.size > 1000
       end
 
-      return false unless ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid?(@flow_directions)
+      if _flow_directions = @flow_directions
+        return false unless OpenApi::EnumValidator.valid?(_flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
+      end
+
       if _mandate_data = @mandate_data
         return false if _mandate_data.is_a?(OpenApi::Validatable) && !_mandate_data.valid?
       end
@@ -168,9 +174,11 @@ module Stripe
       if _payment_method = @payment_method
         return false if _payment_method.to_s.size > 5000
       end
+
       if _payment_method_data = @payment_method_data
         return false if _payment_method_data.is_a?(OpenApi::Validatable) && !_payment_method_data.valid?
       end
+
       if _payment_method_options = @payment_method_options
         return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
@@ -178,7 +186,10 @@ module Stripe
       if _single_use = @single_use
         return false if _single_use.is_a?(OpenApi::Validatable) && !_single_use.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_USAGE.valid?(@usage)
+
+      if _usage = @usage
+        return false unless OpenApi::EnumValidator.valid?(_usage, VALID_VALUES_FOR_USAGE)
+      end
 
       true
     end
@@ -248,7 +259,7 @@ module Stripe
         return @flow_directions = nil
       end
       _flow_directions = flow_directions.not_nil!
-      ENUM_VALIDATOR_FOR_FLOW_DIRECTIONS.all_valid!(_flow_directions)
+      OpenApi::EnumValidator.validate("flow_directions", _flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
       @flow_directions = _flow_directions
     end
 
@@ -357,7 +368,7 @@ module Stripe
         return @usage = nil
       end
       _usage = usage.not_nil!
-      ENUM_VALIDATOR_FOR_USAGE.valid!(_usage)
+      OpenApi::EnumValidator.validate("usage", _usage, VALID_VALUES_FOR_USAGE)
       @usage = _usage
     end
 

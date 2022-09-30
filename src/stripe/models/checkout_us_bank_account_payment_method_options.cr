@@ -28,13 +28,13 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["none", "off_session", "on_session"])
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none", "off_session", "on_session"]
 
     # Bank account verification method.
     @[JSON::Field(key: "verification_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter verification_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_VERIFICATION_METHOD = OpenApi::EnumValidator.new("verification_method", "String", ["automatic", "instant"])
+    VALID_VALUES_FOR_VERIFICATION_METHOD = StaticArray["automatic", "instant"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -51,14 +51,16 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _financial_connections = @financial_connections
         invalid_properties.concat(_financial_connections.list_invalid_properties_for("financial_connections")) if _financial_connections.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
-
+      if _setup_future_usage = @setup_future_usage
+        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+      end
+      if _verification_method = @verification_method
+        invalid_properties.push(OpenApi::EnumValidator.error_message("verification_method", VALID_VALUES_FOR_VERIFICATION_METHOD)) unless OpenApi::EnumValidator.valid?(_verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
+      end
       invalid_properties
     end
 
@@ -68,8 +70,14 @@ module Stripe
       if _financial_connections = @financial_connections
         return false if _financial_connections.is_a?(OpenApi::Validatable) && !_financial_connections.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
-      return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
+
+      if _setup_future_usage = @setup_future_usage
+        return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+      end
+
+      if _verification_method = @verification_method
+        return false unless OpenApi::EnumValidator.valid?(_verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
+      end
 
       true
     end
@@ -92,7 +100,7 @@ module Stripe
         return @setup_future_usage = nil
       end
       _setup_future_usage = setup_future_usage.not_nil!
-      ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(_setup_future_usage)
+      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       @setup_future_usage = _setup_future_usage
     end
 
@@ -103,7 +111,7 @@ module Stripe
         return @verification_method = nil
       end
       _verification_method = verification_method.not_nil!
-      ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid!(_verification_method)
+      OpenApi::EnumValidator.validate("verification_method", _verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
       @verification_method = _verification_method
     end
 

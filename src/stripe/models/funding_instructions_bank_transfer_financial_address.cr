@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["iban", "sort_code", "spei", "zengin"])
+    VALID_VALUES_FOR__TYPE = StaticArray["iban", "sort_code", "spei", "zengin"]
 
     # Optional properties
 
@@ -42,7 +42,7 @@ module Stripe
     @[JSON::Field(key: "supported_networks", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter supported_networks : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS = OpenApi::EnumValidator.new("supported_networks", "Array(String)", ["bacs", "fps", "sepa", "spei", "zengin"])
+    VALID_VALUES_FOR_SUPPORTED_NETWORKS = StaticArray["bacs", "fps", "sepa", "spei", "zengin"]
 
     @[JSON::Field(key: "zengin", type: Stripe::FundingInstructionsBankTransferZenginRecord?, default: nil, required: false, nullable: false, emit_null: false)]
     getter zengin : Stripe::FundingInstructionsBankTransferZenginRecord? = nil
@@ -67,7 +67,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
       if _iban = @iban
         invalid_properties.concat(_iban.list_invalid_properties_for("iban")) if _iban.is_a?(OpenApi::Validatable)
       end
@@ -77,29 +81,39 @@ module Stripe
       if _spei = @spei
         invalid_properties.concat(_spei.list_invalid_properties_for("spei")) if _spei.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
+      if _supported_networks = @supported_networks
+        invalid_properties.push(OpenApi::EnumValidator.error_message("supported_networks", VALID_VALUES_FOR_SUPPORTED_NETWORKS)) unless OpenApi::EnumValidator.valid?(_supported_networks, VALID_VALUES_FOR_SUPPORTED_NETWORKS)
+      end
       if _zengin = @zengin
         invalid_properties.concat(_zengin.list_invalid_properties_for("zengin")) if _zengin.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if @_type.nil?
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+
       if _iban = @iban
         return false if _iban.is_a?(OpenApi::Validatable) && !_iban.valid?
       end
+
       if _sort_code = @sort_code
         return false if _sort_code.is_a?(OpenApi::Validatable) && !_sort_code.valid?
       end
+
       if _spei = @spei
         return false if _spei.is_a?(OpenApi::Validatable) && !_spei.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid?(@supported_networks)
+
+      if _supported_networks = @supported_networks
+        return false unless OpenApi::EnumValidator.valid?(_supported_networks, VALID_VALUES_FOR_SUPPORTED_NETWORKS)
+      end
+
       if _zengin = @zengin
         return false if _zengin.is_a?(OpenApi::Validatable) && !_zengin.valid?
       end
@@ -114,7 +128,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 
@@ -158,7 +172,7 @@ module Stripe
         return @supported_networks = nil
       end
       _supported_networks = supported_networks.not_nil!
-      ENUM_VALIDATOR_FOR_SUPPORTED_NETWORKS.all_valid!(_supported_networks)
+      OpenApi::EnumValidator.validate("supported_networks", _supported_networks, VALID_VALUES_FOR_SUPPORTED_NETWORKS)
       @supported_networks = _supported_networks
     end
 

@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "payment_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR = OpenApi::EnumValidator.new("payment_behavior", "String", ["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"])
+    VALID_VALUES_FOR_PAYMENT_BEHAVIOR = StaticArray["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"]
 
     # The ID of the price object. When changing a subscription item's price, `quantity` is set to 1 unless a `quantity` parameter is provided.
     @[JSON::Field(key: "price", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -51,7 +51,7 @@ module Stripe
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = OpenApi::EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
+    VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
 
     # If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](https://stripe.com/docs/api#retrieve_customer_invoice) endpoint.
     @[JSON::Field(key: "proration_date", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -87,6 +87,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _billing_thresholds = @billing_thresholds
         invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
@@ -95,7 +96,9 @@ module Stripe
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.valid?(@payment_behavior)
+      if _payment_behavior = @payment_behavior
+        invalid_properties.push(OpenApi::EnumValidator.error_message("payment_behavior", VALID_VALUES_FOR_PAYMENT_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_payment_behavior, VALID_VALUES_FOR_PAYMENT_BEHAVIOR)
+      end
       if _price = @price
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -104,13 +107,13 @@ module Stripe
       if _price_data = @price_data
         invalid_properties.concat(_price_data.list_invalid_properties_for("price_data")) if _price_data.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+      if _proration_behavior = @proration_behavior
+        invalid_properties.push(OpenApi::EnumValidator.error_message("proration_behavior", VALID_VALUES_FOR_PRORATION_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+      end
 
       if _tax_rates = @tax_rates
         invalid_properties.concat(_tax_rates.list_invalid_properties_for("tax_rates")) if _tax_rates.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -125,14 +128,21 @@ module Stripe
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
 
-      return false unless ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.valid?(@payment_behavior)
+      if _payment_behavior = @payment_behavior
+        return false unless OpenApi::EnumValidator.valid?(_payment_behavior, VALID_VALUES_FOR_PAYMENT_BEHAVIOR)
+      end
+
       if _price = @price
         return false if _price.to_s.size > 5000
       end
+
       if _price_data = @price_data
         return false if _price_data.is_a?(OpenApi::Validatable) && !_price_data.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+
+      if _proration_behavior = @proration_behavior
+        return false unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+      end
 
       if _tax_rates = @tax_rates
         return false if _tax_rates.is_a?(OpenApi::Validatable) && !_tax_rates.valid?
@@ -190,7 +200,7 @@ module Stripe
         return @payment_behavior = nil
       end
       _payment_behavior = payment_behavior.not_nil!
-      ENUM_VALIDATOR_FOR_PAYMENT_BEHAVIOR.valid!(_payment_behavior)
+      OpenApi::EnumValidator.validate("payment_behavior", _payment_behavior, VALID_VALUES_FOR_PAYMENT_BEHAVIOR)
       @payment_behavior = _payment_behavior
     end
 
@@ -226,7 +236,7 @@ module Stripe
         return @proration_behavior = nil
       end
       _proration_behavior = proration_behavior.not_nil!
-      ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(_proration_behavior)
+      OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       @proration_behavior = _proration_behavior
     end
 

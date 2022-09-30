@@ -80,6 +80,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _credit_reversal = @credit_reversal
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("credit_reversal", _credit_reversal.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -108,7 +109,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -118,18 +118,23 @@ module Stripe
       if _credit_reversal = @credit_reversal
         return false if _credit_reversal.to_s.size > 5000
       end
+
       if _issuing_authorization = @issuing_authorization
         return false if _issuing_authorization.to_s.size > 5000
       end
+
       if _issuing_transaction = @issuing_transaction
         return false if _issuing_transaction.to_s.size > 5000
       end
+
       if _source_flow = @source_flow
         return false if _source_flow.to_s.size > 5000
       end
+
       if _source_flow_details = @source_flow_details
         return false if _source_flow_details.is_a?(OpenApi::Validatable) && !_source_flow_details.valid?
       end
+
       if _source_flow_type = @source_flow_type
         return false if _source_flow_type.to_s.size > 5000
       end

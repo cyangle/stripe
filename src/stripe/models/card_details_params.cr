@@ -51,11 +51,13 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"exp_month\" is required and cannot be null") if @exp_month.nil?
 
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
 
       invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
+
       if _number = @number
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -66,7 +68,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -81,6 +82,7 @@ module Stripe
       if _number = @number
         return false if _number.to_s.size > 5000
       end
+
       if _cvc = @cvc
         return false if _cvc.to_s.size > 5000
       end

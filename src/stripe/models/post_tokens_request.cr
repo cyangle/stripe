@@ -66,6 +66,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _account = @account
         invalid_properties.concat(_account.list_invalid_properties_for("account")) if _account.is_a?(OpenApi::Validatable)
       end
@@ -90,7 +91,6 @@ module Stripe
       if _pii = @pii
         invalid_properties.concat(_pii.list_invalid_properties_for("pii")) if _pii.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -100,15 +100,19 @@ module Stripe
       if _account = @account
         return false if _account.is_a?(OpenApi::Validatable) && !_account.valid?
       end
+
       if _bank_account = @bank_account
         return false if _bank_account.is_a?(OpenApi::Validatable) && !_bank_account.valid?
       end
+
       if _card = @card
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
+
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
+
       if _cvc_update = @cvc_update
         return false if _cvc_update.is_a?(OpenApi::Validatable) && !_cvc_update.valid?
       end
@@ -116,6 +120,7 @@ module Stripe
       if _person = @person
         return false if _person.is_a?(OpenApi::Validatable) && !_person.valid?
       end
+
       if _pii = @pii
         return false if _pii.is_a?(OpenApi::Validatable) && !_pii.valid?
       end

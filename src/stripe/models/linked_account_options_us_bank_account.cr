@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "permissions", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter permissions : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_PERMISSIONS = OpenApi::EnumValidator.new("permissions", "Array(String)", ["balances", "ownership", "payment_method", "transactions"])
+    VALID_VALUES_FOR_PERMISSIONS = StaticArray["balances", "ownership", "payment_method", "transactions"]
 
     # For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
     @[JSON::Field(key: "return_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -46,20 +46,24 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PERMISSIONS.error_message) unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
+      if _permissions = @permissions
+        invalid_properties.push(OpenApi::EnumValidator.error_message("permissions", VALID_VALUES_FOR_PERMISSIONS)) unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
+      end
       if _return_url = @return_url
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions)
+      if _permissions = @permissions
+        return false unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
+      end
+
       if _return_url = @return_url
         return false if _return_url.to_s.size > 5000
       end
@@ -74,7 +78,7 @@ module Stripe
         return @permissions = nil
       end
       _permissions = permissions.not_nil!
-      ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid!(_permissions)
+      OpenApi::EnumValidator.validate("permissions", _permissions, VALID_VALUES_FOR_PERMISSIONS)
       @permissions = _permissions
     end
 

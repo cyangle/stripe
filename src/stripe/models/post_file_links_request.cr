@@ -54,7 +54,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"file\" is required and cannot be null") if @file.nil?
+
       if _file = @file
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("file", _file.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -64,7 +66,6 @@ module Stripe
       if _metadata = @metadata
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

@@ -48,25 +48,28 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"bank_code\" is required and cannot be null") if @bank_code.nil?
+
       if _bank_code = @bank_code
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"bank_name\" is required and cannot be null") if @bank_name.nil?
+
       if _bank_name = @bank_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"clabe\" is required and cannot be null") if @clabe.nil?
+
       if _clabe = @clabe
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("clabe", _clabe.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -77,10 +80,12 @@ module Stripe
       if _bank_code = @bank_code
         return false if _bank_code.to_s.size > 5000
       end
+
       return false if @bank_name.nil?
       if _bank_name = @bank_name
         return false if _bank_name.to_s.size > 5000
       end
+
       return false if @clabe.nil?
       if _clabe = @clabe
         return false if _clabe.to_s.size > 5000

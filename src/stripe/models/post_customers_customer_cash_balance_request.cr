@@ -45,7 +45,6 @@ module Stripe
       if _settings = @settings
         invalid_properties.concat(_settings.list_invalid_properties_for("settings")) if _settings.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

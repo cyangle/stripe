@@ -69,6 +69,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount_charged\" is required and cannot be null") if @amount_charged.nil?
 
       invalid_properties.push("\"amount_received\" is required and cannot be null") if @amount_received.nil?
@@ -76,12 +77,14 @@ module Stripe
       invalid_properties.push("\"amount_returned\" is required and cannot be null") if @amount_returned.nil?
 
       invalid_properties.push("\"refund_attributes_method\" is required and cannot be null") if @refund_attributes_method.nil?
+
       if _refund_attributes_method = @refund_attributes_method
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_attributes_method", _refund_attributes_method.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"refund_attributes_status\" is required and cannot be null") if @refund_attributes_status.nil?
+
       if _refund_attributes_status = @refund_attributes_status
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_attributes_status", _refund_attributes_status.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -92,7 +95,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -109,10 +111,12 @@ module Stripe
       if _refund_attributes_method = @refund_attributes_method
         return false if _refund_attributes_method.to_s.size > 5000
       end
+
       return false if @refund_attributes_status.nil?
       if _refund_attributes_status = @refund_attributes_status
         return false if _refund_attributes_status.to_s.size > 5000
       end
+
       if _address = @address
         return false if _address.to_s.size > 5000
       end

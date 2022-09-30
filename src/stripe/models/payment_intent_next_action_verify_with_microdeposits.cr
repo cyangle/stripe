@@ -37,8 +37,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? microdeposit_type_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_MICRODEPOSIT_TYPE = OpenApi::EnumValidator.new("microdeposit_type", "String", ["amounts", "descriptor_code"])
+    VALID_VALUES_FOR_MICRODEPOSIT_TYPE = StaticArray["amounts", "descriptor_code"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -56,17 +55,19 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"arrival_date\" is required and cannot be null") if @arrival_date.nil?
 
       invalid_properties.push("\"hosted_verification_url\" is required and cannot be null") if @hosted_verification_url.nil?
+
       if _hosted_verification_url = @hosted_verification_url
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_verification_url", _hosted_verification_url.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_MICRODEPOSIT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_MICRODEPOSIT_TYPE.valid?(@microdeposit_type)
-
+      if _microdeposit_type = @microdeposit_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("microdeposit_type", VALID_VALUES_FOR_MICRODEPOSIT_TYPE)) unless OpenApi::EnumValidator.valid?(_microdeposit_type, VALID_VALUES_FOR_MICRODEPOSIT_TYPE)
+      end
       invalid_properties
     end
 
@@ -79,7 +80,10 @@ module Stripe
       if _hosted_verification_url = @hosted_verification_url
         return false if _hosted_verification_url.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_MICRODEPOSIT_TYPE.valid?(@microdeposit_type)
+
+      if _microdeposit_type = @microdeposit_type
+        return false unless OpenApi::EnumValidator.valid?(_microdeposit_type, VALID_VALUES_FOR_MICRODEPOSIT_TYPE)
+      end
 
       true
     end
@@ -115,7 +119,7 @@ module Stripe
         return @microdeposit_type = nil
       end
       _microdeposit_type = microdeposit_type.not_nil!
-      ENUM_VALIDATOR_FOR_MICRODEPOSIT_TYPE.valid!(_microdeposit_type)
+      OpenApi::EnumValidator.validate("microdeposit_type", _microdeposit_type, VALID_VALUES_FOR_MICRODEPOSIT_TYPE)
       @microdeposit_type = _microdeposit_type
     end
 

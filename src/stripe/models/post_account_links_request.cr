@@ -28,7 +28,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["account_onboarding", "account_update"])
+    VALID_VALUES_FOR__TYPE = StaticArray["account_onboarding", "account_update"]
 
     # Optional properties
 
@@ -36,7 +36,7 @@ module Stripe
     @[JSON::Field(key: "collect", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collect : String? = nil
 
-    ENUM_VALIDATOR_FOR_COLLECT = OpenApi::EnumValidator.new("collect", "String", ["currently_due", "eventually_due"])
+    VALID_VALUES_FOR_COLLECT = StaticArray["currently_due", "eventually_due"]
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -69,16 +69,22 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
+
       if _account = @account
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECT.error_message) unless ENUM_VALIDATOR_FOR_COLLECT.valid?(@collect)
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+      if _collect = @collect
+        invalid_properties.push(OpenApi::EnumValidator.error_message("collect", VALID_VALUES_FOR_COLLECT)) unless OpenApi::EnumValidator.valid?(_collect, VALID_VALUES_FOR_COLLECT)
+      end
 
       invalid_properties
     end
@@ -90,8 +96,15 @@ module Stripe
       if _account = @account
         return false if _account.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      return false unless ENUM_VALIDATOR_FOR_COLLECT.valid?(@collect)
+
+      return false if @_type.nil?
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+
+      if _collect = @collect
+        return false unless OpenApi::EnumValidator.valid?(_collect, VALID_VALUES_FOR_COLLECT)
+      end
 
       true
     end
@@ -117,7 +130,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 
@@ -128,7 +141,7 @@ module Stripe
         return @collect = nil
       end
       _collect = collect.not_nil!
-      ENUM_VALIDATOR_FOR_COLLECT.valid!(_collect)
+      OpenApi::EnumValidator.validate("collect", _collect, VALID_VALUES_FOR_COLLECT)
       @collect = _collect
     end
 

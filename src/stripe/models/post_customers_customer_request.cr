@@ -110,7 +110,7 @@ module Stripe
     @[JSON::Field(key: "tax_exempt", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_exempt : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_EXEMPT = OpenApi::EnumValidator.new("tax_exempt", "String", ["", "exempt", "none", "reverse"])
+    VALID_VALUES_FOR_TAX_EXEMPT = StaticArray["", "exempt", "none", "reverse"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -149,6 +149,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _address = @address
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
@@ -237,9 +238,9 @@ module Stripe
       if _tax = @tax
         invalid_properties.concat(_tax.list_invalid_properties_for("tax")) if _tax.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_EXEMPT.error_message) unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
-
+      if _tax_exempt = @tax_exempt
+        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_exempt", VALID_VALUES_FOR_TAX_EXEMPT)) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
+      end
       invalid_properties
     end
 
@@ -253,30 +254,39 @@ module Stripe
       if _bank_account = @bank_account
         return false if _bank_account.is_a?(OpenApi::Validatable) && !_bank_account.valid?
       end
+
       if _card = @card
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
+
       if _cash_balance = @cash_balance
         return false if _cash_balance.is_a?(OpenApi::Validatable) && !_cash_balance.valid?
       end
+
       if _coupon = @coupon
         return false if _coupon.to_s.size > 5000
       end
+
       if _default_alipay_account = @default_alipay_account
         return false if _default_alipay_account.to_s.size > 500
       end
+
       if _default_bank_account = @default_bank_account
         return false if _default_bank_account.to_s.size > 500
       end
+
       if _default_card = @default_card
         return false if _default_card.to_s.size > 500
       end
+
       if _default_source = @default_source
         return false if _default_source.to_s.size > 500
       end
+
       if _description = @description
         return false if _description.to_s.size > 5000
       end
+
       if _email = @email
         return false if _email.to_s.size > 512
       end
@@ -284,12 +294,15 @@ module Stripe
       if _invoice_prefix = @invoice_prefix
         return false if _invoice_prefix.to_s.size > 5000
       end
+
       if _invoice_settings = @invoice_settings
         return false if _invoice_settings.is_a?(OpenApi::Validatable) && !_invoice_settings.valid?
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _name = @name
         return false if _name.to_s.size > 256
       end
@@ -301,16 +314,22 @@ module Stripe
       if _promotion_code = @promotion_code
         return false if _promotion_code.to_s.size > 5000
       end
+
       if _shipping = @shipping
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
+
       if _source = @source
         return false if _source.to_s.size > 5000
       end
+
       if _tax = @tax
         return false if _tax.is_a?(OpenApi::Validatable) && !_tax.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
+
+      if _tax_exempt = @tax_exempt
+        return false unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
+      end
 
       true
     end
@@ -618,7 +637,7 @@ module Stripe
         return @tax_exempt = nil
       end
       _tax_exempt = tax_exempt.not_nil!
-      ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid!(_tax_exempt)
+      OpenApi::EnumValidator.validate("tax_exempt", _tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       @tax_exempt = _tax_exempt
     end
 

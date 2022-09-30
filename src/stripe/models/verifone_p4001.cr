@@ -36,10 +36,10 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _splashscreen = @splashscreen
         invalid_properties.concat(_splashscreen.list_invalid_properties_for("splashscreen")) if _splashscreen.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

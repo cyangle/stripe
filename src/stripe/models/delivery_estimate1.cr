@@ -41,13 +41,13 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _maximum = @maximum
         invalid_properties.concat(_maximum.list_invalid_properties_for("maximum")) if _maximum.is_a?(OpenApi::Validatable)
       end
       if _minimum = @minimum
         invalid_properties.concat(_minimum.list_invalid_properties_for("minimum")) if _minimum.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -57,6 +57,7 @@ module Stripe
       if _maximum = @maximum
         return false if _maximum.is_a?(OpenApi::Validatable) && !_maximum.valid?
       end
+
       if _minimum = @minimum
         return false if _minimum.is_a?(OpenApi::Validatable) && !_minimum.valid?
       end

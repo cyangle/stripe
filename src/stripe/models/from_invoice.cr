@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "action", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter action : String? = nil
 
-    ENUM_VALIDATOR_FOR_ACTION = OpenApi::EnumValidator.new("action", "String", ["revision"])
+    VALID_VALUES_FOR_ACTION = StaticArray["revision"]
 
     @[JSON::Field(key: "invoice", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter invoice : String? = nil
@@ -44,21 +44,29 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ACTION.error_message) unless ENUM_VALIDATOR_FOR_ACTION.valid?(@action, false)
+      invalid_properties.push("\"action\" is required and cannot be null") if @action.nil?
+
+      if _action = @action
+        invalid_properties.push(OpenApi::EnumValidator.error_message("action", VALID_VALUES_FOR_ACTION)) unless OpenApi::EnumValidator.valid?(_action, VALID_VALUES_FOR_ACTION)
+      end
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
+
       if _invoice = @invoice
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_ACTION.valid?(@action, false)
+      return false if @action.nil?
+      if _action = @action
+        return false unless OpenApi::EnumValidator.valid?(_action, VALID_VALUES_FOR_ACTION)
+      end
+
       return false if @invoice.nil?
       if _invoice = @invoice
         return false if _invoice.to_s.size > 5000
@@ -74,7 +82,7 @@ module Stripe
         raise ArgumentError.new("\"action\" is required and cannot be null")
       end
       _action = action.not_nil!
-      ENUM_VALIDATOR_FOR_ACTION.valid!(_action)
+      OpenApi::EnumValidator.validate("action", _action, VALID_VALUES_FOR_ACTION)
       @action = _action
     end
 

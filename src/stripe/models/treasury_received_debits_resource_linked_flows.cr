@@ -65,6 +65,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _debit_reversal = @debit_reversal
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("debit_reversal", _debit_reversal.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -85,7 +86,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -95,12 +95,15 @@ module Stripe
       if _debit_reversal = @debit_reversal
         return false if _debit_reversal.to_s.size > 5000
       end
+
       if _inbound_transfer = @inbound_transfer
         return false if _inbound_transfer.to_s.size > 5000
       end
+
       if _issuing_authorization = @issuing_authorization
         return false if _issuing_authorization.to_s.size > 5000
       end
+
       if _issuing_transaction = @issuing_transaction
         return false if _issuing_transaction.to_s.size > 5000
       end

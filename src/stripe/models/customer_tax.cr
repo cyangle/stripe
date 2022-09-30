@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "automatic_tax", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter automatic_tax : String? = nil
 
-    ENUM_VALIDATOR_FOR_AUTOMATIC_TAX = OpenApi::EnumValidator.new("automatic_tax", "String", ["failed", "not_collecting", "supported", "unrecognized_location"])
+    VALID_VALUES_FOR_AUTOMATIC_TAX = StaticArray["failed", "not_collecting", "supported", "unrecognized_location"]
 
     # Optional properties
 
@@ -59,7 +59,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AUTOMATIC_TAX.error_message) unless ENUM_VALIDATOR_FOR_AUTOMATIC_TAX.valid?(@automatic_tax, false)
+      invalid_properties.push("\"automatic_tax\" is required and cannot be null") if @automatic_tax.nil?
+
+      if _automatic_tax = @automatic_tax
+        invalid_properties.push(OpenApi::EnumValidator.error_message("automatic_tax", VALID_VALUES_FOR_AUTOMATIC_TAX)) unless OpenApi::EnumValidator.valid?(_automatic_tax, VALID_VALUES_FOR_AUTOMATIC_TAX)
+      end
       if _ip_address = @ip_address
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -68,17 +72,21 @@ module Stripe
       if _location = @location
         invalid_properties.concat(_location.list_invalid_properties_for("location")) if _location.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_AUTOMATIC_TAX.valid?(@automatic_tax, false)
+      return false if @automatic_tax.nil?
+      if _automatic_tax = @automatic_tax
+        return false unless OpenApi::EnumValidator.valid?(_automatic_tax, VALID_VALUES_FOR_AUTOMATIC_TAX)
+      end
+
       if _ip_address = @ip_address
         return false if _ip_address.to_s.size > 5000
       end
+
       if _location = @location
         return false if _location.is_a?(OpenApi::Validatable) && !_location.valid?
       end
@@ -93,7 +101,7 @@ module Stripe
         raise ArgumentError.new("\"automatic_tax\" is required and cannot be null")
       end
       _automatic_tax = automatic_tax.not_nil!
-      ENUM_VALIDATOR_FOR_AUTOMATIC_TAX.valid!(_automatic_tax)
+      OpenApi::EnumValidator.validate("automatic_tax", _automatic_tax, VALID_VALUES_FOR_AUTOMATIC_TAX)
       @automatic_tax = _automatic_tax
     end
 

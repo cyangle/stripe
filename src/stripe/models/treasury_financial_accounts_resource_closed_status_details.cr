@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "reasons", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reasons : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_REASONS = OpenApi::EnumValidator.new("reasons", "Array(String)", ["account_rejected", "closed_by_platform", "other"])
+    VALID_VALUES_FOR_REASONS = StaticArray["account_rejected", "closed_by_platform", "other"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -41,15 +41,21 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_REASONS.error_message) unless ENUM_VALIDATOR_FOR_REASONS.all_valid?(@reasons, false)
+      invalid_properties.push("\"reasons\" is required and cannot be null") if @reasons.nil?
 
+      if _reasons = @reasons
+        invalid_properties.push(OpenApi::EnumValidator.error_message("reasons", VALID_VALUES_FOR_REASONS)) unless OpenApi::EnumValidator.valid?(_reasons, VALID_VALUES_FOR_REASONS)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_REASONS.all_valid?(@reasons, false)
+      return false if @reasons.nil?
+      if _reasons = @reasons
+        return false unless OpenApi::EnumValidator.valid?(_reasons, VALID_VALUES_FOR_REASONS)
+      end
 
       true
     end
@@ -61,7 +67,7 @@ module Stripe
         raise ArgumentError.new("\"reasons\" is required and cannot be null")
       end
       _reasons = reasons.not_nil!
-      ENUM_VALIDATOR_FOR_REASONS.all_valid!(_reasons)
+      OpenApi::EnumValidator.validate("reasons", _reasons, VALID_VALUES_FOR_REASONS)
       @reasons = _reasons
     end
 

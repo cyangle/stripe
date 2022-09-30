@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "features", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter features : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_FEATURES = OpenApi::EnumValidator.new("features", "Array(String)", ["balance", "ownership"])
+    VALID_VALUES_FOR_FEATURES = StaticArray["balance", "ownership"]
 
     # Optional properties
 
@@ -48,7 +48,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_FEATURES.error_message) unless ENUM_VALIDATOR_FOR_FEATURES.all_valid?(@features, false)
+      invalid_properties.push("\"features\" is required and cannot be null") if @features.nil?
+
+      if _features = @features
+        invalid_properties.push(OpenApi::EnumValidator.error_message("features", VALID_VALUES_FOR_FEATURES)) unless OpenApi::EnumValidator.valid?(_features, VALID_VALUES_FOR_FEATURES)
+      end
 
       invalid_properties
     end
@@ -56,7 +60,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_FEATURES.all_valid?(@features, false)
+      return false if @features.nil?
+      if _features = @features
+        return false unless OpenApi::EnumValidator.valid?(_features, VALID_VALUES_FOR_FEATURES)
+      end
 
       true
     end
@@ -68,7 +75,7 @@ module Stripe
         raise ArgumentError.new("\"features\" is required and cannot be null")
       end
       _features = features.not_nil!
-      ENUM_VALIDATOR_FOR_FEATURES.all_valid!(_features)
+      OpenApi::EnumValidator.validate("features", _features, VALID_VALUES_FOR_FEATURES)
       @features = _features
     end
 

@@ -53,9 +53,11 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"debit_negative_balances\" is required and cannot be null") if @debit_negative_balances.nil?
 
       invalid_properties.push("\"schedule\" is required and cannot be null") if @schedule.nil?
+
       if _schedule = @schedule
         invalid_properties.concat(_schedule.list_invalid_properties_for("schedule")) if _schedule.is_a?(OpenApi::Validatable)
       end
@@ -64,7 +66,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -77,6 +78,7 @@ module Stripe
       if _schedule = @schedule
         return false if _schedule.is_a?(OpenApi::Validatable) && !_schedule.valid?
       end
+
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 5000
       end

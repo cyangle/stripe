@@ -25,199 +25,199 @@ module Stripe
     @[JSON::Field(key: "acss_debit_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter acss_debit_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS = OpenApi::EnumValidator.new("acss_debit_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_ACSS_DEBIT_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the Affirm capability of the account, or whether the account can directly process Affirm charges.
     @[JSON::Field(key: "affirm_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter affirm_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_AFFIRM_PAYMENTS = OpenApi::EnumValidator.new("affirm_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_AFFIRM_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the Afterpay Clearpay capability of the account, or whether the account can directly process Afterpay Clearpay charges.
     @[JSON::Field(key: "afterpay_clearpay_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter afterpay_clearpay_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_AFTERPAY_CLEARPAY_PAYMENTS = OpenApi::EnumValidator.new("afterpay_clearpay_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_AFTERPAY_CLEARPAY_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the BECS Direct Debit (AU) payments capability of the account, or whether the account can directly process BECS Direct Debit (AU) charges.
     @[JSON::Field(key: "au_becs_debit_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter au_becs_debit_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_AU_BECS_DEBIT_PAYMENTS = OpenApi::EnumValidator.new("au_becs_debit_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_AU_BECS_DEBIT_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the Bacs Direct Debits payments capability of the account, or whether the account can directly process Bacs Direct Debits charges.
     @[JSON::Field(key: "bacs_debit_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bacs_debit_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_BACS_DEBIT_PAYMENTS = OpenApi::EnumValidator.new("bacs_debit_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_BACS_DEBIT_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the Bancontact payments capability of the account, or whether the account can directly process Bancontact charges.
     @[JSON::Field(key: "bancontact_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bancontact_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_BANCONTACT_PAYMENTS = OpenApi::EnumValidator.new("bancontact_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_BANCONTACT_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the customer_balance payments capability of the account, or whether the account can directly process customer_balance charges.
     @[JSON::Field(key: "bank_transfer_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bank_transfer_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_BANK_TRANSFER_PAYMENTS = OpenApi::EnumValidator.new("bank_transfer_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_BANK_TRANSFER_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the blik payments capability of the account, or whether the account can directly process blik charges.
     @[JSON::Field(key: "blik_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter blik_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_BLIK_PAYMENTS = OpenApi::EnumValidator.new("blik_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_BLIK_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the boleto payments capability of the account, or whether the account can directly process boleto charges.
     @[JSON::Field(key: "boleto_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter boleto_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_BOLETO_PAYMENTS = OpenApi::EnumValidator.new("boleto_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_BOLETO_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the card issuing capability of the account, or whether you can use Issuing to distribute funds on cards
     @[JSON::Field(key: "card_issuing", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter card_issuing : String? = nil
 
-    ENUM_VALIDATOR_FOR_CARD_ISSUING = OpenApi::EnumValidator.new("card_issuing", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_CARD_ISSUING = StaticArray["active", "inactive", "pending"]
 
     # The status of the card payments capability of the account, or whether the account can directly process credit and debit card charges.
     @[JSON::Field(key: "card_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter card_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_CARD_PAYMENTS = OpenApi::EnumValidator.new("card_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_CARD_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the Cartes Bancaires payments capability of the account, or whether the account can directly process Cartes Bancaires card charges in EUR currency.
     @[JSON::Field(key: "cartes_bancaires_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cartes_bancaires_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_CARTES_BANCAIRES_PAYMENTS = OpenApi::EnumValidator.new("cartes_bancaires_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_CARTES_BANCAIRES_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the EPS payments capability of the account, or whether the account can directly process EPS charges.
     @[JSON::Field(key: "eps_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter eps_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_EPS_PAYMENTS = OpenApi::EnumValidator.new("eps_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_EPS_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the FPX payments capability of the account, or whether the account can directly process FPX charges.
     @[JSON::Field(key: "fpx_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter fpx_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_FPX_PAYMENTS = OpenApi::EnumValidator.new("fpx_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_FPX_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the giropay payments capability of the account, or whether the account can directly process giropay charges.
     @[JSON::Field(key: "giropay_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter giropay_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_GIROPAY_PAYMENTS = OpenApi::EnumValidator.new("giropay_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_GIROPAY_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the GrabPay payments capability of the account, or whether the account can directly process GrabPay charges.
     @[JSON::Field(key: "grabpay_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter grabpay_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_GRABPAY_PAYMENTS = OpenApi::EnumValidator.new("grabpay_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_GRABPAY_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the iDEAL payments capability of the account, or whether the account can directly process iDEAL charges.
     @[JSON::Field(key: "ideal_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ideal_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_IDEAL_PAYMENTS = OpenApi::EnumValidator.new("ideal_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_IDEAL_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the JCB payments capability of the account, or whether the account (Japan only) can directly process JCB credit card charges in JPY currency.
     @[JSON::Field(key: "jcb_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter jcb_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_JCB_PAYMENTS = OpenApi::EnumValidator.new("jcb_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_JCB_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the Klarna payments capability of the account, or whether the account can directly process Klarna charges.
     @[JSON::Field(key: "klarna_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter klarna_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_KLARNA_PAYMENTS = OpenApi::EnumValidator.new("klarna_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_KLARNA_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the konbini payments capability of the account, or whether the account can directly process konbini charges.
     @[JSON::Field(key: "konbini_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter konbini_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_KONBINI_PAYMENTS = OpenApi::EnumValidator.new("konbini_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_KONBINI_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the legacy payments capability of the account.
     @[JSON::Field(key: "legacy_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter legacy_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_LEGACY_PAYMENTS = OpenApi::EnumValidator.new("legacy_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_LEGACY_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the link_payments capability of the account, or whether the account can directly process Link charges.
     @[JSON::Field(key: "link_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter link_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_LINK_PAYMENTS = OpenApi::EnumValidator.new("link_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_LINK_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the OXXO payments capability of the account, or whether the account can directly process OXXO charges.
     @[JSON::Field(key: "oxxo_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter oxxo_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_OXXO_PAYMENTS = OpenApi::EnumValidator.new("oxxo_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_OXXO_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the P24 payments capability of the account, or whether the account can directly process P24 charges.
     @[JSON::Field(key: "p24_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter p24_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_P24_PAYMENTS = OpenApi::EnumValidator.new("p24_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_P24_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the paynow payments capability of the account, or whether the account can directly process paynow charges.
     @[JSON::Field(key: "paynow_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter paynow_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_PAYNOW_PAYMENTS = OpenApi::EnumValidator.new("paynow_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_PAYNOW_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the promptpay payments capability of the account, or whether the account can directly process promptpay charges.
     @[JSON::Field(key: "promptpay_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter promptpay_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_PROMPTPAY_PAYMENTS = OpenApi::EnumValidator.new("promptpay_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_PROMPTPAY_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the SEPA Direct Debits payments capability of the account, or whether the account can directly process SEPA Direct Debits charges.
     @[JSON::Field(key: "sepa_debit_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sepa_debit_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_SEPA_DEBIT_PAYMENTS = OpenApi::EnumValidator.new("sepa_debit_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_SEPA_DEBIT_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the Sofort payments capability of the account, or whether the account can directly process Sofort charges.
     @[JSON::Field(key: "sofort_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sofort_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_SOFORT_PAYMENTS = OpenApi::EnumValidator.new("sofort_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_SOFORT_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # The status of the tax reporting 1099-K (US) capability of the account.
     @[JSON::Field(key: "tax_reporting_us_1099_k", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_reporting_us_1099_k : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_K = OpenApi::EnumValidator.new("tax_reporting_us_1099_k", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_TAX_REPORTING_US_1099_K = StaticArray["active", "inactive", "pending"]
 
     # The status of the tax reporting 1099-MISC (US) capability of the account.
     @[JSON::Field(key: "tax_reporting_us_1099_misc", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_reporting_us_1099_misc : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_MISC = OpenApi::EnumValidator.new("tax_reporting_us_1099_misc", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_TAX_REPORTING_US_1099_MISC = StaticArray["active", "inactive", "pending"]
 
     # The status of the transfers capability of the account, or whether your platform can transfer funds to the account.
     @[JSON::Field(key: "transfers", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transfers : String? = nil
 
-    ENUM_VALIDATOR_FOR_TRANSFERS = OpenApi::EnumValidator.new("transfers", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_TRANSFERS = StaticArray["active", "inactive", "pending"]
 
     # The status of the banking capability, or whether the account can have bank accounts.
     @[JSON::Field(key: "treasury", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter treasury : String? = nil
 
-    ENUM_VALIDATOR_FOR_TREASURY = OpenApi::EnumValidator.new("treasury", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_TREASURY = StaticArray["active", "inactive", "pending"]
 
     # The status of the US bank account ACH payments capability of the account, or whether the account can directly process US bank account charges.
     @[JSON::Field(key: "us_bank_account_ach_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter us_bank_account_ach_payments : String? = nil
 
-    ENUM_VALIDATOR_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS = OpenApi::EnumValidator.new("us_bank_account_ach_payments", "String", ["active", "inactive", "pending"])
+    VALID_VALUES_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS = StaticArray["active", "inactive", "pending"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -265,111 +265,242 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS.valid?(@acss_debit_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AFFIRM_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_AFFIRM_PAYMENTS.valid?(@affirm_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AFTERPAY_CLEARPAY_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_AFTERPAY_CLEARPAY_PAYMENTS.valid?(@afterpay_clearpay_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AU_BECS_DEBIT_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_AU_BECS_DEBIT_PAYMENTS.valid?(@au_becs_debit_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BACS_DEBIT_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_BACS_DEBIT_PAYMENTS.valid?(@bacs_debit_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BANCONTACT_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_BANCONTACT_PAYMENTS.valid?(@bancontact_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BANK_TRANSFER_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_BANK_TRANSFER_PAYMENTS.valid?(@bank_transfer_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BLIK_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_BLIK_PAYMENTS.valid?(@blik_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BOLETO_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_BOLETO_PAYMENTS.valid?(@boleto_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CARD_ISSUING.error_message) unless ENUM_VALIDATOR_FOR_CARD_ISSUING.valid?(@card_issuing)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CARD_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_CARD_PAYMENTS.valid?(@card_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CARTES_BANCAIRES_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_CARTES_BANCAIRES_PAYMENTS.valid?(@cartes_bancaires_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_EPS_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_EPS_PAYMENTS.valid?(@eps_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_FPX_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_FPX_PAYMENTS.valid?(@fpx_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_GIROPAY_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_GIROPAY_PAYMENTS.valid?(@giropay_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_GRABPAY_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_GRABPAY_PAYMENTS.valid?(@grabpay_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_IDEAL_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_IDEAL_PAYMENTS.valid?(@ideal_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_JCB_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_JCB_PAYMENTS.valid?(@jcb_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_KLARNA_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_KLARNA_PAYMENTS.valid?(@klarna_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_KONBINI_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_KONBINI_PAYMENTS.valid?(@konbini_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_LEGACY_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_LEGACY_PAYMENTS.valid?(@legacy_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_LINK_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_LINK_PAYMENTS.valid?(@link_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OXXO_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_OXXO_PAYMENTS.valid?(@oxxo_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_P24_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_P24_PAYMENTS.valid?(@p24_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PAYNOW_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_PAYNOW_PAYMENTS.valid?(@paynow_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PROMPTPAY_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_PROMPTPAY_PAYMENTS.valid?(@promptpay_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SEPA_DEBIT_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_SEPA_DEBIT_PAYMENTS.valid?(@sepa_debit_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SOFORT_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_SOFORT_PAYMENTS.valid?(@sofort_payments)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_K.error_message) unless ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_K.valid?(@tax_reporting_us_1099_k)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_MISC.error_message) unless ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_MISC.valid?(@tax_reporting_us_1099_misc)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TRANSFERS.error_message) unless ENUM_VALIDATOR_FOR_TRANSFERS.valid?(@transfers)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TREASURY.error_message) unless ENUM_VALIDATOR_FOR_TREASURY.valid?(@treasury)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS.error_message) unless ENUM_VALIDATOR_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS.valid?(@us_bank_account_ach_payments)
-
+      if _acss_debit_payments = @acss_debit_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("acss_debit_payments", VALID_VALUES_FOR_ACSS_DEBIT_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_acss_debit_payments, VALID_VALUES_FOR_ACSS_DEBIT_PAYMENTS)
+      end
+      if _affirm_payments = @affirm_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("affirm_payments", VALID_VALUES_FOR_AFFIRM_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_affirm_payments, VALID_VALUES_FOR_AFFIRM_PAYMENTS)
+      end
+      if _afterpay_clearpay_payments = @afterpay_clearpay_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("afterpay_clearpay_payments", VALID_VALUES_FOR_AFTERPAY_CLEARPAY_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_afterpay_clearpay_payments, VALID_VALUES_FOR_AFTERPAY_CLEARPAY_PAYMENTS)
+      end
+      if _au_becs_debit_payments = @au_becs_debit_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("au_becs_debit_payments", VALID_VALUES_FOR_AU_BECS_DEBIT_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_au_becs_debit_payments, VALID_VALUES_FOR_AU_BECS_DEBIT_PAYMENTS)
+      end
+      if _bacs_debit_payments = @bacs_debit_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("bacs_debit_payments", VALID_VALUES_FOR_BACS_DEBIT_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_bacs_debit_payments, VALID_VALUES_FOR_BACS_DEBIT_PAYMENTS)
+      end
+      if _bancontact_payments = @bancontact_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("bancontact_payments", VALID_VALUES_FOR_BANCONTACT_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_bancontact_payments, VALID_VALUES_FOR_BANCONTACT_PAYMENTS)
+      end
+      if _bank_transfer_payments = @bank_transfer_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("bank_transfer_payments", VALID_VALUES_FOR_BANK_TRANSFER_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_bank_transfer_payments, VALID_VALUES_FOR_BANK_TRANSFER_PAYMENTS)
+      end
+      if _blik_payments = @blik_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("blik_payments", VALID_VALUES_FOR_BLIK_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_blik_payments, VALID_VALUES_FOR_BLIK_PAYMENTS)
+      end
+      if _boleto_payments = @boleto_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("boleto_payments", VALID_VALUES_FOR_BOLETO_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_boleto_payments, VALID_VALUES_FOR_BOLETO_PAYMENTS)
+      end
+      if _card_issuing = @card_issuing
+        invalid_properties.push(OpenApi::EnumValidator.error_message("card_issuing", VALID_VALUES_FOR_CARD_ISSUING)) unless OpenApi::EnumValidator.valid?(_card_issuing, VALID_VALUES_FOR_CARD_ISSUING)
+      end
+      if _card_payments = @card_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("card_payments", VALID_VALUES_FOR_CARD_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_card_payments, VALID_VALUES_FOR_CARD_PAYMENTS)
+      end
+      if _cartes_bancaires_payments = @cartes_bancaires_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("cartes_bancaires_payments", VALID_VALUES_FOR_CARTES_BANCAIRES_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_cartes_bancaires_payments, VALID_VALUES_FOR_CARTES_BANCAIRES_PAYMENTS)
+      end
+      if _eps_payments = @eps_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("eps_payments", VALID_VALUES_FOR_EPS_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_eps_payments, VALID_VALUES_FOR_EPS_PAYMENTS)
+      end
+      if _fpx_payments = @fpx_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("fpx_payments", VALID_VALUES_FOR_FPX_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_fpx_payments, VALID_VALUES_FOR_FPX_PAYMENTS)
+      end
+      if _giropay_payments = @giropay_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("giropay_payments", VALID_VALUES_FOR_GIROPAY_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_giropay_payments, VALID_VALUES_FOR_GIROPAY_PAYMENTS)
+      end
+      if _grabpay_payments = @grabpay_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("grabpay_payments", VALID_VALUES_FOR_GRABPAY_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_grabpay_payments, VALID_VALUES_FOR_GRABPAY_PAYMENTS)
+      end
+      if _ideal_payments = @ideal_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("ideal_payments", VALID_VALUES_FOR_IDEAL_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_ideal_payments, VALID_VALUES_FOR_IDEAL_PAYMENTS)
+      end
+      if _jcb_payments = @jcb_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("jcb_payments", VALID_VALUES_FOR_JCB_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_jcb_payments, VALID_VALUES_FOR_JCB_PAYMENTS)
+      end
+      if _klarna_payments = @klarna_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("klarna_payments", VALID_VALUES_FOR_KLARNA_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_klarna_payments, VALID_VALUES_FOR_KLARNA_PAYMENTS)
+      end
+      if _konbini_payments = @konbini_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("konbini_payments", VALID_VALUES_FOR_KONBINI_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_konbini_payments, VALID_VALUES_FOR_KONBINI_PAYMENTS)
+      end
+      if _legacy_payments = @legacy_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("legacy_payments", VALID_VALUES_FOR_LEGACY_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_legacy_payments, VALID_VALUES_FOR_LEGACY_PAYMENTS)
+      end
+      if _link_payments = @link_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("link_payments", VALID_VALUES_FOR_LINK_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_link_payments, VALID_VALUES_FOR_LINK_PAYMENTS)
+      end
+      if _oxxo_payments = @oxxo_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("oxxo_payments", VALID_VALUES_FOR_OXXO_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_oxxo_payments, VALID_VALUES_FOR_OXXO_PAYMENTS)
+      end
+      if _p24_payments = @p24_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("p24_payments", VALID_VALUES_FOR_P24_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_p24_payments, VALID_VALUES_FOR_P24_PAYMENTS)
+      end
+      if _paynow_payments = @paynow_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("paynow_payments", VALID_VALUES_FOR_PAYNOW_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_paynow_payments, VALID_VALUES_FOR_PAYNOW_PAYMENTS)
+      end
+      if _promptpay_payments = @promptpay_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("promptpay_payments", VALID_VALUES_FOR_PROMPTPAY_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_promptpay_payments, VALID_VALUES_FOR_PROMPTPAY_PAYMENTS)
+      end
+      if _sepa_debit_payments = @sepa_debit_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("sepa_debit_payments", VALID_VALUES_FOR_SEPA_DEBIT_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_sepa_debit_payments, VALID_VALUES_FOR_SEPA_DEBIT_PAYMENTS)
+      end
+      if _sofort_payments = @sofort_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("sofort_payments", VALID_VALUES_FOR_SOFORT_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_sofort_payments, VALID_VALUES_FOR_SOFORT_PAYMENTS)
+      end
+      if _tax_reporting_us_1099_k = @tax_reporting_us_1099_k
+        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_reporting_us_1099_k", VALID_VALUES_FOR_TAX_REPORTING_US_1099_K)) unless OpenApi::EnumValidator.valid?(_tax_reporting_us_1099_k, VALID_VALUES_FOR_TAX_REPORTING_US_1099_K)
+      end
+      if _tax_reporting_us_1099_misc = @tax_reporting_us_1099_misc
+        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_reporting_us_1099_misc", VALID_VALUES_FOR_TAX_REPORTING_US_1099_MISC)) unless OpenApi::EnumValidator.valid?(_tax_reporting_us_1099_misc, VALID_VALUES_FOR_TAX_REPORTING_US_1099_MISC)
+      end
+      if _transfers = @transfers
+        invalid_properties.push(OpenApi::EnumValidator.error_message("transfers", VALID_VALUES_FOR_TRANSFERS)) unless OpenApi::EnumValidator.valid?(_transfers, VALID_VALUES_FOR_TRANSFERS)
+      end
+      if _treasury = @treasury
+        invalid_properties.push(OpenApi::EnumValidator.error_message("treasury", VALID_VALUES_FOR_TREASURY)) unless OpenApi::EnumValidator.valid?(_treasury, VALID_VALUES_FOR_TREASURY)
+      end
+      if _us_bank_account_ach_payments = @us_bank_account_ach_payments
+        invalid_properties.push(OpenApi::EnumValidator.error_message("us_bank_account_ach_payments", VALID_VALUES_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_us_bank_account_ach_payments, VALID_VALUES_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS.valid?(@acss_debit_payments)
-      return false unless ENUM_VALIDATOR_FOR_AFFIRM_PAYMENTS.valid?(@affirm_payments)
-      return false unless ENUM_VALIDATOR_FOR_AFTERPAY_CLEARPAY_PAYMENTS.valid?(@afterpay_clearpay_payments)
-      return false unless ENUM_VALIDATOR_FOR_AU_BECS_DEBIT_PAYMENTS.valid?(@au_becs_debit_payments)
-      return false unless ENUM_VALIDATOR_FOR_BACS_DEBIT_PAYMENTS.valid?(@bacs_debit_payments)
-      return false unless ENUM_VALIDATOR_FOR_BANCONTACT_PAYMENTS.valid?(@bancontact_payments)
-      return false unless ENUM_VALIDATOR_FOR_BANK_TRANSFER_PAYMENTS.valid?(@bank_transfer_payments)
-      return false unless ENUM_VALIDATOR_FOR_BLIK_PAYMENTS.valid?(@blik_payments)
-      return false unless ENUM_VALIDATOR_FOR_BOLETO_PAYMENTS.valid?(@boleto_payments)
-      return false unless ENUM_VALIDATOR_FOR_CARD_ISSUING.valid?(@card_issuing)
-      return false unless ENUM_VALIDATOR_FOR_CARD_PAYMENTS.valid?(@card_payments)
-      return false unless ENUM_VALIDATOR_FOR_CARTES_BANCAIRES_PAYMENTS.valid?(@cartes_bancaires_payments)
-      return false unless ENUM_VALIDATOR_FOR_EPS_PAYMENTS.valid?(@eps_payments)
-      return false unless ENUM_VALIDATOR_FOR_FPX_PAYMENTS.valid?(@fpx_payments)
-      return false unless ENUM_VALIDATOR_FOR_GIROPAY_PAYMENTS.valid?(@giropay_payments)
-      return false unless ENUM_VALIDATOR_FOR_GRABPAY_PAYMENTS.valid?(@grabpay_payments)
-      return false unless ENUM_VALIDATOR_FOR_IDEAL_PAYMENTS.valid?(@ideal_payments)
-      return false unless ENUM_VALIDATOR_FOR_JCB_PAYMENTS.valid?(@jcb_payments)
-      return false unless ENUM_VALIDATOR_FOR_KLARNA_PAYMENTS.valid?(@klarna_payments)
-      return false unless ENUM_VALIDATOR_FOR_KONBINI_PAYMENTS.valid?(@konbini_payments)
-      return false unless ENUM_VALIDATOR_FOR_LEGACY_PAYMENTS.valid?(@legacy_payments)
-      return false unless ENUM_VALIDATOR_FOR_LINK_PAYMENTS.valid?(@link_payments)
-      return false unless ENUM_VALIDATOR_FOR_OXXO_PAYMENTS.valid?(@oxxo_payments)
-      return false unless ENUM_VALIDATOR_FOR_P24_PAYMENTS.valid?(@p24_payments)
-      return false unless ENUM_VALIDATOR_FOR_PAYNOW_PAYMENTS.valid?(@paynow_payments)
-      return false unless ENUM_VALIDATOR_FOR_PROMPTPAY_PAYMENTS.valid?(@promptpay_payments)
-      return false unless ENUM_VALIDATOR_FOR_SEPA_DEBIT_PAYMENTS.valid?(@sepa_debit_payments)
-      return false unless ENUM_VALIDATOR_FOR_SOFORT_PAYMENTS.valid?(@sofort_payments)
-      return false unless ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_K.valid?(@tax_reporting_us_1099_k)
-      return false unless ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_MISC.valid?(@tax_reporting_us_1099_misc)
-      return false unless ENUM_VALIDATOR_FOR_TRANSFERS.valid?(@transfers)
-      return false unless ENUM_VALIDATOR_FOR_TREASURY.valid?(@treasury)
-      return false unless ENUM_VALIDATOR_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS.valid?(@us_bank_account_ach_payments)
+      if _acss_debit_payments = @acss_debit_payments
+        return false unless OpenApi::EnumValidator.valid?(_acss_debit_payments, VALID_VALUES_FOR_ACSS_DEBIT_PAYMENTS)
+      end
+
+      if _affirm_payments = @affirm_payments
+        return false unless OpenApi::EnumValidator.valid?(_affirm_payments, VALID_VALUES_FOR_AFFIRM_PAYMENTS)
+      end
+
+      if _afterpay_clearpay_payments = @afterpay_clearpay_payments
+        return false unless OpenApi::EnumValidator.valid?(_afterpay_clearpay_payments, VALID_VALUES_FOR_AFTERPAY_CLEARPAY_PAYMENTS)
+      end
+
+      if _au_becs_debit_payments = @au_becs_debit_payments
+        return false unless OpenApi::EnumValidator.valid?(_au_becs_debit_payments, VALID_VALUES_FOR_AU_BECS_DEBIT_PAYMENTS)
+      end
+
+      if _bacs_debit_payments = @bacs_debit_payments
+        return false unless OpenApi::EnumValidator.valid?(_bacs_debit_payments, VALID_VALUES_FOR_BACS_DEBIT_PAYMENTS)
+      end
+
+      if _bancontact_payments = @bancontact_payments
+        return false unless OpenApi::EnumValidator.valid?(_bancontact_payments, VALID_VALUES_FOR_BANCONTACT_PAYMENTS)
+      end
+
+      if _bank_transfer_payments = @bank_transfer_payments
+        return false unless OpenApi::EnumValidator.valid?(_bank_transfer_payments, VALID_VALUES_FOR_BANK_TRANSFER_PAYMENTS)
+      end
+
+      if _blik_payments = @blik_payments
+        return false unless OpenApi::EnumValidator.valid?(_blik_payments, VALID_VALUES_FOR_BLIK_PAYMENTS)
+      end
+
+      if _boleto_payments = @boleto_payments
+        return false unless OpenApi::EnumValidator.valid?(_boleto_payments, VALID_VALUES_FOR_BOLETO_PAYMENTS)
+      end
+
+      if _card_issuing = @card_issuing
+        return false unless OpenApi::EnumValidator.valid?(_card_issuing, VALID_VALUES_FOR_CARD_ISSUING)
+      end
+
+      if _card_payments = @card_payments
+        return false unless OpenApi::EnumValidator.valid?(_card_payments, VALID_VALUES_FOR_CARD_PAYMENTS)
+      end
+
+      if _cartes_bancaires_payments = @cartes_bancaires_payments
+        return false unless OpenApi::EnumValidator.valid?(_cartes_bancaires_payments, VALID_VALUES_FOR_CARTES_BANCAIRES_PAYMENTS)
+      end
+
+      if _eps_payments = @eps_payments
+        return false unless OpenApi::EnumValidator.valid?(_eps_payments, VALID_VALUES_FOR_EPS_PAYMENTS)
+      end
+
+      if _fpx_payments = @fpx_payments
+        return false unless OpenApi::EnumValidator.valid?(_fpx_payments, VALID_VALUES_FOR_FPX_PAYMENTS)
+      end
+
+      if _giropay_payments = @giropay_payments
+        return false unless OpenApi::EnumValidator.valid?(_giropay_payments, VALID_VALUES_FOR_GIROPAY_PAYMENTS)
+      end
+
+      if _grabpay_payments = @grabpay_payments
+        return false unless OpenApi::EnumValidator.valid?(_grabpay_payments, VALID_VALUES_FOR_GRABPAY_PAYMENTS)
+      end
+
+      if _ideal_payments = @ideal_payments
+        return false unless OpenApi::EnumValidator.valid?(_ideal_payments, VALID_VALUES_FOR_IDEAL_PAYMENTS)
+      end
+
+      if _jcb_payments = @jcb_payments
+        return false unless OpenApi::EnumValidator.valid?(_jcb_payments, VALID_VALUES_FOR_JCB_PAYMENTS)
+      end
+
+      if _klarna_payments = @klarna_payments
+        return false unless OpenApi::EnumValidator.valid?(_klarna_payments, VALID_VALUES_FOR_KLARNA_PAYMENTS)
+      end
+
+      if _konbini_payments = @konbini_payments
+        return false unless OpenApi::EnumValidator.valid?(_konbini_payments, VALID_VALUES_FOR_KONBINI_PAYMENTS)
+      end
+
+      if _legacy_payments = @legacy_payments
+        return false unless OpenApi::EnumValidator.valid?(_legacy_payments, VALID_VALUES_FOR_LEGACY_PAYMENTS)
+      end
+
+      if _link_payments = @link_payments
+        return false unless OpenApi::EnumValidator.valid?(_link_payments, VALID_VALUES_FOR_LINK_PAYMENTS)
+      end
+
+      if _oxxo_payments = @oxxo_payments
+        return false unless OpenApi::EnumValidator.valid?(_oxxo_payments, VALID_VALUES_FOR_OXXO_PAYMENTS)
+      end
+
+      if _p24_payments = @p24_payments
+        return false unless OpenApi::EnumValidator.valid?(_p24_payments, VALID_VALUES_FOR_P24_PAYMENTS)
+      end
+
+      if _paynow_payments = @paynow_payments
+        return false unless OpenApi::EnumValidator.valid?(_paynow_payments, VALID_VALUES_FOR_PAYNOW_PAYMENTS)
+      end
+
+      if _promptpay_payments = @promptpay_payments
+        return false unless OpenApi::EnumValidator.valid?(_promptpay_payments, VALID_VALUES_FOR_PROMPTPAY_PAYMENTS)
+      end
+
+      if _sepa_debit_payments = @sepa_debit_payments
+        return false unless OpenApi::EnumValidator.valid?(_sepa_debit_payments, VALID_VALUES_FOR_SEPA_DEBIT_PAYMENTS)
+      end
+
+      if _sofort_payments = @sofort_payments
+        return false unless OpenApi::EnumValidator.valid?(_sofort_payments, VALID_VALUES_FOR_SOFORT_PAYMENTS)
+      end
+
+      if _tax_reporting_us_1099_k = @tax_reporting_us_1099_k
+        return false unless OpenApi::EnumValidator.valid?(_tax_reporting_us_1099_k, VALID_VALUES_FOR_TAX_REPORTING_US_1099_K)
+      end
+
+      if _tax_reporting_us_1099_misc = @tax_reporting_us_1099_misc
+        return false unless OpenApi::EnumValidator.valid?(_tax_reporting_us_1099_misc, VALID_VALUES_FOR_TAX_REPORTING_US_1099_MISC)
+      end
+
+      if _transfers = @transfers
+        return false unless OpenApi::EnumValidator.valid?(_transfers, VALID_VALUES_FOR_TRANSFERS)
+      end
+
+      if _treasury = @treasury
+        return false unless OpenApi::EnumValidator.valid?(_treasury, VALID_VALUES_FOR_TREASURY)
+      end
+
+      if _us_bank_account_ach_payments = @us_bank_account_ach_payments
+        return false unless OpenApi::EnumValidator.valid?(_us_bank_account_ach_payments, VALID_VALUES_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS)
+      end
 
       true
     end
@@ -381,7 +512,7 @@ module Stripe
         return @acss_debit_payments = nil
       end
       _acss_debit_payments = acss_debit_payments.not_nil!
-      ENUM_VALIDATOR_FOR_ACSS_DEBIT_PAYMENTS.valid!(_acss_debit_payments)
+      OpenApi::EnumValidator.validate("acss_debit_payments", _acss_debit_payments, VALID_VALUES_FOR_ACSS_DEBIT_PAYMENTS)
       @acss_debit_payments = _acss_debit_payments
     end
 
@@ -392,7 +523,7 @@ module Stripe
         return @affirm_payments = nil
       end
       _affirm_payments = affirm_payments.not_nil!
-      ENUM_VALIDATOR_FOR_AFFIRM_PAYMENTS.valid!(_affirm_payments)
+      OpenApi::EnumValidator.validate("affirm_payments", _affirm_payments, VALID_VALUES_FOR_AFFIRM_PAYMENTS)
       @affirm_payments = _affirm_payments
     end
 
@@ -403,7 +534,7 @@ module Stripe
         return @afterpay_clearpay_payments = nil
       end
       _afterpay_clearpay_payments = afterpay_clearpay_payments.not_nil!
-      ENUM_VALIDATOR_FOR_AFTERPAY_CLEARPAY_PAYMENTS.valid!(_afterpay_clearpay_payments)
+      OpenApi::EnumValidator.validate("afterpay_clearpay_payments", _afterpay_clearpay_payments, VALID_VALUES_FOR_AFTERPAY_CLEARPAY_PAYMENTS)
       @afterpay_clearpay_payments = _afterpay_clearpay_payments
     end
 
@@ -414,7 +545,7 @@ module Stripe
         return @au_becs_debit_payments = nil
       end
       _au_becs_debit_payments = au_becs_debit_payments.not_nil!
-      ENUM_VALIDATOR_FOR_AU_BECS_DEBIT_PAYMENTS.valid!(_au_becs_debit_payments)
+      OpenApi::EnumValidator.validate("au_becs_debit_payments", _au_becs_debit_payments, VALID_VALUES_FOR_AU_BECS_DEBIT_PAYMENTS)
       @au_becs_debit_payments = _au_becs_debit_payments
     end
 
@@ -425,7 +556,7 @@ module Stripe
         return @bacs_debit_payments = nil
       end
       _bacs_debit_payments = bacs_debit_payments.not_nil!
-      ENUM_VALIDATOR_FOR_BACS_DEBIT_PAYMENTS.valid!(_bacs_debit_payments)
+      OpenApi::EnumValidator.validate("bacs_debit_payments", _bacs_debit_payments, VALID_VALUES_FOR_BACS_DEBIT_PAYMENTS)
       @bacs_debit_payments = _bacs_debit_payments
     end
 
@@ -436,7 +567,7 @@ module Stripe
         return @bancontact_payments = nil
       end
       _bancontact_payments = bancontact_payments.not_nil!
-      ENUM_VALIDATOR_FOR_BANCONTACT_PAYMENTS.valid!(_bancontact_payments)
+      OpenApi::EnumValidator.validate("bancontact_payments", _bancontact_payments, VALID_VALUES_FOR_BANCONTACT_PAYMENTS)
       @bancontact_payments = _bancontact_payments
     end
 
@@ -447,7 +578,7 @@ module Stripe
         return @bank_transfer_payments = nil
       end
       _bank_transfer_payments = bank_transfer_payments.not_nil!
-      ENUM_VALIDATOR_FOR_BANK_TRANSFER_PAYMENTS.valid!(_bank_transfer_payments)
+      OpenApi::EnumValidator.validate("bank_transfer_payments", _bank_transfer_payments, VALID_VALUES_FOR_BANK_TRANSFER_PAYMENTS)
       @bank_transfer_payments = _bank_transfer_payments
     end
 
@@ -458,7 +589,7 @@ module Stripe
         return @blik_payments = nil
       end
       _blik_payments = blik_payments.not_nil!
-      ENUM_VALIDATOR_FOR_BLIK_PAYMENTS.valid!(_blik_payments)
+      OpenApi::EnumValidator.validate("blik_payments", _blik_payments, VALID_VALUES_FOR_BLIK_PAYMENTS)
       @blik_payments = _blik_payments
     end
 
@@ -469,7 +600,7 @@ module Stripe
         return @boleto_payments = nil
       end
       _boleto_payments = boleto_payments.not_nil!
-      ENUM_VALIDATOR_FOR_BOLETO_PAYMENTS.valid!(_boleto_payments)
+      OpenApi::EnumValidator.validate("boleto_payments", _boleto_payments, VALID_VALUES_FOR_BOLETO_PAYMENTS)
       @boleto_payments = _boleto_payments
     end
 
@@ -480,7 +611,7 @@ module Stripe
         return @card_issuing = nil
       end
       _card_issuing = card_issuing.not_nil!
-      ENUM_VALIDATOR_FOR_CARD_ISSUING.valid!(_card_issuing)
+      OpenApi::EnumValidator.validate("card_issuing", _card_issuing, VALID_VALUES_FOR_CARD_ISSUING)
       @card_issuing = _card_issuing
     end
 
@@ -491,7 +622,7 @@ module Stripe
         return @card_payments = nil
       end
       _card_payments = card_payments.not_nil!
-      ENUM_VALIDATOR_FOR_CARD_PAYMENTS.valid!(_card_payments)
+      OpenApi::EnumValidator.validate("card_payments", _card_payments, VALID_VALUES_FOR_CARD_PAYMENTS)
       @card_payments = _card_payments
     end
 
@@ -502,7 +633,7 @@ module Stripe
         return @cartes_bancaires_payments = nil
       end
       _cartes_bancaires_payments = cartes_bancaires_payments.not_nil!
-      ENUM_VALIDATOR_FOR_CARTES_BANCAIRES_PAYMENTS.valid!(_cartes_bancaires_payments)
+      OpenApi::EnumValidator.validate("cartes_bancaires_payments", _cartes_bancaires_payments, VALID_VALUES_FOR_CARTES_BANCAIRES_PAYMENTS)
       @cartes_bancaires_payments = _cartes_bancaires_payments
     end
 
@@ -513,7 +644,7 @@ module Stripe
         return @eps_payments = nil
       end
       _eps_payments = eps_payments.not_nil!
-      ENUM_VALIDATOR_FOR_EPS_PAYMENTS.valid!(_eps_payments)
+      OpenApi::EnumValidator.validate("eps_payments", _eps_payments, VALID_VALUES_FOR_EPS_PAYMENTS)
       @eps_payments = _eps_payments
     end
 
@@ -524,7 +655,7 @@ module Stripe
         return @fpx_payments = nil
       end
       _fpx_payments = fpx_payments.not_nil!
-      ENUM_VALIDATOR_FOR_FPX_PAYMENTS.valid!(_fpx_payments)
+      OpenApi::EnumValidator.validate("fpx_payments", _fpx_payments, VALID_VALUES_FOR_FPX_PAYMENTS)
       @fpx_payments = _fpx_payments
     end
 
@@ -535,7 +666,7 @@ module Stripe
         return @giropay_payments = nil
       end
       _giropay_payments = giropay_payments.not_nil!
-      ENUM_VALIDATOR_FOR_GIROPAY_PAYMENTS.valid!(_giropay_payments)
+      OpenApi::EnumValidator.validate("giropay_payments", _giropay_payments, VALID_VALUES_FOR_GIROPAY_PAYMENTS)
       @giropay_payments = _giropay_payments
     end
 
@@ -546,7 +677,7 @@ module Stripe
         return @grabpay_payments = nil
       end
       _grabpay_payments = grabpay_payments.not_nil!
-      ENUM_VALIDATOR_FOR_GRABPAY_PAYMENTS.valid!(_grabpay_payments)
+      OpenApi::EnumValidator.validate("grabpay_payments", _grabpay_payments, VALID_VALUES_FOR_GRABPAY_PAYMENTS)
       @grabpay_payments = _grabpay_payments
     end
 
@@ -557,7 +688,7 @@ module Stripe
         return @ideal_payments = nil
       end
       _ideal_payments = ideal_payments.not_nil!
-      ENUM_VALIDATOR_FOR_IDEAL_PAYMENTS.valid!(_ideal_payments)
+      OpenApi::EnumValidator.validate("ideal_payments", _ideal_payments, VALID_VALUES_FOR_IDEAL_PAYMENTS)
       @ideal_payments = _ideal_payments
     end
 
@@ -568,7 +699,7 @@ module Stripe
         return @jcb_payments = nil
       end
       _jcb_payments = jcb_payments.not_nil!
-      ENUM_VALIDATOR_FOR_JCB_PAYMENTS.valid!(_jcb_payments)
+      OpenApi::EnumValidator.validate("jcb_payments", _jcb_payments, VALID_VALUES_FOR_JCB_PAYMENTS)
       @jcb_payments = _jcb_payments
     end
 
@@ -579,7 +710,7 @@ module Stripe
         return @klarna_payments = nil
       end
       _klarna_payments = klarna_payments.not_nil!
-      ENUM_VALIDATOR_FOR_KLARNA_PAYMENTS.valid!(_klarna_payments)
+      OpenApi::EnumValidator.validate("klarna_payments", _klarna_payments, VALID_VALUES_FOR_KLARNA_PAYMENTS)
       @klarna_payments = _klarna_payments
     end
 
@@ -590,7 +721,7 @@ module Stripe
         return @konbini_payments = nil
       end
       _konbini_payments = konbini_payments.not_nil!
-      ENUM_VALIDATOR_FOR_KONBINI_PAYMENTS.valid!(_konbini_payments)
+      OpenApi::EnumValidator.validate("konbini_payments", _konbini_payments, VALID_VALUES_FOR_KONBINI_PAYMENTS)
       @konbini_payments = _konbini_payments
     end
 
@@ -601,7 +732,7 @@ module Stripe
         return @legacy_payments = nil
       end
       _legacy_payments = legacy_payments.not_nil!
-      ENUM_VALIDATOR_FOR_LEGACY_PAYMENTS.valid!(_legacy_payments)
+      OpenApi::EnumValidator.validate("legacy_payments", _legacy_payments, VALID_VALUES_FOR_LEGACY_PAYMENTS)
       @legacy_payments = _legacy_payments
     end
 
@@ -612,7 +743,7 @@ module Stripe
         return @link_payments = nil
       end
       _link_payments = link_payments.not_nil!
-      ENUM_VALIDATOR_FOR_LINK_PAYMENTS.valid!(_link_payments)
+      OpenApi::EnumValidator.validate("link_payments", _link_payments, VALID_VALUES_FOR_LINK_PAYMENTS)
       @link_payments = _link_payments
     end
 
@@ -623,7 +754,7 @@ module Stripe
         return @oxxo_payments = nil
       end
       _oxxo_payments = oxxo_payments.not_nil!
-      ENUM_VALIDATOR_FOR_OXXO_PAYMENTS.valid!(_oxxo_payments)
+      OpenApi::EnumValidator.validate("oxxo_payments", _oxxo_payments, VALID_VALUES_FOR_OXXO_PAYMENTS)
       @oxxo_payments = _oxxo_payments
     end
 
@@ -634,7 +765,7 @@ module Stripe
         return @p24_payments = nil
       end
       _p24_payments = p24_payments.not_nil!
-      ENUM_VALIDATOR_FOR_P24_PAYMENTS.valid!(_p24_payments)
+      OpenApi::EnumValidator.validate("p24_payments", _p24_payments, VALID_VALUES_FOR_P24_PAYMENTS)
       @p24_payments = _p24_payments
     end
 
@@ -645,7 +776,7 @@ module Stripe
         return @paynow_payments = nil
       end
       _paynow_payments = paynow_payments.not_nil!
-      ENUM_VALIDATOR_FOR_PAYNOW_PAYMENTS.valid!(_paynow_payments)
+      OpenApi::EnumValidator.validate("paynow_payments", _paynow_payments, VALID_VALUES_FOR_PAYNOW_PAYMENTS)
       @paynow_payments = _paynow_payments
     end
 
@@ -656,7 +787,7 @@ module Stripe
         return @promptpay_payments = nil
       end
       _promptpay_payments = promptpay_payments.not_nil!
-      ENUM_VALIDATOR_FOR_PROMPTPAY_PAYMENTS.valid!(_promptpay_payments)
+      OpenApi::EnumValidator.validate("promptpay_payments", _promptpay_payments, VALID_VALUES_FOR_PROMPTPAY_PAYMENTS)
       @promptpay_payments = _promptpay_payments
     end
 
@@ -667,7 +798,7 @@ module Stripe
         return @sepa_debit_payments = nil
       end
       _sepa_debit_payments = sepa_debit_payments.not_nil!
-      ENUM_VALIDATOR_FOR_SEPA_DEBIT_PAYMENTS.valid!(_sepa_debit_payments)
+      OpenApi::EnumValidator.validate("sepa_debit_payments", _sepa_debit_payments, VALID_VALUES_FOR_SEPA_DEBIT_PAYMENTS)
       @sepa_debit_payments = _sepa_debit_payments
     end
 
@@ -678,7 +809,7 @@ module Stripe
         return @sofort_payments = nil
       end
       _sofort_payments = sofort_payments.not_nil!
-      ENUM_VALIDATOR_FOR_SOFORT_PAYMENTS.valid!(_sofort_payments)
+      OpenApi::EnumValidator.validate("sofort_payments", _sofort_payments, VALID_VALUES_FOR_SOFORT_PAYMENTS)
       @sofort_payments = _sofort_payments
     end
 
@@ -689,7 +820,7 @@ module Stripe
         return @tax_reporting_us_1099_k = nil
       end
       _tax_reporting_us_1099_k = tax_reporting_us_1099_k.not_nil!
-      ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_K.valid!(_tax_reporting_us_1099_k)
+      OpenApi::EnumValidator.validate("tax_reporting_us_1099_k", _tax_reporting_us_1099_k, VALID_VALUES_FOR_TAX_REPORTING_US_1099_K)
       @tax_reporting_us_1099_k = _tax_reporting_us_1099_k
     end
 
@@ -700,7 +831,7 @@ module Stripe
         return @tax_reporting_us_1099_misc = nil
       end
       _tax_reporting_us_1099_misc = tax_reporting_us_1099_misc.not_nil!
-      ENUM_VALIDATOR_FOR_TAX_REPORTING_US_1099_MISC.valid!(_tax_reporting_us_1099_misc)
+      OpenApi::EnumValidator.validate("tax_reporting_us_1099_misc", _tax_reporting_us_1099_misc, VALID_VALUES_FOR_TAX_REPORTING_US_1099_MISC)
       @tax_reporting_us_1099_misc = _tax_reporting_us_1099_misc
     end
 
@@ -711,7 +842,7 @@ module Stripe
         return @transfers = nil
       end
       _transfers = transfers.not_nil!
-      ENUM_VALIDATOR_FOR_TRANSFERS.valid!(_transfers)
+      OpenApi::EnumValidator.validate("transfers", _transfers, VALID_VALUES_FOR_TRANSFERS)
       @transfers = _transfers
     end
 
@@ -722,7 +853,7 @@ module Stripe
         return @treasury = nil
       end
       _treasury = treasury.not_nil!
-      ENUM_VALIDATOR_FOR_TREASURY.valid!(_treasury)
+      OpenApi::EnumValidator.validate("treasury", _treasury, VALID_VALUES_FOR_TREASURY)
       @treasury = _treasury
     end
 
@@ -733,7 +864,7 @@ module Stripe
         return @us_bank_account_ach_payments = nil
       end
       _us_bank_account_ach_payments = us_bank_account_ach_payments.not_nil!
-      ENUM_VALIDATOR_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS.valid!(_us_bank_account_ach_payments)
+      OpenApi::EnumValidator.validate("us_bank_account_ach_payments", _us_bank_account_ach_payments, VALID_VALUES_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS)
       @us_bank_account_ach_payments = _us_bank_account_ach_payments
     end
 

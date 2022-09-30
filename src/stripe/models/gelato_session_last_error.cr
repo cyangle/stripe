@@ -27,8 +27,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? code_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_CODE = OpenApi::EnumValidator.new("code", "String", ["abandoned", "consent_declined", "country_not_supported", "device_not_supported", "document_expired", "document_type_not_supported", "document_unverified_other", "id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other", "selfie_document_missing_photo", "selfie_face_mismatch", "selfie_manipulated", "selfie_unverified_other", "under_supported_age"])
+    VALID_VALUES_FOR_CODE = StaticArray["abandoned", "consent_declined", "country_not_supported", "device_not_supported", "document_expired", "document_type_not_supported", "document_unverified_other", "id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other", "selfie_document_missing_photo", "selfie_face_mismatch", "selfie_manipulated", "selfie_unverified_other", "under_supported_age"]
 
     # A message that explains the reason for verification or user-session failure.
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: reason.nil? && !reason_present?)]
@@ -52,20 +51,24 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code)
+      if _code = @code
+        invalid_properties.push(OpenApi::EnumValidator.error_message("code", VALID_VALUES_FOR_CODE)) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
+      end
       if _reason = @reason
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_CODE.valid?(@code)
+      if _code = @code
+        return false unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
+      end
+
       if _reason = @reason
         return false if _reason.to_s.size > 5000
       end
@@ -80,7 +83,7 @@ module Stripe
         return @code = nil
       end
       _code = code.not_nil!
-      ENUM_VALIDATOR_FOR_CODE.valid!(_code)
+      OpenApi::EnumValidator.validate("code", _code, VALID_VALUES_FOR_CODE)
       @code = _code
     end
 

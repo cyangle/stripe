@@ -73,6 +73,7 @@ module Stripe
       if _client_secret = @client_secret
         return false if _client_secret.to_s.size > 5000
       end
+
       if _descriptor_code = @descriptor_code
         return false if _descriptor_code.to_s.size > 5000
       end

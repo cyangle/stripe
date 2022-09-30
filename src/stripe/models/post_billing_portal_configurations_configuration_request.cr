@@ -79,7 +79,6 @@ module Stripe
       if _metadata = @metadata
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -89,6 +88,7 @@ module Stripe
       if _business_profile = @business_profile
         return false if _business_profile.is_a?(OpenApi::Validatable) && !_business_profile.valid?
       end
+
       if _default_return_url = @default_return_url
         return false if _default_return_url.is_a?(OpenApi::Validatable) && !_default_return_url.valid?
       end
@@ -96,9 +96,11 @@ module Stripe
       if _features = @features
         return false if _features.is_a?(OpenApi::Validatable) && !_features.valid?
       end
+
       if _login_page = @login_page
         return false if _login_page.is_a?(OpenApi::Validatable) && !_login_page.valid?
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end

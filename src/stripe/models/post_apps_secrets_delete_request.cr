@@ -49,13 +49,16 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
+
       if _name = @name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"scope\" is required and cannot be null") if @scope.nil?
+
       if _scope = @scope
         invalid_properties.concat(_scope.list_invalid_properties_for("scope")) if _scope.is_a?(OpenApi::Validatable)
       end
@@ -70,6 +73,7 @@ module Stripe
       if _name = @name
         return false if _name.to_s.size > 5000
       end
+
       return false if @scope.nil?
       if _scope = @scope
         return false if _scope.is_a?(OpenApi::Validatable) && !_scope.valid?

@@ -31,7 +31,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["search_result"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["search_result"]
 
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter url : String? = nil
@@ -67,14 +67,21 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"data\" is required and cannot be null") if @data.nil?
+
       if _data = @data
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "data", array: _data)) if _data.is_a?(Array)
       end
       invalid_properties.push("\"has_more\" is required and cannot be null") if @has_more.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
+
       if _url = @url
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -96,13 +103,19 @@ module Stripe
       if _data = @data
         return false if _data.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _data)
       end
+
       return false if @has_more.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @url.nil?
       if _url = @url
         return false if _url.to_s.size > 5000
       end
+
       if _next_page = @next_page
         return false if _next_page.to_s.size > 5000
       end
@@ -138,7 +151,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

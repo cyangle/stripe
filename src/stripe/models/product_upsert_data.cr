@@ -71,13 +71,16 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
+
       if _name = @name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -106,7 +109,6 @@ module Stripe
       if _url = @url
         invalid_properties.concat(_url.list_invalid_properties_for("url")) if _url.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -117,19 +119,24 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @name.nil?
       if _name = @name
         return false if _name.to_s.size > 5000
       end
+
       if _description = @description
         return false if _description.to_s.size > 40000
       end
+
       if _images = @images
         return false if _images.is_a?(OpenApi::Validatable) && !_images.valid?
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _package_dimensions = @package_dimensions
         return false if _package_dimensions.is_a?(OpenApi::Validatable) && !_package_dimensions.valid?
       end
@@ -137,6 +144,7 @@ module Stripe
       if _tax_code = @tax_code
         return false if _tax_code.to_s.size > 5000
       end
+
       if _url = @url
         return false if _url.is_a?(OpenApi::Validatable) && !_url.valid?
       end

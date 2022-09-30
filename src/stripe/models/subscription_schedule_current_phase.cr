@@ -43,6 +43,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"end_date\" is required and cannot be null") if @end_date.nil?
 
       invalid_properties.push("\"start_date\" is required and cannot be null") if @start_date.nil?

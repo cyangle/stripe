@@ -165,6 +165,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _acss_debit_payments = @acss_debit_payments
         invalid_properties.concat(_acss_debit_payments.list_invalid_properties_for("acss_debit_payments")) if _acss_debit_payments.is_a?(OpenApi::Validatable)
       end
@@ -264,7 +265,6 @@ module Stripe
       if _us_bank_account_ach_payments = @us_bank_account_ach_payments
         invalid_properties.concat(_us_bank_account_ach_payments.list_invalid_properties_for("us_bank_account_ach_payments")) if _us_bank_account_ach_payments.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -274,99 +274,131 @@ module Stripe
       if _acss_debit_payments = @acss_debit_payments
         return false if _acss_debit_payments.is_a?(OpenApi::Validatable) && !_acss_debit_payments.valid?
       end
+
       if _affirm_payments = @affirm_payments
         return false if _affirm_payments.is_a?(OpenApi::Validatable) && !_affirm_payments.valid?
       end
+
       if _afterpay_clearpay_payments = @afterpay_clearpay_payments
         return false if _afterpay_clearpay_payments.is_a?(OpenApi::Validatable) && !_afterpay_clearpay_payments.valid?
       end
+
       if _au_becs_debit_payments = @au_becs_debit_payments
         return false if _au_becs_debit_payments.is_a?(OpenApi::Validatable) && !_au_becs_debit_payments.valid?
       end
+
       if _bacs_debit_payments = @bacs_debit_payments
         return false if _bacs_debit_payments.is_a?(OpenApi::Validatable) && !_bacs_debit_payments.valid?
       end
+
       if _bancontact_payments = @bancontact_payments
         return false if _bancontact_payments.is_a?(OpenApi::Validatable) && !_bancontact_payments.valid?
       end
+
       if _bank_transfer_payments = @bank_transfer_payments
         return false if _bank_transfer_payments.is_a?(OpenApi::Validatable) && !_bank_transfer_payments.valid?
       end
+
       if _blik_payments = @blik_payments
         return false if _blik_payments.is_a?(OpenApi::Validatable) && !_blik_payments.valid?
       end
+
       if _boleto_payments = @boleto_payments
         return false if _boleto_payments.is_a?(OpenApi::Validatable) && !_boleto_payments.valid?
       end
+
       if _card_issuing = @card_issuing
         return false if _card_issuing.is_a?(OpenApi::Validatable) && !_card_issuing.valid?
       end
+
       if _card_payments = @card_payments
         return false if _card_payments.is_a?(OpenApi::Validatable) && !_card_payments.valid?
       end
+
       if _cartes_bancaires_payments = @cartes_bancaires_payments
         return false if _cartes_bancaires_payments.is_a?(OpenApi::Validatable) && !_cartes_bancaires_payments.valid?
       end
+
       if _eps_payments = @eps_payments
         return false if _eps_payments.is_a?(OpenApi::Validatable) && !_eps_payments.valid?
       end
+
       if _fpx_payments = @fpx_payments
         return false if _fpx_payments.is_a?(OpenApi::Validatable) && !_fpx_payments.valid?
       end
+
       if _giropay_payments = @giropay_payments
         return false if _giropay_payments.is_a?(OpenApi::Validatable) && !_giropay_payments.valid?
       end
+
       if _grabpay_payments = @grabpay_payments
         return false if _grabpay_payments.is_a?(OpenApi::Validatable) && !_grabpay_payments.valid?
       end
+
       if _ideal_payments = @ideal_payments
         return false if _ideal_payments.is_a?(OpenApi::Validatable) && !_ideal_payments.valid?
       end
+
       if _jcb_payments = @jcb_payments
         return false if _jcb_payments.is_a?(OpenApi::Validatable) && !_jcb_payments.valid?
       end
+
       if _klarna_payments = @klarna_payments
         return false if _klarna_payments.is_a?(OpenApi::Validatable) && !_klarna_payments.valid?
       end
+
       if _konbini_payments = @konbini_payments
         return false if _konbini_payments.is_a?(OpenApi::Validatable) && !_konbini_payments.valid?
       end
+
       if _legacy_payments = @legacy_payments
         return false if _legacy_payments.is_a?(OpenApi::Validatable) && !_legacy_payments.valid?
       end
+
       if _link_payments = @link_payments
         return false if _link_payments.is_a?(OpenApi::Validatable) && !_link_payments.valid?
       end
+
       if _oxxo_payments = @oxxo_payments
         return false if _oxxo_payments.is_a?(OpenApi::Validatable) && !_oxxo_payments.valid?
       end
+
       if _p24_payments = @p24_payments
         return false if _p24_payments.is_a?(OpenApi::Validatable) && !_p24_payments.valid?
       end
+
       if _paynow_payments = @paynow_payments
         return false if _paynow_payments.is_a?(OpenApi::Validatable) && !_paynow_payments.valid?
       end
+
       if _promptpay_payments = @promptpay_payments
         return false if _promptpay_payments.is_a?(OpenApi::Validatable) && !_promptpay_payments.valid?
       end
+
       if _sepa_debit_payments = @sepa_debit_payments
         return false if _sepa_debit_payments.is_a?(OpenApi::Validatable) && !_sepa_debit_payments.valid?
       end
+
       if _sofort_payments = @sofort_payments
         return false if _sofort_payments.is_a?(OpenApi::Validatable) && !_sofort_payments.valid?
       end
+
       if _tax_reporting_us_1099_k = @tax_reporting_us_1099_k
         return false if _tax_reporting_us_1099_k.is_a?(OpenApi::Validatable) && !_tax_reporting_us_1099_k.valid?
       end
+
       if _tax_reporting_us_1099_misc = @tax_reporting_us_1099_misc
         return false if _tax_reporting_us_1099_misc.is_a?(OpenApi::Validatable) && !_tax_reporting_us_1099_misc.valid?
       end
+
       if _transfers = @transfers
         return false if _transfers.is_a?(OpenApi::Validatable) && !_transfers.valid?
       end
+
       if _treasury = @treasury
         return false if _treasury.is_a?(OpenApi::Validatable) && !_treasury.valid?
       end
+
       if _us_bank_account_ach_payments = @us_bank_account_ach_payments
         return false if _us_bank_account_ach_payments.is_a?(OpenApi::Validatable) && !_us_bank_account_ach_payments.valid?
       end

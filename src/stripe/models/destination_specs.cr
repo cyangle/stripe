@@ -43,7 +43,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
+
       if _account = @account
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
           invalid_properties.push(max_length_error)

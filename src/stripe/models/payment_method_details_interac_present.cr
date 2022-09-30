@@ -107,8 +107,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? read_method_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_READ_METHOD = OpenApi::EnumValidator.new("read_method", "String", ["contact_emv", "contactless_emv", "contactless_magstripe_mode", "magnetic_stripe_fallback", "magnetic_stripe_track2"])
+    VALID_VALUES_FOR_READ_METHOD = StaticArray["contact_emv", "contactless_emv", "contactless_magstripe_mode", "magnetic_stripe_fallback", "magnetic_stripe_track2"]
 
     @[JSON::Field(key: "receipt", type: Stripe::PaymentMethodDetailsInteracPresentReceipt1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: receipt.nil? && !receipt_present?)]
     getter receipt : Stripe::PaymentMethodDetailsInteracPresentReceipt1? = nil
@@ -143,6 +142,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"exp_month\" is required and cannot be null") if @exp_month.nil?
 
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
@@ -193,11 +193,12 @@ module Stripe
         end
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_READ_METHOD.error_message) unless ENUM_VALIDATOR_FOR_READ_METHOD.valid?(@read_method)
+      if _read_method = @read_method
+        invalid_properties.push(OpenApi::EnumValidator.error_message("read_method", VALID_VALUES_FOR_READ_METHOD)) unless OpenApi::EnumValidator.valid?(_read_method, VALID_VALUES_FOR_READ_METHOD)
+      end
       if _receipt = @receipt
         invalid_properties.concat(_receipt.list_invalid_properties_for("receipt")) if _receipt.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -211,32 +212,43 @@ module Stripe
       if _brand = @brand
         return false if _brand.to_s.size > 5000
       end
+
       if _cardholder_name = @cardholder_name
         return false if _cardholder_name.to_s.size > 5000
       end
+
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
       if _emv_auth_data = @emv_auth_data
         return false if _emv_auth_data.to_s.size > 5000
       end
+
       if _fingerprint = @fingerprint
         return false if _fingerprint.to_s.size > 5000
       end
+
       if _funding = @funding
         return false if _funding.to_s.size > 5000
       end
+
       if _generated_card = @generated_card
         return false if _generated_card.to_s.size > 5000
       end
+
       if _last4 = @last4
         return false if _last4.to_s.size > 5000
       end
+
       if _network = @network
         return false if _network.to_s.size > 5000
       end
 
-      return false unless ENUM_VALIDATOR_FOR_READ_METHOD.valid?(@read_method)
+      if _read_method = @read_method
+        return false unless OpenApi::EnumValidator.valid?(_read_method, VALID_VALUES_FOR_READ_METHOD)
+      end
+
       if _receipt = @receipt
         return false if _receipt.is_a?(OpenApi::Validatable) && !_receipt.valid?
       end
@@ -407,7 +419,7 @@ module Stripe
         return @read_method = nil
       end
       _read_method = read_method.not_nil!
-      ENUM_VALIDATOR_FOR_READ_METHOD.valid!(_read_method)
+      OpenApi::EnumValidator.validate("read_method", _read_method, VALID_VALUES_FOR_READ_METHOD)
       @read_method = _read_method
     end
 

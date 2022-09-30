@@ -47,13 +47,13 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _charge = @charge
         invalid_properties.concat(_charge.list_invalid_properties_for("charge")) if _charge.is_a?(OpenApi::Validatable)
       end
       if _setup_attempt = @setup_attempt
         invalid_properties.concat(_setup_attempt.list_invalid_properties_for("setup_attempt")) if _setup_attempt.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -63,6 +63,7 @@ module Stripe
       if _charge = @charge
         return false if _charge.is_a?(OpenApi::Validatable) && !_charge.valid?
       end
+
       if _setup_attempt = @setup_attempt
         return false if _setup_attempt.is_a?(OpenApi::Validatable) && !_setup_attempt.valid?
       end

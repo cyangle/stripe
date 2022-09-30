@@ -60,13 +60,16 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"first_name\" is required and cannot be null") if @first_name.nil?
+
       if _first_name = @first_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last_name\" is required and cannot be null") if @last_name.nil?
+
       if _last_name = @last_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -78,7 +81,6 @@ module Stripe
       if _verification = @verification
         invalid_properties.concat(_verification.list_invalid_properties_for("verification")) if _verification.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -89,13 +91,16 @@ module Stripe
       if _first_name = @first_name
         return false if _first_name.to_s.size > 5000
       end
+
       return false if @last_name.nil?
       if _last_name = @last_name
         return false if _last_name.to_s.size > 5000
       end
+
       if _dob = @dob
         return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
+
       if _verification = @verification
         return false if _verification.is_a?(OpenApi::Validatable) && !_verification.valid?
       end

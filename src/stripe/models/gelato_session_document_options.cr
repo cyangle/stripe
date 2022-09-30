@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "allowed_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter allowed_types : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_ALLOWED_TYPES = OpenApi::EnumValidator.new("allowed_types", "Array(String)", ["driving_license", "id_card", "passport"])
+    VALID_VALUES_FOR_ALLOWED_TYPES = StaticArray["driving_license", "id_card", "passport"]
 
     # Collect an ID number and perform an [ID number check](https://stripe.com/docs/identity/verification-checks?type=id-number) with the document’s extracted name and date of birth.
     @[JSON::Field(key: "require_id_number", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -56,7 +56,9 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ALLOWED_TYPES.error_message) unless ENUM_VALIDATOR_FOR_ALLOWED_TYPES.all_valid?(@allowed_types)
+      if _allowed_types = @allowed_types
+        invalid_properties.push(OpenApi::EnumValidator.error_message("allowed_types", VALID_VALUES_FOR_ALLOWED_TYPES)) unless OpenApi::EnumValidator.valid?(_allowed_types, VALID_VALUES_FOR_ALLOWED_TYPES)
+      end
 
       invalid_properties
     end
@@ -64,7 +66,9 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_ALLOWED_TYPES.all_valid?(@allowed_types)
+      if _allowed_types = @allowed_types
+        return false unless OpenApi::EnumValidator.valid?(_allowed_types, VALID_VALUES_FOR_ALLOWED_TYPES)
+      end
 
       true
     end
@@ -76,7 +80,7 @@ module Stripe
         return @allowed_types = nil
       end
       _allowed_types = allowed_types.not_nil!
-      ENUM_VALIDATOR_FOR_ALLOWED_TYPES.all_valid!(_allowed_types)
+      OpenApi::EnumValidator.validate("allowed_types", _allowed_types, VALID_VALUES_FOR_ALLOWED_TYPES)
       @allowed_types = _allowed_types
     end
 

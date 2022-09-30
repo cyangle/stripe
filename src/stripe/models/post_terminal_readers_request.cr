@@ -59,7 +59,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"registration_code\" is required and cannot be null") if @registration_code.nil?
+
       if _registration_code = @registration_code
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("registration_code", _registration_code.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -79,7 +81,6 @@ module Stripe
       if _metadata = @metadata
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -94,9 +95,11 @@ module Stripe
       if _label = @label
         return false if _label.to_s.size > 5000
       end
+
       if _location = @location
         return false if _location.to_s.size > 5000
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end

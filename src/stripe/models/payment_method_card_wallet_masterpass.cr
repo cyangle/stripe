@@ -63,6 +63,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _billing_address = @billing_address
         invalid_properties.concat(_billing_address.list_invalid_properties_for("billing_address")) if _billing_address.is_a?(OpenApi::Validatable)
       end
@@ -79,7 +80,6 @@ module Stripe
       if _shipping_address = @shipping_address
         invalid_properties.concat(_shipping_address.list_invalid_properties_for("shipping_address")) if _shipping_address.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -89,12 +89,15 @@ module Stripe
       if _billing_address = @billing_address
         return false if _billing_address.is_a?(OpenApi::Validatable) && !_billing_address.valid?
       end
+
       if _email = @email
         return false if _email.to_s.size > 5000
       end
+
       if _name = @name
         return false if _name.to_s.size > 5000
       end
+
       if _shipping_address = @shipping_address
         return false if _shipping_address.is_a?(OpenApi::Validatable) && !_shipping_address.valid?
       end

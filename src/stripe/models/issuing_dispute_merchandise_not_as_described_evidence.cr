@@ -54,8 +54,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? return_status_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_RETURN_STATUS = OpenApi::EnumValidator.new("return_status", "String", ["merchant_rejected", "successful"])
+    VALID_VALUES_FOR_RETURN_STATUS = StaticArray["merchant_rejected", "successful"]
 
     # Date when the product was returned or attempted to be returned.
     @[JSON::Field(key: "returned_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: returned_at.nil? && !returned_at_present?)]
@@ -82,6 +81,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _additional_documentation = @additional_documentation
         invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
@@ -96,8 +96,9 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_RETURN_STATUS.error_message) unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
+      if _return_status = @return_status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("return_status", VALID_VALUES_FOR_RETURN_STATUS)) unless OpenApi::EnumValidator.valid?(_return_status, VALID_VALUES_FOR_RETURN_STATUS)
+      end
 
       invalid_properties
     end
@@ -108,6 +109,7 @@ module Stripe
       if _additional_documentation = @additional_documentation
         return false if _additional_documentation.is_a?(OpenApi::Validatable) && !_additional_documentation.valid?
       end
+
       if _explanation = @explanation
         return false if _explanation.to_s.size > 5000
       end
@@ -115,7 +117,10 @@ module Stripe
       if _return_description = @return_description
         return false if _return_description.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_RETURN_STATUS.valid?(@return_status)
+
+      if _return_status = @return_status
+        return false unless OpenApi::EnumValidator.valid?(_return_status, VALID_VALUES_FOR_RETURN_STATUS)
+      end
 
       true
     end
@@ -176,7 +181,7 @@ module Stripe
         return @return_status = nil
       end
       _return_status = return_status.not_nil!
-      ENUM_VALIDATOR_FOR_RETURN_STATUS.valid!(_return_status)
+      OpenApi::EnumValidator.validate("return_status", _return_status, VALID_VALUES_FOR_RETURN_STATUS)
       @return_status = _return_status
     end
 

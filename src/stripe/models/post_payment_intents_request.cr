@@ -41,7 +41,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = OpenApi::EnumValidator.new("capture_method", "String", ["automatic", "manual"])
+    VALID_VALUES_FOR_CAPTURE_METHOD = StaticArray["automatic", "manual"]
 
     # Set to `true` to attempt to [confirm](https://stripe.com/docs/api/payment_intents/confirm) this PaymentIntent immediately. This parameter defaults to `false`. When creating and confirming a PaymentIntent at the same time, parameters available in the [confirm](https://stripe.com/docs/api/payment_intents/confirm) API may also be provided.
     @[JSON::Field(key: "confirm", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -50,7 +50,7 @@ module Stripe
     @[JSON::Field(key: "confirmation_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter confirmation_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_CONFIRMATION_METHOD = OpenApi::EnumValidator.new("confirmation_method", "String", ["automatic", "manual"])
+    VALID_VALUES_FOR_CONFIRMATION_METHOD = StaticArray["automatic", "manual"]
 
     # ID of the Customer this PaymentIntent belongs to, if one exists.  Payment methods attached to other Customers cannot be used with this PaymentIntent.  If present in combination with [setup_future_usage](https://stripe.com/docs/api#payment_intent_object-setup_future_usage), this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent has been confirmed and any required actions from the user are complete.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -115,7 +115,7 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["off_session", "on_session"])
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["off_session", "on_session"]
 
     @[JSON::Field(key: "shipping", type: Stripe::OptionalFieldsShipping1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping : Stripe::OptionalFieldsShipping1? = nil
@@ -182,6 +182,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
@@ -189,10 +190,13 @@ module Stripe
       if _automatic_payment_methods = @automatic_payment_methods
         invalid_properties.concat(_automatic_payment_methods.list_invalid_properties_for("automatic_payment_methods")) if _automatic_payment_methods.is_a?(OpenApi::Validatable)
       end
+      if _capture_method = @capture_method
+        invalid_properties.push(OpenApi::EnumValidator.error_message("capture_method", VALID_VALUES_FOR_CAPTURE_METHOD)) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+      end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CONFIRMATION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CONFIRMATION_METHOD.valid?(@confirmation_method)
+      if _confirmation_method = @confirmation_method
+        invalid_properties.push(OpenApi::EnumValidator.error_message("confirmation_method", VALID_VALUES_FOR_CONFIRMATION_METHOD)) unless OpenApi::EnumValidator.valid?(_confirmation_method, VALID_VALUES_FOR_CONFIRMATION_METHOD)
+      end
       if _customer = @customer
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -233,7 +237,9 @@ module Stripe
         invalid_properties.concat(_radar_options.list_invalid_properties_for("radar_options")) if _radar_options.is_a?(OpenApi::Validatable)
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+      if _setup_future_usage = @setup_future_usage
+        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+      end
       if _shipping = @shipping
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
@@ -264,12 +270,19 @@ module Stripe
       if _automatic_payment_methods = @automatic_payment_methods
         return false if _automatic_payment_methods.is_a?(OpenApi::Validatable) && !_automatic_payment_methods.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
 
-      return false unless ENUM_VALIDATOR_FOR_CONFIRMATION_METHOD.valid?(@confirmation_method)
+      if _capture_method = @capture_method
+        return false unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+      end
+
+      if _confirmation_method = @confirmation_method
+        return false unless OpenApi::EnumValidator.valid?(_confirmation_method, VALID_VALUES_FOR_CONFIRMATION_METHOD)
+      end
+
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
+
       if _description = @description
         return false if _description.to_s.size > 1000
       end
@@ -277,6 +290,7 @@ module Stripe
       if _mandate = @mandate
         return false if _mandate.to_s.size > 5000
       end
+
       if _mandate_data = @mandate_data
         return false if _mandate_data.is_a?(OpenApi::Validatable) && !_mandate_data.valid?
       end
@@ -288,9 +302,11 @@ module Stripe
       if _payment_method = @payment_method
         return false if _payment_method.to_s.size > 5000
       end
+
       if _payment_method_data = @payment_method_data
         return false if _payment_method_data.is_a?(OpenApi::Validatable) && !_payment_method_data.valid?
       end
+
       if _payment_method_options = @payment_method_options
         return false if _payment_method_options.is_a?(OpenApi::Validatable) && !_payment_method_options.valid?
       end
@@ -299,16 +315,22 @@ module Stripe
         return false if _radar_options.is_a?(OpenApi::Validatable) && !_radar_options.valid?
       end
 
-      return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
+      if _setup_future_usage = @setup_future_usage
+        return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+      end
+
       if _shipping = @shipping
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
+
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 22
       end
+
       if _statement_descriptor_suffix = @statement_descriptor_suffix
         return false if _statement_descriptor_suffix.to_s.size > 22
       end
+
       if _transfer_data = @transfer_data
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
@@ -364,7 +386,7 @@ module Stripe
         return @capture_method = nil
       end
       _capture_method = capture_method.not_nil!
-      ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid!(_capture_method)
+      OpenApi::EnumValidator.validate("capture_method", _capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       @capture_method = _capture_method
     end
 
@@ -385,7 +407,7 @@ module Stripe
         return @confirmation_method = nil
       end
       _confirmation_method = confirmation_method.not_nil!
-      ENUM_VALIDATOR_FOR_CONFIRMATION_METHOD.valid!(_confirmation_method)
+      OpenApi::EnumValidator.validate("confirmation_method", _confirmation_method, VALID_VALUES_FOR_CONFIRMATION_METHOD)
       @confirmation_method = _confirmation_method
     end
 
@@ -577,7 +599,7 @@ module Stripe
         return @setup_future_usage = nil
       end
       _setup_future_usage = setup_future_usage.not_nil!
-      ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(_setup_future_usage)
+      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       @setup_future_usage = _setup_future_usage
     end
 

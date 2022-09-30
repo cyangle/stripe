@@ -34,8 +34,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? amount_type_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_AMOUNT_TYPE = OpenApi::EnumValidator.new("amount_type", "String", ["fixed", "maximum"])
+    VALID_VALUES_FOR_AMOUNT_TYPE = StaticArray["fixed", "maximum"]
 
     # A description of the mandate or subscription that is meant to be displayed to the customer.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: description.nil? && !description_present?)]
@@ -60,20 +59,24 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AMOUNT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid?(@amount_type)
+      if _amount_type = @amount_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("amount_type", VALID_VALUES_FOR_AMOUNT_TYPE)) unless OpenApi::EnumValidator.valid?(_amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
+      end
       if _description = @description
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 200)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid?(@amount_type)
+      if _amount_type = @amount_type
+        return false unless OpenApi::EnumValidator.valid?(_amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
+      end
+
       if _description = @description
         return false if _description.to_s.size > 200
       end
@@ -98,7 +101,7 @@ module Stripe
         return @amount_type = nil
       end
       _amount_type = amount_type.not_nil!
-      ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid!(_amount_type)
+      OpenApi::EnumValidator.validate("amount_type", _amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
       @amount_type = _amount_type
     end
 

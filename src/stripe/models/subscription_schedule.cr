@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "end_behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter end_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_END_BEHAVIOR = OpenApi::EnumValidator.new("end_behavior", "String", ["cancel", "none", "release", "renew"])
+    VALID_VALUES_FOR_END_BEHAVIOR = StaticArray["cancel", "none", "release", "renew"]
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -49,7 +49,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["subscription_schedule"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["subscription_schedule"]
 
     # Configuration for the subscription schedule's phases.
     @[JSON::Field(key: "phases", type: Array(Stripe::SubscriptionSchedulePhaseConfiguration)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -59,7 +59,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["active", "canceled", "completed", "not_started", "released"])
+    VALID_VALUES_FOR_STATUS = StaticArray["active", "canceled", "completed", "not_started", "released"]
 
     # Optional properties
 
@@ -153,19 +153,26 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
+
       if _customer = @customer
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"default_settings\" is required and cannot be null") if @default_settings.nil?
+
       if _default_settings = @default_settings
         invalid_properties.concat(_default_settings.list_invalid_properties_for("default_settings")) if _default_settings.is_a?(OpenApi::Validatable)
       end
+      invalid_properties.push("\"end_behavior\" is required and cannot be null") if @end_behavior.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_END_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior, false)
+      if _end_behavior = @end_behavior
+        invalid_properties.push(OpenApi::EnumValidator.error_message("end_behavior", VALID_VALUES_FOR_END_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
+      end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -173,13 +180,21 @@ module Stripe
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"phases\" is required and cannot be null") if @phases.nil?
+
       if _phases = @phases
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "phases", array: _phases)) if _phases.is_a?(Array)
       end
+      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
       if _application = @application
         invalid_properties.concat(_application.list_invalid_properties_for("application")) if _application.is_a?(OpenApi::Validatable)
       end
@@ -199,7 +214,6 @@ module Stripe
       if _test_clock = @test_clock
         invalid_properties.concat(_test_clock.list_invalid_properties_for("test_clock")) if _test_clock.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -212,23 +226,39 @@ module Stripe
       if _customer = @customer
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
+
       return false if @default_settings.nil?
       if _default_settings = @default_settings
         return false if _default_settings.is_a?(OpenApi::Validatable) && !_default_settings.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid?(@end_behavior, false)
+
+      return false if @end_behavior.nil?
+      if _end_behavior = @end_behavior
+        return false unless OpenApi::EnumValidator.valid?(_end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
+      end
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @phases.nil?
       if _phases = @phases
         return false if _phases.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _phases)
       end
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+
+      return false if @status.nil?
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+
       if _application = @application
         return false if _application.is_a?(OpenApi::Validatable) && !_application.valid?
       end
@@ -240,9 +270,11 @@ module Stripe
       if _released_subscription = @released_subscription
         return false if _released_subscription.to_s.size > 5000
       end
+
       if _subscription = @subscription
         return false if _subscription.is_a?(OpenApi::Validatable) && !_subscription.valid?
       end
+
       if _test_clock = @test_clock
         return false if _test_clock.is_a?(OpenApi::Validatable) && !_test_clock.valid?
       end
@@ -289,7 +321,7 @@ module Stripe
         raise ArgumentError.new("\"end_behavior\" is required and cannot be null")
       end
       _end_behavior = end_behavior.not_nil!
-      ENUM_VALIDATOR_FOR_END_BEHAVIOR.valid!(_end_behavior)
+      OpenApi::EnumValidator.validate("end_behavior", _end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
       @end_behavior = _end_behavior
     end
 
@@ -324,7 +356,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 
@@ -346,7 +378,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 

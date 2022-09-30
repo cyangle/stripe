@@ -26,7 +26,7 @@ module Stripe
     @[JSON::Field(key: "amount_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_AMOUNT_TYPE = OpenApi::EnumValidator.new("amount_type", "String", ["fixed", "maximum"])
+    VALID_VALUES_FOR_AMOUNT_TYPE = StaticArray["fixed", "maximum"]
 
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
 
-    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["day", "month", "sporadic", "week", "year"])
+    VALID_VALUES_FOR_INTERVAL = StaticArray["day", "month", "sporadic", "week", "year"]
 
     @[JSON::Field(key: "reference", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reference : String? = nil
@@ -56,7 +56,7 @@ module Stripe
     @[JSON::Field(key: "supported_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter supported_types : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_SUPPORTED_TYPES = OpenApi::EnumValidator.new("supported_types", "Array(String)", ["india"])
+    VALID_VALUES_FOR_SUPPORTED_TYPES = StaticArray["india"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -81,13 +81,23 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AMOUNT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid?(@amount_type, false)
+      invalid_properties.push("\"amount_type\" is required and cannot be null") if @amount_type.nil?
+
+      if _amount_type = @amount_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("amount_type", VALID_VALUES_FOR_AMOUNT_TYPE)) unless OpenApi::EnumValidator.valid?(_amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
+      end
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
+      invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
+
+      if _interval = @interval
+        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+      end
       invalid_properties.push("\"reference\" is required and cannot be null") if @reference.nil?
+
       if _reference = @reference
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 80)
           invalid_properties.push(max_length_error)
@@ -101,8 +111,9 @@ module Stripe
         end
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SUPPORTED_TYPES.error_message) unless ENUM_VALIDATOR_FOR_SUPPORTED_TYPES.all_valid?(@supported_types)
-
+      if _supported_types = @supported_types
+        invalid_properties.push(OpenApi::EnumValidator.error_message("supported_types", VALID_VALUES_FOR_SUPPORTED_TYPES)) unless OpenApi::EnumValidator.valid?(_supported_types, VALID_VALUES_FOR_SUPPORTED_TYPES)
+      end
       invalid_properties
     end
 
@@ -111,21 +122,32 @@ module Stripe
     def valid? : Bool
       return false if @amount.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid?(@amount_type, false)
+      return false if @amount_type.nil?
+      if _amount_type = @amount_type
+        return false unless OpenApi::EnumValidator.valid?(_amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
+      end
+
       return false if @currency.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval, false)
+      return false if @interval.nil?
+      if _interval = @interval
+        return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+      end
+
       return false if @reference.nil?
       if _reference = @reference
         return false if _reference.to_s.size > 80
       end
+
       return false if @start_date.nil?
 
       if _description = @description
         return false if _description.to_s.size > 200
       end
 
-      return false unless ENUM_VALIDATOR_FOR_SUPPORTED_TYPES.all_valid?(@supported_types)
+      if _supported_types = @supported_types
+        return false unless OpenApi::EnumValidator.valid?(_supported_types, VALID_VALUES_FOR_SUPPORTED_TYPES)
+      end
 
       true
     end
@@ -147,7 +169,7 @@ module Stripe
         raise ArgumentError.new("\"amount_type\" is required and cannot be null")
       end
       _amount_type = amount_type.not_nil!
-      ENUM_VALIDATOR_FOR_AMOUNT_TYPE.valid!(_amount_type)
+      OpenApi::EnumValidator.validate("amount_type", _amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
       @amount_type = _amount_type
     end
 
@@ -168,7 +190,7 @@ module Stripe
         raise ArgumentError.new("\"interval\" is required and cannot be null")
       end
       _interval = interval.not_nil!
-      ENUM_VALIDATOR_FOR_INTERVAL.valid!(_interval)
+      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
       @interval = _interval
     end
 
@@ -237,7 +259,7 @@ module Stripe
         return @supported_types = nil
       end
       _supported_types = supported_types.not_nil!
-      ENUM_VALIDATOR_FOR_SUPPORTED_TYPES.all_valid!(_supported_types)
+      OpenApi::EnumValidator.validate("supported_types", _supported_types, VALID_VALUES_FOR_SUPPORTED_TYPES)
       @supported_types = _supported_types
     end
 

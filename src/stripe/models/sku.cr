@@ -56,7 +56,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["sku"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["sku"]
 
     # The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
     @[JSON::Field(key: "price", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -111,6 +111,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"active\" is required and cannot be null") if @active.nil?
 
       invalid_properties.push("\"attributes\" is required and cannot be null") if @attributes.nil?
@@ -120,12 +121,14 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"inventory\" is required and cannot be null") if @inventory.nil?
+
       if _inventory = @inventory
         invalid_properties.concat(_inventory.list_invalid_properties_for("inventory")) if _inventory.is_a?(OpenApi::Validatable)
       end
@@ -133,10 +136,15 @@ module Stripe
 
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
 
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
+
       if _product = @product
         invalid_properties.concat(_product.list_invalid_properties_for("product")) if _product.is_a?(OpenApi::Validatable)
       end
@@ -150,7 +158,6 @@ module Stripe
       if _package_dimensions = @package_dimensions
         invalid_properties.concat(_package_dimensions.list_invalid_properties_for("package_dimensions")) if _package_dimensions.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -169,26 +176,34 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @inventory.nil?
       if _inventory = @inventory
         return false if _inventory.is_a?(OpenApi::Validatable) && !_inventory.valid?
       end
+
       return false if @livemode.nil?
 
       return false if @metadata.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @price.nil?
 
       return false if @product.nil?
       if _product = @product
         return false if _product.is_a?(OpenApi::Validatable) && !_product.valid?
       end
+
       return false if @updated.nil?
 
       if _image = @image
         return false if _image.to_s.size > 2048
       end
+
       if _package_dimensions = @package_dimensions
         return false if _package_dimensions.is_a?(OpenApi::Validatable) && !_package_dimensions.valid?
       end
@@ -288,7 +303,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

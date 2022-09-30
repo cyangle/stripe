@@ -49,7 +49,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["tax_rate"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["tax_rate"]
 
     # This represents the tax rate percent out of 100.
     @[JSON::Field(key: "percentage", type: Float64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -98,8 +98,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? tax_type_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_TAX_TYPE = OpenApi::EnumValidator.new("tax_type", "String", ["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"])
+    VALID_VALUES_FOR_TAX_TYPE = StaticArray["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -128,17 +127,20 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"active\" is required and cannot be null") if @active.nil?
 
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"display_name\" is required and cannot be null") if @display_name.nil?
+
       if _display_name = @display_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -148,7 +150,11 @@ module Stripe
 
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"percentage\" is required and cannot be null") if @percentage.nil?
 
       if _country = @country
@@ -172,9 +178,9 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_TYPE.error_message) unless ENUM_VALIDATOR_FOR_TAX_TYPE.valid?(@tax_type)
-
+      if _tax_type = @tax_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_type", VALID_VALUES_FOR_TAX_TYPE)) unless OpenApi::EnumValidator.valid?(_tax_type, VALID_VALUES_FOR_TAX_TYPE)
+      end
       invalid_properties
     end
 
@@ -189,23 +195,31 @@ module Stripe
       if _display_name = @display_name
         return false if _display_name.to_s.size > 5000
       end
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @inclusive.nil?
 
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @percentage.nil?
 
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
       if _description = @description
         return false if _description.to_s.size > 5000
       end
+
       if _jurisdiction = @jurisdiction
         return false if _jurisdiction.to_s.size > 5000
       end
@@ -213,7 +227,10 @@ module Stripe
       if _state = @state
         return false if _state.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_TAX_TYPE.valid?(@tax_type)
+
+      if _tax_type = @tax_type
+        return false unless OpenApi::EnumValidator.valid?(_tax_type, VALID_VALUES_FOR_TAX_TYPE)
+      end
 
       true
     end
@@ -293,7 +310,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 
@@ -380,7 +397,7 @@ module Stripe
         return @tax_type = nil
       end
       _tax_type = tax_type.not_nil!
-      ENUM_VALIDATOR_FOR_TAX_TYPE.valid!(_tax_type)
+      OpenApi::EnumValidator.validate("tax_type", _tax_type, VALID_VALUES_FOR_TAX_TYPE)
       @tax_type = _tax_type
     end
 

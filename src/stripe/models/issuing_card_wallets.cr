@@ -52,11 +52,14 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"apple_pay\" is required and cannot be null") if @apple_pay.nil?
+
       if _apple_pay = @apple_pay
         invalid_properties.concat(_apple_pay.list_invalid_properties_for("apple_pay")) if _apple_pay.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"google_pay\" is required and cannot be null") if @google_pay.nil?
+
       if _google_pay = @google_pay
         invalid_properties.concat(_google_pay.list_invalid_properties_for("google_pay")) if _google_pay.is_a?(OpenApi::Validatable)
       end
@@ -65,7 +68,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -76,10 +78,12 @@ module Stripe
       if _apple_pay = @apple_pay
         return false if _apple_pay.is_a?(OpenApi::Validatable) && !_apple_pay.valid?
       end
+
       return false if @google_pay.nil?
       if _google_pay = @google_pay
         return false if _google_pay.is_a?(OpenApi::Validatable) && !_google_pay.valid?
       end
+
       if _primary_account_identifier = @primary_account_identifier
         return false if _primary_account_identifier.to_s.size > 5000
       end

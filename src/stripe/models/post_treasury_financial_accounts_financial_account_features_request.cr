@@ -65,6 +65,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _card_issuing = @card_issuing
         invalid_properties.concat(_card_issuing.list_invalid_properties_for("card_issuing")) if _card_issuing.is_a?(OpenApi::Validatable)
       end
@@ -87,7 +88,6 @@ module Stripe
       if _outbound_transfers = @outbound_transfers
         invalid_properties.concat(_outbound_transfers.list_invalid_properties_for("outbound_transfers")) if _outbound_transfers.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -97,6 +97,7 @@ module Stripe
       if _card_issuing = @card_issuing
         return false if _card_issuing.is_a?(OpenApi::Validatable) && !_card_issuing.valid?
       end
+
       if _deposit_insurance = @deposit_insurance
         return false if _deposit_insurance.is_a?(OpenApi::Validatable) && !_deposit_insurance.valid?
       end
@@ -104,15 +105,19 @@ module Stripe
       if _financial_addresses = @financial_addresses
         return false if _financial_addresses.is_a?(OpenApi::Validatable) && !_financial_addresses.valid?
       end
+
       if _inbound_transfers = @inbound_transfers
         return false if _inbound_transfers.is_a?(OpenApi::Validatable) && !_inbound_transfers.valid?
       end
+
       if _intra_stripe_flows = @intra_stripe_flows
         return false if _intra_stripe_flows.is_a?(OpenApi::Validatable) && !_intra_stripe_flows.valid?
       end
+
       if _outbound_payments = @outbound_payments
         return false if _outbound_payments.is_a?(OpenApi::Validatable) && !_outbound_payments.valid?
       end
+
       if _outbound_transfers = @outbound_transfers
         return false if _outbound_transfers.is_a?(OpenApi::Validatable) && !_outbound_transfers.valid?
       end

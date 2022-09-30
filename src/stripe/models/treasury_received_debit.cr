@@ -52,19 +52,19 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
 
-    ENUM_VALIDATOR_FOR_NETWORK = OpenApi::EnumValidator.new("network", "String", ["ach", "card", "stripe"])
+    VALID_VALUES_FOR_NETWORK = StaticArray["ach", "card", "stripe"]
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["treasury.received_debit"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["treasury.received_debit"]
 
     # Status of the ReceivedDebit. ReceivedDebits are created with a status of either `succeeded` (approved) or `failed` (declined). The failure reason can be found under the `failure_code`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["failed", "succeeded"])
+    VALID_VALUES_FOR_STATUS = StaticArray["failed", "succeeded"]
 
     # Optional properties
 
@@ -74,8 +74,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? failure_code_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_FAILURE_CODE = OpenApi::EnumValidator.new("failure_code", "String", ["account_closed", "account_frozen", "insufficient_funds", "other"])
+    VALID_VALUES_FOR_FAILURE_CODE = StaticArray["account_closed", "account_frozen", "insufficient_funds", "other"]
 
     # The FinancialAccount that funds were pulled from.
     @[JSON::Field(key: "financial_account", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: financial_account.nil? && !financial_account_present?)]
@@ -135,6 +134,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
@@ -142,30 +142,44 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"description\" is required and cannot be null") if @description.nil?
+
       if _description = @description
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"linked_flows\" is required and cannot be null") if @linked_flows.nil?
+
       if _linked_flows = @linked_flows
         invalid_properties.concat(_linked_flows.list_invalid_properties_for("linked_flows")) if _linked_flows.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network, false)
+      invalid_properties.push("\"network\" is required and cannot be null") if @network.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _network = @network
+        invalid_properties.push(OpenApi::EnumValidator.error_message("network", VALID_VALUES_FOR_NETWORK)) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+      end
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_FAILURE_CODE.error_message) unless ENUM_VALIDATOR_FOR_FAILURE_CODE.valid?(@failure_code)
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+      if _failure_code = @failure_code
+        invalid_properties.push(OpenApi::EnumValidator.error_message("failure_code", VALID_VALUES_FOR_FAILURE_CODE)) unless OpenApi::EnumValidator.valid?(_failure_code, VALID_VALUES_FOR_FAILURE_CODE)
+      end
       if _financial_account = @financial_account
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -185,7 +199,6 @@ module Stripe
       if _transaction = @transaction
         invalid_properties.concat(_transaction.list_invalid_properties_for("transaction")) if _transaction.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -202,32 +215,54 @@ module Stripe
       if _description = @description
         return false if _description.to_s.size > 5000
       end
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @linked_flows.nil?
       if _linked_flows = @linked_flows
         return false if _linked_flows.is_a?(OpenApi::Validatable) && !_linked_flows.valid?
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network, false)
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      return false unless ENUM_VALIDATOR_FOR_FAILURE_CODE.valid?(@failure_code)
+      return false if @network.nil?
+      if _network = @network
+        return false unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+      end
+
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
+      return false if @status.nil?
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+
+      if _failure_code = @failure_code
+        return false unless OpenApi::EnumValidator.valid?(_failure_code, VALID_VALUES_FOR_FAILURE_CODE)
+      end
+
       if _financial_account = @financial_account
         return false if _financial_account.to_s.size > 5000
       end
+
       if _hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url
         return false if _hosted_regulatory_receipt_url.to_s.size > 5000
       end
+
       if _initiating_payment_method_details = @initiating_payment_method_details
         return false if _initiating_payment_method_details.is_a?(OpenApi::Validatable) && !_initiating_payment_method_details.valid?
       end
+
       if _reversal_details = @reversal_details
         return false if _reversal_details.is_a?(OpenApi::Validatable) && !_reversal_details.valid?
       end
+
       if _transaction = @transaction
         return false if _transaction.is_a?(OpenApi::Validatable) && !_transaction.valid?
       end
@@ -321,7 +356,7 @@ module Stripe
         raise ArgumentError.new("\"network\" is required and cannot be null")
       end
       _network = network.not_nil!
-      ENUM_VALIDATOR_FOR_NETWORK.valid!(_network)
+      OpenApi::EnumValidator.validate("network", _network, VALID_VALUES_FOR_NETWORK)
       @network = _network
     end
 
@@ -332,7 +367,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 
@@ -343,7 +378,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 
@@ -354,7 +389,7 @@ module Stripe
         return @failure_code = nil
       end
       _failure_code = failure_code.not_nil!
-      ENUM_VALIDATOR_FOR_FAILURE_CODE.valid!(_failure_code)
+      OpenApi::EnumValidator.validate("failure_code", _failure_code, VALID_VALUES_FOR_FAILURE_CODE)
       @failure_code = _failure_code
     end
 

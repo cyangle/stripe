@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_CAPTURE_METHOD = OpenApi::EnumValidator.new("capture_method", "String", ["manual"])
+    VALID_VALUES_FOR_CAPTURE_METHOD = StaticArray["manual"]
 
     @[JSON::Field(key: "installments", type: Stripe::PaymentFlowsInstallmentOptions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter installments : Stripe::PaymentFlowsInstallmentOptions? = nil
@@ -34,13 +34,13 @@ module Stripe
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
 
-    ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE = OpenApi::EnumValidator.new("setup_future_usage", "String", ["none", "off_session", "on_session"])
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none", "off_session", "on_session"]
 
     # Bank account verification method.
     @[JSON::Field(key: "verification_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter verification_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_VERIFICATION_METHOD = OpenApi::EnumValidator.new("verification_method", "String", ["automatic", "instant", "microdeposits"])
+    VALID_VALUES_FOR_VERIFICATION_METHOD = StaticArray["automatic", "instant", "microdeposits"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -59,27 +59,39 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CAPTURE_METHOD.error_message) unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
+      if _capture_method = @capture_method
+        invalid_properties.push(OpenApi::EnumValidator.error_message("capture_method", VALID_VALUES_FOR_CAPTURE_METHOD)) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+      end
       if _installments = @installments
         invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.error_message) unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
-
+      if _setup_future_usage = @setup_future_usage
+        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+      end
+      if _verification_method = @verification_method
+        invalid_properties.push(OpenApi::EnumValidator.error_message("verification_method", VALID_VALUES_FOR_VERIFICATION_METHOD)) unless OpenApi::EnumValidator.valid?(_verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid?(@capture_method)
+      if _capture_method = @capture_method
+        return false unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+      end
+
       if _installments = @installments
         return false if _installments.is_a?(OpenApi::Validatable) && !_installments.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid?(@setup_future_usage)
-      return false unless ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid?(@verification_method)
+
+      if _setup_future_usage = @setup_future_usage
+        return false unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+      end
+
+      if _verification_method = @verification_method
+        return false unless OpenApi::EnumValidator.valid?(_verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
+      end
 
       true
     end
@@ -91,7 +103,7 @@ module Stripe
         return @capture_method = nil
       end
       _capture_method = capture_method.not_nil!
-      ENUM_VALIDATOR_FOR_CAPTURE_METHOD.valid!(_capture_method)
+      OpenApi::EnumValidator.validate("capture_method", _capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       @capture_method = _capture_method
     end
 
@@ -113,7 +125,7 @@ module Stripe
         return @setup_future_usage = nil
       end
       _setup_future_usage = setup_future_usage.not_nil!
-      ENUM_VALIDATOR_FOR_SETUP_FUTURE_USAGE.valid!(_setup_future_usage)
+      OpenApi::EnumValidator.validate("setup_future_usage", _setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       @setup_future_usage = _setup_future_usage
     end
 
@@ -124,7 +136,7 @@ module Stripe
         return @verification_method = nil
       end
       _verification_method = verification_method.not_nil!
-      ENUM_VALIDATOR_FOR_VERIFICATION_METHOD.valid!(_verification_method)
+      OpenApi::EnumValidator.validate("verification_method", _verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
       @verification_method = _verification_method
     end
 

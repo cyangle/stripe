@@ -57,6 +57,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _acss_debit = @acss_debit
         invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
@@ -75,7 +76,6 @@ module Stripe
       if _us_bank_account = @us_bank_account
         invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -85,18 +85,23 @@ module Stripe
       if _acss_debit = @acss_debit
         return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
+
       if _blik = @blik
         return false if _blik.is_a?(OpenApi::Validatable) && !_blik.valid?
       end
+
       if _card = @card
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
+
       if _link = @link
         return false if _link.is_a?(OpenApi::Validatable) && !_link.valid?
       end
+
       if _sepa_debit = @sepa_debit
         return false if _sepa_debit.is_a?(OpenApi::Validatable) && !_sepa_debit.valid?
       end
+
       if _us_bank_account = @us_bank_account
         return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end

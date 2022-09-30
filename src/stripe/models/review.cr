@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["review"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["review"]
 
     # If `true`, the review needs action.
     @[JSON::Field(key: "open", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -47,7 +47,7 @@ module Stripe
     @[JSON::Field(key: "opened_reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter opened_reason : String? = nil
 
-    ENUM_VALIDATOR_FOR_OPENED_REASON = OpenApi::EnumValidator.new("opened_reason", "String", ["manual", "rule"])
+    VALID_VALUES_FOR_OPENED_REASON = StaticArray["manual", "rule"]
 
     # The reason the review is currently open or closed. One of `rule`, `manual`, `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
     @[JSON::Field(key: "reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -74,8 +74,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? closed_reason_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_CLOSED_REASON = OpenApi::EnumValidator.new("closed_reason", "String", ["approved", "disputed", "redacted", "refunded", "refunded_as_fraud"])
+    VALID_VALUES_FOR_CLOSED_REASON = StaticArray["approved", "disputed", "redacted", "refunded", "refunded_as_fraud"]
 
     # The IP address where the payment originated.
     @[JSON::Field(key: "ip_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
@@ -126,9 +125,11 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -136,11 +137,20 @@ module Stripe
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"open\" is required and cannot be null") if @open.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OPENED_REASON.error_message) unless ENUM_VALIDATOR_FOR_OPENED_REASON.valid?(@opened_reason, false)
+      invalid_properties.push("\"opened_reason\" is required and cannot be null") if @opened_reason.nil?
+
+      if _opened_reason = @opened_reason
+        invalid_properties.push(OpenApi::EnumValidator.error_message("opened_reason", VALID_VALUES_FOR_OPENED_REASON)) unless OpenApi::EnumValidator.valid?(_opened_reason, VALID_VALUES_FOR_OPENED_REASON)
+      end
       invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
+
       if _reason = @reason
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -154,8 +164,9 @@ module Stripe
       if _charge = @charge
         invalid_properties.concat(_charge.list_invalid_properties_for("charge")) if _charge.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CLOSED_REASON.error_message) unless ENUM_VALIDATOR_FOR_CLOSED_REASON.valid?(@closed_reason)
+      if _closed_reason = @closed_reason
+        invalid_properties.push(OpenApi::EnumValidator.error_message("closed_reason", VALID_VALUES_FOR_CLOSED_REASON)) unless OpenApi::EnumValidator.valid?(_closed_reason, VALID_VALUES_FOR_CLOSED_REASON)
+      end
       if _ip_address = @ip_address
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -170,7 +181,6 @@ module Stripe
       if _session = @session
         invalid_properties.concat(_session.list_invalid_properties_for("session")) if _session.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -183,32 +193,50 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @open.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OPENED_REASON.valid?(@opened_reason, false)
+      return false if @opened_reason.nil?
+      if _opened_reason = @opened_reason
+        return false unless OpenApi::EnumValidator.valid?(_opened_reason, VALID_VALUES_FOR_OPENED_REASON)
+      end
+
       return false if @reason.nil?
       if _reason = @reason
         return false if _reason.to_s.size > 5000
       end
+
       if _billing_zip = @billing_zip
         return false if _billing_zip.to_s.size > 5000
       end
+
       if _charge = @charge
         return false if _charge.is_a?(OpenApi::Validatable) && !_charge.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_CLOSED_REASON.valid?(@closed_reason)
+
+      if _closed_reason = @closed_reason
+        return false unless OpenApi::EnumValidator.valid?(_closed_reason, VALID_VALUES_FOR_CLOSED_REASON)
+      end
+
       if _ip_address = @ip_address
         return false if _ip_address.to_s.size > 5000
       end
+
       if _ip_address_location = @ip_address_location
         return false if _ip_address_location.is_a?(OpenApi::Validatable) && !_ip_address_location.valid?
       end
+
       if _payment_intent = @payment_intent
         return false if _payment_intent.is_a?(OpenApi::Validatable) && !_payment_intent.valid?
       end
+
       if _session = @session
         return false if _session.is_a?(OpenApi::Validatable) && !_session.valid?
       end
@@ -257,7 +285,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 
@@ -278,7 +306,7 @@ module Stripe
         raise ArgumentError.new("\"opened_reason\" is required and cannot be null")
       end
       _opened_reason = opened_reason.not_nil!
-      ENUM_VALIDATOR_FOR_OPENED_REASON.valid!(_opened_reason)
+      OpenApi::EnumValidator.validate("opened_reason", _opened_reason, VALID_VALUES_FOR_OPENED_REASON)
       @opened_reason = _opened_reason
     end
 
@@ -328,7 +356,7 @@ module Stripe
         return @closed_reason = nil
       end
       _closed_reason = closed_reason.not_nil!
-      ENUM_VALIDATOR_FOR_CLOSED_REASON.valid!(_closed_reason)
+      OpenApi::EnumValidator.validate("closed_reason", _closed_reason, VALID_VALUES_FOR_CLOSED_REASON)
       @closed_reason = _closed_reason
     end
 

@@ -41,7 +41,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["scheduled_query_run"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["scheduled_query_run"]
 
     # Time at which the result expires and is no longer available for download.
     @[JSON::Field(key: "result_available_until", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -94,11 +94,13 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"data_load_time\" is required and cannot be null") if @data_load_time.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -106,22 +108,29 @@ module Stripe
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"result_available_until\" is required and cannot be null") if @result_available_until.nil?
 
       invalid_properties.push("\"sql\" is required and cannot be null") if @sql.nil?
+
       if _sql = @sql
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sql", _sql.to_s.size, 100000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
+
       if _status = @status
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"title\" is required and cannot be null") if @title.nil?
+
       if _title = @title
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -133,7 +142,6 @@ module Stripe
       if _file = @file
         invalid_properties.concat(_file.list_invalid_properties_for("file")) if _file.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -148,26 +156,35 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @result_available_until.nil?
 
       return false if @sql.nil?
       if _sql = @sql
         return false if _sql.to_s.size > 100000
       end
+
       return false if @status.nil?
       if _status = @status
         return false if _status.to_s.size > 5000
       end
+
       return false if @title.nil?
       if _title = @title
         return false if _title.to_s.size > 5000
       end
+
       if _error = @error
         return false if _error.is_a?(OpenApi::Validatable) && !_error.valid?
       end
+
       if _file = @file
         return false if _file.is_a?(OpenApi::Validatable) && !_file.valid?
       end
@@ -226,7 +243,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

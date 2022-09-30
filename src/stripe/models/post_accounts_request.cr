@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "business_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter business_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_BUSINESS_TYPE = OpenApi::EnumValidator.new("business_type", "String", ["company", "government_entity", "individual", "non_profit"])
+    VALID_VALUES_FOR_BUSINESS_TYPE = StaticArray["company", "government_entity", "individual", "non_profit"]
 
     @[JSON::Field(key: "capabilities", type: Stripe::CapabilitiesParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capabilities : Stripe::CapabilitiesParam? = nil
@@ -81,7 +81,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["custom", "express", "standard"])
+    VALID_VALUES_FOR__TYPE = StaticArray["custom", "express", "standard"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -112,6 +112,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _account_token = @account_token
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_token", _account_token.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -123,8 +124,9 @@ module Stripe
       if _business_profile = @business_profile
         invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile")) if _business_profile.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BUSINESS_TYPE.error_message) unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
+      if _business_type = @business_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("business_type", VALID_VALUES_FOR_BUSINESS_TYPE)) unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
+      end
       if _capabilities = @capabilities
         invalid_properties.concat(_capabilities.list_invalid_properties_for("capabilities")) if _capabilities.is_a?(OpenApi::Validatable)
       end
@@ -158,9 +160,9 @@ module Stripe
       if _tos_acceptance = @tos_acceptance
         invalid_properties.concat(_tos_acceptance.list_invalid_properties_for("tos_acceptance")) if _tos_acceptance.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
-
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
       invalid_properties
     end
 
@@ -170,19 +172,27 @@ module Stripe
       if _account_token = @account_token
         return false if _account_token.to_s.size > 5000
       end
+
       if _bank_account = @bank_account
         return false if _bank_account.is_a?(OpenApi::Validatable) && !_bank_account.valid?
       end
+
       if _business_profile = @business_profile
         return false if _business_profile.is_a?(OpenApi::Validatable) && !_business_profile.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid?(@business_type)
+
+      if _business_type = @business_type
+        return false unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
+      end
+
       if _capabilities = @capabilities
         return false if _capabilities.is_a?(OpenApi::Validatable) && !_capabilities.valid?
       end
+
       if _company = @company
         return false if _company.is_a?(OpenApi::Validatable) && !_company.valid?
       end
+
       if _country = @country
         return false if _country.to_s.size > 5000
       end
@@ -194,19 +204,26 @@ module Stripe
       if _external_account = @external_account
         return false if _external_account.to_s.size > 5000
       end
+
       if _individual = @individual
         return false if _individual.is_a?(OpenApi::Validatable) && !_individual.valid?
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _settings = @settings
         return false if _settings.is_a?(OpenApi::Validatable) && !_settings.valid?
       end
+
       if _tos_acceptance = @tos_acceptance
         return false if _tos_acceptance.is_a?(OpenApi::Validatable) && !_tos_acceptance.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type)
+
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
 
       true
     end
@@ -254,7 +271,7 @@ module Stripe
         return @business_type = nil
       end
       _business_type = business_type.not_nil!
-      ENUM_VALIDATOR_FOR_BUSINESS_TYPE.valid!(_business_type)
+      OpenApi::EnumValidator.validate("business_type", _business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
       @business_type = _business_type
     end
 
@@ -400,7 +417,7 @@ module Stripe
         return @_type = nil
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 

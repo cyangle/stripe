@@ -73,6 +73,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _statement_descriptor = @statement_descriptor
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -98,7 +99,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -108,15 +108,19 @@ module Stripe
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 5000
       end
+
       if _statement_descriptor_kana = @statement_descriptor_kana
         return false if _statement_descriptor_kana.to_s.size > 5000
       end
+
       if _statement_descriptor_kanji = @statement_descriptor_kanji
         return false if _statement_descriptor_kanji.to_s.size > 5000
       end
+
       if _statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana
         return false if _statement_descriptor_prefix_kana.to_s.size > 5000
       end
+
       if _statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji
         return false if _statement_descriptor_prefix_kanji.to_s.size > 5000
       end

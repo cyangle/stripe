@@ -88,6 +88,7 @@ module Stripe
       if _description = @description
         return false if _description.to_s.size > 500
       end
+
       if _items = @items
         return false if _items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _items)
       end

@@ -91,19 +91,23 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"category\" is required and cannot be null") if @category.nil?
+
       if _category = @category
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("category", _category.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"category_code\" is required and cannot be null") if @category_code.nil?
+
       if _category_code = @category_code
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("category_code", _category_code.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"network_id\" is required and cannot be null") if @network_id.nil?
+
       if _network_id = @network_id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_id", _network_id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -134,7 +138,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -145,26 +148,33 @@ module Stripe
       if _category = @category
         return false if _category.to_s.size > 5000
       end
+
       return false if @category_code.nil?
       if _category_code = @category_code
         return false if _category_code.to_s.size > 5000
       end
+
       return false if @network_id.nil?
       if _network_id = @network_id
         return false if _network_id.to_s.size > 5000
       end
+
       if _city = @city
         return false if _city.to_s.size > 5000
       end
+
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
       if _name = @name
         return false if _name.to_s.size > 5000
       end
+
       if _postal_code = @postal_code
         return false if _postal_code.to_s.size > 5000
       end
+
       if _state = @state
         return false if _state.to_s.size > 5000
       end

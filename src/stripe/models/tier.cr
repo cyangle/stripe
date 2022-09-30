@@ -55,7 +55,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"up_to\" is required and cannot be null") if @up_to.nil?
+
       if _up_to = @up_to
         invalid_properties.concat(_up_to.list_invalid_properties_for("up_to")) if _up_to.is_a?(OpenApi::Validatable)
       end

@@ -59,13 +59,16 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+
       if __type = @_type
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"unit\" is required and cannot be null") if @unit.nil?
+
       if _unit = @unit
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit", _unit.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -83,10 +86,12 @@ module Stripe
       if __type = @_type
         return false if __type.to_s.size > 5000
       end
+
       return false if @unit.nil?
       if _unit = @unit
         return false if _unit.to_s.size > 5000
       end
+
       return false if @unit_cost_decimal.nil?
 
       true

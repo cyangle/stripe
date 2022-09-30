@@ -85,9 +85,11 @@ module Stripe
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _nickname = @nickname
         return false if _nickname.to_s.size > 5000
       end
+
       if _product = @product
         return false if _product.to_s.size > 5000
       end

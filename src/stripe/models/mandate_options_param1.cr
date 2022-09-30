@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transaction_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_TRANSACTION_TYPE = OpenApi::EnumValidator.new("transaction_type", "String", ["business", "personal"])
+    VALID_VALUES_FOR_TRANSACTION_TYPE = StaticArray["business", "personal"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -39,15 +39,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.error_message) unless ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.valid?(@transaction_type)
-
+      if _transaction_type = @transaction_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("transaction_type", VALID_VALUES_FOR_TRANSACTION_TYPE)) unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.valid?(@transaction_type)
+      if _transaction_type = @transaction_type
+        return false unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
+      end
 
       true
     end
@@ -59,7 +62,7 @@ module Stripe
         return @transaction_type = nil
       end
       _transaction_type = transaction_type.not_nil!
-      ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.valid!(_transaction_type)
+      OpenApi::EnumValidator.validate("transaction_type", _transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
       @transaction_type = _transaction_type
     end
 

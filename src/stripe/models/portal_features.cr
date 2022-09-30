@@ -57,31 +57,37 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"customer_update\" is required and cannot be null") if @customer_update.nil?
+
       if _customer_update = @customer_update
         invalid_properties.concat(_customer_update.list_invalid_properties_for("customer_update")) if _customer_update.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"invoice_history\" is required and cannot be null") if @invoice_history.nil?
+
       if _invoice_history = @invoice_history
         invalid_properties.concat(_invoice_history.list_invalid_properties_for("invoice_history")) if _invoice_history.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"payment_method_update\" is required and cannot be null") if @payment_method_update.nil?
+
       if _payment_method_update = @payment_method_update
         invalid_properties.concat(_payment_method_update.list_invalid_properties_for("payment_method_update")) if _payment_method_update.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"subscription_cancel\" is required and cannot be null") if @subscription_cancel.nil?
+
       if _subscription_cancel = @subscription_cancel
         invalid_properties.concat(_subscription_cancel.list_invalid_properties_for("subscription_cancel")) if _subscription_cancel.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"subscription_pause\" is required and cannot be null") if @subscription_pause.nil?
+
       if _subscription_pause = @subscription_pause
         invalid_properties.concat(_subscription_pause.list_invalid_properties_for("subscription_pause")) if _subscription_pause.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"subscription_update\" is required and cannot be null") if @subscription_update.nil?
+
       if _subscription_update = @subscription_update
         invalid_properties.concat(_subscription_update.list_invalid_properties_for("subscription_update")) if _subscription_update.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -92,22 +98,27 @@ module Stripe
       if _customer_update = @customer_update
         return false if _customer_update.is_a?(OpenApi::Validatable) && !_customer_update.valid?
       end
+
       return false if @invoice_history.nil?
       if _invoice_history = @invoice_history
         return false if _invoice_history.is_a?(OpenApi::Validatable) && !_invoice_history.valid?
       end
+
       return false if @payment_method_update.nil?
       if _payment_method_update = @payment_method_update
         return false if _payment_method_update.is_a?(OpenApi::Validatable) && !_payment_method_update.valid?
       end
+
       return false if @subscription_cancel.nil?
       if _subscription_cancel = @subscription_cancel
         return false if _subscription_cancel.is_a?(OpenApi::Validatable) && !_subscription_cancel.valid?
       end
+
       return false if @subscription_pause.nil?
       if _subscription_pause = @subscription_pause
         return false if _subscription_pause.is_a?(OpenApi::Validatable) && !_subscription_pause.valid?
       end
+
       return false if @subscription_update.nil?
       if _subscription_update = @subscription_update
         return false if _subscription_update.is_a?(OpenApi::Validatable) && !_subscription_update.valid?

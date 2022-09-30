@@ -49,7 +49,7 @@ module Stripe
     @[JSON::Field(key: "reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reason : String? = nil
 
-    ENUM_VALIDATOR_FOR_REASON = OpenApi::EnumValidator.new("reason", "String", ["account_disabled", "card_active", "card_inactive", "cardholder_inactive", "cardholder_verification_required", "insufficient_funds", "not_allowed", "spending_controls", "suspected_fraud", "verification_failed", "webhook_approved", "webhook_declined", "webhook_timeout"])
+    VALID_VALUES_FOR_REASON = StaticArray["account_disabled", "card_active", "card_inactive", "cardholder_inactive", "cardholder_verification_required", "insufficient_funds", "not_allowed", "spending_controls", "suspected_fraud", "verification_failed", "webhook_approved", "webhook_declined", "webhook_timeout"]
 
     # Optional properties
 
@@ -80,6 +80,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
       invalid_properties.push("\"approved\" is required and cannot be null") if @approved.nil?
@@ -87,6 +88,7 @@ module Stripe
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
+
       if _currency = @currency
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -95,17 +97,20 @@ module Stripe
       invalid_properties.push("\"merchant_amount\" is required and cannot be null") if @merchant_amount.nil?
 
       invalid_properties.push("\"merchant_currency\" is required and cannot be null") if @merchant_currency.nil?
+
       if _merchant_currency = @merchant_currency
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("merchant_currency", _merchant_currency.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_REASON.error_message) unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason, false)
+      if _reason = @reason
+        invalid_properties.push(OpenApi::EnumValidator.error_message("reason", VALID_VALUES_FOR_REASON)) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
+      end
       if _amount_details = @amount_details
         invalid_properties.concat(_amount_details.list_invalid_properties_for("amount_details")) if _amount_details.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -122,13 +127,19 @@ module Stripe
       if _currency = @currency
         return false if _currency.to_s.size > 5000
       end
+
       return false if @merchant_amount.nil?
 
       return false if @merchant_currency.nil?
       if _merchant_currency = @merchant_currency
         return false if _merchant_currency.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason, false)
+
+      return false if @reason.nil?
+      if _reason = @reason
+        return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
+      end
+
       if _amount_details = @amount_details
         return false if _amount_details.is_a?(OpenApi::Validatable) && !_amount_details.valid?
       end
@@ -211,7 +222,7 @@ module Stripe
         raise ArgumentError.new("\"reason\" is required and cannot be null")
       end
       _reason = reason.not_nil!
-      ENUM_VALIDATOR_FOR_REASON.valid!(_reason)
+      OpenApi::EnumValidator.validate("reason", _reason, VALID_VALUES_FOR_REASON)
       @reason = _reason
     end
 

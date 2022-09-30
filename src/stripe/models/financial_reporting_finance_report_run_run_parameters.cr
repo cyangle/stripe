@@ -95,7 +95,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -109,9 +108,11 @@ module Stripe
       if _payout = @payout
         return false if _payout.to_s.size > 5000
       end
+
       if _reporting_category = @reporting_category
         return false if _reporting_category.to_s.size > 5000
       end
+
       if _timezone = @timezone
         return false if _timezone.to_s.size > 5000
       end

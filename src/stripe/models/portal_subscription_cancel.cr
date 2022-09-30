@@ -32,13 +32,13 @@ module Stripe
     @[JSON::Field(key: "mode", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter mode : String? = nil
 
-    ENUM_VALIDATOR_FOR_MODE = OpenApi::EnumValidator.new("mode", "String", ["at_period_end", "immediately"])
+    VALID_VALUES_FOR_MODE = StaticArray["at_period_end", "immediately"]
 
     # Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = OpenApi::EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
+    VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -56,16 +56,24 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"cancellation_reason\" is required and cannot be null") if @cancellation_reason.nil?
+
       if _cancellation_reason = @cancellation_reason
         invalid_properties.concat(_cancellation_reason.list_invalid_properties_for("cancellation_reason")) if _cancellation_reason.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_MODE.error_message) unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode, false)
+      invalid_properties.push("\"mode\" is required and cannot be null") if @mode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior, false)
+      if _mode = @mode
+        invalid_properties.push(OpenApi::EnumValidator.error_message("mode", VALID_VALUES_FOR_MODE)) unless OpenApi::EnumValidator.valid?(_mode, VALID_VALUES_FOR_MODE)
+      end
+      invalid_properties.push("\"proration_behavior\" is required and cannot be null") if @proration_behavior.nil?
 
+      if _proration_behavior = @proration_behavior
+        invalid_properties.push(OpenApi::EnumValidator.error_message("proration_behavior", VALID_VALUES_FOR_PRORATION_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+      end
       invalid_properties
     end
 
@@ -76,10 +84,18 @@ module Stripe
       if _cancellation_reason = @cancellation_reason
         return false if _cancellation_reason.is_a?(OpenApi::Validatable) && !_cancellation_reason.valid?
       end
+
       return false if @enabled.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode, false)
-      return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior, false)
+      return false if @mode.nil?
+      if _mode = @mode
+        return false unless OpenApi::EnumValidator.valid?(_mode, VALID_VALUES_FOR_MODE)
+      end
+
+      return false if @proration_behavior.nil?
+      if _proration_behavior = @proration_behavior
+        return false unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+      end
 
       true
     end
@@ -112,7 +128,7 @@ module Stripe
         raise ArgumentError.new("\"mode\" is required and cannot be null")
       end
       _mode = mode.not_nil!
-      ENUM_VALIDATOR_FOR_MODE.valid!(_mode)
+      OpenApi::EnumValidator.validate("mode", _mode, VALID_VALUES_FOR_MODE)
       @mode = _mode
     end
 
@@ -123,7 +139,7 @@ module Stripe
         raise ArgumentError.new("\"proration_behavior\" is required and cannot be null")
       end
       _proration_behavior = proration_behavior.not_nil!
-      ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(_proration_behavior)
+      OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       @proration_behavior = _proration_behavior
     end
 

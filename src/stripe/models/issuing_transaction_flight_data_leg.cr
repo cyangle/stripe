@@ -81,6 +81,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _arrival_airport_code = @arrival_airport_code
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("arrival_airport_code", _arrival_airport_code.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -116,15 +117,19 @@ module Stripe
       if _arrival_airport_code = @arrival_airport_code
         return false if _arrival_airport_code.to_s.size > 5000
       end
+
       if _carrier = @carrier
         return false if _carrier.to_s.size > 5000
       end
+
       if _departure_airport_code = @departure_airport_code
         return false if _departure_airport_code.to_s.size > 5000
       end
+
       if _flight_number = @flight_number
         return false if _flight_number.to_s.size > 5000
       end
+
       if _service_class = @service_class
         return false if _service_class.to_s.size > 5000
       end

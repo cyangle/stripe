@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "amount_tax_display", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter amount_tax_display : String? = nil
 
-    ENUM_VALIDATOR_FOR_AMOUNT_TAX_DISPLAY = OpenApi::EnumValidator.new("amount_tax_display", "String", ["", "exclude_tax", "include_inclusive_tax"])
+    VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY = StaticArray["", "exclude_tax", "include_inclusive_tax"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -39,15 +39,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AMOUNT_TAX_DISPLAY.error_message) unless ENUM_VALIDATOR_FOR_AMOUNT_TAX_DISPLAY.valid?(@amount_tax_display)
-
+      if _amount_tax_display = @amount_tax_display
+        invalid_properties.push(OpenApi::EnumValidator.error_message("amount_tax_display", VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY)) unless OpenApi::EnumValidator.valid?(_amount_tax_display, VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_AMOUNT_TAX_DISPLAY.valid?(@amount_tax_display)
+      if _amount_tax_display = @amount_tax_display
+        return false unless OpenApi::EnumValidator.valid?(_amount_tax_display, VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY)
+      end
 
       true
     end
@@ -59,7 +62,7 @@ module Stripe
         return @amount_tax_display = nil
       end
       _amount_tax_display = amount_tax_display.not_nil!
-      ENUM_VALIDATOR_FOR_AMOUNT_TAX_DISPLAY.valid!(_amount_tax_display)
+      OpenApi::EnumValidator.validate("amount_tax_display", _amount_tax_display, VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY)
       @amount_tax_display = _amount_tax_display
     end
 

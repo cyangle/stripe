@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "locale", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter locale : String? = nil
 
-    ENUM_VALIDATOR_FOR_LOCALE = OpenApi::EnumValidator.new("locale", "String", ["auto", "bg", "cs", "da", "de", "el", "en", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-SG", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"])
+    VALID_VALUES_FOR_LOCALE = StaticArray["auto", "bg", "cs", "da", "de", "el", "en", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-SG", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"]
 
     # The `on_behalf_of` account to use for this session. When specified, only subscriptions and invoices with this `on_behalf_of` account appear in the portal. For more information, see the [docs](https://stripe.com/docs/connect/charges-transfers#on-behalf-of). Use the [Accounts API](https://stripe.com/docs/api/accounts/object#account_object-settings-branding) to modify the `on_behalf_of` account's branding settings, which the portal displays.
     @[JSON::Field(key: "on_behalf_of", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -67,7 +67,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
+
       if _customer = @customer
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -79,7 +81,9 @@ module Stripe
         end
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_LOCALE.error_message) unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
+      if _locale = @locale
+        invalid_properties.push(OpenApi::EnumValidator.error_message("locale", VALID_VALUES_FOR_LOCALE)) unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
+      end
 
       invalid_properties
     end
@@ -91,11 +95,14 @@ module Stripe
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
+
       if _configuration = @configuration
         return false if _configuration.to_s.size > 5000
       end
 
-      return false unless ENUM_VALIDATOR_FOR_LOCALE.valid?(@locale)
+      if _locale = @locale
+        return false unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
+      end
 
       true
     end
@@ -145,7 +152,7 @@ module Stripe
         return @locale = nil
       end
       _locale = locale.not_nil!
-      ENUM_VALIDATOR_FOR_LOCALE.valid!(_locale)
+      OpenApi::EnumValidator.validate("locale", _locale, VALID_VALUES_FOR_LOCALE)
       @locale = _locale
     end
 

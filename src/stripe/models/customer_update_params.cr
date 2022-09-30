@@ -24,17 +24,17 @@ module Stripe
     @[JSON::Field(key: "address", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address : String? = nil
 
-    ENUM_VALIDATOR_FOR_ADDRESS = OpenApi::EnumValidator.new("address", "String", ["auto", "never"])
+    VALID_VALUES_FOR_ADDRESS = StaticArray["auto", "never"]
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : String? = nil
 
-    ENUM_VALIDATOR_FOR_NAME = OpenApi::EnumValidator.new("name", "String", ["auto", "never"])
+    VALID_VALUES_FOR_NAME = StaticArray["auto", "never"]
 
     @[JSON::Field(key: "shipping", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping : String? = nil
 
-    ENUM_VALIDATOR_FOR_SHIPPING = OpenApi::EnumValidator.new("shipping", "String", ["auto", "never"])
+    VALID_VALUES_FOR_SHIPPING = StaticArray["auto", "never"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,21 +52,32 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ADDRESS.error_message) unless ENUM_VALIDATOR_FOR_ADDRESS.valid?(@address)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_NAME.error_message) unless ENUM_VALIDATOR_FOR_NAME.valid?(@name)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SHIPPING.error_message) unless ENUM_VALIDATOR_FOR_SHIPPING.valid?(@shipping)
-
+      if _address = @address
+        invalid_properties.push(OpenApi::EnumValidator.error_message("address", VALID_VALUES_FOR_ADDRESS)) unless OpenApi::EnumValidator.valid?(_address, VALID_VALUES_FOR_ADDRESS)
+      end
+      if _name = @name
+        invalid_properties.push(OpenApi::EnumValidator.error_message("name", VALID_VALUES_FOR_NAME)) unless OpenApi::EnumValidator.valid?(_name, VALID_VALUES_FOR_NAME)
+      end
+      if _shipping = @shipping
+        invalid_properties.push(OpenApi::EnumValidator.error_message("shipping", VALID_VALUES_FOR_SHIPPING)) unless OpenApi::EnumValidator.valid?(_shipping, VALID_VALUES_FOR_SHIPPING)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_ADDRESS.valid?(@address)
-      return false unless ENUM_VALIDATOR_FOR_NAME.valid?(@name)
-      return false unless ENUM_VALIDATOR_FOR_SHIPPING.valid?(@shipping)
+      if _address = @address
+        return false unless OpenApi::EnumValidator.valid?(_address, VALID_VALUES_FOR_ADDRESS)
+      end
+
+      if _name = @name
+        return false unless OpenApi::EnumValidator.valid?(_name, VALID_VALUES_FOR_NAME)
+      end
+
+      if _shipping = @shipping
+        return false unless OpenApi::EnumValidator.valid?(_shipping, VALID_VALUES_FOR_SHIPPING)
+      end
 
       true
     end
@@ -78,7 +89,7 @@ module Stripe
         return @address = nil
       end
       _address = address.not_nil!
-      ENUM_VALIDATOR_FOR_ADDRESS.valid!(_address)
+      OpenApi::EnumValidator.validate("address", _address, VALID_VALUES_FOR_ADDRESS)
       @address = _address
     end
 
@@ -89,7 +100,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      ENUM_VALIDATOR_FOR_NAME.valid!(_name)
+      OpenApi::EnumValidator.validate("name", _name, VALID_VALUES_FOR_NAME)
       @name = _name
     end
 
@@ -100,7 +111,7 @@ module Stripe
         return @shipping = nil
       end
       _shipping = shipping.not_nil!
-      ENUM_VALIDATOR_FOR_SHIPPING.valid!(_shipping)
+      OpenApi::EnumValidator.validate("shipping", _shipping, VALID_VALUES_FOR_SHIPPING)
       @shipping = _shipping
     end
 

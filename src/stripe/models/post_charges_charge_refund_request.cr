@@ -39,7 +39,7 @@ module Stripe
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter reason : String? = nil
 
-    ENUM_VALIDATOR_FOR_REASON = OpenApi::EnumValidator.new("reason", "String", ["duplicate", "fraudulent", "requested_by_customer"])
+    VALID_VALUES_FOR_REASON = StaticArray["duplicate", "fraudulent", "requested_by_customer"]
 
     @[JSON::Field(key: "refund_application_fee", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter refund_application_fee : Bool? = nil
@@ -76,8 +76,9 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_REASON.error_message) unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
+      if _reason = @reason
+        invalid_properties.push(OpenApi::EnumValidator.error_message("reason", VALID_VALUES_FOR_REASON)) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
+      end
 
       invalid_properties
     end
@@ -88,10 +89,14 @@ module Stripe
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _payment_intent = @payment_intent
         return false if _payment_intent.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
+
+      if _reason = @reason
+        return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
+      end
 
       true
     end
@@ -158,7 +163,7 @@ module Stripe
         return @reason = nil
       end
       _reason = reason.not_nil!
-      ENUM_VALIDATOR_FOR_REASON.valid!(_reason)
+      OpenApi::EnumValidator.validate("reason", _reason, VALID_VALUES_FOR_REASON)
       @reason = _reason
     end
 

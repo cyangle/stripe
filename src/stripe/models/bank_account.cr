@@ -41,7 +41,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["bank_account"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["bank_account"]
 
     # For bank accounts, possible values are `new`, `validated`, `verified`, `verification_failed`, or `errored`. A bank account that hasn't had any activity or validation performed is `new`. If Stripe can determine that the bank account exists, its status will be `validated`. Note that there often isn’t enough information to know (e.g., for smaller credit unions), and the validation is not always run. If customer bank account verification has succeeded, the bank account status will be `verified`. If the verification failed for any reason, such as microdeposit failure, the status will be `verification_failed`. If a transfer sent to this bank account fails, we'll set the status to `errored` and will not continue to send transfers until the bank details are updated.  For external accounts, possible values are `new` and `errored`. Validations aren't run against external accounts because they're only used for payouts. This means the other statuses don't apply. If a transfer fails, the status is set to `errored` and transfers are stopped until account details are updated.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -82,8 +82,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? available_payout_methods_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS = OpenApi::EnumValidator.new("available_payout_methods", "Array(String)", ["instant", "standard"])
+    VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS = StaticArray["instant", "standard"]
 
     # Name of the bank associated with the routing number (e.g., `WELLS FARGO`).
     @[JSON::Field(key: "bank_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_name.nil? && !bank_name_present?)]
@@ -156,7 +155,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
+
       if _country = @country
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -165,20 +166,26 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last4\" is required and cannot be null") if @last4.nil?
+
       if _last4 = @last4
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
+
       if _status = @status
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -202,8 +209,9 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.error_message) unless ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid?(@available_payout_methods)
+      if _available_payout_methods = @available_payout_methods
+        invalid_properties.push(OpenApi::EnumValidator.error_message("available_payout_methods", VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS)) unless OpenApi::EnumValidator.valid?(_available_payout_methods, VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS)
+      end
       if _bank_name = @bank_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -224,7 +232,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -235,37 +242,53 @@ module Stripe
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
       return false if @currency.nil?
 
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @last4.nil?
       if _last4 = @last4
         return false if _last4.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @status.nil?
       if _status = @status
         return false if _status.to_s.size > 5000
       end
+
       if _account = @account
         return false if _account.is_a?(OpenApi::Validatable) && !_account.valid?
       end
+
       if _account_holder_name = @account_holder_name
         return false if _account_holder_name.to_s.size > 5000
       end
+
       if _account_holder_type = @account_holder_type
         return false if _account_holder_type.to_s.size > 5000
       end
+
       if _account_type = @account_type
         return false if _account_type.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid?(@available_payout_methods)
+
+      if _available_payout_methods = @available_payout_methods
+        return false unless OpenApi::EnumValidator.valid?(_available_payout_methods, VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS)
+      end
+
       if _bank_name = @bank_name
         return false if _bank_name.to_s.size > 5000
       end
+
       if _customer = @customer
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
@@ -340,7 +363,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 
@@ -418,7 +441,7 @@ module Stripe
         return @available_payout_methods = nil
       end
       _available_payout_methods = available_payout_methods.not_nil!
-      ENUM_VALIDATOR_FOR_AVAILABLE_PAYOUT_METHODS.all_valid!(_available_payout_methods)
+      OpenApi::EnumValidator.validate("available_payout_methods", _available_payout_methods, VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS)
       @available_payout_methods = _available_payout_methods
     end
 

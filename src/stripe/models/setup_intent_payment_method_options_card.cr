@@ -33,8 +33,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? network_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_NETWORK = OpenApi::EnumValidator.new("network", "String", ["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"])
+    VALID_VALUES_FOR_NETWORK = StaticArray["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"]
 
     # We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: request_three_d_secure.nil? && !request_three_d_secure_present?)]
@@ -42,8 +41,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? request_three_d_secure_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE = OpenApi::EnumValidator.new("request_three_d_secure", "String", ["any", "automatic", "challenge_only"])
+    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE = StaticArray["any", "automatic", "challenge_only"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -60,14 +58,16 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _mandate_options = @mandate_options
         invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.error_message) unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
-
+      if _network = @network
+        invalid_properties.push(OpenApi::EnumValidator.error_message("network", VALID_VALUES_FOR_NETWORK)) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+      end
+      if _request_three_d_secure = @request_three_d_secure
+        invalid_properties.push(OpenApi::EnumValidator.error_message("request_three_d_secure", VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)) unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
+      end
       invalid_properties
     end
 
@@ -77,8 +77,14 @@ module Stripe
       if _mandate_options = @mandate_options
         return false if _mandate_options.is_a?(OpenApi::Validatable) && !_mandate_options.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network)
-      return false unless ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid?(@request_three_d_secure)
+
+      if _network = @network
+        return false unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+      end
+
+      if _request_three_d_secure = @request_three_d_secure
+        return false unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
+      end
 
       true
     end
@@ -101,7 +107,7 @@ module Stripe
         return @network = nil
       end
       _network = network.not_nil!
-      ENUM_VALIDATOR_FOR_NETWORK.valid!(_network)
+      OpenApi::EnumValidator.validate("network", _network, VALID_VALUES_FOR_NETWORK)
       @network = _network
     end
 
@@ -112,7 +118,7 @@ module Stripe
         return @request_three_d_secure = nil
       end
       _request_three_d_secure = request_three_d_secure.not_nil!
-      ENUM_VALIDATOR_FOR_REQUEST_THREE_D_SECURE.valid!(_request_three_d_secure)
+      OpenApi::EnumValidator.validate("request_three_d_secure", _request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
       @request_three_d_secure = _request_three_d_secure
     end
 

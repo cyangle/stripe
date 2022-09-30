@@ -116,7 +116,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
+
       if _customer = @customer
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -181,15 +183,19 @@ module Stripe
       if _invoice = @invoice
         return false if _invoice.to_s.size > 5000
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _period = @period
         return false if _period.is_a?(OpenApi::Validatable) && !_period.valid?
       end
+
       if _price = @price
         return false if _price.to_s.size > 5000
       end
+
       if _price_data = @price_data
         return false if _price_data.is_a?(OpenApi::Validatable) && !_price_data.valid?
       end

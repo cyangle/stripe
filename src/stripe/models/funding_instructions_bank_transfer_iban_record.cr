@@ -53,31 +53,35 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"account_holder_name\" is required and cannot be null") if @account_holder_name.nil?
+
       if _account_holder_name = @account_holder_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"bic\" is required and cannot be null") if @bic.nil?
+
       if _bic = @bic
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
+
       if _country = @country
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"iban\" is required and cannot be null") if @iban.nil?
+
       if _iban = @iban
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban", _iban.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -88,14 +92,17 @@ module Stripe
       if _account_holder_name = @account_holder_name
         return false if _account_holder_name.to_s.size > 5000
       end
+
       return false if @bic.nil?
       if _bic = @bic
         return false if _bic.to_s.size > 5000
       end
+
       return false if @country.nil?
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
       return false if @iban.nil?
       if _iban = @iban
         return false if _iban.to_s.size > 5000

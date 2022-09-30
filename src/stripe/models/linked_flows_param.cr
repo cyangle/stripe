@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "source_flow_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter source_flow_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_SOURCE_FLOW_TYPE = OpenApi::EnumValidator.new("source_flow_type", "String", ["credit_reversal", "other", "outbound_payment", "payout"])
+    VALID_VALUES_FOR_SOURCE_FLOW_TYPE = StaticArray["credit_reversal", "other", "outbound_payment", "payout"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -39,15 +39,21 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SOURCE_FLOW_TYPE.error_message) unless ENUM_VALIDATOR_FOR_SOURCE_FLOW_TYPE.valid?(@source_flow_type, false)
+      invalid_properties.push("\"source_flow_type\" is required and cannot be null") if @source_flow_type.nil?
 
+      if _source_flow_type = @source_flow_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("source_flow_type", VALID_VALUES_FOR_SOURCE_FLOW_TYPE)) unless OpenApi::EnumValidator.valid?(_source_flow_type, VALID_VALUES_FOR_SOURCE_FLOW_TYPE)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_SOURCE_FLOW_TYPE.valid?(@source_flow_type, false)
+      return false if @source_flow_type.nil?
+      if _source_flow_type = @source_flow_type
+        return false unless OpenApi::EnumValidator.valid?(_source_flow_type, VALID_VALUES_FOR_SOURCE_FLOW_TYPE)
+      end
 
       true
     end
@@ -59,7 +65,7 @@ module Stripe
         raise ArgumentError.new("\"source_flow_type\" is required and cannot be null")
       end
       _source_flow_type = source_flow_type.not_nil!
-      ENUM_VALIDATOR_FOR_SOURCE_FLOW_TYPE.valid!(_source_flow_type)
+      OpenApi::EnumValidator.validate("source_flow_type", _source_flow_type, VALID_VALUES_FOR_SOURCE_FLOW_TYPE)
       @source_flow_type = _source_flow_type
     end
 

@@ -38,13 +38,14 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"native_url\" is required and cannot be null") if @native_url.nil?
+
       if _native_url = @native_url
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_url", _native_url.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 

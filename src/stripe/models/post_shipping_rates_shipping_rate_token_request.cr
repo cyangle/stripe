@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_BEHAVIOR = OpenApi::EnumValidator.new("tax_behavior", "String", ["exclusive", "inclusive", "unspecified"])
+    VALID_VALUES_FOR_TAX_BEHAVIOR = StaticArray["exclusive", "inclusive", "unspecified"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -64,9 +64,9 @@ module Stripe
       if _metadata = @metadata
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
-
+      if _tax_behavior = @tax_behavior
+        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_behavior", VALID_VALUES_FOR_TAX_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
+      end
       invalid_properties
     end
 
@@ -76,10 +76,14 @@ module Stripe
       if _fixed_amount = @fixed_amount
         return false if _fixed_amount.is_a?(OpenApi::Validatable) && !_fixed_amount.valid?
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid?(@tax_behavior)
+
+      if _tax_behavior = @tax_behavior
+        return false unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
+      end
 
       true
     end
@@ -133,7 +137,7 @@ module Stripe
         return @tax_behavior = nil
       end
       _tax_behavior = tax_behavior.not_nil!
-      ENUM_VALIDATOR_FOR_TAX_BEHAVIOR.valid!(_tax_behavior)
+      OpenApi::EnumValidator.validate("tax_behavior", _tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       @tax_behavior = _tax_behavior
     end
 

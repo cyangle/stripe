@@ -133,6 +133,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _acss_debit = @acss_debit
         invalid_properties.concat(_acss_debit.list_invalid_properties_for("acss_debit")) if _acss_debit.is_a?(OpenApi::Validatable)
       end
@@ -208,7 +209,6 @@ module Stripe
       if _wechat_pay = @wechat_pay
         invalid_properties.concat(_wechat_pay.list_invalid_properties_for("wechat_pay")) if _wechat_pay.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -218,75 +218,99 @@ module Stripe
       if _acss_debit = @acss_debit
         return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
+
       if _affirm = @affirm
         return false if _affirm.is_a?(OpenApi::Validatable) && !_affirm.valid?
       end
+
       if _afterpay_clearpay = @afterpay_clearpay
         return false if _afterpay_clearpay.is_a?(OpenApi::Validatable) && !_afterpay_clearpay.valid?
       end
+
       if _alipay = @alipay
         return false if _alipay.is_a?(OpenApi::Validatable) && !_alipay.valid?
       end
+
       if _au_becs_debit = @au_becs_debit
         return false if _au_becs_debit.is_a?(OpenApi::Validatable) && !_au_becs_debit.valid?
       end
+
       if _bacs_debit = @bacs_debit
         return false if _bacs_debit.is_a?(OpenApi::Validatable) && !_bacs_debit.valid?
       end
+
       if _bancontact = @bancontact
         return false if _bancontact.is_a?(OpenApi::Validatable) && !_bancontact.valid?
       end
+
       if _boleto = @boleto
         return false if _boleto.is_a?(OpenApi::Validatable) && !_boleto.valid?
       end
+
       if _card = @card
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
+
       if _customer_balance = @customer_balance
         return false if _customer_balance.is_a?(OpenApi::Validatable) && !_customer_balance.valid?
       end
+
       if _eps = @eps
         return false if _eps.is_a?(OpenApi::Validatable) && !_eps.valid?
       end
+
       if _fpx = @fpx
         return false if _fpx.is_a?(OpenApi::Validatable) && !_fpx.valid?
       end
+
       if _giropay = @giropay
         return false if _giropay.is_a?(OpenApi::Validatable) && !_giropay.valid?
       end
+
       if _grabpay = @grabpay
         return false if _grabpay.is_a?(OpenApi::Validatable) && !_grabpay.valid?
       end
+
       if _ideal = @ideal
         return false if _ideal.is_a?(OpenApi::Validatable) && !_ideal.valid?
       end
+
       if _klarna = @klarna
         return false if _klarna.is_a?(OpenApi::Validatable) && !_klarna.valid?
       end
+
       if _konbini = @konbini
         return false if _konbini.is_a?(OpenApi::Validatable) && !_konbini.valid?
       end
+
       if _oxxo = @oxxo
         return false if _oxxo.is_a?(OpenApi::Validatable) && !_oxxo.valid?
       end
+
       if _p24 = @p24
         return false if _p24.is_a?(OpenApi::Validatable) && !_p24.valid?
       end
+
       if _paynow = @paynow
         return false if _paynow.is_a?(OpenApi::Validatable) && !_paynow.valid?
       end
+
       if _pix = @pix
         return false if _pix.is_a?(OpenApi::Validatable) && !_pix.valid?
       end
+
       if _sepa_debit = @sepa_debit
         return false if _sepa_debit.is_a?(OpenApi::Validatable) && !_sepa_debit.valid?
       end
+
       if _sofort = @sofort
         return false if _sofort.is_a?(OpenApi::Validatable) && !_sofort.valid?
       end
+
       if _us_bank_account = @us_bank_account
         return false if _us_bank_account.is_a?(OpenApi::Validatable) && !_us_bank_account.valid?
       end
+
       if _wechat_pay = @wechat_pay
         return false if _wechat_pay.is_a?(OpenApi::Validatable) && !_wechat_pay.valid?
       end

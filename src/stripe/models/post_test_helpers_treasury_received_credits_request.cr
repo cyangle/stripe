@@ -36,7 +36,7 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
 
-    ENUM_VALIDATOR_FOR_NETWORK = OpenApi::EnumValidator.new("network", "String", ["ach", "us_domestic_wire"])
+    VALID_VALUES_FOR_NETWORK = StaticArray["ach", "us_domestic_wire"]
 
     # Optional properties
 
@@ -71,13 +71,18 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"financial_account\" is required and cannot be null") if @financial_account.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network, false)
+      invalid_properties.push("\"network\" is required and cannot be null") if @network.nil?
+
+      if _network = @network
+        invalid_properties.push(OpenApi::EnumValidator.error_message("network", VALID_VALUES_FOR_NETWORK)) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+      end
       if _description = @description
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -87,7 +92,6 @@ module Stripe
       if _initiating_payment_method_details = @initiating_payment_method_details
         invalid_properties.concat(_initiating_payment_method_details.list_invalid_properties_for("initiating_payment_method_details")) if _initiating_payment_method_details.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -100,7 +104,11 @@ module Stripe
 
       return false if @financial_account.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network, false)
+      return false if @network.nil?
+      if _network = @network
+        return false unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+      end
+
       if _description = @description
         return false if _description.to_s.size > 5000
       end
@@ -149,7 +157,7 @@ module Stripe
         raise ArgumentError.new("\"network\" is required and cannot be null")
       end
       _network = network.not_nil!
-      ENUM_VALIDATOR_FOR_NETWORK.valid!(_network)
+      OpenApi::EnumValidator.validate("network", _network, VALID_VALUES_FOR_NETWORK)
       @network = _network
     end
 

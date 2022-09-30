@@ -40,6 +40,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _allowed_updates = @allowed_updates
         invalid_properties.concat(_allowed_updates.list_invalid_properties_for("allowed_updates")) if _allowed_updates.is_a?(OpenApi::Validatable)
       end

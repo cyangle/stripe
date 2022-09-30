@@ -49,6 +49,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _custom_fields = @custom_fields
         invalid_properties.concat(_custom_fields.list_invalid_properties_for("custom_fields")) if _custom_fields.is_a?(OpenApi::Validatable)
       end
@@ -65,7 +66,6 @@ module Stripe
       if _rendering_options = @rendering_options
         invalid_properties.concat(_rendering_options.list_invalid_properties_for("rendering_options")) if _rendering_options.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -75,12 +75,15 @@ module Stripe
       if _custom_fields = @custom_fields
         return false if _custom_fields.is_a?(OpenApi::Validatable) && !_custom_fields.valid?
       end
+
       if _default_payment_method = @default_payment_method
         return false if _default_payment_method.to_s.size > 5000
       end
+
       if _footer = @footer
         return false if _footer.to_s.size > 5000
       end
+
       if _rendering_options = @rendering_options
         return false if _rendering_options.is_a?(OpenApi::Validatable) && !_rendering_options.valid?
       end

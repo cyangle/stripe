@@ -33,12 +33,12 @@ module Stripe
     @[JSON::Field(key: "interval", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter interval : String? = nil
 
-    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["one_time", "scheduled", "variable"])
+    VALID_VALUES_FOR_INTERVAL = StaticArray["one_time", "scheduled", "variable"]
 
     @[JSON::Field(key: "notification_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter notification_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD = OpenApi::EnumValidator.new("notification_method", "String", ["deprecated_none", "email", "manual", "none", "stripe_email"])
+    VALID_VALUES_FOR_NOTIFICATION_METHOD = StaticArray["deprecated_none", "email", "manual", "none", "stripe_email"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -57,6 +57,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _acceptance = @acceptance
         invalid_properties.concat(_acceptance.list_invalid_properties_for("acceptance")) if _acceptance.is_a?(OpenApi::Validatable)
       end
@@ -64,10 +65,12 @@ module Stripe
         invalid_properties.concat(_amount.list_invalid_properties_for("amount")) if _amount.is_a?(OpenApi::Validatable)
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD.valid?(@notification_method)
-
+      if _interval = @interval
+        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+      end
+      if _notification_method = @notification_method
+        invalid_properties.push(OpenApi::EnumValidator.error_message("notification_method", VALID_VALUES_FOR_NOTIFICATION_METHOD)) unless OpenApi::EnumValidator.valid?(_notification_method, VALID_VALUES_FOR_NOTIFICATION_METHOD)
+      end
       invalid_properties
     end
 
@@ -77,12 +80,18 @@ module Stripe
       if _acceptance = @acceptance
         return false if _acceptance.is_a?(OpenApi::Validatable) && !_acceptance.valid?
       end
+
       if _amount = @amount
         return false if _amount.is_a?(OpenApi::Validatable) && !_amount.valid?
       end
 
-      return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
-      return false unless ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD.valid?(@notification_method)
+      if _interval = @interval
+        return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+      end
+
+      if _notification_method = @notification_method
+        return false unless OpenApi::EnumValidator.valid?(_notification_method, VALID_VALUES_FOR_NOTIFICATION_METHOD)
+      end
 
       true
     end
@@ -126,7 +135,7 @@ module Stripe
         return @interval = nil
       end
       _interval = interval.not_nil!
-      ENUM_VALIDATOR_FOR_INTERVAL.valid!(_interval)
+      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
       @interval = _interval
     end
 
@@ -137,7 +146,7 @@ module Stripe
         return @notification_method = nil
       end
       _notification_method = notification_method.not_nil!
-      ENUM_VALIDATOR_FOR_NOTIFICATION_METHOD.valid!(_notification_method)
+      OpenApi::EnumValidator.validate("notification_method", _notification_method, VALID_VALUES_FOR_NOTIFICATION_METHOD)
       @notification_method = _notification_method
     end
 

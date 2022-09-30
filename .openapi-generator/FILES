@@ -6,6 +6,7 @@ spec/support/helpers.cr
 spec/support/vcr.cr
 src/ext/open_api/json.cr
 src/ext/open_api/validatable.cr
+src/ext/primitive.cr
 src/ext/time.cr
 src/stripe.cr
 src/stripe/api/default_api.cr

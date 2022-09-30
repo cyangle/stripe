@@ -58,7 +58,7 @@ module Stripe
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter reason : String? = nil
 
-    ENUM_VALIDATOR_FOR_REASON = OpenApi::EnumValidator.new("reason", "String", ["duplicate", "fraudulent", "order_change", "product_unsatisfactory"])
+    VALID_VALUES_FOR_REASON = StaticArray["duplicate", "fraudulent", "order_change", "product_unsatisfactory"]
 
     # ID of an existing refund to link this credit note to.
     @[JSON::Field(key: "refund", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -92,7 +92,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
+
       if _invoice = @invoice
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -108,7 +110,9 @@ module Stripe
         end
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_REASON.error_message) unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
+      if _reason = @reason
+        invalid_properties.push(OpenApi::EnumValidator.error_message("reason", VALID_VALUES_FOR_REASON)) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
+      end
 
       invalid_properties
     end
@@ -124,11 +128,14 @@ module Stripe
       if _lines = @lines
         return false if _lines.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _lines)
       end
+
       if _memo = @memo
         return false if _memo.to_s.size > 5000
       end
 
-      return false unless ENUM_VALIDATOR_FOR_REASON.valid?(@reason)
+      if _reason = @reason
+        return false unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
+      end
 
       true
     end
@@ -229,7 +236,7 @@ module Stripe
         return @reason = nil
       end
       _reason = reason.not_nil!
-      ENUM_VALIDATOR_FOR_REASON.valid!(_reason)
+      OpenApi::EnumValidator.validate("reason", _reason, VALID_VALUES_FOR_REASON)
       @reason = _reason
     end
 

@@ -61,11 +61,14 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"business_profile\" is required and cannot be null") if @business_profile.nil?
+
       if _business_profile = @business_profile
         invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile")) if _business_profile.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"features\" is required and cannot be null") if @features.nil?
+
       if _features = @features
         invalid_properties.concat(_features.list_invalid_properties_for("features")) if _features.is_a?(OpenApi::Validatable)
       end
@@ -87,10 +90,12 @@ module Stripe
       if _business_profile = @business_profile
         return false if _business_profile.is_a?(OpenApi::Validatable) && !_business_profile.valid?
       end
+
       return false if @features.nil?
       if _features = @features
         return false if _features.is_a?(OpenApi::Validatable) && !_features.valid?
       end
+
       if _default_return_url = @default_return_url
         return false if _default_return_url.is_a?(OpenApi::Validatable) && !_default_return_url.valid?
       end

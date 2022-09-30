@@ -32,13 +32,13 @@ module Stripe
     @[JSON::Field(key: "service", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter service : String? = nil
 
-    ENUM_VALIDATOR_FOR_SERVICE = OpenApi::EnumValidator.new("service", "String", ["express", "priority", "standard"])
+    VALID_VALUES_FOR_SERVICE = StaticArray["express", "priority", "standard"]
 
     # Packaging options.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["bulk", "individual"])
+    VALID_VALUES_FOR__TYPE = StaticArray["bulk", "individual"]
 
     # Optional properties
 
@@ -48,8 +48,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? carrier_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_CARRIER = OpenApi::EnumValidator.new("carrier", "String", ["dhl", "fedex", "royal_mail", "usps"])
+    VALID_VALUES_FOR_CARRIER = StaticArray["dhl", "fedex", "royal_mail", "usps"]
 
     @[JSON::Field(key: "customs", type: Stripe::IssuingCardShippingCustoms1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: customs.nil? && !customs_present?)]
     getter customs : Stripe::IssuingCardShippingCustoms1? = nil
@@ -84,8 +83,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["canceled", "delivered", "failure", "pending", "returned", "shipped"])
+    VALID_VALUES_FOR_STATUS = StaticArray["canceled", "delivered", "failure", "pending", "returned", "shipped"]
 
     # A tracking number for a card shipment.
     @[JSON::Field(key: "tracking_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tracking_number.nil? && !tracking_number_present?)]
@@ -126,22 +124,32 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"address\" is required and cannot be null") if @address.nil?
+
       if _address = @address
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
+
       if _name = @name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"service\" is required and cannot be null") if @service.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SERVICE.error_message) unless ENUM_VALIDATOR_FOR_SERVICE.valid?(@service, false)
+      if _service = @service
+        invalid_properties.push(OpenApi::EnumValidator.error_message("service", VALID_VALUES_FOR_SERVICE)) unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
+      end
+      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CARRIER.error_message) unless ENUM_VALIDATOR_FOR_CARRIER.valid?(@carrier)
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+      if _carrier = @carrier
+        invalid_properties.push(OpenApi::EnumValidator.error_message("carrier", VALID_VALUES_FOR_CARRIER)) unless OpenApi::EnumValidator.valid?(_carrier, VALID_VALUES_FOR_CARRIER)
+      end
       if _customs = @customs
         invalid_properties.concat(_customs.list_invalid_properties_for("customs")) if _customs.is_a?(OpenApi::Validatable)
       end
@@ -152,7 +160,9 @@ module Stripe
         end
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
       if _tracking_number = @tracking_number
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tracking_number", _tracking_number.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -163,7 +173,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -174,13 +183,26 @@ module Stripe
       if _address = @address
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
+
       return false if @name.nil?
       if _name = @name
         return false if _name.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_SERVICE.valid?(@service, false)
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
-      return false unless ENUM_VALIDATOR_FOR_CARRIER.valid?(@carrier)
+
+      return false if @service.nil?
+      if _service = @service
+        return false unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
+      end
+
+      return false if @_type.nil?
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+
+      if _carrier = @carrier
+        return false unless OpenApi::EnumValidator.valid?(_carrier, VALID_VALUES_FOR_CARRIER)
+      end
+
       if _customs = @customs
         return false if _customs.is_a?(OpenApi::Validatable) && !_customs.valid?
       end
@@ -189,10 +211,14 @@ module Stripe
         return false if _phone_number.to_s.size > 5000
       end
 
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+
       if _tracking_number = @tracking_number
         return false if _tracking_number.to_s.size > 5000
       end
+
       if _tracking_url = @tracking_url
         return false if _tracking_url.to_s.size > 5000
       end
@@ -232,7 +258,7 @@ module Stripe
         raise ArgumentError.new("\"service\" is required and cannot be null")
       end
       _service = service.not_nil!
-      ENUM_VALIDATOR_FOR_SERVICE.valid!(_service)
+      OpenApi::EnumValidator.validate("service", _service, VALID_VALUES_FOR_SERVICE)
       @service = _service
     end
 
@@ -243,7 +269,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 
@@ -254,7 +280,7 @@ module Stripe
         return @carrier = nil
       end
       _carrier = carrier.not_nil!
-      ENUM_VALIDATOR_FOR_CARRIER.valid!(_carrier)
+      OpenApi::EnumValidator.validate("carrier", _carrier, VALID_VALUES_FOR_CARRIER)
       @carrier = _carrier
     end
 
@@ -310,7 +336,7 @@ module Stripe
         return @status = nil
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 

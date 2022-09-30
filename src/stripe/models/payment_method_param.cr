@@ -44,25 +44,28 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"account_number\" is required and cannot be null") if @account_number.nil?
+
       if _account_number = @account_number
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"institution_number\" is required and cannot be null") if @institution_number.nil?
+
       if _institution_number = @institution_number
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_number", _institution_number.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"transit_number\" is required and cannot be null") if @transit_number.nil?
+
       if _transit_number = @transit_number
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transit_number", _transit_number.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -73,10 +76,12 @@ module Stripe
       if _account_number = @account_number
         return false if _account_number.to_s.size > 5000
       end
+
       return false if @institution_number.nil?
       if _institution_number = @institution_number
         return false if _institution_number.to_s.size > 5000
       end
+
       return false if @transit_number.nil?
       if _transit_number = @transit_number
         return false if _transit_number.to_s.size > 5000

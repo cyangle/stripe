@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter code : String? = nil
 
-    ENUM_VALIDATOR_FOR_CODE = OpenApi::EnumValidator.new("code", "String", ["activating", "capability_not_requested", "financial_account_closed", "rejected_other", "rejected_unsupported_business", "requirements_past_due", "requirements_pending_verification", "restricted_by_platform", "restricted_other"])
+    VALID_VALUES_FOR_CODE = StaticArray["activating", "capability_not_requested", "financial_account_closed", "rejected_other", "rejected_unsupported_business", "requirements_past_due", "requirements_pending_verification", "restricted_by_platform", "restricted_other"]
 
     # Optional properties
 
@@ -35,14 +35,13 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? resolution_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_RESOLUTION = OpenApi::EnumValidator.new("resolution", "String", ["contact_stripe", "provide_information", "remove_restriction"])
+    VALID_VALUES_FOR_RESOLUTION = StaticArray["contact_stripe", "provide_information", "remove_restriction"]
 
     # The `platform_restrictions` that are restricting this Feature.
     @[JSON::Field(key: "restriction", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter restriction : String? = nil
 
-    ENUM_VALIDATOR_FOR_RESTRICTION = OpenApi::EnumValidator.new("restriction", "String", ["inbound_flows", "outbound_flows"])
+    VALID_VALUES_FOR_RESTRICTION = StaticArray["inbound_flows", "outbound_flows"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -61,21 +60,35 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
+      invalid_properties.push("\"code\" is required and cannot be null") if @code.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_RESOLUTION.error_message) unless ENUM_VALIDATOR_FOR_RESOLUTION.valid?(@resolution)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_RESTRICTION.error_message) unless ENUM_VALIDATOR_FOR_RESTRICTION.valid?(@restriction)
-
+      if _code = @code
+        invalid_properties.push(OpenApi::EnumValidator.error_message("code", VALID_VALUES_FOR_CODE)) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
+      end
+      if _resolution = @resolution
+        invalid_properties.push(OpenApi::EnumValidator.error_message("resolution", VALID_VALUES_FOR_RESOLUTION)) unless OpenApi::EnumValidator.valid?(_resolution, VALID_VALUES_FOR_RESOLUTION)
+      end
+      if _restriction = @restriction
+        invalid_properties.push(OpenApi::EnumValidator.error_message("restriction", VALID_VALUES_FOR_RESTRICTION)) unless OpenApi::EnumValidator.valid?(_restriction, VALID_VALUES_FOR_RESTRICTION)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
-      return false unless ENUM_VALIDATOR_FOR_RESOLUTION.valid?(@resolution)
-      return false unless ENUM_VALIDATOR_FOR_RESTRICTION.valid?(@restriction)
+      return false if @code.nil?
+      if _code = @code
+        return false unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
+      end
+
+      if _resolution = @resolution
+        return false unless OpenApi::EnumValidator.valid?(_resolution, VALID_VALUES_FOR_RESOLUTION)
+      end
+
+      if _restriction = @restriction
+        return false unless OpenApi::EnumValidator.valid?(_restriction, VALID_VALUES_FOR_RESTRICTION)
+      end
 
       true
     end
@@ -87,7 +100,7 @@ module Stripe
         raise ArgumentError.new("\"code\" is required and cannot be null")
       end
       _code = code.not_nil!
-      ENUM_VALIDATOR_FOR_CODE.valid!(_code)
+      OpenApi::EnumValidator.validate("code", _code, VALID_VALUES_FOR_CODE)
       @code = _code
     end
 
@@ -98,7 +111,7 @@ module Stripe
         return @resolution = nil
       end
       _resolution = resolution.not_nil!
-      ENUM_VALIDATOR_FOR_RESOLUTION.valid!(_resolution)
+      OpenApi::EnumValidator.validate("resolution", _resolution, VALID_VALUES_FOR_RESOLUTION)
       @resolution = _resolution
     end
 
@@ -109,7 +122,7 @@ module Stripe
         return @restriction = nil
       end
       _restriction = restriction.not_nil!
-      ENUM_VALIDATOR_FOR_RESTRICTION.valid!(_restriction)
+      OpenApi::EnumValidator.validate("restriction", _restriction, VALID_VALUES_FOR_RESTRICTION)
       @restriction = _restriction
     end
 

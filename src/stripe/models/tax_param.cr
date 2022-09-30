@@ -37,10 +37,10 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _ip_address = @ip_address
         invalid_properties.concat(_ip_address.list_invalid_properties_for("ip_address")) if _ip_address.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

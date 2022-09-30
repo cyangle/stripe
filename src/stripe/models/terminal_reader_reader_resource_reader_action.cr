@@ -25,13 +25,13 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["failed", "in_progress", "succeeded"])
+    VALID_VALUES_FOR_STATUS = StaticArray["failed", "in_progress", "succeeded"]
 
     # Type of action performed by the reader.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["process_payment_intent", "process_setup_intent", "set_reader_display"])
+    VALID_VALUES_FOR__TYPE = StaticArray["process_payment_intent", "process_setup_intent", "set_reader_display"]
 
     # Optional properties
 
@@ -79,9 +79,16 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
+      invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
       if _failure_code = @failure_code
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_code", _failure_code.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -101,27 +108,38 @@ module Stripe
       if _set_reader_display = @set_reader_display
         invalid_properties.concat(_set_reader_display.list_invalid_properties_for("set_reader_display")) if _set_reader_display.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status, false)
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if @status.nil?
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
+
+      return false if @_type.nil?
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+
       if _failure_code = @failure_code
         return false if _failure_code.to_s.size > 5000
       end
+
       if _failure_message = @failure_message
         return false if _failure_message.to_s.size > 5000
       end
+
       if _process_payment_intent = @process_payment_intent
         return false if _process_payment_intent.is_a?(OpenApi::Validatable) && !_process_payment_intent.valid?
       end
+
       if _process_setup_intent = @process_setup_intent
         return false if _process_setup_intent.is_a?(OpenApi::Validatable) && !_process_setup_intent.valid?
       end
+
       if _set_reader_display = @set_reader_display
         return false if _set_reader_display.is_a?(OpenApi::Validatable) && !_set_reader_display.valid?
       end
@@ -136,7 +154,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 
@@ -147,7 +165,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 

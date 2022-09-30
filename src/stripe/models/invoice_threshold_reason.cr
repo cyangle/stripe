@@ -49,7 +49,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"item_reasons\" is required and cannot be null") if @item_reasons.nil?
+
       if _item_reasons = @item_reasons
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "item_reasons", array: _item_reasons)) if _item_reasons.is_a?(Array)
       end

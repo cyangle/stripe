@@ -29,12 +29,12 @@ module Stripe
     @[JSON::Field(key: "mode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mode : String? = nil
 
-    ENUM_VALIDATOR_FOR_MODE = OpenApi::EnumValidator.new("mode", "String", ["at_period_end", "immediately"])
+    VALID_VALUES_FOR_MODE = StaticArray["at_period_end", "immediately"]
 
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = OpenApi::EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
+    VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,14 +52,17 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _cancellation_reason = @cancellation_reason
         invalid_properties.concat(_cancellation_reason.list_invalid_properties_for("cancellation_reason")) if _cancellation_reason.is_a?(OpenApi::Validatable)
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_MODE.error_message) unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
-
+      if _mode = @mode
+        invalid_properties.push(OpenApi::EnumValidator.error_message("mode", VALID_VALUES_FOR_MODE)) unless OpenApi::EnumValidator.valid?(_mode, VALID_VALUES_FOR_MODE)
+      end
+      if _proration_behavior = @proration_behavior
+        invalid_properties.push(OpenApi::EnumValidator.error_message("proration_behavior", VALID_VALUES_FOR_PRORATION_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+      end
       invalid_properties
     end
 
@@ -70,8 +73,13 @@ module Stripe
         return false if _cancellation_reason.is_a?(OpenApi::Validatable) && !_cancellation_reason.valid?
       end
 
-      return false unless ENUM_VALIDATOR_FOR_MODE.valid?(@mode)
-      return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+      if _mode = @mode
+        return false unless OpenApi::EnumValidator.valid?(_mode, VALID_VALUES_FOR_MODE)
+      end
+
+      if _proration_behavior = @proration_behavior
+        return false unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+      end
 
       true
     end
@@ -104,7 +112,7 @@ module Stripe
         return @mode = nil
       end
       _mode = mode.not_nil!
-      ENUM_VALIDATOR_FOR_MODE.valid!(_mode)
+      OpenApi::EnumValidator.validate("mode", _mode, VALID_VALUES_FOR_MODE)
       @mode = _mode
     end
 
@@ -115,7 +123,7 @@ module Stripe
         return @proration_behavior = nil
       end
       _proration_behavior = proration_behavior.not_nil!
-      ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(_proration_behavior)
+      OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       @proration_behavior = _proration_behavior
     end
 

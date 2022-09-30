@@ -112,7 +112,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"brand\" is required and cannot be null") if @brand.nil?
+
       if _brand = @brand
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -123,12 +125,14 @@ module Stripe
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
 
       invalid_properties.push("\"funding\" is required and cannot be null") if @funding.nil?
+
       if _funding = @funding
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last4\" is required and cannot be null") if @last4.nil?
+
       if _last4 = @last4
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -159,7 +163,6 @@ module Stripe
       if _wallet = @wallet
         invalid_properties.concat(_wallet.list_invalid_properties_for("wallet")) if _wallet.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -170,6 +173,7 @@ module Stripe
       if _brand = @brand
         return false if _brand.to_s.size > 5000
       end
+
       return false if @exp_month.nil?
 
       return false if @exp_year.nil?
@@ -178,28 +182,36 @@ module Stripe
       if _funding = @funding
         return false if _funding.to_s.size > 5000
       end
+
       return false if @last4.nil?
       if _last4 = @last4
         return false if _last4.to_s.size > 5000
       end
+
       if _checks = @checks
         return false if _checks.is_a?(OpenApi::Validatable) && !_checks.valid?
       end
+
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
       if _fingerprint = @fingerprint
         return false if _fingerprint.to_s.size > 5000
       end
+
       if _generated_from = @generated_from
         return false if _generated_from.is_a?(OpenApi::Validatable) && !_generated_from.valid?
       end
+
       if _networks = @networks
         return false if _networks.is_a?(OpenApi::Validatable) && !_networks.valid?
       end
+
       if _three_d_secure_usage = @three_d_secure_usage
         return false if _three_d_secure_usage.is_a?(OpenApi::Validatable) && !_three_d_secure_usage.valid?
       end
+
       if _wallet = @wallet
         return false if _wallet.is_a?(OpenApi::Validatable) && !_wallet.valid?
       end

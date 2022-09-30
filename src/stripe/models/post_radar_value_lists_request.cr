@@ -38,7 +38,7 @@ module Stripe
     @[JSON::Field(key: "item_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter item_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_ITEM_TYPE = OpenApi::EnumValidator.new("item_type", "String", ["card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string"])
+    VALID_VALUES_FOR_ITEM_TYPE = StaticArray["card_bin", "card_fingerprint", "case_sensitive_string", "country", "customer_id", "email", "ip_address", "string"]
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -62,20 +62,25 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"_alias\" is required and cannot be null") if @_alias.nil?
+
       if __alias = @_alias
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_alias", __alias.to_s.size, 100)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
+
       if _name = @name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 100)
           invalid_properties.push(max_length_error)
         end
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ITEM_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ITEM_TYPE.valid?(@item_type)
+      if _item_type = @item_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("item_type", VALID_VALUES_FOR_ITEM_TYPE)) unless OpenApi::EnumValidator.valid?(_item_type, VALID_VALUES_FOR_ITEM_TYPE)
+      end
 
       invalid_properties
     end
@@ -87,12 +92,15 @@ module Stripe
       if __alias = @_alias
         return false if __alias.to_s.size > 100
       end
+
       return false if @name.nil?
       if _name = @name
         return false if _name.to_s.size > 100
       end
 
-      return false unless ENUM_VALIDATOR_FOR_ITEM_TYPE.valid?(@item_type)
+      if _item_type = @item_type
+        return false unless OpenApi::EnumValidator.valid?(_item_type, VALID_VALUES_FOR_ITEM_TYPE)
+      end
 
       true
     end
@@ -142,7 +150,7 @@ module Stripe
         return @item_type = nil
       end
       _item_type = item_type.not_nil!
-      ENUM_VALIDATOR_FOR_ITEM_TYPE.valid!(_item_type)
+      OpenApi::EnumValidator.validate("item_type", _item_type, VALID_VALUES_FOR_ITEM_TYPE)
       @item_type = _item_type
     end
 

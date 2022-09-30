@@ -49,7 +49,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"payment_intent\" is required and cannot be null") if @payment_intent.nil?
+
       if _payment_intent = @payment_intent
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -59,7 +61,6 @@ module Stripe
       if _process_config = @process_config
         invalid_properties.concat(_process_config.list_invalid_properties_for("process_config")) if _process_config.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

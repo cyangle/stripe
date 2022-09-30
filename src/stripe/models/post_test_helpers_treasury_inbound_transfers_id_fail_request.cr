@@ -45,7 +45,6 @@ module Stripe
       if _failure_details = @failure_details
         invalid_properties.concat(_failure_details.list_invalid_properties_for("failure_details")) if _failure_details.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

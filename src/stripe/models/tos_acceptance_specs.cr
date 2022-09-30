@@ -60,7 +60,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -70,6 +69,7 @@ module Stripe
       if _service_agreement = @service_agreement
         return false if _service_agreement.to_s.size > 5000
       end
+
       if _user_agent = @user_agent
         return false if _user_agent.to_s.size > 5000
       end

@@ -29,7 +29,7 @@ module Stripe
     @[JSON::Field(key: "source", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter source : String? = nil
 
-    ENUM_VALIDATOR_FOR_SOURCE = OpenApi::EnumValidator.new("source", "String", ["billing_address", "ip_address", "payment_method", "shipping_destination"])
+    VALID_VALUES_FOR_SOURCE = StaticArray["billing_address", "ip_address", "payment_method", "shipping_destination"]
 
     # Optional properties
 
@@ -56,20 +56,24 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
+
       if _country = @country
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"source\" is required and cannot be null") if @source.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SOURCE.error_message) unless ENUM_VALIDATOR_FOR_SOURCE.valid?(@source, false)
+      if _source = @source
+        invalid_properties.push(OpenApi::EnumValidator.error_message("source", VALID_VALUES_FOR_SOURCE)) unless OpenApi::EnumValidator.valid?(_source, VALID_VALUES_FOR_SOURCE)
+      end
       if _state = @state
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -80,7 +84,12 @@ module Stripe
       if _country = @country
         return false if _country.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_SOURCE.valid?(@source, false)
+
+      return false if @source.nil?
+      if _source = @source
+        return false unless OpenApi::EnumValidator.valid?(_source, VALID_VALUES_FOR_SOURCE)
+      end
+
       if _state = @state
         return false if _state.to_s.size > 5000
       end
@@ -109,7 +118,7 @@ module Stripe
         raise ArgumentError.new("\"source\" is required and cannot be null")
       end
       _source = source.not_nil!
-      ENUM_VALIDATOR_FOR_SOURCE.valid!(_source)
+      OpenApi::EnumValidator.validate("source", _source, VALID_VALUES_FOR_SOURCE)
       @source = _source
     end
 

@@ -49,6 +49,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _payment_method_category = @payment_method_category
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method_category", _payment_method_category.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -59,7 +60,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -69,6 +69,7 @@ module Stripe
       if _payment_method_category = @payment_method_category
         return false if _payment_method_category.to_s.size > 5000
       end
+
       if _preferred_locale = @preferred_locale
         return false if _preferred_locale.to_s.size > 5000
       end

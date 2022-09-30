@@ -50,13 +50,13 @@ module Stripe
     @[JSON::Field(key: "method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter method : String? = nil
 
-    ENUM_VALIDATOR_FOR_METHOD = OpenApi::EnumValidator.new("method", "String", ["instant", "standard"])
+    VALID_VALUES_FOR_METHOD = StaticArray["instant", "standard"]
 
     # The balance type of your Stripe balance to draw this payout from. Balances for different payment sources are kept separately. You can find the amounts with the balances API. One of `bank_account`, `card`, or `fpx`.
     @[JSON::Field(key: "source_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter source_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_SOURCE_TYPE = OpenApi::EnumValidator.new("source_type", "String", ["bank_account", "card", "fpx"])
+    VALID_VALUES_FOR_SOURCE_TYPE = StaticArray["bank_account", "card", "fpx"]
 
     # A string to be displayed on the recipient's bank or card statement. This may be at most 22 characters. Attempting to use a `statement_descriptor` longer than 22 characters will return an error. Note: Most banks will truncate this information and/or display it inconsistently. Some may not display it at all.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -84,6 +84,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
@@ -94,15 +95,17 @@ module Stripe
         end
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_METHOD.error_message) unless ENUM_VALIDATOR_FOR_METHOD.valid?(@method)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SOURCE_TYPE.error_message) unless ENUM_VALIDATOR_FOR_SOURCE_TYPE.valid?(@source_type)
+      if _method = @method
+        invalid_properties.push(OpenApi::EnumValidator.error_message("method", VALID_VALUES_FOR_METHOD)) unless OpenApi::EnumValidator.valid?(_method, VALID_VALUES_FOR_METHOD)
+      end
+      if _source_type = @source_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("source_type", VALID_VALUES_FOR_SOURCE_TYPE)) unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
+      end
       if _statement_descriptor = @statement_descriptor
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -117,8 +120,14 @@ module Stripe
         return false if _description.to_s.size > 5000
       end
 
-      return false unless ENUM_VALIDATOR_FOR_METHOD.valid?(@method)
-      return false unless ENUM_VALIDATOR_FOR_SOURCE_TYPE.valid?(@source_type)
+      if _method = @method
+        return false unless OpenApi::EnumValidator.valid?(_method, VALID_VALUES_FOR_METHOD)
+      end
+
+      if _source_type = @source_type
+        return false unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
+      end
+
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 22
       end
@@ -197,7 +206,7 @@ module Stripe
         return @method = nil
       end
       _method = method.not_nil!
-      ENUM_VALIDATOR_FOR_METHOD.valid!(_method)
+      OpenApi::EnumValidator.validate("method", _method, VALID_VALUES_FOR_METHOD)
       @method = _method
     end
 
@@ -208,7 +217,7 @@ module Stripe
         return @source_type = nil
       end
       _source_type = source_type.not_nil!
-      ENUM_VALIDATOR_FOR_SOURCE_TYPE.valid!(_source_type)
+      OpenApi::EnumValidator.validate("source_type", _source_type, VALID_VALUES_FOR_SOURCE_TYPE)
       @source_type = _source_type
     end
 

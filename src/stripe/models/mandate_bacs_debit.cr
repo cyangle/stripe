@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "network_status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network_status : String? = nil
 
-    ENUM_VALIDATOR_FOR_NETWORK_STATUS = OpenApi::EnumValidator.new("network_status", "String", ["accepted", "pending", "refused", "revoked"])
+    VALID_VALUES_FOR_NETWORK_STATUS = StaticArray["accepted", "pending", "refused", "revoked"]
 
     # The unique reference identifying the mandate on the Bacs network.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -51,31 +51,41 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK_STATUS.error_message) unless ENUM_VALIDATOR_FOR_NETWORK_STATUS.valid?(@network_status, false)
+      invalid_properties.push("\"network_status\" is required and cannot be null") if @network_status.nil?
+
+      if _network_status = @network_status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("network_status", VALID_VALUES_FOR_NETWORK_STATUS)) unless OpenApi::EnumValidator.valid?(_network_status, VALID_VALUES_FOR_NETWORK_STATUS)
+      end
       invalid_properties.push("\"reference\" is required and cannot be null") if @reference.nil?
+
       if _reference = @reference
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
+
       if _url = @url
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_NETWORK_STATUS.valid?(@network_status, false)
+      return false if @network_status.nil?
+      if _network_status = @network_status
+        return false unless OpenApi::EnumValidator.valid?(_network_status, VALID_VALUES_FOR_NETWORK_STATUS)
+      end
+
       return false if @reference.nil?
       if _reference = @reference
         return false if _reference.to_s.size > 5000
       end
+
       return false if @url.nil?
       if _url = @url
         return false if _url.to_s.size > 5000
@@ -91,7 +101,7 @@ module Stripe
         raise ArgumentError.new("\"network_status\" is required and cannot be null")
       end
       _network_status = network_status.not_nil!
-      ENUM_VALIDATOR_FOR_NETWORK_STATUS.valid!(_network_status)
+      OpenApi::EnumValidator.validate("network_status", _network_status, VALID_VALUES_FOR_NETWORK_STATUS)
       @network_status = _network_status
     end
 

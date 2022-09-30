@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["treasury.financial_account_features"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["treasury.financial_account_features"]
 
     # Optional properties
 
@@ -72,7 +72,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       if _card_issuing = @card_issuing
         invalid_properties.concat(_card_issuing.list_invalid_properties_for("card_issuing")) if _card_issuing.is_a?(OpenApi::Validatable)
       end
@@ -94,32 +98,41 @@ module Stripe
       if _outbound_transfers = @outbound_transfers
         invalid_properties.concat(_outbound_transfers.list_invalid_properties_for("outbound_transfers")) if _outbound_transfers.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       if _card_issuing = @card_issuing
         return false if _card_issuing.is_a?(OpenApi::Validatable) && !_card_issuing.valid?
       end
+
       if _deposit_insurance = @deposit_insurance
         return false if _deposit_insurance.is_a?(OpenApi::Validatable) && !_deposit_insurance.valid?
       end
+
       if _financial_addresses = @financial_addresses
         return false if _financial_addresses.is_a?(OpenApi::Validatable) && !_financial_addresses.valid?
       end
+
       if _inbound_transfers = @inbound_transfers
         return false if _inbound_transfers.is_a?(OpenApi::Validatable) && !_inbound_transfers.valid?
       end
+
       if _intra_stripe_flows = @intra_stripe_flows
         return false if _intra_stripe_flows.is_a?(OpenApi::Validatable) && !_intra_stripe_flows.valid?
       end
+
       if _outbound_payments = @outbound_payments
         return false if _outbound_payments.is_a?(OpenApi::Validatable) && !_outbound_payments.valid?
       end
+
       if _outbound_transfers = @outbound_transfers
         return false if _outbound_transfers.is_a?(OpenApi::Validatable) && !_outbound_transfers.valid?
       end
@@ -134,7 +147,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

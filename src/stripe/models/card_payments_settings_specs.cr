@@ -48,6 +48,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _decline_on = @decline_on
         invalid_properties.concat(_decline_on.list_invalid_properties_for("decline_on")) if _decline_on.is_a?(OpenApi::Validatable)
       end
@@ -62,7 +63,6 @@ module Stripe
       if _statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji
         invalid_properties.concat(_statement_descriptor_prefix_kanji.list_invalid_properties_for("statement_descriptor_prefix_kanji")) if _statement_descriptor_prefix_kanji.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -72,12 +72,15 @@ module Stripe
       if _decline_on = @decline_on
         return false if _decline_on.is_a?(OpenApi::Validatable) && !_decline_on.valid?
       end
+
       if _statement_descriptor_prefix = @statement_descriptor_prefix
         return false if _statement_descriptor_prefix.to_s.size > 10
       end
+
       if _statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana
         return false if _statement_descriptor_prefix_kana.is_a?(OpenApi::Validatable) && !_statement_descriptor_prefix_kana.valid?
       end
+
       if _statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji
         return false if _statement_descriptor_prefix_kanji.is_a?(OpenApi::Validatable) && !_statement_descriptor_prefix_kanji.valid?
       end

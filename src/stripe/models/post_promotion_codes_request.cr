@@ -79,7 +79,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"coupon\" is required and cannot be null") if @coupon.nil?
+
       if _coupon = @coupon
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -100,7 +102,6 @@ module Stripe
       if _restrictions = @restrictions
         invalid_properties.concat(_restrictions.list_invalid_properties_for("restrictions")) if _restrictions.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -115,6 +116,7 @@ module Stripe
       if _code = @code
         return false if _code.to_s.size > 500
       end
+
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end

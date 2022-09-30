@@ -59,19 +59,23 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"return_url\" is required and cannot be null") if @return_url.nil?
+
       if _return_url = @return_url
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
+
       if _status = @status
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
+
       if _url = @url
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 2048)
           invalid_properties.push(max_length_error)
@@ -82,7 +86,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -93,14 +96,17 @@ module Stripe
       if _return_url = @return_url
         return false if _return_url.to_s.size > 5000
       end
+
       return false if @status.nil?
       if _status = @status
         return false if _status.to_s.size > 5000
       end
+
       return false if @url.nil?
       if _url = @url
         return false if _url.to_s.size > 2048
       end
+
       if _failure_reason = @failure_reason
         return false if _failure_reason.to_s.size > 5000
       end

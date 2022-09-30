@@ -44,6 +44,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _account_holder_name = @account_holder_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -59,7 +60,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -69,9 +69,11 @@ module Stripe
       if _account_holder_name = @account_holder_name
         return false if _account_holder_name.to_s.size > 5000
       end
+
       if _account_number = @account_number
         return false if _account_number.to_s.size > 5000
       end
+
       if _routing_number = @routing_number
         return false if _routing_number.to_s.size > 5000
       end

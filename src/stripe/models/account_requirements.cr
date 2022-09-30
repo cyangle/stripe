@@ -97,6 +97,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _alternatives = @alternatives
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "alternatives", array: _alternatives)) if _alternatives.is_a?(Array)
       end
@@ -123,6 +124,7 @@ module Stripe
       if _disabled_reason = @disabled_reason
         return false if _disabled_reason.to_s.size > 5000
       end
+
       if _errors = @errors
         return false if _errors.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _errors)
       end

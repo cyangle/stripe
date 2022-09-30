@@ -84,7 +84,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -98,6 +97,7 @@ module Stripe
       if _payment_method = @payment_method
         return false if _payment_method.to_s.size > 5000
       end
+
       if _source = @source
         return false if _source.to_s.size > 5000
       end

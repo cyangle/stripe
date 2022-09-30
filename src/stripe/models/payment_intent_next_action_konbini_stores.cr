@@ -61,6 +61,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _familymart = @familymart
         invalid_properties.concat(_familymart.list_invalid_properties_for("familymart")) if _familymart.is_a?(OpenApi::Validatable)
       end
@@ -73,7 +74,6 @@ module Stripe
       if _seicomart = @seicomart
         invalid_properties.concat(_seicomart.list_invalid_properties_for("seicomart")) if _seicomart.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -83,12 +83,15 @@ module Stripe
       if _familymart = @familymart
         return false if _familymart.is_a?(OpenApi::Validatable) && !_familymart.valid?
       end
+
       if _lawson = @lawson
         return false if _lawson.is_a?(OpenApi::Validatable) && !_lawson.valid?
       end
+
       if _ministop = @ministop
         return false if _ministop.is_a?(OpenApi::Validatable) && !_ministop.valid?
       end
+
       if _seicomart = @seicomart
         return false if _seicomart.is_a?(OpenApi::Validatable) && !_seicomart.valid?
       end

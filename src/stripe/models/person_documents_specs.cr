@@ -45,6 +45,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _company_authorization = @company_authorization
         invalid_properties.concat(_company_authorization.list_invalid_properties_for("company_authorization")) if _company_authorization.is_a?(OpenApi::Validatable)
       end
@@ -54,7 +55,6 @@ module Stripe
       if _visa = @visa
         invalid_properties.concat(_visa.list_invalid_properties_for("visa")) if _visa.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -64,9 +64,11 @@ module Stripe
       if _company_authorization = @company_authorization
         return false if _company_authorization.is_a?(OpenApi::Validatable) && !_company_authorization.valid?
       end
+
       if _passport = @passport
         return false if _passport.is_a?(OpenApi::Validatable) && !_passport.valid?
       end
+
       if _visa = @visa
         return false if _visa.is_a?(OpenApi::Validatable) && !_visa.valid?
       end

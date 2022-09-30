@@ -68,7 +68,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
+
       if _status = @status
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -90,7 +92,6 @@ module Stripe
       if _document = @document
         invalid_properties.concat(_document.list_invalid_properties_for("document")) if _document.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -101,15 +102,19 @@ module Stripe
       if _status = @status
         return false if _status.to_s.size > 5000
       end
+
       if _additional_document = @additional_document
         return false if _additional_document.is_a?(OpenApi::Validatable) && !_additional_document.valid?
       end
+
       if _details = @details
         return false if _details.to_s.size > 5000
       end
+
       if _details_code = @details_code
         return false if _details_code.to_s.size > 5000
       end
+
       if _document = @document
         return false if _document.is_a?(OpenApi::Validatable) && !_document.valid?
       end

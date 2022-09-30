@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["cash", "credit"])
+    VALID_VALUES_FOR__TYPE = StaticArray["cash", "credit"]
 
     # Optional properties
 
@@ -61,18 +61,22 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"as_of\" is required and cannot be null") if @as_of.nil?
 
       invalid_properties.push("\"current\" is required and cannot be null") if @current.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
       if _cash = @cash
         invalid_properties.concat(_cash.list_invalid_properties_for("cash")) if _cash.is_a?(OpenApi::Validatable)
       end
       if _credit = @credit
         invalid_properties.concat(_credit.list_invalid_properties_for("credit")) if _credit.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -83,10 +87,15 @@ module Stripe
 
       return false if @current.nil?
 
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if @_type.nil?
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+
       if _cash = @cash
         return false if _cash.is_a?(OpenApi::Validatable) && !_cash.valid?
       end
+
       if _credit = @credit
         return false if _credit.is_a?(OpenApi::Validatable) && !_credit.valid?
       end
@@ -121,7 +130,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 

@@ -27,8 +27,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? authentication_flow_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW = OpenApi::EnumValidator.new("authentication_flow", "String", ["challenge", "frictionless"])
+    VALID_VALUES_FOR_AUTHENTICATION_FLOW = StaticArray["challenge", "frictionless"]
 
     # Indicates the outcome of 3D Secure authentication.
     @[JSON::Field(key: "result", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: result.nil? && !result_present?)]
@@ -36,8 +35,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? result_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_RESULT = OpenApi::EnumValidator.new("result", "String", ["attempt_acknowledged", "authenticated", "exempted", "failed", "not_supported", "processing_error"])
+    VALID_VALUES_FOR_RESULT = StaticArray["attempt_acknowledged", "authenticated", "exempted", "failed", "not_supported", "processing_error"]
 
     # Additional information about why 3D Secure succeeded or failed based on the `result`.
     @[JSON::Field(key: "result_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: result_reason.nil? && !result_reason_present?)]
@@ -45,8 +43,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? result_reason_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_RESULT_REASON = OpenApi::EnumValidator.new("result_reason", "String", ["abandoned", "bypassed", "canceled", "card_not_enrolled", "network_not_supported", "protocol_error", "rejected"])
+    VALID_VALUES_FOR_RESULT_REASON = StaticArray["abandoned", "bypassed", "canceled", "card_not_enrolled", "network_not_supported", "protocol_error", "rejected"]
 
     # The version of 3D Secure that was used.
     @[JSON::Field(key: "version", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: version.nil? && !version_present?)]
@@ -54,8 +51,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? version_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_VERSION = OpenApi::EnumValidator.new("version", "String", ["1.0.2", "2.1.0", "2.2.0"])
+    VALID_VALUES_FOR_VERSION = StaticArray["1.0.2", "2.1.0", "2.2.0"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -74,24 +70,39 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW.error_message) unless ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW.valid?(@authentication_flow)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_RESULT.error_message) unless ENUM_VALIDATOR_FOR_RESULT.valid?(@result)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_RESULT_REASON.error_message) unless ENUM_VALIDATOR_FOR_RESULT_REASON.valid?(@result_reason)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_VERSION.error_message) unless ENUM_VALIDATOR_FOR_VERSION.valid?(@version)
-
+      if _authentication_flow = @authentication_flow
+        invalid_properties.push(OpenApi::EnumValidator.error_message("authentication_flow", VALID_VALUES_FOR_AUTHENTICATION_FLOW)) unless OpenApi::EnumValidator.valid?(_authentication_flow, VALID_VALUES_FOR_AUTHENTICATION_FLOW)
+      end
+      if _result = @result
+        invalid_properties.push(OpenApi::EnumValidator.error_message("result", VALID_VALUES_FOR_RESULT)) unless OpenApi::EnumValidator.valid?(_result, VALID_VALUES_FOR_RESULT)
+      end
+      if _result_reason = @result_reason
+        invalid_properties.push(OpenApi::EnumValidator.error_message("result_reason", VALID_VALUES_FOR_RESULT_REASON)) unless OpenApi::EnumValidator.valid?(_result_reason, VALID_VALUES_FOR_RESULT_REASON)
+      end
+      if _version = @version
+        invalid_properties.push(OpenApi::EnumValidator.error_message("version", VALID_VALUES_FOR_VERSION)) unless OpenApi::EnumValidator.valid?(_version, VALID_VALUES_FOR_VERSION)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW.valid?(@authentication_flow)
-      return false unless ENUM_VALIDATOR_FOR_RESULT.valid?(@result)
-      return false unless ENUM_VALIDATOR_FOR_RESULT_REASON.valid?(@result_reason)
-      return false unless ENUM_VALIDATOR_FOR_VERSION.valid?(@version)
+      if _authentication_flow = @authentication_flow
+        return false unless OpenApi::EnumValidator.valid?(_authentication_flow, VALID_VALUES_FOR_AUTHENTICATION_FLOW)
+      end
+
+      if _result = @result
+        return false unless OpenApi::EnumValidator.valid?(_result, VALID_VALUES_FOR_RESULT)
+      end
+
+      if _result_reason = @result_reason
+        return false unless OpenApi::EnumValidator.valid?(_result_reason, VALID_VALUES_FOR_RESULT_REASON)
+      end
+
+      if _version = @version
+        return false unless OpenApi::EnumValidator.valid?(_version, VALID_VALUES_FOR_VERSION)
+      end
 
       true
     end
@@ -103,7 +114,7 @@ module Stripe
         return @authentication_flow = nil
       end
       _authentication_flow = authentication_flow.not_nil!
-      ENUM_VALIDATOR_FOR_AUTHENTICATION_FLOW.valid!(_authentication_flow)
+      OpenApi::EnumValidator.validate("authentication_flow", _authentication_flow, VALID_VALUES_FOR_AUTHENTICATION_FLOW)
       @authentication_flow = _authentication_flow
     end
 
@@ -114,7 +125,7 @@ module Stripe
         return @result = nil
       end
       _result = result.not_nil!
-      ENUM_VALIDATOR_FOR_RESULT.valid!(_result)
+      OpenApi::EnumValidator.validate("result", _result, VALID_VALUES_FOR_RESULT)
       @result = _result
     end
 
@@ -125,7 +136,7 @@ module Stripe
         return @result_reason = nil
       end
       _result_reason = result_reason.not_nil!
-      ENUM_VALIDATOR_FOR_RESULT_REASON.valid!(_result_reason)
+      OpenApi::EnumValidator.validate("result_reason", _result_reason, VALID_VALUES_FOR_RESULT_REASON)
       @result_reason = _result_reason
     end
 
@@ -136,7 +147,7 @@ module Stripe
         return @version = nil
       end
       _version = version.not_nil!
-      ENUM_VALIDATOR_FOR_VERSION.valid!(_version)
+      OpenApi::EnumValidator.validate("version", _version, VALID_VALUES_FOR_VERSION)
       @version = _version
     end
 

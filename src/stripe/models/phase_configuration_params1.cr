@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "billing_cycle_anchor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_cycle_anchor : String? = nil
 
-    ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR = OpenApi::EnumValidator.new("billing_cycle_anchor", "String", ["automatic", "phase_start"])
+    VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR = StaticArray["automatic", "phase_start"]
 
     @[JSON::Field(key: "billing_thresholds", type: Stripe::DefaultSettingsParamsBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_thresholds : Stripe::DefaultSettingsParamsBillingThresholds? = nil
@@ -45,7 +45,7 @@ module Stripe
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
 
-    ENUM_VALIDATOR_FOR_COLLECTION_METHOD = OpenApi::EnumValidator.new("collection_method", "String", ["charge_automatically", "send_invoice"])
+    VALID_VALUES_FOR_COLLECTION_METHOD = StaticArray["charge_automatically", "send_invoice"]
 
     @[JSON::Field(key: "coupon", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter coupon : String? = nil
@@ -74,7 +74,7 @@ module Stripe
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR = OpenApi::EnumValidator.new("proration_behavior", "String", ["always_invoice", "create_prorations", "none"])
+    VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
 
     @[JSON::Field(key: "start_date", type: Stripe::PhaseConfigurationParams1EndDate?, default: nil, required: false, nullable: false, emit_null: false)]
     getter start_date : Stripe::PhaseConfigurationParams1EndDate? = nil
@@ -121,7 +121,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"items\" is required and cannot be null") if @items.nil?
+
       if _items = @items
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "items", array: _items)) if _items.is_a?(Array)
       end
@@ -132,13 +134,15 @@ module Stripe
       if _automatic_tax = @automatic_tax
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.error_message) unless ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid?(@billing_cycle_anchor)
+      if _billing_cycle_anchor = @billing_cycle_anchor
+        invalid_properties.push(OpenApi::EnumValidator.error_message("billing_cycle_anchor", VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)) unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
+      end
       if _billing_thresholds = @billing_thresholds
         invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_COLLECTION_METHOD.error_message) unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
+      if _collection_method = @collection_method
+        invalid_properties.push(OpenApi::EnumValidator.error_message("collection_method", VALID_VALUES_FOR_COLLECTION_METHOD)) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
+      end
       if _coupon = @coupon
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -164,7 +168,9 @@ module Stripe
         invalid_properties.concat(_invoice_settings.list_invalid_properties_for("invoice_settings")) if _invoice_settings.is_a?(OpenApi::Validatable)
       end
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+      if _proration_behavior = @proration_behavior
+        invalid_properties.push(OpenApi::EnumValidator.error_message("proration_behavior", VALID_VALUES_FOR_PRORATION_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+      end
       if _start_date = @start_date
         invalid_properties.concat(_start_date.list_invalid_properties_for("start_date")) if _start_date.is_a?(OpenApi::Validatable)
       end
@@ -175,7 +181,6 @@ module Stripe
       if _trial_end = @trial_end
         invalid_properties.concat(_trial_end.list_invalid_properties_for("trial_end")) if _trial_end.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -186,6 +191,7 @@ module Stripe
       if _items = @items
         return false if _items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _items)
       end
+
       if _add_invoice_items = @add_invoice_items
         return false if _add_invoice_items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _add_invoice_items)
       end
@@ -193,34 +199,51 @@ module Stripe
       if _automatic_tax = @automatic_tax
         return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid?(@billing_cycle_anchor)
+
+      if _billing_cycle_anchor = @billing_cycle_anchor
+        return false unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
+      end
+
       if _billing_thresholds = @billing_thresholds
         return false if _billing_thresholds.is_a?(OpenApi::Validatable) && !_billing_thresholds.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid?(@collection_method)
+
+      if _collection_method = @collection_method
+        return false unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
+      end
+
       if _coupon = @coupon
         return false if _coupon.to_s.size > 5000
       end
+
       if _default_payment_method = @default_payment_method
         return false if _default_payment_method.to_s.size > 5000
       end
+
       if _default_tax_rates = @default_tax_rates
         return false if _default_tax_rates.is_a?(OpenApi::Validatable) && !_default_tax_rates.valid?
       end
+
       if _description = @description
         return false if _description.to_s.size > 500
       end
+
       if _end_date = @end_date
         return false if _end_date.is_a?(OpenApi::Validatable) && !_end_date.valid?
       end
+
       if _invoice_settings = @invoice_settings
         return false if _invoice_settings.is_a?(OpenApi::Validatable) && !_invoice_settings.valid?
       end
 
-      return false unless ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid?(@proration_behavior)
+      if _proration_behavior = @proration_behavior
+        return false unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+      end
+
       if _start_date = @start_date
         return false if _start_date.is_a?(OpenApi::Validatable) && !_start_date.valid?
       end
+
       if _transfer_data = @transfer_data
         return false if _transfer_data.is_a?(OpenApi::Validatable) && !_transfer_data.valid?
       end
@@ -282,7 +305,7 @@ module Stripe
         return @billing_cycle_anchor = nil
       end
       _billing_cycle_anchor = billing_cycle_anchor.not_nil!
-      ENUM_VALIDATOR_FOR_BILLING_CYCLE_ANCHOR.valid!(_billing_cycle_anchor)
+      OpenApi::EnumValidator.validate("billing_cycle_anchor", _billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
       @billing_cycle_anchor = _billing_cycle_anchor
     end
 
@@ -304,7 +327,7 @@ module Stripe
         return @collection_method = nil
       end
       _collection_method = collection_method.not_nil!
-      ENUM_VALIDATOR_FOR_COLLECTION_METHOD.valid!(_collection_method)
+      OpenApi::EnumValidator.validate("collection_method", _collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       @collection_method = _collection_method
     end
 
@@ -410,7 +433,7 @@ module Stripe
         return @proration_behavior = nil
       end
       _proration_behavior = proration_behavior.not_nil!
-      ENUM_VALIDATOR_FOR_PRORATION_BEHAVIOR.valid!(_proration_behavior)
+      OpenApi::EnumValidator.validate("proration_behavior", _proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       @proration_behavior = _proration_behavior
     end
 

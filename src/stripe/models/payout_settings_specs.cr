@@ -53,7 +53,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -63,6 +62,7 @@ module Stripe
       if _schedule = @schedule
         return false if _schedule.is_a?(OpenApi::Validatable) && !_schedule.valid?
       end
+
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 22
       end

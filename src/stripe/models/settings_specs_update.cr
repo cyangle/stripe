@@ -57,6 +57,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _branding = @branding
         invalid_properties.concat(_branding.list_invalid_properties_for("branding")) if _branding.is_a?(OpenApi::Validatable)
       end
@@ -75,7 +76,6 @@ module Stripe
       if _treasury = @treasury
         invalid_properties.concat(_treasury.list_invalid_properties_for("treasury")) if _treasury.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -85,18 +85,23 @@ module Stripe
       if _branding = @branding
         return false if _branding.is_a?(OpenApi::Validatable) && !_branding.valid?
       end
+
       if _card_issuing = @card_issuing
         return false if _card_issuing.is_a?(OpenApi::Validatable) && !_card_issuing.valid?
       end
+
       if _card_payments = @card_payments
         return false if _card_payments.is_a?(OpenApi::Validatable) && !_card_payments.valid?
       end
+
       if _payments = @payments
         return false if _payments.is_a?(OpenApi::Validatable) && !_payments.valid?
       end
+
       if _payouts = @payouts
         return false if _payouts.is_a?(OpenApi::Validatable) && !_payouts.valid?
       end
+
       if _treasury = @treasury
         return false if _treasury.is_a?(OpenApi::Validatable) && !_treasury.valid?
       end

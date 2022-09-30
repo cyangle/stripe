@@ -70,6 +70,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _flight = @flight
         invalid_properties.concat(_flight.list_invalid_properties_for("flight")) if _flight.is_a?(OpenApi::Validatable)
       end
@@ -87,7 +88,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -97,15 +97,19 @@ module Stripe
       if _flight = @flight
         return false if _flight.is_a?(OpenApi::Validatable) && !_flight.valid?
       end
+
       if _fuel = @fuel
         return false if _fuel.is_a?(OpenApi::Validatable) && !_fuel.valid?
       end
+
       if _lodging = @lodging
         return false if _lodging.is_a?(OpenApi::Validatable) && !_lodging.valid?
       end
+
       if _receipt = @receipt
         return false if _receipt.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _receipt)
       end
+
       if _reference = @reference
         return false if _reference.to_s.size > 5000
       end

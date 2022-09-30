@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "bank", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bank : String? = nil
 
-    ENUM_VALIDATOR_FOR_BANK = OpenApi::EnumValidator.new("bank", "String", ["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"])
+    VALID_VALUES_FOR_BANK = StaticArray["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -39,15 +39,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BANK.error_message) unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank)
-
+      if _bank = @bank
+        invalid_properties.push(OpenApi::EnumValidator.error_message("bank", VALID_VALUES_FOR_BANK)) unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank)
+      if _bank = @bank
+        return false unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
+      end
 
       true
     end
@@ -59,7 +62,7 @@ module Stripe
         return @bank = nil
       end
       _bank = bank.not_nil!
-      ENUM_VALIDATOR_FOR_BANK.valid!(_bank)
+      OpenApi::EnumValidator.validate("bank", _bank, VALID_VALUES_FOR_BANK)
       @bank = _bank
     end
 

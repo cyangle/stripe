@@ -23,7 +23,7 @@ module Stripe
     @[JSON::Field(key: "behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter behavior : String? = nil
 
-    ENUM_VALIDATOR_FOR_BEHAVIOR = OpenApi::EnumValidator.new("behavior", "String", ["keep_as_draft", "mark_uncollectible", "void"])
+    VALID_VALUES_FOR_BEHAVIOR = StaticArray["keep_as_draft", "mark_uncollectible", "void"]
 
     # Optional properties
 
@@ -46,7 +46,11 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BEHAVIOR.error_message) unless ENUM_VALIDATOR_FOR_BEHAVIOR.valid?(@behavior, false)
+      invalid_properties.push("\"behavior\" is required and cannot be null") if @behavior.nil?
+
+      if _behavior = @behavior
+        invalid_properties.push(OpenApi::EnumValidator.error_message("behavior", VALID_VALUES_FOR_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_behavior, VALID_VALUES_FOR_BEHAVIOR)
+      end
 
       invalid_properties
     end
@@ -54,7 +58,10 @@ module Stripe
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_BEHAVIOR.valid?(@behavior, false)
+      return false if @behavior.nil?
+      if _behavior = @behavior
+        return false unless OpenApi::EnumValidator.valid?(_behavior, VALID_VALUES_FOR_BEHAVIOR)
+      end
 
       true
     end
@@ -66,7 +73,7 @@ module Stripe
         raise ArgumentError.new("\"behavior\" is required and cannot be null")
       end
       _behavior = behavior.not_nil!
-      ENUM_VALIDATOR_FOR_BEHAVIOR.valid!(_behavior)
+      OpenApi::EnumValidator.validate("behavior", _behavior, VALID_VALUES_FOR_BEHAVIOR)
       @behavior = _behavior
     end
 

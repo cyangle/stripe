@@ -69,9 +69,11 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"currently_due\" is required and cannot be null") if @currently_due.nil?
 
       invalid_properties.push("\"errors\" is required and cannot be null") if @errors.nil?
+
       if _errors = @errors
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "errors", array: _errors)) if _errors.is_a?(Array)
       end
@@ -84,7 +86,6 @@ module Stripe
       if _alternatives = @alternatives
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "alternatives", array: _alternatives)) if _alternatives.is_a?(Array)
       end
-
       invalid_properties
     end
 
@@ -97,6 +98,7 @@ module Stripe
       if _errors = @errors
         return false if _errors.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _errors)
       end
+
       return false if @eventually_due.nil?
 
       return false if @past_due.nil?

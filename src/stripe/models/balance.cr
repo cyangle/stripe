@@ -33,7 +33,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["balance"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["balance"]
 
     # Funds that are not yet available in the balance, due to the 7-day rolling pay cycle. The pending balance for each currency, and for each payment type, can be found in the `source_types` property.
     @[JSON::Field(key: "pending", type: Array(Stripe::BalanceAmount)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -72,14 +72,21 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"available\" is required and cannot be null") if @available.nil?
+
       if _available = @available
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "available", array: _available)) if _available.is_a?(Array)
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"pending\" is required and cannot be null") if @pending.nil?
+
       if _pending = @pending
         invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "pending", array: _pending)) if _pending.is_a?(Array)
       end
@@ -92,7 +99,6 @@ module Stripe
       if _issuing = @issuing
         invalid_properties.concat(_issuing.list_invalid_properties_for("issuing")) if _issuing.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -103,19 +109,27 @@ module Stripe
       if _available = @available
         return false if _available.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _available)
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @pending.nil?
       if _pending = @pending
         return false if _pending.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _pending)
       end
+
       if _connect_reserved = @connect_reserved
         return false if _connect_reserved.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _connect_reserved)
       end
+
       if _instant_available = @instant_available
         return false if _instant_available.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _instant_available)
       end
+
       if _issuing = @issuing
         return false if _issuing.is_a?(OpenApi::Validatable) && !_issuing.valid?
       end
@@ -151,7 +165,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

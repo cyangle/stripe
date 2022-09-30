@@ -42,13 +42,14 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"shipping_amount\" is required and cannot be null") if @shipping_amount.nil?
 
       invalid_properties.push("\"shipping_rate\" is required and cannot be null") if @shipping_rate.nil?
+
       if _shipping_rate = @shipping_rate
         invalid_properties.concat(_shipping_rate.list_invalid_properties_for("shipping_rate")) if _shipping_rate.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

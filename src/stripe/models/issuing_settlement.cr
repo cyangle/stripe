@@ -61,7 +61,7 @@ module Stripe
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
 
-    ENUM_VALIDATOR_FOR_NETWORK = OpenApi::EnumValidator.new("network", "String", ["visa"])
+    VALID_VALUES_FOR_NETWORK = StaticArray["visa"]
 
     # The total amount of fees owed to the network.
     @[JSON::Field(key: "network_fees", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -75,7 +75,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["issuing.settlement"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["issuing.settlement"]
 
     # One of `international` or `uk_national_net`.
     @[JSON::Field(key: "settlement_service", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -117,7 +117,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"bin\" is required and cannot be null") if @bin.nil?
+
       if _bin = @bin
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bin", _bin.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -130,6 +132,7 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -143,18 +146,27 @@ module Stripe
 
       invalid_properties.push("\"net_total\" is required and cannot be null") if @net_total.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_NETWORK.error_message) unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network, false)
+      invalid_properties.push("\"network\" is required and cannot be null") if @network.nil?
+
+      if _network = @network
+        invalid_properties.push(OpenApi::EnumValidator.error_message("network", VALID_VALUES_FOR_NETWORK)) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+      end
       invalid_properties.push("\"network_fees\" is required and cannot be null") if @network_fees.nil?
 
       invalid_properties.push("\"network_settlement_identifier\" is required and cannot be null") if @network_settlement_identifier.nil?
+
       if _network_settlement_identifier = @network_settlement_identifier
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_settlement_identifier", _network_settlement_identifier.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"settlement_service\" is required and cannot be null") if @settlement_service.nil?
+
       if _settlement_service = @settlement_service
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("settlement_service", _settlement_service.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -174,6 +186,7 @@ module Stripe
       if _bin = @bin
         return false if _bin.to_s.size > 5000
       end
+
       return false if @clearing_date.nil?
 
       return false if @created.nil?
@@ -184,6 +197,7 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @interchange_fees.nil?
 
       return false if @livemode.nil?
@@ -192,18 +206,28 @@ module Stripe
 
       return false if @net_total.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_NETWORK.valid?(@network, false)
+      return false if @network.nil?
+      if _network = @network
+        return false unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+      end
+
       return false if @network_fees.nil?
 
       return false if @network_settlement_identifier.nil?
       if _network_settlement_identifier = @network_settlement_identifier
         return false if _network_settlement_identifier.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @settlement_service.nil?
       if _settlement_service = @settlement_service
         return false if _settlement_service.to_s.size > 5000
       end
+
       return false if @transaction_count.nil?
 
       return false if @transaction_volume.nil?
@@ -316,7 +340,7 @@ module Stripe
         raise ArgumentError.new("\"network\" is required and cannot be null")
       end
       _network = network.not_nil!
-      ENUM_VALIDATOR_FOR_NETWORK.valid!(_network)
+      OpenApi::EnumValidator.validate("network", _network, VALID_VALUES_FOR_NETWORK)
       @network = _network
     end
 
@@ -351,7 +375,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

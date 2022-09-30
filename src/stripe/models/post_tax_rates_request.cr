@@ -66,7 +66,7 @@ module Stripe
     @[JSON::Field(key: "tax_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_TAX_TYPE = OpenApi::EnumValidator.new("tax_type", "String", ["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"])
+    VALID_VALUES_FOR_TAX_TYPE = StaticArray["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -92,7 +92,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"display_name\" is required and cannot be null") if @display_name.nil?
+
       if _display_name = @display_name
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 50)
           invalid_properties.push(max_length_error)
@@ -124,9 +126,9 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_TYPE.error_message) unless ENUM_VALIDATOR_FOR_TAX_TYPE.valid?(@tax_type)
-
+      if _tax_type = @tax_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_type", VALID_VALUES_FOR_TAX_TYPE)) unless OpenApi::EnumValidator.valid?(_tax_type, VALID_VALUES_FOR_TAX_TYPE)
+      end
       invalid_properties
     end
 
@@ -137,6 +139,7 @@ module Stripe
       if _display_name = @display_name
         return false if _display_name.to_s.size > 50
       end
+
       return false if @inclusive.nil?
 
       return false if @percentage.nil?
@@ -144,6 +147,7 @@ module Stripe
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
       if _description = @description
         return false if _description.to_s.size > 5000
       end
@@ -155,7 +159,10 @@ module Stripe
       if _state = @state
         return false if _state.to_s.size > 2
       end
-      return false unless ENUM_VALIDATOR_FOR_TAX_TYPE.valid?(@tax_type)
+
+      if _tax_type = @tax_type
+        return false unless OpenApi::EnumValidator.valid?(_tax_type, VALID_VALUES_FOR_TAX_TYPE)
+      end
 
       true
     end
@@ -287,7 +294,7 @@ module Stripe
         return @tax_type = nil
       end
       _tax_type = tax_type.not_nil!
-      ENUM_VALIDATOR_FOR_TAX_TYPE.valid!(_tax_type)
+      OpenApi::EnumValidator.validate("tax_type", _tax_type, VALID_VALUES_FOR_TAX_TYPE)
       @tax_type = _tax_type
     end
 

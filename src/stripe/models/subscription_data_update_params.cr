@@ -45,6 +45,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _description = @description
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 500)
           invalid_properties.push(max_length_error)
@@ -56,7 +57,6 @@ module Stripe
       if _trial_period_days = @trial_period_days
         invalid_properties.concat(_trial_period_days.list_invalid_properties_for("trial_period_days")) if _trial_period_days.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -66,9 +66,11 @@ module Stripe
       if _description = @description
         return false if _description.to_s.size > 500
       end
+
       if _effective_date = @effective_date
         return false if _effective_date.is_a?(OpenApi::Validatable) && !_effective_date.valid?
       end
+
       if _trial_period_days = @trial_period_days
         return false if _trial_period_days.is_a?(OpenApi::Validatable) && !_trial_period_days.valid?
       end

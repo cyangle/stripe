@@ -29,12 +29,12 @@ module Stripe
     @[JSON::Field(key: "payment_schedule", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_schedule : String? = nil
 
-    ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE = OpenApi::EnumValidator.new("payment_schedule", "String", ["combined", "interval", "sporadic"])
+    VALID_VALUES_FOR_PAYMENT_SCHEDULE = StaticArray["combined", "interval", "sporadic"]
 
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transaction_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_TRANSACTION_TYPE = OpenApi::EnumValidator.new("transaction_type", "String", ["business", "personal"])
+    VALID_VALUES_FOR_TRANSACTION_TYPE = StaticArray["business", "personal"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,6 +52,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _custom_mandate_url = @custom_mandate_url
         invalid_properties.concat(_custom_mandate_url.list_invalid_properties_for("custom_mandate_url")) if _custom_mandate_url.is_a?(OpenApi::Validatable)
       end
@@ -60,11 +61,12 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE.error_message) unless ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE.valid?(@payment_schedule)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.error_message) unless ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.valid?(@transaction_type)
-
+      if _payment_schedule = @payment_schedule
+        invalid_properties.push(OpenApi::EnumValidator.error_message("payment_schedule", VALID_VALUES_FOR_PAYMENT_SCHEDULE)) unless OpenApi::EnumValidator.valid?(_payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
+      end
+      if _transaction_type = @transaction_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("transaction_type", VALID_VALUES_FOR_TRANSACTION_TYPE)) unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
+      end
       invalid_properties
     end
 
@@ -74,11 +76,18 @@ module Stripe
       if _custom_mandate_url = @custom_mandate_url
         return false if _custom_mandate_url.is_a?(OpenApi::Validatable) && !_custom_mandate_url.valid?
       end
+
       if _interval_description = @interval_description
         return false if _interval_description.to_s.size > 500
       end
-      return false unless ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE.valid?(@payment_schedule)
-      return false unless ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.valid?(@transaction_type)
+
+      if _payment_schedule = @payment_schedule
+        return false unless OpenApi::EnumValidator.valid?(_payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
+      end
+
+      if _transaction_type = @transaction_type
+        return false unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
+      end
 
       true
     end
@@ -115,7 +124,7 @@ module Stripe
         return @payment_schedule = nil
       end
       _payment_schedule = payment_schedule.not_nil!
-      ENUM_VALIDATOR_FOR_PAYMENT_SCHEDULE.valid!(_payment_schedule)
+      OpenApi::EnumValidator.validate("payment_schedule", _payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
       @payment_schedule = _payment_schedule
     end
 
@@ -126,7 +135,7 @@ module Stripe
         return @transaction_type = nil
       end
       _transaction_type = transaction_type.not_nil!
-      ENUM_VALIDATOR_FOR_TRANSACTION_TYPE.valid!(_transaction_type)
+      OpenApi::EnumValidator.validate("transaction_type", _transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
       @transaction_type = _transaction_type
     end
 

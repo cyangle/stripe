@@ -38,6 +38,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"tax_id_provided\" is required and cannot be null") if @tax_id_provided.nil?
 
       invalid_properties

@@ -60,7 +60,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
+
       if _country = @country
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -91,7 +93,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -102,18 +103,23 @@ module Stripe
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
       if _city = @city
         return false if _city.to_s.size > 5000
       end
+
       if _line1 = @line1
         return false if _line1.to_s.size > 5000
       end
+
       if _line2 = @line2
         return false if _line2.to_s.size > 5000
       end
+
       if _postal_code = @postal_code
         return false if _postal_code.to_s.size > 5000
       end
+
       if _state = @state
         return false if _state.to_s.size > 5000
       end

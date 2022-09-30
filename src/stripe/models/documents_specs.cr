@@ -61,6 +61,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _bank_account_ownership_verification = @bank_account_ownership_verification
         invalid_properties.concat(_bank_account_ownership_verification.list_invalid_properties_for("bank_account_ownership_verification")) if _bank_account_ownership_verification.is_a?(OpenApi::Validatable)
       end
@@ -82,7 +83,6 @@ module Stripe
       if _proof_of_registration = @proof_of_registration
         invalid_properties.concat(_proof_of_registration.list_invalid_properties_for("proof_of_registration")) if _proof_of_registration.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -92,21 +92,27 @@ module Stripe
       if _bank_account_ownership_verification = @bank_account_ownership_verification
         return false if _bank_account_ownership_verification.is_a?(OpenApi::Validatable) && !_bank_account_ownership_verification.valid?
       end
+
       if _company_license = @company_license
         return false if _company_license.is_a?(OpenApi::Validatable) && !_company_license.valid?
       end
+
       if _company_memorandum_of_association = @company_memorandum_of_association
         return false if _company_memorandum_of_association.is_a?(OpenApi::Validatable) && !_company_memorandum_of_association.valid?
       end
+
       if _company_ministerial_decree = @company_ministerial_decree
         return false if _company_ministerial_decree.is_a?(OpenApi::Validatable) && !_company_ministerial_decree.valid?
       end
+
       if _company_registration_verification = @company_registration_verification
         return false if _company_registration_verification.is_a?(OpenApi::Validatable) && !_company_registration_verification.valid?
       end
+
       if _company_tax_id_verification = @company_tax_id_verification
         return false if _company_tax_id_verification.is_a?(OpenApi::Validatable) && !_company_tax_id_verification.valid?
       end
+
       if _proof_of_registration = @proof_of_registration
         return false if _proof_of_registration.is_a?(OpenApi::Validatable) && !_proof_of_registration.valid?
       end

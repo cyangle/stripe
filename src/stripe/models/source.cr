@@ -45,7 +45,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["source"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["source"]
 
     # The status of the source, one of `canceled`, `chargeable`, `consumed`, `failed`, or `pending`. Only `chargeable` sources can be used to create a charge.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -55,7 +55,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["ach_credit_transfer", "ach_debit", "acss_debit", "alipay", "au_becs_debit", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_debit", "sofort", "three_d_secure", "wechat"])
+    VALID_VALUES_FOR__TYPE = StaticArray["ach_credit_transfer", "ach_debit", "acss_debit", "alipay", "au_becs_debit", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_debit", "sofort", "three_d_secure", "wechat"]
 
     # Optional properties
 
@@ -220,7 +220,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"client_secret\" is required and cannot be null") if @client_secret.nil?
+
       if _client_secret = @client_secret
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -229,12 +231,14 @@ module Stripe
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"flow\" is required and cannot be null") if @flow.nil?
+
       if _flow = @flow
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flow", _flow.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -242,15 +246,23 @@ module Stripe
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
+
       if _status = @status
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
       if _ach_credit_transfer = @ach_credit_transfer
         invalid_properties.concat(_ach_credit_transfer.list_invalid_properties_for("ach_credit_transfer")) if _ach_credit_transfer.is_a?(OpenApi::Validatable)
       end
@@ -338,7 +350,6 @@ module Stripe
       if _wechat = @wechat
         invalid_properties.concat(_wechat.list_invalid_properties_for("wechat")) if _wechat.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -349,33 +360,48 @@ module Stripe
       if _client_secret = @client_secret
         return false if _client_secret.to_s.size > 5000
       end
+
       return false if @created.nil?
 
       return false if @flow.nil?
       if _flow = @flow
         return false if _flow.to_s.size > 5000
       end
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @status.nil?
       if _status = @status
         return false if _status.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+
+      return false if @_type.nil?
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+
       if _ach_credit_transfer = @ach_credit_transfer
         return false if _ach_credit_transfer.is_a?(OpenApi::Validatable) && !_ach_credit_transfer.valid?
       end
+
       if _ach_debit = @ach_debit
         return false if _ach_debit.is_a?(OpenApi::Validatable) && !_ach_debit.valid?
       end
+
       if _acss_debit = @acss_debit
         return false if _acss_debit.is_a?(OpenApi::Validatable) && !_acss_debit.valid?
       end
+
       if _alipay = @alipay
         return false if _alipay.is_a?(OpenApi::Validatable) && !_alipay.valid?
       end
@@ -383,15 +409,19 @@ module Stripe
       if _au_becs_debit = @au_becs_debit
         return false if _au_becs_debit.is_a?(OpenApi::Validatable) && !_au_becs_debit.valid?
       end
+
       if _bancontact = @bancontact
         return false if _bancontact.is_a?(OpenApi::Validatable) && !_bancontact.valid?
       end
+
       if _card = @card
         return false if _card.is_a?(OpenApi::Validatable) && !_card.valid?
       end
+
       if _card_present = @card_present
         return false if _card_present.is_a?(OpenApi::Validatable) && !_card_present.valid?
       end
+
       if _code_verification = @code_verification
         return false if _code_verification.is_a?(OpenApi::Validatable) && !_code_verification.valid?
       end
@@ -399,15 +429,19 @@ module Stripe
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
+
       if _eps = @eps
         return false if _eps.is_a?(OpenApi::Validatable) && !_eps.valid?
       end
+
       if _giropay = @giropay
         return false if _giropay.is_a?(OpenApi::Validatable) && !_giropay.valid?
       end
+
       if _ideal = @ideal
         return false if _ideal.is_a?(OpenApi::Validatable) && !_ideal.valid?
       end
+
       if _klarna = @klarna
         return false if _klarna.is_a?(OpenApi::Validatable) && !_klarna.valid?
       end
@@ -415,36 +449,47 @@ module Stripe
       if _multibanco = @multibanco
         return false if _multibanco.is_a?(OpenApi::Validatable) && !_multibanco.valid?
       end
+
       if _owner = @owner
         return false if _owner.is_a?(OpenApi::Validatable) && !_owner.valid?
       end
+
       if _p24 = @p24
         return false if _p24.is_a?(OpenApi::Validatable) && !_p24.valid?
       end
+
       if _receiver = @receiver
         return false if _receiver.is_a?(OpenApi::Validatable) && !_receiver.valid?
       end
+
       if _redirect = @redirect
         return false if _redirect.is_a?(OpenApi::Validatable) && !_redirect.valid?
       end
+
       if _sepa_debit = @sepa_debit
         return false if _sepa_debit.is_a?(OpenApi::Validatable) && !_sepa_debit.valid?
       end
+
       if _sofort = @sofort
         return false if _sofort.is_a?(OpenApi::Validatable) && !_sofort.valid?
       end
+
       if _source_order = @source_order
         return false if _source_order.is_a?(OpenApi::Validatable) && !_source_order.valid?
       end
+
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 5000
       end
+
       if _three_d_secure = @three_d_secure
         return false if _three_d_secure.is_a?(OpenApi::Validatable) && !_three_d_secure.valid?
       end
+
       if _usage = @usage
         return false if _usage.to_s.size > 5000
       end
+
       if _wechat = @wechat
         return false if _wechat.is_a?(OpenApi::Validatable) && !_wechat.valid?
       end
@@ -521,7 +566,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 
@@ -546,7 +591,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 

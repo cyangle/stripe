@@ -27,8 +27,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? chain_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_CHAIN = OpenApi::EnumValidator.new("chain", "String", ["familymart", "lawson", "ministop", "seicomart"])
+    VALID_VALUES_FOR_CHAIN = StaticArray["familymart", "lawson", "ministop", "seicomart"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -44,15 +43,18 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CHAIN.error_message) unless ENUM_VALIDATOR_FOR_CHAIN.valid?(@chain)
-
+      if _chain = @chain
+        invalid_properties.push(OpenApi::EnumValidator.error_message("chain", VALID_VALUES_FOR_CHAIN)) unless OpenApi::EnumValidator.valid?(_chain, VALID_VALUES_FOR_CHAIN)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_CHAIN.valid?(@chain)
+      if _chain = @chain
+        return false unless OpenApi::EnumValidator.valid?(_chain, VALID_VALUES_FOR_CHAIN)
+      end
 
       true
     end
@@ -64,7 +66,7 @@ module Stripe
         return @chain = nil
       end
       _chain = chain.not_nil!
-      ENUM_VALIDATOR_FOR_CHAIN.valid!(_chain)
+      OpenApi::EnumValidator.validate("chain", _chain, VALID_VALUES_FOR_CHAIN)
       @chain = _chain
     end
 

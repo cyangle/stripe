@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "device_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter device_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_DEVICE_TYPE = OpenApi::EnumValidator.new("device_type", "String", ["bbpos_chipper2x", "bbpos_wisepad3", "bbpos_wisepos_e", "simulated_wisepos_e", "stripe_m2", "verifone_P400"])
+    VALID_VALUES_FOR_DEVICE_TYPE = StaticArray["bbpos_chipper2x", "bbpos_wisepad3", "bbpos_wisepos_e", "simulated_wisepos_e", "stripe_m2", "verifone_P400"]
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -47,7 +47,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["terminal.reader"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["terminal.reader"]
 
     # Serial number of the reader.
     @[JSON::Field(key: "serial_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -114,14 +114,20 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_DEVICE_TYPE.error_message) unless ENUM_VALIDATOR_FOR_DEVICE_TYPE.valid?(@device_type, false)
+      invalid_properties.push("\"device_type\" is required and cannot be null") if @device_type.nil?
+
+      if _device_type = @device_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("device_type", VALID_VALUES_FOR_DEVICE_TYPE)) unless OpenApi::EnumValidator.valid?(_device_type, VALID_VALUES_FOR_DEVICE_TYPE)
+      end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"label\" is required and cannot be null") if @label.nil?
+
       if _label = @label
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("label", _label.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -131,8 +137,13 @@ module Stripe
 
       invalid_properties.push("\"metadata\" is required and cannot be null") if @metadata.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"serial_number\" is required and cannot be null") if @serial_number.nil?
+
       if _serial_number = @serial_number
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("serial_number", _serial_number.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -159,43 +170,57 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_DEVICE_TYPE.valid?(@device_type, false)
+      return false if @device_type.nil?
+      if _device_type = @device_type
+        return false unless OpenApi::EnumValidator.valid?(_device_type, VALID_VALUES_FOR_DEVICE_TYPE)
+      end
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @label.nil?
       if _label = @label
         return false if _label.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
       return false if @metadata.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @serial_number.nil?
       if _serial_number = @serial_number
         return false if _serial_number.to_s.size > 5000
       end
+
       if _action = @action
         return false if _action.is_a?(OpenApi::Validatable) && !_action.valid?
       end
+
       if _device_sw_version = @device_sw_version
         return false if _device_sw_version.to_s.size > 5000
       end
+
       if _ip_address = @ip_address
         return false if _ip_address.to_s.size > 5000
       end
+
       if _location = @location
         return false if _location.is_a?(OpenApi::Validatable) && !_location.valid?
       end
+
       if _status = @status
         return false if _status.to_s.size > 5000
       end
@@ -210,7 +235,7 @@ module Stripe
         raise ArgumentError.new("\"device_type\" is required and cannot be null")
       end
       _device_type = device_type.not_nil!
-      ENUM_VALIDATOR_FOR_DEVICE_TYPE.valid!(_device_type)
+      OpenApi::EnumValidator.validate("device_type", _device_type, VALID_VALUES_FOR_DEVICE_TYPE)
       @device_type = _device_type
     end
 
@@ -269,7 +294,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

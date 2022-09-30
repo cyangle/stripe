@@ -42,13 +42,14 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"is_revision\" is required and cannot be null") if @is_revision.nil?
 
       invalid_properties.push("\"quote\" is required and cannot be null") if @quote.nil?
+
       if _quote = @quote
         invalid_properties.concat(_quote.list_invalid_properties_for("quote")) if _quote.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 

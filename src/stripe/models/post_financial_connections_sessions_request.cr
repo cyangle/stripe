@@ -27,7 +27,7 @@ module Stripe
     @[JSON::Field(key: "permissions", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter permissions : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_PERMISSIONS = OpenApi::EnumValidator.new("permissions", "Array(String)", ["balances", "ownership", "payment_method", "transactions"])
+    VALID_VALUES_FOR_PERMISSIONS = StaticArray["balances", "ownership", "payment_method", "transactions"]
 
     # Optional properties
 
@@ -60,12 +60,17 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"account_holder\" is required and cannot be null") if @account_holder.nil?
+
       if _account_holder = @account_holder
         invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder")) if _account_holder.is_a?(OpenApi::Validatable)
       end
+      invalid_properties.push("\"permissions\" is required and cannot be null") if @permissions.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PERMISSIONS.error_message) unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions, false)
+      if _permissions = @permissions
+        invalid_properties.push(OpenApi::EnumValidator.error_message("permissions", VALID_VALUES_FOR_PERMISSIONS)) unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
+      end
 
       if _filters = @filters
         invalid_properties.concat(_filters.list_invalid_properties_for("filters")) if _filters.is_a?(OpenApi::Validatable)
@@ -75,7 +80,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -86,11 +90,16 @@ module Stripe
       if _account_holder = @account_holder
         return false if _account_holder.is_a?(OpenApi::Validatable) && !_account_holder.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid?(@permissions, false)
+
+      return false if @permissions.nil?
+      if _permissions = @permissions
+        return false unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
+      end
 
       if _filters = @filters
         return false if _filters.is_a?(OpenApi::Validatable) && !_filters.valid?
       end
+
       if _return_url = @return_url
         return false if _return_url.to_s.size > 5000
       end
@@ -116,7 +125,7 @@ module Stripe
         raise ArgumentError.new("\"permissions\" is required and cannot be null")
       end
       _permissions = permissions.not_nil!
-      ENUM_VALIDATOR_FOR_PERMISSIONS.all_valid!(_permissions)
+      OpenApi::EnumValidator.validate("permissions", _permissions, VALID_VALUES_FOR_PERMISSIONS)
       @permissions = _permissions
     end
 

@@ -44,9 +44,11 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
       invalid_properties.push("\"description\" is required and cannot be null") if @description.nil?
+
       if _description = @description
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -66,6 +68,7 @@ module Stripe
       if _description = @description
         return false if _description.to_s.size > 5000
       end
+
       return false if @quantity.nil?
 
       true

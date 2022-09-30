@@ -135,7 +135,6 @@ module Stripe
       if _url = @url
         invalid_properties.concat(_url.list_invalid_properties_for("url")) if _url.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -145,6 +144,7 @@ module Stripe
       if _default_price = @default_price
         return false if _default_price.to_s.size > 5000
       end
+
       if _description = @description
         return false if _description.to_s.size > 40000
       end
@@ -152,12 +152,15 @@ module Stripe
       if _images = @images
         return false if _images.is_a?(OpenApi::Validatable) && !_images.valid?
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _name = @name
         return false if _name.to_s.size > 5000
       end
+
       if _package_dimensions = @package_dimensions
         return false if _package_dimensions.is_a?(OpenApi::Validatable) && !_package_dimensions.valid?
       end
@@ -165,12 +168,15 @@ module Stripe
       if _statement_descriptor = @statement_descriptor
         return false if _statement_descriptor.to_s.size > 22
       end
+
       if _tax_code = @tax_code
         return false if _tax_code.is_a?(OpenApi::Validatable) && !_tax_code.valid?
       end
+
       if _unit_label = @unit_label
         return false if _unit_label.to_s.size > 12
       end
+
       if _url = @url
         return false if _url.is_a?(OpenApi::Validatable) && !_url.valid?
       end

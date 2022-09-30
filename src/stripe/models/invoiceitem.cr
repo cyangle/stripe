@@ -52,7 +52,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["invoiceitem"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["invoiceitem"]
 
     @[JSON::Field(key: "period", type: Stripe::InvoiceLineItemPeriod?, default: nil, required: true, nullable: false, emit_null: false)]
     getter period : Stripe::InvoiceLineItemPeriod? = nil
@@ -172,11 +172,13 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"amount\" is required and cannot be null") if @amount.nil?
 
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
+
       if _customer = @customer
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
@@ -185,6 +187,7 @@ module Stripe
       invalid_properties.push("\"discountable\" is required and cannot be null") if @discountable.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -192,8 +195,13 @@ module Stripe
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties.push("\"period\" is required and cannot be null") if @period.nil?
+
       if _period = @period
         invalid_properties.concat(_period.list_invalid_properties_for("period")) if _period.is_a?(OpenApi::Validatable)
       end
@@ -245,6 +253,7 @@ module Stripe
       if _customer = @customer
         return false if _customer.is_a?(OpenApi::Validatable) && !_customer.valid?
       end
+
       return false if @date.nil?
 
       return false if @discountable.nil?
@@ -253,13 +262,19 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       return false if @period.nil?
       if _period = @period
         return false if _period.is_a?(OpenApi::Validatable) && !_period.valid?
       end
+
       return false if @proration.nil?
 
       return false if @quantity.nil?
@@ -267,9 +282,11 @@ module Stripe
       if _description = @description
         return false if _description.to_s.size > 5000
       end
+
       if _discounts = @discounts
         return false if _discounts.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _discounts)
       end
+
       if _invoice = @invoice
         return false if _invoice.is_a?(OpenApi::Validatable) && !_invoice.valid?
       end
@@ -277,15 +294,19 @@ module Stripe
       if _price = @price
         return false if _price.is_a?(OpenApi::Validatable) && !_price.valid?
       end
+
       if _subscription = @subscription
         return false if _subscription.is_a?(OpenApi::Validatable) && !_subscription.valid?
       end
+
       if _subscription_item = @subscription_item
         return false if _subscription_item.to_s.size > 5000
       end
+
       if _tax_rates = @tax_rates
         return false if _tax_rates.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tax_rates)
       end
+
       if _test_clock = @test_clock
         return false if _test_clock.is_a?(OpenApi::Validatable) && !_test_clock.valid?
       end
@@ -375,7 +396,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

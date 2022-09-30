@@ -47,13 +47,13 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _back = @back
         invalid_properties.concat(_back.list_invalid_properties_for("back")) if _back.is_a?(OpenApi::Validatable)
       end
       if _front = @front
         invalid_properties.concat(_front.list_invalid_properties_for("front")) if _front.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -63,6 +63,7 @@ module Stripe
       if _back = @back
         return false if _back.is_a?(OpenApi::Validatable) && !_back.valid?
       end
+
       if _front = @front
         return false if _front.is_a?(OpenApi::Validatable) && !_front.valid?
       end

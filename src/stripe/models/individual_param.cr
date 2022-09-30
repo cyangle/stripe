@@ -52,6 +52,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"first_name\" is required and cannot be null") if @first_name.nil?
 
       invalid_properties.push("\"last_name\" is required and cannot be null") if @last_name.nil?
@@ -62,7 +63,6 @@ module Stripe
       if _verification = @verification
         invalid_properties.concat(_verification.list_invalid_properties_for("verification")) if _verification.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -76,6 +76,7 @@ module Stripe
       if _dob = @dob
         return false if _dob.is_a?(OpenApi::Validatable) && !_dob.valid?
       end
+
       if _verification = @verification
         return false if _verification.is_a?(OpenApi::Validatable) && !_verification.valid?
       end

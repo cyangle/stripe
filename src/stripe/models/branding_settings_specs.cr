@@ -48,6 +48,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _icon = @icon
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("icon", _icon.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -68,7 +69,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -78,12 +78,15 @@ module Stripe
       if _icon = @icon
         return false if _icon.to_s.size > 5000
       end
+
       if _logo = @logo
         return false if _logo.to_s.size > 5000
       end
+
       if _primary_color = @primary_color
         return false if _primary_color.to_s.size > 5000
       end
+
       if _secondary_color = @secondary_color
         return false if _secondary_color.to_s.size > 5000
       end

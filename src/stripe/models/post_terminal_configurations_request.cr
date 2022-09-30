@@ -49,6 +49,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _bbpos_wisepos_e = @bbpos_wisepos_e
         invalid_properties.concat(_bbpos_wisepos_e.list_invalid_properties_for("bbpos_wisepos_e")) if _bbpos_wisepos_e.is_a?(OpenApi::Validatable)
       end
@@ -59,7 +60,6 @@ module Stripe
       if _verifone_p400 = @verifone_p400
         invalid_properties.concat(_verifone_p400.list_invalid_properties_for("verifone_p400")) if _verifone_p400.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -73,6 +73,7 @@ module Stripe
       if _tipping = @tipping
         return false if _tipping.is_a?(OpenApi::Validatable) && !_tipping.valid?
       end
+
       if _verifone_p400 = @verifone_p400
         return false if _verifone_p400.is_a?(OpenApi::Validatable) && !_verifone_p400.valid?
       end

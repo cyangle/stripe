@@ -47,14 +47,15 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"upfront\" is required and cannot be null") if @upfront.nil?
+
       if _upfront = @upfront
         invalid_properties.concat(_upfront.list_invalid_properties_for("upfront")) if _upfront.is_a?(OpenApi::Validatable)
       end
       if _recurring = @recurring
         invalid_properties.concat(_recurring.list_invalid_properties_for("recurring")) if _recurring.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -65,6 +66,7 @@ module Stripe
       if _upfront = @upfront
         return false if _upfront.is_a?(OpenApi::Validatable) && !_upfront.valid?
       end
+
       if _recurring = @recurring
         return false if _recurring.is_a?(OpenApi::Validatable) && !_recurring.valid?
       end

@@ -50,9 +50,11 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"customer_consent_collected\" is required and cannot be null") if @customer_consent_collected.nil?
 
       invalid_properties.push("\"setup_intent\" is required and cannot be null") if @setup_intent.nil?
+
       if _setup_intent = @setup_intent
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("setup_intent", _setup_intent.to_s.size, 5000)
           invalid_properties.push(max_length_error)

@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter code : String? = nil
 
-    ENUM_VALIDATOR_FOR_CODE = OpenApi::EnumValidator.new("code", "String", ["account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "debit_not_authorized", "incorrect_account_holder_address", "incorrect_account_holder_name", "incorrect_account_holder_tax_id", "insufficient_funds", "invalid_account_number", "invalid_currency", "no_account", "other"])
+    VALID_VALUES_FOR_CODE = StaticArray["account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "debit_not_authorized", "incorrect_account_holder_address", "incorrect_account_holder_name", "incorrect_account_holder_tax_id", "insufficient_funds", "invalid_account_number", "invalid_currency", "no_account", "other"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -41,15 +41,21 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_CODE.error_message) unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
+      invalid_properties.push("\"code\" is required and cannot be null") if @code.nil?
 
+      if _code = @code
+        invalid_properties.push(OpenApi::EnumValidator.error_message("code", VALID_VALUES_FOR_CODE)) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_CODE.valid?(@code, false)
+      return false if @code.nil?
+      if _code = @code
+        return false unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
+      end
 
       true
     end
@@ -61,7 +67,7 @@ module Stripe
         raise ArgumentError.new("\"code\" is required and cannot be null")
       end
       _code = code.not_nil!
-      ENUM_VALIDATOR_FOR_CODE.valid!(_code)
+      OpenApi::EnumValidator.validate("code", _code, VALID_VALUES_FOR_CODE)
       @code = _code
     end
 

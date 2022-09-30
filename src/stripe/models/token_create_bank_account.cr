@@ -35,12 +35,12 @@ module Stripe
     @[JSON::Field(key: "account_holder_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_holder_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE = OpenApi::EnumValidator.new("account_holder_type", "String", ["company", "individual"])
+    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = StaticArray["company", "individual"]
 
     @[JSON::Field(key: "account_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_type : String? = nil
 
-    ENUM_VALIDATOR_FOR_ACCOUNT_TYPE = OpenApi::EnumValidator.new("account_type", "String", ["checking", "futsu", "savings", "toza"])
+    VALID_VALUES_FOR_ACCOUNT_TYPE = StaticArray["checking", "futsu", "savings", "toza"]
 
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency : String? = nil
@@ -68,13 +68,16 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"account_number\" is required and cannot be null") if @account_number.nil?
+
       if _account_number = @account_number
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
+
       if _country = @country
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -85,17 +88,18 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid?(@account_holder_type)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.error_message) unless ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid?(@account_type)
+      if _account_holder_type = @account_holder_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("account_holder_type", VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)) unless OpenApi::EnumValidator.valid?(_account_holder_type, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
+      end
+      if _account_type = @account_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("account_type", VALID_VALUES_FOR_ACCOUNT_TYPE)) unless OpenApi::EnumValidator.valid?(_account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
+      end
 
       if _routing_number = @routing_number
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -106,15 +110,23 @@ module Stripe
       if _account_number = @account_number
         return false if _account_number.to_s.size > 5000
       end
+
       return false if @country.nil?
       if _country = @country
         return false if _country.to_s.size > 5000
       end
+
       if _account_holder_name = @account_holder_name
         return false if _account_holder_name.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid?(@account_holder_type)
-      return false unless ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid?(@account_type)
+
+      if _account_holder_type = @account_holder_type
+        return false unless OpenApi::EnumValidator.valid?(_account_holder_type, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
+      end
+
+      if _account_type = @account_type
+        return false unless OpenApi::EnumValidator.valid?(_account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
+      end
 
       if _routing_number = @routing_number
         return false if _routing_number.to_s.size > 5000
@@ -172,7 +184,7 @@ module Stripe
         return @account_holder_type = nil
       end
       _account_holder_type = account_holder_type.not_nil!
-      ENUM_VALIDATOR_FOR_ACCOUNT_HOLDER_TYPE.valid!(_account_holder_type)
+      OpenApi::EnumValidator.validate("account_holder_type", _account_holder_type, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
       @account_holder_type = _account_holder_type
     end
 
@@ -183,7 +195,7 @@ module Stripe
         return @account_type = nil
       end
       _account_type = account_type.not_nil!
-      ENUM_VALIDATOR_FOR_ACCOUNT_TYPE.valid!(_account_type)
+      OpenApi::EnumValidator.validate("account_type", _account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
       @account_type = _account_type
     end
 

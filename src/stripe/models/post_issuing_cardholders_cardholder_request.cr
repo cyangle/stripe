@@ -52,7 +52,7 @@ module Stripe
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
 
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["active", "inactive"])
+    VALID_VALUES_FOR_STATUS = StaticArray["active", "inactive"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -75,6 +75,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _billing = @billing
         invalid_properties.concat(_billing.list_invalid_properties_for("billing")) if _billing.is_a?(OpenApi::Validatable)
       end
@@ -89,9 +90,9 @@ module Stripe
       if _spending_controls = @spending_controls
         invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
-
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
       invalid_properties
     end
 
@@ -101,6 +102,7 @@ module Stripe
       if _billing = @billing
         return false if _billing.is_a?(OpenApi::Validatable) && !_billing.valid?
       end
+
       if _company = @company
         return false if _company.is_a?(OpenApi::Validatable) && !_company.valid?
       end
@@ -112,7 +114,10 @@ module Stripe
       if _spending_controls = @spending_controls
         return false if _spending_controls.is_a?(OpenApi::Validatable) && !_spending_controls.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
+
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
 
       true
     end
@@ -208,7 +213,7 @@ module Stripe
         return @status = nil
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 

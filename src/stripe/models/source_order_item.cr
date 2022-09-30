@@ -100,7 +100,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -110,9 +109,11 @@ module Stripe
       if _currency = @currency
         return false if _currency.to_s.size > 5000
       end
+
       if _description = @description
         return false if _description.to_s.size > 5000
       end
+
       if _parent = @parent
         return false if _parent.to_s.size > 5000
       end

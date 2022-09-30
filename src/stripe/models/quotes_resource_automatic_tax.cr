@@ -33,8 +33,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_STATUS = OpenApi::EnumValidator.new("status", "String", ["complete", "failed", "requires_location_inputs"])
+    VALID_VALUES_FOR_STATUS = StaticArray["complete", "failed", "requires_location_inputs"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -51,10 +50,12 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STATUS.error_message) unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
-
+      if _status = @status
+        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
       invalid_properties
     end
 
@@ -63,7 +64,9 @@ module Stripe
     def valid? : Bool
       return false if @enabled.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_STATUS.valid?(@status)
+      if _status = @status
+        return false unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+      end
 
       true
     end
@@ -85,7 +88,7 @@ module Stripe
         return @status = nil
       end
       _status = status.not_nil!
-      ENUM_VALIDATOR_FOR_STATUS.valid!(_status)
+      OpenApi::EnumValidator.validate("status", _status, VALID_VALUES_FOR_STATUS)
       @status = _status
     end
 

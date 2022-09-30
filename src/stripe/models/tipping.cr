@@ -88,6 +88,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _aud = @aud
         invalid_properties.concat(_aud.list_invalid_properties_for("aud")) if _aud.is_a?(OpenApi::Validatable)
       end
@@ -130,7 +131,6 @@ module Stripe
       if _usd = @usd
         invalid_properties.concat(_usd.list_invalid_properties_for("usd")) if _usd.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -140,42 +140,55 @@ module Stripe
       if _aud = @aud
         return false if _aud.is_a?(OpenApi::Validatable) && !_aud.valid?
       end
+
       if _cad = @cad
         return false if _cad.is_a?(OpenApi::Validatable) && !_cad.valid?
       end
+
       if _chf = @chf
         return false if _chf.is_a?(OpenApi::Validatable) && !_chf.valid?
       end
+
       if _czk = @czk
         return false if _czk.is_a?(OpenApi::Validatable) && !_czk.valid?
       end
+
       if _dkk = @dkk
         return false if _dkk.is_a?(OpenApi::Validatable) && !_dkk.valid?
       end
+
       if _eur = @eur
         return false if _eur.is_a?(OpenApi::Validatable) && !_eur.valid?
       end
+
       if _gbp = @gbp
         return false if _gbp.is_a?(OpenApi::Validatable) && !_gbp.valid?
       end
+
       if _hkd = @hkd
         return false if _hkd.is_a?(OpenApi::Validatable) && !_hkd.valid?
       end
+
       if _myr = @myr
         return false if _myr.is_a?(OpenApi::Validatable) && !_myr.valid?
       end
+
       if _nok = @nok
         return false if _nok.is_a?(OpenApi::Validatable) && !_nok.valid?
       end
+
       if _nzd = @nzd
         return false if _nzd.is_a?(OpenApi::Validatable) && !_nzd.valid?
       end
+
       if _sek = @sek
         return false if _sek.is_a?(OpenApi::Validatable) && !_sek.valid?
       end
+
       if _sgd = @sgd
         return false if _sgd.is_a?(OpenApi::Validatable) && !_sgd.valid?
       end
+
       if _usd = @usd
         return false if _usd.is_a?(OpenApi::Validatable) && !_usd.valid?
       end

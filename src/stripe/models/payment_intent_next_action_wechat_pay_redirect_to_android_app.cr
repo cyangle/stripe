@@ -68,49 +68,56 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"app_id\" is required and cannot be null") if @app_id.nil?
+
       if _app_id = @app_id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"nonce_str\" is required and cannot be null") if @nonce_str.nil?
+
       if _nonce_str = @nonce_str
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nonce_str", _nonce_str.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"package\" is required and cannot be null") if @package.nil?
+
       if _package = @package
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("package", _package.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"partner_id\" is required and cannot be null") if @partner_id.nil?
+
       if _partner_id = @partner_id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("partner_id", _partner_id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"prepay_id\" is required and cannot be null") if @prepay_id.nil?
+
       if _prepay_id = @prepay_id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("prepay_id", _prepay_id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"sign\" is required and cannot be null") if @sign.nil?
+
       if _sign = @sign
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sign", _sign.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"timestamp\" is required and cannot be null") if @timestamp.nil?
+
       if _timestamp = @timestamp
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timestamp", _timestamp.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -121,26 +128,32 @@ module Stripe
       if _app_id = @app_id
         return false if _app_id.to_s.size > 5000
       end
+
       return false if @nonce_str.nil?
       if _nonce_str = @nonce_str
         return false if _nonce_str.to_s.size > 5000
       end
+
       return false if @package.nil?
       if _package = @package
         return false if _package.to_s.size > 5000
       end
+
       return false if @partner_id.nil?
       if _partner_id = @partner_id
         return false if _partner_id.to_s.size > 5000
       end
+
       return false if @prepay_id.nil?
       if _prepay_id = @prepay_id
         return false if _prepay_id.to_s.size > 5000
       end
+
       return false if @sign.nil?
       if _sign = @sign
         return false if _sign.to_s.size > 5000
       end
+
       return false if @timestamp.nil?
       if _timestamp = @timestamp
         return false if _timestamp.to_s.size > 5000

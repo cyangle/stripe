@@ -42,7 +42,9 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"email_sent\" is required and cannot be null") if @email_sent.nil?
+
       if _email_sent = @email_sent
         invalid_properties.concat(_email_sent.list_invalid_properties_for("email_sent")) if _email_sent.is_a?(OpenApi::Validatable)
       end
@@ -58,6 +60,7 @@ module Stripe
       if _email_sent = @email_sent
         return false if _email_sent.is_a?(OpenApi::Validatable) && !_email_sent.valid?
       end
+
       return false if @expires_at.nil?
 
       true

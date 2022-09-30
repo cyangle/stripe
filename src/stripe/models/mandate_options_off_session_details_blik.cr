@@ -41,8 +41,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? interval_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_INTERVAL = OpenApi::EnumValidator.new("interval", "String", ["day", "month", "week", "year"])
+    VALID_VALUES_FOR_INTERVAL = StaticArray["day", "month", "week", "year"]
 
     # Frequency indicator of each recurring payment.
     @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: interval_count.nil? && !interval_count_present?)]
@@ -73,8 +72,9 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_INTERVAL.error_message) unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
+      if _interval = @interval
+        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+      end
 
       invalid_properties
     end
@@ -85,7 +85,10 @@ module Stripe
       if _currency = @currency
         return false if _currency.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_INTERVAL.valid?(@interval)
+
+      if _interval = @interval
+        return false unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+      end
 
       true
     end
@@ -121,7 +124,7 @@ module Stripe
         return @interval = nil
       end
       _interval = interval.not_nil!
-      ENUM_VALIDATOR_FOR_INTERVAL.valid!(_interval)
+      OpenApi::EnumValidator.validate("interval", _interval, VALID_VALUES_FOR_INTERVAL)
       @interval = _interval
     end
 

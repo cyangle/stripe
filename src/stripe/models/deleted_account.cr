@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "deleted", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
     getter deleted : Bool? = nil
 
-    ENUM_VALIDATOR_FOR_DELETED = OpenApi::EnumValidator.new("deleted", "Bool", ["true"])
+    VALID_VALUES_FOR_DELETED = StaticArray[Bool.new("true")]
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -35,7 +35,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["account"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["account"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,28 +53,43 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_DELETED.error_message) unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
+      invalid_properties.push("\"deleted\" is required and cannot be null") if @deleted.nil?
+
+      if _deleted = @deleted
+        invalid_properties.push(OpenApi::EnumValidator.error_message("deleted", VALID_VALUES_FOR_DELETED)) unless OpenApi::EnumValidator.valid?(_deleted, VALID_VALUES_FOR_DELETED)
+      end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_DELETED.valid?(@deleted, false)
+      return false if @deleted.nil?
+      if _deleted = @deleted
+        return false unless OpenApi::EnumValidator.valid?(_deleted, VALID_VALUES_FOR_DELETED)
+      end
+
       return false if @id.nil?
       if _id = @id
         return false if _id.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
 
       true
     end
@@ -86,7 +101,7 @@ module Stripe
         raise ArgumentError.new("\"deleted\" is required and cannot be null")
       end
       _deleted = deleted.not_nil!
-      ENUM_VALIDATOR_FOR_DELETED.valid!(_deleted)
+      OpenApi::EnumValidator.validate("deleted", _deleted, VALID_VALUES_FOR_DELETED)
       @deleted = _deleted
     end
 
@@ -111,7 +126,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 

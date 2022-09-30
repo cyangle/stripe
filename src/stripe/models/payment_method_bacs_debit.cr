@@ -57,6 +57,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _fingerprint = @fingerprint
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -72,7 +73,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -82,9 +82,11 @@ module Stripe
       if _fingerprint = @fingerprint
         return false if _fingerprint.to_s.size > 5000
       end
+
       if _last4 = @last4
         return false if _last4.to_s.size > 5000
       end
+
       if _sort_code = @sort_code
         return false if _sort_code.to_s.size > 5000
       end

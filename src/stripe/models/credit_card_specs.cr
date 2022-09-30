@@ -83,19 +83,23 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"exp_month\" is required and cannot be null") if @exp_month.nil?
+
       if _exp_month = @exp_month
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("exp_month", _exp_month.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
+
       if _exp_year = @exp_year
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("exp_year", _exp_year.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
+
       if _number = @number
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -146,7 +150,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -157,38 +160,49 @@ module Stripe
       if _exp_month = @exp_month
         return false if _exp_month.to_s.size > 5000
       end
+
       return false if @exp_year.nil?
       if _exp_year = @exp_year
         return false if _exp_year.to_s.size > 5000
       end
+
       return false if @number.nil?
       if _number = @number
         return false if _number.to_s.size > 5000
       end
+
       if _address_city = @address_city
         return false if _address_city.to_s.size > 5000
       end
+
       if _address_country = @address_country
         return false if _address_country.to_s.size > 5000
       end
+
       if _address_line1 = @address_line1
         return false if _address_line1.to_s.size > 5000
       end
+
       if _address_line2 = @address_line2
         return false if _address_line2.to_s.size > 5000
       end
+
       if _address_state = @address_state
         return false if _address_state.to_s.size > 5000
       end
+
       if _address_zip = @address_zip
         return false if _address_zip.to_s.size > 5000
       end
+
       if _currency = @currency
         return false if _currency.to_s.size > 5000
       end
+
       if _cvc = @cvc
         return false if _cvc.to_s.size > 5000
       end
+
       if _name = @name
         return false if _name.to_s.size > 5000
       end

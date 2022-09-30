@@ -62,7 +62,7 @@ module Stripe
     @[JSON::Field(key: "structure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter structure : String? = nil
 
-    ENUM_VALIDATOR_FOR_STRUCTURE = OpenApi::EnumValidator.new("structure", "String", ["", "free_zone_establishment", "free_zone_llc", "government_instrumentality", "governmental_unit", "incorporated_non_profit", "limited_liability_partnership", "llc", "multi_member_llc", "private_company", "private_corporation", "private_partnership", "public_company", "public_corporation", "public_partnership", "single_member_llc", "sole_establishment", "sole_proprietorship", "tax_exempt_government_instrumentality", "unincorporated_association", "unincorporated_non_profit"])
+    VALID_VALUES_FOR_STRUCTURE = StaticArray["", "free_zone_establishment", "free_zone_llc", "government_instrumentality", "governmental_unit", "incorporated_non_profit", "limited_liability_partnership", "llc", "multi_member_llc", "private_company", "private_corporation", "private_partnership", "public_company", "public_corporation", "public_partnership", "single_member_llc", "sole_establishment", "sole_proprietorship", "tax_exempt_government_instrumentality", "unincorporated_association", "unincorporated_non_profit"]
 
     @[JSON::Field(key: "tax_id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_id : String? = nil
@@ -106,6 +106,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _address = @address
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
@@ -146,8 +147,9 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_STRUCTURE.error_message) unless ENUM_VALIDATOR_FOR_STRUCTURE.valid?(@structure)
+      if _structure = @structure
+        invalid_properties.push(OpenApi::EnumValidator.error_message("structure", VALID_VALUES_FOR_STRUCTURE)) unless OpenApi::EnumValidator.valid?(_structure, VALID_VALUES_FOR_STRUCTURE)
+      end
       if _tax_id = @tax_id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_id", _tax_id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -166,7 +168,6 @@ module Stripe
       if _verification = @verification
         invalid_properties.concat(_verification.list_invalid_properties_for("verification")) if _verification.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -176,9 +177,11 @@ module Stripe
       if _address = @address
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
+
       if _address_kana = @address_kana
         return false if _address_kana.is_a?(OpenApi::Validatable) && !_address_kana.valid?
       end
+
       if _address_kanji = @address_kanji
         return false if _address_kanji.is_a?(OpenApi::Validatable) && !_address_kanji.valid?
       end
@@ -186,9 +189,11 @@ module Stripe
       if _name = @name
         return false if _name.to_s.size > 100
       end
+
       if _name_kana = @name_kana
         return false if _name_kana.to_s.size > 100
       end
+
       if _name_kanji = @name_kanji
         return false if _name_kanji.to_s.size > 100
       end
@@ -200,19 +205,27 @@ module Stripe
       if _phone = @phone
         return false if _phone.to_s.size > 5000
       end
+
       if _registration_number = @registration_number
         return false if _registration_number.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_STRUCTURE.valid?(@structure)
+
+      if _structure = @structure
+        return false unless OpenApi::EnumValidator.valid?(_structure, VALID_VALUES_FOR_STRUCTURE)
+      end
+
       if _tax_id = @tax_id
         return false if _tax_id.to_s.size > 5000
       end
+
       if _tax_id_registrar = @tax_id_registrar
         return false if _tax_id_registrar.to_s.size > 5000
       end
+
       if _vat_id = @vat_id
         return false if _vat_id.to_s.size > 5000
       end
+
       if _verification = @verification
         return false if _verification.is_a?(OpenApi::Validatable) && !_verification.valid?
       end
@@ -381,7 +394,7 @@ module Stripe
         return @structure = nil
       end
       _structure = structure.not_nil!
-      ENUM_VALIDATOR_FOR_STRUCTURE.valid!(_structure)
+      OpenApi::EnumValidator.validate("structure", _structure, VALID_VALUES_FOR_STRUCTURE)
       @structure = _structure
     end
 

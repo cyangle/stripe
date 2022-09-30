@@ -24,7 +24,7 @@ module Stripe
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
 
-    ENUM_VALIDATOR_FOR__TYPE = OpenApi::EnumValidator.new("_type", "String", ["eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer"])
+    VALID_VALUES_FOR__TYPE = StaticArray["eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer"]
 
     # Optional properties
 
@@ -34,7 +34,7 @@ module Stripe
     @[JSON::Field(key: "requested_address_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter requested_address_types : Array(String)? = nil
 
-    ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES = OpenApi::EnumValidator.new("requested_address_types", "Array(String)", ["iban", "sort_code", "spei", "zengin"])
+    VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES = StaticArray["iban", "sort_code", "spei", "zengin"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,24 +53,35 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR__TYPE.error_message) unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
+
+      if __type = @_type
+        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
       if _eu_bank_transfer = @eu_bank_transfer
         invalid_properties.concat(_eu_bank_transfer.list_invalid_properties_for("eu_bank_transfer")) if _eu_bank_transfer.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.error_message) unless ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.all_valid?(@requested_address_types)
-
+      if _requested_address_types = @requested_address_types
+        invalid_properties.push(OpenApi::EnumValidator.error_message("requested_address_types", VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES)) unless OpenApi::EnumValidator.valid?(_requested_address_types, VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR__TYPE.valid?(@_type, false)
+      return false if @_type.nil?
+      if __type = @_type
+        return false unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+      end
+
       if _eu_bank_transfer = @eu_bank_transfer
         return false if _eu_bank_transfer.is_a?(OpenApi::Validatable) && !_eu_bank_transfer.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.all_valid?(@requested_address_types)
+
+      if _requested_address_types = @requested_address_types
+        return false unless OpenApi::EnumValidator.valid?(_requested_address_types, VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES)
+      end
 
       true
     end
@@ -82,7 +93,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      ENUM_VALIDATOR_FOR__TYPE.valid!(__type)
+      OpenApi::EnumValidator.validate("_type", __type, VALID_VALUES_FOR__TYPE)
       @_type = __type
     end
 
@@ -104,7 +115,7 @@ module Stripe
         return @requested_address_types = nil
       end
       _requested_address_types = requested_address_types.not_nil!
-      ENUM_VALIDATOR_FOR_REQUESTED_ADDRESS_TYPES.all_valid!(_requested_address_types)
+      OpenApi::EnumValidator.validate("requested_address_types", _requested_address_types, VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES)
       @requested_address_types = _requested_address_types
     end
 

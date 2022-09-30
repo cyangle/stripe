@@ -48,6 +48,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"cash\" is required and cannot be null") if @cash.nil?
 
       invalid_properties.push("\"inbound_pending\" is required and cannot be null") if @inbound_pending.nil?

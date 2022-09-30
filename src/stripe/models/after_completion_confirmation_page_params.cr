@@ -36,12 +36,12 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _custom_message = @custom_message
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("custom_message", _custom_message.to_s.size, 500)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 

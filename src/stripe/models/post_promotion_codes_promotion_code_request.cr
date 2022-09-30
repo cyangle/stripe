@@ -57,7 +57,6 @@ module Stripe
       if _restrictions = @restrictions
         invalid_properties.concat(_restrictions.list_invalid_properties_for("restrictions")) if _restrictions.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -67,6 +66,7 @@ module Stripe
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _restrictions = @restrictions
         return false if _restrictions.is_a?(OpenApi::Validatable) && !_restrictions.valid?
       end

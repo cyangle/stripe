@@ -135,18 +135,23 @@ module Stripe
       if _discounts = @discounts
         return false if _discounts.is_a?(OpenApi::Validatable) && !_discounts.valid?
       end
+
       if _invoiceitem = @invoiceitem
         return false if _invoiceitem.to_s.size > 5000
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _period = @period
         return false if _period.is_a?(OpenApi::Validatable) && !_period.valid?
       end
+
       if _price = @price
         return false if _price.to_s.size > 5000
       end
+
       if _price_data = @price_data
         return false if _price_data.is_a?(OpenApi::Validatable) && !_price_data.valid?
       end

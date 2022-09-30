@@ -65,6 +65,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _browser = @browser
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("browser", _browser.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -85,7 +86,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -95,12 +95,15 @@ module Stripe
       if _browser = @browser
         return false if _browser.to_s.size > 5000
       end
+
       if _device = @device
         return false if _device.to_s.size > 5000
       end
+
       if _platform = @platform
         return false if _platform.to_s.size > 5000
       end
+
       if _version = @version
         return false if _version.to_s.size > 5000
       end

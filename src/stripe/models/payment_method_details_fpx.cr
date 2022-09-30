@@ -25,7 +25,7 @@ module Stripe
     @[JSON::Field(key: "bank", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter bank : String? = nil
 
-    ENUM_VALIDATOR_FOR_BANK = OpenApi::EnumValidator.new("bank", "String", ["affin_bank", "agrobank", "alliance_bank", "ambank", "bank_islam", "bank_muamalat", "bank_rakyat", "bsn", "cimb", "deutsche_bank", "hong_leong_bank", "hsbc", "kfh", "maybank2e", "maybank2u", "ocbc", "pb_enterprise", "public_bank", "rhb", "standard_chartered", "uob"])
+    VALID_VALUES_FOR_BANK = StaticArray["affin_bank", "agrobank", "alliance_bank", "ambank", "bank_islam", "bank_muamalat", "bank_rakyat", "bsn", "cimb", "deutsche_bank", "hong_leong_bank", "hsbc", "kfh", "maybank2e", "maybank2u", "ocbc", "pb_enterprise", "public_bank", "rhb", "standard_chartered", "uob"]
 
     # Optional properties
 
@@ -52,20 +52,27 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BANK.error_message) unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank, false)
+      invalid_properties.push("\"bank\" is required and cannot be null") if @bank.nil?
+
+      if _bank = @bank
+        invalid_properties.push(OpenApi::EnumValidator.error_message("bank", VALID_VALUES_FOR_BANK)) unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
+      end
       if _transaction_id = @transaction_id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction_id", _transaction_id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_BANK.valid?(@bank, false)
+      return false if @bank.nil?
+      if _bank = @bank
+        return false unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
+      end
+
       if _transaction_id = @transaction_id
         return false if _transaction_id.to_s.size > 5000
       end
@@ -80,7 +87,7 @@ module Stripe
         raise ArgumentError.new("\"bank\" is required and cannot be null")
       end
       _bank = bank.not_nil!
-      ENUM_VALIDATOR_FOR_BANK.valid!(_bank)
+      OpenApi::EnumValidator.validate("bank", _bank, VALID_VALUES_FOR_BANK)
       @bank = _bank
     end
 

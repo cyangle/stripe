@@ -33,13 +33,13 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["file"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["file"]
 
     # The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
     @[JSON::Field(key: "purpose", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter purpose : String? = nil
 
-    ENUM_VALIDATOR_FOR_PURPOSE = OpenApi::EnumValidator.new("purpose", "String", ["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload", "terminal_reader_splashscreen"])
+    VALID_VALUES_FOR_PURPOSE = StaticArray["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload", "terminal_reader_splashscreen"]
 
     # The size in bytes of the file object.
     @[JSON::Field(key: "size", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -112,18 +112,26 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
         end
       end
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+      invalid_properties.push("\"purpose\" is required and cannot be null") if @purpose.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PURPOSE.error_message) unless ENUM_VALIDATOR_FOR_PURPOSE.valid?(@purpose, false)
+      if _purpose = @purpose
+        invalid_properties.push(OpenApi::EnumValidator.error_message("purpose", VALID_VALUES_FOR_PURPOSE)) unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
+      end
       invalid_properties.push("\"size\" is required and cannot be null") if @size.nil?
 
       if _filename = @filename
@@ -149,7 +157,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -162,22 +169,35 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
-      return false unless ENUM_VALIDATOR_FOR_PURPOSE.valid?(@purpose, false)
+
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
+      return false if @purpose.nil?
+      if _purpose = @purpose
+        return false unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
+      end
+
       return false if @size.nil?
 
       if _filename = @filename
         return false if _filename.to_s.size > 5000
       end
+
       if _links = @links
         return false if _links.is_a?(OpenApi::Validatable) && !_links.valid?
       end
+
       if _title = @title
         return false if _title.to_s.size > 5000
       end
+
       if __type = @_type
         return false if __type.to_s.size > 5000
       end
+
       if _url = @url
         return false if _url.to_s.size > 5000
       end
@@ -216,7 +236,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 
@@ -227,7 +247,7 @@ module Stripe
         raise ArgumentError.new("\"purpose\" is required and cannot be null")
       end
       _purpose = purpose.not_nil!
-      ENUM_VALIDATOR_FOR_PURPOSE.valid!(_purpose)
+      OpenApi::EnumValidator.validate("purpose", _purpose, VALID_VALUES_FOR_PURPOSE)
       @purpose = _purpose
     end
 

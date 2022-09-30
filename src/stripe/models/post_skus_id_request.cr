@@ -100,7 +100,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -110,12 +109,15 @@ module Stripe
       if _image = @image
         return false if _image.to_s.size > 5000
       end
+
       if _inventory = @inventory
         return false if _inventory.is_a?(OpenApi::Validatable) && !_inventory.valid?
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _package_dimensions = @package_dimensions
         return false if _package_dimensions.is_a?(OpenApi::Validatable) && !_package_dimensions.valid?
       end

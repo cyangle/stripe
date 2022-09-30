@@ -24,17 +24,17 @@ module Stripe
     @[JSON::Field(key: "billing_details", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_details : String? = nil
 
-    ENUM_VALIDATOR_FOR_BILLING_DETAILS = OpenApi::EnumValidator.new("billing_details", "String", ["allow", "disallow"])
+    VALID_VALUES_FOR_BILLING_DETAILS = StaticArray["allow", "disallow"]
 
     @[JSON::Field(key: "promotion_codes", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter promotion_codes : String? = nil
 
-    ENUM_VALIDATOR_FOR_PROMOTION_CODES = OpenApi::EnumValidator.new("promotion_codes", "String", ["allow", "disallow"])
+    VALID_VALUES_FOR_PROMOTION_CODES = StaticArray["allow", "disallow"]
 
     @[JSON::Field(key: "shipping_details", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping_details : String? = nil
 
-    ENUM_VALIDATOR_FOR_SHIPPING_DETAILS = OpenApi::EnumValidator.new("shipping_details", "String", ["allow", "disallow"])
+    VALID_VALUES_FOR_SHIPPING_DETAILS = StaticArray["allow", "disallow"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,21 +52,32 @@ module Stripe
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_BILLING_DETAILS.error_message) unless ENUM_VALIDATOR_FOR_BILLING_DETAILS.valid?(@billing_details)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_PROMOTION_CODES.error_message) unless ENUM_VALIDATOR_FOR_PROMOTION_CODES.valid?(@promotion_codes)
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_SHIPPING_DETAILS.error_message) unless ENUM_VALIDATOR_FOR_SHIPPING_DETAILS.valid?(@shipping_details)
-
+      if _billing_details = @billing_details
+        invalid_properties.push(OpenApi::EnumValidator.error_message("billing_details", VALID_VALUES_FOR_BILLING_DETAILS)) unless OpenApi::EnumValidator.valid?(_billing_details, VALID_VALUES_FOR_BILLING_DETAILS)
+      end
+      if _promotion_codes = @promotion_codes
+        invalid_properties.push(OpenApi::EnumValidator.error_message("promotion_codes", VALID_VALUES_FOR_PROMOTION_CODES)) unless OpenApi::EnumValidator.valid?(_promotion_codes, VALID_VALUES_FOR_PROMOTION_CODES)
+      end
+      if _shipping_details = @shipping_details
+        invalid_properties.push(OpenApi::EnumValidator.error_message("shipping_details", VALID_VALUES_FOR_SHIPPING_DETAILS)) unless OpenApi::EnumValidator.valid?(_shipping_details, VALID_VALUES_FOR_SHIPPING_DETAILS)
+      end
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid? : Bool
-      return false unless ENUM_VALIDATOR_FOR_BILLING_DETAILS.valid?(@billing_details)
-      return false unless ENUM_VALIDATOR_FOR_PROMOTION_CODES.valid?(@promotion_codes)
-      return false unless ENUM_VALIDATOR_FOR_SHIPPING_DETAILS.valid?(@shipping_details)
+      if _billing_details = @billing_details
+        return false unless OpenApi::EnumValidator.valid?(_billing_details, VALID_VALUES_FOR_BILLING_DETAILS)
+      end
+
+      if _promotion_codes = @promotion_codes
+        return false unless OpenApi::EnumValidator.valid?(_promotion_codes, VALID_VALUES_FOR_PROMOTION_CODES)
+      end
+
+      if _shipping_details = @shipping_details
+        return false unless OpenApi::EnumValidator.valid?(_shipping_details, VALID_VALUES_FOR_SHIPPING_DETAILS)
+      end
 
       true
     end
@@ -78,7 +89,7 @@ module Stripe
         return @billing_details = nil
       end
       _billing_details = billing_details.not_nil!
-      ENUM_VALIDATOR_FOR_BILLING_DETAILS.valid!(_billing_details)
+      OpenApi::EnumValidator.validate("billing_details", _billing_details, VALID_VALUES_FOR_BILLING_DETAILS)
       @billing_details = _billing_details
     end
 
@@ -89,7 +100,7 @@ module Stripe
         return @promotion_codes = nil
       end
       _promotion_codes = promotion_codes.not_nil!
-      ENUM_VALIDATOR_FOR_PROMOTION_CODES.valid!(_promotion_codes)
+      OpenApi::EnumValidator.validate("promotion_codes", _promotion_codes, VALID_VALUES_FOR_PROMOTION_CODES)
       @promotion_codes = _promotion_codes
     end
 
@@ -100,7 +111,7 @@ module Stripe
         return @shipping_details = nil
       end
       _shipping_details = shipping_details.not_nil!
-      ENUM_VALIDATOR_FOR_SHIPPING_DETAILS.valid!(_shipping_details)
+      OpenApi::EnumValidator.validate("shipping_details", _shipping_details, VALID_VALUES_FOR_SHIPPING_DETAILS)
       @shipping_details = _shipping_details
     end
 

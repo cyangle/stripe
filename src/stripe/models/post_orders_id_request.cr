@@ -98,6 +98,7 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       if _automatic_tax = @automatic_tax
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
@@ -140,7 +141,6 @@ module Stripe
       if _tax_details = @tax_details
         invalid_properties.concat(_tax_details.list_invalid_properties_for("tax_details")) if _tax_details.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -150,9 +150,11 @@ module Stripe
       if _automatic_tax = @automatic_tax
         return false if _automatic_tax.is_a?(OpenApi::Validatable) && !_automatic_tax.valid?
       end
+
       if _billing_details = @billing_details
         return false if _billing_details.is_a?(OpenApi::Validatable) && !_billing_details.valid?
       end
+
       if _client_permissions = @client_permissions
         return false if _client_permissions.is_a?(OpenApi::Validatable) && !_client_permissions.valid?
       end
@@ -160,9 +162,11 @@ module Stripe
       if _customer = @customer
         return false if _customer.to_s.size > 5000
       end
+
       if _description = @description
         return false if _description.to_s.size > 5000
       end
+
       if _discounts = @discounts
         return false if _discounts.is_a?(OpenApi::Validatable) && !_discounts.valid?
       end
@@ -170,18 +174,23 @@ module Stripe
       if _line_items = @line_items
         return false if _line_items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _line_items)
       end
+
       if _metadata = @metadata
         return false if _metadata.is_a?(OpenApi::Validatable) && !_metadata.valid?
       end
+
       if _payment = @payment
         return false if _payment.is_a?(OpenApi::Validatable) && !_payment.valid?
       end
+
       if _shipping_cost = @shipping_cost
         return false if _shipping_cost.is_a?(OpenApi::Validatable) && !_shipping_cost.valid?
       end
+
       if _shipping_details = @shipping_details
         return false if _shipping_details.is_a?(OpenApi::Validatable) && !_shipping_details.valid?
       end
+
       if _tax_details = @tax_details
         return false if _tax_details.is_a?(OpenApi::Validatable) && !_tax_details.valid?
       end

@@ -88,7 +88,6 @@ module Stripe
           invalid_properties.push(max_length_error)
         end
       end
-
       invalid_properties
     end
 
@@ -102,6 +101,7 @@ module Stripe
       if _segments = @segments
         return false if _segments.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _segments)
       end
+
       if _travel_agency = @travel_agency
         return false if _travel_agency.to_s.size > 5000
       end

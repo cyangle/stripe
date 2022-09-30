@@ -37,7 +37,7 @@ module Stripe
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
 
-    ENUM_VALIDATOR_FOR_OBJECT = OpenApi::EnumValidator.new("object", "String", ["customer"])
+    VALID_VALUES_FOR_OBJECT = StaticArray["customer"]
 
     # Optional properties
 
@@ -161,8 +161,7 @@ module Stripe
 
     @[JSON::Field(ignore: true)]
     property? tax_exempt_present : Bool = false
-
-    ENUM_VALIDATOR_FOR_TAX_EXEMPT = OpenApi::EnumValidator.new("tax_exempt", "String", ["exempt", "none", "reverse"])
+    VALID_VALUES_FOR_TAX_EXEMPT = StaticArray["exempt", "none", "reverse"]
 
     @[JSON::Field(key: "tax_ids", type: Stripe::TaxIDsList1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_ids : Stripe::TaxIDsList1? = nil
@@ -214,9 +213,11 @@ module Stripe
     # @return Array for valid properties with the reasons
     def list_invalid_properties : Array(String)
       invalid_properties = Array(String).new
+
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
+
       if _id = @id
         if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
           invalid_properties.push(max_length_error)
@@ -224,7 +225,11 @@ module Stripe
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
-      invalid_properties.push(ENUM_VALIDATOR_FOR_OBJECT.error_message) unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
+
+      if _object = @object
+        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
       if _address = @address
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
@@ -288,15 +293,15 @@ module Stripe
       if _tax = @tax
         invalid_properties.concat(_tax.list_invalid_properties_for("tax")) if _tax.is_a?(OpenApi::Validatable)
       end
-
-      invalid_properties.push(ENUM_VALIDATOR_FOR_TAX_EXEMPT.error_message) unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
+      if _tax_exempt = @tax_exempt
+        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_exempt", VALID_VALUES_FOR_TAX_EXEMPT)) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
+      end
       if _tax_ids = @tax_ids
         invalid_properties.concat(_tax_ids.list_invalid_properties_for("tax_ids")) if _tax_ids.is_a?(OpenApi::Validatable)
       end
       if _test_clock = @test_clock
         invalid_properties.concat(_test_clock.list_invalid_properties_for("test_clock")) if _test_clock.is_a?(OpenApi::Validatable)
       end
-
       invalid_properties
     end
 
@@ -309,9 +314,14 @@ module Stripe
       if _id = @id
         return false if _id.to_s.size > 5000
       end
+
       return false if @livemode.nil?
 
-      return false unless ENUM_VALIDATOR_FOR_OBJECT.valid?(@object, false)
+      return false if @object.nil?
+      if _object = @object
+        return false unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+      end
+
       if _address = @address
         return false if _address.is_a?(OpenApi::Validatable) && !_address.valid?
       end
@@ -319,9 +329,11 @@ module Stripe
       if _cash_balance = @cash_balance
         return false if _cash_balance.is_a?(OpenApi::Validatable) && !_cash_balance.valid?
       end
+
       if _currency = @currency
         return false if _currency.to_s.size > 5000
       end
+
       if _default_source = @default_source
         return false if _default_source.is_a?(OpenApi::Validatable) && !_default_source.valid?
       end
@@ -329,9 +341,11 @@ module Stripe
       if _description = @description
         return false if _description.to_s.size > 5000
       end
+
       if _discount = @discount
         return false if _discount.is_a?(OpenApi::Validatable) && !_discount.valid?
       end
+
       if _email = @email
         return false if _email.to_s.size > 5000
       end
@@ -339,6 +353,7 @@ module Stripe
       if _invoice_prefix = @invoice_prefix
         return false if _invoice_prefix.to_s.size > 5000
       end
+
       if _invoice_settings = @invoice_settings
         return false if _invoice_settings.is_a?(OpenApi::Validatable) && !_invoice_settings.valid?
       end
@@ -354,19 +369,27 @@ module Stripe
       if _shipping = @shipping
         return false if _shipping.is_a?(OpenApi::Validatable) && !_shipping.valid?
       end
+
       if _sources = @sources
         return false if _sources.is_a?(OpenApi::Validatable) && !_sources.valid?
       end
+
       if _subscriptions = @subscriptions
         return false if _subscriptions.is_a?(OpenApi::Validatable) && !_subscriptions.valid?
       end
+
       if _tax = @tax
         return false if _tax.is_a?(OpenApi::Validatable) && !_tax.valid?
       end
-      return false unless ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid?(@tax_exempt)
+
+      if _tax_exempt = @tax_exempt
+        return false unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
+      end
+
       if _tax_ids = @tax_ids
         return false if _tax_ids.is_a?(OpenApi::Validatable) && !_tax_ids.valid?
       end
+
       if _test_clock = @test_clock
         return false if _test_clock.is_a?(OpenApi::Validatable) && !_test_clock.valid?
       end
@@ -415,7 +438,7 @@ module Stripe
         raise ArgumentError.new("\"object\" is required and cannot be null")
       end
       _object = object.not_nil!
-      ENUM_VALIDATOR_FOR_OBJECT.valid!(_object)
+      OpenApi::EnumValidator.validate("object", _object, VALID_VALUES_FOR_OBJECT)
       @object = _object
     end
 
@@ -669,7 +692,7 @@ module Stripe
         return @tax_exempt = nil
       end
       _tax_exempt = tax_exempt.not_nil!
-      ENUM_VALIDATOR_FOR_TAX_EXEMPT.valid!(_tax_exempt)
+      OpenApi::EnumValidator.validate("tax_exempt", _tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       @tax_exempt = _tax_exempt
     end
 
