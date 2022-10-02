@@ -30,8 +30,8 @@ module Stripe
     # Simulated payment type
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["card_present"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [card_present]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["card_present"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,7 +54,7 @@ module Stripe
       end
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
     end

@@ -24,14 +24,17 @@ module Stripe
     # SEPA creditor ID.
     @[JSON::Field(key: "creditor_identifier", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter creditor_identifier : String? = nil
+    MAX_LENGTH_FOR_CREDITOR_IDENTIFIER = 5000
 
     # Last 4 digits of the account number associated with the debit.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter last4 : String? = nil
+    MAX_LENGTH_FOR_LAST4 = 5000
 
     # Mandate reference associated with the debit.
     @[JSON::Field(key: "mandate_reference", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mandate_reference : String? = nil
+    MAX_LENGTH_FOR_MANDATE_REFERENCE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -50,17 +53,17 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _creditor_identifier = @creditor_identifier
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("creditor_identifier", _creditor_identifier.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("creditor_identifier", _creditor_identifier.to_s.size, MAX_LENGTH_FOR_CREDITOR_IDENTIFIER)
           invalid_properties.push(max_length_error)
         end
       end
       if _last4 = @last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       if _mandate_reference = @mandate_reference
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate_reference", _mandate_reference.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate_reference", _mandate_reference.to_s.size, MAX_LENGTH_FOR_MANDATE_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -71,15 +74,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _creditor_identifier = @creditor_identifier
-        return false if _creditor_identifier.to_s.size > 5000
+        return false if _creditor_identifier.to_s.size > MAX_LENGTH_FOR_CREDITOR_IDENTIFIER
       end
 
       if _last4 = @last4
-        return false if _last4.to_s.size > 5000
+        return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
       if _mandate_reference = @mandate_reference
-        return false if _mandate_reference.to_s.size > 5000
+        return false if _mandate_reference.to_s.size > MAX_LENGTH_FOR_MANDATE_REFERENCE
       end
 
       true
@@ -92,10 +95,7 @@ module Stripe
         return @creditor_identifier = nil
       end
       _creditor_identifier = creditor_identifier.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("creditor_identifier", _creditor_identifier.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("creditor_identifier", _creditor_identifier.to_s.size, MAX_LENGTH_FOR_CREDITOR_IDENTIFIER)
       @creditor_identifier = _creditor_identifier
     end
 
@@ -106,10 +106,7 @@ module Stripe
         return @last4 = nil
       end
       _last4 = last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
       @last4 = _last4
     end
 
@@ -120,10 +117,7 @@ module Stripe
         return @mandate_reference = nil
       end
       _mandate_reference = mandate_reference.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate_reference", _mandate_reference.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("mandate_reference", _mandate_reference.to_s.size, MAX_LENGTH_FOR_MANDATE_REFERENCE)
       @mandate_reference = _mandate_reference
     end
 

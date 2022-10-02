@@ -24,8 +24,8 @@ module Stripe
     # Possible values are `phase_start` or `automatic`. If `phase_start` then billing cycle anchor of the subscription is set to the start of the phase when entering the phase. If `automatic` then the billing cycle anchor is automatically modified as needed when entering the phase. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
     @[JSON::Field(key: "billing_cycle_anchor", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter billing_cycle_anchor : String? = nil
-
-    VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR = StaticArray["automatic", "phase_start"]
+    ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR = "invalid value for \"billing_cycle_anchor\", must be one of [automatic, phase_start]."
+    VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = StaticArray["automatic", "phase_start"]
 
     # Optional properties
 
@@ -48,10 +48,11 @@ module Stripe
     # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: collection_method.nil? && !collection_method_present?)]
     getter collection_method : String? = nil
+    ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
+    VALID_VALUES_FOR_COLLECTION_METHOD  = StaticArray["charge_automatically", "send_invoice"]
 
     @[JSON::Field(ignore: true)]
     property? collection_method_present : Bool = false
-    VALID_VALUES_FOR_COLLECTION_METHOD = StaticArray["charge_automatically", "send_invoice"]
 
     @[JSON::Field(key: "default_payment_method", type: Stripe::SubscriptionSchedulesResourceDefaultSettingsDefaultPaymentMethod?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: default_payment_method.nil? && !default_payment_method_present?)]
     getter default_payment_method : Stripe::SubscriptionSchedulesResourceDefaultSettingsDefaultPaymentMethod? = nil
@@ -62,6 +63,7 @@ module Stripe
     # Subscription description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
@@ -104,7 +106,7 @@ module Stripe
       invalid_properties.push("\"billing_cycle_anchor\" is required and cannot be null") if @billing_cycle_anchor.nil?
 
       if _billing_cycle_anchor = @billing_cycle_anchor
-        invalid_properties.push(OpenApi::EnumValidator.error_message("billing_cycle_anchor", VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)) unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR) unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
       end
 
       if _automatic_tax = @automatic_tax
@@ -114,13 +116,13 @@ module Stripe
         invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
       if _collection_method = @collection_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("collection_method", VALID_VALUES_FOR_COLLECTION_METHOD)) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_COLLECTION_METHOD) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
       if _default_payment_method = @default_payment_method
         invalid_properties.concat(_default_payment_method.list_invalid_properties_for("default_payment_method")) if _default_payment_method.is_a?(OpenApi::Validatable)
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -158,7 +160,7 @@ module Stripe
       end
 
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _invoice_settings = @invoice_settings
@@ -244,10 +246,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 

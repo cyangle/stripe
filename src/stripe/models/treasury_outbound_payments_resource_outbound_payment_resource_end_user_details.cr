@@ -30,6 +30,7 @@ module Stripe
     # IP address of the user initiating the OutboundPayment. Set if `present` is set to `true`. IP address collection is required for risk and compliance reasons. This will be used to help determine if the OutboundPayment is authorized or should be blocked.
     @[JSON::Field(key: "ip_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
     getter ip_address : String? = nil
+    MAX_LENGTH_FOR_IP_ADDRESS = 5000
 
     @[JSON::Field(ignore: true)]
     property? ip_address_present : Bool = false
@@ -53,7 +54,7 @@ module Stripe
       invalid_properties.push("\"present\" is required and cannot be null") if @present.nil?
 
       if _ip_address = @ip_address
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
@@ -66,7 +67,7 @@ module Stripe
       return false if @present.nil?
 
       if _ip_address = @ip_address
-        return false if _ip_address.to_s.size > 5000
+        return false if _ip_address.to_s.size > MAX_LENGTH_FOR_IP_ADDRESS
       end
 
       true
@@ -89,10 +90,7 @@ module Stripe
         return @ip_address = nil
       end
       _ip_address = ip_address.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
       @ip_address = _ip_address
     end
 

@@ -27,10 +27,12 @@ module Stripe
     # The ID of the [Price](https://stripe.com/docs/api/prices) object that is the default price for this product.
     @[JSON::Field(key: "default_price", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_price : String? = nil
+    MAX_LENGTH_FOR_DEFAULT_PRICE = 5000
 
     # The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 40000
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -45,6 +47,7 @@ module Stripe
     # The product's name, meant to be displayable to the customer.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 5000
 
     @[JSON::Field(key: "package_dimensions", type: Stripe::PostProductsIdRequestPackageDimensions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter package_dimensions : Stripe::PostProductsIdRequestPackageDimensions? = nil
@@ -56,6 +59,7 @@ module Stripe
     # An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.  This may be up to 22 characters. The statement description may not include `<`, `>`, `\\`, `\"`, `'` characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.  It must contain at least one letter. May only be set if `type=service`.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 22
 
     @[JSON::Field(key: "tax_code", type: Stripe::PostProductsIdRequestTaxCode?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_code : Stripe::PostProductsIdRequestTaxCode? = nil
@@ -63,6 +67,7 @@ module Stripe
     # A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions. May only be set if `type=service`.
     @[JSON::Field(key: "unit_label", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter unit_label : String? = nil
+    MAX_LENGTH_FOR_UNIT_LABEL = 12
 
     @[JSON::Field(key: "url", type: Stripe::PostProductsIdRequestUrl?, default: nil, required: false, nullable: false, emit_null: false)]
     getter url : Stripe::PostProductsIdRequestUrl? = nil
@@ -94,12 +99,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _default_price = @default_price
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_price", _default_price.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_price", _default_price.to_s.size, MAX_LENGTH_FOR_DEFAULT_PRICE)
           invalid_properties.push(max_length_error)
         end
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 40000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -111,7 +116,7 @@ module Stripe
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -120,7 +125,7 @@ module Stripe
       end
 
       if _statement_descriptor = @statement_descriptor
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
@@ -128,7 +133,7 @@ module Stripe
         invalid_properties.concat(_tax_code.list_invalid_properties_for("tax_code")) if _tax_code.is_a?(OpenApi::Validatable)
       end
       if _unit_label = @unit_label
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit_label", _unit_label.to_s.size, 12)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit_label", _unit_label.to_s.size, MAX_LENGTH_FOR_UNIT_LABEL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -142,11 +147,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _default_price = @default_price
-        return false if _default_price.to_s.size > 5000
+        return false if _default_price.to_s.size > MAX_LENGTH_FOR_DEFAULT_PRICE
       end
 
       if _description = @description
-        return false if _description.to_s.size > 40000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _images = @images
@@ -158,7 +163,7 @@ module Stripe
       end
 
       if _name = @name
-        return false if _name.to_s.size > 5000
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       if _package_dimensions = @package_dimensions
@@ -166,7 +171,7 @@ module Stripe
       end
 
       if _statement_descriptor = @statement_descriptor
-        return false if _statement_descriptor.to_s.size > 22
+        return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
       if _tax_code = @tax_code
@@ -174,7 +179,7 @@ module Stripe
       end
 
       if _unit_label = @unit_label
-        return false if _unit_label.to_s.size > 12
+        return false if _unit_label.to_s.size > MAX_LENGTH_FOR_UNIT_LABEL
       end
 
       if _url = @url
@@ -201,10 +206,7 @@ module Stripe
         return @default_price = nil
       end
       _default_price = default_price.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_price", _default_price.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("default_price", _default_price.to_s.size, MAX_LENGTH_FOR_DEFAULT_PRICE)
       @default_price = _default_price
     end
 
@@ -215,10 +217,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 40000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -261,10 +260,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 
@@ -296,10 +292,7 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       @statement_descriptor = _statement_descriptor
     end
 
@@ -321,10 +314,7 @@ module Stripe
         return @unit_label = nil
       end
       _unit_label = unit_label.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit_label", _unit_label.to_s.size, 12)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("unit_label", _unit_label.to_s.size, MAX_LENGTH_FOR_UNIT_LABEL)
       @unit_label = _unit_label
     end
 

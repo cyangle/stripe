@@ -27,10 +27,11 @@ module Stripe
     # The funding method type to be used when there are not enough funds in the customer balance. Permitted values include: `bank_transfer`.
     @[JSON::Field(key: "funding_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: funding_type.nil? && !funding_type_present?)]
     getter funding_type : String? = nil
+    ERROR_MESSAGE_FOR_FUNDING_TYPE = "invalid value for \"funding_type\", must be one of [bank_transfer]."
+    VALID_VALUES_FOR_FUNDING_TYPE  = StaticArray["bank_transfer"]
 
     @[JSON::Field(ignore: true)]
     property? funding_type_present : Bool = false
-    VALID_VALUES_FOR_FUNDING_TYPE = StaticArray["bank_transfer"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -51,7 +52,7 @@ module Stripe
         invalid_properties.concat(_bank_transfer.list_invalid_properties_for("bank_transfer")) if _bank_transfer.is_a?(OpenApi::Validatable)
       end
       if _funding_type = @funding_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("funding_type", VALID_VALUES_FOR_FUNDING_TYPE)) unless OpenApi::EnumValidator.valid?(_funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_FUNDING_TYPE) unless OpenApi::EnumValidator.valid?(_funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
       end
       invalid_properties
     end

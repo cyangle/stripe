@@ -24,18 +24,20 @@ module Stripe
     # The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
     @[JSON::Field(key: "bank", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank.nil? && !bank_present?)]
     getter bank : String? = nil
+    ERROR_MESSAGE_FOR_BANK = "invalid value for \"bank\", must be one of [abn_amro, asn_bank, bunq, handelsbanken, ing, knab, moneyou, rabobank, regiobank, revolut, sns_bank, triodos_bank, van_lanschot]."
+    VALID_VALUES_FOR_BANK  = StaticArray["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"]
 
     @[JSON::Field(ignore: true)]
     property? bank_present : Bool = false
-    VALID_VALUES_FOR_BANK = StaticArray["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"]
 
     # The Bank Identifier Code of the customer's bank.
     @[JSON::Field(key: "bic", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bic.nil? && !bic_present?)]
     getter bic : String? = nil
+    ERROR_MESSAGE_FOR_BIC = "invalid value for \"bic\", must be one of [ABNANL2A, ASNBNL21, BUNQNL2A, FVLBNL22, HANDNL2A, INGBNL2A, KNABNL2H, MOYONL21, RABONL2U, RBRBNL21, REVOLT21, SNSBNL2A, TRIONL2U]."
+    VALID_VALUES_FOR_BIC  = StaticArray["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U"]
 
     @[JSON::Field(ignore: true)]
     property? bic_present : Bool = false
-    VALID_VALUES_FOR_BIC = StaticArray["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U"]
 
     @[JSON::Field(key: "generated_sepa_debit", type: Stripe::SetupAttemptPaymentMethodDetailsBancontactGeneratedSepaDebit?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: generated_sepa_debit.nil? && !generated_sepa_debit_present?)]
     getter generated_sepa_debit : Stripe::SetupAttemptPaymentMethodDetailsBancontactGeneratedSepaDebit? = nil
@@ -52,6 +54,7 @@ module Stripe
     # Last four characters of the IBAN.
     @[JSON::Field(key: "iban_last4", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: iban_last4.nil? && !iban_last4_present?)]
     getter iban_last4 : String? = nil
+    MAX_LENGTH_FOR_IBAN_LAST4 = 5000
 
     @[JSON::Field(ignore: true)]
     property? iban_last4_present : Bool = false
@@ -59,6 +62,7 @@ module Stripe
     # Owner's verified full name. Values are verified or provided by iDEAL directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     @[JSON::Field(key: "verified_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verified_name.nil? && !verified_name_present?)]
     getter verified_name : String? = nil
+    MAX_LENGTH_FOR_VERIFIED_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? verified_name_present : Bool = false
@@ -83,10 +87,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _bank = @bank
-        invalid_properties.push(OpenApi::EnumValidator.error_message("bank", VALID_VALUES_FOR_BANK)) unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BANK) unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
       end
       if _bic = @bic
-        invalid_properties.push(OpenApi::EnumValidator.error_message("bic", VALID_VALUES_FOR_BIC)) unless OpenApi::EnumValidator.valid?(_bic, VALID_VALUES_FOR_BIC)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BIC) unless OpenApi::EnumValidator.valid?(_bic, VALID_VALUES_FOR_BIC)
       end
       if _generated_sepa_debit = @generated_sepa_debit
         invalid_properties.concat(_generated_sepa_debit.list_invalid_properties_for("generated_sepa_debit")) if _generated_sepa_debit.is_a?(OpenApi::Validatable)
@@ -95,12 +99,12 @@ module Stripe
         invalid_properties.concat(_generated_sepa_debit_mandate.list_invalid_properties_for("generated_sepa_debit_mandate")) if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
       end
       if _iban_last4 = @iban_last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       if _verified_name = @verified_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -127,11 +131,11 @@ module Stripe
       end
 
       if _iban_last4 = @iban_last4
-        return false if _iban_last4.to_s.size > 5000
+        return false if _iban_last4.to_s.size > MAX_LENGTH_FOR_IBAN_LAST4
       end
 
       if _verified_name = @verified_name
-        return false if _verified_name.to_s.size > 5000
+        return false if _verified_name.to_s.size > MAX_LENGTH_FOR_VERIFIED_NAME
       end
 
       true
@@ -188,10 +192,7 @@ module Stripe
         return @iban_last4 = nil
       end
       _iban_last4 = iban_last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("iban_last4", _iban_last4.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
       @iban_last4 = _iban_last4
     end
 
@@ -202,10 +203,7 @@ module Stripe
         return @verified_name = nil
       end
       _verified_name = verified_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
       @verified_name = _verified_name
     end
 

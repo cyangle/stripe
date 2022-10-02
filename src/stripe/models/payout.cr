@@ -44,6 +44,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -52,26 +53,29 @@ module Stripe
     # The method used to send this payout, which can be `standard` or `instant`. `instant` is only supported for payouts to debit cards. (See [Instant payouts for marketplaces](https://stripe.com/blog/instant-payouts-for-marketplaces) for more information.)
     @[JSON::Field(key: "method", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter method : String? = nil
+    MAX_LENGTH_FOR_METHOD = 5000
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["payout"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [payout]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["payout"]
 
     # The source balance this payout came from. One of `card`, `fpx`, or `bank_account`.
     @[JSON::Field(key: "source_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter source_type : String? = nil
+    MAX_LENGTH_FOR_SOURCE_TYPE = 5000
 
     # Current status of the payout: `paid`, `pending`, `in_transit`, `canceled` or `failed`. A payout is `pending` until it is submitted to the bank, when it becomes `in_transit`. The status then changes to `paid` if the transaction goes through, or to `failed` or `canceled` (within 5 business days). Some failed payouts may initially show as `paid` but then change to `failed`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
+    MAX_LENGTH_FOR_STATUS = 5000
 
     # Can be `bank_account` or `card`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["bank_account", "card"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [bank_account, card]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["bank_account", "card"]
 
     # Optional properties
 
@@ -84,6 +88,7 @@ module Stripe
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
@@ -103,6 +108,7 @@ module Stripe
     # Error code explaining reason for payout failure if available. See [Types of payout failures](https://stripe.com/docs/api#payout_failures) for a list of failure codes.
     @[JSON::Field(key: "failure_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: failure_code.nil? && !failure_code_present?)]
     getter failure_code : String? = nil
+    MAX_LENGTH_FOR_FAILURE_CODE = 5000
 
     @[JSON::Field(ignore: true)]
     property? failure_code_present : Bool = false
@@ -110,6 +116,7 @@ module Stripe
     # Message to user further explaining reason for payout failure if available.
     @[JSON::Field(key: "failure_message", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: failure_message.nil? && !failure_message_present?)]
     getter failure_message : String? = nil
+    MAX_LENGTH_FOR_FAILURE_MESSAGE = 5000
 
     @[JSON::Field(ignore: true)]
     property? failure_message_present : Bool = false
@@ -136,6 +143,7 @@ module Stripe
     # Extra information about a payout to be displayed on the user's bank statement.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
     getter statement_descriptor : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 5000
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_present : Bool = false
@@ -189,7 +197,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -198,39 +206,39 @@ module Stripe
       invalid_properties.push("\"method\" is required and cannot be null") if @method.nil?
 
       if _method = @method
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("method", _method.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("method", _method.to_s.size, MAX_LENGTH_FOR_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"source_type\" is required and cannot be null") if @source_type.nil?
 
       if _source_type = @source_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_type", _source_type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_type", _source_type.to_s.size, MAX_LENGTH_FOR_SOURCE_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _balance_transaction = @balance_transaction
         invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -241,12 +249,12 @@ module Stripe
         invalid_properties.concat(_failure_balance_transaction.list_invalid_properties_for("failure_balance_transaction")) if _failure_balance_transaction.is_a?(OpenApi::Validatable)
       end
       if _failure_code = @failure_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_code", _failure_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_code", _failure_code.to_s.size, MAX_LENGTH_FOR_FAILURE_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       if _failure_message = @failure_message
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_message", _failure_message.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_message", _failure_message.to_s.size, MAX_LENGTH_FOR_FAILURE_MESSAGE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -258,7 +266,7 @@ module Stripe
         invalid_properties.concat(_reversed_by.list_invalid_properties_for("reversed_by")) if _reversed_by.is_a?(OpenApi::Validatable)
       end
       if _statement_descriptor = @statement_descriptor
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
@@ -280,14 +288,14 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
 
       return false if @method.nil?
       if _method = @method
-        return false if _method.to_s.size > 5000
+        return false if _method.to_s.size > MAX_LENGTH_FOR_METHOD
       end
 
       return false if @object.nil?
@@ -297,12 +305,12 @@ module Stripe
 
       return false if @source_type.nil?
       if _source_type = @source_type
-        return false if _source_type.to_s.size > 5000
+        return false if _source_type.to_s.size > MAX_LENGTH_FOR_SOURCE_TYPE
       end
 
       return false if @status.nil?
       if _status = @status
-        return false if _status.to_s.size > 5000
+        return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
       return false if @_type.nil?
@@ -315,7 +323,7 @@ module Stripe
       end
 
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _destination = @destination
@@ -327,11 +335,11 @@ module Stripe
       end
 
       if _failure_code = @failure_code
-        return false if _failure_code.to_s.size > 5000
+        return false if _failure_code.to_s.size > MAX_LENGTH_FOR_FAILURE_CODE
       end
 
       if _failure_message = @failure_message
-        return false if _failure_message.to_s.size > 5000
+        return false if _failure_message.to_s.size > MAX_LENGTH_FOR_FAILURE_MESSAGE
       end
 
       if _original_payout = @original_payout
@@ -343,7 +351,7 @@ module Stripe
       end
 
       if _statement_descriptor = @statement_descriptor
-        return false if _statement_descriptor.to_s.size > 5000
+        return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
       true
@@ -406,10 +414,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -430,10 +435,7 @@ module Stripe
         raise ArgumentError.new("\"method\" is required and cannot be null")
       end
       _method = method.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("method", _method.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("method", _method.to_s.size, MAX_LENGTH_FOR_METHOD)
       @method = _method
     end
 
@@ -455,10 +457,7 @@ module Stripe
         raise ArgumentError.new("\"source_type\" is required and cannot be null")
       end
       _source_type = source_type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_type", _source_type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("source_type", _source_type.to_s.size, MAX_LENGTH_FOR_SOURCE_TYPE)
       @source_type = _source_type
     end
 
@@ -469,10 +468,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
       @status = _status
     end
 
@@ -505,10 +501,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -541,10 +534,7 @@ module Stripe
         return @failure_code = nil
       end
       _failure_code = failure_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_code", _failure_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("failure_code", _failure_code.to_s.size, MAX_LENGTH_FOR_FAILURE_CODE)
       @failure_code = _failure_code
     end
 
@@ -555,10 +545,7 @@ module Stripe
         return @failure_message = nil
       end
       _failure_message = failure_message.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_message", _failure_message.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("failure_message", _failure_message.to_s.size, MAX_LENGTH_FOR_FAILURE_MESSAGE)
       @failure_message = _failure_message
     end
 
@@ -601,10 +588,7 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       @statement_descriptor = _statement_descriptor
     end
 

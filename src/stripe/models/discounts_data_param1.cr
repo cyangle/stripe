@@ -22,12 +22,15 @@ module Stripe
 
     @[JSON::Field(key: "coupon", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter coupon : String? = nil
+    MAX_LENGTH_FOR_COUPON = 5000
 
     @[JSON::Field(key: "discount", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter discount : String? = nil
+    MAX_LENGTH_FOR_DISCOUNT = 5000
 
     @[JSON::Field(key: "promotion_code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter promotion_code : String? = nil
+    MAX_LENGTH_FOR_PROMOTION_CODE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -46,17 +49,17 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _coupon = @coupon
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
           invalid_properties.push(max_length_error)
         end
       end
       if _discount = @discount
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("discount", _discount.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("discount", _discount.to_s.size, MAX_LENGTH_FOR_DISCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
       if _promotion_code = @promotion_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("promotion_code", _promotion_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("promotion_code", _promotion_code.to_s.size, MAX_LENGTH_FOR_PROMOTION_CODE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -67,15 +70,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _coupon = @coupon
-        return false if _coupon.to_s.size > 5000
+        return false if _coupon.to_s.size > MAX_LENGTH_FOR_COUPON
       end
 
       if _discount = @discount
-        return false if _discount.to_s.size > 5000
+        return false if _discount.to_s.size > MAX_LENGTH_FOR_DISCOUNT
       end
 
       if _promotion_code = @promotion_code
-        return false if _promotion_code.to_s.size > 5000
+        return false if _promotion_code.to_s.size > MAX_LENGTH_FOR_PROMOTION_CODE
       end
 
       true
@@ -88,10 +91,7 @@ module Stripe
         return @coupon = nil
       end
       _coupon = coupon.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
       @coupon = _coupon
     end
 
@@ -102,10 +102,7 @@ module Stripe
         return @discount = nil
       end
       _discount = discount.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("discount", _discount.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("discount", _discount.to_s.size, MAX_LENGTH_FOR_DISCOUNT)
       @discount = _discount
     end
 
@@ -116,10 +113,7 @@ module Stripe
         return @promotion_code = nil
       end
       _promotion_code = promotion_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("promotion_code", _promotion_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("promotion_code", _promotion_code.to_s.size, MAX_LENGTH_FOR_PROMOTION_CODE)
       @promotion_code = _promotion_code
     end
 

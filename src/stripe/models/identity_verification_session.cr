@@ -28,6 +28,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -40,8 +41,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["identity.verification_session"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [identity.verification_session]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["identity.verification_session"]
 
     @[JSON::Field(key: "options", type: Stripe::GelatoVerificationSessionOptions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter options : Stripe::GelatoVerificationSessionOptions? = nil
@@ -49,20 +50,21 @@ module Stripe
     # Status of this VerificationSession. [Learn more about the lifecycle of sessions](https://stripe.com/docs/identity/how-sessions-work).
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["canceled", "processing", "requires_input", "verified"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, processing, requires_input, verified]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "processing", "requires_input", "verified"]
 
     # The type of [verification check](https://stripe.com/docs/identity/verification-checks) to be performed.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["document", "id_number"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [document, id_number]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["document", "id_number"]
 
     # Optional properties
 
     # The short-lived client secret used by Stripe.js to [show a verification modal](https://stripe.com/docs/js/identity/modal) inside your app. This client secret expires after 24 hours and can only be used once. Don’t store it, log it, embed it in a URL, or expose it to anyone other than the user. Make sure that you have TLS enabled on any page that includes the client secret. Refer to our docs on [passing the client secret to the frontend](https://stripe.com/docs/identity/verification-sessions#client-secret) to learn more.
     @[JSON::Field(key: "client_secret", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: client_secret.nil? && !client_secret_present?)]
     getter client_secret : String? = nil
+    MAX_LENGTH_FOR_CLIENT_SECRET = 5000
 
     @[JSON::Field(ignore: true)]
     property? client_secret_present : Bool = false
@@ -88,6 +90,7 @@ module Stripe
     # The short-lived URL that you use to redirect a user to Stripe to submit their identity information. This URL expires after 48 hours and can only be used once. Don’t store it, log it, send it in emails or expose it to anyone other than the user. Refer to our docs on [verifying identity documents](https://stripe.com/docs/identity/verify-identity-documents?platform=web&type=redirect) to learn how to redirect users to Stripe.
     @[JSON::Field(key: "url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: url.nil? && !url_present?)]
     getter url : String? = nil
+    MAX_LENGTH_FOR_URL = 5000
 
     @[JSON::Field(ignore: true)]
     property? url_present : Bool = false
@@ -131,7 +134,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -142,7 +145,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"options\" is required and cannot be null") if @options.nil?
 
@@ -152,15 +155,15 @@ module Stripe
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _client_secret = @client_secret
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
@@ -174,7 +177,7 @@ module Stripe
         invalid_properties.concat(_redaction.list_invalid_properties_for("redaction")) if _redaction.is_a?(OpenApi::Validatable)
       end
       if _url = @url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -191,7 +194,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -219,7 +222,7 @@ module Stripe
       end
 
       if _client_secret = @client_secret
-        return false if _client_secret.to_s.size > 5000
+        return false if _client_secret.to_s.size > MAX_LENGTH_FOR_CLIENT_SECRET
       end
 
       if _last_error = @last_error
@@ -235,7 +238,7 @@ module Stripe
       end
 
       if _url = @url
-        return false if _url.to_s.size > 5000
+        return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 
       if _verified_outputs = @verified_outputs
@@ -262,10 +265,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -340,10 +340,7 @@ module Stripe
         return @client_secret = nil
       end
       _client_secret = client_secret.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
       @client_secret = _client_secret
     end
 
@@ -387,10 +384,7 @@ module Stripe
         return @url = nil
       end
       _url = url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
       @url = _url
     end
 

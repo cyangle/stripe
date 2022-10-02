@@ -22,8 +22,8 @@ module Stripe
 
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transaction_type : String? = nil
-
-    VALID_VALUES_FOR_TRANSACTION_TYPE = StaticArray["business", "personal"]
+    ERROR_MESSAGE_FOR_TRANSACTION_TYPE = "invalid value for \"transaction_type\", must be one of [business, personal]."
+    VALID_VALUES_FOR_TRANSACTION_TYPE  = StaticArray["business", "personal"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +40,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _transaction_type = @transaction_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("transaction_type", VALID_VALUES_FOR_TRANSACTION_TYPE)) unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TRANSACTION_TYPE) unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
       end
       invalid_properties
     end

@@ -28,11 +28,13 @@ module Stripe
 
     @[JSON::Field(key: "number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter number : String? = nil
+    MAX_LENGTH_FOR_NUMBER = 5000
 
     # Optional properties
 
     @[JSON::Field(key: "cvc", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cvc : String? = nil
+    MAX_LENGTH_FOR_CVC = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -59,12 +61,12 @@ module Stripe
       invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
 
       if _number = @number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       if _cvc = @cvc
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, MAX_LENGTH_FOR_CVC)
           invalid_properties.push(max_length_error)
         end
       end
@@ -80,11 +82,11 @@ module Stripe
 
       return false if @number.nil?
       if _number = @number
-        return false if _number.to_s.size > 5000
+        return false if _number.to_s.size > MAX_LENGTH_FOR_NUMBER
       end
 
       if _cvc = @cvc
-        return false if _cvc.to_s.size > 5000
+        return false if _cvc.to_s.size > MAX_LENGTH_FOR_CVC
       end
 
       true
@@ -117,10 +119,7 @@ module Stripe
         raise ArgumentError.new("\"number\" is required and cannot be null")
       end
       _number = number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
       @number = _number
     end
 
@@ -131,10 +130,7 @@ module Stripe
         return @cvc = nil
       end
       _cvc = cvc.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("cvc", _cvc.to_s.size, MAX_LENGTH_FOR_CVC)
       @cvc = _cvc
     end
 

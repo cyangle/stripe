@@ -22,18 +22,19 @@ module Stripe
 
     @[JSON::Field(key: "client", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter client : String? = nil
-
-    VALID_VALUES_FOR_CLIENT = StaticArray["android", "ios", "web"]
+    ERROR_MESSAGE_FOR_CLIENT = "invalid value for \"client\", must be one of [android, ios, web]."
+    VALID_VALUES_FOR_CLIENT  = StaticArray["android", "ios", "web"]
 
     # Optional properties
 
     @[JSON::Field(key: "app_id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter app_id : String? = nil
+    MAX_LENGTH_FOR_APP_ID = 5000
 
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
-
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none"]
+    ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none]."
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -55,15 +56,15 @@ module Stripe
       invalid_properties.push("\"client\" is required and cannot be null") if @client.nil?
 
       if _client = @client
-        invalid_properties.push(OpenApi::EnumValidator.error_message("client", VALID_VALUES_FOR_CLIENT)) unless OpenApi::EnumValidator.valid?(_client, VALID_VALUES_FOR_CLIENT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CLIENT) unless OpenApi::EnumValidator.valid?(_client, VALID_VALUES_FOR_CLIENT)
       end
       if _app_id = @app_id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, MAX_LENGTH_FOR_APP_ID)
           invalid_properties.push(max_length_error)
         end
       end
       if _setup_future_usage = @setup_future_usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
     end
@@ -77,7 +78,7 @@ module Stripe
       end
 
       if _app_id = @app_id
-        return false if _app_id.to_s.size > 5000
+        return false if _app_id.to_s.size > MAX_LENGTH_FOR_APP_ID
       end
 
       if _setup_future_usage = @setup_future_usage
@@ -105,10 +106,7 @@ module Stripe
         return @app_id = nil
       end
       _app_id = app_id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("app_id", _app_id.to_s.size, MAX_LENGTH_FOR_APP_ID)
       @app_id = _app_id
     end
 

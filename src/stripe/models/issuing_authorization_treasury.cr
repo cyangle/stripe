@@ -34,6 +34,7 @@ module Stripe
     # The Treasury [Transaction](https://stripe.com/docs/api/treasury/transactions) associated with this authorization
     @[JSON::Field(key: "transaction", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: transaction.nil? && !transaction_present?)]
     getter transaction : String? = nil
+    MAX_LENGTH_FOR_TRANSACTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? transaction_present : Bool = false
@@ -60,7 +61,7 @@ module Stripe
       invalid_properties.push("\"received_debits\" is required and cannot be null") if @received_debits.nil?
 
       if _transaction = @transaction
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction", _transaction.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction", _transaction.to_s.size, MAX_LENGTH_FOR_TRANSACTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -75,7 +76,7 @@ module Stripe
       return false if @received_debits.nil?
 
       if _transaction = @transaction
-        return false if _transaction.to_s.size > 5000
+        return false if _transaction.to_s.size > MAX_LENGTH_FOR_TRANSACTION
       end
 
       true
@@ -108,10 +109,7 @@ module Stripe
         return @transaction = nil
       end
       _transaction = transaction.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction", _transaction.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("transaction", _transaction.to_s.size, MAX_LENGTH_FOR_TRANSACTION)
       @transaction = _transaction
     end
 

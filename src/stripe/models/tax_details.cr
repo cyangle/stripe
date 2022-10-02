@@ -23,8 +23,8 @@ module Stripe
 
     @[JSON::Field(key: "tax_exempt", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_exempt : String? = nil
-
-    VALID_VALUES_FOR_TAX_EXEMPT = StaticArray["", "exempt", "none", "reverse"]
+    ERROR_MESSAGE_FOR_TAX_EXEMPT = "invalid value for \"tax_exempt\", must be one of [, exempt, none, reverse]."
+    VALID_VALUES_FOR_TAX_EXEMPT  = StaticArray["", "exempt", "none", "reverse"]
 
     @[JSON::Field(key: "tax_ids", type: Array(Stripe::DataParams)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_ids : Array(Stripe::DataParams)? = nil
@@ -45,10 +45,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _tax_exempt = @tax_exempt
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_exempt", VALID_VALUES_FOR_TAX_EXEMPT)) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_EXEMPT) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       end
       if _tax_ids = @tax_ids
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tax_ids", array: _tax_ids)) if _tax_ids.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tax_ids", container: _tax_ids)) if _tax_ids.is_a?(Array)
       end
       invalid_properties
     end
@@ -61,7 +61,7 @@ module Stripe
       end
 
       if _tax_ids = @tax_ids
-        return false if _tax_ids.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tax_ids)
+        return false if _tax_ids.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tax_ids)
       end
 
       true
@@ -85,7 +85,7 @@ module Stripe
         return @tax_ids = nil
       end
       _tax_ids = tax_ids.not_nil!
-      OpenApi::ArrayValidator.validate(array: _tax_ids) if _tax_ids.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _tax_ids) if _tax_ids.is_a?(Array)
       @tax_ids = _tax_ids
     end
 

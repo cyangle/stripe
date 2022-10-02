@@ -24,6 +24,7 @@ module Stripe
     # The three-letter IATA airport code of the flight's destination.
     @[JSON::Field(key: "arrival_airport_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: arrival_airport_code.nil? && !arrival_airport_code_present?)]
     getter arrival_airport_code : String? = nil
+    MAX_LENGTH_FOR_ARRIVAL_AIRPORT_CODE = 5000
 
     @[JSON::Field(ignore: true)]
     property? arrival_airport_code_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # The airline carrier code.
     @[JSON::Field(key: "carrier", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: carrier.nil? && !carrier_present?)]
     getter carrier : String? = nil
+    MAX_LENGTH_FOR_CARRIER = 5000
 
     @[JSON::Field(ignore: true)]
     property? carrier_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # The three-letter IATA airport code that the flight departed from.
     @[JSON::Field(key: "departure_airport_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: departure_airport_code.nil? && !departure_airport_code_present?)]
     getter departure_airport_code : String? = nil
+    MAX_LENGTH_FOR_DEPARTURE_AIRPORT_CODE = 5000
 
     @[JSON::Field(ignore: true)]
     property? departure_airport_code_present : Bool = false
@@ -45,6 +48,7 @@ module Stripe
     # The flight number.
     @[JSON::Field(key: "flight_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: flight_number.nil? && !flight_number_present?)]
     getter flight_number : String? = nil
+    MAX_LENGTH_FOR_FLIGHT_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? flight_number_present : Bool = false
@@ -52,6 +56,7 @@ module Stripe
     # The flight's service class.
     @[JSON::Field(key: "service_class", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: service_class.nil? && !service_class_present?)]
     getter service_class : String? = nil
+    MAX_LENGTH_FOR_SERVICE_CLASS = 5000
 
     @[JSON::Field(ignore: true)]
     property? service_class_present : Bool = false
@@ -83,27 +88,27 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _arrival_airport_code = @arrival_airport_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("arrival_airport_code", _arrival_airport_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("arrival_airport_code", _arrival_airport_code.to_s.size, MAX_LENGTH_FOR_ARRIVAL_AIRPORT_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       if _carrier = @carrier
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("carrier", _carrier.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("carrier", _carrier.to_s.size, MAX_LENGTH_FOR_CARRIER)
           invalid_properties.push(max_length_error)
         end
       end
       if _departure_airport_code = @departure_airport_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("departure_airport_code", _departure_airport_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("departure_airport_code", _departure_airport_code.to_s.size, MAX_LENGTH_FOR_DEPARTURE_AIRPORT_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       if _flight_number = @flight_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flight_number", _flight_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flight_number", _flight_number.to_s.size, MAX_LENGTH_FOR_FLIGHT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       if _service_class = @service_class
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("service_class", _service_class.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("service_class", _service_class.to_s.size, MAX_LENGTH_FOR_SERVICE_CLASS)
           invalid_properties.push(max_length_error)
         end
       end
@@ -115,23 +120,23 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _arrival_airport_code = @arrival_airport_code
-        return false if _arrival_airport_code.to_s.size > 5000
+        return false if _arrival_airport_code.to_s.size > MAX_LENGTH_FOR_ARRIVAL_AIRPORT_CODE
       end
 
       if _carrier = @carrier
-        return false if _carrier.to_s.size > 5000
+        return false if _carrier.to_s.size > MAX_LENGTH_FOR_CARRIER
       end
 
       if _departure_airport_code = @departure_airport_code
-        return false if _departure_airport_code.to_s.size > 5000
+        return false if _departure_airport_code.to_s.size > MAX_LENGTH_FOR_DEPARTURE_AIRPORT_CODE
       end
 
       if _flight_number = @flight_number
-        return false if _flight_number.to_s.size > 5000
+        return false if _flight_number.to_s.size > MAX_LENGTH_FOR_FLIGHT_NUMBER
       end
 
       if _service_class = @service_class
-        return false if _service_class.to_s.size > 5000
+        return false if _service_class.to_s.size > MAX_LENGTH_FOR_SERVICE_CLASS
       end
 
       true
@@ -144,10 +149,7 @@ module Stripe
         return @arrival_airport_code = nil
       end
       _arrival_airport_code = arrival_airport_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("arrival_airport_code", _arrival_airport_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("arrival_airport_code", _arrival_airport_code.to_s.size, MAX_LENGTH_FOR_ARRIVAL_AIRPORT_CODE)
       @arrival_airport_code = _arrival_airport_code
     end
 
@@ -158,10 +160,7 @@ module Stripe
         return @carrier = nil
       end
       _carrier = carrier.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("carrier", _carrier.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("carrier", _carrier.to_s.size, MAX_LENGTH_FOR_CARRIER)
       @carrier = _carrier
     end
 
@@ -172,10 +171,7 @@ module Stripe
         return @departure_airport_code = nil
       end
       _departure_airport_code = departure_airport_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("departure_airport_code", _departure_airport_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("departure_airport_code", _departure_airport_code.to_s.size, MAX_LENGTH_FOR_DEPARTURE_AIRPORT_CODE)
       @departure_airport_code = _departure_airport_code
     end
 
@@ -186,10 +182,7 @@ module Stripe
         return @flight_number = nil
       end
       _flight_number = flight_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flight_number", _flight_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("flight_number", _flight_number.to_s.size, MAX_LENGTH_FOR_FLIGHT_NUMBER)
       @flight_number = _flight_number
     end
 
@@ -200,10 +193,7 @@ module Stripe
         return @service_class = nil
       end
       _service_class = service_class.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("service_class", _service_class.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("service_class", _service_class.to_s.size, MAX_LENGTH_FOR_SERVICE_CLASS)
       @service_class = _service_class
     end
 

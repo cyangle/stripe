@@ -43,14 +43,16 @@ module Stripe
     # The list of [payment method types](https://stripe.com/docs/payments/payment-methods/overview) to provide to the order's PaymentIntent. Do not include this attribute if you prefer to manage your payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods).
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_method_types.nil? && !payment_method_types_present?)]
     getter payment_method_types : Array(String)? = nil
+    ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES = "invalid value for \"payment_method_types\", must be one of [acss_debit, afterpay_clearpay, alipay, au_becs_debit, bacs_debit, bancontact, card, customer_balance, eps, fpx, giropay, grabpay, ideal, klarna, link, oxxo, p24, sepa_debit, sofort, wechat_pay]."
+    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES  = StaticArray["acss_debit", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "link", "oxxo", "p24", "sepa_debit", "sofort", "wechat_pay"]
 
     @[JSON::Field(ignore: true)]
     property? payment_method_types_present : Bool = false
-    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES = StaticArray["acss_debit", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "link", "oxxo", "p24", "sepa_debit", "sofort", "wechat_pay"]
 
     # The URL to redirect the customer to after they authenticate their payment.
     @[JSON::Field(key: "return_url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: return_url.nil? && !return_url_present?)]
     getter return_url : String? = nil
+    MAX_LENGTH_FOR_RETURN_URL = 5000
 
     @[JSON::Field(ignore: true)]
     property? return_url_present : Bool = false
@@ -58,6 +60,7 @@ module Stripe
     # For non-card charges, you can use this value as the complete description that appears on your customers' statements. Must contain at least one letter, maximum 22 characters.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
     getter statement_descriptor : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 5000
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_present : Bool = false
@@ -65,6 +68,7 @@ module Stripe
     # Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
     @[JSON::Field(key: "statement_descriptor_suffix", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: statement_descriptor_suffix.nil? && !statement_descriptor_suffix_present?)]
     getter statement_descriptor_suffix : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX = 5000
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_suffix_present : Bool = false
@@ -103,20 +107,20 @@ module Stripe
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
       if _payment_method_types = @payment_method_types
-        invalid_properties.push(OpenApi::EnumValidator.error_message("payment_method_types", VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
       if _return_url = @return_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
           invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor = @statement_descriptor
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_suffix = @statement_descriptor_suffix
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix", _statement_descriptor_suffix.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix", _statement_descriptor_suffix.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
           invalid_properties.push(max_length_error)
         end
       end
@@ -142,15 +146,15 @@ module Stripe
       end
 
       if _return_url = @return_url
-        return false if _return_url.to_s.size > 5000
+        return false if _return_url.to_s.size > MAX_LENGTH_FOR_RETURN_URL
       end
 
       if _statement_descriptor = @statement_descriptor
-        return false if _statement_descriptor.to_s.size > 5000
+        return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
       if _statement_descriptor_suffix = @statement_descriptor_suffix
-        return false if _statement_descriptor_suffix.to_s.size > 5000
+        return false if _statement_descriptor_suffix.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX
       end
 
       if _transfer_data = @transfer_data
@@ -210,10 +214,7 @@ module Stripe
         return @return_url = nil
       end
       _return_url = return_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
       @return_url = _return_url
     end
 
@@ -224,10 +225,7 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       @statement_descriptor = _statement_descriptor
     end
 
@@ -238,10 +236,7 @@ module Stripe
         return @statement_descriptor_suffix = nil
       end
       _statement_descriptor_suffix = statement_descriptor_suffix.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix", _statement_descriptor_suffix.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix", _statement_descriptor_suffix.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX)
       @statement_descriptor_suffix = _statement_descriptor_suffix
     end
 

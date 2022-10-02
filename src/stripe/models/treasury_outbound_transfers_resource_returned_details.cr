@@ -24,8 +24,8 @@ module Stripe
     # Reason for the return.
     @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter code : String? = nil
-
-    VALID_VALUES_FOR_CODE = StaticArray["account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "declined", "incorrect_account_holder_name", "invalid_account_number", "invalid_currency", "no_account", "other"]
+    ERROR_MESSAGE_FOR_CODE = "invalid value for \"code\", must be one of [account_closed, account_frozen, bank_account_restricted, bank_ownership_changed, declined, incorrect_account_holder_name, invalid_account_number, invalid_currency, no_account, other]."
+    VALID_VALUES_FOR_CODE  = StaticArray["account_closed", "account_frozen", "bank_account_restricted", "bank_ownership_changed", "declined", "incorrect_account_holder_name", "invalid_account_number", "invalid_currency", "no_account", "other"]
 
     @[JSON::Field(key: "transaction", type: Stripe::TreasuryOutboundPaymentTransaction?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transaction : Stripe::TreasuryOutboundPaymentTransaction? = nil
@@ -48,7 +48,7 @@ module Stripe
       invalid_properties.push("\"code\" is required and cannot be null") if @code.nil?
 
       if _code = @code
-        invalid_properties.push(OpenApi::EnumValidator.error_message("code", VALID_VALUES_FOR_CODE)) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CODE) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
       end
       invalid_properties.push("\"transaction\" is required and cannot be null") if @transaction.nil?
 

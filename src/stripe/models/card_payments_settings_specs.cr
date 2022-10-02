@@ -25,6 +25,7 @@ module Stripe
 
     @[JSON::Field(key: "statement_descriptor_prefix", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor_prefix : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX = 10
 
     @[JSON::Field(key: "statement_descriptor_prefix_kana", type: Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKana?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor_prefix_kana : Stripe::CardPaymentsSettingsSpecsStatementDescriptorPrefixKana? = nil
@@ -53,7 +54,7 @@ module Stripe
         invalid_properties.concat(_decline_on.list_invalid_properties_for("decline_on")) if _decline_on.is_a?(OpenApi::Validatable)
       end
       if _statement_descriptor_prefix = @statement_descriptor_prefix
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix", _statement_descriptor_prefix.to_s.size, 10)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix", _statement_descriptor_prefix.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX)
           invalid_properties.push(max_length_error)
         end
       end
@@ -74,7 +75,7 @@ module Stripe
       end
 
       if _statement_descriptor_prefix = @statement_descriptor_prefix
-        return false if _statement_descriptor_prefix.to_s.size > 10
+        return false if _statement_descriptor_prefix.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX
       end
 
       if _statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana
@@ -106,10 +107,7 @@ module Stripe
         return @statement_descriptor_prefix = nil
       end
       _statement_descriptor_prefix = statement_descriptor_prefix.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix", _statement_descriptor_prefix.to_s.size, 10)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_prefix", _statement_descriptor_prefix.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX)
       @statement_descriptor_prefix = _statement_descriptor_prefix
     end
 

@@ -32,6 +32,7 @@ module Stripe
     # Unique identifier for a card used with digital wallets
     @[JSON::Field(key: "primary_account_identifier", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: primary_account_identifier.nil? && !primary_account_identifier_present?)]
     getter primary_account_identifier : String? = nil
+    MAX_LENGTH_FOR_PRIMARY_ACCOUNT_IDENTIFIER = 5000
 
     @[JSON::Field(ignore: true)]
     property? primary_account_identifier_present : Bool = false
@@ -64,7 +65,7 @@ module Stripe
         invalid_properties.concat(_google_pay.list_invalid_properties_for("google_pay")) if _google_pay.is_a?(OpenApi::Validatable)
       end
       if _primary_account_identifier = @primary_account_identifier
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("primary_account_identifier", _primary_account_identifier.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("primary_account_identifier", _primary_account_identifier.to_s.size, MAX_LENGTH_FOR_PRIMARY_ACCOUNT_IDENTIFIER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -85,7 +86,7 @@ module Stripe
       end
 
       if _primary_account_identifier = @primary_account_identifier
-        return false if _primary_account_identifier.to_s.size > 5000
+        return false if _primary_account_identifier.to_s.size > MAX_LENGTH_FOR_PRIMARY_ACCOUNT_IDENTIFIER
       end
 
       true
@@ -120,10 +121,7 @@ module Stripe
         return @primary_account_identifier = nil
       end
       _primary_account_identifier = primary_account_identifier.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("primary_account_identifier", _primary_account_identifier.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("primary_account_identifier", _primary_account_identifier.to_s.size, MAX_LENGTH_FOR_PRIMARY_ACCOUNT_IDENTIFIER)
       @primary_account_identifier = _primary_account_identifier
     end
 

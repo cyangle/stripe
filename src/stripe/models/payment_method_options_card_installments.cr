@@ -60,7 +60,7 @@ module Stripe
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
       if _available_plans = @available_plans
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "available_plans", array: _available_plans)) if _available_plans.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "available_plans", container: _available_plans)) if _available_plans.is_a?(Array)
       end
       if _plan = @plan
         invalid_properties.concat(_plan.list_invalid_properties_for("plan")) if _plan.is_a?(OpenApi::Validatable)
@@ -74,7 +74,7 @@ module Stripe
       return false if @enabled.nil?
 
       if _available_plans = @available_plans
-        return false if _available_plans.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _available_plans)
+        return false if _available_plans.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _available_plans)
       end
 
       if _plan = @plan
@@ -101,7 +101,7 @@ module Stripe
         return @available_plans = nil
       end
       _available_plans = available_plans.not_nil!
-      OpenApi::ArrayValidator.validate(array: _available_plans) if _available_plans.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _available_plans) if _available_plans.is_a?(Array)
       @available_plans = _available_plans
     end
 

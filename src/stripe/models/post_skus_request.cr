@@ -34,6 +34,7 @@ module Stripe
     # The ID of the product this SKU is associated with. Must be a product with type `good`.
     @[JSON::Field(key: "product", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter product : String? = nil
+    MAX_LENGTH_FOR_PRODUCT = 5000
 
     # Optional properties
 
@@ -56,6 +57,7 @@ module Stripe
     # The URL of an image for this SKU, meant to be displayable to the customer.
     @[JSON::Field(key: "image", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter image : String? = nil
+    MAX_LENGTH_FOR_IMAGE = 5000
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -101,13 +103,13 @@ module Stripe
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
 
       if _product = @product
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, MAX_LENGTH_FOR_PRODUCT)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _image = @image
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image", _image.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image", _image.to_s.size, MAX_LENGTH_FOR_IMAGE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -132,11 +134,11 @@ module Stripe
 
       return false if @product.nil?
       if _product = @product
-        return false if _product.to_s.size > 5000
+        return false if _product.to_s.size > MAX_LENGTH_FOR_PRODUCT
       end
 
       if _image = @image
-        return false if _image.to_s.size > 5000
+        return false if _image.to_s.size > MAX_LENGTH_FOR_IMAGE
       end
 
       if _package_dimensions = @package_dimensions
@@ -184,10 +186,7 @@ module Stripe
         raise ArgumentError.new("\"product\" is required and cannot be null")
       end
       _product = product.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("product", _product.to_s.size, MAX_LENGTH_FOR_PRODUCT)
       @product = _product
     end
 
@@ -238,10 +237,7 @@ module Stripe
         return @image = nil
       end
       _image = image.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image", _image.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("image", _image.to_s.size, MAX_LENGTH_FOR_IMAGE)
       @image = _image
     end
 

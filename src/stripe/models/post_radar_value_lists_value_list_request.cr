@@ -23,6 +23,7 @@ module Stripe
     # The name of the value list for use in rules.
     @[JSON::Field(key: "alias", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _alias : String? = nil
+    MAX_LENGTH_FOR__ALIAS = 100
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -35,6 +36,7 @@ module Stripe
     # The human-readable name of the value list.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 100
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,13 +56,13 @@ module Stripe
       invalid_properties = Array(String).new
 
       if __alias = @_alias
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_alias", __alias.to_s.size, 100)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_alias", __alias.to_s.size, MAX_LENGTH_FOR__ALIAS)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 100)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -71,11 +73,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if __alias = @_alias
-        return false if __alias.to_s.size > 100
+        return false if __alias.to_s.size > MAX_LENGTH_FOR__ALIAS
       end
 
       if _name = @name
-        return false if _name.to_s.size > 100
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       true
@@ -88,10 +90,7 @@ module Stripe
         return @_alias = nil
       end
       __alias = _alias.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_alias", __alias.to_s.size, 100)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("_alias", __alias.to_s.size, MAX_LENGTH_FOR__ALIAS)
       @_alias = __alias
     end
 
@@ -122,10 +121,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 100)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 

@@ -34,6 +34,7 @@ module Stripe
     # The email address of the customer placing the order.
     @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter email : String? = nil
+    MAX_LENGTH_FOR_EMAIL = 5000
 
     # List of items constituting the order.
     @[JSON::Field(key: "items", type: Array(Stripe::SourceOrderItem)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: items.nil? && !items_present?)]
@@ -69,12 +70,12 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       if _email = @email
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
       if _items = @items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "items", array: _items)) if _items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "items", container: _items)) if _items.is_a?(Array)
       end
       if _shipping = @shipping
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
@@ -90,11 +91,11 @@ module Stripe
       return false if @currency.nil?
 
       if _email = @email
-        return false if _email.to_s.size > 5000
+        return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
       if _items = @items
-        return false if _items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _items)
+        return false if _items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _items)
       end
 
       if _shipping = @shipping
@@ -131,10 +132,7 @@ module Stripe
         return @email = nil
       end
       _email = email.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
       @email = _email
     end
 
@@ -145,7 +143,7 @@ module Stripe
         return @items = nil
       end
       _items = items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _items) if _items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _items) if _items.is_a?(Array)
       @items = _items
     end
 

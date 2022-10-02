@@ -24,30 +24,33 @@ module Stripe
     # The US bank account network used to send funds.
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
-
-    VALID_VALUES_FOR_NETWORK = StaticArray["ach", "us_domestic_wire"]
+    ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [ach, us_domestic_wire]."
+    VALID_VALUES_FOR_NETWORK  = StaticArray["ach", "us_domestic_wire"]
 
     # Optional properties
 
     # Account holder type: individual or company.
     @[JSON::Field(key: "account_holder_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_holder_type.nil? && !account_holder_type_present?)]
     getter account_holder_type : String? = nil
+    ERROR_MESSAGE_FOR_ACCOUNT_HOLDER_TYPE = "invalid value for \"account_holder_type\", must be one of [company, individual]."
+    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE  = StaticArray["company", "individual"]
 
     @[JSON::Field(ignore: true)]
     property? account_holder_type_present : Bool = false
-    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = StaticArray["company", "individual"]
 
     # Account type: checkings or savings. Defaults to checking if omitted.
     @[JSON::Field(key: "account_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_type.nil? && !account_type_present?)]
     getter account_type : String? = nil
+    ERROR_MESSAGE_FOR_ACCOUNT_TYPE = "invalid value for \"account_type\", must be one of [checking, savings]."
+    VALID_VALUES_FOR_ACCOUNT_TYPE  = StaticArray["checking", "savings"]
 
     @[JSON::Field(ignore: true)]
     property? account_type_present : Bool = false
-    VALID_VALUES_FOR_ACCOUNT_TYPE = StaticArray["checking", "savings"]
 
     # Name of the bank associated with the bank account.
     @[JSON::Field(key: "bank_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_name.nil? && !bank_name_present?)]
     getter bank_name : String? = nil
+    MAX_LENGTH_FOR_BANK_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? bank_name_present : Bool = false
@@ -55,6 +58,7 @@ module Stripe
     # Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     @[JSON::Field(key: "fingerprint", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
     getter fingerprint : String? = nil
+    MAX_LENGTH_FOR_FINGERPRINT = 5000
 
     @[JSON::Field(ignore: true)]
     property? fingerprint_present : Bool = false
@@ -62,6 +66,7 @@ module Stripe
     # Last four digits of the bank account number.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: last4.nil? && !last4_present?)]
     getter last4 : String? = nil
+    MAX_LENGTH_FOR_LAST4 = 5000
 
     @[JSON::Field(ignore: true)]
     property? last4_present : Bool = false
@@ -69,6 +74,7 @@ module Stripe
     # Routing number of the bank account.
     @[JSON::Field(key: "routing_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: routing_number.nil? && !routing_number_present?)]
     getter routing_number : String? = nil
+    MAX_LENGTH_FOR_ROUTING_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? routing_number_present : Bool = false
@@ -97,31 +103,31 @@ module Stripe
       invalid_properties.push("\"network\" is required and cannot be null") if @network.nil?
 
       if _network = @network
-        invalid_properties.push(OpenApi::EnumValidator.error_message("network", VALID_VALUES_FOR_NETWORK)) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+        invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
       if _account_holder_type = @account_holder_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("account_holder_type", VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)) unless OpenApi::EnumValidator.valid?(_account_holder_type, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_ACCOUNT_HOLDER_TYPE) unless OpenApi::EnumValidator.valid?(_account_holder_type, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
       end
       if _account_type = @account_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("account_type", VALID_VALUES_FOR_ACCOUNT_TYPE)) unless OpenApi::EnumValidator.valid?(_account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_ACCOUNT_TYPE) unless OpenApi::EnumValidator.valid?(_account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
       end
       if _bank_name = @bank_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _fingerprint = @fingerprint
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
       if _last4 = @last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       if _routing_number = @routing_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -145,19 +151,19 @@ module Stripe
       end
 
       if _bank_name = @bank_name
-        return false if _bank_name.to_s.size > 5000
+        return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
       if _fingerprint = @fingerprint
-        return false if _fingerprint.to_s.size > 5000
+        return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
       if _last4 = @last4
-        return false if _last4.to_s.size > 5000
+        return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
       if _routing_number = @routing_number
-        return false if _routing_number.to_s.size > 5000
+        return false if _routing_number.to_s.size > MAX_LENGTH_FOR_ROUTING_NUMBER
       end
 
       true
@@ -203,10 +209,7 @@ module Stripe
         return @bank_name = nil
       end
       _bank_name = bank_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       @bank_name = _bank_name
     end
 
@@ -217,10 +220,7 @@ module Stripe
         return @fingerprint = nil
       end
       _fingerprint = fingerprint.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
       @fingerprint = _fingerprint
     end
 
@@ -231,10 +231,7 @@ module Stripe
         return @last4 = nil
       end
       _last4 = last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
       @last4 = _last4
     end
 
@@ -245,10 +242,7 @@ module Stripe
         return @routing_number = nil
       end
       _routing_number = routing_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
       @routing_number = _routing_number
     end
 

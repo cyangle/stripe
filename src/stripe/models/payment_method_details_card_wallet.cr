@@ -24,8 +24,8 @@ module Stripe
     # The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["amex_express_checkout", "apple_pay", "google_pay", "masterpass", "samsung_pay", "visa_checkout"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [amex_express_checkout, apple_pay, google_pay, masterpass, samsung_pay, visa_checkout]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["amex_express_checkout", "apple_pay", "google_pay", "masterpass", "samsung_pay", "visa_checkout"]
 
     # Optional properties
 
@@ -40,6 +40,7 @@ module Stripe
     # (For tokenized numbers only.) The last four digits of the device account number.
     @[JSON::Field(key: "dynamic_last4", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: dynamic_last4.nil? && !dynamic_last4_present?)]
     getter dynamic_last4 : String? = nil
+    MAX_LENGTH_FOR_DYNAMIC_LAST4 = 5000
 
     @[JSON::Field(ignore: true)]
     property? dynamic_last4_present : Bool = false
@@ -83,11 +84,11 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
       if _dynamic_last4 = @dynamic_last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("dynamic_last4", _dynamic_last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("dynamic_last4", _dynamic_last4.to_s.size, MAX_LENGTH_FOR_DYNAMIC_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
@@ -111,7 +112,7 @@ module Stripe
       end
 
       if _dynamic_last4 = @dynamic_last4
-        return false if _dynamic_last4.to_s.size > 5000
+        return false if _dynamic_last4.to_s.size > MAX_LENGTH_FOR_DYNAMIC_LAST4
       end
 
       if _masterpass = @masterpass
@@ -163,10 +164,7 @@ module Stripe
         return @dynamic_last4 = nil
       end
       _dynamic_last4 = dynamic_last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("dynamic_last4", _dynamic_last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("dynamic_last4", _dynamic_last4.to_s.size, MAX_LENGTH_FOR_DYNAMIC_LAST4)
       @dynamic_last4 = _dynamic_last4
     end
 

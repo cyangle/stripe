@@ -22,6 +22,7 @@ module Stripe
 
     @[JSON::Field(key: "display_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter display_name : String? = nil
+    MAX_LENGTH_FOR_DISPLAY_NAME = 100
 
     # Optional properties
 
@@ -36,16 +37,16 @@ module Stripe
 
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
-
-    VALID_VALUES_FOR_TAX_BEHAVIOR = StaticArray["exclusive", "inclusive", "unspecified"]
+    ERROR_MESSAGE_FOR_TAX_BEHAVIOR = "invalid value for \"tax_behavior\", must be one of [exclusive, inclusive, unspecified]."
+    VALID_VALUES_FOR_TAX_BEHAVIOR  = StaticArray["exclusive", "inclusive", "unspecified"]
 
     @[JSON::Field(key: "tax_code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_code : String? = nil
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["fixed_amount"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [fixed_amount]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["fixed_amount"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -71,7 +72,7 @@ module Stripe
       invalid_properties.push("\"display_name\" is required and cannot be null") if @display_name.nil?
 
       if _display_name = @display_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 100)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -83,11 +84,11 @@ module Stripe
       end
 
       if _tax_behavior = @tax_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_behavior", VALID_VALUES_FOR_TAX_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
     end
@@ -97,7 +98,7 @@ module Stripe
     def valid? : Bool
       return false if @display_name.nil?
       if _display_name = @display_name
-        return false if _display_name.to_s.size > 100
+        return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 
       if _delivery_estimate = @delivery_estimate
@@ -126,10 +127,7 @@ module Stripe
         raise ArgumentError.new("\"display_name\" is required and cannot be null")
       end
       _display_name = display_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 100)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
       @display_name = _display_name
     end
 

@@ -77,7 +77,7 @@ module Stripe
       invalid_properties.push("\"expires_at\" is required and cannot be null") if @expires_at.nil?
 
       if _subscription_items = @subscription_items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "subscription_items", array: _subscription_items)) if _subscription_items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "subscription_items", container: _subscription_items)) if _subscription_items.is_a?(Array)
       end
 
       invalid_properties
@@ -89,7 +89,7 @@ module Stripe
       return false if @expires_at.nil?
 
       if _subscription_items = @subscription_items
-        return false if _subscription_items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _subscription_items)
+        return false if _subscription_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _subscription_items)
       end
 
       true
@@ -122,7 +122,7 @@ module Stripe
         return @subscription_items = nil
       end
       _subscription_items = subscription_items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _subscription_items) if _subscription_items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _subscription_items) if _subscription_items.is_a?(Array)
       @subscription_items = _subscription_items
     end
 

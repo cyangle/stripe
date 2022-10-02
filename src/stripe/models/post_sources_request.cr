@@ -31,6 +31,7 @@ module Stripe
     # The `Customer` to whom the original source is attached to. Must be set when the original source is not a `Source` (e.g., `Card`).
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER = 500
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -39,8 +40,9 @@ module Stripe
     # The authentication `flow` of the source to create. `flow` is one of `redirect`, `receiver`, `code_verification`, `none`. It is generally inferred unless a type supports multiple flows.
     @[JSON::Field(key: "flow", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter flow : String? = nil
-
-    VALID_VALUES_FOR_FLOW = StaticArray["code_verification", "none", "receiver", "redirect"]
+    MAX_LENGTH_FOR_FLOW    = 5000
+    ERROR_MESSAGE_FOR_FLOW = "invalid value for \"flow\", must be one of [code_verification, none, receiver, redirect]."
+    VALID_VALUES_FOR_FLOW  = StaticArray["code_verification", "none", "receiver", "redirect"]
 
     @[JSON::Field(key: "mandate", type: Stripe::MandateParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mandate : Stripe::MandateParams? = nil
@@ -51,6 +53,7 @@ module Stripe
     # The source to share.
     @[JSON::Field(key: "original_source", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter original_source : String? = nil
+    MAX_LENGTH_FOR_ORIGINAL_SOURCE = 5000
 
     @[JSON::Field(key: "owner", type: Stripe::Owner1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter owner : Stripe::Owner1? = nil
@@ -67,19 +70,23 @@ module Stripe
     # An arbitrary string to be displayed on your customer's statement. As an example, if your website is `RunClub` and the item you're charging for is a race ticket, you may want to specify a `statement_descriptor` of `RunClub 5K race ticket.` While many payment types will display this information, some may not display it at all.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 5000
 
     # An optional token used to create the source. When passed, token properties will override source parameters.
     @[JSON::Field(key: "token", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter token : String? = nil
+    MAX_LENGTH_FOR_TOKEN = 5000
 
     # The `type` of the source to create. Required unless `customer` and `original_source` are specified (see the [Cloning card Sources](https://stripe.com/docs/sources/connect#cloning-card-sources) guide)
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
+    MAX_LENGTH_FOR__TYPE = 5000
 
     @[JSON::Field(key: "usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter usage : String? = nil
-
-    VALID_VALUES_FOR_USAGE = StaticArray["reusable", "single_use"]
+    MAX_LENGTH_FOR_USAGE    = 5000
+    ERROR_MESSAGE_FOR_USAGE = "invalid value for \"usage\", must be one of [reusable, single_use]."
+    VALID_VALUES_FOR_USAGE  = StaticArray["reusable", "single_use"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -111,20 +118,20 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _customer = @customer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 500)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _flow = @flow
-        invalid_properties.push(OpenApi::EnumValidator.error_message("flow", VALID_VALUES_FOR_FLOW)) unless OpenApi::EnumValidator.valid?(_flow, VALID_VALUES_FOR_FLOW)
+        invalid_properties.push(ERROR_MESSAGE_FOR_FLOW) unless OpenApi::EnumValidator.valid?(_flow, VALID_VALUES_FOR_FLOW)
       end
       if _mandate = @mandate
         invalid_properties.concat(_mandate.list_invalid_properties_for("mandate")) if _mandate.is_a?(OpenApi::Validatable)
       end
 
       if _original_source = @original_source
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("original_source", _original_source.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("original_source", _original_source.to_s.size, MAX_LENGTH_FOR_ORIGINAL_SOURCE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -141,22 +148,22 @@ module Stripe
         invalid_properties.concat(_source_order.list_invalid_properties_for("source_order")) if _source_order.is_a?(OpenApi::Validatable)
       end
       if _statement_descriptor = @statement_descriptor
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
       if _token = @token
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("token", _token.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("token", _token.to_s.size, MAX_LENGTH_FOR_TOKEN)
           invalid_properties.push(max_length_error)
         end
       end
       if __type = @_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       if _usage = @usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("usage", VALID_VALUES_FOR_USAGE)) unless OpenApi::EnumValidator.valid?(_usage, VALID_VALUES_FOR_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_USAGE) unless OpenApi::EnumValidator.valid?(_usage, VALID_VALUES_FOR_USAGE)
       end
       invalid_properties
     end
@@ -165,7 +172,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _customer = @customer
-        return false if _customer.to_s.size > 500
+        return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       if _flow = @flow
@@ -177,7 +184,7 @@ module Stripe
       end
 
       if _original_source = @original_source
-        return false if _original_source.to_s.size > 5000
+        return false if _original_source.to_s.size > MAX_LENGTH_FOR_ORIGINAL_SOURCE
       end
 
       if _owner = @owner
@@ -197,15 +204,15 @@ module Stripe
       end
 
       if _statement_descriptor = @statement_descriptor
-        return false if _statement_descriptor.to_s.size > 5000
+        return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
       if _token = @token
-        return false if _token.to_s.size > 5000
+        return false if _token.to_s.size > MAX_LENGTH_FOR_TOKEN
       end
 
       if __type = @_type
-        return false if __type.to_s.size > 5000
+        return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
       if _usage = @usage
@@ -242,10 +249,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 500)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       @customer = _customer
     end
 
@@ -298,10 +302,7 @@ module Stripe
         return @original_source = nil
       end
       _original_source = original_source.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("original_source", _original_source.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("original_source", _original_source.to_s.size, MAX_LENGTH_FOR_ORIGINAL_SOURCE)
       @original_source = _original_source
     end
 
@@ -356,10 +357,7 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       @statement_descriptor = _statement_descriptor
     end
 
@@ -370,10 +368,7 @@ module Stripe
         return @token = nil
       end
       _token = token.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("token", _token.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("token", _token.to_s.size, MAX_LENGTH_FOR_TOKEN)
       @token = _token
     end
 
@@ -384,10 +379,7 @@ module Stripe
         return @_type = nil
       end
       __type = _type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
       @_type = __type
     end
 

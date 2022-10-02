@@ -31,6 +31,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -39,8 +40,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["event"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [event]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["event"]
 
     # Number of webhooks that have yet to be successfully delivered (i.e., to return a 20x response) to the URLs you've specified.
     @[JSON::Field(key: "pending_webhooks", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -49,16 +50,19 @@ module Stripe
     # Description of the event (e.g., `invoice.created` or `charge.refunded`).
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
+    MAX_LENGTH_FOR__TYPE = 5000
 
     # Optional properties
 
     # The connected account that originated the event.
     @[JSON::Field(key: "account", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # The Stripe API version used to render `data`. *Note: This property is populated only for events on or after October 31, 2014*.
     @[JSON::Field(key: "api_version", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: api_version.nil? && !api_version_present?)]
     getter api_version : String? = nil
+    MAX_LENGTH_FOR_API_VERSION = 5000
 
     @[JSON::Field(ignore: true)]
     property? api_version_present : Bool = false
@@ -103,7 +107,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -112,24 +116,24 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"pending_webhooks\" is required and cannot be null") if @pending_webhooks.nil?
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       if _account = @account
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
       if _api_version = @api_version
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("api_version", _api_version.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("api_version", _api_version.to_s.size, MAX_LENGTH_FOR_API_VERSION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -151,7 +155,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -165,15 +169,15 @@ module Stripe
 
       return false if @_type.nil?
       if __type = @_type
-        return false if __type.to_s.size > 5000
+        return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
       if _account = @account
-        return false if _account.to_s.size > 5000
+        return false if _account.to_s.size > MAX_LENGTH_FOR_ACCOUNT
       end
 
       if _api_version = @api_version
-        return false if _api_version.to_s.size > 5000
+        return false if _api_version.to_s.size > MAX_LENGTH_FOR_API_VERSION
       end
 
       if _request = @request
@@ -211,10 +215,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -256,10 +257,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
       @_type = __type
     end
 
@@ -270,10 +268,7 @@ module Stripe
         return @account = nil
       end
       _account = account.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
       @account = _account
     end
 
@@ -284,10 +279,7 @@ module Stripe
         return @api_version = nil
       end
       _api_version = api_version.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("api_version", _api_version.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("api_version", _api_version.to_s.size, MAX_LENGTH_FOR_API_VERSION)
       @api_version = _api_version
     end
 

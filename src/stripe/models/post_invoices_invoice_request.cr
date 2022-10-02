@@ -37,8 +37,8 @@ module Stripe
     # Either `charge_automatically` or `send_invoice`. This field can be updated only on `draft` invoices.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
-
-    VALID_VALUES_FOR_COLLECTION_METHOD = StaticArray["charge_automatically", "send_invoice"]
+    ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
+    VALID_VALUES_FOR_COLLECTION_METHOD  = StaticArray["charge_automatically", "send_invoice"]
 
     @[JSON::Field(key: "custom_fields", type: Stripe::PostInvoicesInvoiceRequestCustomFields?, default: nil, required: false, nullable: false, emit_null: false)]
     getter custom_fields : Stripe::PostInvoicesInvoiceRequestCustomFields? = nil
@@ -50,10 +50,12 @@ module Stripe
     # ID of the default payment method for the invoice. It must belong to the customer associated with the invoice. If not set, defaults to the subscription's default payment method, if any, or to the default payment method in the customer's invoice settings.
     @[JSON::Field(key: "default_payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_payment_method : String? = nil
+    MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD = 5000
 
     # ID of the default payment source for the invoice. It must belong to the customer associated with the invoice and be in a chargeable state. If not set, defaults to the subscription's default source, if any, or to the customer's default source.
     @[JSON::Field(key: "default_source", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_source : String? = nil
+    MAX_LENGTH_FOR_DEFAULT_SOURCE = 5000
 
     @[JSON::Field(key: "default_tax_rates", type: Stripe::PostInvoicesInvoiceRequestDefaultTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_tax_rates : Stripe::PostInvoicesInvoiceRequestDefaultTaxRates? = nil
@@ -61,6 +63,7 @@ module Stripe
     # An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 1500
 
     @[JSON::Field(key: "discounts", type: Stripe::PostInvoicesInvoiceRequestDiscounts?, default: nil, required: false, nullable: false, emit_null: false)]
     getter discounts : Stripe::PostInvoicesInvoiceRequestDiscounts? = nil
@@ -76,6 +79,7 @@ module Stripe
     # Footer to be displayed on the invoice.
     @[JSON::Field(key: "footer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter footer : String? = nil
+    MAX_LENGTH_FOR_FOOTER = 5000
 
     @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Stripe::PostAccountRequestMetadata? = nil
@@ -92,6 +96,7 @@ module Stripe
     # Extra information about a charge for the customer's credit card statement. It must contain at least one letter. If not specified and this invoice is part of a subscription, the default `statement_descriptor` will be set to the first subscription item's product's `statement_descriptor`.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 22
 
     @[JSON::Field(key: "transfer_data", type: Stripe::PostInvoicesInvoiceRequestTransferData?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transfer_data : Stripe::PostInvoicesInvoiceRequestTransferData? = nil
@@ -138,19 +143,19 @@ module Stripe
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
       if _collection_method = @collection_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("collection_method", VALID_VALUES_FOR_COLLECTION_METHOD)) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_COLLECTION_METHOD) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
       if _custom_fields = @custom_fields
         invalid_properties.concat(_custom_fields.list_invalid_properties_for("custom_fields")) if _custom_fields.is_a?(OpenApi::Validatable)
       end
 
       if _default_payment_method = @default_payment_method
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
       if _default_source = @default_source
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_source", _default_source.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_source", _default_source.to_s.size, MAX_LENGTH_FOR_DEFAULT_SOURCE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -158,7 +163,7 @@ module Stripe
         invalid_properties.concat(_default_tax_rates.list_invalid_properties_for("default_tax_rates")) if _default_tax_rates.is_a?(OpenApi::Validatable)
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 1500)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -167,7 +172,7 @@ module Stripe
       end
 
       if _footer = @footer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, MAX_LENGTH_FOR_FOOTER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -184,7 +189,7 @@ module Stripe
         invalid_properties.concat(_rendering_options.list_invalid_properties_for("rendering_options")) if _rendering_options.is_a?(OpenApi::Validatable)
       end
       if _statement_descriptor = @statement_descriptor
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
@@ -214,11 +219,11 @@ module Stripe
       end
 
       if _default_payment_method = @default_payment_method
-        return false if _default_payment_method.to_s.size > 5000
+        return false if _default_payment_method.to_s.size > MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD
       end
 
       if _default_source = @default_source
-        return false if _default_source.to_s.size > 5000
+        return false if _default_source.to_s.size > MAX_LENGTH_FOR_DEFAULT_SOURCE
       end
 
       if _default_tax_rates = @default_tax_rates
@@ -226,7 +231,7 @@ module Stripe
       end
 
       if _description = @description
-        return false if _description.to_s.size > 1500
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _discounts = @discounts
@@ -234,7 +239,7 @@ module Stripe
       end
 
       if _footer = @footer
-        return false if _footer.to_s.size > 5000
+        return false if _footer.to_s.size > MAX_LENGTH_FOR_FOOTER
       end
 
       if _metadata = @metadata
@@ -254,7 +259,7 @@ module Stripe
       end
 
       if _statement_descriptor = @statement_descriptor
-        return false if _statement_descriptor.to_s.size > 22
+        return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
       if _transfer_data = @transfer_data
@@ -345,10 +350,7 @@ module Stripe
         return @default_payment_method = nil
       end
       _default_payment_method = default_payment_method.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("default_payment_method", _default_payment_method.to_s.size, MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
       @default_payment_method = _default_payment_method
     end
 
@@ -359,10 +361,7 @@ module Stripe
         return @default_source = nil
       end
       _default_source = default_source.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_source", _default_source.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("default_source", _default_source.to_s.size, MAX_LENGTH_FOR_DEFAULT_SOURCE)
       @default_source = _default_source
     end
 
@@ -384,10 +383,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 1500)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -429,10 +425,7 @@ module Stripe
         return @footer = nil
       end
       _footer = footer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("footer", _footer.to_s.size, MAX_LENGTH_FOR_FOOTER)
       @footer = _footer
     end
 
@@ -487,10 +480,7 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       @statement_descriptor = _statement_descriptor
     end
 

@@ -24,6 +24,7 @@ module Stripe
     # The Bank Identification Number reflecting this settlement record.
     @[JSON::Field(key: "bin", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter bin : String? = nil
+    MAX_LENGTH_FOR_BIN = 5000
 
     # The date that the transactions are cleared and posted to user's accounts.
     @[JSON::Field(key: "clearing_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -40,6 +41,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # The total interchange received as reimbursement for the transactions.
     @[JSON::Field(key: "interchange_fees", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -60,8 +62,8 @@ module Stripe
     # The card network for this settlement report. One of [\"visa\"]
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
-
-    VALID_VALUES_FOR_NETWORK = StaticArray["visa"]
+    ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [visa]."
+    VALID_VALUES_FOR_NETWORK  = StaticArray["visa"]
 
     # The total amount of fees owed to the network.
     @[JSON::Field(key: "network_fees", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -70,16 +72,18 @@ module Stripe
     # The Settlement Identification Number assigned by the network.
     @[JSON::Field(key: "network_settlement_identifier", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network_settlement_identifier : String? = nil
+    MAX_LENGTH_FOR_NETWORK_SETTLEMENT_IDENTIFIER = 5000
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["issuing.settlement"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [issuing.settlement]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["issuing.settlement"]
 
     # One of `international` or `uk_national_net`.
     @[JSON::Field(key: "settlement_service", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter settlement_service : String? = nil
+    MAX_LENGTH_FOR_SETTLEMENT_SERVICE = 5000
 
     # The total number of transactions reflected in this settlement.
     @[JSON::Field(key: "transaction_count", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -121,7 +125,7 @@ module Stripe
       invalid_properties.push("\"bin\" is required and cannot be null") if @bin.nil?
 
       if _bin = @bin
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bin", _bin.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bin", _bin.to_s.size, MAX_LENGTH_FOR_BIN)
           invalid_properties.push(max_length_error)
         end
       end
@@ -134,7 +138,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -149,26 +153,26 @@ module Stripe
       invalid_properties.push("\"network\" is required and cannot be null") if @network.nil?
 
       if _network = @network
-        invalid_properties.push(OpenApi::EnumValidator.error_message("network", VALID_VALUES_FOR_NETWORK)) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+        invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
       invalid_properties.push("\"network_fees\" is required and cannot be null") if @network_fees.nil?
 
       invalid_properties.push("\"network_settlement_identifier\" is required and cannot be null") if @network_settlement_identifier.nil?
 
       if _network_settlement_identifier = @network_settlement_identifier
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_settlement_identifier", _network_settlement_identifier.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_settlement_identifier", _network_settlement_identifier.to_s.size, MAX_LENGTH_FOR_NETWORK_SETTLEMENT_IDENTIFIER)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"settlement_service\" is required and cannot be null") if @settlement_service.nil?
 
       if _settlement_service = @settlement_service
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("settlement_service", _settlement_service.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("settlement_service", _settlement_service.to_s.size, MAX_LENGTH_FOR_SETTLEMENT_SERVICE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -184,7 +188,7 @@ module Stripe
     def valid? : Bool
       return false if @bin.nil?
       if _bin = @bin
-        return false if _bin.to_s.size > 5000
+        return false if _bin.to_s.size > MAX_LENGTH_FOR_BIN
       end
 
       return false if @clearing_date.nil?
@@ -195,7 +199,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @interchange_fees.nil?
@@ -215,7 +219,7 @@ module Stripe
 
       return false if @network_settlement_identifier.nil?
       if _network_settlement_identifier = @network_settlement_identifier
-        return false if _network_settlement_identifier.to_s.size > 5000
+        return false if _network_settlement_identifier.to_s.size > MAX_LENGTH_FOR_NETWORK_SETTLEMENT_IDENTIFIER
       end
 
       return false if @object.nil?
@@ -225,7 +229,7 @@ module Stripe
 
       return false if @settlement_service.nil?
       if _settlement_service = @settlement_service
-        return false if _settlement_service.to_s.size > 5000
+        return false if _settlement_service.to_s.size > MAX_LENGTH_FOR_SETTLEMENT_SERVICE
       end
 
       return false if @transaction_count.nil?
@@ -242,10 +246,7 @@ module Stripe
         raise ArgumentError.new("\"bin\" is required and cannot be null")
       end
       _bin = bin.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bin", _bin.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bin", _bin.to_s.size, MAX_LENGTH_FOR_BIN)
       @bin = _bin
     end
 
@@ -286,10 +287,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -361,10 +359,7 @@ module Stripe
         raise ArgumentError.new("\"network_settlement_identifier\" is required and cannot be null")
       end
       _network_settlement_identifier = network_settlement_identifier.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_settlement_identifier", _network_settlement_identifier.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("network_settlement_identifier", _network_settlement_identifier.to_s.size, MAX_LENGTH_FOR_NETWORK_SETTLEMENT_IDENTIFIER)
       @network_settlement_identifier = _network_settlement_identifier
     end
 
@@ -386,10 +381,7 @@ module Stripe
         raise ArgumentError.new("\"settlement_service\" is required and cannot be null")
       end
       _settlement_service = settlement_service.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("settlement_service", _settlement_service.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("settlement_service", _settlement_service.to_s.size, MAX_LENGTH_FOR_SETTLEMENT_SERVICE)
       @settlement_service = _settlement_service
     end
 

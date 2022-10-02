@@ -42,10 +42,12 @@ module Stripe
     # The customer associated with this order.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     @[JSON::Field(key: "discounts", type: Stripe::PostOrdersRequestDiscounts?, default: nil, required: false, nullable: false, emit_null: false)]
     getter discounts : Stripe::PostOrdersRequestDiscounts? = nil
@@ -108,7 +110,7 @@ module Stripe
       invalid_properties.push("\"line_items\" is required and cannot be null") if @line_items.nil?
 
       if _line_items = @line_items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "line_items", array: _line_items)) if _line_items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "line_items", container: _line_items)) if _line_items.is_a?(Array)
       end
       if _automatic_tax = @automatic_tax
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
@@ -120,12 +122,12 @@ module Stripe
         invalid_properties.concat(_client_permissions.list_invalid_properties_for("client_permissions")) if _client_permissions.is_a?(OpenApi::Validatable)
       end
       if _customer = @customer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -155,7 +157,7 @@ module Stripe
 
       return false if @line_items.nil?
       if _line_items = @line_items
-        return false if _line_items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _line_items)
+        return false if _line_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _line_items)
       end
 
       if _automatic_tax = @automatic_tax
@@ -171,11 +173,11 @@ module Stripe
       end
 
       if _customer = @customer
-        return false if _customer.to_s.size > 5000
+        return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _discounts = @discounts
@@ -218,7 +220,7 @@ module Stripe
         raise ArgumentError.new("\"line_items\" is required and cannot be null")
       end
       _line_items = line_items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _line_items) if _line_items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _line_items) if _line_items.is_a?(Array)
       @line_items = _line_items
     end
 
@@ -262,10 +264,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       @customer = _customer
     end
 
@@ -276,10 +275,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 

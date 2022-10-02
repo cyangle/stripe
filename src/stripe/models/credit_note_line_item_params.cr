@@ -22,8 +22,8 @@ module Stripe
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["custom_line_item", "invoice_line_item"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [custom_line_item, invoice_line_item]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["custom_line_item", "invoice_line_item"]
 
     # Optional properties
 
@@ -32,9 +32,11 @@ module Stripe
 
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     @[JSON::Field(key: "invoice_line_item", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter invoice_line_item : String? = nil
+    MAX_LENGTH_FOR_INVOICE_LINE_ITEM = 5000
 
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter quantity : Int64? = nil
@@ -73,16 +75,16 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       if _invoice_line_item = @invoice_line_item
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_line_item", _invoice_line_item.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_line_item", _invoice_line_item.to_s.size, MAX_LENGTH_FOR_INVOICE_LINE_ITEM)
           invalid_properties.push(max_length_error)
         end
       end
@@ -103,11 +105,11 @@ module Stripe
       end
 
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _invoice_line_item = @invoice_line_item
-        return false if _invoice_line_item.to_s.size > 5000
+        return false if _invoice_line_item.to_s.size > MAX_LENGTH_FOR_INVOICE_LINE_ITEM
       end
 
       if _tax_rates = @tax_rates
@@ -145,10 +147,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -159,10 +158,7 @@ module Stripe
         return @invoice_line_item = nil
       end
       _invoice_line_item = invoice_line_item.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_line_item", _invoice_line_item.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("invoice_line_item", _invoice_line_item.to_s.size, MAX_LENGTH_FOR_INVOICE_LINE_ITEM)
       @invoice_line_item = _invoice_line_item
     end
 

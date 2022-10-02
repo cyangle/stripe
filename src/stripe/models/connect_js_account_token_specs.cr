@@ -23,8 +23,8 @@ module Stripe
 
     @[JSON::Field(key: "business_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter business_type : String? = nil
-
-    VALID_VALUES_FOR_BUSINESS_TYPE = StaticArray["company", "government_entity", "individual", "non_profit"]
+    ERROR_MESSAGE_FOR_BUSINESS_TYPE = "invalid value for \"business_type\", must be one of [company, government_entity, individual, non_profit]."
+    VALID_VALUES_FOR_BUSINESS_TYPE  = StaticArray["company", "government_entity", "individual", "non_profit"]
 
     @[JSON::Field(key: "company", type: Stripe::ConnectJsAccountTokenCompanySpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter company : Stripe::ConnectJsAccountTokenCompanySpecs? = nil
@@ -53,7 +53,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _business_type = @business_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("business_type", VALID_VALUES_FOR_BUSINESS_TYPE)) unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BUSINESS_TYPE) unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
       end
       if _company = @company
         invalid_properties.concat(_company.list_invalid_properties_for("company")) if _company.is_a?(OpenApi::Validatable)

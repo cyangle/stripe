@@ -24,6 +24,7 @@ module Stripe
     # Entity number associated with this Multibanco payment.
     @[JSON::Field(key: "entity", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: entity.nil? && !entity_present?)]
     getter entity : String? = nil
+    MAX_LENGTH_FOR_ENTITY = 5000
 
     @[JSON::Field(ignore: true)]
     property? entity_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # Reference number associated with this Multibanco payment.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: reference.nil? && !reference_present?)]
     getter reference : String? = nil
+    MAX_LENGTH_FOR_REFERENCE = 5000
 
     @[JSON::Field(ignore: true)]
     property? reference_present : Bool = false
@@ -51,12 +53,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _entity = @entity
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("entity", _entity.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("entity", _entity.to_s.size, MAX_LENGTH_FOR_ENTITY)
           invalid_properties.push(max_length_error)
         end
       end
       if _reference = @reference
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -67,11 +69,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _entity = @entity
-        return false if _entity.to_s.size > 5000
+        return false if _entity.to_s.size > MAX_LENGTH_FOR_ENTITY
       end
 
       if _reference = @reference
-        return false if _reference.to_s.size > 5000
+        return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 
       true
@@ -84,10 +86,7 @@ module Stripe
         return @entity = nil
       end
       _entity = entity.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("entity", _entity.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("entity", _entity.to_s.size, MAX_LENGTH_FOR_ENTITY)
       @entity = _entity
     end
 
@@ -98,10 +97,7 @@ module Stripe
         return @reference = nil
       end
       _reference = reference.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       @reference = _reference
     end
 

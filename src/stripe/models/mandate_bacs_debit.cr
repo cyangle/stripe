@@ -24,16 +24,18 @@ module Stripe
     # The status of the mandate on the Bacs network. Can be one of `pending`, `revoked`, `refused`, or `accepted`.
     @[JSON::Field(key: "network_status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network_status : String? = nil
-
-    VALID_VALUES_FOR_NETWORK_STATUS = StaticArray["accepted", "pending", "refused", "revoked"]
+    ERROR_MESSAGE_FOR_NETWORK_STATUS = "invalid value for \"network_status\", must be one of [accepted, pending, refused, revoked]."
+    VALID_VALUES_FOR_NETWORK_STATUS  = StaticArray["accepted", "pending", "refused", "revoked"]
 
     # The unique reference identifying the mandate on the Bacs network.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reference : String? = nil
+    MAX_LENGTH_FOR_REFERENCE = 5000
 
     # The URL that will contain the mandate that the customer has signed.
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter url : String? = nil
+    MAX_LENGTH_FOR_URL = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,19 +56,19 @@ module Stripe
       invalid_properties.push("\"network_status\" is required and cannot be null") if @network_status.nil?
 
       if _network_status = @network_status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("network_status", VALID_VALUES_FOR_NETWORK_STATUS)) unless OpenApi::EnumValidator.valid?(_network_status, VALID_VALUES_FOR_NETWORK_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK_STATUS) unless OpenApi::EnumValidator.valid?(_network_status, VALID_VALUES_FOR_NETWORK_STATUS)
       end
       invalid_properties.push("\"reference\" is required and cannot be null") if @reference.nil?
 
       if _reference = @reference
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
 
       if _url = @url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -83,12 +85,12 @@ module Stripe
 
       return false if @reference.nil?
       if _reference = @reference
-        return false if _reference.to_s.size > 5000
+        return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 
       return false if @url.nil?
       if _url = @url
-        return false if _url.to_s.size > 5000
+        return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 
       true
@@ -112,10 +114,7 @@ module Stripe
         raise ArgumentError.new("\"reference\" is required and cannot be null")
       end
       _reference = reference.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       @reference = _reference
     end
 
@@ -126,10 +125,7 @@ module Stripe
         raise ArgumentError.new("\"url\" is required and cannot be null")
       end
       _url = url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
       @url = _url
     end
 

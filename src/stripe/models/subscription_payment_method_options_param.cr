@@ -25,13 +25,14 @@ module Stripe
 
     @[JSON::Field(key: "network", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter network : String? = nil
-
-    VALID_VALUES_FOR_NETWORK = StaticArray["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"]
+    MAX_LENGTH_FOR_NETWORK    = 5000
+    ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [amex, cartes_bancaires, diners, discover, interac, jcb, mastercard, unionpay, unknown, visa]."
+    VALID_VALUES_FOR_NETWORK  = StaticArray["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"]
 
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter request_three_d_secure : String? = nil
-
-    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE = StaticArray["any", "automatic"]
+    ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE = "invalid value for \"request_three_d_secure\", must be one of [any, automatic]."
+    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE  = StaticArray["any", "automatic"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,10 +54,10 @@ module Stripe
         invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
       if _network = @network
-        invalid_properties.push(OpenApi::EnumValidator.error_message("network", VALID_VALUES_FOR_NETWORK)) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+        invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
       if _request_three_d_secure = @request_three_d_secure
-        invalid_properties.push(OpenApi::EnumValidator.error_message("request_three_d_secure", VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)) unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE) unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
       end
       invalid_properties
     end

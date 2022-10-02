@@ -24,16 +24,18 @@ module Stripe
     # Type of reader, one of `bbpos_wisepad3`, `stripe_m2`, `bbpos_chipper2x`, `bbpos_wisepos_e`, `verifone_P400`, or `simulated_wisepos_e`.
     @[JSON::Field(key: "device_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter device_type : String? = nil
-
-    VALID_VALUES_FOR_DEVICE_TYPE = StaticArray["bbpos_chipper2x", "bbpos_wisepad3", "bbpos_wisepos_e", "simulated_wisepos_e", "stripe_m2", "verifone_P400"]
+    ERROR_MESSAGE_FOR_DEVICE_TYPE = "invalid value for \"device_type\", must be one of [bbpos_chipper2x, bbpos_wisepad3, bbpos_wisepos_e, simulated_wisepos_e, stripe_m2, verifone_P400]."
+    VALID_VALUES_FOR_DEVICE_TYPE  = StaticArray["bbpos_chipper2x", "bbpos_wisepad3", "bbpos_wisepos_e", "simulated_wisepos_e", "stripe_m2", "verifone_P400"]
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Custom label given to the reader for easier identification.
     @[JSON::Field(key: "label", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter label : String? = nil
+    MAX_LENGTH_FOR_LABEL = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -46,12 +48,13 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["terminal.reader"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [terminal.reader]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["terminal.reader"]
 
     # Serial number of the reader.
     @[JSON::Field(key: "serial_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter serial_number : String? = nil
+    MAX_LENGTH_FOR_SERIAL_NUMBER = 5000
 
     # Optional properties
 
@@ -64,6 +67,7 @@ module Stripe
     # The current software version of the reader.
     @[JSON::Field(key: "device_sw_version", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: device_sw_version.nil? && !device_sw_version_present?)]
     getter device_sw_version : String? = nil
+    MAX_LENGTH_FOR_DEVICE_SW_VERSION = 5000
 
     @[JSON::Field(ignore: true)]
     property? device_sw_version_present : Bool = false
@@ -71,6 +75,7 @@ module Stripe
     # The local IP address of the reader.
     @[JSON::Field(key: "ip_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
     getter ip_address : String? = nil
+    MAX_LENGTH_FOR_IP_ADDRESS = 5000
 
     @[JSON::Field(ignore: true)]
     property? ip_address_present : Bool = false
@@ -84,6 +89,7 @@ module Stripe
     # The networking status of the reader.
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: status.nil? && !status_present?)]
     getter status : String? = nil
+    MAX_LENGTH_FOR_STATUS = 5000
 
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false
@@ -117,19 +123,19 @@ module Stripe
       invalid_properties.push("\"device_type\" is required and cannot be null") if @device_type.nil?
 
       if _device_type = @device_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("device_type", VALID_VALUES_FOR_DEVICE_TYPE)) unless OpenApi::EnumValidator.valid?(_device_type, VALID_VALUES_FOR_DEVICE_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_DEVICE_TYPE) unless OpenApi::EnumValidator.valid?(_device_type, VALID_VALUES_FOR_DEVICE_TYPE)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"label\" is required and cannot be null") if @label.nil?
 
       if _label = @label
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("label", _label.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("label", _label.to_s.size, MAX_LENGTH_FOR_LABEL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -140,12 +146,12 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"serial_number\" is required and cannot be null") if @serial_number.nil?
 
       if _serial_number = @serial_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("serial_number", _serial_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("serial_number", _serial_number.to_s.size, MAX_LENGTH_FOR_SERIAL_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -153,12 +159,12 @@ module Stripe
         invalid_properties.concat(_action.list_invalid_properties_for("action")) if _action.is_a?(OpenApi::Validatable)
       end
       if _device_sw_version = @device_sw_version
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("device_sw_version", _device_sw_version.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("device_sw_version", _device_sw_version.to_s.size, MAX_LENGTH_FOR_DEVICE_SW_VERSION)
           invalid_properties.push(max_length_error)
         end
       end
       if _ip_address = @ip_address
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
@@ -166,7 +172,7 @@ module Stripe
         invalid_properties.concat(_location.list_invalid_properties_for("location")) if _location.is_a?(OpenApi::Validatable)
       end
       if _status = @status
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
@@ -183,12 +189,12 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @label.nil?
       if _label = @label
-        return false if _label.to_s.size > 5000
+        return false if _label.to_s.size > MAX_LENGTH_FOR_LABEL
       end
 
       return false if @livemode.nil?
@@ -202,7 +208,7 @@ module Stripe
 
       return false if @serial_number.nil?
       if _serial_number = @serial_number
-        return false if _serial_number.to_s.size > 5000
+        return false if _serial_number.to_s.size > MAX_LENGTH_FOR_SERIAL_NUMBER
       end
 
       if _action = @action
@@ -210,11 +216,11 @@ module Stripe
       end
 
       if _device_sw_version = @device_sw_version
-        return false if _device_sw_version.to_s.size > 5000
+        return false if _device_sw_version.to_s.size > MAX_LENGTH_FOR_DEVICE_SW_VERSION
       end
 
       if _ip_address = @ip_address
-        return false if _ip_address.to_s.size > 5000
+        return false if _ip_address.to_s.size > MAX_LENGTH_FOR_IP_ADDRESS
       end
 
       if _location = @location
@@ -222,7 +228,7 @@ module Stripe
       end
 
       if _status = @status
-        return false if _status.to_s.size > 5000
+        return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
       true
@@ -246,10 +252,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -260,10 +263,7 @@ module Stripe
         raise ArgumentError.new("\"label\" is required and cannot be null")
       end
       _label = label.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("label", _label.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("label", _label.to_s.size, MAX_LENGTH_FOR_LABEL)
       @label = _label
     end
 
@@ -305,10 +305,7 @@ module Stripe
         raise ArgumentError.new("\"serial_number\" is required and cannot be null")
       end
       _serial_number = serial_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("serial_number", _serial_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("serial_number", _serial_number.to_s.size, MAX_LENGTH_FOR_SERIAL_NUMBER)
       @serial_number = _serial_number
     end
 
@@ -330,10 +327,7 @@ module Stripe
         return @device_sw_version = nil
       end
       _device_sw_version = device_sw_version.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("device_sw_version", _device_sw_version.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("device_sw_version", _device_sw_version.to_s.size, MAX_LENGTH_FOR_DEVICE_SW_VERSION)
       @device_sw_version = _device_sw_version
     end
 
@@ -344,10 +338,7 @@ module Stripe
         return @ip_address = nil
       end
       _ip_address = ip_address.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
       @ip_address = _ip_address
     end
 
@@ -369,10 +360,7 @@ module Stripe
         return @status = nil
       end
       _status = status.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
       @status = _status
     end
 

@@ -24,6 +24,7 @@ module Stripe
     # Information about the run failure.
     @[JSON::Field(key: "message", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter message : String? = nil
+    MAX_LENGTH_FOR_MESSAGE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,7 +43,7 @@ module Stripe
       invalid_properties.push("\"message\" is required and cannot be null") if @message.nil?
 
       if _message = @message
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("message", _message.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("message", _message.to_s.size, MAX_LENGTH_FOR_MESSAGE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -54,7 +55,7 @@ module Stripe
     def valid? : Bool
       return false if @message.nil?
       if _message = @message
-        return false if _message.to_s.size > 5000
+        return false if _message.to_s.size > MAX_LENGTH_FOR_MESSAGE
       end
 
       true
@@ -67,10 +68,7 @@ module Stripe
         raise ArgumentError.new("\"message\" is required and cannot be null")
       end
       _message = message.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("message", _message.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("message", _message.to_s.size, MAX_LENGTH_FOR_MESSAGE)
       @message = _message
     end
 

@@ -28,6 +28,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # `true` if the report is run on live mode data and `false` if it is run on test mode data.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,8 +37,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["reporting.report_run"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [reporting.report_run]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["reporting.report_run"]
 
     @[JSON::Field(key: "parameters", type: Stripe::FinancialReportingFinanceReportRunRunParameters?, default: nil, required: true, nullable: false, emit_null: false)]
     getter parameters : Stripe::FinancialReportingFinanceReportRunRunParameters? = nil
@@ -45,16 +46,19 @@ module Stripe
     # The ID of the [report type](https://stripe.com/docs/reports/report-types) to run, such as `\"balance.summary.1\"`.
     @[JSON::Field(key: "report_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter report_type : String? = nil
+    MAX_LENGTH_FOR_REPORT_TYPE = 5000
 
     # Status of this report run. This will be `pending` when the run is initially created.  When the run finishes, this will be set to `succeeded` and the `result` field will be populated.  Rarely, we may encounter an error, at which point this will be set to `failed` and the `error` field will be populated.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
+    MAX_LENGTH_FOR_STATUS = 5000
 
     # Optional properties
 
     # If something should go wrong during the run, a message about the failure (populated when  `status=failed`).
     @[JSON::Field(key: "error", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: error.nil? && !error_present?)]
     getter error : String? = nil
+    MAX_LENGTH_FOR_ERROR = 5000
 
     @[JSON::Field(ignore: true)]
     property? error_present : Bool = false
@@ -101,7 +105,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -110,7 +114,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"parameters\" is required and cannot be null") if @parameters.nil?
 
@@ -120,19 +124,19 @@ module Stripe
       invalid_properties.push("\"report_type\" is required and cannot be null") if @report_type.nil?
 
       if _report_type = @report_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("report_type", _report_type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("report_type", _report_type.to_s.size, MAX_LENGTH_FOR_REPORT_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
       if _error = @error
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("error", _error.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("error", _error.to_s.size, MAX_LENGTH_FOR_ERROR)
           invalid_properties.push(max_length_error)
         end
       end
@@ -150,7 +154,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -167,16 +171,16 @@ module Stripe
 
       return false if @report_type.nil?
       if _report_type = @report_type
-        return false if _report_type.to_s.size > 5000
+        return false if _report_type.to_s.size > MAX_LENGTH_FOR_REPORT_TYPE
       end
 
       return false if @status.nil?
       if _status = @status
-        return false if _status.to_s.size > 5000
+        return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
       if _error = @error
-        return false if _error.to_s.size > 5000
+        return false if _error.to_s.size > MAX_LENGTH_FOR_ERROR
       end
 
       if _result = @result
@@ -203,10 +207,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -249,10 +250,7 @@ module Stripe
         raise ArgumentError.new("\"report_type\" is required and cannot be null")
       end
       _report_type = report_type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("report_type", _report_type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("report_type", _report_type.to_s.size, MAX_LENGTH_FOR_REPORT_TYPE)
       @report_type = _report_type
     end
 
@@ -263,10 +261,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
       @status = _status
     end
 
@@ -277,10 +272,7 @@ module Stripe
         return @error = nil
       end
       _error = error.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("error", _error.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("error", _error.to_s.size, MAX_LENGTH_FOR_ERROR)
       @error = _error
     end
 

@@ -22,8 +22,8 @@ module Stripe
 
     @[JSON::Field(key: "amount_tax_display", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter amount_tax_display : String? = nil
-
-    VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY = StaticArray["", "exclude_tax", "include_inclusive_tax"]
+    ERROR_MESSAGE_FOR_AMOUNT_TAX_DISPLAY = "invalid value for \"amount_tax_display\", must be one of [, exclude_tax, include_inclusive_tax]."
+    VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY  = StaticArray["", "exclude_tax", "include_inclusive_tax"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +40,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _amount_tax_display = @amount_tax_display
-        invalid_properties.push(OpenApi::EnumValidator.error_message("amount_tax_display", VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY)) unless OpenApi::EnumValidator.valid?(_amount_tax_display, VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY)
+        invalid_properties.push(ERROR_MESSAGE_FOR_AMOUNT_TAX_DISPLAY) unless OpenApi::EnumValidator.valid?(_amount_tax_display, VALID_VALUES_FOR_AMOUNT_TAX_DISPLAY)
       end
       invalid_properties
     end

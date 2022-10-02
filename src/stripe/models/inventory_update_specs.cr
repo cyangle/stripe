@@ -26,13 +26,13 @@ module Stripe
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["bucket", "finite", "infinite"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [bucket, finite, infinite]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["bucket", "finite", "infinite"]
 
     @[JSON::Field(key: "value", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter value : String? = nil
-
-    VALID_VALUES_FOR_VALUE = StaticArray["", "in_stock", "limited", "out_of_stock"]
+    ERROR_MESSAGE_FOR_VALUE = "invalid value for \"value\", must be one of [, in_stock, limited, out_of_stock]."
+    VALID_VALUES_FOR_VALUE  = StaticArray["", "in_stock", "limited", "out_of_stock"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -51,10 +51,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _value = @value
-        invalid_properties.push(OpenApi::EnumValidator.error_message("value", VALID_VALUES_FOR_VALUE)) unless OpenApi::EnumValidator.valid?(_value, VALID_VALUES_FOR_VALUE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_VALUE) unless OpenApi::EnumValidator.valid?(_value, VALID_VALUES_FOR_VALUE)
       end
       invalid_properties
     end

@@ -24,6 +24,7 @@ module Stripe
     # OXXO reference number
     @[JSON::Field(key: "number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: number.nil? && !number_present?)]
     getter number : String? = nil
+    MAX_LENGTH_FOR_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? number_present : Bool = false
@@ -43,7 +44,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _number = @number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -54,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _number = @number
-        return false if _number.to_s.size > 5000
+        return false if _number.to_s.size > MAX_LENGTH_FOR_NUMBER
       end
 
       true
@@ -67,10 +68,7 @@ module Stripe
         return @number = nil
       end
       _number = number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
       @number = _number
     end
 

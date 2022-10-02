@@ -24,6 +24,7 @@ module Stripe
     # Set if there is an Issuing dispute associated with the DebitReversal.
     @[JSON::Field(key: "issuing_dispute", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: issuing_dispute.nil? && !issuing_dispute_present?)]
     getter issuing_dispute : String? = nil
+    MAX_LENGTH_FOR_ISSUING_DISPUTE = 5000
 
     @[JSON::Field(ignore: true)]
     property? issuing_dispute_present : Bool = false
@@ -43,7 +44,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _issuing_dispute = @issuing_dispute
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_dispute", _issuing_dispute.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_dispute", _issuing_dispute.to_s.size, MAX_LENGTH_FOR_ISSUING_DISPUTE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -54,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _issuing_dispute = @issuing_dispute
-        return false if _issuing_dispute.to_s.size > 5000
+        return false if _issuing_dispute.to_s.size > MAX_LENGTH_FOR_ISSUING_DISPUTE
       end
 
       true
@@ -67,10 +68,7 @@ module Stripe
         return @issuing_dispute = nil
       end
       _issuing_dispute = issuing_dispute.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_dispute", _issuing_dispute.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("issuing_dispute", _issuing_dispute.to_s.size, MAX_LENGTH_FOR_ISSUING_DISPUTE)
       @issuing_dispute = _issuing_dispute
     end
 

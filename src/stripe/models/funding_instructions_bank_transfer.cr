@@ -24,6 +24,7 @@ module Stripe
     # The country of the bank account to fund
     @[JSON::Field(key: "country", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter country : String? = nil
+    MAX_LENGTH_FOR_COUNTRY = 5000
 
     # A list of financial addresses that can be used to fund a particular balance
     @[JSON::Field(key: "financial_addresses", type: Array(Stripe::FundingInstructionsBankTransferFinancialAddress)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -32,8 +33,8 @@ module Stripe
     # The bank_transfer type
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["eu_bank_transfer", "jp_bank_transfer"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [eu_bank_transfer, jp_bank_transfer]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["eu_bank_transfer", "jp_bank_transfer"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,19 +55,19 @@ module Stripe
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
 
       if _country = @country
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"financial_addresses\" is required and cannot be null") if @financial_addresses.nil?
 
       if _financial_addresses = @financial_addresses
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "financial_addresses", array: _financial_addresses)) if _financial_addresses.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "financial_addresses", container: _financial_addresses)) if _financial_addresses.is_a?(Array)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
     end
@@ -76,12 +77,12 @@ module Stripe
     def valid? : Bool
       return false if @country.nil?
       if _country = @country
-        return false if _country.to_s.size > 5000
+        return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       return false if @financial_addresses.nil?
       if _financial_addresses = @financial_addresses
-        return false if _financial_addresses.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _financial_addresses)
+        return false if _financial_addresses.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _financial_addresses)
       end
 
       return false if @_type.nil?
@@ -99,10 +100,7 @@ module Stripe
         raise ArgumentError.new("\"country\" is required and cannot be null")
       end
       _country = country.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       @country = _country
     end
 
@@ -113,7 +111,7 @@ module Stripe
         raise ArgumentError.new("\"financial_addresses\" is required and cannot be null")
       end
       _financial_addresses = financial_addresses.not_nil!
-      OpenApi::ArrayValidator.validate(array: _financial_addresses) if _financial_addresses.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _financial_addresses) if _financial_addresses.is_a?(Array)
       @financial_addresses = _financial_addresses
     end
 

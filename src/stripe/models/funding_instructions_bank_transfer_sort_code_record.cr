@@ -24,14 +24,17 @@ module Stripe
     # The name of the person or business that owns the bank account
     @[JSON::Field(key: "account_holder_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account_holder_name : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME = 5000
 
     # The account number
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account_number : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_NUMBER = 5000
 
     # The six-digit sort code
     @[JSON::Field(key: "sort_code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter sort_code : String? = nil
+    MAX_LENGTH_FOR_SORT_CODE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,21 +55,21 @@ module Stripe
       invalid_properties.push("\"account_holder_name\" is required and cannot be null") if @account_holder_name.nil?
 
       if _account_holder_name = @account_holder_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"account_number\" is required and cannot be null") if @account_number.nil?
 
       if _account_number = @account_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"sort_code\" is required and cannot be null") if @sort_code.nil?
 
       if _sort_code = @sort_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, MAX_LENGTH_FOR_SORT_CODE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -78,17 +81,17 @@ module Stripe
     def valid? : Bool
       return false if @account_holder_name.nil?
       if _account_holder_name = @account_holder_name
-        return false if _account_holder_name.to_s.size > 5000
+        return false if _account_holder_name.to_s.size > MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME
       end
 
       return false if @account_number.nil?
       if _account_number = @account_number
-        return false if _account_number.to_s.size > 5000
+        return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
       return false if @sort_code.nil?
       if _sort_code = @sort_code
-        return false if _sort_code.to_s.size > 5000
+        return false if _sort_code.to_s.size > MAX_LENGTH_FOR_SORT_CODE
       end
 
       true
@@ -101,10 +104,7 @@ module Stripe
         raise ArgumentError.new("\"account_holder_name\" is required and cannot be null")
       end
       _account_holder_name = account_holder_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
       @account_holder_name = _account_holder_name
     end
 
@@ -115,10 +115,7 @@ module Stripe
         raise ArgumentError.new("\"account_number\" is required and cannot be null")
       end
       _account_number = account_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
       @account_number = _account_number
     end
 
@@ -129,10 +126,7 @@ module Stripe
         raise ArgumentError.new("\"sort_code\" is required and cannot be null")
       end
       _sort_code = sort_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("sort_code", _sort_code.to_s.size, MAX_LENGTH_FOR_SORT_CODE)
       @sort_code = _sort_code
     end
 

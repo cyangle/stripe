@@ -29,8 +29,8 @@ module Stripe
     # Valid values are `increment` (default) or `set`. When using `increment` the specified `quantity` will be added to the usage at the specified timestamp. The `set` action will overwrite the usage quantity at that timestamp. If the subscription has [billing thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds), `increment` is the only allowed value.
     @[JSON::Field(key: "action", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter action : String? = nil
-
-    VALID_VALUES_FOR_ACTION = StaticArray["increment", "set"]
+    ERROR_MESSAGE_FOR_ACTION = "invalid value for \"action\", must be one of [increment, set]."
+    VALID_VALUES_FOR_ACTION  = StaticArray["increment", "set"]
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -60,7 +60,7 @@ module Stripe
       invalid_properties.push("\"quantity\" is required and cannot be null") if @quantity.nil?
 
       if _action = @action
-        invalid_properties.push(OpenApi::EnumValidator.error_message("action", VALID_VALUES_FOR_ACTION)) unless OpenApi::EnumValidator.valid?(_action, VALID_VALUES_FOR_ACTION)
+        invalid_properties.push(ERROR_MESSAGE_FOR_ACTION) unless OpenApi::EnumValidator.valid?(_action, VALID_VALUES_FOR_ACTION)
       end
 
       if _timestamp = @timestamp

@@ -24,8 +24,8 @@ module Stripe
     # Array of strings of allowed identity document types. If the provided identity document isn’t one of the allowed types, the verification check will fail with a document_type_not_allowed error code.
     @[JSON::Field(key: "allowed_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter allowed_types : Array(String)? = nil
-
-    VALID_VALUES_FOR_ALLOWED_TYPES = StaticArray["driving_license", "id_card", "passport"]
+    ERROR_MESSAGE_FOR_ALLOWED_TYPES = "invalid value for \"allowed_types\", must be one of [driving_license, id_card, passport]."
+    VALID_VALUES_FOR_ALLOWED_TYPES  = StaticArray["driving_license", "id_card", "passport"]
 
     # Collect an ID number and perform an [ID number check](https://stripe.com/docs/identity/verification-checks?type=id-number) with the document’s extracted name and date of birth.
     @[JSON::Field(key: "require_id_number", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -57,7 +57,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _allowed_types = @allowed_types
-        invalid_properties.push(OpenApi::EnumValidator.error_message("allowed_types", VALID_VALUES_FOR_ALLOWED_TYPES)) unless OpenApi::EnumValidator.valid?(_allowed_types, VALID_VALUES_FOR_ALLOWED_TYPES)
+        invalid_properties.push(ERROR_MESSAGE_FOR_ALLOWED_TYPES) unless OpenApi::EnumValidator.valid?(_allowed_types, VALID_VALUES_FOR_ALLOWED_TYPES)
       end
 
       invalid_properties

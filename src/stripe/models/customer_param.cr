@@ -26,9 +26,11 @@ module Stripe
 
     @[JSON::Field(key: "default_payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_payment_method : String? = nil
+    MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD = 5000
 
     @[JSON::Field(key: "footer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter footer : String? = nil
+    MAX_LENGTH_FOR_FOOTER = 5000
 
     @[JSON::Field(key: "rendering_options", type: Stripe::CustomerParamRenderingOptions?, default: nil, required: false, nullable: false, emit_null: false)]
     getter rendering_options : Stripe::CustomerParamRenderingOptions? = nil
@@ -54,12 +56,12 @@ module Stripe
         invalid_properties.concat(_custom_fields.list_invalid_properties_for("custom_fields")) if _custom_fields.is_a?(OpenApi::Validatable)
       end
       if _default_payment_method = @default_payment_method
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
       if _footer = @footer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, MAX_LENGTH_FOR_FOOTER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -77,11 +79,11 @@ module Stripe
       end
 
       if _default_payment_method = @default_payment_method
-        return false if _default_payment_method.to_s.size > 5000
+        return false if _default_payment_method.to_s.size > MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD
       end
 
       if _footer = @footer
-        return false if _footer.to_s.size > 5000
+        return false if _footer.to_s.size > MAX_LENGTH_FOR_FOOTER
       end
 
       if _rendering_options = @rendering_options
@@ -109,10 +111,7 @@ module Stripe
         return @default_payment_method = nil
       end
       _default_payment_method = default_payment_method.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("default_payment_method", _default_payment_method.to_s.size, MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
       @default_payment_method = _default_payment_method
     end
 
@@ -123,10 +122,7 @@ module Stripe
         return @footer = nil
       end
       _footer = footer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("footer", _footer.to_s.size, MAX_LENGTH_FOR_FOOTER)
       @footer = _footer
     end
 

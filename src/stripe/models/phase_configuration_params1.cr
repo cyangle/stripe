@@ -36,28 +36,31 @@ module Stripe
 
     @[JSON::Field(key: "billing_cycle_anchor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_cycle_anchor : String? = nil
-
-    VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR = StaticArray["automatic", "phase_start"]
+    ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR = "invalid value for \"billing_cycle_anchor\", must be one of [automatic, phase_start]."
+    VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = StaticArray["automatic", "phase_start"]
 
     @[JSON::Field(key: "billing_thresholds", type: Stripe::DefaultSettingsParamsBillingThresholds?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_thresholds : Stripe::DefaultSettingsParamsBillingThresholds? = nil
 
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
-
-    VALID_VALUES_FOR_COLLECTION_METHOD = StaticArray["charge_automatically", "send_invoice"]
+    ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
+    VALID_VALUES_FOR_COLLECTION_METHOD  = StaticArray["charge_automatically", "send_invoice"]
 
     @[JSON::Field(key: "coupon", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter coupon : String? = nil
+    MAX_LENGTH_FOR_COUPON = 5000
 
     @[JSON::Field(key: "default_payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_payment_method : String? = nil
+    MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD = 5000
 
     @[JSON::Field(key: "default_tax_rates", type: Stripe::CreditNoteLineItemParamsTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_tax_rates : Stripe::CreditNoteLineItemParamsTaxRates? = nil
 
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 500
 
     @[JSON::Field(key: "end_date", type: Stripe::PhaseConfigurationParams1EndDate?, default: nil, required: false, nullable: false, emit_null: false)]
     getter end_date : Stripe::PhaseConfigurationParams1EndDate? = nil
@@ -73,8 +76,8 @@ module Stripe
 
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
-
-    VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
+    ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR = "invalid value for \"proration_behavior\", must be one of [always_invoice, create_prorations, none]."
+    VALID_VALUES_FOR_PRORATION_BEHAVIOR  = StaticArray["always_invoice", "create_prorations", "none"]
 
     @[JSON::Field(key: "start_date", type: Stripe::PhaseConfigurationParams1EndDate?, default: nil, required: false, nullable: false, emit_null: false)]
     getter start_date : Stripe::PhaseConfigurationParams1EndDate? = nil
@@ -125,31 +128,31 @@ module Stripe
       invalid_properties.push("\"items\" is required and cannot be null") if @items.nil?
 
       if _items = @items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "items", array: _items)) if _items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "items", container: _items)) if _items.is_a?(Array)
       end
       if _add_invoice_items = @add_invoice_items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "add_invoice_items", array: _add_invoice_items)) if _add_invoice_items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "add_invoice_items", container: _add_invoice_items)) if _add_invoice_items.is_a?(Array)
       end
 
       if _automatic_tax = @automatic_tax
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
       if _billing_cycle_anchor = @billing_cycle_anchor
-        invalid_properties.push(OpenApi::EnumValidator.error_message("billing_cycle_anchor", VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)) unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR) unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
       end
       if _billing_thresholds = @billing_thresholds
         invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
       if _collection_method = @collection_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("collection_method", VALID_VALUES_FOR_COLLECTION_METHOD)) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_COLLECTION_METHOD) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
       if _coupon = @coupon
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
           invalid_properties.push(max_length_error)
         end
       end
       if _default_payment_method = @default_payment_method
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
@@ -157,7 +160,7 @@ module Stripe
         invalid_properties.concat(_default_tax_rates.list_invalid_properties_for("default_tax_rates")) if _default_tax_rates.is_a?(OpenApi::Validatable)
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 500)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -169,7 +172,7 @@ module Stripe
       end
 
       if _proration_behavior = @proration_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("proration_behavior", VALID_VALUES_FOR_PRORATION_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
       if _start_date = @start_date
         invalid_properties.concat(_start_date.list_invalid_properties_for("start_date")) if _start_date.is_a?(OpenApi::Validatable)
@@ -189,11 +192,11 @@ module Stripe
     def valid? : Bool
       return false if @items.nil?
       if _items = @items
-        return false if _items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _items)
+        return false if _items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _items)
       end
 
       if _add_invoice_items = @add_invoice_items
-        return false if _add_invoice_items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _add_invoice_items)
+        return false if _add_invoice_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _add_invoice_items)
       end
 
       if _automatic_tax = @automatic_tax
@@ -213,11 +216,11 @@ module Stripe
       end
 
       if _coupon = @coupon
-        return false if _coupon.to_s.size > 5000
+        return false if _coupon.to_s.size > MAX_LENGTH_FOR_COUPON
       end
 
       if _default_payment_method = @default_payment_method
-        return false if _default_payment_method.to_s.size > 5000
+        return false if _default_payment_method.to_s.size > MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD
       end
 
       if _default_tax_rates = @default_tax_rates
@@ -225,7 +228,7 @@ module Stripe
       end
 
       if _description = @description
-        return false if _description.to_s.size > 500
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _end_date = @end_date
@@ -262,7 +265,7 @@ module Stripe
         raise ArgumentError.new("\"items\" is required and cannot be null")
       end
       _items = items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _items) if _items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _items) if _items.is_a?(Array)
       @items = _items
     end
 
@@ -273,7 +276,7 @@ module Stripe
         return @add_invoice_items = nil
       end
       _add_invoice_items = add_invoice_items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _add_invoice_items) if _add_invoice_items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _add_invoice_items) if _add_invoice_items.is_a?(Array)
       @add_invoice_items = _add_invoice_items
     end
 
@@ -338,10 +341,7 @@ module Stripe
         return @coupon = nil
       end
       _coupon = coupon.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
       @coupon = _coupon
     end
 
@@ -352,10 +352,7 @@ module Stripe
         return @default_payment_method = nil
       end
       _default_payment_method = default_payment_method.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("default_payment_method", _default_payment_method.to_s.size, MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
       @default_payment_method = _default_payment_method
     end
 
@@ -377,10 +374,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 500)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 

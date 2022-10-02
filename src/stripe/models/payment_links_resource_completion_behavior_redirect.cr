@@ -24,6 +24,7 @@ module Stripe
     # The URL the customer will be redirected to after the purchase is complete.
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter url : String? = nil
+    MAX_LENGTH_FOR_URL = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,7 +43,7 @@ module Stripe
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
 
       if _url = @url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -54,7 +55,7 @@ module Stripe
     def valid? : Bool
       return false if @url.nil?
       if _url = @url
-        return false if _url.to_s.size > 5000
+        return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 
       true
@@ -67,10 +68,7 @@ module Stripe
         raise ArgumentError.new("\"url\" is required and cannot be null")
       end
       _url = url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
       @url = _url
     end
 

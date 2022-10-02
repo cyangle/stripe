@@ -22,22 +22,25 @@ module Stripe
 
     @[JSON::Field(key: "account_holder_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_holder_type : String? = nil
-
-    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE = StaticArray["company", "individual"]
+    ERROR_MESSAGE_FOR_ACCOUNT_HOLDER_TYPE = "invalid value for \"account_holder_type\", must be one of [company, individual]."
+    VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE  = StaticArray["company", "individual"]
 
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_number : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_NUMBER = 5000
 
     @[JSON::Field(key: "account_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_type : String? = nil
-
-    VALID_VALUES_FOR_ACCOUNT_TYPE = StaticArray["checking", "savings"]
+    ERROR_MESSAGE_FOR_ACCOUNT_TYPE = "invalid value for \"account_type\", must be one of [checking, savings]."
+    VALID_VALUES_FOR_ACCOUNT_TYPE  = StaticArray["checking", "savings"]
 
     @[JSON::Field(key: "financial_connections_account", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter financial_connections_account : String? = nil
+    MAX_LENGTH_FOR_FINANCIAL_CONNECTIONS_ACCOUNT = 5000
 
     @[JSON::Field(key: "routing_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter routing_number : String? = nil
+    MAX_LENGTH_FOR_ROUTING_NUMBER = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -58,23 +61,23 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _account_holder_type = @account_holder_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("account_holder_type", VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)) unless OpenApi::EnumValidator.valid?(_account_holder_type, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_ACCOUNT_HOLDER_TYPE) unless OpenApi::EnumValidator.valid?(_account_holder_type, VALID_VALUES_FOR_ACCOUNT_HOLDER_TYPE)
       end
       if _account_number = @account_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       if _account_type = @account_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("account_type", VALID_VALUES_FOR_ACCOUNT_TYPE)) unless OpenApi::EnumValidator.valid?(_account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_ACCOUNT_TYPE) unless OpenApi::EnumValidator.valid?(_account_type, VALID_VALUES_FOR_ACCOUNT_TYPE)
       end
       if _financial_connections_account = @financial_connections_account
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_connections_account", _financial_connections_account.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_connections_account", _financial_connections_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_CONNECTIONS_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
       if _routing_number = @routing_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -89,7 +92,7 @@ module Stripe
       end
 
       if _account_number = @account_number
-        return false if _account_number.to_s.size > 5000
+        return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
       if _account_type = @account_type
@@ -97,11 +100,11 @@ module Stripe
       end
 
       if _financial_connections_account = @financial_connections_account
-        return false if _financial_connections_account.to_s.size > 5000
+        return false if _financial_connections_account.to_s.size > MAX_LENGTH_FOR_FINANCIAL_CONNECTIONS_ACCOUNT
       end
 
       if _routing_number = @routing_number
-        return false if _routing_number.to_s.size > 5000
+        return false if _routing_number.to_s.size > MAX_LENGTH_FOR_ROUTING_NUMBER
       end
 
       true
@@ -125,10 +128,7 @@ module Stripe
         return @account_number = nil
       end
       _account_number = account_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
       @account_number = _account_number
     end
 
@@ -150,10 +150,7 @@ module Stripe
         return @financial_connections_account = nil
       end
       _financial_connections_account = financial_connections_account.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_connections_account", _financial_connections_account.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("financial_connections_account", _financial_connections_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_CONNECTIONS_ACCOUNT)
       @financial_connections_account = _financial_connections_account
     end
 
@@ -164,10 +161,7 @@ module Stripe
         return @routing_number = nil
       end
       _routing_number = routing_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
       @routing_number = _routing_number
     end
 

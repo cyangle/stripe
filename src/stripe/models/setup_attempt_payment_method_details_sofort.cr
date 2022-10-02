@@ -24,6 +24,7 @@ module Stripe
     # Bank code of bank associated with the bank account.
     @[JSON::Field(key: "bank_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_code.nil? && !bank_code_present?)]
     getter bank_code : String? = nil
+    MAX_LENGTH_FOR_BANK_CODE = 5000
 
     @[JSON::Field(ignore: true)]
     property? bank_code_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # Name of the bank associated with the bank account.
     @[JSON::Field(key: "bank_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_name.nil? && !bank_name_present?)]
     getter bank_name : String? = nil
+    MAX_LENGTH_FOR_BANK_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? bank_name_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # Bank Identifier Code of the bank associated with the bank account.
     @[JSON::Field(key: "bic", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bic.nil? && !bic_present?)]
     getter bic : String? = nil
+    MAX_LENGTH_FOR_BIC = 5000
 
     @[JSON::Field(ignore: true)]
     property? bic_present : Bool = false
@@ -57,6 +60,7 @@ module Stripe
     # Last four characters of the IBAN.
     @[JSON::Field(key: "iban_last4", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: iban_last4.nil? && !iban_last4_present?)]
     getter iban_last4 : String? = nil
+    MAX_LENGTH_FOR_IBAN_LAST4 = 5000
 
     @[JSON::Field(ignore: true)]
     property? iban_last4_present : Bool = false
@@ -64,14 +68,16 @@ module Stripe
     # Preferred language of the Sofort authorization page that the customer is redirected to. Can be one of `en`, `de`, `fr`, or `nl`
     @[JSON::Field(key: "preferred_language", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: preferred_language.nil? && !preferred_language_present?)]
     getter preferred_language : String? = nil
+    ERROR_MESSAGE_FOR_PREFERRED_LANGUAGE = "invalid value for \"preferred_language\", must be one of [de, en, fr, nl]."
+    VALID_VALUES_FOR_PREFERRED_LANGUAGE  = StaticArray["de", "en", "fr", "nl"]
 
     @[JSON::Field(ignore: true)]
     property? preferred_language_present : Bool = false
-    VALID_VALUES_FOR_PREFERRED_LANGUAGE = StaticArray["de", "en", "fr", "nl"]
 
     # Owner's verified full name. Values are verified or provided by Sofort directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     @[JSON::Field(key: "verified_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verified_name.nil? && !verified_name_present?)]
     getter verified_name : String? = nil
+    MAX_LENGTH_FOR_VERIFIED_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? verified_name_present : Bool = false
@@ -98,17 +104,17 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _bank_code = @bank_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       if _bank_name = @bank_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _bic = @bic
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
           invalid_properties.push(max_length_error)
         end
       end
@@ -119,15 +125,15 @@ module Stripe
         invalid_properties.concat(_generated_sepa_debit_mandate.list_invalid_properties_for("generated_sepa_debit_mandate")) if _generated_sepa_debit_mandate.is_a?(OpenApi::Validatable)
       end
       if _iban_last4 = @iban_last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       if _preferred_language = @preferred_language
-        invalid_properties.push(OpenApi::EnumValidator.error_message("preferred_language", VALID_VALUES_FOR_PREFERRED_LANGUAGE)) unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PREFERRED_LANGUAGE) unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
       end
       if _verified_name = @verified_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -138,15 +144,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _bank_code = @bank_code
-        return false if _bank_code.to_s.size > 5000
+        return false if _bank_code.to_s.size > MAX_LENGTH_FOR_BANK_CODE
       end
 
       if _bank_name = @bank_name
-        return false if _bank_name.to_s.size > 5000
+        return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
       if _bic = @bic
-        return false if _bic.to_s.size > 5000
+        return false if _bic.to_s.size > MAX_LENGTH_FOR_BIC
       end
 
       if _generated_sepa_debit = @generated_sepa_debit
@@ -158,7 +164,7 @@ module Stripe
       end
 
       if _iban_last4 = @iban_last4
-        return false if _iban_last4.to_s.size > 5000
+        return false if _iban_last4.to_s.size > MAX_LENGTH_FOR_IBAN_LAST4
       end
 
       if _preferred_language = @preferred_language
@@ -166,7 +172,7 @@ module Stripe
       end
 
       if _verified_name = @verified_name
-        return false if _verified_name.to_s.size > 5000
+        return false if _verified_name.to_s.size > MAX_LENGTH_FOR_VERIFIED_NAME
       end
 
       true
@@ -179,10 +185,7 @@ module Stripe
         return @bank_code = nil
       end
       _bank_code = bank_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
       @bank_code = _bank_code
     end
 
@@ -193,10 +196,7 @@ module Stripe
         return @bank_name = nil
       end
       _bank_name = bank_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       @bank_name = _bank_name
     end
 
@@ -207,10 +207,7 @@ module Stripe
         return @bic = nil
       end
       _bic = bic.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
       @bic = _bic
     end
 
@@ -243,10 +240,7 @@ module Stripe
         return @iban_last4 = nil
       end
       _iban_last4 = iban_last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("iban_last4", _iban_last4.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
       @iban_last4 = _iban_last4
     end
 
@@ -268,10 +262,7 @@ module Stripe
         return @verified_name = nil
       end
       _verified_name = verified_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
       @verified_name = _verified_name
     end
 

@@ -23,10 +23,12 @@ module Stripe
     # The URL the customer will be directed to if they decide to cancel payment and return to your website.
     @[JSON::Field(key: "cancel_url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter cancel_url : String? = nil
+    MAX_LENGTH_FOR_CANCEL_URL = 5000
 
     # The URL to which Stripe should send customers when payment or setup is complete. If you’d like to use information from the successful Checkout Session on your page, read the guide on [customizing your success page](https://stripe.com/docs/payments/checkout/custom-success-page).
     @[JSON::Field(key: "success_url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter success_url : String? = nil
+    MAX_LENGTH_FOR_SUCCESS_URL = 5000
 
     # Optional properties
 
@@ -43,12 +45,13 @@ module Stripe
     # Specify whether Checkout should collect the customer's billing address.
     @[JSON::Field(key: "billing_address_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter billing_address_collection : String? = nil
-
-    VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION = StaticArray["auto", "required"]
+    ERROR_MESSAGE_FOR_BILLING_ADDRESS_COLLECTION = "invalid value for \"billing_address_collection\", must be one of [auto, required]."
+    VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION  = StaticArray["auto", "required"]
 
     # A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or similar, and can be used to reconcile the session with your internal systems.
     @[JSON::Field(key: "client_reference_id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter client_reference_id : String? = nil
+    MAX_LENGTH_FOR_CLIENT_REFERENCE_ID = 200
 
     @[JSON::Field(key: "consent_collection", type: Stripe::ConsentCollectionParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter consent_collection : Stripe::ConsentCollectionParams? = nil
@@ -60,12 +63,13 @@ module Stripe
     # ID of an existing Customer, if one exists. In `payment` mode, the customer’s most recent card payment method will be used to prefill the email, name, card details, and billing address on the Checkout page. In `subscription` mode, the customer’s [default payment method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method) will be used if it’s a card, and otherwise the most recent card will be used. A valid billing address, billing name and billing email are required on the payment method for Checkout to prefill the customer's card details.  If the Customer already has a valid [email](https://stripe.com/docs/api/customers/object#customer_object-email) set, the email will be prefilled and not editable in Checkout. If the Customer does not have a valid `email`, Checkout will set the email entered during the session on the Customer.  If blank for Checkout Sessions in `payment` or `subscription` mode, Checkout will create a new Customer object based on information provided during the payment flow.  You can set [`payment_intent_data.setup_future_usage`](https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-payment_intent_data-setup_future_usage) to have Checkout automatically attach the payment method to the Customer you pass in for future reuse.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # Configure whether a Checkout Session creates a [Customer](https://stripe.com/docs/api/customers) during Session confirmation.  When a Customer is not created, you can still retrieve email, address, and other customer data entered in Checkout with [customer_details](https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-customer_details).  Sessions that don't create Customers instead create [Guest Customers](https://support.stripe.com/questions/guest-customer-faq) in the Dashboard. Promotion codes limited to first time customers will return invalid for these Sessions.  Can only be set in `payment` and `setup` mode.
     @[JSON::Field(key: "customer_creation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer_creation : String? = nil
-
-    VALID_VALUES_FOR_CUSTOMER_CREATION = StaticArray["always", "if_required"]
+    ERROR_MESSAGE_FOR_CUSTOMER_CREATION = "invalid value for \"customer_creation\", must be one of [always, if_required]."
+    VALID_VALUES_FOR_CUSTOMER_CREATION  = StaticArray["always", "if_required"]
 
     # If provided, this value will be used when the Customer object is created. If not provided, customers will be asked to enter their email address. Use this parameter to prefill customer data if you already have an email on file. To access information about the customer once a session is complete, use the `customer` field.
     @[JSON::Field(key: "customer_email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -93,8 +97,8 @@ module Stripe
     # The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's locale is used.
     @[JSON::Field(key: "locale", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter locale : String? = nil
-
-    VALID_VALUES_FOR_LOCALE = StaticArray["auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"]
+    ERROR_MESSAGE_FOR_LOCALE = "invalid value for \"locale\", must be one of [auto, bg, cs, da, de, el, en, en-GB, es, es-419, et, fi, fil, fr, fr-CA, hr, hu, id, it, ja, ko, lt, lv, ms, mt, nb, nl, pl, pt, pt-BR, ro, ru, sk, sl, sv, th, tr, vi, zh, zh-HK, zh-TW]."
+    VALID_VALUES_FOR_LOCALE  = StaticArray["auto", "bg", "cs", "da", "de", "el", "en", "en-GB", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"]
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -103,8 +107,8 @@ module Stripe
     # The mode of the Checkout Session. Required when using prices or `setup` mode. Pass `subscription` if the Checkout Session includes at least one recurring item.
     @[JSON::Field(key: "mode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mode : String? = nil
-
-    VALID_VALUES_FOR_MODE = StaticArray["payment", "setup", "subscription"]
+    ERROR_MESSAGE_FOR_MODE = "invalid value for \"mode\", must be one of [payment, setup, subscription]."
+    VALID_VALUES_FOR_MODE  = StaticArray["payment", "setup", "subscription"]
 
     @[JSON::Field(key: "payment_intent_data", type: Stripe::PaymentIntentDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_intent_data : Stripe::PaymentIntentDataParams? = nil
@@ -112,8 +116,8 @@ module Stripe
     # Specify whether Checkout should collect a payment method. When set to `if_required`, Checkout will not collect a payment method when the total due for the session is 0. This may occur if the Checkout Session includes a free trial or a discount.  Can only be set in `subscription` mode.  If you'd like information on how to collect a payment method outside of Checkout, read the guide on configuring [subscriptions with a free trial](https://stripe.com/docs/payments/checkout/free-trials).
     @[JSON::Field(key: "payment_method_collection", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_collection : String? = nil
-
-    VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION = StaticArray["always", "if_required"]
+    ERROR_MESSAGE_FOR_PAYMENT_METHOD_COLLECTION = "invalid value for \"payment_method_collection\", must be one of [always, if_required]."
+    VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = StaticArray["always", "if_required"]
 
     @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_options : Stripe::PaymentMethodOptionsParam? = nil
@@ -121,8 +125,8 @@ module Stripe
     # A list of the types of payment methods (e.g., `card`) this Checkout Session can accept.  In `payment` and `subscription` mode, you can omit this attribute to manage your payment methods from the [Stripe Dashboard](https://dashboard.stripe.com/settings/payment_methods). It is required in `setup` mode.  Read more about the supported payment methods and their requirements in our [payment method details guide](/docs/payments/checkout/payment-methods).  If multiple payment methods are passed, Checkout will dynamically reorder them to prioritize the most relevant payment methods based on the customer's location and other characteristics.
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_types : Array(String)? = nil
-
-    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES = StaticArray["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
+    ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES = "invalid value for \"payment_method_types\", must be one of [acss_debit, affirm, afterpay_clearpay, alipay, au_becs_debit, bacs_debit, bancontact, blik, boleto, card, customer_balance, eps, fpx, giropay, grabpay, ideal, klarna, konbini, oxxo, p24, paynow, pix, promptpay, sepa_debit, sofort, us_bank_account, wechat_pay]."
+    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES  = StaticArray["acss_debit", "affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "customer_balance", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
 
     @[JSON::Field(key: "phone_number_collection", type: Stripe::PhoneNumberCollectionParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter phone_number_collection : Stripe::PhoneNumberCollectionParams? = nil
@@ -140,8 +144,8 @@ module Stripe
     # Describes the type of transaction being performed by Checkout in order to customize relevant text on the page, such as the submit button. `submit_type` can only be specified on Checkout Sessions in `payment` mode, but not Checkout Sessions in `subscription` or `setup` mode.
     @[JSON::Field(key: "submit_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter submit_type : String? = nil
-
-    VALID_VALUES_FOR_SUBMIT_TYPE = StaticArray["auto", "book", "donate", "pay"]
+    ERROR_MESSAGE_FOR_SUBMIT_TYPE = "invalid value for \"submit_type\", must be one of [auto, book, donate, pay]."
+    VALID_VALUES_FOR_SUBMIT_TYPE  = StaticArray["auto", "book", "donate", "pay"]
 
     @[JSON::Field(key: "subscription_data", type: Stripe::SubscriptionDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter subscription_data : Stripe::SubscriptionDataParams? = nil
@@ -197,14 +201,14 @@ module Stripe
       invalid_properties.push("\"cancel_url\" is required and cannot be null") if @cancel_url.nil?
 
       if _cancel_url = @cancel_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancel_url", _cancel_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancel_url", _cancel_url.to_s.size, MAX_LENGTH_FOR_CANCEL_URL)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"success_url\" is required and cannot be null") if @success_url.nil?
 
       if _success_url = @success_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("success_url", _success_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("success_url", _success_url.to_s.size, MAX_LENGTH_FOR_SUCCESS_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -216,10 +220,10 @@ module Stripe
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
       if _billing_address_collection = @billing_address_collection
-        invalid_properties.push(OpenApi::EnumValidator.error_message("billing_address_collection", VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)) unless OpenApi::EnumValidator.valid?(_billing_address_collection, VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_ADDRESS_COLLECTION) unless OpenApi::EnumValidator.valid?(_billing_address_collection, VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)
       end
       if _client_reference_id = @client_reference_id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_reference_id", _client_reference_id.to_s.size, 200)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_reference_id", _client_reference_id.to_s.size, MAX_LENGTH_FOR_CLIENT_REFERENCE_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -228,42 +232,42 @@ module Stripe
       end
 
       if _customer = @customer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
       if _customer_creation = @customer_creation
-        invalid_properties.push(OpenApi::EnumValidator.error_message("customer_creation", VALID_VALUES_FOR_CUSTOMER_CREATION)) unless OpenApi::EnumValidator.valid?(_customer_creation, VALID_VALUES_FOR_CUSTOMER_CREATION)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CUSTOMER_CREATION) unless OpenApi::EnumValidator.valid?(_customer_creation, VALID_VALUES_FOR_CUSTOMER_CREATION)
       end
 
       if _customer_update = @customer_update
         invalid_properties.concat(_customer_update.list_invalid_properties_for("customer_update")) if _customer_update.is_a?(OpenApi::Validatable)
       end
       if _discounts = @discounts
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "discounts", array: _discounts)) if _discounts.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "discounts", container: _discounts)) if _discounts.is_a?(Array)
       end
 
       if _line_items = @line_items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "line_items", array: _line_items)) if _line_items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "line_items", container: _line_items)) if _line_items.is_a?(Array)
       end
       if _locale = @locale
-        invalid_properties.push(OpenApi::EnumValidator.error_message("locale", VALID_VALUES_FOR_LOCALE)) unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_LOCALE) unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
       end
 
       if _mode = @mode
-        invalid_properties.push(OpenApi::EnumValidator.error_message("mode", VALID_VALUES_FOR_MODE)) unless OpenApi::EnumValidator.valid?(_mode, VALID_VALUES_FOR_MODE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_MODE) unless OpenApi::EnumValidator.valid?(_mode, VALID_VALUES_FOR_MODE)
       end
       if _payment_intent_data = @payment_intent_data
         invalid_properties.concat(_payment_intent_data.list_invalid_properties_for("payment_intent_data")) if _payment_intent_data.is_a?(OpenApi::Validatable)
       end
       if _payment_method_collection = @payment_method_collection
-        invalid_properties.push(OpenApi::EnumValidator.error_message("payment_method_collection", VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)) unless OpenApi::EnumValidator.valid?(_payment_method_collection, VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_COLLECTION) unless OpenApi::EnumValidator.valid?(_payment_method_collection, VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)
       end
       if _payment_method_options = @payment_method_options
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
       if _payment_method_types = @payment_method_types
-        invalid_properties.push(OpenApi::EnumValidator.error_message("payment_method_types", VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
       if _phone_number_collection = @phone_number_collection
         invalid_properties.concat(_phone_number_collection.list_invalid_properties_for("phone_number_collection")) if _phone_number_collection.is_a?(OpenApi::Validatable)
@@ -275,10 +279,10 @@ module Stripe
         invalid_properties.concat(_shipping_address_collection.list_invalid_properties_for("shipping_address_collection")) if _shipping_address_collection.is_a?(OpenApi::Validatable)
       end
       if _shipping_options = @shipping_options
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "shipping_options", array: _shipping_options)) if _shipping_options.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "shipping_options", container: _shipping_options)) if _shipping_options.is_a?(Array)
       end
       if _submit_type = @submit_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("submit_type", VALID_VALUES_FOR_SUBMIT_TYPE)) unless OpenApi::EnumValidator.valid?(_submit_type, VALID_VALUES_FOR_SUBMIT_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SUBMIT_TYPE) unless OpenApi::EnumValidator.valid?(_submit_type, VALID_VALUES_FOR_SUBMIT_TYPE)
       end
       if _subscription_data = @subscription_data
         invalid_properties.concat(_subscription_data.list_invalid_properties_for("subscription_data")) if _subscription_data.is_a?(OpenApi::Validatable)
@@ -294,12 +298,12 @@ module Stripe
     def valid? : Bool
       return false if @cancel_url.nil?
       if _cancel_url = @cancel_url
-        return false if _cancel_url.to_s.size > 5000
+        return false if _cancel_url.to_s.size > MAX_LENGTH_FOR_CANCEL_URL
       end
 
       return false if @success_url.nil?
       if _success_url = @success_url
-        return false if _success_url.to_s.size > 5000
+        return false if _success_url.to_s.size > MAX_LENGTH_FOR_SUCCESS_URL
       end
 
       if _after_expiration = @after_expiration
@@ -315,7 +319,7 @@ module Stripe
       end
 
       if _client_reference_id = @client_reference_id
-        return false if _client_reference_id.to_s.size > 200
+        return false if _client_reference_id.to_s.size > MAX_LENGTH_FOR_CLIENT_REFERENCE_ID
       end
 
       if _consent_collection = @consent_collection
@@ -323,7 +327,7 @@ module Stripe
       end
 
       if _customer = @customer
-        return false if _customer.to_s.size > 5000
+        return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       if _customer_creation = @customer_creation
@@ -335,11 +339,11 @@ module Stripe
       end
 
       if _discounts = @discounts
-        return false if _discounts.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _discounts)
+        return false if _discounts.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _discounts)
       end
 
       if _line_items = @line_items
-        return false if _line_items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _line_items)
+        return false if _line_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _line_items)
       end
 
       if _locale = @locale
@@ -379,7 +383,7 @@ module Stripe
       end
 
       if _shipping_options = @shipping_options
-        return false if _shipping_options.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _shipping_options)
+        return false if _shipping_options.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _shipping_options)
       end
 
       if _submit_type = @submit_type
@@ -404,10 +408,7 @@ module Stripe
         raise ArgumentError.new("\"cancel_url\" is required and cannot be null")
       end
       _cancel_url = cancel_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancel_url", _cancel_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("cancel_url", _cancel_url.to_s.size, MAX_LENGTH_FOR_CANCEL_URL)
       @cancel_url = _cancel_url
     end
 
@@ -418,10 +419,7 @@ module Stripe
         raise ArgumentError.new("\"success_url\" is required and cannot be null")
       end
       _success_url = success_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("success_url", _success_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("success_url", _success_url.to_s.size, MAX_LENGTH_FOR_SUCCESS_URL)
       @success_url = _success_url
     end
 
@@ -475,10 +473,7 @@ module Stripe
         return @client_reference_id = nil
       end
       _client_reference_id = client_reference_id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_reference_id", _client_reference_id.to_s.size, 200)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("client_reference_id", _client_reference_id.to_s.size, MAX_LENGTH_FOR_CLIENT_REFERENCE_ID)
       @client_reference_id = _client_reference_id
     end
 
@@ -510,10 +505,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       @customer = _customer
     end
 
@@ -556,7 +548,7 @@ module Stripe
         return @discounts = nil
       end
       _discounts = discounts.not_nil!
-      OpenApi::ArrayValidator.validate(array: _discounts) if _discounts.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _discounts) if _discounts.is_a?(Array)
       @discounts = _discounts
     end
 
@@ -587,7 +579,7 @@ module Stripe
         return @line_items = nil
       end
       _line_items = line_items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _line_items) if _line_items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _line_items) if _line_items.is_a?(Array)
       @line_items = _line_items
     end
 
@@ -707,7 +699,7 @@ module Stripe
         return @shipping_options = nil
       end
       _shipping_options = shipping_options.not_nil!
-      OpenApi::ArrayValidator.validate(array: _shipping_options) if _shipping_options.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _shipping_options) if _shipping_options.is_a?(Array)
       @shipping_options = _shipping_options
     end
 

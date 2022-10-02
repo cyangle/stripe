@@ -24,6 +24,7 @@ module Stripe
     # The messaging shown to customers in the portal.
     @[JSON::Field(key: "headline", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: headline.nil? && !headline_present?)]
     getter headline : String? = nil
+    MAX_LENGTH_FOR_HEADLINE = 5000
 
     @[JSON::Field(ignore: true)]
     property? headline_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # A link to the business’s publicly available privacy policy.
     @[JSON::Field(key: "privacy_policy_url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: privacy_policy_url.nil? && !privacy_policy_url_present?)]
     getter privacy_policy_url : String? = nil
+    MAX_LENGTH_FOR_PRIVACY_POLICY_URL = 5000
 
     @[JSON::Field(ignore: true)]
     property? privacy_policy_url_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # A link to the business’s publicly available terms of service.
     @[JSON::Field(key: "terms_of_service_url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: terms_of_service_url.nil? && !terms_of_service_url_present?)]
     getter terms_of_service_url : String? = nil
+    MAX_LENGTH_FOR_TERMS_OF_SERVICE_URL = 5000
 
     @[JSON::Field(ignore: true)]
     property? terms_of_service_url_present : Bool = false
@@ -59,17 +62,17 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _headline = @headline
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, MAX_LENGTH_FOR_HEADLINE)
           invalid_properties.push(max_length_error)
         end
       end
       if _privacy_policy_url = @privacy_policy_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("privacy_policy_url", _privacy_policy_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("privacy_policy_url", _privacy_policy_url.to_s.size, MAX_LENGTH_FOR_PRIVACY_POLICY_URL)
           invalid_properties.push(max_length_error)
         end
       end
       if _terms_of_service_url = @terms_of_service_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("terms_of_service_url", _terms_of_service_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("terms_of_service_url", _terms_of_service_url.to_s.size, MAX_LENGTH_FOR_TERMS_OF_SERVICE_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -80,15 +83,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _headline = @headline
-        return false if _headline.to_s.size > 5000
+        return false if _headline.to_s.size > MAX_LENGTH_FOR_HEADLINE
       end
 
       if _privacy_policy_url = @privacy_policy_url
-        return false if _privacy_policy_url.to_s.size > 5000
+        return false if _privacy_policy_url.to_s.size > MAX_LENGTH_FOR_PRIVACY_POLICY_URL
       end
 
       if _terms_of_service_url = @terms_of_service_url
-        return false if _terms_of_service_url.to_s.size > 5000
+        return false if _terms_of_service_url.to_s.size > MAX_LENGTH_FOR_TERMS_OF_SERVICE_URL
       end
 
       true
@@ -101,10 +104,7 @@ module Stripe
         return @headline = nil
       end
       _headline = headline.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("headline", _headline.to_s.size, MAX_LENGTH_FOR_HEADLINE)
       @headline = _headline
     end
 
@@ -115,10 +115,7 @@ module Stripe
         return @privacy_policy_url = nil
       end
       _privacy_policy_url = privacy_policy_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("privacy_policy_url", _privacy_policy_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("privacy_policy_url", _privacy_policy_url.to_s.size, MAX_LENGTH_FOR_PRIVACY_POLICY_URL)
       @privacy_policy_url = _privacy_policy_url
     end
 
@@ -129,10 +126,7 @@ module Stripe
         return @terms_of_service_url = nil
       end
       _terms_of_service_url = terms_of_service_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("terms_of_service_url", _terms_of_service_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("terms_of_service_url", _terms_of_service_url.to_s.size, MAX_LENGTH_FOR_TERMS_OF_SERVICE_URL)
       @terms_of_service_url = _terms_of_service_url
     end
 

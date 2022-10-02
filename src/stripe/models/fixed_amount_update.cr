@@ -39,7 +39,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _currency_options = @currency_options
-        invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "currency_options", hash: _currency_options)) if _currency_options.is_a?(Hash)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "currency_options", container: _currency_options)) if _currency_options.is_a?(Hash)
       end
       invalid_properties
     end
@@ -48,7 +48,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _currency_options = @currency_options
-        return false if _currency_options.is_a?(Hash) && !OpenApi::HashValidator.valid?(hash: _currency_options)
+        return false if _currency_options.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _currency_options)
       end
 
       true
@@ -61,7 +61,7 @@ module Stripe
         return @currency_options = nil
       end
       _currency_options = currency_options.not_nil!
-      OpenApi::HashValidator.validate(hash: _currency_options) if _currency_options.is_a?(Hash)
+      OpenApi::ContainerValidator.validate(container: _currency_options) if _currency_options.is_a?(Hash)
       @currency_options = _currency_options
     end
 

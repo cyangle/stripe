@@ -22,16 +22,17 @@ module Stripe
 
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
-
-    VALID_VALUES_FOR_CAPTURE_METHOD = StaticArray["", "manual"]
+    ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [, manual]."
+    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["", "manual"]
 
     @[JSON::Field(key: "reference", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter reference : String? = nil
+    MAX_LENGTH_FOR_REFERENCE = 128
 
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
-
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none"]
+    ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none]."
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -50,15 +51,15 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _capture_method = @capture_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("capture_method", VALID_VALUES_FOR_CAPTURE_METHOD)) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CAPTURE_METHOD) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
       if _reference = @reference
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 128)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
       if _setup_future_usage = @setup_future_usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
     end
@@ -71,7 +72,7 @@ module Stripe
       end
 
       if _reference = @reference
-        return false if _reference.to_s.size > 128
+        return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 
       if _setup_future_usage = @setup_future_usage
@@ -99,10 +100,7 @@ module Stripe
         return @reference = nil
       end
       _reference = reference.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 128)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       @reference = _reference
     end
 

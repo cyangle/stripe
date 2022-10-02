@@ -30,6 +30,7 @@ module Stripe
     # A shareable URL to the hosted portal login page. Your customers will be able to log in with their [email](https://stripe.com/docs/api/customers/object#customer_object-email) and receive a link to their customer portal.
     @[JSON::Field(key: "url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: url.nil? && !url_present?)]
     getter url : String? = nil
+    MAX_LENGTH_FOR_URL = 5000
 
     @[JSON::Field(ignore: true)]
     property? url_present : Bool = false
@@ -53,7 +54,7 @@ module Stripe
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
       if _url = @url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -66,7 +67,7 @@ module Stripe
       return false if @enabled.nil?
 
       if _url = @url
-        return false if _url.to_s.size > 5000
+        return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 
       true
@@ -89,10 +90,7 @@ module Stripe
         return @url = nil
       end
       _url = url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
       @url = _url
     end
 

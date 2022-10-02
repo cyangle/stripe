@@ -25,6 +25,7 @@ module Stripe
 
     @[JSON::Field(key: "directive", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter directive : String? = nil
+    MAX_LENGTH_FOR_DIRECTIVE = 5000
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -47,7 +48,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _directive = @directive
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("directive", _directive.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("directive", _directive.to_s.size, MAX_LENGTH_FOR_DIRECTIVE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -59,7 +60,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _directive = @directive
-        return false if _directive.to_s.size > 5000
+        return false if _directive.to_s.size > MAX_LENGTH_FOR_DIRECTIVE
       end
 
       true
@@ -82,10 +83,7 @@ module Stripe
         return @directive = nil
       end
       _directive = directive.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("directive", _directive.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("directive", _directive.to_s.size, MAX_LENGTH_FOR_DIRECTIVE)
       @directive = _directive
     end
 

@@ -28,6 +28,7 @@ module Stripe
     # The recipient's email address.
     @[JSON::Field(key: "email_sent_to", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter email_sent_to : String? = nil
+    MAX_LENGTH_FOR_EMAIL_SENT_TO = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -49,7 +50,7 @@ module Stripe
       invalid_properties.push("\"email_sent_to\" is required and cannot be null") if @email_sent_to.nil?
 
       if _email_sent_to = @email_sent_to
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email_sent_to", _email_sent_to.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email_sent_to", _email_sent_to.to_s.size, MAX_LENGTH_FOR_EMAIL_SENT_TO)
           invalid_properties.push(max_length_error)
         end
       end
@@ -63,7 +64,7 @@ module Stripe
 
       return false if @email_sent_to.nil?
       if _email_sent_to = @email_sent_to
-        return false if _email_sent_to.to_s.size > 5000
+        return false if _email_sent_to.to_s.size > MAX_LENGTH_FOR_EMAIL_SENT_TO
       end
 
       true
@@ -86,10 +87,7 @@ module Stripe
         raise ArgumentError.new("\"email_sent_to\" is required and cannot be null")
       end
       _email_sent_to = email_sent_to.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email_sent_to", _email_sent_to.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("email_sent_to", _email_sent_to.to_s.size, MAX_LENGTH_FOR_EMAIL_SENT_TO)
       @email_sent_to = _email_sent_to
     end
 

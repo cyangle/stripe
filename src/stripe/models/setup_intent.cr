@@ -28,6 +28,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,8 +37,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["setup_intent"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [setup_intent]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["setup_intent"]
 
     # The list of payment method types (e.g. card) that this SetupIntent is allowed to set up.
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -46,12 +47,13 @@ module Stripe
     # [Status](https://stripe.com/docs/payments/intents#intent-statuses) of this SetupIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `canceled`, or `succeeded`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["canceled", "processing", "requires_action", "requires_confirmation", "requires_payment_method", "succeeded"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, processing, requires_action, requires_confirmation, requires_payment_method, succeeded]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "processing", "requires_action", "requires_confirmation", "requires_payment_method", "succeeded"]
 
     # Indicates how the payment method is intended to be used in the future.  Use `on_session` if you intend to only reuse the payment method when the customer is in your checkout flow. Use `off_session` if your customer may or may not be in your checkout flow. If not provided, this value defaults to `off_session`.
     @[JSON::Field(key: "usage", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter usage : String? = nil
+    MAX_LENGTH_FOR_USAGE = 5000
 
     # Optional properties
 
@@ -68,14 +70,16 @@ module Stripe
     # Reason for cancellation of this SetupIntent, one of `abandoned`, `requested_by_customer`, or `duplicate`.
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
     getter cancellation_reason : String? = nil
+    ERROR_MESSAGE_FOR_CANCELLATION_REASON = "invalid value for \"cancellation_reason\", must be one of [abandoned, duplicate, requested_by_customer]."
+    VALID_VALUES_FOR_CANCELLATION_REASON  = StaticArray["abandoned", "duplicate", "requested_by_customer"]
 
     @[JSON::Field(ignore: true)]
     property? cancellation_reason_present : Bool = false
-    VALID_VALUES_FOR_CANCELLATION_REASON = StaticArray["abandoned", "duplicate", "requested_by_customer"]
 
     # The client secret of this SetupIntent. Used for client-side retrieval using a publishable key.  The client secret can be used to complete payment setup from your frontend. It should not be stored, logged, or exposed to anyone other than the customer. Make sure that you have TLS enabled on any page that includes the client secret.
     @[JSON::Field(key: "client_secret", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: client_secret.nil? && !client_secret_present?)]
     getter client_secret : String? = nil
+    MAX_LENGTH_FOR_CLIENT_SECRET = 5000
 
     @[JSON::Field(ignore: true)]
     property? client_secret_present : Bool = false
@@ -89,6 +93,7 @@ module Stripe
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
@@ -96,10 +101,11 @@ module Stripe
     # Indicates the directions of money movement for which this payment method is intended to be used.  Include `inbound` if you intend to use the payment method as the origin to pull funds from. Include `outbound` if you intend to use the payment method as the destination to send funds to. You can include both if you intend to use the payment method for both purposes.
     @[JSON::Field(key: "flow_directions", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: flow_directions.nil? && !flow_directions_present?)]
     getter flow_directions : Array(String)? = nil
+    ERROR_MESSAGE_FOR_FLOW_DIRECTIONS = "invalid value for \"flow_directions\", must be one of [inbound, outbound]."
+    VALID_VALUES_FOR_FLOW_DIRECTIONS  = StaticArray["inbound", "outbound"]
 
     @[JSON::Field(ignore: true)]
     property? flow_directions_present : Bool = false
-    VALID_VALUES_FOR_FLOW_DIRECTIONS = StaticArray["inbound", "outbound"]
 
     @[JSON::Field(key: "last_setup_error", type: Stripe::SetupIntentLastSetupError?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: last_setup_error.nil? && !last_setup_error_present?)]
     getter last_setup_error : Stripe::SetupIntentLastSetupError? = nil
@@ -198,7 +204,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -207,19 +213,19 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"payment_method_types\" is required and cannot be null") if @payment_method_types.nil?
 
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"usage\" is required and cannot be null") if @usage.nil?
 
       if _usage = @usage
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("usage", _usage.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("usage", _usage.to_s.size, MAX_LENGTH_FOR_USAGE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -228,10 +234,10 @@ module Stripe
       end
 
       if _cancellation_reason = @cancellation_reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("cancellation_reason", VALID_VALUES_FOR_CANCELLATION_REASON)) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CANCELLATION_REASON) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
       if _client_secret = @client_secret
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
@@ -239,12 +245,12 @@ module Stripe
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       if _flow_directions = @flow_directions
-        invalid_properties.push(OpenApi::EnumValidator.error_message("flow_directions", VALID_VALUES_FOR_FLOW_DIRECTIONS)) unless OpenApi::EnumValidator.valid?(_flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_FLOW_DIRECTIONS) unless OpenApi::EnumValidator.valid?(_flow_directions, VALID_VALUES_FOR_FLOW_DIRECTIONS)
       end
       if _last_setup_error = @last_setup_error
         invalid_properties.concat(_last_setup_error.list_invalid_properties_for("last_setup_error")) if _last_setup_error.is_a?(OpenApi::Validatable)
@@ -281,7 +287,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -300,7 +306,7 @@ module Stripe
 
       return false if @usage.nil?
       if _usage = @usage
-        return false if _usage.to_s.size > 5000
+        return false if _usage.to_s.size > MAX_LENGTH_FOR_USAGE
       end
 
       if _application = @application
@@ -312,7 +318,7 @@ module Stripe
       end
 
       if _client_secret = @client_secret
-        return false if _client_secret.to_s.size > 5000
+        return false if _client_secret.to_s.size > MAX_LENGTH_FOR_CLIENT_SECRET
       end
 
       if _customer = @customer
@@ -320,7 +326,7 @@ module Stripe
       end
 
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _flow_directions = @flow_directions
@@ -379,10 +385,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -435,10 +438,7 @@ module Stripe
         raise ArgumentError.new("\"usage\" is required and cannot be null")
       end
       _usage = usage.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("usage", _usage.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("usage", _usage.to_s.size, MAX_LENGTH_FOR_USAGE)
       @usage = _usage
     end
 
@@ -481,10 +481,7 @@ module Stripe
         return @client_secret = nil
       end
       _client_secret = client_secret.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
       @client_secret = _client_secret
     end
 
@@ -506,10 +503,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 

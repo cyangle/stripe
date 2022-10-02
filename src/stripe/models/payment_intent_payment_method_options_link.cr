@@ -24,12 +24,13 @@ module Stripe
     # Controls when the funds will be captured from the customer's account.
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
-
-    VALID_VALUES_FOR_CAPTURE_METHOD = StaticArray["manual"]
+    ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [manual]."
+    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["manual"]
 
     # Token used for persistent Link logins.
     @[JSON::Field(key: "persistent_token", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: persistent_token.nil? && !persistent_token_present?)]
     getter persistent_token : String? = nil
+    MAX_LENGTH_FOR_PERSISTENT_TOKEN = 5000
 
     @[JSON::Field(ignore: true)]
     property? persistent_token_present : Bool = false
@@ -37,8 +38,8 @@ module Stripe
     # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
-
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none", "off_session"]
+    ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none, off_session]."
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none", "off_session"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -57,15 +58,15 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _capture_method = @capture_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("capture_method", VALID_VALUES_FOR_CAPTURE_METHOD)) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CAPTURE_METHOD) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
       if _persistent_token = @persistent_token
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("persistent_token", _persistent_token.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("persistent_token", _persistent_token.to_s.size, MAX_LENGTH_FOR_PERSISTENT_TOKEN)
           invalid_properties.push(max_length_error)
         end
       end
       if _setup_future_usage = @setup_future_usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
     end
@@ -78,7 +79,7 @@ module Stripe
       end
 
       if _persistent_token = @persistent_token
-        return false if _persistent_token.to_s.size > 5000
+        return false if _persistent_token.to_s.size > MAX_LENGTH_FOR_PERSISTENT_TOKEN
       end
 
       if _setup_future_usage = @setup_future_usage
@@ -106,10 +107,7 @@ module Stripe
         return @persistent_token = nil
       end
       _persistent_token = persistent_token.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("persistent_token", _persistent_token.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("persistent_token", _persistent_token.to_s.size, MAX_LENGTH_FOR_PERSISTENT_TOKEN)
       @persistent_token = _persistent_token
     end
 

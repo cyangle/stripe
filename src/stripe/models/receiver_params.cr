@@ -23,8 +23,9 @@ module Stripe
 
     @[JSON::Field(key: "refund_attributes_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter refund_attributes_method : String? = nil
-
-    VALID_VALUES_FOR_REFUND_ATTRIBUTES_METHOD = StaticArray["email", "manual", "none"]
+    MAX_LENGTH_FOR_REFUND_ATTRIBUTES_METHOD    = 5000
+    ERROR_MESSAGE_FOR_REFUND_ATTRIBUTES_METHOD = "invalid value for \"refund_attributes_method\", must be one of [email, manual, none]."
+    VALID_VALUES_FOR_REFUND_ATTRIBUTES_METHOD  = StaticArray["email", "manual", "none"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -41,7 +42,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _refund_attributes_method = @refund_attributes_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("refund_attributes_method", VALID_VALUES_FOR_REFUND_ATTRIBUTES_METHOD)) unless OpenApi::EnumValidator.valid?(_refund_attributes_method, VALID_VALUES_FOR_REFUND_ATTRIBUTES_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REFUND_ATTRIBUTES_METHOD) unless OpenApi::EnumValidator.valid?(_refund_attributes_method, VALID_VALUES_FOR_REFUND_ATTRIBUTES_METHOD)
       end
       invalid_properties
     end

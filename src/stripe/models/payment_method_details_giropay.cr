@@ -24,6 +24,7 @@ module Stripe
     # Bank code of bank associated with the bank account.
     @[JSON::Field(key: "bank_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_code.nil? && !bank_code_present?)]
     getter bank_code : String? = nil
+    MAX_LENGTH_FOR_BANK_CODE = 5000
 
     @[JSON::Field(ignore: true)]
     property? bank_code_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # Name of the bank associated with the bank account.
     @[JSON::Field(key: "bank_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_name.nil? && !bank_name_present?)]
     getter bank_name : String? = nil
+    MAX_LENGTH_FOR_BANK_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? bank_name_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # Bank Identifier Code of the bank associated with the bank account.
     @[JSON::Field(key: "bic", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bic.nil? && !bic_present?)]
     getter bic : String? = nil
+    MAX_LENGTH_FOR_BIC = 5000
 
     @[JSON::Field(ignore: true)]
     property? bic_present : Bool = false
@@ -45,6 +48,7 @@ module Stripe
     # Owner's verified full name. Values are verified or provided by Giropay directly (if supported) at the time of authorization or settlement. They cannot be set or mutated. Giropay rarely provides this information so the attribute is usually empty.
     @[JSON::Field(key: "verified_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verified_name.nil? && !verified_name_present?)]
     getter verified_name : String? = nil
+    MAX_LENGTH_FOR_VERIFIED_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? verified_name_present : Bool = false
@@ -67,22 +71,22 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _bank_code = @bank_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       if _bank_name = @bank_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _bic = @bic
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
           invalid_properties.push(max_length_error)
         end
       end
       if _verified_name = @verified_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -93,19 +97,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _bank_code = @bank_code
-        return false if _bank_code.to_s.size > 5000
+        return false if _bank_code.to_s.size > MAX_LENGTH_FOR_BANK_CODE
       end
 
       if _bank_name = @bank_name
-        return false if _bank_name.to_s.size > 5000
+        return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
       if _bic = @bic
-        return false if _bic.to_s.size > 5000
+        return false if _bic.to_s.size > MAX_LENGTH_FOR_BIC
       end
 
       if _verified_name = @verified_name
-        return false if _verified_name.to_s.size > 5000
+        return false if _verified_name.to_s.size > MAX_LENGTH_FOR_VERIFIED_NAME
       end
 
       true
@@ -118,10 +122,7 @@ module Stripe
         return @bank_code = nil
       end
       _bank_code = bank_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
       @bank_code = _bank_code
     end
 
@@ -132,10 +133,7 @@ module Stripe
         return @bank_name = nil
       end
       _bank_name = bank_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       @bank_name = _bank_name
     end
 
@@ -146,10 +144,7 @@ module Stripe
         return @bic = nil
       end
       _bic = bic.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
       @bic = _bic
     end
 
@@ -160,10 +155,7 @@ module Stripe
         return @verified_name = nil
       end
       _verified_name = verified_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
       @verified_name = _verified_name
     end
 

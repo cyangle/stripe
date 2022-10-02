@@ -24,20 +24,24 @@ module Stripe
     # The URL you provide to redirect the customer to after they authenticated their payment.
     @[JSON::Field(key: "return_url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter return_url : String? = nil
+    MAX_LENGTH_FOR_RETURN_URL = 5000
 
     # The status of the redirect, either `pending` (ready to be used by your customer to authenticate the transaction), `succeeded` (succesful authentication, cannot be reused) or `not_required` (redirect should not be used) or `failed` (failed authentication, cannot be reused).
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
+    MAX_LENGTH_FOR_STATUS = 5000
 
     # The URL provided to you to redirect a customer to as part of a `redirect` authentication flow.
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter url : String? = nil
+    MAX_LENGTH_FOR_URL = 2048
 
     # Optional properties
 
     # The failure reason for the redirect, either `user_abort` (the customer aborted or dropped out of the redirect flow), `declined` (the authentication failed or the transaction was declined), or `processing_error` (the redirect failed due to a technical error). Present only if the redirect status is `failed`.
     @[JSON::Field(key: "failure_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: failure_reason.nil? && !failure_reason_present?)]
     getter failure_reason : String? = nil
+    MAX_LENGTH_FOR_FAILURE_REASON = 5000
 
     @[JSON::Field(ignore: true)]
     property? failure_reason_present : Bool = false
@@ -63,26 +67,26 @@ module Stripe
       invalid_properties.push("\"return_url\" is required and cannot be null") if @return_url.nil?
 
       if _return_url = @return_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
 
       if _url = @url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 2048)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
       end
       if _failure_reason = @failure_reason
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_reason", _failure_reason.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_reason", _failure_reason.to_s.size, MAX_LENGTH_FOR_FAILURE_REASON)
           invalid_properties.push(max_length_error)
         end
       end
@@ -94,21 +98,21 @@ module Stripe
     def valid? : Bool
       return false if @return_url.nil?
       if _return_url = @return_url
-        return false if _return_url.to_s.size > 5000
+        return false if _return_url.to_s.size > MAX_LENGTH_FOR_RETURN_URL
       end
 
       return false if @status.nil?
       if _status = @status
-        return false if _status.to_s.size > 5000
+        return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
       return false if @url.nil?
       if _url = @url
-        return false if _url.to_s.size > 2048
+        return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 
       if _failure_reason = @failure_reason
-        return false if _failure_reason.to_s.size > 5000
+        return false if _failure_reason.to_s.size > MAX_LENGTH_FOR_FAILURE_REASON
       end
 
       true
@@ -121,10 +125,7 @@ module Stripe
         raise ArgumentError.new("\"return_url\" is required and cannot be null")
       end
       _return_url = return_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
       @return_url = _return_url
     end
 
@@ -135,10 +136,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
       @status = _status
     end
 
@@ -149,10 +147,7 @@ module Stripe
         raise ArgumentError.new("\"url\" is required and cannot be null")
       end
       _url = url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 2048)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
       @url = _url
     end
 
@@ -163,10 +158,7 @@ module Stripe
         return @failure_reason = nil
       end
       _failure_reason = failure_reason.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("failure_reason", _failure_reason.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("failure_reason", _failure_reason.to_s.size, MAX_LENGTH_FOR_FAILURE_REASON)
       @failure_reason = _failure_reason
     end
 

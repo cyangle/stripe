@@ -24,8 +24,8 @@ module Stripe
     # The funding method type used to fund the customer balance. Permitted values include: `eu_bank_transfer`, `gb_bank_transfer`, `jp_bank_transfer`, or `mx_bank_transfer`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [eu_bank_transfer, gb_bank_transfer, jp_bank_transfer, mx_bank_transfer]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer"]
 
     # Optional properties
 
@@ -35,6 +35,7 @@ module Stripe
     # The user-supplied reference field on the bank transfer.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: reference.nil? && !reference_present?)]
     getter reference : String? = nil
+    MAX_LENGTH_FOR_REFERENCE = 5000
 
     @[JSON::Field(ignore: true)]
     property? reference_present : Bool = false
@@ -59,13 +60,13 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _eu_bank_transfer = @eu_bank_transfer
         invalid_properties.concat(_eu_bank_transfer.list_invalid_properties_for("eu_bank_transfer")) if _eu_bank_transfer.is_a?(OpenApi::Validatable)
       end
       if _reference = @reference
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -85,7 +86,7 @@ module Stripe
       end
 
       if _reference = @reference
-        return false if _reference.to_s.size > 5000
+        return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 
       true
@@ -120,10 +121,7 @@ module Stripe
         return @reference = nil
       end
       _reference = reference.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       @reference = _reference
     end
 

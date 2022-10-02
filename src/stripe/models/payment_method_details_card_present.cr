@@ -41,6 +41,7 @@ module Stripe
     # Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     @[JSON::Field(key: "brand", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: brand.nil? && !brand_present?)]
     getter brand : String? = nil
+    MAX_LENGTH_FOR_BRAND = 5000
 
     @[JSON::Field(ignore: true)]
     property? brand_present : Bool = false
@@ -52,6 +53,7 @@ module Stripe
     # The cardholder name as read from the card, in [ISO 7813](https://en.wikipedia.org/wiki/ISO/IEC_7813) format. May include alphanumeric characters, special characters and first/last name separator (`/`). In some cases, the cardholder name may not be available depending on how the issuer has configured the card. Cardholder name is typically not available on swipe or contactless payments, such as those made with Apple Pay and Google Pay.
     @[JSON::Field(key: "cardholder_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cardholder_name.nil? && !cardholder_name_present?)]
     getter cardholder_name : String? = nil
+    MAX_LENGTH_FOR_CARDHOLDER_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? cardholder_name_present : Bool = false
@@ -59,6 +61,7 @@ module Stripe
     # Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     @[JSON::Field(key: "country", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: country.nil? && !country_present?)]
     getter country : String? = nil
+    MAX_LENGTH_FOR_COUNTRY = 5000
 
     @[JSON::Field(ignore: true)]
     property? country_present : Bool = false
@@ -66,6 +69,7 @@ module Stripe
     # Authorization response cryptogram.
     @[JSON::Field(key: "emv_auth_data", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: emv_auth_data.nil? && !emv_auth_data_present?)]
     getter emv_auth_data : String? = nil
+    MAX_LENGTH_FOR_EMV_AUTH_DATA = 5000
 
     @[JSON::Field(ignore: true)]
     property? emv_auth_data_present : Bool = false
@@ -73,6 +77,7 @@ module Stripe
     # Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.  *Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*
     @[JSON::Field(key: "fingerprint", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
     getter fingerprint : String? = nil
+    MAX_LENGTH_FOR_FINGERPRINT = 5000
 
     @[JSON::Field(ignore: true)]
     property? fingerprint_present : Bool = false
@@ -80,6 +85,7 @@ module Stripe
     # Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     @[JSON::Field(key: "funding", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: funding.nil? && !funding_present?)]
     getter funding : String? = nil
+    MAX_LENGTH_FOR_FUNDING = 5000
 
     @[JSON::Field(ignore: true)]
     property? funding_present : Bool = false
@@ -87,6 +93,7 @@ module Stripe
     # ID of a card PaymentMethod generated from the card_present PaymentMethod that may be attached to a Customer for future transactions. Only present if it was possible to generate a card PaymentMethod.
     @[JSON::Field(key: "generated_card", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: generated_card.nil? && !generated_card_present?)]
     getter generated_card : String? = nil
+    MAX_LENGTH_FOR_GENERATED_CARD = 5000
 
     @[JSON::Field(ignore: true)]
     property? generated_card_present : Bool = false
@@ -101,6 +108,7 @@ module Stripe
     # The last four digits of the card.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: last4.nil? && !last4_present?)]
     getter last4 : String? = nil
+    MAX_LENGTH_FOR_LAST4 = 5000
 
     @[JSON::Field(ignore: true)]
     property? last4_present : Bool = false
@@ -108,6 +116,7 @@ module Stripe
     # Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     @[JSON::Field(key: "network", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: network.nil? && !network_present?)]
     getter network : String? = nil
+    MAX_LENGTH_FOR_NETWORK = 5000
 
     @[JSON::Field(ignore: true)]
     property? network_present : Bool = false
@@ -122,10 +131,11 @@ module Stripe
     # How card details were read in this transaction.
     @[JSON::Field(key: "read_method", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: read_method.nil? && !read_method_present?)]
     getter read_method : String? = nil
+    ERROR_MESSAGE_FOR_READ_METHOD = "invalid value for \"read_method\", must be one of [contact_emv, contactless_emv, contactless_magstripe_mode, magnetic_stripe_fallback, magnetic_stripe_track2]."
+    VALID_VALUES_FOR_READ_METHOD  = StaticArray["contact_emv", "contactless_emv", "contactless_magstripe_mode", "magnetic_stripe_fallback", "magnetic_stripe_track2"]
 
     @[JSON::Field(ignore: true)]
     property? read_method_present : Bool = false
-    VALID_VALUES_FOR_READ_METHOD = StaticArray["contact_emv", "contactless_emv", "contactless_magstripe_mode", "magnetic_stripe_fallback", "magnetic_stripe_track2"]
 
     @[JSON::Field(key: "receipt", type: Stripe::PaymentMethodDetailsCardPresentReceipt1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: receipt.nil? && !receipt_present?)]
     getter receipt : Stripe::PaymentMethodDetailsCardPresentReceipt1? = nil
@@ -169,55 +179,55 @@ module Stripe
       invalid_properties.push("\"exp_year\" is required and cannot be null") if @exp_year.nil?
 
       if _brand = @brand
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _cardholder_name = @cardholder_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder_name", _cardholder_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder_name", _cardholder_name.to_s.size, MAX_LENGTH_FOR_CARDHOLDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _country = @country
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
       if _emv_auth_data = @emv_auth_data
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("emv_auth_data", _emv_auth_data.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("emv_auth_data", _emv_auth_data.to_s.size, MAX_LENGTH_FOR_EMV_AUTH_DATA)
           invalid_properties.push(max_length_error)
         end
       end
       if _fingerprint = @fingerprint
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
       if _funding = @funding
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, MAX_LENGTH_FOR_FUNDING)
           invalid_properties.push(max_length_error)
         end
       end
       if _generated_card = @generated_card
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("generated_card", _generated_card.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("generated_card", _generated_card.to_s.size, MAX_LENGTH_FOR_GENERATED_CARD)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _last4 = @last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       if _network = @network
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network", _network.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network", _network.to_s.size, MAX_LENGTH_FOR_NETWORK)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _read_method = @read_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("read_method", VALID_VALUES_FOR_READ_METHOD)) unless OpenApi::EnumValidator.valid?(_read_method, VALID_VALUES_FOR_READ_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_READ_METHOD) unless OpenApi::EnumValidator.valid?(_read_method, VALID_VALUES_FOR_READ_METHOD)
       end
       if _receipt = @receipt
         invalid_properties.concat(_receipt.list_invalid_properties_for("receipt")) if _receipt.is_a?(OpenApi::Validatable)
@@ -233,39 +243,39 @@ module Stripe
       return false if @exp_year.nil?
 
       if _brand = @brand
-        return false if _brand.to_s.size > 5000
+        return false if _brand.to_s.size > MAX_LENGTH_FOR_BRAND
       end
 
       if _cardholder_name = @cardholder_name
-        return false if _cardholder_name.to_s.size > 5000
+        return false if _cardholder_name.to_s.size > MAX_LENGTH_FOR_CARDHOLDER_NAME
       end
 
       if _country = @country
-        return false if _country.to_s.size > 5000
+        return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       if _emv_auth_data = @emv_auth_data
-        return false if _emv_auth_data.to_s.size > 5000
+        return false if _emv_auth_data.to_s.size > MAX_LENGTH_FOR_EMV_AUTH_DATA
       end
 
       if _fingerprint = @fingerprint
-        return false if _fingerprint.to_s.size > 5000
+        return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
       if _funding = @funding
-        return false if _funding.to_s.size > 5000
+        return false if _funding.to_s.size > MAX_LENGTH_FOR_FUNDING
       end
 
       if _generated_card = @generated_card
-        return false if _generated_card.to_s.size > 5000
+        return false if _generated_card.to_s.size > MAX_LENGTH_FOR_GENERATED_CARD
       end
 
       if _last4 = @last4
-        return false if _last4.to_s.size > 5000
+        return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
       if _network = @network
-        return false if _network.to_s.size > 5000
+        return false if _network.to_s.size > MAX_LENGTH_FOR_NETWORK
       end
 
       if _read_method = @read_method
@@ -316,10 +326,7 @@ module Stripe
         return @brand = nil
       end
       _brand = brand.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
       @brand = _brand
     end
 
@@ -340,10 +347,7 @@ module Stripe
         return @cardholder_name = nil
       end
       _cardholder_name = cardholder_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder_name", _cardholder_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("cardholder_name", _cardholder_name.to_s.size, MAX_LENGTH_FOR_CARDHOLDER_NAME)
       @cardholder_name = _cardholder_name
     end
 
@@ -354,10 +358,7 @@ module Stripe
         return @country = nil
       end
       _country = country.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       @country = _country
     end
 
@@ -368,10 +369,7 @@ module Stripe
         return @emv_auth_data = nil
       end
       _emv_auth_data = emv_auth_data.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("emv_auth_data", _emv_auth_data.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("emv_auth_data", _emv_auth_data.to_s.size, MAX_LENGTH_FOR_EMV_AUTH_DATA)
       @emv_auth_data = _emv_auth_data
     end
 
@@ -382,10 +380,7 @@ module Stripe
         return @fingerprint = nil
       end
       _fingerprint = fingerprint.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
       @fingerprint = _fingerprint
     end
 
@@ -396,10 +391,7 @@ module Stripe
         return @funding = nil
       end
       _funding = funding.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("funding", _funding.to_s.size, MAX_LENGTH_FOR_FUNDING)
       @funding = _funding
     end
 
@@ -410,10 +402,7 @@ module Stripe
         return @generated_card = nil
       end
       _generated_card = generated_card.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("generated_card", _generated_card.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("generated_card", _generated_card.to_s.size, MAX_LENGTH_FOR_GENERATED_CARD)
       @generated_card = _generated_card
     end
 
@@ -434,10 +423,7 @@ module Stripe
         return @last4 = nil
       end
       _last4 = last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
       @last4 = _last4
     end
 
@@ -448,10 +434,7 @@ module Stripe
         return @network = nil
       end
       _network = network.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network", _network.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("network", _network.to_s.size, MAX_LENGTH_FOR_NETWORK)
       @network = _network
     end
 

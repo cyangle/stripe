@@ -30,6 +30,7 @@ module Stripe
     # The preferred network for the card.
     @[JSON::Field(key: "preferred", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: preferred.nil? && !preferred_present?)]
     getter preferred : String? = nil
+    MAX_LENGTH_FOR_PREFERRED = 5000
 
     @[JSON::Field(ignore: true)]
     property? preferred_present : Bool = false
@@ -53,7 +54,7 @@ module Stripe
       invalid_properties.push("\"available\" is required and cannot be null") if @available.nil?
 
       if _preferred = @preferred
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred", _preferred.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred", _preferred.to_s.size, MAX_LENGTH_FOR_PREFERRED)
           invalid_properties.push(max_length_error)
         end
       end
@@ -66,7 +67,7 @@ module Stripe
       return false if @available.nil?
 
       if _preferred = @preferred
-        return false if _preferred.to_s.size > 5000
+        return false if _preferred.to_s.size > MAX_LENGTH_FOR_PREFERRED
       end
 
       true
@@ -89,10 +90,7 @@ module Stripe
         return @preferred = nil
       end
       _preferred = preferred.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred", _preferred.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("preferred", _preferred.to_s.size, MAX_LENGTH_FOR_PREFERRED)
       @preferred = _preferred
     end
 

@@ -24,10 +24,12 @@ module Stripe
     # A URL for custom mandate text
     @[JSON::Field(key: "custom_mandate_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter custom_mandate_url : String? = nil
+    MAX_LENGTH_FOR_CUSTOM_MANDATE_URL = 5000
 
     # Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.
     @[JSON::Field(key: "interval_description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: interval_description.nil? && !interval_description_present?)]
     getter interval_description : String? = nil
+    MAX_LENGTH_FOR_INTERVAL_DESCRIPTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? interval_description_present : Bool = false
@@ -35,18 +37,20 @@ module Stripe
     # Payment schedule for the mandate.
     @[JSON::Field(key: "payment_schedule", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_schedule.nil? && !payment_schedule_present?)]
     getter payment_schedule : String? = nil
+    ERROR_MESSAGE_FOR_PAYMENT_SCHEDULE = "invalid value for \"payment_schedule\", must be one of [combined, interval, sporadic]."
+    VALID_VALUES_FOR_PAYMENT_SCHEDULE  = StaticArray["combined", "interval", "sporadic"]
 
     @[JSON::Field(ignore: true)]
     property? payment_schedule_present : Bool = false
-    VALID_VALUES_FOR_PAYMENT_SCHEDULE = StaticArray["combined", "interval", "sporadic"]
 
     # Transaction type of the mandate.
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: transaction_type.nil? && !transaction_type_present?)]
     getter transaction_type : String? = nil
+    ERROR_MESSAGE_FOR_TRANSACTION_TYPE = "invalid value for \"transaction_type\", must be one of [business, personal]."
+    VALID_VALUES_FOR_TRANSACTION_TYPE  = StaticArray["business", "personal"]
 
     @[JSON::Field(ignore: true)]
     property? transaction_type_present : Bool = false
-    VALID_VALUES_FOR_TRANSACTION_TYPE = StaticArray["business", "personal"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -66,20 +70,20 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _custom_mandate_url = @custom_mandate_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("custom_mandate_url", _custom_mandate_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("custom_mandate_url", _custom_mandate_url.to_s.size, MAX_LENGTH_FOR_CUSTOM_MANDATE_URL)
           invalid_properties.push(max_length_error)
         end
       end
       if _interval_description = @interval_description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, MAX_LENGTH_FOR_INTERVAL_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       if _payment_schedule = @payment_schedule
-        invalid_properties.push(OpenApi::EnumValidator.error_message("payment_schedule", VALID_VALUES_FOR_PAYMENT_SCHEDULE)) unless OpenApi::EnumValidator.valid?(_payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_SCHEDULE) unless OpenApi::EnumValidator.valid?(_payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
       end
       if _transaction_type = @transaction_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("transaction_type", VALID_VALUES_FOR_TRANSACTION_TYPE)) unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TRANSACTION_TYPE) unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
       end
       invalid_properties
     end
@@ -88,11 +92,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _custom_mandate_url = @custom_mandate_url
-        return false if _custom_mandate_url.to_s.size > 5000
+        return false if _custom_mandate_url.to_s.size > MAX_LENGTH_FOR_CUSTOM_MANDATE_URL
       end
 
       if _interval_description = @interval_description
-        return false if _interval_description.to_s.size > 5000
+        return false if _interval_description.to_s.size > MAX_LENGTH_FOR_INTERVAL_DESCRIPTION
       end
 
       if _payment_schedule = @payment_schedule
@@ -113,10 +117,7 @@ module Stripe
         return @custom_mandate_url = nil
       end
       _custom_mandate_url = custom_mandate_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("custom_mandate_url", _custom_mandate_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("custom_mandate_url", _custom_mandate_url.to_s.size, MAX_LENGTH_FOR_CUSTOM_MANDATE_URL)
       @custom_mandate_url = _custom_mandate_url
     end
 
@@ -127,10 +128,7 @@ module Stripe
         return @interval_description = nil
       end
       _interval_description = interval_description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("interval_description", _interval_description.to_s.size, MAX_LENGTH_FOR_INTERVAL_DESCRIPTION)
       @interval_description = _interval_description
     end
 

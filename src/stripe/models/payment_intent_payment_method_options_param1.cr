@@ -25,13 +25,13 @@ module Stripe
 
     @[JSON::Field(key: "funding_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter funding_type : String? = nil
-
-    VALID_VALUES_FOR_FUNDING_TYPE = StaticArray["bank_transfer"]
+    ERROR_MESSAGE_FOR_FUNDING_TYPE = "invalid value for \"funding_type\", must be one of [bank_transfer]."
+    VALID_VALUES_FOR_FUNDING_TYPE  = StaticArray["bank_transfer"]
 
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
-
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none"]
+    ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none]."
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,10 +53,10 @@ module Stripe
         invalid_properties.concat(_bank_transfer.list_invalid_properties_for("bank_transfer")) if _bank_transfer.is_a?(OpenApi::Validatable)
       end
       if _funding_type = @funding_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("funding_type", VALID_VALUES_FOR_FUNDING_TYPE)) unless OpenApi::EnumValidator.valid?(_funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_FUNDING_TYPE) unless OpenApi::EnumValidator.valid?(_funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
       end
       if _setup_future_usage = @setup_future_usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
     end

@@ -23,18 +23,18 @@ module Stripe
 
     @[JSON::Field(key: "address", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter address : String? = nil
-
-    VALID_VALUES_FOR_ADDRESS = StaticArray["auto", "never"]
+    ERROR_MESSAGE_FOR_ADDRESS = "invalid value for \"address\", must be one of [auto, never]."
+    VALID_VALUES_FOR_ADDRESS  = StaticArray["auto", "never"]
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : String? = nil
-
-    VALID_VALUES_FOR_NAME = StaticArray["auto", "never"]
+    ERROR_MESSAGE_FOR_NAME = "invalid value for \"name\", must be one of [auto, never]."
+    VALID_VALUES_FOR_NAME  = StaticArray["auto", "never"]
 
     @[JSON::Field(key: "shipping", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping : String? = nil
-
-    VALID_VALUES_FOR_SHIPPING = StaticArray["auto", "never"]
+    ERROR_MESSAGE_FOR_SHIPPING = "invalid value for \"shipping\", must be one of [auto, never]."
+    VALID_VALUES_FOR_SHIPPING  = StaticArray["auto", "never"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,13 +53,13 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _address = @address
-        invalid_properties.push(OpenApi::EnumValidator.error_message("address", VALID_VALUES_FOR_ADDRESS)) unless OpenApi::EnumValidator.valid?(_address, VALID_VALUES_FOR_ADDRESS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_ADDRESS) unless OpenApi::EnumValidator.valid?(_address, VALID_VALUES_FOR_ADDRESS)
       end
       if _name = @name
-        invalid_properties.push(OpenApi::EnumValidator.error_message("name", VALID_VALUES_FOR_NAME)) unless OpenApi::EnumValidator.valid?(_name, VALID_VALUES_FOR_NAME)
+        invalid_properties.push(ERROR_MESSAGE_FOR_NAME) unless OpenApi::EnumValidator.valid?(_name, VALID_VALUES_FOR_NAME)
       end
       if _shipping = @shipping
-        invalid_properties.push(OpenApi::EnumValidator.error_message("shipping", VALID_VALUES_FOR_SHIPPING)) unless OpenApi::EnumValidator.valid?(_shipping, VALID_VALUES_FOR_SHIPPING)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SHIPPING) unless OpenApi::EnumValidator.valid?(_shipping, VALID_VALUES_FOR_SHIPPING)
       end
       invalid_properties
     end

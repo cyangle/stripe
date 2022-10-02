@@ -34,6 +34,7 @@ module Stripe
     # Name of the coupon displayed to customers on, for instance invoices, or receipts. By default the `id` is shown if `name` is not set.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 40
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,14 +54,14 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _currency_options = @currency_options
-        invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "currency_options", hash: _currency_options)) if _currency_options.is_a?(Hash)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "currency_options", container: _currency_options)) if _currency_options.is_a?(Hash)
       end
 
       if _metadata = @metadata
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 40)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -71,7 +72,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _currency_options = @currency_options
-        return false if _currency_options.is_a?(Hash) && !OpenApi::HashValidator.valid?(hash: _currency_options)
+        return false if _currency_options.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _currency_options)
       end
 
       if _metadata = @metadata
@@ -79,7 +80,7 @@ module Stripe
       end
 
       if _name = @name
-        return false if _name.to_s.size > 40
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       true
@@ -92,7 +93,7 @@ module Stripe
         return @currency_options = nil
       end
       _currency_options = currency_options.not_nil!
-      OpenApi::HashValidator.validate(hash: _currency_options) if _currency_options.is_a?(Hash)
+      OpenApi::ContainerValidator.validate(container: _currency_options) if _currency_options.is_a?(Hash)
       @currency_options = _currency_options
     end
 
@@ -124,10 +125,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 40)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 

@@ -28,6 +28,7 @@ module Stripe
 
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     @[JSON::Field(key: "discountable", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter discountable : Bool? = nil
@@ -37,6 +38,7 @@ module Stripe
 
     @[JSON::Field(key: "invoiceitem", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter invoiceitem : String? = nil
+    MAX_LENGTH_FOR_INVOICEITEM = 5000
 
     @[JSON::Field(key: "metadata", type: Stripe::IndividualSpecsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Stripe::IndividualSpecsMetadata? = nil
@@ -46,6 +48,7 @@ module Stripe
 
     @[JSON::Field(key: "price", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter price : String? = nil
+    MAX_LENGTH_FOR_PRICE = 5000
 
     @[JSON::Field(key: "price_data", type: Stripe::OneTimePriceData?, default: nil, required: false, nullable: false, emit_null: false)]
     getter price_data : Stripe::OneTimePriceData? = nil
@@ -90,7 +93,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -99,7 +102,7 @@ module Stripe
         invalid_properties.concat(_discounts.list_invalid_properties_for("discounts")) if _discounts.is_a?(OpenApi::Validatable)
       end
       if _invoiceitem = @invoiceitem
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoiceitem", _invoiceitem.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoiceitem", _invoiceitem.to_s.size, MAX_LENGTH_FOR_INVOICEITEM)
           invalid_properties.push(max_length_error)
         end
       end
@@ -110,7 +113,7 @@ module Stripe
         invalid_properties.concat(_period.list_invalid_properties_for("period")) if _period.is_a?(OpenApi::Validatable)
       end
       if _price = @price
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -129,7 +132,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _discounts = @discounts
@@ -137,7 +140,7 @@ module Stripe
       end
 
       if _invoiceitem = @invoiceitem
-        return false if _invoiceitem.to_s.size > 5000
+        return false if _invoiceitem.to_s.size > MAX_LENGTH_FOR_INVOICEITEM
       end
 
       if _metadata = @metadata
@@ -149,7 +152,7 @@ module Stripe
       end
 
       if _price = @price
-        return false if _price.to_s.size > 5000
+        return false if _price.to_s.size > MAX_LENGTH_FOR_PRICE
       end
 
       if _price_data = @price_data
@@ -190,10 +193,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -225,10 +225,7 @@ module Stripe
         return @invoiceitem = nil
       end
       _invoiceitem = invoiceitem.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoiceitem", _invoiceitem.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("invoiceitem", _invoiceitem.to_s.size, MAX_LENGTH_FOR_INVOICEITEM)
       @invoiceitem = _invoiceitem
     end
 
@@ -261,10 +258,7 @@ module Stripe
         return @price = nil
       end
       _price = price.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
       @price = _price
     end
 

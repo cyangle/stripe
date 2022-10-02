@@ -25,16 +25,18 @@ module Stripe
 
     @[JSON::Field(key: "interval", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter interval : String? = nil
-
-    VALID_VALUES_FOR_INTERVAL = StaticArray["daily", "manual", "monthly", "weekly"]
+    MAX_LENGTH_FOR_INTERVAL    = 5000
+    ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [daily, manual, monthly, weekly]."
+    VALID_VALUES_FOR_INTERVAL  = StaticArray["daily", "manual", "monthly", "weekly"]
 
     @[JSON::Field(key: "monthly_anchor", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter monthly_anchor : Int64? = nil
 
     @[JSON::Field(key: "weekly_anchor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter weekly_anchor : String? = nil
-
-    VALID_VALUES_FOR_WEEKLY_ANCHOR = StaticArray["friday", "monday", "saturday", "sunday", "thursday", "tuesday", "wednesday"]
+    MAX_LENGTH_FOR_WEEKLY_ANCHOR    = 5000
+    ERROR_MESSAGE_FOR_WEEKLY_ANCHOR = "invalid value for \"weekly_anchor\", must be one of [friday, monday, saturday, sunday, thursday, tuesday, wednesday]."
+    VALID_VALUES_FOR_WEEKLY_ANCHOR  = StaticArray["friday", "monday", "saturday", "sunday", "thursday", "tuesday", "wednesday"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -57,11 +59,11 @@ module Stripe
         invalid_properties.concat(_delay_days.list_invalid_properties_for("delay_days")) if _delay_days.is_a?(OpenApi::Validatable)
       end
       if _interval = @interval
-        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+        invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
       if _weekly_anchor = @weekly_anchor
-        invalid_properties.push(OpenApi::EnumValidator.error_message("weekly_anchor", VALID_VALUES_FOR_WEEKLY_ANCHOR)) unless OpenApi::EnumValidator.valid?(_weekly_anchor, VALID_VALUES_FOR_WEEKLY_ANCHOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_WEEKLY_ANCHOR) unless OpenApi::EnumValidator.valid?(_weekly_anchor, VALID_VALUES_FOR_WEEKLY_ANCHOR)
       end
       invalid_properties
     end

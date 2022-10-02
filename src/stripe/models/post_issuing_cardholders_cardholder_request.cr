@@ -51,8 +51,8 @@ module Stripe
     # Specifies whether to permit authorizations on this cardholder's cards.
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["active", "inactive"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, inactive]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["active", "inactive"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -91,7 +91,7 @@ module Stripe
         invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
     end

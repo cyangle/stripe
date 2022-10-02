@@ -30,6 +30,7 @@ module Stripe
     # Explanation of why the cardholder is disputing this transaction.
     @[JSON::Field(key: "explanation", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: explanation.nil? && !explanation_present?)]
     getter explanation : String? = nil
+    MAX_LENGTH_FOR_EXPLANATION = 5000
 
     @[JSON::Field(ignore: true)]
     property? explanation_present : Bool = false
@@ -44,6 +45,7 @@ module Stripe
     # Description of the cardholder's attempt to return the product.
     @[JSON::Field(key: "return_description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: return_description.nil? && !return_description_present?)]
     getter return_description : String? = nil
+    MAX_LENGTH_FOR_RETURN_DESCRIPTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? return_description_present : Bool = false
@@ -51,10 +53,11 @@ module Stripe
     # Result of cardholder's attempt to return the product.
     @[JSON::Field(key: "return_status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: return_status.nil? && !return_status_present?)]
     getter return_status : String? = nil
+    ERROR_MESSAGE_FOR_RETURN_STATUS = "invalid value for \"return_status\", must be one of [merchant_rejected, successful]."
+    VALID_VALUES_FOR_RETURN_STATUS  = StaticArray["merchant_rejected", "successful"]
 
     @[JSON::Field(ignore: true)]
     property? return_status_present : Bool = false
-    VALID_VALUES_FOR_RETURN_STATUS = StaticArray["merchant_rejected", "successful"]
 
     # Date when the product was returned or attempted to be returned.
     @[JSON::Field(key: "returned_at", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: returned_at.nil? && !returned_at_present?)]
@@ -86,18 +89,18 @@ module Stripe
         invalid_properties.concat(_additional_documentation.list_invalid_properties_for("additional_documentation")) if _additional_documentation.is_a?(OpenApi::Validatable)
       end
       if _explanation = @explanation
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _return_description = @return_description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_description", _return_description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_description", _return_description.to_s.size, MAX_LENGTH_FOR_RETURN_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       if _return_status = @return_status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("return_status", VALID_VALUES_FOR_RETURN_STATUS)) unless OpenApi::EnumValidator.valid?(_return_status, VALID_VALUES_FOR_RETURN_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_RETURN_STATUS) unless OpenApi::EnumValidator.valid?(_return_status, VALID_VALUES_FOR_RETURN_STATUS)
       end
 
       invalid_properties
@@ -111,11 +114,11 @@ module Stripe
       end
 
       if _explanation = @explanation
-        return false if _explanation.to_s.size > 5000
+        return false if _explanation.to_s.size > MAX_LENGTH_FOR_EXPLANATION
       end
 
       if _return_description = @return_description
-        return false if _return_description.to_s.size > 5000
+        return false if _return_description.to_s.size > MAX_LENGTH_FOR_RETURN_DESCRIPTION
       end
 
       if _return_status = @return_status
@@ -143,10 +146,7 @@ module Stripe
         return @explanation = nil
       end
       _explanation = explanation.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
       @explanation = _explanation
     end
 
@@ -167,10 +167,7 @@ module Stripe
         return @return_description = nil
       end
       _return_description = return_description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_description", _return_description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("return_description", _return_description.to_s.size, MAX_LENGTH_FOR_RETURN_DESCRIPTION)
       @return_description = _return_description
     end
 

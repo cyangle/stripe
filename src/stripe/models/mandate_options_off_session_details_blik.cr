@@ -31,6 +31,7 @@ module Stripe
     # Currency of each recurring payment.
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: currency.nil? && !currency_present?)]
     getter currency : String? = nil
+    MAX_LENGTH_FOR_CURRENCY = 5000
 
     @[JSON::Field(ignore: true)]
     property? currency_present : Bool = false
@@ -38,10 +39,11 @@ module Stripe
     # Frequency interval of each recurring payment.
     @[JSON::Field(key: "interval", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: interval.nil? && !interval_present?)]
     getter interval : String? = nil
+    ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, week, year]."
+    VALID_VALUES_FOR_INTERVAL  = StaticArray["day", "month", "week", "year"]
 
     @[JSON::Field(ignore: true)]
     property? interval_present : Bool = false
-    VALID_VALUES_FOR_INTERVAL = StaticArray["day", "month", "week", "year"]
 
     # Frequency indicator of each recurring payment.
     @[JSON::Field(key: "interval_count", type: Int64?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: interval_count.nil? && !interval_count_present?)]
@@ -68,12 +70,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _currency = @currency
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
           invalid_properties.push(max_length_error)
         end
       end
       if _interval = @interval
-        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+        invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
       invalid_properties
@@ -83,7 +85,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _currency = @currency
-        return false if _currency.to_s.size > 5000
+        return false if _currency.to_s.size > MAX_LENGTH_FOR_CURRENCY
       end
 
       if _interval = @interval
@@ -110,10 +112,7 @@ module Stripe
         return @currency = nil
       end
       _currency = currency.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
       @currency = _currency
     end
 

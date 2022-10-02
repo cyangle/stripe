@@ -28,6 +28,7 @@ module Stripe
     # Connected account ID by which to filter the report run.
     @[JSON::Field(key: "connected_account", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter connected_account : String? = nil
+    MAX_LENGTH_FOR_CONNECTED_ACCOUNT = 5000
 
     # Currency of objects to be included in the report run.
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -44,14 +45,17 @@ module Stripe
     # Payout ID by which to filter the report run.
     @[JSON::Field(key: "payout", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payout : String? = nil
+    MAX_LENGTH_FOR_PAYOUT = 5000
 
     # Category of balance transactions to be included in the report run.
     @[JSON::Field(key: "reporting_category", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter reporting_category : String? = nil
+    MAX_LENGTH_FOR_REPORTING_CATEGORY = 5000
 
     # Defaults to `Etc/UTC`. The output timezone for all timestamps in the report. A list of possible time zone values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones). Has no effect on `interval_start` or `interval_end`.
     @[JSON::Field(key: "timezone", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter timezone : String? = nil
+    MAX_LENGTH_FOR_TIMEZONE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -75,23 +79,23 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _connected_account = @connected_account
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("connected_account", _connected_account.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("connected_account", _connected_account.to_s.size, MAX_LENGTH_FOR_CONNECTED_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _payout = @payout
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payout", _payout.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payout", _payout.to_s.size, MAX_LENGTH_FOR_PAYOUT)
           invalid_properties.push(max_length_error)
         end
       end
       if _reporting_category = @reporting_category
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reporting_category", _reporting_category.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reporting_category", _reporting_category.to_s.size, MAX_LENGTH_FOR_REPORTING_CATEGORY)
           invalid_properties.push(max_length_error)
         end
       end
       if _timezone = @timezone
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timezone", _timezone.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timezone", _timezone.to_s.size, MAX_LENGTH_FOR_TIMEZONE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -102,19 +106,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _connected_account = @connected_account
-        return false if _connected_account.to_s.size > 5000
+        return false if _connected_account.to_s.size > MAX_LENGTH_FOR_CONNECTED_ACCOUNT
       end
 
       if _payout = @payout
-        return false if _payout.to_s.size > 5000
+        return false if _payout.to_s.size > MAX_LENGTH_FOR_PAYOUT
       end
 
       if _reporting_category = @reporting_category
-        return false if _reporting_category.to_s.size > 5000
+        return false if _reporting_category.to_s.size > MAX_LENGTH_FOR_REPORTING_CATEGORY
       end
 
       if _timezone = @timezone
-        return false if _timezone.to_s.size > 5000
+        return false if _timezone.to_s.size > MAX_LENGTH_FOR_TIMEZONE
       end
 
       true
@@ -137,10 +141,7 @@ module Stripe
         return @connected_account = nil
       end
       _connected_account = connected_account.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("connected_account", _connected_account.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("connected_account", _connected_account.to_s.size, MAX_LENGTH_FOR_CONNECTED_ACCOUNT)
       @connected_account = _connected_account
     end
 
@@ -181,10 +182,7 @@ module Stripe
         return @payout = nil
       end
       _payout = payout.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payout", _payout.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("payout", _payout.to_s.size, MAX_LENGTH_FOR_PAYOUT)
       @payout = _payout
     end
 
@@ -195,10 +193,7 @@ module Stripe
         return @reporting_category = nil
       end
       _reporting_category = reporting_category.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reporting_category", _reporting_category.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reporting_category", _reporting_category.to_s.size, MAX_LENGTH_FOR_REPORTING_CATEGORY)
       @reporting_category = _reporting_category
     end
 
@@ -209,10 +204,7 @@ module Stripe
         return @timezone = nil
       end
       _timezone = timezone.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timezone", _timezone.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("timezone", _timezone.to_s.size, MAX_LENGTH_FOR_TIMEZONE)
       @timezone = _timezone
     end
 

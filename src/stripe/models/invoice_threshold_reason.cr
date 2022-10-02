@@ -53,7 +53,7 @@ module Stripe
       invalid_properties.push("\"item_reasons\" is required and cannot be null") if @item_reasons.nil?
 
       if _item_reasons = @item_reasons
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "item_reasons", array: _item_reasons)) if _item_reasons.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "item_reasons", container: _item_reasons)) if _item_reasons.is_a?(Array)
       end
 
       invalid_properties
@@ -64,7 +64,7 @@ module Stripe
     def valid? : Bool
       return false if @item_reasons.nil?
       if _item_reasons = @item_reasons
-        return false if _item_reasons.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _item_reasons)
+        return false if _item_reasons.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _item_reasons)
       end
 
       true
@@ -77,7 +77,7 @@ module Stripe
         raise ArgumentError.new("\"item_reasons\" is required and cannot be null")
       end
       _item_reasons = item_reasons.not_nil!
-      OpenApi::ArrayValidator.validate(array: _item_reasons) if _item_reasons.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _item_reasons) if _item_reasons.is_a?(Array)
       @item_reasons = _item_reasons
     end
 

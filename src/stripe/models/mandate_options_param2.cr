@@ -25,11 +25,12 @@ module Stripe
 
     @[JSON::Field(key: "amount_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter amount_type : String? = nil
-
-    VALID_VALUES_FOR_AMOUNT_TYPE = StaticArray["fixed", "maximum"]
+    ERROR_MESSAGE_FOR_AMOUNT_TYPE = "invalid value for \"amount_type\", must be one of [fixed, maximum]."
+    VALID_VALUES_FOR_AMOUNT_TYPE  = StaticArray["fixed", "maximum"]
 
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 200
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,10 +49,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _amount_type = @amount_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("amount_type", VALID_VALUES_FOR_AMOUNT_TYPE)) unless OpenApi::EnumValidator.valid?(_amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_AMOUNT_TYPE) unless OpenApi::EnumValidator.valid?(_amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 200)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -66,7 +67,7 @@ module Stripe
       end
 
       if _description = @description
-        return false if _description.to_s.size > 200
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       true
@@ -100,10 +101,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 200)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 

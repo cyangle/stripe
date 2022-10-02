@@ -23,8 +23,8 @@ module Stripe
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["us_bank_account"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [us_bank_account]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["us_bank_account"]
 
     # Optional properties
 
@@ -50,7 +50,7 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _us_bank_account = @us_bank_account
         invalid_properties.concat(_us_bank_account.list_invalid_properties_for("us_bank_account")) if _us_bank_account.is_a?(OpenApi::Validatable)

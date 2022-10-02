@@ -24,14 +24,17 @@ module Stripe
     # The action taken on the payment.
     @[JSON::Field(key: "action", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter action : String? = nil
+    MAX_LENGTH_FOR_ACTION = 5000
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # The predicate to evaluate the payment against.
     @[JSON::Field(key: "predicate", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter predicate : String? = nil
+    MAX_LENGTH_FOR_PREDICATE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,21 +55,21 @@ module Stripe
       invalid_properties.push("\"action\" is required and cannot be null") if @action.nil?
 
       if _action = @action
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("action", _action.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("action", _action.to_s.size, MAX_LENGTH_FOR_ACTION)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"predicate\" is required and cannot be null") if @predicate.nil?
 
       if _predicate = @predicate
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("predicate", _predicate.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("predicate", _predicate.to_s.size, MAX_LENGTH_FOR_PREDICATE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -78,17 +81,17 @@ module Stripe
     def valid? : Bool
       return false if @action.nil?
       if _action = @action
-        return false if _action.to_s.size > 5000
+        return false if _action.to_s.size > MAX_LENGTH_FOR_ACTION
       end
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @predicate.nil?
       if _predicate = @predicate
-        return false if _predicate.to_s.size > 5000
+        return false if _predicate.to_s.size > MAX_LENGTH_FOR_PREDICATE
       end
 
       true
@@ -101,10 +104,7 @@ module Stripe
         raise ArgumentError.new("\"action\" is required and cannot be null")
       end
       _action = action.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("action", _action.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("action", _action.to_s.size, MAX_LENGTH_FOR_ACTION)
       @action = _action
     end
 
@@ -115,10 +115,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -129,10 +126,7 @@ module Stripe
         raise ArgumentError.new("\"predicate\" is required and cannot be null")
       end
       _predicate = predicate.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("predicate", _predicate.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("predicate", _predicate.to_s.size, MAX_LENGTH_FOR_PREDICATE)
       @predicate = _predicate
     end
 

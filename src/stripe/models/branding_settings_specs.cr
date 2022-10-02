@@ -22,15 +22,19 @@ module Stripe
 
     @[JSON::Field(key: "icon", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter icon : String? = nil
+    MAX_LENGTH_FOR_ICON = 5000
 
     @[JSON::Field(key: "logo", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter logo : String? = nil
+    MAX_LENGTH_FOR_LOGO = 5000
 
     @[JSON::Field(key: "primary_color", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter primary_color : String? = nil
+    MAX_LENGTH_FOR_PRIMARY_COLOR = 5000
 
     @[JSON::Field(key: "secondary_color", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter secondary_color : String? = nil
+    MAX_LENGTH_FOR_SECONDARY_COLOR = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -50,22 +54,22 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _icon = @icon
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("icon", _icon.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("icon", _icon.to_s.size, MAX_LENGTH_FOR_ICON)
           invalid_properties.push(max_length_error)
         end
       end
       if _logo = @logo
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("logo", _logo.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("logo", _logo.to_s.size, MAX_LENGTH_FOR_LOGO)
           invalid_properties.push(max_length_error)
         end
       end
       if _primary_color = @primary_color
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("primary_color", _primary_color.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("primary_color", _primary_color.to_s.size, MAX_LENGTH_FOR_PRIMARY_COLOR)
           invalid_properties.push(max_length_error)
         end
       end
       if _secondary_color = @secondary_color
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secondary_color", _secondary_color.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secondary_color", _secondary_color.to_s.size, MAX_LENGTH_FOR_SECONDARY_COLOR)
           invalid_properties.push(max_length_error)
         end
       end
@@ -76,19 +80,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _icon = @icon
-        return false if _icon.to_s.size > 5000
+        return false if _icon.to_s.size > MAX_LENGTH_FOR_ICON
       end
 
       if _logo = @logo
-        return false if _logo.to_s.size > 5000
+        return false if _logo.to_s.size > MAX_LENGTH_FOR_LOGO
       end
 
       if _primary_color = @primary_color
-        return false if _primary_color.to_s.size > 5000
+        return false if _primary_color.to_s.size > MAX_LENGTH_FOR_PRIMARY_COLOR
       end
 
       if _secondary_color = @secondary_color
-        return false if _secondary_color.to_s.size > 5000
+        return false if _secondary_color.to_s.size > MAX_LENGTH_FOR_SECONDARY_COLOR
       end
 
       true
@@ -101,10 +105,7 @@ module Stripe
         return @icon = nil
       end
       _icon = icon.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("icon", _icon.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("icon", _icon.to_s.size, MAX_LENGTH_FOR_ICON)
       @icon = _icon
     end
 
@@ -115,10 +116,7 @@ module Stripe
         return @logo = nil
       end
       _logo = logo.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("logo", _logo.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("logo", _logo.to_s.size, MAX_LENGTH_FOR_LOGO)
       @logo = _logo
     end
 
@@ -129,10 +127,7 @@ module Stripe
         return @primary_color = nil
       end
       _primary_color = primary_color.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("primary_color", _primary_color.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("primary_color", _primary_color.to_s.size, MAX_LENGTH_FOR_PRIMARY_COLOR)
       @primary_color = _primary_color
     end
 
@@ -143,10 +138,7 @@ module Stripe
         return @secondary_color = nil
       end
       _secondary_color = secondary_color.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secondary_color", _secondary_color.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("secondary_color", _secondary_color.to_s.size, MAX_LENGTH_FOR_SECONDARY_COLOR)
       @secondary_color = _secondary_color
     end
 

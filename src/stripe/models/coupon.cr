@@ -28,12 +28,13 @@ module Stripe
     # One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this coupon will get the discount.
     @[JSON::Field(key: "duration", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter duration : String? = nil
-
-    VALID_VALUES_FOR_DURATION = StaticArray["forever", "once", "repeating"]
+    ERROR_MESSAGE_FOR_DURATION = "invalid value for \"duration\", must be one of [forever, once, repeating]."
+    VALID_VALUES_FOR_DURATION  = StaticArray["forever", "once", "repeating"]
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -42,8 +43,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["coupon"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [coupon]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["coupon"]
 
     # Number of times this coupon has been applied to a customer.
     @[JSON::Field(key: "times_redeemed", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -100,6 +101,7 @@ module Stripe
     # Name of the coupon displayed to customers on for instance invoices or receipts.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: name.nil? && !name_present?)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
@@ -154,12 +156,12 @@ module Stripe
       invalid_properties.push("\"duration\" is required and cannot be null") if @duration.nil?
 
       if _duration = @duration
-        invalid_properties.push(OpenApi::EnumValidator.error_message("duration", VALID_VALUES_FOR_DURATION)) unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
+        invalid_properties.push(ERROR_MESSAGE_FOR_DURATION) unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -168,7 +170,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"times_redeemed\" is required and cannot be null") if @times_redeemed.nil?
 
@@ -179,11 +181,11 @@ module Stripe
       end
 
       if _currency_options = @currency_options
-        invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "currency_options", hash: _currency_options)) if _currency_options.is_a?(Hash)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "currency_options", container: _currency_options)) if _currency_options.is_a?(Hash)
       end
 
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -203,7 +205,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -222,11 +224,11 @@ module Stripe
       end
 
       if _currency_options = @currency_options
-        return false if _currency_options.is_a?(Hash) && !OpenApi::HashValidator.valid?(hash: _currency_options)
+        return false if _currency_options.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _currency_options)
       end
 
       if _name = @name
-        return false if _name.to_s.size > 5000
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       true
@@ -260,10 +262,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -346,7 +345,7 @@ module Stripe
         return @currency_options = nil
       end
       _currency_options = currency_options.not_nil!
-      OpenApi::HashValidator.validate(hash: _currency_options) if _currency_options.is_a?(Hash)
+      OpenApi::ContainerValidator.validate(container: _currency_options) if _currency_options.is_a?(Hash)
       @currency_options = _currency_options
     end
 
@@ -387,10 +386,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 

@@ -24,10 +24,12 @@ module Stripe
     # The first name of this cardholder.
     @[JSON::Field(key: "first_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter first_name : String? = nil
+    MAX_LENGTH_FOR_FIRST_NAME = 5000
 
     # The last name of this cardholder.
     @[JSON::Field(key: "last_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter last_name : String? = nil
+    MAX_LENGTH_FOR_LAST_NAME = 5000
 
     # Optional properties
 
@@ -64,14 +66,14 @@ module Stripe
       invalid_properties.push("\"first_name\" is required and cannot be null") if @first_name.nil?
 
       if _first_name = @first_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last_name\" is required and cannot be null") if @last_name.nil?
 
       if _last_name = @last_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -89,12 +91,12 @@ module Stripe
     def valid? : Bool
       return false if @first_name.nil?
       if _first_name = @first_name
-        return false if _first_name.to_s.size > 5000
+        return false if _first_name.to_s.size > MAX_LENGTH_FOR_FIRST_NAME
       end
 
       return false if @last_name.nil?
       if _last_name = @last_name
-        return false if _last_name.to_s.size > 5000
+        return false if _last_name.to_s.size > MAX_LENGTH_FOR_LAST_NAME
       end
 
       if _dob = @dob
@@ -115,10 +117,7 @@ module Stripe
         raise ArgumentError.new("\"first_name\" is required and cannot be null")
       end
       _first_name = first_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("first_name", _first_name.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
       @first_name = _first_name
     end
 
@@ -129,10 +128,7 @@ module Stripe
         raise ArgumentError.new("\"last_name\" is required and cannot be null")
       end
       _last_name = last_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last_name", _last_name.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
       @last_name = _last_name
     end
 

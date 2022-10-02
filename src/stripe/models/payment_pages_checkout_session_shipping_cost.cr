@@ -74,7 +74,7 @@ module Stripe
         invalid_properties.concat(_shipping_rate.list_invalid_properties_for("shipping_rate")) if _shipping_rate.is_a?(OpenApi::Validatable)
       end
       if _taxes = @taxes
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "taxes", array: _taxes)) if _taxes.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "taxes", container: _taxes)) if _taxes.is_a?(Array)
       end
       invalid_properties
     end
@@ -93,7 +93,7 @@ module Stripe
       end
 
       if _taxes = @taxes
-        return false if _taxes.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _taxes)
+        return false if _taxes.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _taxes)
       end
 
       true
@@ -147,7 +147,7 @@ module Stripe
         return @taxes = nil
       end
       _taxes = taxes.not_nil!
-      OpenApi::ArrayValidator.validate(array: _taxes) if _taxes.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _taxes) if _taxes.is_a?(Array)
       @taxes = _taxes
     end
 

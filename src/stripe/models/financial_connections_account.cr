@@ -24,8 +24,8 @@ module Stripe
     # The type of the account. Account category is further divided in `subcategory`.
     @[JSON::Field(key: "category", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter category : String? = nil
-
-    VALID_VALUES_FOR_CATEGORY = StaticArray["cash", "credit", "investment", "other"]
+    ERROR_MESSAGE_FOR_CATEGORY = "invalid value for \"category\", must be one of [cash, credit, investment, other]."
+    VALID_VALUES_FOR_CATEGORY  = StaticArray["cash", "credit", "investment", "other"]
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -34,10 +34,12 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # The name of the institution that holds this account.
     @[JSON::Field(key: "institution_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter institution_name : String? = nil
+    MAX_LENGTH_FOR_INSTITUTION_NAME = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -46,26 +48,26 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["financial_connections.account"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [financial_connections.account]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["financial_connections.account"]
 
     # The status of the link to the account.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["active", "disconnected", "inactive"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, disconnected, inactive]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["active", "disconnected", "inactive"]
 
     # If `category` is `cash`, one of:   - `checking`  - `savings`  - `other`  If `category` is `credit`, one of:   - `mortgage`  - `line_of_credit`  - `credit_card`  - `other`  If `category` is `investment` or `other`, this will be `other`.
     @[JSON::Field(key: "subcategory", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter subcategory : String? = nil
-
-    VALID_VALUES_FOR_SUBCATEGORY = StaticArray["checking", "credit_card", "line_of_credit", "mortgage", "other", "savings"]
+    ERROR_MESSAGE_FOR_SUBCATEGORY = "invalid value for \"subcategory\", must be one of [checking, credit_card, line_of_credit, mortgage, other, savings]."
+    VALID_VALUES_FOR_SUBCATEGORY  = StaticArray["checking", "credit_card", "line_of_credit", "mortgage", "other", "savings"]
 
     # The [PaymentMethod type](https://stripe.com/docs/api/payment_methods/object#payment_method_object-type)(s) that can be created from this account.
     @[JSON::Field(key: "supported_payment_method_types", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter supported_payment_method_types : Array(String)? = nil
-
-    VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES = StaticArray["link", "us_bank_account"]
+    ERROR_MESSAGE_FOR_SUPPORTED_PAYMENT_METHOD_TYPES = "invalid value for \"supported_payment_method_types\", must be one of [link, us_bank_account]."
+    VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES  = StaticArray["link", "us_bank_account"]
 
     # Optional properties
 
@@ -90,6 +92,7 @@ module Stripe
     # A human-readable name that has been assigned to this account, either by the account holder or by the institution.
     @[JSON::Field(key: "display_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
     getter display_name : String? = nil
+    MAX_LENGTH_FOR_DISPLAY_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? display_name_present : Bool = false
@@ -97,6 +100,7 @@ module Stripe
     # The last 4 digits of the account number. If present, this will be 4 numeric characters.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: last4.nil? && !last4_present?)]
     getter last4 : String? = nil
+    MAX_LENGTH_FOR_LAST4 = 5000
 
     @[JSON::Field(ignore: true)]
     property? last4_present : Bool = false
@@ -116,10 +120,11 @@ module Stripe
     # The list of permissions granted by this account.
     @[JSON::Field(key: "permissions", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: permissions.nil? && !permissions_present?)]
     getter permissions : Array(String)? = nil
+    ERROR_MESSAGE_FOR_PERMISSIONS = "invalid value for \"permissions\", must be one of [balances, ownership, payment_method, transactions]."
+    VALID_VALUES_FOR_PERMISSIONS  = StaticArray["balances", "ownership", "payment_method", "transactions"]
 
     @[JSON::Field(ignore: true)]
     property? permissions_present : Bool = false
-    VALID_VALUES_FOR_PERMISSIONS = StaticArray["balances", "ownership", "payment_method", "transactions"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -155,21 +160,21 @@ module Stripe
       invalid_properties.push("\"category\" is required and cannot be null") if @category.nil?
 
       if _category = @category
-        invalid_properties.push(OpenApi::EnumValidator.error_message("category", VALID_VALUES_FOR_CATEGORY)) unless OpenApi::EnumValidator.valid?(_category, VALID_VALUES_FOR_CATEGORY)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CATEGORY) unless OpenApi::EnumValidator.valid?(_category, VALID_VALUES_FOR_CATEGORY)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"institution_name\" is required and cannot be null") if @institution_name.nil?
 
       if _institution_name = @institution_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_name", _institution_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_name", _institution_name.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -178,22 +183,22 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"subcategory\" is required and cannot be null") if @subcategory.nil?
 
       if _subcategory = @subcategory
-        invalid_properties.push(OpenApi::EnumValidator.error_message("subcategory", VALID_VALUES_FOR_SUBCATEGORY)) unless OpenApi::EnumValidator.valid?(_subcategory, VALID_VALUES_FOR_SUBCATEGORY)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SUBCATEGORY) unless OpenApi::EnumValidator.valid?(_subcategory, VALID_VALUES_FOR_SUBCATEGORY)
       end
       invalid_properties.push("\"supported_payment_method_types\" is required and cannot be null") if @supported_payment_method_types.nil?
 
       if _supported_payment_method_types = @supported_payment_method_types
-        invalid_properties.push(OpenApi::EnumValidator.error_message("supported_payment_method_types", VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES)) unless OpenApi::EnumValidator.valid?(_supported_payment_method_types, VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SUPPORTED_PAYMENT_METHOD_TYPES) unless OpenApi::EnumValidator.valid?(_supported_payment_method_types, VALID_VALUES_FOR_SUPPORTED_PAYMENT_METHOD_TYPES)
       end
       if _account_holder = @account_holder
         invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder")) if _account_holder.is_a?(OpenApi::Validatable)
@@ -205,12 +210,12 @@ module Stripe
         invalid_properties.concat(_balance_refresh.list_invalid_properties_for("balance_refresh")) if _balance_refresh.is_a?(OpenApi::Validatable)
       end
       if _display_name = @display_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _last4 = @last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
@@ -221,7 +226,7 @@ module Stripe
         invalid_properties.concat(_ownership_refresh.list_invalid_properties_for("ownership_refresh")) if _ownership_refresh.is_a?(OpenApi::Validatable)
       end
       if _permissions = @permissions
-        invalid_properties.push(OpenApi::EnumValidator.error_message("permissions", VALID_VALUES_FOR_PERMISSIONS)) unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PERMISSIONS) unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
       end
       invalid_properties
     end
@@ -238,12 +243,12 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @institution_name.nil?
       if _institution_name = @institution_name
-        return false if _institution_name.to_s.size > 5000
+        return false if _institution_name.to_s.size > MAX_LENGTH_FOR_INSTITUTION_NAME
       end
 
       return false if @livemode.nil?
@@ -281,11 +286,11 @@ module Stripe
       end
 
       if _display_name = @display_name
-        return false if _display_name.to_s.size > 5000
+        return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 
       if _last4 = @last4
-        return false if _last4.to_s.size > 5000
+        return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
       if _ownership = @ownership
@@ -331,10 +336,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -345,10 +347,7 @@ module Stripe
         raise ArgumentError.new("\"institution_name\" is required and cannot be null")
       end
       _institution_name = institution_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_name", _institution_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("institution_name", _institution_name.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NAME)
       @institution_name = _institution_name
     end
 
@@ -446,10 +445,7 @@ module Stripe
         return @display_name = nil
       end
       _display_name = display_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
       @display_name = _display_name
     end
 
@@ -460,10 +456,7 @@ module Stripe
         return @last4 = nil
       end
       _last4 = last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
       @last4 = _last4
     end
 

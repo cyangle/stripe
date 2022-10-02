@@ -24,18 +24,20 @@ module Stripe
     # If `disabled_reason` is present, all cards will decline authorizations with `cardholder_verification_required` reason.
     @[JSON::Field(key: "disabled_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: disabled_reason.nil? && !disabled_reason_present?)]
     getter disabled_reason : String? = nil
+    ERROR_MESSAGE_FOR_DISABLED_REASON = "invalid value for \"disabled_reason\", must be one of [listed, rejected.listed, under_review]."
+    VALID_VALUES_FOR_DISABLED_REASON  = StaticArray["listed", "rejected.listed", "under_review"]
 
     @[JSON::Field(ignore: true)]
     property? disabled_reason_present : Bool = false
-    VALID_VALUES_FOR_DISABLED_REASON = StaticArray["listed", "rejected.listed", "under_review"]
 
     # Array of fields that need to be collected in order to verify and re-enable the cardholder.
     @[JSON::Field(key: "past_due", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: past_due.nil? && !past_due_present?)]
     getter past_due : Array(String)? = nil
+    ERROR_MESSAGE_FOR_PAST_DUE = "invalid value for \"past_due\", must be one of [company.tax_id, individual.dob.day, individual.dob.month, individual.dob.year, individual.first_name, individual.last_name, individual.verification.document]."
+    VALID_VALUES_FOR_PAST_DUE  = StaticArray["company.tax_id", "individual.dob.day", "individual.dob.month", "individual.dob.year", "individual.first_name", "individual.last_name", "individual.verification.document"]
 
     @[JSON::Field(ignore: true)]
     property? past_due_present : Bool = false
-    VALID_VALUES_FOR_PAST_DUE = StaticArray["company.tax_id", "individual.dob.day", "individual.dob.month", "individual.dob.year", "individual.first_name", "individual.last_name", "individual.verification.document"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,10 +55,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _disabled_reason = @disabled_reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("disabled_reason", VALID_VALUES_FOR_DISABLED_REASON)) unless OpenApi::EnumValidator.valid?(_disabled_reason, VALID_VALUES_FOR_DISABLED_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_DISABLED_REASON) unless OpenApi::EnumValidator.valid?(_disabled_reason, VALID_VALUES_FOR_DISABLED_REASON)
       end
       if _past_due = @past_due
-        invalid_properties.push(OpenApi::EnumValidator.error_message("past_due", VALID_VALUES_FOR_PAST_DUE)) unless OpenApi::EnumValidator.valid?(_past_due, VALID_VALUES_FOR_PAST_DUE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PAST_DUE) unless OpenApi::EnumValidator.valid?(_past_due, VALID_VALUES_FOR_PAST_DUE)
       end
       invalid_properties
     end

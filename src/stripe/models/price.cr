@@ -28,8 +28,8 @@ module Stripe
     # Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per unit in `quantity` (for prices with `usage_type=licensed`), or per unit of total usage (for prices with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
     @[JSON::Field(key: "billing_scheme", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter billing_scheme : String? = nil
-
-    VALID_VALUES_FOR_BILLING_SCHEME = StaticArray["per_unit", "tiered"]
+    ERROR_MESSAGE_FOR_BILLING_SCHEME = "invalid value for \"billing_scheme\", must be one of [per_unit, tiered]."
+    VALID_VALUES_FOR_BILLING_SCHEME  = StaticArray["per_unit", "tiered"]
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -42,6 +42,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -54,8 +55,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["price"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [price]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["price"]
 
     @[JSON::Field(key: "product", type: Stripe::PriceProduct?, default: nil, required: true, nullable: false, emit_null: false)]
     getter product : Stripe::PriceProduct? = nil
@@ -63,8 +64,8 @@ module Stripe
     # One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["one_time", "recurring"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [one_time, recurring]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["one_time", "recurring"]
 
     # Optional properties
 
@@ -81,6 +82,7 @@ module Stripe
     # A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
     @[JSON::Field(key: "lookup_key", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: lookup_key.nil? && !lookup_key_present?)]
     getter lookup_key : String? = nil
+    MAX_LENGTH_FOR_LOOKUP_KEY = 5000
 
     @[JSON::Field(ignore: true)]
     property? lookup_key_present : Bool = false
@@ -88,6 +90,7 @@ module Stripe
     # A brief description of the price, hidden from customers.
     @[JSON::Field(key: "nickname", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: nickname.nil? && !nickname_present?)]
     getter nickname : String? = nil
+    MAX_LENGTH_FOR_NICKNAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? nickname_present : Bool = false
@@ -101,10 +104,11 @@ module Stripe
     # Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tax_behavior.nil? && !tax_behavior_present?)]
     getter tax_behavior : String? = nil
+    ERROR_MESSAGE_FOR_TAX_BEHAVIOR = "invalid value for \"tax_behavior\", must be one of [exclusive, inclusive, unspecified]."
+    VALID_VALUES_FOR_TAX_BEHAVIOR  = StaticArray["exclusive", "inclusive", "unspecified"]
 
     @[JSON::Field(ignore: true)]
     property? tax_behavior_present : Bool = false
-    VALID_VALUES_FOR_TAX_BEHAVIOR = StaticArray["exclusive", "inclusive", "unspecified"]
 
     # Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.
     @[JSON::Field(key: "tiers", type: Array(Stripe::PriceTier)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -113,10 +117,11 @@ module Stripe
     # Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.
     @[JSON::Field(key: "tiers_mode", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tiers_mode.nil? && !tiers_mode_present?)]
     getter tiers_mode : String? = nil
+    ERROR_MESSAGE_FOR_TIERS_MODE = "invalid value for \"tiers_mode\", must be one of [graduated, volume]."
+    VALID_VALUES_FOR_TIERS_MODE  = StaticArray["graduated", "volume"]
 
     @[JSON::Field(ignore: true)]
     property? tiers_mode_present : Bool = false
-    VALID_VALUES_FOR_TIERS_MODE = StaticArray["graduated", "volume"]
 
     @[JSON::Field(key: "transform_quantity", type: Stripe::PriceTransformQuantity?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: transform_quantity.nil? && !transform_quantity_present?)]
     getter transform_quantity : Stripe::PriceTransformQuantity? = nil
@@ -178,7 +183,7 @@ module Stripe
       invalid_properties.push("\"billing_scheme\" is required and cannot be null") if @billing_scheme.nil?
 
       if _billing_scheme = @billing_scheme
-        invalid_properties.push(OpenApi::EnumValidator.error_message("billing_scheme", VALID_VALUES_FOR_BILLING_SCHEME)) unless OpenApi::EnumValidator.valid?(_billing_scheme, VALID_VALUES_FOR_BILLING_SCHEME)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_SCHEME) unless OpenApi::EnumValidator.valid?(_billing_scheme, VALID_VALUES_FOR_BILLING_SCHEME)
       end
       invalid_properties.push("\"created\" is required and cannot be null") if @created.nil?
 
@@ -187,7 +192,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -198,7 +203,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
 
@@ -208,21 +213,21 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _currency_options = @currency_options
-        invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "currency_options", hash: _currency_options)) if _currency_options.is_a?(Hash)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "currency_options", container: _currency_options)) if _currency_options.is_a?(Hash)
       end
       if _custom_unit_amount = @custom_unit_amount
         invalid_properties.concat(_custom_unit_amount.list_invalid_properties_for("custom_unit_amount")) if _custom_unit_amount.is_a?(OpenApi::Validatable)
       end
       if _lookup_key = @lookup_key
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("lookup_key", _lookup_key.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("lookup_key", _lookup_key.to_s.size, MAX_LENGTH_FOR_LOOKUP_KEY)
           invalid_properties.push(max_length_error)
         end
       end
       if _nickname = @nickname
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, MAX_LENGTH_FOR_NICKNAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -230,13 +235,13 @@ module Stripe
         invalid_properties.concat(_recurring.list_invalid_properties_for("recurring")) if _recurring.is_a?(OpenApi::Validatable)
       end
       if _tax_behavior = @tax_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_behavior", VALID_VALUES_FOR_TAX_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
       if _tiers = @tiers
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tiers", array: _tiers)) if _tiers.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tiers", container: _tiers)) if _tiers.is_a?(Array)
       end
       if _tiers_mode = @tiers_mode
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tiers_mode", VALID_VALUES_FOR_TIERS_MODE)) unless OpenApi::EnumValidator.valid?(_tiers_mode, VALID_VALUES_FOR_TIERS_MODE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TIERS_MODE) unless OpenApi::EnumValidator.valid?(_tiers_mode, VALID_VALUES_FOR_TIERS_MODE)
       end
       if _transform_quantity = @transform_quantity
         invalid_properties.concat(_transform_quantity.list_invalid_properties_for("transform_quantity")) if _transform_quantity.is_a?(OpenApi::Validatable)
@@ -261,7 +266,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -284,7 +289,7 @@ module Stripe
       end
 
       if _currency_options = @currency_options
-        return false if _currency_options.is_a?(Hash) && !OpenApi::HashValidator.valid?(hash: _currency_options)
+        return false if _currency_options.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _currency_options)
       end
 
       if _custom_unit_amount = @custom_unit_amount
@@ -292,11 +297,11 @@ module Stripe
       end
 
       if _lookup_key = @lookup_key
-        return false if _lookup_key.to_s.size > 5000
+        return false if _lookup_key.to_s.size > MAX_LENGTH_FOR_LOOKUP_KEY
       end
 
       if _nickname = @nickname
-        return false if _nickname.to_s.size > 5000
+        return false if _nickname.to_s.size > MAX_LENGTH_FOR_NICKNAME
       end
 
       if _recurring = @recurring
@@ -308,7 +313,7 @@ module Stripe
       end
 
       if _tiers = @tiers
-        return false if _tiers.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tiers)
+        return false if _tiers.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tiers)
       end
 
       if _tiers_mode = @tiers_mode
@@ -370,10 +375,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -437,7 +439,7 @@ module Stripe
         return @currency_options = nil
       end
       _currency_options = currency_options.not_nil!
-      OpenApi::HashValidator.validate(hash: _currency_options) if _currency_options.is_a?(Hash)
+      OpenApi::ContainerValidator.validate(container: _currency_options) if _currency_options.is_a?(Hash)
       @currency_options = _currency_options
     end
 
@@ -459,10 +461,7 @@ module Stripe
         return @lookup_key = nil
       end
       _lookup_key = lookup_key.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("lookup_key", _lookup_key.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("lookup_key", _lookup_key.to_s.size, MAX_LENGTH_FOR_LOOKUP_KEY)
       @lookup_key = _lookup_key
     end
 
@@ -473,10 +472,7 @@ module Stripe
         return @nickname = nil
       end
       _nickname = nickname.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("nickname", _nickname.to_s.size, MAX_LENGTH_FOR_NICKNAME)
       @nickname = _nickname
     end
 
@@ -509,7 +505,7 @@ module Stripe
         return @tiers = nil
       end
       _tiers = tiers.not_nil!
-      OpenApi::ArrayValidator.validate(array: _tiers) if _tiers.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _tiers) if _tiers.is_a?(Array)
       @tiers = _tiers
     end
 

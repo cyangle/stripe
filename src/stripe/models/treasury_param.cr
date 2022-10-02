@@ -23,6 +23,7 @@ module Stripe
 
     @[JSON::Field(key: "received_debit", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter received_debit : String? = nil
+    MAX_LENGTH_FOR_RECEIVED_DEBIT = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -41,7 +42,7 @@ module Stripe
       invalid_properties.push("\"received_debit\" is required and cannot be null") if @received_debit.nil?
 
       if _received_debit = @received_debit
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_debit", _received_debit.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_debit", _received_debit.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -53,7 +54,7 @@ module Stripe
     def valid? : Bool
       return false if @received_debit.nil?
       if _received_debit = @received_debit
-        return false if _received_debit.to_s.size > 5000
+        return false if _received_debit.to_s.size > MAX_LENGTH_FOR_RECEIVED_DEBIT
       end
 
       true
@@ -66,10 +67,7 @@ module Stripe
         raise ArgumentError.new("\"received_debit\" is required and cannot be null")
       end
       _received_debit = received_debit.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_debit", _received_debit.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("received_debit", _received_debit.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
       @received_debit = _received_debit
     end
 

@@ -24,8 +24,8 @@ module Stripe
     # The list of permissions to request. The `payment_method` permission must be included.
     @[JSON::Field(key: "permissions", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter permissions : Array(String)? = nil
-
-    VALID_VALUES_FOR_PERMISSIONS = StaticArray["balances", "payment_method", "transactions"]
+    ERROR_MESSAGE_FOR_PERMISSIONS = "invalid value for \"permissions\", must be one of [balances, payment_method, transactions]."
+    VALID_VALUES_FOR_PERMISSIONS  = StaticArray["balances", "payment_method", "transactions"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,7 +42,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _permissions = @permissions
-        invalid_properties.push(OpenApi::EnumValidator.error_message("permissions", VALID_VALUES_FOR_PERMISSIONS)) unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PERMISSIONS) unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
       end
       invalid_properties
     end

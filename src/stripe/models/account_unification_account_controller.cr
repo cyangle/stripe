@@ -24,8 +24,8 @@ module Stripe
     # The controller type. Can be `application`, if a Connect application controls the account, or `account`, if the account controls itself.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["account", "application"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [account, application]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["account", "application"]
 
     # Optional properties
 
@@ -52,7 +52,7 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
       invalid_properties

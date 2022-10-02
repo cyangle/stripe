@@ -24,14 +24,16 @@ module Stripe
     # A short machine-readable string giving the reason for the verification or user-session failure.
     @[JSON::Field(key: "code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: code.nil? && !code_present?)]
     getter code : String? = nil
+    ERROR_MESSAGE_FOR_CODE = "invalid value for \"code\", must be one of [abandoned, consent_declined, country_not_supported, device_not_supported, document_expired, document_type_not_supported, document_unverified_other, id_number_insufficient_document_data, id_number_mismatch, id_number_unverified_other, selfie_document_missing_photo, selfie_face_mismatch, selfie_manipulated, selfie_unverified_other, under_supported_age]."
+    VALID_VALUES_FOR_CODE  = StaticArray["abandoned", "consent_declined", "country_not_supported", "device_not_supported", "document_expired", "document_type_not_supported", "document_unverified_other", "id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other", "selfie_document_missing_photo", "selfie_face_mismatch", "selfie_manipulated", "selfie_unverified_other", "under_supported_age"]
 
     @[JSON::Field(ignore: true)]
     property? code_present : Bool = false
-    VALID_VALUES_FOR_CODE = StaticArray["abandoned", "consent_declined", "country_not_supported", "device_not_supported", "document_expired", "document_type_not_supported", "document_unverified_other", "id_number_insufficient_document_data", "id_number_mismatch", "id_number_unverified_other", "selfie_document_missing_photo", "selfie_face_mismatch", "selfie_manipulated", "selfie_unverified_other", "under_supported_age"]
 
     # A message that explains the reason for verification or user-session failure.
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: reason.nil? && !reason_present?)]
     getter reason : String? = nil
+    MAX_LENGTH_FOR_REASON = 5000
 
     @[JSON::Field(ignore: true)]
     property? reason_present : Bool = false
@@ -52,10 +54,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _code = @code
-        invalid_properties.push(OpenApi::EnumValidator.error_message("code", VALID_VALUES_FOR_CODE)) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CODE) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
       end
       if _reason = @reason
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
           invalid_properties.push(max_length_error)
         end
       end
@@ -70,7 +72,7 @@ module Stripe
       end
 
       if _reason = @reason
-        return false if _reason.to_s.size > 5000
+        return false if _reason.to_s.size > MAX_LENGTH_FOR_REASON
       end
 
       true
@@ -94,10 +96,7 @@ module Stripe
         return @reason = nil
       end
       _reason = reason.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
       @reason = _reason
     end
 

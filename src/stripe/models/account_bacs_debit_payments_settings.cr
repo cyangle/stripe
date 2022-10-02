@@ -24,6 +24,7 @@ module Stripe
     # The Bacs Direct Debit Display Name for this account. For payments made with Bacs Direct Debit, this will appear on the mandate, and as the statement descriptor.
     @[JSON::Field(key: "display_name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter display_name : String? = nil
+    MAX_LENGTH_FOR_DISPLAY_NAME = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +41,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _display_name = @display_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -51,7 +52,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _display_name = @display_name
-        return false if _display_name.to_s.size > 5000
+        return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 
       true
@@ -64,10 +65,7 @@ module Stripe
         return @display_name = nil
       end
       _display_name = display_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
       @display_name = _display_name
     end
 

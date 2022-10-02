@@ -22,8 +22,8 @@ module Stripe
 
     @[JSON::Field(key: "preferred_language", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter preferred_language : String? = nil
-
-    VALID_VALUES_FOR_PREFERRED_LANGUAGE = StaticArray["de", "en", "fr", "nl"]
+    ERROR_MESSAGE_FOR_PREFERRED_LANGUAGE = "invalid value for \"preferred_language\", must be one of [de, en, fr, nl]."
+    VALID_VALUES_FOR_PREFERRED_LANGUAGE  = StaticArray["de", "en", "fr", "nl"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +40,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _preferred_language = @preferred_language
-        invalid_properties.push(OpenApi::EnumValidator.error_message("preferred_language", VALID_VALUES_FOR_PREFERRED_LANGUAGE)) unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PREFERRED_LANGUAGE) unless OpenApi::EnumValidator.valid?(_preferred_language, VALID_VALUES_FOR_PREFERRED_LANGUAGE)
       end
       invalid_properties
     end

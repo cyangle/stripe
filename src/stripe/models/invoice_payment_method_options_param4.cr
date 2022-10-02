@@ -25,8 +25,8 @@ module Stripe
 
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter request_three_d_secure : String? = nil
-
-    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE = StaticArray["any", "automatic"]
+    ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE = "invalid value for \"request_three_d_secure\", must be one of [any, automatic]."
+    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE  = StaticArray["any", "automatic"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -47,7 +47,7 @@ module Stripe
         invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
       if _request_three_d_secure = @request_three_d_secure
-        invalid_properties.push(OpenApi::EnumValidator.error_message("request_three_d_secure", VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)) unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE) unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
       end
       invalid_properties
     end

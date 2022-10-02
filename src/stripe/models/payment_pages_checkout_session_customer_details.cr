@@ -30,6 +30,7 @@ module Stripe
     # The email associated with the Customer, if one exists, on the Checkout Session after a completed Checkout Session or at time of session expiry. Otherwise, if the customer has consented to promotional content, this value is the most recent valid email provided by the customer on the Checkout form.
     @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: email.nil? && !email_present?)]
     getter email : String? = nil
+    MAX_LENGTH_FOR_EMAIL = 5000
 
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
@@ -37,6 +38,7 @@ module Stripe
     # The customer's name after a completed Checkout Session. Note: This property is populated only for sessions on or after March 30, 2022.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: name.nil? && !name_present?)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
@@ -44,6 +46,7 @@ module Stripe
     # The customer's phone number after a completed Checkout Session.
     @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
     getter phone : String? = nil
+    MAX_LENGTH_FOR_PHONE = 5000
 
     @[JSON::Field(ignore: true)]
     property? phone_present : Bool = false
@@ -51,10 +54,11 @@ module Stripe
     # The customer’s tax exempt status after a completed Checkout Session.
     @[JSON::Field(key: "tax_exempt", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tax_exempt.nil? && !tax_exempt_present?)]
     getter tax_exempt : String? = nil
+    ERROR_MESSAGE_FOR_TAX_EXEMPT = "invalid value for \"tax_exempt\", must be one of [exempt, none, reverse]."
+    VALID_VALUES_FOR_TAX_EXEMPT  = StaticArray["exempt", "none", "reverse"]
 
     @[JSON::Field(ignore: true)]
     property? tax_exempt_present : Bool = false
-    VALID_VALUES_FOR_TAX_EXEMPT = StaticArray["exempt", "none", "reverse"]
 
     # The customer’s tax IDs after a completed Checkout Session.
     @[JSON::Field(key: "tax_ids", type: Array(Stripe::PaymentPagesCheckoutSessionTaxId)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tax_ids.nil? && !tax_ids_present?)]
@@ -86,25 +90,25 @@ module Stripe
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       if _email = @email
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _phone = @phone
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
       if _tax_exempt = @tax_exempt
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_exempt", VALID_VALUES_FOR_TAX_EXEMPT)) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_EXEMPT) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       end
       if _tax_ids = @tax_ids
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tax_ids", array: _tax_ids)) if _tax_ids.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tax_ids", container: _tax_ids)) if _tax_ids.is_a?(Array)
       end
       invalid_properties
     end
@@ -117,15 +121,15 @@ module Stripe
       end
 
       if _email = @email
-        return false if _email.to_s.size > 5000
+        return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
       if _name = @name
-        return false if _name.to_s.size > 5000
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       if _phone = @phone
-        return false if _phone.to_s.size > 5000
+        return false if _phone.to_s.size > MAX_LENGTH_FOR_PHONE
       end
 
       if _tax_exempt = @tax_exempt
@@ -133,7 +137,7 @@ module Stripe
       end
 
       if _tax_ids = @tax_ids
-        return false if _tax_ids.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tax_ids)
+        return false if _tax_ids.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tax_ids)
       end
 
       true
@@ -157,10 +161,7 @@ module Stripe
         return @email = nil
       end
       _email = email.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
       @email = _email
     end
 
@@ -171,10 +172,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 
@@ -185,10 +183,7 @@ module Stripe
         return @phone = nil
       end
       _phone = phone.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
       @phone = _phone
     end
 
@@ -210,7 +205,7 @@ module Stripe
         return @tax_ids = nil
       end
       _tax_ids = tax_ids.not_nil!
-      OpenApi::ArrayValidator.validate(array: _tax_ids) if _tax_ids.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _tax_ids) if _tax_ids.is_a?(Array)
       @tax_ids = _tax_ids
     end
 

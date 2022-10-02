@@ -24,14 +24,15 @@ module Stripe
     # Status of this `selfie` check.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["unverified", "verified"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [unverified, verified]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["unverified", "verified"]
 
     # Optional properties
 
     # ID of the [File](https://stripe.com/docs/api/files) holding the image of the identity document used in this check.
     @[JSON::Field(key: "document", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: document.nil? && !document_present?)]
     getter document : String? = nil
+    MAX_LENGTH_FOR_DOCUMENT = 5000
 
     @[JSON::Field(ignore: true)]
     property? document_present : Bool = false
@@ -45,6 +46,7 @@ module Stripe
     # ID of the [File](https://stripe.com/docs/api/files) holding the image of the selfie used in this check.
     @[JSON::Field(key: "selfie", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: selfie.nil? && !selfie_present?)]
     getter selfie : String? = nil
+    MAX_LENGTH_FOR_SELFIE = 5000
 
     @[JSON::Field(ignore: true)]
     property? selfie_present : Bool = false
@@ -70,10 +72,10 @@ module Stripe
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       if _document = @document
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("document", _document.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("document", _document.to_s.size, MAX_LENGTH_FOR_DOCUMENT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -81,7 +83,7 @@ module Stripe
         invalid_properties.concat(_error.list_invalid_properties_for("error")) if _error.is_a?(OpenApi::Validatable)
       end
       if _selfie = @selfie
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("selfie", _selfie.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("selfie", _selfie.to_s.size, MAX_LENGTH_FOR_SELFIE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -97,7 +99,7 @@ module Stripe
       end
 
       if _document = @document
-        return false if _document.to_s.size > 5000
+        return false if _document.to_s.size > MAX_LENGTH_FOR_DOCUMENT
       end
 
       if _error = @error
@@ -105,7 +107,7 @@ module Stripe
       end
 
       if _selfie = @selfie
-        return false if _selfie.to_s.size > 5000
+        return false if _selfie.to_s.size > MAX_LENGTH_FOR_SELFIE
       end
 
       true
@@ -129,10 +131,7 @@ module Stripe
         return @document = nil
       end
       _document = document.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("document", _document.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("document", _document.to_s.size, MAX_LENGTH_FOR_DOCUMENT)
       @document = _document
     end
 
@@ -154,10 +153,7 @@ module Stripe
         return @selfie = nil
       end
       _selfie = selfie.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("selfie", _selfie.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("selfie", _selfie.to_s.size, MAX_LENGTH_FOR_SELFIE)
       @selfie = _selfie
     end
 

@@ -22,16 +22,16 @@ module Stripe
 
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter currency : String? = nil
-
-    VALID_VALUES_FOR_CURRENCY = StaticArray["cad", "usd"]
+    ERROR_MESSAGE_FOR_CURRENCY = "invalid value for \"currency\", must be one of [cad, usd]."
+    VALID_VALUES_FOR_CURRENCY  = StaticArray["cad", "usd"]
 
     @[JSON::Field(key: "mandate_options", type: Stripe::SetupIntentPaymentMethodOptionsMandateOptionsParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mandate_options : Stripe::SetupIntentPaymentMethodOptionsMandateOptionsParam? = nil
 
     @[JSON::Field(key: "verification_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter verification_method : String? = nil
-
-    VALID_VALUES_FOR_VERIFICATION_METHOD = StaticArray["automatic", "instant", "microdeposits"]
+    ERROR_MESSAGE_FOR_VERIFICATION_METHOD = "invalid value for \"verification_method\", must be one of [automatic, instant, microdeposits]."
+    VALID_VALUES_FOR_VERIFICATION_METHOD  = StaticArray["automatic", "instant", "microdeposits"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -50,13 +50,13 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _currency = @currency
-        invalid_properties.push(OpenApi::EnumValidator.error_message("currency", VALID_VALUES_FOR_CURRENCY)) unless OpenApi::EnumValidator.valid?(_currency, VALID_VALUES_FOR_CURRENCY)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CURRENCY) unless OpenApi::EnumValidator.valid?(_currency, VALID_VALUES_FOR_CURRENCY)
       end
       if _mandate_options = @mandate_options
         invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
       if _verification_method = @verification_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("verification_method", VALID_VALUES_FOR_VERIFICATION_METHOD)) unless OpenApi::EnumValidator.valid?(_verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_VERIFICATION_METHOD) unless OpenApi::EnumValidator.valid?(_verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
       end
       invalid_properties
     end

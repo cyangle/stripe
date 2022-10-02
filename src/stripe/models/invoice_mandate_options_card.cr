@@ -31,14 +31,16 @@ module Stripe
     # One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
     @[JSON::Field(key: "amount_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_type.nil? && !amount_type_present?)]
     getter amount_type : String? = nil
+    ERROR_MESSAGE_FOR_AMOUNT_TYPE = "invalid value for \"amount_type\", must be one of [fixed, maximum]."
+    VALID_VALUES_FOR_AMOUNT_TYPE  = StaticArray["fixed", "maximum"]
 
     @[JSON::Field(ignore: true)]
     property? amount_type_present : Bool = false
-    VALID_VALUES_FOR_AMOUNT_TYPE = StaticArray["fixed", "maximum"]
 
     # A description of the mandate or subscription that is meant to be displayed to the customer.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 200
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
@@ -60,10 +62,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _amount_type = @amount_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("amount_type", VALID_VALUES_FOR_AMOUNT_TYPE)) unless OpenApi::EnumValidator.valid?(_amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_AMOUNT_TYPE) unless OpenApi::EnumValidator.valid?(_amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 200)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -78,7 +80,7 @@ module Stripe
       end
 
       if _description = @description
-        return false if _description.to_s.size > 200
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       true
@@ -112,10 +114,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 200)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 

@@ -23,10 +23,12 @@ module Stripe
     # A name for the secret that's unique within the scope.
     @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 5000
 
     # The plaintext secret value to be stored.
     @[JSON::Field(key: "payload", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payload : String? = nil
+    MAX_LENGTH_FOR_PAYLOAD = 5000
 
     @[JSON::Field(key: "scope", type: Stripe::ScopeParam1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter scope : Stripe::ScopeParam1? = nil
@@ -63,14 +65,14 @@ module Stripe
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"payload\" is required and cannot be null") if @payload.nil?
 
       if _payload = @payload
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payload", _payload.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payload", _payload.to_s.size, MAX_LENGTH_FOR_PAYLOAD)
           invalid_properties.push(max_length_error)
         end
       end
@@ -88,12 +90,12 @@ module Stripe
     def valid? : Bool
       return false if @name.nil?
       if _name = @name
-        return false if _name.to_s.size > 5000
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       return false if @payload.nil?
       if _payload = @payload
-        return false if _payload.to_s.size > 5000
+        return false if _payload.to_s.size > MAX_LENGTH_FOR_PAYLOAD
       end
 
       return false if @scope.nil?
@@ -111,10 +113,7 @@ module Stripe
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 
@@ -125,10 +124,7 @@ module Stripe
         raise ArgumentError.new("\"payload\" is required and cannot be null")
       end
       _payload = payload.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payload", _payload.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("payload", _payload.to_s.size, MAX_LENGTH_FOR_PAYLOAD)
       @payload = _payload
     end
 

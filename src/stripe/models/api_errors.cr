@@ -24,34 +24,40 @@ module Stripe
     # The type of error returned. One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["api_error", "card_error", "idempotency_error", "invalid_request_error"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [api_error, card_error, idempotency_error, invalid_request_error]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["api_error", "card_error", "idempotency_error", "invalid_request_error"]
 
     # Optional properties
 
     # For card errors, the ID of the failed charge.
     @[JSON::Field(key: "charge", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter charge : String? = nil
+    MAX_LENGTH_FOR_CHARGE = 5000
 
     # For some errors that could be handled programmatically, a short string indicating the [error code](https://stripe.com/docs/error-codes) reported.
     @[JSON::Field(key: "code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter code : String? = nil
+    MAX_LENGTH_FOR_CODE = 5000
 
     # For card errors resulting from a card issuer decline, a short string indicating the [card issuer's reason for the decline](https://stripe.com/docs/declines#issuer-declines) if they provide one.
     @[JSON::Field(key: "decline_code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter decline_code : String? = nil
+    MAX_LENGTH_FOR_DECLINE_CODE = 5000
 
     # A URL to more information about the [error code](https://stripe.com/docs/error-codes) reported.
     @[JSON::Field(key: "doc_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter doc_url : String? = nil
+    MAX_LENGTH_FOR_DOC_URL = 5000
 
     # A human-readable message providing more details about the error. For card errors, these messages can be shown to your users.
     @[JSON::Field(key: "message", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter message : String? = nil
+    MAX_LENGTH_FOR_MESSAGE = 40000
 
     # If the error is parameter-specific, the parameter related to the error. For example, you can use this to display a message near the correct form field.
     @[JSON::Field(key: "param", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter param : String? = nil
+    MAX_LENGTH_FOR_PARAM = 5000
 
     @[JSON::Field(key: "payment_intent", type: Stripe::PaymentIntent?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_intent : Stripe::PaymentIntent? = nil
@@ -62,6 +68,7 @@ module Stripe
     # If the error is specific to the type of payment method, the payment method type that had a problem. This field is only populated for invoice-related errors.
     @[JSON::Field(key: "payment_method_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_type : String? = nil
+    MAX_LENGTH_FOR_PAYMENT_METHOD_TYPE = 5000
 
     @[JSON::Field(key: "setup_intent", type: Stripe::SetupIntent?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_intent : Stripe::SetupIntent? = nil
@@ -98,35 +105,35 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _charge = @charge
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, MAX_LENGTH_FOR_CHARGE)
           invalid_properties.push(max_length_error)
         end
       end
       if _code = @code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("code", _code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("code", _code.to_s.size, MAX_LENGTH_FOR_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       if _decline_code = @decline_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("decline_code", _decline_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("decline_code", _decline_code.to_s.size, MAX_LENGTH_FOR_DECLINE_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       if _doc_url = @doc_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("doc_url", _doc_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("doc_url", _doc_url.to_s.size, MAX_LENGTH_FOR_DOC_URL)
           invalid_properties.push(max_length_error)
         end
       end
       if _message = @message
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("message", _message.to_s.size, 40000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("message", _message.to_s.size, MAX_LENGTH_FOR_MESSAGE)
           invalid_properties.push(max_length_error)
         end
       end
       if _param = @param
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("param", _param.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("param", _param.to_s.size, MAX_LENGTH_FOR_PARAM)
           invalid_properties.push(max_length_error)
         end
       end
@@ -137,7 +144,7 @@ module Stripe
         invalid_properties.concat(_payment_method.list_invalid_properties_for("payment_method")) if _payment_method.is_a?(OpenApi::Validatable)
       end
       if _payment_method_type = @payment_method_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method_type", _payment_method_type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method_type", _payment_method_type.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -159,27 +166,27 @@ module Stripe
       end
 
       if _charge = @charge
-        return false if _charge.to_s.size > 5000
+        return false if _charge.to_s.size > MAX_LENGTH_FOR_CHARGE
       end
 
       if _code = @code
-        return false if _code.to_s.size > 5000
+        return false if _code.to_s.size > MAX_LENGTH_FOR_CODE
       end
 
       if _decline_code = @decline_code
-        return false if _decline_code.to_s.size > 5000
+        return false if _decline_code.to_s.size > MAX_LENGTH_FOR_DECLINE_CODE
       end
 
       if _doc_url = @doc_url
-        return false if _doc_url.to_s.size > 5000
+        return false if _doc_url.to_s.size > MAX_LENGTH_FOR_DOC_URL
       end
 
       if _message = @message
-        return false if _message.to_s.size > 40000
+        return false if _message.to_s.size > MAX_LENGTH_FOR_MESSAGE
       end
 
       if _param = @param
-        return false if _param.to_s.size > 5000
+        return false if _param.to_s.size > MAX_LENGTH_FOR_PARAM
       end
 
       if _payment_intent = @payment_intent
@@ -191,7 +198,7 @@ module Stripe
       end
 
       if _payment_method_type = @payment_method_type
-        return false if _payment_method_type.to_s.size > 5000
+        return false if _payment_method_type.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD_TYPE
       end
 
       if _setup_intent = @setup_intent
@@ -223,10 +230,7 @@ module Stripe
         return @charge = nil
       end
       _charge = charge.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("charge", _charge.to_s.size, MAX_LENGTH_FOR_CHARGE)
       @charge = _charge
     end
 
@@ -237,10 +241,7 @@ module Stripe
         return @code = nil
       end
       _code = code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("code", _code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("code", _code.to_s.size, MAX_LENGTH_FOR_CODE)
       @code = _code
     end
 
@@ -251,10 +252,7 @@ module Stripe
         return @decline_code = nil
       end
       _decline_code = decline_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("decline_code", _decline_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("decline_code", _decline_code.to_s.size, MAX_LENGTH_FOR_DECLINE_CODE)
       @decline_code = _decline_code
     end
 
@@ -265,10 +263,7 @@ module Stripe
         return @doc_url = nil
       end
       _doc_url = doc_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("doc_url", _doc_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("doc_url", _doc_url.to_s.size, MAX_LENGTH_FOR_DOC_URL)
       @doc_url = _doc_url
     end
 
@@ -279,10 +274,7 @@ module Stripe
         return @message = nil
       end
       _message = message.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("message", _message.to_s.size, 40000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("message", _message.to_s.size, MAX_LENGTH_FOR_MESSAGE)
       @message = _message
     end
 
@@ -293,10 +285,7 @@ module Stripe
         return @param = nil
       end
       _param = param.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("param", _param.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("param", _param.to_s.size, MAX_LENGTH_FOR_PARAM)
       @param = _param
     end
 
@@ -329,10 +318,7 @@ module Stripe
         return @payment_method_type = nil
       end
       _payment_method_type = payment_method_type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method_type", _payment_method_type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("payment_method_type", _payment_method_type.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD_TYPE)
       @payment_method_type = _payment_method_type
     end
 

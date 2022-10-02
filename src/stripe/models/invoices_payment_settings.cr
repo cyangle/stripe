@@ -24,6 +24,7 @@ module Stripe
     # ID of the mandate to be used for this invoice. It must correspond to the payment method used to pay the invoice, including the invoice's default_payment_method or default_source, if set.
     @[JSON::Field(key: "default_mandate", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: default_mandate.nil? && !default_mandate_present?)]
     getter default_mandate : String? = nil
+    MAX_LENGTH_FOR_DEFAULT_MANDATE = 5000
 
     @[JSON::Field(ignore: true)]
     property? default_mandate_present : Bool = false
@@ -37,10 +38,11 @@ module Stripe
     # The list of payment method types (e.g. card) to provide to the invoice’s PaymentIntent. If not set, Stripe attempts to automatically determine the types to use by looking at the invoice’s default payment method, the subscription’s default payment method, the customer’s default payment method, and your [invoice template settings](https://dashboard.stripe.com/settings/billing/invoice).
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_method_types.nil? && !payment_method_types_present?)]
     getter payment_method_types : Array(String)? = nil
+    ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES = "invalid value for \"payment_method_types\", must be one of [ach_credit_transfer, ach_debit, acss_debit, au_becs_debit, bacs_debit, bancontact, boleto, card, customer_balance, fpx, giropay, grabpay, ideal, konbini, link, paynow, promptpay, sepa_debit, sofort, us_bank_account, wechat_pay]."
+    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES  = StaticArray["ach_credit_transfer", "ach_debit", "acss_debit", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "customer_balance", "fpx", "giropay", "grabpay", "ideal", "konbini", "link", "paynow", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
 
     @[JSON::Field(ignore: true)]
     property? payment_method_types_present : Bool = false
-    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES = StaticArray["ach_credit_transfer", "ach_debit", "acss_debit", "au_becs_debit", "bacs_debit", "bancontact", "boleto", "card", "customer_balance", "fpx", "giropay", "grabpay", "ideal", "konbini", "link", "paynow", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -59,7 +61,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _default_mandate = @default_mandate
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_mandate", _default_mandate.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_mandate", _default_mandate.to_s.size, MAX_LENGTH_FOR_DEFAULT_MANDATE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -67,7 +69,7 @@ module Stripe
         invalid_properties.concat(_payment_method_options.list_invalid_properties_for("payment_method_options")) if _payment_method_options.is_a?(OpenApi::Validatable)
       end
       if _payment_method_types = @payment_method_types
-        invalid_properties.push(OpenApi::EnumValidator.error_message("payment_method_types", VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
       invalid_properties
     end
@@ -76,7 +78,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _default_mandate = @default_mandate
-        return false if _default_mandate.to_s.size > 5000
+        return false if _default_mandate.to_s.size > MAX_LENGTH_FOR_DEFAULT_MANDATE
       end
 
       if _payment_method_options = @payment_method_options
@@ -97,10 +99,7 @@ module Stripe
         return @default_mandate = nil
       end
       _default_mandate = default_mandate.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_mandate", _default_mandate.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("default_mandate", _default_mandate.to_s.size, MAX_LENGTH_FOR_DEFAULT_MANDATE)
       @default_mandate = _default_mandate
     end
 

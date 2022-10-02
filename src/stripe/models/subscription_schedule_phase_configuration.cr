@@ -40,8 +40,8 @@ module Stripe
     # If the subscription schedule will prorate when transitioning to this phase. Possible values are `create_prorations` and `none`.
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
-
-    VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
+    ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR = "invalid value for \"proration_behavior\", must be one of [always_invoice, create_prorations, none]."
+    VALID_VALUES_FOR_PRORATION_BEHAVIOR  = StaticArray["always_invoice", "create_prorations", "none"]
 
     # The start of this phase of the subscription schedule.
     @[JSON::Field(key: "start_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -62,10 +62,11 @@ module Stripe
     # Possible values are `phase_start` or `automatic`. If `phase_start` then billing cycle anchor of the subscription is set to the start of the phase when entering the phase. If `automatic` then the billing cycle anchor is automatically modified as needed when entering the phase. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
     @[JSON::Field(key: "billing_cycle_anchor", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_cycle_anchor.nil? && !billing_cycle_anchor_present?)]
     getter billing_cycle_anchor : String? = nil
+    ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR = "invalid value for \"billing_cycle_anchor\", must be one of [automatic, phase_start]."
+    VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR  = StaticArray["automatic", "phase_start"]
 
     @[JSON::Field(ignore: true)]
     property? billing_cycle_anchor_present : Bool = false
-    VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR = StaticArray["automatic", "phase_start"]
 
     @[JSON::Field(key: "billing_thresholds", type: Stripe::SubscriptionBillingThresholds1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_thresholds.nil? && !billing_thresholds_present?)]
     getter billing_thresholds : Stripe::SubscriptionBillingThresholds1? = nil
@@ -76,10 +77,11 @@ module Stripe
     # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: collection_method.nil? && !collection_method_present?)]
     getter collection_method : String? = nil
+    ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
+    VALID_VALUES_FOR_COLLECTION_METHOD  = StaticArray["charge_automatically", "send_invoice"]
 
     @[JSON::Field(ignore: true)]
     property? collection_method_present : Bool = false
-    VALID_VALUES_FOR_COLLECTION_METHOD = StaticArray["charge_automatically", "send_invoice"]
 
     @[JSON::Field(key: "coupon", type: Stripe::SubscriptionSchedulePhaseConfigurationCoupon?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: coupon.nil? && !coupon_present?)]
     getter coupon : Stripe::SubscriptionSchedulePhaseConfigurationCoupon? = nil
@@ -103,6 +105,7 @@ module Stripe
     # Subscription description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
@@ -169,7 +172,7 @@ module Stripe
       invalid_properties.push("\"add_invoice_items\" is required and cannot be null") if @add_invoice_items.nil?
 
       if _add_invoice_items = @add_invoice_items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "add_invoice_items", array: _add_invoice_items)) if _add_invoice_items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "add_invoice_items", container: _add_invoice_items)) if _add_invoice_items.is_a?(Array)
       end
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
@@ -178,12 +181,12 @@ module Stripe
       invalid_properties.push("\"items\" is required and cannot be null") if @items.nil?
 
       if _items = @items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "items", array: _items)) if _items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "items", container: _items)) if _items.is_a?(Array)
       end
       invalid_properties.push("\"proration_behavior\" is required and cannot be null") if @proration_behavior.nil?
 
       if _proration_behavior = @proration_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("proration_behavior", VALID_VALUES_FOR_PRORATION_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
       invalid_properties.push("\"start_date\" is required and cannot be null") if @start_date.nil?
 
@@ -191,13 +194,13 @@ module Stripe
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
       if _billing_cycle_anchor = @billing_cycle_anchor
-        invalid_properties.push(OpenApi::EnumValidator.error_message("billing_cycle_anchor", VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)) unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_CYCLE_ANCHOR) unless OpenApi::EnumValidator.valid?(_billing_cycle_anchor, VALID_VALUES_FOR_BILLING_CYCLE_ANCHOR)
       end
       if _billing_thresholds = @billing_thresholds
         invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
       if _collection_method = @collection_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("collection_method", VALID_VALUES_FOR_COLLECTION_METHOD)) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_COLLECTION_METHOD) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
       if _coupon = @coupon
         invalid_properties.concat(_coupon.list_invalid_properties_for("coupon")) if _coupon.is_a?(OpenApi::Validatable)
@@ -206,10 +209,10 @@ module Stripe
         invalid_properties.concat(_default_payment_method.list_invalid_properties_for("default_payment_method")) if _default_payment_method.is_a?(OpenApi::Validatable)
       end
       if _default_tax_rates = @default_tax_rates
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "default_tax_rates", array: _default_tax_rates)) if _default_tax_rates.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "default_tax_rates", container: _default_tax_rates)) if _default_tax_rates.is_a?(Array)
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -229,7 +232,7 @@ module Stripe
     def valid? : Bool
       return false if @add_invoice_items.nil?
       if _add_invoice_items = @add_invoice_items
-        return false if _add_invoice_items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _add_invoice_items)
+        return false if _add_invoice_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _add_invoice_items)
       end
 
       return false if @currency.nil?
@@ -238,7 +241,7 @@ module Stripe
 
       return false if @items.nil?
       if _items = @items
-        return false if _items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _items)
+        return false if _items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _items)
       end
 
       return false if @proration_behavior.nil?
@@ -273,11 +276,11 @@ module Stripe
       end
 
       if _default_tax_rates = @default_tax_rates
-        return false if _default_tax_rates.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _default_tax_rates)
+        return false if _default_tax_rates.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _default_tax_rates)
       end
 
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _invoice_settings = @invoice_settings
@@ -298,7 +301,7 @@ module Stripe
         raise ArgumentError.new("\"add_invoice_items\" is required and cannot be null")
       end
       _add_invoice_items = add_invoice_items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _add_invoice_items) if _add_invoice_items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _add_invoice_items) if _add_invoice_items.is_a?(Array)
       @add_invoice_items = _add_invoice_items
     end
 
@@ -329,7 +332,7 @@ module Stripe
         raise ArgumentError.new("\"items\" is required and cannot be null")
       end
       _items = items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _items) if _items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _items) if _items.is_a?(Array)
       @items = _items
     end
 
@@ -437,7 +440,7 @@ module Stripe
         return @default_tax_rates = nil
       end
       _default_tax_rates = default_tax_rates.not_nil!
-      OpenApi::ArrayValidator.validate(array: _default_tax_rates) if _default_tax_rates.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _default_tax_rates) if _default_tax_rates.is_a?(Array)
       @default_tax_rates = _default_tax_rates
     end
 
@@ -448,10 +451,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 

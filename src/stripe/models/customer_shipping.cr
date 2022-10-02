@@ -25,11 +25,13 @@ module Stripe
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 5000
 
     # Optional properties
 
     @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter phone : String? = nil
+    MAX_LENGTH_FOR_PHONE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -56,12 +58,12 @@ module Stripe
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _phone = @phone
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -78,11 +80,11 @@ module Stripe
 
       return false if @name.nil?
       if _name = @name
-        return false if _name.to_s.size > 5000
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       if _phone = @phone
-        return false if _phone.to_s.size > 5000
+        return false if _phone.to_s.size > MAX_LENGTH_FOR_PHONE
       end
 
       true
@@ -106,10 +108,7 @@ module Stripe
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 
@@ -120,10 +119,7 @@ module Stripe
         return @phone = nil
       end
       _phone = phone.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
       @phone = _phone
     end
 

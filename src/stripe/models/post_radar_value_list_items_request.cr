@@ -23,10 +23,12 @@ module Stripe
     # The value of the item (whose type must match the type of the parent value list).
     @[JSON::Field(key: "value", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter value : String? = nil
+    MAX_LENGTH_FOR_VALUE = 800
 
     # The identifier of the value list which the created item will be added to.
     @[JSON::Field(key: "value_list", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter value_list : String? = nil
+    MAX_LENGTH_FOR_VALUE_LIST = 5000
 
     # Optional properties
 
@@ -54,14 +56,14 @@ module Stripe
       invalid_properties.push("\"value\" is required and cannot be null") if @value.nil?
 
       if _value = @value
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value", _value.to_s.size, 800)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value", _value.to_s.size, MAX_LENGTH_FOR_VALUE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"value_list\" is required and cannot be null") if @value_list.nil?
 
       if _value_list = @value_list
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value_list", _value_list.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value_list", _value_list.to_s.size, MAX_LENGTH_FOR_VALUE_LIST)
           invalid_properties.push(max_length_error)
         end
       end
@@ -74,12 +76,12 @@ module Stripe
     def valid? : Bool
       return false if @value.nil?
       if _value = @value
-        return false if _value.to_s.size > 800
+        return false if _value.to_s.size > MAX_LENGTH_FOR_VALUE
       end
 
       return false if @value_list.nil?
       if _value_list = @value_list
-        return false if _value_list.to_s.size > 5000
+        return false if _value_list.to_s.size > MAX_LENGTH_FOR_VALUE_LIST
       end
 
       true
@@ -92,10 +94,7 @@ module Stripe
         raise ArgumentError.new("\"value\" is required and cannot be null")
       end
       _value = value.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value", _value.to_s.size, 800)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("value", _value.to_s.size, MAX_LENGTH_FOR_VALUE)
       @value = _value
     end
 
@@ -106,10 +105,7 @@ module Stripe
         raise ArgumentError.new("\"value_list\" is required and cannot be null")
       end
       _value_list = value_list.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value_list", _value_list.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("value_list", _value_list.to_s.size, MAX_LENGTH_FOR_VALUE_LIST)
       @value_list = _value_list
     end
 

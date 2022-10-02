@@ -24,12 +24,13 @@ module Stripe
     # Controls when the funds will be captured from the customer's account.
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
-
-    VALID_VALUES_FOR_CAPTURE_METHOD = StaticArray["manual"]
+    ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [manual]."
+    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["manual"]
 
     # Preferred locale of the Klarna checkout page that the customer is redirected to.
     @[JSON::Field(key: "preferred_locale", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: preferred_locale.nil? && !preferred_locale_present?)]
     getter preferred_locale : String? = nil
+    MAX_LENGTH_FOR_PREFERRED_LOCALE = 5000
 
     @[JSON::Field(ignore: true)]
     property? preferred_locale_present : Bool = false
@@ -37,8 +38,8 @@ module Stripe
     # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
-
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none"]
+    ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none]."
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -57,15 +58,15 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _capture_method = @capture_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("capture_method", VALID_VALUES_FOR_CAPTURE_METHOD)) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CAPTURE_METHOD) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
       if _preferred_locale = @preferred_locale
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, MAX_LENGTH_FOR_PREFERRED_LOCALE)
           invalid_properties.push(max_length_error)
         end
       end
       if _setup_future_usage = @setup_future_usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
     end
@@ -78,7 +79,7 @@ module Stripe
       end
 
       if _preferred_locale = @preferred_locale
-        return false if _preferred_locale.to_s.size > 5000
+        return false if _preferred_locale.to_s.size > MAX_LENGTH_FOR_PREFERRED_LOCALE
       end
 
       if _setup_future_usage = @setup_future_usage
@@ -106,10 +107,7 @@ module Stripe
         return @preferred_locale = nil
       end
       _preferred_locale = preferred_locale.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("preferred_locale", _preferred_locale.to_s.size, MAX_LENGTH_FOR_PREFERRED_LOCALE)
       @preferred_locale = _preferred_locale
     end
 

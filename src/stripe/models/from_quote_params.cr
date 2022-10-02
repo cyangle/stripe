@@ -23,6 +23,7 @@ module Stripe
 
     @[JSON::Field(key: "quote", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter quote : String? = nil
+    MAX_LENGTH_FOR_QUOTE = 5000
 
     # Optional properties
 
@@ -48,7 +49,7 @@ module Stripe
       invalid_properties.push("\"quote\" is required and cannot be null") if @quote.nil?
 
       if _quote = @quote
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("quote", _quote.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("quote", _quote.to_s.size, MAX_LENGTH_FOR_QUOTE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -61,7 +62,7 @@ module Stripe
     def valid? : Bool
       return false if @quote.nil?
       if _quote = @quote
-        return false if _quote.to_s.size > 5000
+        return false if _quote.to_s.size > MAX_LENGTH_FOR_QUOTE
       end
 
       true
@@ -74,10 +75,7 @@ module Stripe
         raise ArgumentError.new("\"quote\" is required and cannot be null")
       end
       _quote = quote.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("quote", _quote.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("quote", _quote.to_s.size, MAX_LENGTH_FOR_QUOTE)
       @quote = _quote
     end
 

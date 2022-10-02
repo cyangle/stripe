@@ -26,6 +26,7 @@ module Stripe
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 5000
 
     # Optional properties
 
@@ -40,13 +41,13 @@ module Stripe
 
     @[JSON::Field(key: "service", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter service : String? = nil
-
-    VALID_VALUES_FOR_SERVICE = StaticArray["express", "priority", "standard"]
+    ERROR_MESSAGE_FOR_SERVICE = "invalid value for \"service\", must be one of [express, priority, standard]."
+    VALID_VALUES_FOR_SERVICE  = StaticArray["express", "priority", "standard"]
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["bulk", "individual"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [bulk, individual]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["bulk", "individual"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -77,7 +78,7 @@ module Stripe
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -86,10 +87,10 @@ module Stripe
       end
 
       if _service = @service
-        invalid_properties.push(OpenApi::EnumValidator.error_message("service", VALID_VALUES_FOR_SERVICE)) unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SERVICE) unless OpenApi::EnumValidator.valid?(_service, VALID_VALUES_FOR_SERVICE)
       end
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
     end
@@ -104,7 +105,7 @@ module Stripe
 
       return false if @name.nil?
       if _name = @name
-        return false if _name.to_s.size > 5000
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       if _customs = @customs
@@ -140,10 +141,7 @@ module Stripe
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 

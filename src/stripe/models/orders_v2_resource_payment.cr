@@ -36,10 +36,11 @@ module Stripe
     # The status of the underlying payment associated with this order, if any. Null when the order is `open`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: status.nil? && !status_present?)]
     getter status : String? = nil
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [canceled, complete, not_required, processing, requires_action, requires_capture, requires_confirmation, requires_payment_method]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["canceled", "complete", "not_required", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method"]
 
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false
-    VALID_VALUES_FOR_STATUS = StaticArray["canceled", "complete", "not_required", "processing", "requires_action", "requires_capture", "requires_confirmation", "requires_payment_method"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -64,7 +65,7 @@ module Stripe
         invalid_properties.concat(_settings.list_invalid_properties_for("settings")) if _settings.is_a?(OpenApi::Validatable)
       end
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
     end

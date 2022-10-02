@@ -25,14 +25,16 @@ module Stripe
 
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
-
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["off_session", "on_session"]
+    ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [off_session, on_session]."
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["off_session", "on_session"]
 
     @[JSON::Field(key: "statement_descriptor_suffix_kana", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor_suffix_kana : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA = 22
 
     @[JSON::Field(key: "statement_descriptor_suffix_kanji", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor_suffix_kanji : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI = 17
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -55,15 +57,15 @@ module Stripe
         invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
       if _setup_future_usage = @setup_future_usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, 22)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA)
           invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, 17)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI)
           invalid_properties.push(max_length_error)
         end
       end
@@ -82,11 +84,11 @@ module Stripe
       end
 
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
-        return false if _statement_descriptor_suffix_kana.to_s.size > 22
+        return false if _statement_descriptor_suffix_kana.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA
       end
 
       if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
-        return false if _statement_descriptor_suffix_kanji.to_s.size > 17
+        return false if _statement_descriptor_suffix_kanji.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI
       end
 
       true
@@ -121,10 +123,7 @@ module Stripe
         return @statement_descriptor_suffix_kana = nil
       end
       _statement_descriptor_suffix_kana = statement_descriptor_suffix_kana.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, 22)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA)
       @statement_descriptor_suffix_kana = _statement_descriptor_suffix_kana
     end
 
@@ -135,10 +134,7 @@ module Stripe
         return @statement_descriptor_suffix_kanji = nil
       end
       _statement_descriptor_suffix_kanji = statement_descriptor_suffix_kanji.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, 17)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI)
       @statement_descriptor_suffix_kanji = _statement_descriptor_suffix_kanji
     end
 

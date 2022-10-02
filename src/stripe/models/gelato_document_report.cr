@@ -24,8 +24,8 @@ module Stripe
     # Status of this `document` check.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["unverified", "verified"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [unverified, verified]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["unverified", "verified"]
 
     # Optional properties
 
@@ -63,6 +63,7 @@ module Stripe
     # First name as it appears in the document.
     @[JSON::Field(key: "first_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: first_name.nil? && !first_name_present?)]
     getter first_name : String? = nil
+    MAX_LENGTH_FOR_FIRST_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? first_name_present : Bool = false
@@ -76,6 +77,7 @@ module Stripe
     # Issuing country of the document.
     @[JSON::Field(key: "issuing_country", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: issuing_country.nil? && !issuing_country_present?)]
     getter issuing_country : String? = nil
+    MAX_LENGTH_FOR_ISSUING_COUNTRY = 5000
 
     @[JSON::Field(ignore: true)]
     property? issuing_country_present : Bool = false
@@ -83,6 +85,7 @@ module Stripe
     # Last name as it appears in the document.
     @[JSON::Field(key: "last_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: last_name.nil? && !last_name_present?)]
     getter last_name : String? = nil
+    MAX_LENGTH_FOR_LAST_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? last_name_present : Bool = false
@@ -90,6 +93,7 @@ module Stripe
     # Document ID number.
     @[JSON::Field(key: "number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: number.nil? && !number_present?)]
     getter number : String? = nil
+    MAX_LENGTH_FOR_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? number_present : Bool = false
@@ -97,10 +101,11 @@ module Stripe
     # Type of the document.
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
     getter _type : String? = nil
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [driving_license, id_card, passport]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["driving_license", "id_card", "passport"]
 
     @[JSON::Field(ignore: true)]
     property? _type_present : Bool = false
-    VALID_VALUES_FOR__TYPE = StaticArray["driving_license", "id_card", "passport"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -131,7 +136,7 @@ module Stripe
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       if _address = @address
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
@@ -147,7 +152,7 @@ module Stripe
       end
 
       if _first_name = @first_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -155,22 +160,22 @@ module Stripe
         invalid_properties.concat(_issued_date.list_invalid_properties_for("issued_date")) if _issued_date.is_a?(OpenApi::Validatable)
       end
       if _issuing_country = @issuing_country
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_country", _issuing_country.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_country", _issuing_country.to_s.size, MAX_LENGTH_FOR_ISSUING_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
       if _last_name = @last_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _number = @number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
     end
@@ -200,7 +205,7 @@ module Stripe
       end
 
       if _first_name = @first_name
-        return false if _first_name.to_s.size > 5000
+        return false if _first_name.to_s.size > MAX_LENGTH_FOR_FIRST_NAME
       end
 
       if _issued_date = @issued_date
@@ -208,15 +213,15 @@ module Stripe
       end
 
       if _issuing_country = @issuing_country
-        return false if _issuing_country.to_s.size > 5000
+        return false if _issuing_country.to_s.size > MAX_LENGTH_FOR_ISSUING_COUNTRY
       end
 
       if _last_name = @last_name
-        return false if _last_name.to_s.size > 5000
+        return false if _last_name.to_s.size > MAX_LENGTH_FOR_LAST_NAME
       end
 
       if _number = @number
-        return false if _number.to_s.size > 5000
+        return false if _number.to_s.size > MAX_LENGTH_FOR_NUMBER
       end
 
       if __type = @_type
@@ -298,10 +303,7 @@ module Stripe
         return @first_name = nil
       end
       _first_name = first_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("first_name", _first_name.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
       @first_name = _first_name
     end
 
@@ -323,10 +325,7 @@ module Stripe
         return @issuing_country = nil
       end
       _issuing_country = issuing_country.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_country", _issuing_country.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("issuing_country", _issuing_country.to_s.size, MAX_LENGTH_FOR_ISSUING_COUNTRY)
       @issuing_country = _issuing_country
     end
 
@@ -337,10 +336,7 @@ module Stripe
         return @last_name = nil
       end
       _last_name = last_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last_name", _last_name.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
       @last_name = _last_name
     end
 
@@ -351,10 +347,7 @@ module Stripe
         return @number = nil
       end
       _number = number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
       @number = _number
     end
 

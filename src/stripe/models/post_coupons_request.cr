@@ -38,8 +38,8 @@ module Stripe
     # Specifies how long the discount will be in effect if used on a subscription. Can be `forever`, `once`, or `repeating`. Defaults to `once`.
     @[JSON::Field(key: "duration", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter duration : String? = nil
-
-    VALID_VALUES_FOR_DURATION = StaticArray["forever", "once", "repeating"]
+    ERROR_MESSAGE_FOR_DURATION = "invalid value for \"duration\", must be one of [forever, once, repeating]."
+    VALID_VALUES_FOR_DURATION  = StaticArray["forever", "once", "repeating"]
 
     # Required only if `duration` is `repeating`, in which case it must be a positive integer that specifies the number of months the discount will be in effect.
     @[JSON::Field(key: "duration_in_months", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -52,6 +52,7 @@ module Stripe
     # Unique string of your choice that will be used to identify this coupon when applying it to a customer. If you don't want to specify a particular code, you can leave the ID blank and we'll generate a random code for you.
     @[JSON::Field(key: "id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # A positive integer specifying the number of times the coupon can be redeemed before it's no longer valid. For example, you might have a 50% off coupon that the first 20 readers of your blog can use.
     @[JSON::Field(key: "max_redemptions", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -63,6 +64,7 @@ module Stripe
     # Name of the coupon displayed to customers on, for instance invoices, or receipts. By default the `id` is shown if `name` is not set.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 40
 
     # A positive float larger than 0, and smaller or equal to 100, that represents the discount the coupon will apply (required if `amount_off` is not passed).
     @[JSON::Field(key: "percent_off", type: Float64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -103,14 +105,14 @@ module Stripe
       end
 
       if _currency_options = @currency_options
-        invalid_properties.concat(OpenApi::HashValidator.list_invalid_properties_for(key: "currency_options", hash: _currency_options)) if _currency_options.is_a?(Hash)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "currency_options", container: _currency_options)) if _currency_options.is_a?(Hash)
       end
       if _duration = @duration
-        invalid_properties.push(OpenApi::EnumValidator.error_message("duration", VALID_VALUES_FOR_DURATION)) unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
+        invalid_properties.push(ERROR_MESSAGE_FOR_DURATION) unless OpenApi::EnumValidator.valid?(_duration, VALID_VALUES_FOR_DURATION)
       end
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -119,7 +121,7 @@ module Stripe
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 40)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -135,7 +137,7 @@ module Stripe
       end
 
       if _currency_options = @currency_options
-        return false if _currency_options.is_a?(Hash) && !OpenApi::HashValidator.valid?(hash: _currency_options)
+        return false if _currency_options.is_a?(Hash) && !OpenApi::ContainerValidator.valid?(container: _currency_options)
       end
 
       if _duration = @duration
@@ -143,7 +145,7 @@ module Stripe
       end
 
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       if _metadata = @metadata
@@ -151,7 +153,7 @@ module Stripe
       end
 
       if _name = @name
-        return false if _name.to_s.size > 40
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       true
@@ -195,7 +197,7 @@ module Stripe
         return @currency_options = nil
       end
       _currency_options = currency_options.not_nil!
-      OpenApi::HashValidator.validate(hash: _currency_options) if _currency_options.is_a?(Hash)
+      OpenApi::ContainerValidator.validate(container: _currency_options) if _currency_options.is_a?(Hash)
       @currency_options = _currency_options
     end
 
@@ -237,10 +239,7 @@ module Stripe
         return @id = nil
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -272,10 +271,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 40)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 

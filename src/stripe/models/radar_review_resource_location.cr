@@ -24,6 +24,7 @@ module Stripe
     # The city where the payment originated.
     @[JSON::Field(key: "city", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: city.nil? && !city_present?)]
     getter city : String? = nil
+    MAX_LENGTH_FOR_CITY = 5000
 
     @[JSON::Field(ignore: true)]
     property? city_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # Two-letter ISO code representing the country where the payment originated.
     @[JSON::Field(key: "country", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: country.nil? && !country_present?)]
     getter country : String? = nil
+    MAX_LENGTH_FOR_COUNTRY = 5000
 
     @[JSON::Field(ignore: true)]
     property? country_present : Bool = false
@@ -52,6 +54,7 @@ module Stripe
     # The state/county/province/region where the payment originated.
     @[JSON::Field(key: "region", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: region.nil? && !region_present?)]
     getter region : String? = nil
+    MAX_LENGTH_FOR_REGION = 5000
 
     @[JSON::Field(ignore: true)]
     property? region_present : Bool = false
@@ -75,18 +78,18 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _city = @city
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("city", _city.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("city", _city.to_s.size, MAX_LENGTH_FOR_CITY)
           invalid_properties.push(max_length_error)
         end
       end
       if _country = @country
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _region = @region
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("region", _region.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("region", _region.to_s.size, MAX_LENGTH_FOR_REGION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -97,15 +100,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _city = @city
-        return false if _city.to_s.size > 5000
+        return false if _city.to_s.size > MAX_LENGTH_FOR_CITY
       end
 
       if _country = @country
-        return false if _country.to_s.size > 5000
+        return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       if _region = @region
-        return false if _region.to_s.size > 5000
+        return false if _region.to_s.size > MAX_LENGTH_FOR_REGION
       end
 
       true
@@ -118,10 +121,7 @@ module Stripe
         return @city = nil
       end
       _city = city.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("city", _city.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("city", _city.to_s.size, MAX_LENGTH_FOR_CITY)
       @city = _city
     end
 
@@ -132,10 +132,7 @@ module Stripe
         return @country = nil
       end
       _country = country.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       @country = _country
     end
 
@@ -166,10 +163,7 @@ module Stripe
         return @region = nil
       end
       _region = region.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("region", _region.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("region", _region.to_s.size, MAX_LENGTH_FOR_REGION)
       @region = _region
     end
 

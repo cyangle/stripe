@@ -27,14 +27,15 @@ module Stripe
     # The type of card to issue. Possible values are `physical` or `virtual`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["physical", "virtual"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [physical, virtual]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["physical", "virtual"]
 
     # Optional properties
 
     # The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the card will be associated.
     @[JSON::Field(key: "cardholder", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cardholder : String? = nil
+    MAX_LENGTH_FOR_CARDHOLDER = 5000
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -50,12 +51,13 @@ module Stripe
     # The card this is meant to be a replacement for (if any).
     @[JSON::Field(key: "replacement_for", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter replacement_for : String? = nil
+    MAX_LENGTH_FOR_REPLACEMENT_FOR = 5000
 
     # If `replacement_for` is specified, this should indicate why that card is being replaced.
     @[JSON::Field(key: "replacement_reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter replacement_reason : String? = nil
-
-    VALID_VALUES_FOR_REPLACEMENT_REASON = StaticArray["damaged", "expired", "lost", "stolen"]
+    ERROR_MESSAGE_FOR_REPLACEMENT_REASON = "invalid value for \"replacement_reason\", must be one of [damaged, expired, lost, stolen]."
+    VALID_VALUES_FOR_REPLACEMENT_REASON  = StaticArray["damaged", "expired", "lost", "stolen"]
 
     @[JSON::Field(key: "shipping", type: Stripe::ShippingSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping : Stripe::ShippingSpecs? = nil
@@ -66,8 +68,8 @@ module Stripe
     # Whether authorizations can be approved on this card. Defaults to `inactive`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["active", "inactive"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, inactive]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["active", "inactive"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -99,21 +101,21 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _cardholder = @cardholder
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder", _cardholder.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder", _cardholder.to_s.size, MAX_LENGTH_FOR_CARDHOLDER)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _replacement_for = @replacement_for
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("replacement_for", _replacement_for.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("replacement_for", _replacement_for.to_s.size, MAX_LENGTH_FOR_REPLACEMENT_FOR)
           invalid_properties.push(max_length_error)
         end
       end
       if _replacement_reason = @replacement_reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("replacement_reason", VALID_VALUES_FOR_REPLACEMENT_REASON)) unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REPLACEMENT_REASON) unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
       end
       if _shipping = @shipping
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
@@ -122,7 +124,7 @@ module Stripe
         invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
     end
@@ -138,11 +140,11 @@ module Stripe
       end
 
       if _cardholder = @cardholder
-        return false if _cardholder.to_s.size > 5000
+        return false if _cardholder.to_s.size > MAX_LENGTH_FOR_CARDHOLDER
       end
 
       if _replacement_for = @replacement_for
-        return false if _replacement_for.to_s.size > 5000
+        return false if _replacement_for.to_s.size > MAX_LENGTH_FOR_REPLACEMENT_FOR
       end
 
       if _replacement_reason = @replacement_reason
@@ -192,10 +194,7 @@ module Stripe
         return @cardholder = nil
       end
       _cardholder = cardholder.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cardholder", _cardholder.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("cardholder", _cardholder.to_s.size, MAX_LENGTH_FOR_CARDHOLDER)
       @cardholder = _cardholder
     end
 
@@ -236,10 +235,7 @@ module Stripe
         return @replacement_for = nil
       end
       _replacement_for = replacement_for.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("replacement_for", _replacement_for.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("replacement_for", _replacement_for.to_s.size, MAX_LENGTH_FOR_REPLACEMENT_FOR)
       @replacement_for = _replacement_for
     end
 

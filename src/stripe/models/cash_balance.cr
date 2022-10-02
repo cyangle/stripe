@@ -24,6 +24,7 @@ module Stripe
     # The ID of the customer whose cash balance this object represents.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter customer : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -32,8 +33,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["cash_balance"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [cash_balance]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["cash_balance"]
 
     @[JSON::Field(key: "settings", type: Stripe::CustomerBalanceCustomerBalanceSettings?, default: nil, required: true, nullable: false, emit_null: false)]
     getter settings : Stripe::CustomerBalanceCustomerBalanceSettings? = nil
@@ -69,7 +70,7 @@ module Stripe
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
 
       if _customer = @customer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -78,7 +79,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"settings\" is required and cannot be null") if @settings.nil?
 
@@ -94,7 +95,7 @@ module Stripe
     def valid? : Bool
       return false if @customer.nil?
       if _customer = @customer
-        return false if _customer.to_s.size > 5000
+        return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       return false if @livemode.nil?
@@ -119,10 +120,7 @@ module Stripe
         raise ArgumentError.new("\"customer\" is required and cannot be null")
       end
       _customer = customer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       @customer = _customer
     end
 

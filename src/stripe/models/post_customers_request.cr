@@ -32,14 +32,17 @@ module Stripe
 
     @[JSON::Field(key: "coupon", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter coupon : String? = nil
+    MAX_LENGTH_FOR_COUPON = 5000
 
     # An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # Customer's email address. It's displayed alongside the customer in your dashboard and can be useful for searching and tracking. This may be up to *512 characters*.
     @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter email : String? = nil
+    MAX_LENGTH_FOR_EMAIL = 512
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -48,6 +51,7 @@ module Stripe
     # The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase letters or numbers.
     @[JSON::Field(key: "invoice_prefix", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter invoice_prefix : String? = nil
+    MAX_LENGTH_FOR_INVOICE_PREFIX = 5000
 
     @[JSON::Field(key: "invoice_settings", type: Stripe::CustomerParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter invoice_settings : Stripe::CustomerParam? = nil
@@ -58,6 +62,7 @@ module Stripe
     # The customer's full name or business name.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 256
 
     # The sequence to be used on the customer's next invoice. Defaults to 1.
     @[JSON::Field(key: "next_invoice_sequence", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -65,10 +70,12 @@ module Stripe
 
     @[JSON::Field(key: "payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method : String? = nil
+    MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
 
     # The customer's phone number.
     @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter phone : String? = nil
+    MAX_LENGTH_FOR_PHONE = 20
 
     # Customer's preferred languages, ordered by preference.
     @[JSON::Field(key: "preferred_locales", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -77,12 +84,14 @@ module Stripe
     # The API ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments. Charges you create through the API will not have the discount.
     @[JSON::Field(key: "promotion_code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter promotion_code : String? = nil
+    MAX_LENGTH_FOR_PROMOTION_CODE = 5000
 
     @[JSON::Field(key: "shipping", type: Stripe::PostCustomersRequestShipping?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping : Stripe::PostCustomersRequestShipping? = nil
 
     @[JSON::Field(key: "source", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter source : String? = nil
+    MAX_LENGTH_FOR_SOURCE = 5000
 
     @[JSON::Field(key: "tax", type: Stripe::TaxParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax : Stripe::TaxParam? = nil
@@ -90,8 +99,8 @@ module Stripe
     # The customer's tax exemption. One of `none`, `exempt`, or `reverse`.
     @[JSON::Field(key: "tax_exempt", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_exempt : String? = nil
-
-    VALID_VALUES_FOR_TAX_EXEMPT = StaticArray["", "exempt", "none", "reverse"]
+    ERROR_MESSAGE_FOR_TAX_EXEMPT = "invalid value for \"tax_exempt\", must be one of [, exempt, none, reverse]."
+    VALID_VALUES_FOR_TAX_EXEMPT  = StaticArray["", "exempt", "none", "reverse"]
 
     # The customer's tax IDs.
     @[JSON::Field(key: "tax_id_data", type: Array(Stripe::DataParams)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -100,6 +109,7 @@ module Stripe
     # ID of the test clock to attach to the customer.
     @[JSON::Field(key: "test_clock", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter test_clock : String? = nil
+    MAX_LENGTH_FOR_TEST_CLOCK = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -144,23 +154,23 @@ module Stripe
         invalid_properties.concat(_cash_balance.list_invalid_properties_for("cash_balance")) if _cash_balance.is_a?(OpenApi::Validatable)
       end
       if _coupon = @coupon
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
           invalid_properties.push(max_length_error)
         end
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       if _email = @email
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 512)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _invoice_prefix = @invoice_prefix
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_prefix", _invoice_prefix.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_prefix", _invoice_prefix.to_s.size, MAX_LENGTH_FOR_INVOICE_PREFIX)
           invalid_properties.push(max_length_error)
         end
       end
@@ -171,24 +181,24 @@ module Stripe
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 256)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _payment_method = @payment_method
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
       if _phone = @phone
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 20)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _promotion_code = @promotion_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("promotion_code", _promotion_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("promotion_code", _promotion_code.to_s.size, MAX_LENGTH_FOR_PROMOTION_CODE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -196,7 +206,7 @@ module Stripe
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
       end
       if _source = @source
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -204,13 +214,13 @@ module Stripe
         invalid_properties.concat(_tax.list_invalid_properties_for("tax")) if _tax.is_a?(OpenApi::Validatable)
       end
       if _tax_exempt = @tax_exempt
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_exempt", VALID_VALUES_FOR_TAX_EXEMPT)) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_EXEMPT) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       end
       if _tax_id_data = @tax_id_data
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tax_id_data", array: _tax_id_data)) if _tax_id_data.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tax_id_data", container: _tax_id_data)) if _tax_id_data.is_a?(Array)
       end
       if _test_clock = @test_clock
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("test_clock", _test_clock.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("test_clock", _test_clock.to_s.size, MAX_LENGTH_FOR_TEST_CLOCK)
           invalid_properties.push(max_length_error)
         end
       end
@@ -229,19 +239,19 @@ module Stripe
       end
 
       if _coupon = @coupon
-        return false if _coupon.to_s.size > 5000
+        return false if _coupon.to_s.size > MAX_LENGTH_FOR_COUPON
       end
 
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _email = @email
-        return false if _email.to_s.size > 512
+        return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
       if _invoice_prefix = @invoice_prefix
-        return false if _invoice_prefix.to_s.size > 5000
+        return false if _invoice_prefix.to_s.size > MAX_LENGTH_FOR_INVOICE_PREFIX
       end
 
       if _invoice_settings = @invoice_settings
@@ -253,19 +263,19 @@ module Stripe
       end
 
       if _name = @name
-        return false if _name.to_s.size > 256
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       if _payment_method = @payment_method
-        return false if _payment_method.to_s.size > 5000
+        return false if _payment_method.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD
       end
 
       if _phone = @phone
-        return false if _phone.to_s.size > 20
+        return false if _phone.to_s.size > MAX_LENGTH_FOR_PHONE
       end
 
       if _promotion_code = @promotion_code
-        return false if _promotion_code.to_s.size > 5000
+        return false if _promotion_code.to_s.size > MAX_LENGTH_FOR_PROMOTION_CODE
       end
 
       if _shipping = @shipping
@@ -273,7 +283,7 @@ module Stripe
       end
 
       if _source = @source
-        return false if _source.to_s.size > 5000
+        return false if _source.to_s.size > MAX_LENGTH_FOR_SOURCE
       end
 
       if _tax = @tax
@@ -285,11 +295,11 @@ module Stripe
       end
 
       if _tax_id_data = @tax_id_data
-        return false if _tax_id_data.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tax_id_data)
+        return false if _tax_id_data.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tax_id_data)
       end
 
       if _test_clock = @test_clock
-        return false if _test_clock.to_s.size > 5000
+        return false if _test_clock.to_s.size > MAX_LENGTH_FOR_TEST_CLOCK
       end
 
       true
@@ -334,10 +344,7 @@ module Stripe
         return @coupon = nil
       end
       _coupon = coupon.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
       @coupon = _coupon
     end
 
@@ -348,10 +355,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -362,10 +366,7 @@ module Stripe
         return @email = nil
       end
       _email = email.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 512)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
       @email = _email
     end
 
@@ -386,10 +387,7 @@ module Stripe
         return @invoice_prefix = nil
       end
       _invoice_prefix = invoice_prefix.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_prefix", _invoice_prefix.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("invoice_prefix", _invoice_prefix.to_s.size, MAX_LENGTH_FOR_INVOICE_PREFIX)
       @invoice_prefix = _invoice_prefix
     end
 
@@ -422,10 +420,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 256)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 
@@ -446,10 +441,7 @@ module Stripe
         return @payment_method = nil
       end
       _payment_method = payment_method.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
       @payment_method = _payment_method
     end
 
@@ -460,10 +452,7 @@ module Stripe
         return @phone = nil
       end
       _phone = phone.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 20)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
       @phone = _phone
     end
 
@@ -484,10 +473,7 @@ module Stripe
         return @promotion_code = nil
       end
       _promotion_code = promotion_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("promotion_code", _promotion_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("promotion_code", _promotion_code.to_s.size, MAX_LENGTH_FOR_PROMOTION_CODE)
       @promotion_code = _promotion_code
     end
 
@@ -509,10 +495,7 @@ module Stripe
         return @source = nil
       end
       _source = source.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
       @source = _source
     end
 
@@ -545,7 +528,7 @@ module Stripe
         return @tax_id_data = nil
       end
       _tax_id_data = tax_id_data.not_nil!
-      OpenApi::ArrayValidator.validate(array: _tax_id_data) if _tax_id_data.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _tax_id_data) if _tax_id_data.is_a?(Array)
       @tax_id_data = _tax_id_data
     end
 
@@ -556,10 +539,7 @@ module Stripe
         return @test_clock = nil
       end
       _test_clock = test_clock.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("test_clock", _test_clock.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("test_clock", _test_clock.to_s.size, MAX_LENGTH_FOR_TEST_CLOCK)
       @test_clock = _test_clock
     end
 

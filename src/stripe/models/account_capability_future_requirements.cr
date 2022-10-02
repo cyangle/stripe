@@ -60,6 +60,7 @@ module Stripe
     # This is typed as a string for consistency with `requirements.disabled_reason`, but it safe to assume `future_requirements.disabled_reason` is empty because fields in `future_requirements` will never disable the account.
     @[JSON::Field(key: "disabled_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: disabled_reason.nil? && !disabled_reason_present?)]
     getter disabled_reason : String? = nil
+    MAX_LENGTH_FOR_DISABLED_REASON = 5000
 
     @[JSON::Field(ignore: true)]
     property? disabled_reason_present : Bool = false
@@ -91,7 +92,7 @@ module Stripe
       invalid_properties.push("\"errors\" is required and cannot be null") if @errors.nil?
 
       if _errors = @errors
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "errors", array: _errors)) if _errors.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "errors", container: _errors)) if _errors.is_a?(Array)
       end
       invalid_properties.push("\"eventually_due\" is required and cannot be null") if @eventually_due.nil?
 
@@ -100,11 +101,11 @@ module Stripe
       invalid_properties.push("\"pending_verification\" is required and cannot be null") if @pending_verification.nil?
 
       if _alternatives = @alternatives
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "alternatives", array: _alternatives)) if _alternatives.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "alternatives", container: _alternatives)) if _alternatives.is_a?(Array)
       end
 
       if _disabled_reason = @disabled_reason
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("disabled_reason", _disabled_reason.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("disabled_reason", _disabled_reason.to_s.size, MAX_LENGTH_FOR_DISABLED_REASON)
           invalid_properties.push(max_length_error)
         end
       end
@@ -118,7 +119,7 @@ module Stripe
 
       return false if @errors.nil?
       if _errors = @errors
-        return false if _errors.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _errors)
+        return false if _errors.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _errors)
       end
 
       return false if @eventually_due.nil?
@@ -128,11 +129,11 @@ module Stripe
       return false if @pending_verification.nil?
 
       if _alternatives = @alternatives
-        return false if _alternatives.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _alternatives)
+        return false if _alternatives.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _alternatives)
       end
 
       if _disabled_reason = @disabled_reason
-        return false if _disabled_reason.to_s.size > 5000
+        return false if _disabled_reason.to_s.size > MAX_LENGTH_FOR_DISABLED_REASON
       end
 
       true
@@ -155,7 +156,7 @@ module Stripe
         raise ArgumentError.new("\"errors\" is required and cannot be null")
       end
       _errors = errors.not_nil!
-      OpenApi::ArrayValidator.validate(array: _errors) if _errors.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _errors) if _errors.is_a?(Array)
       @errors = _errors
     end
 
@@ -196,7 +197,7 @@ module Stripe
         return @alternatives = nil
       end
       _alternatives = alternatives.not_nil!
-      OpenApi::ArrayValidator.validate(array: _alternatives) if _alternatives.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _alternatives) if _alternatives.is_a?(Array)
       @alternatives = _alternatives
     end
 
@@ -217,10 +218,7 @@ module Stripe
         return @disabled_reason = nil
       end
       _disabled_reason = disabled_reason.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("disabled_reason", _disabled_reason.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("disabled_reason", _disabled_reason.to_s.size, MAX_LENGTH_FOR_DISABLED_REASON)
       @disabled_reason = _disabled_reason
     end
 

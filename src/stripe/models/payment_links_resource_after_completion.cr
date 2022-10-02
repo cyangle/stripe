@@ -24,8 +24,8 @@ module Stripe
     # The specified behavior after the purchase is complete.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["hosted_confirmation", "redirect"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [hosted_confirmation, redirect]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["hosted_confirmation", "redirect"]
 
     # Optional properties
 
@@ -55,7 +55,7 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _hosted_confirmation = @hosted_confirmation
         invalid_properties.concat(_hosted_confirmation.list_invalid_properties_for("hosted_confirmation")) if _hosted_confirmation.is_a?(OpenApi::Validatable)

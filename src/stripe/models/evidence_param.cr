@@ -41,8 +41,8 @@ module Stripe
 
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter reason : String? = nil
-
-    VALID_VALUES_FOR_REASON = StaticArray["canceled", "duplicate", "fraudulent", "merchandise_not_as_described", "not_received", "other", "service_not_as_described"]
+    ERROR_MESSAGE_FOR_REASON = "invalid value for \"reason\", must be one of [canceled, duplicate, fraudulent, merchandise_not_as_described, not_received, other, service_not_as_described]."
+    VALID_VALUES_FOR_REASON  = StaticArray["canceled", "duplicate", "fraudulent", "merchandise_not_as_described", "not_received", "other", "service_not_as_described"]
 
     @[JSON::Field(key: "service_not_as_described", type: Stripe::EvidenceParamServiceNotAsDescribed?, default: nil, required: false, nullable: false, emit_null: false)]
     getter service_not_as_described : Stripe::EvidenceParamServiceNotAsDescribed? = nil
@@ -87,7 +87,7 @@ module Stripe
         invalid_properties.concat(_other.list_invalid_properties_for("other")) if _other.is_a?(OpenApi::Validatable)
       end
       if _reason = @reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("reason", VALID_VALUES_FOR_REASON)) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
       if _service_not_as_described = @service_not_as_described
         invalid_properties.concat(_service_not_as_described.list_invalid_properties_for("service_not_as_described")) if _service_not_as_described.is_a?(OpenApi::Validatable)

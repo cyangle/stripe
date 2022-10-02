@@ -24,12 +24,14 @@ module Stripe
     # The Treasury [ReceivedDebit](https://stripe.com/docs/api/treasury/received_debits) that is being disputed.
     @[JSON::Field(key: "received_debit", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter received_debit : String? = nil
+    MAX_LENGTH_FOR_RECEIVED_DEBIT = 5000
 
     # Optional properties
 
     # The Treasury [DebitReversal](https://stripe.com/docs/api/treasury/debit_reversals) representing this Issuing dispute
     @[JSON::Field(key: "debit_reversal", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: debit_reversal.nil? && !debit_reversal_present?)]
     getter debit_reversal : String? = nil
+    MAX_LENGTH_FOR_DEBIT_REVERSAL = 5000
 
     @[JSON::Field(ignore: true)]
     property? debit_reversal_present : Bool = false
@@ -53,12 +55,12 @@ module Stripe
       invalid_properties.push("\"received_debit\" is required and cannot be null") if @received_debit.nil?
 
       if _received_debit = @received_debit
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_debit", _received_debit.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_debit", _received_debit.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
           invalid_properties.push(max_length_error)
         end
       end
       if _debit_reversal = @debit_reversal
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("debit_reversal", _debit_reversal.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("debit_reversal", _debit_reversal.to_s.size, MAX_LENGTH_FOR_DEBIT_REVERSAL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -70,11 +72,11 @@ module Stripe
     def valid? : Bool
       return false if @received_debit.nil?
       if _received_debit = @received_debit
-        return false if _received_debit.to_s.size > 5000
+        return false if _received_debit.to_s.size > MAX_LENGTH_FOR_RECEIVED_DEBIT
       end
 
       if _debit_reversal = @debit_reversal
-        return false if _debit_reversal.to_s.size > 5000
+        return false if _debit_reversal.to_s.size > MAX_LENGTH_FOR_DEBIT_REVERSAL
       end
 
       true
@@ -87,10 +89,7 @@ module Stripe
         raise ArgumentError.new("\"received_debit\" is required and cannot be null")
       end
       _received_debit = received_debit.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_debit", _received_debit.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("received_debit", _received_debit.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
       @received_debit = _received_debit
     end
 
@@ -101,10 +100,7 @@ module Stripe
         return @debit_reversal = nil
       end
       _debit_reversal = debit_reversal.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("debit_reversal", _debit_reversal.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("debit_reversal", _debit_reversal.to_s.size, MAX_LENGTH_FOR_DEBIT_REVERSAL)
       @debit_reversal = _debit_reversal
     end
 

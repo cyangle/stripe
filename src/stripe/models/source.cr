@@ -24,6 +24,7 @@ module Stripe
     # The client secret of the source. Used for client-side retrieval using a publishable key.
     @[JSON::Field(key: "client_secret", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter client_secret : String? = nil
+    MAX_LENGTH_FOR_CLIENT_SECRET = 5000
 
     # Time at which the object was created. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -32,10 +33,12 @@ module Stripe
     # The authentication `flow` of the source. `flow` is one of `redirect`, `receiver`, `code_verification`, `none`.
     @[JSON::Field(key: "flow", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter flow : String? = nil
+    MAX_LENGTH_FOR_FLOW = 5000
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -44,18 +47,19 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["source"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [source]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["source"]
 
     # The status of the source, one of `canceled`, `chargeable`, `consumed`, `failed`, or `pending`. Only `chargeable` sources can be used to create a charge.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
+    MAX_LENGTH_FOR_STATUS = 5000
 
     # The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](https://stripe.com/docs/sources) used.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["ach_credit_transfer", "ach_debit", "acss_debit", "alipay", "au_becs_debit", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_debit", "sofort", "three_d_secure", "wechat"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [ach_credit_transfer, ach_debit, acss_debit, alipay, au_becs_debit, bancontact, card, card_present, eps, giropay, ideal, klarna, multibanco, p24, sepa_debit, sofort, three_d_secure, wechat]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["ach_credit_transfer", "ach_debit", "acss_debit", "alipay", "au_becs_debit", "bancontact", "card", "card_present", "eps", "giropay", "ideal", "klarna", "multibanco", "p24", "sepa_debit", "sofort", "three_d_secure", "wechat"]
 
     # Optional properties
 
@@ -103,6 +107,7 @@ module Stripe
     # The ID of the customer to which this source is attached. This will not be present when the source has not been attached to a customer.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER = 5000
 
     @[JSON::Field(key: "eps", type: Stripe::SourceTypeEps?, default: nil, required: false, nullable: false, emit_null: false)]
     getter eps : Stripe::SourceTypeEps? = nil
@@ -153,6 +158,7 @@ module Stripe
     # Extra information about a source. This will appear on your customer's statement every time you charge the source.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
     getter statement_descriptor : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 5000
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_present : Bool = false
@@ -163,6 +169,7 @@ module Stripe
     # Either `reusable` or `single_use`. Whether this source should be reusable or not. Some source types may or may not be reusable by construction, while others may leave the option at creation. If an incompatible value is passed, an error will be returned.
     @[JSON::Field(key: "usage", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: usage.nil? && !usage_present?)]
     getter usage : String? = nil
+    MAX_LENGTH_FOR_USAGE = 5000
 
     @[JSON::Field(ignore: true)]
     property? usage_present : Bool = false
@@ -224,7 +231,7 @@ module Stripe
       invalid_properties.push("\"client_secret\" is required and cannot be null") if @client_secret.nil?
 
       if _client_secret = @client_secret
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
@@ -233,14 +240,14 @@ module Stripe
       invalid_properties.push("\"flow\" is required and cannot be null") if @flow.nil?
 
       if _flow = @flow
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flow", _flow.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flow", _flow.to_s.size, MAX_LENGTH_FOR_FLOW)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -249,19 +256,19 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _ach_credit_transfer = @ach_credit_transfer
         invalid_properties.concat(_ach_credit_transfer.list_invalid_properties_for("ach_credit_transfer")) if _ach_credit_transfer.is_a?(OpenApi::Validatable)
@@ -293,7 +300,7 @@ module Stripe
       end
 
       if _customer = @customer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -335,7 +342,7 @@ module Stripe
         invalid_properties.concat(_source_order.list_invalid_properties_for("source_order")) if _source_order.is_a?(OpenApi::Validatable)
       end
       if _statement_descriptor = @statement_descriptor
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
@@ -343,7 +350,7 @@ module Stripe
         invalid_properties.concat(_three_d_secure.list_invalid_properties_for("three_d_secure")) if _three_d_secure.is_a?(OpenApi::Validatable)
       end
       if _usage = @usage
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("usage", _usage.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("usage", _usage.to_s.size, MAX_LENGTH_FOR_USAGE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -358,19 +365,19 @@ module Stripe
     def valid? : Bool
       return false if @client_secret.nil?
       if _client_secret = @client_secret
-        return false if _client_secret.to_s.size > 5000
+        return false if _client_secret.to_s.size > MAX_LENGTH_FOR_CLIENT_SECRET
       end
 
       return false if @created.nil?
 
       return false if @flow.nil?
       if _flow = @flow
-        return false if _flow.to_s.size > 5000
+        return false if _flow.to_s.size > MAX_LENGTH_FOR_FLOW
       end
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -382,7 +389,7 @@ module Stripe
 
       return false if @status.nil?
       if _status = @status
-        return false if _status.to_s.size > 5000
+        return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
       return false if @_type.nil?
@@ -427,7 +434,7 @@ module Stripe
       end
 
       if _customer = @customer
-        return false if _customer.to_s.size > 5000
+        return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       if _eps = @eps
@@ -479,7 +486,7 @@ module Stripe
       end
 
       if _statement_descriptor = @statement_descriptor
-        return false if _statement_descriptor.to_s.size > 5000
+        return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
       if _three_d_secure = @three_d_secure
@@ -487,7 +494,7 @@ module Stripe
       end
 
       if _usage = @usage
-        return false if _usage.to_s.size > 5000
+        return false if _usage.to_s.size > MAX_LENGTH_FOR_USAGE
       end
 
       if _wechat = @wechat
@@ -504,10 +511,7 @@ module Stripe
         raise ArgumentError.new("\"client_secret\" is required and cannot be null")
       end
       _client_secret = client_secret.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
       @client_secret = _client_secret
     end
 
@@ -528,10 +532,7 @@ module Stripe
         raise ArgumentError.new("\"flow\" is required and cannot be null")
       end
       _flow = flow.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flow", _flow.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("flow", _flow.to_s.size, MAX_LENGTH_FOR_FLOW)
       @flow = _flow
     end
 
@@ -542,10 +543,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -577,10 +575,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
       @status = _status
     end
 
@@ -721,10 +716,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       @customer = _customer
     end
 
@@ -877,10 +869,7 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       @statement_descriptor = _statement_descriptor
     end
 
@@ -902,10 +891,7 @@ module Stripe
         return @usage = nil
       end
       _usage = usage.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("usage", _usage.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("usage", _usage.to_s.size, MAX_LENGTH_FOR_USAGE)
       @usage = _usage
     end
 

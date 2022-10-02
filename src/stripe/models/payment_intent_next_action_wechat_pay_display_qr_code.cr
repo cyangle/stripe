@@ -24,18 +24,22 @@ module Stripe
     # The data being used to generate QR code
     @[JSON::Field(key: "data", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter data : String? = nil
+    MAX_LENGTH_FOR_DATA = 5000
 
     # The base64 image data for a pre-generated QR code
     @[JSON::Field(key: "image_data_url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter image_data_url : String? = nil
+    MAX_LENGTH_FOR_IMAGE_DATA_URL = 5000
 
     # The image_url_png string used to render QR code
     @[JSON::Field(key: "image_url_png", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter image_url_png : String? = nil
+    MAX_LENGTH_FOR_IMAGE_URL_PNG = 5000
 
     # The image_url_svg string used to render QR code
     @[JSON::Field(key: "image_url_svg", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter image_url_svg : String? = nil
+    MAX_LENGTH_FOR_IMAGE_URL_SVG = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -57,28 +61,28 @@ module Stripe
       invalid_properties.push("\"data\" is required and cannot be null") if @data.nil?
 
       if _data = @data
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("data", _data.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("data", _data.to_s.size, MAX_LENGTH_FOR_DATA)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"image_data_url\" is required and cannot be null") if @image_data_url.nil?
 
       if _image_data_url = @image_data_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_data_url", _image_data_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_data_url", _image_data_url.to_s.size, MAX_LENGTH_FOR_IMAGE_DATA_URL)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"image_url_png\" is required and cannot be null") if @image_url_png.nil?
 
       if _image_url_png = @image_url_png
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_png", _image_url_png.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_png", _image_url_png.to_s.size, MAX_LENGTH_FOR_IMAGE_URL_PNG)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"image_url_svg\" is required and cannot be null") if @image_url_svg.nil?
 
       if _image_url_svg = @image_url_svg
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_svg", _image_url_svg.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_svg", _image_url_svg.to_s.size, MAX_LENGTH_FOR_IMAGE_URL_SVG)
           invalid_properties.push(max_length_error)
         end
       end
@@ -90,22 +94,22 @@ module Stripe
     def valid? : Bool
       return false if @data.nil?
       if _data = @data
-        return false if _data.to_s.size > 5000
+        return false if _data.to_s.size > MAX_LENGTH_FOR_DATA
       end
 
       return false if @image_data_url.nil?
       if _image_data_url = @image_data_url
-        return false if _image_data_url.to_s.size > 5000
+        return false if _image_data_url.to_s.size > MAX_LENGTH_FOR_IMAGE_DATA_URL
       end
 
       return false if @image_url_png.nil?
       if _image_url_png = @image_url_png
-        return false if _image_url_png.to_s.size > 5000
+        return false if _image_url_png.to_s.size > MAX_LENGTH_FOR_IMAGE_URL_PNG
       end
 
       return false if @image_url_svg.nil?
       if _image_url_svg = @image_url_svg
-        return false if _image_url_svg.to_s.size > 5000
+        return false if _image_url_svg.to_s.size > MAX_LENGTH_FOR_IMAGE_URL_SVG
       end
 
       true
@@ -118,10 +122,7 @@ module Stripe
         raise ArgumentError.new("\"data\" is required and cannot be null")
       end
       _data = data.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("data", _data.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("data", _data.to_s.size, MAX_LENGTH_FOR_DATA)
       @data = _data
     end
 
@@ -132,10 +133,7 @@ module Stripe
         raise ArgumentError.new("\"image_data_url\" is required and cannot be null")
       end
       _image_data_url = image_data_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_data_url", _image_data_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("image_data_url", _image_data_url.to_s.size, MAX_LENGTH_FOR_IMAGE_DATA_URL)
       @image_data_url = _image_data_url
     end
 
@@ -146,10 +144,7 @@ module Stripe
         raise ArgumentError.new("\"image_url_png\" is required and cannot be null")
       end
       _image_url_png = image_url_png.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_png", _image_url_png.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("image_url_png", _image_url_png.to_s.size, MAX_LENGTH_FOR_IMAGE_URL_PNG)
       @image_url_png = _image_url_png
     end
 
@@ -160,10 +155,7 @@ module Stripe
         raise ArgumentError.new("\"image_url_svg\" is required and cannot be null")
       end
       _image_url_svg = image_url_svg.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image_url_svg", _image_url_svg.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("image_url_svg", _image_url_svg.to_s.size, MAX_LENGTH_FOR_IMAGE_URL_SVG)
       @image_url_svg = _image_url_svg
     end
 

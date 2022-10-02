@@ -24,6 +24,7 @@ module Stripe
     # The account holder name
     @[JSON::Field(key: "account_holder_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_holder_name.nil? && !account_holder_name_present?)]
     getter account_holder_name : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? account_holder_name_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # The account number
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_number.nil? && !account_number_present?)]
     getter account_number : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? account_number_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # The bank account type. In Japan, this can only be `futsu` or `toza`.
     @[JSON::Field(key: "account_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_type.nil? && !account_type_present?)]
     getter account_type : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_TYPE = 5000
 
     @[JSON::Field(ignore: true)]
     property? account_type_present : Bool = false
@@ -45,6 +48,7 @@ module Stripe
     # The bank code of the account
     @[JSON::Field(key: "bank_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_code.nil? && !bank_code_present?)]
     getter bank_code : String? = nil
+    MAX_LENGTH_FOR_BANK_CODE = 5000
 
     @[JSON::Field(ignore: true)]
     property? bank_code_present : Bool = false
@@ -52,6 +56,7 @@ module Stripe
     # The bank name of the account
     @[JSON::Field(key: "bank_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_name.nil? && !bank_name_present?)]
     getter bank_name : String? = nil
+    MAX_LENGTH_FOR_BANK_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? bank_name_present : Bool = false
@@ -59,6 +64,7 @@ module Stripe
     # The branch code of the account
     @[JSON::Field(key: "branch_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: branch_code.nil? && !branch_code_present?)]
     getter branch_code : String? = nil
+    MAX_LENGTH_FOR_BRANCH_CODE = 5000
 
     @[JSON::Field(ignore: true)]
     property? branch_code_present : Bool = false
@@ -66,6 +72,7 @@ module Stripe
     # The branch name of the account
     @[JSON::Field(key: "branch_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: branch_name.nil? && !branch_name_present?)]
     getter branch_name : String? = nil
+    MAX_LENGTH_FOR_BRANCH_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? branch_name_present : Bool = false
@@ -91,37 +98,37 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _account_holder_name = @account_holder_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _account_number = @account_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       if _account_type = @account_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_type", _account_type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_type", _account_type.to_s.size, MAX_LENGTH_FOR_ACCOUNT_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       if _bank_code = @bank_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       if _bank_name = @bank_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _branch_code = @branch_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("branch_code", _branch_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("branch_code", _branch_code.to_s.size, MAX_LENGTH_FOR_BRANCH_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       if _branch_name = @branch_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("branch_name", _branch_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("branch_name", _branch_name.to_s.size, MAX_LENGTH_FOR_BRANCH_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -132,31 +139,31 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _account_holder_name = @account_holder_name
-        return false if _account_holder_name.to_s.size > 5000
+        return false if _account_holder_name.to_s.size > MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME
       end
 
       if _account_number = @account_number
-        return false if _account_number.to_s.size > 5000
+        return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
       if _account_type = @account_type
-        return false if _account_type.to_s.size > 5000
+        return false if _account_type.to_s.size > MAX_LENGTH_FOR_ACCOUNT_TYPE
       end
 
       if _bank_code = @bank_code
-        return false if _bank_code.to_s.size > 5000
+        return false if _bank_code.to_s.size > MAX_LENGTH_FOR_BANK_CODE
       end
 
       if _bank_name = @bank_name
-        return false if _bank_name.to_s.size > 5000
+        return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
       if _branch_code = @branch_code
-        return false if _branch_code.to_s.size > 5000
+        return false if _branch_code.to_s.size > MAX_LENGTH_FOR_BRANCH_CODE
       end
 
       if _branch_name = @branch_name
-        return false if _branch_name.to_s.size > 5000
+        return false if _branch_name.to_s.size > MAX_LENGTH_FOR_BRANCH_NAME
       end
 
       true
@@ -169,10 +176,7 @@ module Stripe
         return @account_holder_name = nil
       end
       _account_holder_name = account_holder_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
       @account_holder_name = _account_holder_name
     end
 
@@ -183,10 +187,7 @@ module Stripe
         return @account_number = nil
       end
       _account_number = account_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
       @account_number = _account_number
     end
 
@@ -197,10 +198,7 @@ module Stripe
         return @account_type = nil
       end
       _account_type = account_type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_type", _account_type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_type", _account_type.to_s.size, MAX_LENGTH_FOR_ACCOUNT_TYPE)
       @account_type = _account_type
     end
 
@@ -211,10 +209,7 @@ module Stripe
         return @bank_code = nil
       end
       _bank_code = bank_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
       @bank_code = _bank_code
     end
 
@@ -225,10 +220,7 @@ module Stripe
         return @bank_name = nil
       end
       _bank_name = bank_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       @bank_name = _bank_name
     end
 
@@ -239,10 +231,7 @@ module Stripe
         return @branch_code = nil
       end
       _branch_code = branch_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("branch_code", _branch_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("branch_code", _branch_code.to_s.size, MAX_LENGTH_FOR_BRANCH_CODE)
       @branch_code = _branch_code
     end
 
@@ -253,10 +242,7 @@ module Stripe
         return @branch_name = nil
       end
       _branch_name = branch_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("branch_name", _branch_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("branch_name", _branch_name.to_s.size, MAX_LENGTH_FOR_BRANCH_NAME)
       @branch_name = _branch_name
     end
 

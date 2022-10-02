@@ -24,6 +24,7 @@ module Stripe
     # The Treasury [ReceivedCredit](https://stripe.com/docs/api/treasury/received_debits) representing this Issuing transaction if it is a refund
     @[JSON::Field(key: "received_credit", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: received_credit.nil? && !received_credit_present?)]
     getter received_credit : String? = nil
+    MAX_LENGTH_FOR_RECEIVED_CREDIT = 5000
 
     @[JSON::Field(ignore: true)]
     property? received_credit_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # The Treasury [ReceivedDebit](https://stripe.com/docs/api/treasury/received_credits) representing this Issuing transaction if it is a capture
     @[JSON::Field(key: "received_debit", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: received_debit.nil? && !received_debit_present?)]
     getter received_debit : String? = nil
+    MAX_LENGTH_FOR_RECEIVED_DEBIT = 5000
 
     @[JSON::Field(ignore: true)]
     property? received_debit_present : Bool = false
@@ -51,12 +53,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _received_credit = @received_credit
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_credit", _received_credit.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_credit", _received_credit.to_s.size, MAX_LENGTH_FOR_RECEIVED_CREDIT)
           invalid_properties.push(max_length_error)
         end
       end
       if _received_debit = @received_debit
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_debit", _received_debit.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_debit", _received_debit.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -67,11 +69,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _received_credit = @received_credit
-        return false if _received_credit.to_s.size > 5000
+        return false if _received_credit.to_s.size > MAX_LENGTH_FOR_RECEIVED_CREDIT
       end
 
       if _received_debit = @received_debit
-        return false if _received_debit.to_s.size > 5000
+        return false if _received_debit.to_s.size > MAX_LENGTH_FOR_RECEIVED_DEBIT
       end
 
       true
@@ -84,10 +86,7 @@ module Stripe
         return @received_credit = nil
       end
       _received_credit = received_credit.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_credit", _received_credit.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("received_credit", _received_credit.to_s.size, MAX_LENGTH_FOR_RECEIVED_CREDIT)
       @received_credit = _received_credit
     end
 
@@ -98,10 +97,7 @@ module Stripe
         return @received_debit = nil
       end
       _received_debit = received_debit.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("received_debit", _received_debit.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("received_debit", _received_debit.to_s.size, MAX_LENGTH_FOR_RECEIVED_DEBIT)
       @received_debit = _received_debit
     end
 

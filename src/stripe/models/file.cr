@@ -28,18 +28,19 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["file"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [file]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["file"]
 
     # The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
     @[JSON::Field(key: "purpose", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter purpose : String? = nil
-
-    VALID_VALUES_FOR_PURPOSE = StaticArray["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload", "terminal_reader_splashscreen"]
+    ERROR_MESSAGE_FOR_PURPOSE = "invalid value for \"purpose\", must be one of [account_requirement, additional_verification, business_icon, business_logo, customer_signature, dispute_evidence, document_provider_identity_document, finance_report_run, identity_document, identity_document_downloadable, pci_document, selfie, sigma_scheduled_query, tax_document_user_upload, terminal_reader_splashscreen]."
+    VALID_VALUES_FOR_PURPOSE  = StaticArray["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "document_provider_identity_document", "finance_report_run", "identity_document", "identity_document_downloadable", "pci_document", "selfie", "sigma_scheduled_query", "tax_document_user_upload", "terminal_reader_splashscreen"]
 
     # The size in bytes of the file object.
     @[JSON::Field(key: "size", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -57,6 +58,7 @@ module Stripe
     # A filename for the file, suitable for saving to a filesystem.
     @[JSON::Field(key: "filename", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: filename.nil? && !filename_present?)]
     getter filename : String? = nil
+    MAX_LENGTH_FOR_FILENAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? filename_present : Bool = false
@@ -70,6 +72,7 @@ module Stripe
     # A user friendly title for the document.
     @[JSON::Field(key: "title", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: title.nil? && !title_present?)]
     getter title : String? = nil
+    MAX_LENGTH_FOR_TITLE = 5000
 
     @[JSON::Field(ignore: true)]
     property? title_present : Bool = false
@@ -77,6 +80,7 @@ module Stripe
     # The type of the file returned (e.g., `csv`, `pdf`, `jpg`, or `png`).
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
     getter _type : String? = nil
+    MAX_LENGTH_FOR__TYPE = 5000
 
     @[JSON::Field(ignore: true)]
     property? _type_present : Bool = false
@@ -84,6 +88,7 @@ module Stripe
     # The URL from which the file can be downloaded using your live secret API key.
     @[JSON::Field(key: "url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: url.nil? && !url_present?)]
     getter url : String? = nil
+    MAX_LENGTH_FOR_URL = 5000
 
     @[JSON::Field(ignore: true)]
     property? url_present : Bool = false
@@ -118,24 +123,24 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"purpose\" is required and cannot be null") if @purpose.nil?
 
       if _purpose = @purpose
-        invalid_properties.push(OpenApi::EnumValidator.error_message("purpose", VALID_VALUES_FOR_PURPOSE)) unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PURPOSE) unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
       end
       invalid_properties.push("\"size\" is required and cannot be null") if @size.nil?
 
       if _filename = @filename
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("filename", _filename.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("filename", _filename.to_s.size, MAX_LENGTH_FOR_FILENAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -143,17 +148,17 @@ module Stripe
         invalid_properties.concat(_links.list_invalid_properties_for("links")) if _links.is_a?(OpenApi::Validatable)
       end
       if _title = @title
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, MAX_LENGTH_FOR_TITLE)
           invalid_properties.push(max_length_error)
         end
       end
       if __type = @_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       if _url = @url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -167,7 +172,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
@@ -183,7 +188,7 @@ module Stripe
       return false if @size.nil?
 
       if _filename = @filename
-        return false if _filename.to_s.size > 5000
+        return false if _filename.to_s.size > MAX_LENGTH_FOR_FILENAME
       end
 
       if _links = @links
@@ -191,15 +196,15 @@ module Stripe
       end
 
       if _title = @title
-        return false if _title.to_s.size > 5000
+        return false if _title.to_s.size > MAX_LENGTH_FOR_TITLE
       end
 
       if __type = @_type
-        return false if __type.to_s.size > 5000
+        return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
       if _url = @url
-        return false if _url.to_s.size > 5000
+        return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 
       true
@@ -222,10 +227,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -278,10 +280,7 @@ module Stripe
         return @filename = nil
       end
       _filename = filename.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("filename", _filename.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("filename", _filename.to_s.size, MAX_LENGTH_FOR_FILENAME)
       @filename = _filename
     end
 
@@ -303,10 +302,7 @@ module Stripe
         return @title = nil
       end
       _title = title.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("title", _title.to_s.size, MAX_LENGTH_FOR_TITLE)
       @title = _title
     end
 
@@ -317,10 +313,7 @@ module Stripe
         return @_type = nil
       end
       __type = _type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
       @_type = __type
     end
 
@@ -331,10 +324,7 @@ module Stripe
         return @url = nil
       end
       _url = url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
       @url = _url
     end
 

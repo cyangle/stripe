@@ -27,16 +27,17 @@ module Stripe
     # List of address types that should be returned in the financial_addresses response. If not specified, all valid types will be returned.  Permitted values include: `sort_code`, `zengin`, `iban`, or `spei`.
     @[JSON::Field(key: "requested_address_types", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter requested_address_types : Array(String)? = nil
-
-    VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES = StaticArray["iban", "sepa", "sort_code", "spei", "zengin"]
+    ERROR_MESSAGE_FOR_REQUESTED_ADDRESS_TYPES = "invalid value for \"requested_address_types\", must be one of [iban, sepa, sort_code, spei, zengin]."
+    VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES  = StaticArray["iban", "sepa", "sort_code", "spei", "zengin"]
 
     # The bank transfer type that this PaymentIntent is allowed to use for funding Permitted values include: `eu_bank_transfer`, `gb_bank_transfer`, `jp_bank_transfer`, or `mx_bank_transfer`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
     getter _type : String? = nil
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [eu_bank_transfer, gb_bank_transfer, jp_bank_transfer, mx_bank_transfer]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer"]
 
     @[JSON::Field(ignore: true)]
     property? _type_present : Bool = false
-    VALID_VALUES_FOR__TYPE = StaticArray["eu_bank_transfer", "gb_bank_transfer", "jp_bank_transfer", "mx_bank_transfer"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -58,10 +59,10 @@ module Stripe
         invalid_properties.concat(_eu_bank_transfer.list_invalid_properties_for("eu_bank_transfer")) if _eu_bank_transfer.is_a?(OpenApi::Validatable)
       end
       if _requested_address_types = @requested_address_types
-        invalid_properties.push(OpenApi::EnumValidator.error_message("requested_address_types", VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES)) unless OpenApi::EnumValidator.valid?(_requested_address_types, VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REQUESTED_ADDRESS_TYPES) unless OpenApi::EnumValidator.valid?(_requested_address_types, VALID_VALUES_FOR_REQUESTED_ADDRESS_TYPES)
       end
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
     end

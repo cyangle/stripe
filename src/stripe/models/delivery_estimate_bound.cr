@@ -22,8 +22,8 @@ module Stripe
 
     @[JSON::Field(key: "unit", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter unit : String? = nil
-
-    VALID_VALUES_FOR_UNIT = StaticArray["business_day", "day", "hour", "month", "week"]
+    ERROR_MESSAGE_FOR_UNIT = "invalid value for \"unit\", must be one of [business_day, day, hour, month, week]."
+    VALID_VALUES_FOR_UNIT  = StaticArray["business_day", "day", "hour", "month", "week"]
 
     @[JSON::Field(key: "value", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter value : Int64? = nil
@@ -46,7 +46,7 @@ module Stripe
       invalid_properties.push("\"unit\" is required and cannot be null") if @unit.nil?
 
       if _unit = @unit
-        invalid_properties.push(OpenApi::EnumValidator.error_message("unit", VALID_VALUES_FOR_UNIT)) unless OpenApi::EnumValidator.valid?(_unit, VALID_VALUES_FOR_UNIT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_UNIT) unless OpenApi::EnumValidator.valid?(_unit, VALID_VALUES_FOR_UNIT)
       end
       invalid_properties.push("\"value\" is required and cannot be null") if @value.nil?
 

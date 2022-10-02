@@ -24,24 +24,29 @@ module Stripe
     # The name of the person or business that owns the bank account.
     @[JSON::Field(key: "account_holder_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account_holder_name : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME = 5000
 
     # The last four characters of the account number.
     @[JSON::Field(key: "account_number_last4", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account_number_last4 : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_NUMBER_LAST4 = 5000
 
     # Name of the bank.
     @[JSON::Field(key: "bank_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter bank_name : String? = nil
+    MAX_LENGTH_FOR_BANK_NAME = 5000
 
     # Routing number for the account.
     @[JSON::Field(key: "routing_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter routing_number : String? = nil
+    MAX_LENGTH_FOR_ROUTING_NUMBER = 5000
 
     # Optional properties
 
     # The account number.
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_number.nil? && !account_number_present?)]
     getter account_number : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? account_number_present : Bool = false
@@ -68,33 +73,33 @@ module Stripe
       invalid_properties.push("\"account_holder_name\" is required and cannot be null") if @account_holder_name.nil?
 
       if _account_holder_name = @account_holder_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"account_number_last4\" is required and cannot be null") if @account_number_last4.nil?
 
       if _account_number_last4 = @account_number_last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number_last4", _account_number_last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number_last4", _account_number_last4.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"bank_name\" is required and cannot be null") if @bank_name.nil?
 
       if _bank_name = @bank_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"routing_number\" is required and cannot be null") if @routing_number.nil?
 
       if _routing_number = @routing_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       if _account_number = @account_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -106,26 +111,26 @@ module Stripe
     def valid? : Bool
       return false if @account_holder_name.nil?
       if _account_holder_name = @account_holder_name
-        return false if _account_holder_name.to_s.size > 5000
+        return false if _account_holder_name.to_s.size > MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME
       end
 
       return false if @account_number_last4.nil?
       if _account_number_last4 = @account_number_last4
-        return false if _account_number_last4.to_s.size > 5000
+        return false if _account_number_last4.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER_LAST4
       end
 
       return false if @bank_name.nil?
       if _bank_name = @bank_name
-        return false if _bank_name.to_s.size > 5000
+        return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
       return false if @routing_number.nil?
       if _routing_number = @routing_number
-        return false if _routing_number.to_s.size > 5000
+        return false if _routing_number.to_s.size > MAX_LENGTH_FOR_ROUTING_NUMBER
       end
 
       if _account_number = @account_number
-        return false if _account_number.to_s.size > 5000
+        return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
       true
@@ -138,10 +143,7 @@ module Stripe
         raise ArgumentError.new("\"account_holder_name\" is required and cannot be null")
       end
       _account_holder_name = account_holder_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_holder_name", _account_holder_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_holder_name", _account_holder_name.to_s.size, MAX_LENGTH_FOR_ACCOUNT_HOLDER_NAME)
       @account_holder_name = _account_holder_name
     end
 
@@ -152,10 +154,7 @@ module Stripe
         raise ArgumentError.new("\"account_number_last4\" is required and cannot be null")
       end
       _account_number_last4 = account_number_last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number_last4", _account_number_last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_number_last4", _account_number_last4.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER_LAST4)
       @account_number_last4 = _account_number_last4
     end
 
@@ -166,10 +165,7 @@ module Stripe
         raise ArgumentError.new("\"bank_name\" is required and cannot be null")
       end
       _bank_name = bank_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       @bank_name = _bank_name
     end
 
@@ -180,10 +176,7 @@ module Stripe
         raise ArgumentError.new("\"routing_number\" is required and cannot be null")
       end
       _routing_number = routing_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
       @routing_number = _routing_number
     end
 
@@ -194,10 +187,7 @@ module Stripe
         return @account_number = nil
       end
       _account_number = account_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
       @account_number = _account_number
     end
 

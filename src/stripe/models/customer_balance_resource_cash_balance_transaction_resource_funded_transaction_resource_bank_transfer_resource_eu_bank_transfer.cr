@@ -24,6 +24,7 @@ module Stripe
     # The BIC of the bank of the sender of the funding.
     @[JSON::Field(key: "bic", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bic.nil? && !bic_present?)]
     getter bic : String? = nil
+    MAX_LENGTH_FOR_BIC = 5000
 
     @[JSON::Field(ignore: true)]
     property? bic_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # The last 4 digits of the IBAN of the sender of the funding.
     @[JSON::Field(key: "iban_last4", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: iban_last4.nil? && !iban_last4_present?)]
     getter iban_last4 : String? = nil
+    MAX_LENGTH_FOR_IBAN_LAST4 = 5000
 
     @[JSON::Field(ignore: true)]
     property? iban_last4_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # The full name of the sender, as supplied by the sending bank.
     @[JSON::Field(key: "sender_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: sender_name.nil? && !sender_name_present?)]
     getter sender_name : String? = nil
+    MAX_LENGTH_FOR_SENDER_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? sender_name_present : Bool = false
@@ -59,17 +62,17 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _bic = @bic
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
           invalid_properties.push(max_length_error)
         end
       end
       if _iban_last4 = @iban_last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       if _sender_name = @sender_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_name", _sender_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_name", _sender_name.to_s.size, MAX_LENGTH_FOR_SENDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -80,15 +83,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _bic = @bic
-        return false if _bic.to_s.size > 5000
+        return false if _bic.to_s.size > MAX_LENGTH_FOR_BIC
       end
 
       if _iban_last4 = @iban_last4
-        return false if _iban_last4.to_s.size > 5000
+        return false if _iban_last4.to_s.size > MAX_LENGTH_FOR_IBAN_LAST4
       end
 
       if _sender_name = @sender_name
-        return false if _sender_name.to_s.size > 5000
+        return false if _sender_name.to_s.size > MAX_LENGTH_FOR_SENDER_NAME
       end
 
       true
@@ -101,10 +104,7 @@ module Stripe
         return @bic = nil
       end
       _bic = bic.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bic", _bic.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bic", _bic.to_s.size, MAX_LENGTH_FOR_BIC)
       @bic = _bic
     end
 
@@ -115,10 +115,7 @@ module Stripe
         return @iban_last4 = nil
       end
       _iban_last4 = iban_last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("iban_last4", _iban_last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("iban_last4", _iban_last4.to_s.size, MAX_LENGTH_FOR_IBAN_LAST4)
       @iban_last4 = _iban_last4
     end
 
@@ -129,10 +126,7 @@ module Stripe
         return @sender_name = nil
       end
       _sender_name = sender_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_name", _sender_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("sender_name", _sender_name.to_s.size, MAX_LENGTH_FOR_SENDER_NAME)
       @sender_name = _sender_name
     end
 

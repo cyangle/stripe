@@ -27,10 +27,12 @@ module Stripe
 
     @[JSON::Field(key: "domain_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter domain_name : String? = nil
+    MAX_LENGTH_FOR_DOMAIN_NAME = 5000
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -39,8 +41,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["apple_pay_domain"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [apple_pay_domain]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["apple_pay_domain"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -65,14 +67,14 @@ module Stripe
       invalid_properties.push("\"domain_name\" is required and cannot be null") if @domain_name.nil?
 
       if _domain_name = @domain_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("domain_name", _domain_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("domain_name", _domain_name.to_s.size, MAX_LENGTH_FOR_DOMAIN_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -81,7 +83,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties
     end
@@ -93,12 +95,12 @@ module Stripe
 
       return false if @domain_name.nil?
       if _domain_name = @domain_name
-        return false if _domain_name.to_s.size > 5000
+        return false if _domain_name.to_s.size > MAX_LENGTH_FOR_DOMAIN_NAME
       end
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -128,10 +130,7 @@ module Stripe
         raise ArgumentError.new("\"domain_name\" is required and cannot be null")
       end
       _domain_name = domain_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("domain_name", _domain_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("domain_name", _domain_name.to_s.size, MAX_LENGTH_FOR_DOMAIN_NAME)
       @domain_name = _domain_name
     end
 
@@ -142,10 +141,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 

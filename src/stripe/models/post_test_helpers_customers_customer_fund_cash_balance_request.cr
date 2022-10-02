@@ -37,6 +37,7 @@ module Stripe
     # A description of the test funding. This simulates free-text references supplied by customers when making bank transfers to their cash balance. You can use this to test how Stripe's [reconciliation algorithm](https://stripe.com/docs/payments/customer-balance/reconciliation) applies to different user inputs.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter reference : String? = nil
+    MAX_LENGTH_FOR_REFERENCE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -61,7 +62,7 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       if _reference = @reference
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -76,7 +77,7 @@ module Stripe
       return false if @currency.nil?
 
       if _reference = @reference
-        return false if _reference.to_s.size > 5000
+        return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 
       true
@@ -119,10 +120,7 @@ module Stripe
         return @reference = nil
       end
       _reference = reference.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       @reference = _reference
     end
 

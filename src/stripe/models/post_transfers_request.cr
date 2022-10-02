@@ -37,6 +37,7 @@ module Stripe
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -53,8 +54,9 @@ module Stripe
     # The source balance to use for this transfer. One of `bank_account`, `card`, or `fpx`. For most users, this will default to `card`.
     @[JSON::Field(key: "source_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter source_type : String? = nil
-
-    VALID_VALUES_FOR_SOURCE_TYPE = StaticArray["bank_account", "card", "fpx"]
+    MAX_LENGTH_FOR_SOURCE_TYPE    = 5000
+    ERROR_MESSAGE_FOR_SOURCE_TYPE = "invalid value for \"source_type\", must be one of [bank_account, card, fpx]."
+    VALID_VALUES_FOR_SOURCE_TYPE  = StaticArray["bank_account", "card", "fpx"]
 
     # A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
     @[JSON::Field(key: "transfer_group", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -88,13 +90,13 @@ module Stripe
       invalid_properties.push("\"destination\" is required and cannot be null") if @destination.nil?
 
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _source_type = @source_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("source_type", VALID_VALUES_FOR_SOURCE_TYPE)) unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SOURCE_TYPE) unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
       end
 
       invalid_properties
@@ -108,7 +110,7 @@ module Stripe
       return false if @destination.nil?
 
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _source_type = @source_type
@@ -155,10 +157,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 

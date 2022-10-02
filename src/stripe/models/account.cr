@@ -24,12 +24,13 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["account"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [account]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["account"]
 
     # Optional properties
 
@@ -42,10 +43,11 @@ module Stripe
     # The business type.
     @[JSON::Field(key: "business_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: business_type.nil? && !business_type_present?)]
     getter business_type : String? = nil
+    ERROR_MESSAGE_FOR_BUSINESS_TYPE = "invalid value for \"business_type\", must be one of [company, government_entity, individual, non_profit]."
+    VALID_VALUES_FOR_BUSINESS_TYPE  = StaticArray["company", "government_entity", "individual", "non_profit"]
 
     @[JSON::Field(ignore: true)]
     property? business_type_present : Bool = false
-    VALID_VALUES_FOR_BUSINESS_TYPE = StaticArray["company", "government_entity", "individual", "non_profit"]
 
     @[JSON::Field(key: "capabilities", type: Stripe::AccountCapabilities?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capabilities : Stripe::AccountCapabilities? = nil
@@ -63,6 +65,7 @@ module Stripe
     # The account's country.
     @[JSON::Field(key: "country", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter country : String? = nil
+    MAX_LENGTH_FOR_COUNTRY = 5000
 
     # Time at which the account was connected. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "created", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -71,6 +74,7 @@ module Stripe
     # Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
     @[JSON::Field(key: "default_currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_currency : String? = nil
+    MAX_LENGTH_FOR_DEFAULT_CURRENCY = 5000
 
     # Whether account details have been submitted. Standard accounts cannot receive payouts before this is true.
     @[JSON::Field(key: "details_submitted", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -79,6 +83,7 @@ module Stripe
     # An email address associated with the account. You can treat this as metadata: it is not used for authentication or messaging account holders.
     @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: email.nil? && !email_present?)]
     getter email : String? = nil
+    MAX_LENGTH_FOR_EMAIL = 5000
 
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
@@ -115,8 +120,8 @@ module Stripe
     # The Stripe account type. Can be `standard`, `express`, or `custom`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["custom", "express", "standard"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [custom, express, standard]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["custom", "express", "standard"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -157,20 +162,20 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       if _business_profile = @business_profile
         invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile")) if _business_profile.is_a?(OpenApi::Validatable)
       end
       if _business_type = @business_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("business_type", VALID_VALUES_FOR_BUSINESS_TYPE)) unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BUSINESS_TYPE) unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
       end
       if _capabilities = @capabilities
         invalid_properties.concat(_capabilities.list_invalid_properties_for("capabilities")) if _capabilities.is_a?(OpenApi::Validatable)
@@ -183,19 +188,19 @@ module Stripe
         invalid_properties.concat(_controller.list_invalid_properties_for("controller")) if _controller.is_a?(OpenApi::Validatable)
       end
       if _country = @country
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _default_currency = @default_currency
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_currency", _default_currency.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_currency", _default_currency.to_s.size, MAX_LENGTH_FOR_DEFAULT_CURRENCY)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _email = @email
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -219,7 +224,7 @@ module Stripe
         invalid_properties.concat(_tos_acceptance.list_invalid_properties_for("tos_acceptance")) if _tos_acceptance.is_a?(OpenApi::Validatable)
       end
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
     end
@@ -229,7 +234,7 @@ module Stripe
     def valid? : Bool
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
@@ -258,15 +263,15 @@ module Stripe
       end
 
       if _country = @country
-        return false if _country.to_s.size > 5000
+        return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       if _default_currency = @default_currency
-        return false if _default_currency.to_s.size > 5000
+        return false if _default_currency.to_s.size > MAX_LENGTH_FOR_DEFAULT_CURRENCY
       end
 
       if _email = @email
-        return false if _email.to_s.size > 5000
+        return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
       if _external_accounts = @external_accounts
@@ -307,10 +312,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -397,10 +399,7 @@ module Stripe
         return @country = nil
       end
       _country = country.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       @country = _country
     end
 
@@ -421,10 +420,7 @@ module Stripe
         return @default_currency = nil
       end
       _default_currency = default_currency.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_currency", _default_currency.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("default_currency", _default_currency.to_s.size, MAX_LENGTH_FOR_DEFAULT_CURRENCY)
       @default_currency = _default_currency
     end
 
@@ -445,10 +441,7 @@ module Stripe
         return @email = nil
       end
       _email = email.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
       @email = _email
     end
 

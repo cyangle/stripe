@@ -38,8 +38,8 @@ module Stripe
     # Configuration for collecting the customer's billing address.
     @[JSON::Field(key: "billing_address_collection", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter billing_address_collection : String? = nil
-
-    VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION = StaticArray["auto", "required"]
+    ERROR_MESSAGE_FOR_BILLING_ADDRESS_COLLECTION = "invalid value for \"billing_address_collection\", must be one of [auto, required]."
+    VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION  = StaticArray["auto", "required"]
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -48,12 +48,13 @@ module Stripe
     # Configuration for Customer creation during checkout.
     @[JSON::Field(key: "customer_creation", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter customer_creation : String? = nil
-
-    VALID_VALUES_FOR_CUSTOMER_CREATION = StaticArray["always", "if_required"]
+    ERROR_MESSAGE_FOR_CUSTOMER_CREATION = "invalid value for \"customer_creation\", must be one of [always, if_required]."
+    VALID_VALUES_FOR_CUSTOMER_CREATION  = StaticArray["always", "if_required"]
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -66,14 +67,14 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["payment_link"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [payment_link]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["payment_link"]
 
     # Configuration for collecting a payment method during checkout.
     @[JSON::Field(key: "payment_method_collection", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_method_collection : String? = nil
-
-    VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION = StaticArray["always", "if_required"]
+    ERROR_MESSAGE_FOR_PAYMENT_METHOD_COLLECTION = "invalid value for \"payment_method_collection\", must be one of [always, if_required]."
+    VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION  = StaticArray["always", "if_required"]
 
     @[JSON::Field(key: "phone_number_collection", type: Stripe::PaymentLinksResourcePhoneNumberCollection?, default: nil, required: true, nullable: false, emit_null: false)]
     getter phone_number_collection : Stripe::PaymentLinksResourcePhoneNumberCollection? = nil
@@ -85,8 +86,8 @@ module Stripe
     # Indicates the type of transaction being performed which customizes relevant text on the page, such as the submit button.
     @[JSON::Field(key: "submit_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter submit_type : String? = nil
-
-    VALID_VALUES_FOR_SUBMIT_TYPE = StaticArray["auto", "book", "donate", "pay"]
+    ERROR_MESSAGE_FOR_SUBMIT_TYPE = "invalid value for \"submit_type\", must be one of [auto, book, donate, pay]."
+    VALID_VALUES_FOR_SUBMIT_TYPE  = StaticArray["auto", "book", "donate", "pay"]
 
     @[JSON::Field(key: "tax_id_collection", type: Stripe::PaymentLinksResourceTaxIdCollection?, default: nil, required: true, nullable: false, emit_null: false)]
     getter tax_id_collection : Stripe::PaymentLinksResourceTaxIdCollection? = nil
@@ -94,6 +95,7 @@ module Stripe
     # The public URL that can be shared with customers.
     @[JSON::Field(key: "url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter url : String? = nil
+    MAX_LENGTH_FOR_URL = 5000
 
     # Optional properties
 
@@ -135,10 +137,11 @@ module Stripe
     # The list of payment method types that customers can use. When `null`, Stripe will dynamically show relevant payment methods you've enabled in your [payment method settings](https://dashboard.stripe.com/settings/payment_methods).
     @[JSON::Field(key: "payment_method_types", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_method_types.nil? && !payment_method_types_present?)]
     getter payment_method_types : Array(String)? = nil
+    ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES = "invalid value for \"payment_method_types\", must be one of [affirm, afterpay_clearpay, alipay, au_becs_debit, bacs_debit, bancontact, blik, boleto, card, eps, fpx, giropay, grabpay, ideal, klarna, konbini, oxxo, p24, paynow, pix, promptpay, sepa_debit, sofort, us_bank_account, wechat_pay]."
+    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES  = StaticArray["affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
 
     @[JSON::Field(ignore: true)]
     property? payment_method_types_present : Bool = false
-    VALID_VALUES_FOR_PAYMENT_METHOD_TYPES = StaticArray["affirm", "afterpay_clearpay", "alipay", "au_becs_debit", "bacs_debit", "bancontact", "blik", "boleto", "card", "eps", "fpx", "giropay", "grabpay", "ideal", "klarna", "konbini", "oxxo", "p24", "paynow", "pix", "promptpay", "sepa_debit", "sofort", "us_bank_account", "wechat_pay"]
 
     @[JSON::Field(key: "shipping_address_collection", type: Stripe::PaymentLinkShippingAddressCollection?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: shipping_address_collection.nil? && !shipping_address_collection_present?)]
     getter shipping_address_collection : Stripe::PaymentLinkShippingAddressCollection? = nil
@@ -216,19 +219,19 @@ module Stripe
       invalid_properties.push("\"billing_address_collection\" is required and cannot be null") if @billing_address_collection.nil?
 
       if _billing_address_collection = @billing_address_collection
-        invalid_properties.push(OpenApi::EnumValidator.error_message("billing_address_collection", VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)) unless OpenApi::EnumValidator.valid?(_billing_address_collection, VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_ADDRESS_COLLECTION) unless OpenApi::EnumValidator.valid?(_billing_address_collection, VALID_VALUES_FOR_BILLING_ADDRESS_COLLECTION)
       end
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"customer_creation\" is required and cannot be null") if @customer_creation.nil?
 
       if _customer_creation = @customer_creation
-        invalid_properties.push(OpenApi::EnumValidator.error_message("customer_creation", VALID_VALUES_FOR_CUSTOMER_CREATION)) unless OpenApi::EnumValidator.valid?(_customer_creation, VALID_VALUES_FOR_CUSTOMER_CREATION)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CUSTOMER_CREATION) unless OpenApi::EnumValidator.valid?(_customer_creation, VALID_VALUES_FOR_CUSTOMER_CREATION)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -239,12 +242,12 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"payment_method_collection\" is required and cannot be null") if @payment_method_collection.nil?
 
       if _payment_method_collection = @payment_method_collection
-        invalid_properties.push(OpenApi::EnumValidator.error_message("payment_method_collection", VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)) unless OpenApi::EnumValidator.valid?(_payment_method_collection, VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_COLLECTION) unless OpenApi::EnumValidator.valid?(_payment_method_collection, VALID_VALUES_FOR_PAYMENT_METHOD_COLLECTION)
       end
       invalid_properties.push("\"phone_number_collection\" is required and cannot be null") if @phone_number_collection.nil?
 
@@ -254,12 +257,12 @@ module Stripe
       invalid_properties.push("\"shipping_options\" is required and cannot be null") if @shipping_options.nil?
 
       if _shipping_options = @shipping_options
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "shipping_options", array: _shipping_options)) if _shipping_options.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "shipping_options", container: _shipping_options)) if _shipping_options.is_a?(Array)
       end
       invalid_properties.push("\"submit_type\" is required and cannot be null") if @submit_type.nil?
 
       if _submit_type = @submit_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("submit_type", VALID_VALUES_FOR_SUBMIT_TYPE)) unless OpenApi::EnumValidator.valid?(_submit_type, VALID_VALUES_FOR_SUBMIT_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SUBMIT_TYPE) unless OpenApi::EnumValidator.valid?(_submit_type, VALID_VALUES_FOR_SUBMIT_TYPE)
       end
       invalid_properties.push("\"tax_id_collection\" is required and cannot be null") if @tax_id_collection.nil?
 
@@ -269,7 +272,7 @@ module Stripe
       invalid_properties.push("\"url\" is required and cannot be null") if @url.nil?
 
       if _url = @url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -287,7 +290,7 @@ module Stripe
         invalid_properties.concat(_payment_intent_data.list_invalid_properties_for("payment_intent_data")) if _payment_intent_data.is_a?(OpenApi::Validatable)
       end
       if _payment_method_types = @payment_method_types
-        invalid_properties.push(OpenApi::EnumValidator.error_message("payment_method_types", VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_METHOD_TYPES) unless OpenApi::EnumValidator.valid?(_payment_method_types, VALID_VALUES_FOR_PAYMENT_METHOD_TYPES)
       end
       if _shipping_address_collection = @shipping_address_collection
         invalid_properties.concat(_shipping_address_collection.list_invalid_properties_for("shipping_address_collection")) if _shipping_address_collection.is_a?(OpenApi::Validatable)
@@ -332,7 +335,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -356,7 +359,7 @@ module Stripe
 
       return false if @shipping_options.nil?
       if _shipping_options = @shipping_options
-        return false if _shipping_options.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _shipping_options)
+        return false if _shipping_options.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _shipping_options)
       end
 
       return false if @submit_type.nil?
@@ -371,7 +374,7 @@ module Stripe
 
       return false if @url.nil?
       if _url = @url
-        return false if _url.to_s.size > 5000
+        return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 
       if _consent_collection = @consent_collection
@@ -490,10 +493,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -557,7 +557,7 @@ module Stripe
         raise ArgumentError.new("\"shipping_options\" is required and cannot be null")
       end
       _shipping_options = shipping_options.not_nil!
-      OpenApi::ArrayValidator.validate(array: _shipping_options) if _shipping_options.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _shipping_options) if _shipping_options.is_a?(Array)
       @shipping_options = _shipping_options
     end
 
@@ -590,10 +590,7 @@ module Stripe
         raise ArgumentError.new("\"url\" is required and cannot be null")
       end
       _url = url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
       @url = _url
     end
 

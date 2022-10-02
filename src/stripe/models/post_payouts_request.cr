@@ -33,6 +33,7 @@ module Stripe
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # The ID of a bank account or a card to send the payout to. If no destination is supplied, the default external account for the specified currency will be used.
     @[JSON::Field(key: "destination", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -49,18 +50,21 @@ module Stripe
     # The method used to send this payout, which can be `standard` or `instant`. `instant` is only supported for payouts to debit cards. (See [Instant payouts for marketplaces for more information](https://stripe.com/blog/instant-payouts-for-marketplaces).)
     @[JSON::Field(key: "method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter method : String? = nil
-
-    VALID_VALUES_FOR_METHOD = StaticArray["instant", "standard"]
+    MAX_LENGTH_FOR_METHOD    = 5000
+    ERROR_MESSAGE_FOR_METHOD = "invalid value for \"method\", must be one of [instant, standard]."
+    VALID_VALUES_FOR_METHOD  = StaticArray["instant", "standard"]
 
     # The balance type of your Stripe balance to draw this payout from. Balances for different payment sources are kept separately. You can find the amounts with the balances API. One of `bank_account`, `card`, or `fpx`.
     @[JSON::Field(key: "source_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter source_type : String? = nil
-
-    VALID_VALUES_FOR_SOURCE_TYPE = StaticArray["bank_account", "card", "fpx"]
+    MAX_LENGTH_FOR_SOURCE_TYPE    = 5000
+    ERROR_MESSAGE_FOR_SOURCE_TYPE = "invalid value for \"source_type\", must be one of [bank_account, card, fpx]."
+    VALID_VALUES_FOR_SOURCE_TYPE  = StaticArray["bank_account", "card", "fpx"]
 
     # A string to be displayed on the recipient's bank or card statement. This may be at most 22 characters. Attempting to use a `statement_descriptor` longer than 22 characters will return an error. Note: Most banks will truncate this information and/or display it inconsistently. Some may not display it at all.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 22
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -90,19 +94,19 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _method = @method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("method", VALID_VALUES_FOR_METHOD)) unless OpenApi::EnumValidator.valid?(_method, VALID_VALUES_FOR_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_METHOD) unless OpenApi::EnumValidator.valid?(_method, VALID_VALUES_FOR_METHOD)
       end
       if _source_type = @source_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("source_type", VALID_VALUES_FOR_SOURCE_TYPE)) unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SOURCE_TYPE) unless OpenApi::EnumValidator.valid?(_source_type, VALID_VALUES_FOR_SOURCE_TYPE)
       end
       if _statement_descriptor = @statement_descriptor
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
@@ -117,7 +121,7 @@ module Stripe
       return false if @currency.nil?
 
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _method = @method
@@ -129,7 +133,7 @@ module Stripe
       end
 
       if _statement_descriptor = @statement_descriptor
-        return false if _statement_descriptor.to_s.size > 22
+        return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
       true
@@ -162,10 +166,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -228,10 +229,7 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 22)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       @statement_descriptor = _statement_descriptor
     end
 

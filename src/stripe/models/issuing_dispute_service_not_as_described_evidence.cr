@@ -37,6 +37,7 @@ module Stripe
     # Reason for canceling the order.
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
     getter cancellation_reason : String? = nil
+    MAX_LENGTH_FOR_CANCELLATION_REASON = 5000
 
     @[JSON::Field(ignore: true)]
     property? cancellation_reason_present : Bool = false
@@ -44,6 +45,7 @@ module Stripe
     # Explanation of why the cardholder is disputing this transaction.
     @[JSON::Field(key: "explanation", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: explanation.nil? && !explanation_present?)]
     getter explanation : String? = nil
+    MAX_LENGTH_FOR_EXPLANATION = 5000
 
     @[JSON::Field(ignore: true)]
     property? explanation_present : Bool = false
@@ -78,12 +80,12 @@ module Stripe
       end
 
       if _cancellation_reason = @cancellation_reason
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_reason", _cancellation_reason.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_reason", _cancellation_reason.to_s.size, MAX_LENGTH_FOR_CANCELLATION_REASON)
           invalid_properties.push(max_length_error)
         end
       end
       if _explanation = @explanation
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -99,11 +101,11 @@ module Stripe
       end
 
       if _cancellation_reason = @cancellation_reason
-        return false if _cancellation_reason.to_s.size > 5000
+        return false if _cancellation_reason.to_s.size > MAX_LENGTH_FOR_CANCELLATION_REASON
       end
 
       if _explanation = @explanation
-        return false if _explanation.to_s.size > 5000
+        return false if _explanation.to_s.size > MAX_LENGTH_FOR_EXPLANATION
       end
 
       true
@@ -137,10 +139,7 @@ module Stripe
         return @cancellation_reason = nil
       end
       _cancellation_reason = cancellation_reason.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_reason", _cancellation_reason.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("cancellation_reason", _cancellation_reason.to_s.size, MAX_LENGTH_FOR_CANCELLATION_REASON)
       @cancellation_reason = _cancellation_reason
     end
 
@@ -151,10 +150,7 @@ module Stripe
         return @explanation = nil
       end
       _explanation = explanation.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
       @explanation = _explanation
     end
 

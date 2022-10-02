@@ -27,6 +27,7 @@ module Stripe
     # The id of the location that this connection token is scoped to. If specified the connection token will only be usable with readers assigned to that location, otherwise the connection token will be usable with all readers. Note that location scoping only applies to internet-connected readers. For more details, see [the docs on scoping connection tokens](https://stripe.com/docs/terminal/fleet/locations#connection-tokens).
     @[JSON::Field(key: "location", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter location : String? = nil
+    MAX_LENGTH_FOR_LOCATION = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -44,7 +45,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _location = @location
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("location", _location.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("location", _location.to_s.size, MAX_LENGTH_FOR_LOCATION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -55,7 +56,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _location = @location
-        return false if _location.to_s.size > 5000
+        return false if _location.to_s.size > MAX_LENGTH_FOR_LOCATION
       end
 
       true
@@ -78,10 +79,7 @@ module Stripe
         return @location = nil
       end
       _location = location.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("location", _location.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("location", _location.to_s.size, MAX_LENGTH_FOR_LOCATION)
       @location = _location
     end
 

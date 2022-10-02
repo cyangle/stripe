@@ -22,9 +22,11 @@ module Stripe
 
     @[JSON::Field(key: "back", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter back : String? = nil
+    MAX_LENGTH_FOR_BACK = 500
 
     @[JSON::Field(key: "front", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter front : String? = nil
+    MAX_LENGTH_FOR_FRONT = 500
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,12 +44,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _back = @back
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("back", _back.to_s.size, 500)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("back", _back.to_s.size, MAX_LENGTH_FOR_BACK)
           invalid_properties.push(max_length_error)
         end
       end
       if _front = @front
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("front", _front.to_s.size, 500)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("front", _front.to_s.size, MAX_LENGTH_FOR_FRONT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -58,11 +60,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _back = @back
-        return false if _back.to_s.size > 500
+        return false if _back.to_s.size > MAX_LENGTH_FOR_BACK
       end
 
       if _front = @front
-        return false if _front.to_s.size > 500
+        return false if _front.to_s.size > MAX_LENGTH_FOR_FRONT
       end
 
       true
@@ -75,10 +77,7 @@ module Stripe
         return @back = nil
       end
       _back = back.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("back", _back.to_s.size, 500)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("back", _back.to_s.size, MAX_LENGTH_FOR_BACK)
       @back = _back
     end
 
@@ -89,10 +88,7 @@ module Stripe
         return @front = nil
       end
       _front = front.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("front", _front.to_s.size, 500)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("front", _front.to_s.size, MAX_LENGTH_FOR_FRONT)
       @front = _front
     end
 

@@ -39,20 +39,23 @@ module Stripe
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # The FinancialAccount associated with this object.
     @[JSON::Field(key: "financial_account", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter financial_account : String? = nil
+    MAX_LENGTH_FOR_FINANCIAL_ACCOUNT = 5000
 
     # Type of the flow that created the Transaction.
     @[JSON::Field(key: "flow_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter flow_type : String? = nil
-
-    VALID_VALUES_FOR_FLOW_TYPE = StaticArray["credit_reversal", "debit_reversal", "inbound_transfer", "issuing_authorization", "other", "outbound_payment", "outbound_transfer", "received_credit", "received_debit"]
+    ERROR_MESSAGE_FOR_FLOW_TYPE = "invalid value for \"flow_type\", must be one of [credit_reversal, debit_reversal, inbound_transfer, issuing_authorization, other, outbound_payment, outbound_transfer, received_credit, received_debit]."
+    VALID_VALUES_FOR_FLOW_TYPE  = StaticArray["credit_reversal", "debit_reversal", "inbound_transfer", "issuing_authorization", "other", "outbound_payment", "outbound_transfer", "received_credit", "received_debit"]
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -61,14 +64,14 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["treasury.transaction"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.transaction]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["treasury.transaction"]
 
     # Status of the Transaction.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["open", "posted", "void"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [open, posted, void]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["open", "posted", "void"]
 
     @[JSON::Field(key: "status_transitions", type: Stripe::TreasuryTransactionsResourceAbstractTransactionResourceStatusTransitions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status_transitions : Stripe::TreasuryTransactionsResourceAbstractTransactionResourceStatusTransitions? = nil
@@ -84,6 +87,7 @@ module Stripe
     # ID of the flow that created the Transaction.
     @[JSON::Field(key: "flow", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: flow.nil? && !flow_present?)]
     getter flow : String? = nil
+    MAX_LENGTH_FOR_FLOW = 5000
 
     @[JSON::Field(ignore: true)]
     property? flow_present : Bool = false
@@ -137,26 +141,26 @@ module Stripe
       invalid_properties.push("\"description\" is required and cannot be null") if @description.nil?
 
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"financial_account\" is required and cannot be null") if @financial_account.nil?
 
       if _financial_account = @financial_account
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"flow_type\" is required and cannot be null") if @flow_type.nil?
 
       if _flow_type = @flow_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("flow_type", VALID_VALUES_FOR_FLOW_TYPE)) unless OpenApi::EnumValidator.valid?(_flow_type, VALID_VALUES_FOR_FLOW_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_FLOW_TYPE) unless OpenApi::EnumValidator.valid?(_flow_type, VALID_VALUES_FOR_FLOW_TYPE)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -165,12 +169,12 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"status_transitions\" is required and cannot be null") if @status_transitions.nil?
 
@@ -181,7 +185,7 @@ module Stripe
         invalid_properties.concat(_entries.list_invalid_properties_for("entries")) if _entries.is_a?(OpenApi::Validatable)
       end
       if _flow = @flow
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flow", _flow.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flow", _flow.to_s.size, MAX_LENGTH_FOR_FLOW)
           invalid_properties.push(max_length_error)
         end
       end
@@ -207,12 +211,12 @@ module Stripe
 
       return false if @description.nil?
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       return false if @financial_account.nil?
       if _financial_account = @financial_account
-        return false if _financial_account.to_s.size > 5000
+        return false if _financial_account.to_s.size > MAX_LENGTH_FOR_FINANCIAL_ACCOUNT
       end
 
       return false if @flow_type.nil?
@@ -222,7 +226,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -247,7 +251,7 @@ module Stripe
       end
 
       if _flow = @flow
-        return false if _flow.to_s.size > 5000
+        return false if _flow.to_s.size > MAX_LENGTH_FOR_FLOW
       end
 
       if _flow_details = @flow_details
@@ -305,10 +309,7 @@ module Stripe
         raise ArgumentError.new("\"description\" is required and cannot be null")
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -319,10 +320,7 @@ module Stripe
         raise ArgumentError.new("\"financial_account\" is required and cannot be null")
       end
       _financial_account = financial_account.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("financial_account", _financial_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_ACCOUNT)
       @financial_account = _financial_account
     end
 
@@ -344,10 +342,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -412,10 +407,7 @@ module Stripe
         return @flow = nil
       end
       _flow = flow.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("flow", _flow.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("flow", _flow.to_s.size, MAX_LENGTH_FOR_FLOW)
       @flow = _flow
     end
 

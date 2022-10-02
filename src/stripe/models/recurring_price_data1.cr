@@ -26,6 +26,7 @@ module Stripe
 
     @[JSON::Field(key: "product", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter product : String? = nil
+    MAX_LENGTH_FOR_PRODUCT = 5000
 
     @[JSON::Field(key: "recurring", type: Stripe::RecurringAdhoc?, default: nil, required: true, nullable: false, emit_null: false)]
     getter recurring : Stripe::RecurringAdhoc? = nil
@@ -34,8 +35,8 @@ module Stripe
 
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
-
-    VALID_VALUES_FOR_TAX_BEHAVIOR = StaticArray["exclusive", "inclusive", "unspecified"]
+    ERROR_MESSAGE_FOR_TAX_BEHAVIOR = "invalid value for \"tax_behavior\", must be one of [exclusive, inclusive, unspecified]."
+    VALID_VALUES_FOR_TAX_BEHAVIOR  = StaticArray["exclusive", "inclusive", "unspecified"]
 
     @[JSON::Field(key: "unit_amount", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
     getter unit_amount : Int64? = nil
@@ -68,7 +69,7 @@ module Stripe
       invalid_properties.push("\"product\" is required and cannot be null") if @product.nil?
 
       if _product = @product
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, MAX_LENGTH_FOR_PRODUCT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -78,7 +79,7 @@ module Stripe
         invalid_properties.concat(_recurring.list_invalid_properties_for("recurring")) if _recurring.is_a?(OpenApi::Validatable)
       end
       if _tax_behavior = @tax_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_behavior", VALID_VALUES_FOR_TAX_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
 
       invalid_properties
@@ -91,7 +92,7 @@ module Stripe
 
       return false if @product.nil?
       if _product = @product
-        return false if _product.to_s.size > 5000
+        return false if _product.to_s.size > MAX_LENGTH_FOR_PRODUCT
       end
 
       return false if @recurring.nil?
@@ -123,10 +124,7 @@ module Stripe
         raise ArgumentError.new("\"product\" is required and cannot be null")
       end
       _product = product.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("product", _product.to_s.size, MAX_LENGTH_FOR_PRODUCT)
       @product = _product
     end
 

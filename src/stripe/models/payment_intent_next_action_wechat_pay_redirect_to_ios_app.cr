@@ -24,6 +24,7 @@ module Stripe
     # An universal link that redirect to WeChat Pay app
     @[JSON::Field(key: "native_url", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter native_url : String? = nil
+    MAX_LENGTH_FOR_NATIVE_URL = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,7 +43,7 @@ module Stripe
       invalid_properties.push("\"native_url\" is required and cannot be null") if @native_url.nil?
 
       if _native_url = @native_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_url", _native_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_url", _native_url.to_s.size, MAX_LENGTH_FOR_NATIVE_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -54,7 +55,7 @@ module Stripe
     def valid? : Bool
       return false if @native_url.nil?
       if _native_url = @native_url
-        return false if _native_url.to_s.size > 5000
+        return false if _native_url.to_s.size > MAX_LENGTH_FOR_NATIVE_URL
       end
 
       true
@@ -67,10 +68,7 @@ module Stripe
         raise ArgumentError.new("\"native_url\" is required and cannot be null")
       end
       _native_url = native_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_url", _native_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("native_url", _native_url.to_s.size, MAX_LENGTH_FOR_NATIVE_URL)
       @native_url = _native_url
     end
 

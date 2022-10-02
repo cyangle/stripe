@@ -27,14 +27,17 @@ module Stripe
     # Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     @[JSON::Field(key: "country", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter country : String? = nil
+    MAX_LENGTH_FOR_COUNTRY = 5000
 
     # An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # The display name of the tax rate, which will be shown to users.
     @[JSON::Field(key: "display_name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter display_name : String? = nil
+    MAX_LENGTH_FOR_DISPLAY_NAME = 50
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -43,6 +46,7 @@ module Stripe
     # The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
     @[JSON::Field(key: "jurisdiction", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter jurisdiction : String? = nil
+    MAX_LENGTH_FOR_JURISDICTION = 50
 
     @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Stripe::PostAccountRequestMetadata? = nil
@@ -50,12 +54,13 @@ module Stripe
     # [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, \"NY\" for New York, United States.
     @[JSON::Field(key: "state", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter state : String? = nil
+    MAX_LENGTH_FOR_STATE = 2
 
     # The high-level tax type, such as `vat` or `sales_tax`.
     @[JSON::Field(key: "tax_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_type : String? = nil
-
-    VALID_VALUES_FOR_TAX_TYPE = StaticArray["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"]
+    ERROR_MESSAGE_FOR_TAX_TYPE = "invalid value for \"tax_type\", must be one of [gst, hst, jct, pst, qst, rst, sales_tax, vat]."
+    VALID_VALUES_FOR_TAX_TYPE  = StaticArray["gst", "hst", "jct", "pst", "qst", "rst", "sales_tax", "vat"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -80,23 +85,23 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _country = @country
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       if _display_name = @display_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 50)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _jurisdiction = @jurisdiction
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("jurisdiction", _jurisdiction.to_s.size, 50)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("jurisdiction", _jurisdiction.to_s.size, MAX_LENGTH_FOR_JURISDICTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -104,12 +109,12 @@ module Stripe
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _state = @state
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, 2)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, MAX_LENGTH_FOR_STATE)
           invalid_properties.push(max_length_error)
         end
       end
       if _tax_type = @tax_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_type", VALID_VALUES_FOR_TAX_TYPE)) unless OpenApi::EnumValidator.valid?(_tax_type, VALID_VALUES_FOR_TAX_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_TYPE) unless OpenApi::EnumValidator.valid?(_tax_type, VALID_VALUES_FOR_TAX_TYPE)
       end
       invalid_properties
     end
@@ -118,19 +123,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _country = @country
-        return false if _country.to_s.size > 5000
+        return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _display_name = @display_name
-        return false if _display_name.to_s.size > 50
+        return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 
       if _jurisdiction = @jurisdiction
-        return false if _jurisdiction.to_s.size > 50
+        return false if _jurisdiction.to_s.size > MAX_LENGTH_FOR_JURISDICTION
       end
 
       if _metadata = @metadata
@@ -138,7 +143,7 @@ module Stripe
       end
 
       if _state = @state
-        return false if _state.to_s.size > 2
+        return false if _state.to_s.size > MAX_LENGTH_FOR_STATE
       end
 
       if _tax_type = @tax_type
@@ -165,10 +170,7 @@ module Stripe
         return @country = nil
       end
       _country = country.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       @country = _country
     end
 
@@ -179,10 +181,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -193,10 +192,7 @@ module Stripe
         return @display_name = nil
       end
       _display_name = display_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 50)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
       @display_name = _display_name
     end
 
@@ -217,10 +213,7 @@ module Stripe
         return @jurisdiction = nil
       end
       _jurisdiction = jurisdiction.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("jurisdiction", _jurisdiction.to_s.size, 50)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("jurisdiction", _jurisdiction.to_s.size, MAX_LENGTH_FOR_JURISDICTION)
       @jurisdiction = _jurisdiction
     end
 
@@ -242,10 +235,7 @@ module Stripe
         return @state = nil
       end
       _state = state.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, 2)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("state", _state.to_s.size, MAX_LENGTH_FOR_STATE)
       @state = _state
     end
 

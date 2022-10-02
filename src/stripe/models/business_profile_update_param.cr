@@ -23,6 +23,7 @@ module Stripe
 
     @[JSON::Field(key: "headline", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter headline : String? = nil
+    MAX_LENGTH_FOR_HEADLINE = 60
 
     @[JSON::Field(key: "privacy_policy_url", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
     getter privacy_policy_url : Stripe::BusinessProfileSpecsSupportUrl? = nil
@@ -47,7 +48,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _headline = @headline
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, 60)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, MAX_LENGTH_FOR_HEADLINE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -64,7 +65,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _headline = @headline
-        return false if _headline.to_s.size > 60
+        return false if _headline.to_s.size > MAX_LENGTH_FOR_HEADLINE
       end
 
       if _privacy_policy_url = @privacy_policy_url
@@ -85,10 +86,7 @@ module Stripe
         return @headline = nil
       end
       _headline = headline.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("headline", _headline.to_s.size, 60)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("headline", _headline.to_s.size, MAX_LENGTH_FOR_HEADLINE)
       @headline = _headline
     end
 

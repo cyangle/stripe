@@ -32,8 +32,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["balance"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [balance]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["balance"]
 
     # Funds that are not yet available in the balance, due to the 7-day rolling pay cycle. The pending balance for each currency, and for each payment type, can be found in the `source_types` property.
     @[JSON::Field(key: "pending", type: Array(Stripe::BalanceAmount)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -76,25 +76,25 @@ module Stripe
       invalid_properties.push("\"available\" is required and cannot be null") if @available.nil?
 
       if _available = @available
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "available", array: _available)) if _available.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "available", container: _available)) if _available.is_a?(Array)
       end
       invalid_properties.push("\"livemode\" is required and cannot be null") if @livemode.nil?
 
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"pending\" is required and cannot be null") if @pending.nil?
 
       if _pending = @pending
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "pending", array: _pending)) if _pending.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "pending", container: _pending)) if _pending.is_a?(Array)
       end
       if _connect_reserved = @connect_reserved
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "connect_reserved", array: _connect_reserved)) if _connect_reserved.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "connect_reserved", container: _connect_reserved)) if _connect_reserved.is_a?(Array)
       end
       if _instant_available = @instant_available
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "instant_available", array: _instant_available)) if _instant_available.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "instant_available", container: _instant_available)) if _instant_available.is_a?(Array)
       end
       if _issuing = @issuing
         invalid_properties.concat(_issuing.list_invalid_properties_for("issuing")) if _issuing.is_a?(OpenApi::Validatable)
@@ -107,7 +107,7 @@ module Stripe
     def valid? : Bool
       return false if @available.nil?
       if _available = @available
-        return false if _available.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _available)
+        return false if _available.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _available)
       end
 
       return false if @livemode.nil?
@@ -119,15 +119,15 @@ module Stripe
 
       return false if @pending.nil?
       if _pending = @pending
-        return false if _pending.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _pending)
+        return false if _pending.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _pending)
       end
 
       if _connect_reserved = @connect_reserved
-        return false if _connect_reserved.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _connect_reserved)
+        return false if _connect_reserved.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _connect_reserved)
       end
 
       if _instant_available = @instant_available
-        return false if _instant_available.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _instant_available)
+        return false if _instant_available.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _instant_available)
       end
 
       if _issuing = @issuing
@@ -144,7 +144,7 @@ module Stripe
         raise ArgumentError.new("\"available\" is required and cannot be null")
       end
       _available = available.not_nil!
-      OpenApi::ArrayValidator.validate(array: _available) if _available.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _available) if _available.is_a?(Array)
       @available = _available
     end
 
@@ -176,7 +176,7 @@ module Stripe
         raise ArgumentError.new("\"pending\" is required and cannot be null")
       end
       _pending = pending.not_nil!
-      OpenApi::ArrayValidator.validate(array: _pending) if _pending.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _pending) if _pending.is_a?(Array)
       @pending = _pending
     end
 
@@ -187,7 +187,7 @@ module Stripe
         return @connect_reserved = nil
       end
       _connect_reserved = connect_reserved.not_nil!
-      OpenApi::ArrayValidator.validate(array: _connect_reserved) if _connect_reserved.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _connect_reserved) if _connect_reserved.is_a?(Array)
       @connect_reserved = _connect_reserved
     end
 
@@ -198,7 +198,7 @@ module Stripe
         return @instant_available = nil
       end
       _instant_available = instant_available.not_nil!
-      OpenApi::ArrayValidator.validate(array: _instant_available) if _instant_available.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _instant_available) if _instant_available.is_a?(Array)
       @instant_available = _instant_available
     end
 

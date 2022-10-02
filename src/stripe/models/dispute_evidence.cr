@@ -24,6 +24,7 @@ module Stripe
     # Any server or activity logs showing proof that the customer accessed or downloaded the purchased digital product. This information should include IP addresses, corresponding timestamps, and any detailed recorded activity.
     @[JSON::Field(key: "access_activity_log", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: access_activity_log.nil? && !access_activity_log_present?)]
     getter access_activity_log : String? = nil
+    MAX_LENGTH_FOR_ACCESS_ACTIVITY_LOG = 150000
 
     @[JSON::Field(ignore: true)]
     property? access_activity_log_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # The billing address provided by the customer.
     @[JSON::Field(key: "billing_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_address.nil? && !billing_address_present?)]
     getter billing_address : String? = nil
+    MAX_LENGTH_FOR_BILLING_ADDRESS = 5000
 
     @[JSON::Field(ignore: true)]
     property? billing_address_present : Bool = false
@@ -44,6 +46,7 @@ module Stripe
     # An explanation of how and when the customer was shown your refund policy prior to purchase.
     @[JSON::Field(key: "cancellation_policy_disclosure", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cancellation_policy_disclosure.nil? && !cancellation_policy_disclosure_present?)]
     getter cancellation_policy_disclosure : String? = nil
+    MAX_LENGTH_FOR_CANCELLATION_POLICY_DISCLOSURE = 150000
 
     @[JSON::Field(ignore: true)]
     property? cancellation_policy_disclosure_present : Bool = false
@@ -51,6 +54,7 @@ module Stripe
     # A justification for why the customer's subscription was not canceled.
     @[JSON::Field(key: "cancellation_rebuttal", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cancellation_rebuttal.nil? && !cancellation_rebuttal_present?)]
     getter cancellation_rebuttal : String? = nil
+    MAX_LENGTH_FOR_CANCELLATION_REBUTTAL = 150000
 
     @[JSON::Field(ignore: true)]
     property? cancellation_rebuttal_present : Bool = false
@@ -64,6 +68,7 @@ module Stripe
     # The email address of the customer.
     @[JSON::Field(key: "customer_email_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: customer_email_address.nil? && !customer_email_address_present?)]
     getter customer_email_address : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER_EMAIL_ADDRESS = 5000
 
     @[JSON::Field(ignore: true)]
     property? customer_email_address_present : Bool = false
@@ -71,6 +76,7 @@ module Stripe
     # The name of the customer.
     @[JSON::Field(key: "customer_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: customer_name.nil? && !customer_name_present?)]
     getter customer_name : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? customer_name_present : Bool = false
@@ -78,6 +84,7 @@ module Stripe
     # The IP address that the customer used when making the purchase.
     @[JSON::Field(key: "customer_purchase_ip", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: customer_purchase_ip.nil? && !customer_purchase_ip_present?)]
     getter customer_purchase_ip : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER_PURCHASE_IP = 5000
 
     @[JSON::Field(ignore: true)]
     property? customer_purchase_ip_present : Bool = false
@@ -97,6 +104,7 @@ module Stripe
     # An explanation of the difference between the disputed charge versus the prior charge that appears to be a duplicate.
     @[JSON::Field(key: "duplicate_charge_explanation", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: duplicate_charge_explanation.nil? && !duplicate_charge_explanation_present?)]
     getter duplicate_charge_explanation : String? = nil
+    MAX_LENGTH_FOR_DUPLICATE_CHARGE_EXPLANATION = 150000
 
     @[JSON::Field(ignore: true)]
     property? duplicate_charge_explanation_present : Bool = false
@@ -104,6 +112,7 @@ module Stripe
     # The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge.
     @[JSON::Field(key: "duplicate_charge_id", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: duplicate_charge_id.nil? && !duplicate_charge_id_present?)]
     getter duplicate_charge_id : String? = nil
+    MAX_LENGTH_FOR_DUPLICATE_CHARGE_ID = 5000
 
     @[JSON::Field(ignore: true)]
     property? duplicate_charge_id_present : Bool = false
@@ -111,6 +120,7 @@ module Stripe
     # A description of the product or service that was sold.
     @[JSON::Field(key: "product_description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: product_description.nil? && !product_description_present?)]
     getter product_description : String? = nil
+    MAX_LENGTH_FOR_PRODUCT_DESCRIPTION = 150000
 
     @[JSON::Field(ignore: true)]
     property? product_description_present : Bool = false
@@ -130,6 +140,7 @@ module Stripe
     # Documentation demonstrating that the customer was shown your refund policy prior to purchase.
     @[JSON::Field(key: "refund_policy_disclosure", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: refund_policy_disclosure.nil? && !refund_policy_disclosure_present?)]
     getter refund_policy_disclosure : String? = nil
+    MAX_LENGTH_FOR_REFUND_POLICY_DISCLOSURE = 150000
 
     @[JSON::Field(ignore: true)]
     property? refund_policy_disclosure_present : Bool = false
@@ -137,6 +148,7 @@ module Stripe
     # A justification for why the customer is not entitled to a refund.
     @[JSON::Field(key: "refund_refusal_explanation", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: refund_refusal_explanation.nil? && !refund_refusal_explanation_present?)]
     getter refund_refusal_explanation : String? = nil
+    MAX_LENGTH_FOR_REFUND_REFUSAL_EXPLANATION = 150000
 
     @[JSON::Field(ignore: true)]
     property? refund_refusal_explanation_present : Bool = false
@@ -144,6 +156,7 @@ module Stripe
     # The date on which the customer received or began receiving the purchased service, in a clear human-readable format.
     @[JSON::Field(key: "service_date", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: service_date.nil? && !service_date_present?)]
     getter service_date : String? = nil
+    MAX_LENGTH_FOR_SERVICE_DATE = 5000
 
     @[JSON::Field(ignore: true)]
     property? service_date_present : Bool = false
@@ -157,6 +170,7 @@ module Stripe
     # The address to which a physical product was shipped. You should try to include as complete address information as possible.
     @[JSON::Field(key: "shipping_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: shipping_address.nil? && !shipping_address_present?)]
     getter shipping_address : String? = nil
+    MAX_LENGTH_FOR_SHIPPING_ADDRESS = 5000
 
     @[JSON::Field(ignore: true)]
     property? shipping_address_present : Bool = false
@@ -164,6 +178,7 @@ module Stripe
     # The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If multiple carriers were used for this purchase, please separate them with commas.
     @[JSON::Field(key: "shipping_carrier", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: shipping_carrier.nil? && !shipping_carrier_present?)]
     getter shipping_carrier : String? = nil
+    MAX_LENGTH_FOR_SHIPPING_CARRIER = 5000
 
     @[JSON::Field(ignore: true)]
     property? shipping_carrier_present : Bool = false
@@ -171,6 +186,7 @@ module Stripe
     # The date on which a physical product began its route to the shipping address, in a clear human-readable format.
     @[JSON::Field(key: "shipping_date", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: shipping_date.nil? && !shipping_date_present?)]
     getter shipping_date : String? = nil
+    MAX_LENGTH_FOR_SHIPPING_DATE = 5000
 
     @[JSON::Field(ignore: true)]
     property? shipping_date_present : Bool = false
@@ -184,6 +200,7 @@ module Stripe
     # The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
     @[JSON::Field(key: "shipping_tracking_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: shipping_tracking_number.nil? && !shipping_tracking_number_present?)]
     getter shipping_tracking_number : String? = nil
+    MAX_LENGTH_FOR_SHIPPING_TRACKING_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? shipping_tracking_number_present : Bool = false
@@ -197,6 +214,7 @@ module Stripe
     # Any additional evidence or statements.
     @[JSON::Field(key: "uncategorized_text", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: uncategorized_text.nil? && !uncategorized_text_present?)]
     getter uncategorized_text : String? = nil
+    MAX_LENGTH_FOR_UNCATEGORIZED_TEXT = 150000
 
     @[JSON::Field(ignore: true)]
     property? uncategorized_text_present : Bool = false
@@ -242,12 +260,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _access_activity_log = @access_activity_log
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("access_activity_log", _access_activity_log.to_s.size, 150000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("access_activity_log", _access_activity_log.to_s.size, MAX_LENGTH_FOR_ACCESS_ACTIVITY_LOG)
           invalid_properties.push(max_length_error)
         end
       end
       if _billing_address = @billing_address
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("billing_address", _billing_address.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("billing_address", _billing_address.to_s.size, MAX_LENGTH_FOR_BILLING_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
@@ -255,12 +273,12 @@ module Stripe
         invalid_properties.concat(_cancellation_policy.list_invalid_properties_for("cancellation_policy")) if _cancellation_policy.is_a?(OpenApi::Validatable)
       end
       if _cancellation_policy_disclosure = @cancellation_policy_disclosure
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_policy_disclosure", _cancellation_policy_disclosure.to_s.size, 150000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_policy_disclosure", _cancellation_policy_disclosure.to_s.size, MAX_LENGTH_FOR_CANCELLATION_POLICY_DISCLOSURE)
           invalid_properties.push(max_length_error)
         end
       end
       if _cancellation_rebuttal = @cancellation_rebuttal
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_rebuttal", _cancellation_rebuttal.to_s.size, 150000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_rebuttal", _cancellation_rebuttal.to_s.size, MAX_LENGTH_FOR_CANCELLATION_REBUTTAL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -268,17 +286,17 @@ module Stripe
         invalid_properties.concat(_customer_communication.list_invalid_properties_for("customer_communication")) if _customer_communication.is_a?(OpenApi::Validatable)
       end
       if _customer_email_address = @customer_email_address
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_email_address", _customer_email_address.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_email_address", _customer_email_address.to_s.size, MAX_LENGTH_FOR_CUSTOMER_EMAIL_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
       if _customer_name = @customer_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_name", _customer_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_name", _customer_name.to_s.size, MAX_LENGTH_FOR_CUSTOMER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _customer_purchase_ip = @customer_purchase_ip
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_purchase_ip", _customer_purchase_ip.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_purchase_ip", _customer_purchase_ip.to_s.size, MAX_LENGTH_FOR_CUSTOMER_PURCHASE_IP)
           invalid_properties.push(max_length_error)
         end
       end
@@ -289,17 +307,17 @@ module Stripe
         invalid_properties.concat(_duplicate_charge_documentation.list_invalid_properties_for("duplicate_charge_documentation")) if _duplicate_charge_documentation.is_a?(OpenApi::Validatable)
       end
       if _duplicate_charge_explanation = @duplicate_charge_explanation
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("duplicate_charge_explanation", _duplicate_charge_explanation.to_s.size, 150000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("duplicate_charge_explanation", _duplicate_charge_explanation.to_s.size, MAX_LENGTH_FOR_DUPLICATE_CHARGE_EXPLANATION)
           invalid_properties.push(max_length_error)
         end
       end
       if _duplicate_charge_id = @duplicate_charge_id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("duplicate_charge_id", _duplicate_charge_id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("duplicate_charge_id", _duplicate_charge_id.to_s.size, MAX_LENGTH_FOR_DUPLICATE_CHARGE_ID)
           invalid_properties.push(max_length_error)
         end
       end
       if _product_description = @product_description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 150000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -310,17 +328,17 @@ module Stripe
         invalid_properties.concat(_refund_policy.list_invalid_properties_for("refund_policy")) if _refund_policy.is_a?(OpenApi::Validatable)
       end
       if _refund_policy_disclosure = @refund_policy_disclosure
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_policy_disclosure", _refund_policy_disclosure.to_s.size, 150000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_policy_disclosure", _refund_policy_disclosure.to_s.size, MAX_LENGTH_FOR_REFUND_POLICY_DISCLOSURE)
           invalid_properties.push(max_length_error)
         end
       end
       if _refund_refusal_explanation = @refund_refusal_explanation
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_refusal_explanation", _refund_refusal_explanation.to_s.size, 150000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_refusal_explanation", _refund_refusal_explanation.to_s.size, MAX_LENGTH_FOR_REFUND_REFUSAL_EXPLANATION)
           invalid_properties.push(max_length_error)
         end
       end
       if _service_date = @service_date
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("service_date", _service_date.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("service_date", _service_date.to_s.size, MAX_LENGTH_FOR_SERVICE_DATE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -328,17 +346,17 @@ module Stripe
         invalid_properties.concat(_service_documentation.list_invalid_properties_for("service_documentation")) if _service_documentation.is_a?(OpenApi::Validatable)
       end
       if _shipping_address = @shipping_address
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_address", _shipping_address.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_address", _shipping_address.to_s.size, MAX_LENGTH_FOR_SHIPPING_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
       if _shipping_carrier = @shipping_carrier
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_carrier", _shipping_carrier.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_carrier", _shipping_carrier.to_s.size, MAX_LENGTH_FOR_SHIPPING_CARRIER)
           invalid_properties.push(max_length_error)
         end
       end
       if _shipping_date = @shipping_date
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_date", _shipping_date.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_date", _shipping_date.to_s.size, MAX_LENGTH_FOR_SHIPPING_DATE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -346,7 +364,7 @@ module Stripe
         invalid_properties.concat(_shipping_documentation.list_invalid_properties_for("shipping_documentation")) if _shipping_documentation.is_a?(OpenApi::Validatable)
       end
       if _shipping_tracking_number = @shipping_tracking_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_tracking_number", _shipping_tracking_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_tracking_number", _shipping_tracking_number.to_s.size, MAX_LENGTH_FOR_SHIPPING_TRACKING_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -354,7 +372,7 @@ module Stripe
         invalid_properties.concat(_uncategorized_file.list_invalid_properties_for("uncategorized_file")) if _uncategorized_file.is_a?(OpenApi::Validatable)
       end
       if _uncategorized_text = @uncategorized_text
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("uncategorized_text", _uncategorized_text.to_s.size, 150000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("uncategorized_text", _uncategorized_text.to_s.size, MAX_LENGTH_FOR_UNCATEGORIZED_TEXT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -365,11 +383,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _access_activity_log = @access_activity_log
-        return false if _access_activity_log.to_s.size > 150000
+        return false if _access_activity_log.to_s.size > MAX_LENGTH_FOR_ACCESS_ACTIVITY_LOG
       end
 
       if _billing_address = @billing_address
-        return false if _billing_address.to_s.size > 5000
+        return false if _billing_address.to_s.size > MAX_LENGTH_FOR_BILLING_ADDRESS
       end
 
       if _cancellation_policy = @cancellation_policy
@@ -377,11 +395,11 @@ module Stripe
       end
 
       if _cancellation_policy_disclosure = @cancellation_policy_disclosure
-        return false if _cancellation_policy_disclosure.to_s.size > 150000
+        return false if _cancellation_policy_disclosure.to_s.size > MAX_LENGTH_FOR_CANCELLATION_POLICY_DISCLOSURE
       end
 
       if _cancellation_rebuttal = @cancellation_rebuttal
-        return false if _cancellation_rebuttal.to_s.size > 150000
+        return false if _cancellation_rebuttal.to_s.size > MAX_LENGTH_FOR_CANCELLATION_REBUTTAL
       end
 
       if _customer_communication = @customer_communication
@@ -389,15 +407,15 @@ module Stripe
       end
 
       if _customer_email_address = @customer_email_address
-        return false if _customer_email_address.to_s.size > 5000
+        return false if _customer_email_address.to_s.size > MAX_LENGTH_FOR_CUSTOMER_EMAIL_ADDRESS
       end
 
       if _customer_name = @customer_name
-        return false if _customer_name.to_s.size > 5000
+        return false if _customer_name.to_s.size > MAX_LENGTH_FOR_CUSTOMER_NAME
       end
 
       if _customer_purchase_ip = @customer_purchase_ip
-        return false if _customer_purchase_ip.to_s.size > 5000
+        return false if _customer_purchase_ip.to_s.size > MAX_LENGTH_FOR_CUSTOMER_PURCHASE_IP
       end
 
       if _customer_signature = @customer_signature
@@ -409,15 +427,15 @@ module Stripe
       end
 
       if _duplicate_charge_explanation = @duplicate_charge_explanation
-        return false if _duplicate_charge_explanation.to_s.size > 150000
+        return false if _duplicate_charge_explanation.to_s.size > MAX_LENGTH_FOR_DUPLICATE_CHARGE_EXPLANATION
       end
 
       if _duplicate_charge_id = @duplicate_charge_id
-        return false if _duplicate_charge_id.to_s.size > 5000
+        return false if _duplicate_charge_id.to_s.size > MAX_LENGTH_FOR_DUPLICATE_CHARGE_ID
       end
 
       if _product_description = @product_description
-        return false if _product_description.to_s.size > 150000
+        return false if _product_description.to_s.size > MAX_LENGTH_FOR_PRODUCT_DESCRIPTION
       end
 
       if _receipt = @receipt
@@ -429,15 +447,15 @@ module Stripe
       end
 
       if _refund_policy_disclosure = @refund_policy_disclosure
-        return false if _refund_policy_disclosure.to_s.size > 150000
+        return false if _refund_policy_disclosure.to_s.size > MAX_LENGTH_FOR_REFUND_POLICY_DISCLOSURE
       end
 
       if _refund_refusal_explanation = @refund_refusal_explanation
-        return false if _refund_refusal_explanation.to_s.size > 150000
+        return false if _refund_refusal_explanation.to_s.size > MAX_LENGTH_FOR_REFUND_REFUSAL_EXPLANATION
       end
 
       if _service_date = @service_date
-        return false if _service_date.to_s.size > 5000
+        return false if _service_date.to_s.size > MAX_LENGTH_FOR_SERVICE_DATE
       end
 
       if _service_documentation = @service_documentation
@@ -445,15 +463,15 @@ module Stripe
       end
 
       if _shipping_address = @shipping_address
-        return false if _shipping_address.to_s.size > 5000
+        return false if _shipping_address.to_s.size > MAX_LENGTH_FOR_SHIPPING_ADDRESS
       end
 
       if _shipping_carrier = @shipping_carrier
-        return false if _shipping_carrier.to_s.size > 5000
+        return false if _shipping_carrier.to_s.size > MAX_LENGTH_FOR_SHIPPING_CARRIER
       end
 
       if _shipping_date = @shipping_date
-        return false if _shipping_date.to_s.size > 5000
+        return false if _shipping_date.to_s.size > MAX_LENGTH_FOR_SHIPPING_DATE
       end
 
       if _shipping_documentation = @shipping_documentation
@@ -461,7 +479,7 @@ module Stripe
       end
 
       if _shipping_tracking_number = @shipping_tracking_number
-        return false if _shipping_tracking_number.to_s.size > 5000
+        return false if _shipping_tracking_number.to_s.size > MAX_LENGTH_FOR_SHIPPING_TRACKING_NUMBER
       end
 
       if _uncategorized_file = @uncategorized_file
@@ -469,7 +487,7 @@ module Stripe
       end
 
       if _uncategorized_text = @uncategorized_text
-        return false if _uncategorized_text.to_s.size > 150000
+        return false if _uncategorized_text.to_s.size > MAX_LENGTH_FOR_UNCATEGORIZED_TEXT
       end
 
       true
@@ -482,10 +500,7 @@ module Stripe
         return @access_activity_log = nil
       end
       _access_activity_log = access_activity_log.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("access_activity_log", _access_activity_log.to_s.size, 150000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("access_activity_log", _access_activity_log.to_s.size, MAX_LENGTH_FOR_ACCESS_ACTIVITY_LOG)
       @access_activity_log = _access_activity_log
     end
 
@@ -496,10 +511,7 @@ module Stripe
         return @billing_address = nil
       end
       _billing_address = billing_address.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("billing_address", _billing_address.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("billing_address", _billing_address.to_s.size, MAX_LENGTH_FOR_BILLING_ADDRESS)
       @billing_address = _billing_address
     end
 
@@ -521,10 +533,7 @@ module Stripe
         return @cancellation_policy_disclosure = nil
       end
       _cancellation_policy_disclosure = cancellation_policy_disclosure.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_policy_disclosure", _cancellation_policy_disclosure.to_s.size, 150000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("cancellation_policy_disclosure", _cancellation_policy_disclosure.to_s.size, MAX_LENGTH_FOR_CANCELLATION_POLICY_DISCLOSURE)
       @cancellation_policy_disclosure = _cancellation_policy_disclosure
     end
 
@@ -535,10 +544,7 @@ module Stripe
         return @cancellation_rebuttal = nil
       end
       _cancellation_rebuttal = cancellation_rebuttal.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cancellation_rebuttal", _cancellation_rebuttal.to_s.size, 150000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("cancellation_rebuttal", _cancellation_rebuttal.to_s.size, MAX_LENGTH_FOR_CANCELLATION_REBUTTAL)
       @cancellation_rebuttal = _cancellation_rebuttal
     end
 
@@ -560,10 +566,7 @@ module Stripe
         return @customer_email_address = nil
       end
       _customer_email_address = customer_email_address.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_email_address", _customer_email_address.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer_email_address", _customer_email_address.to_s.size, MAX_LENGTH_FOR_CUSTOMER_EMAIL_ADDRESS)
       @customer_email_address = _customer_email_address
     end
 
@@ -574,10 +577,7 @@ module Stripe
         return @customer_name = nil
       end
       _customer_name = customer_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_name", _customer_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer_name", _customer_name.to_s.size, MAX_LENGTH_FOR_CUSTOMER_NAME)
       @customer_name = _customer_name
     end
 
@@ -588,10 +588,7 @@ module Stripe
         return @customer_purchase_ip = nil
       end
       _customer_purchase_ip = customer_purchase_ip.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer_purchase_ip", _customer_purchase_ip.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer_purchase_ip", _customer_purchase_ip.to_s.size, MAX_LENGTH_FOR_CUSTOMER_PURCHASE_IP)
       @customer_purchase_ip = _customer_purchase_ip
     end
 
@@ -624,10 +621,7 @@ module Stripe
         return @duplicate_charge_explanation = nil
       end
       _duplicate_charge_explanation = duplicate_charge_explanation.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("duplicate_charge_explanation", _duplicate_charge_explanation.to_s.size, 150000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("duplicate_charge_explanation", _duplicate_charge_explanation.to_s.size, MAX_LENGTH_FOR_DUPLICATE_CHARGE_EXPLANATION)
       @duplicate_charge_explanation = _duplicate_charge_explanation
     end
 
@@ -638,10 +632,7 @@ module Stripe
         return @duplicate_charge_id = nil
       end
       _duplicate_charge_id = duplicate_charge_id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("duplicate_charge_id", _duplicate_charge_id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("duplicate_charge_id", _duplicate_charge_id.to_s.size, MAX_LENGTH_FOR_DUPLICATE_CHARGE_ID)
       @duplicate_charge_id = _duplicate_charge_id
     end
 
@@ -652,10 +643,7 @@ module Stripe
         return @product_description = nil
       end
       _product_description = product_description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 150000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
       @product_description = _product_description
     end
 
@@ -688,10 +676,7 @@ module Stripe
         return @refund_policy_disclosure = nil
       end
       _refund_policy_disclosure = refund_policy_disclosure.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_policy_disclosure", _refund_policy_disclosure.to_s.size, 150000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("refund_policy_disclosure", _refund_policy_disclosure.to_s.size, MAX_LENGTH_FOR_REFUND_POLICY_DISCLOSURE)
       @refund_policy_disclosure = _refund_policy_disclosure
     end
 
@@ -702,10 +687,7 @@ module Stripe
         return @refund_refusal_explanation = nil
       end
       _refund_refusal_explanation = refund_refusal_explanation.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("refund_refusal_explanation", _refund_refusal_explanation.to_s.size, 150000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("refund_refusal_explanation", _refund_refusal_explanation.to_s.size, MAX_LENGTH_FOR_REFUND_REFUSAL_EXPLANATION)
       @refund_refusal_explanation = _refund_refusal_explanation
     end
 
@@ -716,10 +698,7 @@ module Stripe
         return @service_date = nil
       end
       _service_date = service_date.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("service_date", _service_date.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("service_date", _service_date.to_s.size, MAX_LENGTH_FOR_SERVICE_DATE)
       @service_date = _service_date
     end
 
@@ -741,10 +720,7 @@ module Stripe
         return @shipping_address = nil
       end
       _shipping_address = shipping_address.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_address", _shipping_address.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("shipping_address", _shipping_address.to_s.size, MAX_LENGTH_FOR_SHIPPING_ADDRESS)
       @shipping_address = _shipping_address
     end
 
@@ -755,10 +731,7 @@ module Stripe
         return @shipping_carrier = nil
       end
       _shipping_carrier = shipping_carrier.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_carrier", _shipping_carrier.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("shipping_carrier", _shipping_carrier.to_s.size, MAX_LENGTH_FOR_SHIPPING_CARRIER)
       @shipping_carrier = _shipping_carrier
     end
 
@@ -769,10 +742,7 @@ module Stripe
         return @shipping_date = nil
       end
       _shipping_date = shipping_date.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_date", _shipping_date.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("shipping_date", _shipping_date.to_s.size, MAX_LENGTH_FOR_SHIPPING_DATE)
       @shipping_date = _shipping_date
     end
 
@@ -794,10 +764,7 @@ module Stripe
         return @shipping_tracking_number = nil
       end
       _shipping_tracking_number = shipping_tracking_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_tracking_number", _shipping_tracking_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("shipping_tracking_number", _shipping_tracking_number.to_s.size, MAX_LENGTH_FOR_SHIPPING_TRACKING_NUMBER)
       @shipping_tracking_number = _shipping_tracking_number
     end
 
@@ -819,10 +786,7 @@ module Stripe
         return @uncategorized_text = nil
       end
       _uncategorized_text = uncategorized_text.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("uncategorized_text", _uncategorized_text.to_s.size, 150000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("uncategorized_text", _uncategorized_text.to_s.size, MAX_LENGTH_FOR_UNCATEGORIZED_TEXT)
       @uncategorized_text = _uncategorized_text
     end
 

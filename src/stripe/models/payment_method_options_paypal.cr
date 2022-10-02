@@ -24,12 +24,13 @@ module Stripe
     # Controls when the funds will be captured from the customer's account.
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
-
-    VALID_VALUES_FOR_CAPTURE_METHOD = StaticArray["manual"]
+    ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [manual]."
+    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["manual"]
 
     # Preferred locale of the PayPal checkout page that the customer is redirected to.
     @[JSON::Field(key: "preferred_locale", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: preferred_locale.nil? && !preferred_locale_present?)]
     getter preferred_locale : String? = nil
+    MAX_LENGTH_FOR_PREFERRED_LOCALE = 5000
 
     @[JSON::Field(ignore: true)]
     property? preferred_locale_present : Bool = false
@@ -50,10 +51,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _capture_method = @capture_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("capture_method", VALID_VALUES_FOR_CAPTURE_METHOD)) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CAPTURE_METHOD) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
       if _preferred_locale = @preferred_locale
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, MAX_LENGTH_FOR_PREFERRED_LOCALE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -68,7 +69,7 @@ module Stripe
       end
 
       if _preferred_locale = @preferred_locale
-        return false if _preferred_locale.to_s.size > 5000
+        return false if _preferred_locale.to_s.size > MAX_LENGTH_FOR_PREFERRED_LOCALE
       end
 
       true
@@ -92,10 +93,7 @@ module Stripe
         return @preferred_locale = nil
       end
       _preferred_locale = preferred_locale.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("preferred_locale", _preferred_locale.to_s.size, MAX_LENGTH_FOR_PREFERRED_LOCALE)
       @preferred_locale = _preferred_locale
     end
 

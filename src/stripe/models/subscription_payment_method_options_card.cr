@@ -27,18 +27,20 @@ module Stripe
     # Selected network to process this Subscription on. Depends on the available networks of the card attached to the Subscription. Can be only set confirm-time.
     @[JSON::Field(key: "network", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: network.nil? && !network_present?)]
     getter network : String? = nil
+    ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [amex, cartes_bancaires, diners, discover, interac, jcb, mastercard, unionpay, unknown, visa]."
+    VALID_VALUES_FOR_NETWORK  = StaticArray["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"]
 
     @[JSON::Field(ignore: true)]
     property? network_present : Bool = false
-    VALID_VALUES_FOR_NETWORK = StaticArray["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"]
 
     # We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. Read our guide on [manually requesting 3D Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: request_three_d_secure.nil? && !request_three_d_secure_present?)]
     getter request_three_d_secure : String? = nil
+    ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE = "invalid value for \"request_three_d_secure\", must be one of [any, automatic]."
+    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE  = StaticArray["any", "automatic"]
 
     @[JSON::Field(ignore: true)]
     property? request_three_d_secure_present : Bool = false
-    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE = StaticArray["any", "automatic"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -60,10 +62,10 @@ module Stripe
         invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
       if _network = @network
-        invalid_properties.push(OpenApi::EnumValidator.error_message("network", VALID_VALUES_FOR_NETWORK)) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+        invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
       if _request_three_d_secure = @request_three_d_secure
-        invalid_properties.push(OpenApi::EnumValidator.error_message("request_three_d_secure", VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)) unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE) unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
       end
       invalid_properties
     end

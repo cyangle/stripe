@@ -24,18 +24,20 @@ module Stripe
     # Restricts all inbound money movement.
     @[JSON::Field(key: "inbound_flows", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: inbound_flows.nil? && !inbound_flows_present?)]
     getter inbound_flows : String? = nil
+    ERROR_MESSAGE_FOR_INBOUND_FLOWS = "invalid value for \"inbound_flows\", must be one of [restricted, unrestricted]."
+    VALID_VALUES_FOR_INBOUND_FLOWS  = StaticArray["restricted", "unrestricted"]
 
     @[JSON::Field(ignore: true)]
     property? inbound_flows_present : Bool = false
-    VALID_VALUES_FOR_INBOUND_FLOWS = StaticArray["restricted", "unrestricted"]
 
     # Restricts all outbound money movement.
     @[JSON::Field(key: "outbound_flows", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: outbound_flows.nil? && !outbound_flows_present?)]
     getter outbound_flows : String? = nil
+    ERROR_MESSAGE_FOR_OUTBOUND_FLOWS = "invalid value for \"outbound_flows\", must be one of [restricted, unrestricted]."
+    VALID_VALUES_FOR_OUTBOUND_FLOWS  = StaticArray["restricted", "unrestricted"]
 
     @[JSON::Field(ignore: true)]
     property? outbound_flows_present : Bool = false
-    VALID_VALUES_FOR_OUTBOUND_FLOWS = StaticArray["restricted", "unrestricted"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,10 +55,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _inbound_flows = @inbound_flows
-        invalid_properties.push(OpenApi::EnumValidator.error_message("inbound_flows", VALID_VALUES_FOR_INBOUND_FLOWS)) unless OpenApi::EnumValidator.valid?(_inbound_flows, VALID_VALUES_FOR_INBOUND_FLOWS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_INBOUND_FLOWS) unless OpenApi::EnumValidator.valid?(_inbound_flows, VALID_VALUES_FOR_INBOUND_FLOWS)
       end
       if _outbound_flows = @outbound_flows
-        invalid_properties.push(OpenApi::EnumValidator.error_message("outbound_flows", VALID_VALUES_FOR_OUTBOUND_FLOWS)) unless OpenApi::EnumValidator.valid?(_outbound_flows, VALID_VALUES_FOR_OUTBOUND_FLOWS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OUTBOUND_FLOWS) unless OpenApi::EnumValidator.valid?(_outbound_flows, VALID_VALUES_FOR_OUTBOUND_FLOWS)
       end
       invalid_properties
     end

@@ -24,6 +24,7 @@ module Stripe
     # The app ID registered with WeChat Pay. Only required when client is ios or android.
     @[JSON::Field(key: "app_id", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: app_id.nil? && !app_id_present?)]
     getter app_id : String? = nil
+    MAX_LENGTH_FOR_APP_ID = 5000
 
     @[JSON::Field(ignore: true)]
     property? app_id_present : Bool = false
@@ -31,16 +32,17 @@ module Stripe
     # The client type that the end customer will pay from
     @[JSON::Field(key: "client", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: client.nil? && !client_present?)]
     getter client : String? = nil
+    ERROR_MESSAGE_FOR_CLIENT = "invalid value for \"client\", must be one of [android, ios, web]."
+    VALID_VALUES_FOR_CLIENT  = StaticArray["android", "ios", "web"]
 
     @[JSON::Field(ignore: true)]
     property? client_present : Bool = false
-    VALID_VALUES_FOR_CLIENT = StaticArray["android", "ios", "web"]
 
     # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
-
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none"]
+    ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none]."
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -59,15 +61,15 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _app_id = @app_id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, MAX_LENGTH_FOR_APP_ID)
           invalid_properties.push(max_length_error)
         end
       end
       if _client = @client
-        invalid_properties.push(OpenApi::EnumValidator.error_message("client", VALID_VALUES_FOR_CLIENT)) unless OpenApi::EnumValidator.valid?(_client, VALID_VALUES_FOR_CLIENT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CLIENT) unless OpenApi::EnumValidator.valid?(_client, VALID_VALUES_FOR_CLIENT)
       end
       if _setup_future_usage = @setup_future_usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
     end
@@ -76,7 +78,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _app_id = @app_id
-        return false if _app_id.to_s.size > 5000
+        return false if _app_id.to_s.size > MAX_LENGTH_FOR_APP_ID
       end
 
       if _client = @client
@@ -97,10 +99,7 @@ module Stripe
         return @app_id = nil
       end
       _app_id = app_id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("app_id", _app_id.to_s.size, MAX_LENGTH_FOR_APP_ID)
       @app_id = _app_id
     end
 

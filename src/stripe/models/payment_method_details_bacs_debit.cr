@@ -24,6 +24,7 @@ module Stripe
     # Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     @[JSON::Field(key: "fingerprint", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
     getter fingerprint : String? = nil
+    MAX_LENGTH_FOR_FINGERPRINT = 5000
 
     @[JSON::Field(ignore: true)]
     property? fingerprint_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # Last four digits of the bank account number.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: last4.nil? && !last4_present?)]
     getter last4 : String? = nil
+    MAX_LENGTH_FOR_LAST4 = 5000
 
     @[JSON::Field(ignore: true)]
     property? last4_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # ID of the mandate used to make this payment.
     @[JSON::Field(key: "mandate", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: mandate.nil? && !mandate_present?)]
     getter mandate : String? = nil
+    MAX_LENGTH_FOR_MANDATE = 5000
 
     @[JSON::Field(ignore: true)]
     property? mandate_present : Bool = false
@@ -45,6 +48,7 @@ module Stripe
     # Sort code of the bank account. (e.g., `10-20-30`)
     @[JSON::Field(key: "sort_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: sort_code.nil? && !sort_code_present?)]
     getter sort_code : String? = nil
+    MAX_LENGTH_FOR_SORT_CODE = 5000
 
     @[JSON::Field(ignore: true)]
     property? sort_code_present : Bool = false
@@ -67,22 +71,22 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _fingerprint = @fingerprint
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
       if _last4 = @last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       if _mandate = @mandate
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, MAX_LENGTH_FOR_MANDATE)
           invalid_properties.push(max_length_error)
         end
       end
       if _sort_code = @sort_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, MAX_LENGTH_FOR_SORT_CODE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -93,19 +97,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _fingerprint = @fingerprint
-        return false if _fingerprint.to_s.size > 5000
+        return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
       if _last4 = @last4
-        return false if _last4.to_s.size > 5000
+        return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
       if _mandate = @mandate
-        return false if _mandate.to_s.size > 5000
+        return false if _mandate.to_s.size > MAX_LENGTH_FOR_MANDATE
       end
 
       if _sort_code = @sort_code
-        return false if _sort_code.to_s.size > 5000
+        return false if _sort_code.to_s.size > MAX_LENGTH_FOR_SORT_CODE
       end
 
       true
@@ -118,10 +122,7 @@ module Stripe
         return @fingerprint = nil
       end
       _fingerprint = fingerprint.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
       @fingerprint = _fingerprint
     end
 
@@ -132,10 +133,7 @@ module Stripe
         return @last4 = nil
       end
       _last4 = last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
       @last4 = _last4
     end
 
@@ -146,10 +144,7 @@ module Stripe
         return @mandate = nil
       end
       _mandate = mandate.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("mandate", _mandate.to_s.size, MAX_LENGTH_FOR_MANDATE)
       @mandate = _mandate
     end
 
@@ -160,10 +155,7 @@ module Stripe
         return @sort_code = nil
       end
       _sort_code = sort_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("sort_code", _sort_code.to_s.size, MAX_LENGTH_FOR_SORT_CODE)
       @sort_code = _sort_code
     end
 

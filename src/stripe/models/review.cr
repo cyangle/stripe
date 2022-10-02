@@ -28,6 +28,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,8 +37,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["review"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [review]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["review"]
 
     # If `true`, the review needs action.
     @[JSON::Field(key: "open", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -46,18 +47,20 @@ module Stripe
     # The reason the review was opened. One of `rule` or `manual`.
     @[JSON::Field(key: "opened_reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter opened_reason : String? = nil
-
-    VALID_VALUES_FOR_OPENED_REASON = StaticArray["manual", "rule"]
+    ERROR_MESSAGE_FOR_OPENED_REASON = "invalid value for \"opened_reason\", must be one of [manual, rule]."
+    VALID_VALUES_FOR_OPENED_REASON  = StaticArray["manual", "rule"]
 
     # The reason the review is currently open or closed. One of `rule`, `manual`, `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
     @[JSON::Field(key: "reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reason : String? = nil
+    MAX_LENGTH_FOR_REASON = 5000
 
     # Optional properties
 
     # The ZIP or postal code of the card used, if applicable.
     @[JSON::Field(key: "billing_zip", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_zip.nil? && !billing_zip_present?)]
     getter billing_zip : String? = nil
+    MAX_LENGTH_FOR_BILLING_ZIP = 5000
 
     @[JSON::Field(ignore: true)]
     property? billing_zip_present : Bool = false
@@ -71,14 +74,16 @@ module Stripe
     # The reason the review was closed, or null if it has not yet been closed. One of `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
     @[JSON::Field(key: "closed_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: closed_reason.nil? && !closed_reason_present?)]
     getter closed_reason : String? = nil
+    ERROR_MESSAGE_FOR_CLOSED_REASON = "invalid value for \"closed_reason\", must be one of [approved, disputed, redacted, refunded, refunded_as_fraud]."
+    VALID_VALUES_FOR_CLOSED_REASON  = StaticArray["approved", "disputed", "redacted", "refunded", "refunded_as_fraud"]
 
     @[JSON::Field(ignore: true)]
     property? closed_reason_present : Bool = false
-    VALID_VALUES_FOR_CLOSED_REASON = StaticArray["approved", "disputed", "redacted", "refunded", "refunded_as_fraud"]
 
     # The IP address where the payment originated.
     @[JSON::Field(key: "ip_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
     getter ip_address : String? = nil
+    MAX_LENGTH_FOR_IP_ADDRESS = 5000
 
     @[JSON::Field(ignore: true)]
     property? ip_address_present : Bool = false
@@ -131,7 +136,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -140,24 +145,24 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"open\" is required and cannot be null") if @open.nil?
 
       invalid_properties.push("\"opened_reason\" is required and cannot be null") if @opened_reason.nil?
 
       if _opened_reason = @opened_reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("opened_reason", VALID_VALUES_FOR_OPENED_REASON)) unless OpenApi::EnumValidator.valid?(_opened_reason, VALID_VALUES_FOR_OPENED_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OPENED_REASON) unless OpenApi::EnumValidator.valid?(_opened_reason, VALID_VALUES_FOR_OPENED_REASON)
       end
       invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
 
       if _reason = @reason
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
           invalid_properties.push(max_length_error)
         end
       end
       if _billing_zip = @billing_zip
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("billing_zip", _billing_zip.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("billing_zip", _billing_zip.to_s.size, MAX_LENGTH_FOR_BILLING_ZIP)
           invalid_properties.push(max_length_error)
         end
       end
@@ -165,10 +170,10 @@ module Stripe
         invalid_properties.concat(_charge.list_invalid_properties_for("charge")) if _charge.is_a?(OpenApi::Validatable)
       end
       if _closed_reason = @closed_reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("closed_reason", VALID_VALUES_FOR_CLOSED_REASON)) unless OpenApi::EnumValidator.valid?(_closed_reason, VALID_VALUES_FOR_CLOSED_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CLOSED_REASON) unless OpenApi::EnumValidator.valid?(_closed_reason, VALID_VALUES_FOR_CLOSED_REASON)
       end
       if _ip_address = @ip_address
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
@@ -191,7 +196,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -210,11 +215,11 @@ module Stripe
 
       return false if @reason.nil?
       if _reason = @reason
-        return false if _reason.to_s.size > 5000
+        return false if _reason.to_s.size > MAX_LENGTH_FOR_REASON
       end
 
       if _billing_zip = @billing_zip
-        return false if _billing_zip.to_s.size > 5000
+        return false if _billing_zip.to_s.size > MAX_LENGTH_FOR_BILLING_ZIP
       end
 
       if _charge = @charge
@@ -226,7 +231,7 @@ module Stripe
       end
 
       if _ip_address = @ip_address
-        return false if _ip_address.to_s.size > 5000
+        return false if _ip_address.to_s.size > MAX_LENGTH_FOR_IP_ADDRESS
       end
 
       if _ip_address_location = @ip_address_location
@@ -261,10 +266,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -317,10 +319,7 @@ module Stripe
         raise ArgumentError.new("\"reason\" is required and cannot be null")
       end
       _reason = reason.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
       @reason = _reason
     end
 
@@ -331,10 +330,7 @@ module Stripe
         return @billing_zip = nil
       end
       _billing_zip = billing_zip.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("billing_zip", _billing_zip.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("billing_zip", _billing_zip.to_s.size, MAX_LENGTH_FOR_BILLING_ZIP)
       @billing_zip = _billing_zip
     end
 
@@ -367,10 +363,7 @@ module Stripe
         return @ip_address = nil
       end
       _ip_address = ip_address.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
       @ip_address = _ip_address
     end
 

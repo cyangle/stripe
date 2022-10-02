@@ -24,8 +24,8 @@ module Stripe
     # The types of subscription updates that are supported for items listed in the `products` attribute. When empty, subscriptions are not updateable.
     @[JSON::Field(key: "default_allowed_updates", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter default_allowed_updates : Array(String)? = nil
-
-    VALID_VALUES_FOR_DEFAULT_ALLOWED_UPDATES = StaticArray["price", "promotion_code", "quantity"]
+    ERROR_MESSAGE_FOR_DEFAULT_ALLOWED_UPDATES = "invalid value for \"default_allowed_updates\", must be one of [price, promotion_code, quantity]."
+    VALID_VALUES_FOR_DEFAULT_ALLOWED_UPDATES  = StaticArray["price", "promotion_code", "quantity"]
 
     # Whether the feature is enabled.
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -34,8 +34,8 @@ module Stripe
     # Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
-
-    VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
+    ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR = "invalid value for \"proration_behavior\", must be one of [always_invoice, create_prorations, none]."
+    VALID_VALUES_FOR_PRORATION_BEHAVIOR  = StaticArray["always_invoice", "create_prorations", "none"]
 
     # Optional properties
 
@@ -67,17 +67,17 @@ module Stripe
       invalid_properties.push("\"default_allowed_updates\" is required and cannot be null") if @default_allowed_updates.nil?
 
       if _default_allowed_updates = @default_allowed_updates
-        invalid_properties.push(OpenApi::EnumValidator.error_message("default_allowed_updates", VALID_VALUES_FOR_DEFAULT_ALLOWED_UPDATES)) unless OpenApi::EnumValidator.valid?(_default_allowed_updates, VALID_VALUES_FOR_DEFAULT_ALLOWED_UPDATES)
+        invalid_properties.push(ERROR_MESSAGE_FOR_DEFAULT_ALLOWED_UPDATES) unless OpenApi::EnumValidator.valid?(_default_allowed_updates, VALID_VALUES_FOR_DEFAULT_ALLOWED_UPDATES)
       end
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
       invalid_properties.push("\"proration_behavior\" is required and cannot be null") if @proration_behavior.nil?
 
       if _proration_behavior = @proration_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("proration_behavior", VALID_VALUES_FOR_PRORATION_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
       if _products = @products
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "products", array: _products)) if _products.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "products", container: _products)) if _products.is_a?(Array)
       end
       invalid_properties
     end
@@ -98,7 +98,7 @@ module Stripe
       end
 
       if _products = @products
-        return false if _products.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _products)
+        return false if _products.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _products)
       end
 
       true
@@ -143,7 +143,7 @@ module Stripe
         return @products = nil
       end
       _products = products.not_nil!
-      OpenApi::ArrayValidator.validate(array: _products) if _products.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _products) if _products.is_a?(Array)
       @products = _products
     end
 

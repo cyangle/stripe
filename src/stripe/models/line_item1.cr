@@ -25,6 +25,7 @@ module Stripe
 
     @[JSON::Field(key: "description", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter quantity : Int64? = nil
@@ -50,7 +51,7 @@ module Stripe
       invalid_properties.push("\"description\" is required and cannot be null") if @description.nil?
 
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -66,7 +67,7 @@ module Stripe
 
       return false if @description.nil?
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       return false if @quantity.nil?
@@ -91,10 +92,7 @@ module Stripe
         raise ArgumentError.new("\"description\" is required and cannot be null")
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 

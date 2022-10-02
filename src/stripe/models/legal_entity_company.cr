@@ -47,6 +47,7 @@ module Stripe
     # The company's legal name.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: name.nil? && !name_present?)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
@@ -54,6 +55,7 @@ module Stripe
     # The Kana variation of the company's legal name (Japan only).
     @[JSON::Field(key: "name_kana", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: name_kana.nil? && !name_kana_present?)]
     getter name_kana : String? = nil
+    MAX_LENGTH_FOR_NAME_KANA = 5000
 
     @[JSON::Field(ignore: true)]
     property? name_kana_present : Bool = false
@@ -61,6 +63,7 @@ module Stripe
     # The Kanji variation of the company's legal name (Japan only).
     @[JSON::Field(key: "name_kanji", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: name_kanji.nil? && !name_kanji_present?)]
     getter name_kanji : String? = nil
+    MAX_LENGTH_FOR_NAME_KANJI = 5000
 
     @[JSON::Field(ignore: true)]
     property? name_kanji_present : Bool = false
@@ -78,6 +81,7 @@ module Stripe
     # The company's phone number (used for verification).
     @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
     getter phone : String? = nil
+    MAX_LENGTH_FOR_PHONE = 5000
 
     @[JSON::Field(ignore: true)]
     property? phone_present : Bool = false
@@ -85,8 +89,8 @@ module Stripe
     # The category identifying the legal structure of the company or legal entity. See [Business structure](https://stripe.com/docs/connect/identity-verification#business-structure) for more details.
     @[JSON::Field(key: "structure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter structure : String? = nil
-
-    VALID_VALUES_FOR_STRUCTURE = StaticArray["free_zone_establishment", "free_zone_llc", "government_instrumentality", "governmental_unit", "incorporated_non_profit", "limited_liability_partnership", "llc", "multi_member_llc", "private_company", "private_corporation", "private_partnership", "public_company", "public_corporation", "public_partnership", "single_member_llc", "sole_establishment", "sole_proprietorship", "tax_exempt_government_instrumentality", "unincorporated_association", "unincorporated_non_profit"]
+    ERROR_MESSAGE_FOR_STRUCTURE = "invalid value for \"structure\", must be one of [free_zone_establishment, free_zone_llc, government_instrumentality, governmental_unit, incorporated_non_profit, limited_liability_partnership, llc, multi_member_llc, private_company, private_corporation, private_partnership, public_company, public_corporation, public_partnership, single_member_llc, sole_establishment, sole_proprietorship, tax_exempt_government_instrumentality, unincorporated_association, unincorporated_non_profit]."
+    VALID_VALUES_FOR_STRUCTURE  = StaticArray["free_zone_establishment", "free_zone_llc", "government_instrumentality", "governmental_unit", "incorporated_non_profit", "limited_liability_partnership", "llc", "multi_member_llc", "private_company", "private_corporation", "private_partnership", "public_company", "public_corporation", "public_partnership", "single_member_llc", "sole_establishment", "sole_proprietorship", "tax_exempt_government_instrumentality", "unincorporated_association", "unincorporated_non_profit"]
 
     # Whether the company's business ID number was provided.
     @[JSON::Field(key: "tax_id_provided", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -95,6 +99,7 @@ module Stripe
     # The jurisdiction in which the `tax_id` is registered (Germany-based companies only).
     @[JSON::Field(key: "tax_id_registrar", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_id_registrar : String? = nil
+    MAX_LENGTH_FOR_TAX_ID_REGISTRAR = 5000
 
     # Whether the company's business VAT number was provided.
     @[JSON::Field(key: "vat_id_provided", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -146,17 +151,17 @@ module Stripe
       end
 
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _name_kana = @name_kana
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name_kana", _name_kana.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name_kana", _name_kana.to_s.size, MAX_LENGTH_FOR_NAME_KANA)
           invalid_properties.push(max_length_error)
         end
       end
       if _name_kanji = @name_kanji
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name_kanji", _name_kanji.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name_kanji", _name_kanji.to_s.size, MAX_LENGTH_FOR_NAME_KANJI)
           invalid_properties.push(max_length_error)
         end
       end
@@ -165,16 +170,16 @@ module Stripe
         invalid_properties.concat(_ownership_declaration.list_invalid_properties_for("ownership_declaration")) if _ownership_declaration.is_a?(OpenApi::Validatable)
       end
       if _phone = @phone
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
       if _structure = @structure
-        invalid_properties.push(OpenApi::EnumValidator.error_message("structure", VALID_VALUES_FOR_STRUCTURE)) unless OpenApi::EnumValidator.valid?(_structure, VALID_VALUES_FOR_STRUCTURE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STRUCTURE) unless OpenApi::EnumValidator.valid?(_structure, VALID_VALUES_FOR_STRUCTURE)
       end
 
       if _tax_id_registrar = @tax_id_registrar
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_id_registrar", _tax_id_registrar.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_id_registrar", _tax_id_registrar.to_s.size, MAX_LENGTH_FOR_TAX_ID_REGISTRAR)
           invalid_properties.push(max_length_error)
         end
       end
@@ -201,15 +206,15 @@ module Stripe
       end
 
       if _name = @name
-        return false if _name.to_s.size > 5000
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       if _name_kana = @name_kana
-        return false if _name_kana.to_s.size > 5000
+        return false if _name_kana.to_s.size > MAX_LENGTH_FOR_NAME_KANA
       end
 
       if _name_kanji = @name_kanji
-        return false if _name_kanji.to_s.size > 5000
+        return false if _name_kanji.to_s.size > MAX_LENGTH_FOR_NAME_KANJI
       end
 
       if _ownership_declaration = @ownership_declaration
@@ -217,7 +222,7 @@ module Stripe
       end
 
       if _phone = @phone
-        return false if _phone.to_s.size > 5000
+        return false if _phone.to_s.size > MAX_LENGTH_FOR_PHONE
       end
 
       if _structure = @structure
@@ -225,7 +230,7 @@ module Stripe
       end
 
       if _tax_id_registrar = @tax_id_registrar
-        return false if _tax_id_registrar.to_s.size > 5000
+        return false if _tax_id_registrar.to_s.size > MAX_LENGTH_FOR_TAX_ID_REGISTRAR
       end
 
       if _verification = @verification
@@ -295,10 +300,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 
@@ -309,10 +311,7 @@ module Stripe
         return @name_kana = nil
       end
       _name_kana = name_kana.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name_kana", _name_kana.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name_kana", _name_kana.to_s.size, MAX_LENGTH_FOR_NAME_KANA)
       @name_kana = _name_kana
     end
 
@@ -323,10 +322,7 @@ module Stripe
         return @name_kanji = nil
       end
       _name_kanji = name_kanji.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name_kanji", _name_kanji.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name_kanji", _name_kanji.to_s.size, MAX_LENGTH_FOR_NAME_KANJI)
       @name_kanji = _name_kanji
     end
 
@@ -358,10 +354,7 @@ module Stripe
         return @phone = nil
       end
       _phone = phone.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
       @phone = _phone
     end
 
@@ -393,10 +386,7 @@ module Stripe
         return @tax_id_registrar = nil
       end
       _tax_id_registrar = tax_id_registrar.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tax_id_registrar", _tax_id_registrar.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("tax_id_registrar", _tax_id_registrar.to_s.size, MAX_LENGTH_FOR_TAX_ID_REGISTRAR)
       @tax_id_registrar = _tax_id_registrar
     end
 

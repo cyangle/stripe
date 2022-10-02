@@ -22,6 +22,7 @@ module Stripe
 
     @[JSON::Field(key: "price", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter price : String? = nil
+    MAX_LENGTH_FOR_PRICE = 5000
 
     @[JSON::Field(key: "quantity", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
     getter quantity : Int64? = nil
@@ -51,7 +52,7 @@ module Stripe
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
 
       if _price = @price
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -68,7 +69,7 @@ module Stripe
     def valid? : Bool
       return false if @price.nil?
       if _price = @price
-        return false if _price.to_s.size > 5000
+        return false if _price.to_s.size > MAX_LENGTH_FOR_PRICE
       end
 
       return false if @quantity.nil?
@@ -87,10 +88,7 @@ module Stripe
         raise ArgumentError.new("\"price\" is required and cannot be null")
       end
       _price = price.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
       @price = _price
     end
 

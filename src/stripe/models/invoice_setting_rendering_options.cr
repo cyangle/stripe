@@ -24,6 +24,7 @@ module Stripe
     # How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
     @[JSON::Field(key: "amount_tax_display", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: amount_tax_display.nil? && !amount_tax_display_present?)]
     getter amount_tax_display : String? = nil
+    MAX_LENGTH_FOR_AMOUNT_TAX_DISPLAY = 5000
 
     @[JSON::Field(ignore: true)]
     property? amount_tax_display_present : Bool = false
@@ -43,7 +44,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _amount_tax_display = @amount_tax_display
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("amount_tax_display", _amount_tax_display.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("amount_tax_display", _amount_tax_display.to_s.size, MAX_LENGTH_FOR_AMOUNT_TAX_DISPLAY)
           invalid_properties.push(max_length_error)
         end
       end
@@ -54,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _amount_tax_display = @amount_tax_display
-        return false if _amount_tax_display.to_s.size > 5000
+        return false if _amount_tax_display.to_s.size > MAX_LENGTH_FOR_AMOUNT_TAX_DISPLAY
       end
 
       true
@@ -67,10 +68,7 @@ module Stripe
         return @amount_tax_display = nil
       end
       _amount_tax_display = amount_tax_display.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("amount_tax_display", _amount_tax_display.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("amount_tax_display", _amount_tax_display.to_s.size, MAX_LENGTH_FOR_AMOUNT_TAX_DISPLAY)
       @amount_tax_display = _amount_tax_display
     end
 

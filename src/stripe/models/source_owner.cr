@@ -30,6 +30,7 @@ module Stripe
     # Owner's email address.
     @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: email.nil? && !email_present?)]
     getter email : String? = nil
+    MAX_LENGTH_FOR_EMAIL = 5000
 
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
@@ -37,6 +38,7 @@ module Stripe
     # Owner's full name.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: name.nil? && !name_present?)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
@@ -44,6 +46,7 @@ module Stripe
     # Owner's phone number (including extension).
     @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
     getter phone : String? = nil
+    MAX_LENGTH_FOR_PHONE = 5000
 
     @[JSON::Field(ignore: true)]
     property? phone_present : Bool = false
@@ -57,6 +60,7 @@ module Stripe
     # Verified owner's email address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.
     @[JSON::Field(key: "verified_email", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verified_email.nil? && !verified_email_present?)]
     getter verified_email : String? = nil
+    MAX_LENGTH_FOR_VERIFIED_EMAIL = 5000
 
     @[JSON::Field(ignore: true)]
     property? verified_email_present : Bool = false
@@ -64,6 +68,7 @@ module Stripe
     # Verified owner's full name. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.
     @[JSON::Field(key: "verified_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verified_name.nil? && !verified_name_present?)]
     getter verified_name : String? = nil
+    MAX_LENGTH_FOR_VERIFIED_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? verified_name_present : Bool = false
@@ -71,6 +76,7 @@ module Stripe
     # Verified owner's phone number (including extension). Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.
     @[JSON::Field(key: "verified_phone", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verified_phone.nil? && !verified_phone_present?)]
     getter verified_phone : String? = nil
+    MAX_LENGTH_FOR_VERIFIED_PHONE = 5000
 
     @[JSON::Field(ignore: true)]
     property? verified_phone_present : Bool = false
@@ -100,17 +106,17 @@ module Stripe
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       if _email = @email
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _phone = @phone
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -118,17 +124,17 @@ module Stripe
         invalid_properties.concat(_verified_address.list_invalid_properties_for("verified_address")) if _verified_address.is_a?(OpenApi::Validatable)
       end
       if _verified_email = @verified_email
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_email", _verified_email.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_email", _verified_email.to_s.size, MAX_LENGTH_FOR_VERIFIED_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
       if _verified_name = @verified_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _verified_phone = @verified_phone
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_phone", _verified_phone.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_phone", _verified_phone.to_s.size, MAX_LENGTH_FOR_VERIFIED_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -143,15 +149,15 @@ module Stripe
       end
 
       if _email = @email
-        return false if _email.to_s.size > 5000
+        return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
       if _name = @name
-        return false if _name.to_s.size > 5000
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       if _phone = @phone
-        return false if _phone.to_s.size > 5000
+        return false if _phone.to_s.size > MAX_LENGTH_FOR_PHONE
       end
 
       if _verified_address = @verified_address
@@ -159,15 +165,15 @@ module Stripe
       end
 
       if _verified_email = @verified_email
-        return false if _verified_email.to_s.size > 5000
+        return false if _verified_email.to_s.size > MAX_LENGTH_FOR_VERIFIED_EMAIL
       end
 
       if _verified_name = @verified_name
-        return false if _verified_name.to_s.size > 5000
+        return false if _verified_name.to_s.size > MAX_LENGTH_FOR_VERIFIED_NAME
       end
 
       if _verified_phone = @verified_phone
-        return false if _verified_phone.to_s.size > 5000
+        return false if _verified_phone.to_s.size > MAX_LENGTH_FOR_VERIFIED_PHONE
       end
 
       true
@@ -191,10 +197,7 @@ module Stripe
         return @email = nil
       end
       _email = email.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
       @email = _email
     end
 
@@ -205,10 +208,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 
@@ -219,10 +219,7 @@ module Stripe
         return @phone = nil
       end
       _phone = phone.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
       @phone = _phone
     end
 
@@ -244,10 +241,7 @@ module Stripe
         return @verified_email = nil
       end
       _verified_email = verified_email.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_email", _verified_email.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("verified_email", _verified_email.to_s.size, MAX_LENGTH_FOR_VERIFIED_EMAIL)
       @verified_email = _verified_email
     end
 
@@ -258,10 +252,7 @@ module Stripe
         return @verified_name = nil
       end
       _verified_name = verified_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
       @verified_name = _verified_name
     end
 
@@ -272,10 +263,7 @@ module Stripe
         return @verified_phone = nil
       end
       _verified_phone = verified_phone.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_phone", _verified_phone.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("verified_phone", _verified_phone.to_s.size, MAX_LENGTH_FOR_VERIFIED_PHONE)
       @verified_phone = _verified_phone
     end
 

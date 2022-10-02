@@ -22,21 +22,25 @@ module Stripe
 
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     @[JSON::Field(key: "discounts", type: Stripe::GetInvoicesUpcomingDiscountsParameter?, default: nil, required: false, nullable: false, emit_null: false)]
     getter discounts : Stripe::GetInvoicesUpcomingDiscountsParameter? = nil
 
     @[JSON::Field(key: "id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     @[JSON::Field(key: "price", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter price : String? = nil
+    MAX_LENGTH_FOR_PRICE = 5000
 
     @[JSON::Field(key: "price_data", type: Stripe::PriceDataWithOptionalProduct?, default: nil, required: false, nullable: false, emit_null: false)]
     getter price_data : Stripe::PriceDataWithOptionalProduct? = nil
 
     @[JSON::Field(key: "product", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter product : String? = nil
+    MAX_LENGTH_FOR_PRODUCT = 5000
 
     @[JSON::Field(key: "product_data", type: Stripe::ProductUpsertData?, default: nil, required: false, nullable: false, emit_null: false)]
     getter product_data : Stripe::ProductUpsertData? = nil
@@ -70,7 +74,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -78,12 +82,12 @@ module Stripe
         invalid_properties.concat(_discounts.list_invalid_properties_for("discounts")) if _discounts.is_a?(OpenApi::Validatable)
       end
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       if _price = @price
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -91,7 +95,7 @@ module Stripe
         invalid_properties.concat(_price_data.list_invalid_properties_for("price_data")) if _price_data.is_a?(OpenApi::Validatable)
       end
       if _product = @product
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, MAX_LENGTH_FOR_PRODUCT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -109,7 +113,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _discounts = @discounts
@@ -117,11 +121,11 @@ module Stripe
       end
 
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       if _price = @price
-        return false if _price.to_s.size > 5000
+        return false if _price.to_s.size > MAX_LENGTH_FOR_PRICE
       end
 
       if _price_data = @price_data
@@ -129,7 +133,7 @@ module Stripe
       end
 
       if _product = @product
-        return false if _product.to_s.size > 5000
+        return false if _product.to_s.size > MAX_LENGTH_FOR_PRODUCT
       end
 
       if _product_data = @product_data
@@ -150,10 +154,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -175,10 +176,7 @@ module Stripe
         return @id = nil
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -189,10 +187,7 @@ module Stripe
         return @price = nil
       end
       _price = price.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
       @price = _price
     end
 
@@ -214,10 +209,7 @@ module Stripe
         return @product = nil
       end
       _product = product.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("product", _product.to_s.size, MAX_LENGTH_FOR_PRODUCT)
       @product = _product
     end
 

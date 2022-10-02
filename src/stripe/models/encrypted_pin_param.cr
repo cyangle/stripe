@@ -23,6 +23,7 @@ module Stripe
 
     @[JSON::Field(key: "encrypted_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter encrypted_number : String? = nil
+    MAX_LENGTH_FOR_ENCRYPTED_NUMBER = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -39,7 +40,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _encrypted_number = @encrypted_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("encrypted_number", _encrypted_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("encrypted_number", _encrypted_number.to_s.size, MAX_LENGTH_FOR_ENCRYPTED_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -50,7 +51,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _encrypted_number = @encrypted_number
-        return false if _encrypted_number.to_s.size > 5000
+        return false if _encrypted_number.to_s.size > MAX_LENGTH_FOR_ENCRYPTED_NUMBER
       end
 
       true
@@ -63,10 +64,7 @@ module Stripe
         return @encrypted_number = nil
       end
       _encrypted_number = encrypted_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("encrypted_number", _encrypted_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("encrypted_number", _encrypted_number.to_s.size, MAX_LENGTH_FOR_ENCRYPTED_NUMBER)
       @encrypted_number = _encrypted_number
     end
 

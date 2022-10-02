@@ -24,26 +24,29 @@ module Stripe
     # Allows or disallows billing details to be set on an Order with a publishable key and Order client_secret
     @[JSON::Field(key: "billing_details", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: billing_details.nil? && !billing_details_present?)]
     getter billing_details : String? = nil
+    ERROR_MESSAGE_FOR_BILLING_DETAILS = "invalid value for \"billing_details\", must be one of [allow, disallow]."
+    VALID_VALUES_FOR_BILLING_DETAILS  = StaticArray["allow", "disallow"]
 
     @[JSON::Field(ignore: true)]
     property? billing_details_present : Bool = false
-    VALID_VALUES_FOR_BILLING_DETAILS = StaticArray["allow", "disallow"]
 
     # Allows or disallows promotion codes to be set on an Order with a publishable key and Order client_secret
     @[JSON::Field(key: "promotion_codes", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: promotion_codes.nil? && !promotion_codes_present?)]
     getter promotion_codes : String? = nil
+    ERROR_MESSAGE_FOR_PROMOTION_CODES = "invalid value for \"promotion_codes\", must be one of [allow, disallow]."
+    VALID_VALUES_FOR_PROMOTION_CODES  = StaticArray["allow", "disallow"]
 
     @[JSON::Field(ignore: true)]
     property? promotion_codes_present : Bool = false
-    VALID_VALUES_FOR_PROMOTION_CODES = StaticArray["allow", "disallow"]
 
     # Allows or disallows shipping details to be set on an Order with a publishable key and Order client_secret
     @[JSON::Field(key: "shipping_details", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: shipping_details.nil? && !shipping_details_present?)]
     getter shipping_details : String? = nil
+    ERROR_MESSAGE_FOR_SHIPPING_DETAILS = "invalid value for \"shipping_details\", must be one of [allow, disallow]."
+    VALID_VALUES_FOR_SHIPPING_DETAILS  = StaticArray["allow", "disallow"]
 
     @[JSON::Field(ignore: true)]
     property? shipping_details_present : Bool = false
-    VALID_VALUES_FOR_SHIPPING_DETAILS = StaticArray["allow", "disallow"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -62,13 +65,13 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _billing_details = @billing_details
-        invalid_properties.push(OpenApi::EnumValidator.error_message("billing_details", VALID_VALUES_FOR_BILLING_DETAILS)) unless OpenApi::EnumValidator.valid?(_billing_details, VALID_VALUES_FOR_BILLING_DETAILS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BILLING_DETAILS) unless OpenApi::EnumValidator.valid?(_billing_details, VALID_VALUES_FOR_BILLING_DETAILS)
       end
       if _promotion_codes = @promotion_codes
-        invalid_properties.push(OpenApi::EnumValidator.error_message("promotion_codes", VALID_VALUES_FOR_PROMOTION_CODES)) unless OpenApi::EnumValidator.valid?(_promotion_codes, VALID_VALUES_FOR_PROMOTION_CODES)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PROMOTION_CODES) unless OpenApi::EnumValidator.valid?(_promotion_codes, VALID_VALUES_FOR_PROMOTION_CODES)
       end
       if _shipping_details = @shipping_details
-        invalid_properties.push(OpenApi::EnumValidator.error_message("shipping_details", VALID_VALUES_FOR_SHIPPING_DETAILS)) unless OpenApi::EnumValidator.valid?(_shipping_details, VALID_VALUES_FOR_SHIPPING_DETAILS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SHIPPING_DETAILS) unless OpenApi::EnumValidator.valid?(_shipping_details, VALID_VALUES_FOR_SHIPPING_DETAILS)
       end
       invalid_properties
     end

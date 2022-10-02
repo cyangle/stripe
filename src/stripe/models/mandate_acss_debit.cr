@@ -24,26 +24,27 @@ module Stripe
     # Payment schedule for the mandate.
     @[JSON::Field(key: "payment_schedule", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_schedule : String? = nil
-
-    VALID_VALUES_FOR_PAYMENT_SCHEDULE = StaticArray["combined", "interval", "sporadic"]
+    ERROR_MESSAGE_FOR_PAYMENT_SCHEDULE = "invalid value for \"payment_schedule\", must be one of [combined, interval, sporadic]."
+    VALID_VALUES_FOR_PAYMENT_SCHEDULE  = StaticArray["combined", "interval", "sporadic"]
 
     # Transaction type of the mandate.
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transaction_type : String? = nil
-
-    VALID_VALUES_FOR_TRANSACTION_TYPE = StaticArray["business", "personal"]
+    ERROR_MESSAGE_FOR_TRANSACTION_TYPE = "invalid value for \"transaction_type\", must be one of [business, personal]."
+    VALID_VALUES_FOR_TRANSACTION_TYPE  = StaticArray["business", "personal"]
 
     # Optional properties
 
     # List of Stripe products where this mandate can be selected automatically.
     @[JSON::Field(key: "default_for", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_for : Array(String)? = nil
-
-    VALID_VALUES_FOR_DEFAULT_FOR = StaticArray["invoice", "subscription"]
+    ERROR_MESSAGE_FOR_DEFAULT_FOR = "invalid value for \"default_for\", must be one of [invoice, subscription]."
+    VALID_VALUES_FOR_DEFAULT_FOR  = StaticArray["invoice", "subscription"]
 
     # Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.
     @[JSON::Field(key: "interval_description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: interval_description.nil? && !interval_description_present?)]
     getter interval_description : String? = nil
+    MAX_LENGTH_FOR_INTERVAL_DESCRIPTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? interval_description_present : Bool = false
@@ -69,18 +70,18 @@ module Stripe
       invalid_properties.push("\"payment_schedule\" is required and cannot be null") if @payment_schedule.nil?
 
       if _payment_schedule = @payment_schedule
-        invalid_properties.push(OpenApi::EnumValidator.error_message("payment_schedule", VALID_VALUES_FOR_PAYMENT_SCHEDULE)) unless OpenApi::EnumValidator.valid?(_payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_SCHEDULE) unless OpenApi::EnumValidator.valid?(_payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
       end
       invalid_properties.push("\"transaction_type\" is required and cannot be null") if @transaction_type.nil?
 
       if _transaction_type = @transaction_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("transaction_type", VALID_VALUES_FOR_TRANSACTION_TYPE)) unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TRANSACTION_TYPE) unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
       end
       if _default_for = @default_for
-        invalid_properties.push(OpenApi::EnumValidator.error_message("default_for", VALID_VALUES_FOR_DEFAULT_FOR)) unless OpenApi::EnumValidator.valid?(_default_for, VALID_VALUES_FOR_DEFAULT_FOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_DEFAULT_FOR) unless OpenApi::EnumValidator.valid?(_default_for, VALID_VALUES_FOR_DEFAULT_FOR)
       end
       if _interval_description = @interval_description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, MAX_LENGTH_FOR_INTERVAL_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -105,7 +106,7 @@ module Stripe
       end
 
       if _interval_description = @interval_description
-        return false if _interval_description.to_s.size > 5000
+        return false if _interval_description.to_s.size > MAX_LENGTH_FOR_INTERVAL_DESCRIPTION
       end
 
       true
@@ -151,10 +152,7 @@ module Stripe
         return @interval_description = nil
       end
       _interval_description = interval_description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("interval_description", _interval_description.to_s.size, MAX_LENGTH_FOR_INTERVAL_DESCRIPTION)
       @interval_description = _interval_description
     end
 

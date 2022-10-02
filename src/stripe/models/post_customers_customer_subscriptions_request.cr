@@ -53,12 +53,13 @@ module Stripe
     # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this subscription at the end of the cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions. Defaults to `charge_automatically`.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
-
-    VALID_VALUES_FOR_COLLECTION_METHOD = StaticArray["charge_automatically", "send_invoice"]
+    ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
+    VALID_VALUES_FOR_COLLECTION_METHOD  = StaticArray["charge_automatically", "send_invoice"]
 
     # The ID of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.
     @[JSON::Field(key: "coupon", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter coupon : String? = nil
+    MAX_LENGTH_FOR_COUPON = 5000
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -71,10 +72,12 @@ module Stripe
     # ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
     @[JSON::Field(key: "default_payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_payment_method : String? = nil
+    MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD = 5000
 
     # ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
     @[JSON::Field(key: "default_source", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_source : String? = nil
+    MAX_LENGTH_FOR_DEFAULT_SOURCE = 5000
 
     @[JSON::Field(key: "default_tax_rates", type: Stripe::PostCustomersCustomerSubscriptionsRequestDefaultTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_tax_rates : Stripe::PostCustomersCustomerSubscriptionsRequestDefaultTaxRates? = nil
@@ -97,8 +100,8 @@ module Stripe
     # Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice cannot be paid. Creating subscriptions with this status allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.  Use `default_incomplete` to create Subscriptions with `status=incomplete` when the first invoice requires payment, otherwise start as active. Subscriptions transition to `status=active` when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to `status=incomplete_expired`, which is a terminal state.  Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's first invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not create a subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.  `pending_if_incomplete` is only used with updates and cannot be passed when creating a subscription.
     @[JSON::Field(key: "payment_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_behavior : String? = nil
-
-    VALID_VALUES_FOR_PAYMENT_BEHAVIOR = StaticArray["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"]
+    ERROR_MESSAGE_FOR_PAYMENT_BEHAVIOR = "invalid value for \"payment_behavior\", must be one of [allow_incomplete, default_incomplete, error_if_incomplete, pending_if_incomplete]."
+    VALID_VALUES_FOR_PAYMENT_BEHAVIOR  = StaticArray["allow_incomplete", "default_incomplete", "error_if_incomplete", "pending_if_incomplete"]
 
     @[JSON::Field(key: "payment_settings", type: Stripe::PaymentSettings?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_settings : Stripe::PaymentSettings? = nil
@@ -109,12 +112,13 @@ module Stripe
     # The API ID of a promotion code to apply to this subscription. A promotion code applied to a subscription will only affect invoices created for that particular subscription.
     @[JSON::Field(key: "promotion_code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter promotion_code : String? = nil
+    MAX_LENGTH_FOR_PROMOTION_CODE = 5000
 
     # Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) resulting from the `billing_cycle_anchor`. If no value is passed, the default is `create_prorations`.
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
-
-    VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
+    ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR = "invalid value for \"proration_behavior\", must be one of [always_invoice, create_prorations, none]."
+    VALID_VALUES_FOR_PRORATION_BEHAVIOR  = StaticArray["always_invoice", "create_prorations", "none"]
 
     @[JSON::Field(key: "transfer_data", type: Stripe::TransferDataSpecs3?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transfer_data : Stripe::TransferDataSpecs3? = nil
@@ -172,7 +176,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _add_invoice_items = @add_invoice_items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "add_invoice_items", array: _add_invoice_items)) if _add_invoice_items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "add_invoice_items", container: _add_invoice_items)) if _add_invoice_items.is_a?(Array)
       end
 
       if _automatic_tax = @automatic_tax
@@ -184,21 +188,21 @@ module Stripe
       end
 
       if _collection_method = @collection_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("collection_method", VALID_VALUES_FOR_COLLECTION_METHOD)) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_COLLECTION_METHOD) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
       if _coupon = @coupon
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _default_payment_method = @default_payment_method
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
       if _default_source = @default_source
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_source", _default_source.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_source", _default_source.to_s.size, MAX_LENGTH_FOR_DEFAULT_SOURCE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -207,14 +211,14 @@ module Stripe
       end
 
       if _items = @items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "items", array: _items)) if _items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "items", container: _items)) if _items.is_a?(Array)
       end
       if _metadata = @metadata
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
 
       if _payment_behavior = @payment_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("payment_behavior", VALID_VALUES_FOR_PAYMENT_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_payment_behavior, VALID_VALUES_FOR_PAYMENT_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_payment_behavior, VALID_VALUES_FOR_PAYMENT_BEHAVIOR)
       end
       if _payment_settings = @payment_settings
         invalid_properties.concat(_payment_settings.list_invalid_properties_for("payment_settings")) if _payment_settings.is_a?(OpenApi::Validatable)
@@ -223,12 +227,12 @@ module Stripe
         invalid_properties.concat(_pending_invoice_item_interval.list_invalid_properties_for("pending_invoice_item_interval")) if _pending_invoice_item_interval.is_a?(OpenApi::Validatable)
       end
       if _promotion_code = @promotion_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("promotion_code", _promotion_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("promotion_code", _promotion_code.to_s.size, MAX_LENGTH_FOR_PROMOTION_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       if _proration_behavior = @proration_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("proration_behavior", VALID_VALUES_FOR_PRORATION_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
       if _transfer_data = @transfer_data
         invalid_properties.concat(_transfer_data.list_invalid_properties_for("transfer_data")) if _transfer_data.is_a?(OpenApi::Validatable)
@@ -244,7 +248,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _add_invoice_items = @add_invoice_items
-        return false if _add_invoice_items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _add_invoice_items)
+        return false if _add_invoice_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _add_invoice_items)
       end
 
       if _automatic_tax = @automatic_tax
@@ -260,15 +264,15 @@ module Stripe
       end
 
       if _coupon = @coupon
-        return false if _coupon.to_s.size > 5000
+        return false if _coupon.to_s.size > MAX_LENGTH_FOR_COUPON
       end
 
       if _default_payment_method = @default_payment_method
-        return false if _default_payment_method.to_s.size > 5000
+        return false if _default_payment_method.to_s.size > MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD
       end
 
       if _default_source = @default_source
-        return false if _default_source.to_s.size > 5000
+        return false if _default_source.to_s.size > MAX_LENGTH_FOR_DEFAULT_SOURCE
       end
 
       if _default_tax_rates = @default_tax_rates
@@ -276,7 +280,7 @@ module Stripe
       end
 
       if _items = @items
-        return false if _items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _items)
+        return false if _items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _items)
       end
 
       if _metadata = @metadata
@@ -296,7 +300,7 @@ module Stripe
       end
 
       if _promotion_code = @promotion_code
-        return false if _promotion_code.to_s.size > 5000
+        return false if _promotion_code.to_s.size > MAX_LENGTH_FOR_PROMOTION_CODE
       end
 
       if _proration_behavior = @proration_behavior
@@ -321,7 +325,7 @@ module Stripe
         return @add_invoice_items = nil
       end
       _add_invoice_items = add_invoice_items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _add_invoice_items) if _add_invoice_items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _add_invoice_items) if _add_invoice_items.is_a?(Array)
       @add_invoice_items = _add_invoice_items
     end
 
@@ -415,10 +419,7 @@ module Stripe
         return @coupon = nil
       end
       _coupon = coupon.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
       @coupon = _coupon
     end
 
@@ -449,10 +450,7 @@ module Stripe
         return @default_payment_method = nil
       end
       _default_payment_method = default_payment_method.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_payment_method", _default_payment_method.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("default_payment_method", _default_payment_method.to_s.size, MAX_LENGTH_FOR_DEFAULT_PAYMENT_METHOD)
       @default_payment_method = _default_payment_method
     end
 
@@ -463,10 +461,7 @@ module Stripe
         return @default_source = nil
       end
       _default_source = default_source.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_source", _default_source.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("default_source", _default_source.to_s.size, MAX_LENGTH_FOR_DEFAULT_SOURCE)
       @default_source = _default_source
     end
 
@@ -498,7 +493,7 @@ module Stripe
         return @items = nil
       end
       _items = items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _items) if _items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _items) if _items.is_a?(Array)
       @items = _items
     end
 
@@ -563,10 +558,7 @@ module Stripe
         return @promotion_code = nil
       end
       _promotion_code = promotion_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("promotion_code", _promotion_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("promotion_code", _promotion_code.to_s.size, MAX_LENGTH_FOR_PROMOTION_CODE)
       @promotion_code = _promotion_code
     end
 

@@ -24,6 +24,7 @@ module Stripe
     # An optional 10 to 11 digit numeric-only string determining the confirmation code at applicable convenience stores.
     @[JSON::Field(key: "confirmation_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: confirmation_number.nil? && !confirmation_number_present?)]
     getter confirmation_number : String? = nil
+    MAX_LENGTH_FOR_CONFIRMATION_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? confirmation_number_present : Bool = false
@@ -45,6 +46,7 @@ module Stripe
     # A product descriptor of up to 22 characters, which will appear to customers at the convenience store.
     @[JSON::Field(key: "product_description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: product_description.nil? && !product_description_present?)]
     getter product_description : String? = nil
+    MAX_LENGTH_FOR_PRODUCT_DESCRIPTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? product_description_present : Bool = false
@@ -52,8 +54,8 @@ module Stripe
     # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
-
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none"]
+    ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none]."
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -74,18 +76,18 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _confirmation_number = @confirmation_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, MAX_LENGTH_FOR_CONFIRMATION_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _product_description = @product_description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       if _setup_future_usage = @setup_future_usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
     end
@@ -94,11 +96,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _confirmation_number = @confirmation_number
-        return false if _confirmation_number.to_s.size > 5000
+        return false if _confirmation_number.to_s.size > MAX_LENGTH_FOR_CONFIRMATION_NUMBER
       end
 
       if _product_description = @product_description
-        return false if _product_description.to_s.size > 5000
+        return false if _product_description.to_s.size > MAX_LENGTH_FOR_PRODUCT_DESCRIPTION
       end
 
       if _setup_future_usage = @setup_future_usage
@@ -115,10 +117,7 @@ module Stripe
         return @confirmation_number = nil
       end
       _confirmation_number = confirmation_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("confirmation_number", _confirmation_number.to_s.size, MAX_LENGTH_FOR_CONFIRMATION_NUMBER)
       @confirmation_number = _confirmation_number
     end
 
@@ -149,10 +148,7 @@ module Stripe
         return @product_description = nil
       end
       _product_description = product_description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
       @product_description = _product_description
     end
 

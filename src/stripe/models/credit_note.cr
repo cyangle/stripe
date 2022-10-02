@@ -47,6 +47,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     @[JSON::Field(key: "invoice", type: Stripe::CreditNoteInvoice?, default: nil, required: true, nullable: false, emit_null: false)]
     getter invoice : Stripe::CreditNoteInvoice? = nil
@@ -61,22 +62,24 @@ module Stripe
     # A unique number that identifies this particular credit note and appears on the PDF of the credit note and its associated invoice.
     @[JSON::Field(key: "number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter number : String? = nil
+    MAX_LENGTH_FOR_NUMBER = 5000
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["credit_note"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [credit_note]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["credit_note"]
 
     # The link to download the PDF of the credit note.
     @[JSON::Field(key: "pdf", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter pdf : String? = nil
+    MAX_LENGTH_FOR_PDF = 5000
 
     # Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["issued", "void"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [issued, void]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["issued", "void"]
 
     # The integer amount in %s representing the amount of the credit note, excluding exclusive tax and invoice level discounts.
     @[JSON::Field(key: "subtotal", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -93,8 +96,8 @@ module Stripe
     # Type of this credit note, one of `pre_payment` or `post_payment`. A `pre_payment` credit note means it was issued when the invoice was open. A `post_payment` credit note means it was issued when the invoice was paid.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["post_payment", "pre_payment"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [post_payment, pre_payment]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["post_payment", "pre_payment"]
 
     # Optional properties
 
@@ -107,6 +110,7 @@ module Stripe
     # Customer-facing text that appears on the credit note PDF.
     @[JSON::Field(key: "memo", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: memo.nil? && !memo_present?)]
     getter memo : String? = nil
+    MAX_LENGTH_FOR_MEMO = 5000
 
     @[JSON::Field(ignore: true)]
     property? memo_present : Bool = false
@@ -128,10 +132,11 @@ module Stripe
     # Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: reason.nil? && !reason_present?)]
     getter reason : String? = nil
+    ERROR_MESSAGE_FOR_REASON = "invalid value for \"reason\", must be one of [duplicate, fraudulent, order_change, product_unsatisfactory]."
+    VALID_VALUES_FOR_REASON  = StaticArray["duplicate", "fraudulent", "order_change", "product_unsatisfactory"]
 
     @[JSON::Field(ignore: true)]
     property? reason_present : Bool = false
-    VALID_VALUES_FOR_REASON = StaticArray["duplicate", "fraudulent", "order_change", "product_unsatisfactory"]
 
     @[JSON::Field(key: "refund", type: Stripe::CreditNoteRefund?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: refund.nil? && !refund_present?)]
     getter refund : Stripe::CreditNoteRefund? = nil
@@ -217,12 +222,12 @@ module Stripe
       invalid_properties.push("\"discount_amounts\" is required and cannot be null") if @discount_amounts.nil?
 
       if _discount_amounts = @discount_amounts
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "discount_amounts", array: _discount_amounts)) if _discount_amounts.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "discount_amounts", container: _discount_amounts)) if _discount_amounts.is_a?(Array)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -241,52 +246,52 @@ module Stripe
       invalid_properties.push("\"number\" is required and cannot be null") if @number.nil?
 
       if _number = @number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"pdf\" is required and cannot be null") if @pdf.nil?
 
       if _pdf = @pdf
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("pdf", _pdf.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("pdf", _pdf.to_s.size, MAX_LENGTH_FOR_PDF)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"subtotal\" is required and cannot be null") if @subtotal.nil?
 
       invalid_properties.push("\"tax_amounts\" is required and cannot be null") if @tax_amounts.nil?
 
       if _tax_amounts = @tax_amounts
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tax_amounts", array: _tax_amounts)) if _tax_amounts.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tax_amounts", container: _tax_amounts)) if _tax_amounts.is_a?(Array)
       end
       invalid_properties.push("\"total\" is required and cannot be null") if @total.nil?
 
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _customer_balance_transaction = @customer_balance_transaction
         invalid_properties.concat(_customer_balance_transaction.list_invalid_properties_for("customer_balance_transaction")) if _customer_balance_transaction.is_a?(OpenApi::Validatable)
       end
       if _memo = @memo
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("memo", _memo.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("memo", _memo.to_s.size, MAX_LENGTH_FOR_MEMO)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _reason = @reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("reason", VALID_VALUES_FOR_REASON)) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
       if _refund = @refund
         invalid_properties.concat(_refund.list_invalid_properties_for("refund")) if _refund.is_a?(OpenApi::Validatable)
@@ -313,12 +318,12 @@ module Stripe
 
       return false if @discount_amounts.nil?
       if _discount_amounts = @discount_amounts
-        return false if _discount_amounts.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _discount_amounts)
+        return false if _discount_amounts.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _discount_amounts)
       end
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @invoice.nil?
@@ -335,7 +340,7 @@ module Stripe
 
       return false if @number.nil?
       if _number = @number
-        return false if _number.to_s.size > 5000
+        return false if _number.to_s.size > MAX_LENGTH_FOR_NUMBER
       end
 
       return false if @object.nil?
@@ -345,7 +350,7 @@ module Stripe
 
       return false if @pdf.nil?
       if _pdf = @pdf
-        return false if _pdf.to_s.size > 5000
+        return false if _pdf.to_s.size > MAX_LENGTH_FOR_PDF
       end
 
       return false if @status.nil?
@@ -357,7 +362,7 @@ module Stripe
 
       return false if @tax_amounts.nil?
       if _tax_amounts = @tax_amounts
-        return false if _tax_amounts.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tax_amounts)
+        return false if _tax_amounts.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tax_amounts)
       end
 
       return false if @total.nil?
@@ -372,7 +377,7 @@ module Stripe
       end
 
       if _memo = @memo
-        return false if _memo.to_s.size > 5000
+        return false if _memo.to_s.size > MAX_LENGTH_FOR_MEMO
       end
 
       if _reason = @reason
@@ -444,7 +449,7 @@ module Stripe
         raise ArgumentError.new("\"discount_amounts\" is required and cannot be null")
       end
       _discount_amounts = discount_amounts.not_nil!
-      OpenApi::ArrayValidator.validate(array: _discount_amounts) if _discount_amounts.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _discount_amounts) if _discount_amounts.is_a?(Array)
       @discount_amounts = _discount_amounts
     end
 
@@ -455,10 +460,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -501,10 +503,7 @@ module Stripe
         raise ArgumentError.new("\"number\" is required and cannot be null")
       end
       _number = number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
       @number = _number
     end
 
@@ -526,10 +525,7 @@ module Stripe
         raise ArgumentError.new("\"pdf\" is required and cannot be null")
       end
       _pdf = pdf.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("pdf", _pdf.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("pdf", _pdf.to_s.size, MAX_LENGTH_FOR_PDF)
       @pdf = _pdf
     end
 
@@ -561,7 +557,7 @@ module Stripe
         raise ArgumentError.new("\"tax_amounts\" is required and cannot be null")
       end
       _tax_amounts = tax_amounts.not_nil!
-      OpenApi::ArrayValidator.validate(array: _tax_amounts) if _tax_amounts.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _tax_amounts) if _tax_amounts.is_a?(Array)
       @tax_amounts = _tax_amounts
     end
 
@@ -604,10 +600,7 @@ module Stripe
         return @memo = nil
       end
       _memo = memo.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("memo", _memo.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("memo", _memo.to_s.size, MAX_LENGTH_FOR_MEMO)
       @memo = _memo
     end
 

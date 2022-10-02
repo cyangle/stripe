@@ -24,10 +24,12 @@ module Stripe
     # Time at which the deposited funds will be available for use. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "available_at", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter available_at : String? = nil
+    MAX_LENGTH_FOR_AVAILABLE_AT = 5000
 
     # Comma-separated list of invoice IDs associated with the paper check.
     @[JSON::Field(key: "invoices", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter invoices : String? = nil
+    MAX_LENGTH_FOR_INVOICES = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -45,12 +47,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _available_at = @available_at
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("available_at", _available_at.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("available_at", _available_at.to_s.size, MAX_LENGTH_FOR_AVAILABLE_AT)
           invalid_properties.push(max_length_error)
         end
       end
       if _invoices = @invoices
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoices", _invoices.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoices", _invoices.to_s.size, MAX_LENGTH_FOR_INVOICES)
           invalid_properties.push(max_length_error)
         end
       end
@@ -61,11 +63,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _available_at = @available_at
-        return false if _available_at.to_s.size > 5000
+        return false if _available_at.to_s.size > MAX_LENGTH_FOR_AVAILABLE_AT
       end
 
       if _invoices = @invoices
-        return false if _invoices.to_s.size > 5000
+        return false if _invoices.to_s.size > MAX_LENGTH_FOR_INVOICES
       end
 
       true
@@ -78,10 +80,7 @@ module Stripe
         return @available_at = nil
       end
       _available_at = available_at.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("available_at", _available_at.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("available_at", _available_at.to_s.size, MAX_LENGTH_FOR_AVAILABLE_AT)
       @available_at = _available_at
     end
 
@@ -92,10 +91,7 @@ module Stripe
         return @invoices = nil
       end
       _invoices = invoices.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoices", _invoices.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("invoices", _invoices.to_s.size, MAX_LENGTH_FOR_INVOICES)
       @invoices = _invoices
     end
 

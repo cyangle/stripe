@@ -28,6 +28,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     @[JSON::Field(key: "metadata", type: Hash(String, String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,8 +37,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["subscription_item"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [subscription_item]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["subscription_item"]
 
     @[JSON::Field(key: "price", type: Stripe::Price?, default: nil, required: true, nullable: false, emit_null: false)]
     getter price : Stripe::Price? = nil
@@ -45,6 +46,7 @@ module Stripe
     # The `subscription` this `subscription_item` belongs to.
     @[JSON::Field(key: "subscription", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter subscription : String? = nil
+    MAX_LENGTH_FOR_SUBSCRIPTION = 5000
 
     # Optional properties
 
@@ -93,7 +95,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -102,7 +104,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
 
@@ -112,7 +114,7 @@ module Stripe
       invalid_properties.push("\"subscription\" is required and cannot be null") if @subscription.nil?
 
       if _subscription = @subscription
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -121,7 +123,7 @@ module Stripe
       end
 
       if _tax_rates = @tax_rates
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tax_rates", array: _tax_rates)) if _tax_rates.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tax_rates", container: _tax_rates)) if _tax_rates.is_a?(Array)
       end
       invalid_properties
     end
@@ -133,7 +135,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @metadata.nil?
@@ -150,7 +152,7 @@ module Stripe
 
       return false if @subscription.nil?
       if _subscription = @subscription
-        return false if _subscription.to_s.size > 5000
+        return false if _subscription.to_s.size > MAX_LENGTH_FOR_SUBSCRIPTION
       end
 
       if _billing_thresholds = @billing_thresholds
@@ -158,7 +160,7 @@ module Stripe
       end
 
       if _tax_rates = @tax_rates
-        return false if _tax_rates.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tax_rates)
+        return false if _tax_rates.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tax_rates)
       end
 
       true
@@ -181,10 +183,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -227,10 +226,7 @@ module Stripe
         raise ArgumentError.new("\"subscription\" is required and cannot be null")
       end
       _subscription = subscription.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("subscription", _subscription.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION)
       @subscription = _subscription
     end
 
@@ -262,7 +258,7 @@ module Stripe
         return @tax_rates = nil
       end
       _tax_rates = tax_rates.not_nil!
-      OpenApi::ArrayValidator.validate(array: _tax_rates) if _tax_rates.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _tax_rates) if _tax_rates.is_a?(Array)
       @tax_rates = _tax_rates
     end
 

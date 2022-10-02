@@ -24,8 +24,8 @@ module Stripe
     # Type of installment plan, one of `fixed_count`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["fixed_count"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [fixed_count]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["fixed_count"]
 
     # Optional properties
 
@@ -39,10 +39,11 @@ module Stripe
     # For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card. One of `month`.
     @[JSON::Field(key: "interval", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: interval.nil? && !interval_present?)]
     getter interval : String? = nil
+    ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [month]."
+    VALID_VALUES_FOR_INTERVAL  = StaticArray["month"]
 
     @[JSON::Field(ignore: true)]
     property? interval_present : Bool = false
-    VALID_VALUES_FOR_INTERVAL = StaticArray["month"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -64,11 +65,11 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
 
       if _interval = @interval
-        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+        invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
       invalid_properties
     end

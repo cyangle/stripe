@@ -30,13 +30,13 @@ module Stripe
 
     @[JSON::Field(key: "mode", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mode : String? = nil
-
-    VALID_VALUES_FOR_MODE = StaticArray["at_period_end", "immediately"]
+    ERROR_MESSAGE_FOR_MODE = "invalid value for \"mode\", must be one of [at_period_end, immediately]."
+    VALID_VALUES_FOR_MODE  = StaticArray["at_period_end", "immediately"]
 
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
-
-    VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
+    ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR = "invalid value for \"proration_behavior\", must be one of [always_invoice, create_prorations, none]."
+    VALID_VALUES_FOR_PRORATION_BEHAVIOR  = StaticArray["always_invoice", "create_prorations", "none"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -62,10 +62,10 @@ module Stripe
         invalid_properties.concat(_cancellation_reason.list_invalid_properties_for("cancellation_reason")) if _cancellation_reason.is_a?(OpenApi::Validatable)
       end
       if _mode = @mode
-        invalid_properties.push(OpenApi::EnumValidator.error_message("mode", VALID_VALUES_FOR_MODE)) unless OpenApi::EnumValidator.valid?(_mode, VALID_VALUES_FOR_MODE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_MODE) unless OpenApi::EnumValidator.valid?(_mode, VALID_VALUES_FOR_MODE)
       end
       if _proration_behavior = @proration_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("proration_behavior", VALID_VALUES_FOR_PRORATION_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
       invalid_properties
     end

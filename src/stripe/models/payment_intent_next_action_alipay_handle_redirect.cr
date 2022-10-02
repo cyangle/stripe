@@ -24,6 +24,7 @@ module Stripe
     # The native data to be used with Alipay SDK you must redirect your customer to in order to authenticate the payment in an Android App.
     @[JSON::Field(key: "native_data", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: native_data.nil? && !native_data_present?)]
     getter native_data : String? = nil
+    MAX_LENGTH_FOR_NATIVE_DATA = 5000
 
     @[JSON::Field(ignore: true)]
     property? native_data_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # The native URL you must redirect your customer to in order to authenticate the payment in an iOS App.
     @[JSON::Field(key: "native_url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: native_url.nil? && !native_url_present?)]
     getter native_url : String? = nil
+    MAX_LENGTH_FOR_NATIVE_URL = 5000
 
     @[JSON::Field(ignore: true)]
     property? native_url_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.
     @[JSON::Field(key: "return_url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: return_url.nil? && !return_url_present?)]
     getter return_url : String? = nil
+    MAX_LENGTH_FOR_RETURN_URL = 5000
 
     @[JSON::Field(ignore: true)]
     property? return_url_present : Bool = false
@@ -45,6 +48,7 @@ module Stripe
     # The URL you must redirect your customer to in order to authenticate the payment.
     @[JSON::Field(key: "url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: url.nil? && !url_present?)]
     getter url : String? = nil
+    MAX_LENGTH_FOR_URL = 5000
 
     @[JSON::Field(ignore: true)]
     property? url_present : Bool = false
@@ -67,22 +71,22 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _native_data = @native_data
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_data", _native_data.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_data", _native_data.to_s.size, MAX_LENGTH_FOR_NATIVE_DATA)
           invalid_properties.push(max_length_error)
         end
       end
       if _native_url = @native_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_url", _native_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_url", _native_url.to_s.size, MAX_LENGTH_FOR_NATIVE_URL)
           invalid_properties.push(max_length_error)
         end
       end
       if _return_url = @return_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
           invalid_properties.push(max_length_error)
         end
       end
       if _url = @url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -93,19 +97,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _native_data = @native_data
-        return false if _native_data.to_s.size > 5000
+        return false if _native_data.to_s.size > MAX_LENGTH_FOR_NATIVE_DATA
       end
 
       if _native_url = @native_url
-        return false if _native_url.to_s.size > 5000
+        return false if _native_url.to_s.size > MAX_LENGTH_FOR_NATIVE_URL
       end
 
       if _return_url = @return_url
-        return false if _return_url.to_s.size > 5000
+        return false if _return_url.to_s.size > MAX_LENGTH_FOR_RETURN_URL
       end
 
       if _url = @url
-        return false if _url.to_s.size > 5000
+        return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 
       true
@@ -118,10 +122,7 @@ module Stripe
         return @native_data = nil
       end
       _native_data = native_data.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_data", _native_data.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("native_data", _native_data.to_s.size, MAX_LENGTH_FOR_NATIVE_DATA)
       @native_data = _native_data
     end
 
@@ -132,10 +133,7 @@ module Stripe
         return @native_url = nil
       end
       _native_url = native_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("native_url", _native_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("native_url", _native_url.to_s.size, MAX_LENGTH_FOR_NATIVE_URL)
       @native_url = _native_url
     end
 
@@ -146,10 +144,7 @@ module Stripe
         return @return_url = nil
       end
       _return_url = return_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
       @return_url = _return_url
     end
 
@@ -160,10 +155,7 @@ module Stripe
         return @url = nil
       end
       _url = url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
       @url = _url
     end
 

@@ -23,12 +23,13 @@ module Stripe
     # Controls when the funds will be captured from the customer's account.
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
-
-    VALID_VALUES_FOR_CAPTURE_METHOD = StaticArray["automatic", "manual"]
+    ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [automatic, manual]."
+    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["automatic", "manual"]
 
     # The client secret of the PaymentIntent.
     @[JSON::Field(key: "client_secret", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter client_secret : String? = nil
+    MAX_LENGTH_FOR_CLIENT_SECRET = 5000
 
     # Set to `true` to fail the payment attempt if the PaymentIntent transitions into `requires_action`. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication).
     @[JSON::Field(key: "error_on_requires_action", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -41,6 +42,7 @@ module Stripe
     # ID of the mandate to be used for this payment.
     @[JSON::Field(key: "mandate", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mandate : String? = nil
+    MAX_LENGTH_FOR_MANDATE = 5000
 
     @[JSON::Field(key: "mandate_data", type: Stripe::PostPaymentIntentsIntentConfirmRequestMandateData?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mandate_data : Stripe::PostPaymentIntentsIntentConfirmRequestMandateData? = nil
@@ -51,6 +53,7 @@ module Stripe
     # ID of the payment method (a PaymentMethod, Card, or [compatible Source](https://stripe.com/docs/payments/payment-methods/transitioning#compatibility) object) to attach to this PaymentIntent.
     @[JSON::Field(key: "payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method : String? = nil
+    MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
 
     @[JSON::Field(key: "payment_method_data", type: Stripe::PaymentMethodDataParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_data : Stripe::PaymentMethodDataParams? = nil
@@ -75,8 +78,8 @@ module Stripe
     # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).  If `setup_future_usage` is already set and you are performing a request using a publishable key, you may only update the value from `on_session` to `off_session`.
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
-
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["", "off_session", "on_session"]
+    ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [, off_session, on_session]."
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["", "off_session", "on_session"]
 
     @[JSON::Field(key: "shipping", type: Stripe::PostPaymentIntentsIntentRequestShipping?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping : Stripe::PostPaymentIntentsIntentRequestShipping? = nil
@@ -116,16 +119,16 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _capture_method = @capture_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("capture_method", VALID_VALUES_FOR_CAPTURE_METHOD)) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CAPTURE_METHOD) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
       if _client_secret = @client_secret
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _mandate = @mandate
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, MAX_LENGTH_FOR_MANDATE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -136,7 +139,7 @@ module Stripe
         invalid_properties.concat(_off_session.list_invalid_properties_for("off_session")) if _off_session.is_a?(OpenApi::Validatable)
       end
       if _payment_method = @payment_method
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
@@ -155,7 +158,7 @@ module Stripe
       end
 
       if _setup_future_usage = @setup_future_usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       if _shipping = @shipping
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
@@ -172,11 +175,11 @@ module Stripe
       end
 
       if _client_secret = @client_secret
-        return false if _client_secret.to_s.size > 5000
+        return false if _client_secret.to_s.size > MAX_LENGTH_FOR_CLIENT_SECRET
       end
 
       if _mandate = @mandate
-        return false if _mandate.to_s.size > 5000
+        return false if _mandate.to_s.size > MAX_LENGTH_FOR_MANDATE
       end
 
       if _mandate_data = @mandate_data
@@ -188,7 +191,7 @@ module Stripe
       end
 
       if _payment_method = @payment_method
-        return false if _payment_method.to_s.size > 5000
+        return false if _payment_method.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD
       end
 
       if _payment_method_data = @payment_method_data
@@ -236,10 +239,7 @@ module Stripe
         return @client_secret = nil
       end
       _client_secret = client_secret.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
       @client_secret = _client_secret
     end
 
@@ -270,10 +270,7 @@ module Stripe
         return @mandate = nil
       end
       _mandate = mandate.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("mandate", _mandate.to_s.size, MAX_LENGTH_FOR_MANDATE)
       @mandate = _mandate
     end
 
@@ -306,10 +303,7 @@ module Stripe
         return @payment_method = nil
       end
       _payment_method = payment_method.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
       @payment_method = _payment_method
     end
 

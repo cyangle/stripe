@@ -24,6 +24,7 @@ module Stripe
     # Card brand. Can be `American Express`, `Diners Club`, `Discover`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.
     @[JSON::Field(key: "brand", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter brand : String? = nil
+    MAX_LENGTH_FOR_BRAND = 5000
 
     # Two-digit number representing the card's expiration month.
     @[JSON::Field(key: "exp_month", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,20 +37,23 @@ module Stripe
     # Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     @[JSON::Field(key: "funding", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter funding : String? = nil
+    MAX_LENGTH_FOR_FUNDING = 5000
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # The last four digits of the card.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter last4 : String? = nil
+    MAX_LENGTH_FOR_LAST4 = 5000
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["card"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [card]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["card"]
 
     # Optional properties
 
@@ -62,6 +66,7 @@ module Stripe
     # City/District/Suburb/Town/Village.
     @[JSON::Field(key: "address_city", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_city.nil? && !address_city_present?)]
     getter address_city : String? = nil
+    MAX_LENGTH_FOR_ADDRESS_CITY = 5000
 
     @[JSON::Field(ignore: true)]
     property? address_city_present : Bool = false
@@ -69,6 +74,7 @@ module Stripe
     # Billing address country, if provided when creating card.
     @[JSON::Field(key: "address_country", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_country.nil? && !address_country_present?)]
     getter address_country : String? = nil
+    MAX_LENGTH_FOR_ADDRESS_COUNTRY = 5000
 
     @[JSON::Field(ignore: true)]
     property? address_country_present : Bool = false
@@ -76,6 +82,7 @@ module Stripe
     # Address line 1 (Street address/PO Box/Company name).
     @[JSON::Field(key: "address_line1", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_line1.nil? && !address_line1_present?)]
     getter address_line1 : String? = nil
+    MAX_LENGTH_FOR_ADDRESS_LINE1 = 5000
 
     @[JSON::Field(ignore: true)]
     property? address_line1_present : Bool = false
@@ -83,6 +90,7 @@ module Stripe
     # If `address_line1` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.
     @[JSON::Field(key: "address_line1_check", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_line1_check.nil? && !address_line1_check_present?)]
     getter address_line1_check : String? = nil
+    MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK = 5000
 
     @[JSON::Field(ignore: true)]
     property? address_line1_check_present : Bool = false
@@ -90,6 +98,7 @@ module Stripe
     # Address line 2 (Apartment/Suite/Unit/Building).
     @[JSON::Field(key: "address_line2", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_line2.nil? && !address_line2_present?)]
     getter address_line2 : String? = nil
+    MAX_LENGTH_FOR_ADDRESS_LINE2 = 5000
 
     @[JSON::Field(ignore: true)]
     property? address_line2_present : Bool = false
@@ -97,6 +106,7 @@ module Stripe
     # State/County/Province/Region.
     @[JSON::Field(key: "address_state", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_state.nil? && !address_state_present?)]
     getter address_state : String? = nil
+    MAX_LENGTH_FOR_ADDRESS_STATE = 5000
 
     @[JSON::Field(ignore: true)]
     property? address_state_present : Bool = false
@@ -104,6 +114,7 @@ module Stripe
     # ZIP or postal code.
     @[JSON::Field(key: "address_zip", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_zip.nil? && !address_zip_present?)]
     getter address_zip : String? = nil
+    MAX_LENGTH_FOR_ADDRESS_ZIP = 5000
 
     @[JSON::Field(ignore: true)]
     property? address_zip_present : Bool = false
@@ -111,6 +122,7 @@ module Stripe
     # If `address_zip` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.
     @[JSON::Field(key: "address_zip_check", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_zip_check.nil? && !address_zip_check_present?)]
     getter address_zip_check : String? = nil
+    MAX_LENGTH_FOR_ADDRESS_ZIP_CHECK = 5000
 
     @[JSON::Field(ignore: true)]
     property? address_zip_check_present : Bool = false
@@ -118,14 +130,16 @@ module Stripe
     # A set of available payout methods for this card. Only values from this set should be passed as the `method` when creating a payout.
     @[JSON::Field(key: "available_payout_methods", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: available_payout_methods.nil? && !available_payout_methods_present?)]
     getter available_payout_methods : Array(String)? = nil
+    ERROR_MESSAGE_FOR_AVAILABLE_PAYOUT_METHODS = "invalid value for \"available_payout_methods\", must be one of [instant, standard]."
+    VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS  = StaticArray["instant", "standard"]
 
     @[JSON::Field(ignore: true)]
     property? available_payout_methods_present : Bool = false
-    VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS = StaticArray["instant", "standard"]
 
     # Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     @[JSON::Field(key: "country", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: country.nil? && !country_present?)]
     getter country : String? = nil
+    MAX_LENGTH_FOR_COUNTRY = 5000
 
     @[JSON::Field(ignore: true)]
     property? country_present : Bool = false
@@ -146,6 +160,7 @@ module Stripe
     # If a CVC was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`. A result of unchecked indicates that CVC was provided but hasn't been checked yet. Checks are typically performed when attaching a card to a Customer object, or when creating a charge. For more details, see [Check if a card is valid without a charge](https://support.stripe.com/questions/check-if-a-card-is-valid-without-a-charge).
     @[JSON::Field(key: "cvc_check", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cvc_check.nil? && !cvc_check_present?)]
     getter cvc_check : String? = nil
+    MAX_LENGTH_FOR_CVC_CHECK = 5000
 
     @[JSON::Field(ignore: true)]
     property? cvc_check_present : Bool = false
@@ -160,6 +175,7 @@ module Stripe
     # (For tokenized numbers only.) The last four digits of the device account number.
     @[JSON::Field(key: "dynamic_last4", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: dynamic_last4.nil? && !dynamic_last4_present?)]
     getter dynamic_last4 : String? = nil
+    MAX_LENGTH_FOR_DYNAMIC_LAST4 = 5000
 
     @[JSON::Field(ignore: true)]
     property? dynamic_last4_present : Bool = false
@@ -167,6 +183,7 @@ module Stripe
     # Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.  *Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*
     @[JSON::Field(key: "fingerprint", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
     getter fingerprint : String? = nil
+    MAX_LENGTH_FOR_FINGERPRINT = 5000
 
     @[JSON::Field(ignore: true)]
     property? fingerprint_present : Bool = false
@@ -181,6 +198,7 @@ module Stripe
     # Cardholder name.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: name.nil? && !name_present?)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? name_present : Bool = false
@@ -188,6 +206,7 @@ module Stripe
     # For external accounts, possible values are `new` and `errored`. If a transfer fails, the status is set to `errored` and transfers are stopped until account details are updated.
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: status.nil? && !status_present?)]
     getter status : String? = nil
+    MAX_LENGTH_FOR_STATUS = 5000
 
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false
@@ -195,6 +214,7 @@ module Stripe
     # If the card number is tokenized, this is the method that was used. Can be `android_pay` (includes Google Pay), `apple_pay`, `masterpass`, `visa_checkout`, or null.
     @[JSON::Field(key: "tokenization_method", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tokenization_method.nil? && !tokenization_method_present?)]
     getter tokenization_method : String? = nil
+    MAX_LENGTH_FOR_TOKENIZATION_METHOD = 5000
 
     @[JSON::Field(ignore: true)]
     property? tokenization_method_present : Bool = false
@@ -244,7 +264,7 @@ module Stripe
       invalid_properties.push("\"brand\" is required and cannot be null") if @brand.nil?
 
       if _brand = @brand
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
           invalid_properties.push(max_length_error)
         end
       end
@@ -255,77 +275,77 @@ module Stripe
       invalid_properties.push("\"funding\" is required and cannot be null") if @funding.nil?
 
       if _funding = @funding
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, MAX_LENGTH_FOR_FUNDING)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last4\" is required and cannot be null") if @last4.nil?
 
       if _last4 = @last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       if _account = @account
         invalid_properties.concat(_account.list_invalid_properties_for("account")) if _account.is_a?(OpenApi::Validatable)
       end
       if _address_city = @address_city
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_city", _address_city.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_city", _address_city.to_s.size, MAX_LENGTH_FOR_ADDRESS_CITY)
           invalid_properties.push(max_length_error)
         end
       end
       if _address_country = @address_country
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_country", _address_country.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_country", _address_country.to_s.size, MAX_LENGTH_FOR_ADDRESS_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
       if _address_line1 = @address_line1
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1", _address_line1.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1", _address_line1.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1)
           invalid_properties.push(max_length_error)
         end
       end
       if _address_line1_check = @address_line1_check
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1_check", _address_line1_check.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1_check", _address_line1_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK)
           invalid_properties.push(max_length_error)
         end
       end
       if _address_line2 = @address_line2
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line2", _address_line2.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line2", _address_line2.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE2)
           invalid_properties.push(max_length_error)
         end
       end
       if _address_state = @address_state
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_state", _address_state.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_state", _address_state.to_s.size, MAX_LENGTH_FOR_ADDRESS_STATE)
           invalid_properties.push(max_length_error)
         end
       end
       if _address_zip = @address_zip
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_zip", _address_zip.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_zip", _address_zip.to_s.size, MAX_LENGTH_FOR_ADDRESS_ZIP)
           invalid_properties.push(max_length_error)
         end
       end
       if _address_zip_check = @address_zip_check
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_zip_check", _address_zip_check.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_zip_check", _address_zip_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_ZIP_CHECK)
           invalid_properties.push(max_length_error)
         end
       end
       if _available_payout_methods = @available_payout_methods
-        invalid_properties.push(OpenApi::EnumValidator.error_message("available_payout_methods", VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS)) unless OpenApi::EnumValidator.valid?(_available_payout_methods, VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_AVAILABLE_PAYOUT_METHODS) unless OpenApi::EnumValidator.valid?(_available_payout_methods, VALID_VALUES_FOR_AVAILABLE_PAYOUT_METHODS)
       end
       if _country = @country
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
@@ -334,34 +354,34 @@ module Stripe
         invalid_properties.concat(_customer.list_invalid_properties_for("customer")) if _customer.is_a?(OpenApi::Validatable)
       end
       if _cvc_check = @cvc_check
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_check", _cvc_check.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_check", _cvc_check.to_s.size, MAX_LENGTH_FOR_CVC_CHECK)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _dynamic_last4 = @dynamic_last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("dynamic_last4", _dynamic_last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("dynamic_last4", _dynamic_last4.to_s.size, MAX_LENGTH_FOR_DYNAMIC_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       if _fingerprint = @fingerprint
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _status = @status
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
       if _tokenization_method = @tokenization_method
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tokenization_method", _tokenization_method.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tokenization_method", _tokenization_method.to_s.size, MAX_LENGTH_FOR_TOKENIZATION_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
@@ -373,7 +393,7 @@ module Stripe
     def valid? : Bool
       return false if @brand.nil?
       if _brand = @brand
-        return false if _brand.to_s.size > 5000
+        return false if _brand.to_s.size > MAX_LENGTH_FOR_BRAND
       end
 
       return false if @exp_month.nil?
@@ -382,17 +402,17 @@ module Stripe
 
       return false if @funding.nil?
       if _funding = @funding
-        return false if _funding.to_s.size > 5000
+        return false if _funding.to_s.size > MAX_LENGTH_FOR_FUNDING
       end
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @last4.nil?
       if _last4 = @last4
-        return false if _last4.to_s.size > 5000
+        return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
       return false if @object.nil?
@@ -405,35 +425,35 @@ module Stripe
       end
 
       if _address_city = @address_city
-        return false if _address_city.to_s.size > 5000
+        return false if _address_city.to_s.size > MAX_LENGTH_FOR_ADDRESS_CITY
       end
 
       if _address_country = @address_country
-        return false if _address_country.to_s.size > 5000
+        return false if _address_country.to_s.size > MAX_LENGTH_FOR_ADDRESS_COUNTRY
       end
 
       if _address_line1 = @address_line1
-        return false if _address_line1.to_s.size > 5000
+        return false if _address_line1.to_s.size > MAX_LENGTH_FOR_ADDRESS_LINE1
       end
 
       if _address_line1_check = @address_line1_check
-        return false if _address_line1_check.to_s.size > 5000
+        return false if _address_line1_check.to_s.size > MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK
       end
 
       if _address_line2 = @address_line2
-        return false if _address_line2.to_s.size > 5000
+        return false if _address_line2.to_s.size > MAX_LENGTH_FOR_ADDRESS_LINE2
       end
 
       if _address_state = @address_state
-        return false if _address_state.to_s.size > 5000
+        return false if _address_state.to_s.size > MAX_LENGTH_FOR_ADDRESS_STATE
       end
 
       if _address_zip = @address_zip
-        return false if _address_zip.to_s.size > 5000
+        return false if _address_zip.to_s.size > MAX_LENGTH_FOR_ADDRESS_ZIP
       end
 
       if _address_zip_check = @address_zip_check
-        return false if _address_zip_check.to_s.size > 5000
+        return false if _address_zip_check.to_s.size > MAX_LENGTH_FOR_ADDRESS_ZIP_CHECK
       end
 
       if _available_payout_methods = @available_payout_methods
@@ -441,7 +461,7 @@ module Stripe
       end
 
       if _country = @country
-        return false if _country.to_s.size > 5000
+        return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       if _customer = @customer
@@ -449,27 +469,27 @@ module Stripe
       end
 
       if _cvc_check = @cvc_check
-        return false if _cvc_check.to_s.size > 5000
+        return false if _cvc_check.to_s.size > MAX_LENGTH_FOR_CVC_CHECK
       end
 
       if _dynamic_last4 = @dynamic_last4
-        return false if _dynamic_last4.to_s.size > 5000
+        return false if _dynamic_last4.to_s.size > MAX_LENGTH_FOR_DYNAMIC_LAST4
       end
 
       if _fingerprint = @fingerprint
-        return false if _fingerprint.to_s.size > 5000
+        return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
       if _name = @name
-        return false if _name.to_s.size > 5000
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       if _status = @status
-        return false if _status.to_s.size > 5000
+        return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
       if _tokenization_method = @tokenization_method
-        return false if _tokenization_method.to_s.size > 5000
+        return false if _tokenization_method.to_s.size > MAX_LENGTH_FOR_TOKENIZATION_METHOD
       end
 
       true
@@ -482,10 +502,7 @@ module Stripe
         raise ArgumentError.new("\"brand\" is required and cannot be null")
       end
       _brand = brand.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
       @brand = _brand
     end
 
@@ -516,10 +533,7 @@ module Stripe
         raise ArgumentError.new("\"funding\" is required and cannot be null")
       end
       _funding = funding.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("funding", _funding.to_s.size, MAX_LENGTH_FOR_FUNDING)
       @funding = _funding
     end
 
@@ -530,10 +544,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -544,10 +555,7 @@ module Stripe
         raise ArgumentError.new("\"last4\" is required and cannot be null")
       end
       _last4 = last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
       @last4 = _last4
     end
 
@@ -580,10 +588,7 @@ module Stripe
         return @address_city = nil
       end
       _address_city = address_city.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_city", _address_city.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("address_city", _address_city.to_s.size, MAX_LENGTH_FOR_ADDRESS_CITY)
       @address_city = _address_city
     end
 
@@ -594,10 +599,7 @@ module Stripe
         return @address_country = nil
       end
       _address_country = address_country.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_country", _address_country.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("address_country", _address_country.to_s.size, MAX_LENGTH_FOR_ADDRESS_COUNTRY)
       @address_country = _address_country
     end
 
@@ -608,10 +610,7 @@ module Stripe
         return @address_line1 = nil
       end
       _address_line1 = address_line1.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1", _address_line1.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("address_line1", _address_line1.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1)
       @address_line1 = _address_line1
     end
 
@@ -622,10 +621,7 @@ module Stripe
         return @address_line1_check = nil
       end
       _address_line1_check = address_line1_check.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1_check", _address_line1_check.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("address_line1_check", _address_line1_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK)
       @address_line1_check = _address_line1_check
     end
 
@@ -636,10 +632,7 @@ module Stripe
         return @address_line2 = nil
       end
       _address_line2 = address_line2.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line2", _address_line2.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("address_line2", _address_line2.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE2)
       @address_line2 = _address_line2
     end
 
@@ -650,10 +643,7 @@ module Stripe
         return @address_state = nil
       end
       _address_state = address_state.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_state", _address_state.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("address_state", _address_state.to_s.size, MAX_LENGTH_FOR_ADDRESS_STATE)
       @address_state = _address_state
     end
 
@@ -664,10 +654,7 @@ module Stripe
         return @address_zip = nil
       end
       _address_zip = address_zip.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_zip", _address_zip.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("address_zip", _address_zip.to_s.size, MAX_LENGTH_FOR_ADDRESS_ZIP)
       @address_zip = _address_zip
     end
 
@@ -678,10 +665,7 @@ module Stripe
         return @address_zip_check = nil
       end
       _address_zip_check = address_zip_check.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_zip_check", _address_zip_check.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("address_zip_check", _address_zip_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_ZIP_CHECK)
       @address_zip_check = _address_zip_check
     end
 
@@ -703,10 +687,7 @@ module Stripe
         return @country = nil
       end
       _country = country.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       @country = _country
     end
 
@@ -738,10 +719,7 @@ module Stripe
         return @cvc_check = nil
       end
       _cvc_check = cvc_check.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_check", _cvc_check.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("cvc_check", _cvc_check.to_s.size, MAX_LENGTH_FOR_CVC_CHECK)
       @cvc_check = _cvc_check
     end
 
@@ -762,10 +740,7 @@ module Stripe
         return @dynamic_last4 = nil
       end
       _dynamic_last4 = dynamic_last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("dynamic_last4", _dynamic_last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("dynamic_last4", _dynamic_last4.to_s.size, MAX_LENGTH_FOR_DYNAMIC_LAST4)
       @dynamic_last4 = _dynamic_last4
     end
 
@@ -776,10 +751,7 @@ module Stripe
         return @fingerprint = nil
       end
       _fingerprint = fingerprint.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
       @fingerprint = _fingerprint
     end
 
@@ -800,10 +772,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 
@@ -814,10 +783,7 @@ module Stripe
         return @status = nil
       end
       _status = status.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
       @status = _status
     end
 
@@ -828,10 +794,7 @@ module Stripe
         return @tokenization_method = nil
       end
       _tokenization_method = tokenization_method.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("tokenization_method", _tokenization_method.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("tokenization_method", _tokenization_method.to_s.size, MAX_LENGTH_FOR_TOKENIZATION_METHOD)
       @tokenization_method = _tokenization_method
     end
 

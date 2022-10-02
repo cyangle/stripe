@@ -24,14 +24,15 @@ module Stripe
     # Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["pending", "unavailable", "unverified", "verified"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [pending, unavailable, unverified, verified]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["pending", "unavailable", "unverified", "verified"]
 
     # Optional properties
 
     # Verified address.
     @[JSON::Field(key: "verified_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verified_address.nil? && !verified_address_present?)]
     getter verified_address : String? = nil
+    MAX_LENGTH_FOR_VERIFIED_ADDRESS = 5000
 
     @[JSON::Field(ignore: true)]
     property? verified_address_present : Bool = false
@@ -39,6 +40,7 @@ module Stripe
     # Verified name.
     @[JSON::Field(key: "verified_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verified_name.nil? && !verified_name_present?)]
     getter verified_name : String? = nil
+    MAX_LENGTH_FOR_VERIFIED_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? verified_name_present : Bool = false
@@ -63,15 +65,15 @@ module Stripe
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       if _verified_address = @verified_address
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_address", _verified_address.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_address", _verified_address.to_s.size, MAX_LENGTH_FOR_VERIFIED_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
       if _verified_name = @verified_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -87,11 +89,11 @@ module Stripe
       end
 
       if _verified_address = @verified_address
-        return false if _verified_address.to_s.size > 5000
+        return false if _verified_address.to_s.size > MAX_LENGTH_FOR_VERIFIED_ADDRESS
       end
 
       if _verified_name = @verified_name
-        return false if _verified_name.to_s.size > 5000
+        return false if _verified_name.to_s.size > MAX_LENGTH_FOR_VERIFIED_NAME
       end
 
       true
@@ -115,10 +117,7 @@ module Stripe
         return @verified_address = nil
       end
       _verified_address = verified_address.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_address", _verified_address.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("verified_address", _verified_address.to_s.size, MAX_LENGTH_FOR_VERIFIED_ADDRESS)
       @verified_address = _verified_address
     end
 
@@ -129,10 +128,7 @@ module Stripe
         return @verified_name = nil
       end
       _verified_name = verified_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verified_name", _verified_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("verified_name", _verified_name.to_s.size, MAX_LENGTH_FOR_VERIFIED_NAME)
       @verified_name = _verified_name
     end
 

@@ -30,10 +30,11 @@ module Stripe
     # The status of the most recent automated tax calculation for this session.
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: status.nil? && !status_present?)]
     getter status : String? = nil
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [complete, failed, requires_location_inputs]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["complete", "failed", "requires_location_inputs"]
 
     @[JSON::Field(ignore: true)]
     property? status_present : Bool = false
-    VALID_VALUES_FOR_STATUS = StaticArray["complete", "failed", "requires_location_inputs"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,7 +55,7 @@ module Stripe
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
     end

@@ -75,7 +75,7 @@ module Stripe
       invalid_properties.push("\"errors\" is required and cannot be null") if @errors.nil?
 
       if _errors = @errors
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "errors", array: _errors)) if _errors.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "errors", container: _errors)) if _errors.is_a?(Array)
       end
       invalid_properties.push("\"eventually_due\" is required and cannot be null") if @eventually_due.nil?
 
@@ -84,7 +84,7 @@ module Stripe
       invalid_properties.push("\"pending_verification\" is required and cannot be null") if @pending_verification.nil?
 
       if _alternatives = @alternatives
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "alternatives", array: _alternatives)) if _alternatives.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "alternatives", container: _alternatives)) if _alternatives.is_a?(Array)
       end
       invalid_properties
     end
@@ -96,7 +96,7 @@ module Stripe
 
       return false if @errors.nil?
       if _errors = @errors
-        return false if _errors.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _errors)
+        return false if _errors.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _errors)
       end
 
       return false if @eventually_due.nil?
@@ -106,7 +106,7 @@ module Stripe
       return false if @pending_verification.nil?
 
       if _alternatives = @alternatives
-        return false if _alternatives.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _alternatives)
+        return false if _alternatives.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _alternatives)
       end
 
       true
@@ -129,7 +129,7 @@ module Stripe
         raise ArgumentError.new("\"errors\" is required and cannot be null")
       end
       _errors = errors.not_nil!
-      OpenApi::ArrayValidator.validate(array: _errors) if _errors.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _errors) if _errors.is_a?(Array)
       @errors = _errors
     end
 
@@ -170,7 +170,7 @@ module Stripe
         return @alternatives = nil
       end
       _alternatives = alternatives.not_nil!
-      OpenApi::ArrayValidator.validate(array: _alternatives) if _alternatives.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _alternatives) if _alternatives.is_a?(Array)
       @alternatives = _alternatives
     end
 

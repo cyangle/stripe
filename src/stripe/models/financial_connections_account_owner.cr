@@ -24,26 +24,30 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # The full name of the owner.
     @[JSON::Field(key: "name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 5000
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["financial_connections.account_owner"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [financial_connections.account_owner]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["financial_connections.account_owner"]
 
     # The ownership object that this owner belongs to.
     @[JSON::Field(key: "ownership", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter ownership : String? = nil
+    MAX_LENGTH_FOR_OWNERSHIP = 5000
 
     # Optional properties
 
     # The email address of the owner.
     @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: email.nil? && !email_present?)]
     getter email : String? = nil
+    MAX_LENGTH_FOR_EMAIL = 5000
 
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
@@ -51,6 +55,7 @@ module Stripe
     # The raw phone number of the owner.
     @[JSON::Field(key: "phone", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: phone.nil? && !phone_present?)]
     getter phone : String? = nil
+    MAX_LENGTH_FOR_PHONE = 5000
 
     @[JSON::Field(ignore: true)]
     property? phone_present : Bool = false
@@ -58,6 +63,7 @@ module Stripe
     # The raw physical address of the owner.
     @[JSON::Field(key: "raw_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: raw_address.nil? && !raw_address_present?)]
     getter raw_address : String? = nil
+    MAX_LENGTH_FOR_RAW_ADDRESS = 5000
 
     @[JSON::Field(ignore: true)]
     property? raw_address_present : Bool = false
@@ -94,41 +100,41 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"name\" is required and cannot be null") if @name.nil?
 
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"ownership\" is required and cannot be null") if @ownership.nil?
 
       if _ownership = @ownership
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ownership", _ownership.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ownership", _ownership.to_s.size, MAX_LENGTH_FOR_OWNERSHIP)
           invalid_properties.push(max_length_error)
         end
       end
       if _email = @email
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
       if _phone = @phone
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
       if _raw_address = @raw_address
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("raw_address", _raw_address.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("raw_address", _raw_address.to_s.size, MAX_LENGTH_FOR_RAW_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
@@ -141,12 +147,12 @@ module Stripe
     def valid? : Bool
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @name.nil?
       if _name = @name
-        return false if _name.to_s.size > 5000
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       return false if @object.nil?
@@ -156,19 +162,19 @@ module Stripe
 
       return false if @ownership.nil?
       if _ownership = @ownership
-        return false if _ownership.to_s.size > 5000
+        return false if _ownership.to_s.size > MAX_LENGTH_FOR_OWNERSHIP
       end
 
       if _email = @email
-        return false if _email.to_s.size > 5000
+        return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
       if _phone = @phone
-        return false if _phone.to_s.size > 5000
+        return false if _phone.to_s.size > MAX_LENGTH_FOR_PHONE
       end
 
       if _raw_address = @raw_address
-        return false if _raw_address.to_s.size > 5000
+        return false if _raw_address.to_s.size > MAX_LENGTH_FOR_RAW_ADDRESS
       end
 
       true
@@ -181,10 +187,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -195,10 +198,7 @@ module Stripe
         raise ArgumentError.new("\"name\" is required and cannot be null")
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 
@@ -220,10 +220,7 @@ module Stripe
         raise ArgumentError.new("\"ownership\" is required and cannot be null")
       end
       _ownership = ownership.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ownership", _ownership.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("ownership", _ownership.to_s.size, MAX_LENGTH_FOR_OWNERSHIP)
       @ownership = _ownership
     end
 
@@ -234,10 +231,7 @@ module Stripe
         return @email = nil
       end
       _email = email.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
       @email = _email
     end
 
@@ -248,10 +242,7 @@ module Stripe
         return @phone = nil
       end
       _phone = phone.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("phone", _phone.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("phone", _phone.to_s.size, MAX_LENGTH_FOR_PHONE)
       @phone = _phone
     end
 
@@ -262,10 +253,7 @@ module Stripe
         return @raw_address = nil
       end
       _raw_address = raw_address.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("raw_address", _raw_address.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("raw_address", _raw_address.to_s.size, MAX_LENGTH_FOR_RAW_ADDRESS)
       @raw_address = _raw_address
     end
 

@@ -27,10 +27,12 @@ module Stripe
     # A value that will be passed to the client to launch the authentication flow.
     @[JSON::Field(key: "client_secret", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter client_secret : String? = nil
+    MAX_LENGTH_FOR_CLIENT_SECRET = 5000
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -39,14 +41,14 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["financial_connections.session"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [financial_connections.session]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["financial_connections.session"]
 
     # Permissions requested for accounts collected during this session.
     @[JSON::Field(key: "permissions", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter permissions : Array(String)? = nil
-
-    VALID_VALUES_FOR_PERMISSIONS = StaticArray["balances", "ownership", "payment_method", "transactions"]
+    ERROR_MESSAGE_FOR_PERMISSIONS = "invalid value for \"permissions\", must be one of [balances, ownership, payment_method, transactions]."
+    VALID_VALUES_FOR_PERMISSIONS  = StaticArray["balances", "ownership", "payment_method", "transactions"]
 
     # Optional properties
 
@@ -62,6 +64,7 @@ module Stripe
     # For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
     @[JSON::Field(key: "return_url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter return_url : String? = nil
+    MAX_LENGTH_FOR_RETURN_URL = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -94,14 +97,14 @@ module Stripe
       invalid_properties.push("\"client_secret\" is required and cannot be null") if @client_secret.nil?
 
       if _client_secret = @client_secret
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -110,12 +113,12 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"permissions\" is required and cannot be null") if @permissions.nil?
 
       if _permissions = @permissions
-        invalid_properties.push(OpenApi::EnumValidator.error_message("permissions", VALID_VALUES_FOR_PERMISSIONS)) unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PERMISSIONS) unless OpenApi::EnumValidator.valid?(_permissions, VALID_VALUES_FOR_PERMISSIONS)
       end
       if _account_holder = @account_holder
         invalid_properties.concat(_account_holder.list_invalid_properties_for("account_holder")) if _account_holder.is_a?(OpenApi::Validatable)
@@ -124,7 +127,7 @@ module Stripe
         invalid_properties.concat(_filters.list_invalid_properties_for("filters")) if _filters.is_a?(OpenApi::Validatable)
       end
       if _return_url = @return_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -141,12 +144,12 @@ module Stripe
 
       return false if @client_secret.nil?
       if _client_secret = @client_secret
-        return false if _client_secret.to_s.size > 5000
+        return false if _client_secret.to_s.size > MAX_LENGTH_FOR_CLIENT_SECRET
       end
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -170,7 +173,7 @@ module Stripe
       end
 
       if _return_url = @return_url
-        return false if _return_url.to_s.size > 5000
+        return false if _return_url.to_s.size > MAX_LENGTH_FOR_RETURN_URL
       end
 
       true
@@ -194,10 +197,7 @@ module Stripe
         raise ArgumentError.new("\"client_secret\" is required and cannot be null")
       end
       _client_secret = client_secret.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
       @client_secret = _client_secret
     end
 
@@ -208,10 +208,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -276,10 +273,7 @@ module Stripe
         return @return_url = nil
       end
       _return_url = return_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("return_url", _return_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("return_url", _return_url.to_s.size, MAX_LENGTH_FOR_RETURN_URL)
       @return_url = _return_url
     end
 

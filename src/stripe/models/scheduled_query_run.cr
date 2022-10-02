@@ -32,6 +32,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -40,8 +41,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["scheduled_query_run"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [scheduled_query_run]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["scheduled_query_run"]
 
     # Time at which the result expires and is no longer available for download.
     @[JSON::Field(key: "result_available_until", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -50,14 +51,17 @@ module Stripe
     # SQL for the query.
     @[JSON::Field(key: "sql", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter sql : String? = nil
+    MAX_LENGTH_FOR_SQL = 100000
 
     # The query's execution status, which will be `completed` for successful runs, and `canceled`, `failed`, or `timed_out` otherwise.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
+    MAX_LENGTH_FOR_STATUS = 5000
 
     # Title of the query.
     @[JSON::Field(key: "title", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter title : String? = nil
+    MAX_LENGTH_FOR_TITLE = 5000
 
     # Optional properties
 
@@ -102,7 +106,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -111,28 +115,28 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"result_available_until\" is required and cannot be null") if @result_available_until.nil?
 
       invalid_properties.push("\"sql\" is required and cannot be null") if @sql.nil?
 
       if _sql = @sql
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sql", _sql.to_s.size, 100000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sql", _sql.to_s.size, MAX_LENGTH_FOR_SQL)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"title\" is required and cannot be null") if @title.nil?
 
       if _title = @title
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, MAX_LENGTH_FOR_TITLE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -154,7 +158,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -168,17 +172,17 @@ module Stripe
 
       return false if @sql.nil?
       if _sql = @sql
-        return false if _sql.to_s.size > 100000
+        return false if _sql.to_s.size > MAX_LENGTH_FOR_SQL
       end
 
       return false if @status.nil?
       if _status = @status
-        return false if _status.to_s.size > 5000
+        return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
       return false if @title.nil?
       if _title = @title
-        return false if _title.to_s.size > 5000
+        return false if _title.to_s.size > MAX_LENGTH_FOR_TITLE
       end
 
       if _error = @error
@@ -219,10 +223,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -264,10 +265,7 @@ module Stripe
         raise ArgumentError.new("\"sql\" is required and cannot be null")
       end
       _sql = sql.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sql", _sql.to_s.size, 100000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("sql", _sql.to_s.size, MAX_LENGTH_FOR_SQL)
       @sql = _sql
     end
 
@@ -278,10 +276,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
       @status = _status
     end
 
@@ -292,10 +287,7 @@ module Stripe
         raise ArgumentError.new("\"title\" is required and cannot be null")
       end
       _title = title.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("title", _title.to_s.size, MAX_LENGTH_FOR_TITLE)
       @title = _title
     end
 

@@ -23,10 +23,12 @@ module Stripe
     # The ID of an existing customer that will be associated with this request. This field may only be updated if there is no existing associated customer with this charge.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the `description` of the charge(s) that they are describing.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 40000
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -41,6 +43,7 @@ module Stripe
     # This is the email address that the receipt for this charge will be sent to. If this field is updated, then a new email receipt will be sent to the updated address.
     @[JSON::Field(key: "receipt_email", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter receipt_email : String? = nil
+    MAX_LENGTH_FOR_RECEIPT_EMAIL = 5000
 
     @[JSON::Field(key: "shipping", type: Stripe::OptionalFieldsShipping?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping : Stripe::OptionalFieldsShipping? = nil
@@ -71,12 +74,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _customer = @customer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 40000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -88,7 +91,7 @@ module Stripe
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _receipt_email = @receipt_email
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("receipt_email", _receipt_email.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("receipt_email", _receipt_email.to_s.size, MAX_LENGTH_FOR_RECEIPT_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -103,11 +106,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _customer = @customer
-        return false if _customer.to_s.size > 5000
+        return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       if _description = @description
-        return false if _description.to_s.size > 40000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _fraud_details = @fraud_details
@@ -119,7 +122,7 @@ module Stripe
       end
 
       if _receipt_email = @receipt_email
-        return false if _receipt_email.to_s.size > 5000
+        return false if _receipt_email.to_s.size > MAX_LENGTH_FOR_RECEIPT_EMAIL
       end
 
       if _shipping = @shipping
@@ -136,10 +139,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       @customer = _customer
     end
 
@@ -150,10 +150,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 40000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -196,10 +193,7 @@ module Stripe
         return @receipt_email = nil
       end
       _receipt_email = receipt_email.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("receipt_email", _receipt_email.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("receipt_email", _receipt_email.to_s.size, MAX_LENGTH_FOR_RECEIPT_EMAIL)
       @receipt_email = _receipt_email
     end
 

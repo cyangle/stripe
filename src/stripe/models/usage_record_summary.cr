@@ -24,6 +24,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -32,8 +33,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["usage_record_summary"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [usage_record_summary]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["usage_record_summary"]
 
     @[JSON::Field(key: "period", type: Stripe::Period?, default: nil, required: true, nullable: false, emit_null: false)]
     getter period : Stripe::Period? = nil
@@ -41,6 +42,7 @@ module Stripe
     # The ID of the subscription item this summary is describing.
     @[JSON::Field(key: "subscription_item", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter subscription_item : String? = nil
+    MAX_LENGTH_FOR_SUBSCRIPTION_ITEM = 5000
 
     # The total usage within this usage period.
     @[JSON::Field(key: "total_usage", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -51,6 +53,7 @@ module Stripe
     # The invoice in which this usage period has been billed for.
     @[JSON::Field(key: "invoice", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: invoice.nil? && !invoice_present?)]
     getter invoice : String? = nil
+    MAX_LENGTH_FOR_INVOICE = 5000
 
     @[JSON::Field(ignore: true)]
     property? invoice_present : Bool = false
@@ -79,7 +82,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -88,7 +91,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"period\" is required and cannot be null") if @period.nil?
 
@@ -98,14 +101,14 @@ module Stripe
       invalid_properties.push("\"subscription_item\" is required and cannot be null") if @subscription_item.nil?
 
       if _subscription_item = @subscription_item
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription_item", _subscription_item.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription_item", _subscription_item.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION_ITEM)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"total_usage\" is required and cannot be null") if @total_usage.nil?
 
       if _invoice = @invoice
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -117,7 +120,7 @@ module Stripe
     def valid? : Bool
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -134,13 +137,13 @@ module Stripe
 
       return false if @subscription_item.nil?
       if _subscription_item = @subscription_item
-        return false if _subscription_item.to_s.size > 5000
+        return false if _subscription_item.to_s.size > MAX_LENGTH_FOR_SUBSCRIPTION_ITEM
       end
 
       return false if @total_usage.nil?
 
       if _invoice = @invoice
-        return false if _invoice.to_s.size > 5000
+        return false if _invoice.to_s.size > MAX_LENGTH_FOR_INVOICE
       end
 
       true
@@ -153,10 +156,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -199,10 +199,7 @@ module Stripe
         raise ArgumentError.new("\"subscription_item\" is required and cannot be null")
       end
       _subscription_item = subscription_item.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription_item", _subscription_item.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("subscription_item", _subscription_item.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION_ITEM)
       @subscription_item = _subscription_item
     end
 
@@ -223,10 +220,7 @@ module Stripe
         return @invoice = nil
       end
       _invoice = invoice.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
       @invoice = _invoice
     end
 

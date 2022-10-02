@@ -28,8 +28,8 @@ module Stripe
     # After division, either round the result `up` or `down`.
     @[JSON::Field(key: "round", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter round : String? = nil
-
-    VALID_VALUES_FOR_ROUND = StaticArray["down", "up"]
+    ERROR_MESSAGE_FOR_ROUND = "invalid value for \"round\", must be one of [down, up]."
+    VALID_VALUES_FOR_ROUND  = StaticArray["down", "up"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -51,7 +51,7 @@ module Stripe
       invalid_properties.push("\"round\" is required and cannot be null") if @round.nil?
 
       if _round = @round
-        invalid_properties.push(OpenApi::EnumValidator.error_message("round", VALID_VALUES_FOR_ROUND)) unless OpenApi::EnumValidator.valid?(_round, VALID_VALUES_FOR_ROUND)
+        invalid_properties.push(ERROR_MESSAGE_FOR_ROUND) unless OpenApi::EnumValidator.valid?(_round, VALID_VALUES_FOR_ROUND)
       end
       invalid_properties
     end

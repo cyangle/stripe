@@ -24,8 +24,8 @@ module Stripe
     # The type of financial address
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["iban", "sort_code", "spei", "zengin"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [iban, sort_code, spei, zengin]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["iban", "sort_code", "spei", "zengin"]
 
     # Optional properties
 
@@ -41,8 +41,8 @@ module Stripe
     # The payment networks supported by this FinancialAddress
     @[JSON::Field(key: "supported_networks", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter supported_networks : Array(String)? = nil
-
-    VALID_VALUES_FOR_SUPPORTED_NETWORKS = StaticArray["bacs", "fps", "sepa", "spei", "zengin"]
+    ERROR_MESSAGE_FOR_SUPPORTED_NETWORKS = "invalid value for \"supported_networks\", must be one of [bacs, fps, sepa, spei, zengin]."
+    VALID_VALUES_FOR_SUPPORTED_NETWORKS  = StaticArray["bacs", "fps", "sepa", "spei", "zengin"]
 
     @[JSON::Field(key: "zengin", type: Stripe::FundingInstructionsBankTransferZenginRecord?, default: nil, required: false, nullable: false, emit_null: false)]
     getter zengin : Stripe::FundingInstructionsBankTransferZenginRecord? = nil
@@ -70,7 +70,7 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _iban = @iban
         invalid_properties.concat(_iban.list_invalid_properties_for("iban")) if _iban.is_a?(OpenApi::Validatable)
@@ -82,7 +82,7 @@ module Stripe
         invalid_properties.concat(_spei.list_invalid_properties_for("spei")) if _spei.is_a?(OpenApi::Validatable)
       end
       if _supported_networks = @supported_networks
-        invalid_properties.push(OpenApi::EnumValidator.error_message("supported_networks", VALID_VALUES_FOR_SUPPORTED_NETWORKS)) unless OpenApi::EnumValidator.valid?(_supported_networks, VALID_VALUES_FOR_SUPPORTED_NETWORKS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SUPPORTED_NETWORKS) unless OpenApi::EnumValidator.valid?(_supported_networks, VALID_VALUES_FOR_SUPPORTED_NETWORKS)
       end
       if _zengin = @zengin
         invalid_properties.concat(_zengin.list_invalid_properties_for("zengin")) if _zengin.is_a?(OpenApi::Validatable)

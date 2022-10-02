@@ -25,8 +25,9 @@ module Stripe
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["online"]
+    MAX_LENGTH_FOR__TYPE    = 5000
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [online]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["online"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -51,7 +52,7 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
     end

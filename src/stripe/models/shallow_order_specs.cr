@@ -43,7 +43,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _items = @items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "items", array: _items)) if _items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "items", container: _items)) if _items.is_a?(Array)
       end
       if _shipping = @shipping
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
@@ -55,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _items = @items
-        return false if _items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _items)
+        return false if _items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _items)
       end
 
       if _shipping = @shipping
@@ -72,7 +72,7 @@ module Stripe
         return @items = nil
       end
       _items = items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _items) if _items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _items) if _items.is_a?(Array)
       @items = _items
     end
 

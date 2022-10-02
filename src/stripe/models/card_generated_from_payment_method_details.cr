@@ -24,6 +24,7 @@ module Stripe
     # The type of payment method transaction-specific details from the transaction that generated this `card` payment method. Always `card_present`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
+    MAX_LENGTH_FOR__TYPE = 5000
 
     # Optional properties
 
@@ -49,7 +50,7 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -64,7 +65,7 @@ module Stripe
     def valid? : Bool
       return false if @_type.nil?
       if __type = @_type
-        return false if __type.to_s.size > 5000
+        return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
       if _card_present = @card_present
@@ -81,10 +82,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
       @_type = __type
     end
 

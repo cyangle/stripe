@@ -24,6 +24,7 @@ module Stripe
     # Name of the bank associated with the bank account.
     @[JSON::Field(key: "bank_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_name.nil? && !bank_name_present?)]
     getter bank_name : String? = nil
+    MAX_LENGTH_FOR_BANK_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? bank_name_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     @[JSON::Field(key: "fingerprint", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
     getter fingerprint : String? = nil
+    MAX_LENGTH_FOR_FINGERPRINT = 5000
 
     @[JSON::Field(ignore: true)]
     property? fingerprint_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # Institution number of the bank account.
     @[JSON::Field(key: "institution_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: institution_number.nil? && !institution_number_present?)]
     getter institution_number : String? = nil
+    MAX_LENGTH_FOR_INSTITUTION_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? institution_number_present : Bool = false
@@ -45,6 +48,7 @@ module Stripe
     # Last four digits of the bank account number.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: last4.nil? && !last4_present?)]
     getter last4 : String? = nil
+    MAX_LENGTH_FOR_LAST4 = 5000
 
     @[JSON::Field(ignore: true)]
     property? last4_present : Bool = false
@@ -52,6 +56,7 @@ module Stripe
     # Transit number of the bank account.
     @[JSON::Field(key: "transit_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: transit_number.nil? && !transit_number_present?)]
     getter transit_number : String? = nil
+    MAX_LENGTH_FOR_TRANSIT_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? transit_number_present : Bool = false
@@ -75,27 +80,27 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _bank_name = @bank_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _fingerprint = @fingerprint
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
       if _institution_number = @institution_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_number", _institution_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_number", _institution_number.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       if _last4 = @last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
       if _transit_number = @transit_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transit_number", _transit_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transit_number", _transit_number.to_s.size, MAX_LENGTH_FOR_TRANSIT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -106,23 +111,23 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _bank_name = @bank_name
-        return false if _bank_name.to_s.size > 5000
+        return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
       if _fingerprint = @fingerprint
-        return false if _fingerprint.to_s.size > 5000
+        return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
       if _institution_number = @institution_number
-        return false if _institution_number.to_s.size > 5000
+        return false if _institution_number.to_s.size > MAX_LENGTH_FOR_INSTITUTION_NUMBER
       end
 
       if _last4 = @last4
-        return false if _last4.to_s.size > 5000
+        return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
       if _transit_number = @transit_number
-        return false if _transit_number.to_s.size > 5000
+        return false if _transit_number.to_s.size > MAX_LENGTH_FOR_TRANSIT_NUMBER
       end
 
       true
@@ -135,10 +140,7 @@ module Stripe
         return @bank_name = nil
       end
       _bank_name = bank_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       @bank_name = _bank_name
     end
 
@@ -149,10 +151,7 @@ module Stripe
         return @fingerprint = nil
       end
       _fingerprint = fingerprint.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
       @fingerprint = _fingerprint
     end
 
@@ -163,10 +162,7 @@ module Stripe
         return @institution_number = nil
       end
       _institution_number = institution_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_number", _institution_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("institution_number", _institution_number.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NUMBER)
       @institution_number = _institution_number
     end
 
@@ -177,10 +173,7 @@ module Stripe
         return @last4 = nil
       end
       _last4 = last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
       @last4 = _last4
     end
 
@@ -191,10 +184,7 @@ module Stripe
         return @transit_number = nil
       end
       _transit_number = transit_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transit_number", _transit_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("transit_number", _transit_number.to_s.size, MAX_LENGTH_FOR_TRANSIT_NUMBER)
       @transit_number = _transit_number
     end
 

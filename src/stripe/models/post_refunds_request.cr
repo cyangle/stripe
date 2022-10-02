@@ -26,6 +26,7 @@ module Stripe
 
     @[JSON::Field(key: "charge", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter charge : String? = nil
+    MAX_LENGTH_FOR_CHARGE = 5000
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -34,6 +35,7 @@ module Stripe
     # Customer whose customer balance to refund from.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -49,16 +51,18 @@ module Stripe
     # Origin of the refund
     @[JSON::Field(key: "origin", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter origin : String? = nil
-
-    VALID_VALUES_FOR_ORIGIN = StaticArray["customer_balance"]
+    ERROR_MESSAGE_FOR_ORIGIN = "invalid value for \"origin\", must be one of [customer_balance]."
+    VALID_VALUES_FOR_ORIGIN  = StaticArray["customer_balance"]
 
     @[JSON::Field(key: "payment_intent", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_intent : String? = nil
+    MAX_LENGTH_FOR_PAYMENT_INTENT = 5000
 
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter reason : String? = nil
-
-    VALID_VALUES_FOR_REASON = StaticArray["duplicate", "fraudulent", "requested_by_customer"]
+    MAX_LENGTH_FOR_REASON    = 5000
+    ERROR_MESSAGE_FOR_REASON = "invalid value for \"reason\", must be one of [duplicate, fraudulent, requested_by_customer]."
+    VALID_VALUES_FOR_REASON  = StaticArray["duplicate", "fraudulent", "requested_by_customer"]
 
     @[JSON::Field(key: "refund_application_fee", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
     getter refund_application_fee : Bool? = nil
@@ -92,13 +96,13 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _charge = @charge
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, MAX_LENGTH_FOR_CHARGE)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _customer = @customer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -107,15 +111,15 @@ module Stripe
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _origin = @origin
-        invalid_properties.push(OpenApi::EnumValidator.error_message("origin", VALID_VALUES_FOR_ORIGIN)) unless OpenApi::EnumValidator.valid?(_origin, VALID_VALUES_FOR_ORIGIN)
+        invalid_properties.push(ERROR_MESSAGE_FOR_ORIGIN) unless OpenApi::EnumValidator.valid?(_origin, VALID_VALUES_FOR_ORIGIN)
       end
       if _payment_intent = @payment_intent
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, MAX_LENGTH_FOR_PAYMENT_INTENT)
           invalid_properties.push(max_length_error)
         end
       end
       if _reason = @reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("reason", VALID_VALUES_FOR_REASON)) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
 
       invalid_properties
@@ -125,11 +129,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _charge = @charge
-        return false if _charge.to_s.size > 5000
+        return false if _charge.to_s.size > MAX_LENGTH_FOR_CHARGE
       end
 
       if _customer = @customer
-        return false if _customer.to_s.size > 5000
+        return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       if _metadata = @metadata
@@ -141,7 +145,7 @@ module Stripe
       end
 
       if _payment_intent = @payment_intent
-        return false if _payment_intent.to_s.size > 5000
+        return false if _payment_intent.to_s.size > MAX_LENGTH_FOR_PAYMENT_INTENT
       end
 
       if _reason = @reason
@@ -168,10 +172,7 @@ module Stripe
         return @charge = nil
       end
       _charge = charge.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("charge", _charge.to_s.size, MAX_LENGTH_FOR_CHARGE)
       @charge = _charge
     end
 
@@ -192,10 +193,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       @customer = _customer
     end
 
@@ -248,10 +246,7 @@ module Stripe
         return @payment_intent = nil
       end
       _payment_intent = payment_intent.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("payment_intent", _payment_intent.to_s.size, MAX_LENGTH_FOR_PAYMENT_INTENT)
       @payment_intent = _payment_intent
     end
 

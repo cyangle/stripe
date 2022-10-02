@@ -22,8 +22,8 @@ module Stripe
 
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
-
-    VALID_VALUES_FOR_INTERVAL = StaticArray["day", "month", "week", "year"]
+    ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, week, year]."
+    VALID_VALUES_FOR_INTERVAL  = StaticArray["day", "month", "week", "year"]
 
     # Optional properties
 
@@ -49,7 +49,7 @@ module Stripe
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
       if _interval = @interval
-        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+        invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
 
       invalid_properties

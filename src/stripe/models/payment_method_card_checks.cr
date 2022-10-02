@@ -24,6 +24,7 @@ module Stripe
     # If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     @[JSON::Field(key: "address_line1_check", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_line1_check.nil? && !address_line1_check_present?)]
     getter address_line1_check : String? = nil
+    MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK = 5000
 
     @[JSON::Field(ignore: true)]
     property? address_line1_check_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # If a address postal code was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     @[JSON::Field(key: "address_postal_code_check", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: address_postal_code_check.nil? && !address_postal_code_check_present?)]
     getter address_postal_code_check : String? = nil
+    MAX_LENGTH_FOR_ADDRESS_POSTAL_CODE_CHECK = 5000
 
     @[JSON::Field(ignore: true)]
     property? address_postal_code_check_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     @[JSON::Field(key: "cvc_check", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cvc_check.nil? && !cvc_check_present?)]
     getter cvc_check : String? = nil
+    MAX_LENGTH_FOR_CVC_CHECK = 5000
 
     @[JSON::Field(ignore: true)]
     property? cvc_check_present : Bool = false
@@ -59,17 +62,17 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _address_line1_check = @address_line1_check
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1_check", _address_line1_check.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1_check", _address_line1_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK)
           invalid_properties.push(max_length_error)
         end
       end
       if _address_postal_code_check = @address_postal_code_check
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_postal_code_check", _address_postal_code_check.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_postal_code_check", _address_postal_code_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_POSTAL_CODE_CHECK)
           invalid_properties.push(max_length_error)
         end
       end
       if _cvc_check = @cvc_check
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_check", _cvc_check.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_check", _cvc_check.to_s.size, MAX_LENGTH_FOR_CVC_CHECK)
           invalid_properties.push(max_length_error)
         end
       end
@@ -80,15 +83,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _address_line1_check = @address_line1_check
-        return false if _address_line1_check.to_s.size > 5000
+        return false if _address_line1_check.to_s.size > MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK
       end
 
       if _address_postal_code_check = @address_postal_code_check
-        return false if _address_postal_code_check.to_s.size > 5000
+        return false if _address_postal_code_check.to_s.size > MAX_LENGTH_FOR_ADDRESS_POSTAL_CODE_CHECK
       end
 
       if _cvc_check = @cvc_check
-        return false if _cvc_check.to_s.size > 5000
+        return false if _cvc_check.to_s.size > MAX_LENGTH_FOR_CVC_CHECK
       end
 
       true
@@ -101,10 +104,7 @@ module Stripe
         return @address_line1_check = nil
       end
       _address_line1_check = address_line1_check.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_line1_check", _address_line1_check.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("address_line1_check", _address_line1_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_LINE1_CHECK)
       @address_line1_check = _address_line1_check
     end
 
@@ -115,10 +115,7 @@ module Stripe
         return @address_postal_code_check = nil
       end
       _address_postal_code_check = address_postal_code_check.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("address_postal_code_check", _address_postal_code_check.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("address_postal_code_check", _address_postal_code_check.to_s.size, MAX_LENGTH_FOR_ADDRESS_POSTAL_CODE_CHECK)
       @address_postal_code_check = _address_postal_code_check
     end
 
@@ -129,10 +126,7 @@ module Stripe
         return @cvc_check = nil
       end
       _cvc_check = cvc_check.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_check", _cvc_check.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("cvc_check", _cvc_check.to_s.size, MAX_LENGTH_FOR_CVC_CHECK)
       @cvc_check = _cvc_check
     end
 

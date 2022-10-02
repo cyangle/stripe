@@ -23,8 +23,8 @@ module Stripe
 
     @[JSON::Field(key: "country", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter country : String? = nil
-
-    VALID_VALUES_FOR_COUNTRY = StaticArray["AT", "BE", "DE", "ES", "IT", "NL"]
+    ERROR_MESSAGE_FOR_COUNTRY = "invalid value for \"country\", must be one of [AT, BE, DE, ES, IT, NL]."
+    VALID_VALUES_FOR_COUNTRY  = StaticArray["AT", "BE", "DE", "ES", "IT", "NL"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -43,7 +43,7 @@ module Stripe
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
 
       if _country = @country
-        invalid_properties.push(OpenApi::EnumValidator.error_message("country", VALID_VALUES_FOR_COUNTRY)) unless OpenApi::EnumValidator.valid?(_country, VALID_VALUES_FOR_COUNTRY)
+        invalid_properties.push(ERROR_MESSAGE_FOR_COUNTRY) unless OpenApi::EnumValidator.valid?(_country, VALID_VALUES_FOR_COUNTRY)
       end
       invalid_properties
     end

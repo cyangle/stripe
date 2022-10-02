@@ -24,8 +24,8 @@ module Stripe
     # Bank account verification method.
     @[JSON::Field(key: "verification_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter verification_method : String? = nil
-
-    VALID_VALUES_FOR_VERIFICATION_METHOD = StaticArray["automatic", "instant", "microdeposits"]
+    ERROR_MESSAGE_FOR_VERIFICATION_METHOD = "invalid value for \"verification_method\", must be one of [automatic, instant, microdeposits]."
+    VALID_VALUES_FOR_VERIFICATION_METHOD  = StaticArray["automatic", "instant", "microdeposits"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,7 +42,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _verification_method = @verification_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("verification_method", VALID_VALUES_FOR_VERIFICATION_METHOD)) unless OpenApi::EnumValidator.valid?(_verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_VERIFICATION_METHOD) unless OpenApi::EnumValidator.valid?(_verification_method, VALID_VALUES_FOR_VERIFICATION_METHOD)
       end
       invalid_properties
     end

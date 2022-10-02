@@ -24,6 +24,7 @@ module Stripe
     # The display name for this account. This is used on the Stripe Dashboard to differentiate between accounts.
     @[JSON::Field(key: "display_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: display_name.nil? && !display_name_present?)]
     getter display_name : String? = nil
+    MAX_LENGTH_FOR_DISPLAY_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? display_name_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # The timezone used in the Stripe Dashboard for this account. A list of possible time zone values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones).
     @[JSON::Field(key: "timezone", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: timezone.nil? && !timezone_present?)]
     getter timezone : String? = nil
+    MAX_LENGTH_FOR_TIMEZONE = 5000
 
     @[JSON::Field(ignore: true)]
     property? timezone_present : Bool = false
@@ -51,12 +53,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _display_name = @display_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _timezone = @timezone
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timezone", _timezone.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timezone", _timezone.to_s.size, MAX_LENGTH_FOR_TIMEZONE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -67,11 +69,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _display_name = @display_name
-        return false if _display_name.to_s.size > 5000
+        return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 
       if _timezone = @timezone
-        return false if _timezone.to_s.size > 5000
+        return false if _timezone.to_s.size > MAX_LENGTH_FOR_TIMEZONE
       end
 
       true
@@ -84,10 +86,7 @@ module Stripe
         return @display_name = nil
       end
       _display_name = display_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
       @display_name = _display_name
     end
 
@@ -98,10 +97,7 @@ module Stripe
         return @timezone = nil
       end
       _timezone = timezone.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timezone", _timezone.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("timezone", _timezone.to_s.size, MAX_LENGTH_FOR_TIMEZONE)
       @timezone = _timezone
     end
 

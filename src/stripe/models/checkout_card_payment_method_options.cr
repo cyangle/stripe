@@ -27,16 +27,18 @@ module Stripe
     # Indicates that you intend to make future payments with this PaymentIntent's payment method.  Providing this parameter will [attach the payment method](https://stripe.com/docs/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete. If no Customer was provided, the payment method can still be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer after the transaction completes.  When processing card payments, Stripe also uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules, such as [SCA](https://stripe.com/docs/strong-customer-authentication).
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
-
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none", "off_session", "on_session"]
+    ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none, off_session, on_session]."
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none", "off_session", "on_session"]
 
     # Provides information about a card payment that customers see on their statements. Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters. On card statements, the *concatenation* of both prefix and suffix (including separators) will appear truncated to 22 characters.
     @[JSON::Field(key: "statement_descriptor_suffix_kana", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor_suffix_kana : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA = 5000
 
     # Provides information about a card payment that customers see on their statements. Concatenated with the Kanji prefix (shortened Kanji descriptor) or Kanji statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 17 characters. On card statements, the *concatenation* of both prefix and suffix (including separators) will appear truncated to 17 characters.
     @[JSON::Field(key: "statement_descriptor_suffix_kanji", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor_suffix_kanji : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -59,15 +61,15 @@ module Stripe
         invalid_properties.concat(_installments.list_invalid_properties_for("installments")) if _installments.is_a?(OpenApi::Validatable)
       end
       if _setup_future_usage = @setup_future_usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA)
           invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI)
           invalid_properties.push(max_length_error)
         end
       end
@@ -86,11 +88,11 @@ module Stripe
       end
 
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
-        return false if _statement_descriptor_suffix_kana.to_s.size > 5000
+        return false if _statement_descriptor_suffix_kana.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA
       end
 
       if _statement_descriptor_suffix_kanji = @statement_descriptor_suffix_kanji
-        return false if _statement_descriptor_suffix_kanji.to_s.size > 5000
+        return false if _statement_descriptor_suffix_kanji.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI
       end
 
       true
@@ -125,10 +127,7 @@ module Stripe
         return @statement_descriptor_suffix_kana = nil
       end
       _statement_descriptor_suffix_kana = statement_descriptor_suffix_kana.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix_kana", _statement_descriptor_suffix_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANA)
       @statement_descriptor_suffix_kana = _statement_descriptor_suffix_kana
     end
 
@@ -139,10 +138,7 @@ module Stripe
         return @statement_descriptor_suffix_kanji = nil
       end
       _statement_descriptor_suffix_kanji = statement_descriptor_suffix_kanji.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_suffix_kanji", _statement_descriptor_suffix_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_SUFFIX_KANJI)
       @statement_descriptor_suffix_kanji = _statement_descriptor_suffix_kanji
     end
 

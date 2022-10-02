@@ -24,18 +24,20 @@ module Stripe
     # If set to `auto`, enables the collection of customer consent for promotional communications.
     @[JSON::Field(key: "promotions", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: promotions.nil? && !promotions_present?)]
     getter promotions : String? = nil
+    ERROR_MESSAGE_FOR_PROMOTIONS = "invalid value for \"promotions\", must be one of [auto, none]."
+    VALID_VALUES_FOR_PROMOTIONS  = StaticArray["auto", "none"]
 
     @[JSON::Field(ignore: true)]
     property? promotions_present : Bool = false
-    VALID_VALUES_FOR_PROMOTIONS = StaticArray["auto", "none"]
 
     # If set to `required`, it requires cutomers to accept the terms of service before being able to pay. If set to `none`, customers won't be shown a checkbox to accept the terms of service.
     @[JSON::Field(key: "terms_of_service", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: terms_of_service.nil? && !terms_of_service_present?)]
     getter terms_of_service : String? = nil
+    ERROR_MESSAGE_FOR_TERMS_OF_SERVICE = "invalid value for \"terms_of_service\", must be one of [none, required]."
+    VALID_VALUES_FOR_TERMS_OF_SERVICE  = StaticArray["none", "required"]
 
     @[JSON::Field(ignore: true)]
     property? terms_of_service_present : Bool = false
-    VALID_VALUES_FOR_TERMS_OF_SERVICE = StaticArray["none", "required"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,10 +55,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _promotions = @promotions
-        invalid_properties.push(OpenApi::EnumValidator.error_message("promotions", VALID_VALUES_FOR_PROMOTIONS)) unless OpenApi::EnumValidator.valid?(_promotions, VALID_VALUES_FOR_PROMOTIONS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PROMOTIONS) unless OpenApi::EnumValidator.valid?(_promotions, VALID_VALUES_FOR_PROMOTIONS)
       end
       if _terms_of_service = @terms_of_service
-        invalid_properties.push(OpenApi::EnumValidator.error_message("terms_of_service", VALID_VALUES_FOR_TERMS_OF_SERVICE)) unless OpenApi::EnumValidator.valid?(_terms_of_service, VALID_VALUES_FOR_TERMS_OF_SERVICE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TERMS_OF_SERVICE) unless OpenApi::EnumValidator.valid?(_terms_of_service, VALID_VALUES_FOR_TERMS_OF_SERVICE)
       end
       invalid_properties
     end

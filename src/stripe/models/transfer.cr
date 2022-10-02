@@ -40,6 +40,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -52,8 +53,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["transfer"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [transfer]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["transfer"]
 
     @[JSON::Field(key: "reversals", type: Stripe::TransferReversalList1?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reversals : Stripe::TransferReversalList1? = nil
@@ -73,6 +74,7 @@ module Stripe
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
@@ -95,10 +97,12 @@ module Stripe
     # The source balance this transfer came from. One of `card`, `fpx`, or `bank_account`.
     @[JSON::Field(key: "source_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter source_type : String? = nil
+    MAX_LENGTH_FOR_SOURCE_TYPE = 5000
 
     # A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
     @[JSON::Field(key: "transfer_group", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: transfer_group.nil? && !transfer_group_present?)]
     getter transfer_group : String? = nil
+    MAX_LENGTH_FOR_TRANSFER_GROUP = 5000
 
     @[JSON::Field(ignore: true)]
     property? transfer_group_present : Bool = false
@@ -145,7 +149,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -156,7 +160,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"reversals\" is required and cannot be null") if @reversals.nil?
 
@@ -169,7 +173,7 @@ module Stripe
         invalid_properties.concat(_balance_transaction.list_invalid_properties_for("balance_transaction")) if _balance_transaction.is_a?(OpenApi::Validatable)
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -183,12 +187,12 @@ module Stripe
         invalid_properties.concat(_source_transaction.list_invalid_properties_for("source_transaction")) if _source_transaction.is_a?(OpenApi::Validatable)
       end
       if _source_type = @source_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_type", _source_type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_type", _source_type.to_s.size, MAX_LENGTH_FOR_SOURCE_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       if _transfer_group = @transfer_group
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transfer_group", _transfer_group.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transfer_group", _transfer_group.to_s.size, MAX_LENGTH_FOR_TRANSFER_GROUP)
           invalid_properties.push(max_length_error)
         end
       end
@@ -208,7 +212,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -232,7 +236,7 @@ module Stripe
       end
 
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _destination = @destination
@@ -248,11 +252,11 @@ module Stripe
       end
 
       if _source_type = @source_type
-        return false if _source_type.to_s.size > 5000
+        return false if _source_type.to_s.size > MAX_LENGTH_FOR_SOURCE_TYPE
       end
 
       if _transfer_group = @transfer_group
-        return false if _transfer_group.to_s.size > 5000
+        return false if _transfer_group.to_s.size > MAX_LENGTH_FOR_TRANSFER_GROUP
       end
 
       true
@@ -305,10 +309,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -382,10 +383,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -429,10 +427,7 @@ module Stripe
         return @source_type = nil
       end
       _source_type = source_type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_type", _source_type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("source_type", _source_type.to_s.size, MAX_LENGTH_FOR_SOURCE_TYPE)
       @source_type = _source_type
     end
 
@@ -443,10 +438,7 @@ module Stripe
         return @transfer_group = nil
       end
       _transfer_group = transfer_group.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transfer_group", _transfer_group.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("transfer_group", _transfer_group.to_s.size, MAX_LENGTH_FOR_TRANSFER_GROUP)
       @transfer_group = _transfer_group
     end
 

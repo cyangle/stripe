@@ -24,8 +24,8 @@ module Stripe
     # The types of customer updates that are supported. When empty, customers are not updateable.
     @[JSON::Field(key: "allowed_updates", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter allowed_updates : Array(String)? = nil
-
-    VALID_VALUES_FOR_ALLOWED_UPDATES = StaticArray["address", "email", "phone", "shipping", "tax_id"]
+    ERROR_MESSAGE_FOR_ALLOWED_UPDATES = "invalid value for \"allowed_updates\", must be one of [address, email, phone, shipping, tax_id]."
+    VALID_VALUES_FOR_ALLOWED_UPDATES  = StaticArray["address", "email", "phone", "shipping", "tax_id"]
 
     # Whether the feature is enabled.
     @[JSON::Field(key: "enabled", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -49,7 +49,7 @@ module Stripe
       invalid_properties.push("\"allowed_updates\" is required and cannot be null") if @allowed_updates.nil?
 
       if _allowed_updates = @allowed_updates
-        invalid_properties.push(OpenApi::EnumValidator.error_message("allowed_updates", VALID_VALUES_FOR_ALLOWED_UPDATES)) unless OpenApi::EnumValidator.valid?(_allowed_updates, VALID_VALUES_FOR_ALLOWED_UPDATES)
+        invalid_properties.push(ERROR_MESSAGE_FOR_ALLOWED_UPDATES) unless OpenApi::EnumValidator.valid?(_allowed_updates, VALID_VALUES_FOR_ALLOWED_UPDATES)
       end
       invalid_properties.push("\"enabled\" is required and cannot be null") if @enabled.nil?
 

@@ -27,6 +27,7 @@ module Stripe
     # The new label of the reader.
     @[JSON::Field(key: "label", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter label : String? = nil
+    MAX_LENGTH_FOR_LABEL = 5000
 
     @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Stripe::PostAccountRequestMetadata? = nil
@@ -48,7 +49,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _label = @label
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("label", _label.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("label", _label.to_s.size, MAX_LENGTH_FOR_LABEL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -62,7 +63,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _label = @label
-        return false if _label.to_s.size > 5000
+        return false if _label.to_s.size > MAX_LENGTH_FOR_LABEL
       end
 
       if _metadata = @metadata
@@ -89,10 +90,7 @@ module Stripe
         return @label = nil
       end
       _label = label.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("label", _label.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("label", _label.to_s.size, MAX_LENGTH_FOR_LABEL)
       @label = _label
     end
 

@@ -22,12 +22,15 @@ module Stripe
 
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account_number : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_NUMBER = 5000
 
     @[JSON::Field(key: "institution_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter institution_number : String? = nil
+    MAX_LENGTH_FOR_INSTITUTION_NUMBER = 5000
 
     @[JSON::Field(key: "transit_number", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter transit_number : String? = nil
+    MAX_LENGTH_FOR_TRANSIT_NUMBER = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,21 +51,21 @@ module Stripe
       invalid_properties.push("\"account_number\" is required and cannot be null") if @account_number.nil?
 
       if _account_number = @account_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"institution_number\" is required and cannot be null") if @institution_number.nil?
 
       if _institution_number = @institution_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_number", _institution_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_number", _institution_number.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"transit_number\" is required and cannot be null") if @transit_number.nil?
 
       if _transit_number = @transit_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transit_number", _transit_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transit_number", _transit_number.to_s.size, MAX_LENGTH_FOR_TRANSIT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -74,17 +77,17 @@ module Stripe
     def valid? : Bool
       return false if @account_number.nil?
       if _account_number = @account_number
-        return false if _account_number.to_s.size > 5000
+        return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
       return false if @institution_number.nil?
       if _institution_number = @institution_number
-        return false if _institution_number.to_s.size > 5000
+        return false if _institution_number.to_s.size > MAX_LENGTH_FOR_INSTITUTION_NUMBER
       end
 
       return false if @transit_number.nil?
       if _transit_number = @transit_number
-        return false if _transit_number.to_s.size > 5000
+        return false if _transit_number.to_s.size > MAX_LENGTH_FOR_TRANSIT_NUMBER
       end
 
       true
@@ -97,10 +100,7 @@ module Stripe
         raise ArgumentError.new("\"account_number\" is required and cannot be null")
       end
       _account_number = account_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
       @account_number = _account_number
     end
 
@@ -111,10 +111,7 @@ module Stripe
         raise ArgumentError.new("\"institution_number\" is required and cannot be null")
       end
       _institution_number = institution_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("institution_number", _institution_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("institution_number", _institution_number.to_s.size, MAX_LENGTH_FOR_INSTITUTION_NUMBER)
       @institution_number = _institution_number
     end
 
@@ -125,10 +122,7 @@ module Stripe
         raise ArgumentError.new("\"transit_number\" is required and cannot be null")
       end
       _transit_number = transit_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transit_number", _transit_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("transit_number", _transit_number.to_s.size, MAX_LENGTH_FOR_TRANSIT_NUMBER)
       @transit_number = _transit_number
     end
 

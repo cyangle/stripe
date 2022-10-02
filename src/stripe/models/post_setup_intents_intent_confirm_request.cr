@@ -23,6 +23,7 @@ module Stripe
     # The client secret of the SetupIntent.
     @[JSON::Field(key: "client_secret", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter client_secret : String? = nil
+    MAX_LENGTH_FOR_CLIENT_SECRET = 5000
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -34,6 +35,7 @@ module Stripe
     # ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this SetupIntent.
     @[JSON::Field(key: "payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method : String? = nil
+    MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
 
     @[JSON::Field(key: "payment_method_data", type: Stripe::PaymentMethodDataParams1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_data : Stripe::PaymentMethodDataParams1? = nil
@@ -66,7 +68,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _client_secret = @client_secret
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
@@ -75,7 +77,7 @@ module Stripe
         invalid_properties.concat(_mandate_data.list_invalid_properties_for("mandate_data")) if _mandate_data.is_a?(OpenApi::Validatable)
       end
       if _payment_method = @payment_method
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
@@ -93,7 +95,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _client_secret = @client_secret
-        return false if _client_secret.to_s.size > 5000
+        return false if _client_secret.to_s.size > MAX_LENGTH_FOR_CLIENT_SECRET
       end
 
       if _mandate_data = @mandate_data
@@ -101,7 +103,7 @@ module Stripe
       end
 
       if _payment_method = @payment_method
-        return false if _payment_method.to_s.size > 5000
+        return false if _payment_method.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD
       end
 
       if _payment_method_data = @payment_method_data
@@ -122,10 +124,7 @@ module Stripe
         return @client_secret = nil
       end
       _client_secret = client_secret.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("client_secret", _client_secret.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("client_secret", _client_secret.to_s.size, MAX_LENGTH_FOR_CLIENT_SECRET)
       @client_secret = _client_secret
     end
 
@@ -157,10 +156,7 @@ module Stripe
         return @payment_method = nil
       end
       _payment_method = payment_method.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
       @payment_method = _payment_method
     end
 

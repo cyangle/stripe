@@ -24,18 +24,20 @@ module Stripe
     # The customer's bank, if provided. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
     @[JSON::Field(key: "bank", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank.nil? && !bank_present?)]
     getter bank : String? = nil
+    ERROR_MESSAGE_FOR_BANK = "invalid value for \"bank\", must be one of [abn_amro, asn_bank, bunq, handelsbanken, ing, knab, moneyou, rabobank, regiobank, revolut, sns_bank, triodos_bank, van_lanschot]."
+    VALID_VALUES_FOR_BANK  = StaticArray["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"]
 
     @[JSON::Field(ignore: true)]
     property? bank_present : Bool = false
-    VALID_VALUES_FOR_BANK = StaticArray["abn_amro", "asn_bank", "bunq", "handelsbanken", "ing", "knab", "moneyou", "rabobank", "regiobank", "revolut", "sns_bank", "triodos_bank", "van_lanschot"]
 
     # The Bank Identifier Code of the customer's bank, if the bank was provided.
     @[JSON::Field(key: "bic", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bic.nil? && !bic_present?)]
     getter bic : String? = nil
+    ERROR_MESSAGE_FOR_BIC = "invalid value for \"bic\", must be one of [ABNANL2A, ASNBNL21, BUNQNL2A, FVLBNL22, HANDNL2A, INGBNL2A, KNABNL2H, MOYONL21, RABONL2U, RBRBNL21, REVOLT21, SNSBNL2A, TRIONL2U]."
+    VALID_VALUES_FOR_BIC  = StaticArray["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U"]
 
     @[JSON::Field(ignore: true)]
     property? bic_present : Bool = false
-    VALID_VALUES_FOR_BIC = StaticArray["ABNANL2A", "ASNBNL21", "BUNQNL2A", "FVLBNL22", "HANDNL2A", "INGBNL2A", "KNABNL2H", "MOYONL21", "RABONL2U", "RBRBNL21", "REVOLT21", "SNSBNL2A", "TRIONL2U"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -53,10 +55,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _bank = @bank
-        invalid_properties.push(OpenApi::EnumValidator.error_message("bank", VALID_VALUES_FOR_BANK)) unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BANK) unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
       end
       if _bic = @bic
-        invalid_properties.push(OpenApi::EnumValidator.error_message("bic", VALID_VALUES_FOR_BIC)) unless OpenApi::EnumValidator.valid?(_bic, VALID_VALUES_FOR_BIC)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BIC) unless OpenApi::EnumValidator.valid?(_bic, VALID_VALUES_FOR_BIC)
       end
       invalid_properties
     end

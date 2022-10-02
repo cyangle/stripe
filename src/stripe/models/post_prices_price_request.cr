@@ -34,6 +34,7 @@ module Stripe
     # A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
     @[JSON::Field(key: "lookup_key", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter lookup_key : String? = nil
+    MAX_LENGTH_FOR_LOOKUP_KEY = 200
 
     @[JSON::Field(key: "metadata", type: Stripe::PostAccountRequestMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Stripe::PostAccountRequestMetadata? = nil
@@ -41,12 +42,13 @@ module Stripe
     # A brief description of the price, hidden from customers.
     @[JSON::Field(key: "nickname", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter nickname : String? = nil
+    MAX_LENGTH_FOR_NICKNAME = 5000
 
     # Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_behavior : String? = nil
-
-    VALID_VALUES_FOR_TAX_BEHAVIOR = StaticArray["exclusive", "inclusive", "unspecified"]
+    ERROR_MESSAGE_FOR_TAX_BEHAVIOR = "invalid value for \"tax_behavior\", must be one of [exclusive, inclusive, unspecified]."
+    VALID_VALUES_FOR_TAX_BEHAVIOR  = StaticArray["exclusive", "inclusive", "unspecified"]
 
     # If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
     @[JSON::Field(key: "transfer_lookup_key", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -78,7 +80,7 @@ module Stripe
       end
 
       if _lookup_key = @lookup_key
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("lookup_key", _lookup_key.to_s.size, 200)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("lookup_key", _lookup_key.to_s.size, MAX_LENGTH_FOR_LOOKUP_KEY)
           invalid_properties.push(max_length_error)
         end
       end
@@ -86,12 +88,12 @@ module Stripe
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _nickname = @nickname
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, MAX_LENGTH_FOR_NICKNAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _tax_behavior = @tax_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_behavior", VALID_VALUES_FOR_TAX_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
 
       invalid_properties
@@ -105,7 +107,7 @@ module Stripe
       end
 
       if _lookup_key = @lookup_key
-        return false if _lookup_key.to_s.size > 200
+        return false if _lookup_key.to_s.size > MAX_LENGTH_FOR_LOOKUP_KEY
       end
 
       if _metadata = @metadata
@@ -113,7 +115,7 @@ module Stripe
       end
 
       if _nickname = @nickname
-        return false if _nickname.to_s.size > 5000
+        return false if _nickname.to_s.size > MAX_LENGTH_FOR_NICKNAME
       end
 
       if _tax_behavior = @tax_behavior
@@ -161,10 +163,7 @@ module Stripe
         return @lookup_key = nil
       end
       _lookup_key = lookup_key.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("lookup_key", _lookup_key.to_s.size, 200)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("lookup_key", _lookup_key.to_s.size, MAX_LENGTH_FOR_LOOKUP_KEY)
       @lookup_key = _lookup_key
     end
 
@@ -186,10 +185,7 @@ module Stripe
         return @nickname = nil
       end
       _nickname = nickname.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("nickname", _nickname.to_s.size, MAX_LENGTH_FOR_NICKNAME)
       @nickname = _nickname
     end
 

@@ -34,10 +34,12 @@ module Stripe
     # A brief description of the plan, hidden from customers.
     @[JSON::Field(key: "nickname", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter nickname : String? = nil
+    MAX_LENGTH_FOR_NICKNAME = 5000
 
     # The product the plan belongs to. This cannot be changed once it has been used in a subscription or subscription schedule.
     @[JSON::Field(key: "product", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter product : String? = nil
+    MAX_LENGTH_FOR_PRODUCT = 5000
 
     # Default number of trial days when subscribing a customer to this plan using [`trial_from_plan=true`](https://stripe.com/docs/api#create_subscription-trial_from_plan).
     @[JSON::Field(key: "trial_period_days", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -66,12 +68,12 @@ module Stripe
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _nickname = @nickname
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, MAX_LENGTH_FOR_NICKNAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _product = @product
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, MAX_LENGTH_FOR_PRODUCT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -87,11 +89,11 @@ module Stripe
       end
 
       if _nickname = @nickname
-        return false if _nickname.to_s.size > 5000
+        return false if _nickname.to_s.size > MAX_LENGTH_FOR_NICKNAME
       end
 
       if _product = @product
-        return false if _product.to_s.size > 5000
+        return false if _product.to_s.size > MAX_LENGTH_FOR_PRODUCT
       end
 
       true
@@ -135,10 +137,7 @@ module Stripe
         return @nickname = nil
       end
       _nickname = nickname.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nickname", _nickname.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("nickname", _nickname.to_s.size, MAX_LENGTH_FOR_NICKNAME)
       @nickname = _nickname
     end
 
@@ -149,10 +148,7 @@ module Stripe
         return @product = nil
       end
       _product = product.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product", _product.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("product", _product.to_s.size, MAX_LENGTH_FOR_PRODUCT)
       @product = _product
     end
 

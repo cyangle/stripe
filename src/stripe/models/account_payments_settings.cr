@@ -24,6 +24,7 @@ module Stripe
     # The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: statement_descriptor.nil? && !statement_descriptor_present?)]
     getter statement_descriptor : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 5000
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # The Kana variation of the default text that appears on credit card statements when a charge is made (Japan only)
     @[JSON::Field(key: "statement_descriptor_kana", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: statement_descriptor_kana.nil? && !statement_descriptor_kana_present?)]
     getter statement_descriptor_kana : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANA = 5000
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_kana_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only)
     @[JSON::Field(key: "statement_descriptor_kanji", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: statement_descriptor_kanji.nil? && !statement_descriptor_kanji_present?)]
     getter statement_descriptor_kanji : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANJI = 5000
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_kanji_present : Bool = false
@@ -45,6 +48,7 @@ module Stripe
     # The Kana variation of the default text that appears on credit card statements when a charge is made (Japan only). This field prefixes any dynamic `statement_descriptor_suffix_kana` specified on the charge. `statement_descriptor_prefix_kana` is useful for maximizing descriptor space for the dynamic portion.
     @[JSON::Field(key: "statement_descriptor_prefix_kana", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: statement_descriptor_prefix_kana.nil? && !statement_descriptor_prefix_kana_present?)]
     getter statement_descriptor_prefix_kana : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA = 5000
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_prefix_kana_present : Bool = false
@@ -52,6 +56,7 @@ module Stripe
     # The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only). This field prefixes any dynamic `statement_descriptor_suffix_kanji` specified on the charge. `statement_descriptor_prefix_kanji` is useful for maximizing descriptor space for the dynamic portion.
     @[JSON::Field(key: "statement_descriptor_prefix_kanji", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: statement_descriptor_prefix_kanji.nil? && !statement_descriptor_prefix_kanji_present?)]
     getter statement_descriptor_prefix_kanji : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI = 5000
 
     @[JSON::Field(ignore: true)]
     property? statement_descriptor_prefix_kanji_present : Bool = false
@@ -75,27 +80,27 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _statement_descriptor = @statement_descriptor
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_kana = @statement_descriptor_kana
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_kana", _statement_descriptor_kana.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_kana", _statement_descriptor_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANA)
           invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_kanji = @statement_descriptor_kanji
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_kanji", _statement_descriptor_kanji.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_kanji", _statement_descriptor_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANJI)
           invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix_kana", _statement_descriptor_prefix_kana.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix_kana", _statement_descriptor_prefix_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA)
           invalid_properties.push(max_length_error)
         end
       end
       if _statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix_kanji", _statement_descriptor_prefix_kanji.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix_kanji", _statement_descriptor_prefix_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI)
           invalid_properties.push(max_length_error)
         end
       end
@@ -106,23 +111,23 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _statement_descriptor = @statement_descriptor
-        return false if _statement_descriptor.to_s.size > 5000
+        return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
       if _statement_descriptor_kana = @statement_descriptor_kana
-        return false if _statement_descriptor_kana.to_s.size > 5000
+        return false if _statement_descriptor_kana.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANA
       end
 
       if _statement_descriptor_kanji = @statement_descriptor_kanji
-        return false if _statement_descriptor_kanji.to_s.size > 5000
+        return false if _statement_descriptor_kanji.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANJI
       end
 
       if _statement_descriptor_prefix_kana = @statement_descriptor_prefix_kana
-        return false if _statement_descriptor_prefix_kana.to_s.size > 5000
+        return false if _statement_descriptor_prefix_kana.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA
       end
 
       if _statement_descriptor_prefix_kanji = @statement_descriptor_prefix_kanji
-        return false if _statement_descriptor_prefix_kanji.to_s.size > 5000
+        return false if _statement_descriptor_prefix_kanji.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI
       end
 
       true
@@ -135,10 +140,7 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       @statement_descriptor = _statement_descriptor
     end
 
@@ -149,10 +151,7 @@ module Stripe
         return @statement_descriptor_kana = nil
       end
       _statement_descriptor_kana = statement_descriptor_kana.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_kana", _statement_descriptor_kana.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_kana", _statement_descriptor_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANA)
       @statement_descriptor_kana = _statement_descriptor_kana
     end
 
@@ -163,10 +162,7 @@ module Stripe
         return @statement_descriptor_kanji = nil
       end
       _statement_descriptor_kanji = statement_descriptor_kanji.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_kanji", _statement_descriptor_kanji.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_kanji", _statement_descriptor_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_KANJI)
       @statement_descriptor_kanji = _statement_descriptor_kanji
     end
 
@@ -177,10 +173,7 @@ module Stripe
         return @statement_descriptor_prefix_kana = nil
       end
       _statement_descriptor_prefix_kana = statement_descriptor_prefix_kana.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix_kana", _statement_descriptor_prefix_kana.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_prefix_kana", _statement_descriptor_prefix_kana.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANA)
       @statement_descriptor_prefix_kana = _statement_descriptor_prefix_kana
     end
 
@@ -191,10 +184,7 @@ module Stripe
         return @statement_descriptor_prefix_kanji = nil
       end
       _statement_descriptor_prefix_kanji = statement_descriptor_prefix_kanji.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor_prefix_kanji", _statement_descriptor_prefix_kanji.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor_prefix_kanji", _statement_descriptor_prefix_kanji.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR_PREFIX_KANJI)
       @statement_descriptor_prefix_kanji = _statement_descriptor_prefix_kanji
     end
 

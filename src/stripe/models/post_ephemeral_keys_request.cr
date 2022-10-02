@@ -23,6 +23,7 @@ module Stripe
     # The ID of the Customer you'd like to modify using the resulting ephemeral key.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -31,6 +32,7 @@ module Stripe
     # The ID of the Issuing Card you'd like to access using the resulting ephemeral key.
     @[JSON::Field(key: "issuing_card", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter issuing_card : String? = nil
+    MAX_LENGTH_FOR_ISSUING_CARD = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -49,13 +51,13 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _customer = @customer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _issuing_card = @issuing_card
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_card", _issuing_card.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_card", _issuing_card.to_s.size, MAX_LENGTH_FOR_ISSUING_CARD)
           invalid_properties.push(max_length_error)
         end
       end
@@ -66,11 +68,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _customer = @customer
-        return false if _customer.to_s.size > 5000
+        return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       if _issuing_card = @issuing_card
-        return false if _issuing_card.to_s.size > 5000
+        return false if _issuing_card.to_s.size > MAX_LENGTH_FOR_ISSUING_CARD
       end
 
       true
@@ -83,10 +85,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       @customer = _customer
     end
 
@@ -107,10 +106,7 @@ module Stripe
         return @issuing_card = nil
       end
       _issuing_card = issuing_card.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_card", _issuing_card.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("issuing_card", _issuing_card.to_s.size, MAX_LENGTH_FOR_ISSUING_CARD)
       @issuing_card = _issuing_card
     end
 

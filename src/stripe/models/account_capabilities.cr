@@ -24,200 +24,200 @@ module Stripe
     # The status of the Canadian pre-authorized debits payments capability of the account, or whether the account can directly process Canadian pre-authorized debits charges.
     @[JSON::Field(key: "acss_debit_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter acss_debit_payments : String? = nil
-
-    VALID_VALUES_FOR_ACSS_DEBIT_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_ACSS_DEBIT_PAYMENTS = "invalid value for \"acss_debit_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_ACSS_DEBIT_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the Affirm capability of the account, or whether the account can directly process Affirm charges.
     @[JSON::Field(key: "affirm_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter affirm_payments : String? = nil
-
-    VALID_VALUES_FOR_AFFIRM_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_AFFIRM_PAYMENTS = "invalid value for \"affirm_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_AFFIRM_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the Afterpay Clearpay capability of the account, or whether the account can directly process Afterpay Clearpay charges.
     @[JSON::Field(key: "afterpay_clearpay_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter afterpay_clearpay_payments : String? = nil
-
-    VALID_VALUES_FOR_AFTERPAY_CLEARPAY_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_AFTERPAY_CLEARPAY_PAYMENTS = "invalid value for \"afterpay_clearpay_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_AFTERPAY_CLEARPAY_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the BECS Direct Debit (AU) payments capability of the account, or whether the account can directly process BECS Direct Debit (AU) charges.
     @[JSON::Field(key: "au_becs_debit_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter au_becs_debit_payments : String? = nil
-
-    VALID_VALUES_FOR_AU_BECS_DEBIT_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_AU_BECS_DEBIT_PAYMENTS = "invalid value for \"au_becs_debit_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_AU_BECS_DEBIT_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the Bacs Direct Debits payments capability of the account, or whether the account can directly process Bacs Direct Debits charges.
     @[JSON::Field(key: "bacs_debit_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bacs_debit_payments : String? = nil
-
-    VALID_VALUES_FOR_BACS_DEBIT_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_BACS_DEBIT_PAYMENTS = "invalid value for \"bacs_debit_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_BACS_DEBIT_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the Bancontact payments capability of the account, or whether the account can directly process Bancontact charges.
     @[JSON::Field(key: "bancontact_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bancontact_payments : String? = nil
-
-    VALID_VALUES_FOR_BANCONTACT_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_BANCONTACT_PAYMENTS = "invalid value for \"bancontact_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_BANCONTACT_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the customer_balance payments capability of the account, or whether the account can directly process customer_balance charges.
     @[JSON::Field(key: "bank_transfer_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bank_transfer_payments : String? = nil
-
-    VALID_VALUES_FOR_BANK_TRANSFER_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_BANK_TRANSFER_PAYMENTS = "invalid value for \"bank_transfer_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_BANK_TRANSFER_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the blik payments capability of the account, or whether the account can directly process blik charges.
     @[JSON::Field(key: "blik_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter blik_payments : String? = nil
-
-    VALID_VALUES_FOR_BLIK_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_BLIK_PAYMENTS = "invalid value for \"blik_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_BLIK_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the boleto payments capability of the account, or whether the account can directly process boleto charges.
     @[JSON::Field(key: "boleto_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter boleto_payments : String? = nil
-
-    VALID_VALUES_FOR_BOLETO_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_BOLETO_PAYMENTS = "invalid value for \"boleto_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_BOLETO_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the card issuing capability of the account, or whether you can use Issuing to distribute funds on cards
     @[JSON::Field(key: "card_issuing", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter card_issuing : String? = nil
-
-    VALID_VALUES_FOR_CARD_ISSUING = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_CARD_ISSUING = "invalid value for \"card_issuing\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_CARD_ISSUING  = StaticArray["active", "inactive", "pending"]
 
     # The status of the card payments capability of the account, or whether the account can directly process credit and debit card charges.
     @[JSON::Field(key: "card_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter card_payments : String? = nil
-
-    VALID_VALUES_FOR_CARD_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_CARD_PAYMENTS = "invalid value for \"card_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_CARD_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the Cartes Bancaires payments capability of the account, or whether the account can directly process Cartes Bancaires card charges in EUR currency.
     @[JSON::Field(key: "cartes_bancaires_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cartes_bancaires_payments : String? = nil
-
-    VALID_VALUES_FOR_CARTES_BANCAIRES_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_CARTES_BANCAIRES_PAYMENTS = "invalid value for \"cartes_bancaires_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_CARTES_BANCAIRES_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the EPS payments capability of the account, or whether the account can directly process EPS charges.
     @[JSON::Field(key: "eps_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter eps_payments : String? = nil
-
-    VALID_VALUES_FOR_EPS_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_EPS_PAYMENTS = "invalid value for \"eps_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_EPS_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the FPX payments capability of the account, or whether the account can directly process FPX charges.
     @[JSON::Field(key: "fpx_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter fpx_payments : String? = nil
-
-    VALID_VALUES_FOR_FPX_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_FPX_PAYMENTS = "invalid value for \"fpx_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_FPX_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the giropay payments capability of the account, or whether the account can directly process giropay charges.
     @[JSON::Field(key: "giropay_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter giropay_payments : String? = nil
-
-    VALID_VALUES_FOR_GIROPAY_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_GIROPAY_PAYMENTS = "invalid value for \"giropay_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_GIROPAY_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the GrabPay payments capability of the account, or whether the account can directly process GrabPay charges.
     @[JSON::Field(key: "grabpay_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter grabpay_payments : String? = nil
-
-    VALID_VALUES_FOR_GRABPAY_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_GRABPAY_PAYMENTS = "invalid value for \"grabpay_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_GRABPAY_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the iDEAL payments capability of the account, or whether the account can directly process iDEAL charges.
     @[JSON::Field(key: "ideal_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ideal_payments : String? = nil
-
-    VALID_VALUES_FOR_IDEAL_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_IDEAL_PAYMENTS = "invalid value for \"ideal_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_IDEAL_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the JCB payments capability of the account, or whether the account (Japan only) can directly process JCB credit card charges in JPY currency.
     @[JSON::Field(key: "jcb_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter jcb_payments : String? = nil
-
-    VALID_VALUES_FOR_JCB_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_JCB_PAYMENTS = "invalid value for \"jcb_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_JCB_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the Klarna payments capability of the account, or whether the account can directly process Klarna charges.
     @[JSON::Field(key: "klarna_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter klarna_payments : String? = nil
-
-    VALID_VALUES_FOR_KLARNA_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_KLARNA_PAYMENTS = "invalid value for \"klarna_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_KLARNA_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the konbini payments capability of the account, or whether the account can directly process konbini charges.
     @[JSON::Field(key: "konbini_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter konbini_payments : String? = nil
-
-    VALID_VALUES_FOR_KONBINI_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_KONBINI_PAYMENTS = "invalid value for \"konbini_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_KONBINI_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the legacy payments capability of the account.
     @[JSON::Field(key: "legacy_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter legacy_payments : String? = nil
-
-    VALID_VALUES_FOR_LEGACY_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_LEGACY_PAYMENTS = "invalid value for \"legacy_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_LEGACY_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the link_payments capability of the account, or whether the account can directly process Link charges.
     @[JSON::Field(key: "link_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter link_payments : String? = nil
-
-    VALID_VALUES_FOR_LINK_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_LINK_PAYMENTS = "invalid value for \"link_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_LINK_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the OXXO payments capability of the account, or whether the account can directly process OXXO charges.
     @[JSON::Field(key: "oxxo_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter oxxo_payments : String? = nil
-
-    VALID_VALUES_FOR_OXXO_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_OXXO_PAYMENTS = "invalid value for \"oxxo_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_OXXO_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the P24 payments capability of the account, or whether the account can directly process P24 charges.
     @[JSON::Field(key: "p24_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter p24_payments : String? = nil
-
-    VALID_VALUES_FOR_P24_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_P24_PAYMENTS = "invalid value for \"p24_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_P24_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the paynow payments capability of the account, or whether the account can directly process paynow charges.
     @[JSON::Field(key: "paynow_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter paynow_payments : String? = nil
-
-    VALID_VALUES_FOR_PAYNOW_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_PAYNOW_PAYMENTS = "invalid value for \"paynow_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_PAYNOW_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the promptpay payments capability of the account, or whether the account can directly process promptpay charges.
     @[JSON::Field(key: "promptpay_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter promptpay_payments : String? = nil
-
-    VALID_VALUES_FOR_PROMPTPAY_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_PROMPTPAY_PAYMENTS = "invalid value for \"promptpay_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_PROMPTPAY_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the SEPA Direct Debits payments capability of the account, or whether the account can directly process SEPA Direct Debits charges.
     @[JSON::Field(key: "sepa_debit_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sepa_debit_payments : String? = nil
-
-    VALID_VALUES_FOR_SEPA_DEBIT_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_SEPA_DEBIT_PAYMENTS = "invalid value for \"sepa_debit_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_SEPA_DEBIT_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the Sofort payments capability of the account, or whether the account can directly process Sofort charges.
     @[JSON::Field(key: "sofort_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sofort_payments : String? = nil
-
-    VALID_VALUES_FOR_SOFORT_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_SOFORT_PAYMENTS = "invalid value for \"sofort_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_SOFORT_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the tax reporting 1099-K (US) capability of the account.
     @[JSON::Field(key: "tax_reporting_us_1099_k", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_reporting_us_1099_k : String? = nil
-
-    VALID_VALUES_FOR_TAX_REPORTING_US_1099_K = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_TAX_REPORTING_US_1099_K = "invalid value for \"tax_reporting_us_1099_k\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_TAX_REPORTING_US_1099_K  = StaticArray["active", "inactive", "pending"]
 
     # The status of the tax reporting 1099-MISC (US) capability of the account.
     @[JSON::Field(key: "tax_reporting_us_1099_misc", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter tax_reporting_us_1099_misc : String? = nil
-
-    VALID_VALUES_FOR_TAX_REPORTING_US_1099_MISC = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_TAX_REPORTING_US_1099_MISC = "invalid value for \"tax_reporting_us_1099_misc\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_TAX_REPORTING_US_1099_MISC  = StaticArray["active", "inactive", "pending"]
 
     # The status of the transfers capability of the account, or whether your platform can transfer funds to the account.
     @[JSON::Field(key: "transfers", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transfers : String? = nil
-
-    VALID_VALUES_FOR_TRANSFERS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_TRANSFERS = "invalid value for \"transfers\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_TRANSFERS  = StaticArray["active", "inactive", "pending"]
 
     # The status of the banking capability, or whether the account can have bank accounts.
     @[JSON::Field(key: "treasury", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter treasury : String? = nil
-
-    VALID_VALUES_FOR_TREASURY = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_TREASURY = "invalid value for \"treasury\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_TREASURY  = StaticArray["active", "inactive", "pending"]
 
     # The status of the US bank account ACH payments capability of the account, or whether the account can directly process US bank account charges.
     @[JSON::Field(key: "us_bank_account_ach_payments", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter us_bank_account_ach_payments : String? = nil
-
-    VALID_VALUES_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS = StaticArray["active", "inactive", "pending"]
+    ERROR_MESSAGE_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS = "invalid value for \"us_bank_account_ach_payments\", must be one of [active, inactive, pending]."
+    VALID_VALUES_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS  = StaticArray["active", "inactive", "pending"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -266,103 +266,103 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _acss_debit_payments = @acss_debit_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("acss_debit_payments", VALID_VALUES_FOR_ACSS_DEBIT_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_acss_debit_payments, VALID_VALUES_FOR_ACSS_DEBIT_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_ACSS_DEBIT_PAYMENTS) unless OpenApi::EnumValidator.valid?(_acss_debit_payments, VALID_VALUES_FOR_ACSS_DEBIT_PAYMENTS)
       end
       if _affirm_payments = @affirm_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("affirm_payments", VALID_VALUES_FOR_AFFIRM_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_affirm_payments, VALID_VALUES_FOR_AFFIRM_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_AFFIRM_PAYMENTS) unless OpenApi::EnumValidator.valid?(_affirm_payments, VALID_VALUES_FOR_AFFIRM_PAYMENTS)
       end
       if _afterpay_clearpay_payments = @afterpay_clearpay_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("afterpay_clearpay_payments", VALID_VALUES_FOR_AFTERPAY_CLEARPAY_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_afterpay_clearpay_payments, VALID_VALUES_FOR_AFTERPAY_CLEARPAY_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_AFTERPAY_CLEARPAY_PAYMENTS) unless OpenApi::EnumValidator.valid?(_afterpay_clearpay_payments, VALID_VALUES_FOR_AFTERPAY_CLEARPAY_PAYMENTS)
       end
       if _au_becs_debit_payments = @au_becs_debit_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("au_becs_debit_payments", VALID_VALUES_FOR_AU_BECS_DEBIT_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_au_becs_debit_payments, VALID_VALUES_FOR_AU_BECS_DEBIT_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_AU_BECS_DEBIT_PAYMENTS) unless OpenApi::EnumValidator.valid?(_au_becs_debit_payments, VALID_VALUES_FOR_AU_BECS_DEBIT_PAYMENTS)
       end
       if _bacs_debit_payments = @bacs_debit_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("bacs_debit_payments", VALID_VALUES_FOR_BACS_DEBIT_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_bacs_debit_payments, VALID_VALUES_FOR_BACS_DEBIT_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BACS_DEBIT_PAYMENTS) unless OpenApi::EnumValidator.valid?(_bacs_debit_payments, VALID_VALUES_FOR_BACS_DEBIT_PAYMENTS)
       end
       if _bancontact_payments = @bancontact_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("bancontact_payments", VALID_VALUES_FOR_BANCONTACT_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_bancontact_payments, VALID_VALUES_FOR_BANCONTACT_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BANCONTACT_PAYMENTS) unless OpenApi::EnumValidator.valid?(_bancontact_payments, VALID_VALUES_FOR_BANCONTACT_PAYMENTS)
       end
       if _bank_transfer_payments = @bank_transfer_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("bank_transfer_payments", VALID_VALUES_FOR_BANK_TRANSFER_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_bank_transfer_payments, VALID_VALUES_FOR_BANK_TRANSFER_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BANK_TRANSFER_PAYMENTS) unless OpenApi::EnumValidator.valid?(_bank_transfer_payments, VALID_VALUES_FOR_BANK_TRANSFER_PAYMENTS)
       end
       if _blik_payments = @blik_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("blik_payments", VALID_VALUES_FOR_BLIK_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_blik_payments, VALID_VALUES_FOR_BLIK_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BLIK_PAYMENTS) unless OpenApi::EnumValidator.valid?(_blik_payments, VALID_VALUES_FOR_BLIK_PAYMENTS)
       end
       if _boleto_payments = @boleto_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("boleto_payments", VALID_VALUES_FOR_BOLETO_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_boleto_payments, VALID_VALUES_FOR_BOLETO_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BOLETO_PAYMENTS) unless OpenApi::EnumValidator.valid?(_boleto_payments, VALID_VALUES_FOR_BOLETO_PAYMENTS)
       end
       if _card_issuing = @card_issuing
-        invalid_properties.push(OpenApi::EnumValidator.error_message("card_issuing", VALID_VALUES_FOR_CARD_ISSUING)) unless OpenApi::EnumValidator.valid?(_card_issuing, VALID_VALUES_FOR_CARD_ISSUING)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CARD_ISSUING) unless OpenApi::EnumValidator.valid?(_card_issuing, VALID_VALUES_FOR_CARD_ISSUING)
       end
       if _card_payments = @card_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("card_payments", VALID_VALUES_FOR_CARD_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_card_payments, VALID_VALUES_FOR_CARD_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CARD_PAYMENTS) unless OpenApi::EnumValidator.valid?(_card_payments, VALID_VALUES_FOR_CARD_PAYMENTS)
       end
       if _cartes_bancaires_payments = @cartes_bancaires_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("cartes_bancaires_payments", VALID_VALUES_FOR_CARTES_BANCAIRES_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_cartes_bancaires_payments, VALID_VALUES_FOR_CARTES_BANCAIRES_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CARTES_BANCAIRES_PAYMENTS) unless OpenApi::EnumValidator.valid?(_cartes_bancaires_payments, VALID_VALUES_FOR_CARTES_BANCAIRES_PAYMENTS)
       end
       if _eps_payments = @eps_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("eps_payments", VALID_VALUES_FOR_EPS_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_eps_payments, VALID_VALUES_FOR_EPS_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_EPS_PAYMENTS) unless OpenApi::EnumValidator.valid?(_eps_payments, VALID_VALUES_FOR_EPS_PAYMENTS)
       end
       if _fpx_payments = @fpx_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("fpx_payments", VALID_VALUES_FOR_FPX_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_fpx_payments, VALID_VALUES_FOR_FPX_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_FPX_PAYMENTS) unless OpenApi::EnumValidator.valid?(_fpx_payments, VALID_VALUES_FOR_FPX_PAYMENTS)
       end
       if _giropay_payments = @giropay_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("giropay_payments", VALID_VALUES_FOR_GIROPAY_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_giropay_payments, VALID_VALUES_FOR_GIROPAY_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_GIROPAY_PAYMENTS) unless OpenApi::EnumValidator.valid?(_giropay_payments, VALID_VALUES_FOR_GIROPAY_PAYMENTS)
       end
       if _grabpay_payments = @grabpay_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("grabpay_payments", VALID_VALUES_FOR_GRABPAY_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_grabpay_payments, VALID_VALUES_FOR_GRABPAY_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_GRABPAY_PAYMENTS) unless OpenApi::EnumValidator.valid?(_grabpay_payments, VALID_VALUES_FOR_GRABPAY_PAYMENTS)
       end
       if _ideal_payments = @ideal_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("ideal_payments", VALID_VALUES_FOR_IDEAL_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_ideal_payments, VALID_VALUES_FOR_IDEAL_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_IDEAL_PAYMENTS) unless OpenApi::EnumValidator.valid?(_ideal_payments, VALID_VALUES_FOR_IDEAL_PAYMENTS)
       end
       if _jcb_payments = @jcb_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("jcb_payments", VALID_VALUES_FOR_JCB_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_jcb_payments, VALID_VALUES_FOR_JCB_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_JCB_PAYMENTS) unless OpenApi::EnumValidator.valid?(_jcb_payments, VALID_VALUES_FOR_JCB_PAYMENTS)
       end
       if _klarna_payments = @klarna_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("klarna_payments", VALID_VALUES_FOR_KLARNA_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_klarna_payments, VALID_VALUES_FOR_KLARNA_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_KLARNA_PAYMENTS) unless OpenApi::EnumValidator.valid?(_klarna_payments, VALID_VALUES_FOR_KLARNA_PAYMENTS)
       end
       if _konbini_payments = @konbini_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("konbini_payments", VALID_VALUES_FOR_KONBINI_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_konbini_payments, VALID_VALUES_FOR_KONBINI_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_KONBINI_PAYMENTS) unless OpenApi::EnumValidator.valid?(_konbini_payments, VALID_VALUES_FOR_KONBINI_PAYMENTS)
       end
       if _legacy_payments = @legacy_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("legacy_payments", VALID_VALUES_FOR_LEGACY_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_legacy_payments, VALID_VALUES_FOR_LEGACY_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_LEGACY_PAYMENTS) unless OpenApi::EnumValidator.valid?(_legacy_payments, VALID_VALUES_FOR_LEGACY_PAYMENTS)
       end
       if _link_payments = @link_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("link_payments", VALID_VALUES_FOR_LINK_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_link_payments, VALID_VALUES_FOR_LINK_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_LINK_PAYMENTS) unless OpenApi::EnumValidator.valid?(_link_payments, VALID_VALUES_FOR_LINK_PAYMENTS)
       end
       if _oxxo_payments = @oxxo_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("oxxo_payments", VALID_VALUES_FOR_OXXO_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_oxxo_payments, VALID_VALUES_FOR_OXXO_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OXXO_PAYMENTS) unless OpenApi::EnumValidator.valid?(_oxxo_payments, VALID_VALUES_FOR_OXXO_PAYMENTS)
       end
       if _p24_payments = @p24_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("p24_payments", VALID_VALUES_FOR_P24_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_p24_payments, VALID_VALUES_FOR_P24_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_P24_PAYMENTS) unless OpenApi::EnumValidator.valid?(_p24_payments, VALID_VALUES_FOR_P24_PAYMENTS)
       end
       if _paynow_payments = @paynow_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("paynow_payments", VALID_VALUES_FOR_PAYNOW_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_paynow_payments, VALID_VALUES_FOR_PAYNOW_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PAYNOW_PAYMENTS) unless OpenApi::EnumValidator.valid?(_paynow_payments, VALID_VALUES_FOR_PAYNOW_PAYMENTS)
       end
       if _promptpay_payments = @promptpay_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("promptpay_payments", VALID_VALUES_FOR_PROMPTPAY_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_promptpay_payments, VALID_VALUES_FOR_PROMPTPAY_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PROMPTPAY_PAYMENTS) unless OpenApi::EnumValidator.valid?(_promptpay_payments, VALID_VALUES_FOR_PROMPTPAY_PAYMENTS)
       end
       if _sepa_debit_payments = @sepa_debit_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("sepa_debit_payments", VALID_VALUES_FOR_SEPA_DEBIT_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_sepa_debit_payments, VALID_VALUES_FOR_SEPA_DEBIT_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SEPA_DEBIT_PAYMENTS) unless OpenApi::EnumValidator.valid?(_sepa_debit_payments, VALID_VALUES_FOR_SEPA_DEBIT_PAYMENTS)
       end
       if _sofort_payments = @sofort_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("sofort_payments", VALID_VALUES_FOR_SOFORT_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_sofort_payments, VALID_VALUES_FOR_SOFORT_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SOFORT_PAYMENTS) unless OpenApi::EnumValidator.valid?(_sofort_payments, VALID_VALUES_FOR_SOFORT_PAYMENTS)
       end
       if _tax_reporting_us_1099_k = @tax_reporting_us_1099_k
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_reporting_us_1099_k", VALID_VALUES_FOR_TAX_REPORTING_US_1099_K)) unless OpenApi::EnumValidator.valid?(_tax_reporting_us_1099_k, VALID_VALUES_FOR_TAX_REPORTING_US_1099_K)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_REPORTING_US_1099_K) unless OpenApi::EnumValidator.valid?(_tax_reporting_us_1099_k, VALID_VALUES_FOR_TAX_REPORTING_US_1099_K)
       end
       if _tax_reporting_us_1099_misc = @tax_reporting_us_1099_misc
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_reporting_us_1099_misc", VALID_VALUES_FOR_TAX_REPORTING_US_1099_MISC)) unless OpenApi::EnumValidator.valid?(_tax_reporting_us_1099_misc, VALID_VALUES_FOR_TAX_REPORTING_US_1099_MISC)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_REPORTING_US_1099_MISC) unless OpenApi::EnumValidator.valid?(_tax_reporting_us_1099_misc, VALID_VALUES_FOR_TAX_REPORTING_US_1099_MISC)
       end
       if _transfers = @transfers
-        invalid_properties.push(OpenApi::EnumValidator.error_message("transfers", VALID_VALUES_FOR_TRANSFERS)) unless OpenApi::EnumValidator.valid?(_transfers, VALID_VALUES_FOR_TRANSFERS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TRANSFERS) unless OpenApi::EnumValidator.valid?(_transfers, VALID_VALUES_FOR_TRANSFERS)
       end
       if _treasury = @treasury
-        invalid_properties.push(OpenApi::EnumValidator.error_message("treasury", VALID_VALUES_FOR_TREASURY)) unless OpenApi::EnumValidator.valid?(_treasury, VALID_VALUES_FOR_TREASURY)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TREASURY) unless OpenApi::EnumValidator.valid?(_treasury, VALID_VALUES_FOR_TREASURY)
       end
       if _us_bank_account_ach_payments = @us_bank_account_ach_payments
-        invalid_properties.push(OpenApi::EnumValidator.error_message("us_bank_account_ach_payments", VALID_VALUES_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS)) unless OpenApi::EnumValidator.valid?(_us_bank_account_ach_payments, VALID_VALUES_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS) unless OpenApi::EnumValidator.valid?(_us_bank_account_ach_payments, VALID_VALUES_FOR_US_BANK_ACCOUNT_ACH_PAYMENTS)
       end
       invalid_properties
     end

@@ -24,6 +24,7 @@ module Stripe
     # Account owner's email address.
     @[JSON::Field(key: "email", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: email.nil? && !email_present?)]
     getter email : String? = nil
+    MAX_LENGTH_FOR_EMAIL = 5000
 
     @[JSON::Field(ignore: true)]
     property? email_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # Token used for persistent Link logins.
     @[JSON::Field(key: "persistent_token", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter persistent_token : String? = nil
+    MAX_LENGTH_FOR_PERSISTENT_TOKEN = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -48,12 +50,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _email = @email
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
           invalid_properties.push(max_length_error)
         end
       end
       if _persistent_token = @persistent_token
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("persistent_token", _persistent_token.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("persistent_token", _persistent_token.to_s.size, MAX_LENGTH_FOR_PERSISTENT_TOKEN)
           invalid_properties.push(max_length_error)
         end
       end
@@ -64,11 +66,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _email = @email
-        return false if _email.to_s.size > 5000
+        return false if _email.to_s.size > MAX_LENGTH_FOR_EMAIL
       end
 
       if _persistent_token = @persistent_token
-        return false if _persistent_token.to_s.size > 5000
+        return false if _persistent_token.to_s.size > MAX_LENGTH_FOR_PERSISTENT_TOKEN
       end
 
       true
@@ -81,10 +83,7 @@ module Stripe
         return @email = nil
       end
       _email = email.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("email", _email.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("email", _email.to_s.size, MAX_LENGTH_FOR_EMAIL)
       @email = _email
     end
 
@@ -95,10 +94,7 @@ module Stripe
         return @persistent_token = nil
       end
       _persistent_token = persistent_token.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("persistent_token", _persistent_token.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("persistent_token", _persistent_token.to_s.size, MAX_LENGTH_FOR_PERSISTENT_TOKEN)
       @persistent_token = _persistent_token
     end
 

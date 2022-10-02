@@ -27,8 +27,8 @@ module Stripe
     # The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
     @[JSON::Field(key: "purpose", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter purpose : String? = nil
-
-    VALID_VALUES_FOR_PURPOSE = StaticArray["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "identity_document", "pci_document", "tax_document_user_upload", "terminal_reader_splashscreen"]
+    ERROR_MESSAGE_FOR_PURPOSE = "invalid value for \"purpose\", must be one of [account_requirement, additional_verification, business_icon, business_logo, customer_signature, dispute_evidence, identity_document, pci_document, tax_document_user_upload, terminal_reader_splashscreen]."
+    VALID_VALUES_FOR_PURPOSE  = StaticArray["account_requirement", "additional_verification", "business_icon", "business_logo", "customer_signature", "dispute_evidence", "identity_document", "pci_document", "tax_document_user_upload", "terminal_reader_splashscreen"]
 
     # Optional properties
 
@@ -62,7 +62,7 @@ module Stripe
       invalid_properties.push("\"purpose\" is required and cannot be null") if @purpose.nil?
 
       if _purpose = @purpose
-        invalid_properties.push(OpenApi::EnumValidator.error_message("purpose", VALID_VALUES_FOR_PURPOSE)) unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PURPOSE) unless OpenApi::EnumValidator.valid?(_purpose, VALID_VALUES_FOR_PURPOSE)
       end
 
       if _file_link_data = @file_link_data

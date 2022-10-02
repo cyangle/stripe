@@ -28,6 +28,7 @@ module Stripe
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
+    MAX_LENGTH_FOR_CURRENCY = 5000
 
     @[JSON::Field(key: "customer", type: Stripe::CustomerCashBalanceTransactionCustomer?, default: nil, required: true, nullable: false, emit_null: false)]
     getter customer : Stripe::CustomerCashBalanceTransactionCustomer? = nil
@@ -39,6 +40,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -51,14 +53,14 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["customer_cash_balance_transaction"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [customer_cash_balance_transaction]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["customer_cash_balance_transaction"]
 
     # The type of the cash balance transaction. One of `applied_to_payment`, `unapplied_from_payment`, `refunded_from_payment`, `funded`, `return_initiated`, or `return_canceled`. New types may be added in future. See [Customer Balance](https://stripe.com/docs/payments/customer-balance#types) to learn more about these types.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["applied_to_payment", "funded", "refunded_from_payment", "return_canceled", "return_initiated", "unapplied_from_payment"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [applied_to_payment, funded, refunded_from_payment, return_canceled, return_initiated, unapplied_from_payment]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["applied_to_payment", "funded", "refunded_from_payment", "return_canceled", "return_initiated", "unapplied_from_payment"]
 
     # Optional properties
 
@@ -106,7 +108,7 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       if _currency = @currency
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
           invalid_properties.push(max_length_error)
         end
       end
@@ -120,7 +122,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -131,12 +133,12 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _applied_to_payment = @applied_to_payment
         invalid_properties.concat(_applied_to_payment.list_invalid_properties_for("applied_to_payment")) if _applied_to_payment.is_a?(OpenApi::Validatable)
@@ -160,7 +162,7 @@ module Stripe
 
       return false if @currency.nil?
       if _currency = @currency
-        return false if _currency.to_s.size > 5000
+        return false if _currency.to_s.size > MAX_LENGTH_FOR_CURRENCY
       end
 
       return false if @customer.nil?
@@ -172,7 +174,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -225,10 +227,7 @@ module Stripe
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
       _currency = currency.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
       @currency = _currency
     end
 
@@ -260,10 +259,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 

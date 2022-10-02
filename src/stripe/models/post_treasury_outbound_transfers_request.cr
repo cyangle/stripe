@@ -37,10 +37,12 @@ module Stripe
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # The PaymentMethod to use as the payment instrument for the OutboundTransfer.
     @[JSON::Field(key: "destination_payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter destination_payment_method : String? = nil
+    MAX_LENGTH_FOR_DESTINATION_PAYMENT_METHOD = 5000
 
     @[JSON::Field(key: "destination_payment_method_options", type: Stripe::PaymentMethodOptions3?, default: nil, required: false, nullable: false, emit_null: false)]
     getter destination_payment_method_options : Stripe::PaymentMethodOptions3? = nil
@@ -56,6 +58,7 @@ module Stripe
     # Statement descriptor to be shown on the receiving end of an OutboundTransfer. Maximum 10 characters for `ach` transfers or 140 characters for `wire` transfers. The default value is `transfer`.
     @[JSON::Field(key: "statement_descriptor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor : String? = nil
+    MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -87,12 +90,12 @@ module Stripe
       invalid_properties.push("\"financial_account\" is required and cannot be null") if @financial_account.nil?
 
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       if _destination_payment_method = @destination_payment_method
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("destination_payment_method", _destination_payment_method.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("destination_payment_method", _destination_payment_method.to_s.size, MAX_LENGTH_FOR_DESTINATION_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
@@ -101,7 +104,7 @@ module Stripe
       end
 
       if _statement_descriptor = @statement_descriptor
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
           invalid_properties.push(max_length_error)
         end
       end
@@ -118,11 +121,11 @@ module Stripe
       return false if @financial_account.nil?
 
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _destination_payment_method = @destination_payment_method
-        return false if _destination_payment_method.to_s.size > 5000
+        return false if _destination_payment_method.to_s.size > MAX_LENGTH_FOR_DESTINATION_PAYMENT_METHOD
       end
 
       if _destination_payment_method_options = @destination_payment_method_options
@@ -130,7 +133,7 @@ module Stripe
       end
 
       if _statement_descriptor = @statement_descriptor
-        return false if _statement_descriptor.to_s.size > 5000
+        return false if _statement_descriptor.to_s.size > MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR
       end
 
       true
@@ -173,10 +176,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -187,10 +187,7 @@ module Stripe
         return @destination_payment_method = nil
       end
       _destination_payment_method = destination_payment_method.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("destination_payment_method", _destination_payment_method.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("destination_payment_method", _destination_payment_method.to_s.size, MAX_LENGTH_FOR_DESTINATION_PAYMENT_METHOD)
       @destination_payment_method = _destination_payment_method
     end
 
@@ -232,10 +229,7 @@ module Stripe
         return @statement_descriptor = nil
       end
       _statement_descriptor = statement_descriptor.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("statement_descriptor", _statement_descriptor.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("statement_descriptor", _statement_descriptor.to_s.size, MAX_LENGTH_FOR_STATEMENT_DESCRIPTOR)
       @statement_descriptor = _statement_descriptor
     end
 

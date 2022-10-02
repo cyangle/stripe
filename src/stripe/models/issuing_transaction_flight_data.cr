@@ -31,6 +31,7 @@ module Stripe
     # The name of the passenger.
     @[JSON::Field(key: "passenger_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: passenger_name.nil? && !passenger_name_present?)]
     getter passenger_name : String? = nil
+    MAX_LENGTH_FOR_PASSENGER_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? passenger_name_present : Bool = false
@@ -52,6 +53,7 @@ module Stripe
     # The travel agency that issued the ticket.
     @[JSON::Field(key: "travel_agency", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: travel_agency.nil? && !travel_agency_present?)]
     getter travel_agency : String? = nil
+    MAX_LENGTH_FOR_TRAVEL_AGENCY = 5000
 
     @[JSON::Field(ignore: true)]
     property? travel_agency_present : Bool = false
@@ -75,16 +77,16 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _passenger_name = @passenger_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("passenger_name", _passenger_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("passenger_name", _passenger_name.to_s.size, MAX_LENGTH_FOR_PASSENGER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _segments = @segments
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "segments", array: _segments)) if _segments.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "segments", container: _segments)) if _segments.is_a?(Array)
       end
       if _travel_agency = @travel_agency
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("travel_agency", _travel_agency.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("travel_agency", _travel_agency.to_s.size, MAX_LENGTH_FOR_TRAVEL_AGENCY)
           invalid_properties.push(max_length_error)
         end
       end
@@ -95,15 +97,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _passenger_name = @passenger_name
-        return false if _passenger_name.to_s.size > 5000
+        return false if _passenger_name.to_s.size > MAX_LENGTH_FOR_PASSENGER_NAME
       end
 
       if _segments = @segments
-        return false if _segments.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _segments)
+        return false if _segments.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _segments)
       end
 
       if _travel_agency = @travel_agency
-        return false if _travel_agency.to_s.size > 5000
+        return false if _travel_agency.to_s.size > MAX_LENGTH_FOR_TRAVEL_AGENCY
       end
 
       true
@@ -126,10 +128,7 @@ module Stripe
         return @passenger_name = nil
       end
       _passenger_name = passenger_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("passenger_name", _passenger_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("passenger_name", _passenger_name.to_s.size, MAX_LENGTH_FOR_PASSENGER_NAME)
       @passenger_name = _passenger_name
     end
 
@@ -150,7 +149,7 @@ module Stripe
         return @segments = nil
       end
       _segments = segments.not_nil!
-      OpenApi::ArrayValidator.validate(array: _segments) if _segments.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _segments) if _segments.is_a?(Array)
       @segments = _segments
     end
 
@@ -161,10 +160,7 @@ module Stripe
         return @travel_agency = nil
       end
       _travel_agency = travel_agency.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("travel_agency", _travel_agency.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("travel_agency", _travel_agency.to_s.size, MAX_LENGTH_FOR_TRAVEL_AGENCY)
       @travel_agency = _travel_agency
     end
 

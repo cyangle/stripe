@@ -24,34 +24,38 @@ module Stripe
     # For authenticated transactions: how the customer was authenticated by the issuing bank.
     @[JSON::Field(key: "authentication_flow", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: authentication_flow.nil? && !authentication_flow_present?)]
     getter authentication_flow : String? = nil
+    ERROR_MESSAGE_FOR_AUTHENTICATION_FLOW = "invalid value for \"authentication_flow\", must be one of [challenge, frictionless]."
+    VALID_VALUES_FOR_AUTHENTICATION_FLOW  = StaticArray["challenge", "frictionless"]
 
     @[JSON::Field(ignore: true)]
     property? authentication_flow_present : Bool = false
-    VALID_VALUES_FOR_AUTHENTICATION_FLOW = StaticArray["challenge", "frictionless"]
 
     # Indicates the outcome of 3D Secure authentication.
     @[JSON::Field(key: "result", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: result.nil? && !result_present?)]
     getter result : String? = nil
+    ERROR_MESSAGE_FOR_RESULT = "invalid value for \"result\", must be one of [attempt_acknowledged, authenticated, exempted, failed, not_supported, processing_error]."
+    VALID_VALUES_FOR_RESULT  = StaticArray["attempt_acknowledged", "authenticated", "exempted", "failed", "not_supported", "processing_error"]
 
     @[JSON::Field(ignore: true)]
     property? result_present : Bool = false
-    VALID_VALUES_FOR_RESULT = StaticArray["attempt_acknowledged", "authenticated", "exempted", "failed", "not_supported", "processing_error"]
 
     # Additional information about why 3D Secure succeeded or failed based on the `result`.
     @[JSON::Field(key: "result_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: result_reason.nil? && !result_reason_present?)]
     getter result_reason : String? = nil
+    ERROR_MESSAGE_FOR_RESULT_REASON = "invalid value for \"result_reason\", must be one of [abandoned, bypassed, canceled, card_not_enrolled, network_not_supported, protocol_error, rejected]."
+    VALID_VALUES_FOR_RESULT_REASON  = StaticArray["abandoned", "bypassed", "canceled", "card_not_enrolled", "network_not_supported", "protocol_error", "rejected"]
 
     @[JSON::Field(ignore: true)]
     property? result_reason_present : Bool = false
-    VALID_VALUES_FOR_RESULT_REASON = StaticArray["abandoned", "bypassed", "canceled", "card_not_enrolled", "network_not_supported", "protocol_error", "rejected"]
 
     # The version of 3D Secure that was used.
     @[JSON::Field(key: "version", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: version.nil? && !version_present?)]
     getter version : String? = nil
+    ERROR_MESSAGE_FOR_VERSION = "invalid value for \"version\", must be one of [1.0.2, 2.1.0, 2.2.0]."
+    VALID_VALUES_FOR_VERSION  = StaticArray["1.0.2", "2.1.0", "2.2.0"]
 
     @[JSON::Field(ignore: true)]
     property? version_present : Bool = false
-    VALID_VALUES_FOR_VERSION = StaticArray["1.0.2", "2.1.0", "2.2.0"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -71,16 +75,16 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _authentication_flow = @authentication_flow
-        invalid_properties.push(OpenApi::EnumValidator.error_message("authentication_flow", VALID_VALUES_FOR_AUTHENTICATION_FLOW)) unless OpenApi::EnumValidator.valid?(_authentication_flow, VALID_VALUES_FOR_AUTHENTICATION_FLOW)
+        invalid_properties.push(ERROR_MESSAGE_FOR_AUTHENTICATION_FLOW) unless OpenApi::EnumValidator.valid?(_authentication_flow, VALID_VALUES_FOR_AUTHENTICATION_FLOW)
       end
       if _result = @result
-        invalid_properties.push(OpenApi::EnumValidator.error_message("result", VALID_VALUES_FOR_RESULT)) unless OpenApi::EnumValidator.valid?(_result, VALID_VALUES_FOR_RESULT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_RESULT) unless OpenApi::EnumValidator.valid?(_result, VALID_VALUES_FOR_RESULT)
       end
       if _result_reason = @result_reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("result_reason", VALID_VALUES_FOR_RESULT_REASON)) unless OpenApi::EnumValidator.valid?(_result_reason, VALID_VALUES_FOR_RESULT_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_RESULT_REASON) unless OpenApi::EnumValidator.valid?(_result_reason, VALID_VALUES_FOR_RESULT_REASON)
       end
       if _version = @version
-        invalid_properties.push(OpenApi::EnumValidator.error_message("version", VALID_VALUES_FOR_VERSION)) unless OpenApi::EnumValidator.valid?(_version, VALID_VALUES_FOR_VERSION)
+        invalid_properties.push(ERROR_MESSAGE_FOR_VERSION) unless OpenApi::EnumValidator.valid?(_version, VALID_VALUES_FOR_VERSION)
       end
       invalid_properties
     end

@@ -22,6 +22,7 @@ module Stripe
 
     @[JSON::Field(key: "confirmation_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter confirmation_number : String? = nil
+    MAX_LENGTH_FOR_CONFIRMATION_NUMBER = 11
 
     @[JSON::Field(key: "expires_after_days", type: Stripe::UpdateParams1ApplicationFeeAmount?, default: nil, required: false, nullable: false, emit_null: false)]
     getter expires_after_days : Stripe::UpdateParams1ApplicationFeeAmount? = nil
@@ -31,11 +32,12 @@ module Stripe
 
     @[JSON::Field(key: "product_description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter product_description : String? = nil
+    MAX_LENGTH_FOR_PRODUCT_DESCRIPTION = 22
 
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
-
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["none"]
+    ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [none]."
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["none"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -56,7 +58,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _confirmation_number = @confirmation_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, 11)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, MAX_LENGTH_FOR_CONFIRMATION_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -67,12 +69,12 @@ module Stripe
         invalid_properties.concat(_expires_at.list_invalid_properties_for("expires_at")) if _expires_at.is_a?(OpenApi::Validatable)
       end
       if _product_description = @product_description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 22)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       if _setup_future_usage = @setup_future_usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       invalid_properties
     end
@@ -81,7 +83,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _confirmation_number = @confirmation_number
-        return false if _confirmation_number.to_s.size > 11
+        return false if _confirmation_number.to_s.size > MAX_LENGTH_FOR_CONFIRMATION_NUMBER
       end
 
       if _expires_after_days = @expires_after_days
@@ -93,7 +95,7 @@ module Stripe
       end
 
       if _product_description = @product_description
-        return false if _product_description.to_s.size > 22
+        return false if _product_description.to_s.size > MAX_LENGTH_FOR_PRODUCT_DESCRIPTION
       end
 
       if _setup_future_usage = @setup_future_usage
@@ -110,10 +112,7 @@ module Stripe
         return @confirmation_number = nil
       end
       _confirmation_number = confirmation_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("confirmation_number", _confirmation_number.to_s.size, 11)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("confirmation_number", _confirmation_number.to_s.size, MAX_LENGTH_FOR_CONFIRMATION_NUMBER)
       @confirmation_number = _confirmation_number
     end
 
@@ -146,10 +145,7 @@ module Stripe
         return @product_description = nil
       end
       _product_description = product_description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 22)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
       @product_description = _product_description
     end
 

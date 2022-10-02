@@ -24,24 +24,25 @@ module Stripe
     # Represents the reason why the status is `pending` or `restricted`.
     @[JSON::Field(key: "code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter code : String? = nil
-
-    VALID_VALUES_FOR_CODE = StaticArray["activating", "capability_not_requested", "financial_account_closed", "rejected_other", "rejected_unsupported_business", "requirements_past_due", "requirements_pending_verification", "restricted_by_platform", "restricted_other"]
+    ERROR_MESSAGE_FOR_CODE = "invalid value for \"code\", must be one of [activating, capability_not_requested, financial_account_closed, rejected_other, rejected_unsupported_business, requirements_past_due, requirements_pending_verification, restricted_by_platform, restricted_other]."
+    VALID_VALUES_FOR_CODE  = StaticArray["activating", "capability_not_requested", "financial_account_closed", "rejected_other", "rejected_unsupported_business", "requirements_past_due", "requirements_pending_verification", "restricted_by_platform", "restricted_other"]
 
     # Optional properties
 
     # Represents what the user should do, if anything, to activate the Feature.
     @[JSON::Field(key: "resolution", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: resolution.nil? && !resolution_present?)]
     getter resolution : String? = nil
+    ERROR_MESSAGE_FOR_RESOLUTION = "invalid value for \"resolution\", must be one of [contact_stripe, provide_information, remove_restriction]."
+    VALID_VALUES_FOR_RESOLUTION  = StaticArray["contact_stripe", "provide_information", "remove_restriction"]
 
     @[JSON::Field(ignore: true)]
     property? resolution_present : Bool = false
-    VALID_VALUES_FOR_RESOLUTION = StaticArray["contact_stripe", "provide_information", "remove_restriction"]
 
     # The `platform_restrictions` that are restricting this Feature.
     @[JSON::Field(key: "restriction", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter restriction : String? = nil
-
-    VALID_VALUES_FOR_RESTRICTION = StaticArray["inbound_flows", "outbound_flows"]
+    ERROR_MESSAGE_FOR_RESTRICTION = "invalid value for \"restriction\", must be one of [inbound_flows, outbound_flows]."
+    VALID_VALUES_FOR_RESTRICTION  = StaticArray["inbound_flows", "outbound_flows"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -63,13 +64,13 @@ module Stripe
       invalid_properties.push("\"code\" is required and cannot be null") if @code.nil?
 
       if _code = @code
-        invalid_properties.push(OpenApi::EnumValidator.error_message("code", VALID_VALUES_FOR_CODE)) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CODE) unless OpenApi::EnumValidator.valid?(_code, VALID_VALUES_FOR_CODE)
       end
       if _resolution = @resolution
-        invalid_properties.push(OpenApi::EnumValidator.error_message("resolution", VALID_VALUES_FOR_RESOLUTION)) unless OpenApi::EnumValidator.valid?(_resolution, VALID_VALUES_FOR_RESOLUTION)
+        invalid_properties.push(ERROR_MESSAGE_FOR_RESOLUTION) unless OpenApi::EnumValidator.valid?(_resolution, VALID_VALUES_FOR_RESOLUTION)
       end
       if _restriction = @restriction
-        invalid_properties.push(OpenApi::EnumValidator.error_message("restriction", VALID_VALUES_FOR_RESTRICTION)) unless OpenApi::EnumValidator.valid?(_restriction, VALID_VALUES_FOR_RESTRICTION)
+        invalid_properties.push(ERROR_MESSAGE_FOR_RESTRICTION) unless OpenApi::EnumValidator.valid?(_restriction, VALID_VALUES_FOR_RESTRICTION)
       end
       invalid_properties
     end

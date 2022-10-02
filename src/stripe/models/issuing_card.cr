@@ -24,6 +24,7 @@ module Stripe
     # The brand of the card.
     @[JSON::Field(key: "brand", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter brand : String? = nil
+    MAX_LENGTH_FOR_BRAND = 5000
 
     @[JSON::Field(key: "cardholder", type: Stripe::IssuingCardholder?, default: nil, required: true, nullable: false, emit_null: false)]
     getter cardholder : Stripe::IssuingCardholder? = nil
@@ -47,10 +48,12 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # The last 4 digits of the card number.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter last4 : String? = nil
+    MAX_LENGTH_FOR_LAST4 = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -63,8 +66,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["issuing.card"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [issuing.card]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["issuing.card"]
 
     @[JSON::Field(key: "spending_controls", type: Stripe::IssuingCardAuthorizationControls?, default: nil, required: true, nullable: false, emit_null: false)]
     getter spending_controls : Stripe::IssuingCardAuthorizationControls? = nil
@@ -72,32 +75,35 @@ module Stripe
     # Whether authorizations can be approved on this card.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["active", "canceled", "inactive"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, canceled, inactive]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["active", "canceled", "inactive"]
 
     # The type of the card.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["physical", "virtual"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [physical, virtual]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["physical", "virtual"]
 
     # Optional properties
 
     # The reason why the card was canceled.
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: cancellation_reason.nil? && !cancellation_reason_present?)]
     getter cancellation_reason : String? = nil
+    ERROR_MESSAGE_FOR_CANCELLATION_REASON = "invalid value for \"cancellation_reason\", must be one of [design_rejected, lost, stolen]."
+    VALID_VALUES_FOR_CANCELLATION_REASON  = StaticArray["design_rejected", "lost", "stolen"]
 
     @[JSON::Field(ignore: true)]
     property? cancellation_reason_present : Bool = false
-    VALID_VALUES_FOR_CANCELLATION_REASON = StaticArray["design_rejected", "lost", "stolen"]
 
     # The card's CVC. For security reasons, this is only available for virtual cards, and will be omitted unless you explicitly request it with [the `expand` parameter](https://stripe.com/docs/api/expanding_objects). Additionally, it's only available via the [\"Retrieve a card\" endpoint](https://stripe.com/docs/api/issuing/cards/retrieve), not via \"List all cards\" or any other endpoint.
     @[JSON::Field(key: "cvc", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cvc : String? = nil
+    MAX_LENGTH_FOR_CVC = 5000
 
     # The financial account this card is attached to.
     @[JSON::Field(key: "financial_account", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: financial_account.nil? && !financial_account_present?)]
     getter financial_account : String? = nil
+    MAX_LENGTH_FOR_FINANCIAL_ACCOUNT = 5000
 
     @[JSON::Field(ignore: true)]
     property? financial_account_present : Bool = false
@@ -105,6 +111,7 @@ module Stripe
     # The full unredacted card number. For security reasons, this is only available for virtual cards, and will be omitted unless you explicitly request it with [the `expand` parameter](https://stripe.com/docs/api/expanding_objects). Additionally, it's only available via the [\"Retrieve a card\" endpoint](https://stripe.com/docs/api/issuing/cards/retrieve), not via \"List all cards\" or any other endpoint.
     @[JSON::Field(key: "number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter number : String? = nil
+    MAX_LENGTH_FOR_NUMBER = 5000
 
     @[JSON::Field(key: "replaced_by", type: Stripe::IssuingCardReplacedBy?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: replaced_by.nil? && !replaced_by_present?)]
     getter replaced_by : Stripe::IssuingCardReplacedBy? = nil
@@ -121,10 +128,11 @@ module Stripe
     # The reason why the previous card needed to be replaced.
     @[JSON::Field(key: "replacement_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: replacement_reason.nil? && !replacement_reason_present?)]
     getter replacement_reason : String? = nil
+    ERROR_MESSAGE_FOR_REPLACEMENT_REASON = "invalid value for \"replacement_reason\", must be one of [damaged, expired, lost, stolen]."
+    VALID_VALUES_FOR_REPLACEMENT_REASON  = StaticArray["damaged", "expired", "lost", "stolen"]
 
     @[JSON::Field(ignore: true)]
     property? replacement_reason_present : Bool = false
-    VALID_VALUES_FOR_REPLACEMENT_REASON = StaticArray["damaged", "expired", "lost", "stolen"]
 
     @[JSON::Field(key: "shipping", type: Stripe::IssuingCardShipping1?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: shipping.nil? && !shipping_present?)]
     getter shipping : Stripe::IssuingCardShipping1? = nil
@@ -178,7 +186,7 @@ module Stripe
       invalid_properties.push("\"brand\" is required and cannot be null") if @brand.nil?
 
       if _brand = @brand
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
           invalid_properties.push(max_length_error)
         end
       end
@@ -198,14 +206,14 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last4\" is required and cannot be null") if @last4.nil?
 
       if _last4 = @last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
@@ -216,7 +224,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"spending_controls\" is required and cannot be null") if @spending_controls.nil?
 
@@ -226,28 +234,28 @@ module Stripe
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _cancellation_reason = @cancellation_reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("cancellation_reason", VALID_VALUES_FOR_CANCELLATION_REASON)) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CANCELLATION_REASON) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
       if _cvc = @cvc
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, MAX_LENGTH_FOR_CVC)
           invalid_properties.push(max_length_error)
         end
       end
       if _financial_account = @financial_account
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
       if _number = @number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -258,7 +266,7 @@ module Stripe
         invalid_properties.concat(_replacement_for.list_invalid_properties_for("replacement_for")) if _replacement_for.is_a?(OpenApi::Validatable)
       end
       if _replacement_reason = @replacement_reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("replacement_reason", VALID_VALUES_FOR_REPLACEMENT_REASON)) unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REPLACEMENT_REASON) unless OpenApi::EnumValidator.valid?(_replacement_reason, VALID_VALUES_FOR_REPLACEMENT_REASON)
       end
       if _shipping = @shipping
         invalid_properties.concat(_shipping.list_invalid_properties_for("shipping")) if _shipping.is_a?(OpenApi::Validatable)
@@ -274,7 +282,7 @@ module Stripe
     def valid? : Bool
       return false if @brand.nil?
       if _brand = @brand
-        return false if _brand.to_s.size > 5000
+        return false if _brand.to_s.size > MAX_LENGTH_FOR_BRAND
       end
 
       return false if @cardholder.nil?
@@ -292,12 +300,12 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @last4.nil?
       if _last4 = @last4
-        return false if _last4.to_s.size > 5000
+        return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
       return false if @livemode.nil?
@@ -329,15 +337,15 @@ module Stripe
       end
 
       if _cvc = @cvc
-        return false if _cvc.to_s.size > 5000
+        return false if _cvc.to_s.size > MAX_LENGTH_FOR_CVC
       end
 
       if _financial_account = @financial_account
-        return false if _financial_account.to_s.size > 5000
+        return false if _financial_account.to_s.size > MAX_LENGTH_FOR_FINANCIAL_ACCOUNT
       end
 
       if _number = @number
-        return false if _number.to_s.size > 5000
+        return false if _number.to_s.size > MAX_LENGTH_FOR_NUMBER
       end
 
       if _replaced_by = @replaced_by
@@ -370,10 +378,7 @@ module Stripe
         raise ArgumentError.new("\"brand\" is required and cannot be null")
       end
       _brand = brand.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
       @brand = _brand
     end
 
@@ -435,10 +440,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -449,10 +451,7 @@ module Stripe
         raise ArgumentError.new("\"last4\" is required and cannot be null")
       end
       _last4 = last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
       @last4 = _last4
     end
 
@@ -538,10 +537,7 @@ module Stripe
         return @cvc = nil
       end
       _cvc = cvc.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc", _cvc.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("cvc", _cvc.to_s.size, MAX_LENGTH_FOR_CVC)
       @cvc = _cvc
     end
 
@@ -552,10 +548,7 @@ module Stripe
         return @financial_account = nil
       end
       _financial_account = financial_account.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("financial_account", _financial_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_ACCOUNT)
       @financial_account = _financial_account
     end
 
@@ -566,10 +559,7 @@ module Stripe
         return @number = nil
       end
       _number = number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("number", _number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("number", _number.to_s.size, MAX_LENGTH_FOR_NUMBER)
       @number = _number
     end
 

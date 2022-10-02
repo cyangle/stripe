@@ -31,6 +31,7 @@ module Stripe
     # The IP address from which the beneficial owner attestation was made.
     @[JSON::Field(key: "ip", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ip.nil? && !ip_present?)]
     getter ip : String? = nil
+    MAX_LENGTH_FOR_IP = 5000
 
     @[JSON::Field(ignore: true)]
     property? ip_present : Bool = false
@@ -38,6 +39,7 @@ module Stripe
     # The user-agent string from the browser where the beneficial owner attestation was made.
     @[JSON::Field(key: "user_agent", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: user_agent.nil? && !user_agent_present?)]
     getter user_agent : String? = nil
+    MAX_LENGTH_FOR_USER_AGENT = 5000
 
     @[JSON::Field(ignore: true)]
     property? user_agent_present : Bool = false
@@ -59,12 +61,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _ip = @ip
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip", _ip.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip", _ip.to_s.size, MAX_LENGTH_FOR_IP)
           invalid_properties.push(max_length_error)
         end
       end
       if _user_agent = @user_agent
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_agent", _user_agent.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_agent", _user_agent.to_s.size, MAX_LENGTH_FOR_USER_AGENT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -75,11 +77,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _ip = @ip
-        return false if _ip.to_s.size > 5000
+        return false if _ip.to_s.size > MAX_LENGTH_FOR_IP
       end
 
       if _user_agent = @user_agent
-        return false if _user_agent.to_s.size > 5000
+        return false if _user_agent.to_s.size > MAX_LENGTH_FOR_USER_AGENT
       end
 
       true
@@ -102,10 +104,7 @@ module Stripe
         return @ip = nil
       end
       _ip = ip.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip", _ip.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("ip", _ip.to_s.size, MAX_LENGTH_FOR_IP)
       @ip = _ip
     end
 
@@ -116,10 +115,7 @@ module Stripe
         return @user_agent = nil
       end
       _user_agent = user_agent.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_agent", _user_agent.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("user_agent", _user_agent.to_s.size, MAX_LENGTH_FOR_USER_AGENT)
       @user_agent = _user_agent
     end
 

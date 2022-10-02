@@ -28,6 +28,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,8 +37,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["identity.verification_report"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [identity.verification_report]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["identity.verification_report"]
 
     @[JSON::Field(key: "options", type: Stripe::GelatoVerificationReportOptions?, default: nil, required: true, nullable: false, emit_null: false)]
     getter options : Stripe::GelatoVerificationReportOptions? = nil
@@ -45,8 +46,8 @@ module Stripe
     # Type of report.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["document", "id_number"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [document, id_number]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["document", "id_number"]
 
     # Optional properties
 
@@ -62,6 +63,7 @@ module Stripe
     # ID of the VerificationSession that created this report.
     @[JSON::Field(key: "verification_session", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: verification_session.nil? && !verification_session_present?)]
     getter verification_session : String? = nil
+    MAX_LENGTH_FOR_VERIFICATION_SESSION = 5000
 
     @[JSON::Field(ignore: true)]
     property? verification_session_present : Bool = false
@@ -95,7 +97,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -104,7 +106,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"options\" is required and cannot be null") if @options.nil?
 
@@ -114,7 +116,7 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _document = @document
         invalid_properties.concat(_document.list_invalid_properties_for("document")) if _document.is_a?(OpenApi::Validatable)
@@ -126,7 +128,7 @@ module Stripe
         invalid_properties.concat(_selfie.list_invalid_properties_for("selfie")) if _selfie.is_a?(OpenApi::Validatable)
       end
       if _verification_session = @verification_session
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verification_session", _verification_session.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verification_session", _verification_session.to_s.size, MAX_LENGTH_FOR_VERIFICATION_SESSION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -140,7 +142,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -173,7 +175,7 @@ module Stripe
       end
 
       if _verification_session = @verification_session
-        return false if _verification_session.to_s.size > 5000
+        return false if _verification_session.to_s.size > MAX_LENGTH_FOR_VERIFICATION_SESSION
       end
 
       true
@@ -196,10 +198,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -286,10 +285,7 @@ module Stripe
         return @verification_session = nil
       end
       _verification_session = verification_session.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("verification_session", _verification_session.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("verification_session", _verification_session.to_s.size, MAX_LENGTH_FOR_VERIFICATION_SESSION)
       @verification_session = _verification_session
     end
 

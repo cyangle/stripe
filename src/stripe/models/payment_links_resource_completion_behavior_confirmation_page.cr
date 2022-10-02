@@ -24,6 +24,7 @@ module Stripe
     # The custom message that is displayed to the customer after the purchase is complete.
     @[JSON::Field(key: "custom_message", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: custom_message.nil? && !custom_message_present?)]
     getter custom_message : String? = nil
+    MAX_LENGTH_FOR_CUSTOM_MESSAGE = 5000
 
     @[JSON::Field(ignore: true)]
     property? custom_message_present : Bool = false
@@ -43,7 +44,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _custom_message = @custom_message
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("custom_message", _custom_message.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("custom_message", _custom_message.to_s.size, MAX_LENGTH_FOR_CUSTOM_MESSAGE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -54,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _custom_message = @custom_message
-        return false if _custom_message.to_s.size > 5000
+        return false if _custom_message.to_s.size > MAX_LENGTH_FOR_CUSTOM_MESSAGE
       end
 
       true
@@ -67,10 +68,7 @@ module Stripe
         return @custom_message = nil
       end
       _custom_message = custom_message.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("custom_message", _custom_message.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("custom_message", _custom_message.to_s.size, MAX_LENGTH_FOR_CUSTOM_MESSAGE)
       @custom_message = _custom_message
     end
 

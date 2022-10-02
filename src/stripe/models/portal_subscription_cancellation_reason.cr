@@ -28,8 +28,8 @@ module Stripe
     # Which cancellation reasons will be given as options to the customer.
     @[JSON::Field(key: "options", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter options : Array(String)? = nil
-
-    VALID_VALUES_FOR_OPTIONS = StaticArray["customer_service", "low_quality", "missing_features", "other", "switched_service", "too_complex", "too_expensive", "unused"]
+    ERROR_MESSAGE_FOR_OPTIONS = "invalid value for \"options\", must be one of [customer_service, low_quality, missing_features, other, switched_service, too_complex, too_expensive, unused]."
+    VALID_VALUES_FOR_OPTIONS  = StaticArray["customer_service", "low_quality", "missing_features", "other", "switched_service", "too_complex", "too_expensive", "unused"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -51,7 +51,7 @@ module Stripe
       invalid_properties.push("\"options\" is required and cannot be null") if @options.nil?
 
       if _options = @options
-        invalid_properties.push(OpenApi::EnumValidator.error_message("options", VALID_VALUES_FOR_OPTIONS)) unless OpenApi::EnumValidator.valid?(_options, VALID_VALUES_FOR_OPTIONS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OPTIONS) unless OpenApi::EnumValidator.valid?(_options, VALID_VALUES_FOR_OPTIONS)
       end
       invalid_properties
     end

@@ -24,6 +24,7 @@ module Stripe
     # The CreditReversal created as a result of this ReceivedCredit being reversed.
     @[JSON::Field(key: "credit_reversal", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: credit_reversal.nil? && !credit_reversal_present?)]
     getter credit_reversal : String? = nil
+    MAX_LENGTH_FOR_CREDIT_REVERSAL = 5000
 
     @[JSON::Field(ignore: true)]
     property? credit_reversal_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # Set if the ReceivedCredit was created due to an [Issuing Authorization](https://stripe.com/docs/api#issuing_authorizations) object.
     @[JSON::Field(key: "issuing_authorization", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: issuing_authorization.nil? && !issuing_authorization_present?)]
     getter issuing_authorization : String? = nil
+    MAX_LENGTH_FOR_ISSUING_AUTHORIZATION = 5000
 
     @[JSON::Field(ignore: true)]
     property? issuing_authorization_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # Set if the ReceivedCredit is also viewable as an [Issuing transaction](https://stripe.com/docs/api#issuing_transactions) object.
     @[JSON::Field(key: "issuing_transaction", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: issuing_transaction.nil? && !issuing_transaction_present?)]
     getter issuing_transaction : String? = nil
+    MAX_LENGTH_FOR_ISSUING_TRANSACTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? issuing_transaction_present : Bool = false
@@ -45,6 +48,7 @@ module Stripe
     # ID of the source flow. Set if `network` is `stripe` and the source flow is visible to the user. Examples of source flows include OutboundPayments, payouts, or CreditReversals.
     @[JSON::Field(key: "source_flow", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: source_flow.nil? && !source_flow_present?)]
     getter source_flow : String? = nil
+    MAX_LENGTH_FOR_SOURCE_FLOW = 5000
 
     @[JSON::Field(ignore: true)]
     property? source_flow_present : Bool = false
@@ -58,6 +62,7 @@ module Stripe
     # The type of flow that originated the ReceivedCredit (for example, `outbound_payment`).
     @[JSON::Field(key: "source_flow_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: source_flow_type.nil? && !source_flow_type_present?)]
     getter source_flow_type : String? = nil
+    MAX_LENGTH_FOR_SOURCE_FLOW_TYPE = 5000
 
     @[JSON::Field(ignore: true)]
     property? source_flow_type_present : Bool = false
@@ -82,22 +87,22 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _credit_reversal = @credit_reversal
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("credit_reversal", _credit_reversal.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("credit_reversal", _credit_reversal.to_s.size, MAX_LENGTH_FOR_CREDIT_REVERSAL)
           invalid_properties.push(max_length_error)
         end
       end
       if _issuing_authorization = @issuing_authorization
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_authorization", _issuing_authorization.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_authorization", _issuing_authorization.to_s.size, MAX_LENGTH_FOR_ISSUING_AUTHORIZATION)
           invalid_properties.push(max_length_error)
         end
       end
       if _issuing_transaction = @issuing_transaction
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_transaction", _issuing_transaction.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_transaction", _issuing_transaction.to_s.size, MAX_LENGTH_FOR_ISSUING_TRANSACTION)
           invalid_properties.push(max_length_error)
         end
       end
       if _source_flow = @source_flow
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_flow", _source_flow.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_flow", _source_flow.to_s.size, MAX_LENGTH_FOR_SOURCE_FLOW)
           invalid_properties.push(max_length_error)
         end
       end
@@ -105,7 +110,7 @@ module Stripe
         invalid_properties.concat(_source_flow_details.list_invalid_properties_for("source_flow_details")) if _source_flow_details.is_a?(OpenApi::Validatable)
       end
       if _source_flow_type = @source_flow_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_flow_type", _source_flow_type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_flow_type", _source_flow_type.to_s.size, MAX_LENGTH_FOR_SOURCE_FLOW_TYPE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -116,19 +121,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _credit_reversal = @credit_reversal
-        return false if _credit_reversal.to_s.size > 5000
+        return false if _credit_reversal.to_s.size > MAX_LENGTH_FOR_CREDIT_REVERSAL
       end
 
       if _issuing_authorization = @issuing_authorization
-        return false if _issuing_authorization.to_s.size > 5000
+        return false if _issuing_authorization.to_s.size > MAX_LENGTH_FOR_ISSUING_AUTHORIZATION
       end
 
       if _issuing_transaction = @issuing_transaction
-        return false if _issuing_transaction.to_s.size > 5000
+        return false if _issuing_transaction.to_s.size > MAX_LENGTH_FOR_ISSUING_TRANSACTION
       end
 
       if _source_flow = @source_flow
-        return false if _source_flow.to_s.size > 5000
+        return false if _source_flow.to_s.size > MAX_LENGTH_FOR_SOURCE_FLOW
       end
 
       if _source_flow_details = @source_flow_details
@@ -136,7 +141,7 @@ module Stripe
       end
 
       if _source_flow_type = @source_flow_type
-        return false if _source_flow_type.to_s.size > 5000
+        return false if _source_flow_type.to_s.size > MAX_LENGTH_FOR_SOURCE_FLOW_TYPE
       end
 
       true
@@ -149,10 +154,7 @@ module Stripe
         return @credit_reversal = nil
       end
       _credit_reversal = credit_reversal.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("credit_reversal", _credit_reversal.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("credit_reversal", _credit_reversal.to_s.size, MAX_LENGTH_FOR_CREDIT_REVERSAL)
       @credit_reversal = _credit_reversal
     end
 
@@ -163,10 +165,7 @@ module Stripe
         return @issuing_authorization = nil
       end
       _issuing_authorization = issuing_authorization.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_authorization", _issuing_authorization.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("issuing_authorization", _issuing_authorization.to_s.size, MAX_LENGTH_FOR_ISSUING_AUTHORIZATION)
       @issuing_authorization = _issuing_authorization
     end
 
@@ -177,10 +176,7 @@ module Stripe
         return @issuing_transaction = nil
       end
       _issuing_transaction = issuing_transaction.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_transaction", _issuing_transaction.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("issuing_transaction", _issuing_transaction.to_s.size, MAX_LENGTH_FOR_ISSUING_TRANSACTION)
       @issuing_transaction = _issuing_transaction
     end
 
@@ -191,10 +187,7 @@ module Stripe
         return @source_flow = nil
       end
       _source_flow = source_flow.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_flow", _source_flow.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("source_flow", _source_flow.to_s.size, MAX_LENGTH_FOR_SOURCE_FLOW)
       @source_flow = _source_flow
     end
 
@@ -216,10 +209,7 @@ module Stripe
         return @source_flow_type = nil
       end
       _source_flow_type = source_flow_type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source_flow_type", _source_flow_type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("source_flow_type", _source_flow_type.to_s.size, MAX_LENGTH_FOR_SOURCE_FLOW_TYPE)
       @source_flow_type = _source_flow_type
     end
 

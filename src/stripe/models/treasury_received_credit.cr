@@ -36,10 +36,12 @@ module Stripe
     # An arbitrary string attached to the object. Often useful for displaying to users.
     @[JSON::Field(key: "description", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 5000
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     @[JSON::Field(key: "initiating_payment_method_details", type: Stripe::TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetails?, default: nil, required: true, nullable: false, emit_null: false)]
     getter initiating_payment_method_details : Stripe::TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetails? = nil
@@ -54,34 +56,36 @@ module Stripe
     # The rails used to send the funds.
     @[JSON::Field(key: "network", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter network : String? = nil
-
-    VALID_VALUES_FOR_NETWORK = StaticArray["ach", "card", "stripe", "us_domestic_wire"]
+    ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [ach, card, stripe, us_domestic_wire]."
+    VALID_VALUES_FOR_NETWORK  = StaticArray["ach", "card", "stripe", "us_domestic_wire"]
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["treasury.received_credit"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [treasury.received_credit]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["treasury.received_credit"]
 
     # Status of the ReceivedCredit. ReceivedCredits are created either `succeeded` (approved) or `failed` (declined). If a ReceivedCredit is declined, the failure reason can be found in the `failure_code` field.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["failed", "succeeded"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [failed, succeeded]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["failed", "succeeded"]
 
     # Optional properties
 
     # Reason for the failure. A ReceivedCredit might fail because the receiving FinancialAccount is closed or frozen.
     @[JSON::Field(key: "failure_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: failure_code.nil? && !failure_code_present?)]
     getter failure_code : String? = nil
+    ERROR_MESSAGE_FOR_FAILURE_CODE = "invalid value for \"failure_code\", must be one of [account_closed, account_frozen, other]."
+    VALID_VALUES_FOR_FAILURE_CODE  = StaticArray["account_closed", "account_frozen", "other"]
 
     @[JSON::Field(ignore: true)]
     property? failure_code_present : Bool = false
-    VALID_VALUES_FOR_FAILURE_CODE = StaticArray["account_closed", "account_frozen", "other"]
 
     # The FinancialAccount that received the funds.
     @[JSON::Field(key: "financial_account", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: financial_account.nil? && !financial_account_present?)]
     getter financial_account : String? = nil
+    MAX_LENGTH_FOR_FINANCIAL_ACCOUNT = 5000
 
     @[JSON::Field(ignore: true)]
     property? financial_account_present : Bool = false
@@ -89,6 +93,7 @@ module Stripe
     # A [hosted transaction receipt](https://stripe.com/docs/treasury/moving-money/regulatory-receipts) URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
     @[JSON::Field(key: "hosted_regulatory_receipt_url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: hosted_regulatory_receipt_url.nil? && !hosted_regulatory_receipt_url_present?)]
     getter hosted_regulatory_receipt_url : String? = nil
+    MAX_LENGTH_FOR_HOSTED_REGULATORY_RECEIPT_URL = 5000
 
     @[JSON::Field(ignore: true)]
     property? hosted_regulatory_receipt_url_present : Bool = false
@@ -144,14 +149,14 @@ module Stripe
       invalid_properties.push("\"description\" is required and cannot be null") if @description.nil?
 
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -170,28 +175,28 @@ module Stripe
       invalid_properties.push("\"network\" is required and cannot be null") if @network.nil?
 
       if _network = @network
-        invalid_properties.push(OpenApi::EnumValidator.error_message("network", VALID_VALUES_FOR_NETWORK)) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+        invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       if _failure_code = @failure_code
-        invalid_properties.push(OpenApi::EnumValidator.error_message("failure_code", VALID_VALUES_FOR_FAILURE_CODE)) unless OpenApi::EnumValidator.valid?(_failure_code, VALID_VALUES_FOR_FAILURE_CODE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_FAILURE_CODE) unless OpenApi::EnumValidator.valid?(_failure_code, VALID_VALUES_FOR_FAILURE_CODE)
       end
       if _financial_account = @financial_account
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
       if _hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_regulatory_receipt_url", _hosted_regulatory_receipt_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_regulatory_receipt_url", _hosted_regulatory_receipt_url.to_s.size, MAX_LENGTH_FOR_HOSTED_REGULATORY_RECEIPT_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -215,12 +220,12 @@ module Stripe
 
       return false if @description.nil?
       if _description = @description
-        return false if _description.to_s.size > 5000
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @initiating_payment_method_details.nil?
@@ -255,11 +260,11 @@ module Stripe
       end
 
       if _financial_account = @financial_account
-        return false if _financial_account.to_s.size > 5000
+        return false if _financial_account.to_s.size > MAX_LENGTH_FOR_FINANCIAL_ACCOUNT
       end
 
       if _hosted_regulatory_receipt_url = @hosted_regulatory_receipt_url
-        return false if _hosted_regulatory_receipt_url.to_s.size > 5000
+        return false if _hosted_regulatory_receipt_url.to_s.size > MAX_LENGTH_FOR_HOSTED_REGULATORY_RECEIPT_URL
       end
 
       if _reversal_details = @reversal_details
@@ -310,10 +315,7 @@ module Stripe
         raise ArgumentError.new("\"description\" is required and cannot be null")
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -324,10 +326,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -414,10 +413,7 @@ module Stripe
         return @financial_account = nil
       end
       _financial_account = financial_account.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("financial_account", _financial_account.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("financial_account", _financial_account.to_s.size, MAX_LENGTH_FOR_FINANCIAL_ACCOUNT)
       @financial_account = _financial_account
     end
 
@@ -428,10 +424,7 @@ module Stripe
         return @hosted_regulatory_receipt_url = nil
       end
       _hosted_regulatory_receipt_url = hosted_regulatory_receipt_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("hosted_regulatory_receipt_url", _hosted_regulatory_receipt_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("hosted_regulatory_receipt_url", _hosted_regulatory_receipt_url.to_s.size, MAX_LENGTH_FOR_HOSTED_REGULATORY_RECEIPT_URL)
       @hosted_regulatory_receipt_url = _hosted_regulatory_receipt_url
     end
 

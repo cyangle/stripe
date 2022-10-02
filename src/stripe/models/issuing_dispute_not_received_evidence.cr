@@ -37,6 +37,7 @@ module Stripe
     # Explanation of why the cardholder is disputing this transaction.
     @[JSON::Field(key: "explanation", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: explanation.nil? && !explanation_present?)]
     getter explanation : String? = nil
+    MAX_LENGTH_FOR_EXPLANATION = 5000
 
     @[JSON::Field(ignore: true)]
     property? explanation_present : Bool = false
@@ -44,6 +45,7 @@ module Stripe
     # Description of the merchandise or service that was purchased.
     @[JSON::Field(key: "product_description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: product_description.nil? && !product_description_present?)]
     getter product_description : String? = nil
+    MAX_LENGTH_FOR_PRODUCT_DESCRIPTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? product_description_present : Bool = false
@@ -51,10 +53,11 @@ module Stripe
     # Whether the product was a merchandise or service.
     @[JSON::Field(key: "product_type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: product_type.nil? && !product_type_present?)]
     getter product_type : String? = nil
+    ERROR_MESSAGE_FOR_PRODUCT_TYPE = "invalid value for \"product_type\", must be one of [merchandise, service]."
+    VALID_VALUES_FOR_PRODUCT_TYPE  = StaticArray["merchandise", "service"]
 
     @[JSON::Field(ignore: true)]
     property? product_type_present : Bool = false
-    VALID_VALUES_FOR_PRODUCT_TYPE = StaticArray["merchandise", "service"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -79,17 +82,17 @@ module Stripe
       end
 
       if _explanation = @explanation
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
           invalid_properties.push(max_length_error)
         end
       end
       if _product_description = @product_description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       if _product_type = @product_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("product_type", VALID_VALUES_FOR_PRODUCT_TYPE)) unless OpenApi::EnumValidator.valid?(_product_type, VALID_VALUES_FOR_PRODUCT_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PRODUCT_TYPE) unless OpenApi::EnumValidator.valid?(_product_type, VALID_VALUES_FOR_PRODUCT_TYPE)
       end
       invalid_properties
     end
@@ -102,11 +105,11 @@ module Stripe
       end
 
       if _explanation = @explanation
-        return false if _explanation.to_s.size > 5000
+        return false if _explanation.to_s.size > MAX_LENGTH_FOR_EXPLANATION
       end
 
       if _product_description = @product_description
-        return false if _product_description.to_s.size > 5000
+        return false if _product_description.to_s.size > MAX_LENGTH_FOR_PRODUCT_DESCRIPTION
       end
 
       if _product_type = @product_type
@@ -144,10 +147,7 @@ module Stripe
         return @explanation = nil
       end
       _explanation = explanation.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
       @explanation = _explanation
     end
 
@@ -158,10 +158,7 @@ module Stripe
         return @product_description = nil
       end
       _product_description = product_description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
       @product_description = _product_description
     end
 

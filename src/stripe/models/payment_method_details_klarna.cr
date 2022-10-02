@@ -24,6 +24,7 @@ module Stripe
     # The Klarna payment method used for this transaction. Can be one of `pay_later`, `pay_now`, `pay_with_financing`, or `pay_in_installments`
     @[JSON::Field(key: "payment_method_category", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: payment_method_category.nil? && !payment_method_category_present?)]
     getter payment_method_category : String? = nil
+    MAX_LENGTH_FOR_PAYMENT_METHOD_CATEGORY = 5000
 
     @[JSON::Field(ignore: true)]
     property? payment_method_category_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # Preferred language of the Klarna authorization page that the customer is redirected to. Can be one of `de-AT`, `en-AT`, `nl-BE`, `fr-BE`, `en-BE`, `de-DE`, `en-DE`, `da-DK`, `en-DK`, `es-ES`, `en-ES`, `fi-FI`, `sv-FI`, `en-FI`, `en-GB`, `en-IE`, `it-IT`, `en-IT`, `nl-NL`, `en-NL`, `nb-NO`, `en-NO`, `sv-SE`, `en-SE`, `en-US`, `es-US`, `fr-FR`, `en-FR`, `en-AU`, `en-NZ`, `en-CA`, `fr-CA`, `pl-PL`, `en-PL`, `pt-PT`, `en-PT`, `de-CH`, `fr-CH`, `it-CH`, or `en-CH`
     @[JSON::Field(key: "preferred_locale", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: preferred_locale.nil? && !preferred_locale_present?)]
     getter preferred_locale : String? = nil
+    MAX_LENGTH_FOR_PREFERRED_LOCALE = 5000
 
     @[JSON::Field(ignore: true)]
     property? preferred_locale_present : Bool = false
@@ -51,12 +53,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _payment_method_category = @payment_method_category
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method_category", _payment_method_category.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method_category", _payment_method_category.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD_CATEGORY)
           invalid_properties.push(max_length_error)
         end
       end
       if _preferred_locale = @preferred_locale
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, MAX_LENGTH_FOR_PREFERRED_LOCALE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -67,11 +69,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _payment_method_category = @payment_method_category
-        return false if _payment_method_category.to_s.size > 5000
+        return false if _payment_method_category.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD_CATEGORY
       end
 
       if _preferred_locale = @preferred_locale
-        return false if _preferred_locale.to_s.size > 5000
+        return false if _preferred_locale.to_s.size > MAX_LENGTH_FOR_PREFERRED_LOCALE
       end
 
       true
@@ -84,10 +86,7 @@ module Stripe
         return @payment_method_category = nil
       end
       _payment_method_category = payment_method_category.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method_category", _payment_method_category.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("payment_method_category", _payment_method_category.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD_CATEGORY)
       @payment_method_category = _payment_method_category
     end
 
@@ -98,10 +97,7 @@ module Stripe
         return @preferred_locale = nil
       end
       _preferred_locale = preferred_locale.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred_locale", _preferred_locale.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("preferred_locale", _preferred_locale.to_s.size, MAX_LENGTH_FOR_PREFERRED_LOCALE)
       @preferred_locale = _preferred_locale
     end
 

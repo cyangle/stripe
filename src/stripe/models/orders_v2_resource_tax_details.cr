@@ -24,8 +24,8 @@ module Stripe
     # Describes the purchaser's tax exemption status. One of `none`, `exempt`, or `reverse`.
     @[JSON::Field(key: "tax_exempt", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter tax_exempt : String? = nil
-
-    VALID_VALUES_FOR_TAX_EXEMPT = StaticArray["exempt", "none", "reverse"]
+    ERROR_MESSAGE_FOR_TAX_EXEMPT = "invalid value for \"tax_exempt\", must be one of [exempt, none, reverse]."
+    VALID_VALUES_FOR_TAX_EXEMPT  = StaticArray["exempt", "none", "reverse"]
 
     # The purchaser's tax IDs to be used in calculation of tax for this Order.
     @[JSON::Field(key: "tax_ids", type: Array(Stripe::OrdersV2ResourceTaxDetailsResourceTaxId)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -49,12 +49,12 @@ module Stripe
       invalid_properties.push("\"tax_exempt\" is required and cannot be null") if @tax_exempt.nil?
 
       if _tax_exempt = @tax_exempt
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_exempt", VALID_VALUES_FOR_TAX_EXEMPT)) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_EXEMPT) unless OpenApi::EnumValidator.valid?(_tax_exempt, VALID_VALUES_FOR_TAX_EXEMPT)
       end
       invalid_properties.push("\"tax_ids\" is required and cannot be null") if @tax_ids.nil?
 
       if _tax_ids = @tax_ids
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tax_ids", array: _tax_ids)) if _tax_ids.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tax_ids", container: _tax_ids)) if _tax_ids.is_a?(Array)
       end
       invalid_properties
     end
@@ -69,7 +69,7 @@ module Stripe
 
       return false if @tax_ids.nil?
       if _tax_ids = @tax_ids
-        return false if _tax_ids.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tax_ids)
+        return false if _tax_ids.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tax_ids)
       end
 
       true
@@ -93,7 +93,7 @@ module Stripe
         raise ArgumentError.new("\"tax_ids\" is required and cannot be null")
       end
       _tax_ids = tax_ids.not_nil!
-      OpenApi::ArrayValidator.validate(array: _tax_ids) if _tax_ids.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _tax_ids) if _tax_ids.is_a?(Array)
       @tax_ids = _tax_ids
     end
 

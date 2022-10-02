@@ -23,13 +23,14 @@ module Stripe
 
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["account", "user"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [account, user]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["account", "user"]
 
     # Optional properties
 
     @[JSON::Field(key: "user", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter user : String? = nil
+    MAX_LENGTH_FOR_USER = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -50,10 +51,10 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _user = @user
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user", _user.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user", _user.to_s.size, MAX_LENGTH_FOR_USER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -69,7 +70,7 @@ module Stripe
       end
 
       if _user = @user
-        return false if _user.to_s.size > 5000
+        return false if _user.to_s.size > MAX_LENGTH_FOR_USER
       end
 
       true
@@ -93,10 +94,7 @@ module Stripe
         return @user = nil
       end
       _user = user.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user", _user.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("user", _user.to_s.size, MAX_LENGTH_FOR_USER)
       @user = _user
     end
 

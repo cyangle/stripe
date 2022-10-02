@@ -28,8 +28,8 @@ module Stripe
     # One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
     @[JSON::Field(key: "amount_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter amount_type : String? = nil
-
-    VALID_VALUES_FOR_AMOUNT_TYPE = StaticArray["fixed", "maximum"]
+    ERROR_MESSAGE_FOR_AMOUNT_TYPE = "invalid value for \"amount_type\", must be one of [fixed, maximum]."
+    VALID_VALUES_FOR_AMOUNT_TYPE  = StaticArray["fixed", "maximum"]
 
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -38,12 +38,13 @@ module Stripe
     # Specifies payment frequency. One of `day`, `week`, `month`, `year`, or `sporadic`.
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
-
-    VALID_VALUES_FOR_INTERVAL = StaticArray["day", "month", "sporadic", "week", "year"]
+    ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, sporadic, week, year]."
+    VALID_VALUES_FOR_INTERVAL  = StaticArray["day", "month", "sporadic", "week", "year"]
 
     # Unique identifier for the mandate or subscription.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reference : String? = nil
+    MAX_LENGTH_FOR_REFERENCE = 80
 
     # Start date of the mandate or subscription. Start date should not be lesser than yesterday.
     @[JSON::Field(key: "start_date", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -54,6 +55,7 @@ module Stripe
     # A description of the mandate or subscription that is meant to be displayed to the customer.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: description.nil? && !description_present?)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 200
 
     @[JSON::Field(ignore: true)]
     property? description_present : Bool = false
@@ -75,10 +77,11 @@ module Stripe
     # Specifies the type of mandates supported. Possible values are `india`.
     @[JSON::Field(key: "supported_types", type: Array(String)?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: supported_types.nil? && !supported_types_present?)]
     getter supported_types : Array(String)? = nil
+    ERROR_MESSAGE_FOR_SUPPORTED_TYPES = "invalid value for \"supported_types\", must be one of [india]."
+    VALID_VALUES_FOR_SUPPORTED_TYPES  = StaticArray["india"]
 
     @[JSON::Field(ignore: true)]
     property? supported_types_present : Bool = false
-    VALID_VALUES_FOR_SUPPORTED_TYPES = StaticArray["india"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -109,32 +112,32 @@ module Stripe
       invalid_properties.push("\"amount_type\" is required and cannot be null") if @amount_type.nil?
 
       if _amount_type = @amount_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("amount_type", VALID_VALUES_FOR_AMOUNT_TYPE)) unless OpenApi::EnumValidator.valid?(_amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_AMOUNT_TYPE) unless OpenApi::EnumValidator.valid?(_amount_type, VALID_VALUES_FOR_AMOUNT_TYPE)
       end
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
       if _interval = @interval
-        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+        invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
       invalid_properties.push("\"reference\" is required and cannot be null") if @reference.nil?
 
       if _reference = @reference
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 80)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"start_date\" is required and cannot be null") if @start_date.nil?
 
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 200)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _supported_types = @supported_types
-        invalid_properties.push(OpenApi::EnumValidator.error_message("supported_types", VALID_VALUES_FOR_SUPPORTED_TYPES)) unless OpenApi::EnumValidator.valid?(_supported_types, VALID_VALUES_FOR_SUPPORTED_TYPES)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SUPPORTED_TYPES) unless OpenApi::EnumValidator.valid?(_supported_types, VALID_VALUES_FOR_SUPPORTED_TYPES)
       end
       invalid_properties
     end
@@ -158,13 +161,13 @@ module Stripe
 
       return false if @reference.nil?
       if _reference = @reference
-        return false if _reference.to_s.size > 80
+        return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 
       return false if @start_date.nil?
 
       if _description = @description
-        return false if _description.to_s.size > 200
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _supported_types = @supported_types
@@ -223,10 +226,7 @@ module Stripe
         raise ArgumentError.new("\"reference\" is required and cannot be null")
       end
       _reference = reference.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 80)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       @reference = _reference
     end
 
@@ -247,10 +247,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 200)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 

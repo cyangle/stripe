@@ -23,6 +23,7 @@ module Stripe
     # An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide details to the account.
     @[JSON::Field(key: "account_token", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_token : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_TOKEN = 5000
 
     @[JSON::Field(key: "bank_account", type: Stripe::PostAccountRequestBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bank_account : Stripe::PostAccountRequestBankAccount? = nil
@@ -33,8 +34,8 @@ module Stripe
     # The business type.
     @[JSON::Field(key: "business_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter business_type : String? = nil
-
-    VALID_VALUES_FOR_BUSINESS_TYPE = StaticArray["company", "government_entity", "individual", "non_profit"]
+    ERROR_MESSAGE_FOR_BUSINESS_TYPE = "invalid value for \"business_type\", must be one of [company, government_entity, individual, non_profit]."
+    VALID_VALUES_FOR_BUSINESS_TYPE  = StaticArray["company", "government_entity", "individual", "non_profit"]
 
     @[JSON::Field(key: "capabilities", type: Stripe::CapabilitiesParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capabilities : Stripe::CapabilitiesParam? = nil
@@ -60,6 +61,7 @@ module Stripe
     # A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the [bank account](https://stripe.com/docs/api#account_create_bank_account) or [card creation](https://stripe.com/docs/api#account_create_card) APIs.
     @[JSON::Field(key: "external_account", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter external_account : String? = nil
+    MAX_LENGTH_FOR_EXTERNAL_ACCOUNT = 5000
 
     @[JSON::Field(key: "individual", type: Stripe::IndividualSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter individual : Stripe::IndividualSpecs? = nil
@@ -102,7 +104,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _account_token = @account_token
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_token", _account_token.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_token", _account_token.to_s.size, MAX_LENGTH_FOR_ACCOUNT_TOKEN)
           invalid_properties.push(max_length_error)
         end
       end
@@ -113,7 +115,7 @@ module Stripe
         invalid_properties.concat(_business_profile.list_invalid_properties_for("business_profile")) if _business_profile.is_a?(OpenApi::Validatable)
       end
       if _business_type = @business_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("business_type", VALID_VALUES_FOR_BUSINESS_TYPE)) unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BUSINESS_TYPE) unless OpenApi::EnumValidator.valid?(_business_type, VALID_VALUES_FOR_BUSINESS_TYPE)
       end
       if _capabilities = @capabilities
         invalid_properties.concat(_capabilities.list_invalid_properties_for("capabilities")) if _capabilities.is_a?(OpenApi::Validatable)
@@ -127,7 +129,7 @@ module Stripe
       end
 
       if _external_account = @external_account
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("external_account", _external_account.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("external_account", _external_account.to_s.size, MAX_LENGTH_FOR_EXTERNAL_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -150,7 +152,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _account_token = @account_token
-        return false if _account_token.to_s.size > 5000
+        return false if _account_token.to_s.size > MAX_LENGTH_FOR_ACCOUNT_TOKEN
       end
 
       if _bank_account = @bank_account
@@ -178,7 +180,7 @@ module Stripe
       end
 
       if _external_account = @external_account
-        return false if _external_account.to_s.size > 5000
+        return false if _external_account.to_s.size > MAX_LENGTH_FOR_EXTERNAL_ACCOUNT
       end
 
       if _individual = @individual
@@ -207,10 +209,7 @@ module Stripe
         return @account_token = nil
       end
       _account_token = account_token.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_token", _account_token.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_token", _account_token.to_s.size, MAX_LENGTH_FOR_ACCOUNT_TOKEN)
       @account_token = _account_token
     end
 
@@ -317,10 +316,7 @@ module Stripe
         return @external_account = nil
       end
       _external_account = external_account.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("external_account", _external_account.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("external_account", _external_account.to_s.size, MAX_LENGTH_FOR_EXTERNAL_ACCOUNT)
       @external_account = _external_account
     end
 

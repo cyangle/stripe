@@ -22,8 +22,8 @@ module Stripe
 
     @[JSON::Field(key: "behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter behavior : String? = nil
-
-    VALID_VALUES_FOR_BEHAVIOR = StaticArray["keep_as_draft", "mark_uncollectible", "void"]
+    ERROR_MESSAGE_FOR_BEHAVIOR = "invalid value for \"behavior\", must be one of [keep_as_draft, mark_uncollectible, void]."
+    VALID_VALUES_FOR_BEHAVIOR  = StaticArray["keep_as_draft", "mark_uncollectible", "void"]
 
     # Optional properties
 
@@ -49,7 +49,7 @@ module Stripe
       invalid_properties.push("\"behavior\" is required and cannot be null") if @behavior.nil?
 
       if _behavior = @behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("behavior", VALID_VALUES_FOR_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_behavior, VALID_VALUES_FOR_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_behavior, VALID_VALUES_FOR_BEHAVIOR)
       end
 
       invalid_properties

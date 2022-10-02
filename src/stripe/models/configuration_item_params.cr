@@ -25,6 +25,7 @@ module Stripe
 
     @[JSON::Field(key: "price", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter price : String? = nil
+    MAX_LENGTH_FOR_PRICE = 5000
 
     @[JSON::Field(key: "price_data", type: Stripe::RecurringPriceData?, default: nil, required: false, nullable: false, emit_null: false)]
     getter price_data : Stripe::RecurringPriceData? = nil
@@ -57,7 +58,7 @@ module Stripe
         invalid_properties.concat(_billing_thresholds.list_invalid_properties_for("billing_thresholds")) if _billing_thresholds.is_a?(OpenApi::Validatable)
       end
       if _price = @price
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -79,7 +80,7 @@ module Stripe
       end
 
       if _price = @price
-        return false if _price.to_s.size > 5000
+        return false if _price.to_s.size > MAX_LENGTH_FOR_PRICE
       end
 
       if _price_data = @price_data
@@ -111,10 +112,7 @@ module Stripe
         return @price = nil
       end
       _price = price.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("price", _price.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("price", _price.to_s.size, MAX_LENGTH_FOR_PRICE)
       @price = _price
     end
 

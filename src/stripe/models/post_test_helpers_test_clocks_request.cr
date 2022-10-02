@@ -33,6 +33,7 @@ module Stripe
     # The name for this test clock.
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 300
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,7 +55,7 @@ module Stripe
       invalid_properties.push("\"frozen_time\" is required and cannot be null") if @frozen_time.nil?
 
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 300)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -67,7 +68,7 @@ module Stripe
       return false if @frozen_time.nil?
 
       if _name = @name
-        return false if _name.to_s.size > 300
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       true
@@ -100,10 +101,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 300)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 

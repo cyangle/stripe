@@ -22,13 +22,13 @@ module Stripe
 
     @[JSON::Field(key: "interval", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter interval : String? = nil
-
-    VALID_VALUES_FOR_INTERVAL = StaticArray["day", "month", "week", "year"]
+    ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [day, month, week, year]."
+    VALID_VALUES_FOR_INTERVAL  = StaticArray["day", "month", "week", "year"]
 
     @[JSON::Field(key: "usage_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter usage_type : String? = nil
-
-    VALID_VALUES_FOR_USAGE_TYPE = StaticArray["licensed", "metered"]
+    ERROR_MESSAGE_FOR_USAGE_TYPE = "invalid value for \"usage_type\", must be one of [licensed, metered]."
+    VALID_VALUES_FOR_USAGE_TYPE  = StaticArray["licensed", "metered"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -46,10 +46,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _interval = @interval
-        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+        invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
       if _usage_type = @usage_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("usage_type", VALID_VALUES_FOR_USAGE_TYPE)) unless OpenApi::EnumValidator.valid?(_usage_type, VALID_VALUES_FOR_USAGE_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_USAGE_TYPE) unless OpenApi::EnumValidator.valid?(_usage_type, VALID_VALUES_FOR_USAGE_TYPE)
       end
       invalid_properties
     end

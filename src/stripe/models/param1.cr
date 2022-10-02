@@ -22,9 +22,11 @@ module Stripe
 
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account_number : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_NUMBER = 5000
 
     @[JSON::Field(key: "sort_code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sort_code : String? = nil
+    MAX_LENGTH_FOR_SORT_CODE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,12 +44,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _account_number = @account_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       if _sort_code = @sort_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, MAX_LENGTH_FOR_SORT_CODE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -58,11 +60,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _account_number = @account_number
-        return false if _account_number.to_s.size > 5000
+        return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
       if _sort_code = @sort_code
-        return false if _sort_code.to_s.size > 5000
+        return false if _sort_code.to_s.size > MAX_LENGTH_FOR_SORT_CODE
       end
 
       true
@@ -75,10 +77,7 @@ module Stripe
         return @account_number = nil
       end
       _account_number = account_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
       @account_number = _account_number
     end
 
@@ -89,10 +88,7 @@ module Stripe
         return @sort_code = nil
       end
       _sort_code = sort_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sort_code", _sort_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("sort_code", _sort_code.to_s.size, MAX_LENGTH_FOR_SORT_CODE)
       @sort_code = _sort_code
     end
 

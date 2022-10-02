@@ -32,12 +32,13 @@ module Stripe
     # Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay invoices at the end of the subscription cycle or at invoice finalization using the default payment method attached to the subscription or customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions. Defaults to `charge_automatically`.
     @[JSON::Field(key: "collection_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collection_method : String? = nil
-
-    VALID_VALUES_FOR_COLLECTION_METHOD = StaticArray["charge_automatically", "send_invoice"]
+    ERROR_MESSAGE_FOR_COLLECTION_METHOD = "invalid value for \"collection_method\", must be one of [charge_automatically, send_invoice]."
+    VALID_VALUES_FOR_COLLECTION_METHOD  = StaticArray["charge_automatically", "send_invoice"]
 
     # The customer for which this quote belongs to. A customer is required before finalizing the quote. Once specified, it cannot be changed.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER = 5000
 
     @[JSON::Field(key: "default_tax_rates", type: Stripe::PostQuotesRequestDefaultTaxRates?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_tax_rates : Stripe::PostQuotesRequestDefaultTaxRates? = nil
@@ -45,6 +46,7 @@ module Stripe
     # A description that will be displayed on the quote PDF. If no value is passed, the default description configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
     @[JSON::Field(key: "description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter description : String? = nil
+    MAX_LENGTH_FOR_DESCRIPTION = 500
 
     @[JSON::Field(key: "discounts", type: Stripe::PostQuotesRequestDiscounts?, default: nil, required: false, nullable: false, emit_null: false)]
     getter discounts : Stripe::PostQuotesRequestDiscounts? = nil
@@ -60,6 +62,7 @@ module Stripe
     # A footer that will be displayed on the quote PDF. If no value is passed, the default footer configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
     @[JSON::Field(key: "footer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter footer : String? = nil
+    MAX_LENGTH_FOR_FOOTER = 500
 
     @[JSON::Field(key: "from_quote", type: Stripe::FromQuoteParams?, default: nil, required: false, nullable: false, emit_null: false)]
     getter from_quote : Stripe::FromQuoteParams? = nil
@@ -67,6 +70,7 @@ module Stripe
     # A header that will be displayed on the quote PDF. If no value is passed, the default header configured in your [quote template settings](https://dashboard.stripe.com/settings/billing/quote) will be used.
     @[JSON::Field(key: "header", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter header : String? = nil
+    MAX_LENGTH_FOR_HEADER = 50
 
     @[JSON::Field(key: "invoice_settings", type: Stripe::QuoteParam?, default: nil, required: false, nullable: false, emit_null: false)]
     getter invoice_settings : Stripe::QuoteParam? = nil
@@ -88,6 +92,7 @@ module Stripe
     # ID of the test clock to attach to the quote.
     @[JSON::Field(key: "test_clock", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter test_clock : String? = nil
+    MAX_LENGTH_FOR_TEST_CLOCK = 5000
 
     @[JSON::Field(key: "transfer_data", type: Stripe::PostQuotesRequestTransferData?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transfer_data : Stripe::PostQuotesRequestTransferData? = nil
@@ -135,10 +140,10 @@ module Stripe
         invalid_properties.concat(_automatic_tax.list_invalid_properties_for("automatic_tax")) if _automatic_tax.is_a?(OpenApi::Validatable)
       end
       if _collection_method = @collection_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("collection_method", VALID_VALUES_FOR_COLLECTION_METHOD)) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_COLLECTION_METHOD) unless OpenApi::EnumValidator.valid?(_collection_method, VALID_VALUES_FOR_COLLECTION_METHOD)
       end
       if _customer = @customer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -146,7 +151,7 @@ module Stripe
         invalid_properties.concat(_default_tax_rates.list_invalid_properties_for("default_tax_rates")) if _default_tax_rates.is_a?(OpenApi::Validatable)
       end
       if _description = @description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 500)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -155,7 +160,7 @@ module Stripe
       end
 
       if _footer = @footer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, 500)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, MAX_LENGTH_FOR_FOOTER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -163,7 +168,7 @@ module Stripe
         invalid_properties.concat(_from_quote.list_invalid_properties_for("from_quote")) if _from_quote.is_a?(OpenApi::Validatable)
       end
       if _header = @header
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("header", _header.to_s.size, 50)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("header", _header.to_s.size, MAX_LENGTH_FOR_HEADER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -171,7 +176,7 @@ module Stripe
         invalid_properties.concat(_invoice_settings.list_invalid_properties_for("invoice_settings")) if _invoice_settings.is_a?(OpenApi::Validatable)
       end
       if _line_items = @line_items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "line_items", array: _line_items)) if _line_items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "line_items", container: _line_items)) if _line_items.is_a?(Array)
       end
 
       if _on_behalf_of = @on_behalf_of
@@ -181,7 +186,7 @@ module Stripe
         invalid_properties.concat(_subscription_data.list_invalid_properties_for("subscription_data")) if _subscription_data.is_a?(OpenApi::Validatable)
       end
       if _test_clock = @test_clock
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("test_clock", _test_clock.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("test_clock", _test_clock.to_s.size, MAX_LENGTH_FOR_TEST_CLOCK)
           invalid_properties.push(max_length_error)
         end
       end
@@ -211,7 +216,7 @@ module Stripe
       end
 
       if _customer = @customer
-        return false if _customer.to_s.size > 5000
+        return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       if _default_tax_rates = @default_tax_rates
@@ -219,7 +224,7 @@ module Stripe
       end
 
       if _description = @description
-        return false if _description.to_s.size > 500
+        return false if _description.to_s.size > MAX_LENGTH_FOR_DESCRIPTION
       end
 
       if _discounts = @discounts
@@ -227,7 +232,7 @@ module Stripe
       end
 
       if _footer = @footer
-        return false if _footer.to_s.size > 500
+        return false if _footer.to_s.size > MAX_LENGTH_FOR_FOOTER
       end
 
       if _from_quote = @from_quote
@@ -235,7 +240,7 @@ module Stripe
       end
 
       if _header = @header
-        return false if _header.to_s.size > 50
+        return false if _header.to_s.size > MAX_LENGTH_FOR_HEADER
       end
 
       if _invoice_settings = @invoice_settings
@@ -243,7 +248,7 @@ module Stripe
       end
 
       if _line_items = @line_items
-        return false if _line_items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _line_items)
+        return false if _line_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _line_items)
       end
 
       if _on_behalf_of = @on_behalf_of
@@ -255,7 +260,7 @@ module Stripe
       end
 
       if _test_clock = @test_clock
-        return false if _test_clock.to_s.size > 5000
+        return false if _test_clock.to_s.size > MAX_LENGTH_FOR_TEST_CLOCK
       end
 
       if _transfer_data = @transfer_data
@@ -316,10 +321,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       @customer = _customer
     end
 
@@ -341,10 +343,7 @@ module Stripe
         return @description = nil
       end
       _description = description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("description", _description.to_s.size, 500)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("description", _description.to_s.size, MAX_LENGTH_FOR_DESCRIPTION)
       @description = _description
     end
 
@@ -386,10 +385,7 @@ module Stripe
         return @footer = nil
       end
       _footer = footer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, 500)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("footer", _footer.to_s.size, MAX_LENGTH_FOR_FOOTER)
       @footer = _footer
     end
 
@@ -411,10 +407,7 @@ module Stripe
         return @header = nil
       end
       _header = header.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("header", _header.to_s.size, 50)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("header", _header.to_s.size, MAX_LENGTH_FOR_HEADER)
       @header = _header
     end
 
@@ -436,7 +429,7 @@ module Stripe
         return @line_items = nil
       end
       _line_items = line_items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _line_items) if _line_items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _line_items) if _line_items.is_a?(Array)
       @line_items = _line_items
     end
 
@@ -479,10 +472,7 @@ module Stripe
         return @test_clock = nil
       end
       _test_clock = test_clock.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("test_clock", _test_clock.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("test_clock", _test_clock.to_s.size, MAX_LENGTH_FOR_TEST_CLOCK)
       @test_clock = _test_clock
     end
 

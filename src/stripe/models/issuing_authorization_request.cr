@@ -36,6 +36,7 @@ module Stripe
     # Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter currency : String? = nil
+    MAX_LENGTH_FOR_CURRENCY = 5000
 
     # The `pending_request.merchant_amount` at the time of the request, presented in the `merchant_currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
     @[JSON::Field(key: "merchant_amount", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -44,12 +45,13 @@ module Stripe
     # The currency that was collected by the merchant and presented to the cardholder for the authorization. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     @[JSON::Field(key: "merchant_currency", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter merchant_currency : String? = nil
+    MAX_LENGTH_FOR_MERCHANT_CURRENCY = 5000
 
     # The reason for the approval or decline.
     @[JSON::Field(key: "reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reason : String? = nil
-
-    VALID_VALUES_FOR_REASON = StaticArray["account_disabled", "card_active", "card_inactive", "cardholder_inactive", "cardholder_verification_required", "insufficient_funds", "not_allowed", "spending_controls", "suspected_fraud", "verification_failed", "webhook_approved", "webhook_declined", "webhook_timeout"]
+    ERROR_MESSAGE_FOR_REASON = "invalid value for \"reason\", must be one of [account_disabled, card_active, card_inactive, cardholder_inactive, cardholder_verification_required, insufficient_funds, not_allowed, spending_controls, suspected_fraud, verification_failed, webhook_approved, webhook_declined, webhook_timeout]."
+    VALID_VALUES_FOR_REASON  = StaticArray["account_disabled", "card_active", "card_inactive", "cardholder_inactive", "cardholder_verification_required", "insufficient_funds", "not_allowed", "spending_controls", "suspected_fraud", "verification_failed", "webhook_approved", "webhook_declined", "webhook_timeout"]
 
     # Optional properties
 
@@ -90,7 +92,7 @@ module Stripe
       invalid_properties.push("\"currency\" is required and cannot be null") if @currency.nil?
 
       if _currency = @currency
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
           invalid_properties.push(max_length_error)
         end
       end
@@ -99,14 +101,14 @@ module Stripe
       invalid_properties.push("\"merchant_currency\" is required and cannot be null") if @merchant_currency.nil?
 
       if _merchant_currency = @merchant_currency
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("merchant_currency", _merchant_currency.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("merchant_currency", _merchant_currency.to_s.size, MAX_LENGTH_FOR_MERCHANT_CURRENCY)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
 
       if _reason = @reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("reason", VALID_VALUES_FOR_REASON)) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
       if _amount_details = @amount_details
         invalid_properties.concat(_amount_details.list_invalid_properties_for("amount_details")) if _amount_details.is_a?(OpenApi::Validatable)
@@ -125,14 +127,14 @@ module Stripe
 
       return false if @currency.nil?
       if _currency = @currency
-        return false if _currency.to_s.size > 5000
+        return false if _currency.to_s.size > MAX_LENGTH_FOR_CURRENCY
       end
 
       return false if @merchant_amount.nil?
 
       return false if @merchant_currency.nil?
       if _merchant_currency = @merchant_currency
-        return false if _merchant_currency.to_s.size > 5000
+        return false if _merchant_currency.to_s.size > MAX_LENGTH_FOR_MERCHANT_CURRENCY
       end
 
       return false if @reason.nil?
@@ -184,10 +186,7 @@ module Stripe
         raise ArgumentError.new("\"currency\" is required and cannot be null")
       end
       _currency = currency.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("currency", _currency.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("currency", _currency.to_s.size, MAX_LENGTH_FOR_CURRENCY)
       @currency = _currency
     end
 
@@ -208,10 +207,7 @@ module Stripe
         raise ArgumentError.new("\"merchant_currency\" is required and cannot be null")
       end
       _merchant_currency = merchant_currency.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("merchant_currency", _merchant_currency.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("merchant_currency", _merchant_currency.to_s.size, MAX_LENGTH_FOR_MERCHANT_CURRENCY)
       @merchant_currency = _merchant_currency
     end
 

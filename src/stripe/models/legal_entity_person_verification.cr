@@ -24,6 +24,7 @@ module Stripe
     # The state of verification for the person. Possible values are `unverified`, `pending`, or `verified`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
+    MAX_LENGTH_FOR_STATUS = 5000
 
     # Optional properties
 
@@ -36,6 +37,7 @@ module Stripe
     # A user-displayable string describing the verification state for the person. For example, this may say \"Provided identity information could not be verified\".
     @[JSON::Field(key: "details", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: details.nil? && !details_present?)]
     getter details : String? = nil
+    MAX_LENGTH_FOR_DETAILS = 5000
 
     @[JSON::Field(ignore: true)]
     property? details_present : Bool = false
@@ -43,6 +45,7 @@ module Stripe
     # One of `document_address_mismatch`, `document_dob_mismatch`, `document_duplicate_type`, `document_id_number_mismatch`, `document_name_mismatch`, `document_nationality_mismatch`, `failed_keyed_identity`, or `failed_other`. A machine-readable code specifying the verification state for the person.
     @[JSON::Field(key: "details_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: details_code.nil? && !details_code_present?)]
     getter details_code : String? = nil
+    MAX_LENGTH_FOR_DETAILS_CODE = 5000
 
     @[JSON::Field(ignore: true)]
     property? details_code_present : Bool = false
@@ -72,7 +75,7 @@ module Stripe
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
@@ -80,12 +83,12 @@ module Stripe
         invalid_properties.concat(_additional_document.list_invalid_properties_for("additional_document")) if _additional_document.is_a?(OpenApi::Validatable)
       end
       if _details = @details
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details", _details.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details", _details.to_s.size, MAX_LENGTH_FOR_DETAILS)
           invalid_properties.push(max_length_error)
         end
       end
       if _details_code = @details_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details_code", _details_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details_code", _details_code.to_s.size, MAX_LENGTH_FOR_DETAILS_CODE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -100,7 +103,7 @@ module Stripe
     def valid? : Bool
       return false if @status.nil?
       if _status = @status
-        return false if _status.to_s.size > 5000
+        return false if _status.to_s.size > MAX_LENGTH_FOR_STATUS
       end
 
       if _additional_document = @additional_document
@@ -108,11 +111,11 @@ module Stripe
       end
 
       if _details = @details
-        return false if _details.to_s.size > 5000
+        return false if _details.to_s.size > MAX_LENGTH_FOR_DETAILS
       end
 
       if _details_code = @details_code
-        return false if _details_code.to_s.size > 5000
+        return false if _details_code.to_s.size > MAX_LENGTH_FOR_DETAILS_CODE
       end
 
       if _document = @document
@@ -129,10 +132,7 @@ module Stripe
         raise ArgumentError.new("\"status\" is required and cannot be null")
       end
       _status = status.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("status", _status.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("status", _status.to_s.size, MAX_LENGTH_FOR_STATUS)
       @status = _status
     end
 
@@ -154,10 +154,7 @@ module Stripe
         return @details = nil
       end
       _details = details.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details", _details.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("details", _details.to_s.size, MAX_LENGTH_FOR_DETAILS)
       @details = _details
     end
 
@@ -168,10 +165,7 @@ module Stripe
         return @details_code = nil
       end
       _details_code = details_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("details_code", _details_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("details_code", _details_code.to_s.size, MAX_LENGTH_FOR_DETAILS_CODE)
       @details_code = _details_code
     end
 

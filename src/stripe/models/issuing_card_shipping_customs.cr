@@ -24,6 +24,7 @@ module Stripe
     # A registration number used for customs in Europe. See https://www.gov.uk/eori and https://ec.europa.eu/taxation_customs/business/customs-procedures-import-and-export/customs-procedures/economic-operators-registration-and-identification-number-eori_en.
     @[JSON::Field(key: "eori_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: eori_number.nil? && !eori_number_present?)]
     getter eori_number : String? = nil
+    MAX_LENGTH_FOR_EORI_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? eori_number_present : Bool = false
@@ -43,7 +44,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _eori_number = @eori_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("eori_number", _eori_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("eori_number", _eori_number.to_s.size, MAX_LENGTH_FOR_EORI_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -54,7 +55,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _eori_number = @eori_number
-        return false if _eori_number.to_s.size > 5000
+        return false if _eori_number.to_s.size > MAX_LENGTH_FOR_EORI_NUMBER
       end
 
       true
@@ -67,10 +68,7 @@ module Stripe
         return @eori_number = nil
       end
       _eori_number = eori_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("eori_number", _eori_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("eori_number", _eori_number.to_s.size, MAX_LENGTH_FOR_EORI_NUMBER)
       @eori_number = _eori_number
     end
 

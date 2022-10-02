@@ -24,14 +24,15 @@ module Stripe
     # Surfaces if automatic tax computation is possible given the current customer location information.
     @[JSON::Field(key: "automatic_tax", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter automatic_tax : String? = nil
-
-    VALID_VALUES_FOR_AUTOMATIC_TAX = StaticArray["failed", "not_collecting", "supported", "unrecognized_location"]
+    ERROR_MESSAGE_FOR_AUTOMATIC_TAX = "invalid value for \"automatic_tax\", must be one of [failed, not_collecting, supported, unrecognized_location]."
+    VALID_VALUES_FOR_AUTOMATIC_TAX  = StaticArray["failed", "not_collecting", "supported", "unrecognized_location"]
 
     # Optional properties
 
     # A recent IP address of the customer used for tax reporting and tax location inference.
     @[JSON::Field(key: "ip_address", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ip_address.nil? && !ip_address_present?)]
     getter ip_address : String? = nil
+    MAX_LENGTH_FOR_IP_ADDRESS = 5000
 
     @[JSON::Field(ignore: true)]
     property? ip_address_present : Bool = false
@@ -62,10 +63,10 @@ module Stripe
       invalid_properties.push("\"automatic_tax\" is required and cannot be null") if @automatic_tax.nil?
 
       if _automatic_tax = @automatic_tax
-        invalid_properties.push(OpenApi::EnumValidator.error_message("automatic_tax", VALID_VALUES_FOR_AUTOMATIC_TAX)) unless OpenApi::EnumValidator.valid?(_automatic_tax, VALID_VALUES_FOR_AUTOMATIC_TAX)
+        invalid_properties.push(ERROR_MESSAGE_FOR_AUTOMATIC_TAX) unless OpenApi::EnumValidator.valid?(_automatic_tax, VALID_VALUES_FOR_AUTOMATIC_TAX)
       end
       if _ip_address = @ip_address
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
           invalid_properties.push(max_length_error)
         end
       end
@@ -84,7 +85,7 @@ module Stripe
       end
 
       if _ip_address = @ip_address
-        return false if _ip_address.to_s.size > 5000
+        return false if _ip_address.to_s.size > MAX_LENGTH_FOR_IP_ADDRESS
       end
 
       if _location = @location
@@ -112,10 +113,7 @@ module Stripe
         return @ip_address = nil
       end
       _ip_address = ip_address.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ip_address", _ip_address.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("ip_address", _ip_address.to_s.size, MAX_LENGTH_FOR_IP_ADDRESS)
       @ip_address = _ip_address
     end
 

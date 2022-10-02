@@ -26,8 +26,8 @@ module Stripe
     # Configures how the subscription schedule behaves when it ends. Possible values are `release` or `cancel` with the default being `release`. `release` will end the subscription schedule and keep the underlying subscription running.`cancel` will end the subscription schedule and cancel the underlying subscription.
     @[JSON::Field(key: "end_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter end_behavior : String? = nil
-
-    VALID_VALUES_FOR_END_BEHAVIOR = StaticArray["cancel", "none", "release", "renew"]
+    ERROR_MESSAGE_FOR_END_BEHAVIOR = "invalid value for \"end_behavior\", must be one of [cancel, none, release, renew]."
+    VALID_VALUES_FOR_END_BEHAVIOR  = StaticArray["cancel", "none", "release", "renew"]
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -43,8 +43,8 @@ module Stripe
     # If the update changes the current phase, indicates whether the changes should be prorated. The default value is `create_prorations`.
     @[JSON::Field(key: "proration_behavior", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter proration_behavior : String? = nil
-
-    VALID_VALUES_FOR_PRORATION_BEHAVIOR = StaticArray["always_invoice", "create_prorations", "none"]
+    ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR = "invalid value for \"proration_behavior\", must be one of [always_invoice, create_prorations, none]."
+    VALID_VALUES_FOR_PRORATION_BEHAVIOR  = StaticArray["always_invoice", "create_prorations", "none"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -69,17 +69,17 @@ module Stripe
         invalid_properties.concat(_default_settings.list_invalid_properties_for("default_settings")) if _default_settings.is_a?(OpenApi::Validatable)
       end
       if _end_behavior = @end_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("end_behavior", VALID_VALUES_FOR_END_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_END_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
       end
 
       if _metadata = @metadata
         invalid_properties.concat(_metadata.list_invalid_properties_for("metadata")) if _metadata.is_a?(OpenApi::Validatable)
       end
       if _phases = @phases
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "phases", array: _phases)) if _phases.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "phases", container: _phases)) if _phases.is_a?(Array)
       end
       if _proration_behavior = @proration_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("proration_behavior", VALID_VALUES_FOR_PRORATION_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PRORATION_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_proration_behavior, VALID_VALUES_FOR_PRORATION_BEHAVIOR)
       end
       invalid_properties
     end
@@ -100,7 +100,7 @@ module Stripe
       end
 
       if _phases = @phases
-        return false if _phases.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _phases)
+        return false if _phases.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _phases)
       end
 
       if _proration_behavior = @proration_behavior
@@ -160,7 +160,7 @@ module Stripe
         return @phases = nil
       end
       _phases = phases.not_nil!
-      OpenApi::ArrayValidator.validate(array: _phases) if _phases.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _phases) if _phases.is_a?(Array)
       @phases = _phases
     end
 

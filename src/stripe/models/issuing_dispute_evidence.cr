@@ -24,8 +24,8 @@ module Stripe
     # The reason for filing the dispute. Its value will match the field containing the evidence.
     @[JSON::Field(key: "reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reason : String? = nil
-
-    VALID_VALUES_FOR_REASON = StaticArray["canceled", "duplicate", "fraudulent", "merchandise_not_as_described", "not_received", "other", "service_not_as_described"]
+    ERROR_MESSAGE_FOR_REASON = "invalid value for \"reason\", must be one of [canceled, duplicate, fraudulent, merchandise_not_as_described, not_received, other, service_not_as_described]."
+    VALID_VALUES_FOR_REASON  = StaticArray["canceled", "duplicate", "fraudulent", "merchandise_not_as_described", "not_received", "other", "service_not_as_described"]
 
     # Optional properties
 
@@ -75,7 +75,7 @@ module Stripe
       invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
 
       if _reason = @reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("reason", VALID_VALUES_FOR_REASON)) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REASON) unless OpenApi::EnumValidator.valid?(_reason, VALID_VALUES_FOR_REASON)
       end
       if _canceled = @canceled
         invalid_properties.concat(_canceled.list_invalid_properties_for("canceled")) if _canceled.is_a?(OpenApi::Validatable)

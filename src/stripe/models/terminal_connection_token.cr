@@ -24,18 +24,20 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["terminal.connection_token"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [terminal.connection_token]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["terminal.connection_token"]
 
     # Your application should pass this token to the Stripe Terminal SDK.
     @[JSON::Field(key: "secret", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter secret : String? = nil
+    MAX_LENGTH_FOR_SECRET = 5000
 
     # Optional properties
 
     # The id of the location that this connection token is scoped to. Note that location scoping only applies to internet-connected readers. For more details, see [the docs on scoping connection tokens](https://stripe.com/docs/terminal/fleet/locations#connection-tokens).
     @[JSON::Field(key: "location", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter location : String? = nil
+    MAX_LENGTH_FOR_LOCATION = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -57,17 +59,17 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"secret\" is required and cannot be null") if @secret.nil?
 
       if _secret = @secret
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secret", _secret.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secret", _secret.to_s.size, MAX_LENGTH_FOR_SECRET)
           invalid_properties.push(max_length_error)
         end
       end
       if _location = @location
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("location", _location.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("location", _location.to_s.size, MAX_LENGTH_FOR_LOCATION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -84,11 +86,11 @@ module Stripe
 
       return false if @secret.nil?
       if _secret = @secret
-        return false if _secret.to_s.size > 5000
+        return false if _secret.to_s.size > MAX_LENGTH_FOR_SECRET
       end
 
       if _location = @location
-        return false if _location.to_s.size > 5000
+        return false if _location.to_s.size > MAX_LENGTH_FOR_LOCATION
       end
 
       true
@@ -112,10 +114,7 @@ module Stripe
         raise ArgumentError.new("\"secret\" is required and cannot be null")
       end
       _secret = secret.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("secret", _secret.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("secret", _secret.to_s.size, MAX_LENGTH_FOR_SECRET)
       @secret = _secret
     end
 
@@ -126,10 +125,7 @@ module Stripe
         return @location = nil
       end
       _location = location.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("location", _location.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("location", _location.to_s.size, MAX_LENGTH_FOR_LOCATION)
       @location = _location
     end
 

@@ -24,6 +24,7 @@ module Stripe
     # The browser used in this browser session (e.g., `Chrome`).
     @[JSON::Field(key: "browser", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: browser.nil? && !browser_present?)]
     getter browser : String? = nil
+    MAX_LENGTH_FOR_BROWSER = 5000
 
     @[JSON::Field(ignore: true)]
     property? browser_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # Information about the device used for the browser session (e.g., `Samsung SM-G930T`).
     @[JSON::Field(key: "device", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: device.nil? && !device_present?)]
     getter device : String? = nil
+    MAX_LENGTH_FOR_DEVICE = 5000
 
     @[JSON::Field(ignore: true)]
     property? device_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # The platform for the browser session (e.g., `Macintosh`).
     @[JSON::Field(key: "platform", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: platform.nil? && !platform_present?)]
     getter platform : String? = nil
+    MAX_LENGTH_FOR_PLATFORM = 5000
 
     @[JSON::Field(ignore: true)]
     property? platform_present : Bool = false
@@ -45,6 +48,7 @@ module Stripe
     # The version for the browser session (e.g., `61.0.3163.100`).
     @[JSON::Field(key: "version", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: version.nil? && !version_present?)]
     getter version : String? = nil
+    MAX_LENGTH_FOR_VERSION = 5000
 
     @[JSON::Field(ignore: true)]
     property? version_present : Bool = false
@@ -67,22 +71,22 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _browser = @browser
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("browser", _browser.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("browser", _browser.to_s.size, MAX_LENGTH_FOR_BROWSER)
           invalid_properties.push(max_length_error)
         end
       end
       if _device = @device
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("device", _device.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("device", _device.to_s.size, MAX_LENGTH_FOR_DEVICE)
           invalid_properties.push(max_length_error)
         end
       end
       if _platform = @platform
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("platform", _platform.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("platform", _platform.to_s.size, MAX_LENGTH_FOR_PLATFORM)
           invalid_properties.push(max_length_error)
         end
       end
       if _version = @version
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("version", _version.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("version", _version.to_s.size, MAX_LENGTH_FOR_VERSION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -93,19 +97,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _browser = @browser
-        return false if _browser.to_s.size > 5000
+        return false if _browser.to_s.size > MAX_LENGTH_FOR_BROWSER
       end
 
       if _device = @device
-        return false if _device.to_s.size > 5000
+        return false if _device.to_s.size > MAX_LENGTH_FOR_DEVICE
       end
 
       if _platform = @platform
-        return false if _platform.to_s.size > 5000
+        return false if _platform.to_s.size > MAX_LENGTH_FOR_PLATFORM
       end
 
       if _version = @version
-        return false if _version.to_s.size > 5000
+        return false if _version.to_s.size > MAX_LENGTH_FOR_VERSION
       end
 
       true
@@ -118,10 +122,7 @@ module Stripe
         return @browser = nil
       end
       _browser = browser.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("browser", _browser.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("browser", _browser.to_s.size, MAX_LENGTH_FOR_BROWSER)
       @browser = _browser
     end
 
@@ -132,10 +133,7 @@ module Stripe
         return @device = nil
       end
       _device = device.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("device", _device.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("device", _device.to_s.size, MAX_LENGTH_FOR_DEVICE)
       @device = _device
     end
 
@@ -146,10 +144,7 @@ module Stripe
         return @platform = nil
       end
       _platform = platform.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("platform", _platform.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("platform", _platform.to_s.size, MAX_LENGTH_FOR_PLATFORM)
       @platform = _platform
     end
 
@@ -160,10 +155,7 @@ module Stripe
         return @version = nil
       end
       _version = version.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("version", _version.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("version", _version.to_s.size, MAX_LENGTH_FOR_VERSION)
       @version = _version
     end
 

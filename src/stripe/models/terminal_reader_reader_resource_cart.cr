@@ -65,7 +65,7 @@ module Stripe
       invalid_properties.push("\"line_items\" is required and cannot be null") if @line_items.nil?
 
       if _line_items = @line_items
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "line_items", array: _line_items)) if _line_items.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "line_items", container: _line_items)) if _line_items.is_a?(Array)
       end
       invalid_properties.push("\"total\" is required and cannot be null") if @total.nil?
 
@@ -79,7 +79,7 @@ module Stripe
 
       return false if @line_items.nil?
       if _line_items = @line_items
-        return false if _line_items.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _line_items)
+        return false if _line_items.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _line_items)
       end
 
       return false if @total.nil?
@@ -104,7 +104,7 @@ module Stripe
         raise ArgumentError.new("\"line_items\" is required and cannot be null")
       end
       _line_items = line_items.not_nil!
-      OpenApi::ArrayValidator.validate(array: _line_items) if _line_items.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _line_items) if _line_items.is_a?(Array)
       @line_items = _line_items
     end
 

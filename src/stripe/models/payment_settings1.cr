@@ -23,6 +23,7 @@ module Stripe
 
     @[JSON::Field(key: "default_mandate", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_mandate : String? = nil
+    MAX_LENGTH_FOR_DEFAULT_MANDATE = 5000
 
     @[JSON::Field(key: "payment_method_options", type: Stripe::PaymentMethodOptions1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method_options : Stripe::PaymentMethodOptions1? = nil
@@ -47,7 +48,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _default_mandate = @default_mandate
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_mandate", _default_mandate.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_mandate", _default_mandate.to_s.size, MAX_LENGTH_FOR_DEFAULT_MANDATE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -64,7 +65,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _default_mandate = @default_mandate
-        return false if _default_mandate.to_s.size > 5000
+        return false if _default_mandate.to_s.size > MAX_LENGTH_FOR_DEFAULT_MANDATE
       end
 
       if _payment_method_options = @payment_method_options
@@ -85,10 +86,7 @@ module Stripe
         return @default_mandate = nil
       end
       _default_mandate = default_mandate.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_mandate", _default_mandate.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("default_mandate", _default_mandate.to_s.size, MAX_LENGTH_FOR_DEFAULT_MANDATE)
       @default_mandate = _default_mandate
     end
 

@@ -24,14 +24,15 @@ module Stripe
     # All supported networks.
     @[JSON::Field(key: "supported", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter supported : Array(String)? = nil
-
-    VALID_VALUES_FOR_SUPPORTED = StaticArray["ach", "us_domestic_wire"]
+    ERROR_MESSAGE_FOR_SUPPORTED = "invalid value for \"supported\", must be one of [ach, us_domestic_wire]."
+    VALID_VALUES_FOR_SUPPORTED  = StaticArray["ach", "us_domestic_wire"]
 
     # Optional properties
 
     # The preferred network.
     @[JSON::Field(key: "preferred", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: preferred.nil? && !preferred_present?)]
     getter preferred : String? = nil
+    MAX_LENGTH_FOR_PREFERRED = 5000
 
     @[JSON::Field(ignore: true)]
     property? preferred_present : Bool = false
@@ -55,10 +56,10 @@ module Stripe
       invalid_properties.push("\"supported\" is required and cannot be null") if @supported.nil?
 
       if _supported = @supported
-        invalid_properties.push(OpenApi::EnumValidator.error_message("supported", VALID_VALUES_FOR_SUPPORTED)) unless OpenApi::EnumValidator.valid?(_supported, VALID_VALUES_FOR_SUPPORTED)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SUPPORTED) unless OpenApi::EnumValidator.valid?(_supported, VALID_VALUES_FOR_SUPPORTED)
       end
       if _preferred = @preferred
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred", _preferred.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred", _preferred.to_s.size, MAX_LENGTH_FOR_PREFERRED)
           invalid_properties.push(max_length_error)
         end
       end
@@ -74,7 +75,7 @@ module Stripe
       end
 
       if _preferred = @preferred
-        return false if _preferred.to_s.size > 5000
+        return false if _preferred.to_s.size > MAX_LENGTH_FOR_PREFERRED
       end
 
       true
@@ -98,10 +99,7 @@ module Stripe
         return @preferred = nil
       end
       _preferred = preferred.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("preferred", _preferred.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("preferred", _preferred.to_s.size, MAX_LENGTH_FOR_PREFERRED)
       @preferred = _preferred
     end
 

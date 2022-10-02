@@ -38,12 +38,15 @@ module Stripe
 
     @[JSON::Field(key: "first_name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter first_name : String? = nil
+    MAX_LENGTH_FOR_FIRST_NAME = 100
 
     @[JSON::Field(key: "first_name_kana", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter first_name_kana : String? = nil
+    MAX_LENGTH_FOR_FIRST_NAME_KANA = 5000
 
     @[JSON::Field(key: "first_name_kanji", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter first_name_kanji : String? = nil
+    MAX_LENGTH_FOR_FIRST_NAME_KANJI = 5000
 
     @[JSON::Field(key: "full_name_aliases", type: Stripe::IndividualSpecsFullNameAliases?, default: nil, required: false, nullable: false, emit_null: false)]
     getter full_name_aliases : Stripe::IndividualSpecsFullNameAliases? = nil
@@ -53,21 +56,27 @@ module Stripe
 
     @[JSON::Field(key: "id_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id_number : String? = nil
+    MAX_LENGTH_FOR_ID_NUMBER = 5000
 
     @[JSON::Field(key: "id_number_secondary", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id_number_secondary : String? = nil
+    MAX_LENGTH_FOR_ID_NUMBER_SECONDARY = 5000
 
     @[JSON::Field(key: "last_name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter last_name : String? = nil
+    MAX_LENGTH_FOR_LAST_NAME = 100
 
     @[JSON::Field(key: "last_name_kana", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter last_name_kana : String? = nil
+    MAX_LENGTH_FOR_LAST_NAME_KANA = 5000
 
     @[JSON::Field(key: "last_name_kanji", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter last_name_kanji : String? = nil
+    MAX_LENGTH_FOR_LAST_NAME_KANJI = 5000
 
     @[JSON::Field(key: "maiden_name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter maiden_name : String? = nil
+    MAX_LENGTH_FOR_MAIDEN_NAME = 5000
 
     @[JSON::Field(key: "metadata", type: Stripe::IndividualSpecsMetadata?, default: nil, required: false, nullable: false, emit_null: false)]
     getter metadata : Stripe::IndividualSpecsMetadata? = nil
@@ -77,14 +86,15 @@ module Stripe
 
     @[JSON::Field(key: "political_exposure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter political_exposure : String? = nil
-
-    VALID_VALUES_FOR_POLITICAL_EXPOSURE = StaticArray["existing", "none"]
+    ERROR_MESSAGE_FOR_POLITICAL_EXPOSURE = "invalid value for \"political_exposure\", must be one of [existing, none]."
+    VALID_VALUES_FOR_POLITICAL_EXPOSURE  = StaticArray["existing", "none"]
 
     @[JSON::Field(key: "registered_address", type: Stripe::AddressSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter registered_address : Stripe::AddressSpecs? = nil
 
     @[JSON::Field(key: "ssn_last_4", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter ssn_last_4 : String? = nil
+    MAX_LENGTH_FOR_SSN_LAST_4 = 5000
 
     @[JSON::Field(key: "verification", type: Stripe::PersonVerificationSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter verification : Stripe::PersonVerificationSpecs? = nil
@@ -138,17 +148,17 @@ module Stripe
       end
 
       if _first_name = @first_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 100)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _first_name_kana = @first_name_kana
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name_kana", _first_name_kana.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name_kana", _first_name_kana.to_s.size, MAX_LENGTH_FOR_FIRST_NAME_KANA)
           invalid_properties.push(max_length_error)
         end
       end
       if _first_name_kanji = @first_name_kanji
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name_kanji", _first_name_kanji.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name_kanji", _first_name_kanji.to_s.size, MAX_LENGTH_FOR_FIRST_NAME_KANJI)
           invalid_properties.push(max_length_error)
         end
       end
@@ -157,32 +167,32 @@ module Stripe
       end
 
       if _id_number = @id_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number", _id_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number", _id_number.to_s.size, MAX_LENGTH_FOR_ID_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       if _id_number_secondary = @id_number_secondary
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number_secondary", _id_number_secondary.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number_secondary", _id_number_secondary.to_s.size, MAX_LENGTH_FOR_ID_NUMBER_SECONDARY)
           invalid_properties.push(max_length_error)
         end
       end
       if _last_name = @last_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 100)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _last_name_kana = @last_name_kana
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name_kana", _last_name_kana.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name_kana", _last_name_kana.to_s.size, MAX_LENGTH_FOR_LAST_NAME_KANA)
           invalid_properties.push(max_length_error)
         end
       end
       if _last_name_kanji = @last_name_kanji
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name_kanji", _last_name_kanji.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name_kanji", _last_name_kanji.to_s.size, MAX_LENGTH_FOR_LAST_NAME_KANJI)
           invalid_properties.push(max_length_error)
         end
       end
       if _maiden_name = @maiden_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("maiden_name", _maiden_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("maiden_name", _maiden_name.to_s.size, MAX_LENGTH_FOR_MAIDEN_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -191,13 +201,13 @@ module Stripe
       end
 
       if _political_exposure = @political_exposure
-        invalid_properties.push(OpenApi::EnumValidator.error_message("political_exposure", VALID_VALUES_FOR_POLITICAL_EXPOSURE)) unless OpenApi::EnumValidator.valid?(_political_exposure, VALID_VALUES_FOR_POLITICAL_EXPOSURE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_POLITICAL_EXPOSURE) unless OpenApi::EnumValidator.valid?(_political_exposure, VALID_VALUES_FOR_POLITICAL_EXPOSURE)
       end
       if _registered_address = @registered_address
         invalid_properties.concat(_registered_address.list_invalid_properties_for("registered_address")) if _registered_address.is_a?(OpenApi::Validatable)
       end
       if _ssn_last_4 = @ssn_last_4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ssn_last_4", _ssn_last_4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ssn_last_4", _ssn_last_4.to_s.size, MAX_LENGTH_FOR_SSN_LAST_4)
           invalid_properties.push(max_length_error)
         end
       end
@@ -227,15 +237,15 @@ module Stripe
       end
 
       if _first_name = @first_name
-        return false if _first_name.to_s.size > 100
+        return false if _first_name.to_s.size > MAX_LENGTH_FOR_FIRST_NAME
       end
 
       if _first_name_kana = @first_name_kana
-        return false if _first_name_kana.to_s.size > 5000
+        return false if _first_name_kana.to_s.size > MAX_LENGTH_FOR_FIRST_NAME_KANA
       end
 
       if _first_name_kanji = @first_name_kanji
-        return false if _first_name_kanji.to_s.size > 5000
+        return false if _first_name_kanji.to_s.size > MAX_LENGTH_FOR_FIRST_NAME_KANJI
       end
 
       if _full_name_aliases = @full_name_aliases
@@ -243,27 +253,27 @@ module Stripe
       end
 
       if _id_number = @id_number
-        return false if _id_number.to_s.size > 5000
+        return false if _id_number.to_s.size > MAX_LENGTH_FOR_ID_NUMBER
       end
 
       if _id_number_secondary = @id_number_secondary
-        return false if _id_number_secondary.to_s.size > 5000
+        return false if _id_number_secondary.to_s.size > MAX_LENGTH_FOR_ID_NUMBER_SECONDARY
       end
 
       if _last_name = @last_name
-        return false if _last_name.to_s.size > 100
+        return false if _last_name.to_s.size > MAX_LENGTH_FOR_LAST_NAME
       end
 
       if _last_name_kana = @last_name_kana
-        return false if _last_name_kana.to_s.size > 5000
+        return false if _last_name_kana.to_s.size > MAX_LENGTH_FOR_LAST_NAME_KANA
       end
 
       if _last_name_kanji = @last_name_kanji
-        return false if _last_name_kanji.to_s.size > 5000
+        return false if _last_name_kanji.to_s.size > MAX_LENGTH_FOR_LAST_NAME_KANJI
       end
 
       if _maiden_name = @maiden_name
-        return false if _maiden_name.to_s.size > 5000
+        return false if _maiden_name.to_s.size > MAX_LENGTH_FOR_MAIDEN_NAME
       end
 
       if _metadata = @metadata
@@ -279,7 +289,7 @@ module Stripe
       end
 
       if _ssn_last_4 = @ssn_last_4
-        return false if _ssn_last_4.to_s.size > 5000
+        return false if _ssn_last_4.to_s.size > MAX_LENGTH_FOR_SSN_LAST_4
       end
 
       if _verification = @verification
@@ -350,10 +360,7 @@ module Stripe
         return @first_name = nil
       end
       _first_name = first_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name", _first_name.to_s.size, 100)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("first_name", _first_name.to_s.size, MAX_LENGTH_FOR_FIRST_NAME)
       @first_name = _first_name
     end
 
@@ -364,10 +371,7 @@ module Stripe
         return @first_name_kana = nil
       end
       _first_name_kana = first_name_kana.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name_kana", _first_name_kana.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("first_name_kana", _first_name_kana.to_s.size, MAX_LENGTH_FOR_FIRST_NAME_KANA)
       @first_name_kana = _first_name_kana
     end
 
@@ -378,10 +382,7 @@ module Stripe
         return @first_name_kanji = nil
       end
       _first_name_kanji = first_name_kanji.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("first_name_kanji", _first_name_kanji.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("first_name_kanji", _first_name_kanji.to_s.size, MAX_LENGTH_FOR_FIRST_NAME_KANJI)
       @first_name_kanji = _first_name_kanji
     end
 
@@ -413,10 +414,7 @@ module Stripe
         return @id_number = nil
       end
       _id_number = id_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number", _id_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id_number", _id_number.to_s.size, MAX_LENGTH_FOR_ID_NUMBER)
       @id_number = _id_number
     end
 
@@ -427,10 +425,7 @@ module Stripe
         return @id_number_secondary = nil
       end
       _id_number_secondary = id_number_secondary.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number_secondary", _id_number_secondary.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id_number_secondary", _id_number_secondary.to_s.size, MAX_LENGTH_FOR_ID_NUMBER_SECONDARY)
       @id_number_secondary = _id_number_secondary
     end
 
@@ -441,10 +436,7 @@ module Stripe
         return @last_name = nil
       end
       _last_name = last_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name", _last_name.to_s.size, 100)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last_name", _last_name.to_s.size, MAX_LENGTH_FOR_LAST_NAME)
       @last_name = _last_name
     end
 
@@ -455,10 +447,7 @@ module Stripe
         return @last_name_kana = nil
       end
       _last_name_kana = last_name_kana.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name_kana", _last_name_kana.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last_name_kana", _last_name_kana.to_s.size, MAX_LENGTH_FOR_LAST_NAME_KANA)
       @last_name_kana = _last_name_kana
     end
 
@@ -469,10 +458,7 @@ module Stripe
         return @last_name_kanji = nil
       end
       _last_name_kanji = last_name_kanji.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last_name_kanji", _last_name_kanji.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last_name_kanji", _last_name_kanji.to_s.size, MAX_LENGTH_FOR_LAST_NAME_KANJI)
       @last_name_kanji = _last_name_kanji
     end
 
@@ -483,10 +469,7 @@ module Stripe
         return @maiden_name = nil
       end
       _maiden_name = maiden_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("maiden_name", _maiden_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("maiden_name", _maiden_name.to_s.size, MAX_LENGTH_FOR_MAIDEN_NAME)
       @maiden_name = _maiden_name
     end
 
@@ -540,10 +523,7 @@ module Stripe
         return @ssn_last_4 = nil
       end
       _ssn_last_4 = ssn_last_4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("ssn_last_4", _ssn_last_4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("ssn_last_4", _ssn_last_4.to_s.size, MAX_LENGTH_FOR_SSN_LAST_4)
       @ssn_last_4 = _ssn_last_4
     end
 

@@ -34,12 +34,13 @@ module Stripe
     # Behavior of the subscription schedule and underlying subscription when it ends. Possible values are `release` and `cancel`.
     @[JSON::Field(key: "end_behavior", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter end_behavior : String? = nil
-
-    VALID_VALUES_FOR_END_BEHAVIOR = StaticArray["cancel", "none", "release", "renew"]
+    ERROR_MESSAGE_FOR_END_BEHAVIOR = "invalid value for \"end_behavior\", must be one of [cancel, none, release, renew]."
+    VALID_VALUES_FOR_END_BEHAVIOR  = StaticArray["cancel", "none", "release", "renew"]
 
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
     @[JSON::Field(key: "livemode", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -48,8 +49,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["subscription_schedule"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [subscription_schedule]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["subscription_schedule"]
 
     # Configuration for the subscription schedule's phases.
     @[JSON::Field(key: "phases", type: Array(Stripe::SubscriptionSchedulePhaseConfiguration)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -58,8 +59,8 @@ module Stripe
     # The present status of the subscription schedule. Possible values are `not_started`, `active`, `completed`, `released`, and `canceled`. You can read more about the different states in our [behavior guide](https://stripe.com/docs/billing/subscriptions/subscription-schedules).
     @[JSON::Field(key: "status", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["active", "canceled", "completed", "not_started", "released"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, canceled, completed, not_started, released]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["active", "canceled", "completed", "not_started", "released"]
 
     # Optional properties
 
@@ -106,6 +107,7 @@ module Stripe
     # ID of the subscription once managed by the subscription schedule (if it is released).
     @[JSON::Field(key: "released_subscription", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: released_subscription.nil? && !released_subscription_present?)]
     getter released_subscription : String? = nil
+    MAX_LENGTH_FOR_RELEASED_SUBSCRIPTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? released_subscription_present : Bool = false
@@ -169,12 +171,12 @@ module Stripe
       invalid_properties.push("\"end_behavior\" is required and cannot be null") if @end_behavior.nil?
 
       if _end_behavior = @end_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("end_behavior", VALID_VALUES_FOR_END_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_END_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_end_behavior, VALID_VALUES_FOR_END_BEHAVIOR)
       end
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -183,17 +185,17 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"phases\" is required and cannot be null") if @phases.nil?
 
       if _phases = @phases
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "phases", array: _phases)) if _phases.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "phases", container: _phases)) if _phases.is_a?(Array)
       end
       invalid_properties.push("\"status\" is required and cannot be null") if @status.nil?
 
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       if _application = @application
         invalid_properties.concat(_application.list_invalid_properties_for("application")) if _application.is_a?(OpenApi::Validatable)
@@ -204,7 +206,7 @@ module Stripe
       end
 
       if _released_subscription = @released_subscription
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("released_subscription", _released_subscription.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("released_subscription", _released_subscription.to_s.size, MAX_LENGTH_FOR_RELEASED_SUBSCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -239,7 +241,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @livemode.nil?
@@ -251,7 +253,7 @@ module Stripe
 
       return false if @phases.nil?
       if _phases = @phases
-        return false if _phases.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _phases)
+        return false if _phases.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _phases)
       end
 
       return false if @status.nil?
@@ -268,7 +270,7 @@ module Stripe
       end
 
       if _released_subscription = @released_subscription
-        return false if _released_subscription.to_s.size > 5000
+        return false if _released_subscription.to_s.size > MAX_LENGTH_FOR_RELEASED_SUBSCRIPTION
       end
 
       if _subscription = @subscription
@@ -332,10 +334,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -367,7 +366,7 @@ module Stripe
         raise ArgumentError.new("\"phases\" is required and cannot be null")
       end
       _phases = phases.not_nil!
-      OpenApi::ArrayValidator.validate(array: _phases) if _phases.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _phases) if _phases.is_a?(Array)
       @phases = _phases
     end
 
@@ -451,10 +450,7 @@ module Stripe
         return @released_subscription = nil
       end
       _released_subscription = released_subscription.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("released_subscription", _released_subscription.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("released_subscription", _released_subscription.to_s.size, MAX_LENGTH_FOR_RELEASED_SUBSCRIPTION)
       @released_subscription = _released_subscription
     end
 

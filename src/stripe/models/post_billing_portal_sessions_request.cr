@@ -23,12 +23,14 @@ module Stripe
     # The ID of an existing customer.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter customer : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # Optional properties
 
     # The ID of an existing [configuration](https://stripe.com/docs/api/customer_portal/configuration) to use for this session, describing its functionality and features. If not specified, the session uses the default configuration.
     @[JSON::Field(key: "configuration", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter configuration : String? = nil
+    MAX_LENGTH_FOR_CONFIGURATION = 5000
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -37,8 +39,8 @@ module Stripe
     # The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the customer’s `preferred_locales` or browser’s locale is used.
     @[JSON::Field(key: "locale", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter locale : String? = nil
-
-    VALID_VALUES_FOR_LOCALE = StaticArray["auto", "bg", "cs", "da", "de", "el", "en", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-SG", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"]
+    ERROR_MESSAGE_FOR_LOCALE = "invalid value for \"locale\", must be one of [auto, bg, cs, da, de, el, en, en-AU, en-CA, en-GB, en-IE, en-IN, en-NZ, en-SG, es, es-419, et, fi, fil, fr, fr-CA, hr, hu, id, it, ja, ko, lt, lv, ms, mt, nb, nl, pl, pt, pt-BR, ro, ru, sk, sl, sv, th, tr, vi, zh, zh-HK, zh-TW]."
+    VALID_VALUES_FOR_LOCALE  = StaticArray["auto", "bg", "cs", "da", "de", "el", "en", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-SG", "es", "es-419", "et", "fi", "fil", "fr", "fr-CA", "hr", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "mt", "nb", "nl", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sv", "th", "tr", "vi", "zh", "zh-HK", "zh-TW"]
 
     # The `on_behalf_of` account to use for this session. When specified, only subscriptions and invoices with this `on_behalf_of` account appear in the portal. For more information, see the [docs](https://stripe.com/docs/connect/charges-transfers#on-behalf-of). Use the [Accounts API](https://stripe.com/docs/api/accounts/object#account_object-settings-branding) to modify the `on_behalf_of` account's branding settings, which the portal displays.
     @[JSON::Field(key: "on_behalf_of", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -71,18 +73,18 @@ module Stripe
       invalid_properties.push("\"customer\" is required and cannot be null") if @customer.nil?
 
       if _customer = @customer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
       if _configuration = @configuration
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("configuration", _configuration.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("configuration", _configuration.to_s.size, MAX_LENGTH_FOR_CONFIGURATION)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _locale = @locale
-        invalid_properties.push(OpenApi::EnumValidator.error_message("locale", VALID_VALUES_FOR_LOCALE)) unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_LOCALE) unless OpenApi::EnumValidator.valid?(_locale, VALID_VALUES_FOR_LOCALE)
       end
 
       invalid_properties
@@ -93,11 +95,11 @@ module Stripe
     def valid? : Bool
       return false if @customer.nil?
       if _customer = @customer
-        return false if _customer.to_s.size > 5000
+        return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       if _configuration = @configuration
-        return false if _configuration.to_s.size > 5000
+        return false if _configuration.to_s.size > MAX_LENGTH_FOR_CONFIGURATION
       end
 
       if _locale = @locale
@@ -114,10 +116,7 @@ module Stripe
         raise ArgumentError.new("\"customer\" is required and cannot be null")
       end
       _customer = customer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       @customer = _customer
     end
 
@@ -128,10 +127,7 @@ module Stripe
         return @configuration = nil
       end
       _configuration = configuration.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("configuration", _configuration.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("configuration", _configuration.to_s.size, MAX_LENGTH_FOR_CONFIGURATION)
       @configuration = _configuration
     end
 

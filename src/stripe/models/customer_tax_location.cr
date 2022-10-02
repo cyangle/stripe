@@ -24,18 +24,20 @@ module Stripe
     # The customer's country as identified by Stripe Tax.
     @[JSON::Field(key: "country", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter country : String? = nil
+    MAX_LENGTH_FOR_COUNTRY = 5000
 
     # The data source used to infer the customer's location.
     @[JSON::Field(key: "source", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter source : String? = nil
-
-    VALID_VALUES_FOR_SOURCE = StaticArray["billing_address", "ip_address", "payment_method", "shipping_destination"]
+    ERROR_MESSAGE_FOR_SOURCE = "invalid value for \"source\", must be one of [billing_address, ip_address, payment_method, shipping_destination]."
+    VALID_VALUES_FOR_SOURCE  = StaticArray["billing_address", "ip_address", "payment_method", "shipping_destination"]
 
     # Optional properties
 
     # The customer's state, county, province, or region as identified by Stripe Tax.
     @[JSON::Field(key: "state", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: state.nil? && !state_present?)]
     getter state : String? = nil
+    MAX_LENGTH_FOR_STATE = 5000
 
     @[JSON::Field(ignore: true)]
     property? state_present : Bool = false
@@ -60,17 +62,17 @@ module Stripe
       invalid_properties.push("\"country\" is required and cannot be null") if @country.nil?
 
       if _country = @country
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"source\" is required and cannot be null") if @source.nil?
 
       if _source = @source
-        invalid_properties.push(OpenApi::EnumValidator.error_message("source", VALID_VALUES_FOR_SOURCE)) unless OpenApi::EnumValidator.valid?(_source, VALID_VALUES_FOR_SOURCE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SOURCE) unless OpenApi::EnumValidator.valid?(_source, VALID_VALUES_FOR_SOURCE)
       end
       if _state = @state
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, MAX_LENGTH_FOR_STATE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -82,7 +84,7 @@ module Stripe
     def valid? : Bool
       return false if @country.nil?
       if _country = @country
-        return false if _country.to_s.size > 5000
+        return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       return false if @source.nil?
@@ -91,7 +93,7 @@ module Stripe
       end
 
       if _state = @state
-        return false if _state.to_s.size > 5000
+        return false if _state.to_s.size > MAX_LENGTH_FOR_STATE
       end
 
       true
@@ -104,10 +106,7 @@ module Stripe
         raise ArgumentError.new("\"country\" is required and cannot be null")
       end
       _country = country.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       @country = _country
     end
 
@@ -129,10 +128,7 @@ module Stripe
         return @state = nil
       end
       _state = state.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("state", _state.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("state", _state.to_s.size, MAX_LENGTH_FOR_STATE)
       @state = _state
     end
 

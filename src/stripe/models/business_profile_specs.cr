@@ -23,12 +23,15 @@ module Stripe
 
     @[JSON::Field(key: "mcc", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mcc : String? = nil
+    MAX_LENGTH_FOR_MCC = 4
 
     @[JSON::Field(key: "name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter name : String? = nil
+    MAX_LENGTH_FOR_NAME = 5000
 
     @[JSON::Field(key: "product_description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter product_description : String? = nil
+    MAX_LENGTH_FOR_PRODUCT_DESCRIPTION = 40000
 
     @[JSON::Field(key: "support_address", type: Stripe::AddressSpecs?, default: nil, required: false, nullable: false, emit_null: false)]
     getter support_address : Stripe::AddressSpecs? = nil
@@ -38,12 +41,14 @@ module Stripe
 
     @[JSON::Field(key: "support_phone", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter support_phone : String? = nil
+    MAX_LENGTH_FOR_SUPPORT_PHONE = 5000
 
     @[JSON::Field(key: "support_url", type: Stripe::BusinessProfileSpecsSupportUrl?, default: nil, required: false, nullable: false, emit_null: false)]
     getter support_url : Stripe::BusinessProfileSpecsSupportUrl? = nil
 
     @[JSON::Field(key: "url", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter url : String? = nil
+    MAX_LENGTH_FOR_URL = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -67,17 +72,17 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _mcc = @mcc
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mcc", _mcc.to_s.size, 4)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mcc", _mcc.to_s.size, MAX_LENGTH_FOR_MCC)
           invalid_properties.push(max_length_error)
         end
       end
       if _name = @name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _product_description = @product_description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 40000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -86,7 +91,7 @@ module Stripe
       end
 
       if _support_phone = @support_phone
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("support_phone", _support_phone.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("support_phone", _support_phone.to_s.size, MAX_LENGTH_FOR_SUPPORT_PHONE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -94,7 +99,7 @@ module Stripe
         invalid_properties.concat(_support_url.list_invalid_properties_for("support_url")) if _support_url.is_a?(OpenApi::Validatable)
       end
       if _url = @url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -105,15 +110,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _mcc = @mcc
-        return false if _mcc.to_s.size > 4
+        return false if _mcc.to_s.size > MAX_LENGTH_FOR_MCC
       end
 
       if _name = @name
-        return false if _name.to_s.size > 5000
+        return false if _name.to_s.size > MAX_LENGTH_FOR_NAME
       end
 
       if _product_description = @product_description
-        return false if _product_description.to_s.size > 40000
+        return false if _product_description.to_s.size > MAX_LENGTH_FOR_PRODUCT_DESCRIPTION
       end
 
       if _support_address = @support_address
@@ -121,7 +126,7 @@ module Stripe
       end
 
       if _support_phone = @support_phone
-        return false if _support_phone.to_s.size > 5000
+        return false if _support_phone.to_s.size > MAX_LENGTH_FOR_SUPPORT_PHONE
       end
 
       if _support_url = @support_url
@@ -129,7 +134,7 @@ module Stripe
       end
 
       if _url = @url
-        return false if _url.to_s.size > 5000
+        return false if _url.to_s.size > MAX_LENGTH_FOR_URL
       end
 
       true
@@ -142,10 +147,7 @@ module Stripe
         return @mcc = nil
       end
       _mcc = mcc.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mcc", _mcc.to_s.size, 4)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("mcc", _mcc.to_s.size, MAX_LENGTH_FOR_MCC)
       @mcc = _mcc
     end
 
@@ -156,10 +158,7 @@ module Stripe
         return @name = nil
       end
       _name = name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("name", _name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("name", _name.to_s.size, MAX_LENGTH_FOR_NAME)
       @name = _name
     end
 
@@ -170,10 +169,7 @@ module Stripe
         return @product_description = nil
       end
       _product_description = product_description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("product_description", _product_description.to_s.size, 40000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("product_description", _product_description.to_s.size, MAX_LENGTH_FOR_PRODUCT_DESCRIPTION)
       @product_description = _product_description
     end
 
@@ -205,10 +201,7 @@ module Stripe
         return @support_phone = nil
       end
       _support_phone = support_phone.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("support_phone", _support_phone.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("support_phone", _support_phone.to_s.size, MAX_LENGTH_FOR_SUPPORT_PHONE)
       @support_phone = _support_phone
     end
 
@@ -230,10 +223,7 @@ module Stripe
         return @url = nil
       end
       _url = url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("url", _url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("url", _url.to_s.size, MAX_LENGTH_FOR_URL)
       @url = _url
     end
 

@@ -24,10 +24,12 @@ module Stripe
     # The type of fuel that was purchased. One of `diesel`, `unleaded_plus`, `unleaded_regular`, `unleaded_super`, or `other`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
+    MAX_LENGTH_FOR__TYPE = 5000
 
     # The units for `volume_decimal`. One of `us_gallon` or `liter`.
     @[JSON::Field(key: "unit", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter unit : String? = nil
+    MAX_LENGTH_FOR_UNIT = 5000
 
     # The cost in cents per each unit of fuel, represented as a decimal string with at most 12 decimal places.
     @[JSON::Field(key: "unit_cost_decimal", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -63,14 +65,14 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"unit\" is required and cannot be null") if @unit.nil?
 
       if _unit = @unit
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit", _unit.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit", _unit.to_s.size, MAX_LENGTH_FOR_UNIT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -84,12 +86,12 @@ module Stripe
     def valid? : Bool
       return false if @_type.nil?
       if __type = @_type
-        return false if __type.to_s.size > 5000
+        return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
       return false if @unit.nil?
       if _unit = @unit
-        return false if _unit.to_s.size > 5000
+        return false if _unit.to_s.size > MAX_LENGTH_FOR_UNIT
       end
 
       return false if @unit_cost_decimal.nil?
@@ -104,10 +106,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
       @_type = __type
     end
 
@@ -118,10 +117,7 @@ module Stripe
         raise ArgumentError.new("\"unit\" is required and cannot be null")
       end
       _unit = unit.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("unit", _unit.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("unit", _unit.to_s.size, MAX_LENGTH_FOR_UNIT)
       @unit = _unit
     end
 

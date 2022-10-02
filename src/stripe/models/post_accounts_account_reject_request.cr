@@ -23,6 +23,7 @@ module Stripe
     # The reason for rejecting the account. Can be `fraud`, `terms_of_service`, or `other`.
     @[JSON::Field(key: "reason", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter reason : String? = nil
+    MAX_LENGTH_FOR_REASON = 5000
 
     # Optional properties
 
@@ -49,7 +50,7 @@ module Stripe
       invalid_properties.push("\"reason\" is required and cannot be null") if @reason.nil?
 
       if _reason = @reason
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
           invalid_properties.push(max_length_error)
         end
       end
@@ -62,7 +63,7 @@ module Stripe
     def valid? : Bool
       return false if @reason.nil?
       if _reason = @reason
-        return false if _reason.to_s.size > 5000
+        return false if _reason.to_s.size > MAX_LENGTH_FOR_REASON
       end
 
       true
@@ -75,10 +76,7 @@ module Stripe
         raise ArgumentError.new("\"reason\" is required and cannot be null")
       end
       _reason = reason.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
       @reason = _reason
     end
 

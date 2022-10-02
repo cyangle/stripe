@@ -23,20 +23,21 @@ module Stripe
     # The identifier of the account to create an account link for.
     @[JSON::Field(key: "account", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter account : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT = 5000
 
     # The type of account link the user is requesting. Possible values are `account_onboarding` or `account_update`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["account_onboarding", "account_update"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [account_onboarding, account_update]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["account_onboarding", "account_update"]
 
     # Optional properties
 
     # Which information the platform needs to collect from the user. One of `currently_due` or `eventually_due`. Default is `currently_due`.
     @[JSON::Field(key: "collect", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter collect : String? = nil
-
-    VALID_VALUES_FOR_COLLECT = StaticArray["currently_due", "eventually_due"]
+    ERROR_MESSAGE_FOR_COLLECT = "invalid value for \"collect\", must be one of [currently_due, eventually_due]."
+    VALID_VALUES_FOR_COLLECT  = StaticArray["currently_due", "eventually_due"]
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -73,17 +74,17 @@ module Stripe
       invalid_properties.push("\"account\" is required and cannot be null") if @account.nil?
 
       if _account = @account
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _collect = @collect
-        invalid_properties.push(OpenApi::EnumValidator.error_message("collect", VALID_VALUES_FOR_COLLECT)) unless OpenApi::EnumValidator.valid?(_collect, VALID_VALUES_FOR_COLLECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_COLLECT) unless OpenApi::EnumValidator.valid?(_collect, VALID_VALUES_FOR_COLLECT)
       end
 
       invalid_properties
@@ -94,7 +95,7 @@ module Stripe
     def valid? : Bool
       return false if @account.nil?
       if _account = @account
-        return false if _account.to_s.size > 5000
+        return false if _account.to_s.size > MAX_LENGTH_FOR_ACCOUNT
       end
 
       return false if @_type.nil?
@@ -116,10 +117,7 @@ module Stripe
         raise ArgumentError.new("\"account\" is required and cannot be null")
       end
       _account = account.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
       @account = _account
     end
 

@@ -23,6 +23,7 @@ module Stripe
     # The coupon for this promotion code.
     @[JSON::Field(key: "coupon", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter coupon : String? = nil
+    MAX_LENGTH_FOR_COUPON = 5000
 
     # Optional properties
 
@@ -33,10 +34,12 @@ module Stripe
     # The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific customer. If left blank, we will generate one automatically.
     @[JSON::Field(key: "code", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter code : String? = nil
+    MAX_LENGTH_FOR_CODE = 500
 
     # The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -83,18 +86,18 @@ module Stripe
       invalid_properties.push("\"coupon\" is required and cannot be null") if @coupon.nil?
 
       if _coupon = @coupon
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _code = @code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("code", _code.to_s.size, 500)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("code", _code.to_s.size, MAX_LENGTH_FOR_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       if _customer = @customer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -110,15 +113,15 @@ module Stripe
     def valid? : Bool
       return false if @coupon.nil?
       if _coupon = @coupon
-        return false if _coupon.to_s.size > 5000
+        return false if _coupon.to_s.size > MAX_LENGTH_FOR_COUPON
       end
 
       if _code = @code
-        return false if _code.to_s.size > 500
+        return false if _code.to_s.size > MAX_LENGTH_FOR_CODE
       end
 
       if _customer = @customer
-        return false if _customer.to_s.size > 5000
+        return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       if _restrictions = @restrictions
@@ -135,10 +138,7 @@ module Stripe
         raise ArgumentError.new("\"coupon\" is required and cannot be null")
       end
       _coupon = coupon.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("coupon", _coupon.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("coupon", _coupon.to_s.size, MAX_LENGTH_FOR_COUPON)
       @coupon = _coupon
     end
 
@@ -159,10 +159,7 @@ module Stripe
         return @code = nil
       end
       _code = code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("code", _code.to_s.size, 500)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("code", _code.to_s.size, MAX_LENGTH_FOR_CODE)
       @code = _code
     end
 
@@ -173,10 +170,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       @customer = _customer
     end
 

@@ -29,8 +29,8 @@ module Stripe
 
     @[JSON::Field(key: "save_default_payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter save_default_payment_method : String? = nil
-
-    VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD = StaticArray["off", "on_subscription"]
+    ERROR_MESSAGE_FOR_SAVE_DEFAULT_PAYMENT_METHOD = "invalid value for \"save_default_payment_method\", must be one of [off, on_subscription]."
+    VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD  = StaticArray["off", "on_subscription"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -55,7 +55,7 @@ module Stripe
         invalid_properties.concat(_payment_method_types.list_invalid_properties_for("payment_method_types")) if _payment_method_types.is_a?(OpenApi::Validatable)
       end
       if _save_default_payment_method = @save_default_payment_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("save_default_payment_method", VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD)) unless OpenApi::EnumValidator.valid?(_save_default_payment_method, VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SAVE_DEFAULT_PAYMENT_METHOD) unless OpenApi::EnumValidator.valid?(_save_default_payment_method, VALID_VALUES_FOR_SAVE_DEFAULT_PAYMENT_METHOD)
       end
       invalid_properties
     end

@@ -24,10 +24,12 @@ module Stripe
     # Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
     @[JSON::Field(key: "buyer_id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter buyer_id : String? = nil
+    MAX_LENGTH_FOR_BUYER_ID = 5000
 
     # Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
     @[JSON::Field(key: "fingerprint", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
     getter fingerprint : String? = nil
+    MAX_LENGTH_FOR_FINGERPRINT = 5000
 
     @[JSON::Field(ignore: true)]
     property? fingerprint_present : Bool = false
@@ -35,6 +37,7 @@ module Stripe
     # Transaction ID of this particular Alipay transaction.
     @[JSON::Field(key: "transaction_id", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: transaction_id.nil? && !transaction_id_present?)]
     getter transaction_id : String? = nil
+    MAX_LENGTH_FOR_TRANSACTION_ID = 5000
 
     @[JSON::Field(ignore: true)]
     property? transaction_id_present : Bool = false
@@ -56,17 +59,17 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _buyer_id = @buyer_id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("buyer_id", _buyer_id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("buyer_id", _buyer_id.to_s.size, MAX_LENGTH_FOR_BUYER_ID)
           invalid_properties.push(max_length_error)
         end
       end
       if _fingerprint = @fingerprint
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
       if _transaction_id = @transaction_id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction_id", _transaction_id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction_id", _transaction_id.to_s.size, MAX_LENGTH_FOR_TRANSACTION_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -77,15 +80,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _buyer_id = @buyer_id
-        return false if _buyer_id.to_s.size > 5000
+        return false if _buyer_id.to_s.size > MAX_LENGTH_FOR_BUYER_ID
       end
 
       if _fingerprint = @fingerprint
-        return false if _fingerprint.to_s.size > 5000
+        return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
       if _transaction_id = @transaction_id
-        return false if _transaction_id.to_s.size > 5000
+        return false if _transaction_id.to_s.size > MAX_LENGTH_FOR_TRANSACTION_ID
       end
 
       true
@@ -98,10 +101,7 @@ module Stripe
         return @buyer_id = nil
       end
       _buyer_id = buyer_id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("buyer_id", _buyer_id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("buyer_id", _buyer_id.to_s.size, MAX_LENGTH_FOR_BUYER_ID)
       @buyer_id = _buyer_id
     end
 
@@ -112,10 +112,7 @@ module Stripe
         return @fingerprint = nil
       end
       _fingerprint = fingerprint.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
       @fingerprint = _fingerprint
     end
 
@@ -126,10 +123,7 @@ module Stripe
         return @transaction_id = nil
       end
       _transaction_id = transaction_id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("transaction_id", _transaction_id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("transaction_id", _transaction_id.to_s.size, MAX_LENGTH_FOR_TRANSACTION_ID)
       @transaction_id = _transaction_id
     end
 

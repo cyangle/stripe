@@ -24,6 +24,7 @@ module Stripe
     # Account number to transfer funds to.
     @[JSON::Field(key: "account_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: account_number.nil? && !account_number_present?)]
     getter account_number : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? account_number_present : Bool = false
@@ -31,6 +32,7 @@ module Stripe
     # Name of the bank associated with the routing number.
     @[JSON::Field(key: "bank_name", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: bank_name.nil? && !bank_name_present?)]
     getter bank_name : String? = nil
+    MAX_LENGTH_FOR_BANK_NAME = 5000
 
     @[JSON::Field(ignore: true)]
     property? bank_name_present : Bool = false
@@ -38,6 +40,7 @@ module Stripe
     # Routing transit number for the bank account to transfer funds to.
     @[JSON::Field(key: "routing_number", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: routing_number.nil? && !routing_number_present?)]
     getter routing_number : String? = nil
+    MAX_LENGTH_FOR_ROUTING_NUMBER = 5000
 
     @[JSON::Field(ignore: true)]
     property? routing_number_present : Bool = false
@@ -45,6 +48,7 @@ module Stripe
     # SWIFT code of the bank associated with the routing number.
     @[JSON::Field(key: "swift_code", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: swift_code.nil? && !swift_code_present?)]
     getter swift_code : String? = nil
+    MAX_LENGTH_FOR_SWIFT_CODE = 5000
 
     @[JSON::Field(ignore: true)]
     property? swift_code_present : Bool = false
@@ -67,22 +71,22 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _account_number = @account_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       if _bank_name = @bank_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       if _routing_number = @routing_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
       if _swift_code = @swift_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("swift_code", _swift_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("swift_code", _swift_code.to_s.size, MAX_LENGTH_FOR_SWIFT_CODE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -93,19 +97,19 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _account_number = @account_number
-        return false if _account_number.to_s.size > 5000
+        return false if _account_number.to_s.size > MAX_LENGTH_FOR_ACCOUNT_NUMBER
       end
 
       if _bank_name = @bank_name
-        return false if _bank_name.to_s.size > 5000
+        return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
       if _routing_number = @routing_number
-        return false if _routing_number.to_s.size > 5000
+        return false if _routing_number.to_s.size > MAX_LENGTH_FOR_ROUTING_NUMBER
       end
 
       if _swift_code = @swift_code
-        return false if _swift_code.to_s.size > 5000
+        return false if _swift_code.to_s.size > MAX_LENGTH_FOR_SWIFT_CODE
       end
 
       true
@@ -118,10 +122,7 @@ module Stripe
         return @account_number = nil
       end
       _account_number = account_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account_number", _account_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account_number", _account_number.to_s.size, MAX_LENGTH_FOR_ACCOUNT_NUMBER)
       @account_number = _account_number
     end
 
@@ -132,10 +133,7 @@ module Stripe
         return @bank_name = nil
       end
       _bank_name = bank_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       @bank_name = _bank_name
     end
 
@@ -146,10 +144,7 @@ module Stripe
         return @routing_number = nil
       end
       _routing_number = routing_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("routing_number", _routing_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("routing_number", _routing_number.to_s.size, MAX_LENGTH_FOR_ROUTING_NUMBER)
       @routing_number = _routing_number
     end
 
@@ -160,10 +155,7 @@ module Stripe
         return @swift_code = nil
       end
       _swift_code = swift_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("swift_code", _swift_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("swift_code", _swift_code.to_s.size, MAX_LENGTH_FOR_SWIFT_CODE)
       @swift_code = _swift_code
     end
 

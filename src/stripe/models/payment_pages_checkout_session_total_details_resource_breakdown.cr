@@ -47,12 +47,12 @@ module Stripe
       invalid_properties.push("\"discounts\" is required and cannot be null") if @discounts.nil?
 
       if _discounts = @discounts
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "discounts", array: _discounts)) if _discounts.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "discounts", container: _discounts)) if _discounts.is_a?(Array)
       end
       invalid_properties.push("\"taxes\" is required and cannot be null") if @taxes.nil?
 
       if _taxes = @taxes
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "taxes", array: _taxes)) if _taxes.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "taxes", container: _taxes)) if _taxes.is_a?(Array)
       end
       invalid_properties
     end
@@ -62,12 +62,12 @@ module Stripe
     def valid? : Bool
       return false if @discounts.nil?
       if _discounts = @discounts
-        return false if _discounts.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _discounts)
+        return false if _discounts.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _discounts)
       end
 
       return false if @taxes.nil?
       if _taxes = @taxes
-        return false if _taxes.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _taxes)
+        return false if _taxes.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _taxes)
       end
 
       true
@@ -80,7 +80,7 @@ module Stripe
         raise ArgumentError.new("\"discounts\" is required and cannot be null")
       end
       _discounts = discounts.not_nil!
-      OpenApi::ArrayValidator.validate(array: _discounts) if _discounts.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _discounts) if _discounts.is_a?(Array)
       @discounts = _discounts
     end
 
@@ -91,7 +91,7 @@ module Stripe
         raise ArgumentError.new("\"taxes\" is required and cannot be null")
       end
       _taxes = taxes.not_nil!
-      OpenApi::ArrayValidator.validate(array: _taxes) if _taxes.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _taxes) if _taxes.is_a?(Array)
       @taxes = _taxes
     end
 

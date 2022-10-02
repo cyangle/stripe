@@ -23,8 +23,8 @@ module Stripe
     # The list of account features that you would like to refresh.
     @[JSON::Field(key: "features", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
     getter features : Array(String)? = nil
-
-    VALID_VALUES_FOR_FEATURES = StaticArray["balance", "ownership"]
+    ERROR_MESSAGE_FOR_FEATURES = "invalid value for \"features\", must be one of [balance, ownership]."
+    VALID_VALUES_FOR_FEATURES  = StaticArray["balance", "ownership"]
 
     # Optional properties
 
@@ -51,7 +51,7 @@ module Stripe
       invalid_properties.push("\"features\" is required and cannot be null") if @features.nil?
 
       if _features = @features
-        invalid_properties.push(OpenApi::EnumValidator.error_message("features", VALID_VALUES_FOR_FEATURES)) unless OpenApi::EnumValidator.valid?(_features, VALID_VALUES_FOR_FEATURES)
+        invalid_properties.push(ERROR_MESSAGE_FOR_FEATURES) unless OpenApi::EnumValidator.valid?(_features, VALID_VALUES_FOR_FEATURES)
       end
 
       invalid_properties

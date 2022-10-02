@@ -24,6 +24,7 @@ module Stripe
     # Invoice containing the credited invoice line items
     @[JSON::Field(key: "invoice", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter invoice : String? = nil
+    MAX_LENGTH_FOR_INVOICE = 5000
 
     # Credited invoice line items
     @[JSON::Field(key: "invoice_line_items", type: Array(String)?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -47,7 +48,7 @@ module Stripe
       invalid_properties.push("\"invoice\" is required and cannot be null") if @invoice.nil?
 
       if _invoice = @invoice
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -61,7 +62,7 @@ module Stripe
     def valid? : Bool
       return false if @invoice.nil?
       if _invoice = @invoice
-        return false if _invoice.to_s.size > 5000
+        return false if _invoice.to_s.size > MAX_LENGTH_FOR_INVOICE
       end
 
       return false if @invoice_line_items.nil?
@@ -76,10 +77,7 @@ module Stripe
         raise ArgumentError.new("\"invoice\" is required and cannot be null")
       end
       _invoice = invoice.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
       @invoice = _invoice
     end
 

@@ -24,12 +24,14 @@ module Stripe
     # Possible values are `authorized`, `manual_review`, `issuer_declined`, `blocked`, and `invalid`. See [understanding declines](https://stripe.com/docs/declines) and [Radar reviews](https://stripe.com/docs/radar/reviews) for details.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
+    MAX_LENGTH_FOR__TYPE = 5000
 
     # Optional properties
 
     # Possible values are `approved_by_network`, `declined_by_network`, `not_sent_to_network`, and `reversed_after_approval`. The value `reversed_after_approval` indicates the payment was [blocked by Stripe](https://stripe.com/docs/declines#blocked-payments) after bank authorization, and may temporarily appear as \"pending\" on a cardholder's statement.
     @[JSON::Field(key: "network_status", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: network_status.nil? && !network_status_present?)]
     getter network_status : String? = nil
+    MAX_LENGTH_FOR_NETWORK_STATUS = 5000
 
     @[JSON::Field(ignore: true)]
     property? network_status_present : Bool = false
@@ -37,6 +39,7 @@ module Stripe
     # An enumerated value providing a more detailed explanation of the outcome's `type`. Charges blocked by Radar's default block rule have the value `highest_risk_level`. Charges placed in review by Radar's default review rule have the value `elevated_risk_level`. Charges authorized, blocked, or placed in review by custom rules have the value `rule`. See [understanding declines](https://stripe.com/docs/declines) for more details.
     @[JSON::Field(key: "reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: reason.nil? && !reason_present?)]
     getter reason : String? = nil
+    MAX_LENGTH_FOR_REASON = 5000
 
     @[JSON::Field(ignore: true)]
     property? reason_present : Bool = false
@@ -44,6 +47,7 @@ module Stripe
     # Stripe Radar's evaluation of the riskiness of the payment. Possible values for evaluated payments are `normal`, `elevated`, `highest`. For non-card payments, and card-based payments predating the public assignment of risk levels, this field will have the value `not_assessed`. In the event of an error in the evaluation, this field will have the value `unknown`. This field is only available with Radar.
     @[JSON::Field(key: "risk_level", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter risk_level : String? = nil
+    MAX_LENGTH_FOR_RISK_LEVEL = 5000
 
     # Stripe Radar's evaluation of the riskiness of the payment. Possible values for evaluated payments are between 0 and 100. For non-card payments, card-based payments predating the public assignment of risk scores, or in the event of an error during evaluation, this field will not be present. This field is only available with Radar for Fraud Teams.
     @[JSON::Field(key: "risk_score", type: Int64?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -55,6 +59,7 @@ module Stripe
     # A human-readable description of the outcome type and reason, designed for you (the recipient of the payment), not your customer.
     @[JSON::Field(key: "seller_message", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: seller_message.nil? && !seller_message_present?)]
     getter seller_message : String? = nil
+    MAX_LENGTH_FOR_SELLER_MESSAGE = 5000
 
     @[JSON::Field(ignore: true)]
     property? seller_message_present : Bool = false
@@ -83,22 +88,22 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
       if _network_status = @network_status
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_status", _network_status.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_status", _network_status.to_s.size, MAX_LENGTH_FOR_NETWORK_STATUS)
           invalid_properties.push(max_length_error)
         end
       end
       if _reason = @reason
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
           invalid_properties.push(max_length_error)
         end
       end
       if _risk_level = @risk_level
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("risk_level", _risk_level.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("risk_level", _risk_level.to_s.size, MAX_LENGTH_FOR_RISK_LEVEL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -107,7 +112,7 @@ module Stripe
         invalid_properties.concat(_rule.list_invalid_properties_for("rule")) if _rule.is_a?(OpenApi::Validatable)
       end
       if _seller_message = @seller_message
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("seller_message", _seller_message.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("seller_message", _seller_message.to_s.size, MAX_LENGTH_FOR_SELLER_MESSAGE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -119,19 +124,19 @@ module Stripe
     def valid? : Bool
       return false if @_type.nil?
       if __type = @_type
-        return false if __type.to_s.size > 5000
+        return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
       if _network_status = @network_status
-        return false if _network_status.to_s.size > 5000
+        return false if _network_status.to_s.size > MAX_LENGTH_FOR_NETWORK_STATUS
       end
 
       if _reason = @reason
-        return false if _reason.to_s.size > 5000
+        return false if _reason.to_s.size > MAX_LENGTH_FOR_REASON
       end
 
       if _risk_level = @risk_level
-        return false if _risk_level.to_s.size > 5000
+        return false if _risk_level.to_s.size > MAX_LENGTH_FOR_RISK_LEVEL
       end
 
       if _rule = @rule
@@ -139,7 +144,7 @@ module Stripe
       end
 
       if _seller_message = @seller_message
-        return false if _seller_message.to_s.size > 5000
+        return false if _seller_message.to_s.size > MAX_LENGTH_FOR_SELLER_MESSAGE
       end
 
       true
@@ -152,10 +157,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
       @_type = __type
     end
 
@@ -166,10 +168,7 @@ module Stripe
         return @network_status = nil
       end
       _network_status = network_status.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("network_status", _network_status.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("network_status", _network_status.to_s.size, MAX_LENGTH_FOR_NETWORK_STATUS)
       @network_status = _network_status
     end
 
@@ -180,10 +179,7 @@ module Stripe
         return @reason = nil
       end
       _reason = reason.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reason", _reason.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reason", _reason.to_s.size, MAX_LENGTH_FOR_REASON)
       @reason = _reason
     end
 
@@ -194,10 +190,7 @@ module Stripe
         return @risk_level = nil
       end
       _risk_level = risk_level.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("risk_level", _risk_level.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("risk_level", _risk_level.to_s.size, MAX_LENGTH_FOR_RISK_LEVEL)
       @risk_level = _risk_level
     end
 
@@ -229,10 +222,7 @@ module Stripe
         return @seller_message = nil
       end
       _seller_message = seller_message.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("seller_message", _seller_message.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("seller_message", _seller_message.to_s.size, MAX_LENGTH_FOR_SELLER_MESSAGE)
       @seller_message = _seller_message
     end
 

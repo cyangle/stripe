@@ -26,10 +26,12 @@ module Stripe
     # The ID of a configuration that will be used to customize all readers in this location.
     @[JSON::Field(key: "configuration_overrides", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter configuration_overrides : String? = nil
+    MAX_LENGTH_FOR_CONFIGURATION_OVERRIDES = 1000
 
     # A name for the location.
     @[JSON::Field(key: "display_name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter display_name : String? = nil
+    MAX_LENGTH_FOR_DISPLAY_NAME = 1000
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -60,12 +62,12 @@ module Stripe
         invalid_properties.concat(_address.list_invalid_properties_for("address")) if _address.is_a?(OpenApi::Validatable)
       end
       if _configuration_overrides = @configuration_overrides
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("configuration_overrides", _configuration_overrides.to_s.size, 1000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("configuration_overrides", _configuration_overrides.to_s.size, MAX_LENGTH_FOR_CONFIGURATION_OVERRIDES)
           invalid_properties.push(max_length_error)
         end
       end
       if _display_name = @display_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 1000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -84,11 +86,11 @@ module Stripe
       end
 
       if _configuration_overrides = @configuration_overrides
-        return false if _configuration_overrides.to_s.size > 1000
+        return false if _configuration_overrides.to_s.size > MAX_LENGTH_FOR_CONFIGURATION_OVERRIDES
       end
 
       if _display_name = @display_name
-        return false if _display_name.to_s.size > 1000
+        return false if _display_name.to_s.size > MAX_LENGTH_FOR_DISPLAY_NAME
       end
 
       if _metadata = @metadata
@@ -116,10 +118,7 @@ module Stripe
         return @configuration_overrides = nil
       end
       _configuration_overrides = configuration_overrides.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("configuration_overrides", _configuration_overrides.to_s.size, 1000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("configuration_overrides", _configuration_overrides.to_s.size, MAX_LENGTH_FOR_CONFIGURATION_OVERRIDES)
       @configuration_overrides = _configuration_overrides
     end
 
@@ -130,10 +129,7 @@ module Stripe
         return @display_name = nil
       end
       _display_name = display_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("display_name", _display_name.to_s.size, 1000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("display_name", _display_name.to_s.size, MAX_LENGTH_FOR_DISPLAY_NAME)
       @display_name = _display_name
     end
 

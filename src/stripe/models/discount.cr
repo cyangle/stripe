@@ -27,12 +27,13 @@ module Stripe
     # The ID of the discount object. Discounts cannot be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["discount"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [discount]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["discount"]
 
     # Date that the coupon was applied.
     @[JSON::Field(key: "start", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -43,6 +44,7 @@ module Stripe
     # The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.
     @[JSON::Field(key: "checkout_session", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: checkout_session.nil? && !checkout_session_present?)]
     getter checkout_session : String? = nil
+    MAX_LENGTH_FOR_CHECKOUT_SESSION = 5000
 
     @[JSON::Field(ignore: true)]
     property? checkout_session_present : Bool = false
@@ -63,6 +65,7 @@ module Stripe
     # The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.
     @[JSON::Field(key: "invoice", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: invoice.nil? && !invoice_present?)]
     getter invoice : String? = nil
+    MAX_LENGTH_FOR_INVOICE = 5000
 
     @[JSON::Field(ignore: true)]
     property? invoice_present : Bool = false
@@ -70,6 +73,7 @@ module Stripe
     # The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.
     @[JSON::Field(key: "invoice_item", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: invoice_item.nil? && !invoice_item_present?)]
     getter invoice_item : String? = nil
+    MAX_LENGTH_FOR_INVOICE_ITEM = 5000
 
     @[JSON::Field(ignore: true)]
     property? invoice_item_present : Bool = false
@@ -83,6 +87,7 @@ module Stripe
     # The subscription that this coupon is applied to, if it is applied to a particular subscription.
     @[JSON::Field(key: "subscription", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: subscription.nil? && !subscription_present?)]
     getter subscription : String? = nil
+    MAX_LENGTH_FOR_SUBSCRIPTION = 5000
 
     @[JSON::Field(ignore: true)]
     property? subscription_present : Bool = false
@@ -120,19 +125,19 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"start\" is required and cannot be null") if @start.nil?
 
       if _checkout_session = @checkout_session
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("checkout_session", _checkout_session.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("checkout_session", _checkout_session.to_s.size, MAX_LENGTH_FOR_CHECKOUT_SESSION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -141,12 +146,12 @@ module Stripe
       end
 
       if _invoice = @invoice
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
           invalid_properties.push(max_length_error)
         end
       end
       if _invoice_item = @invoice_item
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_item", _invoice_item.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_item", _invoice_item.to_s.size, MAX_LENGTH_FOR_INVOICE_ITEM)
           invalid_properties.push(max_length_error)
         end
       end
@@ -154,7 +159,7 @@ module Stripe
         invalid_properties.concat(_promotion_code.list_invalid_properties_for("promotion_code")) if _promotion_code.is_a?(OpenApi::Validatable)
       end
       if _subscription = @subscription
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -171,7 +176,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @object.nil?
@@ -182,7 +187,7 @@ module Stripe
       return false if @start.nil?
 
       if _checkout_session = @checkout_session
-        return false if _checkout_session.to_s.size > 5000
+        return false if _checkout_session.to_s.size > MAX_LENGTH_FOR_CHECKOUT_SESSION
       end
 
       if _customer = @customer
@@ -190,11 +195,11 @@ module Stripe
       end
 
       if _invoice = @invoice
-        return false if _invoice.to_s.size > 5000
+        return false if _invoice.to_s.size > MAX_LENGTH_FOR_INVOICE
       end
 
       if _invoice_item = @invoice_item
-        return false if _invoice_item.to_s.size > 5000
+        return false if _invoice_item.to_s.size > MAX_LENGTH_FOR_INVOICE_ITEM
       end
 
       if _promotion_code = @promotion_code
@@ -202,7 +207,7 @@ module Stripe
       end
 
       if _subscription = @subscription
-        return false if _subscription.to_s.size > 5000
+        return false if _subscription.to_s.size > MAX_LENGTH_FOR_SUBSCRIPTION
       end
 
       true
@@ -226,10 +231,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -261,10 +263,7 @@ module Stripe
         return @checkout_session = nil
       end
       _checkout_session = checkout_session.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("checkout_session", _checkout_session.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("checkout_session", _checkout_session.to_s.size, MAX_LENGTH_FOR_CHECKOUT_SESSION)
       @checkout_session = _checkout_session
     end
 
@@ -296,10 +295,7 @@ module Stripe
         return @invoice = nil
       end
       _invoice = invoice.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice", _invoice.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("invoice", _invoice.to_s.size, MAX_LENGTH_FOR_INVOICE)
       @invoice = _invoice
     end
 
@@ -310,10 +306,7 @@ module Stripe
         return @invoice_item = nil
       end
       _invoice_item = invoice_item.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("invoice_item", _invoice_item.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("invoice_item", _invoice_item.to_s.size, MAX_LENGTH_FOR_INVOICE_ITEM)
       @invoice_item = _invoice_item
     end
 
@@ -335,10 +328,7 @@ module Stripe
         return @subscription = nil
       end
       _subscription = subscription.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("subscription", _subscription.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("subscription", _subscription.to_s.size, MAX_LENGTH_FOR_SUBSCRIPTION)
       @subscription = _subscription
     end
 

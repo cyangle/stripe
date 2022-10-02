@@ -28,6 +28,7 @@ module Stripe
     # How frequently funds will be paid out. One of `manual` (payouts only created via API call), `daily`, `weekly`, or `monthly`.
     @[JSON::Field(key: "interval", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter interval : String? = nil
+    MAX_LENGTH_FOR_INTERVAL = 5000
 
     # Optional properties
 
@@ -38,6 +39,7 @@ module Stripe
     # The day of the week funds will be paid out, of the style 'monday', 'tuesday', etc. Only shown if `interval` is weekly.
     @[JSON::Field(key: "weekly_anchor", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter weekly_anchor : String? = nil
+    MAX_LENGTH_FOR_WEEKLY_ANCHOR = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -62,13 +64,13 @@ module Stripe
       invalid_properties.push("\"interval\" is required and cannot be null") if @interval.nil?
 
       if _interval = @interval
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval", _interval.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval", _interval.to_s.size, MAX_LENGTH_FOR_INTERVAL)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _weekly_anchor = @weekly_anchor
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("weekly_anchor", _weekly_anchor.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("weekly_anchor", _weekly_anchor.to_s.size, MAX_LENGTH_FOR_WEEKLY_ANCHOR)
           invalid_properties.push(max_length_error)
         end
       end
@@ -82,11 +84,11 @@ module Stripe
 
       return false if @interval.nil?
       if _interval = @interval
-        return false if _interval.to_s.size > 5000
+        return false if _interval.to_s.size > MAX_LENGTH_FOR_INTERVAL
       end
 
       if _weekly_anchor = @weekly_anchor
-        return false if _weekly_anchor.to_s.size > 5000
+        return false if _weekly_anchor.to_s.size > MAX_LENGTH_FOR_WEEKLY_ANCHOR
       end
 
       true
@@ -109,10 +111,7 @@ module Stripe
         raise ArgumentError.new("\"interval\" is required and cannot be null")
       end
       _interval = interval.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval", _interval.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("interval", _interval.to_s.size, MAX_LENGTH_FOR_INTERVAL)
       @interval = _interval
     end
 
@@ -133,10 +132,7 @@ module Stripe
         return @weekly_anchor = nil
       end
       _weekly_anchor = weekly_anchor.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("weekly_anchor", _weekly_anchor.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("weekly_anchor", _weekly_anchor.to_s.size, MAX_LENGTH_FOR_WEEKLY_ANCHOR)
       @weekly_anchor = _weekly_anchor
     end
 

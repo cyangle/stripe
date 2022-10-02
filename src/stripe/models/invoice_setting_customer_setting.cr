@@ -37,6 +37,7 @@ module Stripe
     # Default footer to be displayed on invoices for this customer.
     @[JSON::Field(key: "footer", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: footer.nil? && !footer_present?)]
     getter footer : String? = nil
+    MAX_LENGTH_FOR_FOOTER = 5000
 
     @[JSON::Field(ignore: true)]
     property? footer_present : Bool = false
@@ -65,13 +66,13 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _custom_fields = @custom_fields
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "custom_fields", array: _custom_fields)) if _custom_fields.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "custom_fields", container: _custom_fields)) if _custom_fields.is_a?(Array)
       end
       if _default_payment_method = @default_payment_method
         invalid_properties.concat(_default_payment_method.list_invalid_properties_for("default_payment_method")) if _default_payment_method.is_a?(OpenApi::Validatable)
       end
       if _footer = @footer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, MAX_LENGTH_FOR_FOOTER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -85,7 +86,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _custom_fields = @custom_fields
-        return false if _custom_fields.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _custom_fields)
+        return false if _custom_fields.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _custom_fields)
       end
 
       if _default_payment_method = @default_payment_method
@@ -93,7 +94,7 @@ module Stripe
       end
 
       if _footer = @footer
-        return false if _footer.to_s.size > 5000
+        return false if _footer.to_s.size > MAX_LENGTH_FOR_FOOTER
       end
 
       if _rendering_options = @rendering_options
@@ -110,7 +111,7 @@ module Stripe
         return @custom_fields = nil
       end
       _custom_fields = custom_fields.not_nil!
-      OpenApi::ArrayValidator.validate(array: _custom_fields) if _custom_fields.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _custom_fields) if _custom_fields.is_a?(Array)
       @custom_fields = _custom_fields
     end
 
@@ -132,10 +133,7 @@ module Stripe
         return @footer = nil
       end
       _footer = footer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("footer", _footer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("footer", _footer.to_s.size, MAX_LENGTH_FOR_FOOTER)
       @footer = _footer
     end
 

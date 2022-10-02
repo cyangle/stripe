@@ -24,6 +24,7 @@ module Stripe
     # SEPA creditor identifier that identifies the company making the payment.
     @[JSON::Field(key: "creditor_id", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter creditor_id : String? = nil
+    MAX_LENGTH_FOR_CREDITOR_ID = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -40,7 +41,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _creditor_id = @creditor_id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("creditor_id", _creditor_id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("creditor_id", _creditor_id.to_s.size, MAX_LENGTH_FOR_CREDITOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -51,7 +52,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _creditor_id = @creditor_id
-        return false if _creditor_id.to_s.size > 5000
+        return false if _creditor_id.to_s.size > MAX_LENGTH_FOR_CREDITOR_ID
       end
 
       true
@@ -64,10 +65,7 @@ module Stripe
         return @creditor_id = nil
       end
       _creditor_id = creditor_id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("creditor_id", _creditor_id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("creditor_id", _creditor_id.to_s.size, MAX_LENGTH_FOR_CREDITOR_ID)
       @creditor_id = _creditor_id
     end
 

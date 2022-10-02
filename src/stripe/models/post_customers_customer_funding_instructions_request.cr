@@ -30,8 +30,8 @@ module Stripe
     # The `funding_type` to get the instructions for.
     @[JSON::Field(key: "funding_type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter funding_type : String? = nil
-
-    VALID_VALUES_FOR_FUNDING_TYPE = StaticArray["bank_transfer"]
+    ERROR_MESSAGE_FOR_FUNDING_TYPE = "invalid value for \"funding_type\", must be one of [bank_transfer]."
+    VALID_VALUES_FOR_FUNDING_TYPE  = StaticArray["bank_transfer"]
 
     # Optional properties
 
@@ -67,7 +67,7 @@ module Stripe
       invalid_properties.push("\"funding_type\" is required and cannot be null") if @funding_type.nil?
 
       if _funding_type = @funding_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("funding_type", VALID_VALUES_FOR_FUNDING_TYPE)) unless OpenApi::EnumValidator.valid?(_funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_FUNDING_TYPE) unless OpenApi::EnumValidator.valid?(_funding_type, VALID_VALUES_FOR_FUNDING_TYPE)
       end
 
       invalid_properties

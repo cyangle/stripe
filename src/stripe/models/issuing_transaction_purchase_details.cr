@@ -49,6 +49,7 @@ module Stripe
     # A merchant-specific order number.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: reference.nil? && !reference_present?)]
     getter reference : String? = nil
+    MAX_LENGTH_FOR_REFERENCE = 5000
 
     @[JSON::Field(ignore: true)]
     property? reference_present : Bool = false
@@ -81,10 +82,10 @@ module Stripe
         invalid_properties.concat(_lodging.list_invalid_properties_for("lodging")) if _lodging.is_a?(OpenApi::Validatable)
       end
       if _receipt = @receipt
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "receipt", array: _receipt)) if _receipt.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "receipt", container: _receipt)) if _receipt.is_a?(Array)
       end
       if _reference = @reference
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -107,11 +108,11 @@ module Stripe
       end
 
       if _receipt = @receipt
-        return false if _receipt.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _receipt)
+        return false if _receipt.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _receipt)
       end
 
       if _reference = @reference
-        return false if _reference.to_s.size > 5000
+        return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 
       true
@@ -157,7 +158,7 @@ module Stripe
         return @receipt = nil
       end
       _receipt = receipt.not_nil!
-      OpenApi::ArrayValidator.validate(array: _receipt) if _receipt.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _receipt) if _receipt.is_a?(Array)
       @receipt = _receipt
     end
 
@@ -168,10 +169,7 @@ module Stripe
         return @reference = nil
       end
       _reference = reference.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       @reference = _reference
     end
 

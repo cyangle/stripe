@@ -23,6 +23,7 @@ module Stripe
 
     @[JSON::Field(key: "id_number", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter id_number : String? = nil
+    MAX_LENGTH_FOR_ID_NUMBER = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -39,7 +40,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _id_number = @id_number
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number", _id_number.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number", _id_number.to_s.size, MAX_LENGTH_FOR_ID_NUMBER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -50,7 +51,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _id_number = @id_number
-        return false if _id_number.to_s.size > 5000
+        return false if _id_number.to_s.size > MAX_LENGTH_FOR_ID_NUMBER
       end
 
       true
@@ -63,10 +64,7 @@ module Stripe
         return @id_number = nil
       end
       _id_number = id_number.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id_number", _id_number.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id_number", _id_number.to_s.size, MAX_LENGTH_FOR_ID_NUMBER)
       @id_number = _id_number
     end
 

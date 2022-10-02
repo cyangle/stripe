@@ -24,6 +24,7 @@ module Stripe
     # Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     @[JSON::Field(key: "brand", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter brand : String? = nil
+    MAX_LENGTH_FOR_BRAND = 5000
 
     # Two-digit number representing the card's expiration month.
     @[JSON::Field(key: "exp_month", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -36,10 +37,12 @@ module Stripe
     # Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     @[JSON::Field(key: "funding", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter funding : String? = nil
+    MAX_LENGTH_FOR_FUNDING = 5000
 
     # The last four digits of the card.
     @[JSON::Field(key: "last4", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter last4 : String? = nil
+    MAX_LENGTH_FOR_LAST4 = 5000
 
     # Optional properties
 
@@ -52,6 +55,7 @@ module Stripe
     # Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     @[JSON::Field(key: "country", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: country.nil? && !country_present?)]
     getter country : String? = nil
+    MAX_LENGTH_FOR_COUNTRY = 5000
 
     @[JSON::Field(ignore: true)]
     property? country_present : Bool = false
@@ -59,6 +63,7 @@ module Stripe
     # Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.  *Starting May 1, 2021, card fingerprint in India for Connect will change to allow two fingerprints for the same card --- one for India and one for the rest of the world.*
     @[JSON::Field(key: "fingerprint", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: fingerprint.nil? && !fingerprint_present?)]
     getter fingerprint : String? = nil
+    MAX_LENGTH_FOR_FINGERPRINT = 5000
 
     @[JSON::Field(ignore: true)]
     property? fingerprint_present : Bool = false
@@ -116,7 +121,7 @@ module Stripe
       invalid_properties.push("\"brand\" is required and cannot be null") if @brand.nil?
 
       if _brand = @brand
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
           invalid_properties.push(max_length_error)
         end
       end
@@ -127,14 +132,14 @@ module Stripe
       invalid_properties.push("\"funding\" is required and cannot be null") if @funding.nil?
 
       if _funding = @funding
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, MAX_LENGTH_FOR_FUNDING)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"last4\" is required and cannot be null") if @last4.nil?
 
       if _last4 = @last4
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
           invalid_properties.push(max_length_error)
         end
       end
@@ -142,12 +147,12 @@ module Stripe
         invalid_properties.concat(_checks.list_invalid_properties_for("checks")) if _checks.is_a?(OpenApi::Validatable)
       end
       if _country = @country
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
           invalid_properties.push(max_length_error)
         end
       end
       if _fingerprint = @fingerprint
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -171,7 +176,7 @@ module Stripe
     def valid? : Bool
       return false if @brand.nil?
       if _brand = @brand
-        return false if _brand.to_s.size > 5000
+        return false if _brand.to_s.size > MAX_LENGTH_FOR_BRAND
       end
 
       return false if @exp_month.nil?
@@ -180,12 +185,12 @@ module Stripe
 
       return false if @funding.nil?
       if _funding = @funding
-        return false if _funding.to_s.size > 5000
+        return false if _funding.to_s.size > MAX_LENGTH_FOR_FUNDING
       end
 
       return false if @last4.nil?
       if _last4 = @last4
-        return false if _last4.to_s.size > 5000
+        return false if _last4.to_s.size > MAX_LENGTH_FOR_LAST4
       end
 
       if _checks = @checks
@@ -193,11 +198,11 @@ module Stripe
       end
 
       if _country = @country
-        return false if _country.to_s.size > 5000
+        return false if _country.to_s.size > MAX_LENGTH_FOR_COUNTRY
       end
 
       if _fingerprint = @fingerprint
-        return false if _fingerprint.to_s.size > 5000
+        return false if _fingerprint.to_s.size > MAX_LENGTH_FOR_FINGERPRINT
       end
 
       if _generated_from = @generated_from
@@ -226,10 +231,7 @@ module Stripe
         raise ArgumentError.new("\"brand\" is required and cannot be null")
       end
       _brand = brand.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("brand", _brand.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("brand", _brand.to_s.size, MAX_LENGTH_FOR_BRAND)
       @brand = _brand
     end
 
@@ -260,10 +262,7 @@ module Stripe
         raise ArgumentError.new("\"funding\" is required and cannot be null")
       end
       _funding = funding.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("funding", _funding.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("funding", _funding.to_s.size, MAX_LENGTH_FOR_FUNDING)
       @funding = _funding
     end
 
@@ -274,10 +273,7 @@ module Stripe
         raise ArgumentError.new("\"last4\" is required and cannot be null")
       end
       _last4 = last4.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("last4", _last4.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("last4", _last4.to_s.size, MAX_LENGTH_FOR_LAST4)
       @last4 = _last4
     end
 
@@ -299,10 +295,7 @@ module Stripe
         return @country = nil
       end
       _country = country.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("country", _country.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("country", _country.to_s.size, MAX_LENGTH_FOR_COUNTRY)
       @country = _country
     end
 
@@ -313,10 +306,7 @@ module Stripe
         return @fingerprint = nil
       end
       _fingerprint = fingerprint.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("fingerprint", _fingerprint.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("fingerprint", _fingerprint.to_s.size, MAX_LENGTH_FOR_FINGERPRINT)
       @fingerprint = _fingerprint
     end
 

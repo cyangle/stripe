@@ -22,9 +22,11 @@ module Stripe
 
     @[JSON::Field(key: "account", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter account : String? = nil
+    MAX_LENGTH_FOR_ACCOUNT = 5000
 
     @[JSON::Field(key: "customer", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter customer : String? = nil
+    MAX_LENGTH_FOR_CUSTOMER = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,12 +44,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _account = @account
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
       if _customer = @customer
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
           invalid_properties.push(max_length_error)
         end
       end
@@ -58,11 +60,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _account = @account
-        return false if _account.to_s.size > 5000
+        return false if _account.to_s.size > MAX_LENGTH_FOR_ACCOUNT
       end
 
       if _customer = @customer
-        return false if _customer.to_s.size > 5000
+        return false if _customer.to_s.size > MAX_LENGTH_FOR_CUSTOMER
       end
 
       true
@@ -75,10 +77,7 @@ module Stripe
         return @account = nil
       end
       _account = account.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("account", _account.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("account", _account.to_s.size, MAX_LENGTH_FOR_ACCOUNT)
       @account = _account
     end
 
@@ -89,10 +88,7 @@ module Stripe
         return @customer = nil
       end
       _customer = customer.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("customer", _customer.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("customer", _customer.to_s.size, MAX_LENGTH_FOR_CUSTOMER)
       @customer = _customer
     end
 

@@ -40,6 +40,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     @[JSON::Field(key: "inventory", type: Stripe::SkuInventory?, default: nil, required: true, nullable: false, emit_null: false)]
     getter inventory : Stripe::SkuInventory? = nil
@@ -55,8 +56,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["sku"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [sku]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["sku"]
 
     # The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
     @[JSON::Field(key: "price", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -74,6 +75,7 @@ module Stripe
     # The URL of an image for this SKU, meant to be displayable to the customer.
     @[JSON::Field(key: "image", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: image.nil? && !image_present?)]
     getter image : String? = nil
+    MAX_LENGTH_FOR_IMAGE = 2048
 
     @[JSON::Field(ignore: true)]
     property? image_present : Bool = false
@@ -123,7 +125,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -139,7 +141,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"price\" is required and cannot be null") if @price.nil?
 
@@ -151,7 +153,7 @@ module Stripe
       invalid_properties.push("\"updated\" is required and cannot be null") if @updated.nil?
 
       if _image = @image
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image", _image.to_s.size, 2048)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image", _image.to_s.size, MAX_LENGTH_FOR_IMAGE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -174,7 +176,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @inventory.nil?
@@ -201,7 +203,7 @@ module Stripe
       return false if @updated.nil?
 
       if _image = @image
-        return false if _image.to_s.size > 2048
+        return false if _image.to_s.size > MAX_LENGTH_FOR_IMAGE
       end
 
       if _package_dimensions = @package_dimensions
@@ -258,10 +260,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -345,10 +344,7 @@ module Stripe
         return @image = nil
       end
       _image = image.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("image", _image.to_s.size, 2048)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("image", _image.to_s.size, MAX_LENGTH_FOR_IMAGE)
       @image = _image
     end
 

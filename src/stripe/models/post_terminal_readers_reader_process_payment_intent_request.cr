@@ -23,6 +23,7 @@ module Stripe
     # PaymentIntent ID
     @[JSON::Field(key: "payment_intent", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter payment_intent : String? = nil
+    MAX_LENGTH_FOR_PAYMENT_INTENT = 5000
 
     # Optional properties
 
@@ -53,7 +54,7 @@ module Stripe
       invalid_properties.push("\"payment_intent\" is required and cannot be null") if @payment_intent.nil?
 
       if _payment_intent = @payment_intent
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, MAX_LENGTH_FOR_PAYMENT_INTENT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -69,7 +70,7 @@ module Stripe
     def valid? : Bool
       return false if @payment_intent.nil?
       if _payment_intent = @payment_intent
-        return false if _payment_intent.to_s.size > 5000
+        return false if _payment_intent.to_s.size > MAX_LENGTH_FOR_PAYMENT_INTENT
       end
 
       if _process_config = @process_config
@@ -86,10 +87,7 @@ module Stripe
         raise ArgumentError.new("\"payment_intent\" is required and cannot be null")
       end
       _payment_intent = payment_intent.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_intent", _payment_intent.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("payment_intent", _payment_intent.to_s.size, MAX_LENGTH_FOR_PAYMENT_INTENT)
       @payment_intent = _payment_intent
     end
 

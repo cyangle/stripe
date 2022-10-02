@@ -22,6 +22,7 @@ module Stripe
 
     @[JSON::Field(key: "plan", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter plan : String? = nil
+    MAX_LENGTH_FOR_PLAN = 5000
 
     # Optional properties
 
@@ -51,7 +52,7 @@ module Stripe
       invalid_properties.push("\"plan\" is required and cannot be null") if @plan.nil?
 
       if _plan = @plan
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("plan", _plan.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("plan", _plan.to_s.size, MAX_LENGTH_FOR_PLAN)
           invalid_properties.push(max_length_error)
         end
       end
@@ -64,7 +65,7 @@ module Stripe
     def valid? : Bool
       return false if @plan.nil?
       if _plan = @plan
-        return false if _plan.to_s.size > 5000
+        return false if _plan.to_s.size > MAX_LENGTH_FOR_PLAN
       end
 
       true
@@ -77,10 +78,7 @@ module Stripe
         raise ArgumentError.new("\"plan\" is required and cannot be null")
       end
       _plan = plan.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("plan", _plan.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("plan", _plan.to_s.size, MAX_LENGTH_FOR_PLAN)
       @plan = _plan
     end
 

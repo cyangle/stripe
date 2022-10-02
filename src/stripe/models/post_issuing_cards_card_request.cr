@@ -23,8 +23,8 @@ module Stripe
     # Reason why the `status` of this card is `canceled`.
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cancellation_reason : String? = nil
-
-    VALID_VALUES_FOR_CANCELLATION_REASON = StaticArray["lost", "stolen"]
+    ERROR_MESSAGE_FOR_CANCELLATION_REASON = "invalid value for \"cancellation_reason\", must be one of [lost, stolen]."
+    VALID_VALUES_FOR_CANCELLATION_REASON  = StaticArray["lost", "stolen"]
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -42,8 +42,8 @@ module Stripe
     # Dictates whether authorizations can be approved on this card. If this card is being canceled because it was lost or stolen, this information should be provided as `cancellation_reason`.
     @[JSON::Field(key: "status", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter status : String? = nil
-
-    VALID_VALUES_FOR_STATUS = StaticArray["active", "canceled", "inactive"]
+    ERROR_MESSAGE_FOR_STATUS = "invalid value for \"status\", must be one of [active, canceled, inactive]."
+    VALID_VALUES_FOR_STATUS  = StaticArray["active", "canceled", "inactive"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -65,7 +65,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _cancellation_reason = @cancellation_reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("cancellation_reason", VALID_VALUES_FOR_CANCELLATION_REASON)) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CANCELLATION_REASON) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
 
       if _metadata = @metadata
@@ -78,7 +78,7 @@ module Stripe
         invalid_properties.concat(_spending_controls.list_invalid_properties_for("spending_controls")) if _spending_controls.is_a?(OpenApi::Validatable)
       end
       if _status = @status
-        invalid_properties.push(OpenApi::EnumValidator.error_message("status", VALID_VALUES_FOR_STATUS)) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_STATUS) unless OpenApi::EnumValidator.valid?(_status, VALID_VALUES_FOR_STATUS)
       end
       invalid_properties
     end

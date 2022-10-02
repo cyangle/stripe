@@ -34,10 +34,11 @@ module Stripe
     # Type of the mandate.
     @[JSON::Field(key: "type", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: _type.nil? && !_type_present?)]
     getter _type : String? = nil
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [off_session, on_session]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["off_session", "on_session"]
 
     @[JSON::Field(ignore: true)]
     property? _type_present : Bool = false
-    VALID_VALUES_FOR__TYPE = StaticArray["off_session", "on_session"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -59,7 +60,7 @@ module Stripe
         invalid_properties.concat(_off_session.list_invalid_properties_for("off_session")) if _off_session.is_a?(OpenApi::Validatable)
       end
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       invalid_properties
     end

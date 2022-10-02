@@ -59,6 +59,7 @@ module Stripe
     # The person's title (e.g., CEO, Support Engineer).
     @[JSON::Field(key: "title", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: title.nil? && !title_present?)]
     getter title : String? = nil
+    MAX_LENGTH_FOR_TITLE = 5000
 
     @[JSON::Field(ignore: true)]
     property? title_present : Bool = false
@@ -83,7 +84,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _title = @title
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, MAX_LENGTH_FOR_TITLE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -94,7 +95,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _title = @title
-        return false if _title.to_s.size > 5000
+        return false if _title.to_s.size > MAX_LENGTH_FOR_TITLE
       end
 
       true
@@ -157,10 +158,7 @@ module Stripe
         return @title = nil
       end
       _title = title.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("title", _title.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("title", _title.to_s.size, MAX_LENGTH_FOR_TITLE)
       @title = _title
     end
 

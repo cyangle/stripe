@@ -30,10 +30,11 @@ module Stripe
     # Reason the card is ineligible for Google Pay
     @[JSON::Field(key: "ineligible_reason", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: ineligible_reason.nil? && !ineligible_reason_present?)]
     getter ineligible_reason : String? = nil
+    ERROR_MESSAGE_FOR_INELIGIBLE_REASON = "invalid value for \"ineligible_reason\", must be one of [missing_agreement, missing_cardholder_contact, unsupported_region]."
+    VALID_VALUES_FOR_INELIGIBLE_REASON  = StaticArray["missing_agreement", "missing_cardholder_contact", "unsupported_region"]
 
     @[JSON::Field(ignore: true)]
     property? ineligible_reason_present : Bool = false
-    VALID_VALUES_FOR_INELIGIBLE_REASON = StaticArray["missing_agreement", "missing_cardholder_contact", "unsupported_region"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -54,7 +55,7 @@ module Stripe
       invalid_properties.push("\"eligible\" is required and cannot be null") if @eligible.nil?
 
       if _ineligible_reason = @ineligible_reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("ineligible_reason", VALID_VALUES_FOR_INELIGIBLE_REASON)) unless OpenApi::EnumValidator.valid?(_ineligible_reason, VALID_VALUES_FOR_INELIGIBLE_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_INELIGIBLE_REASON) unless OpenApi::EnumValidator.valid?(_ineligible_reason, VALID_VALUES_FOR_INELIGIBLE_REASON)
       end
       invalid_properties
     end

@@ -23,6 +23,7 @@ module Stripe
     # A token returned by [Stripe.js](https://stripe.com/docs/js) representing the user’s Alipay account details.
     @[JSON::Field(key: "alipay_account", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter alipay_account : String? = nil
+    MAX_LENGTH_FOR_ALIPAY_ACCOUNT = 5000
 
     @[JSON::Field(key: "bank_account", type: Stripe::PostCustomersCustomerRequestBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
     getter bank_account : Stripe::PostCustomersCustomerRequestBankAccount? = nil
@@ -41,6 +42,7 @@ module Stripe
     # Please refer to full [documentation](https://stripe.com/docs/api) instead.
     @[JSON::Field(key: "source", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter source : String? = nil
+    MAX_LENGTH_FOR_SOURCE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -62,7 +64,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _alipay_account = @alipay_account
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("alipay_account", _alipay_account.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("alipay_account", _alipay_account.to_s.size, MAX_LENGTH_FOR_ALIPAY_ACCOUNT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -74,7 +76,7 @@ module Stripe
       end
 
       if _source = @source
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -85,7 +87,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _alipay_account = @alipay_account
-        return false if _alipay_account.to_s.size > 5000
+        return false if _alipay_account.to_s.size > MAX_LENGTH_FOR_ALIPAY_ACCOUNT
       end
 
       if _bank_account = @bank_account
@@ -97,7 +99,7 @@ module Stripe
       end
 
       if _source = @source
-        return false if _source.to_s.size > 5000
+        return false if _source.to_s.size > MAX_LENGTH_FOR_SOURCE
       end
 
       true
@@ -110,10 +112,7 @@ module Stripe
         return @alipay_account = nil
       end
       _alipay_account = alipay_account.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("alipay_account", _alipay_account.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("alipay_account", _alipay_account.to_s.size, MAX_LENGTH_FOR_ALIPAY_ACCOUNT)
       @alipay_account = _alipay_account
     end
 
@@ -166,10 +165,7 @@ module Stripe
         return @source = nil
       end
       _source = source.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
       @source = _source
     end
 

@@ -25,21 +25,22 @@ module Stripe
 
     @[JSON::Field(key: "default_for", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
     getter default_for : Array(String)? = nil
-
-    VALID_VALUES_FOR_DEFAULT_FOR = StaticArray["invoice", "subscription"]
+    ERROR_MESSAGE_FOR_DEFAULT_FOR = "invalid value for \"default_for\", must be one of [invoice, subscription]."
+    VALID_VALUES_FOR_DEFAULT_FOR  = StaticArray["invoice", "subscription"]
 
     @[JSON::Field(key: "interval_description", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter interval_description : String? = nil
+    MAX_LENGTH_FOR_INTERVAL_DESCRIPTION = 500
 
     @[JSON::Field(key: "payment_schedule", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_schedule : String? = nil
-
-    VALID_VALUES_FOR_PAYMENT_SCHEDULE = StaticArray["combined", "interval", "sporadic"]
+    ERROR_MESSAGE_FOR_PAYMENT_SCHEDULE = "invalid value for \"payment_schedule\", must be one of [combined, interval, sporadic]."
+    VALID_VALUES_FOR_PAYMENT_SCHEDULE  = StaticArray["combined", "interval", "sporadic"]
 
     @[JSON::Field(key: "transaction_type", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter transaction_type : String? = nil
-
-    VALID_VALUES_FOR_TRANSACTION_TYPE = StaticArray["business", "personal"]
+    ERROR_MESSAGE_FOR_TRANSACTION_TYPE = "invalid value for \"transaction_type\", must be one of [business, personal]."
+    VALID_VALUES_FOR_TRANSACTION_TYPE  = StaticArray["business", "personal"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -63,18 +64,18 @@ module Stripe
         invalid_properties.concat(_custom_mandate_url.list_invalid_properties_for("custom_mandate_url")) if _custom_mandate_url.is_a?(OpenApi::Validatable)
       end
       if _default_for = @default_for
-        invalid_properties.push(OpenApi::EnumValidator.error_message("default_for", VALID_VALUES_FOR_DEFAULT_FOR)) unless OpenApi::EnumValidator.valid?(_default_for, VALID_VALUES_FOR_DEFAULT_FOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_DEFAULT_FOR) unless OpenApi::EnumValidator.valid?(_default_for, VALID_VALUES_FOR_DEFAULT_FOR)
       end
       if _interval_description = @interval_description
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, 500)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, MAX_LENGTH_FOR_INTERVAL_DESCRIPTION)
           invalid_properties.push(max_length_error)
         end
       end
       if _payment_schedule = @payment_schedule
-        invalid_properties.push(OpenApi::EnumValidator.error_message("payment_schedule", VALID_VALUES_FOR_PAYMENT_SCHEDULE)) unless OpenApi::EnumValidator.valid?(_payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_PAYMENT_SCHEDULE) unless OpenApi::EnumValidator.valid?(_payment_schedule, VALID_VALUES_FOR_PAYMENT_SCHEDULE)
       end
       if _transaction_type = @transaction_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("transaction_type", VALID_VALUES_FOR_TRANSACTION_TYPE)) unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TRANSACTION_TYPE) unless OpenApi::EnumValidator.valid?(_transaction_type, VALID_VALUES_FOR_TRANSACTION_TYPE)
       end
       invalid_properties
     end
@@ -91,7 +92,7 @@ module Stripe
       end
 
       if _interval_description = @interval_description
-        return false if _interval_description.to_s.size > 500
+        return false if _interval_description.to_s.size > MAX_LENGTH_FOR_INTERVAL_DESCRIPTION
       end
 
       if _payment_schedule = @payment_schedule
@@ -134,10 +135,7 @@ module Stripe
         return @interval_description = nil
       end
       _interval_description = interval_description.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("interval_description", _interval_description.to_s.size, 500)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("interval_description", _interval_description.to_s.size, MAX_LENGTH_FOR_INTERVAL_DESCRIPTION)
       @interval_description = _interval_description
     end
 

@@ -24,6 +24,7 @@ module Stripe
     # The charge that created this object.
     @[JSON::Field(key: "charge", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: charge.nil? && !charge_present?)]
     getter charge : String? = nil
+    MAX_LENGTH_FOR_CHARGE = 5000
 
     @[JSON::Field(ignore: true)]
     property? charge_present : Bool = false
@@ -57,7 +58,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _charge = @charge
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, MAX_LENGTH_FOR_CHARGE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -74,7 +75,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _charge = @charge
-        return false if _charge.to_s.size > 5000
+        return false if _charge.to_s.size > MAX_LENGTH_FOR_CHARGE
       end
 
       if _payment_method_details = @payment_method_details
@@ -95,10 +96,7 @@ module Stripe
         return @charge = nil
       end
       _charge = charge.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("charge", _charge.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("charge", _charge.to_s.size, MAX_LENGTH_FOR_CHARGE)
       @charge = _charge
     end
 

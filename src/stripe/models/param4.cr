@@ -22,8 +22,9 @@ module Stripe
 
     @[JSON::Field(key: "bank", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter bank : String? = nil
-
-    VALID_VALUES_FOR_BANK = StaticArray["affin_bank", "agrobank", "alliance_bank", "ambank", "bank_islam", "bank_muamalat", "bank_rakyat", "bsn", "cimb", "deutsche_bank", "hong_leong_bank", "hsbc", "kfh", "maybank2e", "maybank2u", "ocbc", "pb_enterprise", "public_bank", "rhb", "standard_chartered", "uob"]
+    MAX_LENGTH_FOR_BANK    = 5000
+    ERROR_MESSAGE_FOR_BANK = "invalid value for \"bank\", must be one of [affin_bank, agrobank, alliance_bank, ambank, bank_islam, bank_muamalat, bank_rakyat, bsn, cimb, deutsche_bank, hong_leong_bank, hsbc, kfh, maybank2e, maybank2u, ocbc, pb_enterprise, public_bank, rhb, standard_chartered, uob]."
+    VALID_VALUES_FOR_BANK  = StaticArray["affin_bank", "agrobank", "alliance_bank", "ambank", "bank_islam", "bank_muamalat", "bank_rakyat", "bsn", "cimb", "deutsche_bank", "hong_leong_bank", "hsbc", "kfh", "maybank2e", "maybank2u", "ocbc", "pb_enterprise", "public_bank", "rhb", "standard_chartered", "uob"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -42,7 +43,7 @@ module Stripe
       invalid_properties.push("\"bank\" is required and cannot be null") if @bank.nil?
 
       if _bank = @bank
-        invalid_properties.push(OpenApi::EnumValidator.error_message("bank", VALID_VALUES_FOR_BANK)) unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BANK) unless OpenApi::EnumValidator.valid?(_bank, VALID_VALUES_FOR_BANK)
       end
       invalid_properties
     end

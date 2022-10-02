@@ -27,16 +27,16 @@ module Stripe
     # Polymorphic type matching the originating money movement's source. This can be an external account, a Stripe balance, or a FinancialAccount.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
-
-    VALID_VALUES_FOR__TYPE = StaticArray["balance", "financial_account", "issuing_card", "stripe", "us_bank_account"]
+    ERROR_MESSAGE_FOR__TYPE = "invalid value for \"_type\", must be one of [balance, financial_account, issuing_card, stripe, us_bank_account]."
+    VALID_VALUES_FOR__TYPE  = StaticArray["balance", "financial_account", "issuing_card", "stripe", "us_bank_account"]
 
     # Optional properties
 
     # Set when `type` is `balance`.
     @[JSON::Field(key: "balance", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter balance : String? = nil
-
-    VALID_VALUES_FOR_BALANCE = StaticArray["payments"]
+    ERROR_MESSAGE_FOR_BALANCE = "invalid value for \"balance\", must be one of [payments]."
+    VALID_VALUES_FOR_BALANCE  = StaticArray["payments"]
 
     @[JSON::Field(key: "financial_account", type: Stripe::ReceivedPaymentMethodDetailsFinancialAccount?, default: nil, required: false, nullable: false, emit_null: false)]
     getter financial_account : Stripe::ReceivedPaymentMethodDetailsFinancialAccount? = nil
@@ -44,6 +44,7 @@ module Stripe
     # Set when `type` is `issuing_card`. This is an [Issuing Card](https://stripe.com/docs/api#issuing_cards) ID.
     @[JSON::Field(key: "issuing_card", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter issuing_card : String? = nil
+    MAX_LENGTH_FOR_ISSUING_CARD = 5000
 
     @[JSON::Field(key: "us_bank_account", type: Stripe::TreasurySharedResourceInitiatingPaymentMethodDetailsUsBankAccount?, default: nil, required: false, nullable: false, emit_null: false)]
     getter us_bank_account : Stripe::TreasurySharedResourceInitiatingPaymentMethodDetailsUsBankAccount? = nil
@@ -76,16 +77,16 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        invalid_properties.push(OpenApi::EnumValidator.error_message("_type", VALID_VALUES_FOR__TYPE)) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
+        invalid_properties.push(ERROR_MESSAGE_FOR__TYPE) unless OpenApi::EnumValidator.valid?(__type, VALID_VALUES_FOR__TYPE)
       end
       if _balance = @balance
-        invalid_properties.push(OpenApi::EnumValidator.error_message("balance", VALID_VALUES_FOR_BALANCE)) unless OpenApi::EnumValidator.valid?(_balance, VALID_VALUES_FOR_BALANCE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_BALANCE) unless OpenApi::EnumValidator.valid?(_balance, VALID_VALUES_FOR_BALANCE)
       end
       if _financial_account = @financial_account
         invalid_properties.concat(_financial_account.list_invalid_properties_for("financial_account")) if _financial_account.is_a?(OpenApi::Validatable)
       end
       if _issuing_card = @issuing_card
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_card", _issuing_card.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_card", _issuing_card.to_s.size, MAX_LENGTH_FOR_ISSUING_CARD)
           invalid_properties.push(max_length_error)
         end
       end
@@ -117,7 +118,7 @@ module Stripe
       end
 
       if _issuing_card = @issuing_card
-        return false if _issuing_card.to_s.size > 5000
+        return false if _issuing_card.to_s.size > MAX_LENGTH_FOR_ISSUING_CARD
       end
 
       if _us_bank_account = @us_bank_account
@@ -178,10 +179,7 @@ module Stripe
         return @issuing_card = nil
       end
       _issuing_card = issuing_card.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("issuing_card", _issuing_card.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("issuing_card", _issuing_card.to_s.size, MAX_LENGTH_FOR_ISSUING_CARD)
       @issuing_card = _issuing_card
     end
 

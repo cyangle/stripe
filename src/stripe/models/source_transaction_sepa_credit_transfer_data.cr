@@ -24,14 +24,17 @@ module Stripe
     # Reference associated with the transfer.
     @[JSON::Field(key: "reference", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter reference : String? = nil
+    MAX_LENGTH_FOR_REFERENCE = 5000
 
     # Sender's bank account IBAN.
     @[JSON::Field(key: "sender_iban", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sender_iban : String? = nil
+    MAX_LENGTH_FOR_SENDER_IBAN = 5000
 
     # Sender's name.
     @[JSON::Field(key: "sender_name", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter sender_name : String? = nil
+    MAX_LENGTH_FOR_SENDER_NAME = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -50,17 +53,17 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _reference = @reference
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
           invalid_properties.push(max_length_error)
         end
       end
       if _sender_iban = @sender_iban
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_iban", _sender_iban.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_iban", _sender_iban.to_s.size, MAX_LENGTH_FOR_SENDER_IBAN)
           invalid_properties.push(max_length_error)
         end
       end
       if _sender_name = @sender_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_name", _sender_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_name", _sender_name.to_s.size, MAX_LENGTH_FOR_SENDER_NAME)
           invalid_properties.push(max_length_error)
         end
       end
@@ -71,15 +74,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _reference = @reference
-        return false if _reference.to_s.size > 5000
+        return false if _reference.to_s.size > MAX_LENGTH_FOR_REFERENCE
       end
 
       if _sender_iban = @sender_iban
-        return false if _sender_iban.to_s.size > 5000
+        return false if _sender_iban.to_s.size > MAX_LENGTH_FOR_SENDER_IBAN
       end
 
       if _sender_name = @sender_name
-        return false if _sender_name.to_s.size > 5000
+        return false if _sender_name.to_s.size > MAX_LENGTH_FOR_SENDER_NAME
       end
 
       true
@@ -92,10 +95,7 @@ module Stripe
         return @reference = nil
       end
       _reference = reference.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("reference", _reference.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("reference", _reference.to_s.size, MAX_LENGTH_FOR_REFERENCE)
       @reference = _reference
     end
 
@@ -106,10 +106,7 @@ module Stripe
         return @sender_iban = nil
       end
       _sender_iban = sender_iban.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_iban", _sender_iban.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("sender_iban", _sender_iban.to_s.size, MAX_LENGTH_FOR_SENDER_IBAN)
       @sender_iban = _sender_iban
     end
 
@@ -120,10 +117,7 @@ module Stripe
         return @sender_name = nil
       end
       _sender_name = sender_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sender_name", _sender_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("sender_name", _sender_name.to_s.size, MAX_LENGTH_FOR_SENDER_NAME)
       @sender_name = _sender_name
     end
 

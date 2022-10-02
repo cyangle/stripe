@@ -31,6 +31,7 @@ module Stripe
     # ID of the mandate to be used for this invoice. It must correspond to the payment method used to pay the invoice, including the payment_method param or the invoice's default_payment_method or default_source, if set.
     @[JSON::Field(key: "mandate", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter mandate : String? = nil
+    MAX_LENGTH_FOR_MANDATE = 5000
 
     # Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to `true` (off-session).
     @[JSON::Field(key: "off_session", type: Bool?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -43,10 +44,12 @@ module Stripe
     # A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to the customer associated with the invoice being paid.
     @[JSON::Field(key: "payment_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter payment_method : String? = nil
+    MAX_LENGTH_FOR_PAYMENT_METHOD = 5000
 
     # A payment source to be charged. The source must be the ID of a source belonging to the customer associated with the invoice being paid.
     @[JSON::Field(key: "source", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter source : String? = nil
+    MAX_LENGTH_FOR_SOURCE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -69,18 +72,18 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _mandate = @mandate
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, MAX_LENGTH_FOR_MANDATE)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _payment_method = @payment_method
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
           invalid_properties.push(max_length_error)
         end
       end
       if _source = @source
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -91,15 +94,15 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _mandate = @mandate
-        return false if _mandate.to_s.size > 5000
+        return false if _mandate.to_s.size > MAX_LENGTH_FOR_MANDATE
       end
 
       if _payment_method = @payment_method
-        return false if _payment_method.to_s.size > 5000
+        return false if _payment_method.to_s.size > MAX_LENGTH_FOR_PAYMENT_METHOD
       end
 
       if _source = @source
-        return false if _source.to_s.size > 5000
+        return false if _source.to_s.size > MAX_LENGTH_FOR_SOURCE
       end
 
       true
@@ -132,10 +135,7 @@ module Stripe
         return @mandate = nil
       end
       _mandate = mandate.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("mandate", _mandate.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("mandate", _mandate.to_s.size, MAX_LENGTH_FOR_MANDATE)
       @mandate = _mandate
     end
 
@@ -166,10 +166,7 @@ module Stripe
         return @payment_method = nil
       end
       _payment_method = payment_method.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("payment_method", _payment_method.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("payment_method", _payment_method.to_s.size, MAX_LENGTH_FOR_PAYMENT_METHOD)
       @payment_method = _payment_method
     end
 
@@ -180,10 +177,7 @@ module Stripe
         return @source = nil
       end
       _source = source.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("source", _source.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("source", _source.to_s.size, MAX_LENGTH_FOR_SOURCE)
       @source = _source
     end
 

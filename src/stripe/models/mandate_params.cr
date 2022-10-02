@@ -32,13 +32,15 @@ module Stripe
 
     @[JSON::Field(key: "interval", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter interval : String? = nil
-
-    VALID_VALUES_FOR_INTERVAL = StaticArray["one_time", "scheduled", "variable"]
+    MAX_LENGTH_FOR_INTERVAL    = 5000
+    ERROR_MESSAGE_FOR_INTERVAL = "invalid value for \"interval\", must be one of [one_time, scheduled, variable]."
+    VALID_VALUES_FOR_INTERVAL  = StaticArray["one_time", "scheduled", "variable"]
 
     @[JSON::Field(key: "notification_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter notification_method : String? = nil
-
-    VALID_VALUES_FOR_NOTIFICATION_METHOD = StaticArray["deprecated_none", "email", "manual", "none", "stripe_email"]
+    MAX_LENGTH_FOR_NOTIFICATION_METHOD    = 5000
+    ERROR_MESSAGE_FOR_NOTIFICATION_METHOD = "invalid value for \"notification_method\", must be one of [deprecated_none, email, manual, none, stripe_email]."
+    VALID_VALUES_FOR_NOTIFICATION_METHOD  = StaticArray["deprecated_none", "email", "manual", "none", "stripe_email"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -66,10 +68,10 @@ module Stripe
       end
 
       if _interval = @interval
-        invalid_properties.push(OpenApi::EnumValidator.error_message("interval", VALID_VALUES_FOR_INTERVAL)) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
+        invalid_properties.push(ERROR_MESSAGE_FOR_INTERVAL) unless OpenApi::EnumValidator.valid?(_interval, VALID_VALUES_FOR_INTERVAL)
       end
       if _notification_method = @notification_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("notification_method", VALID_VALUES_FOR_NOTIFICATION_METHOD)) unless OpenApi::EnumValidator.valid?(_notification_method, VALID_VALUES_FOR_NOTIFICATION_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_NOTIFICATION_METHOD) unless OpenApi::EnumValidator.valid?(_notification_method, VALID_VALUES_FOR_NOTIFICATION_METHOD)
       end
       invalid_properties
     end

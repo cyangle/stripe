@@ -30,10 +30,11 @@ module Stripe
     # Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
     @[JSON::Field(key: "tax_behavior", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: tax_behavior.nil? && !tax_behavior_present?)]
     getter tax_behavior : String? = nil
+    ERROR_MESSAGE_FOR_TAX_BEHAVIOR = "invalid value for \"tax_behavior\", must be one of [exclusive, inclusive, unspecified]."
+    VALID_VALUES_FOR_TAX_BEHAVIOR  = StaticArray["exclusive", "inclusive", "unspecified"]
 
     @[JSON::Field(ignore: true)]
     property? tax_behavior_present : Bool = false
-    VALID_VALUES_FOR_TAX_BEHAVIOR = StaticArray["exclusive", "inclusive", "unspecified"]
 
     # Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to `tiered`. See also the documentation for `billing_scheme`.
     @[JSON::Field(key: "tiers", type: Array(Stripe::PriceTier)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -75,10 +76,10 @@ module Stripe
         invalid_properties.concat(_custom_unit_amount.list_invalid_properties_for("custom_unit_amount")) if _custom_unit_amount.is_a?(OpenApi::Validatable)
       end
       if _tax_behavior = @tax_behavior
-        invalid_properties.push(OpenApi::EnumValidator.error_message("tax_behavior", VALID_VALUES_FOR_TAX_BEHAVIOR)) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
+        invalid_properties.push(ERROR_MESSAGE_FOR_TAX_BEHAVIOR) unless OpenApi::EnumValidator.valid?(_tax_behavior, VALID_VALUES_FOR_TAX_BEHAVIOR)
       end
       if _tiers = @tiers
-        invalid_properties.concat(OpenApi::ArrayValidator.list_invalid_properties_for(key: "tiers", array: _tiers)) if _tiers.is_a?(Array)
+        invalid_properties.concat(OpenApi::ContainerValidator.list_invalid_properties_for(key: "tiers", container: _tiers)) if _tiers.is_a?(Array)
       end
 
       invalid_properties
@@ -96,7 +97,7 @@ module Stripe
       end
 
       if _tiers = @tiers
-        return false if _tiers.is_a?(Array) && !OpenApi::ArrayValidator.valid?(array: _tiers)
+        return false if _tiers.is_a?(Array) && !OpenApi::ContainerValidator.valid?(container: _tiers)
       end
 
       true
@@ -131,7 +132,7 @@ module Stripe
         return @tiers = nil
       end
       _tiers = tiers.not_nil!
-      OpenApi::ArrayValidator.validate(array: _tiers) if _tiers.is_a?(Array)
+      OpenApi::ContainerValidator.validate(container: _tiers) if _tiers.is_a?(Array)
       @tiers = _tiers
     end
 

@@ -22,11 +22,12 @@ module Stripe
 
     @[JSON::Field(key: "capture_method", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter capture_method : String? = nil
-
-    VALID_VALUES_FOR_CAPTURE_METHOD = StaticArray["", "manual"]
+    ERROR_MESSAGE_FOR_CAPTURE_METHOD = "invalid value for \"capture_method\", must be one of [, manual]."
+    VALID_VALUES_FOR_CAPTURE_METHOD  = StaticArray["", "manual"]
 
     @[JSON::Field(key: "cvc_token", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cvc_token : String? = nil
+    MAX_LENGTH_FOR_CVC_TOKEN = 5000
 
     @[JSON::Field(key: "installments", type: Stripe::InstallmentsParam1?, default: nil, required: false, nullable: false, emit_null: false)]
     getter installments : Stripe::InstallmentsParam1? = nil
@@ -36,18 +37,20 @@ module Stripe
 
     @[JSON::Field(key: "network", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter network : String? = nil
-
-    VALID_VALUES_FOR_NETWORK = StaticArray["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"]
+    MAX_LENGTH_FOR_NETWORK    = 5000
+    ERROR_MESSAGE_FOR_NETWORK = "invalid value for \"network\", must be one of [amex, cartes_bancaires, diners, discover, interac, jcb, mastercard, unionpay, unknown, visa]."
+    VALID_VALUES_FOR_NETWORK  = StaticArray["amex", "cartes_bancaires", "diners", "discover", "interac", "jcb", "mastercard", "unionpay", "unknown", "visa"]
 
     @[JSON::Field(key: "request_three_d_secure", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter request_three_d_secure : String? = nil
-
-    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE = StaticArray["any", "automatic"]
+    MAX_LENGTH_FOR_REQUEST_THREE_D_SECURE    = 5000
+    ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE = "invalid value for \"request_three_d_secure\", must be one of [any, automatic]."
+    VALID_VALUES_FOR_REQUEST_THREE_D_SECURE  = StaticArray["any", "automatic"]
 
     @[JSON::Field(key: "setup_future_usage", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter setup_future_usage : String? = nil
-
-    VALID_VALUES_FOR_SETUP_FUTURE_USAGE = StaticArray["", "none", "off_session", "on_session"]
+    ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE = "invalid value for \"setup_future_usage\", must be one of [, none, off_session, on_session]."
+    VALID_VALUES_FOR_SETUP_FUTURE_USAGE  = StaticArray["", "none", "off_session", "on_session"]
 
     @[JSON::Field(key: "statement_descriptor_suffix_kana", type: Stripe::PaymentIntentParamStatementDescriptorSuffixKana?, default: nil, required: false, nullable: false, emit_null: false)]
     getter statement_descriptor_suffix_kana : Stripe::PaymentIntentParamStatementDescriptorSuffixKana? = nil
@@ -78,10 +81,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _capture_method = @capture_method
-        invalid_properties.push(OpenApi::EnumValidator.error_message("capture_method", VALID_VALUES_FOR_CAPTURE_METHOD)) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CAPTURE_METHOD) unless OpenApi::EnumValidator.valid?(_capture_method, VALID_VALUES_FOR_CAPTURE_METHOD)
       end
       if _cvc_token = @cvc_token
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_token", _cvc_token.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_token", _cvc_token.to_s.size, MAX_LENGTH_FOR_CVC_TOKEN)
           invalid_properties.push(max_length_error)
         end
       end
@@ -92,13 +95,13 @@ module Stripe
         invalid_properties.concat(_mandate_options.list_invalid_properties_for("mandate_options")) if _mandate_options.is_a?(OpenApi::Validatable)
       end
       if _network = @network
-        invalid_properties.push(OpenApi::EnumValidator.error_message("network", VALID_VALUES_FOR_NETWORK)) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
+        invalid_properties.push(ERROR_MESSAGE_FOR_NETWORK) unless OpenApi::EnumValidator.valid?(_network, VALID_VALUES_FOR_NETWORK)
       end
       if _request_three_d_secure = @request_three_d_secure
-        invalid_properties.push(OpenApi::EnumValidator.error_message("request_three_d_secure", VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)) unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_REQUEST_THREE_D_SECURE) unless OpenApi::EnumValidator.valid?(_request_three_d_secure, VALID_VALUES_FOR_REQUEST_THREE_D_SECURE)
       end
       if _setup_future_usage = @setup_future_usage
-        invalid_properties.push(OpenApi::EnumValidator.error_message("setup_future_usage", VALID_VALUES_FOR_SETUP_FUTURE_USAGE)) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
+        invalid_properties.push(ERROR_MESSAGE_FOR_SETUP_FUTURE_USAGE) unless OpenApi::EnumValidator.valid?(_setup_future_usage, VALID_VALUES_FOR_SETUP_FUTURE_USAGE)
       end
       if _statement_descriptor_suffix_kana = @statement_descriptor_suffix_kana
         invalid_properties.concat(_statement_descriptor_suffix_kana.list_invalid_properties_for("statement_descriptor_suffix_kana")) if _statement_descriptor_suffix_kana.is_a?(OpenApi::Validatable)
@@ -117,7 +120,7 @@ module Stripe
       end
 
       if _cvc_token = @cvc_token
-        return false if _cvc_token.to_s.size > 5000
+        return false if _cvc_token.to_s.size > MAX_LENGTH_FOR_CVC_TOKEN
       end
 
       if _installments = @installments
@@ -169,10 +172,7 @@ module Stripe
         return @cvc_token = nil
       end
       _cvc_token = cvc_token.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("cvc_token", _cvc_token.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("cvc_token", _cvc_token.to_s.size, MAX_LENGTH_FOR_CVC_TOKEN)
       @cvc_token = _cvc_token
     end
 

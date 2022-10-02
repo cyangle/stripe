@@ -24,10 +24,11 @@ module Stripe
     # The name of the convenience store chain where the payment was completed.
     @[JSON::Field(key: "chain", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: chain.nil? && !chain_present?)]
     getter chain : String? = nil
+    ERROR_MESSAGE_FOR_CHAIN = "invalid value for \"chain\", must be one of [familymart, lawson, ministop, seicomart]."
+    VALID_VALUES_FOR_CHAIN  = StaticArray["familymart", "lawson", "ministop", "seicomart"]
 
     @[JSON::Field(ignore: true)]
     property? chain_present : Bool = false
-    VALID_VALUES_FOR_CHAIN = StaticArray["familymart", "lawson", "ministop", "seicomart"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -44,7 +45,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _chain = @chain
-        invalid_properties.push(OpenApi::EnumValidator.error_message("chain", VALID_VALUES_FOR_CHAIN)) unless OpenApi::EnumValidator.valid?(_chain, VALID_VALUES_FOR_CHAIN)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CHAIN) unless OpenApi::EnumValidator.valid?(_chain, VALID_VALUES_FOR_CHAIN)
       end
       invalid_properties
     end

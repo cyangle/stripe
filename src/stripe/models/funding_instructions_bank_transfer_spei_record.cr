@@ -24,14 +24,17 @@ module Stripe
     # The three-digit bank code
     @[JSON::Field(key: "bank_code", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter bank_code : String? = nil
+    MAX_LENGTH_FOR_BANK_CODE = 5000
 
     # The short banking institution name
     @[JSON::Field(key: "bank_name", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter bank_name : String? = nil
+    MAX_LENGTH_FOR_BANK_NAME = 5000
 
     # The CLABE number
     @[JSON::Field(key: "clabe", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter clabe : String? = nil
+    MAX_LENGTH_FOR_CLABE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -52,21 +55,21 @@ module Stripe
       invalid_properties.push("\"bank_code\" is required and cannot be null") if @bank_code.nil?
 
       if _bank_code = @bank_code
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"bank_name\" is required and cannot be null") if @bank_name.nil?
 
       if _bank_name = @bank_name
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"clabe\" is required and cannot be null") if @clabe.nil?
 
       if _clabe = @clabe
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("clabe", _clabe.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("clabe", _clabe.to_s.size, MAX_LENGTH_FOR_CLABE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -78,17 +81,17 @@ module Stripe
     def valid? : Bool
       return false if @bank_code.nil?
       if _bank_code = @bank_code
-        return false if _bank_code.to_s.size > 5000
+        return false if _bank_code.to_s.size > MAX_LENGTH_FOR_BANK_CODE
       end
 
       return false if @bank_name.nil?
       if _bank_name = @bank_name
-        return false if _bank_name.to_s.size > 5000
+        return false if _bank_name.to_s.size > MAX_LENGTH_FOR_BANK_NAME
       end
 
       return false if @clabe.nil?
       if _clabe = @clabe
-        return false if _clabe.to_s.size > 5000
+        return false if _clabe.to_s.size > MAX_LENGTH_FOR_CLABE
       end
 
       true
@@ -101,10 +104,7 @@ module Stripe
         raise ArgumentError.new("\"bank_code\" is required and cannot be null")
       end
       _bank_code = bank_code.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_code", _bank_code.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bank_code", _bank_code.to_s.size, MAX_LENGTH_FOR_BANK_CODE)
       @bank_code = _bank_code
     end
 
@@ -115,10 +115,7 @@ module Stripe
         raise ArgumentError.new("\"bank_name\" is required and cannot be null")
       end
       _bank_name = bank_name.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("bank_name", _bank_name.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("bank_name", _bank_name.to_s.size, MAX_LENGTH_FOR_BANK_NAME)
       @bank_name = _bank_name
     end
 
@@ -129,10 +126,7 @@ module Stripe
         raise ArgumentError.new("\"clabe\" is required and cannot be null")
       end
       _clabe = clabe.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("clabe", _clabe.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("clabe", _clabe.to_s.size, MAX_LENGTH_FOR_CLABE)
       @clabe = _clabe
     end
 

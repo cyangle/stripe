@@ -38,6 +38,7 @@ module Stripe
     # Unique identifier for the object.
     @[JSON::Field(key: "id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter id : String? = nil
+    MAX_LENGTH_FOR_ID = 5000
 
     # Whether the configuration is the default. If `true`, this configuration can be managed in the Dashboard and portal sessions will use this configuration unless it is overriden when creating the session.
     @[JSON::Field(key: "is_default", type: Bool?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -53,8 +54,8 @@ module Stripe
     # String representing the object's type. Objects of the same type share the same value.
     @[JSON::Field(key: "object", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter object : String? = nil
-
-    VALID_VALUES_FOR_OBJECT = StaticArray["billing_portal.configuration"]
+    ERROR_MESSAGE_FOR_OBJECT = "invalid value for \"object\", must be one of [billing_portal.configuration]."
+    VALID_VALUES_FOR_OBJECT  = StaticArray["billing_portal.configuration"]
 
     # Time at which the object was last updated. Measured in seconds since the Unix epoch.
     @[JSON::Field(key: "updated", type: Int64?, default: nil, required: true, nullable: false, emit_null: false)]
@@ -71,6 +72,7 @@ module Stripe
     # The default URL to redirect customers to when they click on the portal's link to return to your website. This can be [overriden](https://stripe.com/docs/api/customer_portal/sessions/create#create_portal_session-return_url) when creating the session.
     @[JSON::Field(key: "default_return_url", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: default_return_url.nil? && !default_return_url_present?)]
     getter default_return_url : String? = nil
+    MAX_LENGTH_FOR_DEFAULT_RETURN_URL = 5000
 
     @[JSON::Field(ignore: true)]
     property? default_return_url_present : Bool = false
@@ -126,7 +128,7 @@ module Stripe
       invalid_properties.push("\"id\" is required and cannot be null") if @id.nil?
 
       if _id = @id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
           invalid_properties.push(max_length_error)
         end
       end
@@ -142,7 +144,7 @@ module Stripe
       invalid_properties.push("\"object\" is required and cannot be null") if @object.nil?
 
       if _object = @object
-        invalid_properties.push(OpenApi::EnumValidator.error_message("object", VALID_VALUES_FOR_OBJECT)) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OBJECT) unless OpenApi::EnumValidator.valid?(_object, VALID_VALUES_FOR_OBJECT)
       end
       invalid_properties.push("\"updated\" is required and cannot be null") if @updated.nil?
 
@@ -150,7 +152,7 @@ module Stripe
         invalid_properties.concat(_application.list_invalid_properties_for("application")) if _application.is_a?(OpenApi::Validatable)
       end
       if _default_return_url = @default_return_url
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_return_url", _default_return_url.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_return_url", _default_return_url.to_s.size, MAX_LENGTH_FOR_DEFAULT_RETURN_URL)
           invalid_properties.push(max_length_error)
         end
       end
@@ -177,7 +179,7 @@ module Stripe
 
       return false if @id.nil?
       if _id = @id
-        return false if _id.to_s.size > 5000
+        return false if _id.to_s.size > MAX_LENGTH_FOR_ID
       end
 
       return false if @is_default.nil?
@@ -201,7 +203,7 @@ module Stripe
       end
 
       if _default_return_url = @default_return_url
-        return false if _default_return_url.to_s.size > 5000
+        return false if _default_return_url.to_s.size > MAX_LENGTH_FOR_DEFAULT_RETURN_URL
       end
 
       true
@@ -256,10 +258,7 @@ module Stripe
         raise ArgumentError.new("\"id\" is required and cannot be null")
       end
       _id = id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("id", _id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("id", _id.to_s.size, MAX_LENGTH_FOR_ID)
       @id = _id
     end
 
@@ -333,10 +332,7 @@ module Stripe
         return @default_return_url = nil
       end
       _default_return_url = default_return_url.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("default_return_url", _default_return_url.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("default_return_url", _default_return_url.to_s.size, MAX_LENGTH_FOR_DEFAULT_RETURN_URL)
       @default_return_url = _default_return_url
     end
 

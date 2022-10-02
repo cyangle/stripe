@@ -24,30 +24,37 @@ module Stripe
     # app_id is the APP ID registered on WeChat open platform
     @[JSON::Field(key: "app_id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter app_id : String? = nil
+    MAX_LENGTH_FOR_APP_ID = 5000
 
     # nonce_str is a random string
     @[JSON::Field(key: "nonce_str", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter nonce_str : String? = nil
+    MAX_LENGTH_FOR_NONCE_STR = 5000
 
     # package is static value
     @[JSON::Field(key: "package", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter package : String? = nil
+    MAX_LENGTH_FOR_PACKAGE = 5000
 
     # an unique merchant ID assigned by WeChat Pay
     @[JSON::Field(key: "partner_id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter partner_id : String? = nil
+    MAX_LENGTH_FOR_PARTNER_ID = 5000
 
     # an unique trading ID assigned by WeChat Pay
     @[JSON::Field(key: "prepay_id", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter prepay_id : String? = nil
+    MAX_LENGTH_FOR_PREPAY_ID = 5000
 
     # A signature
     @[JSON::Field(key: "sign", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter sign : String? = nil
+    MAX_LENGTH_FOR_SIGN = 5000
 
     # Specifies the current time in epoch format
     @[JSON::Field(key: "timestamp", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter timestamp : String? = nil
+    MAX_LENGTH_FOR_TIMESTAMP = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -72,49 +79,49 @@ module Stripe
       invalid_properties.push("\"app_id\" is required and cannot be null") if @app_id.nil?
 
       if _app_id = @app_id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, MAX_LENGTH_FOR_APP_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"nonce_str\" is required and cannot be null") if @nonce_str.nil?
 
       if _nonce_str = @nonce_str
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nonce_str", _nonce_str.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nonce_str", _nonce_str.to_s.size, MAX_LENGTH_FOR_NONCE_STR)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"package\" is required and cannot be null") if @package.nil?
 
       if _package = @package
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("package", _package.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("package", _package.to_s.size, MAX_LENGTH_FOR_PACKAGE)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"partner_id\" is required and cannot be null") if @partner_id.nil?
 
       if _partner_id = @partner_id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("partner_id", _partner_id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("partner_id", _partner_id.to_s.size, MAX_LENGTH_FOR_PARTNER_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"prepay_id\" is required and cannot be null") if @prepay_id.nil?
 
       if _prepay_id = @prepay_id
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("prepay_id", _prepay_id.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("prepay_id", _prepay_id.to_s.size, MAX_LENGTH_FOR_PREPAY_ID)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"sign\" is required and cannot be null") if @sign.nil?
 
       if _sign = @sign
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sign", _sign.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sign", _sign.to_s.size, MAX_LENGTH_FOR_SIGN)
           invalid_properties.push(max_length_error)
         end
       end
       invalid_properties.push("\"timestamp\" is required and cannot be null") if @timestamp.nil?
 
       if _timestamp = @timestamp
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timestamp", _timestamp.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timestamp", _timestamp.to_s.size, MAX_LENGTH_FOR_TIMESTAMP)
           invalid_properties.push(max_length_error)
         end
       end
@@ -126,37 +133,37 @@ module Stripe
     def valid? : Bool
       return false if @app_id.nil?
       if _app_id = @app_id
-        return false if _app_id.to_s.size > 5000
+        return false if _app_id.to_s.size > MAX_LENGTH_FOR_APP_ID
       end
 
       return false if @nonce_str.nil?
       if _nonce_str = @nonce_str
-        return false if _nonce_str.to_s.size > 5000
+        return false if _nonce_str.to_s.size > MAX_LENGTH_FOR_NONCE_STR
       end
 
       return false if @package.nil?
       if _package = @package
-        return false if _package.to_s.size > 5000
+        return false if _package.to_s.size > MAX_LENGTH_FOR_PACKAGE
       end
 
       return false if @partner_id.nil?
       if _partner_id = @partner_id
-        return false if _partner_id.to_s.size > 5000
+        return false if _partner_id.to_s.size > MAX_LENGTH_FOR_PARTNER_ID
       end
 
       return false if @prepay_id.nil?
       if _prepay_id = @prepay_id
-        return false if _prepay_id.to_s.size > 5000
+        return false if _prepay_id.to_s.size > MAX_LENGTH_FOR_PREPAY_ID
       end
 
       return false if @sign.nil?
       if _sign = @sign
-        return false if _sign.to_s.size > 5000
+        return false if _sign.to_s.size > MAX_LENGTH_FOR_SIGN
       end
 
       return false if @timestamp.nil?
       if _timestamp = @timestamp
-        return false if _timestamp.to_s.size > 5000
+        return false if _timestamp.to_s.size > MAX_LENGTH_FOR_TIMESTAMP
       end
 
       true
@@ -169,10 +176,7 @@ module Stripe
         raise ArgumentError.new("\"app_id\" is required and cannot be null")
       end
       _app_id = app_id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("app_id", _app_id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("app_id", _app_id.to_s.size, MAX_LENGTH_FOR_APP_ID)
       @app_id = _app_id
     end
 
@@ -183,10 +187,7 @@ module Stripe
         raise ArgumentError.new("\"nonce_str\" is required and cannot be null")
       end
       _nonce_str = nonce_str.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("nonce_str", _nonce_str.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("nonce_str", _nonce_str.to_s.size, MAX_LENGTH_FOR_NONCE_STR)
       @nonce_str = _nonce_str
     end
 
@@ -197,10 +198,7 @@ module Stripe
         raise ArgumentError.new("\"package\" is required and cannot be null")
       end
       _package = package.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("package", _package.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("package", _package.to_s.size, MAX_LENGTH_FOR_PACKAGE)
       @package = _package
     end
 
@@ -211,10 +209,7 @@ module Stripe
         raise ArgumentError.new("\"partner_id\" is required and cannot be null")
       end
       _partner_id = partner_id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("partner_id", _partner_id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("partner_id", _partner_id.to_s.size, MAX_LENGTH_FOR_PARTNER_ID)
       @partner_id = _partner_id
     end
 
@@ -225,10 +220,7 @@ module Stripe
         raise ArgumentError.new("\"prepay_id\" is required and cannot be null")
       end
       _prepay_id = prepay_id.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("prepay_id", _prepay_id.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("prepay_id", _prepay_id.to_s.size, MAX_LENGTH_FOR_PREPAY_ID)
       @prepay_id = _prepay_id
     end
 
@@ -239,10 +231,7 @@ module Stripe
         raise ArgumentError.new("\"sign\" is required and cannot be null")
       end
       _sign = sign.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("sign", _sign.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("sign", _sign.to_s.size, MAX_LENGTH_FOR_SIGN)
       @sign = _sign
     end
 
@@ -253,10 +242,7 @@ module Stripe
         raise ArgumentError.new("\"timestamp\" is required and cannot be null")
       end
       _timestamp = timestamp.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("timestamp", _timestamp.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("timestamp", _timestamp.to_s.size, MAX_LENGTH_FOR_TIMESTAMP)
       @timestamp = _timestamp
     end
 

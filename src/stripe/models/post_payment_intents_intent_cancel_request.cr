@@ -23,8 +23,9 @@ module Stripe
     # Reason for canceling this PaymentIntent. Possible values are `duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`
     @[JSON::Field(key: "cancellation_reason", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter cancellation_reason : String? = nil
-
-    VALID_VALUES_FOR_CANCELLATION_REASON = StaticArray["abandoned", "duplicate", "fraudulent", "requested_by_customer"]
+    MAX_LENGTH_FOR_CANCELLATION_REASON    = 5000
+    ERROR_MESSAGE_FOR_CANCELLATION_REASON = "invalid value for \"cancellation_reason\", must be one of [abandoned, duplicate, fraudulent, requested_by_customer]."
+    VALID_VALUES_FOR_CANCELLATION_REASON  = StaticArray["abandoned", "duplicate", "fraudulent", "requested_by_customer"]
 
     # Specifies which fields in the response should be expanded.
     @[JSON::Field(key: "expand", type: Array(String)?, default: nil, required: false, nullable: false, emit_null: false)]
@@ -46,7 +47,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _cancellation_reason = @cancellation_reason
-        invalid_properties.push(OpenApi::EnumValidator.error_message("cancellation_reason", VALID_VALUES_FOR_CANCELLATION_REASON)) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
+        invalid_properties.push(ERROR_MESSAGE_FOR_CANCELLATION_REASON) unless OpenApi::EnumValidator.valid?(_cancellation_reason, VALID_VALUES_FOR_CANCELLATION_REASON)
       end
 
       invalid_properties

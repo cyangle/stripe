@@ -23,6 +23,7 @@ module Stripe
     # The ID of the file. The file's `purpose` must be one of the following: `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`, `finance_report_run`, `identity_document_downloadable`, `pci_document`, `selfie`, `sigma_scheduled_query`, `tax_document_user_upload`, or `terminal_reader_splashscreen`.
     @[JSON::Field(key: "file", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter file : String? = nil
+    MAX_LENGTH_FOR_FILE = 5000
 
     # Optional properties
 
@@ -58,7 +59,7 @@ module Stripe
       invalid_properties.push("\"file\" is required and cannot be null") if @file.nil?
 
       if _file = @file
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("file", _file.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("file", _file.to_s.size, MAX_LENGTH_FOR_FILE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -74,7 +75,7 @@ module Stripe
     def valid? : Bool
       return false if @file.nil?
       if _file = @file
-        return false if _file.to_s.size > 5000
+        return false if _file.to_s.size > MAX_LENGTH_FOR_FILE
       end
 
       if _metadata = @metadata
@@ -91,10 +92,7 @@ module Stripe
         raise ArgumentError.new("\"file\" is required and cannot be null")
       end
       _file = file.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("file", _file.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("file", _file.to_s.size, MAX_LENGTH_FOR_FILE)
       @file = _file
     end
 

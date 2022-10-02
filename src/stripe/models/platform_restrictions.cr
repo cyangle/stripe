@@ -23,13 +23,13 @@ module Stripe
 
     @[JSON::Field(key: "inbound_flows", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter inbound_flows : String? = nil
-
-    VALID_VALUES_FOR_INBOUND_FLOWS = StaticArray["restricted", "unrestricted"]
+    ERROR_MESSAGE_FOR_INBOUND_FLOWS = "invalid value for \"inbound_flows\", must be one of [restricted, unrestricted]."
+    VALID_VALUES_FOR_INBOUND_FLOWS  = StaticArray["restricted", "unrestricted"]
 
     @[JSON::Field(key: "outbound_flows", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter outbound_flows : String? = nil
-
-    VALID_VALUES_FOR_OUTBOUND_FLOWS = StaticArray["restricted", "unrestricted"]
+    ERROR_MESSAGE_FOR_OUTBOUND_FLOWS = "invalid value for \"outbound_flows\", must be one of [restricted, unrestricted]."
+    VALID_VALUES_FOR_OUTBOUND_FLOWS  = StaticArray["restricted", "unrestricted"]
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -47,10 +47,10 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _inbound_flows = @inbound_flows
-        invalid_properties.push(OpenApi::EnumValidator.error_message("inbound_flows", VALID_VALUES_FOR_INBOUND_FLOWS)) unless OpenApi::EnumValidator.valid?(_inbound_flows, VALID_VALUES_FOR_INBOUND_FLOWS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_INBOUND_FLOWS) unless OpenApi::EnumValidator.valid?(_inbound_flows, VALID_VALUES_FOR_INBOUND_FLOWS)
       end
       if _outbound_flows = @outbound_flows
-        invalid_properties.push(OpenApi::EnumValidator.error_message("outbound_flows", VALID_VALUES_FOR_OUTBOUND_FLOWS)) unless OpenApi::EnumValidator.valid?(_outbound_flows, VALID_VALUES_FOR_OUTBOUND_FLOWS)
+        invalid_properties.push(ERROR_MESSAGE_FOR_OUTBOUND_FLOWS) unless OpenApi::EnumValidator.valid?(_outbound_flows, VALID_VALUES_FOR_OUTBOUND_FLOWS)
       end
       invalid_properties
     end

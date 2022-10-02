@@ -24,10 +24,12 @@ module Stripe
     # Assessments from Stripe. If set, the value is `fraudulent`.
     @[JSON::Field(key: "stripe_report", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter stripe_report : String? = nil
+    MAX_LENGTH_FOR_STRIPE_REPORT = 5000
 
     # Assessments reported by you. If set, possible values of are `safe` and `fraudulent`.
     @[JSON::Field(key: "user_report", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter user_report : String? = nil
+    MAX_LENGTH_FOR_USER_REPORT = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -45,12 +47,12 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _stripe_report = @stripe_report
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("stripe_report", _stripe_report.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("stripe_report", _stripe_report.to_s.size, MAX_LENGTH_FOR_STRIPE_REPORT)
           invalid_properties.push(max_length_error)
         end
       end
       if _user_report = @user_report
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_report", _user_report.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_report", _user_report.to_s.size, MAX_LENGTH_FOR_USER_REPORT)
           invalid_properties.push(max_length_error)
         end
       end
@@ -61,11 +63,11 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _stripe_report = @stripe_report
-        return false if _stripe_report.to_s.size > 5000
+        return false if _stripe_report.to_s.size > MAX_LENGTH_FOR_STRIPE_REPORT
       end
 
       if _user_report = @user_report
-        return false if _user_report.to_s.size > 5000
+        return false if _user_report.to_s.size > MAX_LENGTH_FOR_USER_REPORT
       end
 
       true
@@ -78,10 +80,7 @@ module Stripe
         return @stripe_report = nil
       end
       _stripe_report = stripe_report.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("stripe_report", _stripe_report.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("stripe_report", _stripe_report.to_s.size, MAX_LENGTH_FOR_STRIPE_REPORT)
       @stripe_report = _stripe_report
     end
 
@@ -92,10 +91,7 @@ module Stripe
         return @user_report = nil
       end
       _user_report = user_report.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("user_report", _user_report.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("user_report", _user_report.to_s.size, MAX_LENGTH_FOR_USER_REPORT)
       @user_report = _user_report
     end
 

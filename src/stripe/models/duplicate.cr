@@ -34,9 +34,11 @@ module Stripe
 
     @[JSON::Field(key: "explanation", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter explanation : String? = nil
+    MAX_LENGTH_FOR_EXPLANATION = 1500
 
     @[JSON::Field(key: "original_transaction", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter original_transaction : String? = nil
+    MAX_LENGTH_FOR_ORIGINAL_TRANSACTION = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -70,12 +72,12 @@ module Stripe
         invalid_properties.concat(_check_image.list_invalid_properties_for("check_image")) if _check_image.is_a?(OpenApi::Validatable)
       end
       if _explanation = @explanation
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 1500)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
           invalid_properties.push(max_length_error)
         end
       end
       if _original_transaction = @original_transaction
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("original_transaction", _original_transaction.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("original_transaction", _original_transaction.to_s.size, MAX_LENGTH_FOR_ORIGINAL_TRANSACTION)
           invalid_properties.push(max_length_error)
         end
       end
@@ -102,11 +104,11 @@ module Stripe
       end
 
       if _explanation = @explanation
-        return false if _explanation.to_s.size > 1500
+        return false if _explanation.to_s.size > MAX_LENGTH_FOR_EXPLANATION
       end
 
       if _original_transaction = @original_transaction
-        return false if _original_transaction.to_s.size > 5000
+        return false if _original_transaction.to_s.size > MAX_LENGTH_FOR_ORIGINAL_TRANSACTION
       end
 
       true
@@ -163,10 +165,7 @@ module Stripe
         return @explanation = nil
       end
       _explanation = explanation.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("explanation", _explanation.to_s.size, 1500)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("explanation", _explanation.to_s.size, MAX_LENGTH_FOR_EXPLANATION)
       @explanation = _explanation
     end
 
@@ -177,10 +176,7 @@ module Stripe
         return @original_transaction = nil
       end
       _original_transaction = original_transaction.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("original_transaction", _original_transaction.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("original_transaction", _original_transaction.to_s.size, MAX_LENGTH_FOR_ORIGINAL_TRANSACTION)
       @original_transaction = _original_transaction
     end
 

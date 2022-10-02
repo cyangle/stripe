@@ -22,6 +22,7 @@ module Stripe
 
     @[JSON::Field(key: "shipping_rate", type: String?, default: nil, required: false, nullable: false, emit_null: false)]
     getter shipping_rate : String? = nil
+    MAX_LENGTH_FOR_SHIPPING_RATE = 5000
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
@@ -38,7 +39,7 @@ module Stripe
       invalid_properties = Array(String).new
 
       if _shipping_rate = @shipping_rate
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_rate", _shipping_rate.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_rate", _shipping_rate.to_s.size, MAX_LENGTH_FOR_SHIPPING_RATE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -49,7 +50,7 @@ module Stripe
     # @return true if the model is valid
     def valid? : Bool
       if _shipping_rate = @shipping_rate
-        return false if _shipping_rate.to_s.size > 5000
+        return false if _shipping_rate.to_s.size > MAX_LENGTH_FOR_SHIPPING_RATE
       end
 
       true
@@ -62,10 +63,7 @@ module Stripe
         return @shipping_rate = nil
       end
       _shipping_rate = shipping_rate.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("shipping_rate", _shipping_rate.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("shipping_rate", _shipping_rate.to_s.size, MAX_LENGTH_FOR_SHIPPING_RATE)
       @shipping_rate = _shipping_rate
     end
 

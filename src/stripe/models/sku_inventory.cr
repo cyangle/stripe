@@ -24,6 +24,7 @@ module Stripe
     # Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.
     @[JSON::Field(key: "type", type: String?, default: nil, required: true, nullable: false, emit_null: false)]
     getter _type : String? = nil
+    MAX_LENGTH_FOR__TYPE = 5000
 
     # Optional properties
 
@@ -37,6 +38,7 @@ module Stripe
     # An indicator of the inventory available. Possible values are `in_stock`, `limited`, and `out_of_stock`. Will be present if and only if `type` is `bucket`.
     @[JSON::Field(key: "value", type: String?, default: nil, required: false, nullable: true, emit_null: true, presence: true, ignore_serialize: value.nil? && !value_present?)]
     getter value : String? = nil
+    MAX_LENGTH_FOR_VALUE = 5000
 
     @[JSON::Field(ignore: true)]
     property? value_present : Bool = false
@@ -61,13 +63,13 @@ module Stripe
       invalid_properties.push("\"_type\" is required and cannot be null") if @_type.nil?
 
       if __type = @_type
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
           invalid_properties.push(max_length_error)
         end
       end
 
       if _value = @value
-        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value", _value.to_s.size, 5000)
+        if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value", _value.to_s.size, MAX_LENGTH_FOR_VALUE)
           invalid_properties.push(max_length_error)
         end
       end
@@ -79,11 +81,11 @@ module Stripe
     def valid? : Bool
       return false if @_type.nil?
       if __type = @_type
-        return false if __type.to_s.size > 5000
+        return false if __type.to_s.size > MAX_LENGTH_FOR__TYPE
       end
 
       if _value = @value
-        return false if _value.to_s.size > 5000
+        return false if _value.to_s.size > MAX_LENGTH_FOR_VALUE
       end
 
       true
@@ -96,10 +98,7 @@ module Stripe
         raise ArgumentError.new("\"_type\" is required and cannot be null")
       end
       __type = _type.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("_type", __type.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("_type", __type.to_s.size, MAX_LENGTH_FOR__TYPE)
       @_type = __type
     end
 
@@ -120,10 +119,7 @@ module Stripe
         return @value = nil
       end
       _value = value.not_nil!
-      if max_length_error = OpenApi::PrimitiveValidator.max_length_error("value", _value.to_s.size, 5000)
-        raise ArgumentError.new(max_length_error)
-      end
-
+      OpenApi::PrimitiveValidator.validate_max_length("value", _value.to_s.size, MAX_LENGTH_FOR_VALUE)
       @value = _value
     end
 
